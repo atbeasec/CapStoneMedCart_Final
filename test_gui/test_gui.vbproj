@@ -1,0 +1,376 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D7267A30-5250-490B-A3B4-13C12E0265E0}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>test_gui.My.MyApplication</StartupObject>
+    <RootNamespace>test_gui</RootNamespace>
+    <AssemblyName>test_gui</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>test_gui.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>test_gui.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dispense.Designer.vb">
+      <DependentUpon>Dispense.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dispense.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.vb">
+      <DependentUpon>Form1.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAlert.Designer.vb">
+      <DependentUpon>frmAlert.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAlert.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChangePassword.Designer.vb">
+      <DependentUpon>frmChangePassword.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmChangePassword.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConfiguration.Designer.vb">
+      <DependentUpon>frmConfiguration.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmConfiguration.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConfigureInventory.Designer.vb">
+      <DependentUpon>frmConfigureInventory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmConfigureInventory.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDiscrepancies.Designer.vb">
+      <DependentUpon>frmDiscrepancies.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDiscrepancies.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmImport.Designer.vb">
+      <DependentUpon>frmImport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmImport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInventory.Designer.vb">
+      <DependentUpon>frmInventory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmInventory.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.vb">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLoginScan.Designer.vb">
+      <DependentUpon>frmLoginScan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLoginScan.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMaintenance.Designer.vb">
+      <DependentUpon>frmMaintenance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMaintenance.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewInventory.Designer.vb">
+      <DependentUpon>frmNewInventory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewInventory.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewOrder.Designer.vb">
+      <DependentUpon>frmNewOrder.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewOrder.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewPatient.Designer.vb">
+      <DependentUpon>frmNewPatient.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewPatient.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPatientInfo.Designer.vb">
+      <DependentUpon>frmPatientInfo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPatientInfo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPatientRecords.Designer.vb">
+      <DependentUpon>frmPatientRecords.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPatientRecords.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPharmacy.Designer.vb">
+      <DependentUpon>frmPharmacy.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPharmacy.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReport.Designer.vb">
+      <DependentUpon>frmReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmResolve.Designer.vb">
+      <DependentUpon>frmResolve.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmResolve.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUpdatePatient.Designer.vb">
+      <DependentUpon>frmUpdatePatient.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmUpdatePatient.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmWitness.Designer.vb">
+      <DependentUpon>frmWitness.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmWitness.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmWitnessSignOff.Designer.vb">
+      <DependentUpon>frmWitnessSignOff.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmWitnessSignOff.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GenericMethods.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="NewNurse.Designer.vb">
+      <DependentUpon>NewNurse.vb</DependentUpon>
+    </Compile>
+    <Compile Include="NewNurse.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Returns.Designer.vb">
+      <DependentUpon>Returns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Returns.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Waste.Designer.vb">
+      <DependentUpon>Waste.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Waste.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Dispense.resx">
+      <DependentUpon>Dispense.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAlert.resx">
+      <DependentUpon>frmAlert.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmChangePassword.resx">
+      <DependentUpon>frmChangePassword.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConfiguration.resx">
+      <DependentUpon>frmConfiguration.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConfigureInventory.resx">
+      <DependentUpon>frmConfigureInventory.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDiscrepancies.resx">
+      <DependentUpon>frmDiscrepancies.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImport.resx">
+      <DependentUpon>frmImport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInventory.resx">
+      <DependentUpon>frmInventory.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLoginScan.resx">
+      <DependentUpon>frmLoginScan.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMaintenance.resx">
+      <DependentUpon>frmMaintenance.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewInventory.resx">
+      <DependentUpon>frmNewInventory.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewOrder.resx">
+      <DependentUpon>frmNewOrder.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewPatient.resx">
+      <DependentUpon>frmNewPatient.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPatientInfo.resx">
+      <DependentUpon>frmPatientInfo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPatientRecords.resx">
+      <DependentUpon>frmPatientRecords.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPharmacy.resx">
+      <DependentUpon>frmPharmacy.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReport.resx">
+      <DependentUpon>frmReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmResolve.resx">
+      <DependentUpon>frmResolve.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUpdatePatient.resx">
+      <DependentUpon>frmUpdatePatient.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmWitness.resx">
+      <DependentUpon>frmWitness.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmWitnessSignOff.resx">
+      <DependentUpon>frmWitnessSignOff.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewNurse.resx">
+      <DependentUpon>NewNurse.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Returns.resx">
+      <DependentUpon>Returns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Waste.resx">
+      <DependentUpon>Waste.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-delete_trash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-pencil.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-document.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-downloading_updates.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\xmark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\checkmark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\syringe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pharmacy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\resolve.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+</Project>
