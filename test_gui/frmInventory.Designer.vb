@@ -48,7 +48,7 @@ Partial Class frmInventory
         Me.pnlHeaderPatientRecords.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlHeaderPatientRecords.Location = New System.Drawing.Point(0, 0)
         Me.pnlHeaderPatientRecords.Name = "pnlHeaderPatientRecords"
-        Me.pnlHeaderPatientRecords.Size = New System.Drawing.Size(824, 61)
+        Me.pnlHeaderPatientRecords.Size = New System.Drawing.Size(846, 61)
         Me.pnlHeaderPatientRecords.TabIndex = 38
         '
         'lblDrawerNum
@@ -179,7 +179,7 @@ Partial Class frmInventory
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(824, 558)
+        Me.ClientSize = New System.Drawing.Size(846, 558)
         Me.Controls.Add(Me.flpInventory)
         Me.Controls.Add(Me.pnlHeader)
         Me.Controls.Add(Me.pnlHeaderPatientRecords)
