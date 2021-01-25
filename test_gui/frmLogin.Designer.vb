@@ -31,6 +31,7 @@ Partial Class frmLogin
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.lblBadge = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -68,6 +69,7 @@ Partial Class frmLogin
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.White
+        Me.Panel1.Controls.Add(Me.lblBadge)
         Me.Panel1.Controls.Add(Me.Panel3)
         Me.Panel1.Controls.Add(Me.Panel2)
         Me.Panel1.Controls.Add(Me.Button1)
@@ -131,6 +133,17 @@ Partial Class frmLogin
         Me.Panel4.Size = New System.Drawing.Size(50, 48)
         Me.Panel4.TabIndex = 9
         '
+        'lblBadge
+        '
+        Me.lblBadge.AutoSize = True
+        Me.lblBadge.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblBadge.ForeColor = System.Drawing.Color.Black
+        Me.lblBadge.Location = New System.Drawing.Point(108, 192)
+        Me.lblBadge.Name = "lblBadge"
+        Me.lblBadge.Size = New System.Drawing.Size(109, 17)
+        Me.lblBadge.TabIndex = 17
+        Me.lblBadge.Text = "Login with badge"
+        '
         'frmLogin
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -144,6 +157,7 @@ Partial Class frmLogin
         Me.Name = "frmLogin"
         Me.Text = "Log in"
         Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
         Me.Panel2.ResumeLayout(False)
@@ -160,4 +174,5 @@ Partial Class frmLogin
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Label1 As Label
     Friend WithEvents Panel4 As Panel
+    Friend WithEvents lblBadge As Label
 End Class

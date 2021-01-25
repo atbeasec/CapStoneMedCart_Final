@@ -64,6 +64,15 @@ Partial Class frmNewPatient
         Me.ComboBox3 = New System.Windows.Forms.ComboBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Button3 = New System.Windows.Forms.Button()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.Panel7 = New System.Windows.Forms.Panel()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.Panel8 = New System.Windows.Forms.Panel()
+        Me.TextBox8 = New System.Windows.Forms.TextBox()
+        Me.TextBox9 = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.Panel9.SuspendLayout()
         Me.Panel10.SuspendLayout()
@@ -77,6 +86,9 @@ Partial Class frmNewPatient
         Me.Panel3.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.Panel5.SuspendLayout()
+        Me.Panel6.SuspendLayout()
+        Me.Panel7.SuspendLayout()
+        Me.Panel8.SuspendLayout()
         Me.SuspendLayout()
         '
         'TextBox7
@@ -87,17 +99,17 @@ Partial Class frmNewPatient
         Me.TextBox7.Location = New System.Drawing.Point(1, 1)
         Me.TextBox7.Multiline = True
         Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(197, 26)
+        Me.TextBox7.Size = New System.Drawing.Size(250, 26)
         Me.TextBox7.TabIndex = 38
         '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.DarkGray
         Me.Panel1.Controls.Add(Me.TextBox7)
-        Me.Panel1.Location = New System.Drawing.Point(45, 81)
+        Me.Panel1.Location = New System.Drawing.Point(46, 81)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel1.Size = New System.Drawing.Size(199, 28)
+        Me.Panel1.Size = New System.Drawing.Size(252, 28)
         Me.Panel1.TabIndex = 39
         '
         'TextBox12
@@ -105,7 +117,7 @@ Partial Class frmNewPatient
         Me.TextBox12.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox12.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox12.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.TextBox12.Location = New System.Drawing.Point(41, 54)
+        Me.TextBox12.Location = New System.Drawing.Point(42, 54)
         Me.TextBox12.Multiline = True
         Me.TextBox12.Name = "TextBox12"
         Me.TextBox12.Size = New System.Drawing.Size(87, 27)
@@ -117,7 +129,7 @@ Partial Class frmNewPatient
         Me.TextBox13.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox13.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.TextBox13.Location = New System.Drawing.Point(397, 54)
+        Me.TextBox13.Location = New System.Drawing.Point(348, 53)
         Me.TextBox13.Multiline = True
         Me.TextBox13.Name = "TextBox13"
         Me.TextBox13.Size = New System.Drawing.Size(82, 27)
@@ -129,43 +141,43 @@ Partial Class frmNewPatient
         Me.TextBox15.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox15.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.TextBox15.Location = New System.Drawing.Point(42, 125)
+        Me.TextBox15.Location = New System.Drawing.Point(44, 122)
         Me.TextBox15.Multiline = True
         Me.TextBox15.Name = "TextBox15"
-        Me.TextBox15.Size = New System.Drawing.Size(54, 27)
+        Me.TextBox15.Size = New System.Drawing.Size(111, 27)
         Me.TextBox15.TabIndex = 42
-        Me.TextBox15.Text = "Email:"
+        Me.TextBox15.Text = "Middle Name:"
         '
         'TextBox17
         '
         Me.TextBox17.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox17.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox17.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.TextBox17.Location = New System.Drawing.Point(398, 125)
+        Me.TextBox17.Location = New System.Drawing.Point(349, 118)
         Me.TextBox17.Multiline = True
         Me.TextBox17.Name = "TextBox17"
         Me.TextBox17.Size = New System.Drawing.Size(112, 27)
         Me.TextBox17.TabIndex = 44
-        Me.TextBox17.Text = "Confirm Email:"
+        Me.TextBox17.Text = "Email:"
         '
         'TextBox19
         '
         Me.TextBox19.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox19.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox19.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.TextBox19.Location = New System.Drawing.Point(43, 196)
+        Me.TextBox19.Location = New System.Drawing.Point(45, 330)
         Me.TextBox19.Multiline = True
         Me.TextBox19.Name = "TextBox19"
-        Me.TextBox19.Size = New System.Drawing.Size(70, 27)
+        Me.TextBox19.Size = New System.Drawing.Size(142, 27)
         Me.TextBox19.TabIndex = 46
-        Me.TextBox19.Text = "Address:"
+        Me.TextBox19.Text = "Street Address:"
         '
         'TextBox20
         '
         Me.TextBox20.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox20.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox20.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.TextBox20.Location = New System.Drawing.Point(41, 269)
+        Me.TextBox20.Location = New System.Drawing.Point(45, 403)
         Me.TextBox20.Multiline = True
         Me.TextBox20.Name = "TextBox20"
         Me.TextBox20.Size = New System.Drawing.Size(37, 27)
@@ -177,7 +189,7 @@ Partial Class frmNewPatient
         Me.TextBox21.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox21.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox21.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.TextBox21.Location = New System.Drawing.Point(324, 271)
+        Me.TextBox21.Location = New System.Drawing.Point(329, 403)
         Me.TextBox21.Multiline = True
         Me.TextBox21.Name = "TextBox21"
         Me.TextBox21.Size = New System.Drawing.Size(70, 27)
@@ -200,7 +212,7 @@ Partial Class frmNewPatient
         Me.TextBox14.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox14.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox14.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.TextBox14.Location = New System.Drawing.Point(507, 271)
+        Me.TextBox14.Location = New System.Drawing.Point(499, 403)
         Me.TextBox14.Multiline = True
         Me.TextBox14.Name = "TextBox14"
         Me.TextBox14.Size = New System.Drawing.Size(109, 27)
@@ -212,7 +224,7 @@ Partial Class frmNewPatient
         Me.TextBox16.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox16.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox16.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.TextBox16.Location = New System.Drawing.Point(39, 340)
+        Me.TextBox16.Location = New System.Drawing.Point(43, 474)
         Me.TextBox16.Multiline = True
         Me.TextBox16.Name = "TextBox16"
         Me.TextBox16.Size = New System.Drawing.Size(64, 27)
@@ -224,33 +236,33 @@ Partial Class frmNewPatient
         Me.TextBox18.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox18.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox18.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.TextBox18.Location = New System.Drawing.Point(395, 340)
+        Me.TextBox18.Location = New System.Drawing.Point(194, 193)
         Me.TextBox18.Multiline = True
         Me.TextBox18.Name = "TextBox18"
         Me.TextBox18.Size = New System.Drawing.Size(104, 27)
         Me.TextBox18.TabIndex = 51
-        Me.TextBox18.Text = "Date of Birth:"
+        Me.TextBox18.Text = "DOB:"
         '
         'TextBox22
         '
         Me.TextBox22.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox22.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox22.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.TextBox22.Location = New System.Drawing.Point(40, 412)
+        Me.TextBox22.Location = New System.Drawing.Point(44, 192)
         Me.TextBox22.Multiline = True
         Me.TextBox22.Name = "TextBox22"
         Me.TextBox22.Size = New System.Drawing.Size(62, 27)
         Me.TextBox22.TabIndex = 52
-        Me.TextBox22.Text = "Gender:"
+        Me.TextBox22.Text = "Sex:"
         '
         'Panel9
         '
         Me.Panel9.BackColor = System.Drawing.Color.DarkGray
         Me.Panel9.Controls.Add(Me.TextBox23)
-        Me.Panel9.Location = New System.Drawing.Point(46, 153)
+        Me.Panel9.Location = New System.Drawing.Point(46, 151)
         Me.Panel9.Name = "Panel9"
         Me.Panel9.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel9.Size = New System.Drawing.Size(199, 28)
+        Me.Panel9.Size = New System.Drawing.Size(252, 28)
         Me.Panel9.TabIndex = 40
         '
         'TextBox23
@@ -261,17 +273,17 @@ Partial Class frmNewPatient
         Me.TextBox23.Location = New System.Drawing.Point(1, 1)
         Me.TextBox23.Multiline = True
         Me.TextBox23.Name = "TextBox23"
-        Me.TextBox23.Size = New System.Drawing.Size(197, 26)
+        Me.TextBox23.Size = New System.Drawing.Size(250, 26)
         Me.TextBox23.TabIndex = 38
         '
         'Panel10
         '
         Me.Panel10.BackColor = System.Drawing.Color.DarkGray
         Me.Panel10.Controls.Add(Me.TextBox24)
-        Me.Panel10.Location = New System.Drawing.Point(45, 225)
+        Me.Panel10.Location = New System.Drawing.Point(46, 361)
         Me.Panel10.Name = "Panel10"
         Me.Panel10.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel10.Size = New System.Drawing.Size(555, 28)
+        Me.Panel10.Size = New System.Drawing.Size(562, 28)
         Me.Panel10.TabIndex = 40
         '
         'TextBox24
@@ -282,17 +294,17 @@ Partial Class frmNewPatient
         Me.TextBox24.Location = New System.Drawing.Point(1, 1)
         Me.TextBox24.Multiline = True
         Me.TextBox24.Name = "TextBox24"
-        Me.TextBox24.Size = New System.Drawing.Size(553, 26)
+        Me.TextBox24.Size = New System.Drawing.Size(560, 26)
         Me.TextBox24.TabIndex = 38
         '
         'Panel11
         '
         Me.Panel11.BackColor = System.Drawing.Color.DarkGray
         Me.Panel11.Controls.Add(Me.TextBox25)
-        Me.Panel11.Location = New System.Drawing.Point(401, 82)
+        Me.Panel11.Location = New System.Drawing.Point(349, 80)
         Me.Panel11.Name = "Panel11"
         Me.Panel11.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel11.Size = New System.Drawing.Size(199, 28)
+        Me.Panel11.Size = New System.Drawing.Size(259, 28)
         Me.Panel11.TabIndex = 40
         '
         'TextBox25
@@ -303,17 +315,17 @@ Partial Class frmNewPatient
         Me.TextBox25.Location = New System.Drawing.Point(1, 1)
         Me.TextBox25.Multiline = True
         Me.TextBox25.Name = "TextBox25"
-        Me.TextBox25.Size = New System.Drawing.Size(197, 26)
+        Me.TextBox25.Size = New System.Drawing.Size(257, 26)
         Me.TextBox25.TabIndex = 38
         '
         'Panel12
         '
         Me.Panel12.BackColor = System.Drawing.Color.DarkGray
         Me.Panel12.Controls.Add(Me.TextBox26)
-        Me.Panel12.Location = New System.Drawing.Point(401, 152)
+        Me.Panel12.Location = New System.Drawing.Point(350, 147)
         Me.Panel12.Name = "Panel12"
         Me.Panel12.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel12.Size = New System.Drawing.Size(199, 28)
+        Me.Panel12.Size = New System.Drawing.Size(258, 28)
         Me.Panel12.TabIndex = 40
         '
         'TextBox26
@@ -324,17 +336,17 @@ Partial Class frmNewPatient
         Me.TextBox26.Location = New System.Drawing.Point(1, 1)
         Me.TextBox26.Multiline = True
         Me.TextBox26.Name = "TextBox26"
-        Me.TextBox26.Size = New System.Drawing.Size(197, 26)
+        Me.TextBox26.Size = New System.Drawing.Size(256, 26)
         Me.TextBox26.TabIndex = 38
         '
         'Panel14
         '
         Me.Panel14.BackColor = System.Drawing.Color.DarkGray
         Me.Panel14.Controls.Add(Me.TextBox28)
-        Me.Panel14.Location = New System.Drawing.Point(399, 367)
+        Me.Panel14.Location = New System.Drawing.Point(198, 220)
         Me.Panel14.Name = "Panel14"
         Me.Panel14.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel14.Size = New System.Drawing.Size(201, 28)
+        Me.Panel14.Size = New System.Drawing.Size(100, 28)
         Me.Panel14.TabIndex = 40
         '
         'TextBox28
@@ -345,14 +357,14 @@ Partial Class frmNewPatient
         Me.TextBox28.Location = New System.Drawing.Point(1, 1)
         Me.TextBox28.Multiline = True
         Me.TextBox28.Name = "TextBox28"
-        Me.TextBox28.Size = New System.Drawing.Size(199, 26)
+        Me.TextBox28.Size = New System.Drawing.Size(98, 26)
         Me.TextBox28.TabIndex = 38
         '
         'Panel15
         '
         Me.Panel15.BackColor = System.Drawing.Color.DarkGray
         Me.Panel15.Controls.Add(Me.TextBox29)
-        Me.Panel15.Location = New System.Drawing.Point(43, 368)
+        Me.Panel15.Location = New System.Drawing.Point(46, 501)
         Me.Panel15.Name = "Panel15"
         Me.Panel15.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel15.Size = New System.Drawing.Size(202, 28)
@@ -373,7 +385,7 @@ Partial Class frmNewPatient
         '
         Me.Panel16.BackColor = System.Drawing.Color.DarkGray
         Me.Panel16.Controls.Add(Me.TextBox30)
-        Me.Panel16.Location = New System.Drawing.Point(44, 298)
+        Me.Panel16.Location = New System.Drawing.Point(46, 431)
         Me.Panel16.Name = "Panel16"
         Me.Panel16.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel16.Size = New System.Drawing.Size(201, 28)
@@ -394,10 +406,10 @@ Partial Class frmNewPatient
         '
         Me.Panel17.BackColor = System.Drawing.Color.DarkGray
         Me.Panel17.Controls.Add(Me.TextBox31)
-        Me.Panel17.Location = New System.Drawing.Point(509, 297)
+        Me.Panel17.Location = New System.Drawing.Point(500, 431)
         Me.Panel17.Name = "Panel17"
         Me.Panel17.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel17.Size = New System.Drawing.Size(90, 28)
+        Me.Panel17.Size = New System.Drawing.Size(108, 28)
         Me.Panel17.TabIndex = 41
         '
         'TextBox31
@@ -408,7 +420,7 @@ Partial Class frmNewPatient
         Me.TextBox31.Location = New System.Drawing.Point(1, 1)
         Me.TextBox31.Multiline = True
         Me.TextBox31.Name = "TextBox31"
-        Me.TextBox31.Size = New System.Drawing.Size(88, 26)
+        Me.TextBox31.Size = New System.Drawing.Size(106, 26)
         Me.TextBox31.TabIndex = 38
         '
         'ComboBox1
@@ -427,18 +439,18 @@ Partial Class frmNewPatient
         Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.TextBox1.Location = New System.Drawing.Point(396, 414)
+        Me.TextBox1.Location = New System.Drawing.Point(45, 265)
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(68, 27)
         Me.TextBox1.TabIndex = 56
-        Me.TextBox1.Text = "Status:"
+        Me.TextBox1.Text = "Room:"
         '
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.DarkGray
         Me.Panel2.Controls.Add(Me.ComboBox1)
-        Me.Panel2.Location = New System.Drawing.Point(325, 299)
+        Me.Panel2.Location = New System.Drawing.Point(328, 432)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel2.Size = New System.Drawing.Size(80, 28)
@@ -448,10 +460,10 @@ Partial Class frmNewPatient
         '
         Me.Panel3.BackColor = System.Drawing.Color.DarkGray
         Me.Panel3.Controls.Add(Me.ComboBox4)
-        Me.Panel3.Location = New System.Drawing.Point(45, 441)
+        Me.Panel3.Location = New System.Drawing.Point(46, 221)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel3.Size = New System.Drawing.Size(202, 28)
+        Me.Panel3.Size = New System.Drawing.Size(124, 28)
         Me.Panel3.TabIndex = 59
         '
         'ComboBox4
@@ -462,17 +474,17 @@ Partial Class frmNewPatient
         Me.ComboBox4.FormattingEnabled = True
         Me.ComboBox4.Location = New System.Drawing.Point(1, 1)
         Me.ComboBox4.Name = "ComboBox4"
-        Me.ComboBox4.Size = New System.Drawing.Size(200, 25)
+        Me.ComboBox4.Size = New System.Drawing.Size(122, 25)
         Me.ComboBox4.TabIndex = 54
         '
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.Color.DarkGray
         Me.Panel4.Controls.Add(Me.ComboBox2)
-        Me.Panel4.Location = New System.Drawing.Point(399, 440)
+        Me.Panel4.Location = New System.Drawing.Point(401, 296)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel4.Size = New System.Drawing.Size(202, 28)
+        Me.Panel4.Size = New System.Drawing.Size(207, 28)
         Me.Panel4.TabIndex = 60
         '
         'ComboBox2
@@ -483,14 +495,14 @@ Partial Class frmNewPatient
         Me.ComboBox2.FormattingEnabled = True
         Me.ComboBox2.Location = New System.Drawing.Point(1, 1)
         Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(200, 25)
+        Me.ComboBox2.Size = New System.Drawing.Size(205, 25)
         Me.ComboBox2.TabIndex = 54
         '
         'Panel5
         '
         Me.Panel5.BackColor = System.Drawing.Color.DarkGray
         Me.Panel5.Controls.Add(Me.ComboBox3)
-        Me.Panel5.Location = New System.Drawing.Point(45, 517)
+        Me.Panel5.Location = New System.Drawing.Point(46, 291)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel5.Size = New System.Drawing.Size(202, 28)
@@ -512,12 +524,12 @@ Partial Class frmNewPatient
         Me.TextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TextBox2.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.TextBox2.Location = New System.Drawing.Point(41, 488)
+        Me.TextBox2.Location = New System.Drawing.Point(400, 265)
         Me.TextBox2.Multiline = True
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(112, 27)
         Me.TextBox2.TabIndex = 61
-        Me.TextBox2.Text = "Room Location:"
+        Me.TextBox2.Text = "Bed:"
         '
         'Button3
         '
@@ -526,7 +538,7 @@ Partial Class frmNewPatient
         Me.Button3.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button3.ForeColor = System.Drawing.Color.White
         Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
-        Me.Button3.Location = New System.Drawing.Point(231, 573)
+        Me.Button3.Location = New System.Drawing.Point(230, 560)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(201, 38)
         Me.Button3.TabIndex = 36
@@ -534,12 +546,117 @@ Partial Class frmNewPatient
         Me.Button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.Button3.UseVisualStyleBackColor = False
         '
+        'Panel6
+        '
+        Me.Panel6.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel6.Controls.Add(Me.TextBox3)
+        Me.Panel6.Location = New System.Drawing.Point(349, 220)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel6.Size = New System.Drawing.Size(103, 28)
+        Me.Panel6.TabIndex = 63
+        '
+        'TextBox3
+        '
+        Me.TextBox3.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.TextBox3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TextBox3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox3.Location = New System.Drawing.Point(1, 1)
+        Me.TextBox3.Multiline = True
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(101, 26)
+        Me.TextBox3.TabIndex = 38
+        '
+        'TextBox4
+        '
+        Me.TextBox4.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.TextBox4.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
+        Me.TextBox4.Location = New System.Drawing.Point(348, 192)
+        Me.TextBox4.Multiline = True
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(104, 27)
+        Me.TextBox4.TabIndex = 64
+        Me.TextBox4.Text = "Height:"
+        '
+        'Panel7
+        '
+        Me.Panel7.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel7.Controls.Add(Me.TextBox5)
+        Me.Panel7.Location = New System.Drawing.Point(495, 221)
+        Me.Panel7.Name = "Panel7"
+        Me.Panel7.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel7.Size = New System.Drawing.Size(112, 28)
+        Me.Panel7.TabIndex = 64
+        '
+        'TextBox5
+        '
+        Me.TextBox5.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.TextBox5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TextBox5.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox5.Location = New System.Drawing.Point(1, 1)
+        Me.TextBox5.Multiline = True
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.Size = New System.Drawing.Size(110, 26)
+        Me.TextBox5.TabIndex = 38
+        '
+        'TextBox6
+        '
+        Me.TextBox6.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.TextBox6.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
+        Me.TextBox6.Location = New System.Drawing.Point(495, 193)
+        Me.TextBox6.Multiline = True
+        Me.TextBox6.Name = "TextBox6"
+        Me.TextBox6.Size = New System.Drawing.Size(104, 27)
+        Me.TextBox6.TabIndex = 65
+        Me.TextBox6.Text = "Weight:"
+        '
+        'Panel8
+        '
+        Me.Panel8.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel8.Controls.Add(Me.TextBox8)
+        Me.Panel8.Location = New System.Drawing.Point(329, 502)
+        Me.Panel8.Name = "Panel8"
+        Me.Panel8.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel8.Size = New System.Drawing.Size(279, 28)
+        Me.Panel8.TabIndex = 66
+        '
+        'TextBox8
+        '
+        Me.TextBox8.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.TextBox8.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TextBox8.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox8.Location = New System.Drawing.Point(1, 1)
+        Me.TextBox8.Multiline = True
+        Me.TextBox8.Name = "TextBox8"
+        Me.TextBox8.Size = New System.Drawing.Size(277, 26)
+        Me.TextBox8.TabIndex = 38
+        '
+        'TextBox9
+        '
+        Me.TextBox9.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.TextBox9.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
+        Me.TextBox9.Location = New System.Drawing.Point(327, 474)
+        Me.TextBox9.Multiline = True
+        Me.TextBox9.Name = "TextBox9"
+        Me.TextBox9.Size = New System.Drawing.Size(133, 27)
+        Me.TextBox9.TabIndex = 67
+        Me.TextBox9.Text = "Primary Physician:"
+        '
         'frmNewPatient
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(656, 639)
+        Me.ClientSize = New System.Drawing.Size(656, 634)
+        Me.Controls.Add(Me.Panel8)
+        Me.Controls.Add(Me.TextBox9)
+        Me.Controls.Add(Me.TextBox6)
+        Me.Controls.Add(Me.Panel7)
+        Me.Controls.Add(Me.Panel6)
+        Me.Controls.Add(Me.TextBox4)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Panel5)
         Me.Controls.Add(Me.TextBox2)
@@ -592,6 +709,12 @@ Partial Class frmNewPatient
         Me.Panel3.ResumeLayout(False)
         Me.Panel4.ResumeLayout(False)
         Me.Panel5.ResumeLayout(False)
+        Me.Panel6.ResumeLayout(False)
+        Me.Panel6.PerformLayout()
+        Me.Panel7.ResumeLayout(False)
+        Me.Panel7.PerformLayout()
+        Me.Panel8.ResumeLayout(False)
+        Me.Panel8.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -637,4 +760,13 @@ Partial Class frmNewPatient
     Friend WithEvents Panel5 As Panel
     Friend WithEvents ComboBox3 As ComboBox
     Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents Panel6 As Panel
+    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents Panel7 As Panel
+    Friend WithEvents TextBox5 As TextBox
+    Friend WithEvents TextBox6 As TextBox
+    Friend WithEvents Panel8 As Panel
+    Friend WithEvents TextBox8 As TextBox
+    Friend WithEvents TextBox9 As TextBox
 End Class
