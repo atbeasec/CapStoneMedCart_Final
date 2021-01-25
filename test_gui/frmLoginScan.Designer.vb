@@ -26,12 +26,12 @@ Partial Class frmLoginScan
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.lblBadge = New System.Windows.Forms.Label()
+        Me.btnLogin = New System.Windows.Forms.Button()
         Me.lblForgotID = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.btnLogin = New System.Windows.Forms.Button()
-        Me.lblBadge = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.SuspendLayout()
@@ -69,12 +69,37 @@ Partial Class frmLoginScan
         Me.Panel1.Size = New System.Drawing.Size(332, 232)
         Me.Panel1.TabIndex = 10
         '
+        'lblBadge
+        '
+        Me.lblBadge.AutoSize = True
+        Me.lblBadge.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblBadge.ForeColor = System.Drawing.Color.Black
+        Me.lblBadge.Location = New System.Drawing.Point(100, 179)
+        Me.lblBadge.Name = "lblBadge"
+        Me.lblBadge.Size = New System.Drawing.Size(127, 17)
+        Me.lblBadge.TabIndex = 16
+        Me.lblBadge.Text = "Login with Password"
+        '
+        'btnLogin
+        '
+        Me.btnLogin.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnLogin.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnLogin.ForeColor = System.Drawing.Color.White
+        Me.btnLogin.Location = New System.Drawing.Point(51, 126)
+        Me.btnLogin.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnLogin.Name = "btnLogin"
+        Me.btnLogin.Size = New System.Drawing.Size(236, 40)
+        Me.btnLogin.TabIndex = 15
+        Me.btnLogin.Text = "Login"
+        Me.btnLogin.UseVisualStyleBackColor = False
+        '
         'lblForgotID
         '
         Me.lblForgotID.AutoSize = True
         Me.lblForgotID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblForgotID.ForeColor = System.Drawing.Color.Black
-        Me.lblForgotID.Location = New System.Drawing.Point(116, 146)
+        Me.lblForgotID.Location = New System.Drawing.Point(115, 132)
         Me.lblForgotID.Name = "lblForgotID"
         Me.lblForgotID.Size = New System.Drawing.Size(101, 17)
         Me.lblForgotID.TabIndex = 14
@@ -95,7 +120,7 @@ Partial Class frmLoginScan
         '
         Me.Panel3.BackColor = System.Drawing.SystemColors.ControlDarkDark
         Me.Panel3.Controls.Add(Me.TextBox1)
-        Me.Panel3.Location = New System.Drawing.Point(51, 103)
+        Me.Panel3.Location = New System.Drawing.Point(51, 93)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel3.Size = New System.Drawing.Size(237, 28)
@@ -115,31 +140,6 @@ Partial Class frmLoginScan
         Me.TextBox1.TabIndex = 2
         Me.TextBox1.Tag = "SVSU ID"
         Me.TextBox1.Text = "SVSU ID"
-        '
-        'btnLogin
-        '
-        Me.btnLogin.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnLogin.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnLogin.ForeColor = System.Drawing.Color.White
-        Me.btnLogin.Location = New System.Drawing.Point(52, 140)
-        Me.btnLogin.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnLogin.Name = "btnLogin"
-        Me.btnLogin.Size = New System.Drawing.Size(236, 40)
-        Me.btnLogin.TabIndex = 15
-        Me.btnLogin.Text = "Log in"
-        Me.btnLogin.UseVisualStyleBackColor = False
-        '
-        'lblBadge
-        '
-        Me.lblBadge.AutoSize = True
-        Me.lblBadge.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblBadge.ForeColor = System.Drawing.Color.Black
-        Me.lblBadge.Location = New System.Drawing.Point(111, 184)
-        Me.lblBadge.Name = "lblBadge"
-        Me.lblBadge.Size = New System.Drawing.Size(124, 34)
-        Me.lblBadge.TabIndex = 16
-        Me.lblBadge.Text = "            OR" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Log in With Scanner"
         '
         'frmLoginScan
         '
