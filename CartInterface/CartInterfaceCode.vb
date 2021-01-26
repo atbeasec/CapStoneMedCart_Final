@@ -61,7 +61,7 @@ Module CartInterfaceCode
     'TODO
     'set up a way to change the COM port. (by default it looks like it is COM3
     'default bit rate looks to be 115200
-#Const SimulationMode = False 'this is going to dictate if the cart is going to be simulated or not.
+#Const SimulationMode = True 'this is going to dictate if the cart is going to be simulated or not.
     Sub main()
         OpenDrawer(16)
 
@@ -289,6 +289,46 @@ Module CartInterfaceCode
         End With
     End Sub
 
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME:  					   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		         */   
+    '/*		         DATE CREATED: 		   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								   */             
+    '/*											   */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+    Sub ChangeSettings()
+
+    End Sub
 
 #End If
 
