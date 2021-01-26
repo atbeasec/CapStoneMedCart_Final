@@ -36,7 +36,7 @@
     'Add new  delete button to contact panel
     Public Sub RestDefaultButtons(ByVal sender As Object, ByVal e As EventArgs)
 
-        Dim temp As Integer = 1
+        Dim intTemp As Integer = 1
 
         Dim ctlControl As Control
 
@@ -116,22 +116,17 @@
 
 
         Dim ctlParentFlowPanel As Control = ctlControl.Parent
-        'Dim strFlowPanelName As String = control.Parent.Name
-
-        ' Debug.Print(control.Parent.Name)
-
-        Dim parentPanelName As String
-
-        parentPanelName = Nothing
+        Dim strParentPanelName As String
+        strParentPanelName = Nothing
 
         'Remove handler from sender
         For Each ctlObject As Control In ctlParentFlowPanel.Controls
-            For Each childControlObj As Control In ctlObject.Controls
-                If childControlObj.Name = sender.name Then
+            For Each ctlChildControlObj As Control In ctlObject.Controls
+                If ctlChildControlObj.Name = sender.name Then
 
-                    RemoveHandler childControlObj.Click, AddressOf DynamicButton_Click
+                    RemoveHandler ctlChildControlObj.Click, AddressOf DynamicButton_Click
 
-                    parentPanelName = childControlObj.Parent.Name
+                    strParentPanelName = ctlChildControlObj.Parent.Name
                 End If
             Next
         Next
@@ -140,7 +135,7 @@
 
         'Remove  panel
         For Each ctlObject As Control In ctlParentFlowPanel.Controls
-            If ctlObject.Name = parentPanelName Then
+            If ctlObject.Name = strParentPanelName Then
 
                 ' prompt user if they are sure they want to delete the record
                 ' remove the record from the database
@@ -210,12 +205,12 @@
         strParentPanelName = Nothing
 
         'Remove handler from sender
-        For Each controlObj As Control In ctlParentFlowPanel.Controls
-            For Each childControlObj As Control In controlObj.Controls
-                If childControlObj.Name = sender.name Then
+        For Each ctlControlObj As Control In ctlParentFlowPanel.Controls
+            For Each ctlChildControlObj As Control In ctlControlObj.Controls
+                If ctlChildControlObj.Name = sender.name Then
 
-                    RemoveHandler childControlObj.Click, AddressOf DynamicButton_Click
-                    strParentPanelName = childControlObj.Parent.Name
+                    RemoveHandler ctlChildControlObj.Click, AddressOf DynamicButton_Click
+                    strParentPanelName = ctlChildControlObj.Parent.Name
 
                 End If
             Next
@@ -235,7 +230,6 @@
         With btnDeleteButton
             .AutoSize = True
             .Size = New Size(30, 30)
-
             .FlatStyle = FlatStyle.Flat
             .FlatAppearance.BorderSize = 0
             .ForeColor = Color.Transparent
