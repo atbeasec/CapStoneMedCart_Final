@@ -1,0 +1,3 @@
+The port is COM3 the Bit rate is 115200
+
+leave a way to change port numbers. 
