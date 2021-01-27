@@ -110,7 +110,7 @@
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Runs the database creation module to determine if the database was created
-        mDatabaseCreation.Main()
+        DatabaseCreation.Main()
     End Sub
 
     Private Sub btnConfiguration_Click(sender As Object, e As EventArgs) Handles btnConfiguration.Click
