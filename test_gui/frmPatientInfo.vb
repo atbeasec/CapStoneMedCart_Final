@@ -518,7 +518,7 @@
     End Sub
     Private Sub PopulateNotes()
 
-        CreateNotesPanels(flpNotes, "Customer had an allergic reaction to the phenylephrine")
+        ' CreateNotesPanels(flpNotes, "Customer had an allergic reaction to the phenylephrine")
         'CreateNotesPanels(flpNotes,)
         'CreateNotesPanels(flpNotes,)
 
@@ -1054,7 +1054,7 @@
 
     Private Sub btnAddAllergy_Click(sender As Object, e As EventArgs) Handles btnAddAllergy.Click
 
-        lstBoxAllergies.Items.Add(txtAllergy.Text)
+        '  lstBoxAllergies.Items.Add(txtAllergy.Text)
 
     End Sub
 

@@ -1,7 +1,7 @@
 ﻿Public Class Dispense
 
-    Dim ContactPanelsAddedCount As Integer = 0
-    Dim CurrentContactPanelName As String = Nothing
+    Dim contactPanelsAddedCount As Integer = 0
+    Dim currentContactPanelName As String = Nothing
 
     Private Sub btnDispense_Click(sender As Object, e As EventArgs) Handles btnDispense.Click
 
@@ -25,8 +25,8 @@
         With pnl
             .BackColor = Color.Gainsboro
             .Size = New Size(665, 47)
-            .Name = "pnlIndividualPatientRecordPadding" + (ContactPanelsAddedCount + 1).ToString
-            .Tag = ContactPanelsAddedCount + 1
+            .Name = "pnlIndividualPatientRecordPadding" + (contactPanelsAddedCount + 1).ToString
+            .Tag = contactPanelsAddedCount + 1
             .Padding = New Padding(0, 0, 0, 3)
             ' .Dock = System.Windows.Forms.DockStyle.Top
         End With
@@ -35,8 +35,8 @@
 
             .BackColor = Color.White
             .Size = New Size(665, 45)
-            .Name = "pnlIndividualPatientRecord" + (ContactPanelsAddedCount + 1).ToString
-            .Tag = ContactPanelsAddedCount + 1
+            .Name = "pnlIndividualPatientRecord" + (contactPanelsAddedCount + 1).ToString
+            .Tag = contactPanelsAddedCount + 1
             .Dock = System.Windows.Forms.DockStyle.Top
         End With
 
@@ -75,8 +75,8 @@
         AddHandler pnlMainPanel.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
         AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
 
-        CurrentContactPanelName = pnl.Name
-        ContactPanelsAddedCount += 1
+        currentContactPanelName = pnl.Name
+        contactPanelsAddedCount += 1
 
     End Sub
 

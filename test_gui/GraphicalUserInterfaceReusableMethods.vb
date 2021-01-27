@@ -1,4 +1,4 @@
-﻿Module GenericMethods
+﻿Module GraphicalUserInterfaceReusableMethods
 
     'Method that allows for highlighting when hovering over panels. has two parts
     'part 1
@@ -36,25 +36,25 @@
     'Add new  delete button to contact panel
     Public Sub RestDefaultButtons(ByVal sender As Object, ByVal e As EventArgs)
 
-        Dim temp As Integer = 1
+        Dim intTemp As Integer = 1
 
-        Dim ctl As Control
+        Dim ctlControl As Control
 
-        For Each ctl In sender.Parent.Controls
+        For Each ctlControl In sender.Parent.Controls
 
-            If TypeName(ctl) = "Button" Then
+            If TypeName(ctlControl) = "Button" Then
 
-                If Not ctl.Name.Contains("Cancel") Or ctl.Name.Contains("Check") Then
+                If Not ctlControl.Name.Contains("Cancel") Or ctlControl.Name.Contains("Check") Then
                     ' for any controls that are not the check mark or red x, we will make them visible
 
-                    ctl.Visible = True
+                    ctlControl.Visible = True
 
                 Else
                     'even though we hide the other controls, once we select the delete button once, we are hiding all of the other icons
                     ' there fore we do not need to recreate them we can simply hide or unhide them
                     ' in this case we will set the visibility to false because they are controls that we need to hide.
 
-                    ctl.Visible = False
+                    ctlControl.Visible = False
 
                 End If
             End If
@@ -78,23 +78,25 @@
 
         'put the check mark where the trash can icon was
         ' CreateCheckMarkBtn(sender.parent, New Point(sender.Location.X, sender.Location.Y))
+
         CreateXMarkBtn(sender.parent, New Point(sender.Location.X, sender.Location.Y))
+
         'put the x icon where the edit button was. We need to find the location of the edit Button.
-        Dim ctl As Control
+        Dim ctlControl As Control
 
-        For Each ctl In sender.Parent.Controls
+        For Each ctlControl In sender.Parent.Controls
 
-            If TypeName(ctl) = "Button" Then
-                If ctl.Name.Contains("Edit") Then
+            If TypeName(ctlControl) = "Button" Then
+                If ctlControl.Name.Contains("Edit") Then
 
-                    Debug.Print(ctl.Name)
+                    Debug.Print(ctlControl.Name)
 
                     'hide the control
-                    ctl.Visible = False
+                    ctlControl.Visible = False
 
                     ' get the location and put the x in that location
-                    ' CreateXMarkBtn(sender.Parent, New Point(ctl.Location.X, ctl.Location.Y))
-                    CreateCheckMarkBtn(sender.Parent, New Point(ctl.Location.X, ctl.Location.Y))
+                    ' CreateXMarkBtn(sender.Parent, New Point(ctlControl.Location.X, ctlControl.Location.Y))
+                    CreateCheckMarkBtn(sender.Parent, New Point(ctlControl.Location.X, ctlControl.Location.Y))
                 End If
             End If
         Next
@@ -108,28 +110,23 @@
         'the parent of the button will be the panel the control is located on.
         'we want to get one step removed so we need to next take the parent of the control
         ' to get the name of flowpanel which the button is laid out on
-        Dim control As Control = sender.Parent
-        Dim parents As Control = control.Parent
+        Dim ctlControl As Control = sender.Parent
+        Dim ctlParents As Control = ctlControl.Parent
 
 
 
-        Dim parentFlowPanel As Control = control.Parent
-        'Dim strFlowPanelName As String = control.Parent.Name
-
-        ' Debug.Print(control.Parent.Name)
-
-        Dim parentPanelName As String
-
-        parentPanelName = Nothing
+        Dim ctlParentFlowPanel As Control = ctlControl.Parent
+        Dim strParentPanelName As String
+        strParentPanelName = Nothing
 
         'Remove handler from sender
-        For Each controlObj As Control In parentFlowPanel.Controls
-            For Each childControlObj As Control In controlObj.Controls
-                If childControlObj.Name = sender.name Then
+        For Each ctlObject As Control In ctlParentFlowPanel.Controls
+            For Each ctlChildControlObj As Control In ctlObject.Controls
+                If ctlChildControlObj.Name = sender.name Then
 
-                    RemoveHandler childControlObj.Click, AddressOf DynamicButton_Click
+                    RemoveHandler ctlChildControlObj.Click, AddressOf DynamicButton_Click
 
-                    parentPanelName = childControlObj.Parent.Name
+                    strParentPanelName = ctlChildControlObj.Parent.Name
                 End If
             Next
         Next
@@ -137,22 +134,18 @@
 
 
         'Remove  panel
-        For Each controlObj As Control In parentFlowPanel.Controls
-            If controlObj.Name = parentPanelName Then
+        For Each ctlObject As Control In ctlParentFlowPanel.Controls
+            If ctlObject.Name = strParentPanelName Then
 
                 ' prompt user if they are sure they want to delete the record
-
-
                 ' remove the record from the database
-
                 'remove the padding panel from the flow panel
-
-                parentFlowPanel.Controls.Remove(controlObj.Parent)
-                controlObj.Parent.Dispose()
+                ctlParentFlowPanel.Controls.Remove(ctlObject.Parent)
+                ctlObject.Parent.Dispose()
 
                 'remove the panel from the flow panel
-                parentFlowPanel.Controls.Remove(controlObj)
-                controlObj.Dispose()
+                ctlParentFlowPanel.Controls.Remove(ctlObject)
+                ctlObject.Dispose()
 
             End If
         Next
@@ -173,7 +166,7 @@
     End Sub
 
 
-    Public Sub CreateIDLabel(ByVal panelName As Panel, lblName As Label, strLabelName As String, x As Integer, y As Integer, labelText As String, ByVal ContactPanelsAddedCount As Integer)
+    Public Sub CreateIDLabel(ByVal pnlName As Panel, lblName As Label, strLabelName As String, x As Integer, y As Integer, strLabelText As String, ByVal intPanelsAddedCount As Integer)
 
         ' Dim lblID As Label
         'lblName = New Label
@@ -190,13 +183,13 @@
             .ForeColor = Color.Black
             .Font = New Font(New FontFamily("Segoe UI"), 11, FontStyle.Regular)
             .Location = New Point(x, y) 'new Point(600, 5)
-            .Name = strLabelName + (ContactPanelsAddedCount).ToString
-            .Text = labelText
-            .Tag = ContactPanelsAddedCount + 1
+            .Name = strLabelName + (intPanelsAddedCount).ToString
+            .Text = strLabelText
+            .Tag = intPanelsAddedCount + 1
         End With
 
 
-        panelName.Controls.Add(lblName)
+        pnlName.Controls.Add(lblName)
 
     End Sub
 
@@ -205,28 +198,20 @@
         'the parent of the button will be the panel the control is located on.
         'we want to get one step removed so we need to next take the parent of the control
         ' to get the name of flowpanel which the button is laid out on
-        Dim control As Control = sender.Parent
-        Dim parents As Control = control.Parent
-
-
-
-        Dim parentFlowPanel As Control = control.Parent
-        'Dim strFlowPanelName As String = control.Parent.Name
-
-        ' Debug.Print(control.Parent.Name)
-
-        Dim parentPanelName As String
-
-        parentPanelName = Nothing
+        Dim ctlControl As Control = sender.Parent
+        Dim ctlParents As Control = ctlControl.Parent
+        Dim ctlParentFlowPanel As Control = ctlControl.Parent
+        Dim strParentPanelName As String
+        strParentPanelName = Nothing
 
         'Remove handler from sender
-        For Each controlObj As Control In parentFlowPanel.Controls
-            For Each childControlObj As Control In controlObj.Controls
-                If childControlObj.Name = sender.name Then
+        For Each ctlControlObj As Control In ctlParentFlowPanel.Controls
+            For Each ctlChildControlObj As Control In ctlControlObj.Controls
+                If ctlChildControlObj.Name = sender.name Then
 
-                    RemoveHandler childControlObj.Click, AddressOf DynamicButton_Click
+                    RemoveHandler ctlChildControlObj.Click, AddressOf DynamicButton_Click
+                    strParentPanelName = ctlChildControlObj.Parent.Name
 
-                    parentPanelName = childControlObj.Parent.Name
                 End If
             Next
         Next
@@ -234,76 +219,74 @@
     End Sub
 
     'Add new  delete button to contact panel
-    Public Sub CreateDeleteBtn(ByVal panelName As Panel, ByVal ContactPanelsAddedCount As Integer, ByVal x As Integer, ByVal y As Integer)
+    Public Sub CreateDeleteBtn(ByVal pnlPanelName As Panel, ByVal intPanelsAddedCount As Integer, ByVal intX As Integer, ByVal intY As Integer)
 
         Dim btnDeleteButton As Button
         btnDeleteButton = New Button
         'declare our image and point at the resource
-        Dim imageTrash As New Bitmap(New Bitmap(My.Resources.icons8_delete_trash), 25, 25)
+        Dim mapImageTrash As New Bitmap(New Bitmap(My.Resources.icons8_delete_trash), 25, 25)
 
         'Set button properties
         With btnDeleteButton
             .AutoSize = True
             .Size = New Size(30, 30)
-
             .FlatStyle = FlatStyle.Flat
             .FlatAppearance.BorderSize = 0
             .ForeColor = Color.Transparent
             ' .Font = New Font(New FontFamily("Microsoft Sans Serif"), 11)
             ' .Location = New Point(  )
-            .Location = New Point(x, y)
-            .Name = "btnDeletePatientRecord" + (ContactPanelsAddedCount).ToString
-            .Image = imageTrash
+            .Location = New Point(intX, intY)
+            .Name = "btnDeletePatientRecord" + (intPanelsAddedCount).ToString
+            .Image = mapImageTrash
             .ImageAlign = ContentAlignment.MiddleCenter
-            .Tag = ContactPanelsAddedCount + 1
+            .Tag = intPanelsAddedCount + 1
         End With
 
+        pnlPanelName.Controls.Add(btnDeleteButton)
 
-        panelName.Controls.Add(btnDeleteButton)
         ' MessageBox.Show("again")
         'Add handler for click events
         AddHandler btnDeleteButton.Click, AddressOf ShowConfirmationButtons
 
     End Sub
 
-    Public Sub CreateEditButton(ByVal panelName As Panel, ByVal ContactPanelsAddedCount As Integer, ByVal x As Integer, ByVal y As Integer)
+    Public Sub CreateEditButton(ByVal pnlPanelName As Panel, ByVal pnlPanelsAddedCount As Integer, ByVal intX As Integer, ByVal intY As Integer)
 
         Dim btnEditButton As Button
         btnEditButton = New Button
         'declare our image and point at the resource
-        Dim imagePencil As New Bitmap(New Bitmap(My.Resources.icons8_pencil), 25, 25)
+        Dim mapImagePencil As New Bitmap(New Bitmap(My.Resources.icons8_pencil), 25, 25)
 
         'Set button properties
         With btnEditButton
             .AutoSize = True
             .Size = New Size(30, 30)
-
             .FlatStyle = FlatStyle.Flat
             .FlatAppearance.BorderSize = 0
             .ForeColor = Color.Transparent
             ' .Font = New Font(New FontFamily("Microsoft Sans Serif"), 11)
             '.Location = New Point(825, 5)
-            .Location = New Point(x, y)
-            .Name = "btnEditPatientRecord" + (ContactPanelsAddedCount).ToString
-            .Image = imagePencil
+            .Location = New Point(intX, intY)
+            .Name = "btnEditPatientRecord" + (pnlPanelsAddedCount).ToString
+            .Image = mapImagePencil
             .ImageAlign = ContentAlignment.MiddleCenter
-            .Tag = ContactPanelsAddedCount + 1
+            .Tag = pnlPanelsAddedCount + 1
         End With
 
-        Debug.Print(panelName.Name)
-        panelName.Controls.Add(btnEditButton)
+        Debug.Print(pnlPanelName.Name)
+        pnlPanelName.Controls.Add(btnEditButton)
         ' MessageBox.Show("again")
         'Add handler for click events
         AddHandler btnEditButton.Click, AddressOf DynamicButtonEditRecord_Click
 
     End Sub
 
-    Public Sub CreateCheckMarkBtn(ByVal panelName As Panel, ByVal location As Point)
+    Public Sub CreateCheckMarkBtn(ByVal pnlPanelName As Panel, ByVal pntLocation As Point)
 
         Dim btnCheckMark As Button
         btnCheckMark = New Button
         'declare our image and point at the resource
-        Dim imageTrash As New Bitmap(New Bitmap(My.Resources.checkmark), 25, 25)
+        Dim mapImageTrash As New Bitmap(New Bitmap(My.Resources.checkmark), 25, 25)
 
         'Set button properties
         With btnCheckMark
@@ -315,27 +298,26 @@
             .ForeColor = Color.Transparent
             ' .Font = New Font(New FontFamily("Microsoft Sans Serif"), 11)
             ' .Location = New Point(  )
-            .Location = New Point(location)
+            .Location = New Point(pntLocation)
             .Name = "btnDeletePatientRecord"
-            .Image = imageTrash
+            .Image = mapImageTrash
             .ImageAlign = ContentAlignment.MiddleCenter
 
         End With
 
-
-        panelName.Controls.Add(btnCheckMark)
+        pnlPanelName.Controls.Add(btnCheckMark)
         ' MessageBox.Show("again")
         'Add handler for click events
         AddHandler btnCheckMark.Click, AddressOf DynamicButton_Click
 
     End Sub
 
-    Public Sub CreateXMarkBtn(ByVal panelName As Panel, ByVal location As Point)
+    Public Sub CreateXMarkBtn(ByVal pnlPanelName As Panel, ByVal pntLocation As Point)
 
         Dim btnCancel As Button
         btnCancel = New Button
         'declare our image and point at the resource
-        Dim imageTrash As New Bitmap(New Bitmap(My.Resources.xmark), 25, 25)
+        Dim mapImageTrash As New Bitmap(New Bitmap(My.Resources.xmark), 25, 25)
 
         'Set button properties
         With btnCancel
@@ -347,31 +329,31 @@
             .ForeColor = Color.Transparent
             ' .Font = New Font(New FontFamily("Microsoft Sans Serif"), 11)
             ' .Location = New Point(  )
-            .Location = New Point(location)
+            .Location = New Point(pntLocation)
             .Name = "btnCancel"
-            .Image = imageTrash
+            .Image = mapImageTrash
             .ImageAlign = ContentAlignment.MiddleCenter
 
         End With
 
 
-        panelName.Controls.Add(btnCancel)
+        pnlPanelName.Controls.Add(btnCancel)
         ' MessageBox.Show("again")
         'Add handler for click events
         AddHandler btnCancel.Click, AddressOf RestDefaultButtons
 
     End Sub
-    Public Function getCurrentPanel(ByVal flpPanel As FlowLayoutPanel, ByVal ContactPanelsAddedCount As Integer) As panel
+    Public Function getCurrentPanel(ByVal flpPanel As FlowLayoutPanel, ByVal intPanelsAddedCount As Integer) As Panel
 
         Dim ctlName As String = "pnlIndividualPatientRecord"
         Dim pnl As Panel
         pnl = New Panel
 
-        For Each ctl In flpPanel.Controls
+        For Each ctlControl In flpPanel.Controls
 
-            If ctl.Name = ctlName & ContactPanelsAddedCount.ToString Then
+            If ctlControl.Name = ctlName & intPanelsAddedCount.ToString Then
 
-                pnl = CType(ctl, Panel)
+                pnl = CType(ctlControl, Panel)
 
             End If
 
@@ -388,14 +370,14 @@
     ' defined in too many classes to keep track of what number of panel has been created.
     Public Function getPanelCount(flpPanel As FlowLayoutPanel) As Integer
 
-        Dim ctl As Control
-        Dim count As Integer
+        Dim ctlControl As Control
+        Dim intCount As Integer
 
-        For Each ctl In flpPanel.Controls
+        For Each ctlControl In flpPanel.Controls
 
-            If TypeName(ctl) = "Panel" Then
+            If TypeName(ctlControl) = "Panel" Then
 
-                count += 1
+                intCount += 1
 
             End If
 
@@ -403,7 +385,7 @@
 
         'Debug.Print(count)
 
-        Return count
+        Return intCount
 
     End Function
 
@@ -412,17 +394,9 @@
 
         If sender.backColor = Color.White Then
             sender.backColor = Color.Gainsboro
-
         Else
             sender.backcolor = Color.White
-
         End If
-
-
-
-
     End Sub
-
-
 
 End Module

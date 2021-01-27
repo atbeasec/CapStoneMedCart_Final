@@ -1,8 +1,8 @@
 ﻿Public Class frmMain
 
-    Dim currentChildForm As Form
-    Dim previousChildForm As Form
-    Dim _ContactPanelsAddedCount As Integer = 0
+    Dim frmCurrentChildForm As Form
+    Dim frmPreviousChildForm As Form
+    Dim intContactPanelsAddedCount As Integer = 0
 
     Private Sub btnPatientRecords_Click(sender As Object, e As EventArgs) Handles btnPatientRecords.Click, btnReport.Click, btnInventory.Click, btnDescrepancies.Click, btnMaintenance.Click, btnLogout.Click, btnPharmacy.Click, btnConfiguration.Click
         ' ensure that the colors of the buttons change accordingly. We need to know which button is clicked,
@@ -11,13 +11,13 @@
 
         DetermineFormToOpen(CInt(sender.tag))
 
-        Dim ctl As Control
+        Dim CtlControl As Control
 
-        For Each ctl In pnlSideMenu.Controls
+        For Each CtlControl In pnlSideMenu.Controls
 
-            If TypeName(ctl) = "Button" Then
+            If TypeName(CtlControl) = "Button" Then
 
-                If sender.Name = ctl.Name Then
+                If sender.Name = CtlControl.Name Then
 
                     If sender.backColor = Color.FromArgb(71, 103, 216) Then
 
@@ -25,7 +25,7 @@
 
                     End If
                 Else
-                    ctl.BackColor = Color.FromArgb(71, 103, 216)
+                    CtlControl.BackColor = Color.FromArgb(71, 103, 216)
                 End If
             End If
         Next
@@ -33,68 +33,68 @@
     End Sub
 
 
-    Private Sub OpenChildForm(ByVal child As Form)
-        ' this is where we dock the form as a child form onto the panel
+    Private Sub OpenChildForm(ByVal frmChild As Form)
 
-
-
+        ' this is where we dock the form as a frmChild form onto the panel
         ' if there is currently a form here we need to close it
-        If Not previousChildForm Is Nothing Then
-            If Not previousChildForm Is child Then
-                previousChildForm.Close()
-                Debug.Print("We should be closing the child form now")
+
+        If Not frmPreviousChildForm Is Nothing Then
+            If Not frmPreviousChildForm Is frmChild Then
+                frmPreviousChildForm.Close()
+                Debug.Print("We should be closing the frmChild form now")
             End If
 
         End If
         'do nothing the correct form is open
         'Else
         '
-        'currentChildForm.Close()
+        'frmCurrentChildForm.Close()
         'Debug.Print("closed the form")
         '
         'End If
         ' then we ned to open a new one and set the following properties..
-        previousChildForm = child
-        'child.TopMost = False
-        child.TopLevel = False
+
+        frmPreviousChildForm = frmChild
+        'frmChild.TopMost = False
+        frmChild.TopLevel = False
         ' removes boarder on form which is where someone can close the form. We will close it on button clicks instead
-        child.FormBorderStyle = FormBorderStyle.None
+        frmChild.FormBorderStyle = FormBorderStyle.None
         'add form to panel
-        Me.pnlDockLocation.Controls.Add(child)
+        Me.pnlDockLocation.Controls.Add(frmChild)
         'make form visible
-        child.Show()
+        frmChild.Show()
 
 
     End Sub
 
-    Private Sub DetermineFormToOpen(ByVal tagNum As Integer)
+    Private Sub DetermineFormToOpen(ByVal intTagNum As Integer)
 
         ' based on the button that is clicked this is where we decide
         ' which form we need to open
-        Dim value As Integer = tagNum
-        Debug.Print(value)
-        Select Case value
+        Dim intValue As Integer = intTagNum
+        Debug.Print(intValue)
+        Select Case intValue
 
             Case 1
-                currentChildForm = frmPatientRecords
+                frmCurrentChildForm = frmPatientRecords
                 OpenChildForm(frmPatientRecords)
             Case 2
-                currentChildForm = frmInventory
+                frmCurrentChildForm = frmInventory
                 OpenChildForm(frmConfigureInventory)
             Case 3
-                currentChildForm = frmReport
+                frmCurrentChildForm = frmReport
                 OpenChildForm(frmReport)
             Case 4
-                currentChildForm = frmDiscrepancies
+                frmCurrentChildForm = frmDiscrepancies
                 OpenChildForm(frmDiscrepancies)
             Case 5
-                currentChildForm = frmMaintenance
+                frmCurrentChildForm = frmMaintenance
                 OpenChildForm(frmMaintenance)
             Case 6
-                currentChildForm = frmPharmacy
+                frmCurrentChildForm = frmPharmacy
                 OpenChildForm(frmPharmacy)
             Case 7
-                currentChildForm = frmConfiguration
+                frmCurrentChildForm = frmConfiguration
                 OpenChildForm(frmConfiguration)
                ' frmWitness.Show()
             Case 8
