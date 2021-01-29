@@ -128,11 +128,11 @@
     End Sub
 
 
-    Private Sub btnMedications_Click(sender As Object, e As EventArgs) Handles btnMedications.Click
-        frmNewInventory.Show()
-        'CreatePanel(flpMedication)
+    ' Private Sub btnMedications_Click(sender As Object, e As EventArgs) Handles btnMedications.Click
+    '   frmNewInventory.Show()
+    'CreatePanel(flpMedication)
 
-    End Sub
+    ' End Sub
 
     Private Sub UpdateDrawerLabel(sender As Object, e As EventArgs)
 

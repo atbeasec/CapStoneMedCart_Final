@@ -2,7 +2,7 @@
 
     Dim frmCurrentChildForm As Form
     Dim frmPreviousChildForm As Form
-    Dim intContactPanelsAddedCount As Integer = 0
+    '  Dim intContactPanelsAddedCount As Integer = 0
 
 
     Private Sub btnPatientRecords_Click(sender As Object, e As EventArgs) Handles btnPatientRecords.Click, btnReport.Click, btnInventory.Click, btnDescrepancies.Click, btnMaintenance.Click, btnLogout.Click, btnPharmacy.Click, btnSettings.Click, btnUsers.Click, btnSerialPort.Click, btnEditRooms.Click, btnDischargePatient.Click
@@ -58,11 +58,15 @@
 
         frmPreviousChildForm = frmChild
         'frmChild.TopMost = False
+
         frmChild.TopLevel = False
+
         ' removes boarder on form which is where someone can close the form. We will close it on button clicks instead
         frmChild.FormBorderStyle = FormBorderStyle.None
+
         'add form to panel
         Me.pnlDockLocation.Controls.Add(frmChild)
+
         'make form visible
         frmChild.Show()
 

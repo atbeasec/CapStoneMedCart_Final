@@ -25,6 +25,7 @@ Partial Class frmConfigureInventory
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmConfigureInventory))
         Me.Button1 = New System.Windows.Forms.Button()
         Me.pnlLayoutButtons = New System.Windows.Forms.Panel()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label26 = New System.Windows.Forms.Label()
         Me.Label25 = New System.Windows.Forms.Label()
@@ -85,8 +86,6 @@ Partial Class frmConfigureInventory
         Me.Label2 = New System.Windows.Forms.Label()
         Me.lblDrawerNumber = New System.Windows.Forms.Label()
         Me.Button26 = New System.Windows.Forms.Button()
-        Me.btnMedications = New System.Windows.Forms.Button()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.pnlLayoutButtons.SuspendLayout()
         Me.pnlHeader.SuspendLayout()
         Me.SuspendLayout()
@@ -160,6 +159,17 @@ Partial Class frmConfigureInventory
         Me.pnlLayoutButtons.Name = "pnlLayoutButtons"
         Me.pnlLayoutButtons.Size = New System.Drawing.Size(429, 553)
         Me.pnlLayoutButtons.TabIndex = 1
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.BackColor = System.Drawing.Color.Gainsboro
+        Me.Label6.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(61, 54)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(45, 15)
+        Me.Label6.TabIndex = 72
+        Me.Label6.Text = "5 Items"
         '
         'Label11
         '
@@ -753,7 +763,7 @@ Partial Class frmConfigureInventory
         Me.flpMedication.BackColor = System.Drawing.Color.White
         Me.flpMedication.Location = New System.Drawing.Point(459, 117)
         Me.flpMedication.Name = "flpMedication"
-        Me.flpMedication.Size = New System.Drawing.Size(800, 319)
+        Me.flpMedication.Size = New System.Drawing.Size(607, 319)
         Me.flpMedication.TabIndex = 42
         '
         'pnlHeader
@@ -849,7 +859,7 @@ Partial Class frmConfigureInventory
         '
         Me.lblDrawerNumber.AutoSize = True
         Me.lblDrawerNumber.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDrawerNumber.Location = New System.Drawing.Point(649, 21)
+        Me.lblDrawerNumber.Location = New System.Drawing.Point(648, 21)
         Me.lblDrawerNumber.Name = "lblDrawerNumber"
         Me.lblDrawerNumber.Size = New System.Drawing.Size(83, 25)
         Me.lblDrawerNumber.TabIndex = 45
@@ -864,41 +874,13 @@ Partial Class frmConfigureInventory
         Me.Button26.ForeColor = System.Drawing.Color.White
         Me.Button26.Image = CType(resources.GetObject("Button26.Image"), System.Drawing.Image)
         Me.Button26.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button26.Location = New System.Drawing.Point(1060, 14)
+        Me.Button26.Location = New System.Drawing.Point(892, 14)
         Me.Button26.Name = "Button26"
         Me.Button26.Size = New System.Drawing.Size(199, 39)
         Me.Button26.TabIndex = 46
         Me.Button26.Text = "ADD TO DRAWER"
         Me.Button26.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.Button26.UseVisualStyleBackColor = False
-        '
-        'btnMedications
-        '
-        Me.btnMedications.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnMedications.FlatAppearance.BorderSize = 0
-        Me.btnMedications.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnMedications.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMedications.ForeColor = System.Drawing.Color.White
-        Me.btnMedications.Image = CType(resources.GetObject("btnMedications.Image"), System.Drawing.Image)
-        Me.btnMedications.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnMedications.Location = New System.Drawing.Point(755, 14)
-        Me.btnMedications.Name = "btnMedications"
-        Me.btnMedications.Size = New System.Drawing.Size(285, 39)
-        Me.btnMedications.TabIndex = 43
-        Me.btnMedications.Text = "CREATE NEW MEDICATION"
-        Me.btnMedications.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnMedications.UseVisualStyleBackColor = False
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.BackColor = System.Drawing.Color.Gainsboro
-        Me.Label6.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(61, 54)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(45, 15)
-        Me.Label6.TabIndex = 72
-        Me.Label6.Text = "5 Items"
         '
         'frmConfigureInventory
         '
@@ -909,7 +891,6 @@ Partial Class frmConfigureInventory
         Me.Controls.Add(Me.Button26)
         Me.Controls.Add(Me.lblDrawerNumber)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.btnMedications)
         Me.Controls.Add(Me.flpMedication)
         Me.Controls.Add(Me.pnlHeader)
         Me.Controls.Add(Me.Label1)
@@ -960,7 +941,6 @@ Partial Class frmConfigureInventory
     Friend WithEvents Label35 As Label
     Friend WithEvents Label36 As Label
     Friend WithEvents Label38 As Label
-    Friend WithEvents btnMedications As Button
     Friend WithEvents Label2 As Label
     Friend WithEvents lblDrawerNumber As Label
     Friend WithEvents Button26 As Button

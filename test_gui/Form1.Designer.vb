@@ -79,7 +79,7 @@ Partial Class frmMain
         '
         'btnSerialPort
         '
-        Me.btnSerialPort.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(150, Byte), Integer))
+        Me.btnSerialPort.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(80, Byte), Integer), CType(CType(150, Byte), Integer))
         Me.btnSerialPort.Dock = System.Windows.Forms.DockStyle.Top
         Me.btnSerialPort.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
         Me.btnSerialPort.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -100,7 +100,7 @@ Partial Class frmMain
         '
         'btnEditRooms
         '
-        Me.btnEditRooms.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(150, Byte), Integer))
+        Me.btnEditRooms.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(80, Byte), Integer), CType(CType(150, Byte), Integer))
         Me.btnEditRooms.Dock = System.Windows.Forms.DockStyle.Top
         Me.btnEditRooms.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
         Me.btnEditRooms.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -114,14 +114,14 @@ Partial Class frmMain
         Me.btnEditRooms.Size = New System.Drawing.Size(227, 42)
         Me.btnEditRooms.TabIndex = 27
         Me.btnEditRooms.Tag = "10"
-        Me.btnEditRooms.Text = "Edit Rooms/Beds"
+        Me.btnEditRooms.Text = "Edit Rooms / Beds"
         Me.btnEditRooms.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnEditRooms.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnEditRooms.UseVisualStyleBackColor = False
         '
         'btnDischargePatient
         '
-        Me.btnDischargePatient.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(150, Byte), Integer))
+        Me.btnDischargePatient.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(80, Byte), Integer), CType(CType(150, Byte), Integer))
         Me.btnDischargePatient.Dock = System.Windows.Forms.DockStyle.Top
         Me.btnDischargePatient.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
         Me.btnDischargePatient.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -142,7 +142,7 @@ Partial Class frmMain
         '
         'btnUsers
         '
-        Me.btnUsers.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(150, Byte), Integer))
+        Me.btnUsers.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(80, Byte), Integer), CType(CType(150, Byte), Integer))
         Me.btnUsers.Dock = System.Windows.Forms.DockStyle.Top
         Me.btnUsers.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
         Me.btnUsers.FlatStyle = System.Windows.Forms.FlatStyle.Flat
