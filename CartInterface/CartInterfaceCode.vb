@@ -37,6 +37,9 @@ Module CartInterfaceCode
     '/*     need to be changed at any time.                                 */
     '/*  DefaultCOM as string - this is the default COM port that the interface*/
     '/*     will use if a different one is not provided. 
+    '/*  dicButtonDictionary - this is the dictionary of the buttons that are */
+    '/*     on the simuated cart form (FullCart). This is to just make things*/
+    '/*     easier to read and avoid duplicated code.                      */	
     '/*	 SimulationMode as boolean - this is going to be a true or false   */ 
     '/*     statement that will tell us if we are simulating the cart.     */
     '/*     If we are simulating the cart then the code that works with the */
@@ -56,20 +59,28 @@ Module CartInterfaceCode
     '26
     Const bitRate = 115200
     Const DefaultCOM As String = "COM3"
+    Private FrmCart = New frmFullCart()
 
 
+    'Private FrmCart = New FrmCart()
     'TODO
     'set up a way to change the COM port. (by default it looks like it is COM3
     'default bit rate looks to be 115200
 #Const SimulationMode = True 'this is going to dictate if the cart is going to be simulated or not.
+
+
+#If SimulationMode Then
+    Dim dicButtonDictionary As Dictionary(Of String, Control) = New Dictionary(Of String, Control)
+#End If
     Sub main()
-        OpenDrawer(16)
+
+        OpenOneDrawer("19")
 
 
     End Sub
 
     '/*********************************************************************/
-    '/*                   SubProgram NAME: OpenDrawer 					   */         
+    '/*                   SubProgram NAME: OpenOneDrawer    			   */         
     '/*********************************************************************/
     '/*                   WRITTEN BY:  Nathan Premo   		         */   
     '/*		         DATE CREATED: 		   */                             
@@ -94,8 +105,8 @@ Module CartInterfaceCode
     '/*                                                                     
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                  */             
-    '/*	OpenDrawer(13)        										   */     
-    '/* OpenDrawer(2)                                                     */
+    '/*	OpenOneDrawer(13)        										   */     
+    '/* OpenOneDrawer(2)                                                   */
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
@@ -116,18 +127,7 @@ Module CartInterfaceCode
     '/*  blnIssue - this is going to let the rest of the program know */
     '/*     if there is an issue with the import and the subprogram needs to */
     '/*     be stopped. 
-    '/*  blnNaN - this is for the Not a Number Error. The name is taken */
-    '/*     from JavaScript. If the SubProgram is sent something that doe not */
-    '/*     convert to a number, both this and issue will be marked as true */
-    '/*  blntoHigh - this is for when the number is higher then the */
-    '/*     number of drawer we have. We only have 26 drawers. So if a number */
-    '/*     higher than 26 is passed to the Subprogram both this and issue */
-    '/*     will be marked as true.
-    '/*  blntoLow - this is for when the number is lower than 1.    */
-    '/*     We do not have negative drawers and our drawer count starts at 1. */
-    '/*     So anything lower is going to cause this and issue to be marked */
-    '/*     as true. 
-    '/*                                                                     
+
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
@@ -136,32 +136,24 @@ Module CartInterfaceCode
     '/*                                                                     
     '/*********************************************************************/
 
-    Sub OpenDrawer(Number As String)
-        Dim blnissue = False
-        Dim blntoHigh = False
-        Dim blntoLow = False
-        Dim blnNaN = False
+    Sub OpenOneDrawer(Number As String)
+        Dim blnissue = errorChecking(Number)
 
-        If Not IsNumeric(Number) Then
-            blnNaN = True
-            blnissue = True
-        Else
-            If Convert.ToInt32(Number) > 26 Then
-                blntoHigh = True
-                blnissue = True
-            ElseIf Convert.ToInt32(Number) < 1 Then
-                blntoLow = True
-                blnissue = True
-            End If
-        End If
-        Dim FrmCart = New FrmCart
+
+
+
 
 #If SimulationMode Then
         'this will comiple and be ran if the code is compiled in simulation mode. 
-
+        FrmCart.populateButtonDictionary(dicButtonDictionary)
         If Not blnissue Then
-            FrmCart.LblDrawer.Text = "Drawer Number " + Number + " is Open"
-            FrmCart.ShowDialog()
+            '  FrmCart.LblDrawer.Text = "Drawer Number " + Number + " is Open"
+            '   FrmCart.ShowDialog()
+
+            dicButtonDictionary.Item(Number).BackColor = Color.Red 'changes the color of the button to red
+            'to make it looks like it is red. 
+
+            FrmCart.showdialog()
         End If
 #Else
         If Not blnissue Then
@@ -214,17 +206,7 @@ Module CartInterfaceCode
         End If
 
 #End If
-        'this is going to show an error message is there is an issue. 
-        If blnissue Then
-            If blntoHigh Then
-                MessageBox.Show(Number & " is greater than the max number of drawers. There are only 26 drawers in this cart model")
-            ElseIf blntoLow Then
-                MessageBox.Show(Number & " is not a vaild drawer number. A drawer number must be between 1 and 26")
-            ElseIf blnNaN Then
-                MessageBox.Show(Number & " is not a vaild number.")
 
-            End If
-        End If
     End Sub
 
 #If SimulationMode = False Then
@@ -331,6 +313,99 @@ Module CartInterfaceCode
     End Sub
 
 #End If
+
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME:  		errorChecking			   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		         */   
+    '/*		         DATE CREATED: 	1/28/2021                              */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								   */             
+    '/*		This is going to handle the errr checking of the number being */
+    '/* sent to the open drawer funcitons. It checks to make sure the number*/
+    '/* is a number and is a between 1 and 26. 
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*         OpenOneDrawer and openMutiDrawer         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 Number - this is the sring of the drawer number that the calling */
+    '/*     calling code wants to open. 										   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								                             */                   
+    '/*       blnIssue this will be true if there is an issue or it will  */
+    '/*          return false if everything is fine.  
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:							                   	   */             
+    '/*			errorChecking("12")					        			   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*  lnIssue - this is going to let the rest of the program know */
+    '/*     if there is an issue with the import and the subprogram needs to */
+    '/*     be stopped. 
+    '/*  blnNaN - this is for the Not a Number Error. The name is taken */
+    '/*     from JavaScript. If the SubProgram is sent something that doe not */
+    '/*     convert to a number, both this and issue will be marked as true */
+    '/*  blntoHigh - this is for when the number is higher then the */
+    '/*     number of drawer we have. We only have 26 drawers. So if a number */
+    '/*     higher than 26 is passed to the Subprogram both this and issue */
+    '/*     will be marked as true.
+    '/*  blntoLow - this is for when the number is lower than 1.    */
+    '/*     We do not have negative drawers and our drawer count starts at 1. */
+    '/*     So anything lower is going to cause this and issue to be marked */
+    '/*     as true. 
+    '/*                                                                                         
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Function errorChecking(number As String)
+        Dim blnIssue = False
+        Dim blntoHigh = False
+        Dim blntoLow = False
+        Dim blnNaN = False
+
+
+        If Not IsNumeric(number) Then
+            blnNaN = True
+            blnIssue = True
+        Else
+            If Convert.ToInt32(number) > 26 Then
+                blntoHigh = True
+                blnIssue = True
+            ElseIf Convert.ToInt32(number) < 1 Then
+                blntoLow = True
+                blnIssue = True
+            End If
+        End If
+
+
+        'this is going to show an error message is there is an issue. 
+        If blnIssue Then
+            If blntoHigh Then
+                MessageBox.Show(number & " is greater than the max number of drawers. There are only 26 drawers in this cart model")
+            ElseIf blntoLow Then
+                MessageBox.Show(number & " is not a vaild drawer number. A drawer number must be between 1 and 26")
+            ElseIf blnNaN Then
+                MessageBox.Show(number & " is not a vaild number.")
+
+            End If
+        End If
+
+        Return blnIssue
+    End Function
+
 
 
 End Module
