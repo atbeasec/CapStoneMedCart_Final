@@ -25,8 +25,6 @@ Partial Class frmMain
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.pnlSideMenu = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.pnlLogo = New System.Windows.Forms.Panel()
-        Me.pnlDockLocation = New System.Windows.Forms.Panel()
         Me.btnConfiguration = New System.Windows.Forms.Button()
         Me.btnPharmacy = New System.Windows.Forms.Button()
         Me.btnLogout = New System.Windows.Forms.Button()
@@ -35,6 +33,8 @@ Partial Class frmMain
         Me.btnReport = New System.Windows.Forms.Button()
         Me.btnInventory = New System.Windows.Forms.Button()
         Me.btnPatientRecords = New System.Windows.Forms.Button()
+        Me.pnlLogo = New System.Windows.Forms.Panel()
+        Me.pnlDockLocation = New System.Windows.Forms.Panel()
         Me.pnlSideMenu.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -55,7 +55,7 @@ Partial Class frmMain
         Me.pnlSideMenu.Location = New System.Drawing.Point(0, 0)
         Me.pnlSideMenu.Margin = New System.Windows.Forms.Padding(2)
         Me.pnlSideMenu.Name = "pnlSideMenu"
-        Me.pnlSideMenu.Size = New System.Drawing.Size(227, 591)
+        Me.pnlSideMenu.Size = New System.Drawing.Size(227, 692)
         Me.pnlSideMenu.TabIndex = 0
         '
         'Panel2
@@ -65,27 +65,8 @@ Partial Class frmMain
         Me.Panel2.Location = New System.Drawing.Point(0, 438)
         Me.Panel2.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(227, 103)
+        Me.Panel2.Size = New System.Drawing.Size(227, 204)
         Me.Panel2.TabIndex = 22
-        '
-        'pnlLogo
-        '
-        Me.pnlLogo.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.pnlLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.pnlLogo.Dock = System.Windows.Forms.DockStyle.Top
-        Me.pnlLogo.Location = New System.Drawing.Point(0, 0)
-        Me.pnlLogo.Margin = New System.Windows.Forms.Padding(2)
-        Me.pnlLogo.Name = "pnlLogo"
-        Me.pnlLogo.Size = New System.Drawing.Size(227, 72)
-        Me.pnlLogo.TabIndex = 8
-        '
-        'pnlDockLocation
-        '
-        Me.pnlDockLocation.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlDockLocation.Location = New System.Drawing.Point(227, 0)
-        Me.pnlDockLocation.Name = "pnlDockLocation"
-        Me.pnlDockLocation.Size = New System.Drawing.Size(998, 591)
-        Me.pnlDockLocation.TabIndex = 1
         '
         'btnConfiguration
         '
@@ -139,7 +120,7 @@ Partial Class frmMain
         Me.btnLogout.ForeColor = System.Drawing.Color.White
         Me.btnLogout.Image = CType(resources.GetObject("btnLogout.Image"), System.Drawing.Image)
         Me.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnLogout.Location = New System.Drawing.Point(0, 541)
+        Me.btnLogout.Location = New System.Drawing.Point(0, 642)
         Me.btnLogout.Margin = New System.Windows.Forms.Padding(2)
         Me.btnLogout.Name = "btnLogout"
         Me.btnLogout.Padding = New System.Windows.Forms.Padding(10, 5, 5, 5)
@@ -257,12 +238,31 @@ Partial Class frmMain
         Me.btnPatientRecords.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnPatientRecords.UseVisualStyleBackColor = False
         '
+        'pnlLogo
+        '
+        Me.pnlLogo.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.pnlLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.pnlLogo.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnlLogo.Location = New System.Drawing.Point(0, 0)
+        Me.pnlLogo.Margin = New System.Windows.Forms.Padding(2)
+        Me.pnlLogo.Name = "pnlLogo"
+        Me.pnlLogo.Size = New System.Drawing.Size(227, 72)
+        Me.pnlLogo.TabIndex = 8
+        '
+        'pnlDockLocation
+        '
+        Me.pnlDockLocation.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlDockLocation.Location = New System.Drawing.Point(227, 0)
+        Me.pnlDockLocation.Name = "pnlDockLocation"
+        Me.pnlDockLocation.Size = New System.Drawing.Size(998, 692)
+        Me.pnlDockLocation.TabIndex = 1
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1225, 591)
+        Me.ClientSize = New System.Drawing.Size(1225, 692)
         Me.Controls.Add(Me.pnlDockLocation)
         Me.Controls.Add(Me.pnlSideMenu)
         Me.Margin = New System.Windows.Forms.Padding(2)

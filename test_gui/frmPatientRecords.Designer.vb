@@ -54,7 +54,7 @@ Partial Class frmPatientRecords
         Me.pnlHeader.Controls.Add(Me.Label1)
         Me.pnlHeader.Location = New System.Drawing.Point(12, 67)
         Me.pnlHeader.Name = "pnlHeader"
-        Me.pnlHeader.Size = New System.Drawing.Size(1047, 47)
+        Me.pnlHeader.Size = New System.Drawing.Size(950, 47)
         Me.pnlHeader.TabIndex = 8
         '
         'Label7
@@ -62,18 +62,18 @@ Partial Class frmPatientRecords
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label7.Location = New System.Drawing.Point(685, 19)
+        Me.Label7.Location = New System.Drawing.Point(431, 19)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(93, 21)
+        Me.Label7.Size = New System.Drawing.Size(43, 21)
         Me.Label7.TabIndex = 6
-        Me.Label7.Text = "Admit Date"
+        Me.Label7.Text = "DOB"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label6.Location = New System.Drawing.Point(278, 19)
+        Me.Label6.Location = New System.Drawing.Point(268, 19)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(86, 21)
         Me.Label6.TabIndex = 5
@@ -84,7 +84,7 @@ Partial Class frmPatientRecords
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label5.Location = New System.Drawing.Point(844, 19)
+        Me.Label5.Location = New System.Drawing.Point(803, 19)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(65, 21)
         Me.Label5.TabIndex = 4
@@ -95,22 +95,22 @@ Partial Class frmPatientRecords
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label4.Location = New System.Drawing.Point(573, 19)
+        Me.Label4.Location = New System.Drawing.Point(672, 19)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(55, 21)
+        Me.Label4.Size = New System.Drawing.Size(39, 21)
         Me.Label4.TabIndex = 3
-        Me.Label4.Text = "Status"
+        Me.Label4.Text = "Bed"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label3.Location = New System.Drawing.Point(413, 19)
+        Me.Label3.Location = New System.Drawing.Point(546, 19)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(121, 21)
+        Me.Label3.Size = New System.Drawing.Size(54, 21)
         Me.Label3.TabIndex = 2
-        Me.Label3.Text = "Room Location"
+        Me.Label3.Text = "Room"
         '
         'Label2
         '
@@ -119,16 +119,16 @@ Partial Class frmPatientRecords
         Me.Label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark
         Me.Label2.Location = New System.Drawing.Point(10, 19)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(81, 21)
+        Me.Label2.Size = New System.Drawing.Size(47, 21)
         Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Patient ID"
+        Me.Label2.Text = "MRN"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label1.Location = New System.Drawing.Point(142, 19)
+        Me.Label1.Location = New System.Drawing.Point(124, 19)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(88, 21)
         Me.Label1.TabIndex = 0
@@ -142,7 +142,7 @@ Partial Class frmPatientRecords
         Me.pnlHeaderPatientRecords.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlHeaderPatientRecords.Location = New System.Drawing.Point(0, 0)
         Me.pnlHeaderPatientRecords.Name = "pnlHeaderPatientRecords"
-        Me.pnlHeaderPatientRecords.Size = New System.Drawing.Size(1138, 61)
+        Me.pnlHeaderPatientRecords.Size = New System.Drawing.Size(986, 61)
         Me.pnlHeaderPatientRecords.TabIndex = 16
         '
         'btnNewPatient
@@ -154,9 +154,9 @@ Partial Class frmPatientRecords
         Me.btnNewPatient.ForeColor = System.Drawing.Color.White
         Me.btnNewPatient.Image = CType(resources.GetObject("btnNewPatient.Image"), System.Drawing.Image)
         Me.btnNewPatient.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnNewPatient.Location = New System.Drawing.Point(811, 15)
+        Me.btnNewPatient.Location = New System.Drawing.Point(771, 15)
         Me.btnNewPatient.Name = "btnNewPatient"
-        Me.btnNewPatient.Size = New System.Drawing.Size(191, 37)
+        Me.btnNewPatient.Size = New System.Drawing.Size(166, 37)
         Me.btnNewPatient.TabIndex = 18
         Me.btnNewPatient.Text = "ADD PATIENT"
         Me.btnNewPatient.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -204,7 +204,7 @@ Partial Class frmPatientRecords
         Me.flpPatientRecords.BackColor = System.Drawing.Color.White
         Me.flpPatientRecords.Location = New System.Drawing.Point(12, 118)
         Me.flpPatientRecords.Name = "flpPatientRecords"
-        Me.flpPatientRecords.Size = New System.Drawing.Size(990, 430)
+        Me.flpPatientRecords.Size = New System.Drawing.Size(950, 533)
         Me.flpPatientRecords.TabIndex = 17
         '
         'frmPatientRecords
@@ -214,7 +214,7 @@ Partial Class frmPatientRecords
         Me.AutoScroll = True
         Me.AutoSize = True
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1138, 577)
+        Me.ClientSize = New System.Drawing.Size(986, 663)
         Me.Controls.Add(Me.flpPatientRecords)
         Me.Controls.Add(Me.pnlHeaderPatientRecords)
         Me.Controls.Add(Me.pnlHeader)
