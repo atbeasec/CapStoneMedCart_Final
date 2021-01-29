@@ -24,8 +24,12 @@ Partial Class frmMain
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.pnlSideMenu = New System.Windows.Forms.Panel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.btnConfiguration = New System.Windows.Forms.Button()
+        Me.pnlSubMenuSettings = New System.Windows.Forms.Panel()
+        Me.btnSerialPort = New System.Windows.Forms.Button()
+        Me.btnEditRooms = New System.Windows.Forms.Button()
+        Me.btnDischargePatient = New System.Windows.Forms.Button()
+        Me.btnUsers = New System.Windows.Forms.Button()
+        Me.btnSettings = New System.Windows.Forms.Button()
         Me.btnPharmacy = New System.Windows.Forms.Button()
         Me.btnLogout = New System.Windows.Forms.Button()
         Me.btnMaintenance = New System.Windows.Forms.Button()
@@ -36,13 +40,15 @@ Partial Class frmMain
         Me.pnlLogo = New System.Windows.Forms.Panel()
         Me.pnlDockLocation = New System.Windows.Forms.Panel()
         Me.pnlSideMenu.SuspendLayout()
+        Me.pnlSubMenuSettings.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlSideMenu
         '
         Me.pnlSideMenu.AutoScroll = True
-        Me.pnlSideMenu.Controls.Add(Me.Panel2)
-        Me.pnlSideMenu.Controls.Add(Me.btnConfiguration)
+        Me.pnlSideMenu.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.pnlSideMenu.Controls.Add(Me.pnlSubMenuSettings)
+        Me.pnlSideMenu.Controls.Add(Me.btnSettings)
         Me.pnlSideMenu.Controls.Add(Me.btnPharmacy)
         Me.pnlSideMenu.Controls.Add(Me.btnLogout)
         Me.pnlSideMenu.Controls.Add(Me.btnMaintenance)
@@ -58,36 +64,123 @@ Partial Class frmMain
         Me.pnlSideMenu.Size = New System.Drawing.Size(227, 692)
         Me.pnlSideMenu.TabIndex = 0
         '
-        'Panel2
+        'pnlSubMenuSettings
         '
-        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(0, 438)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(2)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(227, 204)
-        Me.Panel2.TabIndex = 22
+        Me.pnlSubMenuSettings.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.pnlSubMenuSettings.Controls.Add(Me.btnSerialPort)
+        Me.pnlSubMenuSettings.Controls.Add(Me.btnEditRooms)
+        Me.pnlSubMenuSettings.Controls.Add(Me.btnDischargePatient)
+        Me.pnlSubMenuSettings.Controls.Add(Me.btnUsers)
+        Me.pnlSubMenuSettings.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnlSubMenuSettings.Location = New System.Drawing.Point(0, 438)
+        Me.pnlSubMenuSettings.Name = "pnlSubMenuSettings"
+        Me.pnlSubMenuSettings.Size = New System.Drawing.Size(227, 176)
+        Me.pnlSubMenuSettings.TabIndex = 22
         '
-        'btnConfiguration
+        'btnSerialPort
         '
-        Me.btnConfiguration.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnConfiguration.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnConfiguration.FlatAppearance.BorderSize = 0
-        Me.btnConfiguration.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnConfiguration.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnConfiguration.ForeColor = System.Drawing.Color.White
-        Me.btnConfiguration.Image = CType(resources.GetObject("btnConfiguration.Image"), System.Drawing.Image)
-        Me.btnConfiguration.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnConfiguration.Location = New System.Drawing.Point(0, 380)
-        Me.btnConfiguration.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnConfiguration.Name = "btnConfiguration"
-        Me.btnConfiguration.Padding = New System.Windows.Forms.Padding(10, 5, 5, 5)
-        Me.btnConfiguration.Size = New System.Drawing.Size(227, 58)
-        Me.btnConfiguration.TabIndex = 21
-        Me.btnConfiguration.Tag = "7"
-        Me.btnConfiguration.Text = "   Configuration"
-        Me.btnConfiguration.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnConfiguration.UseVisualStyleBackColor = False
+        Me.btnSerialPort.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(150, Byte), Integer))
+        Me.btnSerialPort.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnSerialPort.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnSerialPort.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSerialPort.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSerialPort.ForeColor = System.Drawing.Color.White
+        Me.btnSerialPort.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSerialPort.Location = New System.Drawing.Point(0, 126)
+        Me.btnSerialPort.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnSerialPort.Name = "btnSerialPort"
+        Me.btnSerialPort.Padding = New System.Windows.Forms.Padding(35, 5, 5, 5)
+        Me.btnSerialPort.Size = New System.Drawing.Size(227, 42)
+        Me.btnSerialPort.TabIndex = 28
+        Me.btnSerialPort.Tag = "11"
+        Me.btnSerialPort.Text = "Serial Port Info"
+        Me.btnSerialPort.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSerialPort.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnSerialPort.UseVisualStyleBackColor = False
+        '
+        'btnEditRooms
+        '
+        Me.btnEditRooms.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(150, Byte), Integer))
+        Me.btnEditRooms.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnEditRooms.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnEditRooms.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEditRooms.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEditRooms.ForeColor = System.Drawing.Color.White
+        Me.btnEditRooms.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnEditRooms.Location = New System.Drawing.Point(0, 84)
+        Me.btnEditRooms.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnEditRooms.Name = "btnEditRooms"
+        Me.btnEditRooms.Padding = New System.Windows.Forms.Padding(35, 5, 5, 5)
+        Me.btnEditRooms.Size = New System.Drawing.Size(227, 42)
+        Me.btnEditRooms.TabIndex = 27
+        Me.btnEditRooms.Tag = "10"
+        Me.btnEditRooms.Text = "Edit Rooms/Beds"
+        Me.btnEditRooms.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnEditRooms.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnEditRooms.UseVisualStyleBackColor = False
+        '
+        'btnDischargePatient
+        '
+        Me.btnDischargePatient.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(150, Byte), Integer))
+        Me.btnDischargePatient.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnDischargePatient.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnDischargePatient.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDischargePatient.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDischargePatient.ForeColor = System.Drawing.Color.White
+        Me.btnDischargePatient.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDischargePatient.Location = New System.Drawing.Point(0, 42)
+        Me.btnDischargePatient.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnDischargePatient.Name = "btnDischargePatient"
+        Me.btnDischargePatient.Padding = New System.Windows.Forms.Padding(35, 5, 5, 5)
+        Me.btnDischargePatient.Size = New System.Drawing.Size(227, 42)
+        Me.btnDischargePatient.TabIndex = 26
+        Me.btnDischargePatient.Tag = "9"
+        Me.btnDischargePatient.Text = "Discharge Patient"
+        Me.btnDischargePatient.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDischargePatient.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnDischargePatient.UseVisualStyleBackColor = False
+        '
+        'btnUsers
+        '
+        Me.btnUsers.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(150, Byte), Integer))
+        Me.btnUsers.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnUsers.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnUsers.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUsers.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUsers.ForeColor = System.Drawing.Color.White
+        Me.btnUsers.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUsers.Location = New System.Drawing.Point(0, 0)
+        Me.btnUsers.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnUsers.Name = "btnUsers"
+        Me.btnUsers.Padding = New System.Windows.Forms.Padding(35, 5, 5, 5)
+        Me.btnUsers.Size = New System.Drawing.Size(227, 42)
+        Me.btnUsers.TabIndex = 25
+        Me.btnUsers.Tag = "8"
+        Me.btnUsers.Text = "Add / Remove User"
+        Me.btnUsers.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUsers.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnUsers.UseVisualStyleBackColor = False
+        '
+        'btnSettings
+        '
+        Me.btnSettings.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnSettings.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnSettings.FlatAppearance.BorderSize = 0
+        Me.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSettings.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSettings.ForeColor = System.Drawing.Color.White
+        Me.btnSettings.Image = CType(resources.GetObject("btnSettings.Image"), System.Drawing.Image)
+        Me.btnSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSettings.Location = New System.Drawing.Point(0, 380)
+        Me.btnSettings.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnSettings.Name = "btnSettings"
+        Me.btnSettings.Padding = New System.Windows.Forms.Padding(10, 5, 5, 5)
+        Me.btnSettings.Size = New System.Drawing.Size(227, 58)
+        Me.btnSettings.TabIndex = 21
+        Me.btnSettings.Tag = "7"
+        Me.btnSettings.Text = "   Settings"
+        Me.btnSettings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnSettings.UseVisualStyleBackColor = False
         '
         'btnPharmacy
         '
@@ -126,7 +219,7 @@ Partial Class frmMain
         Me.btnLogout.Padding = New System.Windows.Forms.Padding(10, 5, 5, 5)
         Me.btnLogout.Size = New System.Drawing.Size(227, 50)
         Me.btnLogout.TabIndex = 14
-        Me.btnLogout.Tag = "8"
+        Me.btnLogout.Tag = "12"
         Me.btnLogout.Text = "   Log Out"
         Me.btnLogout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnLogout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -269,6 +362,7 @@ Partial Class frmMain
         Me.Name = "frmMain"
         Me.Text = "Medical Dispense"
         Me.pnlSideMenu.ResumeLayout(False)
+        Me.pnlSubMenuSettings.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -282,7 +376,11 @@ Partial Class frmMain
     Friend WithEvents btnPatientRecords As Button
     Friend WithEvents pnlLogo As Panel
     Friend WithEvents pnlDockLocation As Panel
-    Friend WithEvents Panel2 As Panel
-    Friend WithEvents btnConfiguration As Button
+    Friend WithEvents btnSettings As Button
     Friend WithEvents btnPharmacy As Button
+    Friend WithEvents pnlSubMenuSettings As Panel
+    Friend WithEvents btnSerialPort As Button
+    Friend WithEvents btnEditRooms As Button
+    Friend WithEvents btnDischargePatient As Button
+    Friend WithEvents btnUsers As Button
 End Class

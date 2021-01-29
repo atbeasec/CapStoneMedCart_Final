@@ -39,12 +39,13 @@ Partial Class frmPharmacy
         Me.ComboBox7 = New System.Windows.Forms.ComboBox()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.numQuantity = New System.Windows.Forms.NumericUpDown()
         Me.Panel4.SuspendLayout()
         Me.Panel5.SuspendLayout()
+        CType(Me.numQuantity, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label10
@@ -202,23 +203,12 @@ Partial Class frmPharmacy
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel4.Controls.Add(Me.TextBox3)
+        Me.Panel4.Controls.Add(Me.numQuantity)
         Me.Panel4.Location = New System.Drawing.Point(342, 234)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel4.Size = New System.Drawing.Size(70, 28)
+        Me.Panel4.Size = New System.Drawing.Size(58, 29)
         Me.Panel4.TabIndex = 161
-        '
-        'TextBox3
-        '
-        Me.TextBox3.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.Location = New System.Drawing.Point(1, 1)
-        Me.TextBox3.Multiline = True
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(68, 26)
-        Me.TextBox3.TabIndex = 38
         '
         'Panel5
         '
@@ -256,6 +246,14 @@ Partial Class frmPharmacy
         Me.Button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.Button1.UseVisualStyleBackColor = False
         '
+        'numQuantity
+        '
+        Me.numQuantity.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.numQuantity.Location = New System.Drawing.Point(1, 1)
+        Me.numQuantity.Name = "numQuantity"
+        Me.numQuantity.Size = New System.Drawing.Size(56, 27)
+        Me.numQuantity.TabIndex = 176
+        '
         'frmPharmacy
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -284,9 +282,9 @@ Partial Class frmPharmacy
         Me.Tag = "6"
         Me.Text = "frmPharmacy"
         Me.Panel4.ResumeLayout(False)
-        Me.Panel4.PerformLayout()
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
+        CType(Me.numQuantity, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -308,8 +306,8 @@ Partial Class frmPharmacy
     Friend WithEvents ComboBox7 As ComboBox
     Friend WithEvents Label18 As Label
     Friend WithEvents Panel4 As Panel
-    Friend WithEvents TextBox3 As TextBox
     Friend WithEvents Panel5 As Panel
     Friend WithEvents TextBox4 As TextBox
     Friend WithEvents Button1 As Button
+    Friend WithEvents numQuantity As NumericUpDown
 End Class

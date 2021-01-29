@@ -4,7 +4,9 @@
     Dim frmPreviousChildForm As Form
     Dim intContactPanelsAddedCount As Integer = 0
 
-    Private Sub btnPatientRecords_Click(sender As Object, e As EventArgs) Handles btnPatientRecords.Click, btnReport.Click, btnInventory.Click, btnDescrepancies.Click, btnMaintenance.Click, btnLogout.Click, btnPharmacy.Click, btnConfiguration.Click
+
+    Private Sub btnPatientRecords_Click(sender As Object, e As EventArgs) Handles btnPatientRecords.Click, btnReport.Click, btnInventory.Click, btnDescrepancies.Click, btnMaintenance.Click, btnLogout.Click, btnPharmacy.Click, btnSettings.Click, btnUsers.Click, btnSerialPort.Click, btnEditRooms.Click, btnDischargePatient.Click
+
         ' ensure that the colors of the buttons change accordingly. We need to know which button is clicked,
         ' and then change the backgroud tot he correct blue color. When this happens we need to change the other buttons
         ' color back to the default RGB blue of 0,0,64
@@ -94,10 +96,26 @@
                 frmCurrentChildForm = frmPharmacy
                 OpenChildForm(frmPharmacy)
             Case 7
+
+                'nothing will happen here because we have a submenu that needs to be displayed to show more buttons
+                'more buttons will be shown and we will take the tag num of those to determine which form to dock
+                ' frmCurrentChildForm = frmConfiguration
+                ' OpenChildForm(frmConfiguration)
+
+            Case 8
                 frmCurrentChildForm = frmConfiguration
                 OpenChildForm(frmConfiguration)
-               ' frmWitness.Show()
-            Case 8
+
+            Case 9
+                frmCurrentChildForm = frmConfiguration
+                OpenChildForm(frmConfiguration)
+            Case 10
+                frmCurrentChildForm = frmConfiguration
+                OpenChildForm(frmConfiguration)
+            Case 11
+                frmCurrentChildForm = frmConfiguration
+                OpenChildForm(frmConfiguration)
+            Case 12
                 'call method here to ask if we are sure that we really want to log out of the system
                 Me.Hide()
                 frmLoginScan.Show()
@@ -109,15 +127,56 @@
     End Sub
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         'Runs the database creation module to determine if the database was created
         DatabaseCreation.Main()
+        'CheckUserPermissions()
+
+        'set submenu to be invisible on form load
+        pnlSubMenuSettings.Visible = False
+
+
+
     End Sub
 
-    Private Sub btnConfiguration_Click(sender As Object, e As EventArgs) Handles btnConfiguration.Click
+    Private Sub btnSettings_Click(sender As Object, e As EventArgs) Handles btnSettings.Click
+
+        ShowOrHideSubMenu()
 
     End Sub
 
     Private Sub pnlDockLocation_Paint(sender As Object, e As PaintEventArgs) Handles pnlDockLocation.Paint
 
     End Sub
+
+
+    Private Sub ShowOrHideSubMenu()
+
+        If pnlSubMenuSettings.Visible = False Then
+
+            pnlSubMenuSettings.Visible = True
+        Else
+            pnlSubMenuSettings.Visible = False
+
+        End If
+
+
+    End Sub
+    Private Sub CheckUserPermissions()
+
+        ' do database query to check user permission level
+        ' select from case statement to determine which level the user is
+        ' have 3 methods, one for each permission level, iterating over the controls that are needed to be
+        ' removed from the control based on what the user should see
+
+        'need to remove these for everyone on form load
+
+
+
+
+
+
+    End Sub
+
+
 End Class
