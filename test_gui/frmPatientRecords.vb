@@ -126,7 +126,7 @@
         pnl.Controls.Add(pnlMainPanel)
 
 
-        AddHandler pnlMainPanel.DoubleClick, AddressOf DynamicDoubleClickOpenPatient
+        AddHandler pnlMainPanel.Click, AddressOf DynamicSingleClickOpenPatient
         AddHandler pnlMainPanel.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
         AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
 
@@ -171,7 +171,7 @@
 
     End Sub
 
-    Private Sub DynamicDoubleClickOpenPatient(sender As Object, e As EventArgs)
+    Private Sub DynamicSingleClickOpenPatient(sender As Object, e As EventArgs)
 
         ' allows panel to have double click functionality to open it
         frmPatientInfo.Show()

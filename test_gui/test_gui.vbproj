@@ -256,12 +256,6 @@
     <Compile Include="NewNurse.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Returns.Designer.vb">
-      <DependentUpon>Returns.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Returns.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Waste.Designer.vb">
       <DependentUpon>Waste.vb</DependentUpon>
     </Compile>
@@ -347,9 +341,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NewNurse.resx">
       <DependentUpon>NewNurse.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Returns.resx">
-      <DependentUpon>Returns.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Waste.resx">
       <DependentUpon>Waste.vb</DependentUpon>

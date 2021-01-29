@@ -1040,11 +1040,11 @@
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs)
-        Returns.Show()
-    End Sub
+    ' Private Sub Button1_Click(sender As Object, e As EventArgs)
+    '     Returns.Show()
+    '  End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
         Waste.Show()
     End Sub
 
@@ -1061,7 +1061,5 @@
     Private Sub btnAddNewNote_Click(sender As Object, e As EventArgs)
 
     End Sub
-
-
 
 End Class
