@@ -36,12 +36,8 @@ Partial Class frmDiscrepancies
         Me.pnlHeaderPatientRecords = New System.Windows.Forms.Panel()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button26 = New System.Windows.Forms.Button()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Panel11 = New System.Windows.Forms.Panel()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.pnlHeader.SuspendLayout()
         Me.pnlHeaderPatientRecords.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'flpDiscrepancies
@@ -162,7 +158,6 @@ Partial Class frmDiscrepancies
         Me.pnlHeaderPatientRecords.BackColor = System.Drawing.Color.White
         Me.pnlHeaderPatientRecords.Controls.Add(Me.Button1)
         Me.pnlHeaderPatientRecords.Controls.Add(Me.Button26)
-        Me.pnlHeaderPatientRecords.Controls.Add(Me.Panel2)
         Me.pnlHeaderPatientRecords.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlHeaderPatientRecords.Location = New System.Drawing.Point(0, 0)
         Me.pnlHeaderPatientRecords.Name = "pnlHeaderPatientRecords"
@@ -203,42 +198,6 @@ Partial Class frmDiscrepancies
         Me.Button26.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.Button26.UseVisualStyleBackColor = False
         '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.Color.Black
-        Me.Panel2.Controls.Add(Me.Panel11)
-        Me.Panel2.Controls.Add(Me.TextBox1)
-        Me.Panel2.Location = New System.Drawing.Point(53, 17)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Padding = New System.Windows.Forms.Padding(0, 0, 0, 2)
-        Me.Panel2.Size = New System.Drawing.Size(273, 35)
-        Me.Panel2.TabIndex = 19
-        '
-        'Panel11
-        '
-        Me.Panel11.BackColor = System.Drawing.Color.White
-        Me.Panel11.BackgroundImage = CType(resources.GetObject("Panel11.BackgroundImage"), System.Drawing.Image)
-        Me.Panel11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Panel11.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel11.Location = New System.Drawing.Point(0, 0)
-        Me.Panel11.Name = "Panel11"
-        Me.Panel11.Size = New System.Drawing.Size(32, 33)
-        Me.Panel11.TabIndex = 13
-        '
-        'TextBox1
-        '
-        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox1.Dock = System.Windows.Forms.DockStyle.Right
-        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.ForeColor = System.Drawing.SystemColors.ScrollBar
-        Me.TextBox1.Location = New System.Drawing.Point(32, 0)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(241, 33)
-        Me.TextBox1.TabIndex = 5
-        Me.TextBox1.Tag = "Search Patient"
-        Me.TextBox1.Text = "Search History"
-        '
         'frmDiscrepancies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -253,8 +212,6 @@ Partial Class frmDiscrepancies
         Me.pnlHeader.ResumeLayout(False)
         Me.pnlHeader.PerformLayout()
         Me.pnlHeaderPatientRecords.ResumeLayout(False)
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -266,9 +223,6 @@ Partial Class frmDiscrepancies
     Friend WithEvents lblDate As Label
     Friend WithEvents lblNurseDispensing As Label
     Friend WithEvents pnlHeaderPatientRecords As Panel
-    Friend WithEvents Panel2 As Panel
-    Friend WithEvents Panel11 As Panel
-    Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Button26 As Button
     Friend WithEvents lblGenericName As Label
     Friend WithEvents lblMeasure As Label

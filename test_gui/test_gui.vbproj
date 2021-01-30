@@ -106,6 +106,12 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmAdHockDispense.Designer.vb">
+      <DependentUpon>frmAdHockDispense.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAdHockDispense.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmAlert.Designer.vb">
       <DependentUpon>frmAlert.vb</DependentUpon>
     </Compile>
@@ -146,6 +152,12 @@
       <DependentUpon>frmDiscrepancies.vb</DependentUpon>
     </Compile>
     <Compile Include="frmDiscrepancies.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEndOfShift.Designer.vb">
+      <DependentUpon>frmEndOfShift.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEndOfShift.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmImport.Designer.vb">
@@ -288,6 +300,9 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmAdHockDispense.resx">
+      <DependentUpon>frmAdHockDispense.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAlert.resx">
       <DependentUpon>frmAlert.vb</DependentUpon>
     </EmbeddedResource>
@@ -308,6 +323,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmDiscrepancies.resx">
       <DependentUpon>frmDiscrepancies.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEndOfShift.resx">
+      <DependentUpon>frmEndOfShift.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmImport.resx">
       <DependentUpon>frmImport.vb</DependentUpon>

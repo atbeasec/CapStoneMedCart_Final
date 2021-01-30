@@ -39,11 +39,11 @@ Partial Class frmInventory
         Me.Label17 = New System.Windows.Forms.Label()
         Me.numQuantity = New System.Windows.Forms.NumericUpDown()
         Me.Panel13 = New System.Windows.Forms.Panel()
-        Me.btnCancel = New System.Windows.Forms.Button()
-        Me.btnSave = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel14.SuspendLayout()
@@ -218,36 +218,6 @@ Partial Class frmInventory
         Me.Panel13.Size = New System.Drawing.Size(117, 29)
         Me.Panel13.TabIndex = 2
         '
-        'btnCancel
-        '
-        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancel.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.ForeColor = System.Drawing.Color.White
-        Me.btnCancel.Image = CType(resources.GetObject("btnCancel.Image"), System.Drawing.Image)
-        Me.btnCancel.Location = New System.Drawing.Point(99, 321)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(120, 38)
-        Me.btnCancel.TabIndex = 6
-        Me.btnCancel.Text = "   CANCEL"
-        Me.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnCancel.UseVisualStyleBackColor = False
-        '
-        'btnSave
-        '
-        Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSave.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.ForeColor = System.Drawing.Color.White
-        Me.btnSave.Image = Global.test_gui.My.Resources.Resources.resolve
-        Me.btnSave.Location = New System.Drawing.Point(263, 321)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(120, 38)
-        Me.btnSave.TabIndex = 7
-        Me.btnSave.Text = "   SAVE "
-        Me.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnSave.UseVisualStyleBackColor = False
-        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -279,6 +249,36 @@ Partial Class frmInventory
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(200, 25)
         Me.ComboBox1.TabIndex = 10
+        '
+        'btnCancel
+        '
+        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancel.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.ForeColor = System.Drawing.Color.White
+        Me.btnCancel.Image = CType(resources.GetObject("btnCancel.Image"), System.Drawing.Image)
+        Me.btnCancel.Location = New System.Drawing.Point(99, 321)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(120, 38)
+        Me.btnCancel.TabIndex = 6
+        Me.btnCancel.Text = "   CANCEL"
+        Me.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnCancel.UseVisualStyleBackColor = False
+        '
+        'btnSave
+        '
+        Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSave.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSave.ForeColor = System.Drawing.Color.White
+        Me.btnSave.Image = Global.test_gui.My.Resources.Resources.resolve
+        Me.btnSave.Location = New System.Drawing.Point(263, 321)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(120, 38)
+        Me.btnSave.TabIndex = 7
+        Me.btnSave.Text = "   SAVE "
+        Me.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnSave.UseVisualStyleBackColor = False
         '
         'frmInventory
         '

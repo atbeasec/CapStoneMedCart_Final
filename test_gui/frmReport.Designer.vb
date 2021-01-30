@@ -52,6 +52,7 @@ Partial Class frmReport
         Me.cmbReports.Location = New System.Drawing.Point(118, 17)
         Me.cmbReports.Name = "cmbReports"
         Me.cmbReports.Size = New System.Drawing.Size(243, 29)
+        Me.cmbReports.Sorted = True
         Me.cmbReports.TabIndex = 166
         '
         'Label15

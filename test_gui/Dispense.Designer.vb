@@ -76,6 +76,7 @@ Partial Class Dispense
         Me.lstboxAllergies.SelectionMode = System.Windows.Forms.SelectionMode.None
         Me.lstboxAllergies.Size = New System.Drawing.Size(202, 84)
         Me.lstboxAllergies.TabIndex = 5
+        Me.lstboxAllergies.TabStop = False
         '
         'Label10
         '
