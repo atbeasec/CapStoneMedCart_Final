@@ -16,7 +16,7 @@
     End Sub
 
 
-    Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal genericName As String, ByVal brandName As String, ByVal quantity As String, ByVal measure As String)
+    Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal strDrugName As String, ByVal strDosage As String, ByVal strType As String, ByVal strNode As String)
 
         Dim pnl As Panel
         pnl = New Panel
@@ -29,8 +29,8 @@
         'Set panel properties
         With pnl
             .BackColor = Color.Gainsboro
-            .Size = New Size(790, 47)
-            .Name = "pnlIndividualPatientRecordPadding" + getPanelCount(flpPannel).ToString
+            .Size = New Size(613, 47)
+            .Name = "pnlMedicationRecordPadding" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Padding = New Padding(0, 0, 0, 3)
             ' .Dock = System.Windows.Forms.DockStyle.Top
@@ -39,8 +39,8 @@
         With pnlMainPanel
 
             .BackColor = Color.White
-            .Size = New Size(790, 45)
-            .Name = "pnlIndividualPatientRecord" + getPanelCount(flpPannel).ToString
+            .Size = New Size(613, 45)
+            .Name = "pnlMedicationRecord" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Dock = System.Windows.Forms.DockStyle.Top
         End With
@@ -54,8 +54,8 @@
         AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
 
         ' add controls to this panel
-        CreateEditButton(pnlMainPanel, getPanelCount(flpPannel), 660, 5)
-        CreateDeleteBtn(pnlMainPanel, getPanelCount(flpPannel), 740, 5)
+        CreateEditButton(pnlMainPanel, getPanelCount(flpPannel), 480, 5)
+        CreateDeleteBtn(pnlMainPanel, getPanelCount(flpPannel), 535, 5)
 
         ' add controls to this panel
         ' call database info here to populate
@@ -68,10 +68,10 @@
         Dim lblID7 As New Label
 
         ' anywhere we have quotes except for the label names, we can call our Database and get method
-        CreateIDLabel(pnlMainPanel, lblID, "lblGenericName", 10, 20, genericName, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID2, "lblBrandName", 210, 20, brandName, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID3, "lblQuantity", 420, 20, quantity, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID4, "lblMeasure", 530, 20, measure, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID, "lblDrugName", 5, 20, strDrugName, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID2, "lblDosage", 206, 20, strDosage, getPanelCount(flpPannel))
+        'CreateIDLabel(pnlMainPanel, lblID3, "lblType", 220, 20, strType, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID4, "lblNode", 340, 20, strNode, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
@@ -280,7 +280,5 @@
 
     End Sub
 
-    Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
 
-    End Sub
 End Class
