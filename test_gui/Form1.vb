@@ -84,21 +84,27 @@
             Case 1
                 frmCurrentChildForm = frmPatientRecords
                 OpenChildForm(frmPatientRecords)
+                HideSubMenu()
             Case 2
                 frmCurrentChildForm = frmInventory
                 OpenChildForm(frmConfigureInventory)
+                HideSubMenu()
             Case 3
                 frmCurrentChildForm = frmReport
                 OpenChildForm(frmReport)
+                HideSubMenu()
             Case 4
                 frmCurrentChildForm = frmDiscrepancies
                 OpenChildForm(frmDiscrepancies)
+                HideSubMenu()
             Case 5
                 frmCurrentChildForm = frmMaintenance
                 OpenChildForm(frmMaintenance)
+                HideSubMenu()
             Case 6
                 frmCurrentChildForm = frmPharmacy
                 OpenChildForm(frmPharmacy)
+                HideSubMenu()
             Case 7
 
                 'nothing will happen here because we have a submenu that needs to be displayed to show more buttons
@@ -143,6 +149,15 @@
 
     End Sub
 
+    Private Sub SetBackgroundColorOfButton(sender As Object, e As EventArgs)
+
+
+
+
+    End Sub
+
+
+
     Private Sub btnSettings_Click(sender As Object, e As EventArgs) Handles btnSettings.Click
 
         ShowOrHideSubMenu()
@@ -164,8 +179,15 @@
 
         End If
 
+    End Sub
+    Private Sub HideSubMenu()
+
+        If pnlSubMenuSettings.Visible = True Then
+            pnlSubMenuSettings.Visible = False
+        End If
 
     End Sub
+
     Private Sub CheckUserPermissions()
 
         ' do database query to check user permission level

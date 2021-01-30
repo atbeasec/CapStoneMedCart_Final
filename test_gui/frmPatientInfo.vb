@@ -251,13 +251,7 @@
 
     'End Sub
 
-    Private Sub btnAddMedicine_Click(sender As Object, e As EventArgs) Handles btnNewMedicine.Click
 
-        ' could make more generic by having a method search the form for a flow panel, take the name of that and then pass it into the create panel
-        ' method
-        ' CreatePanel(flpMedications)
-        'frmNewInventory.Show()
-    End Sub
 
     Private Sub frmPatientInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -356,7 +350,7 @@
         'Set panel properties
         With pnl
             .BackColor = Color.Gainsboro
-            .Size = New Size(988, 47)
+            .Size = New Size(880, 47)
             .Name = "pnlIndividualPatientRecordPadding" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Padding = New Padding(0, 0, 0, 3)
@@ -366,7 +360,7 @@
         With pnlMainPanel
 
             .BackColor = Color.White
-            .Size = New Size(988, 45)
+            .Size = New Size(880, 45)
             .Name = "pnlIndividualPatientRecord" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Dock = System.Windows.Forms.DockStyle.Top
@@ -374,7 +368,6 @@
 
         'put the boarder panel inside the main panel
         pnl.Controls.Add(pnlMainPanel)
-
 
         'AddHandler pnlMainPanel.DoubleClick, AddressOf DynamicDoubleClickNewOrder
         AddHandler pnlMainPanel.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
@@ -391,13 +384,13 @@
         Dim lblID7 As New Label
 
         ' anywhere we have quotes except for the label names, we can call our Database and get method
-        CreateIDLabel(pnlMainPanel, lblID, "lblGenericName", 10, 20, genericName, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID2, "lblBrandName", 185, 20, brandName, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID3, "lblQuantity", 335, 20, quantity, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID4, "lblMeasure", 430, 20, measure, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID5, "lblDispensedBy", 555, 20, dispenseBy, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID6, "lblDispenseDate", 700, 20, dispenseDate, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID7, "lblDispenseTime", 865, 20, dispenseTime, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID, "lblMedicationName", 10, 20, genericName, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID2, "lblDosage", 230, 20, measure, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID3, "lblType", 350, 20, quantity, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID4, "lblDispensedBy", 450, 20, dispenseBy, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID5, "lblDispenseDate", 630, 20, dispenseDate, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID6, "lblDispenseTime", 730, 20, dispenseTime, getPanelCount(flpPannel))
+        ' CreateIDLabel(pnlMainPanel, lblID7, "lblDispenseTime", 865, 20, dispenseTime, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
