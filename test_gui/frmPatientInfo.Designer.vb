@@ -101,7 +101,7 @@ Partial Class frmPatientInfo
         Me.txtGender.Name = "txtGender"
         Me.txtGender.ReadOnly = True
         Me.txtGender.Size = New System.Drawing.Size(150, 29)
-        Me.txtGender.TabIndex = 23
+        Me.txtGender.TabIndex = 3
         '
         'Label19
         '
@@ -123,7 +123,7 @@ Partial Class frmPatientInfo
         Me.txtPhysician.Name = "txtPhysician"
         Me.txtPhysician.ReadOnly = True
         Me.txtPhysician.Size = New System.Drawing.Size(151, 29)
-        Me.txtPhysician.TabIndex = 21
+        Me.txtPhysician.TabIndex = 7
         '
         'Label16
         '
@@ -200,7 +200,7 @@ Partial Class frmPatientInfo
         Me.txtPhone.Name = "txtPhone"
         Me.txtPhone.ReadOnly = True
         Me.txtPhone.Size = New System.Drawing.Size(151, 29)
-        Me.txtPhone.TabIndex = 53
+        Me.txtPhone.TabIndex = 10
         '
         'Label13
         '
@@ -222,7 +222,7 @@ Partial Class frmPatientInfo
         Me.txtEmail.Name = "txtEmail"
         Me.txtEmail.ReadOnly = True
         Me.txtEmail.Size = New System.Drawing.Size(151, 29)
-        Me.txtEmail.TabIndex = 51
+        Me.txtEmail.TabIndex = 9
         '
         'txtAddress
         '
@@ -233,7 +233,7 @@ Partial Class frmPatientInfo
         Me.txtAddress.Name = "txtAddress"
         Me.txtAddress.ReadOnly = True
         Me.txtAddress.Size = New System.Drawing.Size(346, 29)
-        Me.txtAddress.TabIndex = 50
+        Me.txtAddress.TabIndex = 8
         '
         'txtMRN
         '
@@ -244,7 +244,7 @@ Partial Class frmPatientInfo
         Me.txtMRN.Name = "txtMRN"
         Me.txtMRN.ReadOnly = True
         Me.txtMRN.Size = New System.Drawing.Size(150, 29)
-        Me.txtMRN.TabIndex = 49
+        Me.txtMRN.TabIndex = 1
         '
         'Label12
         '
@@ -277,7 +277,7 @@ Partial Class frmPatientInfo
         Me.txtBed.Name = "txtBed"
         Me.txtBed.ReadOnly = True
         Me.txtBed.Size = New System.Drawing.Size(150, 29)
-        Me.txtBed.TabIndex = 46
+        Me.txtBed.TabIndex = 7
         '
         'Label17
         '
@@ -299,7 +299,7 @@ Partial Class frmPatientInfo
         Me.txtRoom.Name = "txtRoom"
         Me.txtRoom.ReadOnly = True
         Me.txtRoom.Size = New System.Drawing.Size(151, 29)
-        Me.txtRoom.TabIndex = 44
+        Me.txtRoom.TabIndex = 6
         '
         'Label10
         '
@@ -320,7 +320,7 @@ Partial Class frmPatientInfo
         Me.txtWeight.Name = "txtWeight"
         Me.txtWeight.ReadOnly = True
         Me.txtWeight.Size = New System.Drawing.Size(150, 29)
-        Me.txtWeight.TabIndex = 40
+        Me.txtWeight.TabIndex = 5
         '
         'Label8
         '
@@ -342,7 +342,7 @@ Partial Class frmPatientInfo
         Me.txtHeight.Name = "txtHeight"
         Me.txtHeight.ReadOnly = True
         Me.txtHeight.Size = New System.Drawing.Size(151, 29)
-        Me.txtHeight.TabIndex = 38
+        Me.txtHeight.TabIndex = 4
         '
         'Label3
         '
@@ -364,7 +364,7 @@ Partial Class frmPatientInfo
         Me.txtBirthday.Name = "txtBirthday"
         Me.txtBirthday.ReadOnly = True
         Me.txtBirthday.Size = New System.Drawing.Size(150, 29)
-        Me.txtBirthday.TabIndex = 30
+        Me.txtBirthday.TabIndex = 2
         '
         'Label11
         '
