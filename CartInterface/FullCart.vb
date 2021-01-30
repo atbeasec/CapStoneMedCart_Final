@@ -1,4 +1,5 @@
-﻿Public Class frmFullCart
+﻿Imports System.Linq
+Public Class frmFullCart
 
     '/*********************************************************************/
     '/*                   FILE NAME:  FullCart                              */									  
@@ -50,25 +51,29 @@
     '/* it will return back to the orginal color.                          *?
     '/*                                                                   */
     '/*********************************************************************/
-    '/*  CALLED BY:   	      						                        */           
+    '/*  CALLED BY:   	      						                       */           
     '/*           Drawer buttons on frmFullCart                            */         
     '/*********************************************************************/
     '/*  CALLS:										   */                 
     '/*             (NONE)								   */             
     '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					   */         
-    '/*											   */                     
-    '/*                                                                     
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*  sender – Identifies which particular control raised the          */
+    '/*          click event                                              */
+    '/*  e – Holds the EventArgs object sent to the routine               */        
+    '/*                                                                   */  
     '/*********************************************************************/
-    '/*  RETURNS:								         */                   
-    '/*            (NOTHING)								   */             
+    '/*  RETURNS:								                           */                   
+    '/*            (NOTHING)								               */             
     '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								   */             
-    '/*											   */                     
+    '/* SAMPLE INVOCATION:								                   */             
+    '/*											                           */                     
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
+    '/*	 blnClosing - this is going to keep track of if we are going to be*/
+    '/*     closing the form or not. If none of the buttons are red the   */
+    '/*     form will close. If a button is red, the form will stay open. */
     '/*                                                                     
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
@@ -78,13 +83,24 @@
     '/*                                                                     
     '/*********************************************************************/
 
-    Private Sub Color_Click(sender As Object, e As EventArgs) Handles btn1.Click, btn3.Click, btn4.Click, btn5.Click, btn6.click, btn7.Click, btn8.Click,
+    Private Sub Color_Click(sender As Object, e As EventArgs) Handles btn1.Click, btn3.Click, btn4.Click, btn5.Click, btn6.Click, btn7.Click, btn8.Click,
             btn9.Click, btn10.Click, btn11.Click, btn12.Click, btn13.Click, btn14.Click, btn15.Click, btn16.Click, btn17.Click, btn18.Click, btn19.Click,
             btn20.Click, btn21.Click, btn22.Click, btn23.Click, btn24.Click, btn25.Click, btn26.Click
         'the idea for this is if any of the buttons are clicked they just chane the color, so 
         'the entire thing can be handled in one sub. 
 
+        Dim blnClosing As Boolean = True
         sender.BackColor = btnColor.BackColor
+        For Each item As Button In Controls 'this gets all the contorls on the form. There should only be buttons. 
+            If Not item.BackColor = btnColor.BackColor Then 'an open drawer will be red so if it is the standard 
+                'control color that means the drawer is closed. 
+                blnClosing = False
+            End If
+        Next
+
+        If blnClosing Then
+            Me.Close()
+        End If
 
     End Sub
 
