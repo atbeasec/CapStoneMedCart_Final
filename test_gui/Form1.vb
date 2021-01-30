@@ -47,6 +47,7 @@
             End If
 
         End If
+
         'do nothing the correct form is open
         'Else
         '
@@ -95,7 +96,8 @@
                 OpenChildForm(frmAdHockDispense)
 
             Case 4
-                'frmEndOfShiftCount
+                frmCurrentChildForm = frmEndOfShift
+                OpenChildForm(frmEndOfShift)
             Case 5
                 frmCurrentChildForm = frmInventory
                 OpenChildForm(frmConfigureInventory)

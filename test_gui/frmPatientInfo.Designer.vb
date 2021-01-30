@@ -74,7 +74,6 @@ Partial Class frmPatientInfo
         Me.btnAddAllergy = New System.Windows.Forms.Button()
         Me.btnWaste = New System.Windows.Forms.Button()
         Me.btnDispenseMedication = New System.Windows.Forms.Button()
-        Me.btnDispense = New System.Windows.Forms.Button()
         Me.btnEditPatient = New System.Windows.Forms.Button()
         Me.pnlPersonalInformation.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -678,21 +677,6 @@ Partial Class frmPatientInfo
         Me.btnDispenseMedication.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnDispenseMedication.UseVisualStyleBackColor = False
         '
-        'btnDispense
-        '
-        Me.btnDispense.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnDispense.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDispense.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDispense.ForeColor = System.Drawing.Color.White
-        Me.btnDispense.Image = CType(resources.GetObject("btnDispense.Image"), System.Drawing.Image)
-        Me.btnDispense.Location = New System.Drawing.Point(1048, 453)
-        Me.btnDispense.Name = "btnDispense"
-        Me.btnDispense.Size = New System.Drawing.Size(263, 37)
-        Me.btnDispense.TabIndex = 14
-        Me.btnDispense.Text = "   Dispense Medication"
-        Me.btnDispense.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnDispense.UseVisualStyleBackColor = False
-        '
         'btnEditPatient
         '
         Me.btnEditPatient.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
@@ -726,7 +710,6 @@ Partial Class frmPatientInfo
         Me.Controls.Add(Me.Label30)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.btnDispense)
         Me.Controls.Add(Me.btnEditPatient)
         Me.Controls.Add(Me.pnlPersonalInformation)
         Me.Controls.Add(Me.Label18)
@@ -748,7 +731,6 @@ Partial Class frmPatientInfo
     Friend WithEvents Label11 As Label
     Friend WithEvents Label18 As Label
     Friend WithEvents btnEditPatient As Button
-    Friend WithEvents btnDispense As Button
     Friend WithEvents txtPhysician As TextBox
     Friend WithEvents txtGender As TextBox
     Friend WithEvents Label19 As Label
