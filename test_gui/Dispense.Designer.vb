@@ -23,195 +23,313 @@ Partial Class Dispense
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Dispense))
-        Me.pnlDispenseButton = New System.Windows.Forms.Panel()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.txtDOB = New System.Windows.Forms.TextBox()
-        Me.txtLastName = New System.Windows.Forms.TextBox()
-        Me.txtFirstName = New System.Windows.Forms.TextBox()
-        Me.txtPatientID = New System.Windows.Forms.TextBox()
+        Me.lstboxAllergies = New System.Windows.Forms.ListBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Label31 = New System.Windows.Forms.Label()
+        Me.Label28 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label26 = New System.Windows.Forms.Label()
+        Me.Label27 = New System.Windows.Forms.Label()
+        Me.flpMedications = New System.Windows.Forms.FlowLayoutPanel()
+        Me.cmbMedications = New System.Windows.Forms.ComboBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.cmbDosage = New System.Windows.Forms.ComboBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.cmbMethod = New System.Windows.Forms.ComboBox()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.numQuantity = New System.Windows.Forms.NumericUpDown()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.btnDispense = New System.Windows.Forms.Button()
-        Me.flpAssignedMedications = New System.Windows.Forms.FlowLayoutPanel()
-        Me.pnlHeader = New System.Windows.Forms.Panel()
-        Me.Label37 = New System.Windows.Forms.Label()
-        Me.Label32 = New System.Windows.Forms.Label()
-        Me.Label35 = New System.Windows.Forms.Label()
-        Me.Label38 = New System.Windows.Forms.Label()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Panel11 = New System.Windows.Forms.Panel()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Panel14 = New System.Windows.Forms.Panel()
+        Me.txtMRN = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.txt = New System.Windows.Forms.Label()
-        Me.lstboxAllergies = New System.Windows.Forms.ListBox()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.pnlDispenseButton.SuspendLayout()
-        Me.pnlHeader.SuspendLayout()
-        Me.Panel2.SuspendLayout()
+        Me.txtDOB = New System.Windows.Forms.TextBox()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.Panel3.SuspendLayout()
+        CType(Me.numQuantity, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel14.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.Panel2.SuspendLayout()
+        Me.Panel4.SuspendLayout()
         Me.SuspendLayout()
         '
-        'pnlDispenseButton
+        'lstboxAllergies
         '
-        Me.pnlDispenseButton.Controls.Add(Me.Label11)
-        Me.pnlDispenseButton.Controls.Add(Me.TextBox2)
-        Me.pnlDispenseButton.Controls.Add(Me.txtDOB)
-        Me.pnlDispenseButton.Controls.Add(Me.txtLastName)
-        Me.pnlDispenseButton.Controls.Add(Me.txtFirstName)
-        Me.pnlDispenseButton.Controls.Add(Me.txtPatientID)
-        Me.pnlDispenseButton.Controls.Add(Me.Label8)
-        Me.pnlDispenseButton.Controls.Add(Me.Label7)
-        Me.pnlDispenseButton.Controls.Add(Me.Label6)
-        Me.pnlDispenseButton.Controls.Add(Me.Label4)
-        Me.pnlDispenseButton.Controls.Add(Me.Button1)
-        Me.pnlDispenseButton.Controls.Add(Me.Label5)
-        Me.pnlDispenseButton.Controls.Add(Me.TextBox1)
-        Me.pnlDispenseButton.Controls.Add(Me.btnDispense)
-        Me.pnlDispenseButton.Location = New System.Drawing.Point(688, 156)
-        Me.pnlDispenseButton.Name = "pnlDispenseButton"
-        Me.pnlDispenseButton.Size = New System.Drawing.Size(248, 375)
-        Me.pnlDispenseButton.TabIndex = 0
+        Me.lstboxAllergies.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lstboxAllergies.FormattingEnabled = True
+        Me.lstboxAllergies.ItemHeight = 20
+        Me.lstboxAllergies.Location = New System.Drawing.Point(610, 142)
+        Me.lstboxAllergies.Name = "lstboxAllergies"
+        Me.lstboxAllergies.SelectionMode = System.Windows.Forms.SelectionMode.None
+        Me.lstboxAllergies.Size = New System.Drawing.Size(202, 84)
+        Me.lstboxAllergies.TabIndex = 5
         '
-        'Label11
+        'Label10
         '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(3, 182)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(123, 21)
-        Me.Label11.TabIndex = 54
-        Me.Label11.Text = "Quantity in Cart:"
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(13, 217)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(158, 21)
+        Me.Label10.TabIndex = 47
+        Me.Label10.Text = "Active Perscriptions:"
         '
-        'TextBox2
+        'Panel3
         '
-        Me.TextBox2.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(187, 180)
-        Me.TextBox2.Multiline = True
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(49, 28)
-        Me.TextBox2.TabIndex = 53
+        Me.Panel3.BackColor = System.Drawing.Color.White
+        Me.Panel3.Controls.Add(Me.Label31)
+        Me.Panel3.Controls.Add(Me.Label28)
+        Me.Panel3.Controls.Add(Me.Label1)
+        Me.Panel3.Controls.Add(Me.Label2)
+        Me.Panel3.Controls.Add(Me.Label9)
+        Me.Panel3.Controls.Add(Me.Label26)
+        Me.Panel3.Controls.Add(Me.Label27)
+        Me.Panel3.Location = New System.Drawing.Point(18, 246)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(1080, 47)
+        Me.Panel3.TabIndex = 52
         '
-        'txtDOB
+        'Label31
         '
-        Me.txtDOB.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtDOB.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDOB.Location = New System.Drawing.Point(98, 142)
-        Me.txtDOB.Multiline = True
-        Me.txtDOB.Name = "txtDOB"
-        Me.txtDOB.Size = New System.Drawing.Size(138, 28)
-        Me.txtDOB.TabIndex = 52
+        Me.Label31.AutoSize = True
+        Me.Label31.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label31.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label31.Location = New System.Drawing.Point(626, 16)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(110, 21)
+        Me.Label31.TabIndex = 15
+        Me.Label31.Text = "Prescribed By"
         '
-        'txtLastName
+        'Label28
         '
-        Me.txtLastName.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtLastName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLastName.Location = New System.Drawing.Point(98, 98)
-        Me.txtLastName.Multiline = True
-        Me.txtLastName.Name = "txtLastName"
-        Me.txtLastName.Size = New System.Drawing.Size(138, 28)
-        Me.txtLastName.TabIndex = 51
+        Me.Label28.AutoSize = True
+        Me.Label28.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label28.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label28.Location = New System.Drawing.Point(549, 16)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(44, 21)
+        Me.Label28.TabIndex = 14
+        Me.Label28.Text = "Date"
         '
-        'txtFirstName
+        'Label1
         '
-        Me.txtFirstName.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtFirstName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFirstName.Location = New System.Drawing.Point(98, 54)
-        Me.txtFirstName.Multiline = True
-        Me.txtFirstName.Name = "txtFirstName"
-        Me.txtFirstName.Size = New System.Drawing.Size(138, 28)
-        Me.txtFirstName.TabIndex = 50
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label1.Location = New System.Drawing.Point(449, 16)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(72, 21)
+        Me.Label1.TabIndex = 12
+        Me.Label1.Text = "Quantity"
         '
-        'txtPatientID
+        'Label2
         '
-        Me.txtPatientID.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtPatientID.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPatientID.Location = New System.Drawing.Point(98, 10)
-        Me.txtPatientID.Multiline = True
-        Me.txtPatientID.Name = "txtPatientID"
-        Me.txtPatientID.Size = New System.Drawing.Size(138, 28)
-        Me.txtPatientID.TabIndex = 49
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label2.Location = New System.Drawing.Point(792, 16)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(77, 21)
+        Me.Label2.TabIndex = 5
+        Me.Label2.Text = "Schedule"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label9.Location = New System.Drawing.Point(5, 16)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(140, 21)
+        Me.Label9.TabIndex = 11
+        Me.Label9.Text = "Medication Name"
+        '
+        'Label26
+        '
+        Me.Label26.AutoSize = True
+        Me.Label26.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label26.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label26.Location = New System.Drawing.Point(339, 16)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(69, 21)
+        Me.Label26.TabIndex = 13
+        Me.Label26.Text = "Method"
+        '
+        'Label27
+        '
+        Me.Label27.AutoSize = True
+        Me.Label27.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label27.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label27.Location = New System.Drawing.Point(228, 16)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(65, 21)
+        Me.Label27.TabIndex = 10
+        Me.Label27.Text = "Dosage"
+        '
+        'flpMedications
+        '
+        Me.flpMedications.AutoScroll = True
+        Me.flpMedications.BackColor = System.Drawing.Color.White
+        Me.flpMedications.Location = New System.Drawing.Point(18, 293)
+        Me.flpMedications.Name = "flpMedications"
+        Me.flpMedications.Size = New System.Drawing.Size(1080, 186)
+        Me.flpMedications.TabIndex = 53
+        '
+        'cmbMedications
+        '
+        Me.cmbMedications.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbMedications.FormattingEnabled = True
+        Me.cmbMedications.Items.AddRange(New Object() {"Yes", "No"})
+        Me.cmbMedications.Location = New System.Drawing.Point(15, 142)
+        Me.cmbMedications.Name = "cmbMedications"
+        Me.cmbMedications.Size = New System.Drawing.Size(243, 29)
+        Me.cmbMedications.TabIndex = 1
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(903, 118)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(65, 21)
+        Me.Label14.TabIndex = 177
+        Me.Label14.Text = "Dosage:"
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label17.Location = New System.Drawing.Point(13, 118)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(90, 21)
+        Me.Label17.TabIndex = 176
+        Me.Label17.Text = "Medication:"
+        '
+        'cmbDosage
+        '
+        Me.cmbDosage.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbDosage.FormattingEnabled = True
+        Me.cmbDosage.Items.AddRange(New Object() {"Yes", "No"})
+        Me.cmbDosage.Location = New System.Drawing.Point(906, 143)
+        Me.cmbDosage.Name = "cmbDosage"
+        Me.cmbDosage.Size = New System.Drawing.Size(193, 29)
+        Me.cmbDosage.TabIndex = 4
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(14, 85)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(236, 21)
+        Me.Label3.TabIndex = 179
+        Me.Label3.Text = "Select Medication to Dispense:"
+        '
+        'cmbMethod
+        '
+        Me.cmbMethod.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbMethod.FormattingEnabled = True
+        Me.cmbMethod.Items.AddRange(New Object() {"Yes", "No"})
+        Me.cmbMethod.Location = New System.Drawing.Point(313, 142)
+        Me.cmbMethod.Name = "cmbMethod"
+        Me.cmbMethod.Size = New System.Drawing.Size(229, 29)
+        Me.cmbMethod.TabIndex = 2
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Location = New System.Drawing.Point(309, 118)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(67, 21)
+        Me.Label15.TabIndex = 183
+        Me.Label15.Text = "Method:"
+        '
+        'numQuantity
+        '
+        Me.numQuantity.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.numQuantity.Location = New System.Drawing.Point(907, 200)
+        Me.numQuantity.Name = "numQuantity"
+        Me.numQuantity.Size = New System.Drawing.Size(69, 29)
+        Me.numQuantity.TabIndex = 3
         '
         'Label8
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(3, 149)
+        Me.Label8.Location = New System.Drawing.Point(309, 8)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(45, 21)
-        Me.Label8.TabIndex = 48
+        Me.Label8.TabIndex = 190
         Me.Label8.Text = "DOB:"
         '
         'Label7
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(3, 99)
+        Me.Label7.Location = New System.Drawing.Point(903, 7)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(87, 21)
-        Me.Label7.TabIndex = 47
+        Me.Label7.TabIndex = 189
         Me.Label7.Text = "Last Name:"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(3, 53)
+        Me.Label6.Location = New System.Drawing.Point(606, 9)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(89, 21)
-        Me.Label6.TabIndex = 46
+        Me.Label6.TabIndex = 188
         Me.Label6.Text = "First Name:"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(3, 10)
+        Me.Label4.Location = New System.Drawing.Point(13, 9)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(79, 21)
-        Me.Label4.TabIndex = 45
-        Me.Label4.Text = "Patient ID:"
+        Me.Label4.Size = New System.Drawing.Size(49, 21)
+        Me.Label4.TabIndex = 187
+        Me.Label4.Text = "MRN:"
         '
-        'Button1
+        'btnCancel
         '
-        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.ForeColor = System.Drawing.Color.White
-        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.Location = New System.Drawing.Point(7, 324)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(229, 38)
-        Me.Button1.TabIndex = 44
-        Me.Button1.Text = "      Cancel Dispensing      "
-        Me.Button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button1.UseVisualStyleBackColor = False
+        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancel.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.ForeColor = System.Drawing.Color.White
+        Me.btnCancel.Image = CType(resources.GetObject("btnCancel.Image"), System.Drawing.Image)
+        Me.btnCancel.Location = New System.Drawing.Point(328, 498)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(229, 38)
+        Me.btnCancel.TabIndex = 5
+        Me.btnCancel.Text = "      Cancel Dispensing      "
+        Me.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnCancel.UseVisualStyleBackColor = False
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(3, 226)
+        Me.Label5.Location = New System.Drawing.Point(903, 175)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(158, 21)
-        Me.Label5.TabIndex = 43
-        Me.Label5.Text = "Quantity to Dispense:"
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(187, 224)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(49, 28)
-        Me.TextBox1.TabIndex = 42
+        Me.Label5.Size = New System.Drawing.Size(73, 21)
+        Me.Label5.TabIndex = 185
+        Me.Label5.Text = "Quantity:"
         '
         'btnDispense
         '
@@ -220,235 +338,197 @@ Partial Class Dispense
         Me.btnDispense.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDispense.ForeColor = System.Drawing.Color.White
         Me.btnDispense.Image = CType(resources.GetObject("btnDispense.Image"), System.Drawing.Image)
-        Me.btnDispense.Location = New System.Drawing.Point(7, 269)
+        Me.btnDispense.Location = New System.Drawing.Point(577, 498)
         Me.btnDispense.Name = "btnDispense"
         Me.btnDispense.Size = New System.Drawing.Size(229, 38)
-        Me.btnDispense.TabIndex = 41
+        Me.btnDispense.TabIndex = 6
         Me.btnDispense.Text = "      Dispense Medication"
         Me.btnDispense.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnDispense.UseVisualStyleBackColor = False
         '
-        'flpAssignedMedications
+        'Label13
         '
-        Me.flpAssignedMedications.AutoScroll = True
-        Me.flpAssignedMedications.BackColor = System.Drawing.Color.White
-        Me.flpAssignedMedications.Location = New System.Drawing.Point(10, 92)
-        Me.flpAssignedMedications.Name = "flpAssignedMedications"
-        Me.flpAssignedMedications.Size = New System.Drawing.Size(672, 439)
-        Me.flpAssignedMedications.TabIndex = 43
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(606, 118)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(154, 21)
+        Me.Label13.TabIndex = 197
+        Me.Label13.Text = "Medication Allergies:"
         '
-        'pnlHeader
+        'Panel14
         '
-        Me.pnlHeader.BackColor = System.Drawing.Color.White
-        Me.pnlHeader.Controls.Add(Me.Label37)
-        Me.pnlHeader.Controls.Add(Me.Label32)
-        Me.pnlHeader.Controls.Add(Me.Label35)
-        Me.pnlHeader.Controls.Add(Me.Label38)
-        Me.pnlHeader.Location = New System.Drawing.Point(10, 45)
-        Me.pnlHeader.Name = "pnlHeader"
-        Me.pnlHeader.Size = New System.Drawing.Size(672, 47)
-        Me.pnlHeader.TabIndex = 42
+        Me.Panel14.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel14.Controls.Add(Me.txtMRN)
+        Me.Panel14.Location = New System.Drawing.Point(16, 32)
+        Me.Panel14.Name = "Panel14"
+        Me.Panel14.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel14.Size = New System.Drawing.Size(190, 24)
+        Me.Panel14.TabIndex = 198
         '
-        'Label37
+        'txtMRN
         '
-        Me.Label37.AutoSize = True
-        Me.Label37.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label37.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label37.Location = New System.Drawing.Point(8, 21)
-        Me.Label37.Name = "Label37"
-        Me.Label37.Size = New System.Drawing.Size(113, 21)
-        Me.Label37.TabIndex = 1
-        Me.Label37.Text = "Generic Name"
-        '
-        'Label32
-        '
-        Me.Label32.AutoSize = True
-        Me.Label32.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label32.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label32.Location = New System.Drawing.Point(574, 21)
-        Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(80, 21)
-        Me.Label32.TabIndex = 6
-        Me.Label32.Text = "Last Refill"
-        '
-        'Label35
-        '
-        Me.Label35.AutoSize = True
-        Me.Label35.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label35.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label35.Location = New System.Drawing.Point(431, 21)
-        Me.Label35.Name = "Label35"
-        Me.Label35.Size = New System.Drawing.Size(73, 21)
-        Me.Label35.TabIndex = 3
-        Me.Label35.Text = "Measure"
-        '
-        'Label38
-        '
-        Me.Label38.AutoSize = True
-        Me.Label38.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label38.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label38.Location = New System.Drawing.Point(232, 21)
-        Me.Label38.Name = "Label38"
-        Me.Label38.Size = New System.Drawing.Size(100, 21)
-        Me.Label38.TabIndex = 0
-        Me.Label38.Text = "Brand Name"
-        '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.Color.Black
-        Me.Panel2.Controls.Add(Me.Panel11)
-        Me.Panel2.Controls.Add(Me.TextBox3)
-        Me.Panel2.Location = New System.Drawing.Point(10, 5)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Padding = New System.Windows.Forms.Padding(0, 0, 0, 2)
-        Me.Panel2.Size = New System.Drawing.Size(273, 35)
-        Me.Panel2.TabIndex = 41
-        '
-        'Panel11
-        '
-        Me.Panel11.BackColor = System.Drawing.Color.White
-        Me.Panel11.BackgroundImage = CType(resources.GetObject("Panel11.BackgroundImage"), System.Drawing.Image)
-        Me.Panel11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Panel11.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel11.Location = New System.Drawing.Point(0, 0)
-        Me.Panel11.Name = "Panel11"
-        Me.Panel11.Size = New System.Drawing.Size(32, 33)
-        Me.Panel11.TabIndex = 13
-        '
-        'TextBox3
-        '
-        Me.TextBox3.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox3.Dock = System.Windows.Forms.DockStyle.Right
-        Me.TextBox3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.ForeColor = System.Drawing.SystemColors.ScrollBar
-        Me.TextBox3.Location = New System.Drawing.Point(32, 0)
-        Me.TextBox3.Multiline = True
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(241, 33)
-        Me.TextBox3.TabIndex = 5
-        Me.TextBox3.Tag = "Search Patient"
-        Me.TextBox3.Text = "Search Medications"
+        Me.txtMRN.BackColor = System.Drawing.Color.White
+        Me.txtMRN.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtMRN.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtMRN.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMRN.Location = New System.Drawing.Point(1, 1)
+        Me.txtMRN.Name = "txtMRN"
+        Me.txtMRN.ReadOnly = True
+        Me.txtMRN.Size = New System.Drawing.Size(188, 22)
+        Me.txtMRN.TabIndex = 6
+        Me.txtMRN.TabStop = False
         '
         'Panel1
         '
-        Me.Panel1.BackColor = System.Drawing.Color.Transparent
-        Me.Panel1.Controls.Add(Me.Label3)
-        Me.Panel1.Controls.Add(Me.Label9)
-        Me.Panel1.Controls.Add(Me.txt)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel1.Location = New System.Drawing.Point(1080, 0)
+        Me.Panel1.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel1.Controls.Add(Me.txtDOB)
+        Me.Panel1.Location = New System.Drawing.Point(313, 32)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(140, 547)
-        Me.Panel1.TabIndex = 46
+        Me.Panel1.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel1.Size = New System.Drawing.Size(190, 24)
+        Me.Panel1.TabIndex = 199
         '
-        'Label3
+        'txtDOB
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(3, 48)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(52, 21)
-        Me.Label3.TabIndex = 55
-        Me.Label3.Text = "Nurse"
+        Me.txtDOB.BackColor = System.Drawing.Color.White
+        Me.txtDOB.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtDOB.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtDOB.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDOB.Location = New System.Drawing.Point(1, 1)
+        Me.txtDOB.Name = "txtDOB"
+        Me.txtDOB.ReadOnly = True
+        Me.txtDOB.Size = New System.Drawing.Size(188, 22)
+        Me.txtDOB.TabIndex = 6
+        Me.txtDOB.TabStop = False
         '
-        'Label9
+        'Panel2
         '
-        Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(3, 5)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(77, 13)
-        Me.Label9.TabIndex = 54
-        Me.Label9.Text = "Logged In As:"
+        Me.Panel2.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel2.Controls.Add(Me.TextBox2)
+        Me.Panel2.Location = New System.Drawing.Point(907, 31)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel2.Size = New System.Drawing.Size(190, 24)
+        Me.Panel2.TabIndex = 200
         '
-        'txt
+        'TextBox2
         '
-        Me.txt.AutoSize = True
-        Me.txt.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txt.Location = New System.Drawing.Point(3, 23)
-        Me.txt.Name = "txt"
-        Me.txt.Size = New System.Drawing.Size(88, 21)
-        Me.txt.TabIndex = 53
-        Me.txt.Text = "John Smith"
+        Me.TextBox2.BackColor = System.Drawing.Color.White
+        Me.TextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.TextBox2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TextBox2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox2.Location = New System.Drawing.Point(1, 1)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.ReadOnly = True
+        Me.TextBox2.Size = New System.Drawing.Size(188, 22)
+        Me.TextBox2.TabIndex = 6
+        Me.TextBox2.TabStop = False
         '
-        'lstboxAllergies
+        'Panel4
         '
-        Me.lstboxAllergies.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lstboxAllergies.FormattingEnabled = True
-        Me.lstboxAllergies.ItemHeight = 20
-        Me.lstboxAllergies.Location = New System.Drawing.Point(688, 66)
-        Me.lstboxAllergies.Name = "lstboxAllergies"
-        Me.lstboxAllergies.SelectionMode = System.Windows.Forms.SelectionMode.None
-        Me.lstboxAllergies.Size = New System.Drawing.Size(248, 84)
-        Me.lstboxAllergies.TabIndex = 1
+        Me.Panel4.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel4.Controls.Add(Me.TextBox3)
+        Me.Panel4.Location = New System.Drawing.Point(610, 32)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel4.Size = New System.Drawing.Size(190, 24)
+        Me.Panel4.TabIndex = 199
         '
-        'Label10
+        'TextBox3
         '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(688, 42)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(133, 21)
-        Me.Label10.TabIndex = 47
-        Me.Label10.Text = "Patient Allergies:"
+        Me.TextBox3.BackColor = System.Drawing.Color.White
+        Me.TextBox3.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.TextBox3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TextBox3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox3.Location = New System.Drawing.Point(1, 1)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.ReadOnly = True
+        Me.TextBox3.Size = New System.Drawing.Size(188, 22)
+        Me.TextBox3.TabIndex = 6
+        Me.TextBox3.TabStop = False
         '
         'Dispense
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1220, 547)
+        Me.ClientSize = New System.Drawing.Size(1116, 559)
         Me.ControlBox = False
+        Me.Controls.Add(Me.Panel4)
+        Me.Controls.Add(Me.Panel2)
+        Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.Panel14)
+        Me.Controls.Add(Me.numQuantity)
+        Me.Controls.Add(Me.Label13)
+        Me.Controls.Add(Me.Label8)
+        Me.Controls.Add(Me.Label7)
+        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.btnCancel)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.btnDispense)
+        Me.Controls.Add(Me.cmbMethod)
+        Me.Controls.Add(Me.Label15)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.cmbMedications)
+        Me.Controls.Add(Me.Label14)
+        Me.Controls.Add(Me.Label17)
+        Me.Controls.Add(Me.cmbDosage)
+        Me.Controls.Add(Me.Panel3)
+        Me.Controls.Add(Me.flpMedications)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.lstboxAllergies)
-        Me.Controls.Add(Me.Panel1)
-        Me.Controls.Add(Me.flpAssignedMedications)
-        Me.Controls.Add(Me.pnlHeader)
-        Me.Controls.Add(Me.Panel2)
-        Me.Controls.Add(Me.pnlDispenseButton)
         Me.Name = "Dispense"
         Me.Text = "    Dispense"
-        Me.pnlDispenseButton.ResumeLayout(False)
-        Me.pnlDispenseButton.PerformLayout()
-        Me.pnlHeader.ResumeLayout(False)
-        Me.pnlHeader.PerformLayout()
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel3.PerformLayout()
+        CType(Me.numQuantity, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel14.ResumeLayout(False)
+        Me.Panel14.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents pnlDispenseButton As Panel
-    Friend WithEvents Label5 As Label
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents btnDispense As Button
-    Friend WithEvents flpAssignedMedications As FlowLayoutPanel
-    Friend WithEvents pnlHeader As Panel
-    Friend WithEvents Label37 As Label
-    Friend WithEvents Label32 As Label
-    Friend WithEvents Label35 As Label
-    Friend WithEvents Label38 As Label
-    Friend WithEvents Panel2 As Panel
-    Friend WithEvents Panel11 As Panel
-    Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents Button1 As Button
-    Friend WithEvents txtDOB As TextBox
-    Friend WithEvents txtLastName As TextBox
-    Friend WithEvents txtFirstName As TextBox
-    Friend WithEvents txtPatientID As TextBox
+    Friend WithEvents lstboxAllergies As ListBox
+    Friend WithEvents Label10 As Label
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents Label31 As Label
+    Friend WithEvents Label28 As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Label26 As Label
+    Friend WithEvents Label27 As Label
+    Friend WithEvents flpMedications As FlowLayoutPanel
+    Friend WithEvents cmbMedications As ComboBox
+    Friend WithEvents Label14 As Label
+    Friend WithEvents Label17 As Label
+    Friend WithEvents cmbDosage As ComboBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents cmbMethod As ComboBox
+    Friend WithEvents Label15 As Label
+    Friend WithEvents numQuantity As NumericUpDown
     Friend WithEvents Label8 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents Label4 As Label
+    Friend WithEvents btnCancel As Button
+    Friend WithEvents Label5 As Label
+    Friend WithEvents btnDispense As Button
+    Friend WithEvents Label13 As Label
+    Friend WithEvents Panel14 As Panel
+    Friend WithEvents txtMRN As TextBox
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Label9 As Label
-    Friend WithEvents txt As Label
-    Friend WithEvents lstboxAllergies As ListBox
-    Friend WithEvents Label10 As Label
-    Friend WithEvents Label11 As Label
+    Friend WithEvents txtDOB As TextBox
+    Friend WithEvents Panel2 As Panel
     Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents TextBox3 As TextBox
 End Class

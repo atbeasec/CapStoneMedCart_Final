@@ -23,7 +23,6 @@ Partial Class frmInventory
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmInventory))
-        Me.btnCancel = New System.Windows.Forms.Button()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -34,13 +33,17 @@ Partial Class frmInventory
         Me.cmbMedicationName = New System.Windows.Forms.ComboBox()
         Me.Panel14 = New System.Windows.Forms.Panel()
         Me.txtExpirationDate = New System.Windows.Forms.TextBox()
-        Me.btnSave = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.numDrawerNumber = New System.Windows.Forms.NumericUpDown()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.numQuantity = New System.Windows.Forms.NumericUpDown()
         Me.Panel13 = New System.Windows.Forms.Panel()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel14.SuspendLayout()
@@ -48,29 +51,15 @@ Partial Class frmInventory
         CType(Me.numDrawerNumber, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numQuantity, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel13.SuspendLayout()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'btnCancel
-        '
-        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancel.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.ForeColor = System.Drawing.Color.White
-        Me.btnCancel.Image = CType(resources.GetObject("btnCancel.Image"), System.Drawing.Image)
-        Me.btnCancel.Location = New System.Drawing.Point(111, 443)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(120, 38)
-        Me.btnCancel.TabIndex = 6
-        Me.btnCancel.Text = "   CANCEL"
-        Me.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnCancel.UseVisualStyleBackColor = False
         '
         'Label10
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label10.Location = New System.Drawing.Point(26, 218)
+        Me.Label10.Location = New System.Drawing.Point(344, 61)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(89, 21)
         Me.Label10.TabIndex = 111
@@ -92,7 +81,7 @@ Partial Class frmInventory
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label6.Location = New System.Drawing.Point(26, 362)
+        Me.Label6.Location = New System.Drawing.Point(26, 221)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(118, 21)
         Me.Label6.TabIndex = 107
@@ -103,7 +92,7 @@ Partial Class frmInventory
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label5.Location = New System.Drawing.Point(26, 285)
+        Me.Label5.Location = New System.Drawing.Point(26, 141)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(136, 21)
         Me.Label5.TabIndex = 106
@@ -113,10 +102,10 @@ Partial Class frmInventory
         '
         Me.Panel4.BackColor = System.Drawing.Color.DarkGray
         Me.Panel4.Controls.Add(Me.cmbBin)
-        Me.Panel4.Location = New System.Drawing.Point(30, 242)
+        Me.Panel4.Location = New System.Drawing.Point(348, 88)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel4.Size = New System.Drawing.Size(111, 28)
+        Me.Panel4.Size = New System.Drawing.Size(118, 28)
         Me.Panel4.TabIndex = 3
         '
         'cmbBin
@@ -127,14 +116,14 @@ Partial Class frmInventory
         Me.cmbBin.FormattingEnabled = True
         Me.cmbBin.Location = New System.Drawing.Point(1, 1)
         Me.cmbBin.Name = "cmbBin"
-        Me.cmbBin.Size = New System.Drawing.Size(109, 25)
+        Me.cmbBin.Size = New System.Drawing.Size(116, 25)
         Me.cmbBin.TabIndex = 10
         '
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.DarkGray
         Me.Panel3.Controls.Add(Me.cmbMedicationName)
-        Me.Panel3.Location = New System.Drawing.Point(30, 312)
+        Me.Panel3.Location = New System.Drawing.Point(30, 168)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel3.Size = New System.Drawing.Size(437, 28)
@@ -155,10 +144,10 @@ Partial Class frmInventory
         '
         Me.Panel14.BackColor = System.Drawing.Color.DarkGray
         Me.Panel14.Controls.Add(Me.txtExpirationDate)
-        Me.Panel14.Location = New System.Drawing.Point(30, 388)
+        Me.Panel14.Location = New System.Drawing.Point(30, 247)
         Me.Panel14.Name = "Panel14"
         Me.Panel14.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel14.Size = New System.Drawing.Size(115, 28)
+        Me.Panel14.Size = New System.Drawing.Size(190, 28)
         Me.Panel14.TabIndex = 5
         '
         'txtExpirationDate
@@ -169,29 +158,14 @@ Partial Class frmInventory
         Me.txtExpirationDate.Location = New System.Drawing.Point(1, 1)
         Me.txtExpirationDate.Multiline = True
         Me.txtExpirationDate.Name = "txtExpirationDate"
-        Me.txtExpirationDate.Size = New System.Drawing.Size(113, 26)
+        Me.txtExpirationDate.Size = New System.Drawing.Size(188, 26)
         Me.txtExpirationDate.TabIndex = 6
-        '
-        'btnSave
-        '
-        Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSave.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.ForeColor = System.Drawing.Color.White
-        Me.btnSave.Image = Global.test_gui.My.Resources.Resources.resolve
-        Me.btnSave.Location = New System.Drawing.Point(263, 443)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(120, 38)
-        Me.btnSave.TabIndex = 7
-        Me.btnSave.Text = "   SAVE "
-        Me.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnSave.UseVisualStyleBackColor = False
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(26, 140)
+        Me.Label2.Location = New System.Drawing.Point(185, 61)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(73, 21)
         Me.Label2.TabIndex = 166
@@ -204,7 +178,7 @@ Partial Class frmInventory
         Me.Panel5.Location = New System.Drawing.Point(30, 87)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel5.Size = New System.Drawing.Size(83, 29)
+        Me.Panel5.Size = New System.Drawing.Size(122, 29)
         Me.Panel5.TabIndex = 1
         '
         'numDrawerNumber
@@ -212,7 +186,7 @@ Partial Class frmInventory
         Me.numDrawerNumber.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.numDrawerNumber.Location = New System.Drawing.Point(1, 1)
         Me.numDrawerNumber.Name = "numDrawerNumber"
-        Me.numDrawerNumber.Size = New System.Drawing.Size(82, 27)
+        Me.numDrawerNumber.Size = New System.Drawing.Size(121, 27)
         Me.numDrawerNumber.TabIndex = 176
         '
         'Label17
@@ -231,25 +205,89 @@ Partial Class frmInventory
         Me.numQuantity.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.numQuantity.Location = New System.Drawing.Point(1, 1)
         Me.numQuantity.Name = "numQuantity"
-        Me.numQuantity.Size = New System.Drawing.Size(82, 27)
+        Me.numQuantity.Size = New System.Drawing.Size(115, 27)
         Me.numQuantity.TabIndex = 176
         '
         'Panel13
         '
         Me.Panel13.BackColor = System.Drawing.Color.DarkGray
         Me.Panel13.Controls.Add(Me.numQuantity)
-        Me.Panel13.Location = New System.Drawing.Point(30, 166)
+        Me.Panel13.Location = New System.Drawing.Point(189, 87)
         Me.Panel13.Name = "Panel13"
         Me.Panel13.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel13.Size = New System.Drawing.Size(83, 29)
+        Me.Panel13.Size = New System.Drawing.Size(117, 29)
         Me.Panel13.TabIndex = 2
+        '
+        'btnCancel
+        '
+        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancel.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.ForeColor = System.Drawing.Color.White
+        Me.btnCancel.Image = CType(resources.GetObject("btnCancel.Image"), System.Drawing.Image)
+        Me.btnCancel.Location = New System.Drawing.Point(99, 321)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(120, 38)
+        Me.btnCancel.TabIndex = 6
+        Me.btnCancel.Text = "   CANCEL"
+        Me.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnCancel.UseVisualStyleBackColor = False
+        '
+        'btnSave
+        '
+        Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSave.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSave.ForeColor = System.Drawing.Color.White
+        Me.btnSave.Image = Global.test_gui.My.Resources.Resources.resolve
+        Me.btnSave.Location = New System.Drawing.Point(263, 321)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(120, 38)
+        Me.btnSave.TabIndex = 7
+        Me.btnSave.Text = "   SAVE "
+        Me.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnSave.UseVisualStyleBackColor = False
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
+        Me.Label1.Location = New System.Drawing.Point(261, 223)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(204, 21)
+        Me.Label1.TabIndex = 170
+        Me.Label1.Text = "Patient Personal Medication:"
+        '
+        'Panel1
+        '
+        Me.Panel1.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel1.Controls.Add(Me.ComboBox1)
+        Me.Panel1.Location = New System.Drawing.Point(263, 247)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel1.Size = New System.Drawing.Size(202, 28)
+        Me.Panel1.TabIndex = 169
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ComboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ComboBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(1, 1)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(200, 25)
+        Me.ComboBox1.TabIndex = 10
         '
         'frmInventory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(500, 504)
+        Me.ClientSize = New System.Drawing.Size(500, 400)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel13)
         Me.Controls.Add(Me.Label17)
         Me.Controls.Add(Me.Panel5)
@@ -273,6 +311,7 @@ Partial Class frmInventory
         CType(Me.numDrawerNumber, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.numQuantity, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel13.ResumeLayout(False)
+        Me.Panel1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -296,4 +335,7 @@ Partial Class frmInventory
     Friend WithEvents Label17 As Label
     Friend WithEvents numQuantity As NumericUpDown
     Friend WithEvents Panel13 As Panel
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents ComboBox1 As ComboBox
 End Class

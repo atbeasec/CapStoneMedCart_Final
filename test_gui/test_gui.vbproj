@@ -136,6 +136,12 @@
     <Compile Include="frmConfigureRooms.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmDischarge.Designer.vb">
+      <DependentUpon>frmDischarge.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDischarge.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmDiscrepancies.Designer.vb">
       <DependentUpon>frmDiscrepancies.vb</DependentUpon>
     </Compile>
@@ -296,6 +302,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmConfigureRooms.resx">
       <DependentUpon>frmConfigureRooms.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDischarge.resx">
+      <DependentUpon>frmDischarge.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDiscrepancies.resx">
       <DependentUpon>frmDiscrepancies.vb</DependentUpon>

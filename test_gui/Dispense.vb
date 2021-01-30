@@ -3,7 +3,7 @@
     Dim contactPanelsAddedCount As Integer = 0
     Dim currentContactPanelName As String = Nothing
 
-    Private Sub btnDispense_Click(sender As Object, e As EventArgs) Handles btnDispense.Click
+    Private Sub btnDispense_Click(sender As Object, e As EventArgs)
 
         MessageBox.Show("CAUTION: This drug interacts with (insert drug name here) that the patient is currently taking. Or the patient is allergic to this drug")
         frmWitnessSignOff.Show()
@@ -114,15 +114,15 @@
 
     End Sub
 
-    Private Sub pnlHeader_Paint(sender As Object, e As PaintEventArgs) Handles pnlHeader.Paint
+    Private Sub pnlHeader_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 
-    Private Sub flpAssignedMedications_Paint(sender As Object, e As PaintEventArgs) Handles flpAssignedMedications.Paint
+    Private Sub flpAssignedMedications_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs)
         Me.Close()
     End Sub
 
@@ -130,6 +130,14 @@
     Private Sub AllergiesExist()
 
         ' If allergies exist show the allergies panel and move the other panel over to specific location
+
+    End Sub
+
+    Private Sub lstboxAllergies_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstboxAllergies.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub Label13_Click(sender As Object, e As EventArgs) Handles Label13.Click
 
     End Sub
 End Class
