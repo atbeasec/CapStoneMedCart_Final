@@ -39,15 +39,15 @@ Partial Class frmInventory
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.numDrawerNumber = New System.Windows.Forms.NumericUpDown()
         Me.Label17 = New System.Windows.Forms.Label()
-        Me.Panel13 = New System.Windows.Forms.Panel()
         Me.numQuantity = New System.Windows.Forms.NumericUpDown()
+        Me.Panel13 = New System.Windows.Forms.Panel()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel14.SuspendLayout()
         Me.Panel5.SuspendLayout()
         CType(Me.numDrawerNumber, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel13.SuspendLayout()
         CType(Me.numQuantity, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel13.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnCancel
@@ -60,7 +60,7 @@ Partial Class frmInventory
         Me.btnCancel.Location = New System.Drawing.Point(111, 443)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(120, 38)
-        Me.btnCancel.TabIndex = 100
+        Me.btnCancel.TabIndex = 6
         Me.btnCancel.Text = "   CANCEL"
         Me.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnCancel.UseVisualStyleBackColor = False
@@ -117,7 +117,7 @@ Partial Class frmInventory
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel4.Size = New System.Drawing.Size(111, 28)
-        Me.Panel4.TabIndex = 93
+        Me.Panel4.TabIndex = 3
         '
         'cmbBin
         '
@@ -138,7 +138,7 @@ Partial Class frmInventory
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel3.Size = New System.Drawing.Size(437, 28)
-        Me.Panel3.TabIndex = 88
+        Me.Panel3.TabIndex = 4
         '
         'cmbMedicationName
         '
@@ -159,7 +159,7 @@ Partial Class frmInventory
         Me.Panel14.Name = "Panel14"
         Me.Panel14.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel14.Size = New System.Drawing.Size(115, 28)
-        Me.Panel14.TabIndex = 89
+        Me.Panel14.TabIndex = 5
         '
         'txtExpirationDate
         '
@@ -182,7 +182,7 @@ Partial Class frmInventory
         Me.btnSave.Location = New System.Drawing.Point(263, 443)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(120, 38)
-        Me.btnSave.TabIndex = 101
+        Me.btnSave.TabIndex = 7
         Me.btnSave.Text = "   SAVE "
         Me.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnSave.UseVisualStyleBackColor = False
@@ -205,7 +205,7 @@ Partial Class frmInventory
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel5.Size = New System.Drawing.Size(83, 29)
-        Me.Panel5.TabIndex = 167
+        Me.Panel5.TabIndex = 1
         '
         'numDrawerNumber
         '
@@ -226,6 +226,14 @@ Partial Class frmInventory
         Me.Label17.TabIndex = 168
         Me.Label17.Text = "Drawer Configuration"
         '
+        'numQuantity
+        '
+        Me.numQuantity.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.numQuantity.Location = New System.Drawing.Point(1, 1)
+        Me.numQuantity.Name = "numQuantity"
+        Me.numQuantity.Size = New System.Drawing.Size(82, 27)
+        Me.numQuantity.TabIndex = 176
+        '
         'Panel13
         '
         Me.Panel13.BackColor = System.Drawing.Color.DarkGray
@@ -234,15 +242,7 @@ Partial Class frmInventory
         Me.Panel13.Name = "Panel13"
         Me.Panel13.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel13.Size = New System.Drawing.Size(83, 29)
-        Me.Panel13.TabIndex = 177
-        '
-        'numQuantity
-        '
-        Me.numQuantity.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.numQuantity.Location = New System.Drawing.Point(1, 1)
-        Me.numQuantity.Name = "numQuantity"
-        Me.numQuantity.Size = New System.Drawing.Size(82, 27)
-        Me.numQuantity.TabIndex = 176
+        Me.Panel13.TabIndex = 2
         '
         'frmInventory
         '
@@ -271,8 +271,8 @@ Partial Class frmInventory
         Me.Panel14.PerformLayout()
         Me.Panel5.ResumeLayout(False)
         CType(Me.numDrawerNumber, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel13.ResumeLayout(False)
         CType(Me.numQuantity, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel13.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -294,6 +294,6 @@ Partial Class frmInventory
     Friend WithEvents Panel5 As Panel
     Friend WithEvents numDrawerNumber As NumericUpDown
     Friend WithEvents Label17 As Label
-    Friend WithEvents Panel13 As Panel
     Friend WithEvents numQuantity As NumericUpDown
+    Friend WithEvents Panel13 As Panel
 End Class

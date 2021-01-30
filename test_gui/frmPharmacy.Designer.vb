@@ -39,13 +39,13 @@ Partial Class frmPharmacy
         Me.ComboBox7 = New System.Windows.Forms.ComboBox()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.numQuantity = New System.Windows.Forms.NumericUpDown()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.numQuantity = New System.Windows.Forms.NumericUpDown()
         Me.Panel4.SuspendLayout()
-        Me.Panel5.SuspendLayout()
         CType(Me.numQuantity, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel5.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label10
@@ -66,7 +66,7 @@ Partial Class frmPharmacy
         Me.ComboBox5.Location = New System.Drawing.Point(342, 154)
         Me.ComboBox5.Name = "ComboBox5"
         Me.ComboBox5.Size = New System.Drawing.Size(243, 29)
-        Me.ComboBox5.TabIndex = 174
+        Me.ComboBox5.TabIndex = 4
         '
         'ComboBox4
         '
@@ -76,7 +76,7 @@ Partial Class frmPharmacy
         Me.ComboBox4.Location = New System.Drawing.Point(40, 305)
         Me.ComboBox4.Name = "ComboBox4"
         Me.ComboBox4.Size = New System.Drawing.Size(240, 29)
-        Me.ComboBox4.TabIndex = 173
+        Me.ComboBox4.TabIndex = 7
         '
         'Label11
         '
@@ -96,7 +96,7 @@ Partial Class frmPharmacy
         Me.ComboBox3.Location = New System.Drawing.Point(38, 79)
         Me.ComboBox3.Name = "ComboBox3"
         Me.ComboBox3.Size = New System.Drawing.Size(242, 29)
-        Me.ComboBox3.TabIndex = 171
+        Me.ComboBox3.TabIndex = 1
         '
         'flpNotes
         '
@@ -107,7 +107,8 @@ Partial Class frmPharmacy
         Me.flpNotes.Location = New System.Drawing.Point(342, 304)
         Me.flpNotes.Name = "flpNotes"
         Me.flpNotes.Size = New System.Drawing.Size(243, 92)
-        Me.flpNotes.TabIndex = 170
+        Me.flpNotes.TabIndex = 8
+        Me.flpNotes.TabStop = True
         '
         'Label12
         '
@@ -127,7 +128,7 @@ Partial Class frmPharmacy
         Me.ComboBox6.Location = New System.Drawing.Point(37, 155)
         Me.ComboBox6.Name = "ComboBox6"
         Me.ComboBox6.Size = New System.Drawing.Size(243, 29)
-        Me.ComboBox6.TabIndex = 168
+        Me.ComboBox6.TabIndex = 3
         '
         'Label13
         '
@@ -187,7 +188,7 @@ Partial Class frmPharmacy
         Me.ComboBox7.Location = New System.Drawing.Point(40, 234)
         Me.ComboBox7.Name = "ComboBox7"
         Me.ComboBox7.Size = New System.Drawing.Size(240, 29)
-        Me.ComboBox7.TabIndex = 162
+        Me.ComboBox7.TabIndex = 5
         '
         'Label18
         '
@@ -208,7 +209,15 @@ Partial Class frmPharmacy
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel4.Size = New System.Drawing.Size(58, 29)
-        Me.Panel4.TabIndex = 161
+        Me.Panel4.TabIndex = 6
+        '
+        'numQuantity
+        '
+        Me.numQuantity.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.numQuantity.Location = New System.Drawing.Point(1, 1)
+        Me.numQuantity.Name = "numQuantity"
+        Me.numQuantity.Size = New System.Drawing.Size(56, 27)
+        Me.numQuantity.TabIndex = 176
         '
         'Panel5
         '
@@ -218,7 +227,7 @@ Partial Class frmPharmacy
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel5.Size = New System.Drawing.Size(119, 28)
-        Me.Panel5.TabIndex = 160
+        Me.Panel5.TabIndex = 2
         '
         'TextBox4
         '
@@ -241,18 +250,10 @@ Partial Class frmPharmacy
         Me.Button1.Location = New System.Drawing.Point(210, 416)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(201, 38)
-        Me.Button1.TabIndex = 159
+        Me.Button1.TabIndex = 9
         Me.Button1.Text = "   Order Prescription"
         Me.Button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.Button1.UseVisualStyleBackColor = False
-        '
-        'numQuantity
-        '
-        Me.numQuantity.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.numQuantity.Location = New System.Drawing.Point(1, 1)
-        Me.numQuantity.Name = "numQuantity"
-        Me.numQuantity.Size = New System.Drawing.Size(56, 27)
-        Me.numQuantity.TabIndex = 176
         '
         'frmPharmacy
         '
@@ -282,9 +283,9 @@ Partial Class frmPharmacy
         Me.Tag = "6"
         Me.Text = "frmPharmacy"
         Me.Panel4.ResumeLayout(False)
+        CType(Me.numQuantity, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
-        CType(Me.numQuantity, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -29,6 +29,8 @@ Partial Class frmMain
         Me.btnEditRooms = New System.Windows.Forms.Button()
         Me.btnDischargePatient = New System.Windows.Forms.Button()
         Me.btnUsers = New System.Windows.Forms.Button()
+        Me.pnlLogo = New System.Windows.Forms.Panel()
+        Me.pnlDockLocation = New System.Windows.Forms.Panel()
         Me.btnSettings = New System.Windows.Forms.Button()
         Me.btnPharmacy = New System.Windows.Forms.Button()
         Me.btnLogout = New System.Windows.Forms.Button()
@@ -37,8 +39,6 @@ Partial Class frmMain
         Me.btnReport = New System.Windows.Forms.Button()
         Me.btnInventory = New System.Windows.Forms.Button()
         Me.btnPatientRecords = New System.Windows.Forms.Button()
-        Me.pnlLogo = New System.Windows.Forms.Panel()
-        Me.pnlDockLocation = New System.Windows.Forms.Panel()
         Me.pnlSideMenu.SuspendLayout()
         Me.pnlSubMenuSettings.SuspendLayout()
         Me.SuspendLayout()
@@ -135,7 +135,7 @@ Partial Class frmMain
         Me.btnDischargePatient.Size = New System.Drawing.Size(227, 42)
         Me.btnDischargePatient.TabIndex = 26
         Me.btnDischargePatient.Tag = "9"
-        Me.btnDischargePatient.Text = "Discharge Patient"
+        Me.btnDischargePatient.Text = "Discharge / Admit"
         Me.btnDischargePatient.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnDischargePatient.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnDischargePatient.UseVisualStyleBackColor = False
@@ -160,6 +160,25 @@ Partial Class frmMain
         Me.btnUsers.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnUsers.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnUsers.UseVisualStyleBackColor = False
+        '
+        'pnlLogo
+        '
+        Me.pnlLogo.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.pnlLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.pnlLogo.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnlLogo.Location = New System.Drawing.Point(0, 0)
+        Me.pnlLogo.Margin = New System.Windows.Forms.Padding(2)
+        Me.pnlLogo.Name = "pnlLogo"
+        Me.pnlLogo.Size = New System.Drawing.Size(227, 72)
+        Me.pnlLogo.TabIndex = 8
+        '
+        'pnlDockLocation
+        '
+        Me.pnlDockLocation.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlDockLocation.Location = New System.Drawing.Point(227, 0)
+        Me.pnlDockLocation.Name = "pnlDockLocation"
+        Me.pnlDockLocation.Size = New System.Drawing.Size(998, 692)
+        Me.pnlDockLocation.TabIndex = 1
         '
         'btnSettings
         '
@@ -330,25 +349,6 @@ Partial Class frmMain
         Me.btnPatientRecords.Text = "   Patient Records"
         Me.btnPatientRecords.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnPatientRecords.UseVisualStyleBackColor = False
-        '
-        'pnlLogo
-        '
-        Me.pnlLogo.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.pnlLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.pnlLogo.Dock = System.Windows.Forms.DockStyle.Top
-        Me.pnlLogo.Location = New System.Drawing.Point(0, 0)
-        Me.pnlLogo.Margin = New System.Windows.Forms.Padding(2)
-        Me.pnlLogo.Name = "pnlLogo"
-        Me.pnlLogo.Size = New System.Drawing.Size(227, 72)
-        Me.pnlLogo.TabIndex = 8
-        '
-        'pnlDockLocation
-        '
-        Me.pnlDockLocation.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlDockLocation.Location = New System.Drawing.Point(227, 0)
-        Me.pnlDockLocation.Name = "pnlDockLocation"
-        Me.pnlDockLocation.Size = New System.Drawing.Size(998, 692)
-        Me.pnlDockLocation.TabIndex = 1
         '
         'frmMain
         '

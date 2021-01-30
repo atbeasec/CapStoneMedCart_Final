@@ -120,11 +120,11 @@
                 frmCurrentChildForm = frmConfiguration
                 OpenChildForm(frmConfiguration)
             Case 10
-                frmCurrentChildForm = frmConfiguration
-                OpenChildForm(frmConfiguration)
+                frmCurrentChildForm = frmConfigureRooms
+                OpenChildForm(frmConfigureRooms)
             Case 11
-                frmCurrentChildForm = frmConfiguration
-                OpenChildForm(frmConfiguration)
+                frmCurrentChildForm = frmSerialPort
+                OpenChildForm(frmSerialPort)
             Case 12
                 'call method here to ask if we are sure that we really want to log out of the system
                 Me.Hide()

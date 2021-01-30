@@ -130,6 +130,12 @@
     <Compile Include="frmConfigureInventory.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmConfigureRooms.Designer.vb">
+      <DependentUpon>frmConfigureRooms.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmConfigureRooms.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmDiscrepancies.Designer.vb">
       <DependentUpon>frmDiscrepancies.vb</DependentUpon>
     </Compile>
@@ -214,6 +220,12 @@
     <Compile Include="frmResolve.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmSerialPort.Designer.vb">
+      <DependentUpon>frmSerialPort.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSerialPort.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmUpdatePatient.Designer.vb">
       <DependentUpon>frmUpdatePatient.vb</DependentUpon>
     </Compile>
@@ -282,6 +294,9 @@
     <EmbeddedResource Include="frmConfigureInventory.resx">
       <DependentUpon>frmConfigureInventory.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmConfigureRooms.resx">
+      <DependentUpon>frmConfigureRooms.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmDiscrepancies.resx">
       <DependentUpon>frmDiscrepancies.vb</DependentUpon>
     </EmbeddedResource>
@@ -323,6 +338,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmResolve.resx">
       <DependentUpon>frmResolve.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSerialPort.resx">
+      <DependentUpon>frmSerialPort.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmUpdatePatient.resx">
       <DependentUpon>frmUpdatePatient.vb</DependentUpon>

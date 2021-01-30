@@ -492,13 +492,13 @@
         Dim lblID7 As New Label
 
         ' anywhere we have quotes except for the label names, we can call our Database and get method
-        CreateIDLabel(pnlMainPanel, lblID, "lblGenericName", 10, 20, genericName, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID2, "lblBrandName", 190, 20, brandName, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID3, "lblQuantity", 365, 20, quantity, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID4, "lblMeasure", 445, 20, measure, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID5, "lblFrequency", 540, 20, frequency, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID6, "lblMethod", 715, 20, method, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID7, "lblDispenseNotes", 825, 20, specialNotes, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID, "lblMedicationName", 5, 20, genericName, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID2, "lblDosage", 228, 20, measure, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID3, "lblMethod", 339, 20, quantity, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID4, "lblQuantity", 449, 20, quantity, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID5, "lblDate", 549, 20, frequency, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID6, "lblPrescribedBy", 626, 20, method, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID7, "lblSchedule", 729, 20, frequency, getPanelCount(flpPannel))
 
 
         'Add panel to flow layout panel
