@@ -7,6 +7,7 @@
     Private Sub frmConfigureInventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         UpdateButtonsOnScreen()
+        AddHandlerToDrawerButtons()
         PopulateInventory()
 
     End Sub
@@ -254,6 +255,50 @@
         Next
     End Sub
 
+    Private Sub AddHandlerToDrawerButtons()
+
+        Dim btnSingle As Button
+
+        For Each ctlControl In pnlLayoutButtons.Controls
+
+            If TypeName(ctlControl) = "Button" Then
+
+                btnSingle = CType(ctlControl, Button)
+
+                AddHandler btnSingle.Click, AddressOf HighlightSelectedDrawer
+
+            End If
+        Next
+
+
+    End Sub
+
+
+    Private Sub HighlightSelectedDrawer(sender As Object, e As EventArgs)
+
+        Dim btn As Control
+
+        For Each btn In pnlLayoutButtons.Controls
+
+            If sender.Name = btn.Name Then
+
+                If sender.backColor = Color.Gainsboro Then
+
+                    sender.ForeColor = Color.White
+                    sender.backColor = Color.FromArgb(71, 103, 216)
+
+                End If
+            Else
+
+                btn.BackColor = Color.Gainsboro
+                btn.ForeColor = Color.Black
+
+            End If
+
+        Next
+
+    End Sub
+
     Private Sub UpdateScreenWithMedicationsInSelectedDrawer(sender As Object, e As EventArgs)
 
 
@@ -279,6 +324,5 @@
 
 
     End Sub
-
 
 End Class
