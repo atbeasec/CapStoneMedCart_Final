@@ -303,7 +303,7 @@ Partial Class frmMain
         Me.btnReport.Size = New System.Drawing.Size(227, 50)
         Me.btnReport.TabIndex = 10
         Me.btnReport.Tag = "3"
-        Me.btnReport.Text = "   Dispense History"
+        Me.btnReport.Text = "   Reports"
         Me.btnReport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnReport.UseVisualStyleBackColor = False
         '

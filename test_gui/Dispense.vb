@@ -140,4 +140,17 @@
     Private Sub Label13_Click(sender As Object, e As EventArgs) Handles Label13.Click
 
     End Sub
+
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+
+        Dim strAnswer As MsgBoxResult = MsgBox(" Are you sure you want to close this form? ", MsgBoxStyle.YesNo, "Confirm ")
+
+
+        If strAnswer = MsgBoxResult.Yes Then
+            Me.Close()
+        Else
+
+        End If
+
+    End Sub
 End Class

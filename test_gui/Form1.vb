@@ -117,8 +117,8 @@
                 OpenChildForm(frmConfiguration)
 
             Case 9
-                frmCurrentChildForm = frmConfiguration
-                OpenChildForm(frmConfiguration)
+                frmCurrentChildForm = frmDischarge
+                OpenChildForm(frmDischarge)
             Case 10
                 frmCurrentChildForm = frmConfigureRooms
                 OpenChildForm(frmConfigureRooms)
