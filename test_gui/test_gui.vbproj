@@ -106,6 +106,12 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmAdminSettings.Designer.vb">
+      <DependentUpon>frmAdminSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAdminSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmAlert.Designer.vb">
       <DependentUpon>frmAlert.vb</DependentUpon>
     </Compile>
@@ -233,6 +239,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GraphicalUserInterfaceReusableMethods.vb" />
+    <Compile Include="Login.vb" />
     <Compile Include="Print.vb" />
     <Compile Include="Reports.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -275,6 +282,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAdminSettings.resx">
+      <DependentUpon>frmAdminSettings.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAlert.resx">
       <DependentUpon>frmAlert.vb</DependentUpon>
