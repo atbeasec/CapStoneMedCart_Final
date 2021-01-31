@@ -237,7 +237,7 @@ Partial Class frmInventory
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel1.Size = New System.Drawing.Size(202, 28)
-        Me.Panel1.TabIndex = 169
+        Me.Panel1.TabIndex = 6
         '
         'ComboBox1
         '
@@ -260,7 +260,7 @@ Partial Class frmInventory
         Me.btnCancel.Location = New System.Drawing.Point(99, 321)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(120, 38)
-        Me.btnCancel.TabIndex = 6
+        Me.btnCancel.TabIndex = 7
         Me.btnCancel.Text = "   CANCEL"
         Me.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnCancel.UseVisualStyleBackColor = False
@@ -275,7 +275,7 @@ Partial Class frmInventory
         Me.btnSave.Location = New System.Drawing.Point(263, 321)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(120, 38)
-        Me.btnSave.TabIndex = 7
+        Me.btnSave.TabIndex = 8
         Me.btnSave.Text = "   SAVE "
         Me.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnSave.UseVisualStyleBackColor = False

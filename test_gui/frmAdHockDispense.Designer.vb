@@ -26,7 +26,6 @@ Partial Class frmAdHockDispense
         Me.numQuantity = New System.Windows.Forms.NumericUpDown()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.btnDispense = New System.Windows.Forms.Button()
         Me.cmbMethod = New System.Windows.Forms.ComboBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -43,6 +42,7 @@ Partial Class frmAdHockDispense
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.btnDispense = New System.Windows.Forms.Button()
         CType(Me.numQuantity, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel14.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -54,7 +54,7 @@ Partial Class frmAdHockDispense
         Me.numQuantity.Location = New System.Drawing.Point(337, 137)
         Me.numQuantity.Name = "numQuantity"
         Me.numQuantity.Size = New System.Drawing.Size(69, 29)
-        Me.numQuantity.TabIndex = 200
+        Me.numQuantity.TabIndex = 4
         '
         'Label13
         '
@@ -76,21 +76,6 @@ Partial Class frmAdHockDispense
         Me.Label5.TabIndex = 209
         Me.Label5.Text = "Quantity:"
         '
-        'btnDispense
-        '
-        Me.btnDispense.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnDispense.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDispense.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDispense.ForeColor = System.Drawing.Color.White
-        Me.btnDispense.Image = CType(resources.GetObject("btnDispense.Image"), System.Drawing.Image)
-        Me.btnDispense.Location = New System.Drawing.Point(185, 382)
-        Me.btnDispense.Name = "btnDispense"
-        Me.btnDispense.Size = New System.Drawing.Size(229, 38)
-        Me.btnDispense.TabIndex = 204
-        Me.btnDispense.Text = "      Dispense Medication"
-        Me.btnDispense.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnDispense.UseVisualStyleBackColor = False
-        '
         'cmbMethod
         '
         Me.cmbMethod.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -99,7 +84,7 @@ Partial Class frmAdHockDispense
         Me.cmbMethod.Location = New System.Drawing.Point(337, 64)
         Me.cmbMethod.Name = "cmbMethod"
         Me.cmbMethod.Size = New System.Drawing.Size(243, 29)
-        Me.cmbMethod.TabIndex = 199
+        Me.cmbMethod.TabIndex = 2
         '
         'Label15
         '
@@ -159,7 +144,7 @@ Partial Class frmAdHockDispense
         Me.cmbDosage.Location = New System.Drawing.Point(35, 140)
         Me.cmbDosage.Name = "cmbDosage"
         Me.cmbDosage.Size = New System.Drawing.Size(243, 29)
-        Me.cmbDosage.TabIndex = 201
+        Me.cmbDosage.TabIndex = 3
         '
         'lstboxAllergies
         '
@@ -181,7 +166,7 @@ Partial Class frmAdHockDispense
         Me.ComboBox1.Location = New System.Drawing.Point(35, 216)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(243, 29)
-        Me.ComboBox1.TabIndex = 211
+        Me.ComboBox1.TabIndex = 5
         '
         'Label1
         '
@@ -201,7 +186,7 @@ Partial Class frmAdHockDispense
         Me.Panel14.Name = "Panel14"
         Me.Panel14.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel14.Size = New System.Drawing.Size(243, 24)
-        Me.Panel14.TabIndex = 215
+        Me.Panel14.TabIndex = 6
         '
         'txtMRN
         '
@@ -234,7 +219,7 @@ Partial Class frmAdHockDispense
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel2.Size = New System.Drawing.Size(243, 24)
-        Me.Panel2.TabIndex = 218
+        Me.Panel2.TabIndex = 6
         '
         'TextBox1
         '
@@ -258,6 +243,21 @@ Partial Class frmAdHockDispense
         Me.Label2.Size = New System.Drawing.Size(100, 21)
         Me.Label2.TabIndex = 217
         Me.Label2.Text = "Patient MRN:"
+        '
+        'btnDispense
+        '
+        Me.btnDispense.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnDispense.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDispense.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDispense.ForeColor = System.Drawing.Color.White
+        Me.btnDispense.Image = CType(resources.GetObject("btnDispense.Image"), System.Drawing.Image)
+        Me.btnDispense.Location = New System.Drawing.Point(185, 382)
+        Me.btnDispense.Name = "btnDispense"
+        Me.btnDispense.Size = New System.Drawing.Size(229, 38)
+        Me.btnDispense.TabIndex = 7
+        Me.btnDispense.Text = "      Dispense Medication"
+        Me.btnDispense.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnDispense.UseVisualStyleBackColor = False
         '
         'frmAdHockDispense
         '
