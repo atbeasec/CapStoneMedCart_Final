@@ -9,7 +9,7 @@
 
     Private Sub frmLoginScan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        btnLogin.Visible = False
+        btnLogin.Visible = True
         lblBadge.Visible = False
 
 
@@ -19,5 +19,17 @@
         lblBadge.Visible = False
         btnLogin.Visible = False
         lblForgotID.Visible = True
+    End Sub
+
+    Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
+        Dim Barcode As Integer = TextBox1.Text
+        ScanLogIn(Barcode)
+    End Sub
+    Private Sub Only_Numbers_Barcode(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles TextBox1.KeyPress
+        'stop the user from entering anything but numbers into the Text boxes
+        If (Not Char.IsControl(e.KeyChar) _
+             AndAlso (Not Char.IsDigit(e.KeyChar))) Then
+            e.Handled = True
+        End If
     End Sub
 End Class

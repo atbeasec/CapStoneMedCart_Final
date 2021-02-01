@@ -148,6 +148,9 @@
                 'call method here to ask if we are sure that we really want to log out of the system
                 Me.Hide()
                 frmLoginScan.Show()
+            Case 9
+                frmCurrentChildForm = frmAdminSettings
+                OpenChildForm(frmAdminSettings)
         End Select
 
 
