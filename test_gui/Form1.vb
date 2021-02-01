@@ -2,9 +2,11 @@
 
     Dim frmCurrentChildForm As Form
     Dim frmPreviousChildForm As Form
-    Dim intContactPanelsAddedCount As Integer = 0
+    '  Dim intContactPanelsAddedCount As Integer = 0
 
-    Private Sub btnPatientRecords_Click(sender As Object, e As EventArgs) Handles btnPatientRecords.Click, btnReport.Click, btnInventory.Click, btnDescrepancies.Click, btnMaintenance.Click, btnLogout.Click, btnPharmacy.Click, btnConfiguration.Click
+
+    Private Sub btnPatientRecords_Click(sender As Object, e As EventArgs) Handles btnPatientRecords.Click, btnInventory.Click, btnAdhockDispense.Click, btnEndOfShiftCount.Click, btnConfigureInventory.Click, btnReport.Click, btnDescrepancies.Click, btnMaintenance.Click, btnPharmacy.Click, btnSettings.Click, btnUsers.Click, btnDischargePatient.Click, btnEditRooms.Click, btnSerialPort.Click, btnWaste.Click
+
         ' ensure that the colors of the buttons change accordingly. We need to know which button is clicked,
         ' and then change the backgroud tot he correct blue color. When this happens we need to change the other buttons
         ' color back to the default RGB blue of 0,0,64
@@ -45,6 +47,7 @@
             End If
 
         End If
+
         'do nothing the correct form is open
         'Else
         '
@@ -56,11 +59,15 @@
 
         frmPreviousChildForm = frmChild
         'frmChild.TopMost = False
+
         frmChild.TopLevel = False
+
         ' removes boarder on form which is where someone can close the form. We will close it on button clicks instead
         frmChild.FormBorderStyle = FormBorderStyle.None
+
         'add form to panel
         Me.pnlDockLocation.Controls.Add(frmChild)
+
         'make form visible
         frmChild.Show()
 
@@ -78,26 +85,66 @@
             Case 1
                 frmCurrentChildForm = frmPatientRecords
                 OpenChildForm(frmPatientRecords)
+                HideSettingsSubMenu()
+                HideInventorySubMenu()
             Case 2
+                ' this is the selection of form inventory
+
+                HideSettingsSubMenu()
+            Case 3
+                frmCurrentChildForm = frmAdHockDispense
+                OpenChildForm(frmAdHockDispense)
+
+            Case 4
+                frmCurrentChildForm = frmEndOfShift
+                OpenChildForm(frmEndOfShift)
+            Case 5
                 frmCurrentChildForm = frmInventory
                 OpenChildForm(frmConfigureInventory)
-            Case 3
+            Case 6
+                frmCurrentChildForm = Waste
+                OpenChildForm(Waste)
+            Case 7
                 frmCurrentChildForm = frmReport
                 OpenChildForm(frmReport)
-            Case 4
+                HideSettingsSubMenu()
+                HideInventorySubMenu()
+            Case 8
                 frmCurrentChildForm = frmDiscrepancies
                 OpenChildForm(frmDiscrepancies)
-            Case 5
+                HideSettingsSubMenu()
+                HideInventorySubMenu()
+            Case 9
                 frmCurrentChildForm = frmMaintenance
                 OpenChildForm(frmMaintenance)
-            Case 6
+                HideSettingsSubMenu()
+                HideInventorySubMenu()
+            Case 10
                 frmCurrentChildForm = frmPharmacy
                 OpenChildForm(frmPharmacy)
-            Case 7
+                HideSettingsSubMenu()
+                HideInventorySubMenu()
+            Case 11
+
+                'nothing will happen here because we have a submenu that needs to be displayed to show more buttons
+                'more buttons will be shown and we will take the tag num of those to determine which form to dock
+                ' frmCurrentChildForm = frmConfiguration
+                ' OpenChildForm(frmConfiguration)
+                HideInventorySubMenu()
+            Case 12
                 frmCurrentChildForm = frmConfiguration
                 OpenChildForm(frmConfiguration)
-               ' frmWitness.Show()
-            Case 8
+
+            Case 13
+                frmCurrentChildForm = frmDischarge
+                OpenChildForm(frmDischarge)
+            Case 14
+                frmCurrentChildForm = frmConfigureRooms
+                OpenChildForm(frmConfigureRooms)
+            Case 15
+                frmCurrentChildForm = frmSerialPort
+                OpenChildForm(frmSerialPort)
+            Case 16
                 'call method here to ask if we are sure that we really want to log out of the system
                 Me.Hide()
                 frmLoginScan.Show()
@@ -112,15 +159,191 @@
     End Sub
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         'Runs the database creation module to determine if the database was created
         DatabaseCreation.Main()
+        'CheckUserPermissions()
+
+        'set submenu to be invisible on form load
+        pnlSubMenuSettings.Visible = False
+        pnlSubMenuInventory.Visible = False
+
+        AssignHandlersToSubMenuItems()
+
     End Sub
 
-    Private Sub btnConfiguration_Click(sender As Object, e As EventArgs) Handles btnConfiguration.Click
+    Private Sub SetBackgroundColorOfButton(sender As Object, e As EventArgs)
+
+
+
+
+    End Sub
+
+
+
+    Private Sub btnSettings_Click(sender As Object, e As EventArgs) Handles btnSettings.Click
+
+        ShowOrHideSettingsSubMenu()
+
+    End Sub
+
+    Private Sub btnInventory_Click(sender As Object, e As EventArgs) Handles btnInventory.Click
+
+        ShowOrHideInventorySubMenu()
 
     End Sub
 
     Private Sub pnlDockLocation_Paint(sender As Object, e As PaintEventArgs) Handles pnlDockLocation.Paint
 
     End Sub
+
+
+    Private Sub ShowOrHideSettingsSubMenu()
+
+        If pnlSubMenuSettings.Visible = False Then
+
+            pnlSubMenuSettings.Visible = True
+        Else
+            pnlSubMenuSettings.Visible = False
+            ResetButtonColorsAfterClosingTab(pnlSubMenuSettings)
+        End If
+
+    End Sub
+    Private Sub HideSettingsSubMenu()
+
+        If pnlSubMenuSettings.Visible = True Then
+            pnlSubMenuSettings.Visible = False
+            ResetButtonColorsAfterClosingTab(pnlSubMenuSettings)
+        End If
+
+
+    End Sub
+
+    Private Sub HideInventorySubMenu()
+
+        If pnlSubMenuInventory.Visible = True Then
+            pnlSubMenuInventory.Visible = False
+            ResetButtonColorsAfterClosingTab(pnlSubMenuInventory)
+        End If
+
+    End Sub
+
+    Private Sub ShowOrHideInventorySubMenu()
+
+        If pnlSubMenuInventory.Visible = False Then
+
+            pnlSubMenuInventory.Visible = True
+        Else
+            pnlSubMenuInventory.Visible = False
+            ResetButtonColorsAfterClosingTab(pnlSubMenuInventory)
+
+        End If
+
+    End Sub
+    Private Sub CheckUserPermissions()
+
+        ' do database query to check user permission level
+        ' select from case statement to determine which level the user is
+        ' have 3 methods, one for each permission level, iterating over the controls that are needed to be
+        ' removed from the control based on what the user should see
+
+        'need to remove these for everyone on form load
+
+    End Sub
+
+    Private Sub AssignHandlersToSubMenuItems()
+
+        Dim ctl As Control
+        Dim btn As Button
+
+
+        For Each ctl In pnlSubMenuInventory.Controls
+            If TypeName(ctl) = "Button" Then
+                btn = CType(ctl, Button)
+
+                AddHandler btn.Click, AddressOf SubMenu_Click
+
+            End If
+        Next
+
+        For Each ctl In pnlSubMenuSettings.Controls
+            If TypeName(ctl) = "Button" Then
+                btn = CType(ctl, Button)
+
+                AddHandler btn.Click, AddressOf SubMenu_Click
+
+            End If
+        Next
+        'btnAdhockDispense.Click, btnConfigureInventory.Click, btnEndOfShiftCount.Click, btnUsers.Click, btnDischargePatient.Click, btnEditRooms.Click, btnSerialPort.Click
+
+
+    End Sub
+
+
+    Private Sub SubMenu_Click(sender As Object, e As EventArgs)
+
+        'changes the background color when the mouse clicks the submenu buttons
+
+        Dim ctlControl As Control
+        Dim btn As Button
+
+        For Each ctlControl In pnlSubMenuInventory.Controls
+
+            If TypeName(ctlControl) = "Button" Then
+
+                btn = CType(ctlControl, Button)
+
+                If sender.Name = ctlControl.Name Then
+
+                    If sender.backColor = Color.FromArgb(60, 80, 150) Then
+                        sender.ForeColor = Color.Black
+                        sender.BackColor = Color.White
+                        sender.FlatAppearance.BorderSize = 0
+                    End If
+                Else
+                    btn.BackColor = Color.FromArgb(60, 80, 150)
+                    btn.ForeColor = Color.White
+                    btn.FlatAppearance.BorderSize = 1
+                End If
+
+            End If
+
+        Next
+
+        For Each ctlControl In pnlSubMenuSettings.Controls
+
+            If TypeName(ctlControl) = "Button" Then
+
+                btn = CType(ctlControl, Button)
+
+                If sender.Name = ctlControl.Name Then
+
+                    If sender.backColor = Color.FromArgb(60, 80, 150) Then
+                        sender.ForeColor = Color.Black
+                        sender.BackColor = Color.White
+                        sender.FlatAppearance.BorderSize = 0
+                    End If
+                Else
+                    btn.BackColor = Color.FromArgb(60, 80, 150)
+                    btn.ForeColor = Color.White
+                    btn.FlatAppearance.BorderSize = 1
+                End If
+
+            End If
+        Next
+    End Sub
+
+    Private Sub ResetButtonColorsAfterClosingTab(pnl As Panel)
+
+        Dim ctlControl As Control
+
+        For Each ctlControl In pnl.Controls
+
+            ctlControl.BackColor = Color.FromArgb(60, 80, 150)
+            ctlControl.ForeColor = Color.White
+
+        Next
+
+    End Sub
+
 End Class

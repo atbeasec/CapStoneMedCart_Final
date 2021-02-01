@@ -53,8 +53,8 @@
 '/* MODIFICATION HISTORY:												*/
 '/*																		*/
 '/*  WHO		WHEN		WHAT										*/
-'/*  BRH        1/23/2021   Initial creation of the code-------------	*/
-'/*  BRH  01/27/21  Updated database path to save on computer			*/
+'/*  BRH        01/23/21   Initial creation of the code-------------	*/
+'/*  BRH		01/27/21  Updated database path to save on computer		*/
 '/********************************************************************	*/
 
 'Imports the libraries necessary to connect and create SQLite databases
@@ -125,6 +125,7 @@ Module DatabaseCreation
 	'/*  WHO   WHEN     WHAT											*/
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  BRH  01/23/21  Initial creation of the code					*/
+	'/*  BRH  01/28/21  Add the CreateSettingsTable method				*/
 	'/*******************************************************************/
 
 	Sub Main()
@@ -154,6 +155,7 @@ Module DatabaseCreation
 			CreateAdHocOrderTable()
 			CreatePatientMedicationPrescriptionTable()
 			CreatePersonalPatientDrawerMedicationTable()
+			CreateSettingsTable()
 
 			DBConn.Close()
 			MessageBox.Show("All tables were created")
@@ -336,6 +338,7 @@ Module DatabaseCreation
 	'/*  WHO   WHEN     WHAT											*/
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  BRH  01/23/21  Initial creation of the code					*/
+	'/*  BRH  01/28/21  Updated fields in the database					*/
 	'/*******************************************************************/
 	Public Sub CreatePatientTable()
 		strCreateTable = "CREATE TABLE 'Patient' (
@@ -349,12 +352,14 @@ Module DatabaseCreation
 	                    'Height'	TEXT NOT NULL,
 	                    'Weight'	TEXT NOT NULL,
 	                    'Address'	TEXT NOT NULL,
+						'City'	TEXT NOT NULL,
+						'State'	TEXT NOT NULL,
+						'Zip_Code'	TEXT NOT NULL,
 	                    'Phone_Number'	TEXT NOT NULL,
 	                    'Email_address'	TEXT,
 	                    'Primary_Physician_ID'	INTEGER NOT NULL,
 	                    FOREIGN KEY(" & "Primary_Physician_ID" & ") REFERENCES " & "Physician" & "(" & "Physician_ID" & "),
 	                    PRIMARY KEY(" & "Patient_ID" & "));"
-
 		ExecuteQuery("Patient")
 	End Sub
 
@@ -392,6 +397,7 @@ Module DatabaseCreation
 	'/*  WHO   WHEN     WHAT											*/
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  BRH  01/23/21  Initial creation of the code					*/
+	'/*  BRH  01/28/21  Updated fields in the database					*/
 	'/*******************************************************************/
 	Public Sub CreatePhysicianTable()
 		strCreateTable = "CREATE TABLE 'Physician' (
@@ -403,6 +409,9 @@ Module DatabaseCreation
 	                    'Physician_Phone_Number'	TEXT NOT NULL,
 	                    'Physician_Fax_Number'	TEXT,
 	                    'Physician_Address'	TEXT NOT NULL,
+						'Physician_City'	TEXT NOT NULL,
+						'Physician_State'	TEXT NOT NULL,
+						'Physician_Zip_Code'	TEXT NOT NULL,
 	                    PRIMARY KEY(" & "Physician_ID" & "));"
 
 		ExecuteQuery("Physician")
@@ -491,12 +500,13 @@ Module DatabaseCreation
 	Public Sub CreateUserTable()
 		strCreateTable = "CREATE TABLE 'User' (
 	                    'User_ID'	INTEGER NOT NULL,
+						'User_First_Name'	TEXT NOT NULL,
+						'User_Last_Name'	TEXT NOT NULL,
 	                    'Password'	TEXT NOT NULL,
 	                    'Barcode'	TEXT NOT NULL,
 	                    'Admin_Flag'	TEXT,
 	                    'Supervisor_Flag'	TEXT,
 	                    PRIMARY KEY(" & "User_ID" & "));"
-
 		ExecuteQuery("User")
 	End Sub
 
@@ -1241,7 +1251,6 @@ Module DatabaseCreation
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  BRH  01/23/21  Initial creation of the code					*/
 	'/*******************************************************************/
-	'/*********************************************************************/
 	Public Sub CreatePersonalPatientDrawerMedicationTable()
 		strCreateTable = "CREATE TABLE 'Personal_Patient_DrawerMedication' (
 						'PersonalMedication_ID'	INTEGER NOT NULL,
@@ -1254,6 +1263,54 @@ Module DatabaseCreation
 						FOREIGN KEY(" & "Patient_TUID" & ") REFERENCES " & "Patient" & "(" & "Patient_ID" & "));"
 
 		ExecuteQuery("Personal_Patient_DrawerMedication")
+	End Sub
+
+	'/*******************************************************************/
+	'/*    SUBROUTINE NAME:			CreateSettingsTable					*/
+	'/*******************************************************************/
+	'/*                   WRITTEN BY:  	Breanna Howey					*/
+	'/*		         DATE CREATED: 	   01/28/21							*/
+	'/*******************************************************************/
+	'/*  SUBROUTINE PURPOSE:											*/
+	'/*	The purpose of this subroutine is to create the					*/
+	'/*	Settings table. SQL code is stored in the						*/  
+	'/* strCreateTable variables and is executed in the call for the	*/ 
+	'/*	ExecuteQuery() subroutine										*/
+	'/*******************************************************************/
+	'/*  CALLED BY:   													*/
+	'/*   Main()						          						*/
+	'/*******************************************************************/
+	'/*  CALLS:															*/
+	'/*  ExecuteQuery()													*/
+	'/*******************************************************************/
+	'/*  PARAMETER LIST (In Parameter Order):							*/
+	'/*																	*/
+	'/*  (None)															*/
+	'/*******************************************************************/
+	'/* SAMPLE INVOCATION:												*/
+	'/*																	*/
+	'/* CreateSettingsTable()											*/	
+	'/*******************************************************************/
+	'/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+	'/*																	*/
+	'/*  (None)															*/
+	'/*******************************************************************/
+	'/* MODIFICATION HISTORY:											*/
+	'/*																	*/
+	'/*  WHO   WHEN     WHAT											*/
+	'/*  ---   ----     ------------------------------------------------*/
+	'/*  BRH  01/23/21  Initial creation of the code					*/
+	'/*  BRH  01/28/21  Update fields in database						*/
+	'/*******************************************************************/
+	Public Sub CreateSettingsTable()
+		strCreateTable = "CREATE TABLE 'Settings' (
+						'Settings_ID'	INTEGER NOT NULL,
+						'Bit_rate'	TEXT NOT NULL,
+						'Comm_Port'	TEXT NOT NULL,
+						'Database_Storage_Location'	TEXT NOT NULL,
+						PRIMARY KEY(" & "Settings_ID" & "));"
+
+		ExecuteQuery("Settings")
 	End Sub
 
 	'/*******************************************************************/
@@ -1294,6 +1351,7 @@ Module DatabaseCreation
 	'/*  CreateAdHocOrderTable()										*/
 	'/*  CreatePatientMedicationPrescriptionTable()						*/
 	'/*  CreatePersonalPatientDrawerMedicationTable()					*/
+	'/*  CreateSettingsTable()											*/
 	'/*******************************************************************/
 	'/*  CALLS:															*/
 	'/*  (None)															*/
@@ -1321,7 +1379,6 @@ Module DatabaseCreation
 		DBCmd = New SQLiteCommand(strCreateTable, DBConn)
 		DBConn.Open()
 		Try
-
 			DBCmd.ExecuteNonQuery()
 		Catch ex As Exception
 			MessageBox.Show("Could not create " & strTableName & " table")
