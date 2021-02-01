@@ -3,7 +3,7 @@
     Dim contactPanelsAddedCount As Integer = 0
     Dim currentContactPanelName As String = Nothing
 
-    Private Sub btnDispense_Click(sender As Object, e As EventArgs) Handles btnDispense.Click
+    Private Sub btnDispense_Click(sender As Object, e As EventArgs)
 
         MessageBox.Show("CAUTION: This drug interacts with (insert drug name here) that the patient is currently taking. Or the patient is allergic to this drug")
         frmWitnessSignOff.Show()
@@ -107,22 +107,22 @@
         Dim dispenseDate4 As String = "11/1/2020"
         Dim dispenseDate5 As String = "10/28/2020"
 
-        CreatePanel(flpAssignedMedications, genName1, brandName1, measure1, dispenseDate1)
-        CreatePanel(flpAssignedMedications, genName2, brandName2, measure2, dispenseDate2)
-        CreatePanel(flpAssignedMedications, genName3, brandName3, measure3, dispenseDate3)
-        CreatePanel(flpAssignedMedications, genName4, brandName4, measure4, dispenseDate4)
+        ' CreatePanel(flpAssignedMedications, genName1, brandName1, measure1, dispenseDate1)
+        ' CreatePanel(flpAssignedMedications, genName2, brandName2, measure2, dispenseDate2)
+        '  CreatePanel(flpAssignedMedications, genName3, brandName3, measure3, dispenseDate3)
+        ' CreatePanel(flpAssignedMedications, genName4, brandName4, measure4, dispenseDate4)
 
     End Sub
 
-    Private Sub pnlHeader_Paint(sender As Object, e As PaintEventArgs) Handles pnlHeader.Paint
+    Private Sub pnlHeader_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 
-    Private Sub flpAssignedMedications_Paint(sender As Object, e As PaintEventArgs) Handles flpAssignedMedications.Paint
+    Private Sub flpAssignedMedications_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs)
         Me.Close()
     End Sub
 
@@ -130,6 +130,27 @@
     Private Sub AllergiesExist()
 
         ' If allergies exist show the allergies panel and move the other panel over to specific location
+
+    End Sub
+
+    Private Sub lstboxAllergies_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstboxAllergies.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub Label13_Click(sender As Object, e As EventArgs) Handles Label13.Click
+
+    End Sub
+
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+
+        Dim strAnswer As MsgBoxResult = MsgBox(" Are you sure you want to close this form? ", MsgBoxStyle.YesNo, "Confirm ")
+
+
+        If strAnswer = MsgBoxResult.Yes Then
+            Me.Close()
+        Else
+
+        End If
 
     End Sub
 End Class

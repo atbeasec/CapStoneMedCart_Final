@@ -81,7 +81,7 @@
     Dim strAdmitDate8 As String = "11/1/2020"
     Dim strAdmitDate9 As String = "11/16/2020"
 
-        CreatePanel(flpPatientRecords, strID1, strFirstName1, strLastName1, strRoomNumber1, strStatus1, strAdmitDate1)
+        CreatePanel(flpPatientRecords, strID1, strFirstName1, strLastName1, strAdmitDate1, strRoomNumber1, strRoomNumber1)
         CreatePanel(flpPatientRecords, strID2, strFirstName2, strLastName2, strRoomNumber2, strStatus2, strAdmitDate2)
         CreatePanel(flpPatientRecords, strID3, strFirstName3, strLastName3, strRoomNumber3, strStatus3, strAdmitDate3)
         CreatePanel(flpPatientRecords, strID4, strFirstName4, strLastName4, strRoomNumber4, strStatus4, strAdmitDate4)
@@ -93,7 +93,7 @@
 
     End Sub
 
-    Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal strID As String, ByVal strFirstName As String, ByVal strLastName As String, ByVal strRoomNumber As String, ByVal strStatus As String, ByVal strAdmitDate As String)
+    Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal strID As String, ByVal strFirstName As String, ByVal strLastName As String, ByVal strBirthday As String, ByVal strRoom As String, ByVal strBed As String)
 
         Dim pnl As Panel
         pnl = New Panel
@@ -106,7 +106,7 @@
         'Set panel properties
         With pnl
             .BackColor = Color.Gainsboro
-            .Size = New Size(955, 47)
+            .Size = New Size(920, 47)
             .Name = "pnlIndividualPatientRecordPadding" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Padding = New Padding(0, 0, 0, 3)
@@ -116,7 +116,7 @@
         With pnlMainPanel
 
             .BackColor = Color.White
-            .Size = New Size(955, 45)
+            .Size = New Size(920, 45)
             .Name = "pnlIndividualPatientRecord" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Dock = System.Windows.Forms.DockStyle.Top
@@ -126,13 +126,13 @@
         pnl.Controls.Add(pnlMainPanel)
 
 
-        AddHandler pnlMainPanel.DoubleClick, AddressOf DynamicDoubleClickOpenPatient
+        AddHandler pnlMainPanel.Click, AddressOf DynamicSingleClickOpenPatient
         AddHandler pnlMainPanel.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
         AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
 
         ' add controls to this panel
-        CreateEditButton(pnlMainPanel, getPanelCount(flpPannel), 830, 5)
-        CreateDeleteBtn(pnlMainPanel, getPanelCount(flpPannel), 890, 5)
+        CreateEditButton(pnlMainPanel, getPanelCount(flpPannel), 810, 5)
+        ' CreateDeleteBtn(pnlMainPanel, getPanelCount(flpPannel), 830, 5)
 
         'CreateDeleteBtn(pnlMainPanel)
         'CreateEditButton(pnlMainPanel)
@@ -154,12 +154,12 @@
         Dim location6 As New Point(500, 20)
 
         ' anywhere we have quotes except for the label names, we can call our Database and get method
-        CreateIDLabel(pnlMainPanel, lblID, "lblID", 10, 20, strID, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID2, "lblFirstName", 135, 20, strFirstName, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID3, "lblLastName", 275, 20, strLastName, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID4, "lblRoomLocation", 430, 20, strRoomNumber, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID5, "lblStatus", 565, 20, strStatus, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID6, "lblAdmitDate", 680, 20, strAdmitDate, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID, "lblMRN", 10, 20, strID, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID2, "lblFirstName", 125, 20, strFirstName, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID3, "lblLastName", 270, 20, strLastName, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID4, "lblBirthday", 430, 20, strBirthday, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID5, "lblRoom", 545, 20, strRoom, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID6, "lblBed", 670, 20, strBed, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
@@ -171,7 +171,7 @@
 
     End Sub
 
-    Private Sub DynamicDoubleClickOpenPatient(sender As Object, e As EventArgs)
+    Private Sub DynamicSingleClickOpenPatient(sender As Object, e As EventArgs)
 
         ' allows panel to have double click functionality to open it
         frmPatientInfo.Show()

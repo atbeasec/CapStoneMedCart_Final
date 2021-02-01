@@ -106,6 +106,12 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmAdHockDispense.Designer.vb">
+      <DependentUpon>frmAdHockDispense.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAdHockDispense.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmAlert.Designer.vb">
       <DependentUpon>frmAlert.vb</DependentUpon>
     </Compile>
@@ -130,10 +136,28 @@
     <Compile Include="frmConfigureInventory.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmConfigureRooms.Designer.vb">
+      <DependentUpon>frmConfigureRooms.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmConfigureRooms.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDischarge.Designer.vb">
+      <DependentUpon>frmDischarge.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDischarge.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmDiscrepancies.Designer.vb">
       <DependentUpon>frmDiscrepancies.vb</DependentUpon>
     </Compile>
     <Compile Include="frmDiscrepancies.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEndOfShift.Designer.vb">
+      <DependentUpon>frmEndOfShift.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEndOfShift.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmImport.Designer.vb">
@@ -214,6 +238,12 @@
     <Compile Include="frmResolve.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmSerialPort.Designer.vb">
+      <DependentUpon>frmSerialPort.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSerialPort.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmUpdatePatient.Designer.vb">
       <DependentUpon>frmUpdatePatient.vb</DependentUpon>
     </Compile>
@@ -256,12 +286,6 @@
     <Compile Include="NewNurse.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Returns.Designer.vb">
-      <DependentUpon>Returns.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Returns.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Waste.Designer.vb">
       <DependentUpon>Waste.vb</DependentUpon>
     </Compile>
@@ -276,6 +300,9 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmAdHockDispense.resx">
+      <DependentUpon>frmAdHockDispense.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAlert.resx">
       <DependentUpon>frmAlert.vb</DependentUpon>
     </EmbeddedResource>
@@ -288,8 +315,17 @@
     <EmbeddedResource Include="frmConfigureInventory.resx">
       <DependentUpon>frmConfigureInventory.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmConfigureRooms.resx">
+      <DependentUpon>frmConfigureRooms.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDischarge.resx">
+      <DependentUpon>frmDischarge.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmDiscrepancies.resx">
       <DependentUpon>frmDiscrepancies.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEndOfShift.resx">
+      <DependentUpon>frmEndOfShift.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmImport.resx">
       <DependentUpon>frmImport.vb</DependentUpon>
@@ -330,6 +366,9 @@
     <EmbeddedResource Include="frmResolve.resx">
       <DependentUpon>frmResolve.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmSerialPort.resx">
+      <DependentUpon>frmSerialPort.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmUpdatePatient.resx">
       <DependentUpon>frmUpdatePatient.vb</DependentUpon>
     </EmbeddedResource>
@@ -347,9 +386,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NewNurse.resx">
       <DependentUpon>NewNurse.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Returns.resx">
-      <DependentUpon>Returns.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Waste.resx">
       <DependentUpon>Waste.vb</DependentUpon>
