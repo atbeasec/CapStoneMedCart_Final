@@ -55,7 +55,12 @@ Module PatientInformation
 
     'create variables and classes to store information to
     'dataset? class? list?
-    Dim dsPatients As New DataSet
+
+    Public Class Patient
+        Dim strMRN As String
+
+    End Class
+    Dim lstPatients As New List Of clsPatients
     'create database connection string
     ' Dim strDEFAULTFOLDER As String = "C:\"
     Dim strDBNAME As String = "Medication Cart System"
@@ -75,7 +80,8 @@ Module PatientInformation
     'call for all information from database
         strSQlliteCmd = "Select * FROM Patient"
         DBAdaptPatient = New SqlDataAdapter(SQlliteCmd, strDBConnString)
-        DBAdaptPets.Fill(dsPatients, "Patients")
+        'DBAdaptPets.Fill(dsPatients, "Patients")
+
         'dgvPetsDataView.DataSource = dsPets.Tables("Pets")
 
     'store all information into a list of patient classes
