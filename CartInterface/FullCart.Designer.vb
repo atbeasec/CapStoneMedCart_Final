@@ -287,6 +287,10 @@ Partial Class frmFullCart
         Me.btnColor.UseVisualStyleBackColor = True
         Me.btnColor.Visible = False
         '
+        'SerialPort1
+        '
+        Me.SerialPort1.PortName = "SerialPort1"
+        '
         'frmFullCart
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)

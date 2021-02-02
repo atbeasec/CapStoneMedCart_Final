@@ -66,7 +66,7 @@ Module CartInterfaceCode
     'TODO
     'set up a way to change the COM port. (by default it looks like it is COM3
     'default bit rate looks to be 115200
-#Const SimulationMode = True 'this is going to dictate if the cart is going to be simulated or not.
+#Const SimulationMode = False 'this is going to dictate if the cart is going to be simulated or not.
 
 
 #If SimulationMode Then
@@ -113,8 +113,6 @@ Module CartInterfaceCode
     '/*	 frmCart - this is the form that is going be be used to simulate the  */
     '/*     the cart. It will display what drawer is open and will give the */
     '/*     caller an option to close the drawer. 
-    '/*  comPort - this is the port that is going to be used to connect to the */
-    '/*     cart. 
     '/*  dicHexDictioanry - this is the dictionary that is going to hold the */
     '/*     hex converstion that are going to be sent to the cart.           */
     '/*     A dictionary was used because I could not figure out how to get  */
@@ -127,7 +125,9 @@ Module CartInterfaceCode
     '/*  blnIssue - this is going to let the rest of the program know */
     '/*     if there is an issue with the import and the subprogram needs to */
     '/*     be stopped. 
-
+    '/*  comSerialPort1 - this is the port that is used to talk to the cart */
+    '/*     It will be set up using the serialSetup function and then used  */
+    '/*     to send information to the cart.                                */
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
@@ -138,8 +138,8 @@ Module CartInterfaceCode
 
     Sub OpenOneDrawer(Number As String)
         Dim blnissue = errorChecking(Number)
-
-
+        Dim comSerialPort1 = serialSetup()
+        Dim temp
 
 
 
@@ -159,57 +159,160 @@ Module CartInterfaceCode
         If Not blnissue Then
 
             'this will compiple and run if the cart is not in simulation mode. 
-            Dim dicHexDictioanry = New Dictionary(Of String, System.Int32)
+
             Dim bytFinal As Byte()
-
-            Dim comPort
-            populationDictionary(dicHexDictioanry)
-
+            bytFinal = getSerialString(Number) 'this is going to get the string we need
+            'to send to the cart. 
 
 
-            If Number.Length > 1 Then
-                If Number.Substring(0, 1) = 1 Then 'this is going to be for when the drawer number is greater 
-                    'then 9
-                    'handles 10 through 19
-                    bytFinal = {&H32, &H30, &H35, &H39, &H36, &H32, &H35, &H2C, &H4F, &H2C, &H30, &H2C, &H31, dicHexDictioanry.Item(Number.Substring(1)), &H0}
-                ElseIf Number.Substring(0, 1) = 2 Then
-                    'handles 20 through 29
-                    bytFinal = {&H32, &H30, &H35, &H39, &H36, &H32, &H35, &H2C, &H4F, &H2C, &H30, &H2C, &H32, dicHexDictioanry.Item(Number.Substring(1)), &H0}
-                End If
-            Else
-                'handles 1 through 9
-                bytFinal = {&H32, &H30, &H35, &H39, &H36, &H32, &H35, &H2C, &H4F, &H2C, &H30, &H2C, dicHexDictioanry.Item(Number), &H0}
+            comSerialPort1.Open()
+            comSerialPort1.Write(bytFinal, 0, bytFinal.Length)
+            Do
+                temp = comSerialPort1.ReadLine() 'this is to make sure the program doesn't continue until drawer is closed. 
 
-            End If
+            Loop While (temp = Nothing)
+            comSerialPort1.Close()
 
-
-
-            comPort = DefaultCOM
-            'this is going to set everything up with the cart. 
-            With FrmCart
-                .SerialPort1.PortName = comPort
-                .SerialPort1.BaudRate = bitRate
-                .SerialPort1.RtsEnable = False
-                .SerialPort1.DtrEnable = False
-                'StopBits: 1 Parity: NONE WordLength: 8
-                .SerialPort1.StopBits = StopBits.One
-                .SerialPort1.Parity = Parity.None
-                .SerialPort1.DataBits = 8
-                .SerialPort1.WriteTimeout = 500
-                .SerialPort1.ReadTimeout = 500
-                .SerialPort1.Handshake = Handshake.None
-                .SerialPort1.Open()
-                .SerialPort1.Write(bytFinal, 0, bytFinal.Length)
-                .SerialPort1.ReadExisting() 'this is to make sure the program doesn't continue until drawer is closed. 
-                .SerialPort1.Close()
-            End With
         End If
 
 #End If
 
     End Sub
 
+
+
 #If SimulationMode = False Then
+
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME:  serialSetup					   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		             */   
+    '/*		         DATE CREATED: 2/1/2021                     		   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								   */             
+    '/*	 This is going to handle setting up the serial port for use . It   */
+    '/*  will make the serial port. Edit the settings as needed, and then   */
+    '/*  return the serial port.                                            */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                     */           
+    '/*                                         			        	   */         
+    '/*********************************************************************/
+    '/*  CALLS:										                     */                 
+    '/*             (NONE)								                 */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				        	   */         
+    '/*											                         */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:						                   		         */                   
+    '/*            SerialPort1			            					   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:			                					   */             
+    '/*			serialSetup()           								   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*  comPort - this is the port that is going to be used to connect to the */
+    '/*     cart. 
+    '/*  comSerialPort1 - this is the port that is used to talk to the cart */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Function serialSetup()
+        Dim SerialPort1 As New SerialPort()
+        Dim comPort = DefaultCOM 'this is going to be set up to get the 
+        'comport from the database. 
+        'this is going to set everything up with the cart. 
+
+        SerialPort1.PortName = comPort
+        SerialPort1.BaudRate = bitRate
+        SerialPort1.RtsEnable = False
+        SerialPort1.DtrEnable = False
+        'StopBits: 1 Parity: NONE WordLength:  8
+        SerialPort1.StopBits = StopBits.One
+        SerialPort1.Parity = Parity.None
+        SerialPort1.DataBits = 8
+        SerialPort1.WriteTimeout = 500
+        SerialPort1.ReadTimeout = 500000000
+        SerialPort1.Handshake = Handshake.None
+
+        Return SerialPort1
+    End Function
+
+
+
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME: getSerialString 				   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		         */   
+    '/*		         DATE CREATED: 	2/1/2021    	   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:						                		   */             
+    '/*	 This is going to get the string that needs to be sent to the cart */
+    '/* it will populate the dictionary for the hex numbers and then it will*/
+    '/* create the strings based on what the string number is.              */
+    '/*                                                                  */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+
+    Function getSerialString(number As String)
+        Dim dicHexDictioanry = New Dictionary(Of String, System.Int32)
+        populationDictionary(dicHexDictioanry)
+        Dim bytFinal As Byte()
+        If number.Length > 1 Then
+            If number.Substring(0, 1) = 1 Then 'this is going to be for when the drawer number is greater 
+                'then 9
+                'handles 10 through 19
+                bytFinal = {&H32, &H30, &H35, &H39, &H36, &H32, &H35, &H2C, &H4F, &H2C, &H30, &H2C, &H31, dicHexDictioanry.Item(number.Substring(1)), &H0}
+            ElseIf number.Substring(0, 1) = 2 Then
+                'handles 20 through 29
+                bytFinal = {&H32, &H30, &H35, &H39, &H36, &H32, &H35, &H2C, &H4F, &H2C, &H30, &H2C, &H32, dicHexDictioanry.Item(number.Substring(1)), &H0}
+            End If
+        Else
+            'handles 1 through 9
+            bytFinal = {&H32, &H30, &H35, &H39, &H36, &H32, &H35, &H2C, &H4F, &H2C, &H30, &H2C, dicHexDictioanry.Item(number), &H0}
+
+        End If
+
+        Return bytFinal
+    End Function
+
+
     '/*********************************************************************/
     '/*                   SUBPROGRAM NAME: populationDictionary			   */         
     '/*********************************************************************/
@@ -226,7 +329,7 @@ Module CartInterfaceCode
     '/*                                                                   */
     '/*********************************************************************/
     '/*  CALLED BY:   	      						         */           
-    '/*            CartInterfaceCode.OpenDrawer()         				   */         
+    '/*            CartInterfaceCode.getSerialString()    				   */         
     '/*********************************************************************/
     '/*  CALLS:										   */                 
     '/*             (NONE)								   */             
@@ -407,5 +510,47 @@ Module CartInterfaceCode
     End Function
 
 
+
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME:  	OpenMutliDrawer				   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		         */   
+    '/*		         DATE CREATED: 		   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								   */             
+    '/*											   */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Sub OpenMutliDrawer()
+
+    End Sub
 
 End Module

@@ -1,4 +1,5 @@
 ﻿Imports System.Linq
+Imports System.IO.Ports
 Public Class frmFullCart
 
     '/*********************************************************************/
@@ -82,6 +83,8 @@ Public Class frmFullCart
     '/*  ---   ----     ------------------------------------------------- */
     '/*                                                                     
     '/*********************************************************************/
+
+
 
     Private Sub Color_Click(sender As Object, e As EventArgs) Handles btn1.Click, btn3.Click, btn4.Click, btn5.Click, btn6.Click, btn7.Click, btn8.Click,
             btn9.Click, btn10.Click, btn11.Click, btn12.Click, btn13.Click, btn14.Click, btn15.Click, btn16.Click, btn17.Click, btn18.Click, btn19.Click,
