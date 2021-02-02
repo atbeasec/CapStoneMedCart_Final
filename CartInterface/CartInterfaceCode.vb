@@ -52,6 +52,9 @@ Module CartInterfaceCode
     '/*											   */					  
     '/*  WHO   WHEN     WHAT								   */			  
     '/*  ---   ----     ------------------------------------------------- */
+    '/* Nathan 2/2/2021 Changes the SimulationMode to be an actual veriable */
+    '/*                 and not a compiler option.                          */
+    '/* Nathan 2/2/2021 Imported the cartInferfaceProject into the main porject*/
     '/*********************************************************************/
 
     '26
@@ -59,16 +62,16 @@ Module CartInterfaceCode
     Private FrmCart = New frmFullCart()
     Dim SerialPort1 = FrmCart.serialSetup()
     Dim intDrawerCount As Integer
-    'Private FrmCart = New FrmCart()
+
     'TODO
     'set up a way to change the COM port. (by default it looks like it is COM3
     'default bit rate looks to be 115200
-#Const SimulationMode = False 'this is going to dictate if the cart is going to be simulated or not.
+    Dim SimulationMode = False 'this is going to dictate if the cart is going to be simulated or not.
 
 
-#If SimulationMode Then
+
     Dim dicButtonDictionary As Dictionary(Of String, Control) = New Dictionary(Of String, Control)
-#End If
+
     Sub main()
 
         OpenOneDrawer("19")
@@ -79,8 +82,8 @@ Module CartInterfaceCode
     '/*********************************************************************/
     '/*                   SubProgram NAME: OpenOneDrawer    			   */         
     '/*********************************************************************/
-    '/*                   WRITTEN BY:  Nathan Premo   		         */   
-    '/*		         DATE CREATED: 		   */                             
+    '/*                   WRITTEN BY:  Nathan Premo   		               */   
+    '/*		         DATE CREATED: 		 1/21/2021                        */                             
     '/*********************************************************************/
     '/*  Subprogram PURPOSE:								   */             
     '/*	 This is going to handle taking the drawer number that the calling */
@@ -102,8 +105,8 @@ Module CartInterfaceCode
     '/*                                                                     
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                  */             
-    '/*	OpenOneDrawer(13)        										   */     
-    '/* OpenOneDrawer(2)                                                   */
+    '/*	OpenOneDrawer("13")        										   */     
+    '/* OpenOneDrawer("2")                                                 */
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
@@ -138,45 +141,45 @@ Module CartInterfaceCode
         Dim comSerialPort1 = FrmCart.serialSetup()
 
 
-#If SimulationMode Then
-        'this will comiple and be ran if the code is compiled in simulation mode. 
-        FrmCart.populateButtonDictionary(dicButtonDictionary)
-        If Not blnissue Then
-            '  FrmCart.LblDrawer.Text = "Drawer Number " + Number + " is Open"
-            '   FrmCart.ShowDialog()
+        If SimulationMode Then
+            'this will comiple and be ran if the code is compiled in simulation mode. 
+            FrmCart.populateButtonDictionary(dicButtonDictionary)
+            If Not blnissue Then
+                '  FrmCart.LblDrawer.Text = "Drawer Number " + Number + " is Open"
+                '   FrmCart.ShowDialog()
 
-            dicButtonDictionary.Item(Number).BackColor = Color.Red 'changes the color of the button to red
-            'to make it looks like it is red. 
+                dicButtonDictionary.Item(Number).BackColor = Color.Red 'changes the color of the button to red
+                'to make it looks like it is red. 
 
-            FrmCart.showdialog()
+                FrmCart.showdialog()
+            End If
+        Else
+            If Not blnissue Then
+                intDrawerCount = 0 'reset the drawer count
+                'this will compiple and run if the cart is not in simulation mode. 
+
+                Dim bytFinal As Byte()
+                bytFinal = getSerialString(Number) 'this is going to get the string we need
+                'to send to the cart. 
+
+
+                comSerialPort1.Open()
+                comSerialPort1.Write(bytFinal, 0, bytFinal.Length)
+                Do
+                    'this is going to keep looping until the drawer count reached zero. 
+
+                Loop While (intDrawerCount > 0)
+                comSerialPort1.Close()
+
+            End If
+
+
         End If
-#Else
-        If Not blnissue Then
-            intDrawerCount = 0 'reset the drawer count
-            'this will compiple and run if the cart is not in simulation mode. 
-
-            Dim bytFinal As Byte()
-            bytFinal = getSerialString(Number) 'this is going to get the string we need
-            'to send to the cart. 
-
-
-            comSerialPort1.Open()
-            comSerialPort1.Write(bytFinal, 0, bytFinal.Length)
-            Do
-                'this is going to keep looping until the drawer count reached zero. 
-
-            Loop While (intDrawerCount > 0)
-            comSerialPort1.Close()
-
-        End If
-
-#End If
 
     End Sub
 
 
 
-#If SimulationMode = False Then
 
 
 
@@ -348,7 +351,7 @@ Module CartInterfaceCode
 
     End Sub
 
-#End If
+
 
     '/*********************************************************************/
     '/*                   FUNCTION NAME:  		errorChecking			   */         
