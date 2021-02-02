@@ -32,14 +32,12 @@ Module CartInterfaceCode
     '/* 																	  
     '/*********************************************************************/
     '/*  GLOBAL VARIABLE LIST (Alphabetically):			                    */	
-    '/*  BitRate as integer - this is going to be the bit per second that are going to */
-    '/*     Transmitted to the cart. By default it will be 115200 and shouldn't*/
-    '/*     need to be changed at any time.                                 */
-    '/*  DefaultCOM as string - this is the default COM port that the interface*/
-    '/*     will use if a different one is not provided. 
     '/*  dicButtonDictionary - this is the dictionary of the buttons that are */
     '/*     on the simuated cart form (FullCart). This is to just make things*/
-    '/*     easier to read and avoid duplicated code.                      */	
+    '/*     easier to read and avoid duplicated code.                      */
+    '/*  intDrawerCount - this is the number of drawers that is open. we  */
+    '/*     will be using this to make sure that all the drawers are closed*/
+    '/*     before the program is able to continue. 
     '/*	 SimulationMode as boolean - this is going to be a true or false   */ 
     '/*     statement that will tell us if we are simulating the cart.     */
     '/*     If we are simulating the cart then the code that works with the */
@@ -57,11 +55,10 @@ Module CartInterfaceCode
     '/*********************************************************************/
 
     '26
-    Const bitRate = 115200
-    Const DefaultCOM As String = "COM3"
+
     Private FrmCart = New frmFullCart()
-
-
+    Dim SerialPort1 = FrmCart.serialSetup()
+    Dim intDrawerCount As Integer
     'Private FrmCart = New FrmCart()
     'TODO
     'set up a way to change the COM port. (by default it looks like it is COM3
@@ -138,9 +135,7 @@ Module CartInterfaceCode
 
     Sub OpenOneDrawer(Number As String)
         Dim blnissue = errorChecking(Number)
-        Dim comSerialPort1 = serialSetup()
-        Dim temp
-
+        Dim comSerialPort1 = FrmCart.serialSetup()
 
 
 #If SimulationMode Then
@@ -157,7 +152,7 @@ Module CartInterfaceCode
         End If
 #Else
         If Not blnissue Then
-
+            intDrawerCount = 0 'reset the drawer count
             'this will compiple and run if the cart is not in simulation mode. 
 
             Dim bytFinal As Byte()
@@ -168,9 +163,9 @@ Module CartInterfaceCode
             comSerialPort1.Open()
             comSerialPort1.Write(bytFinal, 0, bytFinal.Length)
             Do
-                temp = comSerialPort1.ReadLine() 'this is to make sure the program doesn't continue until drawer is closed. 
+                'this is going to keep looping until the drawer count reached zero. 
 
-            Loop While (temp = Nothing)
+            Loop While (intDrawerCount > 0)
             comSerialPort1.Close()
 
         End If
@@ -183,69 +178,7 @@ Module CartInterfaceCode
 
 #If SimulationMode = False Then
 
-    '/*********************************************************************/
-    '/*                   FUNCTION NAME:  serialSetup					   */         
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:  Nathan Premo   		             */   
-    '/*		         DATE CREATED: 2/1/2021                     		   */                             
-    '/*********************************************************************/
-    '/*  FUNCTION PURPOSE:								   */             
-    '/*	 This is going to handle setting up the serial port for use . It   */
-    '/*  will make the serial port. Edit the settings as needed, and then   */
-    '/*  return the serial port.                                            */
-    '/*                                                                   */
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      						                     */           
-    '/*                                         			        	   */         
-    '/*********************************************************************/
-    '/*  CALLS:										                     */                 
-    '/*             (NONE)								                 */             
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):				        	   */         
-    '/*											                         */                     
-    '/*                                                                     
-    '/*********************************************************************/
-    '/*  RETURNS:						                   		         */                   
-    '/*            SerialPort1			            					   */             
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:			                					   */             
-    '/*			serialSetup()           								   */                     
-    '/*                                                                     
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*  comPort - this is the port that is going to be used to connect to the */
-    '/*     cart. 
-    '/*  comSerialPort1 - this is the port that is used to talk to the cart */
-    '/*											   */                     
-    '/*                                                                     
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						         */               
-    '/*											   */                     
-    '/*  WHO   WHEN     WHAT								   */             
-    '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
-    '/*********************************************************************/
 
-    Function serialSetup()
-        Dim SerialPort1 As New SerialPort()
-        Dim comPort = DefaultCOM 'this is going to be set up to get the 
-        'comport from the database. 
-        'this is going to set everything up with the cart. 
-
-        SerialPort1.PortName = comPort
-        SerialPort1.BaudRate = bitRate
-        SerialPort1.RtsEnable = False
-        SerialPort1.DtrEnable = False
-        'StopBits: 1 Parity: NONE WordLength:  8
-        SerialPort1.StopBits = StopBits.One
-        SerialPort1.Parity = Parity.None
-        SerialPort1.DataBits = 8
-        SerialPort1.WriteTimeout = 500
-        SerialPort1.ReadTimeout = 500000000
-        SerialPort1.Handshake = Handshake.None
-
-        Return SerialPort1
-    End Function
 
 
 
@@ -517,8 +450,8 @@ Module CartInterfaceCode
     '/*                   WRITTEN BY:  Nathan Premo   		         */   
     '/*		         DATE CREATED: 		   */                             
     '/*********************************************************************/
-    '/*  FUNCTION PURPOSE:								   */             
-    '/*											   */                     
+    '/*  FUNCTION PURPOSE:		                						   */             
+    '/*	 This is going to handle opening more than one drawer at a time.   */                     
     '/*                                                                   */
     '/*********************************************************************/
     '/*  CALLED BY:   	      						         */           
@@ -528,7 +461,8 @@ Module CartInterfaceCode
     '/*             (NONE)								   */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					   */         
-    '/*											   */                     
+    '/*	 Drawers - this is going to be an array of strings that will be the*/
+    '/*     drawer numbers that need to be opened.                         */
     '/*                                                                     
     '/*********************************************************************/
     '/*  RETURNS:								         */                   
@@ -536,6 +470,80 @@ Module CartInterfaceCode
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								   */             
     '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+
+    '/*  blnIssue - this is going to let the rest of the program know       */
+    '/*     if there is an issue with the import and the subprogram needs to */
+    '/*     be stopped.                                                    */
+    '/*  comSerialPort1 - this is the port that is used to talk to the cart */
+    '/*     It will be set up using the serialSetup function and then used  */
+    '/*     to send information to the cart.                                */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Sub OpenMutliDrawer(Drawers() As String)
+        Dim blnIssue As Boolean = False
+        Dim comSerialPort1 = FrmCart.serialSetup()
+        Dim bytFinal As Byte()
+
+        intDrawerCount = 0 'reset the drawer count
+        For Each item As String In Drawers
+            If errorChecking(item) Then
+                blnIssue = True
+            End If
+        Next
+
+        If Not blnIssue Then
+            comSerialPort1.open
+
+            For Each item As String In Drawers
+                bytFinal = getSerialString(item) 'gets the byte your array
+                comSerialPort1.Write(bytFinal, 0, bytFinal.Length) 'sends the byte array
+                intDrawerCount += 1 'inceases the drawer count
+            Next
+            Do
+                'this is going to keep looping until the drawer count reached zero. 
+
+            Loop While (intDrawerCount > 0)
+            comSerialPort1.Close()
+        End If
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME:  minusDrawerCount 			   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		         */   
+    '/*		         DATE CREATED: 	2/2/2021                        	   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								   */             
+    '/*	    This is going to subtracted 1 from the drawer count and will   */
+    '/*         be used to keep tracked of the drawers as they close.      */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*		(none)									   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*		cartInterfaceCode.minusDrawerCount  						   */                     
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
@@ -549,8 +557,9 @@ Module CartInterfaceCode
     '/*                                                                     
     '/*********************************************************************/
 
-    Sub OpenMutliDrawer()
-
+    Public Sub minusDrawerCount()
+        intDrawerCount -= 1
     End Sub
+
 
 End Module

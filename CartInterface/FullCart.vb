@@ -27,8 +27,13 @@ Public Class frmFullCart
     '/*			 FullCart.Show()		                             */					  
     '/* 																	  
     '/*********************************************************************/
-    '/*  GLOBAL VARIABLE LIST (Alphabetically):			                    */		  
-    '/*	    (NONE)                                                          */				  
+    '/*  GLOBAL VARIABLE LIST (Alphabetically):			                    */
+    '/*  BitRate as integer - this is going to be the bit per second that are going to */
+    '/*     Transmitted to the cart. By default it will be 115200 and shouldn't*/
+    '/*     need to be changed at any time.                                 */
+    '/*  DefaultCOM as string - this is the default COM port that the interface*/
+    '/*     will use if a different one is not provided. 
+    '/*	                                                              */				  
     '/*********************************************************************/
     '/* COMPILATION NOTES(will include version notes including libraries):*/
     '/* 										                    	   */					  
@@ -39,7 +44,8 @@ Public Class frmFullCart
     '/*  WHO   WHEN     WHAT								   */			  
     '/*  ---   ----     ------------------------------------------------- */
     '/*********************************************************************/
-
+    Const bitRate = 115200
+    Const DefaultCOM As String = "COM3"
 
 
     '/*********************************************************************/
@@ -179,6 +185,75 @@ Public Class frmFullCart
             .Add("25", btn25)
             .Add("26", btn26)
         End With
+    End Sub
+
+
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME:  serialSetup					   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		             */   
+    '/*		         DATE CREATED: 2/1/2021                     		   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								   */             
+    '/*	 This is going to handle setting up the serial port for use . It   */
+    '/*  will make the serial port. Edit the settings as needed, and then   */
+    '/*  return the serial port.                                            */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                     */           
+    '/*                                         			        	   */         
+    '/*********************************************************************/
+    '/*  CALLS:										                     */                 
+    '/*             (NONE)								                 */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				        	   */         
+    '/*											                         */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:						                   		         */                   
+    '/*            SerialPort1			            					   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:			                					   */             
+    '/*			serialSetup()           								   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*  comPort - this is the port that is going to be used to connect to the */
+    '/*     cart. 
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Function serialSetup()
+        Dim comPort = DefaultCOM 'this is going to be set up to get the 
+        'comport from the database. 
+        'this is going to set everything up with the cart. 
+
+        SerialPort1.PortName = comPort
+        SerialPort1.BaudRate = bitRate
+        SerialPort1.RtsEnable = False
+        SerialPort1.DtrEnable = False
+        'StopBits: 1 Parity: NONE WordLength:  8
+        SerialPort1.StopBits = StopBits.One
+        SerialPort1.Parity = Parity.None
+        SerialPort1.DataBits = 8
+        SerialPort1.WriteTimeout = 500
+        SerialPort1.ReadTimeout = 500000000
+        SerialPort1.Handshake = Handshake.None
+
+        Return SerialPort1
+    End Function
+
+
+
+    Sub listening() Handles SerialPort1.DataReceived
+        CartInterface.minusDrawerCount()
     End Sub
 
 
