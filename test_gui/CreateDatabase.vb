@@ -59,7 +59,7 @@
 
 'Imports the libraries necessary to connect and create SQLite databases
 Imports System.Data.SQLite
-
+Imports System.IO
 Module CreateDatabase
 	'The path where the database is desired to be stored. 
 	'Right now, the database is stored in the bin\debug folder where this 
@@ -69,138 +69,173 @@ Module CreateDatabase
 	Dim strDBPath As String = strDEFAULTFOLDER & strDBNAME & ".db"
 	Public DBConn As SQLiteConnection
 	Public DBCmd As SQLiteCommand
-	Public strCONNECTION As String = String.Format("Data Source = {0}", strDBPath)
-	Dim strCreateTable As String
+    Public strCONNECTION As String
+    Dim strCreateTable As String
 
-	'/*********************************************************************/
-	'/*                   SUBROUTINE NAME:     Main						*/
-	'/*******************************************************************/
-	'/*                   WRITTEN BY:  	Breanna Howey					*/
-	'/*		         DATE CREATED: 	   01/23/21							*/
-	'/*******************************************************************/
-	'/*  SUBROUTINE PURPOSE:											*/
-	'/*																	*/
-	'/*******************************************************************/
-	'/*  CALLED BY:   	      											*/
-	'/*  (None)								           					*/
-	'/*******************************************************************/
-	'/*  CALLS:															*/
-	'/*  CreateDataBase()												*/	
-	'/*  CreateDrawersTable()											*/
-	'/*  CreateMedicationTable()										*/
-	'/*  CreatePatientTable()											*/
-	'/*  CreatePhysicianTable()											*/		
-	'/*  CreatePatientPhysicianTable()									*/	
-	'/*  CreateUserTable()												*/	
-	'/*  CreatePatientUserTable()										*/		
-	'/*  CreateRoomsTable()												*/
-	'/*  CreatePatientRoomTable()										*/
-	'/*  CreateAllergyTable()											*/
-	'/*  CreatePatientAllergyTable()									*/
-	'/*  CreateAllergyOverrideTable()									*/
-	'/*  CreatePatientMedicationTable()									*/		
-	'/*  CreateDrugInteractionsTable()									*/		
-	'/*  CreateDrawerMedicationTable()									*/
-	'/*  CreateWastesTable()											*/		
-	'/*  CreateDispensingTable()										*/
-	'/*  CreateDiscrepanciesTable()										*/	
-	'/*  CreateAdHocOrderTable()										*/
-	'/*  CreatePatientMedicationPrescriptionTable()						*/
-	'/*  CreatePersonalPatientDrawerMedicationTable()					*/
-	'/*******************************************************************/
-	'/*  PARAMETER LIST (In Parameter Order):							*/
-	'/*																	*/
-	'/*  (None)															*/
-	'/*******************************************************************/
-	'/* SAMPLE INVOCATION:												*/
-	'/*																	*/
-	'/*   Main();														*/
-	'/*******************************************************************/
-	'/*  LOCAL VARIABLE LIST (Alphabetically):							*/
-	'/*																	*/
-	'/*  (None).														*/
-	'/*******************************************************************/
-	'/* MODIFICATION HISTORY:											*/
-	'/*																	*/
-	'/*  WHO   WHEN     WHAT											*/
-	'/*  ---   ----     ------------------------------------------------*/
-	'/*  BRH  01/23/21  Initial creation of the code					*/
-	'/*  BRH  01/28/21  Add the CreateSettingsTable method				*/
-	'/*******************************************************************/
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:     Main						*/
+    '/*******************************************************************/
+    '/*                   WRITTEN BY:  	Breanna Howey					*/
+    '/*		         DATE CREATED: 	   01/23/21							*/
+    '/*******************************************************************/
+    '/*  SUBROUTINE PURPOSE:											*/
+    '/*																	*/
+    '/*******************************************************************/
+    '/*  CALLED BY:   	      											*/
+    '/*  (None)								           					*/
+    '/*******************************************************************/
+    '/*  CALLS:															*/
+    '/*  CreateDataBase()												*/	
+    '/*  CreateDrawersTable()											*/
+    '/*  CreateMedicationTable()										*/
+    '/*  CreatePatientTable()											*/
+    '/*  CreatePhysicianTable()											*/		
+    '/*  CreatePatientPhysicianTable()									*/	
+    '/*  CreateUserTable()												*/	
+    '/*  CreatePatientUserTable()										*/		
+    '/*  CreateRoomsTable()												*/
+    '/*  CreatePatientRoomTable()										*/
+    '/*  CreateAllergyTable()											*/
+    '/*  CreatePatientAllergyTable()									*/
+    '/*  CreateAllergyOverrideTable()									*/
+    '/*  CreatePatientMedicationTable()									*/		
+    '/*  CreateDrugInteractionsTable()									*/		
+    '/*  CreateDrawerMedicationTable()									*/
+    '/*  CreateWastesTable()											*/		
+    '/*  CreateDispensingTable()										*/
+    '/*  CreateDiscrepanciesTable()										*/	
+    '/*  CreateAdHocOrderTable()										*/
+    '/*  CreatePatientMedicationPrescriptionTable()						*/
+    '/*  CreatePersonalPatientDrawerMedicationTable()					*/
+    '/*******************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):							*/
+    '/*																	*/
+    '/*  (None)															*/
+    '/*******************************************************************/
+    '/* SAMPLE INVOCATION:												*/
+    '/*																	*/
+    '/*   Main();														*/
+    '/*******************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+    '/*																	*/
+    '/*  (None).														*/
+    '/*******************************************************************/
+    '/* MODIFICATION HISTORY:											*/
+    '/*																	*/
+    '/*  WHO   WHEN     WHAT											*/
+    '/*  ---   ----     ------------------------------------------------*/
+    '/*  BRH  01/23/21  Initial creation of the code					*/
+    '/*  BRH  01/28/21  Add the CreateSettingsTable method				*/
+    '/*******************************************************************/
 
-	Sub Main()
-		If Not System.IO.File.Exists(strDBPath) Then
-			'Creates the database
-			CreateDataBase()
+    Sub Main()
+        'Create variable to check application path for the config file
+        Dim strApplicationPath As String = Application.StartupPath & "\config.app"
 
-			'Seperate routines to create the tables
-			CreateDrawersTable()
-			CreateMedicationTable()
-			CreatePatientTable()
-			CreatePhysicianTable()
-			CreatePatientPhysicianTable()
-			CreateUserTable()
-			CreatePatientUserTable()
-			CreateRoomsTable()
-			CreatePatientRoomTable()
-			CreateAllergyTable()
-			CreatePatientAllergyTable()
-			CreateAllergyOverrideTable()
-			CreatePatientMedicationTable()
-			CreateDrugInteractionsTable()
-			CreateDrawerMedicationTable()
-			CreateWastesTable()
-			CreateDispensingTable()
-			CreateDiscrepanciesTable()
-			CreateAdHocOrderTable()
-			CreatePatientMedicationPrescriptionTable()
-			CreatePersonalPatientDrawerMedicationTable()
-			CreateSettingsTable()
+        ''create folder dialoge object to prompt user to select a folder path
+        Dim dlgFolderDialogeLocation As New FolderBrowserDialog
 
-			DBConn.Close()
-			MessageBox.Show("All tables were created")
-		Else
-			MessageBox.Show("Database is already stored at this location")
-		End If
+        ''set the default displayed path to the application path for better user experience
+        dlgFolderDialogeLocation.SelectedPath = Application.StartupPath
 
-	End Sub
+        'check if the config file exists or not
+        If Not System.IO.File.Exists(strApplicationPath) Then
 
-	'/*******************************************************************/
-	'/*                   SUBROUTINE NAME:        CreateDataBase()		*/
-	'/*******************************************************************/
-	'/*                   WRITTEN BY:  	Breanna Howey					*/
-	'/*		         DATE CREATED: 	   01/23/21							*/
-	'/*******************************************************************/
-	'/*  SUBROUTINE PURPOSE:											*/
-	'/*	The purpose of this subroutine is to create the database. First,*/ 
-	'/* the database file is created at the specified path. Next, the	*/
-	'/* program lets the user know the database has been created		*/
-	'/*******************************************************************/
-	'/*  CALLED BY:   	      											*/
-	'/*  Main()															*/
-	'/*******************************************************************/
-	'/*  CALLS:															*/
-	'/*  (NONE)															*/
-	'/*******************************************************************/
-	'/*  PARAMETER LIST (In Parameter Order):							*/
-	'/*																	*/
-	'/*  (None)															*/
-	'/*******************************************************************/
-	'/* SAMPLE INVOCATION:												*/
-	'/*																	*/
-	'/* CreateDataBase()												*/
-	'/*******************************************************************/
-	'/*  LOCAL VARIABLE LIST (Alphabetically):							*/
-	'/*																	*/
-	'/*  (None)															*/
-	'/*******************************************************************/
-	'/* MODIFICATION HISTORY:											*/
-	'/*																	*/
-	'/*  WHO   WHEN     WHAT											*/
-	'/*  ---   ----     ------------------------------------------------*/
-	'/*  BRH  01/23/21  Initial creation of the code					*/
-	'/*******************************************************************/
-	Public Sub CreateDataBase()
+            'if the file does not exist, create it, then dispose of the connection
+            System.IO.File.Create(strApplicationPath).Dispose()
+            'prompt user to select a database path after the config file is created
+            If (dlgFolderDialogeLocation.ShowDialog() = DialogResult.OK) Then
+
+                'set defult folder for database to selected path a
+                'then set the new database path
+                strDEFAULTFOLDER = dlgFolderDialogeLocation.SelectedPath
+                strDBPath = strDEFAULTFOLDER & "\" & strDBNAME & ".db"
+                'write database path to the file
+                My.Computer.FileSystem.WriteAllText(strApplicationPath, strDBPath, True)
+            End If
+
+        Else
+            'if the file already exists
+            'use reader to read database path from the config.app file
+            Using reader As StreamReader = New StreamReader(strApplicationPath)
+                strDBPath = reader.ReadLine
+            End Using
+        End If
+
+
+        strCONNECTION = String.Format("Data Source = {0}", strDBPath)
+        If Not System.IO.File.Exists(strDBPath) Then
+            'Creates the database
+            CreateDataBase()
+
+            'Seperate routines to create the tables
+            CreateDrawersTable()
+            CreateMedicationTable()
+            CreatePatientTable()
+            CreatePhysicianTable()
+            CreatePatientPhysicianTable()
+            CreateUserTable()
+            CreatePatientUserTable()
+            CreateRoomsTable()
+            CreatePatientRoomTable()
+            CreateAllergyTable()
+            CreatePatientAllergyTable()
+            CreateAllergyOverrideTable()
+            CreatePatientMedicationTable()
+            CreateDrugInteractionsTable()
+            CreateDrawerMedicationTable()
+            CreateWastesTable()
+            CreateDispensingTable()
+            CreateDiscrepanciesTable()
+            CreateAdHocOrderTable()
+            CreatePatientMedicationPrescriptionTable()
+            CreatePersonalPatientDrawerMedicationTable()
+            CreateSettingsTable()
+
+            DBConn.Close()
+            MessageBox.Show("All tables were created")
+        Else
+            MessageBox.Show("Database is already stored at this location")
+        End If
+
+    End Sub
+
+    '/*******************************************************************/
+    '/*                   SUBROUTINE NAME:        CreateDataBase()		*/
+    '/*******************************************************************/
+    '/*                   WRITTEN BY:  	Breanna Howey					*/
+    '/*		         DATE CREATED: 	   01/23/21							*/
+    '/*******************************************************************/
+    '/*  SUBROUTINE PURPOSE:											*/
+    '/*	The purpose of this subroutine is to create the database. First,*/ 
+    '/* the database file is created at the specified path. Next, the	*/
+    '/* program lets the user know the database has been created		*/
+    '/*******************************************************************/
+    '/*  CALLED BY:   	      											*/
+    '/*  Main()															*/
+    '/*******************************************************************/
+    '/*  CALLS:															*/
+    '/*  (NONE)															*/
+    '/*******************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):							*/
+    '/*																	*/
+    '/*  (None)															*/
+    '/*******************************************************************/
+    '/* SAMPLE INVOCATION:												*/
+    '/*																	*/
+    '/* CreateDataBase()												*/
+    '/*******************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+    '/*																	*/
+    '/*  (None)															*/
+    '/*******************************************************************/
+    '/* MODIFICATION HISTORY:											*/
+    '/*																	*/
+    '/*  WHO   WHEN     WHAT											*/
+    '/*  ---   ----     ------------------------------------------------*/
+    '/*  BRH  01/23/21  Initial creation of the code					*/
+    '/*******************************************************************/
+    Public Sub CreateDataBase()
 		'Creates a database file through the SQLiteConnection
 		SQLiteConnection.CreateFile(strDBPath)
 		MessageBox.Show("Database Created")
