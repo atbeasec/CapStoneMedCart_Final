@@ -295,7 +295,7 @@ Public Class frmFullCart
 
     Public Sub gettingConnectionSettings()
         Dim strGetSettings As String = "Select * from Settings"
-        Dim dsSetting = DatabaseCreation.ExecuteSelectQuery(strGetSettings)
+        Dim dsSetting = CreateDatabase.ExecuteSelectQuery(strGetSettings)
         bitRate = dsSetting.Tables(0).Rows(0)(1).ToString
         comPort = dsSetting.Tables(0).Rows(0)(2).ToString
 
