@@ -129,7 +129,7 @@
 
     Private Sub AllergiesExist()
 
-        ' If allergies exist show the allergies panel and move the other panel over to specific location
+        'If allergies exist show the allergies panel and move the other panel over to specific location
 
     End Sub
 
