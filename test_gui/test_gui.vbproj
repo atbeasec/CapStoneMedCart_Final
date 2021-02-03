@@ -92,6 +92,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CartInterfaceCode.vb" />
     <Compile Include="DatabaseCreation.vb" />
     <Compile Include="Dispense.Designer.vb">
       <DependentUpon>Dispense.vb</DependentUpon>
@@ -214,6 +215,12 @@
     <Compile Include="frmNewPatient.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmOpenedDrawer.Designer.vb">
+      <DependentUpon>frmOpenedDrawer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmOpenedDrawer.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmPatientInfo.Designer.vb">
       <DependentUpon>frmPatientInfo.vb</DependentUpon>
     </Compile>
@@ -268,6 +275,12 @@
     <Compile Include="frmWitnessSignOff.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FullCart.Designer.vb">
+      <DependentUpon>FullCart.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FullCart.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GraphicalUserInterfaceReusableMethods.vb" />
     <Compile Include="Login.vb" />
     <Compile Include="Print.vb" />
@@ -291,6 +304,12 @@
       <DependentUpon>NewNurse.vb</DependentUpon>
     </Compile>
     <Compile Include="NewNurse.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsChange.Designer.vb">
+      <DependentUpon>SettingsChange.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsChange.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Waste.Designer.vb">
@@ -361,6 +380,9 @@
     <EmbeddedResource Include="frmNewPatient.resx">
       <DependentUpon>frmNewPatient.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmOpenedDrawer.resx">
+      <DependentUpon>frmOpenedDrawer.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPatientInfo.resx">
       <DependentUpon>frmPatientInfo.vb</DependentUpon>
     </EmbeddedResource>
@@ -388,6 +410,9 @@
     <EmbeddedResource Include="frmWitnessSignOff.resx">
       <DependentUpon>frmWitnessSignOff.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FullCart.resx">
+      <DependentUpon>FullCart.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -396,6 +421,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NewNurse.resx">
       <DependentUpon>NewNurse.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsChange.resx">
+      <DependentUpon>SettingsChange.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Waste.resx">
       <DependentUpon>Waste.vb</DependentUpon>

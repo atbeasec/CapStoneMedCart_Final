@@ -1,26 +1,26 @@
-﻿Public Class FrmCart
+﻿Public Class frmOpenedDrawer
     '/*********************************************************************/
-    '/*                   FILE NAME:  FrmCart                             */									  
+    '/*                   FILE NAME:  frmOpenedDrawer                       */									  
     '/*********************************************************************/
     '/*                 PART OF PROJECT: CartInterface  				   */				  
     '/*********************************************************************/
-    '/*                   WRITTEN BY:  Nathan Premo  		                 */		  
-    '/*		         DATE CREATED:	1/21/2021                   		   */	
+    '/*                   WRITTEN BY:  Nathan Premo  		             */		  
+    '/*		         DATE CREATED:	2/2/2021                    		   */						  
     '/*********************************************************************/
-    '/*  FILE PURPOSE:									   */			  
-    '/*	 This is going to be the form that is used to simulate the cart.  */
-    '/* is just has a label that will be changed to the drawer number, and */
-    '/* a button that closes the form. 
+    '/*  FILE PURPOSE:									                   */			  
+    '/*  This is going to hold the form that lets the user know a drawer is*/
+    '/*  open. It exists to give the user a way to indicate a crat is closed */
+    '/*  if the cart should fail to report it correctly. 
     '/* 																	  
     '/*********************************************************************/
-    '/*  COMMAND LINE PARAMETER LIST (In Parameter Order):			   */ 
-    '/*                                                    (NONE)	   */	  
+    '/*  COMMAND LINE PARAMETER LIST (In Parameter Order):			       */ 
+    '/*                                                    (NONE)	       */	  
     '/*********************************************************************/
-    '/*  ENVIRONMENTAL RETURNS:							   */			  
-    '/*                          (NOTHING)					   */		  
+    '/*  ENVIRONMENTAL RETURNS:							                    */			  
+    '/*                          (NOTHING)				            	   */		  
     '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								   */			  
-    '/*											   */					  
+    '/* SAMPLE INVOCATION:						                		   */			  
+    '/*				(none)                  							   */					  
     '/* 																	  
     '/*********************************************************************/
     '/*  GLOBAL VARIABLE LIST (Alphabetically):			         */		  
@@ -37,36 +37,43 @@
     '/*********************************************************************/
 
 
+
     '/*********************************************************************/
-    '/*                   SUBPROGRAM NAME:  btnClose_Click				   */         
+    '/*                   SUBPROGRAM NAME:  btnClose_Click    			   */         
     '/*********************************************************************/
-    '/*                   WRITTEN BY:  Nathan Premo   		                */   
-    '/*		         DATE CREATED: 	1/21/2021                       	   */                             
+    '/*                   WRITTEN BY:  Nathan Premo   		               */   
+    '/*		         DATE CREATED: 	2/2/2021                        	   */                             
     '/*********************************************************************/
-    '/*  FUNCTION PURPOSE:								   */             
-    '/*	 this is going to handle the when the button on the form is clicked*/
-    '/*  all it will do is close the form by calling the me.close function. */
+    '/*  SUBPROGRAM PURPOSE:						            		   */             
+    '/*	 This is going to handle the user clicking the close button. 	   */
+    '/*  it exists in case the cart doesn't corretly send the code that a */
+    '/*  drawer has closed it will allow the user to indicate that a drawer */
+    '/*  has been closed.                                                  */
     '/*                                                                   */
     '/*********************************************************************/
-    '/*  CALLED BY:   	      	               					         */           
-    '/*  The button on the form.                          				   */         
+    '/*  CALLED BY:   	      						         */           
+    '/*   Form button click                                				   */         
     '/*********************************************************************/
-    '/*  CALLS:										                       */                 
-    '/*             (NONE)							                	   */             
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
     '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):				        	   */         
-    '/*			(NONE)                  								   */                     
-    '/*                                                                     
-    '/*********************************************************************/
-    '/*  RETURNS:								                           */                   
-    '/*            (NOTHING)							               	   */             
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								   */             
+    '/*  PARAMETER LIST (In Parameter Order):					          */
+    '/*  sender – Identifies which particular control raised the          */
+    '/*          click event                                              */
+    '/*  e – Holds the EventArgs object sent to the routine               */        
+    '/*                                                                   */  
     '/*											   */                     
     '/*                                                                     
     '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:			                					   */             
+    '/*		btnClose.click          									   */                     
+    '/*                                                                     
+    '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*		(None)                  									   */                     
+    '/*		(none)									   */                     
     '/*                                                                     
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
@@ -76,8 +83,7 @@
     '/*                                                                     
     '/*********************************************************************/
 
-
-    Private Sub BtnClose_Click(sender As Object, e As EventArgs) Handles BtnClose.Click
-        Me.Close()
+    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+        CartInterfaceCode.minusDrawerCount()
     End Sub
 End Class
