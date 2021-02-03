@@ -93,7 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CartInterfaceCode.vb" />
-    <Compile Include="DatabaseCreation.vb" />
+    <Compile Include="CreateDatabase.vb" />
     <Compile Include="Dispense.Designer.vb">
       <DependentUpon>Dispense.vb</DependentUpon>
     </Compile>

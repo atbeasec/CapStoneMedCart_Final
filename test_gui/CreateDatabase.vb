@@ -1,5 +1,5 @@
 ﻿'/********************************************************************	*/
-'/*                   FILE NAME:  DataBaseCreation.vb					*/
+'/*                   FILE NAME:  CreateDatabase.vb						*/
 '/********************************************************************	*/
 '/*					  PART OF PROJECT: 									*/
 '/********************************************************************	*/
@@ -60,7 +60,7 @@
 'Imports the libraries necessary to connect and create SQLite databases
 Imports System.Data.SQLite
 
-Module DatabaseCreation
+Module CreateDatabase
 	'The path where the database is desired to be stored. 
 	'Right now, the database is stored in the bin\debug folder where this 
 	'	project is housed.
@@ -249,7 +249,8 @@ Module DatabaseCreation
 	                                    'Drawer_Number'	INTEGER NOT NULL,
 	                                    'Size'	INTEGER NOT NULL,
 	                                    'Number_of_Dividers'	INTEGER NOT NULL,
-	                                    'Full_Flag'	TEXT,
+	                                    'Full_Flag'	INTEGER NOT NULL,
+										'Active_Flag' INTEGER NOT NULL,
 	                                    PRIMARY KEY('Drawers_ID' AUTOINCREMENT));"
 		ExecuteQuery("Drawers")
 	End Sub
@@ -296,10 +297,11 @@ Module DatabaseCreation
 	                        'Drug_Name'	TEXT NOT NULL,
 	                        'RXCUI_ID'	INTEGER NOT NULL,
 	                        'Dosage'	INTEGER NOT NULL,
-	                        'NarcoticControlled_Flag'	TEXT NOT NULL,
+	                        'NarcoticControlled_Flag'	INTEGER NOT NULL,
 	                        'Barcode'	TEXT,
-	                        'Brand_Name'	TEXT,
-	                        'Type'	TEXT NOT NULL,
+	                        'Type'	TEXT,
+							'Strength'	TEXT,
+							'Active_Flag' INTEGER NOT NULL,
 	                        PRIMARY KEY('Medication_ID' AUTOINCREMENT));"
 
 		ExecuteQuery("Medication")
@@ -360,6 +362,7 @@ Module DatabaseCreation
 	                    'Phone_Number'	TEXT NOT NULL,
 	                    'Email_address'	TEXT,
 	                    'Primary_Physician_ID'	INTEGER NOT NULL,
+						'Active_Flag' INTEGER NOT NULL,
 	                    FOREIGN KEY(" & "Primary_Physician_ID" & ") REFERENCES " & "Physician" & "(" & "Physician_ID" & "),
 	                    PRIMARY KEY('Patient_ID' AUTOINCREMENT));"
 		ExecuteQuery("Patient")
@@ -414,6 +417,7 @@ Module DatabaseCreation
 						'Physician_City'	TEXT NOT NULL,
 						'Physician_State'	TEXT NOT NULL,
 						'Physician_Zip_Code'	TEXT NOT NULL,
+						'Active_Flag' INTEGER NOT NULL,
 	                    PRIMARY KEY(" & "Physician_ID" & "));"
 
 		ExecuteQuery("Physician")
@@ -505,11 +509,12 @@ Module DatabaseCreation
 	                    'User_ID'	INTEGER NOT NULL,
 						'Username'	TEXT NOT NULL UNIQUE,
 	                    'Password'	TEXT NOT NULL,
-						'User_First_Name'	TEXT NOT NULL,
-						'User_Last_Name'	TEXT NOT NULL,
+						'User_First_Name'	TEXT,
+						'User_Last_Name'	TEXT,
 	                    'Barcode'	TEXT NOT NULL,
-	                    'Admin_Flag'	TEXT,
-	                    'Supervisor_Flag'	TEXT,
+	                    'Admin_Flag'	INTEGER,
+	                    'Supervisor_Flag'	INTEGER,
+						'Active_Flag' INTEGER NOT NULL,
 	                    PRIMARY KEY('User_ID' AUTOINCREMENT));"
 		ExecuteQuery("User")
 	End Sub
@@ -554,6 +559,7 @@ Module DatabaseCreation
 	                    'Patient_TUID'	INTEGER NOT NULL,
 	                    'User_TUID'	INTEGER NOT NULL,
 	                    'Visit_Date'	TEXT NOT NULL,
+						'Active_Flag' INTEGER NOT NULL,
 	                    PRIMARY KEY(" & "Patient_TUID" & "," & "User_TUID" & "),
 	                    FOREIGN KEY(" & "User_TUID" & ") REFERENCES " & "User" & "(" & "User_ID" & "),
 	                    FOREIGN KEY(" & "Patient_TUID" & ") REFERENCES " & "Patient" & "(" & "Patient_ID" & "));"
@@ -600,7 +606,7 @@ Module DatabaseCreation
 		strCreateTable = "CREATE TABLE 'Rooms' (
 	                    'Room_ID'	INTEGER NOT NULL,
 	                    'Bed_Name'	TEXT NOT NULL,
-	                    'Active_Flag'	TEXT NOT NULL,
+	                    'Active_Flag'	INTEGER NOT NULL,
 	                    PRIMARY KEY(" & "Room_ID" & "," & "Bed_Name" & "));"
 
 		ExecuteQuery("Rooms")
@@ -891,13 +897,14 @@ Module DatabaseCreation
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
 	'/*******************************************************************/
 	Public Sub CreateDrugInteractionsTable()
-		strCreateTable = "CREATE TABLE 'DrugInteractions' (
+		strCreateTable = "CREATE TABLE 'Drug_Interactions' (
 	                    'Drug_Interactions_ID'	INTEGER NOT NULL UNIQUE,
 	                    'Medication_One_ID'	INTEGER NOT NULL,
 	                    'Medication_Two_ID'	INTEGER NOT NULL,
 	                    'Medication_Three_ID'	INTEGER,
 	                    'Severity'	TEXT,
 	                    'Description'	TEXT,
+						'Active_Flag' INTEGER NOT NULL,
 	                    FOREIGN KEY(" & "Medication_Three_ID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
 	                    FOREIGN KEY(" & "Medication_One_ID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
 	                    FOREIGN KEY(" & "Medication_Two_ID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
@@ -950,7 +957,7 @@ Module DatabaseCreation
 	                'Quantity'	INTEGER NOT NULL,
 	                'Divider_Bin'	TEXT,
 	                'Expiration_Date'	TEXT NOT NULL,
-	                'Discrepancy_Flag'	TEXT,
+	                'Discrepancy_Flag'	INTEGER NOT NULL,
 	                PRIMARY KEY('DrawerMedication_ID' AUTOINCREMENT),
 	                FOREIGN KEY(" & "Medication_TUID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
 	                FOREIGN KEY(" & "Drawers_TUID" & ") REFERENCES " & "Drawers" & "(" & "Drawers_ID" & "));"
@@ -1221,6 +1228,7 @@ Module DatabaseCreation
 						'Quantity'	INTEGER NOT NULL,
 						'Method'	TEXT NOT NULL,
 						'Schedule'	TEXT NOT NULL,
+						'Active_Flag' INTEGER NOT NULL,
 						FOREIGN KEY(" & "Medication_TUID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
 						FOREIGN KEY(" & "Ordering_Physician_ID" & ") REFERENCES " & "Physician" & "(" & "Physician_ID" & "),
 						FOREIGN KEY(" & "Patient_TUID" & ") REFERENCES " & "Patient" & "(" & "Patient_ID" & "),
@@ -1323,7 +1331,7 @@ Module DatabaseCreation
 						'Settings_ID'	INTEGER NOT NULL UNIQUE,
 						'Bit_rate'	TEXT NOT NULL,
 						'Comm_Port'	TEXT NOT NULL,
-						'Database_Storage_Location'	TEXT NOT NULL,
+						'Simulation_Mode_Flag'	INTEGER,
 						PRIMARY KEY('Settings_ID' AUTOINCREMENT));"
 
 		ExecuteQuery("Settings")
