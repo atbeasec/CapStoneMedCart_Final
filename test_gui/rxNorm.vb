@@ -39,22 +39,20 @@ Module rxNorm
     '/* MODIFICATION HISTORY:						                    */
     '/*											                        */
     '/*  WHO            WHEN        WHAT								*/
-    '/*  Dillen    1/27/2021   Initial creation                    */
+    '/*  Dillen    1/27/2021   Initial creation                         */
     '/*******************************************************************/
 
-    'stores name of rxui
-    Dim strRXUI As String
-    'stores the name of the drug the user is trying to search 
-    Dim searchName As String
+
+
 
 
 
 
     '/*********************************************************************/
-    '/*                   FUNCTION NAME:  getDrugInformation              */
+    '/*                   FUNCTION NAME:  getDrugInformationByName        */
     '/*********************************************************************/
     '/*                   WRITTEN BY:Dillen Perron  		              */
-    '/*		         DATE CREATED: January 16, XXXX			              */
+    '/*		         DATE CREATED: 2/3/2021     			              */
     '/*********************************************************************/
     '/*  FUNCTION PURPOSE:								                  */
     '/*											                          */
@@ -77,11 +75,10 @@ Module rxNorm
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                  */
     '/*											                          */
-    '/*   CalcQuadratic(4.0,5.0,6.0);					                  */
+    '/* getDrugInformationByName("tylenol")  		                      */
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically):			    	          */
     '/*											                          */
-    '/*  sngDisc – The calculated discriminant of the quadratic equation. */
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						                      */
     '/*											                          */
@@ -92,11 +89,11 @@ Module rxNorm
     '/*********************************************************************/
 
 
-    Function getDrugInformation(drugname As String) As Object
+    Function getDrugInformationByName(drugname As String) As Object
 
 
         'URL for finding each drug name 
-        Dim url As String = "https://rxnav.nlm.nih.gov/REST/drugs?name=" + searchName
+        Dim url As String = "https://rxnav.nlm.nih.gov/REST/drugs?name=" + drugname
 
 
         'web request to pull data 
@@ -113,5 +110,130 @@ Module rxNorm
 
     End Function
 
+
+
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME:  getDrugInformationByID        */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:Dillen Perron  		              */
+    '/*		         DATE CREATED: 2/3/2021     			              */
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								                  */
+    '/*											                          */
+    '/* This function Is responsible for making rxNorm api call           */
+    '*/ to gather drug information                                        */
+    '/*											                          */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/*                                     				              */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */
+    '/*             (NONE)								                  */
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */
+    '/*											                          */
+    '/* 			                                                      */
+    '/*********************************************************************/
+    '/*  RETURNS:								                          */
+    '/*            (NOTHING)								              */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */
+    '/*											                          */
+    '/*   getDrugInformationByID(153008)				                  */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):			    	          */
+    '/*											                          */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO      WHEN     WHAT								              */
+    '/*                                                                   */
+    '/*  Dillen  01/27/21  Function to make api call to get               */
+    '/*                      drug information using rxcui.			      */
+    '/*********************************************************************/
+
+    'Function getDrugInformationByID(drugid As String) As Object
+
+
+    'URL for finding each drug name 
+    'Dim url As String = "https://rxnav.nlm.nih.gov/REST/rxcui/" + drugid+ "/filter?propName=TTY&propValues=IN+PIN"
+
+
+    'web request to pull data 
+    'Dim restClient As New RestSharp.RestClient(url)
+    'Dim restRequest As New RestSharp.RestRequest(url)
+
+
+    'saves the result from request
+    'Dim result = restClient.get(restRequest)
+
+
+    'debug to test if content is correct
+    '   Debug.WriteLine(result.Content)
+
+    '  End Function
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME:  getAllProperties                */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:Dillen Perron  		              */
+    '/*		         DATE CREATED: 2/3/2021     			              */
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								                  */
+    '/*											                          */
+    '/* This function Is responsible for gathering all property           */
+    '/*	information on a given rxcui number		                          */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/*                                     				              */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */
+    '/*             (NONE)								                  */
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */
+    '/*											                          */
+    '/* 			                                                      */
+    '/*********************************************************************/
+    '/*  RETURNS:								                          */
+    '/*            (NOTHING)								              */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */
+    '/*											                          */
+    '/*   getAllProperties("153008")				                  */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):			    	          */
+    '/*											                          */
+    '/*	 url - holds a link to the api with the selected rxui             */
+    '/*  restClient -			                                          */
+    '/*  restRequest - 			                                          */
+    '/*  result - holds the result of the api call (json format)          */
+    '/*											                          */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO      WHEN     WHAT								              */
+    '/*                                                                   */
+    '/*  Dillen  01/27/21  Function to make api call to get               */
+    '/*                      drug properties            			      */
+    '/*********************************************************************/
+
+    Function getAllProperties(rxcuiNum As String)
+        'Url of the API call for all properties
+        Dim url As String = "https://rxnav.nlm.nih.gov/REST/rxcui/" + rxcuiNum + "/allProperties.json?prop=all"
+
+
+        'web request to pull data 
+        Dim restClient As New RestSharp.RestClient(url)
+        Dim restRequest As New RestSharp.RestRequest(url)
+
+
+        'saves the result from request
+        Dim result = restClient.get(restRequest)
+
+
+        'debug to test if content is correct
+        Debug.WriteLine(result.Content)
+
+
+    End Function
 
 End Module
