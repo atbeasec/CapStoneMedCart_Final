@@ -1402,5 +1402,120 @@ Module DatabaseCreation
 		DBConn.Close()
 	End Sub
 
+	'/*********************************************************************/
+	'/*                   FUNCTION NAME:  	ExecuteSelectQuery   		   */         
+	'/*********************************************************************/
+	'/*                   WRITTEN BY:  Nathan Premo   						*/   
+	'/*		         DATE CREATED: 		2/2/2021						  */                             
+	'/*********************************************************************/
+	'/*  FUNCTION PURPOSE:								   */             
+	'/*	 this is going to handle select requests from the database. It will*/
+	'/*  set up and send the SQL request to the database and return the    */
+	'/*  values as a dataset. If there is an issue, it will display the    */
+	'/*  query that had the issue as well as the issue being reported.     */
+	'/*********************************************************************/
+	'/*  CALLED BY:   	      						         */           
+	'/*                                         				   */         
+	'/*********************************************************************/
+	'/*  CALLS:										   */                 
+	'/*             (NONE)								   */             
+	'/*********************************************************************/
+	'/*  PARAMETER LIST (In Parameter Order):					   */         
+	'/*	 strStatement - this is the SQL query that the user is looking to */ 
+	'/*					excute.											  */             
+	'/*                                                                     
+	'/*********************************************************************/
+	'/*  RETURNS:														 */                   
+	'/*  dsValues														  */
+	'/*********************************************************************/
+	'/* SAMPLE INVOCATION:												 */             
+	'/*	 Databasecreation.ExecuteSelectQuery("SELECT * from user;")		 */                     
+	'/*                                                                     
+	'/*********************************************************************/
+	'/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+	'/*  dsValues	- this is going to be the dataset that is returned    */
+	'/*					from the database.								  */
+	'/*                                                                     
+	'/*********************************************************************/
+	'/* MODIFICATION HISTORY:						         */               
+	'/*											   */                     
+	'/*  WHO   WHEN     WHAT								   */             
+	'/*  ---   ----     ------------------------------------------------- */
+	'/*                                                                     
+	'/*********************************************************************/
+
+
+	Public Function ExecuteSelectQuery(strStatement As String)
+		Dim dsValues As DataSet = New DataSet
+		Dim DBAdaptor As SQLiteDataAdapter
+
+		DBConn = New SQLiteConnection(strCONNECTION)
+		DBCmd = New SQLiteCommand(strStatement, DBConn)
+		'DBConn.Open()
+		Try
+			DBAdaptor = New SQLiteDataAdapter(strStatement, DBConn)
+			DBAdaptor.Fill(dsValues, "Table")
+		Catch ex As Exception
+			MessageBox.Show("could not complete the following SQL statement: " & strStatement &
+							" the following error occured: " & vbCrLf & vbCrLf & ex.ToString)
+
+		End Try
+		Return dsValues
+	End Function
+
+	'/*********************************************************************/
+	'/*                   SUBPROGRAM NAME:  ExecuteInsertQuery			   */         
+	'/*********************************************************************/
+	'/*                   WRITTEN BY:  Nathan Premo   						 */   
+	'/*		         DATE CREATED: 	2/2/2021							   */                             
+	'/*********************************************************************/
+	'/*  SUBPROGRAM PURPOSE:											   */             
+	'/*	 This will handle insert requests to the database. It will set up  */
+	'/*  The database connection and send the query. If there is an issue  */
+	'/*  it will display the query that had the issue as well as the issue */
+	'/*  being reported.     */
+	'/*                                                                   */
+	'/*********************************************************************/
+	'/*  CALLED BY:   	      						         */           
+	'/*                                         				   */         
+	'/*********************************************************************/
+	'/*  CALLS:										   */                 
+	'/*             (NONE)								   */             
+	'/*********************************************************************/
+	'/*  PARAMETER LIST (In Parameter Order):								*/         
+	'/*	 strStatement - this is the SQL query that the user is looking to */ 
+	'/*					excute.											  */
+	'/*                                                                     
+	'/*********************************************************************/
+	'/*  RETURNS:								         */                   
+	'/*            (NOTHING)								   */             
+	'/*********************************************************************/
+	'/* SAMPLE INVOCATION:								   */             
+	'/*											   */                     
+	'/*                                                                     
+	'/*********************************************************************/
+	'/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+	'/*											   */                     
+	'/*                                                                     
+	'/*********************************************************************/
+	'/* MODIFICATION HISTORY:						         */               
+	'/*											   */                     
+	'/*  WHO   WHEN     WHAT								   */             
+	'/*  ---   ----     ------------------------------------------------- */
+	'/*                                                                     
+	'/*********************************************************************/
+
+	Public Sub ExecuteInsertQuery(strStatement As String)
+		DBConn = New SQLiteConnection(strCONNECTION)
+		DBCmd = New SQLiteCommand(strStatement, DBConn)
+		DBConn.Open()
+		Try
+			DBCmd.ExecuteNonQuery()
+		Catch ex As Exception
+			MessageBox.Show("could not complete the following SQL statement: " & strStatement &
+							" the following error occured: " & vbCrLf & vbCrLf & ex.ToString)
+		End Try
+		DBConn.Close()
+	End Sub
 
 End Module

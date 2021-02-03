@@ -75,8 +75,8 @@ Module CartInterfaceCode
     Dim dicButtonDictionary As Dictionary(Of String, Control) = New Dictionary(Of String, Control)
 
     Sub main()
+        FrmCart.gettingConnectionSettings
 
-        OpenOneDrawer("19")
 
 
     End Sub
@@ -145,7 +145,7 @@ Module CartInterfaceCode
 
         If blnSimulationMode Then
             'this will comiple and be ran if the code is compiled in simulation mode. 
-            FrmCart.populateButtonDictionary(dicButtonDictionary)
+        FrmCart.populateButtonDictionary(dicButtonDictionary)
             If Not blnissue Then
                 '  FrmCart.LblDrawer.Text = "Drawer Number " + Number + " is Open"
                 '   FrmCart.ShowDialog()

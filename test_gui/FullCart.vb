@@ -44,8 +44,8 @@ Public Class frmFullCart
     '/*  WHO   WHEN     WHAT								   */			  
     '/*  ---   ----     ------------------------------------------------- */
     '/*********************************************************************/
-    Dim bitRate
-    Dim comPort
+    Dim bitRate As Integer = 0
+    Dim comPort As String = Nothing
 
 
     '/*********************************************************************/
@@ -230,7 +230,7 @@ Public Class frmFullCart
     '/*********************************************************************/
 
     Function serialSetup()
-
+        gettingConnectionSettings()
         'comport from the database. 
         'this is going to set everything up with the cart. 
 
@@ -280,7 +280,10 @@ Public Class frmFullCart
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
+    '/*	 strGetSettings - this the string that is going to be sent to the */
+    '/*          SQL database to get the settings.                        */
+    '/*  dsSetting - this is the dataset that is going to hold the        */
+    '/*         Information the database sends back. 
     '/*                                                                     
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
@@ -290,11 +293,11 @@ Public Class frmFullCart
     '/*                                                                     
     '/*********************************************************************/
 
-    Sub gettingConnectionSettings()
-
-
-
-
+    Public Sub gettingConnectionSettings()
+        Dim strGetSettings As String = "Select * from Settings"
+        Dim dsSetting = DatabaseCreation.ExecuteSelectQuery(strGetSettings)
+        bitRate = dsSetting.Tables(0).Rows(0)(1).ToString
+        comPort = dsSetting.Tables(0).Rows(0)(2).ToString
 
 
 
@@ -342,7 +345,10 @@ Public Class frmFullCart
 
 
     Sub listening() Handles SerialPort1.DataReceived
-        CartInterface.minusDrawerCount()
+        CartInterfaceCode.minusDrawerCount()
     End Sub
 
+    Private Sub frmFullCart_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class
