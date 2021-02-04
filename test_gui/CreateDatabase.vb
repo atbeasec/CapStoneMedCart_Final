@@ -1591,21 +1591,21 @@ Module CreateDatabase
     '/*                                                                     
     '/*********************************************************************/
     '/*  RETURNS:								         */                   
-    '/*            (NOTHING)								   */             
+    '/*    strReturnedScalar as string         
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								   */             
     '/*											   */                     
-    '/*                                                                     
+    '/*          ExecuteScalarQuery("Select * from Table")                                                           
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
     '/*	strReturnedScalar									                      
     '/*                                                                     
     '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						         */               
-    '/*											   */                     
-    '/*  WHO   WHEN     WHAT								   */             
-    '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
+    '/* MODIFICATION HISTORY:						                      
+    '/*											                       
+    '/*  WHO             WHEN     WHAT								      */             
+    '/*  ---             ----     ----------------------------------------*/
+    '/*  AlexBeasecker  01/23/21  Initial creation of the code			  */                                                                   
     '/*********************************************************************/
     Public Function ExecuteScalarQuery(strStatement As String)
         'declare string for the scalar statement
