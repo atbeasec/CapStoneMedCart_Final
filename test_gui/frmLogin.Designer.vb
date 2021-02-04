@@ -26,12 +26,13 @@ Partial Class frmLogin
         Me.Button1 = New System.Windows.Forms.Button()
         Me.txtUserName = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.lblBadge = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.lblBadge = New System.Windows.Forms.Label()
+        Me.chkShowPassword = New System.Windows.Forms.CheckBox()
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -69,6 +70,7 @@ Partial Class frmLogin
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.White
+        Me.Panel1.Controls.Add(Me.chkShowPassword)
         Me.Panel1.Controls.Add(Me.lblBadge)
         Me.Panel1.Controls.Add(Me.Panel3)
         Me.Panel1.Controls.Add(Me.Panel2)
@@ -78,30 +80,42 @@ Partial Class frmLogin
         Me.Panel1.Size = New System.Drawing.Size(332, 232)
         Me.Panel1.TabIndex = 7
         '
+        'lblBadge
+        '
+        Me.lblBadge.AutoSize = True
+        Me.lblBadge.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblBadge.ForeColor = System.Drawing.Color.Black
+        Me.lblBadge.Location = New System.Drawing.Point(108, 192)
+        Me.lblBadge.Name = "lblBadge"
+        Me.lblBadge.Size = New System.Drawing.Size(109, 17)
+        Me.lblBadge.TabIndex = 17
+        Me.lblBadge.Text = "Login with badge"
+        '
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Panel3.Controls.Add(Me.TextBox1)
+        Me.Panel3.Controls.Add(Me.txtPassword)
         Me.Panel3.Location = New System.Drawing.Point(51, 97)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel3.Size = New System.Drawing.Size(237, 28)
         Me.Panel3.TabIndex = 8
         '
-        'TextBox1
+        'txtPassword
         '
-        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.ForeColor = System.Drawing.SystemColors.ButtonShadow
-        Me.TextBox1.Location = New System.Drawing.Point(1, 1)
-        Me.TextBox1.Margin = New System.Windows.Forms.Padding(2)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(235, 26)
-        Me.TextBox1.TabIndex = 2
-        Me.TextBox1.Tag = "Password"
-        Me.TextBox1.Text = "Password"
+        Me.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtPassword.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtPassword.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPassword.ForeColor = System.Drawing.SystemColors.ButtonShadow
+        Me.txtPassword.Location = New System.Drawing.Point(1, 1)
+        Me.txtPassword.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtPassword.Multiline = True
+        Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
+        Me.txtPassword.Size = New System.Drawing.Size(235, 26)
+        Me.txtPassword.TabIndex = 2
+        Me.txtPassword.Tag = "Password"
+        Me.txtPassword.Text = "Password"
         '
         'Panel2
         '
@@ -133,16 +147,14 @@ Partial Class frmLogin
         Me.Panel4.Size = New System.Drawing.Size(50, 48)
         Me.Panel4.TabIndex = 9
         '
-        'lblBadge
+        'chkShowPassword
         '
-        Me.lblBadge.AutoSize = True
-        Me.lblBadge.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblBadge.ForeColor = System.Drawing.Color.Black
-        Me.lblBadge.Location = New System.Drawing.Point(108, 192)
-        Me.lblBadge.Name = "lblBadge"
-        Me.lblBadge.Size = New System.Drawing.Size(109, 17)
-        Me.lblBadge.TabIndex = 17
-        Me.lblBadge.Text = "Login with badge"
+        Me.chkShowPassword.AutoSize = True
+        Me.chkShowPassword.Location = New System.Drawing.Point(292, 103)
+        Me.chkShowPassword.Name = "chkShowPassword"
+        Me.chkShowPassword.Size = New System.Drawing.Size(15, 14)
+        Me.chkShowPassword.TabIndex = 18
+        Me.chkShowPassword.UseVisualStyleBackColor = True
         '
         'frmLogin
         '
@@ -170,9 +182,10 @@ Partial Class frmLogin
     Friend WithEvents txtUserName As TextBox
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Panel3 As Panel
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtPassword As TextBox
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Label1 As Label
     Friend WithEvents Panel4 As Panel
     Friend WithEvents lblBadge As Label
+    Friend WithEvents chkShowPassword As CheckBox
 End Class
