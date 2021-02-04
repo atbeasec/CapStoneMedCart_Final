@@ -736,7 +736,7 @@ Module CreateDatabase
 		strCreateTable = "CREATE TABLE 'Allergy' (
 	                    'Allergy_Name'	TEXT NOT NULL UNIQUE,
 	                    'Medication_TUID'	INTEGER,
-	                    'Allergy_Type'	INTEGER,
+	                    'Allergy_Type'	TEXT,
 	                    PRIMARY KEY(" & "Allergy_Name" & "));"
 
 		ExecuteQuery("Allergy")
@@ -1044,6 +1044,7 @@ Module CreateDatabase
 	                    'Secondary_User_TUID'	INTEGER NOT NULL,
 	                    'DrawerMedication_TUID'	INTEGER NOT NULL,
 	                    'DateTime'	TEXT NOT NULL,
+						'Reason' TEXT,
 	                    PRIMARY KEY('Wastes_ID' AUTOINCREMENT),
 	                    FOREIGN KEY(" & "Medication_TUID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
 	                    FOREIGN KEY(" & "Primary_User_TUID" & ") REFERENCES " & "User" & "(" & "User_ID" & "),
