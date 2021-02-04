@@ -57,6 +57,8 @@ Module CartInterfaceCode
     '/* Nathan 2/2/2021 Imported the cartInferfaceProject into the main porject*/
     '/* Nathan 2/2/2021 renamed SimulationMode to blnSimualationMOde to follow*/
     '/*                 naming standards.                                   */
+    '/* Np     2/4/2021Fixed bytFinal being used before it is assigned a value*/
+    '/*                 Warning.                                            */
     '/*********************************************************************/
 
     '26
@@ -224,6 +226,8 @@ Module CartInterfaceCode
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
+    '/* Np     2/4/2021Fixed bytFinal being used before it is assigned a value*/
+    '/*                 Warning.                                            */
     '/*                                                                     
     '/*********************************************************************/
 

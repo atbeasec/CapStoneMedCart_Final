@@ -42,6 +42,9 @@ Public Class frmFullCart
     '/*											   */					  
     '/*  WHO   WHEN     WHAT								   */			  
     '/*  ---   ----     ------------------------------------------------- */
+    '/*  NP    02/4/2021 I changed the way gettingConnectionSettings was  */
+    '/*                  working with the data brought back from the      */
+    '/*                  database to use to EnumListTo make it more readable.*/
     '/*********************************************************************/
     Dim bitRate As Integer = 0
     Dim comPort As String = Nothing
@@ -289,14 +292,16 @@ Public Class frmFullCart
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
+    '/*  NP    02/4/2021 I changed the way it was working with the data   */
+    '/*                  brought back from the database to use to EnumList*/
+    '/*                  To make it more readable.                        *
     '/*********************************************************************/
 
     Public Sub gettingConnectionSettings()
         Dim strGetSettings As String = "Select * from Settings"
         Dim dsSetting = CreateDatabase.ExecuteSelectQuery(strGetSettings)
-        bitRate = dsSetting.Tables(0).Rows(0)(1).ToString
-        comPort = dsSetting.Tables(0).Rows(0)(2).ToString
+        bitRate = dsSetting.Tables(0).Rows(0)(EnumList.Settings.bitRate).ToString
+        comPort = dsSetting.Tables(0).Rows(0)(EnumList.Settings.ComPort).ToString
 
 
 
