@@ -1,9 +1,9 @@
 ﻿Public Class frmInventory
-    Private Sub NumericUpDown1_ValueChanged(sender As Object, e As EventArgs) Handles numDrawerNumber.ValueChanged
+    Private Sub NumericUpDown1_ValueChanged(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs)
         Me.Close()
     End Sub
 

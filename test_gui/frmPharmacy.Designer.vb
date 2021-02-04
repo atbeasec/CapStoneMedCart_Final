@@ -37,17 +37,18 @@ Partial Class frmPharmacy
         Me.Label17 = New System.Windows.Forms.Label()
         Me.cmbDosage = New System.Windows.Forms.ComboBox()
         Me.Label18 = New System.Windows.Forms.Label()
-        Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.numQuantity = New System.Windows.Forms.NumericUpDown()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.txtPatientDOB = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.txtSchedule = New System.Windows.Forms.TextBox()
-        Me.Panel4.SuspendLayout()
-        CType(Me.numQuantity, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.txtQuantity = New System.Windows.Forms.TextBox()
         Me.Panel5.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label10
@@ -78,7 +79,7 @@ Partial Class frmPharmacy
         Me.cmbOrderedBy.Location = New System.Drawing.Point(40, 305)
         Me.cmbOrderedBy.Name = "cmbOrderedBy"
         Me.cmbOrderedBy.Size = New System.Drawing.Size(240, 29)
-        Me.cmbOrderedBy.TabIndex = 6
+        Me.cmbOrderedBy.TabIndex = 7
         '
         'Label11
         '
@@ -191,24 +192,6 @@ Partial Class frmPharmacy
         Me.Label18.TabIndex = 158
         Me.Label18.Text = "New Prescription"
         '
-        'Panel4
-        '
-        Me.Panel4.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel4.Controls.Add(Me.numQuantity)
-        Me.Panel4.Location = New System.Drawing.Point(342, 234)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel4.Size = New System.Drawing.Size(58, 29)
-        Me.Panel4.TabIndex = 5
-        '
-        'numQuantity
-        '
-        Me.numQuantity.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.numQuantity.Location = New System.Drawing.Point(1, 1)
-        Me.numQuantity.Name = "numQuantity"
-        Me.numQuantity.Size = New System.Drawing.Size(56, 27)
-        Me.numQuantity.TabIndex = 176
-        '
         'Panel5
         '
         Me.Panel5.BackColor = System.Drawing.Color.DarkGray
@@ -243,7 +226,7 @@ Partial Class frmPharmacy
         Me.Button1.Location = New System.Drawing.Point(210, 416)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(201, 38)
-        Me.Button1.TabIndex = 9
+        Me.Button1.TabIndex = 10
         Me.Button1.Text = "   Order Prescription"
         Me.Button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.Button1.UseVisualStyleBackColor = False
@@ -256,7 +239,7 @@ Partial Class frmPharmacy
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel1.Size = New System.Drawing.Size(242, 91)
-        Me.Panel1.TabIndex = 7
+        Me.Panel1.TabIndex = 8
         '
         'txtSchedule
         '
@@ -267,7 +250,58 @@ Partial Class frmPharmacy
         Me.txtSchedule.Multiline = True
         Me.txtSchedule.Name = "txtSchedule"
         Me.txtSchedule.Size = New System.Drawing.Size(240, 89)
-        Me.txtSchedule.TabIndex = 7
+        Me.txtSchedule.TabIndex = 9
+        '
+        'Button2
+        '
+        Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.Button2.FlatAppearance.BorderSize = 0
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.ForeColor = System.Drawing.Color.White
+        Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
+        Me.Button2.Location = New System.Drawing.Point(437, 234)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(28, 28)
+        Me.Button2.TabIndex = 6
+        Me.Button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.Button2.UseVisualStyleBackColor = False
+        '
+        'Button3
+        '
+        Me.Button3.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.Button3.FlatAppearance.BorderSize = 0
+        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button3.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.ForeColor = System.Drawing.Color.White
+        Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
+        Me.Button3.Location = New System.Drawing.Point(403, 234)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(28, 28)
+        Me.Button3.TabIndex = 5
+        Me.Button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.Button3.UseVisualStyleBackColor = False
+        '
+        'Panel2
+        '
+        Me.Panel2.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel2.Controls.Add(Me.txtQuantity)
+        Me.Panel2.Location = New System.Drawing.Point(344, 234)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel2.Size = New System.Drawing.Size(53, 28)
+        Me.Panel2.TabIndex = 4
+        '
+        'txtQuantity
+        '
+        Me.txtQuantity.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtQuantity.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtQuantity.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtQuantity.Location = New System.Drawing.Point(1, 1)
+        Me.txtQuantity.Multiline = True
+        Me.txtQuantity.Name = "txtQuantity"
+        Me.txtQuantity.Size = New System.Drawing.Size(51, 26)
+        Me.txtQuantity.TabIndex = 38
         '
         'frmPharmacy
         '
@@ -275,6 +309,9 @@ Partial Class frmPharmacy
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(621, 470)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.cmbMethod)
@@ -290,18 +327,17 @@ Partial Class frmPharmacy
         Me.Controls.Add(Me.Label17)
         Me.Controls.Add(Me.cmbDosage)
         Me.Controls.Add(Me.Label18)
-        Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Panel5)
         Me.Controls.Add(Me.Button1)
         Me.Name = "frmPharmacy"
         Me.Tag = "6"
         Me.Text = "frmPharmacy"
-        Me.Panel4.ResumeLayout(False)
-        CType(Me.numQuantity, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -321,11 +357,13 @@ Partial Class frmPharmacy
     Friend WithEvents Label17 As Label
     Friend WithEvents cmbDosage As ComboBox
     Friend WithEvents Label18 As Label
-    Friend WithEvents Panel4 As Panel
     Friend WithEvents Panel5 As Panel
     Friend WithEvents txtPatientDOB As TextBox
     Friend WithEvents Button1 As Button
-    Friend WithEvents numQuantity As NumericUpDown
     Friend WithEvents Panel1 As Panel
     Friend WithEvents txtSchedule As TextBox
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button3 As Button
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents txtQuantity As TextBox
 End Class

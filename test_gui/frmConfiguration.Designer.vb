@@ -32,9 +32,9 @@ Partial Class frmConfiguration
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
+        Me.rbtnAdministrator = New System.Windows.Forms.RadioButton()
+        Me.rbtnSupervisor = New System.Windows.Forms.RadioButton()
+        Me.rbtnNurse = New System.Windows.Forms.RadioButton()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -181,41 +181,41 @@ Partial Class frmConfiguration
         Me.Label3.TabIndex = 155
         Me.Label3.Text = "Permissions"
         '
-        'RadioButton3
+        'rbtnAdministrator
         '
-        Me.RadioButton3.AutoSize = True
-        Me.RadioButton3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RadioButton3.Location = New System.Drawing.Point(231, 491)
-        Me.RadioButton3.Name = "RadioButton3"
-        Me.RadioButton3.Size = New System.Drawing.Size(129, 25)
-        Me.RadioButton3.TabIndex = 9
-        Me.RadioButton3.TabStop = True
-        Me.RadioButton3.Text = "Adminustrator"
-        Me.RadioButton3.UseVisualStyleBackColor = True
+        Me.rbtnAdministrator.AutoSize = True
+        Me.rbtnAdministrator.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbtnAdministrator.Location = New System.Drawing.Point(231, 491)
+        Me.rbtnAdministrator.Name = "rbtnAdministrator"
+        Me.rbtnAdministrator.Size = New System.Drawing.Size(124, 25)
+        Me.rbtnAdministrator.TabIndex = 9
+        Me.rbtnAdministrator.TabStop = True
+        Me.rbtnAdministrator.Text = "Administrator"
+        Me.rbtnAdministrator.UseVisualStyleBackColor = True
         '
-        'RadioButton2
+        'rbtnSupervisor
         '
-        Me.RadioButton2.AutoSize = True
-        Me.RadioButton2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RadioButton2.Location = New System.Drawing.Point(111, 491)
-        Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(103, 25)
-        Me.RadioButton2.TabIndex = 8
-        Me.RadioButton2.TabStop = True
-        Me.RadioButton2.Text = "Supervisor"
-        Me.RadioButton2.UseVisualStyleBackColor = True
+        Me.rbtnSupervisor.AutoSize = True
+        Me.rbtnSupervisor.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbtnSupervisor.Location = New System.Drawing.Point(111, 491)
+        Me.rbtnSupervisor.Name = "rbtnSupervisor"
+        Me.rbtnSupervisor.Size = New System.Drawing.Size(103, 25)
+        Me.rbtnSupervisor.TabIndex = 8
+        Me.rbtnSupervisor.TabStop = True
+        Me.rbtnSupervisor.Text = "Supervisor"
+        Me.rbtnSupervisor.UseVisualStyleBackColor = True
         '
-        'RadioButton1
+        'rbtnNurse
         '
-        Me.RadioButton1.AutoSize = True
-        Me.RadioButton1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RadioButton1.Location = New System.Drawing.Point(25, 491)
-        Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(70, 25)
-        Me.RadioButton1.TabIndex = 7
-        Me.RadioButton1.TabStop = True
-        Me.RadioButton1.Text = "Nurse"
-        Me.RadioButton1.UseVisualStyleBackColor = True
+        Me.rbtnNurse.AutoSize = True
+        Me.rbtnNurse.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbtnNurse.Location = New System.Drawing.Point(25, 491)
+        Me.rbtnNurse.Name = "rbtnNurse"
+        Me.rbtnNurse.Size = New System.Drawing.Size(70, 25)
+        Me.rbtnNurse.TabIndex = 7
+        Me.rbtnNurse.TabStop = True
+        Me.rbtnNurse.Text = "Nurse"
+        Me.rbtnNurse.UseVisualStyleBackColor = True
         '
         'Panel2
         '
@@ -434,9 +434,9 @@ Partial Class frmConfiguration
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.RadioButton3)
-        Me.Controls.Add(Me.RadioButton2)
-        Me.Controls.Add(Me.RadioButton1)
+        Me.Controls.Add(Me.rbtnAdministrator)
+        Me.Controls.Add(Me.rbtnSupervisor)
+        Me.Controls.Add(Me.rbtnNurse)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Panel9)
@@ -474,9 +474,9 @@ Partial Class frmConfiguration
     Friend WithEvents Button1 As Button
     Friend WithEvents Label4 As Label
     Friend WithEvents Label3 As Label
-    Friend WithEvents RadioButton3 As RadioButton
-    Friend WithEvents RadioButton2 As RadioButton
-    Friend WithEvents RadioButton1 As RadioButton
+    Friend WithEvents rbtnAdministrator As RadioButton
+    Friend WithEvents rbtnSupervisor As RadioButton
+    Friend WithEvents rbtnNurse As RadioButton
     Friend WithEvents Panel2 As Panel
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Label2 As Label
