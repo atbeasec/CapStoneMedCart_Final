@@ -1,6 +1,5 @@
 ﻿Imports System.IO.Ports
 Imports System.Data.SQLite
-Imports Microsoft.Data.Sqlite
 Public Class frmFullCart
 
     '/*********************************************************************/

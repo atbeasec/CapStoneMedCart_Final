@@ -231,7 +231,7 @@ Module CartInterfaceCode
     Function getSerialString(number As String)
         Dim dicHexDictioanry = New Dictionary(Of String, System.Int32)
         populationDictionary(dicHexDictioanry)
-        Dim bytFinal As Byte()
+        Dim bytFinal As Byte() = Nothing
         If number.Length > 1 Then
             If number.Substring(0, 1) = 1 Then 'this is going to be for when the drawer number is greater 
                 'then 9
