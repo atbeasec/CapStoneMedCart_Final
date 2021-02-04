@@ -1567,4 +1567,61 @@ Module CreateDatabase
 		DBConn.Close()
 	End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME:  ExecuteScalarQuery			   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker   			 */   
+    '/*		         DATE CREATED: 	2/2/2021							   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:											   */             
+    '/*	 This will handle execute scalar sql statements. these statements
+    '/*  will return a single value from the database. The sql statement 
+    '/* is passed to this method, this method runs the scalar statement
+    '/* then returns the  string value from the statement.
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):								*/         
+    '/*	 strStatement - this is the SQL query that the user is looking to */ 
+    '/*					excute.											  */
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	strReturnedScalar									                      
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+    Public Function ExecuteScalarQuery(strStatement As String)
+        'declare string for the scalar statement
+        Dim strReturnedScalar As String = ""
+
+        'create database connection
+        DBConn = New SQLiteConnection(strCONNECTION)
+        DBCmd = New SQLiteCommand(strStatement, DBConn)
+        'DBConn.Open()
+        Try
+            strReturnedScalar = DBCmd.ExecuteScalar()
+        Catch ex As Exception
+            MessageBox.Show("could not complete the following SQL statement: " & strStatement &
+                            " the following error occured: " & vbCrLf & vbCrLf & ex.ToString)
+
+        End Try
+        Return strReturnedScalar
+    End Function
 End Module
