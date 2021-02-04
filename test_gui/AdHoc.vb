@@ -83,7 +83,7 @@ Module AdHoc
         Strdatacommand = "SELECT DrawerMedication_ID FROM DrawerMedication 
                             INNER JOIN AdHocOrder
                             ON AdHocOrder.Medication_TUID = DrawerMedication.Medication_TUID
-                            WHERE DrawerMedication.Medication_TUID = '1'"
+                            WHERE DrawerMedication.Medication_TUID = '" & intMedicationID & "'"
 
 
         StrMedicationDrawerID = ExecuteScalarQuery(Strdatacommand)

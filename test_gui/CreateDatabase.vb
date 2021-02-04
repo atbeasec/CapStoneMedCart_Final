@@ -1614,7 +1614,7 @@ Module CreateDatabase
         'create database connection
         DBConn = New SQLiteConnection(strCONNECTION)
         DBCmd = New SQLiteCommand(strStatement, DBConn)
-        'DBConn.Open()
+        DBConn.Open()
         Try
             strReturnedScalar = DBCmd.ExecuteScalar()
         Catch ex As Exception
@@ -1622,6 +1622,7 @@ Module CreateDatabase
                             " the following error occured: " & vbCrLf & vbCrLf & ex.ToString)
 
         End Try
+        DBConn.Close()
         Return strReturnedScalar
     End Function
 End Module
