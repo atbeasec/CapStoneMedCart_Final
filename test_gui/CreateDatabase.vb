@@ -152,6 +152,11 @@ Module CreateDatabase
                 strDBPath = strDEFAULTFOLDER & "\" & strDBNAME & ".db"
                 'write database path to the file
                 My.Computer.FileSystem.WriteAllText(strApplicationPath, strDBPath, True)
+            Else
+                'if the user clicks cancel or 'X' set a default path for the database into the config.app file
+                strDEFAULTFOLDER = Application.StartupPath
+                strDBPath = strDEFAULTFOLDER & "\" & strDBNAME & ".db"
+                My.Computer.FileSystem.WriteAllText(strApplicationPath, strDBPath, True)
             End If
 
         Else
