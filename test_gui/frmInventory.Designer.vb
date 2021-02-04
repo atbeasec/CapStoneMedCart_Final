@@ -407,7 +407,7 @@ Partial Class frmInventory
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(517, 425)
+        Me.ClientSize = New System.Drawing.Size(517, 524)
         Me.Controls.Add(Me.Panel7)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Panel6)

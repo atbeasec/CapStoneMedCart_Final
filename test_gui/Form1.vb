@@ -2,8 +2,6 @@
 
     Dim frmCurrentChildForm As Form
     Dim frmPreviousChildForm As Form
-    '  Dim intContactPanelsAddedCount As Integer = 0
-
 
     Private Sub btnPatientRecords_Click(sender As Object, e As EventArgs) Handles btnPatientRecords.Click, btnInventory.Click, btnAdhockDispense.Click, btnEndOfShiftCount.Click, btnConfigureInventory.Click, btnReport.Click, btnDescrepancies.Click, btnMaintenance.Click, btnPharmacy.Click, btnSettings.Click, btnUsers.Click, btnDischargePatient.Click, btnEditRooms.Click, btnSerialPort.Click, btnWaste.Click
 
@@ -48,20 +46,9 @@
 
         End If
 
-        'do nothing the correct form is open
-        'Else
-        '
-        'frmCurrentChildForm.Close()
-        'Debug.Print("closed the form")
-        '
-        'End If
-        ' then we ned to open a new one and set the following properties..
-
         frmPreviousChildForm = frmChild
         'frmChild.TopMost = False
-
         frmChild.TopLevel = False
-
         ' removes boarder on form which is where someone can close the form. We will close it on button clicks instead
         frmChild.FormBorderStyle = FormBorderStyle.None
 
@@ -159,15 +146,21 @@
     End Sub
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         'Runs the database creation module to determine if the database was created
         CreateDatabase.Main()
+
         'CheckUserPermissions()
 
         'set submenu to be invisible on form load
         pnlSubMenuSettings.Visible = False
+
         pnlSubMenuInventory.Visible = False
 
         AssignHandlersToSubMenuItems()
+
+        'set the patient records form to be selected on default
+        btnPatientRecords.PerformClick()
 
     End Sub
 
@@ -255,7 +248,6 @@
         Dim ctl As Control
         Dim btn As Button
 
-
         For Each ctl In pnlSubMenuInventory.Controls
             If TypeName(ctl) = "Button" Then
                 btn = CType(ctl, Button)
@@ -337,10 +329,8 @@
         Dim ctlControl As Control
 
         For Each ctlControl In pnl.Controls
-
             ctlControl.BackColor = Color.FromArgb(60, 80, 150)
             ctlControl.ForeColor = Color.White
-
         Next
 
     End Sub

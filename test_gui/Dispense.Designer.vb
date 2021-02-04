@@ -46,7 +46,6 @@ Partial Class Dispense
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.btnCancel = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.btnDispense = New System.Windows.Forms.Button()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -307,21 +306,6 @@ Partial Class Dispense
         Me.Label4.TabIndex = 187
         Me.Label4.Text = "MRN:"
         '
-        'btnCancel
-        '
-        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancel.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.ForeColor = System.Drawing.Color.White
-        Me.btnCancel.Image = CType(resources.GetObject("btnCancel.Image"), System.Drawing.Image)
-        Me.btnCancel.Location = New System.Drawing.Point(328, 498)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(229, 38)
-        Me.btnCancel.TabIndex = 5
-        Me.btnCancel.Text = "      Cancel Dispensing      "
-        Me.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnCancel.UseVisualStyleBackColor = False
-        '
         'Label5
         '
         Me.Label5.AutoSize = True
@@ -339,7 +323,7 @@ Partial Class Dispense
         Me.btnDispense.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDispense.ForeColor = System.Drawing.Color.White
         Me.btnDispense.Image = CType(resources.GetObject("btnDispense.Image"), System.Drawing.Image)
-        Me.btnDispense.Location = New System.Drawing.Point(577, 498)
+        Me.btnDispense.Location = New System.Drawing.Point(421, 497)
         Me.btnDispense.Name = "btnDispense"
         Me.btnDispense.Size = New System.Drawing.Size(229, 38)
         Me.btnDispense.TabIndex = 6
@@ -466,7 +450,6 @@ Partial Class Dispense
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.btnDispense)
         Me.Controls.Add(Me.cmbMethod)
@@ -520,7 +503,6 @@ Partial Class Dispense
     Friend WithEvents Label7 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents Label4 As Label
-    Friend WithEvents btnCancel As Button
     Friend WithEvents Label5 As Label
     Friend WithEvents btnDispense As Button
     Friend WithEvents Label13 As Label
