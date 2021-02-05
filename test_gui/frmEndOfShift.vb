@@ -1,4 +1,45 @@
 ﻿Public Class frmEndOfShift
+
+    '/*******************************************************************/
+    '/*                   FILE NAME:  frmEndOfShift.vb                  */
+    '/*******************************************************************/
+    '/*                 PART OF PROJECT: Med_Cart				        */
+    '/*******************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier  		            */
+    '/*		         DATE CREATED: 2/5/2020         		            */
+    '/*******************************************************************/
+    '/*  Class PURPOSE:								                    */
+    '/*											                        */
+    '/*  Contains all of the functionality that occurs on this form     */
+    '/*                                                                 */
+    '/*******************************************************************/
+    '/*  COMMAND LINE PARAMETER LIST (In Parameter Order):			    */
+    '/*                                                    (NONE)	    */
+    '/*******************************************************************/
+    '/*  ENVIRONMENTAL RETURNS:							                */
+    '/*                          (NOTHING)					            */
+    '/*******************************************************************/
+    '/* SAMPLE INVOCATION:								                */
+    '/*											                        */
+    '/* the program will invoke this class when a user selects the      */
+    '/* end of shift button in the sub menu.                            */
+    '/*******************************************************************/
+    '/*  GLOBAL VARIABLE LIST (Alphabetically):			                */
+    '/*******************************************************************/
+    '/* COMPILATION NOTES:								                */
+    '/* 											                    */
+    '/* This project compiles normally under Microsoft Visual Basic.    */
+    '/* All one needs to do Is open up the Solver project And compile.  */
+    '/* No special compile options Or optimizations were used.  No      */
+    '/* unresolved warnings Or errors exist under these compilation     */
+    '/* conditions.									                    */
+    '/*******************************************************************/
+    '/* MODIFICATION HISTORY:						                    */
+    '/*											                        */
+    '/*  WHO             WHEN        WHAT								*/
+    '/*  Collin Krygier  2/5/2021    Initial creation                   */
+    '/*******************************************************************/
+
     Dim ContactPanelsAddedCount As Integer = 0
     Dim CurrentContactPanelName As String = Nothing
 
@@ -43,9 +84,60 @@
 
     End Sub
 
-
-
-
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: CreatePanel()                  */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/5/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is routine is dynamically creates panels that are placed    */ 
+    '/*	 inside of the flowpanel that is fixed on the form. The panels are*/
+    '/*	 created here, assigned handlers, and the contents of the panels  */
+    '/*	 are updated in this routine                                      */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*   btnAllMedications, btnNonControlled, btnControlled              */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 NONE                                                             */ 
+    '/* flpPannel- the flow panel which the user wants to create the      */
+    '/*     create the single panel.                                      */
+    '/* intMedicationTUID- value from the database we will store in the   */
+    '/*     control during runtime to save on a backend query later when  */
+    '/*     extracting data to send to the database.                      */
+    '/* strMedicationName- name of the medication that is assigned to     */
+    '/*     to some drawer and section in the cart.                       */
+    '/* strDrawerNumber- the drawer number which the medication being     */
+    '/*     sent to this method is stored in.                             */
+    '/* strSection- the section which the medication being sent here is   */
+    '/*     stored in.                                                    */
+    '/* strSystemCount- the quantity of the drug that the system assumes  */
+    '/*     should be in the drawer.                                      */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 CreatePanel(flpEndOfShiftCount, medTUID1, genName1, intNum1, intNum3, intNum5)   
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	pnl- is the pnl which we are creating for padding purposes        */
+    '/* pnlMainPanel- is the pnl which we are going to add controls       */
+    '/* lblID1 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID2 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID3 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID4 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  Collin Krygier  2/5/2021    Initial creation                     */
+    '/*********************************************************************/
     Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal intMedicationTUID As Integer, ByVal strMedicationName As String, ByVal strDrawerNumber As String, ByVal strSection As String, ByVal strSystemCount As String)
 
         Dim pnl As Panel
@@ -86,30 +178,19 @@
         CreateFlagBtn(pnlMainPanel, getPanelCount(flpPannel), lblActions.Location.X + 8, 5)
         CreateTextBox(pnlMainPanel, getPanelCount(flpPannel), lblCount.Location.X, 6)
 
-        Dim lblID As New Label
+        Dim lblID1 As New Label
         Dim lblID2 As New Label
         Dim lblID3 As New Label
         Dim lblID4 As New Label
-        Dim lblID5 As New Label
-        Dim lblID6 As New Label
-
-        Dim location As New Point(10, 20)
-        Dim location2 As New Point(100, 20)
-        Dim location3 As New Point(200, 20)
-        Dim location4 As New Point(300, 20)
-        Dim location5 As New Point(400, 20)
-        Dim location6 As New Point(500, 20)
 
         ' anywhere we have quotes except for the label names, we can call our Database and get method
-        CreateIDLabel(pnlMainPanel, lblID, "lblMedication", lblMedication.Location.X, 20, strMedicationName, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID1, "lblMedication", lblMedication.Location.X, 20, strMedicationName, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID2, "lblDrawerNumber", lblDrawerNum.Location.X, 20, strDrawerNumber, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID3, "lblSection", lblSection.Location.X, 20, strSection, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID4, "lblSystemCount", lblSystemCount.Location.X, 20, strSystemCount, getPanelCount(flpPannel))
 
-
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
-
 
     End Sub
 
@@ -117,7 +198,7 @@
     '/*                   SubProgram NAME: ExtractFormDataForDatabase     */         
     '/*********************************************************************/
     '/*                   WRITTEN BY:  Collin Krygier   		          */   
-    '/*		         DATE CREATED: 		 1/21/2021                        */                             
+    '/*		         DATE CREATED: 		 2/5/2021                         */                             
     '/*********************************************************************/
     '/*  Subprogram PURPOSE:								              */             
     '/*	 This is going to iterate over the flow panel to strip the data   */
@@ -149,7 +230,7 @@
     '/*											                          */                     
     '/*  WHO   WHEN     WHAT								              */             
     '/*  ---   ----     ------------------------------------------------  */
-    '/*                                                                     
+    '/*  Collin Krygier  2/5/2021    Initial creation                     */
     '/*********************************************************************/
     Sub ExtractFormDataForDatabase()
 
@@ -168,7 +249,7 @@
             For Each pnlPanel In ctlPanelPadding.Controls
                 ' retreiving list of all panels within the padding
 
-                For Each ctlControl In pnl.Controls
+                For Each ctlControl In pnlPanel.Controls
                     ' retreiving the items in the panel such as labels and textbox values
 
                     If TypeName(ctlControl) = "TextBox" Then
@@ -198,5 +279,13 @@
 
     Private Sub btnControlled_Click(sender As Object, e As EventArgs) Handles btnControlled.Click
         ExtractFormDataForDatabase()
+    End Sub
+
+    Private Sub btnNonControlled_Click(sender As Object, e As EventArgs) Handles btnNonControlled.Click
+
+    End Sub
+
+    Private Sub btnAllMedications_Click(sender As Object, e As EventArgs) Handles btnAllMedications.Click
+
     End Sub
 End Class
