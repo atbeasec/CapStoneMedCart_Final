@@ -72,63 +72,62 @@ Module CreateDatabase
     Public strCONNECTION As String
     Dim strCreateTable As String
 
-    '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:     Main						*/
-    '/*******************************************************************/
-    '/*                   WRITTEN BY:  	Breanna Howey					*/
-    '/*		         DATE CREATED: 	   01/23/21							*/
-    '/*******************************************************************/
-    '/*  SUBROUTINE PURPOSE:											*/
-    '/*																	*/
-    '/*******************************************************************/
-    '/*  CALLED BY:   	      											*/
-    '/*  (None)								           					*/
-    '/*******************************************************************/
-    '/*  CALLS:															*/
-    '/*  CreateDataBase()												*/	
-    '/*  CreateDrawersTable()											*/
-    '/*  CreateMedicationTable()										*/
-    '/*  CreatePatientTable()											*/
-    '/*  CreatePhysicianTable()											*/		
-    '/*  CreatePatientPhysicianTable()									*/	
-    '/*  CreateUserTable()												*/	
-    '/*  CreatePatientUserTable()										*/		
-    '/*  CreateRoomsTable()												*/
-    '/*  CreatePatientRoomTable()										*/
-    '/*  CreateAllergyTable()											*/
-    '/*  CreatePatientAllergyTable()									*/
-    '/*  CreateAllergyOverrideTable()									*/
-    '/*  CreatePatientMedicationTable()									*/		
-    '/*  CreateDrugInteractionsTable()									*/		
-    '/*  CreateDrawerMedicationTable()									*/
-    '/*  CreateWastesTable()											*/		
-    '/*  CreateDispensingTable()										*/
-    '/*  CreateDiscrepanciesTable()										*/	
-    '/*  CreateAdHocOrderTable()										*/
-    '/*  CreatePatientMedicationPrescriptionTable()						*/
-    '/*  CreatePersonalPatientDrawerMedicationTable()					*/
-    '/*******************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):							*/
-    '/*																	*/
-    '/*  (None)															*/
-    '/*******************************************************************/
-    '/* SAMPLE INVOCATION:												*/
-    '/*																	*/
-    '/*   Main();														*/
-    '/*******************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically):							*/
-    '/*																	*/
-    '/*  (None).														*/
-    '/*******************************************************************/
-    '/* MODIFICATION HISTORY:											*/
-    '/*																	*/
-    '/*  WHO   WHEN     WHAT											*/
-    '/*  ---   ----     ------------------------------------------------*/
-    '/*  BRH  01/23/21  Initial creation of the code					*/
-    '/*  BRH  01/28/21  Add the CreateSettingsTable method				*/
-    '/*******************************************************************/
+	'/*********************************************************************/
+	'/*                   SUBROUTINE NAME:     Main						*/
+	'/*******************************************************************/
+	'/*                   WRITTEN BY:  	Breanna Howey					*/
+	'/*		         DATE CREATED: 	   01/23/21							*/
+	'/*******************************************************************/
+	'/*  SUBROUTINE PURPOSE:											*/
+	'/*																	*/
+	'/*******************************************************************/
+	'/*  CALLED BY:   	      											*/
+	'/*  (None)								           					*/
+	'/*******************************************************************/
+	'/*  CALLS:															*/
+	'/*  CreateDataBase()												*/	
+	'/*  CreateDrawersTable()											*/
+	'/*  CreateMedicationTable()										*/
+	'/*  CreatePatientTable()											*/
+	'/*  CreatePhysicianTable()											*/		
+	'/*  CreatePatientPhysicianTable()									*/	
+	'/*  CreateUserTable()												*/	
+	'/*  CreatePatientUserTable()										*/		
+	'/*  CreateRoomsTable()												*/
+	'/*  CreatePatientRoomTable()										*/
+	'/*  CreateAllergyTable()											*/
+	'/*  CreatePatientAllergyTable()									*/
+	'/*  CreateAllergyOverrideTable()									*/
+	'/*  CreatePatientMedicationTable()									*/		
+	'/*  CreateDrugInteractionsTable()									*/		
+	'/*  CreateDrawerMedicationTable()									*/
+	'/*  CreateWastesTable()											*/		
+	'/*  CreateDispensingTable()										*/
+	'/*  CreateDiscrepanciesTable()										*/	
+	'/*  CreateAdHocOrderTable()										*/
+	'/*  CreatePersonalPatientDrawerMedicationTable()					*/
+	'/*******************************************************************/
+	'/*  PARAMETER LIST (In Parameter Order):							*/
+	'/*																	*/
+	'/*  (None)															*/
+	'/*******************************************************************/
+	'/* SAMPLE INVOCATION:												*/
+	'/*																	*/
+	'/*   Main();														*/
+	'/*******************************************************************/
+	'/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+	'/*																	*/
+	'/*  (None).														*/
+	'/*******************************************************************/
+	'/* MODIFICATION HISTORY:											*/
+	'/*																	*/
+	'/*  WHO   WHEN     WHAT											*/
+	'/*  ---   ----     ------------------------------------------------*/
+	'/*  BRH  01/23/21  Initial creation of the code					*/
+	'/*  BRH  01/28/21  Add the CreateSettingsTable method				*/
+	'/*******************************************************************/
 
-    Sub Main()
+	Sub Main()
         'Create variable to check application path for the config file
         Dim strApplicationPath As String = Application.StartupPath & "\config.app"
 
@@ -192,9 +191,8 @@ Module CreateDatabase
             CreateWastesTable()
             CreateDispensingTable()
             CreateDiscrepanciesTable()
-            CreateAdHocOrderTable()
-            CreatePatientMedicationPrescriptionTable()
-            CreatePersonalPatientDrawerMedicationTable()
+			CreateAdHocOrderTable()
+			CreatePersonalPatientDrawerMedicationTable()
             CreateSettingsTable()
 
             DBConn.Close()
@@ -330,16 +328,18 @@ Module CreateDatabase
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  BRH  01/23/21  Initial creation of the code					*/
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
+	'/*  BRH  02/04/21  Change Brand_name to Synonym field				*/
 	'/*******************************************************************/
 	Public Sub CreateMedicationTable()
 		strCreateTable = "CREATE TABLE 'Medication' (
-	                        'Medication_ID'	INTEGER NOT NULL UNIQUE,
-	                        'Drug_Name'	TEXT NOT NULL,
-	                        'RXCUI_ID'	INTEGER NOT NULL,
-	                        'Dosage'	INTEGER NOT NULL,
-	                        'NarcoticControlled_Flag'	INTEGER NOT NULL,
-	                        'Barcode'	TEXT,
-	                        'Type'	TEXT,
+							'Medication_ID'	INTEGER NOT NULL UNIQUE,
+							'Drug_Name'	TEXT NOT NULL,
+							'RXCUI_ID'	INTEGER NOT NULL,
+							'Dosage'	INTEGER NOT NULL,
+							'NarcoticControlled_Flag'	INTEGER NOT NULL,
+							'Barcode'	TEXT NOT NULL UNIQUE,
+							'Synonym'	TEXT,
+							'Type'	TEXT,
 							'Strength'	TEXT,
 							'Active_Flag' INTEGER NOT NULL,
 	                        PRIMARY KEY('Medication_ID' AUTOINCREMENT));"
@@ -383,11 +383,13 @@ Module CreateDatabase
 	'/*  BRH  01/23/21  Initial creation of the code					*/
 	'/*  BRH  01/28/21  Updated fields in the database					*/
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
+	'/*  BRH  02/04/21  Added Barcode field								*/
 	'/*******************************************************************/
 	Public Sub CreatePatientTable()
 		strCreateTable = "CREATE TABLE 'Patient' (
 	                    'Patient_ID'	INTEGER NOT NULL UNIQUE,
 	                    'MRN_Number'	INTEGER NOT NULL,
+						'Barcode'	TEXT UNIQUE,
 	                    'Patient_First_Name'	TEXT NOT NULL,
 	                    'Patient_Middle_Name'	TEXT,
 	                    'Patient_Last_Name'	TEXT NOT NULL,
@@ -543,6 +545,7 @@ Module CreateDatabase
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  BRH  01/23/21  Initial creation of the code					*/
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
+	'/*  BRH  02/04/21  Made barcode unique								*/
 	'/*******************************************************************/
 	Public Sub CreateUserTable()
 		strCreateTable = "CREATE TABLE 'User' (
@@ -551,7 +554,7 @@ Module CreateDatabase
 	                    'Password'	TEXT NOT NULL,
 						'User_First_Name'	TEXT,
 						'User_Last_Name'	TEXT,
-	                    'Barcode'	TEXT NOT NULL,
+	                    'Barcode'	TEXT NOT NULL UNIQUE,
 	                    'Admin_Flag'	INTEGER,
 	                    'Supervisor_Flag'	INTEGER,
 						'Active_Flag' INTEGER NOT NULL,
@@ -892,6 +895,7 @@ Module CreateDatabase
 	                    'Quantity'	INTEGER NOT NULL,
 	                    'Method'	TEXT NOT NULL,
 	                    'Schedule'	TEXT NOT NULL,
+						'Active_Flag'	INTEGER,
 	                    FOREIGN KEY(" & "Medication_TUID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
 	                    FOREIGN KEY(" & "Ordering_Physician_ID" & ") REFERENCES " & "Physician" & "(" & "Physician_ID" & "),
 	                    FOREIGN KEY(" & "Patient_TUID" & ") REFERENCES " & "Patient" & "(" & "Patient_ID" & "),
@@ -935,17 +939,16 @@ Module CreateDatabase
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  BRH  01/23/21  Initial creation of the code					*/
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
+	'/*  BRH  02/04/21  Removed third medication id						*/
 	'/*******************************************************************/
 	Public Sub CreateDrugInteractionsTable()
 		strCreateTable = "CREATE TABLE 'Drug_Interactions' (
 	                    'Drug_Interactions_ID'	INTEGER NOT NULL UNIQUE,
 	                    'Medication_One_ID'	INTEGER NOT NULL,
 	                    'Medication_Two_ID'	INTEGER NOT NULL,
-	                    'Medication_Three_ID'	INTEGER,
 	                    'Severity'	TEXT,
 	                    'Description'	TEXT,
 						'Active_Flag' INTEGER NOT NULL,
-	                    FOREIGN KEY(" & "Medication_Three_ID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
 	                    FOREIGN KEY(" & "Medication_One_ID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
 	                    FOREIGN KEY(" & "Medication_Two_ID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
 	                    PRIMARY KEY('Drug_Interactions_ID' AUTOINCREMENT));"
@@ -1044,14 +1047,12 @@ Module CreateDatabase
 	Public Sub CreateWastesTable()
 		strCreateTable = "CREATE TABLE 'Wastes' (
 	                    'Wastes_ID'	INTEGER NOT NULL UNIQUE,
-	                    'Medication_TUID'	INTEGER NOT NULL,
 	                    'Primary_User_TUID'	INTEGER NOT NULL,
 	                    'Secondary_User_TUID'	INTEGER NOT NULL,
 	                    'DrawerMedication_TUID'	INTEGER NOT NULL,
 	                    'DateTime'	TEXT NOT NULL,
 						'Reason' TEXT,
 	                    PRIMARY KEY('Wastes_ID' AUTOINCREMENT),
-	                    FOREIGN KEY(" & "Medication_TUID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
 	                    FOREIGN KEY(" & "Primary_User_TUID" & ") REFERENCES " & "User" & "(" & "User_ID" & "),
 	                    FOREIGN KEY(" & "Secondary_User_TUID" & ") REFERENCES " & "User" & "(" & "User_ID" & "),
 	                    FOREIGN KEY(" & "DrawerMedication_TUID" & ") REFERENCES " & "DrawerMedication" & "(" & "DrawerMedication_ID" & "));"
@@ -1320,7 +1321,7 @@ Module CreateDatabase
 						'PersonalMedication_ID'	INTEGER NOT NULL UNIQUE,
 						'Patient_TUID'	INTEGER NOT NULL,
 						'DrawerMedication_TUID'	INTEGER NOT NULL,
-						'Removed_Dispensing'	TEXT NOT NULL,
+						'Removed_Dispensing'	INTEGER,
 						'Active_Flag'	TEXT NOT NULL,
 						PRIMARY KEY('PersonalMedication_ID' AUTOINCREMENT),
 						FOREIGN KEY(" & "DrawerMedication_TUID" & ") REFERENCES " & "DrawerMedication" & "(" & "DrawerMedication_ID" & "),
@@ -1407,7 +1408,6 @@ Module CreateDatabase
 	'/*  CreateAllergyTable()											*/
 	'/*  CreatePatientAllergyTable()									*/
 	'/*  CreateAllergyOverrideTable()									*/
-	'/*  CreatePatientMedicationTable()									*/
 	'/*  CreateDrugInteractionsTable()									*/
 	'/*  CreateDrawerMedicationTable()									*/
 	'/*  CreateWastesTable()											*/

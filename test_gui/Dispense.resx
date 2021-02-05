@@ -118,16 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnCancel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAADsSURBVEhL7ZQ7DoJAEECpNUEKNAqF0cbaxKNq4QG8h5VGbfwk/iq9h7q+IYNBQwEIVLzkhezM
-        zkzYLFgVFeVjjKnhGF0NxUK+gRO0NZQciqYo7LCp4S+IO7iSTTDTcHIokgbroNyYC3qaCmDt4laScMCW
-        ptJB4e8gX+NtPEoQ9phtQAgNokdyxRFGB8QeZWpoFD2apz5P2NEt+UDDAT6kO7xwqKl8oGGxb0IjD8/S
-        FTbYxWWwMuaGPd2aDRr4KLdKkFvmaNzGhQThjv2gIC0UygC5TcJnQAjrOs4lCdkGUVTKF1/8v6ui4k8s
-        6w0QQXU+NmDL7gAAAABJRU5ErkJggg==
-</value>
-  </data>
   <data name="btnDispense.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAWlJREFUSEvl
