@@ -70,6 +70,7 @@
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
     '/*	 Active_Flag - this is going if the patient is active or not        */
     '/*  address - this is for the patient's address                       */
+    '/*  barCode - this is the barcode that is used to ID the patient.     */
     '/*  city - this is going to be for the city the patient lives in.     */
     '/*  DoB - this is for the patients date of birth                       */
     '/*  Email - this is going to be for the patient's email.               */
@@ -89,25 +90,26 @@
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
+    '/*  NP    2/5/2021 Updated this for include teh barcode.             */                                                                   
     '/*********************************************************************/
 
     Enum Patient
         ID = 0
         MRN_Number = 1
-        FristName = 2
-        MiddleName = 3
-        LastName = 4
-        DoB = 5 'this is the day of birth
-        Sex = 6
-        Height = 7
-        address = 8
-        City = 9
-        zip = 10
-        Phone = 11
-        Email = 12
-        PhysicianID = 13
-        Active_Flag = 14
+        barCode = 2
+        FristName = 3
+        MiddleName = 4
+        LastName = 5
+        DoB = 6 'this is the day of birth
+        Sex = 7
+        Height = 8
+        address = 9
+        City = 10
+        zip = 11
+        Phone = 12
+        Email = 13
+        PhysicianID = 14
+        Active_Flag = 15
     End Enum
 
     '/*********************************************************************/
@@ -140,7 +142,7 @@
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
     '/*  amount - this is going to be the amount of medication ordered.   */
     '/*  dateTime - this is going to tbe the day and time the order was made. */
-    '/*  Drawer - this is going to be the drawer the meication is in.     */
+    '/*  DrawerMedicationTUID - this is going to be the drawer the meication is in.     */
     '/*  ID - this is the ID of the order.                                 */
     '/*  MedicationID  - this is the ID of the medication being ordered.  */
     '/*  PatientID - this is the id of the patient this order is for.     */
@@ -152,7 +154,7 @@
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
+    '/*  NP    2/5/2021 Changes drawer to DrawerMedicationTUID            */                                                                  
     '/*********************************************************************/
 
     Enum AdHocOrder
@@ -161,7 +163,7 @@
         PatientID = 2
         UserID = 3
         amount = 4
-        Drawer = 5
+        DrawerMedicationTUID = 5
         dateTime = 6
     End Enum
 
@@ -537,17 +539,16 @@
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
+    '/*  NP    2/5/2021 removed MedicationThreeID to matach database.     */                                                                   
     '/*********************************************************************/
 
     Enum DrugInteraction
         ID = 0
         MedicationOneID = 1
         medicationTwoID = 2
-        MedicationThreeID = 3
-        Severity = 4
-        description = 5
-        activeFlag = 6
+        Severity = 3
+        description = 4
+        activeFlag = 5
     End Enum
 
     '/*********************************************************************/
@@ -590,13 +591,14 @@
     '/*     naroctic or a controlled substance.                            */
     '/*  RXCUID - this is the ID of the medication in the RxNorm RestFul API*/
     '/* Strength - this is the strength of the medication.                 */
+    '/* Snyonym - this is other names the medicaiton can go by.            */
     '/* Type - this is the type of substance the medication is.     	   */                                                                                        
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
+    '/*  NP    2/5/2021 added Snyonym to match the database.              */                                                                   
     '/*********************************************************************/
 
     Enum Medication
@@ -606,12 +608,13 @@
         Dosage = 3
         NarcoticControlledFlag = 4
         Barcode = 5
-        type = 6
-        Strength = 7
-        ActiveFlag = 8
+        Snyonym = 6
+        type = 7
+        Strength = 8
+        ActiveFlag = 9
     End Enum
 
-    'need to update this one later.
+
     '/*********************************************************************/
     '/*                   ENUM NAME: PatientAllery 			    		   */         
     '/*********************************************************************/
@@ -651,18 +654,18 @@
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
+    '/*  NP     2/5/2021 Removed ID as I misunderstood how the primary key*/
+    '/*                  was being made.                                  */
     '/*********************************************************************/
 
     Enum PatientAllery
-        ID = 0
-        PatientID = 1
-        AllergyName = 2
-        AllergySeverity = 3
-        ActiveFlag = 4
+        PatientID = 0
+        AllergyName = 1
+        AllergySeverity = 2
+        ActiveFlag = 3
     End Enum
     '/*********************************************************************/
-    '/*                   ENUM NAME: PatientMedication_Prescription        */         
+    '/*                   ENUM NAME: PatientMedication       */         
     '/*********************************************************************/
     '/*                   WRITTEN BY:  Nathan Premo   		         */   
     '/*		         DATE CREATED: 		   */                             
@@ -686,7 +689,7 @@
     '/*            (NOTHING)								   */             
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:							                	   */             
-    '/*	EnumList.PatientMedication_Prescription.id  					   */                     
+    '/*	EnumList.PatientMedication.id  					   */                     
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
@@ -708,11 +711,11 @@
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
+    '/*  NP    2/5/2021 Changed named to PatientMedication to match database*/                                                                   
     '/*********************************************************************/
 
 
-    Enum PatientMedication_Prescription
+    Enum PatientMedication
         ID = 0
         PatientID = 1
         MedicationID = 2
@@ -876,7 +879,7 @@
     '/*                   ENUM NAME: Personal_Patient_DrawerMedication    */         
     '/*********************************************************************/
     '/*                   WRITTEN BY:  Nathan Premo   		         */   
-    '/*		         DATE CREATED: 		   */                             
+    '/*		         DATE CREATED: 	2/4/2021                        	   */                             
     '/*********************************************************************/
     '/*  ENUM PURPOSE:		                    						   */             
     '/*	 This will make the data that we are getting from the 			   */                     
@@ -915,11 +918,12 @@
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
+    '/*  NP    2/5/2021 changed TUID to PersonalMedicationID to correctly */
+    '/*                 match the database.                               */
     '/*********************************************************************/
 
     Enum Personal_Patient_DrawerMedication
-        TUID = 0
+        PersonalMedicationID = 0
         PatientID = 1
         DrawerMedicationID = 2
         RemoveDispensing = 3
@@ -994,8 +998,8 @@
     '/*********************************************************************/
     '/*                   ENUM NAME: ROOM             					   */         
     '/*********************************************************************/
-    '/*                   WRITTEN BY:  Nathan Premo   		         */   
-    '/*		         DATE CREATED: 		   */                             
+    '/*                   WRITTEN BY:  Nathan Premo   		          */   
+    '/*		         DATE CREATED: 	02/4/2021                        	   */                             
     '/*********************************************************************/
     '/*  ENUM PURPOSE:                  								   */             
     '/*	 This is going to make the data we bring back from the rooms table */
@@ -1196,17 +1200,17 @@
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
+    '/*  NP    2/5/2021 Removed the MedicationID to match the updates to  */
+    '/*                 the database.                                     */
     '/*********************************************************************/
 
 
     Enum Waste
         ID = 0
-        MedicationID = 1
-        PrimaryUserID = 2
-        SecondaryUserID = 3
-        DrawerMedicationTUID = 4
-        DateTime = 5
-        Reason = 6
+        PrimaryUserID = 1
+        SecondaryUserID = 2
+        DrawerMedicationTUID = 3
+        DateTime = 4
+        Reason = 5
     End Enum
 End Module
