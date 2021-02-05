@@ -15,82 +15,76 @@
         frmNewPatient.Show()
 
     End Sub
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME:  					   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		         */   
+    '/*		         DATE CREATED: 		   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								   */             
+    '/*											   */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	 strBed	- this is going to hold the bed name if there is a value  */
+    '/*     in the patientRoom database. If there isn't it will display as*/
+    '/*     N/A
+    '/*  strRoom - this is going to hold the room number if there is a value*/
+    '/*     in the patientRomm database. If tehre isn't it will display as */
+    '/*     N/A
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  NP    2/4/2021 Created the SQL statements to pull back the       */
+    '/*                 information needed for Patient Records Form.      */
+    '/*                 Created variables strRoom and strBed              */
+    '/*********************************************************************/
+
 
     Private Sub frmPatientRecords_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim PatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery("select Patient.MRN_Number, Patient.Patient_First_Name, " &
+                                                   "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name from Patient LEFT JOIN " &
+                                                   "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1;")
+        Dim strRoom As String
+        Dim strBed As String
 
-        'Jonie Nicolas
-        'Mauricio Adkisson
+        For Each row In PatientInfo.Tables(0).Rows()
+            With PatientInfo.Tables(0)
 
-        Dim strID1 As String = "123456"
-    Dim strID2 As String = "123457"
-    Dim strID3 As String = "123458"
-    Dim strID4 As String = "123459"
-    Dim strID5 As String = "123460"
-    Dim strID6 As String = "123461"
-    Dim strID7 As String = "123462"
-    Dim strID8 As String = "123463"
-    Dim strID9 As String = "123464"
+                If IsDBNull(.Rows(0)(4)) Then
+                    strRoom = "N/A"
+                Else
+                    strRoom = .Rows(0)(4).ToString
+                End If
 
-    Dim strFirstName1 As String = "John"
-    Dim strFirstName2 As String = "Sally"
-    Dim strFirstName3 As String = "Abigail"
-    Dim strFirstName4 As String = "Oren"
-    Dim strFirstName5 As String = "Birgit"
-    Dim strFirstName6 As String = "Roslyn"
-    Dim strFirstName7 As String = "Hae"
-    Dim strFirstName8 As String = "Fairy"
-    Dim strFirstName9 As String = "Raymundo"
+                If IsDBNull(.Rows(0)(5)) Then
+                    strBed = "N/A"
+                Else
+                    strBed = .Rows(0)(5).ToString
+                End If
+                CreatePanel(flpPatientRecords, .Rows(0)(0), .Rows(0)(1), .Rows(0)(2), .Rows(0)(3), strRoom, strBed)
 
-    Dim strLastName1 As String = "Smith"
-    Dim strLastName2 As String = "Jones"
-    Dim strLastName3 As String = "Montilla"
-    Dim strLastName4 As String = "Herndon"
-    Dim strLastName5 As String = "Horner"
-    Dim strLastName6 As String = "Chiaramonte"
-    Dim strLastName7 As String = "Fix"
-    Dim strLastName8 As String = "Johnson"
-    Dim strLastName9 As String = "Yurick"
-
-    Dim strRoomNumber1 As String = "B-21"
-    Dim strRoomNumber2 As String = "B-22"
-    Dim strRoomNumber3 As String = "B-23"
-    Dim strRoomNumber4 As String = "B-24"
-    Dim strRoomNumber5 As String = "B-25"
-    Dim strRoomNumber6 As String = "B-26"
-    Dim strRoomNumber7 As String = "B-27"
-    Dim strRoomNumber8 As String = "B-28"
-    Dim strRoomNumber9 As String = "B-29"
-
-    Dim strStatus1 As String = "Admitted"
-    Dim strStatus2 As String = "Admitted"
-    Dim strStatus3 As String = "Admitted"
-    Dim strStatus4 As String = "Admitted"
-    Dim strStatus5 As String = "Admitted"
-    Dim strStatus6 As String = "Admitted"
-    Dim strStatus7 As String = "Admitted"
-    Dim strStatus8 As String = "Admitted"
-    Dim strStatus9 As String = "Admitted"
-
-    Dim strAdmitDate1 As String = "11/3/2020"
-    Dim strAdmitDate2 As String = "10/1/2020"
-    Dim strAdmitDate3 As String = "12/2/2020"
-    Dim strAdmitDate4 As String = "11/12/2020"
-    Dim strAdmitDate5 As String = "11/1/2020"
-    Dim strAdmitDate6 As String = "11/16/2020"
-    Dim strAdmitDate7 As String = "11/12/2020"
-    Dim strAdmitDate8 As String = "11/1/2020"
-    Dim strAdmitDate9 As String = "11/16/2020"
-
-        CreatePanel(flpPatientRecords, strID1, strFirstName1, strLastName1, strAdmitDate1, strRoomNumber1, strRoomNumber1)
-        CreatePanel(flpPatientRecords, strID2, strFirstName2, strLastName2, strRoomNumber2, strStatus2, strAdmitDate2)
-        CreatePanel(flpPatientRecords, strID3, strFirstName3, strLastName3, strRoomNumber3, strStatus3, strAdmitDate3)
-        CreatePanel(flpPatientRecords, strID4, strFirstName4, strLastName4, strRoomNumber4, strStatus4, strAdmitDate4)
-        CreatePanel(flpPatientRecords, strID5, strFirstName5, strLastName5, strRoomNumber5, strStatus5, strAdmitDate5)
-        CreatePanel(flpPatientRecords, strID6, strFirstName6, strLastName6, strRoomNumber6, strStatus6, strAdmitDate6)
-        CreatePanel(flpPatientRecords, strID7, strFirstName7, strLastName7, strRoomNumber7, strStatus7, strAdmitDate7)
-        CreatePanel(flpPatientRecords, strID8, strFirstName8, strLastName8, strRoomNumber8, strStatus8, strAdmitDate8)
-        CreatePanel(flpPatientRecords, strID9, strFirstName9, strLastName9, strRoomNumber9, strStatus9, strAdmitDate9)
-
+            End With
+        Next
     End Sub
 
     Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal strID As String, ByVal strFirstName As String, ByVal strLastName As String, ByVal strBirthday As String, ByVal strRoom As String, ByVal strBed As String)
