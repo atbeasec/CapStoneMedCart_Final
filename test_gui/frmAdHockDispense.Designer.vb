@@ -42,8 +42,8 @@ Partial Class frmAdHockDispense
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnDispense = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
+        Me.btnDecrementQuantity = New System.Windows.Forms.Button()
+        Me.btnIncrementQuantity = New System.Windows.Forms.Button()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.txtQuantity = New System.Windows.Forms.TextBox()
         Me.Panel14.SuspendLayout()
@@ -254,35 +254,35 @@ Partial Class frmAdHockDispense
         Me.btnDispense.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnDispense.UseVisualStyleBackColor = False
         '
-        'Button2
+        'btnDecrementQuantity
         '
-        Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.Button2.FlatAppearance.BorderSize = 0
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.ForeColor = System.Drawing.Color.White
-        Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
-        Me.Button2.Location = New System.Drawing.Point(430, 140)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(28, 28)
-        Me.Button2.TabIndex = 6
-        Me.Button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button2.UseVisualStyleBackColor = False
+        Me.btnDecrementQuantity.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnDecrementQuantity.FlatAppearance.BorderSize = 0
+        Me.btnDecrementQuantity.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDecrementQuantity.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDecrementQuantity.ForeColor = System.Drawing.Color.White
+        Me.btnDecrementQuantity.Image = CType(resources.GetObject("btnDecrementQuantity.Image"), System.Drawing.Image)
+        Me.btnDecrementQuantity.Location = New System.Drawing.Point(430, 140)
+        Me.btnDecrementQuantity.Name = "btnDecrementQuantity"
+        Me.btnDecrementQuantity.Size = New System.Drawing.Size(28, 28)
+        Me.btnDecrementQuantity.TabIndex = 6
+        Me.btnDecrementQuantity.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnDecrementQuantity.UseVisualStyleBackColor = False
         '
-        'Button3
+        'btnIncrementQuantity
         '
-        Me.Button3.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.Button3.FlatAppearance.BorderSize = 0
-        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.ForeColor = System.Drawing.Color.White
-        Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
-        Me.Button3.Location = New System.Drawing.Point(396, 140)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(28, 28)
-        Me.Button3.TabIndex = 5
-        Me.Button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button3.UseVisualStyleBackColor = False
+        Me.btnIncrementQuantity.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnIncrementQuantity.FlatAppearance.BorderSize = 0
+        Me.btnIncrementQuantity.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnIncrementQuantity.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnIncrementQuantity.ForeColor = System.Drawing.Color.White
+        Me.btnIncrementQuantity.Image = CType(resources.GetObject("btnIncrementQuantity.Image"), System.Drawing.Image)
+        Me.btnIncrementQuantity.Location = New System.Drawing.Point(396, 140)
+        Me.btnIncrementQuantity.Name = "btnIncrementQuantity"
+        Me.btnIncrementQuantity.Size = New System.Drawing.Size(28, 28)
+        Me.btnIncrementQuantity.TabIndex = 5
+        Me.btnIncrementQuantity.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnIncrementQuantity.UseVisualStyleBackColor = False
         '
         'Panel5
         '
@@ -298,8 +298,9 @@ Partial Class frmAdHockDispense
         '
         Me.txtQuantity.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtQuantity.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtQuantity.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtQuantity.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtQuantity.Location = New System.Drawing.Point(1, 1)
+        Me.txtQuantity.MaxLength = 2
         Me.txtQuantity.Multiline = True
         Me.txtQuantity.Name = "txtQuantity"
         Me.txtQuantity.Size = New System.Drawing.Size(51, 26)
@@ -312,8 +313,8 @@ Partial Class frmAdHockDispense
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(623, 445)
         Me.ControlBox = False
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.btnDecrementQuantity)
+        Me.Controls.Add(Me.btnIncrementQuantity)
         Me.Controls.Add(Me.Panel5)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Label2)
@@ -364,8 +365,8 @@ Partial Class frmAdHockDispense
     Friend WithEvents Panel2 As Panel
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Label2 As Label
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button3 As Button
+    Friend WithEvents btnDecrementQuantity As Button
+    Friend WithEvents btnIncrementQuantity As Button
     Friend WithEvents Panel5 As Panel
     Friend WithEvents txtQuantity As TextBox
 End Class

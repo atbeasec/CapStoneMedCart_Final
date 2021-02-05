@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Button26.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnAddToDrawer.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAActJREFUSEvl
         lT1Ow0AQhXMAoIHQEA4RQgehCqeAGxBI4BQoZQQcIl1CA1SIjo7fCwBHgAIa8z37rSzLxjgSooBPelrt
@@ -131,7 +131,7 @@
         EaryzzhE8y6dHop167pojPTBqkONmu+g4lv0B6nVPgHAaVAwrRkMxQAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="Button2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnDecrementDividers.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAMpJREFUSEvt
         lEsOgkAQRDkE/nZexSvhymu6cetJGOthtUENYRw0buYlnQ7V3VUboKlUfktKqVWdVBtLi8DHfq2lQTyq
@@ -140,7 +140,7 @@
         7wYEMuaf1NEtVSp/pWlu1zZ/epABfiIAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="Button3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnIncrementDividers.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAMVJREFUSEvt
         kzsOwjAQRH2IfKBLzfGg4Zw0tJwEMy8aQ0QU5WckCj9pZXl2d8aNQ6HwH8QYW9VV1VjKi4yPqrsKOA9u
@@ -149,7 +149,7 @@
         fOxXWSoUfkIIL1o/f3AJCMtSAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="Button1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnDecrementCapacity.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAMpJREFUSEvt
         lEsOgkAQRDkE/nZexSvhymu6cetJGOthtUENYRw0buYlnQ7V3VUboKlUfktKqVWdVBtLi8DHfq2lQTyq
@@ -158,7 +158,7 @@
         7wYEMuaf1NEtVSp/pWlu1zZ/epABfiIAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="Button4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnIncrementCapacity.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAMVJREFUSEvt
         kzsOwjAQRH2IfKBLzfGg4Zw0tJwEMy8aQ0QU5WckCj9pZXl2d8aNQ6HwH8QYW9VV1VjKi4yPqrsKOA9u

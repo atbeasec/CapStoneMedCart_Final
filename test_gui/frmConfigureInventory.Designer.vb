@@ -58,18 +58,18 @@ Partial Class frmConfigureInventory
         Me.Label38 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.lblDrawerNumber = New System.Windows.Forms.Label()
-        Me.Button26 = New System.Windows.Forms.Button()
+        Me.btnAddToDrawer = New System.Windows.Forms.Button()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
+        Me.btnDecrementDividers = New System.Windows.Forms.Button()
+        Me.btnIncrementDividers = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.txtQuantity = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
+        Me.txtDividers = New System.Windows.Forms.TextBox()
+        Me.btnDecrementCapacity = New System.Windows.Forms.Button()
+        Me.btnIncrementCapacity = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtCapacity = New System.Windows.Forms.TextBox()
         Me.pnlLayoutButtons.SuspendLayout()
         Me.pnlHeader.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -530,22 +530,22 @@ Partial Class frmConfigureInventory
         Me.lblDrawerNumber.TabIndex = 45
         Me.lblDrawerNumber.Text = "N"
         '
-        'Button26
+        'btnAddToDrawer
         '
-        Me.Button26.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.Button26.FlatAppearance.BorderSize = 0
-        Me.Button26.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button26.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button26.ForeColor = System.Drawing.Color.White
-        Me.Button26.Image = CType(resources.GetObject("Button26.Image"), System.Drawing.Image)
-        Me.Button26.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button26.Location = New System.Drawing.Point(813, 39)
-        Me.Button26.Name = "Button26"
-        Me.Button26.Size = New System.Drawing.Size(197, 32)
-        Me.Button26.TabIndex = 32
-        Me.Button26.Text = "ADD TO DRAWER"
-        Me.Button26.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button26.UseVisualStyleBackColor = False
+        Me.btnAddToDrawer.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnAddToDrawer.FlatAppearance.BorderSize = 0
+        Me.btnAddToDrawer.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAddToDrawer.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAddToDrawer.ForeColor = System.Drawing.Color.White
+        Me.btnAddToDrawer.Image = CType(resources.GetObject("btnAddToDrawer.Image"), System.Drawing.Image)
+        Me.btnAddToDrawer.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnAddToDrawer.Location = New System.Drawing.Point(813, 39)
+        Me.btnAddToDrawer.Name = "btnAddToDrawer"
+        Me.btnAddToDrawer.Size = New System.Drawing.Size(197, 32)
+        Me.btnAddToDrawer.TabIndex = 32
+        Me.btnAddToDrawer.Text = "ADD TO DRAWER"
+        Me.btnAddToDrawer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnAddToDrawer.UseVisualStyleBackColor = False
         '
         'Label9
         '
@@ -579,107 +579,109 @@ Partial Class frmConfigureInventory
         Me.Label7.TabIndex = 172
         Me.Label7.Text = "Capacity:"
         '
-        'Button2
+        'btnDecrementDividers
         '
-        Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.Button2.FlatAppearance.BorderSize = 0
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.ForeColor = System.Drawing.Color.White
-        Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
-        Me.Button2.Location = New System.Drawing.Point(768, 42)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(28, 28)
-        Me.Button2.TabIndex = 31
-        Me.Button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button2.UseVisualStyleBackColor = False
+        Me.btnDecrementDividers.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnDecrementDividers.FlatAppearance.BorderSize = 0
+        Me.btnDecrementDividers.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDecrementDividers.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDecrementDividers.ForeColor = System.Drawing.Color.White
+        Me.btnDecrementDividers.Image = CType(resources.GetObject("btnDecrementDividers.Image"), System.Drawing.Image)
+        Me.btnDecrementDividers.Location = New System.Drawing.Point(768, 42)
+        Me.btnDecrementDividers.Name = "btnDecrementDividers"
+        Me.btnDecrementDividers.Size = New System.Drawing.Size(28, 28)
+        Me.btnDecrementDividers.TabIndex = 31
+        Me.btnDecrementDividers.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnDecrementDividers.UseVisualStyleBackColor = False
         '
-        'Button3
+        'btnIncrementDividers
         '
-        Me.Button3.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.Button3.FlatAppearance.BorderSize = 0
-        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.ForeColor = System.Drawing.Color.White
-        Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
-        Me.Button3.Location = New System.Drawing.Point(734, 42)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(28, 28)
-        Me.Button3.TabIndex = 30
-        Me.Button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button3.UseVisualStyleBackColor = False
+        Me.btnIncrementDividers.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnIncrementDividers.FlatAppearance.BorderSize = 0
+        Me.btnIncrementDividers.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnIncrementDividers.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnIncrementDividers.ForeColor = System.Drawing.Color.White
+        Me.btnIncrementDividers.Image = CType(resources.GetObject("btnIncrementDividers.Image"), System.Drawing.Image)
+        Me.btnIncrementDividers.Location = New System.Drawing.Point(734, 42)
+        Me.btnIncrementDividers.Name = "btnIncrementDividers"
+        Me.btnIncrementDividers.Size = New System.Drawing.Size(28, 28)
+        Me.btnIncrementDividers.TabIndex = 30
+        Me.btnIncrementDividers.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnIncrementDividers.UseVisualStyleBackColor = False
         '
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel2.Controls.Add(Me.txtQuantity)
+        Me.Panel2.Controls.Add(Me.txtDividers)
         Me.Panel2.Location = New System.Drawing.Point(664, 42)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel2.Size = New System.Drawing.Size(64, 28)
         Me.Panel2.TabIndex = 29
         '
-        'txtQuantity
+        'txtDividers
         '
-        Me.txtQuantity.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtQuantity.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtQuantity.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtQuantity.Location = New System.Drawing.Point(1, 1)
-        Me.txtQuantity.Multiline = True
-        Me.txtQuantity.Name = "txtQuantity"
-        Me.txtQuantity.Size = New System.Drawing.Size(62, 26)
-        Me.txtQuantity.TabIndex = 38
+        Me.txtDividers.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtDividers.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtDividers.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDividers.Location = New System.Drawing.Point(1, 1)
+        Me.txtDividers.MaxLength = 2
+        Me.txtDividers.Multiline = True
+        Me.txtDividers.Name = "txtDividers"
+        Me.txtDividers.Size = New System.Drawing.Size(62, 26)
+        Me.txtDividers.TabIndex = 38
         '
-        'Button1
+        'btnDecrementCapacity
         '
-        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.Button1.FlatAppearance.BorderSize = 0
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.ForeColor = System.Drawing.Color.White
-        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.Location = New System.Drawing.Point(547, 42)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(28, 28)
-        Me.Button1.TabIndex = 28
-        Me.Button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button1.UseVisualStyleBackColor = False
+        Me.btnDecrementCapacity.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnDecrementCapacity.FlatAppearance.BorderSize = 0
+        Me.btnDecrementCapacity.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDecrementCapacity.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDecrementCapacity.ForeColor = System.Drawing.Color.White
+        Me.btnDecrementCapacity.Image = CType(resources.GetObject("btnDecrementCapacity.Image"), System.Drawing.Image)
+        Me.btnDecrementCapacity.Location = New System.Drawing.Point(547, 42)
+        Me.btnDecrementCapacity.Name = "btnDecrementCapacity"
+        Me.btnDecrementCapacity.Size = New System.Drawing.Size(28, 28)
+        Me.btnDecrementCapacity.TabIndex = 28
+        Me.btnDecrementCapacity.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnDecrementCapacity.UseVisualStyleBackColor = False
         '
-        'Button4
+        'btnIncrementCapacity
         '
-        Me.Button4.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.Button4.FlatAppearance.BorderSize = 0
-        Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button4.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button4.ForeColor = System.Drawing.Color.White
-        Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
-        Me.Button4.Location = New System.Drawing.Point(513, 42)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(28, 28)
-        Me.Button4.TabIndex = 27
-        Me.Button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button4.UseVisualStyleBackColor = False
+        Me.btnIncrementCapacity.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnIncrementCapacity.FlatAppearance.BorderSize = 0
+        Me.btnIncrementCapacity.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnIncrementCapacity.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnIncrementCapacity.ForeColor = System.Drawing.Color.White
+        Me.btnIncrementCapacity.Image = CType(resources.GetObject("btnIncrementCapacity.Image"), System.Drawing.Image)
+        Me.btnIncrementCapacity.Location = New System.Drawing.Point(513, 42)
+        Me.btnIncrementCapacity.Name = "btnIncrementCapacity"
+        Me.btnIncrementCapacity.Size = New System.Drawing.Size(28, 28)
+        Me.btnIncrementCapacity.TabIndex = 27
+        Me.btnIncrementCapacity.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnIncrementCapacity.UseVisualStyleBackColor = False
         '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel1.Controls.Add(Me.TextBox1)
+        Me.Panel1.Controls.Add(Me.txtCapacity)
         Me.Panel1.Location = New System.Drawing.Point(439, 42)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel1.Size = New System.Drawing.Size(68, 28)
         Me.Panel1.TabIndex = 26
         '
-        'TextBox1
+        'txtCapacity
         '
-        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(1, 1)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(66, 26)
-        Me.TextBox1.TabIndex = 38
+        Me.txtCapacity.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtCapacity.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtCapacity.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCapacity.Location = New System.Drawing.Point(1, 1)
+        Me.txtCapacity.MaxLength = 2
+        Me.txtCapacity.Multiline = True
+        Me.txtCapacity.Name = "txtCapacity"
+        Me.txtCapacity.Size = New System.Drawing.Size(66, 26)
+        Me.txtCapacity.TabIndex = 38
         '
         'frmConfigureInventory
         '
@@ -687,16 +689,16 @@ Partial Class frmConfigureInventory
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1022, 500)
-        Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.Button4)
+        Me.Controls.Add(Me.btnDecrementCapacity)
+        Me.Controls.Add(Me.btnIncrementCapacity)
         Me.Controls.Add(Me.Panel1)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.btnDecrementDividers)
+        Me.Controls.Add(Me.btnIncrementDividers)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.Button26)
+        Me.Controls.Add(Me.btnAddToDrawer)
         Me.Controls.Add(Me.lblDrawerNumber)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.flpMedication)
@@ -750,17 +752,17 @@ Partial Class frmConfigureInventory
     Friend WithEvents Label38 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents lblDrawerNumber As Label
-    Friend WithEvents Button26 As Button
+    Friend WithEvents btnAddToDrawer As Button
     Friend WithEvents Label3 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label7 As Label
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button3 As Button
+    Friend WithEvents btnDecrementDividers As Button
+    Friend WithEvents btnIncrementDividers As Button
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents txtQuantity As TextBox
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Button4 As Button
+    Friend WithEvents txtDividers As TextBox
+    Friend WithEvents btnDecrementCapacity As Button
+    Friend WithEvents btnIncrementCapacity As Button
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtCapacity As TextBox
 End Class
