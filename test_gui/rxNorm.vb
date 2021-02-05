@@ -236,4 +236,70 @@ Module rxNorm
 
     End Function
 
+
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME:  getDrugRXCUI                    */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:Dillen Perron  		              */
+    '/*		         DATE CREATED: 2/3/2021     			              */
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								                  */
+    '/*											                          */
+    '/* This function is a Search for a name in the RxNorm data set and   */
+    '/* Return the RxCUIs Of any concepts which have that name As an      */
+    '/* RxNorm term Or As a synonym Of an RxNorm term. Search option      */
+    '/* is a normalized String search. (search = 1)                       */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/*                                     				              */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */
+    '/*             (NONE)								                  */
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */
+    '/*											                          */
+    '/* 			                                                      */
+    '/*********************************************************************/
+    '/*  RETURNS:								                          */
+    '/*            (NOTHING)								              */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */
+    '/*											                          */
+    '/*   getDrugRXCUI("advil","200","mg","Tab")				          */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):			    	          */
+    '/*											                          */
+    '/*	 url - holds a link to the api with the selected rxui             */
+    '/*  restClient -			                                          */
+    '/*  restRequest - 			                                          */
+    '/*  result - holds the result of the api call (json format)          */
+    '/*											                          */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO      WHEN     WHAT								              */
+    '/*                                                                   */
+    '/*  Dillen  02/4/21  inital creation                                 */
+    '/*                                                                   */  
+    '/*                                                                   */
+    '/*********************************************************************/
+    Function getDrugRXCUI(drugName As String, drugDosage As String, drugMeasurement As String, drugType As String) As Object
+
+
+        'URL for finding each drug name 
+        'Dim url As String = "https://rxnav.nlm.nih.gov/REST/drugs?name=" + searchName
+        Dim url As String = "https://rxnav.nlm.nih.gov/REST/rxcui.json?name=" + drugName + "+" + drugDosage + "+" + drugMeasurement + "+" + drugType + "&search=1"
+
+        'web request to pull data 
+        Dim restClient As New RestSharp.RestClient(url)
+        Dim restRequest As New RestSharp.RestRequest(url)
+
+
+        'saves the result from request
+        Dim result = restClient.Get(restRequest)
+
+
+        'debug to test if content is correct
+        Debug.WriteLine(result.Content)
+
 End Module
