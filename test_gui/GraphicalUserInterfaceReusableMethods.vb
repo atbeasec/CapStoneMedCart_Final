@@ -6,14 +6,19 @@
     Public Sub MouseEnterPanelSetBackGroundColor(Sender As Object, e As EventArgs)
 
         'changes the background color when the mouse is hovered over the panel
+        If Not Sender.backcolor = Color.Red Then
 
-        If Sender.backColor = Color.White Then
-            Sender.backColor = Color.Gainsboro
+            If Sender.backColor = Color.White Then
+                Sender.backColor = Color.Gainsboro
 
-        Else
+            Else
 
-            Sender.backcolor = Color.White
+                Sender.backcolor = Color.White
+            End If
+
         End If
+
+
 
     End Sub
 
@@ -22,14 +27,17 @@
 
         ' checking if the background color is set to the highlighted color
         'if it is not then we will set it.
-        If sender.backColor = Color.Gainsboro Then
+        If Not sender.backcolor = Color.Red Then
+            If sender.backColor = Color.Gainsboro Then
 
-            sender.backColor = Color.White
+                sender.backColor = Color.White
 
-        Else
+            Else
 
-            sender.backcolor = Color.Gainsboro
+                sender.backcolor = Color.Gainsboro
+            End If
         End If
+
 
     End Sub
 
@@ -271,6 +279,7 @@
             .Image = mapImageTrash
             .ImageAlign = ContentAlignment.MiddleCenter
             .Tag = intPanelsAddedCount + 1
+            .TabStop = False
         End With
 
         pnlPanelName.Controls.Add(btnFlagMedication)
@@ -282,6 +291,15 @@
     End Sub
     Public Sub DynamicFlagMedicationButton(sender As Object, ByVal e As EventArgs)
 
+        Dim pnlFlaggedPannel As Panel
+        pnlFlaggedPannel = CType(sender.parent, Panel)
+        Debug.Print(pnlFlaggedPannel.Name)
+
+        If Not pnlFlaggedPannel.BackColor = Color.Red Then
+            pnlFlaggedPannel.BackColor = Color.Red
+        Else
+            pnlFlaggedPannel.BackColor = Color.White
+        End If
         'functionality will be assigned here
 
         ' take the panel which this button lives on and highlight it differently
@@ -298,7 +316,8 @@
         'Set button properties
         With txtCount
             .AutoSize = True
-            .Size = New Size(30, 30)
+            .BorderStyle = BorderStyle.FixedSingle
+            .Size = New Size(45, 30)
             .ForeColor = Color.Black
             .Font = New Font(New FontFamily("Segoe UI"), 11)
             ' .Location = New Point(  )
@@ -306,6 +325,7 @@
             .Name = "txtCount" + (intPanelsAddedCount).ToString
             .Tag = intPanelsAddedCount + 1
             .MaxLength = 2
+            ' .Dock = DockStyle.Fill
 
         End With
 

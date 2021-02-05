@@ -16,15 +16,23 @@
         Dim intNum2 As String = 2
         Dim intNum3 As String = 3
 
+        Dim medTUID1 As Integer = 2
+        Dim medTUID2 As Integer = 3
+        Dim medTUID3 As Integer = 4
+
+        Dim intNum5 As String = 30
+        Dim intNum6 As String = 40
+        Dim intNum7 As String = 25
+
         Dim genName1 As String = "benzhydrocodone "
         Dim genName2 As String = "hydrocodone bitartrate"
         Dim genName3 As String = "phenylephrine"
         Dim genName4 As String = "Morphine"
         Dim genName5 As String = "Codeine"
 
-        CreatePanel(flpEndOfShiftCount, genName1, intNum1)
-        CreatePanel(flpEndOfShiftCount, genName2, intNum2)
-        CreatePanel(flpEndOfShiftCount, genName3, intNum3)
+        CreatePanel(flpEndOfShiftCount, genName1, intNum1, intNum3, intNum5)
+        CreatePanel(flpEndOfShiftCount, genName2, intNum2, intNum3, intNum7)
+        CreatePanel(flpEndOfShiftCount, genName3, intNum3, intNum2, intNum7)
 
 
     End Sub
@@ -32,7 +40,7 @@
 
 
 
-    Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal strMedicationName As String, ByVal strDrawerNumber As String)
+    Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel,, ByVal intMedicationTUID As Integer, ByVal strMedicationName As String, ByVal strDrawerNumber As String, ByVal strSection As String, ByVal strSystemCount As String)
 
         Dim pnl As Panel
         pnl = New Panel
@@ -44,8 +52,8 @@
         'Set panel properties
         With pnl
             .BackColor = Color.Gainsboro
-            .Size = New Size(795, 47)
-            .Name = "pnlIndividualPatientRecordPadding" + getPanelCount(flpPannel).ToString
+            .Size = New Size(flpEndOfShiftCount.Size.Width - 5, 47)
+            .Name = "pnlMedicationFlaggedPadding" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Padding = New Padding(0, 0, 0, 3)
             ' .Dock = System.Windows.Forms.DockStyle.Top
@@ -54,13 +62,14 @@
         With pnlMainPanel
 
             .BackColor = Color.White
-            .Size = New Size(795, 45)
-            .Name = "pnlIndividualPatientRecord" + getPanelCount(flpPannel).ToString
+            .Size = New Size(flpEndOfShiftCount.Size.Width - 5, 45)
+            .Name = "pnlMedicationFlagged" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Dock = System.Windows.Forms.DockStyle.Top
+            .Tag = intMedicationTUID
         End With
 
-        'put the boarder panel inside the main panel
+        'put the border panel inside the main panel
         pnl.Controls.Add(pnlMainPanel)
 
         'AddHandler pnlMainPanel.Click, AddressOf DynamicSingleClickOpenPatient
@@ -69,7 +78,7 @@
 
         ' add controls to this panel
         CreateFlagBtn(pnlMainPanel, getPanelCount(flpPannel), lblActions.Location.X + 8, 5)
-        CreateTextBox(pnlMainPanel, getPanelCount(flpPannel), lblCount.Location.X, 8)
+        CreateTextBox(pnlMainPanel, getPanelCount(flpPannel), lblCount.Location.X, 6)
 
         Dim lblID As New Label
         Dim lblID2 As New Label
@@ -88,6 +97,9 @@
         ' anywhere we have quotes except for the label names, we can call our Database and get method
         CreateIDLabel(pnlMainPanel, lblID, "lblMedication", lblMedication.Location.X, 20, strMedicationName, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID2, "lblDrawerNumber", lblDrawerNum.Location.X, 20, strDrawerNumber, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID3, "lblSection", lblSection.Location.X, 20, strSection, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID4, "lblSystemCount", lblSystemCount.Location.X, 20, strSystemCount, getPanelCount(flpPannel))
+
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
