@@ -88,6 +88,7 @@
 
         'create SQLite command string and barcode placeholder
         Dim StrPlaceHolderBarCode As String = "000000000"
+        Dim Strdatacommand As String
 
         'set up SQL objects
 

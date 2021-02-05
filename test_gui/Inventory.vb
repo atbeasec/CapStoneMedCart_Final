@@ -46,4 +46,15 @@
     '/*  WHO                     WHEN        WHAT						*/
     '/*  Alexander Beasecker    1/25/2021   Initial creation            */
     '/*******************************************************************/
+
+
+
+
+
+
+    Public Sub DisplayDrawerDrugs(ByRef intDrawerID As Integer)
+
+
+    End Sub
+
 End Module
