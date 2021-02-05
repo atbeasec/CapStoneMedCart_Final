@@ -288,6 +288,7 @@
     </Compile>
     <Compile Include="GraphicalUserInterfaceReusableMethods.vb" />
     <Compile Include="Login.vb" />
+    <Compile Include="PharmacyOrder.vb" />
     <Compile Include="Print.vb" />
     <Compile Include="Reports.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
