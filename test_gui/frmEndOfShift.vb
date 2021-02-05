@@ -30,9 +30,9 @@
         Dim genName4 As String = "Morphine"
         Dim genName5 As String = "Codeine"
 
-        CreatePanel(flpEndOfShiftCount, genName1, intNum1, intNum3, intNum5)
-        CreatePanel(flpEndOfShiftCount, genName2, intNum2, intNum3, intNum7)
-        CreatePanel(flpEndOfShiftCount, genName3, intNum3, intNum2, intNum7)
+        CreatePanel(flpEndOfShiftCount, medTUID1, genName1, intNum1, intNum3, intNum5)
+        CreatePanel(flpEndOfShiftCount, medTUID2, genName2, intNum2, intNum3, intNum7)
+        CreatePanel(flpEndOfShiftCount, medTUID3, genName3, intNum3, intNum2, intNum7)
 
 
     End Sub
@@ -40,7 +40,7 @@
 
 
 
-    Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel,, ByVal intMedicationTUID As Integer, ByVal strMedicationName As String, ByVal strDrawerNumber As String, ByVal strSection As String, ByVal strSystemCount As String)
+    Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal intMedicationTUID As Integer, ByVal strMedicationName As String, ByVal strDrawerNumber As String, ByVal strSection As String, ByVal strSystemCount As String)
 
         Dim pnl As Panel
         pnl = New Panel
