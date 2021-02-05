@@ -290,7 +290,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GraphicalUserInterfaceReusableMethods.vb" />
+    <Compile Include="Inventory.vb" />
     <Compile Include="Login.vb" />
+    <Compile Include="Medications.vb" />
     <Compile Include="Print.vb" />
     <Compile Include="Reports.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
