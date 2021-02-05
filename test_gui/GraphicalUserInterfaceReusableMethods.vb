@@ -250,6 +250,76 @@
 
     End Sub
 
+    Public Sub CreateFlagBtn(ByVal pnlPanelName As Panel, ByVal intPanelsAddedCount As Integer, ByVal intX As Integer, ByVal intY As Integer)
+
+        Dim btnFlagMedication As Button
+        btnFlagMedication = New Button
+        'declare our image and point at the resource
+        Dim mapImageTrash As New Bitmap(New Bitmap(My.Resources.flag_black_25px), 25, 25)
+
+        'Set button properties
+        With btnFlagMedication
+            .AutoSize = True
+            .Size = New Size(30, 30)
+            .FlatStyle = FlatStyle.Flat
+            .FlatAppearance.BorderSize = 0
+            .ForeColor = Color.Transparent
+            ' .Font = New Font(New FontFamily("Microsoft Sans Serif"), 11)
+            ' .Location = New Point(  )
+            .Location = New Point(intX, intY)
+            .Name = "btnFlagMedication" + (intPanelsAddedCount).ToString
+            .Image = mapImageTrash
+            .ImageAlign = ContentAlignment.MiddleCenter
+            .Tag = intPanelsAddedCount + 1
+        End With
+
+        pnlPanelName.Controls.Add(btnFlagMedication)
+
+        ' MessageBox.Show("again")
+        'Add handler for click events
+        AddHandler btnFlagMedication.Click, AddressOf DynamicFlagMedicationButton
+
+    End Sub
+    Public Sub DynamicFlagMedicationButton(sender As Object, ByVal e As EventArgs)
+
+        'functionality will be assigned here
+
+        ' take the panel which this button lives on and highlight it differently
+
+
+
+    End Sub
+
+    Public Sub CreateTextBox(ByVal pnlPanelName As Panel, ByVal intPanelsAddedCount As Integer, ByVal intX As Integer, ByVal intY As Integer)
+
+        Dim txtCount As TextBox
+        txtCount = New TextBox
+
+        'Set button properties
+        With txtCount
+            .AutoSize = True
+            .Size = New Size(30, 30)
+            .ForeColor = Color.Black
+            .Font = New Font(New FontFamily("Segoe UI"), 11)
+            ' .Location = New Point(  )
+            .Location = New Point(intX, intY)
+            .Name = "txtCount" + (intPanelsAddedCount).ToString
+            .Tag = intPanelsAddedCount + 1
+            .MaxLength = 2
+
+        End With
+
+        pnlPanelName.Controls.Add(txtCount)
+
+        ' MessageBox.Show("again")
+        'Add handler for click events
+        'assing functionality here
+
+        'AddHandler btnFlagMedication.Click, AddressOf DynamicFlagMedicationButton
+
+    End Sub
+
+
     Public Sub CreateEditButton(ByVal pnlPanelName As Panel, ByVal pnlPanelsAddedCount As Integer, ByVal intX As Integer, ByVal intY As Integer)
 
         Dim btnEditButton As Button
