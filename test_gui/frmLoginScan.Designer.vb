@@ -123,7 +123,7 @@ Partial Class frmLoginScan
         Me.Panel3.Location = New System.Drawing.Point(51, 93)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel3.Size = New System.Drawing.Size(237, 28)
+        Me.Panel3.Size = New System.Drawing.Size(236, 28)
         Me.Panel3.TabIndex = 8
         '
         'TextBox1
@@ -136,7 +136,7 @@ Partial Class frmLoginScan
         Me.TextBox1.Margin = New System.Windows.Forms.Padding(2)
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(235, 26)
+        Me.TextBox1.Size = New System.Drawing.Size(234, 26)
         Me.TextBox1.TabIndex = 2
         Me.TextBox1.Tag = "SVSU ID"
         Me.TextBox1.Text = "SVSU ID"

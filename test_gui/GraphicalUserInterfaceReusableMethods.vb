@@ -399,4 +399,19 @@
         End If
     End Sub
 
+    Public Sub ButtonIncrement(ByVal txtBox As TextBox)
+
+        txtBox.Text = CInt(txtBox.Text) + 1
+
+    End Sub
+
+    Public Sub ButtonDecrement(ByVal txtBox As TextBox)
+
+        If Not CInt(txtBox.Text) = 0 Then
+            txtBox.Text = Int(txtBox.Text) - 1
+        End If
+
+    End Sub
+
+
 End Module
