@@ -30,9 +30,15 @@
         Dim genName4 As String = "Morphine"
         Dim genName5 As String = "Codeine"
 
+        ' create panel will be like it usually is and populate the panels. 
         CreatePanel(flpEndOfShiftCount, medTUID1, genName1, intNum1, intNum3, intNum5)
         CreatePanel(flpEndOfShiftCount, medTUID2, genName2, intNum2, intNum3, intNum7)
         CreatePanel(flpEndOfShiftCount, medTUID3, genName3, intNum3, intNum2, intNum7)
+
+
+        ' once save report is selected, we will need to extract the items from the UI and send it to reporting or to the database
+
+
 
 
     End Sub
@@ -105,5 +111,92 @@
         flpPannel.Controls.Add(pnl)
 
 
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: ExtractFormDataForDatabase     */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 1/21/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to iterate over the flow panel to strip the data   */
+    '/*  the user typed in when creating the report. This data will be    */
+    '/*  passed to a method that updates the database discrepancies.      */ 
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                         				          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 NONE                                                             */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	ExtractFormDataForDatabase()        							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	ctlPanelPadding- a control representing all of the panels that had*/
+    '/*    were used to pad another panel.                                */
+    '/* pnlPanel- a control which will contain only panels.               */
+    '/* ctlControls- a control which represents all of the controls on a  */
+    '/*     particular panel.                                             */
+    '/* txtBox- represents a textbox, specifically the one that the user  */
+    '/*    typed in to update the medication count in the drawer          */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*                                                                     
+    '/*********************************************************************/
+    Sub ExtractFormDataForDatabase()
+
+        Dim ctlPanelPadding As Control
+        Dim pnlPanel As Control
+        Dim ctlControl As Control
+        Dim txtBox As TextBox
+
+        'the construction of the panels is important to consider here. Look over the createPanel method to understand
+        'there is a panel docked inside of another panel which is used to create a padding effect.
+        'to get any controls off of the panel, we need to iterate twice through the controls to reach these items
+
+        For Each ctlPanelPadding In flpEndOfShiftCount.Controls
+            ' retreiving the pannels for padding
+
+            For Each pnlPanel In ctlPanelPadding.Controls
+                ' retreiving list of all panels within the padding
+
+                For Each ctlControl In pnl.Controls
+                    ' retreiving the items in the panel such as labels and textbox values
+
+                    If TypeName(ctlControl) = "TextBox" Then
+                        txtBox = CType(ctlControl, TextBox)
+
+
+
+
+                        'HERE call the insert or update statement to database to pipe the data over for reporting
+                        Debug.Print(pnlPanel.Tag) 'tag will retreive the ID of the medication because it is added there inthe create panel method
+                        Debug.Print(txtBox.Text) 'textbox will contain the typed count 
+                        Debug.Print(pnlPanel.BackColor.ToString) 'if the backcolor is red, then the item was flagged
+                        'Debug.Print(ctlControl.Name)
+
+
+
+
+
+
+                    End If
+
+                Next
+            Next
+        Next
+
+    End Sub
+
+    Private Sub btnControlled_Click(sender As Object, e As EventArgs) Handles btnControlled.Click
+        ExtractFormDataForDatabase()
     End Sub
 End Class
