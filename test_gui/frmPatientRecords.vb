@@ -4,7 +4,7 @@
     'Private CurrentContactPanelName As String = Nothing
 
     Dim currentContactPanel As String = Nothing
-    Dim intSelectedPatientMRN As Integer
+    Public intSelectedPatientMRN As Integer = 0
 
     Private Sub Button2_Click(sender As Object, e As EventArgs)
         frmPatientInfo.Show()
@@ -169,9 +169,10 @@
 
     Private Sub DynamicSingleClickOpenPatient(sender As Object, e As EventArgs)
 
+        intSelectedPatientMRN = GetSelectedPatientMRN(sender)
         ' allows panel to have double click functionality to open it
         frmPatientInfo.Show()
-        intSelectedPatientMRN = GetSelectedPatientMRN(sender)
+
     End Sub
 
     'Private Sub DynamicMouseHoverLeave(sender As Object, e As EventArgs)
@@ -487,11 +488,9 @@
                 Debug.Print(ctl.Text)
                 intMRN = CInt(ctl.Text)
             End If
-
         Next
-
         'returning the MRN of the patient from the selected record
         Return intMRN
-
     End Function
+
 End Class

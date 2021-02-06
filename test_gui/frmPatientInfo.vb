@@ -1,4 +1,6 @@
 ﻿Public Class frmPatientInfo
+
+    Dim intPatientMRN As Integer = frmPatientRecords.intSelectedPatientMRN
     Dim ContactPanelsAddedCount As Integer = 0
     Dim CurrentContactPanelName As String = Nothing
 
@@ -9,7 +11,7 @@
 
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) 
+    Private Sub Button3_Click(sender As Object, e As EventArgs)
         Dispense.Show()
     End Sub
 
@@ -255,11 +257,12 @@
 
     Private Sub frmPatientInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        intPatientMRN = frmPatientRecords.intSelectedPatientMRN
         PopulateDispenseHistory()
         PopulateCurrentMedications()
         'PopulateAllergies()
         PopulateNotes()
-
+        GetPatientInformation(intPatientMRN)
         'CreateDispenseHistoryPanel(flpDispenseHistory)
         'CreateDispenseHistoryPanel(flpDispenseHistory)
         'CreateDispenseHistoryPanel(flpDispenseHistory)
@@ -1055,4 +1058,14 @@
 
     End Sub
 
+    Private Sub GetPatientInformation(ByRef intPatientMRN As Integer)
+        Dim dsPatientDataSet As DataSet
+        Dim strSQLiteCommand As String = "SELECT MRN_Number, Patient_First_Name,Patient_Middle_Name, Patient_Last_Name, " &
+            "Date_of_Birth, Sex, Height, Weight, Address, City, State, Email_address, Phone_Number " &
+            "FROM Patient WHERE MRN_Number = '" & intPatientMRN & "'"
+
+        dsPatientDataSet = CreateDatabase.ExecuteSelectQuery(strSQLiteCommand)
+
+        Dim stringstring As String
+    End Sub
 End Class
