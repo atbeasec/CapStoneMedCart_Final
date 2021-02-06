@@ -99,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdHoc.vb" />
+    <Compile Include="AdminActions.vb" />
     <Compile Include="CartInterfaceCode.vb" />
     <Compile Include="CreateDatabase.vb" />
     <Compile Include="Dispense.Designer.vb">
