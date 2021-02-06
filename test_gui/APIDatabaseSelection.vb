@@ -27,11 +27,6 @@ Imports System.IO
 '/*                                                                 */
 '/*******************************************************************/
 '/*  GLOBAL VARIABLE LIST (Alphabetically):			                */
-'/*DBCmd - Stores the SQL commands 									*/
-'/*DBCONNECTIon - Stores the information to connect to the database,*/
-'/*strSQLCmd - stores  string as a sql command                      */
-'/*strDBNAME - Stores the database name							    */
-'/*strDBPath - Stores the database path						        */
 '/*******************************************************************/
 '/* COMPILATION NOTES:								                */
 '/* 											                    */
@@ -48,17 +43,12 @@ Imports System.IO
 '/*******************************************************************/
 Module APIDatabaseSelection
 
-	Dim DBCONNECTION As SQLiteConnection
-	Dim DBCmd As SQLiteCommand
-	Const strDBName As String = "Medication_Cart_System"
-	Dim strSQLCmd As String
-	Dim strDBPATH As String = My.Application.Info.DirectoryPath & "\" & strDBName & ".db"
 
 	'/*******************************************************************/
 	'/*                   FUNCTION NAME:        GetDrugRXCUI		    */
 	'/*******************************************************************/
 	'/*              WRITTEN BY:  	Cody Russell					    */
-	'/*		         DATE CREATED: 	   February 5, 2021		            */
+	'/*		         DATE CREATED: 	   February 3, 2021		            */
 	'/*******************************************************************/
 	'/*  FUNCTION PURPOSE:									      		*/
 	'/*	The purpose of this function is to get the medication rxcui     */ 
@@ -86,19 +76,14 @@ Module APIDatabaseSelection
 	'/*																	*/
 	'/*  WHO   WHEN     WHAT											*/
 	'/*  ---   ----     ------------------------------------------------*/
-	'/*  Cody Russell 02/5/21  Initial creation of the code	        	*/
+	'/*  Cody Russell 02/3/21  Initial creation of the code	        	*/
+	'/*  Cody Russell 02/5/21  Made altercations to make more readable code  */
 	'/*******************************************************************/
 	Function getDrugRXCUI()
-		DBCONNECTION = New SQLiteConnection(strDBPATH)
-		DBCONNECTION.Open()
 
-		strSQLCmd = "SELECT Drug_Name, Dosage, Type FROM Drug_Interactions"
-        Dim reader As SQLiteDataReader
-        DBCmd.CommandText = strSQLCmd
+		ExecuteSelectQuery("SELECT Drug_Name, Dosage, Type FROM Medication")
 
-        DBCONNECTION.Close()
-
-    End Function
+	End Function
 
 	'/*******************************************************************/
 	'/*                   FUNCTION NAME:        GetMedication		    */
@@ -107,7 +92,7 @@ Module APIDatabaseSelection
 	'/*		         DATE CREATED: 	   February 3, 2021		            */
 	'/*******************************************************************/
 	'/*  FUNCTION PURPOSE:									      		*/
-	'/*	The purpose of this function is to get the medication detail from  */ 
+	'/*	The purpose of this function is to get the medication detail from */ 
 	'/* the database.                                                   */
 	'/*******************************************************************/
 	'/*  CALLED BY:   	      											*/
@@ -133,19 +118,52 @@ Module APIDatabaseSelection
 	'/*  WHO   WHEN     WHAT											*/
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  Cody Russell 02/3/21  Initial creation of the code	        	*/
+	'/*  Cody Russell 02/5/21  Made altercations to make more readable code  */
 	'/*******************************************************************/
 	Function getMedication()
-		DBCONNECTION = New SQLiteConnection(strDBPATH)
-		DBCONNECTION.Open()
 
-		strSQLCmd = "SELECT Drug_Name, Dosage, Type FROM Medication"
+		ExecuteSelectQuery("SELECT Medication_ID, Drug_Name, RXCUI_ID, Dosage,
+                            NarcoticControlled_Flag, Barcode, Synonym, Type
+                            Strength, Active_Flag FROM Medication")
 
-		DBCmd.CommandText = strSQLCmd
-
-		DBCONNECTION.Close()
 	End Function
 
-	Function GetMedicationInteraction()
-
+	'/*******************************************************************/
+	'/*                   FUNCTION NAME:        GetDrugInteractions	    */
+	'/*******************************************************************/
+	'/*              WRITTEN BY:  	Cody Russell					    */
+	'/*		         DATE CREATED: 	   February 5, 2021		            */
+	'/*******************************************************************/
+	'/*  FUNCTION PURPOSE:									      		*/
+	'/*	The purpose of this function is to get the drug interaction     */ 
+	'/* details from the database.                                      */
+	'/*******************************************************************/
+	'/*  CALLED BY:   	      											*/
+	'/*  (NONE)															*/
+	'/*******************************************************************/
+	'/*  CALLS:															*/
+	'/*  (NONE)															*/
+	'/*******************************************************************/
+	'/*  PARAMETER LIST (In Parameter Order):							*/
+	'/*																	*/
+	'/*  (None)															*/
+	'/*******************************************************************/
+	'/* SAMPLE INVOCATION:												*/
+	'/*																	*/
+	'/* GetMedication()							        			    */
+	'/*******************************************************************/
+	'/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+	'/*																	*/
+	'/*  (None)															*/
+	'/*******************************************************************/
+	'/* MODIFICATION HISTORY:											*/
+	'/*																	*/
+	'/*  WHO   WHEN     WHAT											*/
+	'/*  ---   ----     ------------------------------------------------*/
+	'/*  Cody Russell 02/5/21  Initial creation of the code	        	*/
+	'/*******************************************************************/
+	Function GetDrugInteraction()
+		ExecuteSelectQuery("SELECT Drug_Interactions_ID, Medication_One_ID, Medication_Two_ID,
+                           Severity, Description FROM Drug_Interactions")
 	End Function
 End Module
