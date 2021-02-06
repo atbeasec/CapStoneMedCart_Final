@@ -4,6 +4,8 @@
     'Private CurrentContactPanelName As String = Nothing
 
     Dim currentContactPanel As String = Nothing
+    Dim intSelectedPatientMRN As Integer
+
     Private Sub Button2_Click(sender As Object, e As EventArgs)
         frmPatientInfo.Show()
 
@@ -169,7 +171,7 @@
 
         ' allows panel to have double click functionality to open it
         frmPatientInfo.Show()
-
+        intSelectedPatientMRN = GetSelectedPatientMRN(sender)
     End Sub
 
     'Private Sub DynamicMouseHoverLeave(sender As Object, e As EventArgs)
@@ -432,4 +434,64 @@
     'End Sub
 
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: GetSelectedPatientMRN	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Collin Krygier  		         */   
+    '/*		         DATE CREATED: 	2/6/21			         */                             
+    '/********************************************************************/
+    '/*  FUNCTION PURPOSE: this function retrieves the the MRN of the	 */					            
+    '/*	 patient selected by the user.					 */					                       
+    '/*                                                                  */
+    '/********************************************************************/
+    '/*  CALLED BY: DynamicSingleClickOpenPatient   	      		 */				            
+    '/*                                        				 */         
+    '/********************************************************************/
+    '/*  CALLS:								 */		                  
+    '/*             (NONE)						 */		               
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				 */	           
+    '/*	 sender- an object representing the control that was selected    */								                        
+    '/*                                                                  */  
+    '/********************************************************************/
+    '/*  RETURNS:							 */	                          
+    '/*  intMRN- an integer that is the MRN number of the selected patient/								             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						 */		             
+    '/*	GetSelectedPatientMRN(sender)					 */					                       
+    '/*                                                                  */   
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/*	 ctl- a control object that is used to hold all of the controls  */
+    '/*  that will be iterated over.					 */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						 */		                 
+    '/*									 */		                   
+    '/*  WHO            WHEN             WHAT				 */		            
+    '/*  ---            ----             ----				 */
+    '/*  CK		2/6/21		 initial creation                */
+    '/********************************************************************/ 
+    Function GetSelectedPatientMRN(sender As Object) As Integer
+
+        Dim intMRN As Integer = Nothing
+        Dim ctl As Control
+
+        ' iterating over the list of controls in the panel
+        For Each ctl In sender.Controls
+
+            ' the label containing the MRN number will always be called "lblMRN" with a number tacked on
+            ' to represent what number panel it is in the row of created panels.
+            ' simplying searching for the control that contains MRN will always yield the correct label.
+            If ctl.Name.Contains("MRN") Then
+
+                Debug.Print(ctl.Text)
+                intMRN = CInt(ctl.Text)
+            End If
+
+        Next
+
+        'returning the MRN of the patient from the selected record
+        Return intMRN
+
+    End Function
 End Class
