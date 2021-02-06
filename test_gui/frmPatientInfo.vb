@@ -1061,10 +1061,10 @@
     Private Sub GetPatientInformation(ByRef intPatientMRN As Integer)
 
         Dim dsPatientDataSet As DataSet = New DataSet
-        Dim intPhysicianID As String 
+        Dim intPhysicianID As String
         Dim strSQLiteCommand As String = "SELECT MRN_Number, Patient_First_Name,Patient_Middle_Name, Patient_Last_Name, " &
             "Date_of_Birth, Sex, Height, Weight, Address, City, State, Email_address, Phone_Number, Primary_Physician_ID " &
-            "FROM Patient WHERE MRN_Number = '" & intPatientMRN & "'"
+            " FROM Patient WHERE MRN_Number = '" & intPatientMRN & "'"
 
         dsPatientDataSet = CreateDatabase.ExecuteSelectQuery(strSQLiteCommand)
 
@@ -1083,12 +1083,14 @@
         Next
 
         strSQLiteCommand = "SELECT Physician_First_Name,Physician_Last_Name" &
-            " FROM Physician WHERE Physician_ID = '" & intPhysicianID & "'"
+            "FROM Physician WHERE Physician_ID = '" & intPhysicianID & "'"
 
         dsPatientDataSet = CreateDatabase.ExecuteSelectQuery(strSQLiteCommand)
 
         For Each dr As DataRow In dsPatientDataSet.Tables(0).Rows
             txtPhysician.Text = "Dr. " & dr(0) & " " & dr(1)
         Next
+
+
     End Sub
 End Class
