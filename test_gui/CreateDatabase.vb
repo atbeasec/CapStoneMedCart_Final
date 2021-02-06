@@ -55,6 +55,8 @@
 '/*  WHO		WHEN		WHAT										*/
 '/*  BRH        01/23/21   Initial creation of the code-------------	*/
 '/*  BRH		01/27/21  Updated database path to save on computer		*/
+'/*  BRH		02/06/21	Allowed for user to choose database file	*/
+'/*							and database file name upon creation.		*/
 '/********************************************************************	*/
 
 'Imports the libraries necessary to connect and create SQLite databases
@@ -125,120 +127,161 @@ Module CreateDatabase
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  BRH  01/23/21  Initial creation of the code					*/
 	'/*  BRH  01/28/21  Add the CreateSettingsTable method				*/
+	'/*  BRH		02/06/21	Allowed for user to choose database file*/
+	'/*							and database file name upon creation.	*/
 	'/*******************************************************************/
 
 	Sub Main()
-        'Create variable to check application path for the config file
-        Dim strApplicationPath As String = Application.StartupPath & "\config.app"
+		'Initializes a dialog for saving files
+		Dim dlgSaveFileDialog As New SaveFileDialog
 
-        ''create folder dialoge object to prompt user to select a folder path
-        Dim dlgFolderDialogeLocation As New FolderBrowserDialog
+		'Initializes a dialog for opening files
+		Dim dlgOpenFileDialog As New OpenFileDialog
 
-        ''set the default displayed path to the application path for better user experience
-        dlgFolderDialogeLocation.SelectedPath = Application.StartupPath
+		'Create variable to check application path for the config file
+		Dim strApplicationPath As String = Application.StartupPath & "\config.app"
 
-        'check if the config file exists or not
-        If Not System.IO.File.Exists(strApplicationPath) Then
+		''create folder dialoge object to prompt user to select a folder path
+		Dim dlgFolderDialogeLocation As New FolderBrowserDialog
 
-            'if the file does not exist, create it, then dispose of the connection
-            System.IO.File.Create(strApplicationPath).Dispose()
-            'prompt user to select a database path after the config file is created
-            If (dlgFolderDialogeLocation.ShowDialog() = DialogResult.OK) Then
+		''set the default displayed path to the application path for better user experience
+		dlgFolderDialogeLocation.SelectedPath = Application.StartupPath
 
-                'set defult folder for database to selected path a
-                'then set the new database path
-                strDEFAULTFOLDER = dlgFolderDialogeLocation.SelectedPath
-                strDBPath = strDEFAULTFOLDER & "\" & strDBNAME & ".db"
-                'write database path to the file
-                My.Computer.FileSystem.WriteAllText(strApplicationPath, strDBPath, True)
-            Else
-                'if the user clicks cancel or 'X' set a default path for the database into the config.app file
-                strDEFAULTFOLDER = Application.StartupPath
-                strDBPath = strDEFAULTFOLDER & "\" & strDBNAME & ".db"
-                My.Computer.FileSystem.WriteAllText(strApplicationPath, strDBPath, True)
-            End If
+		'check if the config file exists or not
+		If Not System.IO.File.Exists(strApplicationPath) Then
 
-        Else
-            'if the file already exists
-            'use reader to read database path from the config.app file
-            Using reader As StreamReader = New StreamReader(strApplicationPath)
-                strDBPath = reader.ReadLine
-            End Using
-        End If
+			'if the file does not exist, create it, then dispose of the connection
+			System.IO.File.Create(strApplicationPath).Dispose()
+
+			'Show a message asking the user if they want to open an existing file or create a new one
+			Dim dlgResult As DialogResult = MessageBox.Show("Would you like to open an existing file?" & vbCr & "If you would like to create a file, select No",
+														"Open file", MessageBoxButtons.YesNo)
+
+			'If the user selects yes, they want to select an existing file
+			If dlgResult = DialogResult.Yes Then
+				'Initialize the dialog for opening a file
+				dlgOpenFileDialog.Title = "Open File..."
+				dlgOpenFileDialog.Multiselect = False
+				dlgOpenFileDialog.Filter = "All Files|*.*"
+
+				'If the user selects a file and presses ok, the file path will be saved in config.app
+				If dlgOpenFileDialog.ShowDialog() = DialogResult.OK Then
+					strDBPath = dlgOpenFileDialog.FileName
+
+					My.Computer.FileSystem.WriteAllText(strApplicationPath, strDBPath, True)
+					Using reader As StreamReader = New StreamReader(strApplicationPath)
+						strDBPath = reader.ReadLine
+					End Using
+
+					'If the user accidentally closes out, a default database will be made 
+				Else
+					strDEFAULTFOLDER = Application.StartupPath
+					strDBPath = strDEFAULTFOLDER & "\" & strDBNAME & ".db"
+					My.Computer.FileSystem.WriteAllText(strApplicationPath, strDBPath, True)
+				End If
+
+			Else 'If the user didn't want to open a file, the user is prompted to choose a path to save the database
+				'prompt user to select a database path after the config file is created
+
+				'Set up how the save dialog box will work
+				dlgSaveFileDialog.Filter = "db files (*.db)|*.db|All files (*.*)|*.*"
+				dlgSaveFileDialog.FilterIndex = 2
+				dlgSaveFileDialog.RestoreDirectory = True
+
+				'If the user selects a file path and types in a file name and hits ok,
+				'the file's path will be stored in the config.app file
+				If dlgSaveFileDialog.ShowDialog() = DialogResult.OK Then
+					strDBPath = dlgSaveFileDialog.FileName
+					My.Computer.FileSystem.WriteAllText(strApplicationPath, strDBPath, True)
+				Else
+					'if the user clicks cancel or 'X' set a default path for the database into the config.app file
+					strDEFAULTFOLDER = Application.StartupPath
+					strDBPath = strDEFAULTFOLDER & "\" & strDBNAME & ".db"
+					My.Computer.FileSystem.WriteAllText(strApplicationPath, strDBPath, True)
+				End If
+			End If
+
+		Else
+			'if the file already exists
+			'use reader to read database path from the config.app file
+			Using reader As StreamReader = New StreamReader(strApplicationPath)
+				strDBPath = reader.ReadLine
+			End Using
+		End If
 
 
-        strCONNECTION = String.Format("Data Source = {0}", strDBPath)
-        If Not System.IO.File.Exists(strDBPath) Then
-            'Creates the database
-            CreateDataBase()
+		strCONNECTION = String.Format("Data Source = {0}", strDBPath)
+		If Not System.IO.File.Exists(strDBPath) Then
+			'Creates the database
+			CreateDataBase()
 
-            'Seperate routines to create the tables
-            CreateDrawersTable()
-            CreateMedicationTable()
-            CreatePatientTable()
-            CreatePhysicianTable()
-            CreatePatientPhysicianTable()
-            CreateUserTable()
-            CreatePatientUserTable()
-            CreateRoomsTable()
-            CreatePatientRoomTable()
-            CreateAllergyTable()
-            CreatePatientAllergyTable()
-            CreateAllergyOverrideTable()
-            CreatePatientMedicationTable()
-            CreateDrugInteractionsTable()
-            CreateDrawerMedicationTable()
-            CreateWastesTable()
-            CreateDispensingTable()
-            CreateDiscrepanciesTable()
+			'Seperate routines to create the tables
+			CreateDrawersTable()
+			CreateMedicationTable()
+			CreatePatientTable()
+			CreatePhysicianTable()
+			CreatePatientPhysicianTable()
+			CreateUserTable()
+			CreatePatientUserTable()
+			CreateRoomsTable()
+			CreatePatientRoomTable()
+			CreateAllergyTable()
+			CreatePatientAllergyTable()
+			CreateAllergyOverrideTable()
+			CreatePatientMedicationTable()
+			CreateDrugInteractionsTable()
+			CreateDrawerMedicationTable()
+			CreateWastesTable()
+			CreateDispensingTable()
+			CreateDiscrepanciesTable()
 			CreateAdHocOrderTable()
 			CreatePersonalPatientDrawerMedicationTable()
-            CreateSettingsTable()
+			CreateSettingsTable()
 
-            DBConn.Close()
-            MessageBox.Show("All tables were created")
-        Else
-            MessageBox.Show("Database is already stored at this location")
-        End If
+			DBConn.Close()
+			MessageBox.Show("All tables were created")
+		Else
 
-    End Sub
+		End If
 
-    '/*******************************************************************/
-    '/*                   SUBROUTINE NAME:        CreateDataBase()		*/
-    '/*******************************************************************/
-    '/*                   WRITTEN BY:  	Breanna Howey					*/
-    '/*		         DATE CREATED: 	   01/23/21							*/
-    '/*******************************************************************/
-    '/*  SUBROUTINE PURPOSE:											*/
-    '/*	The purpose of this subroutine is to create the database. First,*/ 
-    '/* the database file is created at the specified path. Next, the	*/
-    '/* program lets the user know the database has been created		*/
-    '/*******************************************************************/
-    '/*  CALLED BY:   	      											*/
-    '/*  Main()															*/
-    '/*******************************************************************/
-    '/*  CALLS:															*/
-    '/*  (NONE)															*/
-    '/*******************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):							*/
-    '/*																	*/
-    '/*  (None)															*/
-    '/*******************************************************************/
-    '/* SAMPLE INVOCATION:												*/
-    '/*																	*/
-    '/* CreateDataBase()												*/
-    '/*******************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically):							*/
-    '/*																	*/
-    '/*  (None)															*/
-    '/*******************************************************************/
-    '/* MODIFICATION HISTORY:											*/
-    '/*																	*/
-    '/*  WHO   WHEN     WHAT											*/
-    '/*  ---   ----     ------------------------------------------------*/
-    '/*  BRH  01/23/21  Initial creation of the code					*/
-    '/*******************************************************************/
-    Public Sub CreateDataBase()
+	End Sub
+
+	'/*******************************************************************/
+	'/*                   SUBROUTINE NAME:        CreateDataBase()		*/
+	'/*******************************************************************/
+	'/*                   WRITTEN BY:  	Breanna Howey					*/
+	'/*		         DATE CREATED: 	   01/23/21							*/
+	'/*******************************************************************/
+	'/*  SUBROUTINE PURPOSE:											*/
+	'/*	The purpose of this subroutine is to create the database. First,*/ 
+	'/* the database file is created at the specified path. Next, the	*/
+	'/* program lets the user know the database has been created		*/
+	'/*******************************************************************/
+	'/*  CALLED BY:   	      											*/
+	'/*  Main()															*/
+	'/*******************************************************************/
+	'/*  CALLS:															*/
+	'/*  (NONE)															*/
+	'/*******************************************************************/
+	'/*  PARAMETER LIST (In Parameter Order):							*/
+	'/*																	*/
+	'/*  (None)															*/
+	'/*******************************************************************/
+	'/* SAMPLE INVOCATION:												*/
+	'/*																	*/
+	'/* CreateDataBase()												*/
+	'/*******************************************************************/
+	'/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+	'/*																	*/
+	'/*  (None)															*/
+	'/*******************************************************************/
+	'/* MODIFICATION HISTORY:											*/
+	'/*																	*/
+	'/*  WHO   WHEN     WHAT											*/
+	'/*  ---   ----     ------------------------------------------------*/
+	'/*  BRH  01/23/21  Initial creation of the code					*/
+	'/*******************************************************************/
+	Public Sub CreateDataBase()
 		'Creates a database file through the SQLiteConnection
 		SQLiteConnection.CreateFile(strDBPath)
 		MessageBox.Show("Database Created")
