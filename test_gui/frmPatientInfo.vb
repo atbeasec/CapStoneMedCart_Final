@@ -1083,7 +1083,7 @@
         Next
 
         strSQLiteCommand = "SELECT Physician_First_Name,Physician_Last_Name" &
-            "FROM Physician WHERE Physician_ID = '" & intPhysicianID & "'"
+            " FROM Physician WHERE Physician_ID = '" & intPhysicianID & "'"
 
         dsPatientDataSet = CreateDatabase.ExecuteSelectQuery(strSQLiteCommand)
 
@@ -1091,6 +1091,6 @@
             txtPhysician.Text = "Dr. " & dr(0) & " " & dr(1)
         Next
 
-
+        DispenseHistory.DispenseHistorySpecificPatient(intPatientMRN)
     End Sub
 End Class
