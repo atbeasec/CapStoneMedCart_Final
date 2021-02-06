@@ -103,13 +103,15 @@
         DoB = 6 'this is the day of birth
         Sex = 7
         Height = 8
-        address = 9
-        City = 10
-        zip = 11
-        Phone = 12
-        Email = 13
-        PhysicianID = 14
-        Active_Flag = 15
+        Weight = 9
+        address = 10
+        City = 11
+        state = 12
+        zip = 13
+        Phone = 14
+        Email = 15
+        PhysicianID = 16
+        Active_Flag = 17
     End Enum
 
     '/*********************************************************************/
