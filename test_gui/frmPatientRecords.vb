@@ -67,21 +67,24 @@
         Dim strRoom As String
         Dim strBed As String
 
-        For Each row In PatientInfo.Tables(0).Rows()
+        For Each item As DataRow In PatientInfo.Tables(0).Rows()
             With PatientInfo.Tables(0)
 
-                If IsDBNull(.Rows(0)(4)) Then
+
+                If IsDBNull(item.Item(4)) Then
                     strRoom = "N/A"
                 Else
-                    strRoom = .Rows(0)(4).ToString
+                    strRoom = item.Item(4).ToString
                 End If
 
-                If IsDBNull(.Rows(0)(5)) Then
+                If IsDBNull(item.Item(5)) Then
                     strBed = "N/A"
                 Else
-                    strBed = .Rows(0)(5).ToString
+                    strBed = item.Item(5).ToString
+
                 End If
-                CreatePanel(flpPatientRecords, .Rows(0)(0), .Rows(0)(1), .Rows(0)(2), .Rows(0)(3), strRoom, strBed)
+                CreatePanel(flpPatientRecords, item.Item(0), item.Item(1),
+                           item.Item(2), item.Item(3), strRoom, strBed)
 
             End With
         Next
