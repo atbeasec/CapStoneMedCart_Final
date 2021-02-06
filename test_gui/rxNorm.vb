@@ -302,4 +302,6 @@ Module rxNorm
         'debug to test if content is correct
         Debug.WriteLine(result.Content)
 
+    End Function
+
 End Module
