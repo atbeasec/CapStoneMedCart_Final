@@ -77,11 +77,11 @@ Module APIDatabaseSelection
 	'/*  WHO   WHEN     WHAT											*/
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  Cody Russell 02/3/21  Initial creation of the code	        	*/
-	'/*  Cody Russell 02/5/21  Made altercations to make more readable code  */
+	'/*  Cody Russell 02/5/21  Made altercations to make more readable code */
 	'/*******************************************************************/
 	Function getDrugRXCUI()
 
-		ExecuteSelectQuery("SELECT Drug_Name, Dosage, Type FROM Medication")
+		ExecuteSelectQuery("SELECT RXCUI_ID, Drug_Name, Dosage, Type FROM Medication")
 
 	End Function
 
@@ -122,9 +122,7 @@ Module APIDatabaseSelection
 	'/*******************************************************************/
 	Function getMedication()
 
-		ExecuteSelectQuery("SELECT Medication_ID, Drug_Name, RXCUI_ID, Dosage,
-                            NarcoticControlled_Flag, Barcode, Synonym, Type
-                            Strength, Active_Flag FROM Medication")
+		ExecuteSelectQuery("SELECT * FROM Medication")
 
 	End Function
 
@@ -150,7 +148,7 @@ Module APIDatabaseSelection
 	'/*******************************************************************/
 	'/* SAMPLE INVOCATION:												*/
 	'/*																	*/
-	'/* GetMedication()							        			    */
+	'/* GetDrugInteractions()							                */
 	'/*******************************************************************/
 	'/*  LOCAL VARIABLE LIST (Alphabetically):							*/
 	'/*																	*/
@@ -163,7 +161,14 @@ Module APIDatabaseSelection
 	'/*  Cody Russell 02/5/21  Initial creation of the code	        	*/
 	'/*******************************************************************/
 	Function GetDrugInteraction()
+		ExecuteSelectQuery("SELECT * FROM Drug_Interactions")
+	End Function
+
+	Function CompareDrugInteractions(CompareStrings As String)
 		ExecuteSelectQuery("SELECT Drug_Interactions_ID, Medication_One_ID, Medication_Two_ID,
-                           Severity, Description FROM Drug_Interactions")
+                          Medication_Three_ID, Severity, Description FROM Drug_Interactions")
+
+		Dim reader As SQLiteDataReader
+
 	End Function
 End Module
