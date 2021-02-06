@@ -93,11 +93,12 @@ Module APIDatabaseSelection
 		DBCONNECTION.Open()
 
 		strSQLCmd = "SELECT Drug_Name, Dosage, Type FROM Drug_Interactions"
-		Dim reader As sqldatareader
-		DBCmd.CommandText = strSQLCmd
+        Dim reader As SQLiteDataReader
+        DBCmd.CommandText = strSQLCmd
 
-		DBCONNECTION.Close()
-	End Function
+        DBCONNECTION.Close()
+
+    End Function
 
 	'/*******************************************************************/
 	'/*                   FUNCTION NAME:        GetMedication		    */
