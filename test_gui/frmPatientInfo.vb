@@ -1059,13 +1059,23 @@
     End Sub
 
     Private Sub GetPatientInformation(ByRef intPatientMRN As Integer)
-        Dim dsPatientDataSet As DataSet
+        Dim dsPatientDataSet As DataSet = New DataSet
         Dim strSQLiteCommand As String = "SELECT MRN_Number, Patient_First_Name,Patient_Middle_Name, Patient_Last_Name, " &
             "Date_of_Birth, Sex, Height, Weight, Address, City, State, Email_address, Phone_Number " &
             "FROM Patient WHERE MRN_Number = '" & intPatientMRN & "'"
 
         dsPatientDataSet = CreateDatabase.ExecuteSelectQuery(strSQLiteCommand)
+        For Each dr As DataRow In dsPatientDataSet.Tables(0).Rows
 
-        Dim stringstring As String
+            txtMRN.Text = dr(0)
+            txtBirthday.Text = dr(4)
+            txtGender.Text = dr(5)
+            txtHeight.Text = dr(6)
+            txtWeight.Text = dr(7)
+            txtAddress.Text = dr(8) & " " & dr(9) & " " & dr(10)
+            txtEmail.Text = dr(11)
+            txtPhone.Text = dr(12)
+            LblPatientName.Text = dr(1) & " " & dr(2) & " " & dr(3)
+        Next
     End Sub
 End Class
