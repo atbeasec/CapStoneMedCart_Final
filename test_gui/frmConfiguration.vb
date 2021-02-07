@@ -123,6 +123,7 @@
     End Sub
 
     Private Sub txtUserID_LostFocus(sender As Object, e As EventArgs) Handles txtUserID.LostFocus
+        'String to be sent to CreateDatabase Module to exicute search to check if Username is already in the User Table
         Dim strStatement = "SELECT COUNT(*) FROM User WHERE Username = '" & txtUserID.Text & "'"
         If ExecuteScalarQuery(strStatement) <> 0 Then
             MsgBox("A User already has that Username")
@@ -132,6 +133,7 @@
     End Sub
 
     Private Sub txtBarcode_LostFocus(sender As Object, e As EventArgs) Handles txtBarcode.LostFocus
+        'String to be sent to CreateDatabase Module to exicute search to check if Barcode is already in the User Table
         Dim strStatement = "SELECT COUNT(*) FROM User WHERE Barcode = '" & txtBarcode.Text & "'"
         If ExecuteScalarQuery(strStatement) <> 0 Then
             MsgBox("A User already has that Barcode")
@@ -145,18 +147,22 @@
         Dim intAdmin As Integer = 0
         Dim intActiveFlag As Integer = 1
         Dim strPassword As String = txtPassword.Text
+        'call CheckPassword Function to see if password mets security standards
         If CheckPassword(strPassword) = False Then
             MsgBox("Password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special characters ")
             txtPassword.Text = ""
             txtConfirmPassword.Text = ""
             txtPassword.Focus()
+            ' make sure password and Confirm Password Match
         ElseIf txtPassword.Text <> txtConfirmPassword.Text Then
             MsgBox("Confirm Password must match Password")
             txtConfirmPassword.Text = ""
             txtConfirmPassword.Focus()
+            'Make Sure all fields are filled
         ElseIf txtFirstName.Text = "" Or txtLastName.Text = "" Or txtUserID.Text = "" Or txtBarcode.Text = "" Then
             MsgBox("All Fields must be filled")
         Else
+            'Insert data into table by calling ExecuteScalarQuery in CreateDatabase Module
             Dim strStatement = "INSERT INTO USER(Username,Password,User_First_Name, User_Last_Name, Barcode, Admin_Flag, Supervisor_Flag, Active_Flag)" &
             "VALUES('" & txtUserID.Text & "','" & strPassword & "','" & txtFirstName.Text & "','" & txtLastName.Text & "','" & txtBarcode.Text & "','" & intAdmin & "','" & intSupervisor & "','" & intActiveFlag & "')"
             ExecuteScalarQuery(strStatement)
@@ -212,6 +218,7 @@
     '/*  Dylan Walter   2/7/2021    Initial Creation                      */                                                                   
     '/*********************************************************************/
     Function CheckPassword(strPassword)
+        'Security Requierments 
         Dim minLength As Integer = 8
         Dim numUpper As Integer = 1
         Dim numLower As Integer = 1
