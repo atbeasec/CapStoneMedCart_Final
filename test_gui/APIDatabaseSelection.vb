@@ -43,6 +43,8 @@ Imports System.IO
 '/*******************************************************************/
 Module APIDatabaseSelection
 
+	Dim myDataReader As SQLiteDataReader
+
 
 	'/*******************************************************************/
 	'/*                   FUNCTION NAME:        GetDrugRXCUI		    */
@@ -164,11 +166,51 @@ Module APIDatabaseSelection
 		ExecuteSelectQuery("SELECT * FROM Drug_Interactions")
 	End Function
 
-	Function CompareDrugInteractions(CompareStrings As String)
-		ExecuteSelectQuery("SELECT Drug_Interactions_ID, Medication_One_ID, Medication_Two_ID,
-                          Medication_Three_ID, Severity, Description FROM Drug_Interactions")
+	'/*******************************************************************/
+	'/*                   FUNCTION NAME:        GetDrugInteractions	    */
+	'/*******************************************************************/
+	'/*              WRITTEN BY:  	Cody Russell					    */
+	'/*		         DATE CREATED: 	   February 5, 2021		            */
+	'/*******************************************************************/
+	'/*  FUNCTION PURPOSE:									      		*/
+	'/*	The purpose of this function is to get the drug interaction     */ 
+	'/* details from the database and compare the data.                 */
+	'/*******************************************************************/
+	'/*  CALLED BY:   	      											*/
+	'/*  (NONE)															*/
+	'/*******************************************************************/
+	'/*  CALLS:															*/
+	'/*  (NONE)															*/
+	'/*******************************************************************/
+	'/*  PARAMETER LIST (In Parameter Order):							*/
+	'/*																	*/
+	'/*  (None)															*/
+	'/*******************************************************************/
+	'/* SAMPLE INVOCATION:												*/
+	'/*																	*/
+	'/* CompareDrugInteractions()							            */
+	'/*******************************************************************/
+	'/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+	'/*																	*/
+	'/*  (None)															*/
+	'/*******************************************************************/
+	'/* MODIFICATION HISTORY:											*/
+	'/*																	*/
+	'/*  WHO   WHEN     WHAT											*/
+	'/*  ---   ----     ------------------------------------------------*/
+	'/*  Cody Russell 02/5/21  Initial creation of the code	        	*/
+	'/* Cody Russell  02/6/21  Altered this function so that it will    */
+	'/* hold data in a reader than compare from the database it pulls.  */
+	'/*******************************************************************/
+	Function CompareDrugInteractions(Drug1 As String, Drug2 As String, Severity As String, Description As String
+																				) As Boolean
 
-		Dim reader As SQLiteDataReader
+		myDataReader = ExecuteSelectQuery("SELECT Medication_One_ID, Medication_Two_ID, Severity, Description,
+                                            Active_Flag FROM Drug_Interactions WHERE Medication_One_ID ='" & Drug1 & "'
+										    AND Medication_Two_ID = '" & Drug2 & "' AND Severity = '" & Severity &
+											"'AND Description = '" & Description)
 
+
+		
 	End Function
 End Module
