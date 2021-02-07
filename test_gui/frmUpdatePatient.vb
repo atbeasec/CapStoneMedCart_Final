@@ -86,11 +86,7 @@ Public Class frmUpdatePatient
                 Else
                     cboGender.SelectedItem = "Female"
                 End If
-            For Each row As DataRow In dsRooms.Tables(0).Rows
-                If checkforDup(cboRoom, row(EnumList.room.Id)) Then
-                    cboRoom.Items.Add(row(EnumList.room.Id))
-                End If
-            Next
+            PopulateRoomComboBox(cboRoom, dsRooms)
             cboRoom.SelectedItem = dsPatientRoom.Tables(0)(EnumList.PatientRoom.RoomID)
 
             cboState.SelectedItem = .Rows(0)(EnumList.Patient.state)
@@ -161,6 +157,6 @@ Public Class frmUpdatePatient
 
         strbSQL.Clear()
         strbSQL.Append("Update PatientRoom set ROOM_TUID = '" & cboRoom.SelectedIndex & "' where Patient_TUID = '")
-        strbSQL.Append(dsPatient.Tables(0).Rows(0)(EnumList.Patient.ID) "';")
+        strbSQL.Append(dsPatient.Tables(0).Rows(0)(EnumList.Patient.ID) & "';")
     End Sub
 End Class

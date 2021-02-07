@@ -29,7 +29,7 @@
 '/*  WHO   WHEN     WHAT								   */			  
 '/*  ---   ----     ------------------------------------------------- */
 '/*********************************************************************/
-
+Imports System.Text
 Module MiscMethods
     '/*********************************************************************/
     '/*                   SUBPROGRAM NAME:  	PopulateStateComboBox  	   */         
@@ -55,7 +55,7 @@ Module MiscMethods
     '/*            (NOTHING)				            				   */             
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:		                   						   */             
-    '/*	MiscMethods.StateArray()										   */                     
+    '/*	MiscMethods.PopulateStateComboBox(cboStates)    				   */                     
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
@@ -84,7 +84,7 @@ Module MiscMethods
     End Sub
 
     '/*********************************************************************/
-    '/*                   FUNCTION NAME: checkforDup                       */         
+    '/*                   FUNCTION NAME: checkComboForDup                  */         
     '/*********************************************************************/
     '/*                   WRITTEN BY:  Nathan Premo   		             */   
     '/*		         DATE CREATED: 2/6/2021                     		   */                             
@@ -102,13 +102,13 @@ Module MiscMethods
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					   */         
     '/*	 cboRoom - this is the combo box we are trying to add the itme to. */                     
-    '/*                                                                     
+    '/*   item - This is the string that you wish to add to the combobox    */                                                                  
     '/*********************************************************************/
     '/*  RETURNS:								         */                   
-    '/*            (NOTHING)								   */             
+    '/*	blnGood - this is the value that will tell us if the item is unqiue*/  
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								   */             
-    '/*	blnGood - this is the value that will tell us if the item is unqiue*/                     
+    '/* MiscMethods.checkComboForDup(cboStates, "MI)                       */
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
@@ -124,7 +124,7 @@ Module MiscMethods
     '/*********************************************************************/
 
 
-    Function checkforDup(cboRoom As ComboBox, item As String)
+    Function checkComboForDup(cboRoom As ComboBox, item As String)
         Dim blnGood As Boolean = True
         For Each thing As String In cboRoom.Items
             If thing.Equals(item) Then
@@ -133,4 +133,156 @@ Module MiscMethods
         Next
         Return blnGood
     End Function
+
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME:  PopulateRoomComboBox 	   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		         */   
+    '/*		         DATE CREATED: 2/6/2021                     		   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								               */             
+    '/*	 This is going to populate a combo box with the list of rooms that */
+    '/*  are in our database.                                              */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	cboRoom - this is the combo box that we are going to be populating*/
+    '/* dsrooms- this is the dataset of the rooms that we are going to be */
+    '/*     using. 
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*	miscMethods.PopulateRoomComboBox(CboRooms, dsRooms)										   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Sub PopulateRoomComboBox(cboRoom As ComboBox, dsrooms As DataSet)
+        For Each row As DataRow In dsrooms.Tables(0).Rows
+            If checkComboForDup(cboRoom, row(EnumList.room.Id)) Then
+                cboRoom.Items.Add(row(EnumList.room.Id))
+            End If
+        Next
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: populateBedComboBox  		   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		         */   
+    '/*		         DATE CREATED: 		   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:						            		   */             
+    '/*	This is going to populate a combo box with the list of rooms that  */                     
+    '/* we have in our database. It is only going to post the unique ones. */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+
+    Sub populateBedComboBox(cboBed As ComboBox, dsrooms As DataSet)
+        For Each row As DataRow In dsrooms.Tables(0).Rows
+            If checkComboForDup(cboBed, row(EnumList.room.BedName)) Then
+                cboBed.Items.Add(row(EnumList.room.BedName))
+            End If
+        Next
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: populatePhysicianComboBox      */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		                */   
+    '/*		         DATE CREATED: 	2/6/2021                        	   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:						            		   */             
+    '/*	This is going to populate a combo box with the list of Physicians that*/                     
+    '/* we have in our database. It is only going to post the unique ones. */           
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 cboStuff - This is going to be the combo box that we are trying   */
+    '/*     populate with the list of physicians.                          */
+    '/*  ds - this is the data that we are using to populate the combo box */                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+
+    Sub populatePhysicianComboBox(cboStuff As ComboBox, ds As DataSet)
+        Dim strbTesting As New StringBuilder
+        For Each row As DataRow In ds.Tables(0).Rows
+            strbTesting.Clear()
+            strbTesting.Append((row(EnumList.Physician.FirstName) & " " &
+                                row(EnumList.Physician.LastName)))
+            If checkComboForDup(cboStuff, strbTesting.ToString) Then
+                cboStuff.Items.Add(strbTesting.ToString)
+            End If
+        Next
+    End Sub
+
 End Module

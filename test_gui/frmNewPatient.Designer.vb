@@ -45,7 +45,7 @@ Partial Class frmNewPatient
         Me.cmbState = New System.Windows.Forms.ComboBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
+        Me.cmbSex = New System.Windows.Forms.ComboBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.cmbBed = New System.Windows.Forms.ComboBox()
         Me.Panel5 = New System.Windows.Forms.Panel()
@@ -56,7 +56,6 @@ Partial Class frmNewPatient
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.txtWeight = New System.Windows.Forms.TextBox()
         Me.Panel8 = New System.Windows.Forms.Panel()
-        Me.txtPrimaryPhysician = New System.Windows.Forms.TextBox()
         Me.lblFirstName = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -74,6 +73,7 @@ Partial Class frmNewPatient
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.btnCancel = New System.Windows.Forms.Button()
+        Me.cmbPhysician = New System.Windows.Forms.ComboBox()
         Me.Panel1.SuspendLayout()
         Me.Panel9.SuspendLayout()
         Me.Panel10.SuspendLayout()
@@ -316,23 +316,23 @@ Partial Class frmNewPatient
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel3.Controls.Add(Me.ComboBox4)
+        Me.Panel3.Controls.Add(Me.cmbSex)
         Me.Panel3.Location = New System.Drawing.Point(46, 221)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel3.Size = New System.Drawing.Size(124, 28)
         Me.Panel3.TabIndex = 5
         '
-        'ComboBox4
+        'cmbSex
         '
-        Me.ComboBox4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ComboBox4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ComboBox4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox4.FormattingEnabled = True
-        Me.ComboBox4.Location = New System.Drawing.Point(1, 1)
-        Me.ComboBox4.Name = "ComboBox4"
-        Me.ComboBox4.Size = New System.Drawing.Size(122, 25)
-        Me.ComboBox4.TabIndex = 5
+        Me.cmbSex.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cmbSex.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cmbSex.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbSex.FormattingEnabled = True
+        Me.cmbSex.Location = New System.Drawing.Point(1, 1)
+        Me.cmbSex.Name = "cmbSex"
+        Me.cmbSex.Size = New System.Drawing.Size(122, 25)
+        Me.cmbSex.TabIndex = 5
         '
         'Panel4
         '
@@ -436,23 +436,12 @@ Partial Class frmNewPatient
         'Panel8
         '
         Me.Panel8.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel8.Controls.Add(Me.txtPrimaryPhysician)
+        Me.Panel8.Controls.Add(Me.cmbPhysician)
         Me.Panel8.Location = New System.Drawing.Point(348, 502)
         Me.Panel8.Name = "Panel8"
         Me.Panel8.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel8.Size = New System.Drawing.Size(279, 28)
         Me.Panel8.TabIndex = 16
-        '
-        'txtPrimaryPhysician
-        '
-        Me.txtPrimaryPhysician.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtPrimaryPhysician.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtPrimaryPhysician.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPrimaryPhysician.Location = New System.Drawing.Point(1, 1)
-        Me.txtPrimaryPhysician.Multiline = True
-        Me.txtPrimaryPhysician.Name = "txtPrimaryPhysician"
-        Me.txtPrimaryPhysician.Size = New System.Drawing.Size(277, 26)
-        Me.txtPrimaryPhysician.TabIndex = 15
         '
         'lblFirstName
         '
@@ -645,6 +634,17 @@ Partial Class frmNewPatient
         Me.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnCancel.UseVisualStyleBackColor = False
         '
+        'cmbPhysician
+        '
+        Me.cmbPhysician.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cmbPhysician.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cmbPhysician.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbPhysician.FormattingEnabled = True
+        Me.cmbPhysician.Location = New System.Drawing.Point(1, 1)
+        Me.cmbPhysician.Name = "cmbPhysician"
+        Me.cmbPhysician.Size = New System.Drawing.Size(277, 25)
+        Me.cmbPhysician.TabIndex = 85
+        '
         'frmNewPatient
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -715,7 +715,6 @@ Partial Class frmNewPatient
         Me.Panel7.ResumeLayout(False)
         Me.Panel7.PerformLayout()
         Me.Panel8.ResumeLayout(False)
-        Me.Panel8.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -743,7 +742,7 @@ Partial Class frmNewPatient
     Friend WithEvents cmbState As ComboBox
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Panel3 As Panel
-    Friend WithEvents ComboBox4 As ComboBox
+    Friend WithEvents cmbSex As ComboBox
     Friend WithEvents Panel4 As Panel
     Friend WithEvents cmbBed As ComboBox
     Friend WithEvents Panel5 As Panel
@@ -753,7 +752,6 @@ Partial Class frmNewPatient
     Friend WithEvents Panel7 As Panel
     Friend WithEvents txtWeight As TextBox
     Friend WithEvents Panel8 As Panel
-    Friend WithEvents txtPrimaryPhysician As TextBox
     Friend WithEvents lblFirstName As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents Label3 As Label
@@ -771,4 +769,5 @@ Partial Class frmNewPatient
     Friend WithEvents Label15 As Label
     Friend WithEvents Label16 As Label
     Friend WithEvents btnCancel As Button
+    Friend WithEvents cmbPhysician As ComboBox
 End Class
