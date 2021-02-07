@@ -29,10 +29,8 @@ Partial Class frmLogin
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.btnEye = New System.Windows.Forms.Button()
         Me.txtPassword = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.lblFirstName = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.txtUserName = New System.Windows.Forms.TextBox()
         Me.lblBadge = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -52,7 +50,7 @@ Partial Class frmLogin
         Me.Button1.Margin = New System.Windows.Forms.Padding(2)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(238, 36)
-        Me.Button1.TabIndex = 1
+        Me.Button1.TabIndex = 3
         Me.Button1.Text = "Log in"
         Me.Button1.UseVisualStyleBackColor = False
         '
@@ -86,12 +84,11 @@ Partial Class frmLogin
         Me.Panel2.BackColor = System.Drawing.Color.DarkGray
         Me.Panel2.Controls.Add(Me.btnEye)
         Me.Panel2.Controls.Add(Me.txtPassword)
-        Me.Panel2.Controls.Add(Me.TextBox3)
         Me.Panel2.Location = New System.Drawing.Point(50, 103)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel2.Size = New System.Drawing.Size(238, 28)
-        Me.Panel2.TabIndex = 19
+        Me.Panel2.Size = New System.Drawing.Size(238, 24)
+        Me.Panel2.TabIndex = 2
         '
         'btnEye
         '
@@ -103,7 +100,7 @@ Partial Class frmLogin
         Me.btnEye.Image = CType(resources.GetObject("btnEye.Image"), System.Drawing.Image)
         Me.btnEye.Location = New System.Drawing.Point(207, 1)
         Me.btnEye.Name = "btnEye"
-        Me.btnEye.Size = New System.Drawing.Size(30, 26)
+        Me.btnEye.Size = New System.Drawing.Size(30, 22)
         Me.btnEye.TabIndex = 19
         Me.btnEye.UseVisualStyleBackColor = False
         '
@@ -114,24 +111,11 @@ Partial Class frmLogin
         Me.txtPassword.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPassword.Location = New System.Drawing.Point(1, 1)
         Me.txtPassword.MaxLength = 50
-        Me.txtPassword.Multiline = True
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.txtPassword.Size = New System.Drawing.Size(236, 26)
+        Me.txtPassword.Size = New System.Drawing.Size(236, 22)
         Me.txtPassword.TabIndex = 2
         Me.txtPassword.Tag = "*"
-        '
-        'TextBox3
-        '
-        Me.TextBox3.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.Location = New System.Drawing.Point(1, 1)
-        Me.TextBox3.Multiline = True
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(236, 26)
-        Me.TextBox3.TabIndex = 1
-        Me.TextBox3.Tag = "User Name"
         '
         'lblFirstName
         '
@@ -147,26 +131,12 @@ Partial Class frmLogin
         'Panel5
         '
         Me.Panel5.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel5.Controls.Add(Me.TextBox1)
         Me.Panel5.Controls.Add(Me.txtUserName)
         Me.Panel5.Location = New System.Drawing.Point(50, 47)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel5.Size = New System.Drawing.Size(238, 28)
-        Me.Panel5.TabIndex = 18
-        '
-        'TextBox1
-        '
-        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(1, 1)
-        Me.TextBox1.MaxLength = 50
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(236, 26)
-        Me.TextBox1.TabIndex = 2
-        Me.TextBox1.Tag = "User Name"
+        Me.Panel5.Size = New System.Drawing.Size(238, 24)
+        Me.Panel5.TabIndex = 1
         '
         'txtUserName
         '
@@ -174,9 +144,8 @@ Partial Class frmLogin
         Me.txtUserName.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtUserName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtUserName.Location = New System.Drawing.Point(1, 1)
-        Me.txtUserName.Multiline = True
         Me.txtUserName.Name = "txtUserName"
-        Me.txtUserName.Size = New System.Drawing.Size(236, 26)
+        Me.txtUserName.Size = New System.Drawing.Size(236, 22)
         Me.txtUserName.TabIndex = 1
         Me.txtUserName.Tag = "User Name"
         '
@@ -244,7 +213,5 @@ Partial Class frmLogin
     Friend WithEvents Label2 As Label
     Friend WithEvents Panel2 As Panel
     Friend WithEvents txtPassword As TextBox
-    Friend WithEvents TextBox3 As TextBox
     Friend WithEvents lblFirstName As Label
-    Friend WithEvents TextBox1 As TextBox
 End Class

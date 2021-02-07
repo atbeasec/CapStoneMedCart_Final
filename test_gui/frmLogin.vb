@@ -44,15 +44,15 @@
     End Sub
 
 
-    Private Sub frmLogin_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+    'Private Sub frmLogin_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
 
-        If MessageBox.Show("Are you sure you want to close the application?",
-                           "Medication Dispense",
-                           MessageBoxButtons.YesNo) = DialogResult.No Then
-            e.Cancel = True
+    '    If MessageBox.Show("Are you sure you want to close the application?",
+    '                       "Medication Dispense",
+    '                       MessageBoxButtons.YesNo) = DialogResult.No Then
+    '        e.Cancel = True
 
-        End If
+    '    End If
 
-    End Sub
+    'End Sub
 
 End Class

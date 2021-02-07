@@ -12,7 +12,7 @@ Public Class frmLoginScan
 
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
         'set textbox text to string variable strBarcode
-        Dim strBarcode = TextBox1.Text
+        Dim strBarcode = txtBarcode.Text
         'send strBarcode to LogIn Module and recive responce
         If LogIn.ScanLogIn(strBarcode) = "True" Then
             'If users barcode is in the User table in the database then close current form and open frmMain
