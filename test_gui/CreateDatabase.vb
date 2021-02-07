@@ -123,15 +123,16 @@ Module CreateDatabase
 	'/*******************************************************************/
 	'/* MODIFICATION HISTORY:											*/
 	'/*																	*/
-	'/*  WHO   WHEN     WHAT											*/
+	'/*  WHO	WHEN     WHAT											*/
 	'/*  ---   ----     ------------------------------------------------*/
-	'/*  BRH  01/23/21  Initial creation of the code					*/
-	'/*  BRH  01/28/21  Add the CreateSettingsTable method				*/
-	'/*  BRH		02/06/21	Allowed for user to choose database file*/
+	'/*  BRH	01/23/21  Initial creation of the code					*/
+	'/*  BRH	01/28/21  Add the CreateSettingsTable method			*/
+	'/*  BRH	02/06/21	Allowed for user to choose database file	*/
 	'/*							and database file name upon creation.	*/
 	'/*******************************************************************/
 
 	Sub Main()
+
 		'Initializes a dialog for saving files
 		Dim dlgSaveFileDialog As New SaveFileDialog
 
@@ -325,14 +326,14 @@ Module CreateDatabase
 	'/*******************************************************************/
 	Public Sub CreateDrawersTable()
 		strCreateTable = "CREATE TABLE 'Drawers' (
-	                                    'Drawers_ID'	INTEGER NOT NULL UNIQUE,
-	                                    'Drawer_Node'	TEXT NOT NULL,
-	                                    'Drawer_Number'	INTEGER NOT NULL,
-	                                    'Size'	INTEGER NOT NULL,
-	                                    'Number_of_Dividers'	INTEGER NOT NULL,
-	                                    'Full_Flag'	INTEGER NOT NULL,
-										'Active_Flag' INTEGER NOT NULL,
-	                                    PRIMARY KEY('Drawers_ID' AUTOINCREMENT));"
+		'Drawers_ID'	INTEGER NOT NULL UNIQUE,
+		'Drawer_Node'	TEXT NOT NULL,
+		'Drawer_Number'	INTEGER NOT NULL,
+		'Size'	INTEGER NOT NULL,
+		'Number_of_Dividers'	INTEGER NOT NULL,
+		'Full_Flag'	INTEGER NOT NULL,
+		'Active_Flag' INTEGER NOT NULL,
+		PRIMARY KEY('Drawers_ID' AUTOINCREMENT));"
 		ExecuteQuery("Drawers")
 	End Sub
 
@@ -738,9 +739,9 @@ Module CreateDatabase
 	                    'Patient_TUID'	INTEGER NOT NULL,
 	                    'Room_TUID'	INTEGER NOT NULL,
 	                    'Bed_Name'	TEXT NOT NULL,
-	                    'Active_Flag'	TEXT NOT NULL,
-	                    FOREIGN KEY(" & "Bed_Name" & ") REFERENCES " & "Rooms" & ",
-	                    PRIMARY KEY(" & "Patient_TUID" & "," & "Room_TUID" & "," & "Bed_Name" & "),
+	                    'Active_Flag'	INTEGER NOT NULL,
+						PRIMARY KEY(" & "Patient_TUID" & "," & "Room_TUID" & "," & "Bed_Name" & "),
+	                    FOREIGN KEY(" & "Bed_Name" & ") REFERENCES " & "Rooms" & "(" & "Bed_Name" & "),	                    
 	                    FOREIGN KEY(" & "Patient_TUID" & ") REFERENCES " & "Patient" & "(" & "Patient_ID" & "),
 	                    FOREIGN KEY(" & "Room_TUID" & ") REFERENCES " & "Rooms" & "(" & "Room_ID" & "));"
 
@@ -833,7 +834,7 @@ Module CreateDatabase
 	                    'Patient_TUID'	INTEGER NOT NULL,
 	                    'Allergy_Name'	TEXT NOT NULL,
 	                    'Allergy_Severity'	TEXT,
-	                    'Active_Flag'	TEXT NOT NULL,
+	                    'Active_Flag'	INTEGER NOT NULL,
 	                    PRIMARY KEY(" & "Patient_TUID" & "," & "Allergy_Name" & "),
 	                    FOREIGN KEY(" & "Allergy_Name" & ") REFERENCES " & "Allergy" & "(" & "Allergy_Name" & "),
 	                    FOREIGN KEY(" & "Patient_TUID" & ") REFERENCES " & "Patient" & "(" & "Patient_ID" & "));"
@@ -938,7 +939,7 @@ Module CreateDatabase
 	                    'Quantity'	INTEGER NOT NULL,
 	                    'Method'	TEXT NOT NULL,
 	                    'Schedule'	TEXT NOT NULL,
-						'Active_Flag'	INTEGER,
+						'Active_Flag'	INTEGER NOT NULL,
 	                    FOREIGN KEY(" & "Medication_TUID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
 	                    FOREIGN KEY(" & "Ordering_Physician_ID" & ") REFERENCES " & "Physician" & "(" & "Physician_ID" & "),
 	                    FOREIGN KEY(" & "Patient_TUID" & ") REFERENCES " & "Patient" & "(" & "Patient_ID" & "),
@@ -1365,7 +1366,7 @@ Module CreateDatabase
 						'Patient_TUID'	INTEGER NOT NULL,
 						'DrawerMedication_TUID'	INTEGER NOT NULL,
 						'Removed_Dispensing'	INTEGER,
-						'Active_Flag'	TEXT NOT NULL,
+						'Active_Flag'	INTEGER NOT NULL,
 						PRIMARY KEY('PersonalMedication_ID' AUTOINCREMENT),
 						FOREIGN KEY(" & "DrawerMedication_TUID" & ") REFERENCES " & "DrawerMedication" & "(" & "DrawerMedication_ID" & "),
 						FOREIGN KEY(" & "Patient_TUID" & ") REFERENCES " & "Patient" & "(" & "Patient_ID" & "));"

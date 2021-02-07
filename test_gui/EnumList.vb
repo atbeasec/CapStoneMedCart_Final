@@ -95,19 +95,20 @@
     Enum Patient
         ID = 0
         MRN_Number = 1
-        FristName = 2
+        FirstName = 2
         MiddleName = 3
         LastName = 4
         DoB = 5 'this is the day of birth
         Sex = 6
         Height = 7
-        address = 8
-        City = 9
-        zip = 10
-        Phone = 11
-        Email = 12
-        PhysicianID = 13
-        Active_Flag = 14
+        Weight = 8
+        address = 9
+        City = 10
+        zip = 11
+        Phone = 12
+        Email = 13
+        PhysicianID = 14
+        Active_Flag = 15
     End Enum
 
     '/*********************************************************************/
@@ -258,7 +259,7 @@
     '/*                                                                     
     '/*********************************************************************/
 
-    Enum AlleryOverRide
+    Enum AllergyOverRide
         ID = 0
         PatientID = 1
         UserID = 2
@@ -320,9 +321,10 @@
         MedicationID = 2
         Expected = 3
         actual = 4
-        approvingUser = 5
-        DateTimeEntered = 6
-        DateTimeCleared = 7
+        primaryUser = 5
+        approvingUser = 6
+        DateTimeEntered = 7
+        DateTimeCleared = 8
     End Enum
     '/*********************************************************************/
     '/*                   Enum NAME:  Dispensing	    				   */         
@@ -540,14 +542,13 @@
     '/*                                                                     
     '/*********************************************************************/
 
-    Enum DrugInteraction
+    Enum DrugInteractions
         ID = 0
         MedicationOneID = 1
         medicationTwoID = 2
-        MedicationThreeID = 3
-        Severity = 4
-        description = 5
-        activeFlag = 6
+        Severity = 3
+        description = 4
+        activeFlag = 5
     End Enum
 
     '/*********************************************************************/
@@ -606,9 +607,10 @@
         Dosage = 3
         NarcoticControlledFlag = 4
         Barcode = 5
-        type = 6
-        Strength = 7
-        ActiveFlag = 8
+        Synonym = 6
+        type = 7
+        Strength = 8
+        ActiveFlag = 9
     End Enum
 
     'need to update this one later.
@@ -654,7 +656,7 @@
     '/*                                                                     
     '/*********************************************************************/
 
-    Enum PatientAllery
+    Enum PatientAllergy
         ID = 0
         PatientID = 1
         AllergyName = 2
@@ -1032,7 +1034,7 @@
     '/*                                                                     
     '/*********************************************************************/
 
-    Enum room
+    Enum Rooms
         Id = 0
         BedName = 1
         ActiveFlag = 2
@@ -1140,13 +1142,13 @@
     '/*********************************************************************/
 
 
-    Enum user
+    Enum User
         ID = 0
         UserName = 1
         Password = 2
         FistName = 3
         LastName = 4
-        BarCode = 5
+        Barcode = 5
         AdminFlag = 6
         SuperVisorFlag = 7
         ActiveFlag = 8
