@@ -21,9 +21,16 @@
     End Sub
 
 
-    Private Sub chkShowPassword_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowPassword.CheckedChanged
+
+    Private Sub chkShowPassword_CheckedChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub btnEye_Click(sender As Object, e As EventArgs) Handles btnEye.Click
+
         'If checked then password is visible as plain text
-        If chkShowPassword.Checked = True Then
+        If txtPassword.UseSystemPasswordChar = False Then
+
             txtPassword.UseSystemPasswordChar = True
             'If unchecked then password is visible as *
         Else
@@ -31,5 +38,21 @@
 
         End If
     End Sub
+
+    Private Sub frmLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+
+
+    'Private Sub frmLogin_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+
+    '    If MessageBox.Show("Are you sure you want to close the application?",
+    '                       "Medication Dispense",
+    '                       MessageBoxButtons.YesNo) = DialogResult.No Then
+    '        e.Cancel = True
+
+    '    End If
+
+    'End Sub
 
 End Class
