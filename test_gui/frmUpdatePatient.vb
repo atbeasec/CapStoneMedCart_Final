@@ -58,36 +58,43 @@ Public Class frmUpdatePatient
         strbSQLString.Append("Select * from Rooms;")
         dsRooms = CreateDatabase.ExecuteSelectQuery(strbSQLString.ToString)
 
+
+        MiscMethods.PopulateStateComboBox(cboState)
+
         With dsPatient.Tables(0)
-            strbSQLString.Clear()
-            strbSQLString.Append("Select * from PatientRoom where Patient_TUID = " &
+                strbSQLString.Clear()
+                strbSQLString.Append("Select * from PatientRoom where Patient_TUID = " &
                                 .Rows(0)(EnumList.Patient.ID))
-            dsPatientRoom = CreateDatabase.ExecuteSelectQuery(strbSQLString.ToString)
-            txtFirstName.Text = .Rows(0)(EnumList.Patient.FristName)
-            txtLastName.Text = .Rows(0)(EnumList.Patient.LastName)
-            txtEmail.Text = .Rows(0)(EnumList.Patient.Email)
-            txtAddress.Text = .Rows(0)(EnumList.Patient.address)
-            txtCity.Text = .Rows(0)(EnumList.Patient.City)
-            txtZip.Text = .Rows(0)(EnumList.Patient.zip)
-            txtDoB.Text = .Rows(0)(EnumList.Patient.DoB)
-            txtPhone.Text = .Rows(0)(EnumList.Patient.Phone)
-            cboStatus.Items.AddRange({"Admitted", "Discharged"})
-            If .Rows(0)(EnumList.Patient.Active_Flag) = 1 Then
-                cboStatus.SelectedItem = "Admitted"
-            Else
-                cboStatus.SelectedItem = "Discharged"
-            End If
-            cboGender.Items.AddRange({"Male", "Female"})
-            If .Rows(0)(EnumList.Patient.Sex).ToString = "Male" Then
-                cboGender.SelectedItem = "Male"
-            Else
-                cboGender.SelectedItem = "Female"
-            End If
-            For Each row In dsRooms.Tables(0).Rows
-                cboRoom.Items.Add(dsRooms.Tables(0).Rows(0)(EnumList.room.Id))
+                dsPatientRoom = CreateDatabase.ExecuteSelectQuery(strbSQLString.ToString)
+                txtFirstName.Text = .Rows(0)(EnumList.Patient.FristName)
+                txtLastName.Text = .Rows(0)(EnumList.Patient.LastName)
+                txtEmail.Text = .Rows(0)(EnumList.Patient.Email)
+                txtAddress.Text = .Rows(0)(EnumList.Patient.address)
+                txtCity.Text = .Rows(0)(EnumList.Patient.City)
+                txtZip.Text = .Rows(0)(EnumList.Patient.zip)
+                txtDoB.Text = .Rows(0)(EnumList.Patient.DoB)
+                txtPhone.Text = .Rows(0)(EnumList.Patient.Phone)
+                cboStatus.Items.AddRange({"Admitted", "Discharged"})
+                If .Rows(0)(EnumList.Patient.Active_Flag) = 1 Then
+                    cboStatus.SelectedItem = "Admitted"
+                Else
+                    cboStatus.SelectedItem = "Discharged"
+                End If
+                cboGender.Items.AddRange({"Male", "Female"})
+                If .Rows(0)(EnumList.Patient.Sex).ToString = "Male" Then
+                    cboGender.SelectedItem = "Male"
+                Else
+                    cboGender.SelectedItem = "Female"
+                End If
+            For Each row As DataRow In dsRooms.Tables(0).Rows
+                If checkforDup(cboRoom, row(EnumList.room.Id)) Then
+                    cboRoom.Items.Add(row(EnumList.room.Id))
+                End If
             Next
             cboRoom.SelectedItem = dsPatientRoom.Tables(0)(EnumList.PatientRoom.RoomID)
-        End With
+
+            cboState.SelectedItem = .Rows(0)(EnumList.Patient.state)
+            End With
     End Sub
 
 
@@ -137,9 +144,9 @@ Public Class frmUpdatePatient
         Dim status As String
         strbSQL.Append("Update Patient set ")
         strbSQL.Append("Patient_First_Name = '" & txtFirstName.Text & "', Patient_Last_Name = '" & txtLastName.Text)
-        strbSQL.Append("', Date_Of_Birth = '" & txtDoB.Text & "', Sex = '" & cboGender.SelectedIndex & "', Email_address = '")
+        strbSQL.Append("', Date_Of_Birth = '" & txtDoB.Text & "', Sex = '" & cboGender.SelectedItem & "', Email_address = '")
         strbSQL.Append(txtEmail.Text & "', Address = '" & txtAddress.Text & "', City = '" & txtCity.Text)
-        strbSQL.Append("', State = '" & cboState.SelectedIndex & "', Zip_Code = '" & txtZip.Text & "', Phone_Number = '" &
+        strbSQL.Append("', State = '" & cboState.SelectedItem & "', Zip_Code = '" & txtZip.Text & "', Phone_Number = '" &
                        txtPhone.Text)
         If cboStatus.SelectedItem = "Admitted" Then
             status = 1
@@ -149,11 +156,11 @@ Public Class frmUpdatePatient
         strbSQL.Append("',Active_Flag = '" & status)
         strbSQL.Append("' where Patient_ID = " & dsPatient.Tables(0).Rows(0)(EnumList.Patient.ID) & ";")
 
-
+        MessageBox.Show(strbSQL.ToString)
         CreateDatabase.ExecuteInsertQuery(strbSQL.ToString)
 
         strbSQL.Clear()
-        strbSQL.Append("Update PatientRoom set ROOM_TUID = " & cboRoom.SelectedIndex & " where Patient_TUID = ")
-        strbSQL.Append(dsPatient.Tables(0).Rows(0)(EnumList.Patient.ID))
+        strbSQL.Append("Update PatientRoom set ROOM_TUID = '" & cboRoom.SelectedIndex & "' where Patient_TUID = '")
+        strbSQL.Append(dsPatient.Tables(0).Rows(0)(EnumList.Patient.ID) "';")
     End Sub
 End Class

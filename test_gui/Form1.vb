@@ -164,9 +164,9 @@
         'CheckUserPermissions()
 
         Dim test = New frmUpdatePatient
-        test.Show()
+        test.ShowDialog()
 
-
+        Me.Close()
         'set submenu to be invisible on form load
         pnlSubMenuSettings.Visible = False
         pnlSubMenuInventory.Visible = False
