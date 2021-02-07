@@ -139,7 +139,6 @@ Partial Class frmLoginScan
         Me.TextBox1.Size = New System.Drawing.Size(234, 26)
         Me.TextBox1.TabIndex = 2
         Me.TextBox1.Tag = "SVSU ID"
-        Me.TextBox1.Text = "SVSU ID"
         '
         'frmLoginScan
         '

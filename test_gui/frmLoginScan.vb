@@ -25,4 +25,7 @@ Public Class frmLoginScan
 
     End Sub
 
+    Private Sub frmLoginScan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class

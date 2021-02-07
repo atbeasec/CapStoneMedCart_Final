@@ -485,6 +485,9 @@
   <ItemGroup>
     <None Include="Resources\flag_black_25px.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eye_25px.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
