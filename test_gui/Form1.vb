@@ -163,10 +163,10 @@
         CreateDatabase.Main()
         'CheckUserPermissions()
 
-        Dim test = New frmPharmacy
-        test.ShowDialog()
+        'Dim test = New frmPharmacy
+        'test.ShowDialog()
 
-        Me.Close()
+        ' Me.Close()
         'set submenu to be invisible on form load
         pnlSubMenuSettings.Visible = False
         pnlSubMenuInventory.Visible = False
