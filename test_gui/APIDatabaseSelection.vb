@@ -28,10 +28,10 @@ Imports System.IO
 '/*******************************************************************/
 '/*  GLOBAL VARIABLE LIST (Alphabetically):			                */
 '/*DBCmd - Stores the SQL commands for either creating the database or	*/
-'/*			the database tables										*/
+'/*	 or altering tables         									*/
 '/*DBConn - Stores the information to connect to the database       */
 '/*strDBNAME - Stores the database name								*/
-'/*strDBPath - Stores the database path								*/
+'/*fileReader is the string that stores the database file path		*/
 '/*******************************************************************/
 '/* COMPILATION NOTES:								                */
 '/* 											                    */
