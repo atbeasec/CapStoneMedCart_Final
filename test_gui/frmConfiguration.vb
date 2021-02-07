@@ -1,7 +1,9 @@
 ﻿Public Class frmConfiguration
     Private Sub frmConfiguration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        rbtnNurse.Checked = True
         PopulateUserInfo()
+
 
     End Sub
 
@@ -120,4 +122,119 @@
 
     End Sub
 
+    Private Sub txtUserID_LostFocus(sender As Object, e As EventArgs) Handles txtUserID.LostFocus
+        Dim strStatement = "SELECT COUNT(*) FROM User WHERE Username = '" & txtUserID.Text & "'"
+        If ExecuteScalarQuery(strStatement) <> 0 Then
+            MsgBox("A User already has that Username")
+            txtUserID.Focus()
+            txtUserID.Text = ""
+        End If
+    End Sub
+
+    Private Sub txtBarcode_LostFocus(sender As Object, e As EventArgs) Handles txtBarcode.LostFocus
+        Dim strStatement = "SELECT COUNT(*) FROM User WHERE Barcode = '" & txtBarcode.Text & "'"
+        If ExecuteScalarQuery(strStatement) <> 0 Then
+            MsgBox("A User already has that Barcode")
+            txtBarcode.Focus()
+            txtBarcode.Text = ""
+        End If
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim intSupervisor As Integer = 0
+        Dim intAdmin As Integer = 0
+        Dim intActiveFlag As Integer = 1
+        Dim strPassword As String = txtPassword.Text
+        If CheckPassword(strPassword) = False Then
+            MsgBox("Password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special characters ")
+            txtPassword.Text = ""
+            txtConfirmPassword.Text = ""
+            txtPassword.Focus()
+        ElseIf txtPassword.Text <> txtConfirmPassword.Text Then
+            MsgBox("Confirm Password must match Password")
+            txtConfirmPassword.Text = ""
+            txtConfirmPassword.Focus()
+        ElseIf txtFirstName.Text = "" Or txtLastName.Text = "" Or txtUserID.Text = "" Or txtBarcode.Text = "" Then
+            MsgBox("All Fields must be filled")
+        Else
+            Dim strStatement = "INSERT INTO USER(Username,Password,User_First_Name, User_Last_Name, Barcode, Admin_Flag, Supervisor_Flag, Active_Flag)" &
+            "VALUES('" & txtUserID.Text & "','" & strPassword & "','" & txtFirstName.Text & "','" & txtLastName.Text & "','" & txtBarcode.Text & "','" & intAdmin & "','" & intSupervisor & "','" & intActiveFlag & "')"
+            ExecuteScalarQuery(strStatement)
+
+            'clear all text boxes
+            txtFirstName.Text = ""
+            txtLastName.Text = ""
+            txtUserID.Text = ""
+            txtBarcode.Text = ""
+            txtPassword.Text = ""
+            txtConfirmPassword.Text = ""
+        End If
+
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME:  CheckPassword			   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Dylan Walter   						 */   
+    '/*		         DATE CREATED: 	2/7/2021							   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:											   */             
+    '/*  Will check if the password being entered meets security          */
+    '/*  requierments                                                     */
+    '/*********************************************************************/
+    '/*  CALLED BY: Button1_Click        	      						  */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):								*/         
+    '/*	 strPassword - this is the password being tested                  */ 
+    '/*					    `   										  */
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            Secure								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO            WHEN        WHAT								   */             
+    '/*  ---            ----        ------------------------------------- */
+    '/*  Dylan Walter   2/7/2021    Initial Creation                      */                                                                   
+    '/*********************************************************************/
+    Function CheckPassword(strPassword)
+        Dim minLength As Integer = 8
+        Dim numUpper As Integer = 1
+        Dim numLower As Integer = 1
+        Dim numNumbers As Integer = 1
+        Dim numSpecial As Integer = 1
+        Dim Secure As Boolean = True
+
+        ' Replace [A-Z] with \p{Lu}, to allow for Unicode uppercase letters.
+        Dim upper As New System.Text.RegularExpressions.Regex("[A-Z]")
+        Dim lower As New System.Text.RegularExpressions.Regex("[a-z]")
+        Dim number As New System.Text.RegularExpressions.Regex("[0-9]")
+        ' Special is "none of the above".
+        Dim special As New System.Text.RegularExpressions.Regex("[^a-zA-Z0-9]")
+
+        ' Check the length.
+        If Len(strPassword) < minLength Then Secure = False
+        ' Check for minimum number of occurrences.
+        If upper.Matches(strPassword).Count < numUpper Then Secure = False
+        If lower.Matches(strPassword).Count < numLower Then Secure = False
+        If number.Matches(strPassword).Count < numNumbers Then Secure = False
+        If special.Matches(strPassword).Count < numSpecial Then Secure = False
+
+        ' Passed all checks.
+        Return Secure
+    End Function
 End Class

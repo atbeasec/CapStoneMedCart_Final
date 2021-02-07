@@ -24,11 +24,11 @@ Partial Class frmConfiguration
     Private Sub InitializeComponent()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.TextBox8 = New System.Windows.Forms.TextBox()
+        Me.txtUserID = New System.Windows.Forms.TextBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.txtConfirmPassword = New System.Windows.Forms.TextBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -36,12 +36,12 @@ Partial Class frmConfiguration
         Me.rbtnSupervisor = New System.Windows.Forms.RadioButton()
         Me.rbtnNurse = New System.Windows.Forms.RadioButton()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtBarcode = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel9 = New System.Windows.Forms.Panel()
-        Me.TextBox23 = New System.Windows.Forms.TextBox()
+        Me.txtLastName = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.TxtFirstName = New System.Windows.Forms.TextBox()
         Me.flpUserInfo = New System.Windows.Forms.FlowLayoutPanel()
         Me.pnlHeader = New System.Windows.Forms.Panel()
         Me.lblActions = New System.Windows.Forms.Label()
@@ -82,65 +82,65 @@ Partial Class frmConfiguration
         'Panel5
         '
         Me.Panel5.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel5.Controls.Add(Me.TextBox8)
+        Me.Panel5.Controls.Add(Me.txtUserID)
         Me.Panel5.Location = New System.Drawing.Point(16, 196)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel5.Size = New System.Drawing.Size(227, 28)
         Me.Panel5.TabIndex = 3
         '
-        'TextBox8
+        'txtUserID
         '
-        Me.TextBox8.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox8.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox8.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox8.Location = New System.Drawing.Point(1, 1)
-        Me.TextBox8.Multiline = True
-        Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(225, 26)
-        Me.TextBox8.TabIndex = 38
+        Me.txtUserID.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtUserID.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtUserID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtUserID.Location = New System.Drawing.Point(1, 1)
+        Me.txtUserID.Multiline = True
+        Me.txtUserID.Name = "txtUserID"
+        Me.txtUserID.Size = New System.Drawing.Size(225, 26)
+        Me.txtUserID.TabIndex = 38
         '
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel4.Controls.Add(Me.TextBox5)
+        Me.Panel4.Controls.Add(Me.txtConfirmPassword)
         Me.Panel4.Location = New System.Drawing.Point(19, 395)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel4.Size = New System.Drawing.Size(224, 28)
         Me.Panel4.TabIndex = 6
         '
-        'TextBox5
+        'txtConfirmPassword
         '
-        Me.TextBox5.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox5.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox5.Location = New System.Drawing.Point(1, 1)
-        Me.TextBox5.Multiline = True
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(222, 26)
-        Me.TextBox5.TabIndex = 38
+        Me.txtConfirmPassword.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtConfirmPassword.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtConfirmPassword.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtConfirmPassword.Location = New System.Drawing.Point(1, 1)
+        Me.txtConfirmPassword.Multiline = True
+        Me.txtConfirmPassword.Name = "txtConfirmPassword"
+        Me.txtConfirmPassword.Size = New System.Drawing.Size(222, 26)
+        Me.txtConfirmPassword.TabIndex = 38
         '
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel3.Controls.Add(Me.TextBox3)
+        Me.Panel3.Controls.Add(Me.txtPassword)
         Me.Panel3.Location = New System.Drawing.Point(18, 329)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel3.Size = New System.Drawing.Size(225, 28)
         Me.Panel3.TabIndex = 5
         '
-        'TextBox3
+        'txtPassword
         '
-        Me.TextBox3.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.Location = New System.Drawing.Point(1, 1)
-        Me.TextBox3.Multiline = True
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(223, 26)
-        Me.TextBox3.TabIndex = 38
+        Me.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtPassword.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtPassword.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPassword.Location = New System.Drawing.Point(1, 1)
+        Me.txtPassword.Multiline = True
+        Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.Size = New System.Drawing.Size(223, 26)
+        Me.txtPassword.TabIndex = 38
         '
         'Button1
         '
@@ -220,23 +220,23 @@ Partial Class frmConfiguration
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel2.Controls.Add(Me.TextBox1)
+        Me.Panel2.Controls.Add(Me.txtBarcode)
         Me.Panel2.Location = New System.Drawing.Point(17, 263)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel2.Size = New System.Drawing.Size(226, 28)
         Me.Panel2.TabIndex = 4
         '
-        'TextBox1
+        'txtBarcode
         '
-        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(1, 1)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(224, 26)
-        Me.TextBox1.TabIndex = 38
+        Me.txtBarcode.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtBarcode.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtBarcode.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtBarcode.Location = New System.Drawing.Point(1, 1)
+        Me.txtBarcode.Multiline = True
+        Me.txtBarcode.Name = "txtBarcode"
+        Me.txtBarcode.Size = New System.Drawing.Size(224, 26)
+        Me.txtBarcode.TabIndex = 38
         '
         'Label2
         '
@@ -252,44 +252,44 @@ Partial Class frmConfiguration
         'Panel9
         '
         Me.Panel9.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel9.Controls.Add(Me.TextBox23)
+        Me.Panel9.Controls.Add(Me.txtLastName)
         Me.Panel9.Location = New System.Drawing.Point(17, 131)
         Me.Panel9.Name = "Panel9"
         Me.Panel9.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel9.Size = New System.Drawing.Size(286, 28)
         Me.Panel9.TabIndex = 2
         '
-        'TextBox23
+        'txtLastName
         '
-        Me.TextBox23.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox23.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox23.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox23.Location = New System.Drawing.Point(1, 1)
-        Me.TextBox23.Multiline = True
-        Me.TextBox23.Name = "TextBox23"
-        Me.TextBox23.Size = New System.Drawing.Size(284, 26)
-        Me.TextBox23.TabIndex = 38
+        Me.txtLastName.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtLastName.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtLastName.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtLastName.Location = New System.Drawing.Point(1, 1)
+        Me.txtLastName.Multiline = True
+        Me.txtLastName.Name = "txtLastName"
+        Me.txtLastName.Size = New System.Drawing.Size(284, 26)
+        Me.txtLastName.TabIndex = 38
         '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel1.Controls.Add(Me.TextBox7)
+        Me.Panel1.Controls.Add(Me.TxtFirstName)
         Me.Panel1.Location = New System.Drawing.Point(17, 65)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel1.Size = New System.Drawing.Size(286, 28)
         Me.Panel1.TabIndex = 1
         '
-        'TextBox7
+        'TxtFirstName
         '
-        Me.TextBox7.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox7.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox7.Location = New System.Drawing.Point(1, 1)
-        Me.TextBox7.Multiline = True
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(284, 26)
-        Me.TextBox7.TabIndex = 38
+        Me.TxtFirstName.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.TxtFirstName.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TxtFirstName.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtFirstName.Location = New System.Drawing.Point(1, 1)
+        Me.TxtFirstName.Multiline = True
+        Me.TxtFirstName.Name = "TxtFirstName"
+        Me.TxtFirstName.Size = New System.Drawing.Size(284, 26)
+        Me.TxtFirstName.TabIndex = 38
         '
         'flpUserInfo
         '
@@ -466,11 +466,11 @@ Partial Class frmConfiguration
     End Sub
     Friend WithEvents Button2 As Button
     Friend WithEvents Panel5 As Panel
-    Friend WithEvents TextBox8 As TextBox
+    Friend WithEvents txtUserID As TextBox
     Friend WithEvents Panel4 As Panel
-    Friend WithEvents TextBox5 As TextBox
+    Friend WithEvents txtConfirmPassword As TextBox
     Friend WithEvents Panel3 As Panel
-    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents txtPassword As TextBox
     Friend WithEvents Button1 As Button
     Friend WithEvents Label4 As Label
     Friend WithEvents Label3 As Label
@@ -478,12 +478,12 @@ Partial Class frmConfiguration
     Friend WithEvents rbtnSupervisor As RadioButton
     Friend WithEvents rbtnNurse As RadioButton
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtBarcode As TextBox
     Friend WithEvents Label2 As Label
     Friend WithEvents Panel9 As Panel
-    Friend WithEvents TextBox23 As TextBox
+    Friend WithEvents txtLastName As TextBox
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents TextBox7 As TextBox
+    Friend WithEvents TxtFirstName As TextBox
     Friend WithEvents flpUserInfo As FlowLayoutPanel
     Friend WithEvents pnlHeader As Panel
     Friend WithEvents lblActions As Label
