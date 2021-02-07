@@ -71,6 +71,7 @@ Module MiscMethods
     '/*********************************************************************/
 
     Sub PopulateStateComboBox(cboState As ComboBox)
+        cboState.Items.Clear()
         Dim strStatesArray As String() = {"ME", "NH", "VT", "MA", "CT", "RI", "NY", "VA", "NC",
         "SC", "GA", "FL", "DE", "NJ", "OH", "MI", "IL", "IN", "IA", "KS", "NE", "OK",
         "TX", "AL", "TN", "MO", "ND", "SD", "WY", "MT", "ID", "NV", "WA", "OR", "CO",
@@ -177,6 +178,8 @@ Module MiscMethods
     '/*********************************************************************/
 
     Sub PopulateRoomComboBox(cboRoom As ComboBox, dsrooms As DataSet)
+        cboRoom.Items.Clear()
+
         For Each row As DataRow In dsrooms.Tables(0).Rows
             If checkComboForDup(cboRoom, row(EnumList.room.Id)) Then
                 cboRoom.Items.Add(row(EnumList.room.Id))
@@ -225,6 +228,8 @@ Module MiscMethods
 
 
     Sub populateBedComboBox(cboBed As ComboBox, dsrooms As DataSet)
+        cboBed.Items.Clear()
+
         For Each row As DataRow In dsrooms.Tables(0).Rows
             If checkComboForDup(cboBed, row(EnumList.room.BedName)) Then
                 cboBed.Items.Add(row(EnumList.room.BedName))
@@ -262,7 +267,9 @@ Module MiscMethods
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
+    '/*	 strbTesting - this is a string builder that is used to make the  */                     
+    '/*     make the string that will be added to the combo box. It will be*/
+    '/*     The first and laste name.                                      */
     '/*                                                                     
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
@@ -275,12 +282,73 @@ Module MiscMethods
 
     Sub populatePhysicianComboBox(cboStuff As ComboBox, ds As DataSet)
         Dim strbTesting As New StringBuilder
+        cboStuff.Items.Clear()
+
         For Each row As DataRow In ds.Tables(0).Rows
             strbTesting.Clear()
             strbTesting.Append((row(EnumList.Physician.FirstName) & " " &
                                 row(EnumList.Physician.LastName)))
             If checkComboForDup(cboStuff, strbTesting.ToString) Then
                 cboStuff.Items.Add(strbTesting.ToString)
+            End If
+        Next
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: populatePatientNameComboBo       */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		                */   
+    '/*		         DATE CREATED: 	2/7/2021                        	   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								                 */             
+    '/*	 This is going to populate a combo box with a patients first and last*/                     
+    '/*  name.                                                             */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 cboPatient - this is the combo box we are going to be populating */
+    '/*  dsPatients - this is the data set of the patients we have in the */
+    '/*     database.                                                     */
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*	miscMethods.populatePatientNameComboBox(cboPatientName,dsPatients) */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	 strbTesting - this is a string builder that is used to make the  */                     
+    '/*     make the string that will be added to the combo box. It will be*/
+    '/*     The first and laste name.                                      */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+
+    Sub populatePatientNameComboBox(cboPatient As ComboBox, dsPatients As DataSet)
+        Dim strbTesting As New StringBuilder
+        cboPatient.Items.Clear()
+
+        For Each row As DataRow In dsPatients.Tables(0).Rows
+            strbTesting.Clear()
+            strbTesting.Append((row(EnumList.Patient.FristName) & " " &
+                                row(EnumList.Patient.LastName)))
+            If checkComboForDup(cboPatient, strbTesting.ToString) Then
+                cboPatient.Items.Add(strbTesting.ToString)
             End If
         Next
     End Sub

@@ -163,7 +163,7 @@
         CreateDatabase.Main()
         'CheckUserPermissions()
 
-        Dim test = New frmNewPatient
+        Dim test = New frmPharmacy
         test.ShowDialog()
 
         Me.Close()

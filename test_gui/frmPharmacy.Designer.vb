@@ -41,7 +41,7 @@ Partial Class frmPharmacy
         Me.numQuantity = New System.Windows.Forms.NumericUpDown()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.txtPatientDOB = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnORder = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.txtSchedule = New System.Windows.Forms.TextBox()
         Me.Panel4.SuspendLayout()
@@ -233,20 +233,20 @@ Partial Class frmPharmacy
         Me.txtPatientDOB.TabIndex = 38
         Me.txtPatientDOB.TabStop = False
         '
-        'Button1
+        'btnORder
         '
-        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.ForeColor = System.Drawing.Color.White
-        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.Location = New System.Drawing.Point(210, 416)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(201, 38)
-        Me.Button1.TabIndex = 9
-        Me.Button1.Text = "   Order Prescription"
-        Me.Button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button1.UseVisualStyleBackColor = False
+        Me.btnORder.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnORder.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnORder.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnORder.ForeColor = System.Drawing.Color.White
+        Me.btnORder.Image = CType(resources.GetObject("btnORder.Image"), System.Drawing.Image)
+        Me.btnORder.Location = New System.Drawing.Point(210, 416)
+        Me.btnORder.Name = "btnORder"
+        Me.btnORder.Size = New System.Drawing.Size(201, 38)
+        Me.btnORder.TabIndex = 9
+        Me.btnORder.Text = "   Order Prescription"
+        Me.btnORder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnORder.UseVisualStyleBackColor = False
         '
         'Panel1
         '
@@ -292,7 +292,7 @@ Partial Class frmPharmacy
         Me.Controls.Add(Me.Label18)
         Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Panel5)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnORder)
         Me.Name = "frmPharmacy"
         Me.Tag = "6"
         Me.Text = "frmPharmacy"
@@ -324,7 +324,7 @@ Partial Class frmPharmacy
     Friend WithEvents Panel4 As Panel
     Friend WithEvents Panel5 As Panel
     Friend WithEvents txtPatientDOB As TextBox
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnORder As Button
     Friend WithEvents numQuantity As NumericUpDown
     Friend WithEvents Panel1 As Panel
     Friend WithEvents txtSchedule As TextBox
