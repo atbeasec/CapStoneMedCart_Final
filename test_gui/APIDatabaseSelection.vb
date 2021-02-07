@@ -27,6 +27,11 @@ Imports System.IO
 '/*                                                                 */
 '/*******************************************************************/
 '/*  GLOBAL VARIABLE LIST (Alphabetically):			                */
+'/*DBCmd - Stores the SQL commands for either creating the database or	*/
+'/*			the database tables										*/
+'/*DBConn - Stores the information to connect to the database       */
+'/*strDBNAME - Stores the database name								*/
+'/*strDBPath - Stores the database path								*/
 '/*******************************************************************/
 '/* COMPILATION NOTES:								                */
 '/* 											                    */
@@ -43,8 +48,14 @@ Imports System.IO
 '/*******************************************************************/
 Module APIDatabaseSelection
 
-	Dim myDataReader As SQLiteDataReader
+	Dim strSQLCmd As String
+	Dim DBCmd As SQLiteCommand
+	Dim DBConn As SQLiteConnection
+	Dim strDBName As String = "Medication_Cart_System"
 
+	Dim fileReader As String
+
+	Dim myDataReader As SQLiteDataReader
 
 	'/*******************************************************************/
 	'/*                   FUNCTION NAME:        GetDrugRXCUI		    */
@@ -83,7 +94,7 @@ Module APIDatabaseSelection
 	'/*******************************************************************/
 	Function getDrugRXCUI()
 
-		ExecuteSelectQuery("SELECT RXCUI_ID, Drug_Name, Dosage, Type FROM Medication")
+		ExecuteSelectQuery("SELECT RXCUI_ID, Drug_Name, Dosage, Type FROM Medication ORDER BY ASCEND")
 
 	End Function
 
@@ -166,6 +177,7 @@ Module APIDatabaseSelection
 		ExecuteSelectQuery("SELECT * FROM Drug_Interactions")
 	End Function
 
+
 	'/*******************************************************************/
 	'/*                   FUNCTION NAME:        GetDrugInteractions	    */
 	'/*******************************************************************/
@@ -202,15 +214,36 @@ Module APIDatabaseSelection
 	'/* Cody Russell  02/6/21  Altered this function so that it will    */
 	'/* hold data in a reader than compare from the database it pulls.  */
 	'/*******************************************************************/
-	Function CompareDrugInteractions(Drug1 As String, Drug2 As String, Severity As String, Description As String
-																				) As Boolean
+	Function CompareDrugInteractions(Drug1 As String, Drug2 As String, Severity As String, Description As String,
+																		ActiveFlag As String) As Boolean
+		Dim dsDrugInteractions As New DataSet
+		Dim dtDrugInteraction As New DataTable
+		Dim dbAdaptDrugInteractions As SQLiteDataAdapter
 
-		myDataReader = ExecuteSelectQuery("SELECT Medication_One_ID, Medication_Two_ID, Severity, Description,
+		fileReader = My.Computer.FileSystem.ReadAllText("Medication_Cart_System.db")
+		DBConn = New SQLiteConnection("data source = " & fileReader & ";")
+		DBConn.Open()
+		DBCmd.CommandText = "SELECT Medication_One_ID, Medication_Two_ID, Severity, Description,
                                             Active_Flag FROM Drug_Interactions WHERE Medication_One_ID ='" & Drug1 & "'
 										    AND Medication_Two_ID = '" & Drug2 & "' AND Severity = '" & Severity &
-											"'AND Description = '" & Description)
+											"'AND Description = '" & Description & "' AND Active_Flag = '" & ActiveFlag & "'"
 
+		dbAdaptDrugInteractions.SelectCommand = DBCmd
+		dbAdaptDrugInteractions.Fill(dsDrugInteractions, "Drug_Interactions")
+		dtDrugInteraction = dsDrugInteractions.Tables("Drug_Interactions")
 
-		
+		If DBCmd.ExecuteScalar <> 0 Then
+			DBCmd.CommandText = "INSERT into Drug_Interactions(Medication_Ono_ID, Medication_TWo_ID, 
+                            Severity, Description,Description, Active_Flag)
+                            VALUES('" & Drug1 & "','" & Drug2 & "','" &
+							Severity & "','" & Description & "','" & ActiveFlag & "'"
+
+		Else
+			DBCmd.CommandText = "UPDATE Drug_Interactions SET Medication_One_ID= '" & Drug1 & "',
+                           Medication_Two_ID = '" & Drug2 & "', Severity = '" & Severity & "',
+						    Description = '" & Description & "', Active_Flag = '" & ActiveFlag & "'"
+		End If
+
+		DBConn.Close()
 	End Function
 End Module
