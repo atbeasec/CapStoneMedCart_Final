@@ -56,6 +56,7 @@ Partial Class frmNewPatient
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.txtWeight = New System.Windows.Forms.TextBox()
         Me.Panel8 = New System.Windows.Forms.Panel()
+        Me.cmbPhysician = New System.Windows.Forms.ComboBox()
         Me.lblFirstName = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -73,7 +74,6 @@ Partial Class frmNewPatient
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.btnCancel = New System.Windows.Forms.Button()
-        Me.cmbPhysician = New System.Windows.Forms.ComboBox()
         Me.Panel1.SuspendLayout()
         Me.Panel9.SuspendLayout()
         Me.Panel10.SuspendLayout()
@@ -443,6 +443,17 @@ Partial Class frmNewPatient
         Me.Panel8.Size = New System.Drawing.Size(279, 28)
         Me.Panel8.TabIndex = 16
         '
+        'cmbPhysician
+        '
+        Me.cmbPhysician.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cmbPhysician.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cmbPhysician.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbPhysician.FormattingEnabled = True
+        Me.cmbPhysician.Location = New System.Drawing.Point(1, 1)
+        Me.cmbPhysician.Name = "cmbPhysician"
+        Me.cmbPhysician.Size = New System.Drawing.Size(277, 25)
+        Me.cmbPhysician.TabIndex = 85
+        '
         'lblFirstName
         '
         Me.lblFirstName.AutoSize = True
@@ -633,17 +644,6 @@ Partial Class frmNewPatient
         Me.btnCancel.Text = "   CANCEL"
         Me.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnCancel.UseVisualStyleBackColor = False
-        '
-        'cmbPhysician
-        '
-        Me.cmbPhysician.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.cmbPhysician.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.cmbPhysician.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbPhysician.FormattingEnabled = True
-        Me.cmbPhysician.Location = New System.Drawing.Point(1, 1)
-        Me.cmbPhysician.Name = "cmbPhysician"
-        Me.cmbPhysician.Size = New System.Drawing.Size(277, 25)
-        Me.cmbPhysician.TabIndex = 85
         '
         'frmNewPatient
         '

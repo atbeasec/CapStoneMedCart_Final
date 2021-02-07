@@ -119,15 +119,16 @@ Public Class frmNewPatient
             "'Address', 'City', 'State', 'Zip_Code', 'Phone_Number', 'Email_address', 'Primary_Physician_ID', " &
             "'Active_Flag') Values ('")
 
-        ' strbSQL.Append(CInt(Rnd() * 20) & "',") 'this is going to make a random barcode this is temporary
-        strbSQL.Append("'" & txtFirstName.Text & "' , " & txtMiddleName.Text & "',")
+        strbSQL.Append(CInt(Rnd() * 20) & "','")
+        strbSQL.Append(CInt(Rnd() * 20) & "',") 'this is going to make a random barcode this is temporary
+        strbSQL.Append("'" & txtFirstName.Text & "' , '" & txtMiddleName.Text & "',")
         strbSQL.Append("'" & txtLastName.Text & "','" & txtBirthday.Text & "',")
         strbSQL.Append("'" & cmbSex.SelectedItem & "','" & txtHeight.Text & "',")
         strbSQL.Append("'" & txtWeight.Text & "','" & txtAddress.Text & "',")
         strbSQL.Append("'" & txtCity.Text & "','" & cmbState.SelectedItem & "',")
         strbSQL.Append("'" & txtZipCode.Text & "','" & txtPhoneNumber.Text & "',")
         strbSQL.Append("'" & txtEmail.Text & "','" & dsPhysicians.Tables(0).Rows(0)(EnumList.Physician.Id) & "',")
-        strbSQL.Append("'" & 1 & "';")
+        strbSQL.Append("'" & 1 & "');")
 
         CreateDatabase.ExecuteInsertQuery(strbSQL.ToString)
         'send message saying it was a success or error
