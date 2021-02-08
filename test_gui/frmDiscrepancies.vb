@@ -163,7 +163,27 @@
 
     Private Sub btnResolve_Click(sender As Object, e As EventArgs) Handles btnResolve.Click
 
-        frmResolve.Show()
+        Dim paddingPanel As Control
+        Dim controlPanel As Control
+        Dim checkIfSelected As Boolean = False
+
+        For Each paddingPanel In flpDiscrepancies.Controls
+            Debug.Print(paddingPanel.Name)
+            For Each controlPanel In paddingPanel.Controls
+                If controlPanel.Name.Contains("pnlIndividualDiscrepancy") Then
+                    If controlPanel.BackColor = Color.FromArgb(71, 103, 216) Then
+                        checkIfSelected = True
+                    End If
+                End If
+            Next
+        Next
+
+        If checkIfSelected = False Then
+            MessageBox.Show("Please Select a discrepancy to resolve")
+        Else
+            frmResolve.Show()
+        End If
+
 
     End Sub
 

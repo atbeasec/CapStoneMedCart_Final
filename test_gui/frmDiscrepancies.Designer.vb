@@ -24,6 +24,7 @@ Partial Class frmDiscrepancies
     Private Sub InitializeComponent()
         Me.flpDiscrepancies = New System.Windows.Forms.FlowLayoutPanel()
         Me.pnlHeader = New System.Windows.Forms.Panel()
+        Me.lblDiscrepancyID = New System.Windows.Forms.Label()
         Me.lblActualCount = New System.Windows.Forms.Label()
         Me.lblTime = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
@@ -32,7 +33,6 @@ Partial Class frmDiscrepancies
         Me.lblDrawer = New System.Windows.Forms.Label()
         Me.pnlHeaderPatientRecords = New System.Windows.Forms.Panel()
         Me.btnResolve = New System.Windows.Forms.Button()
-        Me.lblDiscrepancyID = New System.Windows.Forms.Label()
         Me.pnlHeader.SuspendLayout()
         Me.pnlHeaderPatientRecords.SuspendLayout()
         Me.SuspendLayout()
@@ -60,6 +60,17 @@ Partial Class frmDiscrepancies
         Me.pnlHeader.Name = "pnlHeader"
         Me.pnlHeader.Size = New System.Drawing.Size(901, 47)
         Me.pnlHeader.TabIndex = 42
+        '
+        'lblDiscrepancyID
+        '
+        Me.lblDiscrepancyID.AutoSize = True
+        Me.lblDiscrepancyID.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDiscrepancyID.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblDiscrepancyID.Location = New System.Drawing.Point(7, 16)
+        Me.lblDiscrepancyID.Name = "lblDiscrepancyID"
+        Me.lblDiscrepancyID.Size = New System.Drawing.Size(26, 21)
+        Me.lblDiscrepancyID.TabIndex = 11
+        Me.lblDiscrepancyID.Text = "ID"
         '
         'lblActualCount
         '
@@ -134,7 +145,7 @@ Partial Class frmDiscrepancies
         Me.pnlHeaderPatientRecords.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlHeaderPatientRecords.Location = New System.Drawing.Point(0, 0)
         Me.pnlHeaderPatientRecords.Name = "pnlHeaderPatientRecords"
-        Me.pnlHeaderPatientRecords.Size = New System.Drawing.Size(942, 51)
+        Me.pnlHeaderPatientRecords.Size = New System.Drawing.Size(929, 51)
         Me.pnlHeaderPatientRecords.TabIndex = 41
         '
         'btnResolve
@@ -154,23 +165,12 @@ Partial Class frmDiscrepancies
         Me.btnResolve.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnResolve.UseVisualStyleBackColor = False
         '
-        'lblDiscrepancyID
-        '
-        Me.lblDiscrepancyID.AutoSize = True
-        Me.lblDiscrepancyID.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDiscrepancyID.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblDiscrepancyID.Location = New System.Drawing.Point(7, 16)
-        Me.lblDiscrepancyID.Name = "lblDiscrepancyID"
-        Me.lblDiscrepancyID.Size = New System.Drawing.Size(26, 21)
-        Me.lblDiscrepancyID.TabIndex = 11
-        Me.lblDiscrepancyID.Text = "ID"
-        '
         'frmDiscrepancies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(942, 561)
+        Me.ClientSize = New System.Drawing.Size(929, 561)
         Me.Controls.Add(Me.flpDiscrepancies)
         Me.Controls.Add(Me.pnlHeader)
         Me.Controls.Add(Me.pnlHeaderPatientRecords)
