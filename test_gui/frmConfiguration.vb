@@ -2,10 +2,54 @@
     Private Sub frmConfiguration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         PopulateUserInfo()
+        rbtnNurse.Checked = True
 
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: CreatePanel()                  */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/6/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is routine is dynamically creates panels that are placed    */ 
+    '/*	 inside of the flowpanel that is fixed on the form. The panels are*/
+    '/*	 created here, assigned handlers, and the contents of the panels  */
+    '/*	 are updated in this routine                                      */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*             */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 NONE                                                             */ 
+    '/* flpPannel- the flow panel which the user wants to create the      */
+    '/*     create the single panel.                                      */
+    '/* strID- value from the database we will display                    */
+    '/* strName- Name of the user in the database                         */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	   CreatePanel(flpUserInfo, strID9, strFirstName9, strAccess9)    */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	pnl- is the pnl which we are creating for padding purposes        */
+    '/* pnlMainPanel- is the pnl which we are going to add controls       */
+    '/* lblID1 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID2 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID3 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  Collin Krygier  2/6/2021    Initial creation                     */
+    '/*********************************************************************/
     Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal strID As String, ByVal strName As String, ByVal strAccess As String)
 
         Dim pnl As Panel
@@ -14,7 +58,6 @@
         Dim pnlMainPanel As Panel
         pnlMainPanel = New Panel
         ' call method here to get the count from the database and update the panel number so the next item is correct
-
 
         'Set panel properties
         With pnl
@@ -43,7 +86,6 @@
         AddHandler pnlMainPanel.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
         AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
 
-        ' add controls to this panel
         CreateEditButton(pnlMainPanel, getPanelCount(flpPannel), 500, 5)
         CreateDeleteBtn(pnlMainPanel, getPanelCount(flpPannel), 550, 5)
 
@@ -55,21 +97,12 @@
         Dim lblID As New Label
         Dim lblID2 As New Label
         Dim lblID3 As New Label
-        Dim lblID4 As New Label
-        Dim lblID5 As New Label
-        Dim lblID6 As New Label
-
-        Dim location As New Point(10, 20)
-        Dim location2 As New Point(100, 20)
-        Dim location3 As New Point(200, 20)
-        Dim location4 As New Point(300, 20)
-        Dim location5 As New Point(400, 20)
-        Dim location6 As New Point(500, 20)
+        Const INTTWENTY As Integer = 20
 
         ' anywhere we have quotes except for the label names, we can call our Database and get method
-        CreateIDLabel(pnlMainPanel, lblID, "lblID", lblName.Location.X, 20, strName, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID2, "lblNames", lblIDNumber.Location.X, 20, strID, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID3, "lblAccessLevel", lblAccess.Location.X, 20, strAccess, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID, "lblID", lblName.Location.X, INTTWENTY, strName, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID2, "lblNames", lblIDNumber.Location.X, INTTWENTY, strID, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID3, "lblAccessLevel", lblAccess.Location.X, INTTWENTY, strAccess, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
@@ -121,4 +154,65 @@
 
     End Sub
 
+    Private Sub rbtnNurse_CheckedChanged(sender As Object, e As EventArgs) Handles rbtnNurse.CheckedChanged ', rbtnSupervisor.CheckedChanged, rbtnAdministrator.CheckedChanged
+
+
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   Function NAME: RadioButtonSelection()           */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/6/2021                         */                             
+    '/*********************************************************************/
+    '/*  Function   PURPOSE:								              */             
+    '/*	 This is function is intended to take the selected radio button   */
+    '/*  and return a string representation of the selection.             */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*             */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  RETURNS ():					                                  */         
+    '/*	 function returns a string that will be sent to the database    - */
+    '/*  representing the user permission.                                */
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 NONE                                                             */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	   CreatePanel(flpUserInfo, strID9, strFirstName9, strAccess9)    */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	strPrivilege- a string which will be returned by the function that*/
+    '/* contains the selected radio button string.                        */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  Collin Krygier  2/6/2021    Initial creation                     */
+    '/*********************************************************************/
+    Function RadioButtonSelection() As String
+
+        Dim strPrivilege As String = Nothing
+
+        Const NURSE As String = "nurse"
+        Const ADMIN As String = "administrator"
+        Const SUPERVISOR As String = "supervisor"
+
+        If rbtnNurse.Checked = True Then
+
+            strPrivilege = NURSE
+        ElseIf rbtnAdministrator.Checked = True Then
+
+            strPrivilege = ADMIN
+        ElseIf rbtnSupervisor.Checked = True Then
+            strPrivilege = SUPERVISOR
+        End If
+
+        Return strPrivilege
+    End Function
 End Class
