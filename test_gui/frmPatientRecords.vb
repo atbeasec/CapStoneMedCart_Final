@@ -59,34 +59,55 @@
     '/*  NP    2/4/2021 Created the SQL statements to pull back the       */
     '/*                 information needed for Patient Records Form.      */
     '/*                 Created variables strRoom and strBed              */
+    '/* AB     2/8/2021 Changed looping code as there was a bug 
+    '/*                 that it would only display the first patient multiple
+    '/*                 times
     '/*********************************************************************/
 
 
     Private Sub frmPatientRecords_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim PatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery("select Patient.MRN_Number, Patient.Patient_First_Name, " &
+        Dim dsPatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery("select Patient.MRN_Number, Patient.Patient_First_Name, " &
                                                    "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name from Patient LEFT JOIN " &
                                                    "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1;")
         Dim strRoom As String
         Dim strBed As String
 
-        For Each row In PatientInfo.Tables(0).Rows()
-            With PatientInfo.Tables(0)
+        ''There was a bug with this code
+        'For Each row In dsPatientInfo.Tables(0).Rows()
+        '    With dsPatientInfo.Tables(0)
 
-                If IsDBNull(.Rows(0)(4)) Then
-                    strRoom = "N/A"
-                Else
-                    strRoom = .Rows(0)(4).ToString
-                End If
+        '        If IsDBNull(.Rows(0)(4)) Then
+        '            strRoom = "N/A"
+        '        Else
+        '            strRoom = .Rows(0)(4).ToString
+        '        End If
 
-                If IsDBNull(.Rows(0)(5)) Then
-                    strBed = "N/A"
-                Else
-                    strBed = .Rows(0)(5).ToString
-                End If
-                CreatePanel(flpPatientRecords, .Rows(0)(0), .Rows(0)(1), .Rows(0)(2), .Rows(0)(3), strRoom, strBed)
+        '        If IsDBNull(.Rows(0)(5)) Then
+        '            strBed = "N/A"
+        '        Else
+        '            strBed = .Rows(0)(5).ToString
+        '        End If
+        '        CreatePanel(flpPatientRecords, .Rows(0)(0), .Rows(0)(1), .Rows(0)(2), .Rows(0)(3), strRoom, strBed)
 
-            End With
+        '    End With
+        'Next
+
+        For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
+            If IsDBNull(dr(4)) Then
+                strRoom = "N/A"
+            Else
+                strRoom = dr(4).ToString
+            End If
+
+            If IsDBNull(dr(5)) Then
+                strBed = "N/A"
+            Else
+                strBed = dr(5).ToString
+            End If
+
+            CreatePanel(flpPatientRecords, dr(0), dr(1), dr(2), dr(3), strRoom, strBed)
         Next
+
     End Sub
 
     Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal strID As String, ByVal strFirstName As String, ByVal strLastName As String, ByVal strBirthday As String, ByVal strRoom As String, ByVal strBed As String)
