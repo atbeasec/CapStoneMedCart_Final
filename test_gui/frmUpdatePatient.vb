@@ -1,6 +1,14 @@
 ﻿Imports System.Text
 
 Public Class frmUpdatePatient
+
+
+
+
+    Private dsPatient As DataSet = New DataSet
+    Private dsRooms As DataSet = New DataSet
+    Private dsPatientRoom As DataSet = New DataSet
+
     '/*********************************************************************/
     '/*                   SUBPRORGRAM NAME:frmUpdatePatient_Load		   */         
     '/*********************************************************************/
@@ -41,13 +49,10 @@ Public Class frmUpdatePatient
     '/*  ---   ----     ------------------------------------------------- */
     '/*                                                                     
     '/*********************************************************************/
-
-    Private dsPatient As DataSet = New DataSet
-    Private dsRooms As DataSet = New DataSet
-    Private dsPatientRoom As DataSet = New DataSet
-
-
     Private Sub frmUpdatePatient_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'sender is the object (normally a control) that calls the method. It is just an object. 
+        '.tag is a field that exists in all controls. It isn't used for anything so we are using 
+        'it to hold the MRN number for the patient so we can look them up in the database.
         sender.tag = 278769641
 
         Dim strbSQLString = New StringBuilder()
@@ -59,38 +64,38 @@ Public Class frmUpdatePatient
         dsRooms = CreateDatabase.ExecuteSelectQuery(strbSQLString.ToString)
 
 
-        MiscMethods.PopulateStateComboBox(cboState)
+        PopulateComboBoxMethods.PopulateStateComboBox(cboState)
 
         With dsPatient.Tables(0)
-                strbSQLString.Clear()
-                strbSQLString.Append("Select * from PatientRoom where Patient_TUID = " &
-                                .Rows(0)(EnumList.Patient.ID))
-                dsPatientRoom = CreateDatabase.ExecuteSelectQuery(strbSQLString.ToString)
-                txtFirstName.Text = .Rows(0)(EnumList.Patient.FristName)
-                txtLastName.Text = .Rows(0)(EnumList.Patient.LastName)
-                txtEmail.Text = .Rows(0)(EnumList.Patient.Email)
-                txtAddress.Text = .Rows(0)(EnumList.Patient.address)
-                txtCity.Text = .Rows(0)(EnumList.Patient.City)
-                txtZip.Text = .Rows(0)(EnumList.Patient.zip)
-                txtDoB.Text = .Rows(0)(EnumList.Patient.DoB)
-                txtPhone.Text = .Rows(0)(EnumList.Patient.Phone)
-                cboStatus.Items.AddRange({"Admitted", "Discharged"})
-                If .Rows(0)(EnumList.Patient.Active_Flag) = 1 Then
-                    cboStatus.SelectedItem = "Admitted"
-                Else
-                    cboStatus.SelectedItem = "Discharged"
-                End If
-                cboGender.Items.AddRange({"Male", "Female"})
-                If .Rows(0)(EnumList.Patient.Sex).ToString = "Male" Then
-                    cboGender.SelectedItem = "Male"
-                Else
-                    cboGender.SelectedItem = "Female"
-                End If
+            strbSQLString.Clear()
+            strbSQLString.Append("Select * from PatientRoom where Patient_TUID = " &
+                            .Rows(0)(EnumList.Patient.ID))
+            dsPatientRoom = CreateDatabase.ExecuteSelectQuery(strbSQLString.ToString)
+            txtFirstName.Text = .Rows(0)(EnumList.Patient.FristName)
+            txtLastName.Text = .Rows(0)(EnumList.Patient.LastName)
+            txtEmail.Text = .Rows(0)(EnumList.Patient.Email)
+            txtAddress.Text = .Rows(0)(EnumList.Patient.address)
+            txtCity.Text = .Rows(0)(EnumList.Patient.City)
+            txtZip.Text = .Rows(0)(EnumList.Patient.zip)
+            txtDoB.Text = .Rows(0)(EnumList.Patient.DoB)
+            txtPhone.Text = .Rows(0)(EnumList.Patient.Phone)
+            cboStatus.Items.AddRange({"Admitted", "Discharged"})
+            If .Rows(0)(EnumList.Patient.Active_Flag) = 1 Then
+                cboStatus.SelectedItem = "Admitted"
+            Else
+                cboStatus.SelectedItem = "Discharged"
+            End If
+            cboGender.Items.AddRange({"Male", "Female"})
+            If .Rows(0)(EnumList.Patient.Sex).ToString = "Male" Then
+                cboGender.SelectedItem = "Male"
+            Else
+                cboGender.SelectedItem = "Female"
+            End If
             PopulateRoomComboBox(cboRoom, dsRooms)
             cboRoom.SelectedItem = dsPatientRoom.Tables(0)(EnumList.PatientRoom.RoomID)
 
             cboState.SelectedItem = .Rows(0)(EnumList.Patient.state)
-            End With
+        End With
     End Sub
 
 
