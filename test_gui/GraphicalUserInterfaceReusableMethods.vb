@@ -6,7 +6,7 @@
     Public Sub MouseEnterPanelSetBackGroundColor(Sender As Object, e As EventArgs)
 
         'changes the background color when the mouse is hovered over the panel
-        If Not Sender.backcolor = Color.Red Then
+        If Not Sender.backcolor = Color.Red And Not Sender.backcolor = Color.FromArgb(71, 103, 216) Then
 
             If Sender.backColor = Color.White Then
                 Sender.backColor = Color.Gainsboro
@@ -27,7 +27,7 @@
 
         ' checking if the background color is set to the highlighted color
         'if it is not then we will set it.
-        If Not sender.backcolor = Color.Red Then
+        If Not sender.backcolor = Color.Red And Not sender.backcolor = Color.FromArgb(71, 103, 216) Then
             If sender.backColor = Color.Gainsboro Then
 
                 sender.backColor = Color.White
