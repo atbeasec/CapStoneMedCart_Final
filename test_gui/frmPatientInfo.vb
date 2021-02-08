@@ -1070,15 +1070,60 @@
 
         For Each dr As DataRow In dsPatientDataSet.Tables(0).Rows
 
-            txtMRN.Text = dr(0)
-            txtBirthday.Text = dr(4)
-            txtGender.Text = dr(5)
-            txtHeight.Text = dr(6)
-            txtWeight.Text = dr(7)
-            txtAddress.Text = dr(8) & " " & dr(9) & " " & dr(10)
-            txtEmail.Text = dr(11)
-            txtPhone.Text = dr(12)
-            LblPatientName.Text = dr(1) & " " & dr(2) & " " & dr(3)
+            If IsDBNull(dr(0)) Then
+                txtMRN.Text = "N/A"
+            Else
+                txtMRN.Text = dr(0)
+            End If
+
+            If IsDBNull(dr(4)) Then
+                txtBirthday.Text = "N/A"
+            Else
+                txtBirthday.Text = dr(4)
+            End If
+
+            If IsDBNull(dr(5)) Then
+                txtGender.Text = "N/A"
+            Else
+                txtGender.Text = dr(5)
+            End If
+
+            If IsDBNull(dr(6)) Then
+                txtHeight.Text = "N/A"
+            Else
+                txtHeight.Text = dr(6)
+            End If
+
+            If IsDBNull(dr(7)) Then
+                txtWeight.Text = "N/A"
+            Else
+                txtWeight.Text = dr(7)
+            End If
+
+            If IsDBNull(dr(8)) Then
+                txtAddress.Text = "N/A"
+            Else
+                txtAddress.Text = dr(8) & " " & dr(9) & " " & dr(10)
+            End If
+
+            If IsDBNull(dr(11)) Then
+                txtEmail.Text = "N/A"
+            Else
+                txtEmail.Text = dr(11)
+            End If
+
+            If IsDBNull(dr(12)) Then
+                txtPhone.Text = "N/A"
+            Else
+                txtPhone.Text = dr(12)
+            End If
+
+            If IsDBNull(dr(1)) Then
+                LblPatientName.Text = "N/A"
+            Else
+                LblPatientName.Text = dr(1) & " " & dr(2) & " " & dr(3)
+            End If
+
             intPhysicianID = dr(13)
         Next
 
@@ -1088,7 +1133,11 @@
         dsPatientDataSet = CreateDatabase.ExecuteSelectQuery(strSQLiteCommand)
 
         For Each dr As DataRow In dsPatientDataSet.Tables(0).Rows
-            txtPhysician.Text = "Dr. " & dr(0) & " " & dr(1)
+            If IsDBNull(dr(1)) Then
+                txtPhysician.Text = "N/A"
+            Else
+                txtPhysician.Text = "Dr. " & dr(0) & " " & dr(1)
+            End If
         Next
 
         DispenseHistory.DispenseHistorySpecificPatient(intPatientMRN)
