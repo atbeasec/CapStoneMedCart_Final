@@ -1142,10 +1142,4 @@
 
         DispenseHistory.DispenseHistorySpecificPatient(intPatientMRN)
     End Sub
-
-
-    Private Sub DisplayPatientPrescriptions(ByRef intPatientMRN As Integer)
-
-
-    End Sub
 End Class
