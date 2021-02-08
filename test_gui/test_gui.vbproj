@@ -293,6 +293,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GraphicalUserInterfaceReusableMethods.vb" />
+    <Compile Include="Interactions.vb" />
     <Compile Include="Inventory.vb" />
     <Compile Include="Login.vb" />
     <Compile Include="PharmacyOrder.vb" />
@@ -320,6 +321,7 @@
     <Compile Include="NewNurse.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="rxNorm.vb" />
     <Compile Include="SettingsChange.Designer.vb">
       <DependentUpon>SettingsChange.vb</DependentUpon>
     </Compile>
