@@ -183,7 +183,7 @@ Module DispenseHistory
           On PatientMedication.Patient_TUID = Patient.Patient_ID
           INNER JOIN Medication
           On Medication.Medication_ID = PatientMedication.Medication_TUID
-          WHERE Patient.MRN_Number = '" & intPatientMRN & "';"
+          WHERE Patient.MRN_Number = '" & intPatientMRN & "' ORDER BY DateTime_Dispensed DESC;"
 
         Dim dsmydataset As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
 

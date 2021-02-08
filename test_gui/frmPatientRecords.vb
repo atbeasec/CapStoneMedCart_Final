@@ -68,7 +68,7 @@
     Private Sub frmPatientRecords_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim dsPatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery("select Patient.MRN_Number, Patient.Patient_First_Name, " &
                                                    "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name from Patient LEFT JOIN " &
-                                                   "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1;")
+                                                   "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1 ORDER BY Patient.Patient_Last_Name ASC;")
         Dim strRoom As String
         Dim strBed As String
 
