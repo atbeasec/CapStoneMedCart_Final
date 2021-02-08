@@ -71,7 +71,6 @@ Partial Class frmPatientInfo
         Me.Label26 = New System.Windows.Forms.Label()
         Me.Label27 = New System.Windows.Forms.Label()
         Me.lstBoxAllergies = New System.Windows.Forms.ListBox()
-        Me.btnAddAllergy = New System.Windows.Forms.Button()
         Me.btnWaste = New System.Windows.Forms.Button()
         Me.btnDispenseMedication = New System.Windows.Forms.Button()
         Me.btnEditPatient = New System.Windows.Forms.Button()
@@ -165,7 +164,7 @@ Partial Class frmPatientInfo
         Me.pnlPersonalInformation.ForeColor = System.Drawing.Color.Gainsboro
         Me.pnlPersonalInformation.Location = New System.Drawing.Point(12, 34)
         Me.pnlPersonalInformation.Name = "pnlPersonalInformation"
-        Me.pnlPersonalInformation.Size = New System.Drawing.Size(404, 421)
+        Me.pnlPersonalInformation.Size = New System.Drawing.Size(404, 428)
         Me.pnlPersonalInformation.TabIndex = 17
         '
         'Label15
@@ -401,7 +400,7 @@ Partial Class frmPatientInfo
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(7, 465)
+        Me.Label6.Location = New System.Drawing.Point(9, 541)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(86, 25)
         Me.Label6.TabIndex = 44
@@ -413,7 +412,7 @@ Partial Class frmPatientInfo
         Me.flpDispenseHistory.BackColor = System.Drawing.Color.White
         Me.flpDispenseHistory.Location = New System.Drawing.Point(422, 128)
         Me.flpDispenseHistory.Name = "flpDispenseHistory"
-        Me.flpDispenseHistory.Size = New System.Drawing.Size(889, 317)
+        Me.flpDispenseHistory.Size = New System.Drawing.Size(846, 317)
         Me.flpDispenseHistory.TabIndex = 48
         '
         'Panel2
@@ -427,7 +426,7 @@ Partial Class frmPatientInfo
         Me.Panel2.Controls.Add(Me.Label29)
         Me.Panel2.Location = New System.Drawing.Point(422, 78)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(889, 47)
+        Me.Panel2.Size = New System.Drawing.Size(846, 47)
         Me.Panel2.TabIndex = 47
         '
         'Label24
@@ -435,7 +434,7 @@ Partial Class frmPatientInfo
         Me.Label24.AutoSize = True
         Me.Label24.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label24.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label24.Location = New System.Drawing.Point(463, 16)
+        Me.Label24.Location = New System.Drawing.Point(441, 16)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(72, 21)
         Me.Label24.TabIndex = 7
@@ -457,7 +456,7 @@ Partial Class frmPatientInfo
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label7.Location = New System.Drawing.Point(345, 16)
+        Me.Label7.Location = New System.Drawing.Point(323, 16)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(69, 21)
         Me.Label7.TabIndex = 9
@@ -468,7 +467,7 @@ Partial Class frmPatientInfo
         Me.Label23.AutoSize = True
         Me.Label23.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label23.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label23.Location = New System.Drawing.Point(586, 16)
+        Me.Label23.Location = New System.Drawing.Point(564, 16)
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(108, 21)
         Me.Label23.TabIndex = 6
@@ -479,7 +478,7 @@ Partial Class frmPatientInfo
         Me.Label25.AutoSize = True
         Me.Label25.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label25.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label25.Location = New System.Drawing.Point(753, 16)
+        Me.Label25.Location = New System.Drawing.Point(731, 16)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(87, 21)
         Me.Label25.TabIndex = 4
@@ -490,7 +489,7 @@ Partial Class frmPatientInfo
         Me.Label29.AutoSize = True
         Me.Label29.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label29.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label29.Location = New System.Drawing.Point(234, 16)
+        Me.Label29.Location = New System.Drawing.Point(212, 16)
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(65, 21)
         Me.Label29.TabIndex = 0
@@ -512,7 +511,7 @@ Partial Class frmPatientInfo
         Me.flpMedications.BackColor = System.Drawing.Color.White
         Me.flpMedications.Location = New System.Drawing.Point(231, 541)
         Me.flpMedications.Name = "flpMedications"
-        Me.flpMedications.Size = New System.Drawing.Size(1080, 255)
+        Me.flpMedications.Size = New System.Drawing.Size(1037, 255)
         Me.flpMedications.TabIndex = 51
         '
         'Label20
@@ -537,7 +536,7 @@ Partial Class frmPatientInfo
         Me.Panel3.Controls.Add(Me.Label27)
         Me.Panel3.Location = New System.Drawing.Point(231, 494)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(1080, 47)
+        Me.Panel3.Size = New System.Drawing.Size(1037, 47)
         Me.Panel3.TabIndex = 48
         '
         'Label31
@@ -623,27 +622,10 @@ Partial Class frmPatientInfo
         Me.lstBoxAllergies.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lstBoxAllergies.FormattingEnabled = True
         Me.lstBoxAllergies.ItemHeight = 20
-        Me.lstBoxAllergies.Location = New System.Drawing.Point(12, 541)
+        Me.lstBoxAllergies.Location = New System.Drawing.Point(12, 581)
         Me.lstBoxAllergies.Name = "lstBoxAllergies"
-        Me.lstBoxAllergies.Size = New System.Drawing.Size(201, 242)
+        Me.lstBoxAllergies.Size = New System.Drawing.Size(201, 202)
         Me.lstBoxAllergies.TabIndex = 58
-        '
-        'btnAddAllergy
-        '
-        Me.btnAddAllergy.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnAddAllergy.FlatAppearance.BorderSize = 0
-        Me.btnAddAllergy.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAddAllergy.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddAllergy.ForeColor = System.Drawing.Color.White
-        Me.btnAddAllergy.Image = CType(resources.GetObject("btnAddAllergy.Image"), System.Drawing.Image)
-        Me.btnAddAllergy.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnAddAllergy.Location = New System.Drawing.Point(12, 494)
-        Me.btnAddAllergy.Name = "btnAddAllergy"
-        Me.btnAddAllergy.Size = New System.Drawing.Size(151, 37)
-        Me.btnAddAllergy.TabIndex = 15
-        Me.btnAddAllergy.Text = " Add Allergy"
-        Me.btnAddAllergy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnAddAllergy.UseVisualStyleBackColor = False
         '
         'btnWaste
         '
@@ -654,7 +636,7 @@ Partial Class frmPatientInfo
         Me.btnWaste.ForeColor = System.Drawing.Color.White
         Me.btnWaste.Image = CType(resources.GetObject("btnWaste.Image"), System.Drawing.Image)
         Me.btnWaste.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnWaste.Location = New System.Drawing.Point(761, 27)
+        Me.btnWaste.Location = New System.Drawing.Point(716, 27)
         Me.btnWaste.Name = "btnWaste"
         Me.btnWaste.Size = New System.Drawing.Size(107, 37)
         Me.btnWaste.TabIndex = 11
@@ -669,7 +651,7 @@ Partial Class frmPatientInfo
         Me.btnDispenseMedication.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDispenseMedication.ForeColor = System.Drawing.Color.White
         Me.btnDispenseMedication.Image = CType(resources.GetObject("btnDispenseMedication.Image"), System.Drawing.Image)
-        Me.btnDispenseMedication.Location = New System.Drawing.Point(880, 27)
+        Me.btnDispenseMedication.Location = New System.Drawing.Point(835, 27)
         Me.btnDispenseMedication.Name = "btnDispenseMedication"
         Me.btnDispenseMedication.Size = New System.Drawing.Size(236, 37)
         Me.btnDispenseMedication.TabIndex = 12
@@ -684,7 +666,7 @@ Partial Class frmPatientInfo
         Me.btnEditPatient.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnEditPatient.ForeColor = System.Drawing.Color.White
         Me.btnEditPatient.Image = CType(resources.GetObject("btnEditPatient.Image"), System.Drawing.Image)
-        Me.btnEditPatient.Location = New System.Drawing.Point(1127, 27)
+        Me.btnEditPatient.Location = New System.Drawing.Point(1082, 27)
         Me.btnEditPatient.Name = "btnEditPatient"
         Me.btnEditPatient.Size = New System.Drawing.Size(184, 37)
         Me.btnEditPatient.TabIndex = 13
@@ -697,9 +679,8 @@ Partial Class frmPatientInfo
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1334, 802)
+        Me.ClientSize = New System.Drawing.Size(1274, 802)
         Me.Controls.Add(Me.lstBoxAllergies)
-        Me.Controls.Add(Me.btnAddAllergy)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Label20)
         Me.Controls.Add(Me.btnWaste)
@@ -759,7 +740,6 @@ Partial Class frmPatientInfo
     Friend WithEvents flpMedications As FlowLayoutPanel
     Friend WithEvents Label20 As Label
     Friend WithEvents Panel3 As Panel
-    Friend WithEvents btnAddAllergy As Button
     Friend WithEvents Label2 As Label
     Friend WithEvents lstBoxAllergies As ListBox
     Friend WithEvents Label7 As Label

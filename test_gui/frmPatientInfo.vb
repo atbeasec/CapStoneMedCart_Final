@@ -1045,7 +1045,7 @@
         '  CreatePanel(flpMedications)
     End Sub
 
-    Private Sub btnAddAllergy_Click(sender As Object, e As EventArgs) Handles btnAddAllergy.Click
+    Private Sub btnAddAllergy_Click(sender As Object, e As EventArgs)
 
         '  lstBoxAllergies.Items.Add(txtAllergy.Text)
 
