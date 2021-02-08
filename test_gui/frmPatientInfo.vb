@@ -332,15 +332,15 @@
 
 
 
-        CreateDispenseHistoryPanels(flpDispenseHistory, genName1, brandName1, quantity1, measure1, dispensedBy1, dispenseDate1, dispenseTime1)
-        CreateDispenseHistoryPanels(flpDispenseHistory, genName2, brandName2, quantity2, measure2, dispensedBy2, dispenseDate2, dispenseTime2)
-        CreateDispenseHistoryPanels(flpDispenseHistory, genName3, brandName3, quantity3, measure3, dispensedBy3, dispenseDate3, dispenseTime3)
-        CreateDispenseHistoryPanels(flpDispenseHistory, genName4, brandName4, quantity4, measure4, dispensedBy4, dispenseDate4, dispenseTime4)
-        CreateDispenseHistoryPanels(flpDispenseHistory, genName5, brandName5, quantity5, measure5, dispensedBy5, dispenseDate5, dispenseTime5)
+        'CreateDispenseHistoryPanels(flpDispenseHistory, genName1, brandName1, quantity1, measure1, dispensedBy1, dispenseDate1, dispenseTime1)
+        'CreateDispenseHistoryPanels(flpDispenseHistory, genName2, brandName2, quantity2, measure2, dispensedBy2, dispenseDate2, dispenseTime2)
+        'CreateDispenseHistoryPanels(flpDispenseHistory, genName3, brandName3, quantity3, measure3, dispensedBy3, dispenseDate3, dispenseTime3)
+        'CreateDispenseHistoryPanels(flpDispenseHistory, genName4, brandName4, quantity4, measure4, dispensedBy4, dispenseDate4, dispenseTime4)
+        'CreateDispenseHistoryPanels(flpDispenseHistory, genName5, brandName5, quantity5, measure5, dispensedBy5, dispenseDate5, dispenseTime5)
 
     End Sub
 
-    Private Sub CreateDispenseHistoryPanels(ByVal flpPannel As FlowLayoutPanel, ByVal genericName As String, ByVal brandName As String, ByVal quantity As String, ByVal measure As String, ByVal dispenseBy As String, ByVal dispenseDate As String, ByVal dispenseTime As String)
+    Public Sub CreateDispenseHistoryPanels(ByVal flpPannel As FlowLayoutPanel, ByVal genericName As String, ByVal brandName As String, ByVal quantity As String, ByVal measure As String, ByVal dispenseBy As String, ByVal dispenseDate As String, ByVal dispenseTime As String)
 
         Dim pnl As Panel
         pnl = New Panel
