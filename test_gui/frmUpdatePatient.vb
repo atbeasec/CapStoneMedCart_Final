@@ -53,7 +53,7 @@ Public Class frmUpdatePatient
         'sender is the object (normally a control) that calls the method. It is just an object. 
         '.tag is a field that exists in all controls. It isn't used for anything so we are using 
         'it to hold the MRN number for the patient so we can look them up in the database.
-        sender.tag = 278769641
+        'sender.tag = 278769641
 
         Dim strbSQLString = New StringBuilder()
         strbSQLString.Append("Select * from Patient where MRN_Number = '" & sender.tag & "';")
