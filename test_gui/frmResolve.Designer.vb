@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmResolve
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,75 +20,70 @@ Partial Class frmResolve
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.lblDiscrepancyHeader = New System.Windows.Forms.Label()
+        Me.btnResolve = New System.Windows.Forms.Button()
+        Me.lblDiscrepancyID = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(12, 42)
+        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(11, 67)
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(307, 119)
+        Me.TextBox1.Size = New System.Drawing.Size(358, 119)
         Me.TextBox1.TabIndex = 0
         '
-        'Label2
+        'lblDiscrepancyHeader
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.BackColor = System.Drawing.Color.White
-        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(38, 10)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(251, 21)
-        Me.Label2.TabIndex = 92
-        Me.Label2.Text = "Reason For Closing Discrepancy"
+        Me.lblDiscrepancyHeader.AutoSize = True
+        Me.lblDiscrepancyHeader.BackColor = System.Drawing.Color.White
+        Me.lblDiscrepancyHeader.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDiscrepancyHeader.Location = New System.Drawing.Point(114, 36)
+        Me.lblDiscrepancyHeader.Name = "lblDiscrepancyHeader"
+        Me.lblDiscrepancyHeader.Size = New System.Drawing.Size(153, 21)
+        Me.lblDiscrepancyHeader.TabIndex = 92
+        Me.lblDiscrepancyHeader.Text = "Reason For Closing "
         '
-        'Button1
+        'btnResolve
         '
-        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.Button1.FlatAppearance.BorderSize = 0
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.ForeColor = System.Drawing.Color.White
-        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button1.Location = New System.Drawing.Point(99, 181)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(129, 39)
-        Me.Button1.TabIndex = 93
-        Me.Button1.Text = "Resolve"
-        Me.Button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button1.UseVisualStyleBackColor = False
+        Me.btnResolve.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnResolve.FlatAppearance.BorderSize = 0
+        Me.btnResolve.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnResolve.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnResolve.ForeColor = System.Drawing.Color.White
+        Me.btnResolve.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnResolve.Location = New System.Drawing.Point(126, 201)
+        Me.btnResolve.Name = "btnResolve"
+        Me.btnResolve.Size = New System.Drawing.Size(129, 39)
+        Me.btnResolve.TabIndex = 93
+        Me.btnResolve.Text = "Resolve"
+        Me.btnResolve.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnResolve.UseVisualStyleBackColor = False
         '
-        'Button2
+        'lblDiscrepancyID
         '
-        Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.Button2.FlatAppearance.BorderSize = 0
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.ForeColor = System.Drawing.Color.White
-        Me.Button2.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button2.Location = New System.Drawing.Point(99, 235)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(129, 39)
-        Me.Button2.TabIndex = 94
-        Me.Button2.Text = "Cancel"
-        Me.Button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button2.UseVisualStyleBackColor = False
+        Me.lblDiscrepancyID.AutoSize = True
+        Me.lblDiscrepancyID.BackColor = System.Drawing.Color.White
+        Me.lblDiscrepancyID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDiscrepancyID.Location = New System.Drawing.Point(118, 11)
+        Me.lblDiscrepancyID.Name = "lblDiscrepancyID"
+        Me.lblDiscrepancyID.Size = New System.Drawing.Size(124, 21)
+        Me.lblDiscrepancyID.TabIndex = 94
+        Me.lblDiscrepancyID.Text = "Discrepancy ID"
         '
         'frmResolve
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(330, 288)
-        Me.ControlBox = False
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.Label2)
+        Me.ClientSize = New System.Drawing.Size(382, 253)
+        Me.Controls.Add(Me.lblDiscrepancyID)
+        Me.Controls.Add(Me.btnResolve)
+        Me.Controls.Add(Me.lblDiscrepancyHeader)
         Me.Controls.Add(Me.TextBox1)
         Me.Name = "frmResolve"
         Me.Text = "frmResolve"
@@ -98,7 +93,7 @@ Partial Class frmResolve
     End Sub
 
     Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Button2 As Button
+    Friend WithEvents lblDiscrepancyHeader As Label
+    Friend WithEvents btnResolve As Button
+    Friend WithEvents lblDiscrepancyID As Label
 End Class
