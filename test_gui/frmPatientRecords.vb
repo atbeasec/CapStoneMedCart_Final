@@ -72,7 +72,7 @@
         Dim strRoom As String
         Dim strBed As String
 
-        ''There was a bug with this code
+        'There was a bug with this code
         'For Each row In dsPatientInfo.Tables(0).Rows()
         '    With dsPatientInfo.Tables(0)
 
