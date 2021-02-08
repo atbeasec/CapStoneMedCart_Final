@@ -60,29 +60,12 @@ Module PatientInformation
         Dim strMRN As String
 
     End Class
-    Dim lstPatients As New List Of clsPatients
-    'create database connection string
-    ' Dim strDEFAULTFOLDER As String = "C:\"
-    Dim strDBNAME As String = "Medication Cart System"
-    Dim strDBPath As String = strDEFAULTFOLDER & strDBNAME & ".db"
 
-    Public DBConn As New SQLite.SQLiteConnection()
-    Public DBCmd As SQLite.SQLiteCommand
-    Public strDBConnString As String = String.Format("Data Source = {0}", strDBPath)
-
-    Dim myConnection As SQLiteConnection = New SQLiteConnection()
-    myConnection.ConnectionString = strDBConnString
-        myConnection.Open()
-
-    Dim DBAdaptPatient As SqlDataAdapter
-    Dim DBAdaptPhysician As SqlDataAdapter
 
     'call for all information from database
-        strSQlliteCmd = "Select * FROM Patient"
-        DBAdaptPatient = New SqlDataAdapter(SQlliteCmd, strDBConnString)
-        'DBAdaptPets.Fill(dsPatients, "Patients")
+    Dim strSQlliteCmd As String = "Select * FROM Patient"
 
-        'dgvPetsDataView.DataSource = dsPets.Tables("Pets")
+
 
     'store all information into a list of patient classes
 
