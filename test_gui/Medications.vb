@@ -82,20 +82,20 @@
     '/*  ---                   ----     ----------------------------------*/
     '/*  Alexander Beasecker  02/01/2021  Initial creation of the code     */
     '/*********************************************************************/
-    Public Sub InsertMedication(ByRef StrGenericName As String, ByRef intRXCUI As Integer, ByRef intDosage As Integer,
-                                ByRef strNarcoticFlag As String, ByRef strBrandName As String, ByRef strType As String,
+    Public Sub InsertMedication(ByRef StrDrugName As String, ByRef intRXCUI As Integer, ByRef intDosage As Integer,
+                                ByRef strNarcoticFlag As String, ByRef strType As String,
                                 ByRef strStrength As String, ByRef intActiveFlag As Integer)
 
         'create SQLite command string and barcode placeholder
         Dim StrPlaceHolderBarCode As String = "000000000"
+        Dim Strdatacommand As String
 
         'set up SQL objects
 
         'set insert statement into sqlite command object
-        Strdatacommand = "INSERT INTO AdHocOrder(Drug_Name, RXCUI_ID, Dosage, NarcoticControlled_Flag, Barcode, Brand_Name, Type)
-                                VALUES('" & StrGenericName & "','" & intRXCUI & "','" & intDosage & "','" & strNarcoticFlag &
-                                "','" & StrPlaceHolderBarCode & "','" & strBrandName & "','" &
-                                strType & "','" & strStrength & "','" & intActiveFlag & "')"
+        Strdatacommand = "INSERT INTO Medication(Drug_Name, RXCUI_ID, Dosage, NarcoticControlled_Flag, Barcode, Type, Strength,Active_Flag)
+                                VALUES('" & StrDrugName & "','" & intRXCUI & "','" & intDosage & "','" & strNarcoticFlag &
+                                "','" & StrPlaceHolderBarCode & "','" & strType & "','" & strStrength & "','" & intActiveFlag & "')"
 
         'open connection to datebase, run insert and close
         CreateDatabase.ExecuteInsertQuery(Strdatacommand)
@@ -144,8 +144,8 @@
         Dim Strdatacommand As String
 
         'create update statement for setting the barcode
-        Strdatacommand = "UPDATE Medication SET Barcode ='" & strBarcode & "' WHERE RXCUI = '" & intRXCUI & "';"
+        Strdatacommand = "UPDATE Medication SET Barcode ='" & strBarcode & "' WHERE RXCUI_ID = '" & intRXCUI & "';"
         CreateDatabase.ExecuteInsertQuery(Strdatacommand)
-
     End Sub
+
 End Module

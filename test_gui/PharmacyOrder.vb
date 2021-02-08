@@ -44,4 +44,56 @@
     '/*  WHO                     WHEN        WHAT						*/
     '/*  Alexander Beasecker    1/25/2021   Initial creation            */
     '/*******************************************************************/
+
+
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:PharmacyOrder                     */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   02/05/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: the purpse of this method is too insert
+    '/* a medication order into the database. requires patient ID, Medication ID,
+    '/* physicianID, the amount ordered, the method and the dispense schedule.
+    '/*
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*  CreateDatabase.ExecuteInsertQuery
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/* intPatientID, intMedicationID, intPhysicianID, 
+    '/* intAmount, strMethod, strSchedule
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*				PharmacyOrder("121","223532","543","15","IV drip","every 12 hours")							                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*	intActiveFlag
+    '/* dtmOrderTime
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  02/05/2021  Initial creation of the code    */
+    '/*********************************************************************/
+    Public Sub PharmacyOrder(ByRef intPatientID As Integer, ByRef intMedicationID As Integer, ByRef intPhysicianID As Integer,
+                             ByRef intAmount As Integer, ByRef strMethod As String, ByRef strSchedule As String)
+
+        'get current time and date
+        Dim dtmOrderTime As String = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
+        'set active flag
+        Dim intActiveFlag As Integer = 1
+        'create sql statement command
+        Dim Strdatacommand As String = "INSERT INTO PatientMedication(Patient_TUID,Medication_TUID,Ordering_Physician_ID, " &
+            "Date_Presrcibed, Quantity, Method, Schedule, Active_Flag) " &
+            "VALUES(" & intPatientID & ", " & intMedicationID & ", " & intPhysicianID & ", " & dtmOrderTime & ", " &
+            intAmount & ", " & strMethod & ", " & strSchedule & ", " & intActiveFlag & ")"
+        'call sql insert method to run command
+        CreateDatabase.ExecuteInsertQuery(Strdatacommand)
+
+    End Sub
 End Module

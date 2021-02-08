@@ -57,6 +57,8 @@ Module CartInterfaceCode
     '/* Nathan 2/2/2021 Imported the cartInferfaceProject into the main porject*/
     '/* Nathan 2/2/2021 renamed SimulationMode to blnSimualationMOde to follow*/
     '/*                 naming standards.                                   */
+    '/* Np     2/4/2021Fixed bytFinal being used before it is assigned a value*/
+    '/*                 Warning.                                            */
     '/*********************************************************************/
 
     '26
@@ -224,6 +226,8 @@ Module CartInterfaceCode
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
+    '/* Np     2/4/2021Fixed bytFinal being used before it is assigned a value*/
+    '/*                 Warning.                                            */
     '/*                                                                     
     '/*********************************************************************/
 
@@ -231,7 +235,7 @@ Module CartInterfaceCode
     Function getSerialString(number As String)
         Dim dicHexDictioanry = New Dictionary(Of String, System.Int32)
         populationDictionary(dicHexDictioanry)
-        Dim bytFinal As Byte()
+        Dim bytFinal As Byte() = Nothing
         If number.Length > 1 Then
             If number.Substring(0, 1) = 1 Then 'this is going to be for when the drawer number is greater 
                 'then 9
