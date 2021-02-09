@@ -174,7 +174,7 @@ Public Class frmNewPatient
 
     Private Sub frmNewPatient_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         dsrooms = CreateDatabase.ExecuteSelectQuery("Select * From Rooms;")
-        dsPhysicians = CreateDatabase.ExecuteSelectQuery("Select * from Physician;")
+        dsPhysicians = CreateDatabase.ExecuteSelectQuery("Select * from Physician ORDER BY Physician_First_Name;")
         cmbSex.Items.AddRange({"Male", "Female"})
         PopulateStateComboBox(cmbState)
         PopulateRoomComboBox(cmbRoom, dsrooms)
