@@ -181,4 +181,68 @@ Module PatientInformation
         DispenseHistory.DispenseHistorySpecificPatient(intPatientMRN)
     End Sub
 
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME: GetAllergies                       */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:Adam kott                             */   
+    '/*                 DATE CREATED:2/8/2021                                 */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:    receive a MRN number and push the              */             
+    '/* allergy information into the allergies list                       */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:                                                           */           
+    '/*                                                                   */         
+    '/*********************************************************************/
+    '/*  CALLS:                                                              */                 
+    '/*             (ExecuteScalar),(ExectueSelectQuery)                  */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):                              */         
+    '/*        intPatientInformationMRN                                      */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:                                                          */                   
+    '/*            (NOTHING)                                              */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:                                   */             
+    '/*                                               */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*           dtsPatientAllergy:                                         */
+    '/*        intPatientAllergyId:                                       */
+    '/*        intPatientInformationMRN:                                  */
+
+
+    '/*    */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:                                 */               
+    '/*                                               */                     
+    '/*  WHO   WHEN     WHAT                                   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  AK   2/8/2021 Created the SQL statements to pull back the       */
+    '/*                 information needed for Patient allergies list     */
+    '/*********************************************************************/
+    Public Sub GetAllergies(ByRef intPatientInformationMRN As Integer)
+
+        'default value for an mrn number so allergies are shown
+        'intPatientInformationMRN = 949764144
+
+        'get the patient id assiociated with the MRN Nummber
+        Dim intPatientAllergyId As Integer = CInt(CreateDatabase.ExecuteScalarQuery("select patient.Patient_ID From Patient " &
+                         "where Patient.MRN_Number=" & (intPatientInformationMRN).ToString & ";"))
+        'get the allergy information from the patient allergy tables
+        Dim dtsPatientAllergy As DataSet = CreateDatabase.ExecuteSelectQuery("Select Allergy_Name From PatientAllergy " &
+                            "Where Active_Flag =1 AND Patient_TUID =" & (intPatientAllergyId).ToString & ";")
+
+        'push each row from the
+        For Each item As DataRow In dtsPatientAllergy.Tables(0).Rows
+            With dtsPatientAllergy.Tables(0)
+                frmPatientInfo.lstBoxAllergies.Items.Add(item(0))
+            End With
+        Next
+        'get select from patient allergy inner join on patient table where tuid is the same
+        'join patients meds table and medications table
+    End Sub
+
 End Module

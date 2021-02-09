@@ -254,14 +254,13 @@
     'End Sub
 
 
-
     Private Sub frmPatientInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         intPatientMRN = frmPatientRecords.intSelectedPatientMRN
         PopulateDispenseHistory()
         PopulateCurrentMedications()
-        'PopulateAllergies()
         PopulateNotes()
+        PatientInformation.GetAllergies(intPatientMRN)
         PatientInformation.GetPatientInformation(intPatientMRN)
         'CreateDispenseHistoryPanel(flpDispenseHistory)
         'CreateDispenseHistoryPanel(flpDispenseHistory)
