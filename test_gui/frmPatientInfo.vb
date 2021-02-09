@@ -262,7 +262,7 @@
         PopulateCurrentMedications()
         'PopulateAllergies()
         PopulateNotes()
-        GetPatientInformation(intPatientMRN)
+        PatientInformation.GetPatientInformation(intPatientMRN)
         'CreateDispenseHistoryPanel(flpDispenseHistory)
         'CreateDispenseHistoryPanel(flpDispenseHistory)
         'CreateDispenseHistoryPanel(flpDispenseHistory)
