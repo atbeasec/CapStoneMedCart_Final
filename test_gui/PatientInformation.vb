@@ -90,11 +90,15 @@ Module PatientInformation
     '/*  WHO                   WHEN     WHAT							  */
     '/*  ---                   ----     ----------------------------------*/
     '/*  Alexander Beasecker  02/09/21  Initial creation of the code      */
+    '/*  NP                   02/9/2021 Changed intPhysicianID to be nothing*/
+    '/*                                 When first made to remove the used*/
+    '/*                                 before declared warning.          */
     '/*********************************************************************/
     Public Sub GetPatientInformation(ByRef intPatientMRN As Integer)
 
         Dim dsPatientDataSet As DataSet = New DataSet
-        Dim intPhysicianID As String
+        'changed be nothing when made to clear up used before declared warning. 
+        Dim intPhysicianID As String = Nothing
         'sql taktement to get patient information
         Dim strSQLiteCommand As String = "SELECT MRN_Number, Patient_First_Name,Patient_Middle_Name, Patient_Last_Name, " &
             "Date_of_Birth, Sex, Height, Weight, Address, City, State, Email_address, Phone_Number, Primary_Physician_ID " &
