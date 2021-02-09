@@ -1569,7 +1569,7 @@ Module CreateDatabase
 	'/*  being reported.     */
 	'/*                                                                   */
 	'/*********************************************************************/
-	'/*  CALLED BY:   	      						         */           
+	'/*  CALLED BY: frmConfiguration.vb  	      						  */           
 	'/*                                         				   */         
 	'/*********************************************************************/
 	'/*  CALLS:										   */                 
@@ -1611,47 +1611,47 @@ Module CreateDatabase
 		DBConn.Close()
 	End Sub
 
-    '/*********************************************************************/
-    '/*                   SUBPROGRAM NAME:  ExecuteScalarQuery			   */         
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:  Alexander Beasecker   			 */   
-    '/*		         DATE CREATED: 	2/2/2021							   */                             
-    '/*********************************************************************/
-    '/*  SUBPROGRAM PURPOSE:											   */             
-    '/*	 This will handle execute scalar sql statements. these statements
-    '/*  will return a single value from the database. The sql statement 
-    '/* is passed to this method, this method runs the scalar statement
-    '/* then returns the  string value from the statement.
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      						         */           
-    '/*                                         				   */         
-    '/*********************************************************************/
-    '/*  CALLS:										   */                 
-    '/*             (NONE)								   */             
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):								*/         
-    '/*	 strStatement - this is the SQL query that the user is looking to */ 
-    '/*					excute.											  */
-    '/*                                                                     
-    '/*********************************************************************/
-    '/*  RETURNS:								         */                   
-    '/*    strReturnedScalar as string         
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								   */             
-    '/*											   */                     
-    '/*          ExecuteScalarQuery("Select * from Table")                                                           
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*	strReturnedScalar									                      
-    '/*                                                                     
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						                      
-    '/*											                       
-    '/*  WHO             WHEN     WHAT								      */             
-    '/*  ---             ----     ----------------------------------------*/
-    '/*  AlexBeasecker  01/23/21  Initial creation of the code			  */                                                                   
-    '/*********************************************************************/
-    Public Function ExecuteScalarQuery(strStatement As String)
+	'/*********************************************************************/
+	'/*                   SUBPROGRAM NAME:  ExecuteScalarQuery			   */         
+	'/*********************************************************************/
+	'/*                   WRITTEN BY:  Alexander Beasecker   			 */   
+	'/*		         DATE CREATED: 	2/2/2021							   */                             
+	'/*********************************************************************/
+	'/*  SUBPROGRAM PURPOSE:											   */             
+	'/*	 This will handle execute scalar sql statements. these statements
+	'/*  will return a single value from the database. The sql statement 
+	'/* is passed to this method, this method runs the scalar statement
+	'/* then returns the  string value from the statement.
+	'/*********************************************************************/
+	'/*  CALLED BY: frmConfiguration.vb     						         */           
+	'/*                                         				   */         
+	'/*********************************************************************/
+	'/*  CALLS:										   */                 
+	'/*             (NONE)								   */             
+	'/*********************************************************************/
+	'/*  PARAMETER LIST (In Parameter Order):								*/         
+	'/*	 strStatement - this is the SQL query that the user is looking to */ 
+	'/*					excute.											  */
+	'/*                                                                     
+	'/*********************************************************************/
+	'/*  RETURNS:								         */                   
+	'/*    strReturnedScalar as string         
+	'/*********************************************************************/
+	'/* SAMPLE INVOCATION:								   */             
+	'/*											   */                     
+	'/*          ExecuteScalarQuery("Select * from Table")                                                           
+	'/*********************************************************************/
+	'/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+	'/*	strReturnedScalar									                      
+	'/*                                                                     
+	'/*********************************************************************/
+	'/* MODIFICATION HISTORY:						                      
+	'/*											                       
+	'/*  WHO             WHEN     WHAT								      */             
+	'/*  ---             ----     ----------------------------------------*/
+	'/*  AlexBeasecker  01/23/21  Initial creation of the code			  */                                                                   
+	'/*********************************************************************/
+	Public Function ExecuteScalarQuery(strStatement As String)
         'declare string for the scalar statement
         Dim strReturnedScalar As String = ""
 
