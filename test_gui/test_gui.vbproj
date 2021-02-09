@@ -99,8 +99,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdHoc.vb" />
+    <Compile Include="AdminActions.vb" />
     <Compile Include="CartInterfaceCode.vb" />
     <Compile Include="CreateDatabase.vb" />
+    <Compile Include="Discrepancies.vb" />
     <Compile Include="Dispense.Designer.vb">
       <DependentUpon>Dispense.vb</DependentUpon>
     </Compile>
@@ -291,6 +293,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GraphicalUserInterfaceReusableMethods.vb" />
+    <Compile Include="Interactions.vb" />
     <Compile Include="Inventory.vb" />
     <Compile Include="Login.vb" />
     <Compile Include="PatientInformation.vb" />
@@ -319,6 +322,7 @@
     <Compile Include="NewNurse.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="rxNorm.vb" />
     <Compile Include="SettingsChange.Designer.vb">
       <DependentUpon>SettingsChange.vb</DependentUpon>
     </Compile>
@@ -486,6 +490,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\flag_black_25px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eye_25px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
