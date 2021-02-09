@@ -174,33 +174,26 @@ Module DispenseHistory
     '/*  Alexander Beasecker  01/27/21  Initial creation of the code      */
     '/*********************************************************************/
 
-    'Sub DispenseHistorySpecificPatient(NEED PATIENT ID )
-    '    Dim Strdatacommand As String
+    Sub DispenseHistorySpecificPatient(ByRef intPatientMRN As Integer)
+        Dim Strdatacommand As String = "SELECT Drug_Name, PatientMedication.Method, Amount_Dispensed,User.User_Last_Name,User.User_First_Name, DateTime_Dispensed   
+          FROM Dispensing 
+          INNER JOIN PatientMedication
+          On PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID
+          INNER JOIN Patient
+          On PatientMedication.Patient_TUID = Patient.Patient_ID
+          INNER JOIN Medication
+          On Medication.Medication_ID = PatientMedication.Medication_TUID
+          INNER JOIN User
+		  ON User.User_ID = Dispensing.Primary_User_TUID
+          WHERE Patient.MRN_Number = '" & intPatientMRN & "' ORDER BY DateTime_Dispensed DESC;"
 
-    '    Strdatacommand = "SELECT Drug_Name, Brand_Name, Amount_Dispensed, Dosage,Primary_User_TUID, DateTime_Dispensed   
-    '      FROM Dispensing 
-    '      INNER JOIN PatientMedication
-    '      On PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID
-    '      INNER JOIN Patient
-    '      On PatientMedication.Patient_TUID = Patient.Patient_ID
-    '      INNER JOIN Medication
-    '      On Medication.Medication_ID = PatientMedication.Medication_TUID
-    '      WHERE Patient_ID = 'NEED TO GET THE PATIENT ID VARIABLE FROM THE GUI';"
+        Dim dsmydataset As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
 
+        For Each dr As DataRow In dsmydataset.Tables(0).Rows
+            frmPatientInfo.CreateDispenseHistoryPanels(frmPatientInfo.flpDispenseHistory, dr(0), "    ", dr(1), dr(2), dr(4) & " " & dr(3), dr(5), " ")
+        Next
 
-    '    DBConn = New SQLiteConnection(strCONNECTION)
-    '    DBCmd = New SQLiteCommand(DBConn)
-    '    DBConn.Open()
-    '    Dim mydataset As New DataSet
-    '    Dim DBadapter As New SQLiteDataAdapter
-    '    DBCmd.CommandText = Strdatacommand
-    '    DBadapter = New SQLiteDataAdapter(Strdatacommand, DBConn)
-    '    DBadapter.Fill(mydataset, "PATIENT")
+    End Sub
 
-    '    For Each dr As DataRow In mydataset.Tables("PATIENT").Rows
-    '        frmPatientInfo.CreateDispenseHistoryPanels(frmPatientInfo.flpDispenseHistory, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "time")
-    '    Next
-
-    'End Sub
 End Module
 

@@ -99,15 +99,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdHoc.vb" />
+    <Compile Include="AdminActions.vb" />
     <Compile Include="CartInterfaceCode.vb" />
     <Compile Include="CheckComboBoxForDuplicateMethods.vb" />
     <Compile Include="CreateDatabase.vb" />
+    <Compile Include="Discrepancies.vb" />
     <Compile Include="Dispense.Designer.vb">
       <DependentUpon>Dispense.vb</DependentUpon>
     </Compile>
     <Compile Include="Dispense.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="DispenseHistory.vb" />
     <Compile Include="EnumList.vb" />
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
@@ -291,6 +294,8 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GraphicalUserInterfaceReusableMethods.vb" />
+    <Compile Include="Interactions.vb" />
+    <Compile Include="Inventory.vb" />
     <Compile Include="Login.vb" />
     <Compile Include="PopulatePatientComboBoxMethods.vb" />
     <Compile Include="PopulatePhysicanComboBoxesMethods.vb" />
@@ -319,6 +324,7 @@
     <Compile Include="NewNurse.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="rxNorm.vb" />
     <Compile Include="SettingsChange.Designer.vb">
       <DependentUpon>SettingsChange.vb</DependentUpon>
     </Compile>
@@ -452,7 +458,6 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -481,6 +486,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\resolve.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flag_2_25px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flag_black_25px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eye_25px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

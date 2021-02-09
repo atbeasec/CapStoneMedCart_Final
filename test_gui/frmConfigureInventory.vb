@@ -10,6 +10,12 @@
         AddHandlerToDrawerButtons()
         PopulateInventory()
 
+        ' method is going to be needed to load the capacity from the database and the number of dividers in the selected drawer
+        ' we will take that data and put it into the textbox for capacity and divider.
+        ' Everytime we increment that data we will send and update statement to the database
+
+        txtCapacity.Text = "2"
+        txtDividers.Text = "1"
     End Sub
 
     Private Sub CreateDrawers(sender As Object, e As EventArgs)
@@ -313,7 +319,7 @@
 
 
     End Sub
-    Private Sub Button26_Click(sender As Object, e As EventArgs) Handles Button26.Click
+    Private Sub Button26_Click(sender As Object, e As EventArgs) Handles btnAddToDrawer.Click
 
         'call new form to show inventory. already coded somewhere
 
@@ -325,4 +331,27 @@
 
     End Sub
 
+    Private Sub btnIncrementCapacity_Click(sender As Object, e As EventArgs) Handles btnIncrementCapacity.Click
+
+        ButtonIncrement(txtCapacity)
+
+    End Sub
+
+    Private Sub btnIncrementDividers_Click(sender As Object, e As EventArgs) Handles btnIncrementDividers.Click
+
+        ButtonIncrement(txtDividers)
+
+    End Sub
+
+    Private Sub btnDecrementCapacity_Click(sender As Object, e As EventArgs) Handles btnDecrementCapacity.Click
+
+        ButtonDecrement(txtCapacity)
+
+    End Sub
+
+    Private Sub btnDecrementDividers_Click(sender As Object, e As EventArgs) Handles btnDecrementDividers.Click
+
+        ButtonDecrement(txtDividers)
+
+    End Sub
 End Class

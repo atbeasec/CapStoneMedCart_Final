@@ -6,14 +6,19 @@
     Public Sub MouseEnterPanelSetBackGroundColor(Sender As Object, e As EventArgs)
 
         'changes the background color when the mouse is hovered over the panel
+        If Not Sender.backcolor = Color.Red And Not Sender.backcolor = Color.FromArgb(71, 103, 216) Then
 
-        If Sender.backColor = Color.White Then
-            Sender.backColor = Color.Gainsboro
+            If Sender.backColor = Color.White Then
+                Sender.backColor = Color.Gainsboro
 
-        Else
+            Else
 
-            Sender.backcolor = Color.White
+                Sender.backcolor = Color.White
+            End If
+
         End If
+
+
 
     End Sub
 
@@ -22,14 +27,17 @@
 
         ' checking if the background color is set to the highlighted color
         'if it is not then we will set it.
-        If sender.backColor = Color.Gainsboro Then
+        If Not sender.backcolor = Color.Red And Not sender.backcolor = Color.FromArgb(71, 103, 216) Then
+            If sender.backColor = Color.Gainsboro Then
 
-            sender.backColor = Color.White
+                sender.backColor = Color.White
 
-        Else
+            Else
 
-            sender.backcolor = Color.Gainsboro
+                sender.backcolor = Color.Gainsboro
+            End If
         End If
+
 
     End Sub
 
@@ -250,6 +258,88 @@
 
     End Sub
 
+    Public Sub CreateFlagBtn(ByVal pnlPanelName As Panel, ByVal intPanelsAddedCount As Integer, ByVal intX As Integer, ByVal intY As Integer)
+
+        Dim btnFlagMedication As Button
+        btnFlagMedication = New Button
+        'declare our image and point at the resource
+        Dim mapImageTrash As New Bitmap(New Bitmap(My.Resources.flag_black_25px), 25, 25)
+
+        'Set button properties
+        With btnFlagMedication
+            .AutoSize = True
+            .Size = New Size(30, 30)
+            .FlatStyle = FlatStyle.Flat
+            .FlatAppearance.BorderSize = 0
+            .ForeColor = Color.Transparent
+            ' .Font = New Font(New FontFamily("Microsoft Sans Serif"), 11)
+            ' .Location = New Point(  )
+            .Location = New Point(intX, intY)
+            .Name = "btnFlagMedication" + (intPanelsAddedCount).ToString
+            .Image = mapImageTrash
+            .ImageAlign = ContentAlignment.MiddleCenter
+            .Tag = intPanelsAddedCount + 1
+            .TabStop = False
+        End With
+
+        pnlPanelName.Controls.Add(btnFlagMedication)
+
+        ' MessageBox.Show("again")
+        'Add handler for click events
+        AddHandler btnFlagMedication.Click, AddressOf DynamicFlagMedicationButton
+
+    End Sub
+    Public Sub DynamicFlagMedicationButton(sender As Object, ByVal e As EventArgs)
+
+        Dim pnlFlaggedPannel As Panel
+        pnlFlaggedPannel = CType(sender.parent, Panel)
+        Debug.Print(pnlFlaggedPannel.Name)
+
+        If Not pnlFlaggedPannel.BackColor = Color.Red Then
+            pnlFlaggedPannel.BackColor = Color.Red
+        Else
+            pnlFlaggedPannel.BackColor = Color.White
+        End If
+        'functionality will be assigned here
+
+        ' take the panel which this button lives on and highlight it differently
+
+
+
+    End Sub
+
+    Public Sub CreateTextBox(ByVal pnlPanelName As Panel, ByVal intPanelsAddedCount As Integer, ByVal intX As Integer, ByVal intY As Integer)
+
+        Dim txtCount As TextBox
+        txtCount = New TextBox
+
+        'Set button properties
+        With txtCount
+            .AutoSize = True
+            .BorderStyle = BorderStyle.FixedSingle
+            .Size = New Size(45, 30)
+            .ForeColor = Color.Black
+            .Font = New Font(New FontFamily("Segoe UI"), 11)
+            ' .Location = New Point(  )
+            .Location = New Point(intX, intY)
+            .Name = "txtCount" + (intPanelsAddedCount).ToString
+            .Tag = intPanelsAddedCount + 1
+            .MaxLength = 2
+            ' .Dock = DockStyle.Fill
+
+        End With
+
+        pnlPanelName.Controls.Add(txtCount)
+
+        ' MessageBox.Show("again")
+        'Add handler for click events
+        'assing functionality here
+
+        'AddHandler btnFlagMedication.Click, AddressOf DynamicFlagMedicationButton
+
+    End Sub
+
+
     Public Sub CreateEditButton(ByVal pnlPanelName As Panel, ByVal pnlPanelsAddedCount As Integer, ByVal intX As Integer, ByVal intY As Integer)
 
         Dim btnEditButton As Button
@@ -398,5 +488,20 @@
             sender.backcolor = Color.White
         End If
     End Sub
+
+    Public Sub ButtonIncrement(ByVal txtBox As TextBox)
+
+        txtBox.Text = CInt(txtBox.Text) + 1
+
+    End Sub
+
+    Public Sub ButtonDecrement(ByVal txtBox As TextBox)
+
+        If Not CInt(txtBox.Text) = 0 Then
+            txtBox.Text = Int(txtBox.Text) - 1
+        End If
+
+    End Sub
+
 
 End Module

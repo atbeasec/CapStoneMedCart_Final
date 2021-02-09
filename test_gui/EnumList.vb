@@ -262,7 +262,7 @@
     '/*                                                                     
     '/*********************************************************************/
 
-    Enum AlleryOverRide
+    Enum AllergyOverRide
         ID = 0
         PatientID = 1
         UserID = 2
@@ -324,9 +324,10 @@
         MedicationID = 2
         Expected = 3
         actual = 4
-        approvingUser = 5
-        DateTimeEntered = 6
-        DateTimeCleared = 7
+        primaryUser = 5
+        approvingUser = 6
+        DateTimeEntered = 7
+        DateTimeCleared = 8
     End Enum
     '/*********************************************************************/
     '/*                   Enum NAME:  Dispensing	    				   */         
@@ -544,7 +545,7 @@
     '/*  NP    2/5/2021 removed MedicationThreeID to matach database.     */                                                                   
     '/*********************************************************************/
 
-    Enum DrugInteraction
+    Enum DrugInteractions
         ID = 0
         MedicationOneID = 1
         medicationTwoID = 2
@@ -1038,7 +1039,7 @@
     '/*                                                                     
     '/*********************************************************************/
 
-    Enum room
+    Enum Rooms
         Id = 0
         BedName = 1
         ActiveFlag = 2
@@ -1146,13 +1147,13 @@
     '/*********************************************************************/
 
 
-    Enum user
+    Enum User
         ID = 0
         UserName = 1
         Password = 2
         FistName = 3
         LastName = 4
-        BarCode = 5
+        Barcode = 5
         AdminFlag = 6
         SuperVisorFlag = 7
         ActiveFlag = 8

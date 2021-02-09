@@ -55,6 +55,8 @@
 '/*  WHO		WHEN		WHAT										*/
 '/*  BRH        01/23/21   Initial creation of the code-------------	*/
 '/*  BRH		01/27/21  Updated database path to save on computer		*/
+'/*  BRH		02/06/21	Allowed for user to choose database file	*/
+'/*							and database file name upon creation.		*/
 '/********************************************************************	*/
 
 'Imports the libraries necessary to connect and create SQLite databases
@@ -121,124 +123,166 @@ Module CreateDatabase
 	'/*******************************************************************/
 	'/* MODIFICATION HISTORY:											*/
 	'/*																	*/
-	'/*  WHO   WHEN     WHAT											*/
+	'/*  WHO	WHEN     WHAT											*/
 	'/*  ---   ----     ------------------------------------------------*/
-	'/*  BRH  01/23/21  Initial creation of the code					*/
-	'/*  BRH  01/28/21  Add the CreateSettingsTable method				*/
+	'/*  BRH	01/23/21  Initial creation of the code					*/
+	'/*  BRH	01/28/21  Add the CreateSettingsTable method			*/
+	'/*  BRH	02/06/21	Allowed for user to choose database file	*/
+	'/*							and database file name upon creation.	*/
 	'/*******************************************************************/
 
 	Sub Main()
-        'Create variable to check application path for the config file
-        Dim strApplicationPath As String = Application.StartupPath & "\config.app"
 
-        ''create folder dialoge object to prompt user to select a folder path
-        Dim dlgFolderDialogeLocation As New FolderBrowserDialog
+		'Initializes a dialog for saving files
+		Dim dlgSaveFileDialog As New SaveFileDialog
 
-        ''set the default displayed path to the application path for better user experience
-        dlgFolderDialogeLocation.SelectedPath = Application.StartupPath
+		'Initializes a dialog for opening files
+		Dim dlgOpenFileDialog As New OpenFileDialog
 
-        'check if the config file exists or not
-        If Not System.IO.File.Exists(strApplicationPath) Then
+		'Create variable to check application path for the config file
+		Dim strApplicationPath As String = Application.StartupPath & "\config.app"
 
-            'if the file does not exist, create it, then dispose of the connection
-            System.IO.File.Create(strApplicationPath).Dispose()
-            'prompt user to select a database path after the config file is created
-            If (dlgFolderDialogeLocation.ShowDialog() = DialogResult.OK) Then
+		''create folder dialoge object to prompt user to select a folder path
+		Dim dlgFolderDialogeLocation As New FolderBrowserDialog
 
-                'set defult folder for database to selected path a
-                'then set the new database path
-                strDEFAULTFOLDER = dlgFolderDialogeLocation.SelectedPath
-                strDBPath = strDEFAULTFOLDER & "\" & strDBNAME & ".db"
-                'write database path to the file
-                My.Computer.FileSystem.WriteAllText(strApplicationPath, strDBPath, True)
-            Else
-                'if the user clicks cancel or 'X' set a default path for the database into the config.app file
-                strDEFAULTFOLDER = Application.StartupPath
-                strDBPath = strDEFAULTFOLDER & "\" & strDBNAME & ".db"
-                My.Computer.FileSystem.WriteAllText(strApplicationPath, strDBPath, True)
-            End If
+		''set the default displayed path to the application path for better user experience
+		dlgFolderDialogeLocation.SelectedPath = Application.StartupPath
 
-        Else
-            'if the file already exists
-            'use reader to read database path from the config.app file
-            Using reader As StreamReader = New StreamReader(strApplicationPath)
-                strDBPath = reader.ReadLine
-            End Using
-        End If
+		'check if the config file exists or not
+		If Not System.IO.File.Exists(strApplicationPath) Then
+
+			'if the file does not exist, create it, then dispose of the connection
+			System.IO.File.Create(strApplicationPath).Dispose()
+
+			'Show a message asking the user if they want to open an existing file or create a new one
+			Dim dlgResult As DialogResult = MessageBox.Show("Would you like to open an existing file?" & vbCr & "If you would like to create a file, select No",
+														"Open file", MessageBoxButtons.YesNo)
+
+			'If the user selects yes, they want to select an existing file
+			If dlgResult = DialogResult.Yes Then
+				'Initialize the dialog for opening a file
+				dlgOpenFileDialog.Title = "Open File..."
+				dlgOpenFileDialog.Multiselect = False
+				dlgOpenFileDialog.Filter = "All Files|*.*"
+
+				'If the user selects a file and presses ok, the file path will be saved in config.app
+				If dlgOpenFileDialog.ShowDialog() = DialogResult.OK Then
+					strDBPath = dlgOpenFileDialog.FileName
+
+					My.Computer.FileSystem.WriteAllText(strApplicationPath, strDBPath, True)
+					Using reader As StreamReader = New StreamReader(strApplicationPath)
+						strDBPath = reader.ReadLine
+					End Using
+
+					'If the user accidentally closes out, a default database will be made 
+				Else
+					strDEFAULTFOLDER = Application.StartupPath
+					strDBPath = strDEFAULTFOLDER & "\" & strDBNAME & ".db"
+					My.Computer.FileSystem.WriteAllText(strApplicationPath, strDBPath, True)
+				End If
+
+			Else 'If the user didn't want to open a file, the user is prompted to choose a path to save the database
+				'prompt user to select a database path after the config file is created
+
+				'Set up how the save dialog box will work
+				dlgSaveFileDialog.Filter = "db files (*.db)|*.db|All files (*.*)|*.*"
+				dlgSaveFileDialog.FilterIndex = 2
+				dlgSaveFileDialog.RestoreDirectory = True
+
+				'If the user selects a file path and types in a file name and hits ok,
+				'the file's path will be stored in the config.app file
+				If dlgSaveFileDialog.ShowDialog() = DialogResult.OK Then
+					strDBPath = dlgSaveFileDialog.FileName
+					My.Computer.FileSystem.WriteAllText(strApplicationPath, strDBPath, True)
+				Else
+					'if the user clicks cancel or 'X' set a default path for the database into the config.app file
+					strDEFAULTFOLDER = Application.StartupPath
+					strDBPath = strDEFAULTFOLDER & "\" & strDBNAME & ".db"
+					My.Computer.FileSystem.WriteAllText(strApplicationPath, strDBPath, True)
+				End If
+			End If
+
+		Else
+			'if the file already exists
+			'use reader to read database path from the config.app file
+			Using reader As StreamReader = New StreamReader(strApplicationPath)
+				strDBPath = reader.ReadLine
+			End Using
+		End If
 
 
-        strCONNECTION = String.Format("Data Source = {0}", strDBPath)
-        If Not System.IO.File.Exists(strDBPath) Then
-            'Creates the database
-            CreateDataBase()
+		strCONNECTION = String.Format("Data Source = {0}", strDBPath)
+		If Not System.IO.File.Exists(strDBPath) Then
+			'Creates the database
+			CreateDataBase()
 
-            'Seperate routines to create the tables
-            CreateDrawersTable()
-            CreateMedicationTable()
-            CreatePatientTable()
-            CreatePhysicianTable()
-            CreatePatientPhysicianTable()
-            CreateUserTable()
-            CreatePatientUserTable()
-            CreateRoomsTable()
-            CreatePatientRoomTable()
-            CreateAllergyTable()
-            CreatePatientAllergyTable()
-            CreateAllergyOverrideTable()
-            CreatePatientMedicationTable()
-            CreateDrugInteractionsTable()
-            CreateDrawerMedicationTable()
-            CreateWastesTable()
-            CreateDispensingTable()
-            CreateDiscrepanciesTable()
+			'Seperate routines to create the tables
+			CreateDrawersTable()
+			CreateMedicationTable()
+			CreatePatientTable()
+			CreatePhysicianTable()
+			CreatePatientPhysicianTable()
+			CreateUserTable()
+			CreatePatientUserTable()
+			CreateRoomsTable()
+			CreatePatientRoomTable()
+			CreateAllergyTable()
+			CreatePatientAllergyTable()
+			CreateAllergyOverrideTable()
+			CreatePatientMedicationTable()
+			CreateDrugInteractionsTable()
+			CreateDrawerMedicationTable()
+			CreateWastesTable()
+			CreateDispensingTable()
+			CreateDiscrepanciesTable()
 			CreateAdHocOrderTable()
 			CreatePersonalPatientDrawerMedicationTable()
-            CreateSettingsTable()
+			CreateSettingsTable()
 
-            DBConn.Close()
-            MessageBox.Show("All tables were created")
-        Else
-            MessageBox.Show("Database is already stored at this location")
-        End If
+			DBConn.Close()
+			MessageBox.Show("All tables were created")
+		Else
 
-    End Sub
+		End If
 
-    '/*******************************************************************/
-    '/*                   SUBROUTINE NAME:        CreateDataBase()		*/
-    '/*******************************************************************/
-    '/*                   WRITTEN BY:  	Breanna Howey					*/
-    '/*		         DATE CREATED: 	   01/23/21							*/
-    '/*******************************************************************/
-    '/*  SUBROUTINE PURPOSE:											*/
-    '/*	The purpose of this subroutine is to create the database. First,*/ 
-    '/* the database file is created at the specified path. Next, the	*/
-    '/* program lets the user know the database has been created		*/
-    '/*******************************************************************/
-    '/*  CALLED BY:   	      											*/
-    '/*  Main()															*/
-    '/*******************************************************************/
-    '/*  CALLS:															*/
-    '/*  (NONE)															*/
-    '/*******************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):							*/
-    '/*																	*/
-    '/*  (None)															*/
-    '/*******************************************************************/
-    '/* SAMPLE INVOCATION:												*/
-    '/*																	*/
-    '/* CreateDataBase()												*/
-    '/*******************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically):							*/
-    '/*																	*/
-    '/*  (None)															*/
-    '/*******************************************************************/
-    '/* MODIFICATION HISTORY:											*/
-    '/*																	*/
-    '/*  WHO   WHEN     WHAT											*/
-    '/*  ---   ----     ------------------------------------------------*/
-    '/*  BRH  01/23/21  Initial creation of the code					*/
-    '/*******************************************************************/
-    Public Sub CreateDataBase()
+	End Sub
+
+	'/*******************************************************************/
+	'/*                   SUBROUTINE NAME:        CreateDataBase()		*/
+	'/*******************************************************************/
+	'/*                   WRITTEN BY:  	Breanna Howey					*/
+	'/*		         DATE CREATED: 	   01/23/21							*/
+	'/*******************************************************************/
+	'/*  SUBROUTINE PURPOSE:											*/
+	'/*	The purpose of this subroutine is to create the database. First,*/ 
+	'/* the database file is created at the specified path. Next, the	*/
+	'/* program lets the user know the database has been created		*/
+	'/*******************************************************************/
+	'/*  CALLED BY:   	      											*/
+	'/*  Main()															*/
+	'/*******************************************************************/
+	'/*  CALLS:															*/
+	'/*  (NONE)															*/
+	'/*******************************************************************/
+	'/*  PARAMETER LIST (In Parameter Order):							*/
+	'/*																	*/
+	'/*  (None)															*/
+	'/*******************************************************************/
+	'/* SAMPLE INVOCATION:												*/
+	'/*																	*/
+	'/* CreateDataBase()												*/
+	'/*******************************************************************/
+	'/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+	'/*																	*/
+	'/*  (None)															*/
+	'/*******************************************************************/
+	'/* MODIFICATION HISTORY:											*/
+	'/*																	*/
+	'/*  WHO   WHEN     WHAT											*/
+	'/*  ---   ----     ------------------------------------------------*/
+	'/*  BRH  01/23/21  Initial creation of the code					*/
+	'/*******************************************************************/
+	Public Sub CreateDataBase()
 		'Creates a database file through the SQLiteConnection
 		SQLiteConnection.CreateFile(strDBPath)
 		MessageBox.Show("Database Created")
@@ -282,14 +326,14 @@ Module CreateDatabase
 	'/*******************************************************************/
 	Public Sub CreateDrawersTable()
 		strCreateTable = "CREATE TABLE 'Drawers' (
-	                                    'Drawers_ID'	INTEGER NOT NULL UNIQUE,
-	                                    'Drawer_Node'	TEXT NOT NULL,
-	                                    'Drawer_Number'	INTEGER NOT NULL,
-	                                    'Size'	INTEGER NOT NULL,
-	                                    'Number_of_Dividers'	INTEGER NOT NULL,
-	                                    'Full_Flag'	INTEGER NOT NULL,
-										'Active_Flag' INTEGER NOT NULL,
-	                                    PRIMARY KEY('Drawers_ID' AUTOINCREMENT));"
+		'Drawers_ID'	INTEGER NOT NULL UNIQUE,
+		'Drawer_Node'	TEXT NOT NULL,
+		'Drawer_Number'	INTEGER NOT NULL,
+		'Size'	INTEGER NOT NULL,
+		'Number_of_Dividers'	INTEGER NOT NULL,
+		'Full_Flag'	INTEGER NOT NULL,
+		'Active_Flag' INTEGER NOT NULL,
+		PRIMARY KEY('Drawers_ID' AUTOINCREMENT));"
 		ExecuteQuery("Drawers")
 	End Sub
 
@@ -329,16 +373,16 @@ Module CreateDatabase
 	'/*  BRH  01/23/21  Initial creation of the code					*/
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
 	'/*  BRH  02/04/21  Change Brand_name to Synonym field				*/
+	'/*  BRH  02/08/21  Updated fields per Database meeting				*/
 	'/*******************************************************************/
 	Public Sub CreateMedicationTable()
 		strCreateTable = "CREATE TABLE 'Medication' (
 							'Medication_ID'	INTEGER NOT NULL UNIQUE,
 							'Drug_Name'	TEXT NOT NULL,
-							'RXCUI_ID'	INTEGER NOT NULL,
-							'Dosage'	INTEGER NOT NULL,
+							'RXCUI_ID'	TEXT NOT NULL,
+							'Controlled'	INTEGER NOT NULL,
 							'NarcoticControlled_Flag'	INTEGER NOT NULL,
 							'Barcode'	TEXT NOT NULL UNIQUE,
-							'Synonym'	TEXT,
 							'Type'	TEXT,
 							'Strength'	TEXT,
 							'Active_Flag' INTEGER NOT NULL,
@@ -695,9 +739,9 @@ Module CreateDatabase
 	                    'Patient_TUID'	INTEGER NOT NULL,
 	                    'Room_TUID'	INTEGER NOT NULL,
 	                    'Bed_Name'	TEXT NOT NULL,
-	                    'Active_Flag'	TEXT NOT NULL,
-	                    FOREIGN KEY(" & "Bed_Name" & ") REFERENCES " & "Rooms" & ",
-	                    PRIMARY KEY(" & "Patient_TUID" & "," & "Room_TUID" & "," & "Bed_Name" & "),
+	                    'Active_Flag'	INTEGER NOT NULL,
+						PRIMARY KEY(" & "Patient_TUID" & "," & "Room_TUID" & "," & "Bed_Name" & "),
+	                    FOREIGN KEY(" & "Bed_Name" & ") REFERENCES " & "Rooms" & "(" & "Bed_Name" & "),	                    
 	                    FOREIGN KEY(" & "Patient_TUID" & ") REFERENCES " & "Patient" & "(" & "Patient_ID" & "),
 	                    FOREIGN KEY(" & "Room_TUID" & ") REFERENCES " & "Rooms" & "(" & "Room_ID" & "));"
 
@@ -790,7 +834,7 @@ Module CreateDatabase
 	                    'Patient_TUID'	INTEGER NOT NULL,
 	                    'Allergy_Name'	TEXT NOT NULL,
 	                    'Allergy_Severity'	TEXT,
-	                    'Active_Flag'	TEXT NOT NULL,
+	                    'Active_Flag'	INTEGER NOT NULL,
 	                    PRIMARY KEY(" & "Patient_TUID" & "," & "Allergy_Name" & "),
 	                    FOREIGN KEY(" & "Allergy_Name" & ") REFERENCES " & "Allergy" & "(" & "Allergy_Name" & "),
 	                    FOREIGN KEY(" & "Patient_TUID" & ") REFERENCES " & "Patient" & "(" & "Patient_ID" & "));"
@@ -895,7 +939,7 @@ Module CreateDatabase
 	                    'Quantity'	INTEGER NOT NULL,
 	                    'Method'	TEXT NOT NULL,
 	                    'Schedule'	TEXT NOT NULL,
-						'Active_Flag'	INTEGER,
+						'Active_Flag'	INTEGER NOT NULL,
 	                    FOREIGN KEY(" & "Medication_TUID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
 	                    FOREIGN KEY(" & "Ordering_Physician_ID" & ") REFERENCES " & "Physician" & "(" & "Physician_ID" & "),
 	                    FOREIGN KEY(" & "Patient_TUID" & ") REFERENCES " & "Patient" & "(" & "Patient_ID" & "),
@@ -1322,7 +1366,7 @@ Module CreateDatabase
 						'Patient_TUID'	INTEGER NOT NULL,
 						'DrawerMedication_TUID'	INTEGER NOT NULL,
 						'Removed_Dispensing'	INTEGER,
-						'Active_Flag'	TEXT NOT NULL,
+						'Active_Flag'	INTEGER NOT NULL,
 						PRIMARY KEY('PersonalMedication_ID' AUTOINCREMENT),
 						FOREIGN KEY(" & "DrawerMedication_TUID" & ") REFERENCES " & "DrawerMedication" & "(" & "DrawerMedication_ID" & "),
 						FOREIGN KEY(" & "Patient_TUID" & ") REFERENCES " & "Patient" & "(" & "Patient_ID" & "));"

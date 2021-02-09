@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmLogin
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,22 +20,24 @@ Partial Class frmLogin
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLogin))
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.txtUserName = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.lblBadge = New System.Windows.Forms.Label()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.txtPassword = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnEye = New System.Windows.Forms.Button()
+        Me.txtPassword = New System.Windows.Forms.TextBox()
+        Me.lblFirstName = New System.Windows.Forms.Label()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.txtUserName = New System.Windows.Forms.TextBox()
+        Me.lblBadge = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.chkShowPassword = New System.Windows.Forms.CheckBox()
         Me.Panel1.SuspendLayout()
-        Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        Me.Panel5.SuspendLayout()
         Me.SuspendLayout()
         '
         'Button1
@@ -44,41 +46,108 @@ Partial Class frmLogin
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button1.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button1.ForeColor = System.Drawing.Color.White
-        Me.Button1.Location = New System.Drawing.Point(50, 140)
+        Me.Button1.Location = New System.Drawing.Point(50, 141)
         Me.Button1.Margin = New System.Windows.Forms.Padding(2)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(238, 40)
-        Me.Button1.TabIndex = 1
+        Me.Button1.Size = New System.Drawing.Size(238, 36)
+        Me.Button1.TabIndex = 3
         Me.Button1.Text = "Log in"
         Me.Button1.UseVisualStyleBackColor = False
+        '
+        'Panel1
+        '
+        Me.Panel1.BackColor = System.Drawing.Color.White
+        Me.Panel1.Controls.Add(Me.Label2)
+        Me.Panel1.Controls.Add(Me.Panel2)
+        Me.Panel1.Controls.Add(Me.lblFirstName)
+        Me.Panel1.Controls.Add(Me.Panel5)
+        Me.Panel1.Controls.Add(Me.lblBadge)
+        Me.Panel1.Controls.Add(Me.Button1)
+        Me.Panel1.Location = New System.Drawing.Point(166, 116)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(332, 232)
+        Me.Panel1.TabIndex = 7
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
+        Me.Label2.Location = New System.Drawing.Point(48, 80)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(76, 21)
+        Me.Label2.TabIndex = 70
+        Me.Label2.Text = "Password"
+        '
+        'Panel2
+        '
+        Me.Panel2.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel2.Controls.Add(Me.btnEye)
+        Me.Panel2.Controls.Add(Me.txtPassword)
+        Me.Panel2.Location = New System.Drawing.Point(50, 103)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel2.Size = New System.Drawing.Size(238, 24)
+        Me.Panel2.TabIndex = 2
+        '
+        'btnEye
+        '
+        Me.btnEye.BackColor = System.Drawing.Color.White
+        Me.btnEye.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnEye.FlatAppearance.BorderSize = 0
+        Me.btnEye.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEye.ForeColor = System.Drawing.Color.Transparent
+        Me.btnEye.Image = CType(resources.GetObject("btnEye.Image"), System.Drawing.Image)
+        Me.btnEye.Location = New System.Drawing.Point(207, 1)
+        Me.btnEye.Name = "btnEye"
+        Me.btnEye.Size = New System.Drawing.Size(30, 22)
+        Me.btnEye.TabIndex = 19
+        Me.btnEye.UseVisualStyleBackColor = False
+        '
+        'txtPassword
+        '
+        Me.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtPassword.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtPassword.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPassword.Location = New System.Drawing.Point(1, 1)
+        Me.txtPassword.MaxLength = 50
+        Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
+        Me.txtPassword.Size = New System.Drawing.Size(236, 22)
+        Me.txtPassword.TabIndex = 2
+        Me.txtPassword.Tag = "*"
+        '
+        'lblFirstName
+        '
+        Me.lblFirstName.AutoSize = True
+        Me.lblFirstName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFirstName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
+        Me.lblFirstName.Location = New System.Drawing.Point(48, 23)
+        Me.lblFirstName.Name = "lblFirstName"
+        Me.lblFirstName.Size = New System.Drawing.Size(88, 21)
+        Me.lblFirstName.TabIndex = 69
+        Me.lblFirstName.Text = "User Name"
+        '
+        'Panel5
+        '
+        Me.Panel5.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel5.Controls.Add(Me.txtUserName)
+        Me.Panel5.Location = New System.Drawing.Point(50, 47)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel5.Size = New System.Drawing.Size(238, 24)
+        Me.Panel5.TabIndex = 1
         '
         'txtUserName
         '
         Me.txtUserName.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtUserName.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtUserName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUserName.ForeColor = System.Drawing.SystemColors.ButtonShadow
         Me.txtUserName.Location = New System.Drawing.Point(1, 1)
-        Me.txtUserName.Margin = New System.Windows.Forms.Padding(2)
-        Me.txtUserName.Multiline = True
         Me.txtUserName.Name = "txtUserName"
-        Me.txtUserName.Size = New System.Drawing.Size(235, 26)
-        Me.txtUserName.TabIndex = 2
+        Me.txtUserName.Size = New System.Drawing.Size(236, 22)
+        Me.txtUserName.TabIndex = 1
         Me.txtUserName.Tag = "User Name"
-        Me.txtUserName.Text = "User Name"
-        '
-        'Panel1
-        '
-        Me.Panel1.BackColor = System.Drawing.Color.White
-        Me.Panel1.Controls.Add(Me.chkShowPassword)
-        Me.Panel1.Controls.Add(Me.lblBadge)
-        Me.Panel1.Controls.Add(Me.Panel3)
-        Me.Panel1.Controls.Add(Me.Panel2)
-        Me.Panel1.Controls.Add(Me.Button1)
-        Me.Panel1.Location = New System.Drawing.Point(166, 116)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(332, 232)
-        Me.Panel1.TabIndex = 7
         '
         'lblBadge
         '
@@ -91,50 +160,14 @@ Partial Class frmLogin
         Me.lblBadge.TabIndex = 17
         Me.lblBadge.Text = "Login with badge"
         '
-        'Panel3
-        '
-        Me.Panel3.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Panel3.Controls.Add(Me.txtPassword)
-        Me.Panel3.Location = New System.Drawing.Point(51, 97)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel3.Size = New System.Drawing.Size(237, 28)
-        Me.Panel3.TabIndex = 8
-        '
-        'txtPassword
-        '
-        Me.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtPassword.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtPassword.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPassword.ForeColor = System.Drawing.SystemColors.ButtonShadow
-        Me.txtPassword.Location = New System.Drawing.Point(1, 1)
-        Me.txtPassword.Margin = New System.Windows.Forms.Padding(2)
-        Me.txtPassword.Multiline = True
-        Me.txtPassword.Name = "txtPassword"
-        Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.txtPassword.Size = New System.Drawing.Size(235, 26)
-        Me.txtPassword.TabIndex = 2
-        Me.txtPassword.Tag = "Password"
-        Me.txtPassword.Text = "Password"
-        '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Panel2.Controls.Add(Me.txtUserName)
-        Me.Panel2.Location = New System.Drawing.Point(50, 48)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel2.Size = New System.Drawing.Size(237, 28)
-        Me.Panel2.TabIndex = 7
-        '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.White
         Me.Label1.Location = New System.Drawing.Point(261, 64)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(154, 30)
+        Me.Label1.Size = New System.Drawing.Size(158, 30)
         Me.Label1.TabIndex = 8
         Me.Label1.Text = "Welcome back!"
         '
@@ -146,15 +179,6 @@ Partial Class frmLogin
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(50, 48)
         Me.Panel4.TabIndex = 9
-        '
-        'chkShowPassword
-        '
-        Me.chkShowPassword.AutoSize = True
-        Me.chkShowPassword.Location = New System.Drawing.Point(292, 103)
-        Me.chkShowPassword.Name = "chkShowPassword"
-        Me.chkShowPassword.Size = New System.Drawing.Size(15, 14)
-        Me.chkShowPassword.TabIndex = 18
-        Me.chkShowPassword.UseVisualStyleBackColor = True
         '
         'frmLogin
         '
@@ -170,22 +194,24 @@ Partial Class frmLogin
         Me.Text = "Log in"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
-        Me.Panel3.ResumeLayout(False)
-        Me.Panel3.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        Me.Panel5.ResumeLayout(False)
+        Me.Panel5.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents Button1 As Button
-    Friend WithEvents txtUserName As TextBox
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents Panel3 As Panel
-    Friend WithEvents txtPassword As TextBox
-    Friend WithEvents Panel2 As Panel
     Friend WithEvents Label1 As Label
     Friend WithEvents Panel4 As Panel
     Friend WithEvents lblBadge As Label
-    Friend WithEvents chkShowPassword As CheckBox
+    Friend WithEvents btnEye As Button
+    Friend WithEvents Panel5 As Panel
+    Friend WithEvents txtUserName As TextBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents txtPassword As TextBox
+    Friend WithEvents lblFirstName As Label
 End Class

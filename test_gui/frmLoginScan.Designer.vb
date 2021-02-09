@@ -31,7 +31,7 @@ Partial Class frmLoginScan
         Me.lblForgotID = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtBarcode = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.SuspendLayout()
@@ -119,27 +119,25 @@ Partial Class frmLoginScan
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Panel3.Controls.Add(Me.TextBox1)
+        Me.Panel3.Controls.Add(Me.txtBarcode)
         Me.Panel3.Location = New System.Drawing.Point(51, 93)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel3.Size = New System.Drawing.Size(237, 28)
+        Me.Panel3.Size = New System.Drawing.Size(236, 24)
         Me.Panel3.TabIndex = 8
         '
-        'TextBox1
+        'txtBarcode
         '
-        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.ForeColor = System.Drawing.SystemColors.ButtonShadow
-        Me.TextBox1.Location = New System.Drawing.Point(1, 1)
-        Me.TextBox1.Margin = New System.Windows.Forms.Padding(2)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(235, 26)
-        Me.TextBox1.TabIndex = 2
-        Me.TextBox1.Tag = "SVSU ID"
-        Me.TextBox1.Text = "SVSU ID"
+        Me.txtBarcode.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtBarcode.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtBarcode.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtBarcode.ForeColor = System.Drawing.SystemColors.ButtonShadow
+        Me.txtBarcode.Location = New System.Drawing.Point(1, 1)
+        Me.txtBarcode.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtBarcode.Name = "txtBarcode"
+        Me.txtBarcode.Size = New System.Drawing.Size(234, 22)
+        Me.txtBarcode.TabIndex = 2
+        Me.txtBarcode.Tag = "SVSU ID"
         '
         'frmLoginScan
         '
@@ -167,7 +165,7 @@ Partial Class frmLoginScan
     Friend WithEvents lblForgotID As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Panel3 As Panel
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtBarcode As TextBox
     Friend WithEvents btnLogin As Button
     Friend WithEvents lblBadge As Label
 End Class

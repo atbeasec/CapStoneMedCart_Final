@@ -24,6 +24,7 @@ Partial Class frmDiscrepancies
     Private Sub InitializeComponent()
         Me.flpDiscrepancies = New System.Windows.Forms.FlowLayoutPanel()
         Me.pnlHeader = New System.Windows.Forms.Panel()
+        Me.lblDiscrepancyID = New System.Windows.Forms.Label()
         Me.lblActualCount = New System.Windows.Forms.Label()
         Me.lblTime = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
@@ -31,7 +32,7 @@ Partial Class frmDiscrepancies
         Me.lblMedication = New System.Windows.Forms.Label()
         Me.lblDrawer = New System.Windows.Forms.Label()
         Me.pnlHeaderPatientRecords = New System.Windows.Forms.Panel()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnResolve = New System.Windows.Forms.Button()
         Me.pnlHeader.SuspendLayout()
         Me.pnlHeaderPatientRecords.SuspendLayout()
         Me.SuspendLayout()
@@ -40,31 +41,43 @@ Partial Class frmDiscrepancies
         '
         Me.flpDiscrepancies.AutoScroll = True
         Me.flpDiscrepancies.BackColor = System.Drawing.Color.White
-        Me.flpDiscrepancies.Location = New System.Drawing.Point(12, 118)
+        Me.flpDiscrepancies.Location = New System.Drawing.Point(12, 105)
         Me.flpDiscrepancies.Name = "flpDiscrepancies"
-        Me.flpDiscrepancies.Size = New System.Drawing.Size(837, 430)
+        Me.flpDiscrepancies.Size = New System.Drawing.Size(901, 430)
         Me.flpDiscrepancies.TabIndex = 43
         '
         'pnlHeader
         '
         Me.pnlHeader.BackColor = System.Drawing.Color.White
+        Me.pnlHeader.Controls.Add(Me.lblDiscrepancyID)
         Me.pnlHeader.Controls.Add(Me.lblActualCount)
         Me.pnlHeader.Controls.Add(Me.lblTime)
         Me.pnlHeader.Controls.Add(Me.lblDate)
         Me.pnlHeader.Controls.Add(Me.lblExpectedCount)
         Me.pnlHeader.Controls.Add(Me.lblMedication)
         Me.pnlHeader.Controls.Add(Me.lblDrawer)
-        Me.pnlHeader.Location = New System.Drawing.Point(12, 67)
+        Me.pnlHeader.Location = New System.Drawing.Point(12, 54)
         Me.pnlHeader.Name = "pnlHeader"
-        Me.pnlHeader.Size = New System.Drawing.Size(837, 47)
+        Me.pnlHeader.Size = New System.Drawing.Size(901, 47)
         Me.pnlHeader.TabIndex = 42
+        '
+        'lblDiscrepancyID
+        '
+        Me.lblDiscrepancyID.AutoSize = True
+        Me.lblDiscrepancyID.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDiscrepancyID.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblDiscrepancyID.Location = New System.Drawing.Point(7, 16)
+        Me.lblDiscrepancyID.Name = "lblDiscrepancyID"
+        Me.lblDiscrepancyID.Size = New System.Drawing.Size(26, 21)
+        Me.lblDiscrepancyID.TabIndex = 11
+        Me.lblDiscrepancyID.Text = "ID"
         '
         'lblActualCount
         '
         Me.lblActualCount.AutoSize = True
         Me.lblActualCount.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblActualCount.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblActualCount.Location = New System.Drawing.Point(476, 16)
+        Me.lblActualCount.Location = New System.Drawing.Point(541, 16)
         Me.lblActualCount.Name = "lblActualCount"
         Me.lblActualCount.Size = New System.Drawing.Size(104, 21)
         Me.lblActualCount.TabIndex = 10
@@ -75,7 +88,7 @@ Partial Class frmDiscrepancies
         Me.lblTime.AutoSize = True
         Me.lblTime.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTime.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblTime.Location = New System.Drawing.Point(729, 16)
+        Me.lblTime.Location = New System.Drawing.Point(794, 16)
         Me.lblTime.Name = "lblTime"
         Me.lblTime.Size = New System.Drawing.Size(46, 21)
         Me.lblTime.TabIndex = 1
@@ -86,7 +99,7 @@ Partial Class frmDiscrepancies
         Me.lblDate.AutoSize = True
         Me.lblDate.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDate.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblDate.Location = New System.Drawing.Point(622, 16)
+        Me.lblDate.Location = New System.Drawing.Point(687, 16)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(44, 21)
         Me.lblDate.TabIndex = 5
@@ -97,7 +110,7 @@ Partial Class frmDiscrepancies
         Me.lblExpectedCount.AutoSize = True
         Me.lblExpectedCount.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblExpectedCount.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblExpectedCount.Location = New System.Drawing.Point(297, 16)
+        Me.lblExpectedCount.Location = New System.Drawing.Point(362, 16)
         Me.lblExpectedCount.Name = "lblExpectedCount"
         Me.lblExpectedCount.Size = New System.Drawing.Size(126, 21)
         Me.lblExpectedCount.TabIndex = 2
@@ -108,7 +121,7 @@ Partial Class frmDiscrepancies
         Me.lblMedication.AutoSize = True
         Me.lblMedication.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblMedication.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblMedication.Location = New System.Drawing.Point(8, 16)
+        Me.lblMedication.Location = New System.Drawing.Point(73, 16)
         Me.lblMedication.Name = "lblMedication"
         Me.lblMedication.Size = New System.Drawing.Size(93, 21)
         Me.lblMedication.TabIndex = 8
@@ -119,7 +132,7 @@ Partial Class frmDiscrepancies
         Me.lblDrawer.AutoSize = True
         Me.lblDrawer.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDrawer.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblDrawer.Location = New System.Drawing.Point(184, 16)
+        Me.lblDrawer.Location = New System.Drawing.Point(249, 16)
         Me.lblDrawer.Name = "lblDrawer"
         Me.lblDrawer.Size = New System.Drawing.Size(62, 21)
         Me.lblDrawer.TabIndex = 9
@@ -128,36 +141,36 @@ Partial Class frmDiscrepancies
         'pnlHeaderPatientRecords
         '
         Me.pnlHeaderPatientRecords.BackColor = System.Drawing.Color.White
-        Me.pnlHeaderPatientRecords.Controls.Add(Me.Button1)
+        Me.pnlHeaderPatientRecords.Controls.Add(Me.btnResolve)
         Me.pnlHeaderPatientRecords.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlHeaderPatientRecords.Location = New System.Drawing.Point(0, 0)
         Me.pnlHeaderPatientRecords.Name = "pnlHeaderPatientRecords"
-        Me.pnlHeaderPatientRecords.Size = New System.Drawing.Size(869, 61)
+        Me.pnlHeaderPatientRecords.Size = New System.Drawing.Size(929, 51)
         Me.pnlHeaderPatientRecords.TabIndex = 41
         '
-        'Button1
+        'btnResolve
         '
-        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.Button1.FlatAppearance.BorderSize = 0
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.ForeColor = System.Drawing.Color.White
-        Me.Button1.Image = Global.test_gui.My.Resources.Resources.resolve
-        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button1.Location = New System.Drawing.Point(729, 12)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(120, 35)
-        Me.Button1.TabIndex = 49
-        Me.Button1.Text = "  Resolve"
-        Me.Button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button1.UseVisualStyleBackColor = False
+        Me.btnResolve.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnResolve.FlatAppearance.BorderSize = 0
+        Me.btnResolve.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnResolve.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnResolve.ForeColor = System.Drawing.Color.White
+        Me.btnResolve.Image = Global.test_gui.My.Resources.Resources.resolve
+        Me.btnResolve.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnResolve.Location = New System.Drawing.Point(793, 12)
+        Me.btnResolve.Name = "btnResolve"
+        Me.btnResolve.Size = New System.Drawing.Size(120, 35)
+        Me.btnResolve.TabIndex = 49
+        Me.btnResolve.Text = "  Resolve"
+        Me.btnResolve.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnResolve.UseVisualStyleBackColor = False
         '
         'frmDiscrepancies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(869, 561)
+        Me.ClientSize = New System.Drawing.Size(929, 561)
         Me.Controls.Add(Me.flpDiscrepancies)
         Me.Controls.Add(Me.pnlHeader)
         Me.Controls.Add(Me.pnlHeaderPatientRecords)
@@ -179,5 +192,6 @@ Partial Class frmDiscrepancies
     Friend WithEvents lblMedication As Label
     Friend WithEvents lblDrawer As Label
     Friend WithEvents lblActualCount As Label
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnResolve As Button
+    Friend WithEvents lblDiscrepancyID As Label
 End Class
