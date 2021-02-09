@@ -72,8 +72,8 @@
         Dim strRoom As String
         Dim strBed As String
 
-        For Each item As DataRow In PatientInfo.Tables(0).Rows()
-            With PatientInfo.Tables(0)
+        For Each item As DataRow In dsPatientInfo.Tables(0).Rows()
+            With dsPatientInfo.Tables(0)
 
 
                 If IsDBNull(item.Item(4)) Then
@@ -92,6 +92,7 @@
                            item.Item(2), item.Item(3), strRoom, strBed)
 
             End With
+        Next
     End Sub
 
     Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal strID As String, ByVal strFirstName As String, ByVal strLastName As String, ByVal strBirthday As String, ByVal strRoom As String, ByVal strBed As String)
