@@ -54,16 +54,54 @@ Module PatientInformation
     '/*******************************************************************/
 
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:GetPatientInformation           */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   01/27/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: The purpose of this subroutine is designed to handle
+    '/* the population of the patient information in the patient inforamtion
+    '/* screen.
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/* ExecuteSelectQuery()
+    '/* IsDBNull()
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   
+    '/*											   
+    '/*  intPatientMRN			   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*											                           
+    '/*   GetPatientInformation("233987")
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*	
+    '/* dsPatientDataSet
+    '/* intPhysicianID
+    '/* strSQLiteCommand
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  02/09/21  Initial creation of the code      */
+    '/*********************************************************************/
     Public Sub GetPatientInformation(ByRef intPatientMRN As Integer)
 
         Dim dsPatientDataSet As DataSet = New DataSet
         Dim intPhysicianID As String
+        'sql taktement to get patient information
         Dim strSQLiteCommand As String = "SELECT MRN_Number, Patient_First_Name,Patient_Middle_Name, Patient_Last_Name, " &
             "Date_of_Birth, Sex, Height, Weight, Address, City, State, Email_address, Phone_Number, Primary_Physician_ID " &
             " FROM Patient WHERE MRN_Number = '" & intPatientMRN & "'"
 
         dsPatientDataSet = CreateDatabase.ExecuteSelectQuery(strSQLiteCommand)
-
+        ''check each piece of dataset for null, if not null set it, set to N/A if null
         For Each dr As DataRow In dsPatientDataSet.Tables(0).Rows
 
             If IsDBNull(dr(0)) Then
@@ -122,12 +160,12 @@ Module PatientInformation
 
             intPhysicianID = dr(13)
         Next
-
+        'get name of physician that is assigned to patient
         strSQLiteCommand = "SELECT Physician_First_Name,Physician_Last_Name" &
             " FROM Physician WHERE Physician_ID = '" & intPhysicianID & "'"
 
         dsPatientDataSet = CreateDatabase.ExecuteSelectQuery(strSQLiteCommand)
-
+        'check if physician fields are null
         For Each dr As DataRow In dsPatientDataSet.Tables(0).Rows
             If IsDBNull(dr(1)) Then
                 frmPatientInfo.txtPhysician.Text = "N/A"
