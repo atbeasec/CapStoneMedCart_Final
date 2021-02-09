@@ -1,19 +1,16 @@
-﻿Imports System.Text
-Public Class frmNewPatient
+﻿Module PopulateRoomsCombBoxesMethods
+
     '/*********************************************************************/
-    '/*                   FILE NAME:  */									  
+    '/*                   FILE NAME: PopulateRoomsCombBoxesMethods        */									  
     '/*********************************************************************/
-    '/*                 PART OF PROJECT:				   */				  
+    '/*                 PART OF PROJECT: Test_GUI       				   */				  
     '/*********************************************************************/
-    '/*                   WRITTEN BY:  Nathan Premo  		         */		  
-    '/*		         DATE CREATED:			   */						  
+    '/*                   WRITTEN BY:  Nathan Premo  		               */		  
+    '/*		         DATE CREATED:	2/8/2021                      		   */						  
     '/*********************************************************************/
-    '/*  PROJECT PURPOSE:								   */				  
-    '/*											   */					  
-    '/* 																	  
-    '/*********************************************************************/
-    '/*  FILE PURPOSE:									   */			  
-    '/*											   */					  
+    '/*  FILE PURPOSE:									                      */			  
+    '/*	 This holds the method that will handle populating the combo box for*/
+    '/*  rooms and the beds on a number of forms.                           */					  
     '/* 																	  
     '/*********************************************************************/
     '/*  COMMAND LINE PARAMETER LIST (In Parameter Order):			   */ 
@@ -37,33 +34,70 @@ Public Class frmNewPatient
     '/*											   */					  
     '/*  WHO   WHEN     WHAT								   */			  
     '/*  ---   ----     ------------------------------------------------- */
-    '/*  NP    2/6/2021 Started to connect the GUI to the database. 
     '/*********************************************************************/
 
 
-    Dim dsrooms As DataSet
-    Dim dsPhysicians As DataSet
-    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-
-        SavePatientDataToDatabase()
-
-
-    End Sub
-
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-
-        Me.Close()
-
-    End Sub
 
     '/*********************************************************************/
-    '/*                   SUBPROGRAM NAME:  SavePatientDataToDatabase	   */         
+    '/*                   SUBPROGRAM NAME:  PopulateRoomComboBox 	   */         
     '/*********************************************************************/
-    '/*                   WRITTEN BY:  Nathan Premo   		           */   
-    '/*		         DATE CREATED: 	2/6/2021                        	   */                             
+    '/*                   WRITTEN BY:  Nathan Premo   		         */   
+    '/*		         DATE CREATED: 2/6/2021                     		   */                             
     '/*********************************************************************/
-    '/*  FUNCTION PURPOSE:								   */             
+    '/*  SUBPROGRAM PURPOSE:								               */             
+    '/*	 This is going to populate a combo box with the list of rooms that */
+    '/*  are in our database.                                              */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	cboRoom - this is the combo box that we are going to be populating*/
+    '/* dsrooms- this is the dataset of the rooms that we are going to be */
+    '/*     using. 
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                    */             
+    '/*	PopulateRoomsCombBoxesMethods.PopulateRoomComboBox                 */
+    '/*                         (CboRooms, dsRooms)					       */                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
     '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Sub PopulateRoomComboBox(cboRoom As ComboBox, dsrooms As DataSet)
+        cboRoom.Items.Clear()
+
+        For Each row As DataRow In dsrooms.Tables(0).Rows
+            If checkComboForDup(cboRoom, row(EnumList.room.Id)) Then
+                cboRoom.Items.Add(row(EnumList.room.Id))
+            End If
+        Next
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: populateBedComboBox  		   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		         */   
+    '/*		         DATE CREATED: 		   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:						            		   */             
+    '/*	This is going to populate a combo box with the list of rooms that  */                     
+    '/* we have in our database. It is only going to post the unique ones. */
     '/*                                                                   */
     '/*********************************************************************/
     '/*  CALLED BY:   	      						         */           
@@ -80,87 +114,9 @@ Public Class frmNewPatient
     '/*            (NOTHING)								   */             
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								   */             
-    '/*											   */                     
-    '/*                                                                     
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
-    '/*                                                                     
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						         */               
-    '/*											   */                     
-    '/*  WHO   WHEN     WHAT								   */             
-    '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
-    '/*********************************************************************/
-
-
-    Private Sub SavePatientDataToDatabase()
-        Dim strbSQL As New StringBuilder()
-        Dim strPhysicianName As String() = Split(cmbPhysician.SelectedItem)
-        dsPhysicians = CreateDatabase.ExecuteSelectQuery("Select Physician_ID from  Physician where Physician_First_name = '" &
-                                                         strPhysicianName(0) & "' and Physician_Last_Name = '" &
-                                                         strPhysicianName(1) & "';")
-
-
-
-        'grab data from all textfields and send it to the database
-
-        strbSQL.Append("INSERT INTO Patient ('MRN_Number', 'Barcode', 'Patient_First_Name'," &
-            "'Patient_Middle_Name', 'Patient_Last_Name', 'Date_of_Birth', 'Sex', 'Height', 'Weight', " &
-            "'Address', 'City', 'State', 'Zip_Code', 'Phone_Number', 'Email_address', 'Primary_Physician_ID', " &
-            "'Active_Flag') Values ('")
-
-        strbSQL.Append(CInt(Rnd() * 20) & "','")
-        strbSQL.Append(CInt(Rnd() * 20) & "',") 'this is going to make a random barcode this is temporary
-        strbSQL.Append("'" & txtFirstName.Text & "' , '" & txtMiddleName.Text & "',")
-        strbSQL.Append("'" & txtLastName.Text & "','" & txtBirthday.Text & "',")
-        strbSQL.Append("'" & cmbSex.SelectedItem & "','" & txtHeight.Text & "',")
-        strbSQL.Append("'" & txtWeight.Text & "','" & txtAddress.Text & "',")
-        strbSQL.Append("'" & txtCity.Text & "','" & cmbState.SelectedItem & "',")
-        strbSQL.Append("'" & txtZipCode.Text & "','" & txtPhoneNumber.Text & "',")
-        strbSQL.Append("'" & txtEmail.Text & "','" & dsPhysicians.Tables(0).Rows(0)(EnumList.Physician.Id) & "',")
-        strbSQL.Append("'" & 1 & "');")
-
-        CreateDatabase.ExecuteInsertQuery(strbSQL.ToString)
-        'send message saying it was a success or error
-
-        'if error say what the error was and return to the form with the filled out info
-
-        ' Else
-
-        ' success message that the data was saved to the database successfully
-    End Sub
-
-    '/*********************************************************************/
-    '/*                   SUBPRORAM NAME:  frmNewPatient_Load		       */         
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:  Nathan Premo   		            */   
-    '/*		         DATE CREATED: 	2/6/2021                        	   */                             
-    '/*********************************************************************/
-    '/*  SUBPROGAM PURPOSE:								   */             
-    '/*	 This is going to run before the form is shown. It is going to    */                     
-    '/*  populate the combo boxes.                                        */
+    '/*	PopulateRoomsCombBoxesMethods.populateBedComboBox(cmbBed, dsrooms)*/                     
     '/*                                                                   */
     '/*********************************************************************/
-    '/*  CALLED BY:   	      						         */           
-    '/*                                         				   */         
-    '/*********************************************************************/
-    '/*  CALLS:										   */                 
-    '/*             (NONE)								   */             
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					   */         
-    '/*  sender – Identifies which particular control raised the          */
-    '/*          click event                                              */
-    '/*  e – Holds the EventArgs object sent to the routine               */        
-    '/*********************************************************************/
-    '/*  RETURNS:								         */                   
-    '/*            (NOTHING)								   */             
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								   */             
-    '/*											   */                     
-    '/*                                                                     
-    '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
     '/*											   */                     
     '/*                                                                     
@@ -172,15 +128,14 @@ Public Class frmNewPatient
     '/*                                                                     
     '/*********************************************************************/
 
-    Private Sub frmNewPatient_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        dsrooms = CreateDatabase.ExecuteSelectQuery("Select * From Rooms;")
-        dsPhysicians = CreateDatabase.ExecuteSelectQuery("Select * from Physician;")
-        cmbSex.Items.AddRange({"Male", "Female"})
-        PopulateStateComboBox(cmbState)
-        PopulateRoomComboBox(cmbRoom, dsrooms)
-        populateBedComboBox(cmbBed, dsrooms)
-        populatePhysicianComboBox(cmbPhysician, dsPhysicians)
+
+    Sub populateBedComboBox(cboBed As ComboBox, dsrooms As DataSet)
+        cboBed.Items.Clear()
+
+        For Each row As DataRow In dsrooms.Tables(0).Rows
+            If checkComboForDup(cboBed, row(EnumList.room.BedName)) Then
+                cboBed.Items.Add(row(EnumList.room.BedName))
+            End If
+        Next
     End Sub
-
-
-End Class
+End Module
