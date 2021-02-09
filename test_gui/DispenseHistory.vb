@@ -175,7 +175,7 @@ Module DispenseHistory
     '/*********************************************************************/
 
     Sub DispenseHistorySpecificPatient(ByRef intPatientMRN As Integer)
-        Dim Strdatacommand As String = "SELECT Drug_Name, Synonym, Amount_Dispensed, Dosage,Primary_User_TUID, DateTime_Dispensed   
+        Dim Strdatacommand As String = "SELECT Drug_Name, PatientMedication.Method, Amount_Dispensed,User.User_Last_Name,User.User_First_Name, DateTime_Dispensed   
           FROM Dispensing 
           INNER JOIN PatientMedication
           On PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID
@@ -183,12 +183,14 @@ Module DispenseHistory
           On PatientMedication.Patient_TUID = Patient.Patient_ID
           INNER JOIN Medication
           On Medication.Medication_ID = PatientMedication.Medication_TUID
+          INNER JOIN User
+		  ON User.User_ID = Dispensing.Primary_User_TUID
           WHERE Patient.MRN_Number = '" & intPatientMRN & "' ORDER BY DateTime_Dispensed DESC;"
 
         Dim dsmydataset As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
 
         For Each dr As DataRow In dsmydataset.Tables(0).Rows
-            frmPatientInfo.CreateDispenseHistoryPanels(frmPatientInfo.flpDispenseHistory, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "9:30")
+            frmPatientInfo.CreateDispenseHistoryPanels(frmPatientInfo.flpDispenseHistory, dr(0), "    ", dr(1), dr(2), dr(4) & " " & dr(3), dr(5), " ")
         Next
 
     End Sub
