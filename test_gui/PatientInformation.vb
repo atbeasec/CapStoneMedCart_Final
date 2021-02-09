@@ -58,7 +58,7 @@ Module PatientInformation
     '/*                   SUBROUTINE NAME:GetPatientInformation           */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
-    '/*		         DATE CREATED: 	   01/27/21							  */
+    '/*		         DATE CREATED: 	   02/09/21							  */
     '/*********************************************************************/
     '/*  SUBROUTINE PURPOSE: The purpose of this subroutine is designed to handle
     '/* the population of the patient information in the patient inforamtion
