@@ -64,7 +64,7 @@ Public Class frmUpdatePatient
         dsRooms = CreateDatabase.ExecuteSelectQuery(strbSQLString.ToString)
 
 
-        PopulateComboBoxMethods.PopulateStateComboBox(cboState)
+        PopulateStateComboBox(cboState)
 
         With dsPatient.Tables(0)
             strbSQLString.Clear()
