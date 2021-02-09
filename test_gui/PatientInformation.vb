@@ -173,7 +173,7 @@ Module PatientInformation
                 frmPatientInfo.txtPhysician.Text = "Dr. " & dr(0) & " " & dr(1)
             End If
         Next
-
+        'call dispense history to get dispensed history of the patient
         DispenseHistory.DispenseHistorySpecificPatient(intPatientMRN)
     End Sub
 
