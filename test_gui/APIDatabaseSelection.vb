@@ -177,12 +177,12 @@ Module APIDatabaseSelection
 
 
 	'/*******************************************************************/
-	'/*                   FUNCTION NAME:        GetDrugInteractions	    */
+	'/*                  Subroutine NAME:        GetDrugInteractions	*/
 	'/*******************************************************************/
 	'/*              WRITTEN BY:  	Cody Russell					    */
 	'/*		         DATE CREATED: 	   February 5, 2021		            */
 	'/*******************************************************************/
-	'/*  FUNCTION PURPOSE:									      		*/
+	'/*  Subroutine PURPOSE:									        */
 	'/*	The purpose of this function is to get the drug interaction     */ 
 	'/* details from the database and compare the data.                 */
 	'/*******************************************************************/
@@ -232,18 +232,19 @@ Module APIDatabaseSelection
 								Severity & "','" & Description & "','" & ActiveFlag & "')")
 
 		Else
+			ExecuteScalarQuery("UPDATE Drug_Interactions SET Severity = '" & Severity & "', Description = '" & Description & "', Active_Flag = '" & ActiveFlag &
+						   "'WHERE Medication_One_ID = '" & Drug1 & "' AND Medication_Two_ID = '" & Drug2 & "';")
+			'Using reader As StreamReader = New StreamReader(strApplicationPath)
+			'	strDBPath = reader.ReadLine
+			'End Using
+			'strCONNECTION = String.Format("Data Source = {0}", strDBPath)
+			'DBConn = New SQLiteConnection(strCONNECTION)
+			'strStatement = "UPDATE Drug_Interactions SET Severity = '" & Severity & "', Description = '" & Description & "', Active_Flag = '" & ActiveFlag &
+			'			   "'WHERE Medication_One_ID = '" & Drug1 & "' AND Medication_Two_ID = '" & Drug2 & "';"
 
-			Using reader As StreamReader = New StreamReader(strApplicationPath)
-				strDBPath = reader.ReadLine
-			End Using
-			strCONNECTION = String.Format("Data Source = {0}", strDBPath)
-			DBConn = New SQLiteConnection(strCONNECTION)
-			strStatement = "UPDATE Drug_Interactions SET Severity = '" & Severity & "', Description = '" & Description & "', Active_Flag = '" & ActiveFlag &
-						   "'WHERE Medication_One_ID = '" & Drug1 & "' AND Medication_Two_ID = '" & Drug2 & "';"
-
-			DBConn.Open()
-			DBCmd = New SQLiteCommand(strStatement, DBConn)
-			DBConn.Close()
+			'DBConn.Open()
+			'DBCmd = New SQLiteCommand(strStatement, DBConn)
+			'DBConn.Close()
 			dtCompareDrugInteractions.Clear()
 		End If
 	End Sub
