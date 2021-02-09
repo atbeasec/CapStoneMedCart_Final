@@ -4,6 +4,8 @@
     'Private CurrentContactPanelName As String = Nothing
 
     Dim currentContactPanel As String = Nothing
+    Public intSelectedPatientMRN As Integer = 0
+
     Private Sub Button2_Click(sender As Object, e As EventArgs)
         frmPatientInfo.Show()
 
@@ -57,34 +59,55 @@
     '/*  NP    2/4/2021 Created the SQL statements to pull back the       */
     '/*                 information needed for Patient Records Form.      */
     '/*                 Created variables strRoom and strBed              */
+    '/* AB     2/8/2021 Changed looping code as there was a bug 
+    '/*                 that it would only display the first patient multiple
+    '/*                 times
     '/*********************************************************************/
 
 
     Private Sub frmPatientRecords_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim PatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery("select Patient.MRN_Number, Patient.Patient_First_Name, " &
+        Dim dsPatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery("select Patient.MRN_Number, Patient.Patient_First_Name, " &
                                                    "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name from Patient LEFT JOIN " &
-                                                   "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1;")
+                                                   "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1 ORDER BY Patient.Patient_Last_Name ASC;")
         Dim strRoom As String
         Dim strBed As String
 
-        For Each row In PatientInfo.Tables(0).Rows()
-            With PatientInfo.Tables(0)
+        'There was a bug with this code
+        'For Each row In dsPatientInfo.Tables(0).Rows()
+        '    With dsPatientInfo.Tables(0)
 
-                If IsDBNull(.Rows(0)(4)) Then
-                    strRoom = "N/A"
-                Else
-                    strRoom = .Rows(0)(4).ToString
-                End If
+        '        If IsDBNull(.Rows(0)(4)) Then
+        '            strRoom = "N/A"
+        '        Else
+        '            strRoom = .Rows(0)(4).ToString
+        '        End If
 
-                If IsDBNull(.Rows(0)(5)) Then
-                    strBed = "N/A"
-                Else
-                    strBed = .Rows(0)(5).ToString
-                End If
-                CreatePanel(flpPatientRecords, .Rows(0)(0), .Rows(0)(1), .Rows(0)(2), .Rows(0)(3), strRoom, strBed)
+        '        If IsDBNull(.Rows(0)(5)) Then
+        '            strBed = "N/A"
+        '        Else
+        '            strBed = .Rows(0)(5).ToString
+        '        End If
+        '        CreatePanel(flpPatientRecords, .Rows(0)(0), .Rows(0)(1), .Rows(0)(2), .Rows(0)(3), strRoom, strBed)
 
-            End With
+        '    End With
+        'Next
+
+        For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
+            If IsDBNull(dr(4)) Then
+                strRoom = "N/A"
+            Else
+                strRoom = dr(4).ToString
+            End If
+
+            If IsDBNull(dr(5)) Then
+                strBed = "N/A"
+            Else
+                strBed = dr(5).ToString
+            End If
+
+            CreatePanel(flpPatientRecords, dr(0), dr(1), dr(2), dr(3), strRoom, strBed)
         Next
+
     End Sub
 
     Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal strID As String, ByVal strFirstName As String, ByVal strLastName As String, ByVal strBirthday As String, ByVal strRoom As String, ByVal strBed As String)
@@ -167,6 +190,7 @@
 
     Private Sub DynamicSingleClickOpenPatient(sender As Object, e As EventArgs)
 
+        intSelectedPatientMRN = GetSelectedPatientMRN(sender)
         ' allows panel to have double click functionality to open it
         frmPatientInfo.Show()
 
@@ -431,5 +455,63 @@
 
     'End Sub
 
+
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: GetSelectedPatientMRN	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Collin Krygier  		         */   
+    '/*		         DATE CREATED: 	2/6/21			         */                             
+    '/********************************************************************/
+    '/*  FUNCTION PURPOSE: this function retrieves the the MRN of the	 */					            
+    '/*	 patient selected by the user.					 */					                       
+    '/*                                                                  */
+    '/********************************************************************/
+    '/*  CALLED BY: DynamicSingleClickOpenPatient   	      		 */				            
+    '/*                                        				 */         
+    '/********************************************************************/
+    '/*  CALLS:								 */		                  
+    '/*             (NONE)						 */		               
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				 */	           
+    '/*	 sender- an object representing the control that was selected    */								                        
+    '/*                                                                  */  
+    '/********************************************************************/
+    '/*  RETURNS:							 */	                          
+    '/*  intMRN- an integer that is the MRN number of the selected patient/								             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						 */		             
+    '/*	GetSelectedPatientMRN(sender)					 */					                       
+    '/*                                                                  */   
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/*	 ctl- a control object that is used to hold all of the controls  */
+    '/*  that will be iterated over.					 */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						 */		                 
+    '/*									 */		                   
+    '/*  WHO            WHEN             WHAT				 */		            
+    '/*  ---            ----             ----				 */
+    '/*  CK		2/6/21		 initial creation                */
+    '/********************************************************************/ 
+    Function GetSelectedPatientMRN(sender As Object) As Integer
+
+        Dim intMRN As Integer = Nothing
+        Dim ctl As Control
+
+        ' iterating over the list of controls in the panel
+        For Each ctl In sender.Controls
+
+            ' the label containing the MRN number will always be called "lblMRN" with a number tacked on
+            ' to represent what number panel it is in the row of created panels.
+            ' simplying searching for the control that contains MRN will always yield the correct label.
+            If ctl.Name.Contains("MRN") Then
+
+                Debug.Print(ctl.Text)
+                intMRN = CInt(ctl.Text)
+            End If
+        Next
+        'returning the MRN of the patient from the selected record
+        Return intMRN
+    End Function
 
 End Class

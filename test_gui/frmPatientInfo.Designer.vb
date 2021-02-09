@@ -23,7 +23,7 @@ Partial Class frmPatientInfo
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPatientInfo))
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.LblPatientName = New System.Windows.Forms.Label()
         Me.txtGender = New System.Windows.Forms.TextBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.txtPhysician = New System.Windows.Forms.TextBox()
@@ -80,16 +80,16 @@ Partial Class frmPatientInfo
         Me.Panel3.SuspendLayout()
         Me.SuspendLayout()
         '
-        'Label1
+        'LblPatientName
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.Black
-        Me.Label1.Location = New System.Drawing.Point(6, 5)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(131, 25)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "John M Smith"
+        Me.LblPatientName.AutoSize = True
+        Me.LblPatientName.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblPatientName.ForeColor = System.Drawing.Color.Black
+        Me.LblPatientName.Location = New System.Drawing.Point(6, 5)
+        Me.LblPatientName.Name = "LblPatientName"
+        Me.LblPatientName.Size = New System.Drawing.Size(140, 25)
+        Me.LblPatientName.TabIndex = 0
+        Me.LblPatientName.Text = "Fill Name Here"
         '
         'txtGender
         '
@@ -156,7 +156,7 @@ Partial Class frmPatientInfo
         Me.pnlPersonalInformation.Controls.Add(Me.txtHeight)
         Me.pnlPersonalInformation.Controls.Add(Me.Label3)
         Me.pnlPersonalInformation.Controls.Add(Me.txtGender)
-        Me.pnlPersonalInformation.Controls.Add(Me.Label1)
+        Me.pnlPersonalInformation.Controls.Add(Me.LblPatientName)
         Me.pnlPersonalInformation.Controls.Add(Me.Label19)
         Me.pnlPersonalInformation.Controls.Add(Me.txtBirthday)
         Me.pnlPersonalInformation.Controls.Add(Me.txtPhysician)
@@ -725,7 +725,7 @@ Partial Class frmPatientInfo
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents Label1 As Label
+    Friend WithEvents LblPatientName As Label
     Friend WithEvents pnlPersonalInformation As Panel
     Friend WithEvents Label16 As Label
     Friend WithEvents Label11 As Label
