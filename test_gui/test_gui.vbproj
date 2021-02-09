@@ -100,6 +100,7 @@
   <ItemGroup>
     <Compile Include="AdHoc.vb" />
     <Compile Include="CartInterfaceCode.vb" />
+    <Compile Include="CheckComboBoxForDuplicateMethods.vb" />
     <Compile Include="CreateDatabase.vb" />
     <Compile Include="Dispense.Designer.vb">
       <DependentUpon>Dispense.vb</DependentUpon>
@@ -291,7 +292,10 @@
     </Compile>
     <Compile Include="GraphicalUserInterfaceReusableMethods.vb" />
     <Compile Include="Login.vb" />
-    <Compile Include="PopulateComboBoxMethods.vb" />
+    <Compile Include="PopulatePatientComboBoxMethods.vb" />
+    <Compile Include="PopulatePhysicanComboBoxesMethods.vb" />
+    <Compile Include="PopulateRoomsCombBoxesMethods.vb" />
+    <Compile Include="PopulateStateComboBoxesMethod.vb" />
     <Compile Include="Print.vb" />
     <Compile Include="Reports.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
