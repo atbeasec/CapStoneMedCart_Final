@@ -373,16 +373,16 @@ Module CreateDatabase
 	'/*  BRH  01/23/21  Initial creation of the code					*/
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
 	'/*  BRH  02/04/21  Change Brand_name to Synonym field				*/
+	'/*  BRH  02/08/21  Updated fields per Database meeting				*/
 	'/*******************************************************************/
 	Public Sub CreateMedicationTable()
 		strCreateTable = "CREATE TABLE 'Medication' (
 							'Medication_ID'	INTEGER NOT NULL UNIQUE,
 							'Drug_Name'	TEXT NOT NULL,
-							'RXCUI_ID'	INTEGER NOT NULL,
-							'Dosage'	INTEGER NOT NULL,
+							'RXCUI_ID'	TEXT NOT NULL,
+							'Controlled'	INTEGER NOT NULL,
 							'NarcoticControlled_Flag'	INTEGER NOT NULL,
 							'Barcode'	TEXT NOT NULL UNIQUE,
-							'Synonym'	TEXT,
 							'Type'	TEXT,
 							'Strength'	TEXT,
 							'Active_Flag' INTEGER NOT NULL,
