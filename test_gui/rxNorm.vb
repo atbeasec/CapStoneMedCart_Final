@@ -86,6 +86,8 @@ Module rxNorm
     '/*                                                                   */
     '/*  Dillen  01/27/21  Function to make api call to get               */
     '/*                      drug information.			                  */
+    '/* NP       02/9/2021 Changed function to return result to remove the*/
+    '/*                    Warning for not returning a value.             */
     '/*********************************************************************/
 
 
@@ -107,7 +109,8 @@ Module rxNorm
 
         'debug to test if content is correct
         Debug.WriteLine(result.Content)
-
+        'changed function to return result to remove warning. NP
+        Return result
     End Function
 
 
@@ -214,6 +217,8 @@ Module rxNorm
     '/*                                                                   */
     '/*  Dillen  01/27/21  Function to make api call to get               */
     '/*                      drug properties            			      */
+    '/*  NP      02/9/2021 Added a return that returns the result to      */
+    '/*                    remove the function has no return warning.     */
     '/*********************************************************************/
 
     Function getAllProperties(rxcuiNum As String)
@@ -232,8 +237,8 @@ Module rxNorm
 
         'debug to test if content is correct
         Debug.WriteLine(result.Content)
-
-
+        'adding return result to make this work like a function -NP
+        Return result
     End Function
 
 
@@ -280,8 +285,8 @@ Module rxNorm
     '/*  WHO      WHEN     WHAT								              */
     '/*                                                                   */
     '/*  Dillen  02/4/21  inital creation                                 */
-    '/*                                                                   */  
-    '/*                                                                   */
+    '/*  NP      02/9/2021 Added a return that returns the result to      */
+    '/*                    remove the function has no return warning.     */
     '/*********************************************************************/
     Function getDrugRXCUI(drugName As String, drugDosage As String, drugMeasurement As String, drugType As String) As Object
 
@@ -301,7 +306,8 @@ Module rxNorm
 
         'debug to test if content is correct
         Debug.WriteLine(result.Content)
-
+        'adding return result to make this work like a function -NP
+        Return result
     End Function
 
 End Module
