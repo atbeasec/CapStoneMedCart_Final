@@ -2,10 +2,18 @@
 
     Dim currentContactPanel As String = Nothing
 
+    Dim dsPhysicians As DataSet
+    Dim dsPatients As DataSet
+
     Private Sub frmPharmacy_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         'Jonie Nicolas
         'Mauricio Adkisson
+        dsPhysicians = ExecuteSelectQuery("Select * From Physician;")
+        dsPatients = ExecuteSelectQuery("Select * from Patient;")
+        populatePhysicianComboBox(cmbOrderedBy, dsPhysicians)
+        populatePatientNameComboBox(cmbPatientName, dsPatients)
+
 
         Dim strID1 As String = "123456"
         Dim strID2 As String = "123457"
@@ -76,6 +84,12 @@
         'CreatePanel(flpPatients, strID7, strFirstName7, strLastName7, strRoomNumber7, strStatus7, strAdmitDate7)
         'CreatePanel(flpPatients, strID8, strFirstName8, strLastName8, strRoomNumber8, strStatus8, strAdmitDate8)
         'CreatePanel(flpPatients, strID9, strFirstName9, strLastName9, strRoomNumber9, strStatus9, strAdmitDate9)
+
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnORder.Click
+        Dim dtmOrderTime As String = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
+
 
     End Sub
 
