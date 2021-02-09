@@ -84,7 +84,7 @@
         "TX", "AL", "TN", "MO", "ND", "SD", "WY", "MT", "ID", "NV", "WA", "OR", "CO",
         "NM", "AZ", "WV", "PA", "CA", "AR", "HI", "MN", "WI", "MD", "MS", "AK", "LA",
         "UT", "KY"}
-
+        System.Array.Sort(strStatesArray)
         For Each item As String In strStatesArray
             cboState.Items.Add(item)
         Next
