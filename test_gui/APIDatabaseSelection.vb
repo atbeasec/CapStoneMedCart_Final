@@ -30,8 +30,9 @@ Imports System.IO
 '/*DBCmd - Stores the SQL commands for either creating the database or	*/
 '/*	 or altering tables         									*/
 '/*DBConn - Stores the information to connect to the database       */
-'/*strDBNAME - Stores the database name								*/
-'/*fileReader is the string that stores the database file path		*/
+'/*strCONNECTION - string that opens a connection to the database   */
+'/*strDBPath - string that stores the database path					*/
+'/*strApplicationPath - string that links to the path of the application */
 '/*******************************************************************/
 '/* COMPILATION NOTES:								                */
 '/* 											                    */
@@ -48,14 +49,11 @@ Imports System.IO
 '/*******************************************************************/
 Module APIDatabaseSelection
 
-	Dim strSQLCmd As String
-	Dim DBCmd As SQLiteCommand
-	Dim DBConn As SQLiteConnection
-	Dim strDBName As String = "Medication_Cart_System"
-
-	Dim fileReader As String
-
-	Dim myDataReader As SQLiteDataReader
+	Dim strDBPath As String
+	Public DBConn As SQLiteConnection
+	Public DBCmd As SQLiteCommand
+	Dim strCONNECTION As String
+	Dim strApplicationPath As String = Application.StartupPath & "\config.app"
 
 	'/*******************************************************************/
 	'/*                   FUNCTION NAME:        GetDrugRXCUI		    */
@@ -214,36 +212,39 @@ Module APIDatabaseSelection
 	'/* Cody Russell  02/6/21  Altered this function so that it will    */
 	'/* hold data in a reader than compare from the database it pulls.  */
 	'/*******************************************************************/
-	Function CompareDrugInteractions(Drug1 As String, Drug2 As String, Severity As String, Description As String,
-																		ActiveFlag As String) As Boolean
-		Dim dsDrugInteractions As New DataSet
-		Dim dtDrugInteraction As New DataTable
-		Dim dbAdaptDrugInteractions As SQLiteDataAdapter
+	Sub CompareDrugInteractions(Drug1 As Integer, Drug2 As Integer, Severity As String, Description As String,
+																		ActiveFlag As Integer)
 
-		fileReader = My.Computer.FileSystem.ReadAllText("Medication_Cart_System.db")
-		DBConn = New SQLiteConnection("data source = " & fileReader & ";")
-		DBConn.Open()
-		DBCmd.CommandText = "SELECT Medication_One_ID, Medication_Two_ID, Severity, Description,
+		Dim dtCompareDrugInteractions As DataSet
+		Dim strStatement As String
+
+		dtCompareDrugInteractions = ExecuteSelectQuery("SELECT Medication_One_ID, Medication_Two_ID, Severity, Description,
                                             Active_Flag FROM Drug_Interactions WHERE Medication_One_ID ='" & Drug1 & "'
 										    AND Medication_Two_ID = '" & Drug2 & "' AND Severity = '" & Severity &
-											"'AND Description = '" & Description & "' AND Active_Flag = '" & ActiveFlag & "'"
+											"'AND Description = '" & Description & "' AND Active_Flag = '" & ActiveFlag & "'")
 
-		dbAdaptDrugInteractions.SelectCommand = DBCmd
-		dbAdaptDrugInteractions.Fill(dsDrugInteractions, "Drug_Interactions")
-		dtDrugInteraction = dsDrugInteractions.Tables("Drug_Interactions")
 
-		If DBCmd.ExecuteScalar <> 0 Then
-			DBCmd.CommandText = "INSERT into Drug_Interactions(Medication_Ono_ID, Medication_TWo_ID, 
-                            Severity, Description,Description, Active_Flag)
+		If (dtCompareDrugInteractions Is Nothing) Then
+
+			ExecuteInsertQuery("INSERT INTO Drug_Interactions(Medication_One_ID, Medication_Two_ID, 
+                            Severity, Description, Active_Flag)
                             VALUES('" & Drug1 & "','" & Drug2 & "','" &
-							Severity & "','" & Description & "','" & ActiveFlag & "'"
+								Severity & "','" & Description & "','" & ActiveFlag & "')")
 
 		Else
-			DBCmd.CommandText = "UPDATE Drug_Interactions SET Medication_One_ID= '" & Drug1 & "',
-                           Medication_Two_ID = '" & Drug2 & "', Severity = '" & Severity & "',
-						    Description = '" & Description & "', Active_Flag = '" & ActiveFlag & "'"
-		End If
 
-		DBConn.Close()
-	End Function
+			Using reader As StreamReader = New StreamReader(strApplicationPath)
+				strDBPath = reader.ReadLine
+			End Using
+			strCONNECTION = String.Format("Data Source = {0}", strDBPath)
+			DBConn = New SQLiteConnection(strCONNECTION)
+			strStatement = "UPDATE Drug_Interactions SET Severity = '" & Severity & "', Description = '" & Description & "', Active_Flag = '" & ActiveFlag &
+						   "'WHERE Medication_One_ID = '" & Drug1 & "' AND Medication_Two_ID = '" & Drug2 & "';"
+
+			DBConn.Open()
+			DBCmd = New SQLiteCommand(strStatement, DBConn)
+			DBConn.Close()
+			dtCompareDrugInteractions.Clear()
+		End If
+	End Sub
 End Module
