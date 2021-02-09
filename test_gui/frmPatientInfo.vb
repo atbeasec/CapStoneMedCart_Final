@@ -255,7 +255,7 @@
 
 
     Private Sub frmPatientInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        PatientInformation.GetAllergies(intPatientMRN)
         intPatientMRN = frmPatientRecords.intSelectedPatientMRN
         PopulateDispenseHistory()
         PopulateCurrentMedications()
