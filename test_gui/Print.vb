@@ -1,4 +1,5 @@
-﻿Module Print
+﻿Imports Microsoft.Office.Interop
+Module Print
     '/*******************************************************************/
     '/*                   FILE NAME:  Print.vb                          */
     '/*******************************************************************/
@@ -39,7 +40,72 @@
     '/* MODIFICATION HISTORY:						                    */
     '/*											                        */
     '/*  WHO            WHEN        WHAT								*/
-    '/*  Eric LaVoie    1/25/2021   Initial creation                    */
+    '/*  Jordan Roberts 2/09/2021   Basic functionality implemented; 
+    '/**    module can tell which combo box item from frmreport was selected
+    '/*     and sub routines can create a document and table in word and
+    '/*     open for viewing. Module is not wired to the database yet.
     '/*******************************************************************/
+    Enum Reports
+        Adhoc = 0
+        Discrepancies = 1
+        DispensedMeds = 2
+        DispensedNarc = 3
+        Override = 4
+    End Enum
+    Sub Main()
 
+        Dim intSelectedIndex As Integer = test_gui.frmReport.cmbReports.SelectedIndex
+        Dim strReport As String = ""
+        Select Case intSelectedIndex
+            Case Reports.Adhoc : strReport = "Ad hoc Orders"
+
+            Case Reports.Discrepancies : strReport = "Discrepancies"
+
+            Case Reports.DispensedMeds : strReport = "Dispensed Meds"
+
+            Case Reports.DispensedNarc : strReport = "Dispensed Narcotics"
+
+            Case Reports.Override : strReport = "Overrides"
+
+        End Select
+        GenerateReportToWord(strReport)
+    End Sub
+
+    Sub GatherDataFromDatabaseTable()
+
+
+
+    End Sub
+
+    Sub GenerateReportToWord(ByVal strItem As String)
+        Dim aWordApplication As Word.Application
+        Dim aWordDocument As Word.Document
+        aWordApplication = New Word.Application
+        With aWordApplication
+            .Visible = True
+            aWordDocument = .Documents.Add()
+            .Selection.Font.Size = 10
+            .Selection.Font.Name = "Calibri"
+        End With
+
+        CreateAndAddTableToWordForFormatting(aWordDocument)
+        '  Dim strSQLQuery As String = "SELECT name FROM PRAGMA_TABLE_INFO('AdHocOrder');"
+
+        '  Dim dsDataSetReturnValues As DataSet = CreateDatabase.ExecuteSelectQuery(strSQLQuery)
+
+        aWordApplication.Selection.TypeText(strItem)
+    End Sub
+
+    Sub CreateAndAddTableToWordForFormatting(ByRef aWordDoc As Word.Document)
+        Dim aTableWordDoc As Word.Table
+
+        aTableWordDoc = aWordDoc.Tables.Add(aWordDoc.Range, 10, 7)
+        With aTableWordDoc
+            .Range.ParagraphFormat.SpaceAfter = 6
+            .Title = "Test Title"
+            .AutoFitBehavior(Word.WdAutoFitBehavior.wdAutoFitWindow)
+            .Style = "Plain Table 4"
+        End With
+
+    End Sub
 End Module

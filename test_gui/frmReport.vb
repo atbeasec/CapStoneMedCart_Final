@@ -23,6 +23,14 @@
 
     End Sub
 
+    Private Sub btnGenerateReport_Click(sender As Object, e As EventArgs) Handles btnGenerateReport.Click
+        If cmbReports.SelectedIndex < 0 Then
+            MessageBox.Show("Please select a report from the drop down menu", "No Selected Item", MessageBoxButtons.OK, MessageBoxIcon.Warning)
 
+        Else
+            Print.Main()
+        End If
+
+    End Sub
 
 End Class
