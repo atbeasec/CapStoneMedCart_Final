@@ -27,12 +27,7 @@ Imports System.IO
 '/*                                                                 */
 '/*******************************************************************/
 '/*  GLOBAL VARIABLE LIST (Alphabetically):			                */
-'/*DBCmd - Stores the SQL commands for either creating the database or	*/
-'/*	 or altering tables         									*/
-'/*DBConn - Stores the information to connect to the database       */
-'/*strCONNECTION - string that opens a connection to the database   */
-'/*strDBPath - string that stores the database path					*/
-'/*strApplicationPath - string that links to the path of the application */
+'/*(none)                                                          	*/
 '/*******************************************************************/
 '/* COMPILATION NOTES:								                */
 '/* 											                    */
@@ -49,20 +44,14 @@ Imports System.IO
 '/*******************************************************************/
 Module APIDatabaseSelection
 
-	Dim strDBPath As String
-	Public DBConn As SQLiteConnection
-	Public DBCmd As SQLiteCommand
-	Dim strCONNECTION As String
-	Dim strApplicationPath As String = Application.StartupPath & "\config.app"
-
 	'/*******************************************************************/
-	'/*                   FUNCTION NAME:        GetDrugRXCUI		    */
+	'/*                   Subroutine NAME:        GetDrugRXCUI		    */
 	'/*******************************************************************/
 	'/*              WRITTEN BY:  	Cody Russell					    */
 	'/*		         DATE CREATED: 	   February 3, 2021		            */
 	'/*******************************************************************/
-	'/*  FUNCTION PURPOSE:									      		*/
-	'/*	The purpose of this function is to get the medication rxcui     */ 
+	'/*  SUBROUTINE PURPOSE:									      	*/
+	'/*	The purpose of this subroutine is to get the medication rxcui   */ 
 	'/* number from the database.                                       */
 	'/*******************************************************************/
 	'/*  CALLED BY:   	      											*/
@@ -90,20 +79,20 @@ Module APIDatabaseSelection
 	'/*  Cody Russell 02/3/21  Initial creation of the code	        	*/
 	'/*  Cody Russell 02/5/21  Made altercations to make more readable code */
 	'/*******************************************************************/
-	Function getDrugRXCUI()
+	Sub getDrugRXCUI()
 
 		ExecuteSelectQuery("SELECT RXCUI_ID, Drug_Name, Dosage, Type FROM Medication ORDER BY ASCEND")
 
-	End Function
+	End Sub
 
 	'/*******************************************************************/
-	'/*                   FUNCTION NAME:        GetMedication		    */
+	'/*                  Subroutine NAME:        GetMedication		    */
 	'/*******************************************************************/
 	'/*              WRITTEN BY:  	Cody Russell					    */
 	'/*		         DATE CREATED: 	   February 3, 2021		            */
 	'/*******************************************************************/
-	'/*  FUNCTION PURPOSE:									      		*/
-	'/*	The purpose of this function is to get the medication detail from */ 
+	'/*  SUBROUTINE PURPOSE:									      	*/
+	'/*	The purpose of this subroutine is to get the medication detail from */ 
 	'/* the database.                                                   */
 	'/*******************************************************************/
 	'/*  CALLED BY:   	      											*/
@@ -131,20 +120,20 @@ Module APIDatabaseSelection
 	'/*  Cody Russell 02/3/21  Initial creation of the code	        	*/
 	'/*  Cody Russell 02/5/21  Made altercations to make more readable code  */
 	'/*******************************************************************/
-	Function getMedication()
+	Sub getMedication()
 
 		ExecuteSelectQuery("SELECT * FROM Medication")
 
-	End Function
+	End Sub
 
 	'/*******************************************************************/
-	'/*                   FUNCTION NAME:        GetDrugInteractions	    */
+	'/*                   Subroutine NAME:        GetDrugInteractions	*/
 	'/*******************************************************************/
 	'/*              WRITTEN BY:  	Cody Russell					    */
 	'/*		         DATE CREATED: 	   February 5, 2021		            */
 	'/*******************************************************************/
-	'/*  FUNCTION PURPOSE:									      		*/
-	'/*	The purpose of this function is to get the drug interaction     */ 
+	'/*  Subroutine PURPOSE:									      	*/
+	'/*	The purpose of this subroutine is to get the drug interaction   */ 
 	'/* details from the database.                                      */
 	'/*******************************************************************/
 	'/*  CALLED BY:   	      											*/
@@ -171,19 +160,19 @@ Module APIDatabaseSelection
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  Cody Russell 02/5/21  Initial creation of the code	        	*/
 	'/*******************************************************************/
-	Function GetDrugInteraction()
+	Sub GetDrugInteraction()
 		ExecuteSelectQuery("SELECT * FROM Drug_Interactions")
-	End Function
+	End Sub
 
 
 	'/*******************************************************************/
-	'/*                  Subroutine NAME:        GetDrugInteractions	*/
+	'/*                  Subroutine NAME:     CompareDrugInteractions	*/
 	'/*******************************************************************/
 	'/*              WRITTEN BY:  	Cody Russell					    */
 	'/*		         DATE CREATED: 	   February 5, 2021		            */
 	'/*******************************************************************/
 	'/*  Subroutine PURPOSE:									        */
-	'/*	The purpose of this function is to get the drug interaction     */ 
+	'/*	The purpose of this subroutine is to get the drug interaction   */ 
 	'/* details from the database and compare the data.                 */
 	'/*******************************************************************/
 	'/*  CALLED BY:   	      											*/
@@ -194,7 +183,12 @@ Module APIDatabaseSelection
 	'/*******************************************************************/
 	'/*  PARAMETER LIST (In Parameter Order):							*/
 	'/*																	*/
-	'/*  (None)															*/
+	'/*  Drug1 - Integer that holds the first medication numebr,		*/
+	'/* Drug2 - Integer that holds the second medication number,        */
+	'/* Severity - String that holds the severity in the database,      */
+	'/* Description - String that holds the description information from*/
+	'/* the database, ActiveFlag - holds the integer value of the       */
+	'/* Active_Flag column.                                             */
 	'/*******************************************************************/
 	'/* SAMPLE INVOCATION:												*/
 	'/*																	*/
@@ -202,7 +196,8 @@ Module APIDatabaseSelection
 	'/*******************************************************************/
 	'/*  LOCAL VARIABLE LIST (Alphabetically):							*/
 	'/*																	*/
-	'/*  (None)															*/
+	'/*  dtCompareDrugInteractions - dataset that holds the information */
+	'/* in each parameter in the subroutine.                            */
 	'/*******************************************************************/
 	'/* MODIFICATION HISTORY:											*/
 	'/*																	*/
@@ -211,13 +206,15 @@ Module APIDatabaseSelection
 	'/*  Cody Russell 02/5/21  Initial creation of the code	        	*/
 	'/* Cody Russell  02/6/21  Altered this function so that it will    */
 	'/* hold data in a reader than compare from the database it pulls.  */
+	'/* Cody Russell  02/8/21 Altered the subroutine more to make it more*/
+	'/* simple and easier to read and understand.                       */
 	'/*******************************************************************/
 	Sub CompareDrugInteractions(Drug1 As Integer, Drug2 As Integer, Severity As String, Description As String,
 																		ActiveFlag As Integer)
-
+		'Create a dataset to hold database data
 		Dim dtCompareDrugInteractions As DataSet
-		Dim strStatement As String
 
+		'Select the specific table and the data in each column, filling a dataset through the different parameters
 		dtCompareDrugInteractions = ExecuteSelectQuery("SELECT Medication_One_ID, Medication_Two_ID, Severity, Description,
                                             Active_Flag FROM Drug_Interactions WHERE Medication_One_ID ='" & Drug1 & "'
 										    AND Medication_Two_ID = '" & Drug2 & "' AND Severity = '" & Severity &
@@ -226,26 +223,91 @@ Module APIDatabaseSelection
 
 		If (dtCompareDrugInteractions Is Nothing) Then
 
+			'Send an insert sql statement to the database
 			ExecuteInsertQuery("INSERT INTO Drug_Interactions(Medication_One_ID, Medication_Two_ID, 
                             Severity, Description, Active_Flag)
                             VALUES('" & Drug1 & "','" & Drug2 & "','" &
 								Severity & "','" & Description & "','" & ActiveFlag & "')")
 
 		Else
+			'Send an update sql statement to the database
 			ExecuteScalarQuery("UPDATE Drug_Interactions SET Severity = '" & Severity & "', Description = '" & Description & "', Active_Flag = '" & ActiveFlag &
 						   "'WHERE Medication_One_ID = '" & Drug1 & "' AND Medication_Two_ID = '" & Drug2 & "';")
-			'Using reader As StreamReader = New StreamReader(strApplicationPath)
-			'	strDBPath = reader.ReadLine
-			'End Using
-			'strCONNECTION = String.Format("Data Source = {0}", strDBPath)
-			'DBConn = New SQLiteConnection(strCONNECTION)
-			'strStatement = "UPDATE Drug_Interactions SET Severity = '" & Severity & "', Description = '" & Description & "', Active_Flag = '" & ActiveFlag &
-			'			   "'WHERE Medication_One_ID = '" & Drug1 & "' AND Medication_Two_ID = '" & Drug2 & "';"
 
-			'DBConn.Open()
-			'DBCmd = New SQLiteCommand(strStatement, DBConn)
-			'DBConn.Close()
+			'Clear the dataset after it is sent to the database
 			dtCompareDrugInteractions.Clear()
 		End If
+	End Sub
+
+	'/*******************************************************************/
+	'/*                  Subroutine NAME:     CompareMedications    	*/
+	'/*******************************************************************/
+	'/*              WRITTEN BY:  	Cody Russell					    */
+	'/*		         DATE CREATED: 	   February 9, 2021		            */
+	'/*******************************************************************/
+	'/*  Subroutine PURPOSE:									        */
+	'/*	The purpose of this subroutine is to get the medication         */ 
+	'/* details from the database and compare the data.                 */
+	'/*******************************************************************/
+	'/*  CALLED BY:   	      											*/
+	'/*  (NONE)															*/
+	'/*******************************************************************/
+	'/*  CALLS:															*/
+	'/*  (NONE)															*/
+	'/*******************************************************************/
+	'/*  PARAMETER LIST (In Parameter Order):							*/
+	'/*																	*/
+	'/*																	*/
+	'/*																	*/
+	'/*																	*/
+	'/*																	*/
+	'/*																	*/
+	'/*******************************************************************/
+	'/* SAMPLE INVOCATION:												*/
+	'/*																	*/
+	'/* CompareMedications()	     						            */
+	'/*******************************************************************/
+	'/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+	'/*																	*/
+	'/*  dtCompareDrugInteractions - dataset that holds the information */
+	'/* in each parameter in the subroutine.                            */
+	'/*******************************************************************/
+	'/* MODIFICATION HISTORY:											*/
+	'/*																	*/
+	'/*  WHO   WHEN     WHAT											*/
+	'/*  ---   ----     ------------------------------------------------*/
+	'/*  Cody Russell 02/9/21  Initial creation of the code	        	*/
+	'/*******************************************************************/
+	Sub CompareMedications(DrugName As String, RXCUID As Integer, ControlledFlag As Integer, NarcoticFlag As Integer,
+								 Barcode As Integer, Type As String, Strength As Integer, ActiveFlag As Integer)
+
+		'Create a dataset to hold database data
+		Dim dtMedications As DataSet
+
+		'Select the specific table and the data in each column, filling a dataset through the different parameters
+		ExecuteSelectQuery("SELECT Drug_Name, RXCUI_ID, Controlled_Flag, Narcotic_Flag, Barcode, Type, Strength, Active_Flag
+                           Active_Flag FROM Drug_Interactions WHERE Drug_Name ='" & DrugName & "'
+						   AND RXCUI_ID = '" & RXCUID & "' AND Controlled_Flag = '" & ControlledFlag &
+						  "'AND Narcotic_Flag = '" & NarcoticFlag & "' AND Barcode = '" & Barcode & "' AND Type = '" & Type &
+						  "'AND Strength = '" & Strength & "'AND Active_Flag = '" & ActiveFlag & "'")
+
+		If (dtMedications Is Nothing) Then
+
+			'Send an insert sql statement to the database
+			ExecuteInsertQuery("INSERT INTO Medications(DrugName, RXCUI_ID, Controlled_Flag, Narcotic_Flag, Barcode, Type, 
+                            Strength, Active_Flag) VALUES('" & DrugName & "','" & RXCUID & "','" & ControlledFlag & "','" & NarcoticFlag &
+							"','" & Barcode & "','" & Type & "','" & Strength & "','" & ActiveFlag & "')")
+
+		Else
+
+			'Send an update sql statement to the database
+			ExecuteScalarQuery("UPDATE Medications SET Controlled_Flag = '" & ControlledFlag & "', Narcotic_Flag = '" & NarcoticFlag &
+							   "', Barcode = '" & Barcode & "', Type = '" & Type & "', Strength = '" & Strength &
+							   "', Active_Flag = '" & ActiveFlag & "'WHERE RXCUI_ID = '" & RXCUID & "';")
+
+			'Clear the dataset after it is sent to the database
+			dtMedications.Clear()
+		End If
+
 	End Sub
 End Module
