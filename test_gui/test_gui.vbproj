@@ -293,6 +293,7 @@
     <Compile Include="GraphicalUserInterfaceReusableMethods.vb" />
     <Compile Include="Inventory.vb" />
     <Compile Include="Login.vb" />
+    <Compile Include="PatientInformation.vb" />
     <Compile Include="PharmacyOrder.vb" />
     <Compile Include="Medications.vb" />
     <Compile Include="Print.vb" />
