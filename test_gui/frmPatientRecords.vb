@@ -72,42 +72,26 @@
         Dim strRoom As String
         Dim strBed As String
 
-        'There was a bug with this code
-        'For Each row In dsPatientInfo.Tables(0).Rows()
-        '    With dsPatientInfo.Tables(0)
+        For Each item As DataRow In PatientInfo.Tables(0).Rows()
+            With PatientInfo.Tables(0)
 
-        '        If IsDBNull(.Rows(0)(4)) Then
-        '            strRoom = "N/A"
-        '        Else
-        '            strRoom = .Rows(0)(4).ToString
-        '        End If
 
-        '        If IsDBNull(.Rows(0)(5)) Then
-        '            strBed = "N/A"
-        '        Else
-        '            strBed = .Rows(0)(5).ToString
-        '        End If
-        '        CreatePanel(flpPatientRecords, .Rows(0)(0), .Rows(0)(1), .Rows(0)(2), .Rows(0)(3), strRoom, strBed)
+                If IsDBNull(item.Item(4)) Then
+                    strRoom = "N/A"
+                Else
+                    strRoom = item.Item(4).ToString
+                End If
 
-        '    End With
-        'Next
+                If IsDBNull(item.Item(5)) Then
+                    strBed = "N/A"
+                Else
+                    strBed = item.Item(5).ToString
 
-        For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
-            If IsDBNull(dr(4)) Then
-                strRoom = "N/A"
-            Else
-                strRoom = dr(4).ToString
-            End If
+                End If
+                CreatePanel(flpPatientRecords, item.Item(0), item.Item(1),
+                           item.Item(2), item.Item(3), strRoom, strBed)
 
-            If IsDBNull(dr(5)) Then
-                strBed = "N/A"
-            Else
-                strBed = dr(5).ToString
-            End If
-
-            CreatePanel(flpPatientRecords, dr(0), dr(1), dr(2), dr(3), strRoom, strBed)
-        Next
-
+            End With
     End Sub
 
     Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal strID As String, ByVal strFirstName As String, ByVal strLastName As String, ByVal strBirthday As String, ByVal strRoom As String, ByVal strBed As String)

@@ -152,6 +152,10 @@
 
         'CheckUserPermissions()
 
+        'Dim test = New frmPharmacy
+        'test.ShowDialog()
+
+        ' Me.Close()
         'set submenu to be invisible on form load
         pnlSubMenuSettings.Visible = False
 
