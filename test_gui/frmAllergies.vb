@@ -11,12 +11,21 @@
                             " Where Active_Flag =1 And Patient_TUID =" & (intPatientAllergyId).ToString & ";")
         ' insert the select statement here and send the results to the createAllergiesPanel
         For Each dr As DataRow In dtsPatientAllergy.Tables(0).Rows
-            txtAllergyName.Text = dr(0)
-            cmbSeverity.SelectedIndex = dr(1)
-            txtAllergyType.Text = dr(2)
+            If dr(2) = "Drug" Then
+                txtMedicationName.Text = dr(0)
+                cmbSeverity.SelectedIndex = dr(1)
+                txtAllergyType.Text = dr(2)
+                txtAllergyName.Text = "N/A"
+            Else
 
+                txtAllergyName.Text = dr(0)
+                cmbSeverity.SelectedIndex = dr(1)
+                txtAllergyType.Text = dr(2)
+                txtMedicationName.Text = "N/A"
 
-
+                Debug.WriteLine("")
+            End If
+            CreateAllergiesPanels(flpAllergies, txtAllergyName.Text, txtMedicationName.Text, txtAllergyType.Text, cmbSeverity.SelectedItem.ToString)
         Next
         'CreateAllergiesPanels()
 
