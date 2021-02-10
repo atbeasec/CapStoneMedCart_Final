@@ -28,11 +28,9 @@
 
     Private Sub btnDispense_Click(sender As Object, e As EventArgs) Handles btnDispense.Click
 
+        'make sure that both patient and medication is selected before ordering the AdHoc
         If Not IsNothing(cmbMedications.SelectedItem) And Not IsNothing(cmbPatientName.SelectedItem) Then
             AdHoc.InsertAdHoc(txtMRN.Text, "1", txtQuantity.Text)
         End If
-
-
-
     End Sub
 End Class

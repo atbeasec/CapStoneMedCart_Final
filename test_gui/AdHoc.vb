@@ -55,18 +55,31 @@ Module AdHoc
     '/* patient Adhoc order table.
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
-    '/*  (None)								           					  
+    '/*  frmPatientRecords -- btnDispense_Click()							           					  
     '/*********************************************************************/
     '/*  CALLS:														    	
+    '/* String.Split()
+    '/* ExecuteScalarQuery()
+    '/* IsDBNull()
+    '/* ExecuteInsertQuery()
     '/*
     '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					   		   
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/* intPatientMRN As Integer, intUserID As Integer
+    '/* intAmount As Integer
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                   
-    '/*											                           
+    '/*	InsertAdHoc('876523','10','100')										                           
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically):	
-    '/*	
+    '/* dtmAdhocTime
+    '/* strArray()
+    '/*	Strdatacommand
+    '/* intMedicationDrawerID
+    '/* intMedicationID
+    '/* intMedRXCUI
+    '/* intPatientID
+    '/* StrSelectedMedication
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						                      */
     '/*											                          */
@@ -77,6 +90,7 @@ Module AdHoc
 
     Public Sub InsertAdHoc(ByRef intPatientMRN As Integer, ByRef intUserID As Integer,
                            ByRef intAmount As Integer)
+        'create variables used for insert order
         Dim intMedicationID As Integer
         Dim intPatientID As Integer
         Dim Strdatacommand As String
@@ -104,11 +118,12 @@ Module AdHoc
 
 
         If Not IsDBNull(intMedicationDrawerID) Then
+            'get current time for dateTime in table
             Dim dtmAdhocTime As String = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")
             Strdatacommand = "INSERT INTO AdHocOrder(Medication_TUID,Patient_TUID,User_TUID,Amount,DrawerMedication_TUID,DateTime) " &
                 "VALUES('" & intMedicationID & "', '" & intPatientID & "', '" & intUserID & "', '" & intAmount & "', '" & intMedicationDrawerID & "', '" & dtmAdhocTime & "')"
 
-
+            'insert AdHoc
             CreateDatabase.ExecuteInsertQuery(Strdatacommand)
         End If
 
@@ -118,9 +133,11 @@ Module AdHoc
     '/*                   SUBROUTINE NAME:GetAllMedicationsForListbox                     */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
-    '/*		         DATE CREATED: 	   02/01/21							  */
+    '/*		         DATE CREATED: 	   02/09/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE: 
+    '/*  SUBROUTINE PURPOSE: the purpose of this subroutine is too
+    '/*  populate the medications listbox with all the current Active medications
+    '/*  that are currently on the drawer
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
     '/*  (None)								           					  
@@ -140,7 +157,7 @@ Module AdHoc
     '/*											                          */
     '/*  WHO                   WHEN     WHAT							  */
     '/*  ---                   ----     ----------------------------------*/
-    '/*  Alexander Beasecker  02/01/2021  Initial creation of the code     */
+    '/*  Alexander Beasecker 02/09/21	  Initial creation of the code     */
     '/*********************************************************************/
     Public Sub GetAllMedicationsForListbox()
         Dim Strdatacommand As String
@@ -158,7 +175,7 @@ Module AdHoc
     '/*                   SUBROUTINE NAME:SetMedicationProperties                     */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
-    '/*		         DATE CREATED: 	   02/01/21							  */
+    '/*		         DATE CREATED: 	   02/09/21								  */
     '/*********************************************************************/
     '/*  SUBROUTINE PURPOSE: 
     '/*********************************************************************/
@@ -180,7 +197,7 @@ Module AdHoc
     '/*											                          */
     '/*  WHO                   WHEN     WHAT							  */
     '/*  ---                   ----     ----------------------------------*/
-    '/*  Alexander Beasecker  02/01/2021  Initial creation of the code     */
+    '/*  Alexander Beasecker  02/09/21	  Initial creation of the code     */
     '/*********************************************************************/
     Public Sub SetMedicationProperties()
 
@@ -212,7 +229,7 @@ Module AdHoc
     '/*                   SUBROUTINE NAME:PopulatePatientsAdhoc                     */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
-    '/*		         DATE CREATED: 	   02/01/21							  */
+    '/*		         DATE CREATED: 	   02/09/21								  */
     '/*********************************************************************/
     '/*  SUBROUTINE PURPOSE: 
     '/*********************************************************************/
@@ -234,7 +251,7 @@ Module AdHoc
     '/*											                          */
     '/*  WHO                   WHEN     WHAT							  */
     '/*  ---                   ----     ----------------------------------*/
-    '/*  Alexander Beasecker  02/01/2021  Initial creation of the code     */
+    '/*  Alexander Beasecker  02/09/21	  Initial creation of the code     */
     '/*********************************************************************/
     Public Sub PopulatePatientsAdhoc()
         frmAdHockDispense.cmbPatientName.Items.Clear()
@@ -261,7 +278,7 @@ Module AdHoc
     '/*                   SUBROUTINE NAME:PopulatePatientInformation                     */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
-    '/*		         DATE CREATED: 	   02/01/21							  */
+    '/*		         DATE CREATED: 	   02/09/21								  */
     '/*********************************************************************/
     '/*  SUBROUTINE PURPOSE: 
     '/*********************************************************************/
@@ -283,7 +300,7 @@ Module AdHoc
     '/*											                          */
     '/*  WHO                   WHEN     WHAT							  */
     '/*  ---                   ----     ----------------------------------*/
-    '/*  Alexander Beasecker  02/01/2021  Initial creation of the code     */
+    '/*  Alexander Beasecker  02/09/21	  Initial creation of the code     */
     '/*********************************************************************/
     Public Sub PopulatePatientInformation()
         Dim strArray() As String
