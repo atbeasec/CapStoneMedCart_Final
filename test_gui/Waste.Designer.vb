@@ -27,6 +27,10 @@ Partial Class Waste
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.pnlRadioButtons = New System.Windows.Forms.Panel()
+        Me.pnlSignOff = New System.Windows.Forms.Panel()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.btnConfigureInventory = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.rbtnOther = New System.Windows.Forms.RadioButton()
         Me.rbtnPatientUnavilable = New System.Windows.Forms.RadioButton()
@@ -34,10 +38,6 @@ Partial Class Waste
         Me.RadioButton3 = New System.Windows.Forms.RadioButton()
         Me.RadioButton2 = New System.Windows.Forms.RadioButton()
         Me.rbtnDispenseDevice = New System.Windows.Forms.RadioButton()
-        Me.pnlSignOff = New System.Windows.Forms.Panel()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.btnConfigureInventory = New System.Windows.Forms.Button()
         Me.pnlRadioButtons.SuspendLayout()
         Me.pnlSignOff.SuspendLayout()
         Me.SuspendLayout()
@@ -85,6 +85,51 @@ Partial Class Waste
         Me.pnlRadioButtons.Name = "pnlRadioButtons"
         Me.pnlRadioButtons.Size = New System.Drawing.Size(325, 482)
         Me.pnlRadioButtons.TabIndex = 23
+        '
+        'pnlSignOff
+        '
+        Me.pnlSignOff.Controls.Add(Me.Label3)
+        Me.pnlSignOff.Controls.Add(Me.TextBox2)
+        Me.pnlSignOff.Controls.Add(Me.btnConfigureInventory)
+        Me.pnlSignOff.Location = New System.Drawing.Point(0, 248)
+        Me.pnlSignOff.Name = "pnlSignOff"
+        Me.pnlSignOff.Size = New System.Drawing.Size(325, 135)
+        Me.pnlSignOff.TabIndex = 24
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(39, 10)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(235, 25)
+        Me.Label3.TabIndex = 32
+        Me.Label3.Text = "Witness Sign-off Required"
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox2.Location = New System.Drawing.Point(4, 38)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(306, 27)
+        Me.TextBox2.TabIndex = 30
+        '
+        'btnConfigureInventory
+        '
+        Me.btnConfigureInventory.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnConfigureInventory.FlatAppearance.BorderSize = 0
+        Me.btnConfigureInventory.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnConfigureInventory.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnConfigureInventory.ForeColor = System.Drawing.Color.White
+        Me.btnConfigureInventory.Image = CType(resources.GetObject("btnConfigureInventory.Image"), System.Drawing.Image)
+        Me.btnConfigureInventory.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnConfigureInventory.Location = New System.Drawing.Point(91, 83)
+        Me.btnConfigureInventory.Name = "btnConfigureInventory"
+        Me.btnConfigureInventory.Size = New System.Drawing.Size(150, 37)
+        Me.btnConfigureInventory.TabIndex = 31
+        Me.btnConfigureInventory.Text = "   SUBMIT"
+        Me.btnConfigureInventory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnConfigureInventory.UseVisualStyleBackColor = False
         '
         'TextBox1
         '
@@ -165,51 +210,6 @@ Partial Class Waste
         Me.rbtnDispenseDevice.TabStop = True
         Me.rbtnDispenseDevice.Text = "Dispense Device"
         Me.rbtnDispenseDevice.UseVisualStyleBackColor = True
-        '
-        'pnlSignOff
-        '
-        Me.pnlSignOff.Controls.Add(Me.Label3)
-        Me.pnlSignOff.Controls.Add(Me.TextBox2)
-        Me.pnlSignOff.Controls.Add(Me.btnConfigureInventory)
-        Me.pnlSignOff.Location = New System.Drawing.Point(0, 248)
-        Me.pnlSignOff.Name = "pnlSignOff"
-        Me.pnlSignOff.Size = New System.Drawing.Size(325, 135)
-        Me.pnlSignOff.TabIndex = 24
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(39, 10)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(235, 25)
-        Me.Label3.TabIndex = 32
-        Me.Label3.Text = "Witness Sign-off Required"
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(4, 38)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(306, 27)
-        Me.TextBox2.TabIndex = 30
-        '
-        'btnConfigureInventory
-        '
-        Me.btnConfigureInventory.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnConfigureInventory.FlatAppearance.BorderSize = 0
-        Me.btnConfigureInventory.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnConfigureInventory.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnConfigureInventory.ForeColor = System.Drawing.Color.White
-        Me.btnConfigureInventory.Image = CType(resources.GetObject("btnConfigureInventory.Image"), System.Drawing.Image)
-        Me.btnConfigureInventory.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnConfigureInventory.Location = New System.Drawing.Point(91, 83)
-        Me.btnConfigureInventory.Name = "btnConfigureInventory"
-        Me.btnConfigureInventory.Size = New System.Drawing.Size(150, 37)
-        Me.btnConfigureInventory.TabIndex = 31
-        Me.btnConfigureInventory.Text = "   SUBMIT"
-        Me.btnConfigureInventory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnConfigureInventory.UseVisualStyleBackColor = False
         '
         'Waste
         '

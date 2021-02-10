@@ -7,6 +7,8 @@
 
     Private Sub Waste_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'TextBox1.Visible = False
+
+
     End Sub
 
     '/********************************************************************/
@@ -62,4 +64,7 @@
 
     End Sub
 
+    Private Sub btnConfigureInventory_Click(sender As Object, e As EventArgs) Handles btnConfigureInventory.Click
+
+    End Sub
 End Class
