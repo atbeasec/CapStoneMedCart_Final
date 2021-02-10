@@ -137,7 +137,7 @@ Module AdHoc
         frmAdHockDispense.cmbPatientName.Items.Clear()
 
         Dim Strdatacommand As String
-        Strdatacommand = "SELECT Patient_First_Name, Patient_Last_Name, MRN_Number FROM Patient Order By Patient_Last_Name, Patient_First_Name"
+        Strdatacommand = "SELECT Patient_First_Name, Patient_Last_Name, MRN_Number FROM Patient WHERE Active_Flag = 1 Order By Patient_Last_Name, Patient_First_Name"
 
 
         Dim dsPatientRecords As DataSet = New DataSet
