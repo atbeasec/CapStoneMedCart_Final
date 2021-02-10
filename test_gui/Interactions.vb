@@ -96,7 +96,9 @@ Module Interactions
     '/*  WHO      WHEN     WHAT								              */
     '/*                                                                   */
     '/*  Dillen  02/3/21  Function that check Interations                 */
-    '/*********************************************************************/
+    '/*  NP      02/9/2021 Added a return that returns the result to      */
+    '/*                    remove the function has no return warning.     */
+    '/********************************************************************/
     '//
     Function getDrugInteraction(rxuiNum As String) As Object
 
@@ -116,6 +118,8 @@ Module Interactions
 
         'debug to test if content is correct
         Debug.WriteLine(result.Content)
+        'adding return result to make this work like a function -NP
+        Return result
 
     End Function
 End Module

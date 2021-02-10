@@ -688,10 +688,11 @@ Module CreateDatabase
 	'/*  WHO   WHEN     WHAT											*/
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  BRH  01/23/21  Initial creation of the code					*/
+	'/*  BRH  02/09/21  Edited Room_ID data type						*/
 	'/*******************************************************************/
 	Public Sub CreateRoomsTable()
 		strCreateTable = "CREATE TABLE 'Rooms' (
-	                    'Room_ID'	INTEGER NOT NULL,
+	                    'Room_ID'	TEXT NOT NULL,
 	                    'Bed_Name'	TEXT NOT NULL,
 	                    'Active_Flag'	INTEGER NOT NULL,
 	                    PRIMARY KEY(" & "Room_ID" & "," & "Bed_Name" & "));"
@@ -733,17 +734,18 @@ Module CreateDatabase
 	'/*  WHO   WHEN     WHAT											*/
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  BRH  01/23/21  Initial creation of the code					*/
+	'/*  BRH  02/09/21  Change Room_TUID to match Rooms ID				*/
+	'/*  BRH  02/09/21  Update foreign keys to fix insertion issue		*/
 	'/*******************************************************************/
 	Public Sub CreatePatientRoomTable()
 		strCreateTable = "CREATE TABLE 'PatientRoom' (
 	                    'Patient_TUID'	INTEGER NOT NULL,
-	                    'Room_TUID'	INTEGER NOT NULL,
+	                    'Room_TUID'	TEXT NOT NULL,
 	                    'Bed_Name'	TEXT NOT NULL,
 	                    'Active_Flag'	INTEGER NOT NULL,
-						PRIMARY KEY(" & "Patient_TUID" & "," & "Room_TUID" & "," & "Bed_Name" & "),
-	                    FOREIGN KEY(" & "Bed_Name" & ") REFERENCES " & "Rooms" & "(" & "Bed_Name" & "),	                    
+						PRIMARY KEY(" & "Patient_TUID" & "," & "Room_TUID" & "," & "Bed_Name" & "),                   
 	                    FOREIGN KEY(" & "Patient_TUID" & ") REFERENCES " & "Patient" & "(" & "Patient_ID" & "),
-	                    FOREIGN KEY(" & "Room_TUID" & ") REFERENCES " & "Rooms" & "(" & "Room_ID" & "));"
+	                   FOREIGN KEY(" & "Room_TUID," & "Bed_Name" & ") REFERENCES " & "Rooms" & "(" & "Room_ID," & "Bed_Name" & "));"
 
 		ExecuteQuery("PatientRoom")
 	End Sub

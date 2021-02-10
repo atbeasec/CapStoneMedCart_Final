@@ -83,8 +83,8 @@
         cboRoom.Items.Clear()
 
         For Each row As DataRow In dsrooms.Tables(0).Rows
-            If checkComboForDup(cboRoom, row(EnumList.room.Id)) Then
-                cboRoom.Items.Add(row(EnumList.room.Id))
+            If checkComboForDup(cboRoom, row(EnumList.Rooms.Id)) Then
+                cboRoom.Items.Add(row(EnumList.Rooms.Id))
             End If
         Next
     End Sub
@@ -133,8 +133,8 @@
         cboBed.Items.Clear()
 
         For Each row As DataRow In dsrooms.Tables(0).Rows
-            If checkComboForDup(cboBed, row(EnumList.room.BedName)) Then
-                cboBed.Items.Add(row(EnumList.room.BedName))
+            If checkComboForDup(cboBed, row(EnumList.Rooms.BedName)) Then
+                cboBed.Items.Add(row(EnumList.Rooms.BedName))
             End If
         Next
     End Sub

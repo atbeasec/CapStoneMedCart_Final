@@ -1,0 +1,54 @@
+﻿Balsam of Peru,,Food
+Buckwheat,,Food
+Celery,,Food
+Egg,,Food
+Fish,,Food
+Mango,,Food
+Strawberries,,Food
+ Banana,,Food
+Avocado,,Food
+Kiwi,,Food
+Tomatoes,,Food
+Garlic,,Food
+Hot peppers,,Food
+Oats,,Food
+Maize,,Food
+Milk,,Food
+Peanut,,Food
+Poultry Meat,,Food
+Red Meat,,Food
+Rice,,Food
+Sesame,,Food
+Shellfish,,Food
+Soy,,Food
+Sulfites,,Food
+Tartrazine,,Food
+Tree nut,,Food
+Wheat,,Food
+Tetracycline,1,Drug
+Dilantin,5,Drug
+Tegretol ,2,Drug
+Penicillin,7,Drug
+Cephalosporins,8,Drug
+Sulfonamides,3,Drug
+Non-steroidal anti-inflammatories,9,Drug
+Intravenous contrast dye,6,Drug
+Local anesthetics,4,Drug
+Pollen,,Environmental
+Cat,,Environmental
+Dog,,Environmental
+Insect sting,,Environmental
+Mold,,Environmental
+Perfume,,Environmental
+Cosmetics,,Environmental
+Semen,,Environmental
+Latex,,Environmental
+Cold stimuli,,Environmental
+House dust mite,,Environmental
+Nickel,,Environmental
+Gold,,Environmental
+Chromium,,Environmental
+Cobalt,,Environmental
+Formaldehyde,,Environmental
+Photographic developers,,Environmental
+Fungicide,,Environmental
