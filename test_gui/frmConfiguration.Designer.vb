@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmConfiguration
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,11 +20,11 @@ Partial Class frmConfiguration
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.txtUserID = New System.Windows.Forms.TextBox()
+        Me.txtUsername = New System.Windows.Forms.TextBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.txtConfirmPassword = New System.Windows.Forms.TextBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
@@ -82,23 +82,23 @@ Partial Class frmConfiguration
         'Panel5
         '
         Me.Panel5.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel5.Controls.Add(Me.txtUserID)
+        Me.Panel5.Controls.Add(Me.txtUsername)
         Me.Panel5.Location = New System.Drawing.Point(16, 196)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel5.Size = New System.Drawing.Size(227, 28)
         Me.Panel5.TabIndex = 3
         '
-        'txtUserID
+        'txtUsername
         '
-        Me.txtUserID.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtUserID.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtUserID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUserID.Location = New System.Drawing.Point(1, 1)
-        Me.txtUserID.Multiline = True
-        Me.txtUserID.Name = "txtUserID"
-        Me.txtUserID.Size = New System.Drawing.Size(225, 26)
-        Me.txtUserID.TabIndex = 38
+        Me.txtUsername.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtUsername.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtUsername.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtUsername.Location = New System.Drawing.Point(1, 1)
+        Me.txtUsername.Multiline = True
+        Me.txtUsername.Name = "txtUsername"
+        Me.txtUsername.Size = New System.Drawing.Size(225, 26)
+        Me.txtUsername.TabIndex = 38
         '
         'Panel4
         '
@@ -466,7 +466,7 @@ Partial Class frmConfiguration
     End Sub
     Friend WithEvents Button2 As Button
     Friend WithEvents Panel5 As Panel
-    Friend WithEvents txtUserID As TextBox
+    Friend WithEvents txtUsername As TextBox
     Friend WithEvents Panel4 As Panel
     Friend WithEvents txtConfirmPassword As TextBox
     Friend WithEvents Panel3 As Panel
