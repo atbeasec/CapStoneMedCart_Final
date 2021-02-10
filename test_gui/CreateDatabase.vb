@@ -688,10 +688,11 @@ Module CreateDatabase
 	'/*  WHO   WHEN     WHAT											*/
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  BRH  01/23/21  Initial creation of the code					*/
+	'/*  BRH  02/09/21  Edited Room_ID data type						*/
 	'/*******************************************************************/
 	Public Sub CreateRoomsTable()
 		strCreateTable = "CREATE TABLE 'Rooms' (
-	                    'Room_ID'	INTEGER NOT NULL,
+	                    'Room_ID'	TEXT NOT NULL,
 	                    'Bed_Name'	TEXT NOT NULL,
 	                    'Active_Flag'	INTEGER NOT NULL,
 	                    PRIMARY KEY(" & "Room_ID" & "," & "Bed_Name" & "));"
