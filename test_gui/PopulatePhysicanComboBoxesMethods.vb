@@ -87,8 +87,9 @@ Module PopulatePhysicanComboBoxesMethods
 
         For Each row As DataRow In ds.Tables(0).Rows
             strbTesting.Clear()
-            strbTesting.Append((row(EnumList.Physician.LastName) & " " &
+            strbTesting.Append((row(EnumList.Physician.LastName) & ", " &
                                 row(EnumList.Physician.FirstName)))
+            Debug.WriteLine("")
             If checkComboForDup(cboStuff, strbTesting.ToString) Then
                 cboStuff.Items.Add(strbTesting.ToString)
             End If
