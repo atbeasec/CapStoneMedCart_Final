@@ -140,18 +140,18 @@ Module AdHoc
     '/*  that are currently on the drawer
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
-    '/*  (None)								           					  
+    '/*  frmAdHockDispense_Load(							           					  
     '/*********************************************************************/
     '/*  CALLS:														    	
-    '/*
+    '/* CreateDatabase.ExecuteSelectQuery(Strdatacommand)
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					   		   
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                   
-    '/*											                           
+    '/*	GetAllMedicationsForListbox()							                           
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically):	
-    '/*	
+    '/*	 Strdatacommand
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						                      */
     '/*											                          */
@@ -161,37 +161,49 @@ Module AdHoc
     '/*********************************************************************/
     Public Sub GetAllMedicationsForListbox()
         Dim Strdatacommand As String
+        ' Currently the medication display is appending the RXCUI Number on too the medication
+        ' name, as searching by name alone could cause problems if medication names can repeat
         Strdatacommand = "Select Drug_Name, RXCUI_ID FROM Medication INNER JOIN DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE Active_Flag = 1"
 
         Dim dsMedicationDataSet As DataSet = New DataSet
         dsMedicationDataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
-
+        'add medication name and RXCUI to listbox
         For Each dr As DataRow In dsMedicationDataSet.Tables(0).Rows
             frmAdHockDispense.cmbMedications.Items.Add(dr(0) & "--" & dr(1))
         Next
     End Sub
 
     '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:SetMedicationProperties                     */
+    '/*                   SUBROUTINE NAME:SetMedicationProperties         */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
-    '/*		         DATE CREATED: 	   02/09/21								  */
+    '/*		         DATE CREATED: 	   02/09/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE: 
+    '/*  SUBROUTINE PURPOSE: this subroutine is used too populate the
+    '/* properties textboxes for the medication that is selected. it will
+    '/* populate the method and dosage textboxes
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
-    '/*  (None)								           					  
+    '/*  frmPatientRecords.cmbMedications_SelectedIndexChanged(							           					  
     '/*********************************************************************/
     '/*  CALLS:														    	
-    '/*
+    '/*frmAdHockDispense.cmbMethod.Items.Clear()
+    '/*frmAdHockDispense.cmbDosage.Items.Clear()
+    '/*strMedicationRXCUI.Split("--")
+    '/*frmAdHockDispense.cmbMethod.Items.Add(
+    '/*frmAdHockDispense.cmbDosage.Items.Add(
+    '/*CreateDatabase.ExecuteSelectQuery(
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					   		   
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                   
-    '/*											                           
+    '/*	SetMedicationProperties()							                           
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically):	
-    '/*	
+    '/* strArray()
+    '/* Strdatacommand
+    '/* dsMedicationInformation
+    '/* strMedicationRXCUI
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						                      */
     '/*											                          */
@@ -200,23 +212,25 @@ Module AdHoc
     '/*  Alexander Beasecker  02/09/21	  Initial creation of the code     */
     '/*********************************************************************/
     Public Sub SetMedicationProperties()
-
+        'clear the textboxes
         frmAdHockDispense.cmbMethod.Items.Clear()
         frmAdHockDispense.cmbDosage.Items.Clear()
 
-        Dim strMedicationName As String = frmAdHockDispense.cmbMedications.SelectedItem
-
+        'get selected medication
+        Dim strMedicationRXCUI As String = frmAdHockDispense.cmbMedications.SelectedItem
+        'split out the RXCUI and name
         Dim strArray() As String
-        strArray = strMedicationName.Split("--")
-        strMedicationName = strArray(0)
-
+        strArray = strMedicationRXCUI.Split("--")
+        strMedicationRXCUI = strArray(2)
+        'select medication type and strength for the selected medication using rxcui 
         Dim Strdatacommand As String
-        Strdatacommand = "SELECT Type, Strength From Medication WHERE Drug_Name = '" & strMedicationName & "'"
+        Strdatacommand = "SELECT Type, Strength From Medication WHERE RXCUI_ID = '" & strMedicationRXCUI & "'"
 
-
+        'make dataset and call the sql method
         Dim dsMedicationInformation As DataSet = New DataSet
         dsMedicationInformation = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
 
+        'insert the method and dosage into comboboxes
         frmAdHockDispense.cmbMethod.Items.Add(dsMedicationInformation.Tables(0).Rows(0)(0))
         frmAdHockDispense.cmbMethod.SelectedItem = dsMedicationInformation.Tables(0).Rows(0)(0)
 
@@ -226,26 +240,32 @@ Module AdHoc
     End Sub
 
     '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:PopulatePatientsAdhoc                     */
+    '/*                   SUBROUTINE NAME:PopulatePatientsAdhoc           */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
-    '/*		         DATE CREATED: 	   02/09/21								  */
+    '/*		         DATE CREATED: 	   02/09/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE: 
+    '/*  SUBROUTINE PURPOSE: the purpose of this subroutine is too populate
+    '/* the currently active patients into the patient combo box
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
-    '/*  (None)								           					  
+    '/*  frmAdHockDispense_Load(								           					  
     '/*********************************************************************/
     '/*  CALLS:														    	
+    '/*frmAdHockDispense.cmbPatientName.Items.Clear()
+    '/*CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+    '/*IsDBNull(
+    '/*frmAdHockDispense.cmbPatientName.Items.Add(
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):	
     '/*
     '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					   		   
-    '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                   
-    '/*											                           
+    '/*		PopulatePatientsAdhoc()									                           
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically):	
-    '/*	
+    '/*Strdatacommand
+    '/*dsPatientRecords
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						                      */
     '/*											                          */
@@ -254,20 +274,24 @@ Module AdHoc
     '/*  Alexander Beasecker  02/09/21	  Initial creation of the code     */
     '/*********************************************************************/
     Public Sub PopulatePatientsAdhoc()
+        'clear patientname listbox
         frmAdHockDispense.cmbPatientName.Items.Clear()
-
+        'get patient name, first, last, and MRN number
+        'MRN is appended on too the end currently because search just based on name will not work
+        ' if system has multiple patients with the same name
         Dim Strdatacommand As String
         Strdatacommand = "SELECT Patient_First_Name, Patient_Last_Name, MRN_Number FROM Patient WHERE Active_Flag = 1 Order By Patient_Last_Name, Patient_First_Name"
 
-
+        'call sql method
         Dim dsPatientRecords As DataSet = New DataSet
         dsPatientRecords = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
 
+        'place all patients into list box
         For Each dr As DataRow In dsPatientRecords.Tables(0).Rows
             If IsDBNull(dr(0)) Then
-                frmAdHockDispense.cmbPatientName.Items.Add("No medications in drawers")
+                frmAdHockDispense.cmbPatientName.Items.Add("No Patients active")
             Else
-                frmAdHockDispense.cmbPatientName.Items.Add(dr(0) & " " & dr(1) & "--" & dr(2))
+                frmAdHockDispense.cmbPatientName.Items.Add(dr(1) & ", " & dr(0) & "--" & dr(2))
             End If
 
         Next
@@ -280,21 +304,31 @@ Module AdHoc
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
     '/*		         DATE CREATED: 	   02/09/21								  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE: 
+    '/*  SUBROUTINE PURPOSE: the purpose of this subroutine is to populate
+    '/* the patient information textboxes after the patient is selected.
+    '/* it will fill, patient MRN, Date of Birth and allergies
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
-    '/*  (None)								           					  
+    '/* cmbPatientName_SelectedIndexChanged(							           					  
     '/*********************************************************************/
     '/*  CALLS:														    	
-    '/*
+    '/* frmAdHockDispense.txtDateOfBirth.Clear()
+    '/* frmAdHockDispense.txtMRN.Clear()
+    '/* strPatientSelected.Split("--")
+    '/* CreateDatabase.ExecuteSelectQuery(Strdatacommand)
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					   		   
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                   
-    '/*											                           
+    '/*		PopulatePatientInformation()									                           
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically):	
-    '/*	
+    '/*
+    '/*strArray
+    '/*Strdatacommand
+    '/*intPatientID
+    '/*strPatientSelected
+    '/*dsPatientRecords
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						                      */
     '/*											                          */
@@ -303,27 +337,36 @@ Module AdHoc
     '/*  Alexander Beasecker  02/09/21	  Initial creation of the code     */
     '/*********************************************************************/
     Public Sub PopulatePatientInformation()
+
+        'local variables for splitting array and holding patient ID
         Dim strArray() As String
         Dim intPatientID As Integer
+
+        'clear textboxes so no overlapping data
         frmAdHockDispense.txtDateOfBirth.Clear()
         frmAdHockDispense.txtMRN.Clear()
 
+        'get selected patient and split
         Dim strPatientSelected As String = frmAdHockDispense.cmbPatientName.SelectedItem
         strArray = strPatientSelected.Split("--")
-        Dim Strdatacommand As String
 
+        'create sql command string
+        Dim Strdatacommand As String
         frmAdHockDispense.txtMRN.Text = strArray(2)
         Strdatacommand = "SELECT Date_of_Birth, Patient_ID from Patient Where MRN_Number = '" & frmAdHockDispense.txtMRN.Text & "'"
 
+        'create dataset and call sql method
         Dim dsPatientRecords As DataSet = New DataSet
         dsPatientRecords = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
-
+        'set patient properties in textboxes
         frmAdHockDispense.txtDateOfBirth.Text = dsPatientRecords.Tables(0).Rows(0)(0)
         intPatientID = dsPatientRecords.Tables(0).Rows(0)(1)
 
+        'get patient allergies
         Strdatacommand = "SELECT Allergy_Name From PatientAllergy Where Patient_TUID = '" & intPatientID & "'"
         dsPatientRecords = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
 
+        'place all allergies for the patient
         For Each dr As DataRow In dsPatientRecords.Tables(0).Rows
             frmAdHockDispense.lstboxAllergies.Items.Add(dr(0))
         Next
