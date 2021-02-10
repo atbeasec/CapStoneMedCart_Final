@@ -25,4 +25,8 @@
     Private Sub cmbPatientName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPatientName.SelectedIndexChanged
         AdHoc.PopulatePatientInformation()
     End Sub
+
+    Private Sub btnDispense_Click(sender As Object, e As EventArgs) Handles btnDispense.Click
+
+    End Sub
 End Class

@@ -87,22 +87,22 @@ Module AdHoc
 
 
         StrMedicationDrawerID = ExecuteScalarQuery(Strdatacommand)
-
-        Dim dtmAdhocTime As String = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
-
-        Strdatacommand = "INSERT INTO AdHocOrder(Medication_TUID, Patient_TUID, 
+        If Not IsDBNull(StrMedicationDrawerID) Then
+            Dim dtmAdhocTime As String = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
+            Strdatacommand = "INSERT INTO AdHocOrder(Medication_TUID, Patient_TUID, 
                             User_TUID, Amount, DrawerMedication_TUID, DateTime)
                             VALUES('" & intMedicationID & "','" & intPatientID & "','" &
-                            intUserID & "','" & intAmount & "','" & StrMedicationDrawerID & "','" & dtmAdhocTime & "')"
+                                intUserID & "','" & intAmount & "','" & StrMedicationDrawerID & "','" & dtmAdhocTime & "')"
 
 
-        CreateDatabase.ExecuteInsertQuery(Strdatacommand)
+            CreateDatabase.ExecuteInsertQuery(Strdatacommand)
+        End If
 
     End Sub
 
     Public Sub GetAllMedicationsForListbox()
         Dim Strdatacommand As String
-        Strdatacommand = "SELECT Drug_Name from Medication WHERE Active_Flag = 1"
+        Strdatacommand = "Select Drug_Name FROM Medication INNER JOIN DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE Active_Flag = 1"
 
         Dim dsMedicationDataSet As DataSet = New DataSet
         dsMedicationDataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
@@ -144,7 +144,12 @@ Module AdHoc
         dsPatientRecords = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
 
         For Each dr As DataRow In dsPatientRecords.Tables(0).Rows
-            frmAdHockDispense.cmbPatientName.Items.Add(dr(0) & " " & dr(1) & "--" & dr(2))
+            If IsDBNull(dr(0)) Then
+                frmAdHockDispense.cmbPatientName.Items.Add("No medications in drawers")
+            Else
+                frmAdHockDispense.cmbPatientName.Items.Add(dr(0) & " " & dr(1) & "--" & dr(2))
+            End If
+
         Next
 
     End Sub
@@ -175,4 +180,5 @@ Module AdHoc
             frmAdHockDispense.lstboxAllergies.Items.Add(dr(0))
         Next
     End Sub
+
 End Module
