@@ -281,7 +281,7 @@ Module APIDatabaseSelection
 	Sub CompareMedications(DrugName As String, RXCUID As Integer, ControlledFlag As Integer, NarcoticFlag As Integer,
 								 Barcode As Integer, Type As String, Strength As Integer, ActiveFlag As Integer)
 
-		'Create a dataset to hold database data
+		'Create a dataset to hold database data for that
 		Dim dtMedications As DataSet
 
 		'Select the specific table and the data in each column, filling a dataset through the different parameters
