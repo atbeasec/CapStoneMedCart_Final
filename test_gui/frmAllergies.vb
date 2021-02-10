@@ -5,11 +5,20 @@
         Dim intPatientAllergyId As Integer = CInt(CreateDatabase.ExecuteScalarQuery("select patient.Patient_ID From Patient " &
                         "where Patient.MRN_Number=" & (intPatientInformationMRN).ToString & ";"))
         'get the allergy information from the patient allergy tables
-        Dim dtsPatientAllergy As DataSet = CreateDatabase.ExecuteSelectQuery("Select Allergy_Name From PatientAllergy " &
-                            "Where Active_Flag =1 AND Patient_TUID =" & (intPatientAllergyId).ToString & ";")
+        Dim dtsPatientAllergy As DataSet = CreateDatabase.ExecuteSelectQuery("Select Allergy.Allergy_Name, PatientAllergy.Allergy_Severity," &
+                                                                             "Allergy.Allergy_Type, Allergy.Medication_TUID From PatientAllergy " &
+                                                                             "INNER JOIN Allergy on PatientAllergy.Allergy_Name=Allergy.Allergy_Name" &
+                            " Where Active_Flag =1 And Patient_TUID =" & (intPatientAllergyId).ToString & ";")
         ' insert the select statement here and send the results to the createAllergiesPanel
+        For Each dr As DataRow In dtsPatientAllergy.Tables(0).Rows
+            txtAllergyName.Text = dr(0)
+            cmbSeverity.SelectedIndex = dr(1)
+            txtAllergyType.Text = dr(2)
 
-        ' CreateAllergiesPanels()
+
+
+        Next
+        'CreateAllergiesPanels()
 
 
     End Sub
