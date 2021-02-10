@@ -1,5 +1,4 @@
 'Import necessary libraries to connect to the SQLite database
-Imports System.Data.SQLite
 Imports System.IO
 
 '/*******************************************************************/
@@ -210,13 +209,14 @@ Module APIDatabaseSelection
 	'/* simple and easier to read and understand.                       */
 	'/*******************************************************************/
 	Sub CompareDrugInteractions(Drug1 As Integer, Drug2 As Integer, Severity As String, Description As String,
-																		ActiveFlag As Integer)
+								ActiveFlag As Integer)
+
 		'Create a dataset to hold database data
 		Dim dtCompareDrugInteractions As DataSet
 
 		'Select the specific table and the data in each column, filling a dataset through the different parameters
 		dtCompareDrugInteractions = ExecuteSelectQuery("SELECT Medication_One_ID, Medication_Two_ID, Severity, Description,
-                                            Active_Flag FROM Drug_Interactions WHERE Medication_One_ID ='" & Drug1 & "'
+		                                          Active_Flag FROM Drug_Interactions WHERE Medication_One_ID ='" & Drug1 & "'
 										    AND Medication_Two_ID = '" & Drug2 & "' AND Severity = '" & Severity &
 											"'AND Description = '" & Description & "' AND Active_Flag = '" & ActiveFlag & "'")
 
@@ -225,11 +225,11 @@ Module APIDatabaseSelection
 
 			'Send an insert sql statement to the database
 			ExecuteInsertQuery("INSERT INTO Drug_Interactions(Medication_One_ID, Medication_Two_ID, 
-                            Severity, Description, Active_Flag)
-                            VALUES('" & Drug1 & "','" & Drug2 & "','" &
+                            Severity, Description, Active_Flag) VALUES('" & Drug1 & "','" & Drug2 & "','" &
 								Severity & "','" & Description & "','" & ActiveFlag & "')")
 
 		Else
+
 			'Send an update sql statement to the database
 			ExecuteScalarQuery("UPDATE Drug_Interactions SET Severity = '" & Severity & "', Description = '" & Description & "', Active_Flag = '" & ActiveFlag &
 						   "'WHERE Medication_One_ID = '" & Drug1 & "' AND Medication_Two_ID = '" & Drug2 & "';")
@@ -282,32 +282,32 @@ Module APIDatabaseSelection
 								 Barcode As Integer, Type As String, Strength As Integer, ActiveFlag As Integer)
 
 		'Create a dataset to hold database data for that
-		Dim dtMedications As DataSet
+		Dim dsMedications As DataSet
 
 		'Select the specific table and the data in each column, filling a dataset through the different parameters
-		ExecuteSelectQuery("SELECT Drug_Name, RXCUI_ID, Controlled_Flag, Narcotic_Flag, Barcode, Type, Strength, Active_Flag
-                           Active_Flag FROM Drug_Interactions WHERE Drug_Name ='" & DrugName & "'
-						   AND RXCUI_ID = '" & RXCUID & "' AND Controlled_Flag = '" & ControlledFlag &
-						  "'AND Narcotic_Flag = '" & NarcoticFlag & "' AND Barcode = '" & Barcode & "' AND Type = '" & Type &
-						  "'AND Strength = '" & Strength & "'AND Active_Flag = '" & ActiveFlag & "'")
+		ExecuteSelectQuery("SELECT Drug_Name, RXCUI_ID, Controlled, NarcoticControlled_Flag, Barcode, Type, Strength, Active_Flag
+	                          FROM Medication WHERE Drug_Name ='" & DrugName & "' AND RXCUI_ID = '" & RXCUID &
+						   "' AND Controlled = '" & ControlledFlag & "'AND NarcoticControlled_Flag = '" & NarcoticFlag &
+						   "' AND Barcode = '" & Barcode & "' AND Type = '" & Type & "'AND Strength = '" & Strength &
+						   "'AND Active_Flag = '" & ActiveFlag & "'")
 
-		If (dtMedications Is Nothing) Then
+		If (dsMedications Is Nothing) Then
 
 			'Send an insert sql statement to the database
-			ExecuteInsertQuery("INSERT INTO Medications(DrugName, RXCUI_ID, Controlled_Flag, Narcotic_Flag, Barcode, Type, 
-                            Strength, Active_Flag) VALUES('" & DrugName & "','" & RXCUID & "','" & ControlledFlag & "','" & NarcoticFlag &
+			ExecuteInsertQuery("INSERT INTO Medication(Drug_Name, RXCUI_ID, Controlled, NarcoticControlled_Flag, Barcode, Type, 
+	                           Strength, Active_Flag) VALUES('" & DrugName & "','" & RXCUID & "','" & ControlledFlag & "','" & NarcoticFlag &
 							"','" & Barcode & "','" & Type & "','" & Strength & "','" & ActiveFlag & "')")
 
 		Else
 
 			'Send an update sql statement to the database
-			ExecuteScalarQuery("UPDATE Medications SET Controlled_Flag = '" & ControlledFlag & "', Narcotic_Flag = '" & NarcoticFlag &
+			ExecuteScalarQuery("UPDATE Medication SET Controlled = '" & ControlledFlag & "', NarcoticControlled_Flag = '" & NarcoticFlag &
 							   "', Barcode = '" & Barcode & "', Type = '" & Type & "', Strength = '" & Strength &
-							   "', Active_Flag = '" & ActiveFlag & "'WHERE RXCUI_ID = '" & RXCUID & "';")
+							   "', Active_Flag = '" & ActiveFlag & "'WHERE RXCUI_ID = '" & RXCUID &
+							   "'Drug_Name =" & DrugName & "';")
 
 			'Clear the dataset after it is sent to the database
-			dtMedications.Clear()
+			dsMedications.Clear()
 		End If
-
 	End Sub
 End Module
