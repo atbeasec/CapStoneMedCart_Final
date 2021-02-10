@@ -9,8 +9,8 @@
 
         'Jonie Nicolas
         'Mauricio Adkisson
-        dsPhysicians = ExecuteSelectQuery("Select * From Physician;")
-        dsPatients = ExecuteSelectQuery("Select * from Patient;")
+        dsPhysicians = ExecuteSelectQuery("Select * From Physician ORDER BY Physician_Last_Name, Physician_First_Name;")
+        dsPatients = ExecuteSelectQuery("Select * From Patient ORDER BY Patient_Last_Name, Patient_First_Name;")
         populatePhysicianComboBox(cmbOrderedBy, dsPhysicians)
         populatePatientNameComboBox(cmbPatientName, dsPatients)
 
@@ -92,7 +92,6 @@
 
 
     End Sub
-
 
 
 

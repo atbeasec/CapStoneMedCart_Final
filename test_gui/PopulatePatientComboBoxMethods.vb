@@ -91,8 +91,8 @@ Module PopulatePatientComboBoxMethods
 
         For Each row As DataRow In dsPatients.Tables(0).Rows
             strbTesting.Clear()
-            strbTesting.Append((row(EnumList.Patient.FristName) & " " &
-                                row(EnumList.Patient.LastName)))
+            strbTesting.Append((row(EnumList.Patient.LastName) & ", " &
+                                row(EnumList.Patient.FristName)))
             If checkComboForDup(cboPatient, strbTesting.ToString) Then
                 cboPatient.Items.Add(strbTesting.ToString)
             End If
