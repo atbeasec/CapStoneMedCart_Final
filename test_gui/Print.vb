@@ -53,7 +53,7 @@ Module Print
         Override = 4
     End Enum
     Sub Main()
-
+        Dim lstOfDataValues As List(Of String) = New List(Of String)
         Dim intSelectedIndex As Integer = test_gui.frmReport.cmbReports.SelectedIndex
         Dim strReport As String = ""
         Select Case intSelectedIndex
@@ -68,16 +68,27 @@ Module Print
             Case Reports.Override : strReport = "Overrides"
 
         End Select
-        GenerateReportToWord(strReport)
+        Dim intColumnCount As Integer = 0
+        Dim intRowCount As Integer = 0
+        GatherDataFromDatabaseTable(intColumnCount, intRowCount, lstOfDataValues)
+        GenerateReportToWord(strReport, intColumnCount, intRowCount, lstOfDataValues)
     End Sub
 
-    Sub GatherDataFromDatabaseTable()
+    Sub GatherDataFromDatabaseTable(ByRef intColumnCount As Integer, ByRef intRowCount As Integer, ByRef lstOfDataValues As List(Of String))
+        intColumnCount = CreateDatabase.ExecuteScalarQuery("Select Count(name) from PRAGMA_TABLE_INFO('User');")
+        intRowCount = CreateDatabase.ExecuteScalarQuery("Select Count(*) From User;")
+        Dim dsDataset As DataSet
 
-
+        dsDataset = CreateDatabase.ExecuteSelectQuery("Select * from User;")
+        For Each row As DataRow In dsDataset.Tables(0).Rows
+            For Each item As String In row.ItemArray
+                lstOfDataValues.Add(item)
+            Next
+        Next
 
     End Sub
 
-    Sub GenerateReportToWord(ByVal strItem As String)
+    Sub GenerateReportToWord(ByVal strItem As String, ByRef intColumnCount As Integer, ByRef intRowCount As Integer, ByRef lstOfDataValues As List(Of String))
         Dim aWordApplication As Word.Application
         Dim aWordDocument As Word.Document
         aWordApplication = New Word.Application
@@ -86,25 +97,34 @@ Module Print
             aWordDocument = .Documents.Add()
             .Selection.Font.Size = 10
             .Selection.Font.Name = "Calibri"
+            .ActiveWindow.View.TableGridlines = False
         End With
 
-        CreateAndAddTableToWordForFormatting(aWordDocument)
-        '  Dim strSQLQuery As String = "SELECT name FROM PRAGMA_TABLE_INFO('AdHocOrder');"
+        CreateAndAddTableToWordForFormatting(aWordDocument, intColumnCount, intRowCount)
+        Dim intToKeepTrackOfDataInList As Integer = 0
+        For intRow As Integer = 1 To intRowCount
+            For intColumn As Integer = 1 To intColumnCount
+                aWordApplication.Selection.Tables.Item(1).Cell(intRow, intColumn).Range.Text = lstOfDataValues.Item(intToKeepTrackOfDataInList)
+                intToKeepTrackOfDataInList += 1
+            Next
+        Next
 
-        '  Dim dsDataSetReturnValues As DataSet = CreateDatabase.ExecuteSelectQuery(strSQLQuery)
-
-        aWordApplication.Selection.TypeText(strItem)
     End Sub
 
-    Sub CreateAndAddTableToWordForFormatting(ByRef aWordDoc As Word.Document)
+    Sub CreateAndAddTableToWordForFormatting(ByRef aWordDoc As Word.Document, ByVal intColumnCount As Integer, ByVal intRowCount As Integer)
         Dim aTableWordDoc As Word.Table
-
-        aTableWordDoc = aWordDoc.Tables.Add(aWordDoc.Range, 10, 7)
+        aTableWordDoc = aWordDoc.Tables.Add(aWordDoc.Range, intRowCount, intColumnCount)
         With aTableWordDoc
             .Range.ParagraphFormat.SpaceAfter = 6
             .Title = "Test Title"
             .AutoFitBehavior(Word.WdAutoFitBehavior.wdAutoFitWindow)
             .Style = "Plain Table 4"
+            With .Borders
+                .InsideLineStyle = Word.WdLineStyle.wdLineStyleNone
+                .OutsideLineStyle = Word.WdLineStyle.wdLineStyleNone
+
+            End With
+
         End With
 
     End Sub
