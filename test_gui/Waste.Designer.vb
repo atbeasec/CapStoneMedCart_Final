@@ -30,7 +30,7 @@ Partial Class Waste
         Me.pnlSignOff = New System.Windows.Forms.Panel()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.btnConfigureInventory = New System.Windows.Forms.Button()
+        Me.btnWaste = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.rbtnOther = New System.Windows.Forms.RadioButton()
         Me.rbtnPatientUnavilable = New System.Windows.Forms.RadioButton()
@@ -90,7 +90,7 @@ Partial Class Waste
         '
         Me.pnlSignOff.Controls.Add(Me.Label3)
         Me.pnlSignOff.Controls.Add(Me.TextBox2)
-        Me.pnlSignOff.Controls.Add(Me.btnConfigureInventory)
+        Me.pnlSignOff.Controls.Add(Me.btnWaste)
         Me.pnlSignOff.Location = New System.Drawing.Point(0, 248)
         Me.pnlSignOff.Name = "pnlSignOff"
         Me.pnlSignOff.Size = New System.Drawing.Size(325, 135)
@@ -114,22 +114,22 @@ Partial Class Waste
         Me.TextBox2.Size = New System.Drawing.Size(306, 27)
         Me.TextBox2.TabIndex = 30
         '
-        'btnConfigureInventory
+        'btnWaste
         '
-        Me.btnConfigureInventory.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnConfigureInventory.FlatAppearance.BorderSize = 0
-        Me.btnConfigureInventory.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnConfigureInventory.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnConfigureInventory.ForeColor = System.Drawing.Color.White
-        Me.btnConfigureInventory.Image = CType(resources.GetObject("btnConfigureInventory.Image"), System.Drawing.Image)
-        Me.btnConfigureInventory.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnConfigureInventory.Location = New System.Drawing.Point(91, 83)
-        Me.btnConfigureInventory.Name = "btnConfigureInventory"
-        Me.btnConfigureInventory.Size = New System.Drawing.Size(150, 37)
-        Me.btnConfigureInventory.TabIndex = 31
-        Me.btnConfigureInventory.Text = "   SUBMIT"
-        Me.btnConfigureInventory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnConfigureInventory.UseVisualStyleBackColor = False
+        Me.btnWaste.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnWaste.FlatAppearance.BorderSize = 0
+        Me.btnWaste.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnWaste.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnWaste.ForeColor = System.Drawing.Color.White
+        Me.btnWaste.Image = CType(resources.GetObject("btnWaste.Image"), System.Drawing.Image)
+        Me.btnWaste.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnWaste.Location = New System.Drawing.Point(91, 83)
+        Me.btnWaste.Name = "btnWaste"
+        Me.btnWaste.Size = New System.Drawing.Size(150, 37)
+        Me.btnWaste.TabIndex = 31
+        Me.btnWaste.Text = "   SUBMIT"
+        Me.btnWaste.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnWaste.UseVisualStyleBackColor = False
         '
         'TextBox1
         '
@@ -245,5 +245,5 @@ Partial Class Waste
     Friend WithEvents pnlSignOff As Panel
     Friend WithEvents Label3 As Label
     Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents btnConfigureInventory As Button
+    Friend WithEvents btnWaste As Button
 End Class

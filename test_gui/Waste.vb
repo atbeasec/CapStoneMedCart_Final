@@ -63,7 +63,7 @@
 
     End Sub
 
-    Private Sub btnConfigureInventory_Click(sender As Object, e As EventArgs) Handles btnConfigureInventory.Click
+    Private Sub btnConfigureInventory_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
 
     End Sub
 End Class
