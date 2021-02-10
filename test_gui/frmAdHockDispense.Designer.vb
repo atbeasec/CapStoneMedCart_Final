@@ -33,13 +33,13 @@ Partial Class frmAdHockDispense
         Me.Label17 = New System.Windows.Forms.Label()
         Me.cmbDosage = New System.Windows.Forms.ComboBox()
         Me.lstboxAllergies = New System.Windows.Forms.ListBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.cmbPatientName = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel14 = New System.Windows.Forms.Panel()
-        Me.txtMRN = New System.Windows.Forms.TextBox()
+        Me.txtDateOfBirth = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtMRN = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnDispense = New System.Windows.Forms.Button()
         Me.btnDecrementQuantity = New System.Windows.Forms.Button()
@@ -153,15 +153,15 @@ Partial Class frmAdHockDispense
         Me.lstboxAllergies.TabIndex = 203
         Me.lstboxAllergies.TabStop = False
         '
-        'ComboBox1
+        'cmbPatientName
         '
-        Me.ComboBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"Yes", "No"})
-        Me.ComboBox1.Location = New System.Drawing.Point(35, 216)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(243, 29)
-        Me.ComboBox1.TabIndex = 7
+        Me.cmbPatientName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbPatientName.FormattingEnabled = True
+        Me.cmbPatientName.Items.AddRange(New Object() {"Yes", "No"})
+        Me.cmbPatientName.Location = New System.Drawing.Point(35, 216)
+        Me.cmbPatientName.Name = "cmbPatientName"
+        Me.cmbPatientName.Size = New System.Drawing.Size(243, 29)
+        Me.cmbPatientName.TabIndex = 7
         '
         'Label1
         '
@@ -176,25 +176,25 @@ Partial Class frmAdHockDispense
         'Panel14
         '
         Me.Panel14.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel14.Controls.Add(Me.txtMRN)
+        Me.Panel14.Controls.Add(Me.txtDateOfBirth)
         Me.Panel14.Location = New System.Drawing.Point(337, 222)
         Me.Panel14.Name = "Panel14"
         Me.Panel14.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel14.Size = New System.Drawing.Size(243, 24)
         Me.Panel14.TabIndex = 6
         '
-        'txtMRN
+        'txtDateOfBirth
         '
-        Me.txtMRN.BackColor = System.Drawing.Color.White
-        Me.txtMRN.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtMRN.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtMRN.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMRN.Location = New System.Drawing.Point(1, 1)
-        Me.txtMRN.Name = "txtMRN"
-        Me.txtMRN.ReadOnly = True
-        Me.txtMRN.Size = New System.Drawing.Size(241, 22)
-        Me.txtMRN.TabIndex = 6
-        Me.txtMRN.TabStop = False
+        Me.txtDateOfBirth.BackColor = System.Drawing.Color.White
+        Me.txtDateOfBirth.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtDateOfBirth.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtDateOfBirth.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDateOfBirth.Location = New System.Drawing.Point(1, 1)
+        Me.txtDateOfBirth.Name = "txtDateOfBirth"
+        Me.txtDateOfBirth.ReadOnly = True
+        Me.txtDateOfBirth.Size = New System.Drawing.Size(241, 22)
+        Me.txtDateOfBirth.TabIndex = 6
+        Me.txtDateOfBirth.TabStop = False
         '
         'Label8
         '
@@ -209,25 +209,25 @@ Partial Class frmAdHockDispense
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel2.Controls.Add(Me.TextBox1)
+        Me.Panel2.Controls.Add(Me.txtMRN)
         Me.Panel2.Location = New System.Drawing.Point(35, 292)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel2.Size = New System.Drawing.Size(243, 24)
         Me.Panel2.TabIndex = 6
         '
-        'TextBox1
+        'txtMRN
         '
-        Me.TextBox1.BackColor = System.Drawing.Color.White
-        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(1, 1)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(241, 22)
-        Me.TextBox1.TabIndex = 6
-        Me.TextBox1.TabStop = False
+        Me.txtMRN.BackColor = System.Drawing.Color.White
+        Me.txtMRN.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtMRN.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtMRN.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMRN.Location = New System.Drawing.Point(1, 1)
+        Me.txtMRN.Name = "txtMRN"
+        Me.txtMRN.ReadOnly = True
+        Me.txtMRN.Size = New System.Drawing.Size(241, 22)
+        Me.txtMRN.TabIndex = 6
+        Me.txtMRN.TabStop = False
         '
         'Label2
         '
@@ -320,7 +320,7 @@ Partial Class frmAdHockDispense
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Panel14)
         Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.ComboBox1)
+        Me.Controls.Add(Me.cmbPatientName)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Label5)
@@ -357,13 +357,13 @@ Partial Class frmAdHockDispense
     Friend WithEvents Label17 As Label
     Friend WithEvents cmbDosage As ComboBox
     Friend WithEvents lstboxAllergies As ListBox
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents cmbPatientName As ComboBox
     Friend WithEvents Label1 As Label
     Friend WithEvents Panel14 As Panel
-    Friend WithEvents txtMRN As TextBox
+    Friend WithEvents txtDateOfBirth As TextBox
     Friend WithEvents Label8 As Label
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtMRN As TextBox
     Friend WithEvents Label2 As Label
     Friend WithEvents btnDecrementQuantity As Button
     Friend WithEvents btnIncrementQuantity As Button
