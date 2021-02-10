@@ -102,7 +102,7 @@ Module AdHoc
 
     Public Sub GetAllMedicationsForListbox()
         Dim Strdatacommand As String
-        Strdatacommand = "SELECT Drug_Name from Medication"
+        Strdatacommand = "SELECT Drug_Name from Medication WHERE Active_Flag = 1"
 
         Dim dsMedicationDataSet As DataSet = New DataSet
         dsMedicationDataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
