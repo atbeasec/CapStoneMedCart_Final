@@ -688,10 +688,11 @@ Module CreateDatabase
 	'/*  WHO   WHEN     WHAT											*/
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  BRH  01/23/21  Initial creation of the code					*/
+	'/*  BRH  02/09/21  Edited Room_ID data type						*/
 	'/*******************************************************************/
 	Public Sub CreateRoomsTable()
 		strCreateTable = "CREATE TABLE 'Rooms' (
-	                    'Room_ID'	INTEGER NOT NULL,
+	                    'Room_ID'	TEXT NOT NULL,
 	                    'Bed_Name'	TEXT NOT NULL,
 	                    'Active_Flag'	INTEGER NOT NULL,
 	                    PRIMARY KEY(" & "Room_ID" & "," & "Bed_Name" & "));"
@@ -733,11 +734,12 @@ Module CreateDatabase
 	'/*  WHO   WHEN     WHAT											*/
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  BRH  01/23/21  Initial creation of the code					*/
+	'/*  BRH  02/09/21  Change Room_TUID to match Rooms ID				*/
 	'/*******************************************************************/
 	Public Sub CreatePatientRoomTable()
 		strCreateTable = "CREATE TABLE 'PatientRoom' (
 	                    'Patient_TUID'	INTEGER NOT NULL,
-	                    'Room_TUID'	INTEGER NOT NULL,
+	                    'Room_TUID'	TEXT NOT NULL,
 	                    'Bed_Name'	TEXT NOT NULL,
 	                    'Active_Flag'	INTEGER NOT NULL,
 						PRIMARY KEY(" & "Patient_TUID" & "," & "Room_TUID" & "," & "Bed_Name" & "),
