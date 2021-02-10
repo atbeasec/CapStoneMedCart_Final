@@ -100,5 +100,17 @@
 
     Public Sub PopulateWasteComboBoxMedication()
 
+        Dim Strdatacommand As String
+        ' Currently the medication display is appending the RXCUI Number on too the medication
+        ' name, as searching by name alone could cause problems if medication names can repeat
+        Strdatacommand = "Select Drug_Name, RXCUI_ID FROM Medication INNER JOIN DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE Active_Flag = 1"
+
+        Dim dsMedicationDataSet As DataSet = New DataSet
+        dsMedicationDataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+        'add medication name and RXCUI to listbox
+        For Each dr As DataRow In dsMedicationDataSet.Tables(0).Rows
+            Waste.ComboBox1.Items.Add(dr(0) & "--" & dr(1))
+        Next
+
     End Sub
 End Module

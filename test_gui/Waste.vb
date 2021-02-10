@@ -7,8 +7,7 @@
 
     Private Sub Waste_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'TextBox1.Visible = False
-
-
+        Inventory.PopulateWasteComboBoxMedication()
     End Sub
 
     '/********************************************************************/
