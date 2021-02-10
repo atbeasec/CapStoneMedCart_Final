@@ -50,7 +50,9 @@ Module AdHoc
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
     '/*		         DATE CREATED: 	   02/01/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE: 
+    '/*  SUBROUTINE PURPOSE: This subroutines purpose is to take the 
+    '/* information that is selected on the AdHoc order screen and insert it into the
+    '/* patient Adhoc order table.
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
     '/*  (None)								           					  
@@ -70,7 +72,7 @@ Module AdHoc
     '/*											                          */
     '/*  WHO                   WHEN     WHAT							  */
     '/*  ---                   ----     ----------------------------------*/
-    '/*  Alexander Beasecker  02/01/2021  Initial creation of the code     */
+    '/*  Alexander Beasecker  02/01/2021  Initial creation of the code    */
     '/*********************************************************************/
 
     Public Sub InsertAdHoc(ByRef intPatientMRN As Integer, ByRef intUserID As Integer,
@@ -112,6 +114,34 @@ Module AdHoc
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:GetAllMedicationsForListbox                     */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   02/01/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: 
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   		   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*											                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  02/01/2021  Initial creation of the code     */
+    '/*********************************************************************/
     Public Sub GetAllMedicationsForListbox()
         Dim Strdatacommand As String
         Strdatacommand = "Select Drug_Name, RXCUI_ID FROM Medication INNER JOIN DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE Active_Flag = 1"
@@ -124,6 +154,34 @@ Module AdHoc
         Next
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:SetMedicationProperties                     */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   02/01/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: 
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   		   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*											                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  02/01/2021  Initial creation of the code     */
+    '/*********************************************************************/
     Public Sub SetMedicationProperties()
 
         frmAdHockDispense.cmbMethod.Items.Clear()
@@ -150,6 +208,34 @@ Module AdHoc
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:PopulatePatientsAdhoc                     */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   02/01/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: 
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   		   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*											                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  02/01/2021  Initial creation of the code     */
+    '/*********************************************************************/
     Public Sub PopulatePatientsAdhoc()
         frmAdHockDispense.cmbPatientName.Items.Clear()
 
@@ -171,6 +257,34 @@ Module AdHoc
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:PopulatePatientInformation                     */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   02/01/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: 
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   		   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*											                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  02/01/2021  Initial creation of the code     */
+    '/*********************************************************************/
     Public Sub PopulatePatientInformation()
         Dim strArray() As String
         Dim intPatientID As Integer

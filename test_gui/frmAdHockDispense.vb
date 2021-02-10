@@ -27,6 +27,12 @@
     End Sub
 
     Private Sub btnDispense_Click(sender As Object, e As EventArgs) Handles btnDispense.Click
-        AdHoc.InsertAdHoc(txtMRN.Text, "1", txtQuantity.Text)
+
+        If Not IsNothing(cmbMedications.SelectedItem) And Not IsNothing(cmbPatientName.SelectedItem) Then
+            AdHoc.InsertAdHoc(txtMRN.Text, "1", txtQuantity.Text)
+        End If
+
+
+
     End Sub
 End Class
