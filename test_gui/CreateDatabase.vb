@@ -735,6 +735,7 @@ Module CreateDatabase
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  BRH  01/23/21  Initial creation of the code					*/
 	'/*  BRH  02/09/21  Change Room_TUID to match Rooms ID				*/
+	'/*  BRH  02/09/21  Update foreign keys to fix insertion issue		*/
 	'/*******************************************************************/
 	Public Sub CreatePatientRoomTable()
 		strCreateTable = "CREATE TABLE 'PatientRoom' (
@@ -742,10 +743,9 @@ Module CreateDatabase
 	                    'Room_TUID'	TEXT NOT NULL,
 	                    'Bed_Name'	TEXT NOT NULL,
 	                    'Active_Flag'	INTEGER NOT NULL,
-						PRIMARY KEY(" & "Patient_TUID" & "," & "Room_TUID" & "," & "Bed_Name" & "),
-	                    FOREIGN KEY(" & "Bed_Name" & ") REFERENCES " & "Rooms" & "(" & "Bed_Name" & "),	                    
+						PRIMARY KEY(" & "Patient_TUID" & "," & "Room_TUID" & "," & "Bed_Name" & "),                   
 	                    FOREIGN KEY(" & "Patient_TUID" & ") REFERENCES " & "Patient" & "(" & "Patient_ID" & "),
-	                    FOREIGN KEY(" & "Room_TUID" & ") REFERENCES " & "Rooms" & "(" & "Room_ID" & "));"
+	                   FOREIGN KEY(" & "Room_TUID," & "Bed_Name" & ") REFERENCES " & "Rooms" & "(" & "Room_ID," & "Bed_Name" & "));"
 
 		ExecuteQuery("PatientRoom")
 	End Sub
