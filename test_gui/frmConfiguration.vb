@@ -1,4 +1,5 @@
-﻿Public Class frmConfiguration
+﻿Imports System.Text
+Public Class frmConfiguration
     Private Sub frmConfiguration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         PopulateUserInfo()
@@ -236,11 +237,53 @@
         End If
     End Sub
 
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME:  					   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		         */   
+    '/*		         DATE CREATED: 		   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								   */             
+    '/*											   */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  NP    2/10/2021 Changed the first and last name to accept '-@    */                                                                   
+    '/*********************************************************************/
+
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim intSupervisor As Integer = 0
         Dim intAdmin As Integer = 0
         Dim intActiveFlag As Integer = 1
         Dim strPassword As String = txtPassword.Text
+        Dim strSpecialChar As String = "\'-@"
+
+
         'call CheckPassword Function to see if password mets security standards
         If CheckPassword(strPassword) = False Then
             MsgBox("Password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special characters !@#$%^&* ")
@@ -255,7 +298,17 @@
             'Make Sure all fields are filled
         ElseIf txtFirstName.Text = "" Or txtLastName.Text = "" Or txtUserID.Text = "" Or txtBarcode.Text = "" Then
             MsgBox("All Fields must be filled")
+
         Else
+            If txtFirstName.Text.Contains("'") Or txtLastName.Text.Contains("'") Then
+                If txtFirstName.Text.Contains("'") Then
+                    txtFirstName.Text = txtFirstName.Text.Insert((txtFirstName.Text.IndexOf("'")), "'")
+                End If
+                If txtLastName.Text.Contains("'") Then
+                    txtLastName.Text = txtLastName.Text.Insert((txtLastName.Text.IndexOf("'")), "'")
+                End If
+            End If
+
             'Insert data into table by calling ExecuteScalarQuery in CreateDatabase Module
             Dim strStatement = "INSERT INTO USER(Username,Password,User_First_Name, User_Last_Name, Barcode, Admin_Flag, Supervisor_Flag, Active_Flag)" &
             "VALUES('" & txtUserID.Text & "','" & strPassword & "','" & txtFirstName.Text & "','" & txtLastName.Text & "','" & txtBarcode.Text & "','" & intAdmin & "','" & intSupervisor & "','" & intActiveFlag & "')"
@@ -309,7 +362,9 @@
     '/*											   */                     
     '/*  WHO            WHEN        WHAT								   */             
     '/*  ---            ----        ------------------------------------- */
-    '/*  Dylan Walter   2/7/2021    Initial Creation                      */                                                                   
+    '/*  Dylan Walter   2/7/2021    Initial Creation                      */
+    '/*  Nathan Premo   2/10/2021   adding the ability for first and last */
+    '/*                             name to have ' - @                    */
     '/*********************************************************************/
     Function CheckPassword(strPassword)
         'Security Requierments 
@@ -341,7 +396,7 @@
 
     Private Sub txtFirstName_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFirstName.KeyPress
         If Not (Asc(e.KeyChar) = 8) Then
-            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz "
+            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz '-@1234567890"
             If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
                 e.KeyChar = ChrW(0)
                 e.Handled = True
@@ -351,7 +406,7 @@
 
     Private Sub txtLastName_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtLastName.KeyPress
         If Not (Asc(e.KeyChar) = 8) Then
-            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz "
+            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz '-@1234567890"
             If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
                 e.KeyChar = ChrW(0)
                 e.Handled = True
@@ -361,7 +416,7 @@
 
     Private Sub txtUserID_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtUserID.KeyPress
         If Not (Asc(e.KeyChar) = 8) Then
-            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz123456789"
+            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz1234567890"
             If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
                 e.KeyChar = ChrW(0)
                 e.Handled = True
@@ -387,5 +442,9 @@
                 e.Handled = True
             End If
         End If
+    End Sub
+
+    Private Sub Label5_Click(sender As Object, e As EventArgs) Handles Label5.Click
+
     End Sub
 End Class

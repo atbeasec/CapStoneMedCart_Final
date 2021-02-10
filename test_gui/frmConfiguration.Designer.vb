@@ -382,9 +382,9 @@ Partial Class frmConfiguration
         Me.Label5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.Location = New System.Drawing.Point(14, 173)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(64, 21)
+        Me.Label5.Size = New System.Drawing.Size(84, 21)
         Me.Label5.TabIndex = 178
-        Me.Label5.Text = "User ID:"
+        Me.Label5.Text = "Username:"
         '
         'Label6
         '
