@@ -74,6 +74,7 @@ Partial Class frmPatientInfo
         Me.btnWaste = New System.Windows.Forms.Button()
         Me.btnDispenseMedication = New System.Windows.Forms.Button()
         Me.btnEditPatient = New System.Windows.Forms.Button()
+        Me.btnAddAllergies = New System.Windows.Forms.Button()
         Me.pnlPersonalInformation.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -400,7 +401,7 @@ Partial Class frmPatientInfo
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(9, 541)
+        Me.Label6.Location = New System.Drawing.Point(12, 465)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(86, 25)
         Me.Label6.TabIndex = 44
@@ -511,7 +512,7 @@ Partial Class frmPatientInfo
         Me.flpMedications.BackColor = System.Drawing.Color.White
         Me.flpMedications.Location = New System.Drawing.Point(231, 541)
         Me.flpMedications.Name = "flpMedications"
-        Me.flpMedications.Size = New System.Drawing.Size(1037, 255)
+        Me.flpMedications.Size = New System.Drawing.Size(1037, 180)
         Me.flpMedications.TabIndex = 51
         '
         'Label20
@@ -622,9 +623,9 @@ Partial Class frmPatientInfo
         Me.lstBoxAllergies.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lstBoxAllergies.FormattingEnabled = True
         Me.lstBoxAllergies.ItemHeight = 20
-        Me.lstBoxAllergies.Location = New System.Drawing.Point(12, 581)
+        Me.lstBoxAllergies.Location = New System.Drawing.Point(12, 538)
         Me.lstBoxAllergies.Name = "lstBoxAllergies"
-        Me.lstBoxAllergies.Size = New System.Drawing.Size(201, 202)
+        Me.lstBoxAllergies.Size = New System.Drawing.Size(201, 182)
         Me.lstBoxAllergies.TabIndex = 58
         '
         'btnWaste
@@ -674,12 +675,29 @@ Partial Class frmPatientInfo
         Me.btnEditPatient.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnEditPatient.UseVisualStyleBackColor = False
         '
+        'btnAddAllergies
+        '
+        Me.btnAddAllergies.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnAddAllergies.FlatAppearance.BorderSize = 0
+        Me.btnAddAllergies.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAddAllergies.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAddAllergies.ForeColor = System.Drawing.Color.White
+        Me.btnAddAllergies.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnAddAllergies.Location = New System.Drawing.Point(12, 494)
+        Me.btnAddAllergies.Name = "btnAddAllergies"
+        Me.btnAddAllergies.Size = New System.Drawing.Size(201, 37)
+        Me.btnAddAllergies.TabIndex = 59
+        Me.btnAddAllergies.Text = "  Add Allergies"
+        Me.btnAddAllergies.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnAddAllergies.UseVisualStyleBackColor = False
+        '
         'frmPatientInfo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1274, 802)
+        Me.ClientSize = New System.Drawing.Size(1274, 727)
+        Me.Controls.Add(Me.btnAddAllergies)
         Me.Controls.Add(Me.lstBoxAllergies)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Label20)
@@ -757,4 +775,5 @@ Partial Class frmPatientInfo
     Friend WithEvents Label9 As Label
     Friend WithEvents Label26 As Label
     Friend WithEvents Label27 As Label
+    Friend WithEvents btnAddAllergies As Button
 End Class

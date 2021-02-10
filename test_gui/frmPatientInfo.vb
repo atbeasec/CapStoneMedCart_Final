@@ -1057,4 +1057,7 @@
 
     End Sub
 
+    Private Sub btnAddAllergies_Click(sender As Object, e As EventArgs) Handles btnAddAllergies.Click
+        frmAllergies.Show()
+    End Sub
 End Class
