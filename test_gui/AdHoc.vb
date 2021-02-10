@@ -133,4 +133,19 @@ Module AdHoc
 
     End Sub
 
+    Public Sub PopulatePatientsAdhoc()
+        frmAdHockDispense.cmbPatientName.Items.Clear()
+
+        Dim Strdatacommand As String
+        Strdatacommand = "SELECT Patient_First_Name, Patient_Last_Name from Patient Order By Patient_Last_Name, Patient_First_Name"
+
+
+        Dim dsPatientRecords As DataSet = New DataSet
+        dsPatientRecords = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+
+        For Each dr As DataRow In dsPatientRecords.Tables(0).Rows
+            frmAdHockDispense.cmbPatientName.Items.Add(dr(0) & " " & dr(1))
+        Next
+
+    End Sub
 End Module

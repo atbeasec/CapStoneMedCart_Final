@@ -7,6 +7,7 @@
 
         cmbMedications.Items.Clear()
         AdHoc.GetAllMedicationsForListbox()
+        AdHoc.PopulatePatientsAdhoc()
     End Sub
 
     Private Sub btnIncrementQuantity_Click(sender As Object, e As EventArgs) Handles btnIncrementQuantity.Click
@@ -20,4 +21,5 @@
     Private Sub cmbMedications_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMedications.SelectedIndexChanged
         AdHoc.SetMedicationProperties()
     End Sub
+
 End Class
