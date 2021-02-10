@@ -27,6 +27,6 @@
     End Sub
 
     Private Sub btnDispense_Click(sender As Object, e As EventArgs) Handles btnDispense.Click
-
+        AdHoc.InsertAdHoc(txtMRN.Text, "1", txtQuantity.Text)
     End Sub
 End Class

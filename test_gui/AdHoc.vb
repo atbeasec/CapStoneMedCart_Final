@@ -73,26 +73,38 @@ Module AdHoc
     '/*  Alexander Beasecker  02/01/2021  Initial creation of the code     */
     '/*********************************************************************/
 
-    Public Sub InsertAdHoc(ByRef intMedicationID As Integer, ByRef intPatientID As Integer, ByRef intUserID As Integer,
+    Public Sub InsertAdHoc(ByRef intPatientMRN As Integer, ByRef intUserID As Integer,
                            ByRef intAmount As Integer)
-
+        Dim intMedicationID As Integer
+        Dim intPatientID As Integer
         Dim Strdatacommand As String
-        Dim StrMedicationDrawerID As String
+        Dim intMedRXCUI As Integer
+        Dim intMedicationDrawerID As Integer
+        Dim StrSelectedMedication As String
+
+        StrSelectedMedication = frmAdHockDispense.cmbMedications.SelectedItem
+
+        'Split selected medication to get RXCUI number
+        Dim strArray() As String = StrSelectedMedication.Split("--")
+        intMedRXCUI = strArray(2)
+
+        'Get medication TUID
+        Strdatacommand = "SELECT Medication_ID FROM Medication WHERE RXCUI_ID = '" & intMedRXCUI & "'"
+        intMedicationID = ExecuteScalarQuery(Strdatacommand)
+
+        'Get Drawer Medication TUID
+        Strdatacommand = "SELECT DrawerMedication_ID FROM DrawerMedication WHERE Medication_TUID = '" & intMedicationID & "'"
+        intMedicationDrawerID = ExecuteScalarQuery(Strdatacommand)
+
+        'Get patient TUID
+        Strdatacommand = "SELECT Patient_ID FROM Patient WHERE MRN_Number = '" & intPatientMRN & "'"
+        intPatientID = ExecuteScalarQuery(Strdatacommand)
 
 
-        Strdatacommand = "SELECT DrawerMedication_ID FROM DrawerMedication 
-                            INNER JOIN AdHocOrder
-                            ON AdHocOrder.Medication_TUID = DrawerMedication.Medication_TUID
-                            WHERE DrawerMedication.Medication_TUID = '" & intMedicationID & "'"
-
-
-        StrMedicationDrawerID = ExecuteScalarQuery(Strdatacommand)
-        If Not IsDBNull(StrMedicationDrawerID) Then
-            Dim dtmAdhocTime As String = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
-            Strdatacommand = "INSERT INTO AdHocOrder(Medication_TUID, Patient_TUID, 
-                            User_TUID, Amount, DrawerMedication_TUID, DateTime)
-                            VALUES('" & intMedicationID & "','" & intPatientID & "','" &
-                                intUserID & "','" & intAmount & "','" & StrMedicationDrawerID & "','" & dtmAdhocTime & "')"
+        If Not IsDBNull(intMedicationDrawerID) Then
+            Dim dtmAdhocTime As String = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")
+            Strdatacommand = "INSERT INTO AdHocOrder(Medication_TUID,Patient_TUID,User_TUID,Amount,DrawerMedication_TUID,DateTime) " &
+                "VALUES('" & intMedicationID & "', '" & intPatientID & "', '" & intUserID & "', '" & intAmount & "', '" & intMedicationDrawerID & "', '" & dtmAdhocTime & "')"
 
 
             CreateDatabase.ExecuteInsertQuery(Strdatacommand)
@@ -102,13 +114,13 @@ Module AdHoc
 
     Public Sub GetAllMedicationsForListbox()
         Dim Strdatacommand As String
-        Strdatacommand = "Select Drug_Name FROM Medication INNER JOIN DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE Active_Flag = 1"
+        Strdatacommand = "Select Drug_Name, RXCUI_ID FROM Medication INNER JOIN DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE Active_Flag = 1"
 
         Dim dsMedicationDataSet As DataSet = New DataSet
         dsMedicationDataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
 
         For Each dr As DataRow In dsMedicationDataSet.Tables(0).Rows
-            frmAdHockDispense.cmbMedications.Items.Add(dr(0))
+            frmAdHockDispense.cmbMedications.Items.Add(dr(0) & "--" & dr(1))
         Next
     End Sub
 
@@ -119,8 +131,13 @@ Module AdHoc
 
         Dim strMedicationName As String = frmAdHockDispense.cmbMedications.SelectedItem
 
+        Dim strArray() As String
+        strArray = strMedicationName.Split("--")
+        strMedicationName = strArray(0)
+
         Dim Strdatacommand As String
         Strdatacommand = "SELECT Type, Strength From Medication WHERE Drug_Name = '" & strMedicationName & "'"
+
 
         Dim dsMedicationInformation As DataSet = New DataSet
         dsMedicationInformation = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
