@@ -22,4 +22,7 @@
         AdHoc.SetMedicationProperties()
     End Sub
 
+    Private Sub cmbPatientName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPatientName.SelectedIndexChanged
+        AdHoc.PopulatePatientInformation()
+    End Sub
 End Class

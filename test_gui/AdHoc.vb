@@ -137,15 +137,42 @@ Module AdHoc
         frmAdHockDispense.cmbPatientName.Items.Clear()
 
         Dim Strdatacommand As String
-        Strdatacommand = "SELECT Patient_First_Name, Patient_Last_Name from Patient Order By Patient_Last_Name, Patient_First_Name"
+        Strdatacommand = "SELECT Patient_First_Name, Patient_Last_Name, MRN_Number FROM Patient Order By Patient_Last_Name, Patient_First_Name"
 
 
         Dim dsPatientRecords As DataSet = New DataSet
         dsPatientRecords = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
 
         For Each dr As DataRow In dsPatientRecords.Tables(0).Rows
-            frmAdHockDispense.cmbPatientName.Items.Add(dr(0) & " " & dr(1))
+            frmAdHockDispense.cmbPatientName.Items.Add(dr(0) & " " & dr(1) & "--" & dr(2))
         Next
 
+    End Sub
+
+    Public Sub PopulatePatientInformation()
+        Dim strArray() As String
+        Dim intPatientID As Integer
+        frmAdHockDispense.txtDateOfBirth.Clear()
+        frmAdHockDispense.txtMRN.Clear()
+
+        Dim strPatientSelected As String = frmAdHockDispense.cmbPatientName.SelectedItem
+        strArray = strPatientSelected.Split("--")
+        Dim Strdatacommand As String
+
+        frmAdHockDispense.txtMRN.Text = strArray(2)
+        Strdatacommand = "SELECT Date_of_Birth, Patient_ID from Patient Where MRN_Number = '" & frmAdHockDispense.txtMRN.Text & "'"
+
+        Dim dsPatientRecords As DataSet = New DataSet
+        dsPatientRecords = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+
+        frmAdHockDispense.txtDateOfBirth.Text = dsPatientRecords.Tables(0).Rows(0)(0)
+        intPatientID = dsPatientRecords.Tables(0).Rows(0)(1)
+
+        Strdatacommand = "SELECT Allergy_Name From PatientAllergy Where Patient_TUID = '" & intPatientID & "'"
+        dsPatientRecords = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+
+        For Each dr As DataRow In dsPatientRecords.Tables(0).Rows
+            frmAdHockDispense.lstboxAllergies.Items.Add(dr(0))
+        Next
     End Sub
 End Module
