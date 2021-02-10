@@ -1,7 +1,12 @@
 ﻿Public Class frmAllergies
     Private Sub frmAllergies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        Dim intPatientInformationMRN = CInt(Label5.Text)
         ' on form load we need to select all allergies from the database and show them here:
+        Dim intPatientAllergyId As Integer = CInt(CreateDatabase.ExecuteScalarQuery("select patient.Patient_ID From Patient " &
+                        "where Patient.MRN_Number=" & (intPatientInformationMRN).ToString & ";"))
+        'get the allergy information from the patient allergy tables
+        Dim dtsPatientAllergy As DataSet = CreateDatabase.ExecuteSelectQuery("Select Allergy_Name From PatientAllergy " &
+                            "Where Active_Flag =1 AND Patient_TUID =" & (intPatientAllergyId).ToString & ";")
         ' insert the select statement here and send the results to the createAllergiesPanel
 
         ' CreateAllergiesPanels()
@@ -119,4 +124,6 @@
         CreateAllergiesPanels(flpAllergies, txtAllergyName.Text, txtMedicationName.Text, txtAllergyType.Text, cmbSeverity.SelectedItem.ToString)
 
     End Sub
+
+
 End Class

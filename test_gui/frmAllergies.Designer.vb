@@ -25,6 +25,7 @@ Partial Class frmAllergies
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAllergies))
         Me.flpAllergies = New System.Windows.Forms.FlowLayoutPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.lblActions = New System.Windows.Forms.Label()
         Me.lblMedication = New System.Windows.Forms.Label()
         Me.lblAllergyName = New System.Windows.Forms.Label()
         Me.lblAllergyType = New System.Windows.Forms.Label()
@@ -42,7 +43,6 @@ Partial Class frmAllergies
         Me.Label3 = New System.Windows.Forms.Label()
         Me.btnAddAllergy = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.lblActions = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Panel2.SuspendLayout()
         Me.Panel9.SuspendLayout()
@@ -71,6 +71,17 @@ Partial Class frmAllergies
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(873, 47)
         Me.Panel2.TabIndex = 49
+        '
+        'lblActions
+        '
+        Me.lblActions.AutoSize = True
+        Me.lblActions.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblActions.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblActions.Location = New System.Drawing.Point(711, 16)
+        Me.lblActions.Name = "lblActions"
+        Me.lblActions.Size = New System.Drawing.Size(65, 21)
+        Me.lblActions.TabIndex = 10
+        Me.lblActions.Text = "Actions"
         '
         'lblMedication
         '
@@ -254,17 +265,6 @@ Partial Class frmAllergies
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(0, 21)
         Me.Label4.TabIndex = 185
-        '
-        'lblActions
-        '
-        Me.lblActions.AutoSize = True
-        Me.lblActions.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblActions.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblActions.Location = New System.Drawing.Point(711, 16)
-        Me.lblActions.Name = "lblActions"
-        Me.lblActions.Size = New System.Drawing.Size(65, 21)
-        Me.lblActions.TabIndex = 10
-        Me.lblActions.Text = "Actions"
         '
         'Label5
         '

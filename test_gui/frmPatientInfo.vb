@@ -1059,5 +1059,6 @@
 
     Private Sub btnAddAllergies_Click(sender As Object, e As EventArgs) Handles btnAddAllergies.Click
         frmAllergies.Show()
+        frmAllergies.Label5.Text = intPatientMRN
     End Sub
 End Class
