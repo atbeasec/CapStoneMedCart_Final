@@ -34,15 +34,15 @@ Sulfonamides,3,Drug
 Non-steroidal anti-inflammatories,9,Drug
 Intravenous contrast dye,6,Drug
 Local anesthetics,4,Drug
-Pollen,,Environmental
-Cat,,Environmental
-Dog,,Environmental
-Insect sting,,Environmental
-Mold,,Environmental
+Pollen,,Pollen
+Cat,,Pet
+Dog,,Pet
+Insect sting,,Insect
+Mold,,Mold
 Perfume,,Environmental
 Cosmetics,,Environmental
 Semen,,Environmental
-Latex,,Environmental
+Latex,,Latex
 Cold stimuli,,Environmental
 House dust mite,,Environmental
 Nickel,,Environmental
@@ -51,4 +51,50 @@ Chromium,,Environmental
 Cobalt,,Environmental
 Formaldehyde,,Environmental
 Photographic developers,,Environmental
-Fungicide,,Environmental
+Fungicide,,Mold
+PANHEPRIN,22,Drug
+ESTRADIOL,23,Drug
+DICUMAROL,24,Drug
+HEPARIN SODIUM,25,Drug
+MANNITOL,50,Drug
+FOLVITE FOLIC ACID,51,Drug
+DIMERCAPROL,52,Drug
+METHERGINE,53,Drug
+FOLIC ACID,10,Drug
+LINDANE,54,Drug
+CYANOCOBALAMIN,55,Drug
+AQUASOL A,26,Drug
+TERFONYL,27,Drug
+IOPANOIC,28,Drug
+CORTISONE ACETATE,56,Drug
+PHENYLBUTAZONE,11,Drug
+HEXYLCAINE HYDROCHLORIDE,48,Drug
+HYDROCORTISONE,49,Drug
+NESACAINE-MPF,29,Drug
+ETHCHLORVYNOL,30,Drug
+PROMAZINE HYDROCHLORIDE,47,Drug
+ORTHO-NOVUM,37,Drug
+VALIUM DIAZEPAM,46,Drug
+XYLOCAINE,12,Drug
+MEPROBAMATE,38,Drug
+NORPRAMIN,36,Drug
+MEPROBAMATE,40,Drug
+MACRODANTIN,39,Drug
+THYROLAR-2,13,Drug
+THYROLAR-3,14,Drug
+THYROLAR-1,15,Drug
+DARVOCET,16,Drug
+DOXEPIN HYDROCHLORIDE,41,Drug
+ANCOBON FLUCYTOSINE,31,Drug
+ZIAC,45,Drug
+FENTANYL,18,Drug
+OXISTAT OXICONAZOLE NITRATE,42,Drug
+GENOTROPIN,34,Drug
+VIVELLE ESTRADIOL,35,Drug
+ZOMIG-ZMT,33,Drug
+IPRIVASK,43,Drug
+TRIGLIDE,44,Drug
+CLARINEX,17,Drug
+STRATTERA,21,Drug
+NEURONTIN,20,Drug
+THALIDOMIDE,19,Drug
