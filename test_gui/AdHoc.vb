@@ -99,4 +99,38 @@ Module AdHoc
         CreateDatabase.ExecuteInsertQuery(Strdatacommand)
 
     End Sub
+
+    Public Sub GetAllMedicationsForListbox()
+        Dim Strdatacommand As String
+        Strdatacommand = "SELECT Drug_Name from Medication"
+
+        Dim dsMedicationDataSet As DataSet = New DataSet
+        dsMedicationDataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+
+        For Each dr As DataRow In dsMedicationDataSet.Tables(0).Rows
+            frmAdHockDispense.cmbMedications.Items.Add(dr(0))
+        Next
+    End Sub
+
+    Public Sub SetMedicationProperties()
+
+        frmAdHockDispense.cmbMethod.Items.Clear()
+        frmAdHockDispense.cmbDosage.Items.Clear()
+
+        Dim strMedicationName As String = frmAdHockDispense.cmbMedications.SelectedItem
+
+        Dim Strdatacommand As String
+        Strdatacommand = "SELECT Type, Strength From Medication WHERE Drug_Name = '" & strMedicationName & "'"
+
+        Dim dsMedicationInformation As DataSet = New DataSet
+        dsMedicationInformation = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+
+        frmAdHockDispense.cmbMethod.Items.Add(dsMedicationInformation.Tables(0).Rows(0)(0))
+        frmAdHockDispense.cmbMethod.SelectedItem = dsMedicationInformation.Tables(0).Rows(0)(0)
+
+        frmAdHockDispense.cmbDosage.Items.Add(dsMedicationInformation.Tables(0).Rows(0)(1))
+        frmAdHockDispense.cmbDosage.SelectedItem = dsMedicationInformation.Tables(0).Rows(0)(1)
+
+    End Sub
+
 End Module
