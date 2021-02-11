@@ -345,6 +345,7 @@ Module AdHoc
         'clear textboxes so no overlapping data
         frmAdHockDispense.txtDateOfBirth.Clear()
         frmAdHockDispense.txtMRN.Clear()
+        frmAdHockDispense.lstboxAllergies.Items.Clear()
 
         'get selected patient and split
         Dim strPatientSelected As String = frmAdHockDispense.cmbPatientName.SelectedItem
