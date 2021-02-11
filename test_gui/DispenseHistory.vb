@@ -195,5 +195,101 @@ Module DispenseHistory
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:DispensemedicationPopulate  */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   02/10/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: 
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   		   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  02/10/21  Initial creation of the code      */
+    '/*********************************************************************/
+    Public Sub DispensemedicationPopulate(ByRef intPatientMRN As Integer)
+        Dispense.cmbMedications.Items.Clear()
+        Dim Strdatacommand As String
+        ' Currently the medication display is appending the RXCUI Number on too the medication
+        ' name, as searching by name alone could cause problems if medication names can repeat
+        Strdatacommand = "SELECT Drug_Name,RXCUI_ID FROM PatientMedication " &
+        "INNER JOIN Medication on Medication.Medication_ID = PatientMedication.Medication_TUID " &
+        "INNER JOIN Patient on Patient.Patient_ID = PatientMedication.Patient_TUID " &
+        "WHERE MRN_Number = '" & intPatientMRN & "'"
+
+        Dim dsMedicationDataSet As DataSet = New DataSet
+        dsMedicationDataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+        'add medication name and RXCUI to listbox
+        For Each dr As DataRow In dsMedicationDataSet.Tables(0).Rows
+            Dispense.cmbMedications.Items.Add(dr(0) & "--" & dr(1))
+        Next
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:SetMedicationProperties  */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   02/10/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: 
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   		   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  02/10/21  Initial creation of the code      */
+    '/*********************************************************************/
+    Public Sub SetMedicationProperties()
+        Dispense.cmbMethod.Items.Clear()
+        Dispense.cmbDosage.Items.Clear()
+
+        'get selected medication
+        Dim strMedicationRXCUI As String = Dispense.cmbMedications.SelectedItem
+        'split out the RXCUI and name
+        Dim strArray() As String
+        strArray = strMedicationRXCUI.Split("--")
+        strMedicationRXCUI = strArray(2)
+        'select medication type and strength for the selected medication using rxcui 
+        Dim Strdatacommand As String
+        Strdatacommand = "SELECT Method, Strength FROM PatientMedication " &
+            "INNER JOIN Medication on Medication.Medication_ID = PatientMedication.Medication_TUID " &
+            "WHERE RXCUI_ID = '" & strMedicationRXCUI & "'"
+
+        'make dataset and call the sql method
+        Dim dsMedicationInformation As DataSet = New DataSet
+        dsMedicationInformation = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+
+        'insert the method and dosage into comboboxes
+        Dispense.cmbMethod.Items.Add(dsMedicationInformation.Tables(0).Rows(0)(0))
+        Dispense.cmbMethod.SelectedItem = dsMedicationInformation.Tables(0).Rows(0)(0)
+
+        Dispense.cmbDosage.Items.Add(dsMedicationInformation.Tables(0).Rows(0)(1))
+        Dispense.cmbDosage.SelectedItem = dsMedicationInformation.Tables(0).Rows(0)(1)
+    End Sub
 End Module
 
