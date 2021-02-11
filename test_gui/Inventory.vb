@@ -173,7 +173,7 @@
             Dim strArray() As String
             Dim strMedication As String = Waste.ComboBox1.SelectedItem
             Dim intDrawerMedID As Integer
-            Dim strWasteReason As String
+            Dim strWasteReason As String = " "
 
             If Waste.rbtnOther.Checked Then
                 strWasteReason = Waste.TextBox1.Text
