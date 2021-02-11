@@ -107,9 +107,11 @@
         Dim dispenseDate4 As String = "11/1/2020"
         Dim dispenseDate5 As String = "10/28/2020"
 
+        txtQuantity.Text = "1"
+
         ' CreatePanel(flpAssignedMedications, genName1, brandName1, measure1, dispenseDate1)
         ' CreatePanel(flpAssignedMedications, genName2, brandName2, measure2, dispenseDate2)
-        '  CreatePanel(flpAssignedMedications, genName3, brandName3, measure3, dispenseDate3)
+        ' CreatePanel(flpAssignedMedications, genName3, brandName3, measure3, dispenseDate3)
         ' CreatePanel(flpAssignedMedications, genName4, brandName4, measure4, dispenseDate4)
 
     End Sub
@@ -152,5 +154,17 @@
 
         End If
 
+    End Sub
+
+    Private Sub btnUp_Click(sender As Object, e As EventArgs) Handles btnUp.Click
+        ButtonIncrement(txtQuantity)
+    End Sub
+
+    Private Sub btnDown_Click(sender As Object, e As EventArgs) Handles btnDown.Click
+        ButtonDecrement(txtQuantity)
+    End Sub
+
+    Private Sub btnDispense_Click_1(sender As Object, e As EventArgs) Handles btnDispense.Click
+        MessageBox.Show("Drawer Has Opened")
     End Sub
 End Class
