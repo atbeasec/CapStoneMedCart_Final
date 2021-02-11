@@ -245,4 +245,45 @@ Module PatientInformation
         'join patients meds table and medications table
     End Sub
 
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME: getPrescriptions                  */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:Adam kott                             */   
+    '/*                 DATE CREATED:2/10/2021                           */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:                                                      */                    
+    '/*********************************************************************/
+    '/*  CALLS:                                                         */                            
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):                              */         
+    '/*********************************************************************/
+    '/*  RETURNS:                                                          */                   
+    '/*            (NOTHING)                                              */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:                                   */             
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:                                 */               
+    '/*                                               */                     
+    '/*  WHO   WHEN     WHAT                                   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  ATB   2/10/2021 initial code creation
+    '/*********************************************************************/
+    Public Sub getPrescriptions(ByRef intPatientMRN As Integer)
+        Dim strSQLiteCommand As String
+        Dim dsPatientPrescription As DataSet
+        strSQLiteCommand = "SELECT Drug_Name, Strength, Method, Quantity,Date_Presrcibed,Physician_First_Name,Physician_Last_Name,Schedule FROM PatientMedication " &
+            "INNER JOIN Medication on Medication.Medication_ID = PatientMedication.Medication_TUID " &
+            "INNER JOIN Patient ON Patient.Patient_ID = PatientMedication.Patient_TUID " &
+            "INNER JOIN Physician on Physician.Physician_ID = PatientMedication.Ordering_Physician_ID " &
+            "WHERE MRN_Number = '" & intPatientMRN & "'"
+
+        dsPatientPrescription = CreateDatabase.ExecuteSelectQuery(strSQLiteCommand)
+        For Each dr As DataRow In dsPatientPrescription.Tables(0).Rows
+            frmPatientInfo.CreateCurrentMedicationsPanels(frmPatientInfo.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), "Dr. " & dr(5) & " " & dr(6), dr(7))
+        Next
+    End Sub
 End Module
