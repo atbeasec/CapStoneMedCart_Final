@@ -374,6 +374,7 @@ Module CreateDatabase
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
 	'/*  BRH  02/04/21  Change Brand_name to Synonym field				*/
 	'/*  BRH  02/08/21  Updated fields per Database meeting				*/
+	'/*  BRH  02/11/21  Added a Schedule field							*/
 	'/*******************************************************************/
 	Public Sub CreateMedicationTable()
 		strCreateTable = "CREATE TABLE 'Medication' (
@@ -385,6 +386,7 @@ Module CreateDatabase
 							'Barcode'	TEXT NOT NULL UNIQUE,
 							'Type'	TEXT,
 							'Strength'	TEXT,
+							'Schedule'	TEXT,
 							'Active_Flag' INTEGER NOT NULL,
 	                        PRIMARY KEY('Medication_ID' AUTOINCREMENT));"
 
@@ -930,6 +932,7 @@ Module CreateDatabase
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  BRH  01/23/21  Initial creation of the code					*/
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
+	'/*  BRH  02/09/21  Added Frequency and Notes fields				*/
 	'/*******************************************************************/
 	Public Sub CreatePatientMedicationTable()
 		strCreateTable = "CREATE TABLE 'PatientMedication' (
@@ -940,7 +943,8 @@ Module CreateDatabase
 	                    'Date_Presrcibed'	TEXT NOT NULL,
 	                    'Quantity'	INTEGER NOT NULL,
 	                    'Method'	TEXT NOT NULL,
-	                    'Schedule'	TEXT NOT NULL,
+	                    'Frequency'	TEXT NOT NULL,
+						'Notes'		TEXT,
 						'Active_Flag'	INTEGER NOT NULL,
 	                    FOREIGN KEY(" & "Medication_TUID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
 	                    FOREIGN KEY(" & "Ordering_Physician_ID" & ") REFERENCES " & "Physician" & "(" & "Physician_ID" & "),
