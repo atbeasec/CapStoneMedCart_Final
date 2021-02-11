@@ -115,34 +115,39 @@
     End Sub
 
     Public Sub WasteMedication()
+        If Not IsNothing(Waste.ComboBox1.SelectedItem) Then
+            Dim strSqlCommand As String
+            Dim strArray() As String
+            Dim strMedication As String = Waste.ComboBox1.SelectedItem
+            Dim intDrawerMedID As Integer
+            Dim strWasteReason As String
 
-        Dim strSqlCommand As String
-        Dim strArray() As String
-        Dim strMedication As String = Waste.ComboBox1.SelectedItem
-        Dim intDrawerMedID As Integer
-        Dim strWasteReason As String
+            If Waste.rbtnOther.Checked Then
+                strWasteReason = Waste.TextBox1.Text
+            ElseIf Waste.rbtnDispenseDevice.Checked Then
+                strWasteReason = Waste.rbtnDispenseDevice.Text
+            ElseIf Waste.RadioButton2.Checked Then
+                strWasteReason = Waste.RadioButton2.Text
+            ElseIf Waste.RadioButton3.Checked Then
+                strWasteReason = Waste.RadioButton3.Text
+            ElseIf Waste.RadioButton4.Checked Then
+                strWasteReason = Waste.RadioButton4.Text
+            ElseIf Waste.rbtnPatientUnavilable.Checked Then
+                strWasteReason = Waste.rbtnPatientUnavilable.Text
+            End If
 
-        If Waste.rbtnOther.Checked Then
-            strWasteReason = Waste.TextBox1.Text
-        ElseIf Waste.rbtnDispenseDevice.Checked Then
-            strWasteReason = Waste.rbtnDispenseDevice.Text
-        ElseIf Waste.RadioButton2.Checked Then
-            strWasteReason = Waste.RadioButton2.Text
-        ElseIf Waste.RadioButton3.Checked Then
-            strWasteReason = Waste.RadioButton3.Text
-        ElseIf Waste.RadioButton4.Checked Then
-            strWasteReason = Waste.RadioButton4.Text
-        ElseIf Waste.rbtnPatientUnavilable.Checked Then
-            strWasteReason = Waste.rbtnPatientUnavilable.Text
+            Dim dtmAdhocTime As String = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")
+            strArray = strMedication.Split("--")
+            strMedication = strArray(2)
+            strSqlCommand = "SELECT DrawerMedication_ID FROM DrawerMedication INNER JOIN Medication on Medication.Medication_ID = DrawerMedication.Medication_TUID WHERE Medication.RXCUI_ID = '" & strMedication & "'"
+            intDrawerMedID = CreateDatabase.ExecuteScalarQuery(strSqlCommand)
+
+            strSqlCommand = "INSERT INTO Wastes(Primary_User_TUID,Secondary_User_TUID,DrawerMedication_TUID,DateTime,Reason) VALUES('1','1','" & intDrawerMedID & "','" & dtmAdhocTime & "','" & strWasteReason & "')"
+            CreateDatabase.ExecuteInsertQuery(strSqlCommand)
+
+            'Debug message used to let you know it worked, will be removed
+            MessageBox.Show("Waste recorded")
         End If
-
-        strArray = strMedication.Split("--")
-        strMedication = strArray(2)
-        strSqlCommand = "SELECT DrawerMedication_ID FROM DrawerMedication INNER JOIN Medication on Medication.Medication_ID = DrawerMedication.Medication_TUID WHERE Medication.RXCUI_ID = '" & strMedication & "'"
-        intDrawerMedID = CreateDatabase.ExecuteScalarQuery(strSqlCommand)
-
-        strSqlCommand = "INSERT INTO Wastes(Primary_User_TUID,Secondary_User_TUID,DrawerMedication_TUID,DateTime,Reason) VALUES('1','1','" & intDrawerMedID & "','10/10/2020 08:21:54','" & strWasteReason & "')"
-        CreateDatabase.ExecuteInsertQuery(strSqlCommand)
 
     End Sub
 End Module
