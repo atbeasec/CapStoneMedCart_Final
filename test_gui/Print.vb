@@ -54,8 +54,14 @@ Module Print
     End Enum
     Sub Main()
         Dim lstOfDataValues As List(Of String) = New List(Of String)
+        'Determine which combo box index was selected
         Dim intSelectedIndex As Integer = test_gui.frmReport.cmbReports.SelectedIndex
         Dim strReport As String = ""
+        'select statement that evaluates the selected index with the report that 
+        'the user requested to be generated
+        'this select case will be updated in the future to provide more
+        'assignments, (e.g. strReport may be changed to strSQLCommand and assign
+        'the necessary sql statement to query the needed table)
         Select Case intSelectedIndex
             Case Reports.Adhoc : strReport = "Ad hoc Orders"
 
@@ -75,10 +81,12 @@ Module Print
     End Sub
 
     Sub GatherDataFromDatabaseTable(ByRef intColumnCount As Integer, ByRef intRowCount As Integer, ByRef lstOfDataValues As List(Of String))
+        'call the execute scalar query function with a sql command that determines the number of fields in the table
         intColumnCount = CreateDatabase.ExecuteScalarQuery("Select Count(name) from PRAGMA_TABLE_INFO('Rooms');")
+        'call the execute scalar query function with a sql command that determines the number of records in the table
         intRowCount = CreateDatabase.ExecuteScalarQuery("Select Count(*) From Rooms;")
-        Dim dsDataset As DataSet
 
+        Dim dsDataset As DataSet
         dsDataset = CreateDatabase.ExecuteSelectQuery("Select * from Rooms;")
         For Each row As DataRow In dsDataset.Tables(0).Rows
             For Each item As Object In row.ItemArray
@@ -97,6 +105,7 @@ Module Print
         Dim aWordApplication As Word.Application
         Dim aWordDocument As Word.Document
         aWordApplication = New Word.Application
+        'Open up the aWordApplication variable and modify some of the style preferences
         With aWordApplication
             .Visible = True
             aWordDocument = .Documents.Add()
@@ -107,6 +116,9 @@ Module Print
 
         CreateAndAddTableToWordForFormatting(aWordDocument, intColumnCount, intRowCount)
         Dim intToKeepTrackOfDataInList As Integer = 0
+
+        'this loop will iterate through the lstOfDataValues list that holds each item of the database table
+        'and send the data to the table in the Word document.
         For intRow As Integer = 1 To intRowCount
             For intColumn As Integer = 1 To intColumnCount
                 aWordApplication.Selection.Tables.Item(1).Cell(intRow, intColumn).Range.Text = lstOfDataValues.Item(intToKeepTrackOfDataInList)
