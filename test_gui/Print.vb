@@ -75,14 +75,19 @@ Module Print
     End Sub
 
     Sub GatherDataFromDatabaseTable(ByRef intColumnCount As Integer, ByRef intRowCount As Integer, ByRef lstOfDataValues As List(Of String))
-        intColumnCount = CreateDatabase.ExecuteScalarQuery("Select Count(name) from PRAGMA_TABLE_INFO('User');")
-        intRowCount = CreateDatabase.ExecuteScalarQuery("Select Count(*) From User;")
+        intColumnCount = CreateDatabase.ExecuteScalarQuery("Select Count(name) from PRAGMA_TABLE_INFO('Rooms');")
+        intRowCount = CreateDatabase.ExecuteScalarQuery("Select Count(*) From Rooms;")
         Dim dsDataset As DataSet
 
-        dsDataset = CreateDatabase.ExecuteSelectQuery("Select * from User;")
+        dsDataset = CreateDatabase.ExecuteSelectQuery("Select * from Rooms;")
         For Each row As DataRow In dsDataset.Tables(0).Rows
-            For Each item As String In row.ItemArray
-                lstOfDataValues.Add(item)
+            For Each item As Object In row.ItemArray
+                If IsDBNull(item) Then
+                    lstOfDataValues.Add("")
+                Else
+                    lstOfDataValues.Add(item.ToString)
+                End If
+
             Next
         Next
 
@@ -95,7 +100,7 @@ Module Print
         With aWordApplication
             .Visible = True
             aWordDocument = .Documents.Add()
-            .Selection.Font.Size = 10
+            .Selection.Font.Size = 8
             .Selection.Font.Name = "Calibri"
             .ActiveWindow.View.TableGridlines = False
         End With
