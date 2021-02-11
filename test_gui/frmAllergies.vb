@@ -1,5 +1,7 @@
 ﻿Public Class frmAllergies
     Private Sub frmAllergies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim dsAllergies = CreateDatabase.ExecuteSelectQuery("Select * From Allergy ORDER BY Allergy_Type, Allergy_Name;")
+        populateAllergiesComboBox(cmbAllergies, dsAllergies)
         Dim strSeverity As String = " "
         Dim intPatientInformationMRN = CInt(frmPatientInfo.txtMRN.Text)
         ' on form load we need to select all allergies from the database and show them here:
@@ -23,11 +25,8 @@
 
                 Debug.WriteLine("")
             End If
-            If dr(1).Equals(DBNull.Value) Then
-                strSeverity = "N/A"
-            Else
-                strSeverity = dr(1).ToString
-            End If
+
+            strSeverity = CheckSeverity(dr)
             txtAllergyType.Text = dr(2)
             CreateAllergiesPanels(flpAllergies, txtAllergyName.Text, txtMedicationName.Text, txtAllergyType.Text, strSeverity)
         Next
@@ -35,6 +34,18 @@
 
 
     End Sub
+
+    Private Shared Function CheckSeverity(dr As DataRow) As String
+        Dim strSeverity As String
+
+        If dr(1).Equals(DBNull.Value) Then
+            strSeverity = "N/A"
+        Else
+            strSeverity = dr(1).ToString
+        End If
+
+        Return strSeverity
+    End Function
 
     '/********************************************************************/
     '/*                   SUB NAME: CreatePanel            	             */         
@@ -134,12 +145,18 @@
 
 
     Private Sub btnAddAllergy_Click(sender As Object, e As EventArgs) Handles btnAddAllergy.Click
-
+        Dim strAllergyName = " "
+        Dim strSeverity = " "
         ' at some point error handling will be added here and if all data is valid 2 things will occur:
         '   1. first we will take the items from all the textfields and insert it into the database.
         '   2. We will just take those same fields and call the create panel method to throw the items on the UI
         '   to save another database call and complexity of removing all the panels from the UI and repopulating them
-        Dim strAllergyName = txtAllergyName.Text
+
+        If cmbAllergies.SelectedIndex = -1 Then
+            strAllergyName = cmbAllergies.Text
+        Else
+            Debug.WriteLine("")
+        End If
         Dim intMEdicationTUID = "NUll" 'for now but medication tuid will need to be looked up
         Dim strAllergyType = txtAllergyType.Text
 
@@ -149,9 +166,13 @@
         ' populate the screen from a manually added allergy.
 
         'probably going to need a select query to get the medication name from the TUID
+        If cmbSeverity.SelectedIndex = -1 Then
+            strSeverity = "N/A"
+        Else
+            strSeverity = cmbSeverity.SelectedItem.ToString
+        End If
 
-
-        CreateAllergiesPanels(flpAllergies, strAllergyName, txtMedicationName.Text, strAllergyType, cmbSeverity.SelectedItem.ToString)
+        CreateAllergiesPanels(flpAllergies, strAllergyName, txtMedicationName.Text, strAllergyType, strSeverity)
 
     End Sub
 

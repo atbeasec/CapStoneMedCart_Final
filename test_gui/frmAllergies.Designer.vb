@@ -44,6 +44,7 @@ Partial Class frmAllergies
         Me.btnAddAllergy = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.cmbAllergies = New System.Windows.Forms.ComboBox()
         Me.Panel2.SuspendLayout()
         Me.Panel9.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -276,12 +277,21 @@ Partial Class frmAllergies
         Me.Label5.TabIndex = 186
         Me.Label5.Text = "Patient Allergy Information"
         '
+        'cmbAllergies
+        '
+        Me.cmbAllergies.FormattingEnabled = True
+        Me.cmbAllergies.Location = New System.Drawing.Point(732, 74)
+        Me.cmbAllergies.Name = "cmbAllergies"
+        Me.cmbAllergies.Size = New System.Drawing.Size(121, 21)
+        Me.cmbAllergies.TabIndex = 187
+        '
         'frmAllergies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(926, 478)
+        Me.Controls.Add(Me.cmbAllergies)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.btnAddAllergy)
@@ -331,4 +341,5 @@ Partial Class frmAllergies
     Friend WithEvents Label4 As Label
     Friend WithEvents lblActions As Label
     Friend WithEvents Label5 As Label
+    Friend WithEvents cmbAllergies As ComboBox
 End Class
