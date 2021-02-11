@@ -614,7 +614,8 @@
         Snyonym = 6
         type = 7
         Strength = 8
-        ActiveFlag = 9
+        Schedule = 9
+        ActiveFlag = 10
     End Enum
 
 
@@ -726,8 +727,9 @@
         DatePrescribed = 4
         Quanity = 5
         method = 6
-        schedule = 7
-        activeFlag = 8
+        Frequency = 7
+        Notes = 8
+        activeFlag = 9
     End Enum
 
     '/*********************************************************************/
