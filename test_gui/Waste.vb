@@ -63,7 +63,7 @@
 
     End Sub
 
-    Private Sub btnConfigureInventory_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
-
+    Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
+        Inventory.WasteMedication()
     End Sub
 End Class

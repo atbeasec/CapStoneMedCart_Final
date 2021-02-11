@@ -202,6 +202,7 @@ Partial Class Waste
         'rbtnDispenseDevice
         '
         Me.rbtnDispenseDevice.AutoSize = True
+        Me.rbtnDispenseDevice.Checked = True
         Me.rbtnDispenseDevice.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbtnDispenseDevice.Location = New System.Drawing.Point(14, 12)
         Me.rbtnDispenseDevice.Name = "rbtnDispenseDevice"
