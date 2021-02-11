@@ -652,7 +652,7 @@ Partial Class frmPatientInfo
         Me.btnDispenseMedication.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDispenseMedication.ForeColor = System.Drawing.Color.White
         Me.btnDispenseMedication.Image = CType(resources.GetObject("btnDispenseMedication.Image"), System.Drawing.Image)
-        Me.btnDispenseMedication.Location = New System.Drawing.Point(835, 27)
+        Me.btnDispenseMedication.Location = New System.Drawing.Point(840, 27)
         Me.btnDispenseMedication.Name = "btnDispenseMedication"
         Me.btnDispenseMedication.Size = New System.Drawing.Size(236, 37)
         Me.btnDispenseMedication.TabIndex = 12
@@ -667,9 +667,9 @@ Partial Class frmPatientInfo
         Me.btnEditPatient.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnEditPatient.ForeColor = System.Drawing.Color.White
         Me.btnEditPatient.Image = CType(resources.GetObject("btnEditPatient.Image"), System.Drawing.Image)
-        Me.btnEditPatient.Location = New System.Drawing.Point(1082, 27)
+        Me.btnEditPatient.Location = New System.Drawing.Point(1093, 27)
         Me.btnEditPatient.Name = "btnEditPatient"
-        Me.btnEditPatient.Size = New System.Drawing.Size(184, 37)
+        Me.btnEditPatient.Size = New System.Drawing.Size(173, 37)
         Me.btnEditPatient.TabIndex = 13
         Me.btnEditPatient.Text = "  Edit Patient"
         Me.btnEditPatient.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
