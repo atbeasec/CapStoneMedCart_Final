@@ -285,7 +285,7 @@ Module APIDatabaseSelection
 		Dim dsMedications As DataSet
 
 		'Select the specific table and the data in each column, filling a dataset through the different parameters
-		ExecuteSelectQuery("SELECT Drug_Name, RXCUI_ID, Controlled, NarcoticControlled_Flag, Barcode, Type, Strength, Active_Flag
+		dsMedications = ExecuteSelectQuery("SELECT Drug_Name, RXCUI_ID, Controlled, NarcoticControlled_Flag, Barcode, Type, Strength, Active_Flag
 	                          FROM Medication WHERE Drug_Name ='" & DrugName & "' AND RXCUI_ID = '" & RXCUID &
 						   "' AND Controlled = '" & ControlledFlag & "'AND NarcoticControlled_Flag = '" & NarcoticFlag &
 						   "' AND Barcode = '" & Barcode & "' AND Type = '" & Type & "'AND Strength = '" & Strength &
