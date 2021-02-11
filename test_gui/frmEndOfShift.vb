@@ -46,42 +46,6 @@
     Private Sub frmEndOfShift_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
 
-
-        'end of shift count count will work by the following logic:
-        'query will be done to bring in all of the medications that are currently in the cart.
-        'each item in the cart will appear on the created panels on the GUI, a textbox field will be provided
-        'for the user to type in the count they have. There will also be a button where they can flag a particular medication
-
-
-        Dim intNum1 As String = 1
-        Dim intNum2 As String = 2
-        Dim intNum3 As String = 3
-
-        Dim medTUID1 As Integer = 2
-        Dim medTUID2 As Integer = 3
-        Dim medTUID3 As Integer = 4
-
-        Dim intNum5 As String = 30
-        Dim intNum6 As String = 40
-        Dim intNum7 As String = 25
-
-        Dim genName1 As String = "benzhydrocodone "
-        Dim genName2 As String = "hydrocodone bitartrate"
-        Dim genName3 As String = "phenylephrine"
-        Dim genName4 As String = "Morphine"
-        Dim genName5 As String = "Codeine"
-
-        ' create panel will be like it usually is and populate the panels. 
-        CreatePanel(flpEndOfShiftCount, medTUID1, genName1, intNum1, intNum3, intNum5)
-        CreatePanel(flpEndOfShiftCount, medTUID2, genName2, intNum2, intNum3, intNum7)
-        CreatePanel(flpEndOfShiftCount, medTUID3, genName3, intNum3, intNum2, intNum7)
-
-
-        ' once save report is selected, we will need to extract the items from the UI and send it to reporting or to the database
-
-
-
-
     End Sub
 
     '/*********************************************************************/
@@ -279,13 +243,14 @@
 
     Private Sub btnControlled_Click(sender As Object, e As EventArgs) Handles btnControlled.Click
         ExtractFormDataForDatabase()
+        ControllerMedsEndofShift()
     End Sub
 
     Private Sub btnNonControlled_Click(sender As Object, e As EventArgs) Handles btnNonControlled.Click
-
+        NonControllerMedsEndofShift()
     End Sub
 
     Private Sub btnAllMedications_Click(sender As Object, e As EventArgs) Handles btnAllMedications.Click
-
+        EndofShiftAllMedications()
     End Sub
 End Class

@@ -150,5 +150,20 @@
         End If
 
     End Sub
+
+
+
+    Public Sub EndofShiftAllMedications()
+
+    End Sub
+
+    Public Sub NonControllerMedsEndofShift()
+
+
+    End Sub
+
+    Public Sub ControllerMedsEndofShift()
+
+    End Sub
 End Module
 
