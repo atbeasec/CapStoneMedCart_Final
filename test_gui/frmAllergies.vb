@@ -1,5 +1,6 @@
 ﻿Public Class frmAllergies
     Private Sub frmAllergies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim strSeverity As String = " "
         Dim intPatientInformationMRN = CInt(frmPatientInfo.txtMRN.Text)
         ' on form load we need to select all allergies from the database and show them here:
         Dim intPatientAllergyId As Integer = CInt(CreateDatabase.ExecuteScalarQuery("select patient.Patient_ID From Patient " &
@@ -11,21 +12,24 @@
                             " Where Active_Flag =1 And Patient_TUID =" & (intPatientAllergyId).ToString & ";")
         ' insert the select statement here and send the results to the createAllergiesPanel
         For Each dr As DataRow In dtsPatientAllergy.Tables(0).Rows
+
+
             If dr(2) = "Drug" Then
                 txtMedicationName.Text = dr(0)
-                cmbSeverity.SelectedIndex = dr(1)
-                txtAllergyType.Text = dr(2)
                 txtAllergyName.Text = "N/A"
             Else
-
                 txtAllergyName.Text = dr(0)
-                cmbSeverity.SelectedIndex = dr(1)
-                txtAllergyType.Text = dr(2)
                 txtMedicationName.Text = "N/A"
 
                 Debug.WriteLine("")
             End If
-            CreateAllergiesPanels(flpAllergies, txtAllergyName.Text, txtMedicationName.Text, txtAllergyType.Text, cmbSeverity.SelectedItem.ToString)
+            If dr(1).Equals(DBNull.Value) Then
+                strSeverity = "N/A"
+            Else
+                strSeverity = dr(1).ToString
+            End If
+            txtAllergyType.Text = dr(2)
+            CreateAllergiesPanels(flpAllergies, txtAllergyName.Text, txtMedicationName.Text, txtAllergyType.Text, strSeverity)
         Next
         'CreateAllergiesPanels()
 
