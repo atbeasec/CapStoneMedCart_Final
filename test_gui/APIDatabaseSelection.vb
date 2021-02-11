@@ -277,6 +277,7 @@ Module APIDatabaseSelection
 	'/*  WHO   WHEN     WHAT											*/
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  Cody Russell 02/9/21  Initial creation of the code	        	*/
+	'/*  Cody Russell 02/9/21  Made changes to a few sql statements     */
 	'/*******************************************************************/
 	Sub CompareMedications(DrugName As String, RXCUID As Integer, ControlledFlag As Integer, NarcoticFlag As Integer,
 								 Barcode As Integer, Type As String, Strength As Integer, ActiveFlag As Integer)
