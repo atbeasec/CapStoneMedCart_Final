@@ -154,16 +154,18 @@
 
 
     Public Sub EndofShiftAllMedications()
+        Dim strSqlCommand As String
+        strSqlCommand = ""
 
     End Sub
 
     Public Sub NonControllerMedsEndofShift()
-
+        Dim strSqlCommand As String
 
     End Sub
 
     Public Sub ControllerMedsEndofShift()
-
+        Dim strSqlCommand As String
     End Sub
 End Module
 
