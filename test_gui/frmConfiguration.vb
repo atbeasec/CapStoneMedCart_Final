@@ -233,7 +233,39 @@ Public Class frmConfiguration
 
     '    Return strPrivilege
     'End Function
-    Private Sub txtUserID_LostFocus(sender As Object, e As EventArgs) Handles txtUsername.LostFocus
+
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: txtUsername_LostFocus          */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Dylan Walter        		          */   
+    '/*		         DATE CREATED: 		 2/10/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This  sub program is used to check if the Username already exist */ 
+    '/*  in the User table when you leave txtUsername  				      */   
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */                 
+    '/*********************************************************************/
+    '/*  CALLS:	CreateDatabase.ExecuteScalarQuery                        */            
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	     sender                                                      */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	  "dwwalter"                                                       */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */   
+    '/*strStatement- SQL String passed to ExecuteScalarQuery to check     */
+    '/* User table for a duplicate Username                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO        WHEN            WHAT					               */             
+    '/*  Dylan W    2/10/2021    Initial creation and check data in DB   */
+    '/*********************************************************************/
+    Private Sub txtUsername_LostFocus(sender As Object, e As EventArgs) Handles txtUsername.LostFocus
         'String to be sent to CreateDatabase Module to exicute search to check if Username is already in the User Table
         Dim strStatement = "SELECT COUNT(*) FROM User WHERE Username = '" & txtUsername.Text & "'"
         If ExecuteScalarQuery(strStatement) <> 0 Then
@@ -243,6 +275,37 @@ Public Class frmConfiguration
         End If
     End Sub
 
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: txtBarcode_LostFocus          */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Dylan Walter        		          */   
+    '/*		         DATE CREATED: 		 2/10/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This  sub program is used to check if the Barcode already exist */ 
+    '/*  in the User table when you leave txtBarcode  				      */   
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */                 
+    '/*********************************************************************/
+    '/*  CALLS:	CreateDatabase.ExecuteScalarQuery                        */            
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	     sender                                                      */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	  "6gGMRK7bIKlWkNEp4mT71hAU"                                       */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */   
+    '/*strStatement- SQL String passed to ExecuteScalarQuery to check     */
+    '/* User table for a duplicate Bqarcode                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO        WHEN            WHAT					               */             
+    '/*  Dylan W    2/10/2021    Initial creation and check data in DB   */
+    '/*********************************************************************/
     Private Sub txtBarcode_LostFocus(sender As Object, e As EventArgs) Handles txtBarcode.LostFocus
         'String to be sent to CreateDatabase Module to exicute search to check if Barcode is already in the User Table
         Dim strStatement = "SELECT COUNT(*) FROM User WHERE Barcode = '" & txtBarcode.Text & "'"
@@ -254,41 +317,44 @@ Public Class frmConfiguration
     End Sub
 
     '/*********************************************************************/
-    '/*                   FUNCTION NAME:  					   */         
+    '/*                   SubProgram NAME: Button1_Click 		    	   */         
     '/*********************************************************************/
-    '/*                   WRITTEN BY:     		         */   
-    '/*		         DATE CREATED: 		   */                             
+    '/*                   WRITTEN BY: Dylan Walter    		            */   
+    '/*		         DATE CREATED: 2/6/2021                      		   */                             
     '/*********************************************************************/
-    '/*  FUNCTION PURPOSE:								   */             
-    '/*											   */                     
-    '/*                                                                   */
+    '/*  Subprogram PURPOSE: when button1 is clicked check if data in all 	*/             
+    '/*	text boxes is valid and insert into the User table in SQL 			*/                     
+    '/*  database                                                                 */
     '/*********************************************************************/
     '/*  CALLED BY:   	      						         */           
     '/*                                         				   */         
     '/*********************************************************************/
-    '/*  CALLS:										   */                 
-    '/*             (NONE)								   */             
+    '/*  CALLS:	CheckPassword						        			   */                 
+    '/*         CreateDatabase.ExecuteInsertQuery   					   */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					   */         
     '/*											   */                     
-    '/*                                                                     
-    '/*********************************************************************/
-    '/*  RETURNS:								         */                   
-    '/*            (NOTHING)								   */             
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								   */             
     '/*											   */                     
-    '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
-    '/*                                                                     
+    '/*		intActiveFlag- used to assign 1 to the active flag      	   */                     
+    '/*      intAdmin- 1 if admin radio button is checked                   */
+    '/*		strFirstName- text from txtFirstName 							*/
+    '/*		strLastName- text from txtLastName								*/
+    '/*		strPassword- text from txtPassword								*/
+    '/*		strSpecialChar-	list of allowed special characters				*/
+    '/*     strStatement- SQL String passed to ExecuteScalarQuery to check */
+    '/*		intSupervisor- 1 if supervisor radio button is checked		    */
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
-    '/*  WHO   WHEN     WHAT								   */             
-    '/*  ---   ----     ------------------------------------------------- */
-    '/*  NP    2/10/2021 Changed the first and last name to accept '-@    */                                                                   
+    '/*  WHO        WHEN     WHAT								   */             
+    '/*  ---        ----     ------------------------------------------------- */
+    '/*	Dylan W	    2/3/2021  Users can now be added to the User Table		*/ 
+    '/*  NP         2/10/2021 Changed the first and last name to accept '-@ */  
+    '/*	Dylan W     2/10/2021 checked first and last for multiple ' 	   */     
     '/*********************************************************************/
 
 
@@ -321,11 +387,11 @@ Public Class frmConfiguration
         Else
 
 
-            'Insert data into table by calling ExecuteScalarQuery in CreateDatabase Module
+            'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
 
             Dim strStatement = "INSERT INTO USER(Username,Password,User_First_Name, User_Last_Name, Barcode, Admin_Flag, Supervisor_Flag, Active_Flag)" &
             "VALUES('" & txtUsername.Text & "','" & strPassword & "','" & strFirstName & "','" & strLastName & "','" & txtBarcode.Text & "','" & intAdmin & "','" & intSupervisor & "','" & intActiveFlag & "')"
-            ExecuteScalarQuery(strStatement)
+            ExecuteInsertQuery(strStatement)
 
             'clear all text boxes
             txtFirstName.Text = ""
@@ -365,14 +431,22 @@ Public Class frmConfiguration
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								   */             
     '/*											   */                     
-    '/*                                                                     
+    '/*
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
-    '/*                                                                     
+    '/*		regLower- Regex of all lowercase letters						*/                     
+    '/*		intMinLength- number of needed characters					*/ 
+    '/*		regNumber- Regex of all numbers 								*/ 
+    '/*		intNumLower- number of needed lowercase letters 				*/ 
+    '/*		intNumNumbers- number of needed numbers							*/ 
+    '/*		intNumUpper- number of needed uppercase letters					*/ 
+    '/*		intNumSpecial- number of needed special characters 				*/ 
+    '/*		bolSecure- returned boolean, true if requirements are met	    */    
+    '/*     regSpecial- Regex of all other characters                       */
+    '/*     regUpper- Regex of all uppercase letters                        */
     '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						         */               
-    '/*											   */                     
+    '/* MODIFICATION HISTORY:						                        */               
+    '/*											                            */                     
     '/*  WHO            WHEN        WHAT								   */             
     '/*  ---            ----        ------------------------------------- */
     '/*  Dylan Walter   2/7/2021    Initial Creation                      */
@@ -381,35 +455,38 @@ Public Class frmConfiguration
     '/*********************************************************************/
     Function CheckPassword(strPassword)
         'Security Requierments 
-        Dim minLength As Integer = 8
-        Dim numUpper As Integer = 1
-        Dim numLower As Integer = 1
-        Dim numNumbers As Integer = 1
-        Dim numSpecial As Integer = 1
-        Dim Secure As Boolean = True
+        Dim intMinLength As Integer = 8
+        Dim intNumUpper As Integer = 1
+        Dim intNumLower As Integer = 1
+        Dim intNumNumbers As Integer = 1
+        Dim intNumSpecial As Integer = 1
+        Dim bolSecure As Boolean = True
 
         ' Replace [A-Z] with \p{Lu}, to allow for Unicode uppercase letters.
-        Dim upper As New System.Text.RegularExpressions.Regex("[A-Z]")
-        Dim lower As New System.Text.RegularExpressions.Regex("[a-z]")
-        Dim number As New System.Text.RegularExpressions.Regex("[0-9]")
+        Dim regUpper As New System.Text.RegularExpressions.Regex("[A-Z]")
+        Dim regLower As New System.Text.RegularExpressions.Regex("[a-z]")
+        Dim regNumber As New System.Text.RegularExpressions.Regex("[0-9]")
         ' Special is "none of the above".
-        Dim special As New System.Text.RegularExpressions.Regex("[^a-zA-Z0-9]")
+        Dim regSpecial As New System.Text.RegularExpressions.Regex("[^a-zA-Z0-9]")
 
         ' Check the length.
-        If Len(strPassword) < minLength Then Secure = False
+        If Len(strPassword) < intMinLength Then bolSecure = False
         ' Check for minimum number of occurrences.
-        If upper.Matches(strPassword).Count < numUpper Then Secure = False
-        If lower.Matches(strPassword).Count < numLower Then Secure = False
-        If number.Matches(strPassword).Count < numNumbers Then Secure = False
-        If special.Matches(strPassword).Count < numSpecial Then Secure = False
+        If regUpper.Matches(strPassword).Count < intNumUpper Then bolSecure = False
+        If regLower.Matches(strPassword).Count < intNumLower Then bolSecure = False
+        If regNumber.Matches(strPassword).Count < intNumNumbers Then bolSecure = False
+        If regSpecial.Matches(strPassword).Count < intNumSpecial Then bolSecure = False
 
         ' Passed all checks.
-        Return Secure
+        Return bolSecure
     End Function
 
     Private Sub txtFirstName_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFirstName.KeyPress
+
         If Not (Asc(e.KeyChar) = 8) Then
+            'string of allowed characters
             Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz '-@1234567890"
+            'converts letter to lowercase to compare to allowedChars string to check if it is allowed in the text box
             If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
                 e.KeyChar = ChrW(0)
                 e.Handled = True
@@ -419,7 +496,9 @@ Public Class frmConfiguration
 
     Private Sub txtLastName_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtLastName.KeyPress
         If Not (Asc(e.KeyChar) = 8) Then
+            'string of allowed characters
             Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz '-@1234567890"
+            'converts letter to lowercase to compare to allowedChars string to check if it is allowed in the text box
             If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
                 e.KeyChar = ChrW(0)
                 e.Handled = True
@@ -429,7 +508,9 @@ Public Class frmConfiguration
 
     Private Sub txtUserID_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtUsername.KeyPress
         If Not (Asc(e.KeyChar) = 8) Then
+            'string of allowed characters
             Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz1234567890"
+            'converts letter to lowercase to compare to allowedChars string to check if it is allowed in the text box
             If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
                 e.KeyChar = ChrW(0)
                 e.Handled = True
@@ -439,7 +520,9 @@ Public Class frmConfiguration
 
     Private Sub txtBarcode_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBarcode.KeyPress
         If Not (Asc(e.KeyChar) = 8) Then
+            'string of allowed characters
             Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz123456789"
+            'converts letter to lowercase to compare to allowedChars string to check if it is allowed in the text box
             If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
                 e.KeyChar = ChrW(0)
                 e.Handled = True
@@ -449,7 +532,9 @@ Public Class frmConfiguration
 
     Private Sub txtPassword_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress, txtConfirmPassword.KeyPress
         If Not (Asc(e.KeyChar) = 8) Then
+            'string of allowed characters
             Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz123456789!@#$%^&*"
+            'converts letter to lowercase to compare to allowedChars string to check if it is allowed in the text box
             If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
                 e.KeyChar = ChrW(0)
                 e.Handled = True
