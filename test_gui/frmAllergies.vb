@@ -139,14 +139,19 @@
         '   1. first we will take the items from all the textfields and insert it into the database.
         '   2. We will just take those same fields and call the create panel method to throw the items on the UI
         '   to save another database call and complexity of removing all the panels from the UI and repopulating them
+        Dim strAllergyName = txtAllergyName.Text
+        Dim intMEdicationTUID = "NUll" 'for now but medication tuid will need to be looked up
+        Dim strAllergyType = txtAllergyType.Text
+
 
         ' insert into database statement/method goes here
-
+        CreateDatabase.ExecuteInsertQuery("INSERT INTO Allergy (Allergy_Name,Medication_TUID,Allergy_Type) VALUES ('" & strAllergyName & "'," & intMEdicationTUID & ",'" & strAllergyType & "');")
         ' populate the screen from a manually added allergy.
 
+        'probably going to need a select query to get the medication name from the TUID
 
 
-        CreateAllergiesPanels(flpAllergies, txtAllergyName.Text, txtMedicationName.Text, txtAllergyType.Text, cmbSeverity.SelectedItem.ToString)
+        CreateAllergiesPanels(flpAllergies, strAllergyName, txtMedicationName.Text, strAllergyType, cmbSeverity.SelectedItem.ToString)
 
     End Sub
 
