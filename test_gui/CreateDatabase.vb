@@ -57,6 +57,9 @@
 '/*  BRH		01/27/21  Updated database path to save on computer		*/
 '/*  BRH		02/06/21	Allowed for user to choose database file	*/
 '/*							and database file name upon creation.		*/
+'/*  NP			02/12/2021	added defaultCartSettings sub and set the   */
+'/*							database to call it when the database is    */
+'/*							being made. 
 '/********************************************************************	*/
 
 'Imports the libraries necessary to connect and create SQLite databases
@@ -240,7 +243,9 @@ Module CreateDatabase
 			CreateSettingsTable()
 
 			DBConn.Close()
+
 			MessageBox.Show("All tables were created")
+			defaultCartSettings() 'this is going to put the default settings for our cart in the database. 
 		Else
 
 		End If
@@ -1423,6 +1428,52 @@ Module CreateDatabase
 						PRIMARY KEY('Settings_ID' AUTOINCREMENT));"
 
 		ExecuteQuery("Settings")
+	End Sub
+
+
+	'/*********************************************************************/
+	'/*                   SUBPROGRAM NAME: defaultCartSettings    		   */         
+	'/*********************************************************************/
+	'/*                   WRITTEN BY:  Nathan Premo   		                 */   
+	'/*		         DATE CREATED: 	2/12/2021                       	   */                             
+	'/*********************************************************************/
+	'/*  SUBPROGRAM PURPOSE:		            						   */             
+	'/*	 This is going to make the SQL call that will set the default settings*/
+	'/*  for our cart in the database. This is so everytime a new database*/
+	'/*  is made it will work with our cart out of the box.               */
+	'/*                                                                   */
+	'/*********************************************************************/
+	'/*  CALLED BY:   	      						         */           
+	'/*  createDatabase.main()                            				   */         
+	'/*********************************************************************/
+	'/*  CALLS:										   */                 
+	'/*             (NONE)								   */             
+	'/*********************************************************************/
+	'/*  PARAMETER LIST (In Parameter Order):					   */         
+	'/*											   */                     
+	'/*                                                                     
+	'/*********************************************************************/
+	'/*  RETURNS:								         */                   
+	'/*            (NOTHING)								   */             
+	'/*********************************************************************/
+	'/* SAMPLE INVOCATION:								                 */             
+	'/*	defaultCartSettings()						      */                     
+	'/*********************************************************************/
+	'/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+	'/*	 strDefaultSettings - this is the string that has our SQL call	   */                     
+	'/*                                                                     
+	'/*********************************************************************/
+	'/* MODIFICATION HISTORY:						         */               
+	'/*											   */                     
+	'/*  WHO   WHEN     WHAT								   */             
+	'/*  ---   ----     ------------------------------------------------- */
+	'/*                                                                     
+	'/*********************************************************************/
+
+	Sub defaultCartSettings()
+		Dim strDefaultSettings As String = "INSERT INTO Settings('Settings_ID', 'Bit_rate', 'Comm_Port', 'Simulation_Mode_Flag') VALUES (0, '115200', 'COM3', 1);"
+
+		ExecuteInsertQuery(strDefaultSettings)
 	End Sub
 
 	'/*******************************************************************/

@@ -28,6 +28,7 @@ Partial Class frmSerialPort
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.btnSave = New System.Windows.Forms.Button()
+        Me.chkSimulation = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'cmbBaudrate
@@ -75,9 +76,9 @@ Partial Class frmSerialPort
         Me.Label18.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label18.Location = New System.Drawing.Point(12, 9)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(152, 25)
+        Me.Label18.Size = New System.Drawing.Size(202, 25)
         Me.Label18.TabIndex = 172
-        Me.Label18.Text = "Serial Port Info:"
+        Me.Label18.Text = "Medication Cart Info:"
         '
         'btnSave
         '
@@ -86,7 +87,7 @@ Partial Class frmSerialPort
         Me.btnSave.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.ForeColor = System.Drawing.Color.White
         Me.btnSave.Image = Global.test_gui.My.Resources.Resources.resolve
-        Me.btnSave.Location = New System.Drawing.Point(77, 208)
+        Me.btnSave.Location = New System.Drawing.Point(71, 250)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(120, 38)
         Me.btnSave.TabIndex = 177
@@ -94,12 +95,24 @@ Partial Class frmSerialPort
         Me.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnSave.UseVisualStyleBackColor = False
         '
+        'chkSimulation
+        '
+        Me.chkSimulation.AutoSize = True
+        Me.chkSimulation.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.chkSimulation.Location = New System.Drawing.Point(26, 203)
+        Me.chkSimulation.Name = "chkSimulation"
+        Me.chkSimulation.Size = New System.Drawing.Size(148, 25)
+        Me.chkSimulation.TabIndex = 178
+        Me.chkSimulation.Text = "Simulation Mode"
+        Me.chkSimulation.UseVisualStyleBackColor = True
+        '
         'frmSerialPort
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(671, 450)
+        Me.Controls.Add(Me.chkSimulation)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.cmbBaudrate)
         Me.Controls.Add(Me.Label12)
@@ -119,4 +132,5 @@ Partial Class frmSerialPort
     Friend WithEvents Label17 As Label
     Friend WithEvents Label18 As Label
     Friend WithEvents btnSave As Button
+    Friend WithEvents chkSimulation As CheckBox
 End Class
