@@ -240,19 +240,19 @@
 
     End Sub
 
-    Private Sub btnControlled_Click(sender As Object, e As EventArgs) Handles btnControlled.Click
+    Private Sub btnControlled_Click(sender As Object, e As EventArgs)
         flpEndOfShiftCount.Controls.Clear()
-        ExtractFormDataForDatabase()
-        ControlledMedsEndofShift()
+        ' ExtractFormDataForDatabase()
+        ' ControlledMedsEndofShift()
     End Sub
 
-    Private Sub btnNonControlled_Click(sender As Object, e As EventArgs) Handles btnNonControlled.Click
+    Private Sub btnNonControlled_Click(sender As Object, e As EventArgs)
         flpEndOfShiftCount.Controls.Clear()
-        NonControlledMedsEndofShift()
+        ' NonControlledMedsEndofShift()
     End Sub
 
-    Private Sub btnAllMedications_Click(sender As Object, e As EventArgs) Handles btnAllMedications.Click
+    Private Sub btnAllMedications_Click(sender As Object, e As EventArgs)
         flpEndOfShiftCount.Controls.Clear()
-        EndofShiftAllMedications()
+        ' EndofShiftAllMedications()
     End Sub
 End Class

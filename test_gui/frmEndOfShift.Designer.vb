@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmEndOfShift
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,20 +20,19 @@ Partial Class frmEndOfShift
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.flpEndOfShiftCount = New System.Windows.Forms.FlowLayoutPanel()
         Me.pnlHeader = New System.Windows.Forms.Panel()
+        Me.lblSection = New System.Windows.Forms.Label()
+        Me.lblSystemCount = New System.Windows.Forms.Label()
         Me.lblCount = New System.Windows.Forms.Label()
         Me.lblActions = New System.Windows.Forms.Label()
         Me.lblMedication = New System.Windows.Forms.Label()
         Me.lblDrawerNum = New System.Windows.Forms.Label()
         Me.btnSave = New System.Windows.Forms.Button()
-        Me.lblSystemCount = New System.Windows.Forms.Label()
-        Me.lblSection = New System.Windows.Forms.Label()
-        Me.btnControlled = New System.Windows.Forms.Button()
-        Me.btnNonControlled = New System.Windows.Forms.Button()
-        Me.btnAllMedications = New System.Windows.Forms.Button()
+        Me.cmbMethod = New System.Windows.Forms.ComboBox()
+        Me.Label15 = New System.Windows.Forms.Label()
         Me.pnlHeader.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -59,6 +58,28 @@ Partial Class frmEndOfShift
         Me.pnlHeader.Name = "pnlHeader"
         Me.pnlHeader.Size = New System.Drawing.Size(955, 47)
         Me.pnlHeader.TabIndex = 18
+        '
+        'lblSection
+        '
+        Me.lblSection.AutoSize = True
+        Me.lblSection.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSection.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblSection.Location = New System.Drawing.Point(435, 19)
+        Me.lblSection.Name = "lblSection"
+        Me.lblSection.Size = New System.Drawing.Size(62, 21)
+        Me.lblSection.TabIndex = 8
+        Me.lblSection.Text = "Divider"
+        '
+        'lblSystemCount
+        '
+        Me.lblSystemCount.AutoSize = True
+        Me.lblSystemCount.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSystemCount.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblSystemCount.Location = New System.Drawing.Point(574, 19)
+        Me.lblSystemCount.Name = "lblSystemCount"
+        Me.lblSystemCount.Size = New System.Drawing.Size(111, 21)
+        Me.lblSystemCount.TabIndex = 7
+        Me.lblSystemCount.Text = "System Count"
         '
         'lblCount
         '
@@ -98,7 +119,7 @@ Partial Class frmEndOfShift
         Me.lblDrawerNum.AutoSize = True
         Me.lblDrawerNum.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDrawerNum.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblDrawerNum.Location = New System.Drawing.Point(244, 19)
+        Me.lblDrawerNum.Location = New System.Drawing.Point(210, 19)
         Me.lblDrawerNum.Name = "lblDrawerNum"
         Me.lblDrawerNum.Size = New System.Drawing.Size(126, 21)
         Me.lblDrawerNum.TabIndex = 0
@@ -120,85 +141,35 @@ Partial Class frmEndOfShift
         Me.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnSave.UseVisualStyleBackColor = False
         '
-        'lblSystemCount
+        'cmbMethod
         '
-        Me.lblSystemCount.AutoSize = True
-        Me.lblSystemCount.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSystemCount.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblSystemCount.Location = New System.Drawing.Point(574, 19)
-        Me.lblSystemCount.Name = "lblSystemCount"
-        Me.lblSystemCount.Size = New System.Drawing.Size(111, 21)
-        Me.lblSystemCount.TabIndex = 7
-        Me.lblSystemCount.Text = "System Count"
+        Me.cmbMethod.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbMethod.FormattingEnabled = True
+        Me.cmbMethod.Items.AddRange(New Object() {"All Medication", "Controlled", "Controlled Non-Narcotic ", "Narcotic", "Non-Controlled"})
+        Me.cmbMethod.Location = New System.Drawing.Point(110, 18)
+        Me.cmbMethod.Name = "cmbMethod"
+        Me.cmbMethod.Size = New System.Drawing.Size(317, 29)
+        Me.cmbMethod.Sorted = True
+        Me.cmbMethod.TabIndex = 166
         '
-        'lblSection
+        'Label15
         '
-        Me.lblSection.AutoSize = True
-        Me.lblSection.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSection.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblSection.Location = New System.Drawing.Point(435, 19)
-        Me.lblSection.Name = "lblSection"
-        Me.lblSection.Size = New System.Drawing.Size(65, 21)
-        Me.lblSection.TabIndex = 8
-        Me.lblSection.Text = "Section"
-        '
-        'btnControlled
-        '
-        Me.btnControlled.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnControlled.FlatAppearance.BorderSize = 0
-        Me.btnControlled.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnControlled.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnControlled.ForeColor = System.Drawing.Color.White
-        Me.btnControlled.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnControlled.Location = New System.Drawing.Point(12, 12)
-        Me.btnControlled.Name = "btnControlled"
-        Me.btnControlled.Size = New System.Drawing.Size(166, 37)
-        Me.btnControlled.TabIndex = 21
-        Me.btnControlled.Text = "CONTROLLED"
-        Me.btnControlled.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnControlled.UseVisualStyleBackColor = False
-        '
-        'btnNonControlled
-        '
-        Me.btnNonControlled.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnNonControlled.FlatAppearance.BorderSize = 0
-        Me.btnNonControlled.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNonControlled.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNonControlled.ForeColor = System.Drawing.Color.White
-        Me.btnNonControlled.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnNonControlled.Location = New System.Drawing.Point(203, 12)
-        Me.btnNonControlled.Name = "btnNonControlled"
-        Me.btnNonControlled.Size = New System.Drawing.Size(192, 37)
-        Me.btnNonControlled.TabIndex = 22
-        Me.btnNonControlled.Text = "NON-CONTROLLED"
-        Me.btnNonControlled.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnNonControlled.UseVisualStyleBackColor = False
-        '
-        'btnAllMedications
-        '
-        Me.btnAllMedications.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnAllMedications.FlatAppearance.BorderSize = 0
-        Me.btnAllMedications.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAllMedications.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAllMedications.ForeColor = System.Drawing.Color.White
-        Me.btnAllMedications.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnAllMedications.Location = New System.Drawing.Point(417, 12)
-        Me.btnAllMedications.Name = "btnAllMedications"
-        Me.btnAllMedications.Size = New System.Drawing.Size(208, 37)
-        Me.btnAllMedications.TabIndex = 23
-        Me.btnAllMedications.Text = "ALL MEDICATIONS"
-        Me.btnAllMedications.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnAllMedications.UseVisualStyleBackColor = False
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Location = New System.Drawing.Point(8, 21)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(96, 21)
+        Me.Label15.TabIndex = 167
+        Me.Label15.Text = "Report Type:"
         '
         'frmEndOfShift
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1009, 663)
-        Me.Controls.Add(Me.btnAllMedications)
-        Me.Controls.Add(Me.btnNonControlled)
-        Me.Controls.Add(Me.btnControlled)
+        Me.ClientSize = New System.Drawing.Size(1138, 663)
+        Me.Controls.Add(Me.cmbMethod)
+        Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.flpEndOfShiftCount)
         Me.Controls.Add(Me.pnlHeader)
@@ -207,6 +178,7 @@ Partial Class frmEndOfShift
         Me.pnlHeader.ResumeLayout(False)
         Me.pnlHeader.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -219,7 +191,6 @@ Partial Class frmEndOfShift
     Friend WithEvents btnSave As Button
     Friend WithEvents lblSection As Label
     Friend WithEvents lblSystemCount As Label
-    Friend WithEvents btnControlled As Button
-    Friend WithEvents btnNonControlled As Button
-    Friend WithEvents btnAllMedications As Button
+    Friend WithEvents cmbMethod As ComboBox
+    Friend WithEvents Label15 As Label
 End Class
