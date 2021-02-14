@@ -365,7 +365,7 @@ Partial Class frmMain
         Me.btnAdhockDispense.Size = New System.Drawing.Size(210, 42)
         Me.btnAdhockDispense.TabIndex = 25
         Me.btnAdhockDispense.Tag = "3"
-        Me.btnAdhockDispense.Text = "Ad Hock Dispense"
+        Me.btnAdhockDispense.Text = "Ad Hoc Dispense"
         Me.btnAdhockDispense.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnAdhockDispense.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnAdhockDispense.UseVisualStyleBackColor = False
