@@ -48,8 +48,6 @@ Partial Class frmPatientInfo
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtBirthday = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.flpDispenseHistory = New System.Windows.Forms.FlowLayoutPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
@@ -66,7 +64,6 @@ Partial Class frmPatientInfo
         Me.Label31 = New System.Windows.Forms.Label()
         Me.Label28 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label26 = New System.Windows.Forms.Label()
         Me.Label27 = New System.Windows.Forms.Label()
@@ -75,6 +72,8 @@ Partial Class frmPatientInfo
         Me.btnDispenseMedication = New System.Windows.Forms.Button()
         Me.btnEditPatient = New System.Windows.Forms.Button()
         Me.btnAddAllergies = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label18 = New System.Windows.Forms.Label()
         Me.pnlPersonalInformation.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -376,27 +375,6 @@ Partial Class frmPatientInfo
         Me.Label11.TabIndex = 6
         Me.Label11.Text = "DOB:"
         '
-        'Label18
-        '
-        Me.Label18.AutoSize = True
-        Me.Label18.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.ForeColor = System.Drawing.Color.Black
-        Me.Label18.Location = New System.Drawing.Point(118, 120)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(146, 21)
-        Me.Label18.TabIndex = 18
-        Me.Label18.Text = "Charts/Documents"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(7, 6)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(262, 25)
-        Me.Label4.TabIndex = 30
-        Me.Label4.Text = "Patient Medical Information"
-        '
         'Label6
         '
         Me.Label6.AutoSize = True
@@ -492,9 +470,9 @@ Partial Class frmPatientInfo
         Me.Label29.ForeColor = System.Drawing.SystemColors.ControlDarkDark
         Me.Label29.Location = New System.Drawing.Point(212, 16)
         Me.Label29.Name = "Label29"
-        Me.Label29.Size = New System.Drawing.Size(65, 21)
+        Me.Label29.Size = New System.Drawing.Size(74, 21)
         Me.Label29.TabIndex = 0
-        Me.Label29.Text = "Dosage"
+        Me.Label29.Text = "Strength"
         '
         'Label30
         '
@@ -528,10 +506,10 @@ Partial Class frmPatientInfo
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.White
+        Me.Panel3.Controls.Add(Me.Label1)
         Me.Panel3.Controls.Add(Me.Label31)
         Me.Panel3.Controls.Add(Me.Label28)
         Me.Panel3.Controls.Add(Me.Label5)
-        Me.Panel3.Controls.Add(Me.Label2)
         Me.Panel3.Controls.Add(Me.Label9)
         Me.Panel3.Controls.Add(Me.Label26)
         Me.Panel3.Controls.Add(Me.Label27)
@@ -545,44 +523,33 @@ Partial Class frmPatientInfo
         Me.Label31.AutoSize = True
         Me.Label31.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label31.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label31.Location = New System.Drawing.Point(626, 16)
+        Me.Label31.Location = New System.Drawing.Point(849, 16)
         Me.Label31.Name = "Label31"
-        Me.Label31.Size = New System.Drawing.Size(120, 21)
+        Me.Label31.Size = New System.Drawing.Size(110, 21)
         Me.Label31.TabIndex = 15
-        Me.Label31.Text = "Prescripbed By"
+        Me.Label31.Text = "Prescribed By"
         '
         'Label28
         '
         Me.Label28.AutoSize = True
         Me.Label28.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label28.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label28.Location = New System.Drawing.Point(549, 16)
+        Me.Label28.Location = New System.Drawing.Point(685, 16)
         Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(44, 21)
+        Me.Label28.Size = New System.Drawing.Size(126, 21)
         Me.Label28.TabIndex = 14
-        Me.Label28.Text = "Date"
+        Me.Label28.Text = "Date Prescribed"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label5.Location = New System.Drawing.Point(449, 16)
+        Me.Label5.Location = New System.Drawing.Point(568, 16)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(72, 21)
         Me.Label5.TabIndex = 12
         Me.Label5.Text = "Quantity"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label2.Location = New System.Drawing.Point(792, 16)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(77, 21)
-        Me.Label2.TabIndex = 5
-        Me.Label2.Text = "Schedule"
         '
         'Label9
         '
@@ -600,7 +567,7 @@ Partial Class frmPatientInfo
         Me.Label26.AutoSize = True
         Me.Label26.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label26.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label26.Location = New System.Drawing.Point(339, 16)
+        Me.Label26.Location = New System.Drawing.Point(462, 16)
         Me.Label26.Name = "Label26"
         Me.Label26.Size = New System.Drawing.Size(69, 21)
         Me.Label26.TabIndex = 13
@@ -611,11 +578,11 @@ Partial Class frmPatientInfo
         Me.Label27.AutoSize = True
         Me.Label27.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label27.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label27.Location = New System.Drawing.Point(228, 16)
+        Me.Label27.Location = New System.Drawing.Point(202, 16)
         Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(65, 21)
+        Me.Label27.Size = New System.Drawing.Size(74, 21)
         Me.Label27.TabIndex = 10
-        Me.Label27.Text = "Dosage"
+        Me.Label27.Text = "Strength"
         '
         'lstBoxAllergies
         '
@@ -691,12 +658,34 @@ Partial Class frmPatientInfo
         Me.btnAddAllergies.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnAddAllergies.UseVisualStyleBackColor = False
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label1.Location = New System.Drawing.Point(344, 16)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(86, 21)
+        Me.Label1.TabIndex = 16
+        Me.Label1.Text = "Frequency"
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.ForeColor = System.Drawing.Color.Black
+        Me.Label18.Location = New System.Drawing.Point(118, 120)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(146, 21)
+        Me.Label18.TabIndex = 18
+        Me.Label18.Text = "Charts/Documents"
+        '
         'frmPatientInfo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1274, 727)
+        Me.ClientSize = New System.Drawing.Size(1274, 730)
         Me.Controls.Add(Me.btnAddAllergies)
         Me.Controls.Add(Me.lstBoxAllergies)
         Me.Controls.Add(Me.Panel3)
@@ -708,7 +697,6 @@ Partial Class frmPatientInfo
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Label30)
         Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.btnEditPatient)
         Me.Controls.Add(Me.pnlPersonalInformation)
         Me.Controls.Add(Me.Label18)
@@ -728,13 +716,11 @@ Partial Class frmPatientInfo
     Friend WithEvents pnlPersonalInformation As Panel
     Friend WithEvents Label16 As Label
     Friend WithEvents Label11 As Label
-    Friend WithEvents Label18 As Label
     Friend WithEvents btnEditPatient As Button
     Friend WithEvents txtPhysician As TextBox
     Friend WithEvents txtGender As TextBox
     Friend WithEvents Label19 As Label
     Friend WithEvents txtBirthday As TextBox
-    Friend WithEvents Label4 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents Label21 As Label
     Friend WithEvents txtBed As TextBox
@@ -758,7 +744,6 @@ Partial Class frmPatientInfo
     Friend WithEvents flpMedications As FlowLayoutPanel
     Friend WithEvents Label20 As Label
     Friend WithEvents Panel3 As Panel
-    Friend WithEvents Label2 As Label
     Friend WithEvents lstBoxAllergies As ListBox
     Friend WithEvents Label7 As Label
     Friend WithEvents txtMRN As TextBox
@@ -776,4 +761,6 @@ Partial Class frmPatientInfo
     Friend WithEvents Label26 As Label
     Friend WithEvents Label27 As Label
     Friend WithEvents btnAddAllergies As Button
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Label18 As Label
 End Class
