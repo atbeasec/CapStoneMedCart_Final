@@ -31,7 +31,7 @@ Partial Class frmEndOfShift
         Me.lblMedication = New System.Windows.Forms.Label()
         Me.lblDrawerNum = New System.Windows.Forms.Label()
         Me.btnSave = New System.Windows.Forms.Button()
-        Me.cmbMethod = New System.Windows.Forms.ComboBox()
+        Me.cmbFilter = New System.Windows.Forms.ComboBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.pnlHeader.SuspendLayout()
         Me.SuspendLayout()
@@ -119,7 +119,7 @@ Partial Class frmEndOfShift
         Me.lblDrawerNum.AutoSize = True
         Me.lblDrawerNum.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDrawerNum.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblDrawerNum.Location = New System.Drawing.Point(210, 19)
+        Me.lblDrawerNum.Location = New System.Drawing.Point(225, 19)
         Me.lblDrawerNum.Name = "lblDrawerNum"
         Me.lblDrawerNum.Size = New System.Drawing.Size(126, 21)
         Me.lblDrawerNum.TabIndex = 0
@@ -136,21 +136,21 @@ Partial Class frmEndOfShift
         Me.btnSave.Location = New System.Drawing.Point(801, 12)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(166, 37)
-        Me.btnSave.TabIndex = 20
+        Me.btnSave.TabIndex = 2
         Me.btnSave.Text = "SAVE REPORT"
         Me.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnSave.UseVisualStyleBackColor = False
         '
-        'cmbMethod
+        'cmbFilter
         '
-        Me.cmbMethod.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbMethod.FormattingEnabled = True
-        Me.cmbMethod.Items.AddRange(New Object() {"All Medication", "Controlled", "Controlled Non-Narcotic ", "Narcotic", "Non-Controlled"})
-        Me.cmbMethod.Location = New System.Drawing.Point(110, 18)
-        Me.cmbMethod.Name = "cmbMethod"
-        Me.cmbMethod.Size = New System.Drawing.Size(317, 29)
-        Me.cmbMethod.Sorted = True
-        Me.cmbMethod.TabIndex = 166
+        Me.cmbFilter.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbFilter.FormattingEnabled = True
+        Me.cmbFilter.Items.AddRange(New Object() {"All Medication", "Controlled", "Controlled Non-Narcotic ", "Narcotic", "Non-Controlled"})
+        Me.cmbFilter.Location = New System.Drawing.Point(110, 18)
+        Me.cmbFilter.Name = "cmbFilter"
+        Me.cmbFilter.Size = New System.Drawing.Size(317, 29)
+        Me.cmbFilter.Sorted = True
+        Me.cmbFilter.TabIndex = 1
         '
         'Label15
         '
@@ -167,8 +167,8 @@ Partial Class frmEndOfShift
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1138, 663)
-        Me.Controls.Add(Me.cmbMethod)
+        Me.ClientSize = New System.Drawing.Size(1021, 663)
+        Me.Controls.Add(Me.cmbFilter)
         Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.flpEndOfShiftCount)
@@ -191,6 +191,6 @@ Partial Class frmEndOfShift
     Friend WithEvents btnSave As Button
     Friend WithEvents lblSection As Label
     Friend WithEvents lblSystemCount As Label
-    Friend WithEvents cmbMethod As ComboBox
+    Friend WithEvents cmbFilter As ComboBox
     Friend WithEvents Label15 As Label
 End Class

@@ -40,10 +40,61 @@
     '/*  Collin Krygier  2/5/2021    Initial creation                   */
     '/*******************************************************************/
 
+    Enum TypesOfReports As Integer
+        AllMedication
+        Controlled
+        ControlledNonNarcotic
+        Narcotic
+        NonNarcotic
+    End Enum
+
+
     Dim ContactPanelsAddedCount As Integer = 0
     Dim CurrentContactPanelName As String = Nothing
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: frmEndOfShift_Load()           */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/13/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is routine is called at the time of the form loading        */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*   nothing                                                         */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*   nothing                                       				  */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 NONE                                                             */ 
+    '/* sender As Object- represents a control object                     */
+    '/* e As EventArgs- the event associated                              */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	frmEndOfShift_Load()                                              */ 
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  Collin Krygier  2/13/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Sub frmEndOfShift_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+
+        'Remove these once the SQL statements are corrected and updated.
+        CreatePanel(flpEndOfShiftCount, "123", "Advil", "2", "3", "54")
+        CreatePanel(flpEndOfShiftCount, "123", "Advil", "2", "3", "54")
+        CreatePanel(flpEndOfShiftCount, "123", "Advil", "2", "3", "54")
+        CreatePanel(flpEndOfShiftCount, "123", "Advil", "2", "3", "54")
+        CreatePanel(flpEndOfShiftCount, "123", "Advil", "2", "3", "54")
+        CreatePanel(flpEndOfShiftCount, "123", "Advil", "2", "3", "54")
+        CreatePanel(flpEndOfShiftCount, "123", "Advil", "2", "3", "54")
+
 
     End Sub
 
@@ -101,7 +152,7 @@
     '/*  WHO   WHEN     WHAT								              */             
     '/*  Collin Krygier  2/5/2021    Initial creation                     */
     '/*********************************************************************/
-    Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal intMedicationTUID As Integer, ByVal strMedicationName As String, ByVal strDrawerNumber As String, ByVal strSection As String, ByVal strSystemCount As String)
+    Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal intMedicationTUID As String, ByVal strMedicationName As String, ByVal strDrawerNumber As String, ByVal strSection As String, ByVal strSystemCount As String)
 
         Dim pnl As Panel
         pnl = New Panel
@@ -120,6 +171,8 @@
             ' .Dock = System.Windows.Forms.DockStyle.Top
         End With
 
+        ' important to note that the .tag is going to contain the medication TUID for querying  purposes
+
         With pnlMainPanel
 
             .BackColor = Color.White
@@ -137,7 +190,7 @@
         AddHandler pnlMainPanel.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
         AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
 
-        ' add controls to this panel
+        'add controls to this panel
         CreateFlagBtn(pnlMainPanel, getPanelCount(flpPannel), lblActions.Location.X + 8, 5)
         CreateTextBox(pnlMainPanel, getPanelCount(flpPannel), lblCount.Location.X, 6)
 
@@ -219,8 +272,6 @@
                         txtBox = CType(ctlControl, TextBox)
 
 
-
-
                         'HERE call the insert or update statement to database to pipe the data over for reporting
                         Debug.Print(pnlPanel.Tag) 'tag will retreive the ID of the medication because it is added there inthe create panel method
                         Debug.Print(txtBox.Text) 'textbox will contain the typed count 
@@ -228,31 +279,267 @@
                         'Debug.Print(ctlControl.Name)
 
 
-
-
-
-
                     End If
-
                 Next
             Next
         Next
 
     End Sub
 
-    Private Sub btnControlled_Click(sender As Object, e As EventArgs)
-        flpEndOfShiftCount.Controls.Clear()
-        ' ExtractFormDataForDatabase()
-        ' ControlledMedsEndofShift()
+    '/*********************************************************************/
+    '/*             SubProgram NAME: cmbFilter_SelectedIndexChanged()     */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/13/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is routine is called when the user selects an item from the */
+    '/* from the drop down list.                                          */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*   nothing                                                         */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*   RemoveHandlersAndAssociations()                                 */   
+    '/*   GetListOfAllControls                                            */
+    '/*   DetermineSelectedReport                                         */
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 NONE                                                             */ 
+    '/* sender As Object- represents a control object                     */
+    '/* e As EventArgs- the event associated                              */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	cmbFilter_SelectedIndexChanged()                                  */ 
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  Collin Krygier  2/13/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub cmbFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFilter.SelectedIndexChanged
+
+        ' remove all controls and the handlers of those controls before generating new panels
+        RemoveHandlersAndAssociations(GetListOfAllControls(flpEndOfShiftCount), flpEndOfShiftCount)
+
+        ' determine which report will be run based on the user selection from the drop down
+        ' this selection determines which SQL query will be called.
+
+        DetermineSelectedReport(cmbFilter.SelectedIndex)
+
     End Sub
 
-    Private Sub btnNonControlled_Click(sender As Object, e As EventArgs)
-        flpEndOfShiftCount.Controls.Clear()
-        ' NonControlledMedsEndofShift()
+    '/*********************************************************************/
+    '/*             SubProgram NAME: DetermineSelectedReport()            */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/13/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is routine is called when the user selects an item from the */
+    '/*  from the drop down list and the index value of the selected item */
+    '/*  is passed here                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*   cmbFilter_SelectedIndexChanged                                  */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                     
+    '/*                                             
+    '/*                                          
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 NONE                                                             */ 
+    '/* intIndex- an integer representing the index value of the selected */
+    '/* item.                                                             */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	DetermineSelectedReport(intInteger)                               */ 
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  Collin Krygier  2/13/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub DetermineSelectedReport(ByVal intIndex As Integer)
+
+        Select Case intIndex
+
+            Case TypesOfReports.AllMedication
+
+                 ' EndofShiftAllMedications()
+
+            Case TypesOfReports.Controlled
+
+
+            Case TypesOfReports.ControlledNonNarcotic
+
+                 ' ControlledMedsEndofShift()
+
+            Case TypesOfReports.Narcotic
+
+
+            Case TypesOfReports.NonNarcotic
+
+                'NonControlledMedsEndofShift()
+
+        End Select
+
     End Sub
 
-    Private Sub btnAllMedications_Click(sender As Object, e As EventArgs)
-        flpEndOfShiftCount.Controls.Clear()
-        ' EndofShiftAllMedications()
+    '/*********************************************************************/
+    '/*                   Function NAME: GetListOfAllControls             */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/13/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to iterate over the flow panel and return all of the/
+    '/*  controls within the flow panel.                                  */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*             RemoveHandlersAndAssociations                         */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*             nothing                                				  */             
+    '/*********************************************************************/
+    '/*  Returns: A list of controls that are contained on the flowpanel  */                 
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 A flow panel object                                              */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 GetListOfAllControls(FlowPanel1)       						  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	ctlRemainingControls- a control representing all non panel controls/
+    '/* pnlMain- a control which represents a panel in this usecase       */
+    '/*     particular panel.                                             */
+    '/* pnlPadding- a control which represents a panel in this usecase    */
+    '/*     particular panel.                                             */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/13/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Function GetListOfAllControls(ByVal flpFlowPanel As FlowLayoutPanel)
+
+        ' the order in which this list is created is important because the controls added
+        ' to this list will need to be disposed of and have handles removed properly
+        ' to allow for effecient use of resources within the software.
+
+        Dim lstOfControlsToRemove As New List(Of Control)
+        Dim pnlPadding As Control
+        Dim pnlMain As Control
+        Dim ctlRemainingControls As Control
+
+        ' add all of the padding panels to the list
+        For Each pnlPadding In flpFlowPanel.Controls
+            lstOfControlsToRemove.Add(pnlPadding)
+        Next
+
+        ' add all of the main panels to the list
+        For Each pnlPadding In flpFlowPanel.Controls
+            For Each pnlMain In pnlPadding.Controls
+                lstOfControlsToRemove.Add(pnlMain)
+            Next
+        Next
+
+        ' add all of the remaining controls such as txtboxes, labels, and buttons to the list
+        For Each pnlPadding In flpFlowPanel.Controls
+            For Each pnlMain In pnlPadding.Controls
+                For Each ctlRemainingControls In pnlMain.Controls
+                    lstOfControlsToRemove.Add(ctlRemainingControls)
+                Next
+            Next
+        Next
+
+
+        ' List of all controls on the form is populated. Next, the controls needs to be
+        ' iterated over from last to first because if the panels are disposed of before
+        ' the single controls, the handlers and other parts will not be disposed of correctly
+        ' and may consume memory for the life of the running application.
+
+        lstOfControlsToRemove.Reverse()
+
+        Return lstOfControlsToRemove
+
+    End Function
+
+    '/*********************************************************************/
+    '/*                   SUB NAME: RemoveHandlersAndAssociations         */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/13/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to iterate over a list of controls and remove the  */
+    '/* control handlers before removing and disposing of the controls    */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*     cmbFilter_SelectedIndexChanged                                */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*         nothing                                    				  */                     
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 A flow panel object                                              */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 RemoveHandlersAndAssociations(listOfControls, flowpanel1)    	  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	ctlControlObject- a control representing all controls             */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/13/2021    Initial creation                    */
+    '/*********************************************************************/
+
+    Private Sub RemoveHandlersAndAssociations(ByVal lstOfControlsToRemove As List(Of Control), flpFlowPanel As FlowLayoutPanel)
+
+        Dim ctlControlObject As Control
+        Const PANELWITHASSIGNEDHANDLERS As String = "pnlMedicationFlagged"
+        For Each ctlControlObject In lstOfControlsToRemove
+
+            If TypeName(ctlControlObject) = "TextBox" Then
+                ' no handler here
+                flpFlowPanel.Controls.Remove(ctlControlObject)
+                ctlControlObject.Dispose()
+
+            ElseIf TypeName(ctlControlObject) = "Button" Then
+                ' remove the handler that is assiged to all edit buttons
+                RemoveHandler ctlControlObject.Click, AddressOf DynamicFlagMedicationButton
+                flpFlowPanel.Controls.Remove(ctlControlObject)
+                ctlControlObject.Dispose()
+
+            ElseIf TypeName(ctlControlObject) = "Panel" And ctlControlObject.Name.Contains(PANELWITHASSIGNEDHANDLERS) Then
+
+                RemoveHandler ctlControlObject.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
+                RemoveHandler ctlControlObject.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
+                flpFlowPanel.Controls.Remove(ctlControlObject)
+                ctlControlObject.Dispose()
+            Else
+
+                flpFlowPanel.Controls.Remove(ctlControlObject)
+                ctlControlObject.Dispose()
+            End If
+
+        Next
+
+        ' clear the panel even though it should be empty at this point and all links to old controls are deleted.
+        flpFlowPanel.Controls.Clear()
+
     End Sub
 End Class
