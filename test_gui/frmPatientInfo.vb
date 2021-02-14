@@ -256,6 +256,7 @@
 
     Private Sub frmPatientInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+
         intPatientMRN = frmPatientRecords.intSelectedPatientMRN
         PatientInformation.GetAllergies(intPatientMRN)
         PatientInformation.GetPatientInformation(intPatientMRN)
@@ -987,4 +988,11 @@
         'frmAllergies.Label5.Text = intPatientMRN
         frmAllergies.Show()
     End Sub
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+
+        frmMain.OpenChildForm(frmPatientRecords)
+
+    End Sub
+
 End Class

@@ -1,7 +1,7 @@
 ﻿Public Class frmMain
 
-    Dim frmCurrentChildForm As Form
-    Dim frmPreviousChildForm As Form
+    Private frmCurrentChildForm As Form
+    Private frmPreviousChildForm As Form
 
     Private Sub btnPatientRecords_Click(sender As Object, e As EventArgs) Handles btnPatientRecords.Click, btnInventory.Click, btnAdhockDispense.Click, btnEndOfShiftCount.Click, btnConfigureInventory.Click, btnReport.Click, btnDescrepancies.Click, btnMaintenance.Click, btnPharmacy.Click, btnSettings.Click, btnUsers.Click, btnDischargePatient.Click, btnEditRooms.Click, btnSerialPort.Click, btnWaste.Click
 
@@ -33,7 +33,7 @@
     End Sub
 
 
-    Private Sub OpenChildForm(ByVal frmChild As Form)
+    Sub OpenChildForm(ByVal frmChild As Form)
 
         ' this is where we dock the form as a frmChild form onto the panel
         ' if there is currently a form here we need to close it
@@ -346,4 +346,5 @@
         frmLoginScan.Show()
 
     End Sub
+
 End Class

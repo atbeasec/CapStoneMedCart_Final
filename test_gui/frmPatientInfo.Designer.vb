@@ -74,9 +74,12 @@ Partial Class frmPatientInfo
         Me.btnAddAllergies = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnBack = New System.Windows.Forms.Button()
         Me.pnlPersonalInformation.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'LblPatientName
@@ -162,9 +165,9 @@ Partial Class frmPatientInfo
         Me.pnlPersonalInformation.Controls.Add(Me.Label16)
         Me.pnlPersonalInformation.Controls.Add(Me.Label11)
         Me.pnlPersonalInformation.ForeColor = System.Drawing.Color.Gainsboro
-        Me.pnlPersonalInformation.Location = New System.Drawing.Point(12, 34)
+        Me.pnlPersonalInformation.Location = New System.Drawing.Point(12, 44)
         Me.pnlPersonalInformation.Name = "pnlPersonalInformation"
-        Me.pnlPersonalInformation.Size = New System.Drawing.Size(404, 428)
+        Me.pnlPersonalInformation.Size = New System.Drawing.Size(364, 428)
         Me.pnlPersonalInformation.TabIndex = 17
         '
         'Label15
@@ -389,7 +392,7 @@ Partial Class frmPatientInfo
         '
         Me.flpDispenseHistory.AutoScroll = True
         Me.flpDispenseHistory.BackColor = System.Drawing.Color.White
-        Me.flpDispenseHistory.Location = New System.Drawing.Point(422, 128)
+        Me.flpDispenseHistory.Location = New System.Drawing.Point(385, 138)
         Me.flpDispenseHistory.Name = "flpDispenseHistory"
         Me.flpDispenseHistory.Size = New System.Drawing.Size(846, 317)
         Me.flpDispenseHistory.TabIndex = 48
@@ -403,7 +406,7 @@ Partial Class frmPatientInfo
         Me.Panel2.Controls.Add(Me.Label23)
         Me.Panel2.Controls.Add(Me.Label25)
         Me.Panel2.Controls.Add(Me.Label29)
-        Me.Panel2.Location = New System.Drawing.Point(422, 78)
+        Me.Panel2.Location = New System.Drawing.Point(385, 88)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(846, 47)
         Me.Panel2.TabIndex = 47
@@ -478,7 +481,7 @@ Partial Class frmPatientInfo
         '
         Me.Label30.AutoSize = True
         Me.Label30.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label30.Location = New System.Drawing.Point(422, 40)
+        Me.Label30.Location = New System.Drawing.Point(385, 50)
         Me.Label30.Name = "Label30"
         Me.Label30.Size = New System.Drawing.Size(157, 25)
         Me.Label30.TabIndex = 46
@@ -604,7 +607,7 @@ Partial Class frmPatientInfo
         Me.btnWaste.ForeColor = System.Drawing.Color.White
         Me.btnWaste.Image = CType(resources.GetObject("btnWaste.Image"), System.Drawing.Image)
         Me.btnWaste.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnWaste.Location = New System.Drawing.Point(716, 27)
+        Me.btnWaste.Location = New System.Drawing.Point(638, 0)
         Me.btnWaste.Name = "btnWaste"
         Me.btnWaste.Size = New System.Drawing.Size(107, 37)
         Me.btnWaste.TabIndex = 11
@@ -615,11 +618,12 @@ Partial Class frmPatientInfo
         'btnDispenseMedication
         '
         Me.btnDispenseMedication.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnDispenseMedication.FlatAppearance.BorderSize = 0
         Me.btnDispenseMedication.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDispenseMedication.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDispenseMedication.ForeColor = System.Drawing.Color.White
         Me.btnDispenseMedication.Image = CType(resources.GetObject("btnDispenseMedication.Image"), System.Drawing.Image)
-        Me.btnDispenseMedication.Location = New System.Drawing.Point(840, 27)
+        Me.btnDispenseMedication.Location = New System.Drawing.Point(762, 0)
         Me.btnDispenseMedication.Name = "btnDispenseMedication"
         Me.btnDispenseMedication.Size = New System.Drawing.Size(236, 37)
         Me.btnDispenseMedication.TabIndex = 12
@@ -630,11 +634,12 @@ Partial Class frmPatientInfo
         'btnEditPatient
         '
         Me.btnEditPatient.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnEditPatient.FlatAppearance.BorderSize = 0
         Me.btnEditPatient.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEditPatient.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnEditPatient.ForeColor = System.Drawing.Color.White
         Me.btnEditPatient.Image = CType(resources.GetObject("btnEditPatient.Image"), System.Drawing.Image)
-        Me.btnEditPatient.Location = New System.Drawing.Point(1093, 27)
+        Me.btnEditPatient.Location = New System.Drawing.Point(1015, 0)
         Me.btnEditPatient.Name = "btnEditPatient"
         Me.btnEditPatient.Size = New System.Drawing.Size(173, 37)
         Me.btnEditPatient.TabIndex = 13
@@ -680,24 +685,52 @@ Partial Class frmPatientInfo
         Me.Label18.TabIndex = 18
         Me.Label18.Text = "Charts/Documents"
         '
+        'Panel1
+        '
+        Me.Panel1.BackColor = System.Drawing.Color.White
+        Me.Panel1.Controls.Add(Me.btnBack)
+        Me.Panel1.Controls.Add(Me.btnWaste)
+        Me.Panel1.Controls.Add(Me.btnEditPatient)
+        Me.Panel1.Controls.Add(Me.btnDispenseMedication)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(1274, 46)
+        Me.Panel1.TabIndex = 60
+        '
+        'btnBack
+        '
+        Me.btnBack.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnBack.FlatAppearance.BorderSize = 0
+        Me.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnBack.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnBack.ForeColor = System.Drawing.Color.White
+        Me.btnBack.Image = CType(resources.GetObject("btnBack.Image"), System.Drawing.Image)
+        Me.btnBack.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnBack.Location = New System.Drawing.Point(17, 0)
+        Me.btnBack.Name = "btnBack"
+        Me.btnBack.Size = New System.Drawing.Size(89, 37)
+        Me.btnBack.TabIndex = 61
+        Me.btnBack.Text = "Back"
+        Me.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnBack.UseVisualStyleBackColor = False
+        '
         'frmPatientInfo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1274, 730)
+        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.btnAddAllergies)
         Me.Controls.Add(Me.lstBoxAllergies)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Label20)
-        Me.Controls.Add(Me.btnWaste)
         Me.Controls.Add(Me.flpMedications)
-        Me.Controls.Add(Me.btnDispenseMedication)
         Me.Controls.Add(Me.flpDispenseHistory)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Label30)
         Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.btnEditPatient)
         Me.Controls.Add(Me.pnlPersonalInformation)
         Me.Controls.Add(Me.Label18)
         Me.Name = "frmPatientInfo"
@@ -708,6 +741,7 @@ Partial Class frmPatientInfo
         Me.Panel2.PerformLayout()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -763,4 +797,6 @@ Partial Class frmPatientInfo
     Friend WithEvents btnAddAllergies As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents Label18 As Label
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents btnBack As Button
 End Class
