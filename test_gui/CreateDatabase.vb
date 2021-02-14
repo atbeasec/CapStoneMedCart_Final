@@ -6,7 +6,6 @@
 '/*                   WRITTEN BY:  Breanna Howey	  					*/
 '/*					  DATE CREATED: January 23, 2021					*/
 '/********************************************************************	*/
-'/********************************************************************	*/
 '/*  FILE PURPOSE:														*/
 '/*																		*/
 '/* This file serves as the driver for database initialization.  The	*/
@@ -33,6 +32,7 @@
 '/*DBCmd - Stores the SQL commands for either creating the database or	*/
 '/*			the database tables											*/
 '/*DBConn - Stores the information to connect to the database, after creation
+'/*strApplicationPath - Stores the path of the config.app file			*/
 '/*strCONNECTION - Stores the string that contains the database name and the
 '*/				   folder the database is stored in (database path)		*/
 '/*strCreateTable-Stores the Sql needed to create the necessary database*/
@@ -59,7 +59,10 @@
 '/*							and database file name upon creation.		*/
 '/*  NP			02/12/2021	added defaultCartSettings sub and set the   */
 '/*							database to call it when the database is    */
-'/*							being made. 
+'/*							being made.									*/
+'/*	 BRH		02/13/2021	Added subroutines to allow for opening and	*/
+'/*							saving file functionality to be used in other
+'*/							modules.									*/
 '/********************************************************************	*/
 
 'Imports the libraries necessary to connect and create SQLite databases
@@ -70,12 +73,14 @@ Module CreateDatabase
 	'Right now, the database is stored in the bin\debug folder where this 
 	'	project is housed.
 	Dim strDEFAULTFOLDER As String = ""
-	Dim strDBNAME As String = "Medication_Cart_System"
-	Dim strDBPath As String = strDEFAULTFOLDER & strDBNAME & ".db"
+	Public strDBNAME As String = "Medication_Cart_System"
+	Public strDBPath As String = strDEFAULTFOLDER & strDBNAME & ".db"
 	Public DBConn As SQLiteConnection
 	Public DBCmd As SQLiteCommand
     Public strCONNECTION As String
-    Dim strCreateTable As String
+	Dim strCreateTable As String
+	Public strApplicationPath As String = Application.StartupPath & "\config.app"
+	Public dlgOpenFileDialog As New OpenFileDialog
 
 	'/*********************************************************************/
 	'/*                   SUBROUTINE NAME:     Main						*/
@@ -132,86 +137,13 @@ Module CreateDatabase
 	'/*  BRH	01/28/21  Add the CreateSettingsTable method			*/
 	'/*  BRH	02/06/21	Allowed for user to choose database file	*/
 	'/*							and database file name upon creation.	*/
+	'/*	 BRH	02/13/21	Removed code to allow for more practical	*/
+	'/*						programming practices.						*/
 	'/*******************************************************************/
 
 	Sub Main()
 
-		'Initializes a dialog for saving files
-		Dim dlgSaveFileDialog As New SaveFileDialog
-
-		'Initializes a dialog for opening files
-		Dim dlgOpenFileDialog As New OpenFileDialog
-
-		'Create variable to check application path for the config file
-		Dim strApplicationPath As String = Application.StartupPath & "\config.app"
-
-		''create folder dialoge object to prompt user to select a folder path
-		Dim dlgFolderDialogeLocation As New FolderBrowserDialog
-
-		''set the default displayed path to the application path for better user experience
-		dlgFolderDialogeLocation.SelectedPath = Application.StartupPath
-
-		'check if the config file exists or not
-		If Not System.IO.File.Exists(strApplicationPath) Then
-
-			'if the file does not exist, create it, then dispose of the connection
-			System.IO.File.Create(strApplicationPath).Dispose()
-
-			'Show a message asking the user if they want to open an existing file or create a new one
-			Dim dlgResult As DialogResult = MessageBox.Show("Would you like to open an existing file?" & vbCr & "If you would like to create a file, select No",
-														"Open file", MessageBoxButtons.YesNo)
-
-			'If the user selects yes, they want to select an existing file
-			If dlgResult = DialogResult.Yes Then
-				'Initialize the dialog for opening a file
-				dlgOpenFileDialog.Title = "Open File..."
-				dlgOpenFileDialog.Multiselect = False
-				dlgOpenFileDialog.Filter = "All Files|*.*"
-
-				'If the user selects a file and presses ok, the file path will be saved in config.app
-				If dlgOpenFileDialog.ShowDialog() = DialogResult.OK Then
-					strDBPath = dlgOpenFileDialog.FileName
-
-					My.Computer.FileSystem.WriteAllText(strApplicationPath, strDBPath, True)
-					Using reader As StreamReader = New StreamReader(strApplicationPath)
-						strDBPath = reader.ReadLine
-					End Using
-
-					'If the user accidentally closes out, a default database will be made 
-				Else
-					strDEFAULTFOLDER = Application.StartupPath
-					strDBPath = strDEFAULTFOLDER & "\" & strDBNAME & ".db"
-					My.Computer.FileSystem.WriteAllText(strApplicationPath, strDBPath, True)
-				End If
-
-			Else 'If the user didn't want to open a file, the user is prompted to choose a path to save the database
-				'prompt user to select a database path after the config file is created
-
-				'Set up how the save dialog box will work
-				dlgSaveFileDialog.Filter = "db files (*.db)|*.db|All files (*.*)|*.*"
-				dlgSaveFileDialog.FilterIndex = 2
-				dlgSaveFileDialog.RestoreDirectory = True
-
-				'If the user selects a file path and types in a file name and hits ok,
-				'the file's path will be stored in the config.app file
-				If dlgSaveFileDialog.ShowDialog() = DialogResult.OK Then
-					strDBPath = dlgSaveFileDialog.FileName
-					My.Computer.FileSystem.WriteAllText(strApplicationPath, strDBPath, True)
-				Else
-					'if the user clicks cancel or 'X' set a default path for the database into the config.app file
-					strDEFAULTFOLDER = Application.StartupPath
-					strDBPath = strDEFAULTFOLDER & "\" & strDBNAME & ".db"
-					My.Computer.FileSystem.WriteAllText(strApplicationPath, strDBPath, True)
-				End If
-			End If
-
-		Else
-			'if the file already exists
-			'use reader to read database path from the config.app file
-			Using reader As StreamReader = New StreamReader(strApplicationPath)
-				strDBPath = reader.ReadLine
-			End Using
-		End If
+		CreateConfigAppFile()
 
 
 		strCONNECTION = String.Format("Data Source = {0}", strDBPath)
@@ -250,6 +182,297 @@ Module CreateDatabase
 
 		End If
 
+	End Sub
+
+	'/*******************************************************************/
+	'/*                   SUBROUTINE NAME:      SetupOpenFileDialog		*/
+	'/*******************************************************************/
+	'/*                   WRITTEN BY:  	Breanna Howey					*/
+	'/*					DATE CREATED: 	   02/13/21						*/
+	'/*******************************************************************/
+	'/*  SUBROUTINE PURPOSE:											*/
+	'/*	The purpose of this subroutine is to set up the necessary variable
+	'/* for allowing other subroutines to use the open file dialog.		*/
+	'/*******************************************************************/
+	'/*  CALLED BY:   	      											*/
+	'/*	OpenDatabaseFile()												*/
+	'/*	ImportExportDatabase.ImportDatabase()							*/
+	'/*	ImportExportDatabase.ImportDatabaseAsCopy()						*/
+	'/*******************************************************************/
+	'/*  CALLS:															*/
+	'/*  (None)															*/
+	'/*******************************************************************/
+	'/*  PARAMETER LIST (In Parameter Order):							*/
+	'/*																	*/
+	'/*  (None)															*/
+	'/*******************************************************************/
+	'/* SAMPLE INVOCATION:												*/
+	'/*																	*/
+	'/*	SetupOpenFileDialog()											*/
+	'/*******************************************************************/
+	'/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+	'/*																	*/
+	'/*  (None)															*/
+	'/*******************************************************************/
+	'/* MODIFICATION HISTORY:											*/
+	'/*																	*/
+	'/* WHO   WHEN     WHAT											*/
+	'/*  ---   ----     ------------------------------------------------*/
+	'/*	BRH	 02/13/21	Created subroutine to allow for less code in main
+	'/*******************************************************************/
+	Public Sub SetupOpenFileDialog()
+		'Initialize the dialog for opening a file
+		dlgOpenFileDialog.Title = "Open File..."
+		dlgOpenFileDialog.Multiselect = False
+		dlgOpenFileDialog.Filter = "All Files|*.*"
+	End Sub
+
+	'/*******************************************************************/
+	'/*                   SUBROUTINE NAME:      OpenDatabaseFile		*/
+	'/*******************************************************************/
+	'/*                   WRITTEN BY:  	Breanna Howey					*/
+	'/*					DATE CREATED: 	   02/13/21						*/
+	'/*******************************************************************/
+	'/*  SUBROUTINE PURPOSE:											*/
+	'/*	The purpose of this subrouting is to allow the user to open		*/
+	'/* an existing database. When called, the subroutine will show the	*/
+	'/* open dialog window and prompt the user to choose a file. The user*/
+	'/* will then select a file and hit open. The file path will then by*/
+	'/* stored in the config.app file for future use. If the user closes*/
+	'/* out of the pop up window without specifying a file, the system	*/
+	'/* will call a subroutine to create a default path.				*/
+	'/*******************************************************************/
+	'/*  CALLED BY:   	      											*/
+	'/*	CreateConfigApp()												*/
+	'/*******************************************************************/
+	'/*  CALLS:															*/
+	'/*  CreateDefaultDBPath()											*/
+	'/*	 SetUpOpenFileDialog()											*/
+	'/*******************************************************************/
+	'/*  PARAMETER LIST (In Parameter Order):							*/
+	'/*																	*/
+	'/*  (None)															*/
+	'/*******************************************************************/
+	'/* SAMPLE INVOCATION:												*/
+	'/*																	*/
+	'/*	OpenDatabaseFile()												*/
+	'/*******************************************************************/
+	'/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+	'/*																	*/
+	'/*  dlgOpenFileDialog - Stores an instance of the OpenFileDialog	*/
+	'/*							window									*/
+	'/*******************************************************************/
+	'/* MODIFICATION HISTORY:											*/
+	'/*																	*/
+	'/* WHO   WHEN     WHAT											*/
+	'/*  ---   ----     ------------------------------------------------*/
+	'/*	BRH	 02/13/21	Created subroutine to allow for less code in main
+	'/*					Initial code created by Alexander B.			*/
+	'/*******************************************************************/
+	Public Sub OpenDatabaseFile()
+
+		SetupOpenFileDialog()
+
+		'If the user selects a file and presses ok, the file path will be saved in config.app
+		If dlgOpenFileDialog.ShowDialog() = DialogResult.OK Then
+			strDBPath = dlgOpenFileDialog.FileName
+
+			My.Computer.FileSystem.WriteAllText(strApplicationPath, strDBPath, True)
+			Using reader As StreamReader = New StreamReader(strApplicationPath)
+				strDBPath = reader.ReadLine
+			End Using
+
+			'If the user accidentally closes out, a default database will be made 
+		Else
+			'if the user clicks cancel or 'X' set a default path for the database into the config.app file
+			CreateDefaultDBPath()
+		End If
+	End Sub
+
+	'/*******************************************************************/
+	'/*                   SUBROUTINE NAME:      SaveDatabaseFile		*/
+	'/*******************************************************************/
+	'/*                   WRITTEN BY:  	Breanna Howey					*/
+	'/*					DATE CREATED: 	   02/13/21						*/
+	'/*******************************************************************/
+	'/*  SUBROUTINE PURPOSE:											*/
+	'/*	The purpose of this subroutine is to allow the user to save		*/
+	'/* the database with the desired name. When called, the subroutine */
+	'/* will show the save dialog box and prompt the user to save the	*/
+	'/* database. The user will then select where they want to save it 	*/
+	'/* and type the name of the file. The user will then click save and*/
+	'/* the file path will then by stored in the config.app file for	*/
+	'/* future use. If the user closes out of the pop up window without */
+	'/*	specifying a file, the system will call a subroutine to create a*/
+	'/*	default path.													*/
+	'/*******************************************************************/
+	'/*  CALLED BY:   	      											*/
+	'/*	CreateConfigApp()												*/
+	'/*******************************************************************/
+	'/*  CALLS:															*/
+	'/*  CreateDefaultDBPath()											*/
+	'/*******************************************************************/
+	'/*  PARAMETER LIST (In Parameter Order):							*/
+	'/*																	*/
+	'/*  (None)															*/
+	'/*******************************************************************/
+	'/* SAMPLE INVOCATION:												*/
+	'/*																	*/
+	'/*	SaveDatabaseFile()												*/
+	'/*******************************************************************/
+	'/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+	'/*																	*/
+	'/*  dlgOpenFileDialog - Stores an instance of the OpenFileDialog	*/
+	'/*							window									*/
+	'/*******************************************************************/
+	'/* MODIFICATION HISTORY:											*/
+	'/*																	*/
+	'/* WHO   WHEN     WHAT											*/
+	'/*  ---   ----     ------------------------------------------------*/
+	'/*	BRH	 02/13/21	Created subroutine to allow for less code in main
+	'/*					Initial code created by Alexander B.			*/
+	'/*******************************************************************/
+	Public Sub SaveDatabaseFile()
+		'Initializes a dialog for saving files
+		Dim dlgSaveFileDialog As New SaveFileDialog
+
+		'Set up how the save dialog box will work
+		dlgSaveFileDialog.Filter = "db files (*.db)|*.db|All files (*.*)|*.*"
+		dlgSaveFileDialog.FilterIndex = 2
+		dlgSaveFileDialog.RestoreDirectory = True
+
+		'If the user selects a file path and types in a file name and hits ok,
+		'the file's path will be stored in the config.app file
+		If dlgSaveFileDialog.ShowDialog() = DialogResult.OK Then
+			strDBPath = dlgSaveFileDialog.FileName
+			My.Computer.FileSystem.WriteAllText(strApplicationPath, strDBPath, True)
+		Else
+			'if the user clicks cancel or 'X' set a default path for the database into the config.app file
+			CreateDefaultDBPath()
+		End If
+	End Sub
+
+	'/*******************************************************************/
+	'/*                   SUBROUTINE NAME:      CreateDefaultDBPath		*/
+	'/*******************************************************************/
+	'/*                   WRITTEN BY:  	Breanna Howey					*/
+	'/*					DATE CREATED: 	   02/13/21						*/
+	'/*******************************************************************/
+	'/*  SUBROUTINE PURPOSE:											*/
+	'/*	The purpose of this subroutine is to create a default path to	*/ 
+	'/* the database in case the user closes out of the Open or Save	*/ 
+	'/* database options without specifying a database to open or save.	*/
+	'/*******************************************************************/
+	'/*  CALLED BY:   	      											*/
+	'/*	OpenDatabaseFile()												*/
+	'/*	CloseDatabaseFile()												*/
+	'/*******************************************************************/
+	'/*  CALLS:															*/
+	'/*  (NONE)															*/
+	'/*******************************************************************/
+	'/*  PARAMETER LIST (In Parameter Order):							*/
+	'/*																	*/
+	'/*  (None)															*/
+	'/*******************************************************************/
+	'/* SAMPLE INVOCATION:												*/
+	'/*																	*/
+	'/*	CreateDefaultDBPath()											*/
+	'/*******************************************************************/
+	'/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+	'/*																	*/
+	'/*  (None)															*/
+	'/*******************************************************************/
+	'/* MODIFICATION HISTORY:											*/
+	'/*																	*/
+	'/* WHO   WHEN     WHAT											*/
+	'/*  ---   ----     ------------------------------------------------*/
+	'/*	BRH	 02/13/21	Created subroutine to allow for less code in main
+	'/*					Initial code created by Alexander B.			*/	
+	'/*******************************************************************/
+	Public Sub CreateDefaultDBPath()
+		strDEFAULTFOLDER = Application.StartupPath
+		strDBPath = strDEFAULTFOLDER & "\" & strDBNAME & ".db"
+		My.Computer.FileSystem.WriteAllText(strApplicationPath, strDBPath, True)
+	End Sub
+
+	'/*******************************************************************/
+	'/*                   SUBROUTINE NAME:      CreateConfigAppFile		*/
+	'/*******************************************************************/
+	'/*                   WRITTEN BY:  	Breanna Howey					*/
+	'/*					DATE CREATED: 	   02/13/21						*/
+	'/*******************************************************************/
+	'/*  SUBROUTINE PURPOSE:											*/
+	'/*	The purpose of this subroutine is to create and populate the	*/
+	'/*	config.app file responsible for storing the database path.		*/
+	'/* First, the routine checks if the file exists and the specified	*/
+	'/* file path, if not, the file will be created and the user will be*/
+	'/* be prompted to either open or create a new database (done through
+	'/* other subroutines). If the file already exists, the routine will*/
+	'/* read the fie path from the file and store it in the strDBpath	*/
+	'/* variable.														*/
+	'/*******************************************************************/
+	'/*  CALLED BY:   	      											*/
+	'/*	Main()												*/
+	'/*******************************************************************/
+	'/*  CALLS:															*/
+	'/*  CreateDefaultDBPath()											*/
+	'/*******************************************************************/
+	'/*  PARAMETER LIST (In Parameter Order):							*/
+	'/*																	*/
+	'/*  (None)															*/
+	'/*******************************************************************/
+	'/* SAMPLE INVOCATION:												*/
+	'/*																	*/
+	'/*	CreateConfigAppFile()												*/
+	'/*******************************************************************/
+	'/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+	'/*																	*/
+	'/*  dlgFolderDialogeLocation - Stores an instance of the			*/
+	'/*								FolderBrowserDialog	window			*/
+	'/*******************************************************************/
+	'/* MODIFICATION HISTORY:											*/
+	'/*																	*/
+	'/* WHO   WHEN     WHAT												*/
+	'/*  ---   ----     ------------------------------------------------*/
+	'/*	BRH	 02/13/21	Created subroutine to allow for less code in main
+	'/*					Initial code created by Alexander B.			*/
+	'/*******************************************************************/
+	Public Sub CreateConfigAppFile()
+		'Create folder dialoge object to prompt user to select a folder path
+		Dim dlgFolderDialogeLocation As New FolderBrowserDialog
+
+		'Set the default displayed path to the application path for better user experience
+		dlgFolderDialogeLocation.SelectedPath = Application.StartupPath
+
+		'check if the config file exists or not
+		If Not System.IO.File.Exists(strApplicationPath) Then
+
+			'if the file does not exist, create it, then dispose of the connection
+			System.IO.File.Create(strApplicationPath).Dispose()
+
+			'Show a message asking the user if they want to open an existing file or create a new one
+			Dim dlgResult As DialogResult = MessageBox.Show("Would you like to open an existing file?" & vbCr & "If you would like to create a file, select No",
+														"Open file", MessageBoxButtons.YesNo)
+
+			'If the user selects yes, they want to select an existing file
+			If dlgResult = DialogResult.Yes Then
+
+				OpenDatabaseFile()
+
+			Else 'If the user didn't want to open a file, the user is prompted to choose a path to save the database
+				'prompt user to select a database path after the config file is created
+
+				'Set up how the save dialog box will work
+				SaveDatabaseFile()
+			End If
+
+		Else
+			'if the file already exists
+			'use reader to read database path from the config.app file
+			Using reader As StreamReader = New StreamReader(strApplicationPath)
+				strDBPath = reader.ReadLine
+			End Using
+		End If
 	End Sub
 
 	'/*******************************************************************/
