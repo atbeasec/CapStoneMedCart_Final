@@ -140,5 +140,15 @@
         MessageBox.Show("New settings have been saved.")
     End Sub
 
+    Private Sub btnExportDatabase_Click(sender As Object, e As EventArgs) Handles btnExportDatabase.Click
+        ExportDatabase()
+    End Sub
 
+    Private Sub btnImportDatabase_Click(sender As Object, e As EventArgs) Handles btnImportDatabase.Click
+        ImportDatabase()
+    End Sub
+
+    Private Sub btnImportAsCopy_Click(sender As Object, e As EventArgs) Handles btnImportAsCopy.Click
+        ImportDatabaseAsCopy()
+    End Sub
 End Class
