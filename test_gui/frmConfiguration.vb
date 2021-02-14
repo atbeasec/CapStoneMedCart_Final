@@ -149,17 +149,17 @@ Public Class frmConfiguration
         'put the boarder panel inside the main panel
         pnl.Controls.Add(pnlMainPanel)
 
-
         'AddHandler pnlMainPanel.DoubleClick, AddressOf DynamicDoubleClickNewOrder
         AddHandler pnlMainPanel.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
         AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
 
         CreateEditButton(pnlMainPanel, getPanelCount(flpPannel), 500, 5)
+
+
         CreateDeleteBtn(pnlMainPanel, getPanelCount(flpPannel), 550, 5)
 
         'CreateDeleteBtn(pnlMainPanel)
         'CreateEditButton(pnlMainPanel)
-
 
         ' call database info here to populate
         Dim lblID As New Label
@@ -363,7 +363,6 @@ Public Class frmConfiguration
         Dim intAdmin As Integer = 0
         Dim intActiveFlag As Integer = 1
         Dim strPassword As String = txtPassword.Text
-        Dim strSpecialChar As String = "\'-@"
         Dim strLastName As String = txtLastName.Text
         Dim strFirstName As String = txtFirstName.Text
         strFirstName = Regex.Replace(strFirstName, "'", "''")
@@ -485,7 +484,7 @@ Public Class frmConfiguration
 
         If Not (Asc(e.KeyChar) = 8) Then
             'string of allowed characters
-            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz '-@1234567890"
+            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*()/.,<>=+"
             'converts letter to lowercase to compare to allowedChars string to check if it is allowed in the text box
             If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
                 e.KeyChar = ChrW(0)
@@ -497,7 +496,7 @@ Public Class frmConfiguration
     Private Sub txtLastName_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtLastName.KeyPress
         If Not (Asc(e.KeyChar) = 8) Then
             'string of allowed characters
-            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz '-@1234567890"
+            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*()/.,<>=+"
             'converts letter to lowercase to compare to allowedChars string to check if it is allowed in the text box
             If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
                 e.KeyChar = ChrW(0)
@@ -509,7 +508,7 @@ Public Class frmConfiguration
     Private Sub txtUserID_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtUsername.KeyPress
         If Not (Asc(e.KeyChar) = 8) Then
             'string of allowed characters
-            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz1234567890"
+            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()/.,<>=+"
             'converts letter to lowercase to compare to allowedChars string to check if it is allowed in the text box
             If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
                 e.KeyChar = ChrW(0)
@@ -521,7 +520,7 @@ Public Class frmConfiguration
     Private Sub txtBarcode_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBarcode.KeyPress
         If Not (Asc(e.KeyChar) = 8) Then
             'string of allowed characters
-            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz123456789"
+            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz123456789!@#$%^&*()/.,<>=+"
             'converts letter to lowercase to compare to allowedChars string to check if it is allowed in the text box
             If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
                 e.KeyChar = ChrW(0)
@@ -533,7 +532,7 @@ Public Class frmConfiguration
     Private Sub txtPassword_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress, txtConfirmPassword.KeyPress
         If Not (Asc(e.KeyChar) = 8) Then
             'string of allowed characters
-            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz123456789!@#$%^&*"
+            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz123456789!@#$%^&*()/.,<>=+"
             'converts letter to lowercase to compare to allowedChars string to check if it is allowed in the text box
             If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
                 e.KeyChar = ChrW(0)
@@ -541,4 +540,5 @@ Public Class frmConfiguration
             End If
         End If
     End Sub
+
 End Class
