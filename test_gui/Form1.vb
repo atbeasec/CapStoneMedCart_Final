@@ -335,6 +335,8 @@
         'Runs the database creation module to determine if the database was created
         CreateDatabase.Main()
 
+        CartInterfaceCode.main()
+        Me.Close()
         'CheckUserPermissions()
 
         'Dim test = New frmPharmacy

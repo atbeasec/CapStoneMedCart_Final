@@ -182,7 +182,8 @@ Module CartInterfaceCode
 
 
     Sub main()
-
+        ChangeSettings("115200", "COM4", False)
+        OpenOneDrawer(16)
 
 
 
@@ -280,6 +281,7 @@ Module CartInterfaceCode
 
                 comSerialPort1.Open()
                 comSerialPort1.Write(bytFinal, 0, bytFinal.Length)
+                intDrawerCount += 1
                 Do
                     'this is going to keep looping until the drawer count reached zero. 
 

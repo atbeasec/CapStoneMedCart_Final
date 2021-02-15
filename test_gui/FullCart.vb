@@ -379,7 +379,8 @@ Public Class frmFullCart
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
+    '/*	 strFeedback - this is going to store the information the cart is */ 
+    '/*                 sending back.                                     */
     '/*                                                                     
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
@@ -392,7 +393,10 @@ Public Class frmFullCart
 
 
     Sub listening() Handles SerialPort1.DataReceived
-        CartInterfaceCode.minusDrawerCount()
+        Dim strFeedback = SerialPort1.ReadExisting
+        If strFeedback.Equals("N") Then
+            CartInterfaceCode.minusDrawerCount()
+        End If
     End Sub
     '/*********************************************************************/
     '/*                   SUBPROGRAM NAME:  	gettingConnectionSettings  */         
