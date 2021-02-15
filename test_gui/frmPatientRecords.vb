@@ -4,7 +4,6 @@
     'Private CurrentContactPanelName As String = Nothing
 
     Dim currentContactPanel As String = Nothing
-    Public intSelectedPatientMRN As Integer = 0
 
     Private Sub Button2_Click(sender As Object, e As EventArgs)
         frmPatientInfo.Show()
@@ -71,6 +70,7 @@
                                                    "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1 ORDER BY Patient.Patient_Last_Name ASC;")
         Dim strRoom As String
         Dim strBed As String
+
 
         For Each item As DataRow In dsPatientInfo.Tables(0).Rows()
             With dsPatientInfo.Tables(0)
@@ -175,10 +175,12 @@
 
     Private Sub DynamicSingleClickOpenPatient(sender As Object, e As EventArgs)
 
-        intSelectedPatientMRN = GetSelectedPatientMRN(sender)
+        frmPatientInfo.txtMRN.Text = GetSelectedPatientMRN(sender)
         ' allows panel to have double click functionality to open it
-        frmPatientInfo.Show()
+        ' frmPatientInfo.Show()
 
+        frmMain.OpenChildForm(frmPatientInfo)
+        'Form1.OpenChildForm()
     End Sub
 
     'Private Sub DynamicMouseHoverLeave(sender As Object, e As EventArgs)

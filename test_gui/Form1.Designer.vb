@@ -365,7 +365,7 @@ Partial Class frmMain
         Me.btnAdhockDispense.Size = New System.Drawing.Size(210, 42)
         Me.btnAdhockDispense.TabIndex = 25
         Me.btnAdhockDispense.Tag = "3"
-        Me.btnAdhockDispense.Text = "Ad Hock Dispense"
+        Me.btnAdhockDispense.Text = "Ad Hoc Dispense"
         Me.btnAdhockDispense.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnAdhockDispense.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnAdhockDispense.UseVisualStyleBackColor = False
@@ -451,7 +451,7 @@ Partial Class frmMain
         Me.pnlDockLocation.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlDockLocation.Location = New System.Drawing.Point(227, 0)
         Me.pnlDockLocation.Name = "pnlDockLocation"
-        Me.pnlDockLocation.Size = New System.Drawing.Size(1023, 692)
+        Me.pnlDockLocation.Size = New System.Drawing.Size(1157, 692)
         Me.pnlDockLocation.TabIndex = 1
         '
         'frmMain
@@ -459,7 +459,7 @@ Partial Class frmMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1250, 692)
+        Me.ClientSize = New System.Drawing.Size(1384, 692)
         Me.Controls.Add(Me.pnlDockLocation)
         Me.Controls.Add(Me.pnlSideMenu)
         Me.Margin = New System.Windows.Forms.Padding(2)
