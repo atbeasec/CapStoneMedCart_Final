@@ -177,8 +177,10 @@
 
         intSelectedPatientMRN = GetSelectedPatientMRN(sender)
         ' allows panel to have double click functionality to open it
-        frmPatientInfo.Show()
+        ' frmPatientInfo.Show()
 
+        frmMain.OpenChildForm(frmPatientInfo)
+        'Form1.OpenChildForm()
     End Sub
 
     'Private Sub DynamicMouseHoverLeave(sender As Object, e As EventArgs)

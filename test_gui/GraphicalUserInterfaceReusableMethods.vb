@@ -291,22 +291,58 @@
     End Sub
     Public Sub DynamicFlagMedicationButton(sender As Object, ByVal e As EventArgs)
 
+
         Dim pnlFlaggedPannel As Panel
+        Dim txtBoxOnFlaggedPanel As TextBox = Nothing
+
         pnlFlaggedPannel = CType(sender.parent, Panel)
+        txtBoxOnFlaggedPanel = FindTextBoxOnPanel(pnlFlaggedPannel)
         Debug.Print(pnlFlaggedPannel.Name)
 
         If Not pnlFlaggedPannel.BackColor = Color.Red Then
+
+            'find the textbox and set the field to be read only
+            'txtBoxOnFlaggedPanel.ReadOnly = True
+            'txtBoxOnFlaggedPanel.AcceptsTab = False
+
+            txtBoxOnFlaggedPanel.Enabled = False
+
+            ' change the panel color to be red
             pnlFlaggedPannel.BackColor = Color.Red
+
         Else
+
+            'find the textbox and set the field to be editable
+            'txtBoxOnFlaggedPanel.ReadOnly = False
+            'txtBoxOnFlaggedPanel.AcceptsTab = True
+            txtBoxOnFlaggedPanel.Enabled = True
+
+            ' change the panel color to be white
             pnlFlaggedPannel.BackColor = Color.White
+
         End If
-        'functionality will be assigned here
-
-        ' take the panel which this button lives on and highlight it differently
-
-
 
     End Sub
+
+    Public Function FindTextBoxOnPanel(ByVal pnlFlagged As Panel) As TextBox
+
+        ' search for control with the name txtCount
+        ' this control will be the textbox on the selected panel
+        Const TEXTBOXNAME As String = "txtCount"
+        Dim ctlControl As Control
+        Dim txtBox As TextBox = Nothing
+
+        ' looking at each control on the panel
+        For Each ctlControl In pnlFlagged.Controls
+            ' if the current control is the textbox, then asign the textbox variable to this 
+            If ctlControl.Name.Contains(TEXTBOXNAME) Then
+                txtBox = CType(ctlControl, TextBox)
+            End If
+        Next
+
+        Return txtBox
+
+    End Function
 
     Public Sub CreateTextBox(ByVal pnlPanelName As Panel, ByVal intPanelsAddedCount As Integer, ByVal intX As Integer, ByVal intY As Integer)
 
