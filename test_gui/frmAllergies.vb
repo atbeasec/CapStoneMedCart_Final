@@ -188,5 +188,12 @@
         End If
     End Sub
 
+    Private Sub cmbAllergies_LostFocus(sender As Object, e As EventArgs) Handles cmbAllergies.LostFocus
+        cmbAllergies.DroppedDown = False
+    End Sub
 
+    Private Sub cmbAllergies_Click(sender As Object, e As EventArgs) Handles cmbAllergies.Click
+        cmbAllergies.DroppedDown = True
+
+    End Sub
 End Class
