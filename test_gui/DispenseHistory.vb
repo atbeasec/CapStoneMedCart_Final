@@ -293,28 +293,86 @@ Module DispenseHistory
         Dispense.cmbDosage.SelectedItem = dsMedicationInformation.Tables(0).Rows(0)(1)
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:DispenseMedication  */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   02/15/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: 
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   		   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  02/15/21  Initial creation of the code      */
+    '/*********************************************************************/
     Function SplitMedicationString(ByRef strMedicationString As String)
+        ''split string to get the RXCUI for the medication selected on form
         Dim strArray() As String
         strArray = strMedicationString.Split("--")
 
         Return strArray(2)
     End Function
+
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:DispenseMedication  */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   02/15/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: 
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   		   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  02/15/21  Initial creation of the code      */
+    '/*********************************************************************/
     Public Sub DispenseMedication(ByRef strMedicationID As String, ByRef intPatientMRN As Integer)
+        'create variables
         Dim strbSQLcommand As New StringBuilder()
         Dim intMedID As Integer
         Dim intPatientID As Integer
         Dim intPrescribedQuantity As Integer
+
+        'using RXCUI get database ID for medication
         strbSQLcommand.Append("SELECT Medication_ID FROM Medication WHERE RXCUI_ID = '" & strMedicationID & "'")
         intMedID = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
 
+        'clear string builder and using MRN get database patient ID
         strbSQLcommand.Clear()
         strbSQLcommand.Append("SELECT Patient_ID FROM Patient WHERE MRN_Number = '" & intPatientMRN & "'")
         intPatientID = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
 
+        'clear string builder using medID and PatientID get the quantity of the prescribed medication
         strbSQLcommand.Clear()
         strbSQLcommand.Append("SELECT Quantity FROM PatientMedication WHERE Medication_TUID = '" & intMedID & "' AND Patient_TUID = '" & intPatientID & "'")
         intPrescribedQuantity = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
 
+        'update quantity to new amount
         intPrescribedQuantity = intPrescribedQuantity - Dispense.txtQuantity.Text
         strbSQLcommand.Clear()
         strbSQLcommand.Append("UPDATE PatientMedication SET Quantity = " & intPrescribedQuantity & " WHERE Medication_TUID = '" & intMedID & "' AND Patient_TUID = '" & intPatientID & "'")
