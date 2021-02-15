@@ -294,7 +294,7 @@ Module DispenseHistory
     End Sub
 
     '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:DispenseMedication  */
+    '/*                   SUBROUTINE NAME:SplitMedicationString  */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
     '/*		         DATE CREATED: 	   02/15/21							  */
@@ -357,6 +357,7 @@ Module DispenseHistory
         Dim intMedID As Integer
         Dim intPatientID As Integer
         Dim intPrescribedQuantity As Integer
+        Dim intPatientMedicationDatabaseID As Integer
 
         'using RXCUI get database ID for medication
         strbSQLcommand.Append("SELECT Medication_ID FROM Medication WHERE RXCUI_ID = '" & strMedicationID & "'")
@@ -378,6 +379,46 @@ Module DispenseHistory
         strbSQLcommand.Append("UPDATE PatientMedication SET Quantity = " & intPrescribedQuantity & " WHERE Medication_TUID = '" & intMedID & "' AND Patient_TUID = '" & intPatientID & "'")
         CreateDatabase.ExecuteInsertQuery(strbSQLcommand.ToString)
         strbSQLcommand.Clear()
+
+        'clear string builder and set up sql to get the patientMedication_ID primary key from patient medication table to use in
+        'the dispensing table as a foreign key
+        strbSQLcommand.Clear()
+        strbSQLcommand.Append("SELECT PatientMedication_ID FROM PatientMedication WHERE Medication_TUID = '" & intMedID & "' AND Patient_TUID = '" & intPatientID & "'")
+        intPatientMedicationDatabaseID = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
+
+
+
+
+    End Sub
+
+
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:SplitMedicationString  */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   02/15/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: 
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   		   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  02/15/21  Initial creation of the code      */
+    '/*********************************************************************/
+    Private Sub UpdateMedicationDrawerAmount()
+
     End Sub
 End Module
 
