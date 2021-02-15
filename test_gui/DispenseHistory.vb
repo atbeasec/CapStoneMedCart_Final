@@ -1,4 +1,6 @@
 ﻿Imports System.Data.SQLite
+Imports System.Text
+
 Module DispenseHistory
     '/*******************************************************************/
     '/*                   FILE NAME: DispenseHistory.vb                 */
@@ -10,9 +12,8 @@ Module DispenseHistory
     '/*******************************************************************/
     '/*  MODULE PURPOSE:								                */
     '/*											                        */
-    '/* This module is responsible for populating dispensed medicaitons*/
-    '/* in both the patient charts and in the dispensed history form.   */
-    '/*                                                                 */
+    '/* This module is responsible for handling all dispensing medication
+    '/* related modules
     '/*******************************************************************/
     '/*  COMMAND LINE PARAMETER LIST (In Parameter Order):			    */
     '/*                         (NONE)	                                */
@@ -290,6 +291,35 @@ Module DispenseHistory
 
         Dispense.cmbDosage.Items.Add(dsMedicationInformation.Tables(0).Rows(0)(1))
         Dispense.cmbDosage.SelectedItem = dsMedicationInformation.Tables(0).Rows(0)(1)
+    End Sub
+
+    Function SplitMedicationString(ByRef strMedicationString As String)
+        Dim strArray() As String
+        strArray = strMedicationString.Split("--")
+
+        Return strArray(2)
+    End Function
+    Public Sub DispenseMedication(ByRef strMedicationID As String, ByRef intPatientMRN As Integer)
+        Dim strbSQLcommand As New StringBuilder()
+        Dim intMedID As Integer
+        Dim intPatientID As Integer
+        Dim intPrescribedQuantity As Integer
+        strbSQLcommand.Append("SELECT Medication_ID FROM Medication WHERE RXCUI_ID = '" & strMedicationID & "'")
+        intMedID = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
+
+        strbSQLcommand.Clear()
+        strbSQLcommand.Append("SELECT Patient_ID FROM Patient WHERE MRN_Number = '" & intPatientMRN & "'")
+        intPatientID = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
+
+        strbSQLcommand.Clear()
+        strbSQLcommand.Append("SELECT Quantity FROM PatientMedication WHERE Medication_TUID = '" & intMedID & "' AND Patient_TUID = '" & intPatientID & "'")
+        intPrescribedQuantity = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
+
+        intPrescribedQuantity = intPrescribedQuantity - Dispense.txtQuantity.Text
+        strbSQLcommand.Clear()
+        strbSQLcommand.Append("UPDATE PatientMedication SET Quantity = " & intPrescribedQuantity & " WHERE Medication_TUID = '" & intMedID & "' AND Patient_TUID = '" & intPatientID & "'")
+        CreateDatabase.ExecuteInsertQuery(strbSQLcommand.ToString)
+        strbSQLcommand.Clear()
     End Sub
 End Module
 

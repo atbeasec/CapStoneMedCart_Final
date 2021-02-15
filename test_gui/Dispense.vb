@@ -165,7 +165,11 @@
     End Sub
 
     Private Sub btnDispense_Click_1(sender As Object, e As EventArgs) Handles btnDispense.Click
-        MessageBox.Show("Drawer Has Opened")
+        If Not IsNothing(cmbMedications.SelectedItem) Then
+            MessageBox.Show("Drawer Has Opened")
+            DispenseHistory.DispenseMedication(DispenseHistory.SplitMedicationString(cmbMedications.SelectedItem), txtMRN.Text)
+        End If
+
     End Sub
 
     Private Sub cmbMedications_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMedications.SelectedIndexChanged
