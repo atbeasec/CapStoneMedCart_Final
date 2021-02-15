@@ -100,7 +100,7 @@ Partial Class frmMain
         Me.btnSerialPort.Size = New System.Drawing.Size(210, 42)
         Me.btnSerialPort.TabIndex = 28
         Me.btnSerialPort.Tag = "15"
-        Me.btnSerialPort.Text = "Serial Port Info"
+        Me.btnSerialPort.Text = "Admin Settings"
         Me.btnSerialPort.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnSerialPort.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnSerialPort.UseVisualStyleBackColor = False

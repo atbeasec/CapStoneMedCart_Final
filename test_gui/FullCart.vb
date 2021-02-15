@@ -394,6 +394,7 @@ Public Class frmFullCart
 
     Sub listening() Handles SerialPort1.DataReceived
         Dim strFeedback = SerialPort1.ReadExisting
+        MessageBox.Show(strFeedback)
         If strFeedback.Equals("N") Then
             CartInterfaceCode.minusDrawerCount()
         End If

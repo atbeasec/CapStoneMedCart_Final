@@ -183,7 +183,7 @@ Module CartInterfaceCode
 
     Sub main()
         ChangeSettings("115200", "COM4", False)
-        OpenOneDrawer(16)
+        OpenMutliDrawer({"16", "18", "20"})
 
 
 
@@ -253,7 +253,7 @@ Module CartInterfaceCode
     Sub OpenOneDrawer(Number As String)
         Dim blnissue = errorChecking(Number)
         Dim comSerialPort1 = FrmCart.serialSetup()
-
+        intDrawerCount = 0 'reset the drawer count just in case. 
 
         If blnSimulationMode Then
             'this will comiple and be ran if the code is compiled in simulation mode. 
