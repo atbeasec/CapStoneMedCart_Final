@@ -1,7 +1,7 @@
 ﻿Public Class frmMain
 
-    Dim frmCurrentChildForm As Form
-    Dim frmPreviousChildForm As Form
+    Private frmCurrentChildForm As Form
+    Private frmPreviousChildForm As Form
 
     Public Enum SelectedForm As Integer
         PatientRecords = 1
@@ -122,7 +122,7 @@
     '/*  Collin Krygier  2/14/2021    Initial creation                    */
     '/*********************************************************************/
 
-    Private Sub OpenChildForm(ByVal frmChild As Form)
+    Sub OpenChildForm(ByVal frmChild As Form)
 
         ' this is where we dock the form as a frmChild form onto the panel
         ' if there is currently a form here we need to close it
@@ -846,4 +846,5 @@
         frmLoginScan.Show()
 
     End Sub
+
 End Class
