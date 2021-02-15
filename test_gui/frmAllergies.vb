@@ -177,4 +177,16 @@
     End Sub
 
 
+    Private Sub cmbAllergies_TextChanged(sender As Object, e As EventArgs) Handles cmbAllergies.TextChanged
+
+        If cmbAllergies.FindStringExact(cmbAllergies.Text) = -1 Then
+            'do nothing until the user types in a value that matches an item in the box
+        Else
+
+            cmbAllergies.SelectedIndex = cmbAllergies.FindString(cmbAllergies.Text)
+
+        End If
+    End Sub
+
+
 End Class
