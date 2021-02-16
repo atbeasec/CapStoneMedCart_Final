@@ -3,24 +3,21 @@
         Dim dsAllergies = CreateDatabase.ExecuteSelectQuery("Select * From Allergy ORDER BY Allergy_Type, Allergy_Name;")
         populateAllergiesComboBox(cmbAllergies, dsAllergies)
         Dim strSeverity As String = " "
-        Dim intPatientInformationMRN = CInt(frmPatientInfo.txtMRN.Text)
-        ' on form load we need to select all allergies from the database and show them here:
-        Dim intPatientAllergyId As Integer = CInt(CreateDatabase.ExecuteScalarQuery("select patient.Patient_ID From Patient " &
-                        "where Patient.MRN_Number=" & (intPatientInformationMRN).ToString & ";"))
+        Dim intPatientTuid As Integer = GetPatientTuid()
         'get the allergy information from the patient allergy tables
         Dim dtsPatientAllergy As DataSet = CreateDatabase.ExecuteSelectQuery("Select Allergy.Allergy_Name, PatientAllergy.Allergy_Severity," &
                                                                              "Allergy.Allergy_Type, Allergy.Medication_TUID From PatientAllergy " &
                                                                              "INNER JOIN Allergy on PatientAllergy.Allergy_Name=Allergy.Allergy_Name" &
-                            " Where Active_Flag =1 And Patient_TUID =" & (intPatientAllergyId).ToString & ";")
+                            " Where Active_Flag =1 And Patient_TUID =" & (intPatientTuid).ToString & ";")
         ' insert the select statement here and send the results to the createAllergiesPanel
         For Each dr As DataRow In dtsPatientAllergy.Tables(0).Rows
 
 
             If dr(2) = "Drug" Then
                 txtMedicationName.Text = dr(0)
-                txtAllergyName.Text = "N/A"
+                cmbAllergies.Text = "N/A"
             Else
-                txtAllergyName.Text = dr(0)
+                cmbAllergies.Text = dr(0)
                 txtMedicationName.Text = "N/A"
 
                 Debug.WriteLine("")
@@ -28,12 +25,20 @@
 
             strSeverity = CheckSeverity(dr)
             txtAllergyType.Text = dr(2)
-            CreateAllergiesPanels(flpAllergies, txtAllergyName.Text, txtMedicationName.Text, txtAllergyType.Text, strSeverity)
+            CreateAllergiesPanels(flpAllergies, cmbAllergies.Text, txtMedicationName.Text, txtAllergyType.Text, strSeverity)
         Next
         'CreateAllergiesPanels()
 
 
     End Sub
+
+    Private Shared Function GetPatientTuid() As Integer
+        Dim intPatientInformationMRN = CInt(frmPatientInfo.txtMRN.Text)
+        ' on form load we need to select all allergies from the database and show them here:
+        Dim intPatientTuid As Integer = CInt(CreateDatabase.ExecuteScalarQuery("select patient.Patient_ID From Patient " &
+                        "where Patient.MRN_Number=" & (intPatientInformationMRN).ToString & ";"))
+        Return intPatientTuid
+    End Function
 
     Private Shared Function CheckSeverity(dr As DataRow) As String
         Dim strSeverity As String
@@ -155,14 +160,14 @@
         If cmbAllergies.SelectedIndex = -1 Then
             strAllergyName = cmbAllergies.Text
         Else
-            Debug.WriteLine("")
+            strAllergyName = cmbAllergies.Text
         End If
         Dim intMEdicationTUID = "NUll" 'for now but medication tuid will need to be looked up
         Dim strAllergyType = txtAllergyType.Text
-
+        Dim intPatientTuid = GetPatientTuid()
 
         ' insert into database statement/method goes here
-        CreateDatabase.ExecuteInsertQuery("INSERT INTO Allergy (Allergy_Name,Medication_TUID,Allergy_Type) VALUES ('" & strAllergyName & "'," & intMEdicationTUID & ",'" & strAllergyType & "');")
+        CreateDatabase.ExecuteInsertQuery("INSERT INTO PatientAllergy (Patient_TUID, Allergy_Name, Allergy_Severity, Active_Flag) VALUES (" & intPatientTuid & ",'" & strAllergyName & "','" & strAllergyType & "',1);")
         ' populate the screen from a manually added allergy.
 
         'probably going to need a select query to get the medication name from the TUID
@@ -196,4 +201,5 @@
         cmbAllergies.DroppedDown = True
 
     End Sub
+
 End Class
