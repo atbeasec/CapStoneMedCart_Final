@@ -336,7 +336,7 @@
         CreateDatabase.Main()
 
         'CheckUserPermissions()
-
+        frmNewPatient.ShowDialog()
 
         'set submenu to be invisible on form load
         pnlSubMenuSettings.Visible = False
