@@ -141,7 +141,8 @@ Module LogIn
         strUpdatedPassword = strPassword & STRPEPPER
         ' generate a random salt
         For i = 0 To (7) Step 1
-            Dim intCharPosition = CInt(Rnd() * (Rnd()) * Rnd() * 61)
+            Dim generatorCharPosition = New System.Random
+            Dim intCharPosition = generatorCharPosition.Next(0, 61)
             strSalt += STRSALTCHARS.ToCharArray.ElementAt(intCharPosition)
         Next
         ' add the salt to the password prepended
