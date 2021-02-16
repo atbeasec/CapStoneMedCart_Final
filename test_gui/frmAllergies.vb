@@ -209,6 +209,7 @@
     End Sub
 
     Private Sub cmbAllergies_Click(sender As Object, e As EventArgs) Handles cmbAllergies.Click
+
         cmbAllergies.DroppedDown = True
         txtAllergyType.Text = ""
     End Sub
