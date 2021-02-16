@@ -1,7 +1,9 @@
 ﻿Public Class frmAllergies
     Private Sub frmAllergies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim dsAllergies = CreateDatabase.ExecuteSelectQuery("Select * From Allergy ORDER BY Allergy_Type, Allergy_Name;")
+        Dim dsAllergies = CreateDatabase.ExecuteSelectQuery("Select * From Allergy ORDER BY Allergy_Type, Allergy_Name ;")
+        Dim dsDrugAllergies = CreateDatabase.ExecuteSelectQuery("Select * From Allergy WHERE Allergy_Type = 'Drug' ORDER BY Allergy_Type, Allergy_Name ;")
         populateAllergiesComboBox(cmbAllergies, dsAllergies)
+        populateAllergiesComboBox(cmbMedicationName, dsDrugAllergies)
         Dim strSeverity As String = " "
         Dim intPatientTuid As Integer = GetPatientTuid()
         'get the allergy information from the patient allergy tables
@@ -14,18 +16,18 @@
 
 
             If dr(2) = "Drug" Then
-                txtMedicationName.Text = dr(0)
+                cmbMedicationName.Text = dr(0)
                 cmbAllergies.Text = "N/A"
             Else
                 cmbAllergies.Text = dr(0)
-                txtMedicationName.Text = "N/A"
+                cmbMedicationName.Text = "N/A"
 
                 Debug.WriteLine("")
             End If
 
             strSeverity = CheckSeverity(dr)
             txtAllergyType.Text = dr(2)
-            CreateAllergiesPanels(flpAllergies, cmbAllergies.Text, txtMedicationName.Text, txtAllergyType.Text, strSeverity)
+            CreateAllergiesPanels(flpAllergies, cmbAllergies.Text, cmbMedicationName.Text, txtAllergyType.Text, strSeverity)
         Next
         'CreateAllergiesPanels()
 
@@ -162,14 +164,16 @@
         Else
             strAllergyName = cmbAllergies.Text
         End If
-        Dim intMEdicationTUID = "NUll" 'for now but medication tuid will need to be looked up
+        Dim intMedicationTUID = "NUll" 'for now but medication tuid will need to be looked up
         Dim strAllergyType = txtAllergyType.Text
         Dim intPatientTuid = GetPatientTuid()
 
+        If cmbAllergies.FindStringExact(cmbAllergies.Text) = -1 Then
+            CreateDatabase.ExecuteInsertQuery("INSERT INTO Allergy(Allergy_Name,Medication_TUID,Allergy_Type) VALUES('" & strAllergyName & "'," & intMedicationTUID & ",'" & strAllergyType & "');")
+        End If
         ' insert into database statement/method goes here
         CreateDatabase.ExecuteInsertQuery("INSERT INTO PatientAllergy (Patient_TUID, Allergy_Name, Allergy_Severity, Active_Flag) VALUES (" & intPatientTuid & ",'" & strAllergyName & "','" & strAllergyType & "',1);")
         ' populate the screen from a manually added allergy.
-
         'probably going to need a select query to get the medication name from the TUID
         If cmbSeverity.SelectedIndex = -1 Then
             strSeverity = "N/A"
@@ -177,7 +181,7 @@
             strSeverity = cmbSeverity.SelectedItem.ToString
         End If
 
-        CreateAllergiesPanels(flpAllergies, strAllergyName, txtMedicationName.Text, strAllergyType, strSeverity)
+        CreateAllergiesPanels(flpAllergies, strAllergyName, cmbMedicationName.Text, strAllergyType, strSeverity)
 
     End Sub
 
@@ -195,11 +199,27 @@
 
     Private Sub cmbAllergies_LostFocus(sender As Object, e As EventArgs) Handles cmbAllergies.LostFocus
         cmbAllergies.DroppedDown = False
+        If cmbAllergies.FindStringExact(cmbAllergies.Text) = -1 Then
+            Debug.WriteLine("")
+
+        Else
+            Dim objAllergyType = CreateDatabase.ExecuteScalarQuery("Select Allergy_Type From Allergy Where Allergy_Name = '" & cmbAllergies.Text & "';")
+            txtAllergyType.Text = objAllergyType.ToString
+        End If
     End Sub
 
     Private Sub cmbAllergies_Click(sender As Object, e As EventArgs) Handles cmbAllergies.Click
         cmbAllergies.DroppedDown = True
+        txtAllergyType.Text = ""
+    End Sub
+
+    Private Sub cmbMedicationName_Click(sender As Object, e As EventArgs) Handles cmbMedicationName.Click
+        cmbMedicationName.DroppedDown = True
 
     End Sub
 
+    Private Sub cmbMedicationName_LostFocus(sender As Object, e As EventArgs) Handles cmbMedicationName.LostFocus
+        cmbMedicationName.DroppedDown = False
+
+    End Sub
 End Class

@@ -36,16 +36,14 @@ Partial Class frmAllergies
         Me.Panel9 = New System.Windows.Forms.Panel()
         Me.txtAllergyType = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.txtMedicationName = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.btnAddAllergy = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.cmbAllergies = New System.Windows.Forms.ComboBox()
+        Me.cmbMedicationName = New System.Windows.Forms.ComboBox()
         Me.Panel2.SuspendLayout()
         Me.Panel9.SuspendLayout()
-        Me.Panel3.SuspendLayout()
         Me.SuspendLayout()
         '
         'flpAllergies
@@ -186,27 +184,6 @@ Partial Class frmAllergies
         Me.Label2.TabIndex = 182
         Me.Label2.Text = "Allergy Type:"
         '
-        'Panel3
-        '
-        Me.Panel3.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel3.Controls.Add(Me.txtMedicationName)
-        Me.Panel3.Location = New System.Drawing.Point(365, 137)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel3.Size = New System.Drawing.Size(286, 28)
-        Me.Panel3.TabIndex = 4
-        '
-        'txtMedicationName
-        '
-        Me.txtMedicationName.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtMedicationName.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtMedicationName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMedicationName.Location = New System.Drawing.Point(1, 1)
-        Me.txtMedicationName.Multiline = True
-        Me.txtMedicationName.Name = "txtMedicationName"
-        Me.txtMedicationName.Size = New System.Drawing.Size(284, 26)
-        Me.txtMedicationName.TabIndex = 38
-        '
         'Label3
         '
         Me.Label3.AutoSize = True
@@ -263,18 +240,28 @@ Partial Class frmAllergies
         Me.cmbAllergies.Size = New System.Drawing.Size(286, 29)
         Me.cmbAllergies.TabIndex = 188
         '
+        'cmbMedicationName
+        '
+        Me.cmbMedicationName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbMedicationName.FormattingEnabled = True
+        Me.cmbMedicationName.Items.AddRange(New Object() {"Class 1", "Class 2", "Class 3", "Class 4", "Class 5"})
+        Me.cmbMedicationName.Location = New System.Drawing.Point(364, 138)
+        Me.cmbMedicationName.Name = "cmbMedicationName"
+        Me.cmbMedicationName.Size = New System.Drawing.Size(286, 29)
+        Me.cmbMedicationName.TabIndex = 189
+        '
         'frmAllergies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(926, 478)
+        Me.Controls.Add(Me.cmbMedicationName)
         Me.Controls.Add(Me.cmbAllergies)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.btnAddAllergy)
         Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Label12)
@@ -288,8 +275,6 @@ Partial Class frmAllergies
         Me.Panel2.PerformLayout()
         Me.Panel9.ResumeLayout(False)
         Me.Panel9.PerformLayout()
-        Me.Panel3.ResumeLayout(False)
-        Me.Panel3.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -307,12 +292,11 @@ Partial Class frmAllergies
     Friend WithEvents Panel9 As Panel
     Friend WithEvents txtAllergyType As TextBox
     Friend WithEvents Label2 As Label
-    Friend WithEvents Panel3 As Panel
-    Friend WithEvents txtMedicationName As TextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents btnAddAllergy As Button
     Friend WithEvents Label4 As Label
     Friend WithEvents lblActions As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents cmbAllergies As ComboBox
+    Friend WithEvents cmbMedicationName As ComboBox
 End Class
