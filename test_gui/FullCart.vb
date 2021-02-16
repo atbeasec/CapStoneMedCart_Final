@@ -47,7 +47,7 @@ Public Class frmFullCart
     '/*                  database to use to EnumListTo make it more readable.*/
     '/*********************************************************************/
     Dim bitRateValue As Integer = 0
-    Dim comPortValue As String = "COM3"
+    Dim comPortValue As String = "COM3" 'these only have a value to supress warnings
 
     '/*********************************************************************/
     '/*                   Property NAME: bitRate     					   */         
@@ -328,6 +328,7 @@ Public Class frmFullCart
     '/*********************************************************************/
 
     Function serialSetup()
+
         gettingConnectionSettings()
         'comport from the database. 
         'this is going to set everything up with the cart. 
@@ -379,7 +380,8 @@ Public Class frmFullCart
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
+    '/*	 strFeedback - this is going to store the information the cart is */ 
+    '/*                 sending back.                                     */
     '/*                                                                     
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
@@ -392,7 +394,11 @@ Public Class frmFullCart
 
 
     Sub listening() Handles SerialPort1.DataReceived
-        CartInterfaceCode.minusDrawerCount()
+        Dim strFeedback = SerialPort1.ReadExisting
+        ' MessageBox.Show(strFeedback)
+        If strFeedback.Equals("N") Then
+            CartInterfaceCode.minusDrawerCount()
+        End If
     End Sub
     '/*********************************************************************/
     '/*                   SUBPROGRAM NAME:  	gettingConnectionSettings  */         
@@ -440,14 +446,17 @@ Public Class frmFullCart
     '/*********************************************************************/
 
     Public Sub gettingConnectionSettings()
-        Dim strGetSettings As String = "Select * from Settings"
-        Dim dsSetting = CreateDatabase.ExecuteSelectQuery(strGetSettings)
-        With dsSetting.Tables(0)
+        Try
+            Dim strGetSettings As String = "Select * from Settings"
+            Dim dsSetting = CreateDatabase.ExecuteSelectQuery(strGetSettings)
+            With dsSetting.Tables(0)
                 bitRate = .Rows(0)(EnumList.Settings.bitRate).ToString
                 comPort = .Rows(0)(EnumList.Settings.ComPort).ToString
                 CartInterfaceCode.setSimulationMode(Convert.ToBoolean(.rows(0)(EnumList.Settings.SimulationFlag)))
             End With
-
+        Catch ex As Exception
+            CreateDatabase.defaultCartSettings()
+        End Try
     End Sub
 
     Private Sub frmFullCart_Load(sender As Object, e As EventArgs) Handles MyBase.Load

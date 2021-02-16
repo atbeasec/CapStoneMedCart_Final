@@ -1,6 +1,6 @@
 ﻿Public Class frmPatientInfo
 
-    Dim intPatientMRN As Integer = frmPatientRecords.intSelectedPatientMRN
+    'Dim intPatientMRN As Integer = frmPatientRecords.intSelectedPatientMRN
     Dim ContactPanelsAddedCount As Integer = 0
     Dim CurrentContactPanelName As String = Nothing
 
@@ -257,7 +257,8 @@
     Private Sub frmPatientInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
 
-        'intPatientMRN = frmPatientRecords.intSelectedPatientMRN
+
+Dim intPatientMRN = txtMRN.Text
         PatientInformation.GetAllergies(intPatientMRN)
         PatientInformation.GetPatientInformation(intPatientMRN)
         PatientInformation.getPrescriptions(intPatientMRN)
