@@ -182,7 +182,8 @@ Module CartInterfaceCode
 
 
     Sub main()
-
+        ChangeSettings("115200", "COM4", True)
+        OpenMutliDrawer({"16", "17", "18"})
 
 
 
@@ -252,7 +253,7 @@ Module CartInterfaceCode
     Sub OpenOneDrawer(Number As String)
         Dim blnissue = errorChecking(Number)
         Dim comSerialPort1 = FrmCart.serialSetup()
-
+        intDrawerCount = 0 'reset the drawer count just in case. 
 
         If blnSimulationMode Then
             'this will comiple and be ran if the code is compiled in simulation mode. 
@@ -280,6 +281,7 @@ Module CartInterfaceCode
 
                 comSerialPort1.Open()
                 comSerialPort1.Write(bytFinal, 0, bytFinal.Length)
+                intDrawerCount += 1
                 Do
                     'this is going to keep looping until the drawer count reached zero. 
 
@@ -628,21 +630,34 @@ Module CartInterfaceCode
                 blnIssue = True
             End If
         Next
+        If blnSimulationMode Then
+            'this will comiple and be ran if the code is compiled in simulation mode. 
+            FrmCart.populateButtonDictionary(dicButtonDictionary)
+            If Not blnIssue Then
+                '  FrmCart.LblDrawer.Text = "Drawer Number " + Number + " is Open"
+                '   FrmCart.ShowDialog()
+                For Each number As String In Drawers
+                    dicButtonDictionary.Item(Number).BackColor = Color.Red 'changes the color of the button to red
+                    'to make it looks like it is red. 
+                Next
+                FrmCart.showdialog()
+            End If
+        Else
+            If Not blnIssue Then
+                FrmCart.gettingConnectionSettings() 'get the settings in the database for the cart
+                comSerialPort1.open
 
-        If Not blnIssue Then
-            FrmCart.gettingConnectionSettings() 'get the settings in the database for the cart
-            comSerialPort1.open
+                For Each item As String In Drawers
+                    bytFinal = getSerialString(item) 'gets the byte your array
+                    comSerialPort1.Write(bytFinal, 0, bytFinal.Length) 'sends the byte array
+                    intDrawerCount += 1 'inceases the drawer count
+                Next
+                Do
+                    'this is going to keep looping until the drawer count reached zero. 
 
-            For Each item As String In Drawers
-                bytFinal = getSerialString(item) 'gets the byte your array
-                comSerialPort1.Write(bytFinal, 0, bytFinal.Length) 'sends the byte array
-                intDrawerCount += 1 'inceases the drawer count
-            Next
-            Do
-                'this is going to keep looping until the drawer count reached zero. 
-
-            Loop While (intDrawerCount > 0)
-            comSerialPort1.Close()
+                Loop While (intDrawerCount > 0)
+                comSerialPort1.Close()
+            End If
         End If
     End Sub
 
@@ -653,8 +668,7 @@ Module CartInterfaceCode
     '/*		         DATE CREATED: 	2/2/2021                        	   */                             
     '/*********************************************************************/
     '/*  SUBPROGRAM PURPOSE:								   */             
-    '/*	    This is going to subtracted 1 from the drawer count and will   */
-    '/*         be used to keep tracked of the drawers as they close.      */
+    '/*	    This is going to change the open drawer count to zero         */
     '/*                                                                   */
     '/*********************************************************************/
     '/*  CALLED BY:   	      						         */           
@@ -686,7 +700,7 @@ Module CartInterfaceCode
     '/*********************************************************************/
 
     Public Sub minusDrawerCount()
-        intDrawerCount -= 1
+        intDrawerCount = 0
     End Sub
 
 

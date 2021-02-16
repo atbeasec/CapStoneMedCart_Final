@@ -1,40 +1,58 @@
 ﻿Public Class frmAllergies
     Private Sub frmAllergies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim dsAllergies = CreateDatabase.ExecuteSelectQuery("Select * From Allergy ORDER BY Allergy_Type, Allergy_Name ;")
+        Dim dsDrugAllergies = CreateDatabase.ExecuteSelectQuery("Select * From Allergy WHERE Allergy_Type = 'Drug' ORDER BY Allergy_Type, Allergy_Name ;")
+        populateAllergiesComboBox(cmbAllergies, dsAllergies)
+        populateAllergiesComboBox(cmbMedicationName, dsDrugAllergies)
         Dim strSeverity As String = " "
-        Dim intPatientInformationMRN = CInt(frmPatientInfo.txtMRN.Text)
-        ' on form load we need to select all allergies from the database and show them here:
-        Dim intPatientAllergyId As Integer = CInt(CreateDatabase.ExecuteScalarQuery("select patient.Patient_ID From Patient " &
-                        "where Patient.MRN_Number=" & (intPatientInformationMRN).ToString & ";"))
+        Dim intPatientTuid As Integer = GetPatientTuid()
         'get the allergy information from the patient allergy tables
         Dim dtsPatientAllergy As DataSet = CreateDatabase.ExecuteSelectQuery("Select Allergy.Allergy_Name, PatientAllergy.Allergy_Severity," &
                                                                              "Allergy.Allergy_Type, Allergy.Medication_TUID From PatientAllergy " &
                                                                              "INNER JOIN Allergy on PatientAllergy.Allergy_Name=Allergy.Allergy_Name" &
-                            " Where Active_Flag =1 And Patient_TUID =" & (intPatientAllergyId).ToString & ";")
+                            " Where Active_Flag =1 And Patient_TUID =" & (intPatientTuid).ToString & ";")
         ' insert the select statement here and send the results to the createAllergiesPanel
         For Each dr As DataRow In dtsPatientAllergy.Tables(0).Rows
 
 
             If dr(2) = "Drug" Then
-                txtMedicationName.Text = dr(0)
-                txtAllergyName.Text = "N/A"
+                cmbMedicationName.Text = dr(0)
+                cmbAllergies.Text = "N/A"
             Else
-                txtAllergyName.Text = dr(0)
-                txtMedicationName.Text = "N/A"
+                cmbAllergies.Text = dr(0)
+                cmbMedicationName.Text = "N/A"
 
                 Debug.WriteLine("")
             End If
-            If dr(1).Equals(DBNull.Value) Then
-                strSeverity = "N/A"
-            Else
-                strSeverity = dr(1).ToString
-            End If
+
+            strSeverity = CheckSeverity(dr)
             txtAllergyType.Text = dr(2)
-            CreateAllergiesPanels(flpAllergies, txtAllergyName.Text, txtMedicationName.Text, txtAllergyType.Text, strSeverity)
+            CreateAllergiesPanels(flpAllergies, cmbAllergies.Text, cmbMedicationName.Text, txtAllergyType.Text, strSeverity)
         Next
         'CreateAllergiesPanels()
 
 
     End Sub
+
+    Private Shared Function GetPatientTuid() As Integer
+        Dim intPatientInformationMRN = CInt(frmPatientInfo.txtMRN.Text)
+        ' on form load we need to select all allergies from the database and show them here:
+        Dim intPatientTuid As Integer = CInt(CreateDatabase.ExecuteScalarQuery("select patient.Patient_ID From Patient " &
+                        "where Patient.MRN_Number=" & (intPatientInformationMRN).ToString & ";"))
+        Return intPatientTuid
+    End Function
+
+    Private Shared Function CheckSeverity(dr As DataRow) As String
+        Dim strSeverity As String
+
+        If dr(2).Equals(DBNull.Value) Then
+            strSeverity = "N/A"
+        Else
+            strSeverity = dr(2).ToString
+        End If
+
+        Return strSeverity
+    End Function
 
     '/********************************************************************/
     '/*                   SUB NAME: CreatePanel            	             */         
@@ -134,21 +152,75 @@
 
 
     Private Sub btnAddAllergy_Click(sender As Object, e As EventArgs) Handles btnAddAllergy.Click
-
+        Dim strAllergyName = " "
+        Dim strSeverity = " "
         ' at some point error handling will be added here and if all data is valid 2 things will occur:
         '   1. first we will take the items from all the textfields and insert it into the database.
         '   2. We will just take those same fields and call the create panel method to throw the items on the UI
         '   to save another database call and complexity of removing all the panels from the UI and repopulating them
 
+        If cmbAllergies.SelectedIndex = -1 Then
+            strAllergyName = cmbAllergies.Text
+        Else
+            strAllergyName = cmbAllergies.Text
+        End If
+        Dim intMedicationTUID = "NUll" 'for now but medication tuid will need to be looked up
+        Dim strAllergyType = txtAllergyType.Text
+        Dim intPatientTuid = GetPatientTuid()
+
+        If cmbAllergies.FindStringExact(cmbAllergies.Text) = -1 Then
+            CreateDatabase.ExecuteInsertQuery("INSERT INTO Allergy(Allergy_Name,Medication_TUID,Allergy_Type) VALUES('" & strAllergyName & "'," & intMedicationTUID & ",'" & strAllergyType & "');")
+        End If
         ' insert into database statement/method goes here
-
+        CreateDatabase.ExecuteInsertQuery("INSERT INTO PatientAllergy (Patient_TUID, Allergy_Name, Allergy_Severity, Active_Flag) VALUES (" & intPatientTuid & ",'" & strAllergyName & "','" & strAllergyType & "',1);")
         ' populate the screen from a manually added allergy.
+        'probably going to need a select query to get the medication name from the TUID
+        If cmbSeverity.SelectedIndex = -1 Then
+            strSeverity = "N/A"
+        Else
+            strSeverity = cmbSeverity.SelectedItem.ToString
+        End If
 
-
-
-        CreateAllergiesPanels(flpAllergies, txtAllergyName.Text, txtMedicationName.Text, txtAllergyType.Text, cmbSeverity.SelectedItem.ToString)
+        CreateAllergiesPanels(flpAllergies, strAllergyName, cmbMedicationName.Text, strAllergyType, strSeverity)
 
     End Sub
 
 
+    Private Sub cmbAllergies_TextChanged(sender As Object, e As EventArgs) Handles cmbAllergies.TextChanged
+
+        If cmbAllergies.FindStringExact(cmbAllergies.Text) = -1 Then
+            'do nothing until the user types in a value that matches an item in the box
+        Else
+
+            cmbAllergies.SelectedIndex = cmbAllergies.FindString(cmbAllergies.Text)
+
+        End If
+    End Sub
+
+    Private Sub cmbAllergies_LostFocus(sender As Object, e As EventArgs) Handles cmbAllergies.LostFocus
+        cmbAllergies.DroppedDown = False
+        If cmbAllergies.FindStringExact(cmbAllergies.Text) = -1 Then
+            Debug.WriteLine("")
+
+        Else
+            Dim objAllergyType = CreateDatabase.ExecuteScalarQuery("Select Allergy_Type From Allergy Where Allergy_Name = '" & cmbAllergies.Text & "';")
+            txtAllergyType.Text = objAllergyType.ToString
+        End If
+    End Sub
+
+    Private Sub cmbAllergies_Click(sender As Object, e As EventArgs) Handles cmbAllergies.Click
+
+        cmbAllergies.DroppedDown = True
+        txtAllergyType.Text = ""
+    End Sub
+
+    Private Sub cmbMedicationName_Click(sender As Object, e As EventArgs) Handles cmbMedicationName.Click
+        cmbMedicationName.DroppedDown = True
+
+    End Sub
+
+    Private Sub cmbMedicationName_LostFocus(sender As Object, e As EventArgs) Handles cmbMedicationName.LostFocus
+        cmbMedicationName.DroppedDown = False
+
+    End Sub
 End Class

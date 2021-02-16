@@ -5,7 +5,7 @@
         AddItemsToBaudrate()
         AddItemsToComPort()
         frmCart.gettingConnectionSettings() ' this is going to get the information from the database. 
-        cmbBaudrate.SelectedItem = frmCart.bitRate
+        cmbBaudrate.SelectedItem = frmCart.bitRate.ToString
         cmbComPort.SelectedItem = frmCart.comPort
         If CartInterfaceCode.blnSimulationMode Then
             chkSimulation.Checked = True
@@ -65,6 +65,7 @@
         Const STRCOMPORTFOUR As String = "COM4"
         Const STRCOMPORTFIVE As String = "COM5"
         Const STRCOMPORTSIX As String = "COM6"
+        Const STRCOMPORTSEVEN As String = "COM7"
 
         cmbComPort.Items.Add(STRCOMPORTONE)
         cmbComPort.Items.Add(STRCOMPORTTWO)
@@ -72,6 +73,7 @@
         cmbComPort.Items.Add(STRCOMPORTFOUR)
         cmbComPort.Items.Add(STRCOMPORTFIVE)
         cmbComPort.Items.Add(STRCOMPORTSIX)
+        cmbComPort.Items.Add(STRCOMPORTSEVEN)
 
 
 
