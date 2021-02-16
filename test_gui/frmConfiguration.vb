@@ -586,9 +586,7 @@ Public Class frmConfiguration
 
 
             'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
-
-            strStatement = "INSERT INTO USER(Username,Password,User_First_Name, User_Last_Name, Barcode, Admin_Flag, Supervisor_Flag, Active_Flag)" &
-            "VALUES('" & txtUsername.Text & "','" & strPassword & "','" & strFirstName & "','" & strLastName & "','" & txtBarcode.Text & "','" & intAdmin & "','" & intSupervisor & "','" & intActiveFlag & "')"
+            strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',Password='" & strPassword & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Barcode='" & txtBarcode.Text & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "',Active_Flag='" & intActiveFlag & "'WHERE User_ID=1;"
             ExecuteInsertQuery(strStatement)
 
             'clear all text boxes
