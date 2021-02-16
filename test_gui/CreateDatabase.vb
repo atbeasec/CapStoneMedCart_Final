@@ -825,6 +825,7 @@ Module CreateDatabase
 		strCreateTable = "CREATE TABLE 'User' (
 	                    'User_ID'	INTEGER NOT NULL,
 						'Username'	TEXT NOT NULL UNIQUE,
+						'Salt'	TEXT,
 	                    'Password'	TEXT NOT NULL,
 						'User_First_Name'	TEXT,
 						'User_Last_Name'	TEXT,
