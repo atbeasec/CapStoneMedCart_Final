@@ -3,7 +3,7 @@
 
     End Sub
 
-    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnAddRoom.Click
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) 
 
     End Sub
 End Class
