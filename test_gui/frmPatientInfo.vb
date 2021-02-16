@@ -1,6 +1,6 @@
 ﻿Public Class frmPatientInfo
 
-    Dim intPatientMRN As Integer = frmPatientRecords.intSelectedPatientMRN
+    'Dim intPatientMRN As Integer = frmPatientRecords.intSelectedPatientMRN
     Dim ContactPanelsAddedCount As Integer = 0
     Dim CurrentContactPanelName As String = Nothing
 
@@ -256,86 +256,13 @@
 
     Private Sub frmPatientInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        intPatientMRN = frmPatientRecords.intSelectedPatientMRN
-        PopulateDispenseHistory()
-        PopulateCurrentMedications()
-        PopulateNotes()
+
+        Dim intPatientMRN = txtMRN.Text
         PatientInformation.GetAllergies(intPatientMRN)
         PatientInformation.GetPatientInformation(intPatientMRN)
-        'CreateDispenseHistoryPanel(flpDispenseHistory)
-        'CreateDispenseHistoryPanel(flpDispenseHistory)
-        'CreateDispenseHistoryPanel(flpDispenseHistory)
-        'CreateDispenseHistoryPanel(flpDispenseHistory)
-        'CreateDispenseHistoryPanel(flpDispenseHistory)
-
-        'CreateCurrentMedications(flpMedications)
-        'CreateCurrentMedications(flpMedications)
-        'CreateCurrentMedications(flpMedications)
-        'CreateCurrentMedications(flpMedications)
+        PatientInformation.getPrescriptions(intPatientMRN)
 
 
-        ''    CreateAllergiesPanel(flpAllergies, "Carbamazepine ")
-        ''    CreateAllergiesPanel(flpAllergies, "Penicillin")
-        ''   CreateAllergiesPanel(flpAllergies, "Latex")
-
-        'CreateNotesPanel(flpNotes)
-        ''CreateAllergiesPanel(flpAllergies, "")
-
-
-
-    End Sub
-
-    Private Sub PopulateDispenseHistory()
-
-        Dim genName1 As String = "benzhydrocodone "
-        Dim genName2 As String = "hydrocodone bitartrate"
-        Dim genName3 As String = "phenylephrine"
-        Dim genName4 As String = "Morphine"
-        Dim genName5 As String = "Codeine"
-
-        Dim brandName1 As String = "Apadaz "
-        Dim brandName2 As String = "Flowtuss "
-        Dim brandName3 As String = "Histinex HC"
-        Dim brandName4 As String = "Duramorph "
-        Dim brandName5 As String = "Robitussin Ac"
-
-        Dim quantity1 As String = "1"
-        Dim quantity2 As String = "1"
-        Dim quantity3 As String = "2"
-        Dim quantity4 As String = "1"
-        Dim quantity5 As String = "3"
-
-        Dim measure1 As String = "10 mg"
-        Dim measure2 As String = "10 mg"
-        Dim measure3 As String = "50 mg"
-        Dim measure4 As String = "10 mg"
-        Dim measure5 As String = "10 mg"
-
-        Dim dispensedBy1 As String = "Kathryn Bonner"
-        Dim dispensedBy2 As String = "Lola Stanley"
-        Dim dispensedBy3 As String = "Kathryn Bonner"
-        Dim dispensedBy4 As String = "Kathryn Bonner"
-        Dim dispensedBy5 As String = "Lola Stanley"
-
-        Dim dispenseDate1 As String = "11/11/2020"
-        Dim dispenseDate2 As String = "11/5/2020"
-        Dim dispenseDate3 As String = "11/4/2020"
-        Dim dispenseDate4 As String = "11/1/2020"
-        Dim dispenseDate5 As String = "10/28/2020"
-
-        Dim dispenseTime1 As String = "8:05 AM"
-        Dim dispenseTime2 As String = "9:13 AM"
-        Dim dispenseTime3 As String = "8:34 AM"
-        Dim dispenseTime4 As String = "1:05 PM"
-        Dim dispenseTime5 As String = "5:04 AM"
-
-
-
-        'CreateDispenseHistoryPanels(flpDispenseHistory, genName1, brandName1, quantity1, measure1, dispensedBy1, dispenseDate1, dispenseTime1)
-        'CreateDispenseHistoryPanels(flpDispenseHistory, genName2, brandName2, quantity2, measure2, dispensedBy2, dispenseDate2, dispenseTime2)
-        'CreateDispenseHistoryPanels(flpDispenseHistory, genName3, brandName3, quantity3, measure3, dispensedBy3, dispenseDate3, dispenseTime3)
-        'CreateDispenseHistoryPanels(flpDispenseHistory, genName4, brandName4, quantity4, measure4, dispensedBy4, dispenseDate4, dispenseTime4)
-        'CreateDispenseHistoryPanels(flpDispenseHistory, genName5, brandName5, quantity5, measure5, dispensedBy5, dispenseDate5, dispenseTime5)
 
     End Sub
 
@@ -447,7 +374,7 @@
 
     End Sub
 
-    Private Sub CreateCurrentMedicationsPanels(ByVal flpPannel As FlowLayoutPanel, ByVal genericName As String, ByVal brandName As String, ByVal quantity As String, ByVal measure As String, ByVal frequency As String, ByVal method As String, ByVal specialNotes As String)
+    Public Sub CreateCurrentMedicationsPanels(ByVal flpPannel As FlowLayoutPanel, ByVal genericName As String, ByVal brandName As String, ByVal quantity As String, ByVal measure As String, ByVal frequency As String, ByVal method As String, ByVal specialNotes As String)
         Dim pnl As Panel
         pnl = New Panel
 
@@ -1060,6 +987,13 @@
 
     Private Sub btnAddAllergies_Click(sender As Object, e As EventArgs) Handles btnAddAllergies.Click
         'frmAllergies.Label5.Text = intPatientMRN
-        'frmAllergies.Show()
+        frmAllergies.Show()
     End Sub
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+
+        frmMain.OpenChildForm(frmPatientRecords)
+
+    End Sub
+
 End Class

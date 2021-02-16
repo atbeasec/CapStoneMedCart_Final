@@ -27,6 +27,10 @@ Partial Class frmSerialPort
         Me.cmbComPort = New System.Windows.Forms.ComboBox()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
+        Me.chkSimulation = New System.Windows.Forms.CheckBox()
+        Me.btnExportDatabase = New System.Windows.Forms.Button()
+        Me.btnImportDatabase = New System.Windows.Forms.Button()
+        Me.btnImportAsCopy = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
@@ -75,9 +79,65 @@ Partial Class frmSerialPort
         Me.Label18.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label18.Location = New System.Drawing.Point(12, 9)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(152, 25)
+        Me.Label18.Size = New System.Drawing.Size(202, 25)
         Me.Label18.TabIndex = 172
-        Me.Label18.Text = "Serial Port Info:"
+        Me.Label18.Text = "Medication Cart Info:"
+        '
+        'chkSimulation
+        '
+        Me.chkSimulation.AutoSize = True
+        Me.chkSimulation.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.chkSimulation.Location = New System.Drawing.Point(26, 203)
+        Me.chkSimulation.Name = "chkSimulation"
+        Me.chkSimulation.Size = New System.Drawing.Size(148, 25)
+        Me.chkSimulation.TabIndex = 178
+        Me.chkSimulation.Text = "Simulation Mode"
+        Me.chkSimulation.UseVisualStyleBackColor = True
+        '
+        'btnExportDatabase
+        '
+        Me.btnExportDatabase.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnExportDatabase.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnExportDatabase.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExportDatabase.ForeColor = System.Drawing.Color.White
+        Me.btnExportDatabase.Image = Global.test_gui.My.Resources.Resources.export
+        Me.btnExportDatabase.Location = New System.Drawing.Point(462, 346)
+        Me.btnExportDatabase.Name = "btnExportDatabase"
+        Me.btnExportDatabase.Size = New System.Drawing.Size(197, 57)
+        Me.btnExportDatabase.TabIndex = 181
+        Me.btnExportDatabase.Text = "EXPORT DATABASE"
+        Me.btnExportDatabase.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnExportDatabase.UseVisualStyleBackColor = False
+        '
+        'btnImportDatabase
+        '
+        Me.btnImportDatabase.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnImportDatabase.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnImportDatabase.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnImportDatabase.ForeColor = System.Drawing.Color.White
+        Me.btnImportDatabase.Image = Global.test_gui.My.Resources.Resources.icons8_downloading_updates
+        Me.btnImportDatabase.Location = New System.Drawing.Point(238, 346)
+        Me.btnImportDatabase.Name = "btnImportDatabase"
+        Me.btnImportDatabase.Size = New System.Drawing.Size(197, 57)
+        Me.btnImportDatabase.TabIndex = 180
+        Me.btnImportDatabase.Text = "IMPORT DATABASE"
+        Me.btnImportDatabase.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnImportDatabase.UseVisualStyleBackColor = False
+        '
+        'btnImportAsCopy
+        '
+        Me.btnImportAsCopy.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnImportAsCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnImportAsCopy.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnImportAsCopy.ForeColor = System.Drawing.Color.White
+        Me.btnImportAsCopy.Image = Global.test_gui.My.Resources.Resources.icons8_downloading_updates
+        Me.btnImportAsCopy.Location = New System.Drawing.Point(17, 346)
+        Me.btnImportAsCopy.Name = "btnImportAsCopy"
+        Me.btnImportAsCopy.Size = New System.Drawing.Size(197, 57)
+        Me.btnImportAsCopy.TabIndex = 179
+        Me.btnImportAsCopy.Text = "IMPORT DATABASE AS COPY"
+        Me.btnImportAsCopy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnImportAsCopy.UseVisualStyleBackColor = False
         '
         'btnSave
         '
@@ -86,7 +146,7 @@ Partial Class frmSerialPort
         Me.btnSave.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.ForeColor = System.Drawing.Color.White
         Me.btnSave.Image = Global.test_gui.My.Resources.Resources.resolve
-        Me.btnSave.Location = New System.Drawing.Point(77, 208)
+        Me.btnSave.Location = New System.Drawing.Point(71, 250)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(120, 38)
         Me.btnSave.TabIndex = 177
@@ -100,6 +160,10 @@ Partial Class frmSerialPort
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(671, 450)
+        Me.Controls.Add(Me.btnExportDatabase)
+        Me.Controls.Add(Me.btnImportDatabase)
+        Me.Controls.Add(Me.btnImportAsCopy)
+        Me.Controls.Add(Me.chkSimulation)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.cmbBaudrate)
         Me.Controls.Add(Me.Label12)
@@ -119,4 +183,8 @@ Partial Class frmSerialPort
     Friend WithEvents Label17 As Label
     Friend WithEvents Label18 As Label
     Friend WithEvents btnSave As Button
+    Friend WithEvents chkSimulation As CheckBox
+    Friend WithEvents btnImportAsCopy As Button
+    Friend WithEvents btnImportDatabase As Button
+    Friend WithEvents btnExportDatabase As Button
 End Class

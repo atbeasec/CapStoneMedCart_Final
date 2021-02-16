@@ -28,9 +28,9 @@ Public Class frmFullCart
     '/* 																	  
     '/*********************************************************************/
     '/*  GLOBAL VARIABLE LIST (Alphabetically):			                    */
-    '/*  BitRate as integer - this is going to be the bit per second that are going to */
+    '/*  bitRateValue as integer - this is going to be the bit per second that are going to */
     '/*     Transmitted to the cart.                                */
-    '/*  comPort - this is the port that is going to be used to connect to the */
+    '/*  comPortValue - this is the port that is going to be used to connect to the */
     '/*     cart. 
     '/*	                                                              */				  
     '/*********************************************************************/
@@ -46,8 +46,104 @@ Public Class frmFullCart
     '/*                  working with the data brought back from the      */
     '/*                  database to use to EnumListTo make it more readable.*/
     '/*********************************************************************/
-    Dim bitRate As Integer = 0
-    Dim comPort As String = Nothing
+    Dim bitRateValue As Integer = 0
+    Dim comPortValue As String = "COM3" 'these only have a value to supress warnings
+
+    '/*********************************************************************/
+    '/*                   Property NAME: bitRate     					   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		         */   
+    '/*		         DATE CREATED: 	2/12/2021                       	   */                             
+    '/*********************************************************************/
+    '/*  Property PURPOSE:								   */             
+    '/*	 This is going to handle the getting and setting of bitRateValue  */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*	bitRate = 115200										   */                     
+    '/* dim something = bitRate                                           */                                                                    
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	 value - this is the value we are setting bitRateValue to          */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Public Property bitRate As Integer
+        Get
+            Return bitRateValue
+        End Get
+        Set(value As Integer)
+            bitRateValue = value
+        End Set
+    End Property
+
+    '/*********************************************************************/
+    '/*                   Property NAME: comPortValue					   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		         */   
+    '/*		         DATE CREATED: 	2/12/2021                       	   */                             
+    '/*********************************************************************/
+    '/*  Property PURPOSE:								   */             
+    '/*	 This is going to handle the getting and setting of comPortValue  */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   */             
+    '/*	Comport = COM3              									   */                     
+    '/*  dim something = comport                                           (/                                                                   
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	 value - this is the value we are setting comPortValue to   	   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Public Property comPort As String
+        Get
+            Return comPortValue
+        End Get
+        Set(value As String)
+            comPortValue = value
+        End Set
+    End Property
+
+
 
 
     '/*********************************************************************/
@@ -232,6 +328,7 @@ Public Class frmFullCart
     '/*********************************************************************/
 
     Function serialSetup()
+
         gettingConnectionSettings()
         'comport from the database. 
         'this is going to set everything up with the cart. 
@@ -252,6 +349,57 @@ Public Class frmFullCart
     End Function
 
 
+
+
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME:  listening					   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		         */   
+    '/*		         DATE CREATED: 		2/2/2021   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								   */             
+    '/*  This is going to be listening for information from the cart so   */ 
+    '/* we can keep track of when the drawers are closing. 
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	 strFeedback - this is going to store the information the cart is */ 
+    '/*                 sending back.                                     */
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+
+
+    Sub listening() Handles SerialPort1.DataReceived
+        Dim strFeedback = SerialPort1.ReadExisting
+        ' MessageBox.Show(strFeedback)
+        If strFeedback.Equals("N") Then
+            CartInterfaceCode.minusDrawerCount()
+        End If
+    End Sub
     '/*********************************************************************/
     '/*                   SUBPROGRAM NAME:  	gettingConnectionSettings  */         
     '/*********************************************************************/
@@ -298,58 +446,17 @@ Public Class frmFullCart
     '/*********************************************************************/
 
     Public Sub gettingConnectionSettings()
-        Dim strGetSettings As String = "Select * from Settings"
-        Dim dsSetting = CreateDatabase.ExecuteSelectQuery(strGetSettings)
-        bitRate = dsSetting.Tables(0).Rows(0)(EnumList.Settings.bitRate).ToString
-        comPort = dsSetting.Tables(0).Rows(0)(EnumList.Settings.ComPort).ToString
-
-
-
-    End Sub
-
-    '/*********************************************************************/
-    '/*                   FUNCTION NAME:  listening					   */         
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:  Nathan Premo   		         */   
-    '/*		         DATE CREATED: 		2/2/2021   */                             
-    '/*********************************************************************/
-    '/*  FUNCTION PURPOSE:								   */             
-    '/*  This is going to be listening for information from the cart so   */ 
-    '/* we can keep track of when the drawers are closing. 
-    '/*                                                                   */
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      						         */           
-    '/*                                         				   */         
-    '/*********************************************************************/
-    '/*  CALLS:										   */                 
-    '/*             (NONE)								   */             
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					   */         
-    '/*											   */                     
-    '/*                                                                     
-    '/*********************************************************************/
-    '/*  RETURNS:								         */                   
-    '/*            (NOTHING)								   */             
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								   */             
-    '/*											   */                     
-    '/*                                                                     
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
-    '/*                                                                     
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						         */               
-    '/*											   */                     
-    '/*  WHO   WHEN     WHAT								   */             
-    '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
-    '/*********************************************************************/
-
-
-
-    Sub listening() Handles SerialPort1.DataReceived
-        CartInterfaceCode.minusDrawerCount()
+        Try
+            Dim strGetSettings As String = "Select * from Settings"
+            Dim dsSetting = CreateDatabase.ExecuteSelectQuery(strGetSettings)
+            With dsSetting.Tables(0)
+                bitRate = .Rows(0)(EnumList.Settings.bitRate).ToString
+                comPort = .Rows(0)(EnumList.Settings.ComPort).ToString
+                CartInterfaceCode.setSimulationMode(Convert.ToBoolean(.rows(0)(EnumList.Settings.SimulationFlag)))
+            End With
+        Catch ex As Exception
+            CreateDatabase.defaultCartSettings()
+        End Try
     End Sub
 
     Private Sub frmFullCart_Load(sender As Object, e As EventArgs) Handles MyBase.Load

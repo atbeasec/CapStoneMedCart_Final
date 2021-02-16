@@ -97,7 +97,33 @@
         Return dsDataset
     End Function
 
-
+    '/*********************************************************************/
+    '/*                   Function NAME:PopulateWasteComboBoxMedication   */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   02/10/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: 
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):			   		   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*	 									                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  02/10/21	  Initial creation of the code    */
+    '/*********************************************************************/
     Public Sub PopulateWasteComboBoxMedication()
 
         Dim Strdatacommand As String
@@ -114,13 +140,40 @@
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   Function NAME:WasteMedication                    */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   02/10/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: 
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):			   		   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*	 									                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  02/10/21	  Initial creation of the code    */
+    '/*********************************************************************/
     Public Sub WasteMedication()
         If Not IsNothing(Waste.ComboBox1.SelectedItem) Then
             Dim strSqlCommand As String
             Dim strArray() As String
             Dim strMedication As String = Waste.ComboBox1.SelectedItem
             Dim intDrawerMedID As Integer
-            Dim strWasteReason As String
+            Dim strWasteReason As String = " "
 
             If Waste.rbtnOther.Checked Then
                 strWasteReason = Waste.TextBox1.Text
@@ -149,6 +202,126 @@
             MessageBox.Show("Waste recorded")
         End If
 
+    End Sub
+
+
+    '/*********************************************************************/
+    '/*                   Function NAME:EndofShiftAllMedications                    */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   02/10/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: 
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):			   		   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*	 									                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  02/10/21	  Initial creation of the code    */
+    '/*********************************************************************/
+    Public Sub EndofShiftAllMedications()
+
+        Dim strSqlCommand As String
+        Dim dsMedicationDataset As DataSet
+        strSqlCommand = "SELECT Medication_TUID, Drug_Name, Drawer_Number, Divider_Bin, Quantity FROM DrawerMedication " &
+            "INNER JOIN Medication on Medication.Medication_ID = DrawerMedication.Medication_TUID " &
+            "INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID"
+        dsMedicationDataset = CreateDatabase.ExecuteSelectQuery(strSqlCommand)
+        For Each dr As DataRow In dsMedicationDataset.Tables(0).Rows
+            frmEndOfShift.CreatePanel(frmEndOfShift.flpEndOfShiftCount, dr(0), dr(1), dr(2), dr(3), dr(4))
+        Next
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   Function NAME:NonControlledMedsEndofShift      */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   02/10/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: 
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):			   		   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*	 									                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  02/10/21	  Initial creation of the code    */
+    '/*********************************************************************/
+    Public Sub NonControlledMedsEndofShift()
+        Dim strSqlCommand As String
+        Dim dsMedicationDataset As DataSet
+        strSqlCommand = "SELECT Medication_TUID, Drug_Name, Drawer_Number, Divider_Bin, Quantity FROM DrawerMedication " &
+            "INNER JOIN Medication on Medication.Medication_ID = DrawerMedication.Medication_TUID " &
+            "INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID WHERE Medication.Controlled = '0'"
+        dsMedicationDataset = CreateDatabase.ExecuteSelectQuery(strSqlCommand)
+        For Each dr As DataRow In dsMedicationDataset.Tables(0).Rows
+            frmEndOfShift.CreatePanel(frmEndOfShift.flpEndOfShiftCount, dr(0), dr(1), dr(2), dr(3), dr(4))
+        Next
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   Function NAME:ControlledMedsEndofShift           */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   02/10/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: 
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):			   		   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*	 									                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  02/10/21	  Initial creation of the code    */
+    '/*********************************************************************/
+    Public Sub ControlledMedsEndofShift()
+        Dim strSqlCommand As String
+        Dim dsMedicationDataset As DataSet
+        strSqlCommand = "SELECT Medication_TUID, Drug_Name, Drawer_Number, Divider_Bin, Quantity FROM DrawerMedication " &
+            "INNER JOIN Medication on Medication.Medication_ID = DrawerMedication.Medication_TUID " &
+            "INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID WHERE Medication.Controlled = '1'"
+        dsMedicationDataset = CreateDatabase.ExecuteSelectQuery(strSqlCommand)
+        For Each dr As DataRow In dsMedicationDataset.Tables(0).Rows
+            frmEndOfShift.CreatePanel(frmEndOfShift.flpEndOfShiftCount, dr(0), dr(1), dr(2), dr(3), dr(4))
+        Next
     End Sub
 End Module
 

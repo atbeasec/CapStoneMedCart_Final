@@ -7,6 +7,7 @@
 
     Private Sub frmPharmacy_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        txtQuantity.Text = 0
         'Jonie Nicolas
         'Mauricio Adkisson
         dsPhysicians = ExecuteSelectQuery("Select * From Physician ORDER BY Physician_Last_Name, Physician_First_Name;")
@@ -91,6 +92,15 @@
         Dim dtmOrderTime As String = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
 
 
+    End Sub
+
+    Private Sub btnIncrement_Click(sender As Object, e As EventArgs) Handles btnIncrement.Click
+        ButtonIncrement(txtQuantity)
+
+    End Sub
+
+    Private Sub btnDecrement_Click(sender As Object, e As EventArgs) Handles btnDecrement.Click
+        ButtonDecrement(txtQuantity)
     End Sub
 
 
