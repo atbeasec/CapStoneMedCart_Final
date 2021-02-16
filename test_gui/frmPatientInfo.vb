@@ -957,9 +957,10 @@
     'End Sub
 
     Private Sub btnDispenseMedication_Click(sender As Object, e As EventArgs) Handles btnDispenseMedication.Click
-
         Dispense.Show()
-
+        'DispenseHistory.DispensemedicationPopulate(intPatientMRN)
+        'PatientInformation.PopulatePatientDispenseInfo(intPatientMRN)
+        'PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientMRN)
     End Sub
 
     ' Private Sub Button1_Click(sender As Object, e As EventArgs)
