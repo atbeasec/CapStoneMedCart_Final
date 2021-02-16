@@ -39,7 +39,7 @@ Public Class frmConfiguration
     '/*********************************************************************/
     Private Sub frmConfiguration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'pull  the dataset from the user table in sqlite
-        Dim dsUserInfo As DataSet = CreateDatabase.ExecuteSelectQuery("select User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
+        Dim dsUserInfo As DataSet = CreateDatabase.ExecuteSelectQuery("select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
                                                    "User.Supervisor_Flag, User.Active_Flag From User;")
 
 
@@ -47,24 +47,29 @@ Public Class frmConfiguration
         For Each item As DataRow In dsUserInfo.Tables(0).Rows()
             With dsUserInfo.Tables(0)
                 'grab first name and last name and merge into one string
-                Dim strFirst As String = item.Item(1)
-                Dim strLast As String = item.Item(2)
+                Dim strFirst As String = item.Item(2)
+                Dim strLast As String = item.Item(3)
                 Dim strName = strFirst & " " & strLast
+                Dim strActive As String = ""
 
+                If (item.Item(6)) = 1 Then
+                    strActive = "Yes"
+                Else strActive = "No"
+                End If
                 'check what role the person has, if adminis 1 then it does not matter what Supervisor is 
                 'if admin is 0 then check supervisor. If both admin and supervidor are 0 then the 
                 'user is a nurse
                 Dim strRole As String
-                If (item.Item(4)) = 1 Then
+                If (item.Item(5)) = 1 Then
                     strRole = "Admin"
-                ElseIf (item.Item(3)) = 1 Then
+                ElseIf (item.Item(4)) = 1 Then
                     strRole = "Supervisor"
                 Else strRole = "Nurse"
                 End If
 
                 'populate data into panels
-                CreatePanel(flpUserInfo, item.Item(0), strName,
-                           strRole)
+                CreatePanel(flpUserInfo, item.Item(0), item.Item(1), strName,
+                           strRole, strActive)
 
             End With
         Next
@@ -118,7 +123,7 @@ Public Class frmConfiguration
     '/*  WHO   WHEN     WHAT								              */             
     '/*  Collin Krygier  2/6/2021    Initial creation                     */
     '/*********************************************************************/
-    Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal strID As String, ByVal strName As String, ByVal strAccess As String)
+    Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal strID As String, ByVal strName As String, ByVal strUsername As String, ByVal strAccess As String, ByVal strActive As String)
 
         Dim pnl As Panel
         pnl = New Panel
@@ -165,12 +170,16 @@ Public Class frmConfiguration
         Dim lblID As New Label
         Dim lblID2 As New Label
         Dim lblID3 As New Label
+        Dim lblID4 As New Label
+        Dim lblID5 As New Label
         Const INTTWENTY As Integer = 20
 
         ' anywhere we have quotes except for the label names, we can call our Database and get method
-        CreateIDLabel(pnlMainPanel, lblID, "lblID", lblName.Location.X, INTTWENTY, strName, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID2, "lblNames", lblIDNumber.Location.X, INTTWENTY, strID, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID3, "lblAccessLevel", lblAccess.Location.X, INTTWENTY, strAccess, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID, "lblID", lblID.Location.X, INTTWENTY, strID, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID2, "lblNames", lblName.Location.X, INTTWENTY, strName, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID3, "lblUsername", lblIDNumber.Location.X, INTTWENTY, strUsername, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID4, "lblAccessLevel", lblAccess.Location.X, INTTWENTY, strAccess, getPanelCount(flpPannel))
+        'CreateIDLabel(pnlMainPanel, lblID5, "lblActive", lblName.Location.X, INTTWENTY, strActive, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
@@ -598,4 +607,33 @@ Public Class frmConfiguration
             txtConfirmPassword.Text = ""
         End If
     End Sub
+    Function GetSelectedUserUsername(sender As Object) As Integer
+
+        Dim intGetID = Nothing
+        Dim ctl As Control
+
+        ' iterating over the list of controls in the panel
+        For Each ctl In sender.Controls
+
+            ' the label containing the MRN number will always be called "lblMRN" with a number tacked on
+            ' to represent what number panel it is in the row of created panels.
+            ' simplying searching for the control that contains MRN will always yield the correct label.
+            If ctl.Name.Contains("ID") Then
+
+                Debug.Print(ctl.Text)
+                intGetID = CInt(ctl.Text)
+            End If
+        Next
+        'returning the MRN of the patient from the selected record
+        MsgBox(intGetID)
+        Return intGetID
+    End Function
+    'strStatement= "SELECT Active_Flag FROM User WHERE User_ID = '" & txtUsername.Text &"'"
+    'If ExecuteScalarQuery(strStatement) = 1 Then
+    'strStatement = "UPDATE USER SET Active_Flag='" & intActiveFlag & "'WHERE User_ID=0;"
+    'ExecuteInsertQuery(strStatement)
+    'Else
+    'strStatement = "UPDATE USER SET Active_Flag='" & intActiveFlag & "'WHERE User_ID=1;"
+    'ExecuteInsertQuery(strStatement)
+    'End If
 End Class
