@@ -47,7 +47,7 @@ Public Class frmFullCart
     '/*                  database to use to EnumListTo make it more readable.*/
     '/*********************************************************************/
     Dim bitRateValue As Integer = 0
-    Dim comPortValue As String = "COM3"
+    Dim comPortValue As String = "COM3" 'these only have a value to supress warnings
 
     '/*********************************************************************/
     '/*                   Property NAME: bitRate     					   */         
@@ -328,6 +328,7 @@ Public Class frmFullCart
     '/*********************************************************************/
 
     Function serialSetup()
+
         gettingConnectionSettings()
         'comport from the database. 
         'this is going to set everything up with the cart. 
@@ -394,7 +395,7 @@ Public Class frmFullCart
 
     Sub listening() Handles SerialPort1.DataReceived
         Dim strFeedback = SerialPort1.ReadExisting
-        MessageBox.Show(strFeedback)
+        ' MessageBox.Show(strFeedback)
         If strFeedback.Equals("N") Then
             CartInterfaceCode.minusDrawerCount()
         End If
