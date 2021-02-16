@@ -37,7 +37,7 @@ Partial Class frmInventory
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.cmbPatientPersonalMedication = New System.Windows.Forms.ComboBox()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.txtDrawerNumber = New System.Windows.Forms.TextBox()
@@ -53,6 +53,13 @@ Partial Class frmInventory
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.ComboBox3 = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.pnlMainLocation = New System.Windows.Forms.Panel()
+        Me.pnlMainFormFields = New System.Windows.Forms.Panel()
+        Me.Panel11 = New System.Windows.Forms.Panel()
+        Me.pnlPatientName = New System.Windows.Forms.Panel()
+        Me.lblPatientName = New System.Windows.Forms.Label()
+        Me.pnlPatientNamePadding = New System.Windows.Forms.Panel()
+        Me.cmbPatientNames = New System.Windows.Forms.ComboBox()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel14.SuspendLayout()
@@ -61,6 +68,10 @@ Partial Class frmInventory
         Me.Panel5.SuspendLayout()
         Me.Panel6.SuspendLayout()
         Me.Panel7.SuspendLayout()
+        Me.pnlMainLocation.SuspendLayout()
+        Me.pnlMainFormFields.SuspendLayout()
+        Me.pnlPatientName.SuspendLayout()
+        Me.pnlPatientNamePadding.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label10
@@ -68,7 +79,7 @@ Partial Class frmInventory
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label10.Location = New System.Drawing.Point(373, 202)
+        Me.Label10.Location = New System.Drawing.Point(353, 145)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(89, 21)
         Me.Label10.TabIndex = 111
@@ -79,7 +90,7 @@ Partial Class frmInventory
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label9.Location = New System.Drawing.Point(27, 202)
+        Me.Label9.Location = New System.Drawing.Point(7, 145)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(126, 21)
         Me.Label9.TabIndex = 110
@@ -90,7 +101,7 @@ Partial Class frmInventory
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label6.Location = New System.Drawing.Point(28, 280)
+        Me.Label6.Location = New System.Drawing.Point(8, 223)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(118, 21)
         Me.Label6.TabIndex = 107
@@ -101,7 +112,7 @@ Partial Class frmInventory
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label5.Location = New System.Drawing.Point(26, 60)
+        Me.Label5.Location = New System.Drawing.Point(6, 3)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(136, 21)
         Me.Label5.TabIndex = 106
@@ -111,7 +122,7 @@ Partial Class frmInventory
         '
         Me.Panel4.BackColor = System.Drawing.Color.DarkGray
         Me.Panel4.Controls.Add(Me.cmbBin)
-        Me.Panel4.Location = New System.Drawing.Point(376, 229)
+        Me.Panel4.Location = New System.Drawing.Point(356, 172)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel4.Size = New System.Drawing.Size(118, 28)
@@ -132,7 +143,7 @@ Partial Class frmInventory
         '
         Me.Panel3.BackColor = System.Drawing.Color.DarkGray
         Me.Panel3.Controls.Add(Me.cmbMedicationName)
-        Me.Panel3.Location = New System.Drawing.Point(30, 87)
+        Me.Panel3.Location = New System.Drawing.Point(10, 30)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel3.Size = New System.Drawing.Size(464, 28)
@@ -153,7 +164,7 @@ Partial Class frmInventory
         '
         Me.Panel14.BackColor = System.Drawing.Color.DarkGray
         Me.Panel14.Controls.Add(Me.txtExpirationDate)
-        Me.Panel14.Location = New System.Drawing.Point(30, 306)
+        Me.Panel14.Location = New System.Drawing.Point(10, 249)
         Me.Panel14.Name = "Panel14"
         Me.Panel14.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel14.Size = New System.Drawing.Size(190, 28)
@@ -174,7 +185,7 @@ Partial Class frmInventory
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(202, 202)
+        Me.Label2.Location = New System.Drawing.Point(182, 145)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(73, 21)
         Me.Label2.TabIndex = 166
@@ -196,7 +207,7 @@ Partial Class frmInventory
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(289, 280)
+        Me.Label1.Location = New System.Drawing.Point(269, 223)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(204, 21)
         Me.Label1.TabIndex = 170
@@ -205,23 +216,24 @@ Partial Class frmInventory
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel1.Controls.Add(Me.ComboBox1)
-        Me.Panel1.Location = New System.Drawing.Point(292, 306)
+        Me.Panel1.Controls.Add(Me.cmbPatientPersonalMedication)
+        Me.Panel1.Location = New System.Drawing.Point(272, 250)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel1.Size = New System.Drawing.Size(202, 28)
         Me.Panel1.TabIndex = 12
         '
-        'ComboBox1
+        'cmbPatientPersonalMedication
         '
-        Me.ComboBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ComboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ComboBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(1, 1)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(200, 25)
-        Me.ComboBox1.TabIndex = 10
+        Me.cmbPatientPersonalMedication.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cmbPatientPersonalMedication.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cmbPatientPersonalMedication.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbPatientPersonalMedication.FormattingEnabled = True
+        Me.cmbPatientPersonalMedication.Items.AddRange(New Object() {"Yes", "No"})
+        Me.cmbPatientPersonalMedication.Location = New System.Drawing.Point(1, 1)
+        Me.cmbPatientPersonalMedication.Name = "cmbPatientPersonalMedication"
+        Me.cmbPatientPersonalMedication.Size = New System.Drawing.Size(200, 25)
+        Me.cmbPatientPersonalMedication.TabIndex = 10
         '
         'btnSave
         '
@@ -230,7 +242,7 @@ Partial Class frmInventory
         Me.btnSave.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.ForeColor = System.Drawing.Color.White
         Me.btnSave.Image = Global.test_gui.My.Resources.Resources.resolve
-        Me.btnSave.Location = New System.Drawing.Point(192, 365)
+        Me.btnSave.Location = New System.Drawing.Point(184, 18)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(120, 38)
         Me.btnSave.TabIndex = 13
@@ -242,7 +254,7 @@ Partial Class frmInventory
         '
         Me.Panel2.BackColor = System.Drawing.Color.DarkGray
         Me.Panel2.Controls.Add(Me.txtDrawerNumber)
-        Me.Panel2.Location = New System.Drawing.Point(31, 228)
+        Me.Panel2.Location = New System.Drawing.Point(11, 171)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel2.Size = New System.Drawing.Size(53, 28)
@@ -267,7 +279,7 @@ Partial Class frmInventory
         Me.btnUp.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUp.ForeColor = System.Drawing.Color.White
         Me.btnUp.Image = CType(resources.GetObject("btnUp.Image"), System.Drawing.Image)
-        Me.btnUp.Location = New System.Drawing.Point(90, 228)
+        Me.btnUp.Location = New System.Drawing.Point(70, 171)
         Me.btnUp.Name = "btnUp"
         Me.btnUp.Size = New System.Drawing.Size(28, 28)
         Me.btnUp.TabIndex = 5
@@ -282,7 +294,7 @@ Partial Class frmInventory
         Me.Button1.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button1.ForeColor = System.Drawing.Color.White
         Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.Location = New System.Drawing.Point(124, 228)
+        Me.Button1.Location = New System.Drawing.Point(104, 171)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(28, 28)
         Me.Button1.TabIndex = 6
@@ -297,7 +309,7 @@ Partial Class frmInventory
         Me.Button2.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button2.ForeColor = System.Drawing.Color.White
         Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
-        Me.Button2.Location = New System.Drawing.Point(299, 228)
+        Me.Button2.Location = New System.Drawing.Point(279, 171)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(28, 28)
         Me.Button2.TabIndex = 9
@@ -312,7 +324,7 @@ Partial Class frmInventory
         Me.Button3.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button3.ForeColor = System.Drawing.Color.White
         Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
-        Me.Button3.Location = New System.Drawing.Point(265, 228)
+        Me.Button3.Location = New System.Drawing.Point(245, 171)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(28, 28)
         Me.Button3.TabIndex = 8
@@ -323,7 +335,7 @@ Partial Class frmInventory
         '
         Me.Panel5.BackColor = System.Drawing.Color.DarkGray
         Me.Panel5.Controls.Add(Me.txtQuantity)
-        Me.Panel5.Location = New System.Drawing.Point(206, 228)
+        Me.Panel5.Location = New System.Drawing.Point(186, 171)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel5.Size = New System.Drawing.Size(53, 28)
@@ -344,17 +356,17 @@ Partial Class frmInventory
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(289, 131)
+        Me.Label15.Location = New System.Drawing.Point(269, 74)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(67, 21)
+        Me.Label15.Size = New System.Drawing.Size(45, 21)
         Me.Label15.TabIndex = 186
-        Me.Label15.Text = "Method:"
+        Me.Label15.Text = "Type:"
         '
         'Panel6
         '
         Me.Panel6.BackColor = System.Drawing.Color.DarkGray
         Me.Panel6.Controls.Add(Me.ComboBox2)
-        Me.Panel6.Location = New System.Drawing.Point(292, 154)
+        Me.Panel6.Location = New System.Drawing.Point(272, 97)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel6.Size = New System.Drawing.Size(202, 28)
@@ -375,7 +387,7 @@ Partial Class frmInventory
         '
         Me.Panel7.BackColor = System.Drawing.Color.DarkGray
         Me.Panel7.Controls.Add(Me.ComboBox3)
-        Me.Panel7.Location = New System.Drawing.Point(31, 154)
+        Me.Panel7.Location = New System.Drawing.Point(11, 97)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel7.Size = New System.Drawing.Size(202, 28)
@@ -396,40 +408,107 @@ Partial Class frmInventory
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(28, 130)
+        Me.Label3.Location = New System.Drawing.Point(8, 73)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(65, 21)
+        Me.Label3.Size = New System.Drawing.Size(72, 21)
         Me.Label3.TabIndex = 188
-        Me.Label3.Text = "Dosage:"
+        Me.Label3.Text = "Strength:"
+        '
+        'pnlMainLocation
+        '
+        Me.pnlMainLocation.Controls.Add(Me.pnlMainFormFields)
+        Me.pnlMainLocation.Controls.Add(Me.Panel11)
+        Me.pnlMainLocation.Controls.Add(Me.pnlPatientName)
+        Me.pnlMainLocation.Location = New System.Drawing.Point(17, 48)
+        Me.pnlMainLocation.Name = "pnlMainLocation"
+        Me.pnlMainLocation.Size = New System.Drawing.Size(496, 405)
+        Me.pnlMainLocation.TabIndex = 189
+        '
+        'pnlMainFormFields
+        '
+        Me.pnlMainFormFields.Controls.Add(Me.Panel3)
+        Me.pnlMainFormFields.Controls.Add(Me.Button3)
+        Me.pnlMainFormFields.Controls.Add(Me.Label9)
+        Me.pnlMainFormFields.Controls.Add(Me.Panel7)
+        Me.pnlMainFormFields.Controls.Add(Me.Label10)
+        Me.pnlMainFormFields.Controls.Add(Me.Button2)
+        Me.pnlMainFormFields.Controls.Add(Me.Panel14)
+        Me.pnlMainFormFields.Controls.Add(Me.Panel5)
+        Me.pnlMainFormFields.Controls.Add(Me.Panel2)
+        Me.pnlMainFormFields.Controls.Add(Me.Label6)
+        Me.pnlMainFormFields.Controls.Add(Me.Label3)
+        Me.pnlMainFormFields.Controls.Add(Me.Label2)
+        Me.pnlMainFormFields.Controls.Add(Me.Label1)
+        Me.pnlMainFormFields.Controls.Add(Me.Label15)
+        Me.pnlMainFormFields.Controls.Add(Me.Panel4)
+        Me.pnlMainFormFields.Controls.Add(Me.Button1)
+        Me.pnlMainFormFields.Controls.Add(Me.btnUp)
+        Me.pnlMainFormFields.Controls.Add(Me.Label5)
+        Me.pnlMainFormFields.Controls.Add(Me.Panel6)
+        Me.pnlMainFormFields.Controls.Add(Me.Panel1)
+        Me.pnlMainFormFields.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnlMainFormFields.Location = New System.Drawing.Point(0, 0)
+        Me.pnlMainFormFields.Name = "pnlMainFormFields"
+        Me.pnlMainFormFields.Size = New System.Drawing.Size(496, 295)
+        Me.pnlMainFormFields.TabIndex = 191
+        '
+        'Panel11
+        '
+        Me.Panel11.Location = New System.Drawing.Point(622, 113)
+        Me.Panel11.Name = "Panel11"
+        Me.Panel11.Size = New System.Drawing.Size(367, 100)
+        Me.Panel11.TabIndex = 190
+        '
+        'pnlPatientName
+        '
+        Me.pnlPatientName.Controls.Add(Me.lblPatientName)
+        Me.pnlPatientName.Controls.Add(Me.btnSave)
+        Me.pnlPatientName.Controls.Add(Me.pnlPatientNamePadding)
+        Me.pnlPatientName.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.pnlPatientName.Location = New System.Drawing.Point(0, 293)
+        Me.pnlPatientName.Name = "pnlPatientName"
+        Me.pnlPatientName.Size = New System.Drawing.Size(496, 112)
+        Me.pnlPatientName.TabIndex = 189
+        '
+        'lblPatientName
+        '
+        Me.lblPatientName.AutoSize = True
+        Me.lblPatientName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPatientName.Location = New System.Drawing.Point(4, 4)
+        Me.lblPatientName.Name = "lblPatientName"
+        Me.lblPatientName.Size = New System.Drawing.Size(106, 21)
+        Me.lblPatientName.TabIndex = 191
+        Me.lblPatientName.Text = "Patient Name:"
+        '
+        'pnlPatientNamePadding
+        '
+        Me.pnlPatientNamePadding.BackColor = System.Drawing.Color.DarkGray
+        Me.pnlPatientNamePadding.Controls.Add(Me.cmbPatientNames)
+        Me.pnlPatientNamePadding.Location = New System.Drawing.Point(9, 28)
+        Me.pnlPatientNamePadding.Name = "pnlPatientNamePadding"
+        Me.pnlPatientNamePadding.Padding = New System.Windows.Forms.Padding(1)
+        Me.pnlPatientNamePadding.Size = New System.Drawing.Size(465, 28)
+        Me.pnlPatientNamePadding.TabIndex = 190
+        '
+        'cmbPatientNames
+        '
+        Me.cmbPatientNames.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cmbPatientNames.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cmbPatientNames.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbPatientNames.FormattingEnabled = True
+        Me.cmbPatientNames.Location = New System.Drawing.Point(1, 1)
+        Me.cmbPatientNames.Name = "cmbPatientNames"
+        Me.cmbPatientNames.Size = New System.Drawing.Size(463, 25)
+        Me.cmbPatientNames.TabIndex = 10
         '
         'frmInventory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(517, 524)
-        Me.Controls.Add(Me.Panel7)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.Panel6)
-        Me.Controls.Add(Me.Label15)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button3)
-        Me.Controls.Add(Me.Panel5)
-        Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.btnUp)
-        Me.Controls.Add(Me.Panel2)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.Panel1)
+        Me.ClientSize = New System.Drawing.Size(1005, 602)
+        Me.Controls.Add(Me.pnlMainLocation)
         Me.Controls.Add(Me.Label17)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.Label10)
-        Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.Panel4)
-        Me.Controls.Add(Me.Panel3)
-        Me.Controls.Add(Me.Panel14)
-        Me.Controls.Add(Me.btnSave)
         Me.Name = "frmInventory"
         Me.Text = "frmInventory"
         Me.Panel4.ResumeLayout(False)
@@ -443,6 +522,12 @@ Partial Class frmInventory
         Me.Panel5.PerformLayout()
         Me.Panel6.ResumeLayout(False)
         Me.Panel7.ResumeLayout(False)
+        Me.pnlMainLocation.ResumeLayout(False)
+        Me.pnlMainFormFields.ResumeLayout(False)
+        Me.pnlMainFormFields.PerformLayout()
+        Me.pnlPatientName.ResumeLayout(False)
+        Me.pnlPatientName.PerformLayout()
+        Me.pnlPatientNamePadding.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -462,7 +547,7 @@ Partial Class frmInventory
     Friend WithEvents Label17 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents cmbPatientPersonalMedication As ComboBox
     Friend WithEvents Panel2 As Panel
     Friend WithEvents txtDrawerNumber As TextBox
     Friend WithEvents btnUp As Button
@@ -477,4 +562,11 @@ Partial Class frmInventory
     Friend WithEvents Panel7 As Panel
     Friend WithEvents ComboBox3 As ComboBox
     Friend WithEvents Label3 As Label
+    Friend WithEvents pnlMainLocation As Panel
+    Friend WithEvents pnlPatientName As Panel
+    Friend WithEvents pnlPatientNamePadding As Panel
+    Friend WithEvents cmbPatientNames As ComboBox
+    Friend WithEvents lblPatientName As Label
+    Friend WithEvents Panel11 As Panel
+    Friend WithEvents pnlMainFormFields As Panel
 End Class
