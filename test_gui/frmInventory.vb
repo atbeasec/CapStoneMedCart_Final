@@ -3,8 +3,40 @@
 
     End Sub
 
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs)
-        Me.Close()
+    Private Sub frmInventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        DefaultSaveButtonLocation()
+
+    End Sub
+
+
+    Public Sub MoveControlsIfPatientMedication()
+        btnSave.Location = New Point(184, 75)
+        pnlPatientNamePadding.Visible = True
+        lblPatientName.Visible = True
+    End Sub
+
+    Public Sub DefaultSaveButtonLocation()
+        btnSave.Location = New Point(184, 18)
+        pnlPatientNamePadding.Visible = False
+        lblPatientName.Visible = False
+    End Sub
+
+    Private Sub cmbPatientPersonalMedication_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPatientPersonalMedication.SelectedIndexChanged
+
+        Const YES As String = "Yes"
+
+
+        If cmbPatientPersonalMedication.Text.Contains(YES) Then
+
+            MoveControlsIfPatientMedication()
+
+        Else
+
+            DefaultSaveButtonLocation()
+
+        End If
+
     End Sub
 
 

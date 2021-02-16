@@ -87,9 +87,9 @@ Partial Class frmAdHockDispense
         Me.Label15.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label15.Location = New System.Drawing.Point(397, 40)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(67, 21)
+        Me.Label15.Size = New System.Drawing.Size(45, 21)
         Me.Label15.TabIndex = 208
-        Me.Label15.Text = "Method:"
+        Me.Label15.Text = "Type:"
         '
         'Label3
         '
@@ -300,7 +300,7 @@ Partial Class frmAdHockDispense
         Me.txtQuantity.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtQuantity.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtQuantity.Location = New System.Drawing.Point(1, 1)
-        Me.txtQuantity.MaxLength = 2
+        Me.txtQuantity.MaxLength = 3
         Me.txtQuantity.Multiline = True
         Me.txtQuantity.Name = "txtQuantity"
         Me.txtQuantity.Size = New System.Drawing.Size(51, 26)

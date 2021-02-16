@@ -125,6 +125,8 @@ Partial Class frmAllergies
         '
         'cmbSeverity
         '
+        Me.cmbSeverity.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbSeverity.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbSeverity.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbSeverity.FormattingEnabled = True
         Me.cmbSeverity.Items.AddRange(New Object() {"Class 1", "Class 2", "Class 3", "Class 4", "Class 5"})
@@ -232,6 +234,8 @@ Partial Class frmAllergies
         '
         'cmbAllergies
         '
+        Me.cmbAllergies.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbAllergies.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbAllergies.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbAllergies.FormattingEnabled = True
         Me.cmbAllergies.Items.AddRange(New Object() {"Class 1", "Class 2", "Class 3", "Class 4", "Class 5"})
@@ -242,6 +246,8 @@ Partial Class frmAllergies
         '
         'cmbMedicationName
         '
+        Me.cmbMedicationName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbMedicationName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbMedicationName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbMedicationName.FormattingEnabled = True
         Me.cmbMedicationName.Items.AddRange(New Object() {"Class 1", "Class 2", "Class 3", "Class 4", "Class 5"})
