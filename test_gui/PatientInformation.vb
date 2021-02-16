@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SQLite
+Imports System.Text
 Module PatientInformation
     '/*******************************************************************/
     '/*                   FILE NAME: PatientInformation.vb              */
@@ -51,6 +52,9 @@ Module PatientInformation
     '/*  Alexander Beasecker    1/25/2021   Initial creation            */
     '/*  Adam Kott              1/27/2021   added plans for module      */
     '/*  Adam Kott              1/28/2021   added database connection   */
+    '/*  Nathan Premo           2/16/2021   added getRoom method to     */
+    '/*                                     connect the room combo box  */
+    '/*                                     to the database.            */
     '/*******************************************************************/
 
 
@@ -285,5 +289,66 @@ Module PatientInformation
         For Each dr As DataRow In dsPatientPrescription.Tables(0).Rows
             frmPatientInfo.CreateCurrentMedicationsPanels(frmPatientInfo.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), "Dr. " & dr(5) & " " & dr(6), dr(7))
         Next
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: getRoom   					   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		               */   
+    '/*		         DATE CREATED: 2/16/2021                    		   */                             
+    '/*********************************************************************/
+    '/*  SUBPROHRAM PURPOSE:								               */             
+    '/*	 This is going to populate the room combo box as well as select the*/
+    '/*  select the room the patient is in. It is also going to populate   */
+    '/*  the room combo box using the populateRoomComboboxMethod           */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 intPatientMRN - this is the patient medical record we are going to*/                     
+    '/*                  be using for the SQL statements.                  */
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+
+    Public Sub getRoom(intPatientMRN As Integer, cboRoom As ComboBox, cboBed As ComboBox)
+        Dim strbSQL As StringBuilder = New StringBuilder
+        Dim dsPatient As DataSet
+        Dim dsPatientRoom As DataSet
+
+        dsPatient = CreateDatabase.ExecuteSelectQuery("Select * from Patient where MRN_Number = '" & intPatientMRN & "';")
+        strbSQL.Append("Select * from Rooms;")
+        PopulateRoomsCombBoxesMethods.PopulateRoomComboBox(cboRoom, CreateDatabase.ExecuteSelectQuery(strbSQL.ToString))
+        'calling that function will populate the room combobox for us. 
+
+        strbSQL.Clear()
+        strbSQL.Append("Select * from PatientRoom where Patient_TUID ='" & dsPatient.Tables(0).Rows(0)(EnumList.Patient.ID) & "';")
+
+        dsPatientRoom = CreateDatabase.ExecuteSelectQuery(strbSQL.ToString)
+        cboRoom.SelectedItem = dsPatientRoom.Tables(0).Rows(0)(EnumList.PatientRoom.RoomID)
+        PopulateRoomsCombBoxesMethods.UpdateBedComboBox(cboBed, cboRoom)
+        cboBed.SelectedItem = dsPatientRoom.Tables(0).Rows(0)(EnumList.PatientRoom.BedName)
     End Sub
 End Module

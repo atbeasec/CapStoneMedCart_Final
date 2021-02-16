@@ -36,8 +36,7 @@ Module PopulateRoomsCombBoxesMethods
     '/*											   */					  
     '/*  WHO   WHEN     WHAT								   */			  
     '/*  ---   ----     ------------------------------------------------- */
-    '/*  NP    2/16/2021 Added methods to handle the popuating of the room
-    '/*                  and bed combo boxes based on selections.         */
+    '/*  NP    2/16/2021 Added UpdateBedComboBox                          */
     '/*********************************************************************/
 
 
@@ -147,8 +146,8 @@ Module PopulateRoomsCombBoxesMethods
     '/*********************************************************************/
     '/*                   SUBPROGRAM NAME: UpdateBedComboBox      		   */         
     '/*********************************************************************/
-    '/*                   WRITTEN BY:  Nathan Premo   		         */   
-    '/*		         DATE CREATED: 		   */                             
+    '/*                   WRITTEN BY:  Nathan Premo   		                */   
+    '/*		         DATE CREATED: 	2/16/2021                       	   */                             
     '/*********************************************************************/
     '/*  SUBPRORAM PURPOSE:								                   */             
     '/*	 this is going to update the list of options in the beds combobox  */
@@ -194,49 +193,6 @@ Module PopulateRoomsCombBoxesMethods
 
         populateBedComboBox(cboBed, dsBeds)
 
-
-    End Sub
-
-    '/*********************************************************************/
-    '/*                   SUBPROGRAM NAME:  updateRoomComboBox 		   */         
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:  Nathan Premo   		         */   
-    '/*		         DATE CREATED: 		   */                             
-    '/*********************************************************************/
-    '/*  SUBPROGRAM PURPOSE:								              */             
-    '/*	 This is going to repopulate the Rooms combobox based on what is  */                     
-    '/*  selected in the bed combo box.                                   */
-    '/*                                                                   */
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      						         */           
-    '/*                                         				   */         
-    '/*********************************************************************/
-    '/*  CALLS:										   */                 
-    '/*             (NONE)								   */             
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					   */         
-    '/*  cboRoom - this is the combo box being used for the rooms.        */
-    '/*  cboRoom - this is the combo box being used for the rooms.        */
-    '/*********************************************************************/
-    '/*  RETURNS:								         */                   
-    '/*            (NOTHING)								   */             
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								   */             
-    '/*											   */                     
-    '/*                                                                     
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
-    '/*                                                                     
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						         */               
-    '/*											   */                     
-    '/*  WHO   WHEN     WHAT								   */             
-    '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
-    '/*********************************************************************/
-
-    Sub updateRoomComboBox(cboRoom As ComboBox, cboBed As ComboBox)
 
     End Sub
 End Module
