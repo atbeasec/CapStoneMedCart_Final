@@ -257,7 +257,7 @@
     Private Sub frmPatientInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
 
-        intPatientMRN = frmPatientRecords.intSelectedPatientMRN
+        'intPatientMRN = frmPatientRecords.intSelectedPatientMRN
         PatientInformation.GetAllergies(intPatientMRN)
         PatientInformation.GetPatientInformation(intPatientMRN)
         PatientInformation.getPrescriptions(intPatientMRN)
