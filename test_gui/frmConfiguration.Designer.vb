@@ -22,7 +22,6 @@ Partial Class frmConfiguration
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.txtUsername = New System.Windows.Forms.TextBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -54,6 +53,7 @@ Partial Class frmConfiguration
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.btnSaveChanges = New System.Windows.Forms.Button()
         Me.Panel5.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -62,22 +62,6 @@ Partial Class frmConfiguration
         Me.Panel1.SuspendLayout()
         Me.pnlHeader.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'Button2
-        '
-        Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.Button2.FlatAppearance.BorderSize = 0
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.ForeColor = System.Drawing.Color.White
-        Me.Button2.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button2.Location = New System.Drawing.Point(190, 708)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(141, 37)
-        Me.Button2.TabIndex = 116
-        Me.Button2.Text = "Save"
-        Me.Button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button2.UseVisualStyleBackColor = False
         '
         'Panel5
         '
@@ -416,12 +400,30 @@ Partial Class frmConfiguration
         Me.Label8.TabIndex = 181
         Me.Label8.Text = "Confirm Password:"
         '
+        'btnSaveChanges
+        '
+        Me.btnSaveChanges.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnSaveChanges.FlatAppearance.BorderSize = 0
+        Me.btnSaveChanges.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSaveChanges.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSaveChanges.ForeColor = System.Drawing.Color.White
+        Me.btnSaveChanges.Image = Global.test_gui.My.Resources.Resources.resolve
+        Me.btnSaveChanges.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnSaveChanges.Location = New System.Drawing.Point(109, 601)
+        Me.btnSaveChanges.Name = "btnSaveChanges"
+        Me.btnSaveChanges.Size = New System.Drawing.Size(189, 37)
+        Me.btnSaveChanges.TabIndex = 182
+        Me.btnSaveChanges.Text = "   Save Changes"
+        Me.btnSaveChanges.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnSaveChanges.UseVisualStyleBackColor = False
+        '
         'frmConfiguration
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1014, 614)
+        Me.ClientSize = New System.Drawing.Size(1208, 788)
+        Me.Controls.Add(Me.btnSaveChanges)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label6)
@@ -443,7 +445,6 @@ Partial Class frmConfiguration
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.flpUserInfo)
         Me.Controls.Add(Me.pnlHeader)
-        Me.Controls.Add(Me.Button2)
         Me.Name = "frmConfiguration"
         Me.Text = "frmConfiguration"
         Me.Panel5.ResumeLayout(False)
@@ -464,7 +465,6 @@ Partial Class frmConfiguration
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents Button2 As Button
     Friend WithEvents Panel5 As Panel
     Friend WithEvents txtUsername As TextBox
     Friend WithEvents Panel4 As Panel
@@ -496,4 +496,5 @@ Partial Class frmConfiguration
     Friend WithEvents Label6 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents Label8 As Label
+    Friend WithEvents btnSaveChanges As Button
 End Class

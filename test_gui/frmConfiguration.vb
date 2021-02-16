@@ -541,4 +541,63 @@ Public Class frmConfiguration
         End If
     End Sub
 
+    Private Sub btnSaveChanges_Click(sender As Object, e As EventArgs) Handles btnSaveChanges.Click
+        Dim intID As Integer = 1
+        ' when we hit the edit user button we need to grab the User_ID number
+        ' check if the 
+        Dim strStatement = "SELECT COUNT(*) FROM User WHERE Username = '" & txtUsername.Text & "'" & " OR User_ID = '" & intID & "'"
+        'if it returns 2 then the username was changed to something already in the database 
+        If ExecuteScalarQuery(strStatement) = 2 Then
+            MsgBox("A User already has that Username")
+        End If
+
+
+
+
+
+
+        Dim intSupervisor As Integer = 0
+        Dim intAdmin As Integer = 0
+        Dim intActiveFlag As Integer = 1
+        Dim strPassword As String = txtPassword.Text
+        Dim strLastName As String = txtLastName.Text
+        Dim strFirstName As String = txtFirstName.Text
+        strFirstName = Regex.Replace(strFirstName, "'", "''")
+        strLastName = Regex.Replace(strLastName, "'", "''")
+
+        If ExecuteScalarQuery(strStatement) = 2 Then
+            MsgBox("A User already has that Username")
+            'call CheckPassword Function to see if password mets security standards
+        ElseIf CheckPassword(strPassword) = False Then
+            MsgBox("Password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special characters !@#$%^&* ")
+            txtPassword.Text = ""
+            txtConfirmPassword.Text = ""
+            txtPassword.Focus()
+            ' make sure password and Confirm Password Match
+        ElseIf txtPassword.Text <> txtConfirmPassword.Text Then
+            MsgBox("Confirm Password must match Password")
+            txtConfirmPassword.Text = ""
+            txtConfirmPassword.Focus()
+            'Make Sure all fields are filled
+        ElseIf txtFirstName.Text = "" Or txtLastName.Text = "" Or txtUsername.Text = "" Or txtBarcode.Text = "" Then
+            MsgBox("All Fields must be filled")
+
+        Else
+
+
+            'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
+
+            strStatement = "INSERT INTO USER(Username,Password,User_First_Name, User_Last_Name, Barcode, Admin_Flag, Supervisor_Flag, Active_Flag)" &
+            "VALUES('" & txtUsername.Text & "','" & strPassword & "','" & strFirstName & "','" & strLastName & "','" & txtBarcode.Text & "','" & intAdmin & "','" & intSupervisor & "','" & intActiveFlag & "')"
+            ExecuteInsertQuery(strStatement)
+
+            'clear all text boxes
+            txtFirstName.Text = ""
+            txtLastName.Text = ""
+            txtUsername.Text = ""
+            txtBarcode.Text = ""
+            txtPassword.Text = ""
+            txtConfirmPassword.Text = ""
+        End If
+    End Sub
 End Class
