@@ -197,7 +197,7 @@
         End If
     End Sub
 
-    Private Sub cmbAllergies_LostFocus(sender As Object, e As EventArgs) Handles cmbAllergies.LostFocus
+    Private Sub cmbAllergies_LostFocus(sender As Object, e As EventArgs) Handles cmbAllergies.SelectedValueChanged
         cmbAllergies.DroppedDown = False
         If cmbAllergies.FindStringExact(cmbAllergies.Text) = -1 Then
             Debug.WriteLine("")
@@ -212,6 +212,7 @@
 
         cmbAllergies.DroppedDown = True
         txtAllergyType.Text = ""
+
     End Sub
 
     Private Sub cmbMedicationName_Click(sender As Object, e As EventArgs) Handles cmbMedicationName.Click
