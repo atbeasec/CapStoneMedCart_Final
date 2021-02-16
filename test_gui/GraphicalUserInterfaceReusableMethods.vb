@@ -465,6 +465,38 @@
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: DetermineQueryDelete_Click     */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:  Collin Krygier          		          */   
+    '/*		         DATE CREATED: 		 2/15/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to compare two instances of forms and see if they  */
+    '/*  are the same form or not. From here, the necessary method will be*/
+    '/* called based upon the functionality of the button based on that form
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  CreateCheckMarkBtn, it is working as a handler                   */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*             none                                                  */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	None                                                              */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	None                                 							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	None                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/15/2021    Initial creation                    */
+    '/*********************************************************************/
     Public Sub DetermineQueryDelete_Click(sender As Object, ByVal e As EventArgs)
 
         ' determine the form that is currently opened in the application because this
@@ -497,6 +529,39 @@
         End If
 
     End Sub
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: DynamicButtonEditRecord_Click  */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:  Collin Krygier          		          */   
+    '/*		         DATE CREATED: 		 2/15/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to compare two instances of forms and see if they  */
+    '/*  are the same form or not. From here, the necessary method will be*/
+    '/* called based upon the functionality of the button based on that form
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  CreateEditButton, it is working as a handler                     */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*             none                                                  */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	None                                                              */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	None                                 							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	None                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/15/2021    Initial creation                    */
+    '/*********************************************************************/
 
     Public Sub DynamicButtonEditRecord_Click(ByVal sender As Object, ByVal e As EventArgs)
 
@@ -531,6 +596,41 @@
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   Function NAME: getOpenedForm()                  */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:  Collin Krygier          		          */   
+    '/*		         DATE CREATED: 		 2/15/2021                        */                             
+    '/*********************************************************************/
+    '/*  Function PURPOSE:								                  */             
+    '/*	 This function simply retrieves the form that is currently on the */
+    '/*  pnlDockLocation panel.                                           */
+    '/*********************************************************************/
+    '/*  Function Return Value:					                          */         
+    '/*	 A form object representing the form that is opened on the screen */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  DynamicButtonEditRecord_Click                                    */ 
+    '/*  DetermineQueryDelete_Click                                       */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/* None                                                              */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	None                                                              */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	None                                 							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	None                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/15/2021    Initial creation                    */
+    '/*********************************************************************/
     Public Function getOpenedForm() As Form
 
         ' on frmMain, the panel called pnlDockedLocation is where we are shoving all of our forms into.
