@@ -166,12 +166,7 @@
 
     End Sub
 
-    Public Sub DynamicButtonEditRecord_Click(ByVal sender As Object, ByVal e As EventArgs)
 
-        'show the add new patient form filled in with the patients infromation
-        'frmUpdatePatient.Show()
-        ' frmPatientInfo.Show()
-    End Sub
 
 
     Public Sub CreateIDLabel(ByVal pnlName As Panel, lblName As Label, strLabelName As String, x As Integer, y As Integer, strLabelText As String, ByVal intPanelsAddedCount As Integer)
@@ -435,7 +430,7 @@
         ' MessageBox.Show("again")
         'Add handler for click events
         AddHandler btnCheckMark.Click, AddressOf DynamicButton_Click
-
+        AddHandler btnCheckMark.Click, AddressOf DetermineQueryDelete_Click
     End Sub
 
     Public Sub CreateXMarkBtn(ByVal pnlPanelName As Panel, ByVal pntLocation As Point)
@@ -469,6 +464,90 @@
         AddHandler btnCancel.Click, AddressOf RestDefaultButtons
 
     End Sub
+
+    Public Sub DetermineQueryDelete_Click(sender As Object, ByVal e As EventArgs)
+
+        ' determine the form that is currently opened in the application because this
+        ' will influence the SQL query called to update the database
+
+        ' use reflection to determine if the form opened is the same as another form
+        ' because the functionality of the delete button varies depending on the form
+        ' that is currently opened.
+
+        If getOpenedForm().GetType() Is frmConfiguration.GetType() Then
+
+            ' call SQL method to set the user flag to inactive or delete the user from the DB
+            '   Debug.Print("Set user to inactive")
+
+        ElseIf getOpenedForm().GetType() Is frmPatientRecords.GetType() Then
+
+            ' call SQL method to set the Patient Record flag to inactive or delete the user from the DB
+            '    Debug.Print("patient records")
+
+        ElseIf getOpenedForm().GetType() Is frmConfigureInventory.GetType() Then
+
+            ' call SQL method to remove the item from the list of currently stocked items in the med cart
+            '  Debug.Print("removing this inventory piece")
+
+        ElseIf getOpenedForm().GetType() Is frmAllergies.GetType() Then
+
+            ' call SQL method to remove the allergy that is currently assigned to the patient
+            '  Debug.Print("remove allergy assigned to patient")
+
+        End If
+
+    End Sub
+
+    Public Sub DynamicButtonEditRecord_Click(ByVal sender As Object, ByVal e As EventArgs)
+
+        ' determine the form that is currently opened in the application because this
+        ' will influence the SQL query called to update the database
+
+        ' use reflection to determine if the form opened is the same as another form
+        ' because the functionality of the delete button varies depending on the form
+        ' that is currently opened.
+
+        If getOpenedForm().GetType() Is frmConfiguration.GetType() Then
+
+            ' call SQL method to set edit functionality
+            ' Debug.Print("Set user to inactive")
+
+        ElseIf getOpenedForm().GetType() Is frmPatientRecords.GetType() Then
+
+            ' call SQL method to set edit functionality
+            Debug.Print("patient records")
+
+        ElseIf getOpenedForm().GetType() Is frmConfigureInventory.GetType() Then
+
+            ' call SQL method to set edit functionality
+            '  Debug.Print("removing this inventory piece")
+
+        ElseIf getOpenedForm().GetType() Is frmAllergies.GetType() Then
+
+            ' call SQL method to set edit functionality
+            ' Debug.Print("remove allergy assigned to patient")
+
+        End If
+
+    End Sub
+
+    Public Function getOpenedForm() As Form
+
+        ' on frmMain, the panel called pnlDockedLocation is where we are shoving all of our forms into.
+        ' we arent really interested in the location, we are interested in the control that is inside
+        ' the pnlDockLocation. 
+        ' the GetChildAtPoint() requires point as a parameter and we will use 1,1 to get that.
+
+        Dim ptPoint As Point = New Point(1, 1)
+        Dim frmOpenedControl As Control = frmMain.pnlDockLocation.GetChildAtPoint(ptPoint)
+        Dim frmOpenedForm As Form = CType(frmOpenedControl, Form)
+
+        Return frmOpenedForm
+
+    End Function
+
+
+
     Public Function getCurrentPanel(ByVal flpPanel As FlowLayoutPanel, ByVal intPanelsAddedCount As Integer) As Panel
 
         Dim ctlName As String = "pnlIndividualPatientRecord"
