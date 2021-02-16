@@ -389,7 +389,7 @@ Partial Class Dispense
         '
         Me.Panel2.BackColor = System.Drawing.Color.DarkGray
         Me.Panel2.Controls.Add(Me.txtPatientLastName)
-        Me.Panel2.Location = New System.Drawing.Point(905, 64)
+        Me.Panel2.Location = New System.Drawing.Point(905, 103)
 
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
@@ -414,7 +414,7 @@ Partial Class Dispense
         Me.Panel4.BackColor = System.Drawing.Color.DarkGray
 
         Me.Panel4.Controls.Add(Me.txtPatientFirstName)
-        Me.Panel4.Location = New System.Drawing.Point(636, 65)
+        Me.Panel4.Location = New System.Drawing.Point(636, 104)
 
 
         Me.Panel4.Name = "Panel4"
