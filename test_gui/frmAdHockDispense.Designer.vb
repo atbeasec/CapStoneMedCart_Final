@@ -188,6 +188,7 @@ Partial Class frmAdHockDispense
         Me.txtDateOfBirth.BackColor = System.Drawing.Color.White
         Me.txtDateOfBirth.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtDateOfBirth.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtDateOfBirth.Enabled = False
         Me.txtDateOfBirth.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtDateOfBirth.Location = New System.Drawing.Point(1, 1)
         Me.txtDateOfBirth.Name = "txtDateOfBirth"
@@ -221,6 +222,7 @@ Partial Class frmAdHockDispense
         Me.txtMRN.BackColor = System.Drawing.Color.White
         Me.txtMRN.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtMRN.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtMRN.Enabled = False
         Me.txtMRN.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtMRN.Location = New System.Drawing.Point(1, 1)
         Me.txtMRN.Name = "txtMRN"
