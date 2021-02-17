@@ -112,10 +112,10 @@ Partial Class frmLogin
         Me.txtPassword.Location = New System.Drawing.Point(1, 1)
         Me.txtPassword.MaxLength = 50
         Me.txtPassword.Name = "txtPassword"
-        Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPassword.Size = New System.Drawing.Size(236, 22)
         Me.txtPassword.TabIndex = 2
         Me.txtPassword.Tag = "*"
+        Me.txtPassword.UseSystemPasswordChar = True
         '
         'lblFirstName
         '
