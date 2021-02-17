@@ -825,6 +825,7 @@ Module CreateDatabase
 		strCreateTable = "CREATE TABLE 'User' (
 	                    'User_ID'	INTEGER NOT NULL,
 						'Username'	TEXT NOT NULL UNIQUE,
+						'Salt'	TEXT,
 	                    'Password'	TEXT NOT NULL,
 						'User_First_Name'	TEXT,
 						'User_Last_Name'	TEXT,
@@ -1161,6 +1162,7 @@ Module CreateDatabase
 	'/*  BRH  01/23/21  Initial creation of the code					*/
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
 	'/*  BRH  02/09/21  Added Frequency and Notes fields				*/
+	'/*  BRH  02/16/21  Changed Method to Type							*/
 	'/*******************************************************************/
 	Public Sub CreatePatientMedicationTable()
 		strCreateTable = "CREATE TABLE 'PatientMedication' (
@@ -1170,7 +1172,7 @@ Module CreateDatabase
 	                    'Ordering_Physician_ID'	INTEGER NOT NULL,
 	                    'Date_Presrcibed'	TEXT NOT NULL,
 	                    'Quantity'	INTEGER NOT NULL,
-	                    'Method'	TEXT NOT NULL,
+	                    'Type'	TEXT NOT NULL,
 	                    'Frequency'	TEXT NOT NULL,
 						'Notes'		TEXT,
 						'Active_Flag'	INTEGER NOT NULL,

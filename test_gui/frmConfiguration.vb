@@ -307,8 +307,10 @@ Public Class frmConfiguration
     '/*  Dylan W    2/10/2021    Initial creation and check data in DB   */
     '/*********************************************************************/
     Private Sub txtBarcode_LostFocus(sender As Object, e As EventArgs) Handles txtBarcode.LostFocus
+        ' Convert the barcode to the peppered hash
+        Dim strHashedBarcode = ConvertBarcodePepperAndHash(txtBarcode.Text)
         'String to be sent to CreateDatabase Module to exicute search to check if Barcode is already in the User Table
-        Dim strStatement = "SELECT COUNT(*) FROM User WHERE Barcode = '" & txtBarcode.Text & "'"
+        Dim strStatement = "SELECT COUNT(*) FROM User WHERE Barcode = '" & strHashedBarcode & "'"
         If ExecuteScalarQuery(strStatement) <> 0 Then
             MsgBox("A User already has that Barcode")
             txtBarcode.Focus()
@@ -365,6 +367,9 @@ Public Class frmConfiguration
         Dim strPassword As String = txtPassword.Text
         Dim strLastName As String = txtLastName.Text
         Dim strFirstName As String = txtFirstName.Text
+        Dim strSalt As String = Nothing
+        Dim strResults() As String = Nothing ' this will hold the salted, peppered, hashed password and the salt
+        Dim strHashedBarcode As String ' this will hold the peppered, hashed barcode
         strFirstName = Regex.Replace(strFirstName, "'", "''")
         strLastName = Regex.Replace(strLastName, "'", "''")
 
@@ -384,12 +389,18 @@ Public Class frmConfiguration
             MsgBox("All Fields must be filled")
 
         Else
+            ' get the peppered hash of the password
+            strResults = LogIn.MakeSaltPepperAndHash(strPassword)
+            strPassword = strResults(0)
+            strSalt = strResults(1)
 
+            ' Convert the barcode to the peppered hash
+            strHashedBarcode = ConvertBarcodePepperAndHash(txtBarcode.Text)
 
             'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
 
-            Dim strStatement = "INSERT INTO USER(Username,Password,User_First_Name, User_Last_Name, Barcode, Admin_Flag, Supervisor_Flag, Active_Flag)" &
-            "VALUES('" & txtUsername.Text & "','" & strPassword & "','" & strFirstName & "','" & strLastName & "','" & txtBarcode.Text & "','" & intAdmin & "','" & intSupervisor & "','" & intActiveFlag & "')"
+            Dim strStatement = "INSERT INTO USER(Username,Salt,Password,User_First_Name, User_Last_Name, Barcode, Admin_Flag, Supervisor_Flag, Active_Flag)" &
+            "VALUES('" & txtUsername.Text & "','" & strSalt & "','" & strPassword & "','" & strFirstName & "','" & strLastName & "','" & strHashedBarcode & "','" & intAdmin & "','" & intSupervisor & "','" & intActiveFlag & "')"
             ExecuteInsertQuery(strStatement)
 
             'clear all text boxes
@@ -520,7 +531,7 @@ Public Class frmConfiguration
     Private Sub txtBarcode_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBarcode.KeyPress
         If Not (Asc(e.KeyChar) = 8) Then
             'string of allowed characters
-            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz123456789!@#$%^&*()/.,<>=+"
+            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()/.,<>=+"
             'converts letter to lowercase to compare to allowedChars string to check if it is allowed in the text box
             If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
                 e.KeyChar = ChrW(0)
@@ -532,7 +543,7 @@ Public Class frmConfiguration
     Private Sub txtPassword_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress, txtConfirmPassword.KeyPress
         If Not (Asc(e.KeyChar) = 8) Then
             'string of allowed characters
-            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz123456789!@#$%^&*()/.,<>=+"
+            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()/.,<>=+"
             'converts letter to lowercase to compare to allowedChars string to check if it is allowed in the text box
             If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
                 e.KeyChar = ChrW(0)

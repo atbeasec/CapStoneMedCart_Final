@@ -53,9 +53,9 @@ Partial Class Dispense
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.txtDOB = New System.Windows.Forms.TextBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.txtPatientLastName = New System.Windows.Forms.TextBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.txtPatientFirstName = New System.Windows.Forms.TextBox()
         Me.btnDown = New System.Windows.Forms.Button()
         Me.btnUp = New System.Windows.Forms.Button()
         Me.Panel5 = New System.Windows.Forms.Panel()
@@ -388,48 +388,52 @@ Partial Class Dispense
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel2.Controls.Add(Me.TextBox2)
+        Me.Panel2.Controls.Add(Me.txtPatientLastName)
         Me.Panel2.Location = New System.Drawing.Point(905, 103)
+
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel2.Size = New System.Drawing.Size(190, 24)
         Me.Panel2.TabIndex = 200
         '
-        'TextBox2
+        'txtPatientLastName
         '
-        Me.TextBox2.BackColor = System.Drawing.Color.White
-        Me.TextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(1, 1)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.ReadOnly = True
-        Me.TextBox2.Size = New System.Drawing.Size(188, 22)
-        Me.TextBox2.TabIndex = 6
-        Me.TextBox2.TabStop = False
+        Me.txtPatientLastName.BackColor = System.Drawing.Color.White
+        Me.txtPatientLastName.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtPatientLastName.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtPatientLastName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPatientLastName.Location = New System.Drawing.Point(1, 1)
+        Me.txtPatientLastName.Name = "txtPatientLastName"
+        Me.txtPatientLastName.ReadOnly = True
+        Me.txtPatientLastName.Size = New System.Drawing.Size(188, 22)
+        Me.txtPatientLastName.TabIndex = 6
+        Me.txtPatientLastName.TabStop = False
         '
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel4.Controls.Add(Me.TextBox3)
+
+        Me.Panel4.Controls.Add(Me.txtPatientFirstName)
         Me.Panel4.Location = New System.Drawing.Point(636, 104)
+
+
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel4.Size = New System.Drawing.Size(194, 24)
         Me.Panel4.TabIndex = 199
         '
-        'TextBox3
+        'txtPatientFirstName
         '
-        Me.TextBox3.BackColor = System.Drawing.Color.White
-        Me.TextBox3.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.Location = New System.Drawing.Point(1, 1)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.ReadOnly = True
-        Me.TextBox3.Size = New System.Drawing.Size(192, 22)
-        Me.TextBox3.TabIndex = 6
-        Me.TextBox3.TabStop = False
+        Me.txtPatientFirstName.BackColor = System.Drawing.Color.White
+        Me.txtPatientFirstName.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtPatientFirstName.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtPatientFirstName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPatientFirstName.Location = New System.Drawing.Point(1, 1)
+        Me.txtPatientFirstName.Name = "txtPatientFirstName"
+        Me.txtPatientFirstName.ReadOnly = True
+        Me.txtPatientFirstName.Size = New System.Drawing.Size(192, 22)
+        Me.txtPatientFirstName.TabIndex = 6
+        Me.txtPatientFirstName.TabStop = False
         '
         'btnDown
         '
@@ -590,9 +594,9 @@ Partial Class Dispense
     Friend WithEvents Panel1 As Panel
     Friend WithEvents txtDOB As TextBox
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents txtPatientLastName As TextBox
     Friend WithEvents Panel4 As Panel
-    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents txtPatientFirstName As TextBox
     Friend WithEvents btnDown As Button
     Friend WithEvents btnUp As Button
     Friend WithEvents Panel5 As Panel

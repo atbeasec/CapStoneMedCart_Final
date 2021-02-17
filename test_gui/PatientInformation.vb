@@ -249,6 +249,26 @@ Module PatientInformation
         'join patients meds table and medications table
     End Sub
 
+    Public Sub PopulatePatientDispenseInfo(ByRef intPatientMRN As Integer)
+
+        'get patient information using sql generic method
+        Dim dsPatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT Date_of_Birth,Patient_First_Name,Patient_Last_Name FROM Patient WHERE MRN_Number = '" & intPatientMRN & "'")
+        'set all patient information into dispense textboxes
+        Dispense.txtMRN.Text = intPatientMRN
+        Dispense.txtDOB.Text = dsPatientInfo.Tables(0).Rows(0)(0)
+        Dispense.txtPatientFirstName.Text = dsPatientInfo.Tables(0).Rows(0)(1)
+        Dispense.txtPatientLastName.Text = dsPatientInfo.Tables(0).Rows(0)(2)
+    End Sub
+
+
+    Public Sub PopulatePatientAllergiesDispenseInfo(ByRef intPatientMRN As Integer)
+        Dim dsPatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT Allergy_Name From PatientAllergy " &
+                                                                         "INNER JOIN Patient on Patient.Patient_ID = PatientAllergy.Patient_TUID " &
+                                                                         "WHERE MRN_Number = '" & intPatientMRN & "'")
+        For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
+            Dispense.lstboxAllergies.Items.Add(dr(0))
+        Next
+    End Sub
     '/*********************************************************************/
     '/*                   FUNCTION NAME: getPrescriptions                  */         
     '/*********************************************************************/
@@ -279,7 +299,7 @@ Module PatientInformation
     Public Sub getPrescriptions(ByRef intPatientMRN As Integer)
         Dim strSQLiteCommand As String
         Dim dsPatientPrescription As DataSet
-        strSQLiteCommand = "SELECT Drug_Name, Strength, Method, Quantity,Date_Presrcibed,Physician_First_Name,Physician_Last_Name,Schedule FROM PatientMedication " &
+        strSQLiteCommand = "SELECT Drug_Name, Strength, PatientMedication.Type, Quantity,Date_Presrcibed,Physician_First_Name,Physician_Last_Name,Schedule FROM PatientMedication " &
             "INNER JOIN Medication on Medication.Medication_ID = PatientMedication.Medication_TUID " &
             "INNER JOIN Patient ON Patient.Patient_ID = PatientMedication.Patient_TUID " &
             "INNER JOIN Physician on Physician.Physician_ID = PatientMedication.Ordering_Physician_ID " &

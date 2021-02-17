@@ -189,4 +189,5 @@ Public Class frmNewPatient
         PopulateRoomsCombBoxesMethods.UpdateBedComboBox(cmbBed, cmbRoom)
         cmbBed.Enabled = True
     End Sub
+
 End Class
