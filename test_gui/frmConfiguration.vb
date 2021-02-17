@@ -60,15 +60,15 @@ Public Class frmConfiguration
                 'if admin is 0 then check supervisor. If both admin and supervidor are 0 then the 
                 'user is a nurse
                 Dim strRole As String
-                If (item.Item(5)) = 1 Then
+                If (item.Item(4)) = 1 Then
                     strRole = "Admin"
-                ElseIf (item.Item(4)) = 1 Then
+                ElseIf (item.Item(5)) = 1 Then
                     strRole = "Supervisor"
                 Else strRole = "Nurse"
                 End If
 
                 'populate data into panels
-                CreatePanel(flpUserInfo, item.Item(0), item.Item(1), strName,
+                CreatePanel(flpUserInfo, item.Item(0), strName, item.Item(1),
                            strRole, strActive)
 
             End With
@@ -76,6 +76,8 @@ Public Class frmConfiguration
 
         'have new users assigned as Nurses by default
         rbtnNurse.Checked = True
+        btnSaveChanges.Visible = False
+        btnCancel.Visible = False
 
 
     End Sub
@@ -552,7 +554,7 @@ Public Class frmConfiguration
     End Sub
 
     Private Sub btnSaveChanges_Click(sender As Object, e As EventArgs) Handles btnSaveChanges.Click
-        Dim intID As Integer = 1
+        Dim intID As Integer = txtID.Text
         ' when we hit the edit user button we need to grab the User_ID number
         ' check if the 
         Dim strStatement = "SELECT COUNT(*) FROM User WHERE Username = '" & txtUsername.Text & "'" & " OR User_ID = '" & intID & "'"
@@ -608,8 +610,8 @@ Public Class frmConfiguration
             txtConfirmPassword.Text = ""
         End If
     End Sub
-    Function GetSelectedUserID(sender As Object) As Integer
-
+    Function GetSelectedUserID(ByVal sender As Object) As Integer
+        'Dim ctlParent As Control = sender
         Dim intGetID = Nothing
         Dim ctl As Control
 
@@ -619,18 +621,44 @@ Public Class frmConfiguration
             ' the label containing the MRN number will always be called "lblMRN" with a number tacked on
             ' to represent what number panel it is in the row of created panels.
             ' simplying searching for the control that contains MRN will always yield the correct label.
-            If ctl.Name.Contains("ID") Then
+            If ctl.Name.Contains("lblID") Then
 
                 Debug.Print(ctl.Text)
                 intGetID = CInt(ctl.Text)
             End If
         Next
         'returning the MRN of the patient from the selected record
-        MsgBox(intGetID)
         Return intGetID
     End Function
 
-    Private Sub collectdata(sender As Object, e As EventArgs)
+    Function GetSelectedUserName(ByVal sender As Object) As String
+        'Dim ctlParent As Control = sender
+        Dim strGetUsername = Nothing
+        Dim ctl As Control
 
+        ' iterating over the list of controls in the panel
+        For Each ctl In sender.Controls
+
+            ' the label containing the MRN number will always be called "lblMRN" with a number tacked on
+            ' to represent what number panel it is in the row of created panels.
+            ' simplying searching for the control that contains MRN will always yield the correct label.
+            If ctl.Name.Contains("lblUsername") Then
+
+                Debug.Print(ctl.Text)
+                strGetUsername = (ctl.Text)
+            End If
+        Next
+        'returning the MRN of the patient from the selected record
+        Return strGetUsername
+    End Function
+
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        'clear all text boxes
+        txtFirstName.Text = ""
+        txtLastName.Text = ""
+        txtUsername.Text = ""
+        txtBarcode.Text = ""
+        txtPassword.Text = ""
+        txtConfirmPassword.Text = ""
     End Sub
 End Class

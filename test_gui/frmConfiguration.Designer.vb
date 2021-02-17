@@ -54,6 +54,8 @@ Partial Class frmConfiguration
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.btnSaveChanges = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.txtID = New System.Windows.Forms.TextBox()
         Me.Panel5.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -407,15 +409,40 @@ Partial Class frmConfiguration
         Me.btnSaveChanges.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSaveChanges.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSaveChanges.ForeColor = System.Drawing.Color.White
-        Me.btnSaveChanges.Image = Global.test_gui.My.Resources.Resources.resolve
         Me.btnSaveChanges.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnSaveChanges.Location = New System.Drawing.Point(109, 601)
+        Me.btnSaveChanges.Location = New System.Drawing.Point(25, 558)
         Me.btnSaveChanges.Name = "btnSaveChanges"
-        Me.btnSaveChanges.Size = New System.Drawing.Size(189, 37)
+        Me.btnSaveChanges.Size = New System.Drawing.Size(131, 37)
         Me.btnSaveChanges.TabIndex = 182
-        Me.btnSaveChanges.Text = "   Save Changes"
+        Me.btnSaveChanges.Text = "  Save "
         Me.btnSaveChanges.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnSaveChanges.UseVisualStyleBackColor = False
+        Me.btnSaveChanges.Visible = False
+        '
+        'btnCancel
+        '
+        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnCancel.FlatAppearance.BorderSize = 0
+        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancel.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.ForeColor = System.Drawing.Color.White
+        Me.btnCancel.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnCancel.Location = New System.Drawing.Point(195, 558)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(135, 37)
+        Me.btnCancel.TabIndex = 183
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnCancel.UseVisualStyleBackColor = False
+        Me.btnCancel.Visible = False
+        '
+        'txtID
+        '
+        Me.txtID.Location = New System.Drawing.Point(262, 242)
+        Me.txtID.Name = "txtID"
+        Me.txtID.Size = New System.Drawing.Size(100, 20)
+        Me.txtID.TabIndex = 184
+        Me.txtID.Visible = False
         '
         'frmConfiguration
         '
@@ -423,6 +450,8 @@ Partial Class frmConfiguration
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1208, 788)
+        Me.Controls.Add(Me.txtID)
+        Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSaveChanges)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label7)
@@ -497,4 +526,6 @@ Partial Class frmConfiguration
     Friend WithEvents Label7 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents btnSaveChanges As Button
+    Friend WithEvents btnCancel As Button
+    Friend WithEvents txtID As TextBox
 End Class

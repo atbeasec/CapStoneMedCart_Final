@@ -429,8 +429,9 @@
         pnlPanelName.Controls.Add(btnCheckMark)
         ' MessageBox.Show("again")
         'Add handler for click events
-        AddHandler btnCheckMark.Click, AddressOf DynamicButton_Click
         AddHandler btnCheckMark.Click, AddressOf DetermineQueryDelete_Click
+        AddHandler btnCheckMark.Click, AddressOf DynamicButton_Click
+
     End Sub
 
     Public Sub CreateXMarkBtn(ByVal pnlPanelName As Panel, ByVal pntLocation As Point)
@@ -509,14 +510,13 @@
         If getOpenedForm().GetType() Is frmConfiguration.GetType() Then
 
             ' call SQL method to set the user flag to inactive or delete the user from the DB
-            '   Debug.Print("Set user to inactive")
-            Dim intID As Integer = frmConfiguration.GetSelectedUserID()
+            Dim intID As Integer = frmConfiguration.GetSelectedUserID(sender.parent)
             Dim strStatement As String = "SELECT Active_Flag FROM User WHERE User_ID = '" & intID & "'"
             If ExecuteScalarQuery(strStatement) = 1 Then
-                strStatement = "UPDATE USER SET Active_Flag='0' WHERE User_ID=intID;"
+                strStatement = "UPDATE USER SET Active_Flag='0' WHERE User_ID='" & intID & "';"
                 ExecuteInsertQuery(strStatement)
             Else
-                strStatement = "UPDATE USER SET Active_Flag='1' WHERE User_ID=intID;"
+                strStatement = "UPDATE USER SET Active_Flag='1' WHERE User_ID='" & intID & "';"
                 ExecuteInsertQuery(strStatement)
             End If
 
@@ -583,25 +583,45 @@
 
         If getOpenedForm().GetType() Is frmConfiguration.GetType() Then
 
-            ' call SQL method to set edit functionality
-            ' Debug.Print("Set user to inactive")
+            frmConfiguration.txtUsername.Text = frmConfiguration.GetSelectedUserName(sender.parent)
+            frmConfiguration.txtID.Text = frmConfiguration.GetSelectedUserID(sender.parent)
+            Dim strStatement = "SELECT User_First_Name FROM User WHERE User_ID = '" & frmConfiguration.txtID.Text & "';"
+            frmConfiguration.txtFirstName.Text = ExecuteScalarQuery(strStatement)
+            strStatement = "SELECT User_Last_Name FROM User WHERE User_ID = '" & frmConfiguration.txtID.Text & "';"
+            frmConfiguration.txtLastName.Text = ExecuteScalarQuery(strStatement)
+            strStatement = "SELECT Barcode FROM User WHERE User_ID = '" & frmConfiguration.txtID.Text & "';"
+            frmConfiguration.txtBarcode.Text = ExecuteScalarQuery(strStatement)
+            strStatement = "SELECT Admin_Flag FROM User WHERE User_ID = '" & frmConfiguration.txtID.Text & "';"
+            Dim strSupervisor = "SELECT Supervisor_Flag FROM User WHERE User_ID = '" & frmConfiguration.txtID.Text & "';"
 
-        ElseIf getOpenedForm().GetType() Is frmPatientRecords.GetType() Then
+            If ExecuteScalarQuery(strStatement) = 1 Then
+                frmConfiguration.rbtnAdministrator.Checked = True
+            ElseIf ExecuteScalarQuery(strSupervisor) = 1 Then
+                frmConfiguration.rbtnSupervisor.Checked = True
+            Else frmConfiguration.rbtnNurse.Checked = True
+            End If
+                frmConfiguration.btnSaveChanges.Visible = True
+                frmConfiguration.btnCancel.Visible = True
+                frmConfiguration.Button1.Visible = False
+                ' call SQL method to set edit functionality
+                ' Debug.Print("Set user to inactive")
 
-            ' call SQL method to set edit functionality
-            Debug.Print("patient records")
+            ElseIf getOpenedForm().GetType() Is frmPatientRecords.GetType() Then
 
-        ElseIf getOpenedForm().GetType() Is frmConfigureInventory.GetType() Then
+                ' call SQL method to set edit functionality
+                Debug.Print("patient records")
 
-            ' call SQL method to set edit functionality
-            '  Debug.Print("removing this inventory piece")
+            ElseIf getOpenedForm().GetType() Is frmConfigureInventory.GetType() Then
 
-        ElseIf getOpenedForm().GetType() Is frmAllergies.GetType() Then
+                ' call SQL method to set edit functionality
+                '  Debug.Print("removing this inventory piece")
 
-            ' call SQL method to set edit functionality
-            ' Debug.Print("remove allergy assigned to patient")
+            ElseIf getOpenedForm().GetType() Is frmAllergies.GetType() Then
 
-        End If
+                ' call SQL method to set edit functionality
+                ' Debug.Print("remove allergy assigned to patient")
+
+            End If
 
     End Sub
 
