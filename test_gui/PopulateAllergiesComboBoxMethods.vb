@@ -101,4 +101,20 @@ Module PopulateAllergiesComboBoxMethods
             .DataSource = dcAllergies
         End With
     End Sub
+    Sub populateMedicationComboBox(cmbMedication As ComboBox, dsAllergies As DataSet)
+        Dim strbTesting As New StringBuilder
+        Dim dcAllergies As New AutoCompleteStringCollection
+        cmbMedication.Items.Clear()
+
+
+        For Each row As DataRow In dsAllergies.Tables(0).Rows
+            dcAllergies.Add(row(0).ToString())
+        Next
+        With cmbMedication
+            .AutoCompleteMode = AutoCompleteMode.SuggestAppend
+            .AutoCompleteSource = AutoCompleteSource.CustomSource
+            .AutoCompleteCustomSource = dcAllergies
+            .DataSource = dcAllergies
+        End With
+    End Sub
 End Module
