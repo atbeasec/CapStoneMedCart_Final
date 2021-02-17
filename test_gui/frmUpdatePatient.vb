@@ -9,6 +9,7 @@ Public Class frmUpdatePatient
     Private dsRooms As DataSet = New DataSet
     Private dsPatientRoom As DataSet = New DataSet
 
+
     '/*********************************************************************/
     '/*                   SUBPRORGRAM NAME:frmUpdatePatient_Load		   */         
     '/*********************************************************************/
@@ -96,6 +97,7 @@ Public Class frmUpdatePatient
 
             cboState.SelectedItem = .Rows(0)(EnumList.Patient.state)
         End With
+
     End Sub
 
 
@@ -163,5 +165,50 @@ Public Class frmUpdatePatient
         strbSQL.Clear()
         strbSQL.Append("Update PatientRoom set ROOM_TUID = '" & cboRoom.SelectedIndex & "' where Patient_TUID = '")
         strbSQL.Append(dsPatient.Tables(0).Rows(0)(EnumList.Patient.ID) & "';")
+    End Sub
+
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: cboRoom_SelectedIndexChanged   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		         */   
+    '/*		         DATE CREATED: 		   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:            								   */             
+    '/*	 This calls the method to update the list of beds in the bed combo */                     
+    '/*  box. 
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					            */         
+    '/*  sender – Identifies which particular control raised the          */
+    '/*          click event                                              */
+    '/*  e – Holds the EventArgs object sent to the routine               */      
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Private Sub cboRoom_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboRoom.SelectedIndexChanged
+        PopulateRoomsCombBoxesMethods.UpdateBedComboBox(cboBed, cboRoom)
     End Sub
 End Class

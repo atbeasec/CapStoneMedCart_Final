@@ -176,7 +176,7 @@ Module DispenseHistory
     '/*********************************************************************/
 
     Sub DispenseHistorySpecificPatient(ByRef intPatientMRN As Integer)
-        Dim Strdatacommand As String = "SELECT Drug_Name, PatientMedication.Method, Amount_Dispensed,User.User_Last_Name,User.User_First_Name, DateTime_Dispensed   
+        Dim Strdatacommand As String = "SELECT Drug_Name, PatientMedication.Type, Amount_Dispensed,User.User_Last_Name,User.User_First_Name, DateTime_Dispensed   
           FROM Dispensing 
           INNER JOIN PatientMedication
           On PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID

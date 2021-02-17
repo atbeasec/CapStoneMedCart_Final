@@ -429,8 +429,9 @@
         pnlPanelName.Controls.Add(btnCheckMark)
         ' MessageBox.Show("again")
         'Add handler for click events
-        AddHandler btnCheckMark.Click, AddressOf DynamicButton_Click
         AddHandler btnCheckMark.Click, AddressOf DetermineQueryDelete_Click
+        AddHandler btnCheckMark.Click, AddressOf DynamicButton_Click
+
     End Sub
 
     Public Sub CreateXMarkBtn(ByVal pnlPanelName As Panel, ByVal pntLocation As Point)
@@ -509,24 +510,33 @@
         If getOpenedForm().GetType() Is frmConfiguration.GetType() Then
 
             ' call SQL method to set the user flag to inactive or delete the user from the DB
-            '   Debug.Print("Set user to inactive")
+
+            Dim intID As Integer = GetSelectedInformation(sender.parent, "lblID")
+            Dim strStatement As String = "SELECT Active_Flag FROM User WHERE User_ID = '" & intID & "'"
+            If ExecuteScalarQuery(strStatement) = 1 Then
+                strStatement = "UPDATE USER SET Active_Flag='0' WHERE User_ID='" & intID & "';"
+                ExecuteInsertQuery(strStatement)
+            Else
+                strStatement = "UPDATE USER SET Active_Flag='1' WHERE User_ID='" & intID & "';"
+                ExecuteInsertQuery(strStatement)
+            End If
 
         ElseIf getOpenedForm().GetType() Is frmPatientRecords.GetType() Then
 
-            ' call SQL method to set the Patient Record flag to inactive or delete the user from the DB
-            '    Debug.Print("patient records")
+                ' call SQL method to set the Patient Record flag to inactive or delete the user from the DB
+                '    Debug.Print("patient records")
 
-        ElseIf getOpenedForm().GetType() Is frmConfigureInventory.GetType() Then
+            ElseIf getOpenedForm().GetType() Is frmConfigureInventory.GetType() Then
 
-            ' call SQL method to remove the item from the list of currently stocked items in the med cart
-            '  Debug.Print("removing this inventory piece")
+                ' call SQL method to remove the item from the list of currently stocked items in the med cart
+                '  Debug.Print("removing this inventory piece")
 
-        ElseIf getOpenedForm().GetType() Is frmAllergies.GetType() Then
+            ElseIf getOpenedForm().GetType() Is frmAllergies.GetType() Then
 
-            ' call SQL method to remove the allergy that is currently assigned to the patient
-            '  Debug.Print("remove allergy assigned to patient")
+                ' call SQL method to remove the allergy that is currently assigned to the patient
+                '  Debug.Print("remove allergy assigned to patient")
 
-        End If
+            End If
 
     End Sub
 
@@ -574,25 +584,49 @@
 
         If getOpenedForm().GetType() Is frmConfiguration.GetType() Then
 
-            ' call SQL method to set edit functionality
-            ' Debug.Print("Set user to inactive")
+            'call GetSelectedInformation to get the selected username and ID
+            frmConfiguration.txtUsername.Text = GetSelectedInformation(sender.parent, "lblUsername")
+            frmConfiguration.txtID.Text = GetSelectedInformation(sender.parent, "lblID")
+
+            'calls to fill the other textboxes for editing the user
+            Dim strStatement = "SELECT User_First_Name FROM User WHERE User_ID = '" & frmConfiguration.txtID.Text & "';"
+            frmConfiguration.txtFirstName.Text = ExecuteScalarQuery(strStatement)
+            strStatement = "SELECT User_Last_Name FROM User WHERE User_ID = '" & frmConfiguration.txtID.Text & "';"
+            frmConfiguration.txtLastName.Text = ExecuteScalarQuery(strStatement)
+            strStatement = "SELECT Barcode FROM User WHERE User_ID = '" & frmConfiguration.txtID.Text & "';"
+            frmConfiguration.txtBarcode.Text = ExecuteScalarQuery(strStatement)
+            strStatement = "SELECT Admin_Flag FROM User WHERE User_ID = '" & frmConfiguration.txtID.Text & "';"
+            Dim strSupervisor = "SELECT Supervisor_Flag FROM User WHERE User_ID = '" & frmConfiguration.txtID.Text & "';"
+
+            'look at the users permissions on the user table and see what radio button should be selected
+            If ExecuteScalarQuery(strStatement) = 1 Then
+                frmConfiguration.rbtnAdministrator.Checked = True
+            ElseIf ExecuteScalarQuery(strSupervisor) = 1 Then
+                frmConfiguration.rbtnSupervisor.Checked = True
+            Else frmConfiguration.rbtnNurse.Checked = True
+            End If
+
+            'make the save and cancel button visible and hide button1
+            frmConfiguration.btnSaveChanges.Visible = True
+                frmConfiguration.btnCancel.Visible = True
+            frmConfiguration.Button1.Visible = False
 
         ElseIf getOpenedForm().GetType() Is frmPatientRecords.GetType() Then
 
-            ' call SQL method to set edit functionality
-            Debug.Print("patient records")
+                ' call SQL method to set edit functionality
+                Debug.Print("patient records")
 
-        ElseIf getOpenedForm().GetType() Is frmConfigureInventory.GetType() Then
+            ElseIf getOpenedForm().GetType() Is frmConfigureInventory.GetType() Then
 
-            ' call SQL method to set edit functionality
-            '  Debug.Print("removing this inventory piece")
+                ' call SQL method to set edit functionality
+                '  Debug.Print("removing this inventory piece")
 
-        ElseIf getOpenedForm().GetType() Is frmAllergies.GetType() Then
+            ElseIf getOpenedForm().GetType() Is frmAllergies.GetType() Then
 
-            ' call SQL method to set edit functionality
-            ' Debug.Print("remove allergy assigned to patient")
+                ' call SQL method to set edit functionality
+                ' Debug.Print("remove allergy assigned to patient")
 
-        End If
+            End If
 
     End Sub
 
@@ -644,6 +678,62 @@
 
         Return frmOpenedForm
 
+    End Function
+
+    '/*********************************************************************/
+    '/*                   Function NAME: GetSelectedInformation()         */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:  Dylan Walter          		          */   
+    '/*		         DATE CREATED: 		 2/16/2021                        */                             
+    '/*********************************************************************/
+    '/*  Function PURPOSE:								                  */             
+    '/*	 This function simply retrieves the requested information from    */
+    '/*  the selected form.                                               */
+    '/*********************************************************************/
+    '/*  Function Return Value:					                          */         
+    '/*	 strSelected- a string that contains the requested selection      */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  DynamicButtonEditRecord_Click                                    */ 
+    '/*  DetermineQueryDelete_Click                                       */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/* None                                                              */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	sender                                                            */ 
+    '/* strLable                                                          */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	None                                 							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	ctl                                                               */
+    '/*	Selected                                                          */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  DW  2/16/2021    Initial creation                                */
+    '/*********************************************************************/
+    Function GetSelectedInformation(ByVal sender As Object, ByVal strLabel As String) As String
+        Dim strSelected = Nothing
+        Dim ctl As Control
+
+        ' iterating over the list of controls in the panel
+        For Each ctl In sender.Controls
+
+            ' the label containing the wanted information is stored in strLabel and is sent by the user
+            ' to represent what number panel it is in the row of created panels.
+            If ctl.Name.Contains(strLabel) Then
+
+                Debug.Print(ctl.Text)
+                strSelected = (ctl.Text)
+            End If
+        Next
+        'returning the Requested information from the selected record
+        Return strSelected
     End Function
 
 

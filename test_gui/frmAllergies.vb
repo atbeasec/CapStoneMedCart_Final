@@ -1,9 +1,11 @@
 ﻿Public Class frmAllergies
     Private Sub frmAllergies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        cmbAllergiesLocked()
         Dim dsAllergies = CreateDatabase.ExecuteSelectQuery("Select * From Allergy ORDER BY Allergy_Type, Allergy_Name ;")
         Dim dsDrugAllergies = CreateDatabase.ExecuteSelectQuery("Select * From Allergy WHERE Allergy_Type = 'Drug' ORDER BY Allergy_Type, Allergy_Name ;")
+
         populateAllergiesComboBox(cmbAllergies, dsAllergies)
-        populateAllergiesComboBox(cmbMedicationName, dsDrugAllergies)
+        populateMedicationComboBox(cmbMedicationName, dsDrugAllergies)
         Dim strSeverity As String = " "
         Dim intPatientTuid As Integer = GetPatientTuid()
         'get the allergy information from the patient allergy tables
@@ -28,6 +30,7 @@
             strSeverity = CheckSeverity(dr)
             txtAllergyType.Text = dr(2)
             CreateAllergiesPanels(flpAllergies, cmbAllergies.Text, cmbMedicationName.Text, txtAllergyType.Text, strSeverity)
+            cmbAllergiesLocked()
         Next
         'CreateAllergiesPanels()
 
@@ -185,34 +188,25 @@
 
     End Sub
 
-
-    Private Sub cmbAllergies_TextChanged(sender As Object, e As EventArgs) Handles cmbAllergies.TextChanged
-
-        If cmbAllergies.FindStringExact(cmbAllergies.Text) = -1 Then
-            'do nothing until the user types in a value that matches an item in the box
-        Else
-
-            cmbAllergies.SelectedIndex = cmbAllergies.FindString(cmbAllergies.Text)
-
-        End If
-    End Sub
-
-    Private Sub cmbAllergies_LostFocus(sender As Object, e As EventArgs) Handles cmbAllergies.LostFocus
+    Private Sub cmbAllergies_LostFocus(sender As Object, e As EventArgs) Handles cmbAllergies.SelectedValueChanged
         cmbAllergies.DroppedDown = False
         If cmbAllergies.FindStringExact(cmbAllergies.Text) = -1 Then
             Debug.WriteLine("")
 
         Else
             Dim objAllergyType = CreateDatabase.ExecuteScalarQuery("Select Allergy_Type From Allergy Where Allergy_Name = '" & cmbAllergies.Text & "';")
+
             txtAllergyType.Text = objAllergyType.ToString
+            cmbSeverity.SelectedIndex = 1
         End If
     End Sub
 
-    Private Sub cmbAllergies_Click(sender As Object, e As EventArgs) Handles cmbAllergies.Click
+    'Private Sub cmbAllergies_Click(sender As Object, e As EventArgs) Handles cmbAllergies.Click
 
-        cmbAllergies.DroppedDown = True
-        txtAllergyType.Text = ""
-    End Sub
+    '    cmbAllergies.DroppedDown = True
+    '    txtAllergyType.Text = ""
+
+    'End Sub
 
     Private Sub cmbMedicationName_Click(sender As Object, e As EventArgs) Handles cmbMedicationName.Click
         cmbMedicationName.DroppedDown = True
@@ -222,5 +216,26 @@
     Private Sub cmbMedicationName_LostFocus(sender As Object, e As EventArgs) Handles cmbMedicationName.LostFocus
         cmbMedicationName.DroppedDown = False
 
+    End Sub
+
+    Private Sub cmbMedicationName_SelectedValueChanged(sender As Object, e As EventArgs) Handles cmbMedicationName.SelectedValueChanged
+        cmbAllergies.Text = cmbMedicationName.Text
+        cmbAllergiesLocked()
+    End Sub
+
+
+    Private Sub cmbAllergiesLocked()
+        If cmbMedicationName.Text = "N/A" Or cmbMedicationName.SelectedIndex = -1 Then
+            cmbAllergies.Enabled = True
+            cmbAllergies.SelectedIndex = -1
+        Else
+            cmbAllergies.Enabled = False
+
+        End If
+    End Sub
+
+
+    Private Sub cmbMedicationName_MouseLeave(sender As Object, e As EventArgs) Handles cmbMedicationName.MouseLeave
+        cmbAllergiesLocked()
     End Sub
 End Class
