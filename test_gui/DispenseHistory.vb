@@ -386,7 +386,11 @@ Module DispenseHistory
         strbSQLcommand.Append("SELECT PatientMedication_ID FROM PatientMedication WHERE Medication_TUID = '" & intMedID & "' AND Patient_TUID = '" & intPatientID & "'")
         intPatientMedicationDatabaseID = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
 
+        'clear string builder and set up sql statement to decrease drawer amount
+        strbSQLcommand.Clear()
 
+        'clear string builder and set up sql statement to insert into dispense history
+        strbSQLcommand.Clear()
 
 
     End Sub
