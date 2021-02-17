@@ -569,6 +569,8 @@ Public Class frmConfiguration
         Dim strPassword As String = txtPassword.Text
         Dim strLastName As String = txtLastName.Text
         Dim strFirstName As String = txtFirstName.Text
+        Dim strSalt As String = Nothing
+        Dim strResults() As String = Nothing ' this will hold the salted, peppered, hashed password and the salt
         strFirstName = Regex.Replace(strFirstName, "'", "''")
         strLastName = Regex.Replace(strLastName, "'", "''")
 
@@ -594,10 +596,13 @@ Public Class frmConfiguration
         ElseIf txtFirstName.Text = "" Or txtLastName.Text = "" Or txtUsername.Text = "" Or txtBarcode.Text = "" Then
             MsgBox("All Fields must be filled")
         Else
-
+            ' get the peppered hash of the password
+            strResults = LogIn.MakeSaltPepperAndHash(strPassword)
+            strPassword = strResults(0)
+            strSalt = strResults(1)
 
             'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
-            strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',Password='" & strPassword & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Barcode='" & txtBarcode.Text & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "' WHERE User_ID=1;"
+            strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',Salt='" & strSalt & "',Password='" & strPassword & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Barcode='" & txtBarcode.Text & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "' WHERE User_ID='" & txtID.Text & "';"
             ExecuteInsertQuery(strStatement)
 
             'clear all text boxes and change button visibility back to default 
