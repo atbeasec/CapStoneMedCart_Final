@@ -1,6 +1,6 @@
 ﻿Public Class frmPatientInfo
 
-    'Dim intPatientMRN As Integer = frmPatientRecords.intSelectedPatientMRN
+    Dim intPatientMRN As Integer
     Dim ContactPanelsAddedCount As Integer = 0
     Dim CurrentContactPanelName As String = Nothing
 
@@ -258,7 +258,7 @@
 
 
 
-Dim intPatientMRN = txtMRN.Text
+        intPatientMRN = txtMRN.Text
         PatientInformation.GetAllergies(intPatientMRN)
         PatientInformation.GetPatientInformation(intPatientMRN)
         PatientInformation.getPrescriptions(intPatientMRN)
@@ -959,9 +959,9 @@ Dim intPatientMRN = txtMRN.Text
 
     Private Sub btnDispenseMedication_Click(sender As Object, e As EventArgs) Handles btnDispenseMedication.Click
         Dispense.Show()
-        'DispenseHistory.DispensemedicationPopulate(intPatientMRN)
-        'PatientInformation.PopulatePatientDispenseInfo(intPatientMRN)
-        'PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientMRN)
+        DispenseHistory.DispensemedicationPopulate(intPatientMRN)
+        PatientInformation.PopulatePatientDispenseInfo(intPatientMRN)
+        PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientMRN)
     End Sub
 
     ' Private Sub Button1_Click(sender As Object, e As EventArgs)

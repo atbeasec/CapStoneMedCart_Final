@@ -277,7 +277,7 @@ Module DispenseHistory
         strMedicationRXCUI = strArray(2)
         'select medication type and strength for the selected medication using rxcui 
         Dim Strdatacommand As String
-        Strdatacommand = "SELECT Method, Strength FROM PatientMedication " &
+        Strdatacommand = "SELECT PatientMedication.Type, Strength FROM PatientMedication " &
             "INNER JOIN Medication on Medication.Medication_ID = PatientMedication.Medication_TUID " &
             "WHERE RXCUI_ID = '" & strMedicationRXCUI & "'"
 
