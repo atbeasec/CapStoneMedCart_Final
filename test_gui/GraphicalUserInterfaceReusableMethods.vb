@@ -510,7 +510,8 @@
         If getOpenedForm().GetType() Is frmConfiguration.GetType() Then
 
             ' call SQL method to set the user flag to inactive or delete the user from the DB
-            Dim intID As Integer = frmConfiguration.GetSelectedUserID(sender.parent)
+
+            Dim intID As Integer = GetSelectedInformation(sender.parent, "lblID")
             Dim strStatement As String = "SELECT Active_Flag FROM User WHERE User_ID = '" & intID & "'"
             If ExecuteScalarQuery(strStatement) = 1 Then
                 strStatement = "UPDATE USER SET Active_Flag='0' WHERE User_ID='" & intID & "';"
@@ -583,8 +584,11 @@
 
         If getOpenedForm().GetType() Is frmConfiguration.GetType() Then
 
-            frmConfiguration.txtUsername.Text = frmConfiguration.GetSelectedUserName(sender.parent)
-            frmConfiguration.txtID.Text = frmConfiguration.GetSelectedUserID(sender.parent)
+            'call GetSelectedInformation to get the selected username and ID
+            frmConfiguration.txtUsername.Text = GetSelectedInformation(sender.parent, "lblUsername")
+            frmConfiguration.txtID.Text = GetSelectedInformation(sender.parent, "lblID")
+
+            'calls to fill the other textboxes for editing the user
             Dim strStatement = "SELECT User_First_Name FROM User WHERE User_ID = '" & frmConfiguration.txtID.Text & "';"
             frmConfiguration.txtFirstName.Text = ExecuteScalarQuery(strStatement)
             strStatement = "SELECT User_Last_Name FROM User WHERE User_ID = '" & frmConfiguration.txtID.Text & "';"
@@ -594,19 +598,20 @@
             strStatement = "SELECT Admin_Flag FROM User WHERE User_ID = '" & frmConfiguration.txtID.Text & "';"
             Dim strSupervisor = "SELECT Supervisor_Flag FROM User WHERE User_ID = '" & frmConfiguration.txtID.Text & "';"
 
+            'look at the users permissions on the user table and see what radio button should be selected
             If ExecuteScalarQuery(strStatement) = 1 Then
                 frmConfiguration.rbtnAdministrator.Checked = True
             ElseIf ExecuteScalarQuery(strSupervisor) = 1 Then
                 frmConfiguration.rbtnSupervisor.Checked = True
             Else frmConfiguration.rbtnNurse.Checked = True
             End If
-                frmConfiguration.btnSaveChanges.Visible = True
-                frmConfiguration.btnCancel.Visible = True
-                frmConfiguration.Button1.Visible = False
-                ' call SQL method to set edit functionality
-                ' Debug.Print("Set user to inactive")
 
-            ElseIf getOpenedForm().GetType() Is frmPatientRecords.GetType() Then
+            'make the save and cancel button visible and hide button1
+            frmConfiguration.btnSaveChanges.Visible = True
+                frmConfiguration.btnCancel.Visible = True
+            frmConfiguration.Button1.Visible = False
+
+        ElseIf getOpenedForm().GetType() Is frmPatientRecords.GetType() Then
 
                 ' call SQL method to set edit functionality
                 Debug.Print("patient records")
@@ -673,6 +678,62 @@
 
         Return frmOpenedForm
 
+    End Function
+
+    '/*********************************************************************/
+    '/*                   Function NAME: GetSelectedInformation()         */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:  Dylan Walter          		          */   
+    '/*		         DATE CREATED: 		 2/16/2021                        */                             
+    '/*********************************************************************/
+    '/*  Function PURPOSE:								                  */             
+    '/*	 This function simply retrieves the requested information from    */
+    '/*  the selected form.                                               */
+    '/*********************************************************************/
+    '/*  Function Return Value:					                          */         
+    '/*	 strSelected- a string that contains the requested selection      */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  DynamicButtonEditRecord_Click                                    */ 
+    '/*  DetermineQueryDelete_Click                                       */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/* None                                                              */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	sender                                                            */ 
+    '/* strLable                                                          */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	None                                 							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	ctl                                                               */
+    '/*	Selected                                                          */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  DW  2/16/2021    Initial creation                                */
+    '/*********************************************************************/
+    Function GetSelectedInformation(ByVal sender As Object, ByVal strLabel As String) As String
+        Dim strSelected = Nothing
+        Dim ctl As Control
+
+        ' iterating over the list of controls in the panel
+        For Each ctl In sender.Controls
+
+            ' the label containing the wanted information is stored in strLabel and is sent by the user
+            ' to represent what number panel it is in the row of created panels.
+            If ctl.Name.Contains(strLabel) Then
+
+                Debug.Print(ctl.Text)
+                strSelected = (ctl.Text)
+            End If
+        Next
+        'returning the Requested information from the selected record
+        Return strSelected
     End Function
 
 

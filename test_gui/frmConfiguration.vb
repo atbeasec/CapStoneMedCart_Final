@@ -380,21 +380,24 @@ Public Class frmConfiguration
         strFirstName = Regex.Replace(strFirstName, "'", "''")
         strLastName = Regex.Replace(strLastName, "'", "''")
 
+        'check what Role the user will have
+        If rbtnAdministrator.Checked = True Then
+            intAdmin = 1
+        ElseIf rbtnSupervisor.Checked = True Then
+            intSupervisor = 1
+        End If
+
         'call CheckPassword Function to see if password mets security standards
         If CheckPassword(strPassword) = False Then
             MsgBox("Password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special characters !@#$%^&* ")
-            txtPassword.Text = ""
-            txtConfirmPassword.Text = ""
             txtPassword.Focus()
             ' make sure password and Confirm Password Match
         ElseIf txtPassword.Text <> txtConfirmPassword.Text Then
             MsgBox("Confirm Password must match Password")
-            txtConfirmPassword.Text = ""
             txtConfirmPassword.Focus()
             'Make Sure all fields are filled
         ElseIf txtFirstName.Text = "" Or txtLastName.Text = "" Or txtUsername.Text = "" Or txtBarcode.Text = "" Then
             MsgBox("All Fields must be filled")
-
         Else
 
 
@@ -555,110 +558,65 @@ Public Class frmConfiguration
 
     Private Sub btnSaveChanges_Click(sender As Object, e As EventArgs) Handles btnSaveChanges.Click
         Dim intID As Integer = txtID.Text
-        ' when we hit the edit user button we need to grab the User_ID number
-        ' check if the 
         Dim strStatement = "SELECT COUNT(*) FROM User WHERE Username = '" & txtUsername.Text & "'" & " OR User_ID = '" & intID & "'"
-        'if it returns 2 then the username was changed to something already in the database 
-        If ExecuteScalarQuery(strStatement) = 2 Then
-            MsgBox("A User already has that Username")
-        End If
-
-
-
-
-
-
         Dim intSupervisor As Integer = 0
         Dim intAdmin As Integer = 0
-        Dim intActiveFlag As Integer = 1
         Dim strPassword As String = txtPassword.Text
         Dim strLastName As String = txtLastName.Text
         Dim strFirstName As String = txtFirstName.Text
         strFirstName = Regex.Replace(strFirstName, "'", "''")
         strLastName = Regex.Replace(strLastName, "'", "''")
 
+        'check what Role the user will have
+        If rbtnAdministrator.Checked = True Then
+            intAdmin = 1
+        ElseIf rbtnSupervisor.Checked = True Then
+            intSupervisor = 1
+        End If
+
+        'if it returns 2 then the username was changed to something already in the database 
         If ExecuteScalarQuery(strStatement) = 2 Then
             MsgBox("A User already has that Username")
             'call CheckPassword Function to see if password mets security standards
         ElseIf CheckPassword(strPassword) = False Then
             MsgBox("Password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special characters !@#$%^&* ")
-            txtPassword.Text = ""
-            txtConfirmPassword.Text = ""
             txtPassword.Focus()
             ' make sure password and Confirm Password Match
         ElseIf txtPassword.Text <> txtConfirmPassword.Text Then
             MsgBox("Confirm Password must match Password")
-            txtConfirmPassword.Text = ""
             txtConfirmPassword.Focus()
             'Make Sure all fields are filled
         ElseIf txtFirstName.Text = "" Or txtLastName.Text = "" Or txtUsername.Text = "" Or txtBarcode.Text = "" Then
             MsgBox("All Fields must be filled")
-
         Else
 
 
             'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
-            strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',Password='" & strPassword & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Barcode='" & txtBarcode.Text & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "',Active_Flag='" & intActiveFlag & "'WHERE User_ID=1;"
+            strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',Password='" & strPassword & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Barcode='" & txtBarcode.Text & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "' WHERE User_ID=1;"
             ExecuteInsertQuery(strStatement)
 
-            'clear all text boxes
+            'clear all text boxes and change button visibility back to default 
             txtFirstName.Text = ""
             txtLastName.Text = ""
             txtUsername.Text = ""
             txtBarcode.Text = ""
             txtPassword.Text = ""
             txtConfirmPassword.Text = ""
+            btnCancel.Visible = False
+            btnSaveChanges.Visible = False
+            Button1.Visible = True
         End If
     End Sub
-    Function GetSelectedUserID(ByVal sender As Object) As Integer
-        'Dim ctlParent As Control = sender
-        Dim intGetID = Nothing
-        Dim ctl As Control
-
-        ' iterating over the list of controls in the panel
-        For Each ctl In sender.Controls
-
-            ' the label containing the MRN number will always be called "lblMRN" with a number tacked on
-            ' to represent what number panel it is in the row of created panels.
-            ' simplying searching for the control that contains MRN will always yield the correct label.
-            If ctl.Name.Contains("lblID") Then
-
-                Debug.Print(ctl.Text)
-                intGetID = CInt(ctl.Text)
-            End If
-        Next
-        'returning the MRN of the patient from the selected record
-        Return intGetID
-    End Function
-
-    Function GetSelectedUserName(ByVal sender As Object) As String
-        'Dim ctlParent As Control = sender
-        Dim strGetUsername = Nothing
-        Dim ctl As Control
-
-        ' iterating over the list of controls in the panel
-        For Each ctl In sender.Controls
-
-            ' the label containing the MRN number will always be called "lblMRN" with a number tacked on
-            ' to represent what number panel it is in the row of created panels.
-            ' simplying searching for the control that contains MRN will always yield the correct label.
-            If ctl.Name.Contains("lblUsername") Then
-
-                Debug.Print(ctl.Text)
-                strGetUsername = (ctl.Text)
-            End If
-        Next
-        'returning the MRN of the patient from the selected record
-        Return strGetUsername
-    End Function
-
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        'clear all text boxes
+        'clear all text boxes and change button visibility back to default 
         txtFirstName.Text = ""
         txtLastName.Text = ""
         txtUsername.Text = ""
         txtBarcode.Text = ""
         txtPassword.Text = ""
         txtConfirmPassword.Text = ""
+        btnCancel.Visible = False
+        btnSaveChanges.Visible = False
+        Button1.Visible = True
     End Sub
 End Class

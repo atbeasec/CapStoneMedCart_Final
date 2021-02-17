@@ -104,6 +104,7 @@ Partial Class frmConfiguration
         Me.txtConfirmPassword.Location = New System.Drawing.Point(1, 1)
         Me.txtConfirmPassword.Multiline = True
         Me.txtConfirmPassword.Name = "txtConfirmPassword"
+        Me.txtConfirmPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtConfirmPassword.Size = New System.Drawing.Size(222, 26)
         Me.txtConfirmPassword.TabIndex = 38
         '
@@ -125,6 +126,7 @@ Partial Class frmConfiguration
         Me.txtPassword.Location = New System.Drawing.Point(1, 1)
         Me.txtPassword.Multiline = True
         Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPassword.Size = New System.Drawing.Size(223, 26)
         Me.txtPassword.TabIndex = 38
         '
