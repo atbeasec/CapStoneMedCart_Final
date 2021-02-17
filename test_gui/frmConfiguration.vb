@@ -157,6 +157,7 @@ Public Class frmConfiguration
         'AddHandler pnlMainPanel.DoubleClick, AddressOf DynamicDoubleClickNewOrder
         AddHandler pnlMainPanel.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
         AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
+        'AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
 
         CreateEditButton(pnlMainPanel, getPanelCount(flpPannel), 500, 5)
 
@@ -179,7 +180,7 @@ Public Class frmConfiguration
         CreateIDLabel(pnlMainPanel, lblID2, "lblNames", lblName.Location.X, INTTWENTY, strName, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID3, "lblUsername", lblIDNumber.Location.X, INTTWENTY, strUsername, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID4, "lblAccessLevel", lblAccess.Location.X, INTTWENTY, strAccess, getPanelCount(flpPannel))
-        'CreateIDLabel(pnlMainPanel, lblID5, "lblActive", lblName.Location.X, INTTWENTY, strActive, getPanelCount(flpPannel))
+        'CreateIDLabel(pnlMainPanel, lblID5, "lblActive", lblActive.Location.X, INTTWENTY, strActive, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
@@ -607,7 +608,7 @@ Public Class frmConfiguration
             txtConfirmPassword.Text = ""
         End If
     End Sub
-    Function GetSelectedUserUsername(sender As Object) As Integer
+    Function GetSelectedUserID(sender As Object) As Integer
 
         Dim intGetID = Nothing
         Dim ctl As Control
@@ -628,12 +629,8 @@ Public Class frmConfiguration
         MsgBox(intGetID)
         Return intGetID
     End Function
-    'strStatement= "SELECT Active_Flag FROM User WHERE User_ID = '" & txtUsername.Text &"'"
-    'If ExecuteScalarQuery(strStatement) = 1 Then
-    'strStatement = "UPDATE USER SET Active_Flag='" & intActiveFlag & "'WHERE User_ID=0;"
-    'ExecuteInsertQuery(strStatement)
-    'Else
-    'strStatement = "UPDATE USER SET Active_Flag='" & intActiveFlag & "'WHERE User_ID=1;"
-    'ExecuteInsertQuery(strStatement)
-    'End If
+
+    Private Sub collectdata(sender As Object, e As EventArgs)
+
+    End Sub
 End Class

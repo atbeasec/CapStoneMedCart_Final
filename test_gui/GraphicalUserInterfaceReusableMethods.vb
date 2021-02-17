@@ -510,23 +510,32 @@
 
             ' call SQL method to set the user flag to inactive or delete the user from the DB
             '   Debug.Print("Set user to inactive")
+            Dim intID As Integer = frmConfiguration.GetSelectedUserID()
+            Dim strStatement As String = "SELECT Active_Flag FROM User WHERE User_ID = '" & intID & "'"
+            If ExecuteScalarQuery(strStatement) = 1 Then
+                strStatement = "UPDATE USER SET Active_Flag='0' WHERE User_ID=intID;"
+                ExecuteInsertQuery(strStatement)
+            Else
+                strStatement = "UPDATE USER SET Active_Flag='1' WHERE User_ID=intID;"
+                ExecuteInsertQuery(strStatement)
+            End If
 
         ElseIf getOpenedForm().GetType() Is frmPatientRecords.GetType() Then
 
-            ' call SQL method to set the Patient Record flag to inactive or delete the user from the DB
-            '    Debug.Print("patient records")
+                ' call SQL method to set the Patient Record flag to inactive or delete the user from the DB
+                '    Debug.Print("patient records")
 
-        ElseIf getOpenedForm().GetType() Is frmConfigureInventory.GetType() Then
+            ElseIf getOpenedForm().GetType() Is frmConfigureInventory.GetType() Then
 
-            ' call SQL method to remove the item from the list of currently stocked items in the med cart
-            '  Debug.Print("removing this inventory piece")
+                ' call SQL method to remove the item from the list of currently stocked items in the med cart
+                '  Debug.Print("removing this inventory piece")
 
-        ElseIf getOpenedForm().GetType() Is frmAllergies.GetType() Then
+            ElseIf getOpenedForm().GetType() Is frmAllergies.GetType() Then
 
-            ' call SQL method to remove the allergy that is currently assigned to the patient
-            '  Debug.Print("remove allergy assigned to patient")
+                ' call SQL method to remove the allergy that is currently assigned to the patient
+                '  Debug.Print("remove allergy assigned to patient")
 
-        End If
+            End If
 
     End Sub
 
