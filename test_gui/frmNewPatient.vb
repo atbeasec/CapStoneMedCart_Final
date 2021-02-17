@@ -182,5 +182,4 @@ Public Class frmNewPatient
         populatePhysicianComboBox(cmbPhysician, dsPhysicians)
     End Sub
 
-
 End Class
