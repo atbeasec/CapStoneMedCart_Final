@@ -1,7 +1,10 @@
 ﻿Public Class frmAllergies
     Private Sub frmAllergies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+
         Dim dsAllergies = CreateDatabase.ExecuteSelectQuery("Select * From Allergy ORDER BY Allergy_Type, Allergy_Name ;")
         Dim dsDrugAllergies = CreateDatabase.ExecuteSelectQuery("Select * From Allergy WHERE Allergy_Type = 'Drug' ORDER BY Allergy_Type, Allergy_Name ;")
+
         populateAllergiesComboBox(cmbAllergies, dsAllergies)
         populateAllergiesComboBox(cmbMedicationName, dsDrugAllergies)
         Dim strSeverity As String = " "
@@ -185,18 +188,6 @@
 
     End Sub
 
-
-    Private Sub cmbAllergies_TextChanged(sender As Object, e As EventArgs) Handles cmbAllergies.TextChanged
-
-        If cmbAllergies.FindStringExact(cmbAllergies.Text) = -1 Then
-            'do nothing until the user types in a value that matches an item in the box
-        Else
-
-            cmbAllergies.SelectedIndex = cmbAllergies.FindString(cmbAllergies.Text)
-
-        End If
-    End Sub
-
     Private Sub cmbAllergies_LostFocus(sender As Object, e As EventArgs) Handles cmbAllergies.SelectedValueChanged
         cmbAllergies.DroppedDown = False
         If cmbAllergies.FindStringExact(cmbAllergies.Text) = -1 Then
@@ -204,16 +195,18 @@
 
         Else
             Dim objAllergyType = CreateDatabase.ExecuteScalarQuery("Select Allergy_Type From Allergy Where Allergy_Name = '" & cmbAllergies.Text & "';")
+
             txtAllergyType.Text = objAllergyType.ToString
+            cmbSeverity.SelectedIndex = 1
         End If
     End Sub
 
-    Private Sub cmbAllergies_Click(sender As Object, e As EventArgs) Handles cmbAllergies.Click
+    'Private Sub cmbAllergies_Click(sender As Object, e As EventArgs) Handles cmbAllergies.Click
 
-        cmbAllergies.DroppedDown = True
-        txtAllergyType.Text = ""
+    '    cmbAllergies.DroppedDown = True
+    '    txtAllergyType.Text = ""
 
-    End Sub
+    'End Sub
 
     Private Sub cmbMedicationName_Click(sender As Object, e As EventArgs) Handles cmbMedicationName.Click
         cmbMedicationName.DroppedDown = True
