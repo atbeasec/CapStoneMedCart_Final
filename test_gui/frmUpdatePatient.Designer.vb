@@ -64,6 +64,9 @@ Partial Class frmUpdatePatient
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.txtFirstName = New System.Windows.Forms.TextBox()
         Me.btnUpdateButton = New System.Windows.Forms.Button()
+        Me.txtBed = New System.Windows.Forms.TextBox()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.cboBed = New System.Windows.Forms.ComboBox()
         Me.Panel5.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -77,6 +80,7 @@ Partial Class frmUpdatePatient
         Me.Panel10.SuspendLayout()
         Me.Panel9.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.Panel6.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label2
@@ -534,12 +538,47 @@ Partial Class frmUpdatePatient
         Me.btnUpdateButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnUpdateButton.UseVisualStyleBackColor = False
         '
+        'txtBed
+        '
+        Me.txtBed.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtBed.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtBed.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
+        Me.txtBed.Location = New System.Drawing.Point(381, 476)
+        Me.txtBed.Multiline = True
+        Me.txtBed.Name = "txtBed"
+        Me.txtBed.Size = New System.Drawing.Size(112, 27)
+        Me.txtBed.TabIndex = 91
+        Me.txtBed.Text = "Bed"
+        '
+        'Panel6
+        '
+        Me.Panel6.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel6.Controls.Add(Me.cboBed)
+        Me.Panel6.Location = New System.Drawing.Point(382, 506)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel6.Size = New System.Drawing.Size(202, 28)
+        Me.Panel6.TabIndex = 91
+        '
+        'cboBed
+        '
+        Me.cboBed.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cboBed.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cboBed.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboBed.FormattingEnabled = True
+        Me.cboBed.Location = New System.Drawing.Point(1, 1)
+        Me.cboBed.Name = "cboBed"
+        Me.cboBed.Size = New System.Drawing.Size(200, 25)
+        Me.cboBed.TabIndex = 54
+        '
         'frmUpdatePatient
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(620, 639)
+        Me.Controls.Add(Me.Panel6)
+        Me.Controls.Add(Me.txtBed)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Panel5)
         Me.Controls.Add(Me.TextBox2)
@@ -592,6 +631,7 @@ Partial Class frmUpdatePatient
         Me.Panel9.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        Me.Panel6.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -638,4 +678,7 @@ Partial Class frmUpdatePatient
     Friend WithEvents Panel1 As Panel
     Friend WithEvents txtFirstName As TextBox
     Friend WithEvents btnUpdateButton As Button
+    Friend WithEvents txtBed As TextBox
+    Friend WithEvents Panel6 As Panel
+    Friend WithEvents cboBed As ComboBox
 End Class

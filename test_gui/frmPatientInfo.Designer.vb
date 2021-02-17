@@ -29,6 +29,8 @@ Partial Class frmPatientInfo
         Me.txtPhysician = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.pnlPersonalInformation = New System.Windows.Forms.Panel()
+        Me.cboBed = New System.Windows.Forms.ComboBox()
+        Me.cboRoom = New System.Windows.Forms.ComboBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.txtPhone = New System.Windows.Forms.TextBox()
@@ -38,9 +40,7 @@ Partial Class frmPatientInfo
         Me.txtMRN = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label21 = New System.Windows.Forms.Label()
-        Me.txtBed = New System.Windows.Forms.TextBox()
         Me.Label17 = New System.Windows.Forms.Label()
-        Me.txtRoom = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.txtWeight = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -140,6 +140,8 @@ Partial Class frmPatientInfo
         'pnlPersonalInformation
         '
         Me.pnlPersonalInformation.BackColor = System.Drawing.Color.White
+        Me.pnlPersonalInformation.Controls.Add(Me.cboBed)
+        Me.pnlPersonalInformation.Controls.Add(Me.cboRoom)
         Me.pnlPersonalInformation.Controls.Add(Me.Label15)
         Me.pnlPersonalInformation.Controls.Add(Me.Label14)
         Me.pnlPersonalInformation.Controls.Add(Me.txtPhone)
@@ -149,9 +151,7 @@ Partial Class frmPatientInfo
         Me.pnlPersonalInformation.Controls.Add(Me.txtMRN)
         Me.pnlPersonalInformation.Controls.Add(Me.Label12)
         Me.pnlPersonalInformation.Controls.Add(Me.Label21)
-        Me.pnlPersonalInformation.Controls.Add(Me.txtBed)
         Me.pnlPersonalInformation.Controls.Add(Me.Label17)
-        Me.pnlPersonalInformation.Controls.Add(Me.txtRoom)
         Me.pnlPersonalInformation.Controls.Add(Me.Label10)
         Me.pnlPersonalInformation.Controls.Add(Me.txtWeight)
         Me.pnlPersonalInformation.Controls.Add(Me.Label8)
@@ -169,6 +169,22 @@ Partial Class frmPatientInfo
         Me.pnlPersonalInformation.Name = "pnlPersonalInformation"
         Me.pnlPersonalInformation.Size = New System.Drawing.Size(364, 428)
         Me.pnlPersonalInformation.TabIndex = 17
+        '
+        'cboBed
+        '
+        Me.cboBed.FormattingEnabled = True
+        Me.cboBed.Location = New System.Drawing.Point(13, 258)
+        Me.cboBed.Name = "cboBed"
+        Me.cboBed.Size = New System.Drawing.Size(151, 21)
+        Me.cboBed.TabIndex = 57
+        '
+        'cboRoom
+        '
+        Me.cboRoom.FormattingEnabled = True
+        Me.cboRoom.Location = New System.Drawing.Point(207, 196)
+        Me.cboRoom.Name = "cboRoom"
+        Me.cboRoom.Size = New System.Drawing.Size(151, 21)
+        Me.cboRoom.TabIndex = 56
         '
         'Label15
         '
@@ -269,17 +285,6 @@ Partial Class frmPatientInfo
         Me.Label21.TabIndex = 47
         Me.Label21.Text = "Bed:"
         '
-        'txtBed
-        '
-        Me.txtBed.BackColor = System.Drawing.Color.White
-        Me.txtBed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtBed.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBed.Location = New System.Drawing.Point(13, 253)
-        Me.txtBed.Name = "txtBed"
-        Me.txtBed.ReadOnly = True
-        Me.txtBed.Size = New System.Drawing.Size(150, 29)
-        Me.txtBed.TabIndex = 7
-        '
         'Label17
         '
         Me.Label17.AutoSize = True
@@ -290,17 +295,6 @@ Partial Class frmPatientInfo
         Me.Label17.Size = New System.Drawing.Size(58, 21)
         Me.Label17.TabIndex = 45
         Me.Label17.Text = "Room:"
-        '
-        'txtRoom
-        '
-        Me.txtRoom.BackColor = System.Drawing.Color.White
-        Me.txtRoom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtRoom.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRoom.Location = New System.Drawing.Point(207, 191)
-        Me.txtRoom.Name = "txtRoom"
-        Me.txtRoom.ReadOnly = True
-        Me.txtRoom.Size = New System.Drawing.Size(151, 29)
-        Me.txtRoom.TabIndex = 6
         '
         'Label10
         '
@@ -757,9 +751,7 @@ Partial Class frmPatientInfo
     Friend WithEvents txtBirthday As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents Label21 As Label
-    Friend WithEvents txtBed As TextBox
     Friend WithEvents Label17 As Label
-    Friend WithEvents txtRoom As TextBox
     Friend WithEvents Label10 As Label
     Friend WithEvents txtWeight As TextBox
     Friend WithEvents Label8 As Label
@@ -799,4 +791,6 @@ Partial Class frmPatientInfo
     Friend WithEvents Label18 As Label
     Friend WithEvents Panel1 As Panel
     Friend WithEvents btnBack As Button
+    Friend WithEvents cboBed As ComboBox
+    Friend WithEvents cboRoom As ComboBox
 End Class
