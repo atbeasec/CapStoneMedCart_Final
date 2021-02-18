@@ -228,6 +228,7 @@ Module LogIn
         For i = 0 To (7) Step 1
             Dim generatorCharPosition = New System.Random
             Dim intCharPosition = generatorCharPosition.Next(0, 61)
+            Threading.Thread.Sleep(1376 + generatorCharPosition.Next(5))
             strSalt += STRSALTCHARS.ToCharArray.ElementAt(intCharPosition)
         Next
         ' add the salt to the password prepended
