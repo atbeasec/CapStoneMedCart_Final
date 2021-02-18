@@ -356,8 +356,11 @@ Public Class frmConfiguration
     '/*		intActiveFlag- used to assign 1 to the active flag      	   */                     
     '/*      intAdmin- 1 if admin radio button is checked                   */
     '/*		strFirstName- text from txtFirstName 							*/
+    '/*     strHashedBarcode - hashed barcode
     '/*		strLastName- text from txtLastName								*/
     '/*		strPassword- text from txtPassword								*/
+    '/*     strResults() - the results of the salt and the hashed password  */
+    '/*     strSalt - the salt of the password                              */
     '/*		strSpecialChar-	list of allowed special characters				*/
     '/*     strStatement- SQL String passed to ExecuteScalarQuery to check */
     '/*		intSupervisor- 1 if supervisor radio button is checked		    */
@@ -368,7 +371,8 @@ Public Class frmConfiguration
     '/*  ---        ----     ------------------------------------------------- */
     '/*	Dylan W	    2/3/2021  Users can now be added to the User Table		*/ 
     '/*  NP         2/10/2021 Changed the first and last name to accept '-@ */  
-    '/*	Dylan W     2/10/2021 checked first and last for multiple ' 	   */     
+    '/*	Dylan W     2/10/2021 checked first and last for multiple ' 	   */ 
+    '/* Eric L.     2/17/2021 Added methods to salt, pepper and hash        */
     '/*********************************************************************/
 
 
@@ -557,9 +561,9 @@ Public Class frmConfiguration
 
     Private Sub txtPassword_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress, txtConfirmPassword.KeyPress
         If Not (Asc(e.KeyChar) = 8) Then
-            'string of allowed characters
+            'String of allowed characters
             Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()/.,<>=+"
-            'converts letter to lowercase to compare to allowedChars string to check if it is allowed in the text box
+            'converts letter to lowercase to compare to allowedChars string to check if it Is allowed in the text box
             If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
                 e.KeyChar = ChrW(0)
                 e.Handled = True
@@ -577,6 +581,7 @@ Public Class frmConfiguration
         Dim strFirstName As String = txtFirstName.Text
         Dim strSalt As String = Nothing
         Dim strResults() As String = Nothing ' this will hold the salted, peppered, hashed password and the salt
+        Dim strHashedBarcode As String
         strFirstName = Regex.Replace(strFirstName, "'", "''")
         strLastName = Regex.Replace(strLastName, "'", "''")
 
@@ -607,9 +612,19 @@ Public Class frmConfiguration
             strPassword = strResults(0)
             strSalt = strResults(1)
 
-            'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
-            strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',Salt='" & strSalt & "',Password='" & strPassword & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Barcode='" & txtBarcode.Text & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "' WHERE User_ID='" & txtID.Text & "';"
-            ExecuteInsertQuery(strStatement)
+            If txtBarcode.Text = "" Then
+                'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
+                strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',Salt='" & strSalt & "',Password='" & strPassword & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "' WHERE User_ID='" & txtID.Text & "';"
+                ExecuteInsertQuery(strStatement)
+            Else
+                ' Convert the barcode to the peppered hash
+                strHashedBarcode = ConvertBarcodePepperAndHash(txtBarcode.Text)
+                'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
+                strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',Salt='" & strSalt & "',Password='" & strPassword & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Barcode='" & strHashedBarcode & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "' WHERE User_ID='" & txtID.Text & "';"
+                ExecuteInsertQuery(strStatement)
+            End If
+
+
 
             'clear all text boxes and change button visibility back to default 
             txtFirstName.Text = ""

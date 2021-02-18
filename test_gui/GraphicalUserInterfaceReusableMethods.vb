@@ -593,8 +593,8 @@
             frmConfiguration.txtFirstName.Text = ExecuteScalarQuery(strStatement)
             strStatement = "SELECT User_Last_Name FROM User WHERE User_ID = '" & frmConfiguration.txtID.Text & "';"
             frmConfiguration.txtLastName.Text = ExecuteScalarQuery(strStatement)
-            strStatement = "SELECT Barcode FROM User WHERE User_ID = '" & frmConfiguration.txtID.Text & "';"
-            frmConfiguration.txtBarcode.Text = ExecuteScalarQuery(strStatement)
+            'strStatement = "SELECT Barcode FROM User WHERE User_ID = '" & frmConfiguration.txtID.Text & "';"
+            frmConfiguration.txtBarcode.Text = ""
             strStatement = "SELECT Admin_Flag FROM User WHERE User_ID = '" & frmConfiguration.txtID.Text & "';"
             Dim strSupervisor = "SELECT Supervisor_Flag FROM User WHERE User_ID = '" & frmConfiguration.txtID.Text & "';"
 
