@@ -29,7 +29,6 @@ Partial Class frmConfigureRooms
         Me.lstRooms = New System.Windows.Forms.ListBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.btnDeleteRoom = New System.Windows.Forms.Button()
-        Me.btnAddRoom = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.lstBeds = New System.Windows.Forms.ListBox()
         Me.btnAddBed = New System.Windows.Forms.Button()
@@ -70,7 +69,7 @@ Partial Class frmConfigureRooms
         Me.Panel5.Controls.Add(Me.txtRoom)
         Me.Panel5.Location = New System.Drawing.Point(16, 35)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel5.Padding = New System.Windows.Forms.Padding(1, 1, 1, 1)
         Me.Panel5.Size = New System.Drawing.Size(175, 28)
         Me.Panel5.TabIndex = 1
         '
@@ -103,7 +102,7 @@ Partial Class frmConfigureRooms
         Me.Panel1.Controls.Add(Me.lstRooms)
         Me.Panel1.Location = New System.Drawing.Point(17, 99)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel1.Padding = New System.Windows.Forms.Padding(1, 1, 1, 1)
         Me.Panel1.Size = New System.Drawing.Size(175, 212)
         Me.Panel1.TabIndex = 3
         '
@@ -121,28 +120,13 @@ Partial Class frmConfigureRooms
         Me.btnDeleteRoom.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnDeleteRoom.UseVisualStyleBackColor = False
         '
-        'btnAddRoom
-        '
-        Me.btnAddRoom.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnAddRoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAddRoom.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddRoom.ForeColor = System.Drawing.Color.White
-        Me.btnAddRoom.Location = New System.Drawing.Point(207, 31)
-        Me.btnAddRoom.Name = "btnAddRoom"
-        Me.btnAddRoom.Size = New System.Drawing.Size(87, 33)
-        Me.btnAddRoom.TabIndex = 2
-        Me.btnAddRoom.Text = "Add"
-        Me.btnAddRoom.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnAddRoom.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnAddRoom.UseVisualStyleBackColor = False
-        '
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.DarkGray
         Me.Panel2.Controls.Add(Me.lstBeds)
         Me.Panel2.Location = New System.Drawing.Point(318, 99)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel2.Padding = New System.Windows.Forms.Padding(1, 1, 1, 1)
         Me.Panel2.Size = New System.Drawing.Size(175, 212)
         Me.Panel2.TabIndex = 7
         '
@@ -179,7 +163,7 @@ Partial Class frmConfigureRooms
         Me.Panel3.Controls.Add(Me.txtBed)
         Me.Panel3.Location = New System.Drawing.Point(319, 35)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel3.Padding = New System.Windows.Forms.Padding(1, 1, 1, 1)
         Me.Panel3.Size = New System.Drawing.Size(175, 28)
         Me.Panel3.TabIndex = 5
         '
@@ -241,7 +225,6 @@ Partial Class frmConfigureRooms
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.btnDeleteRoom)
-        Me.Controls.Add(Me.btnAddRoom)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.Label13)
@@ -265,7 +248,6 @@ Partial Class frmConfigureRooms
     Friend WithEvents lstRooms As ListBox
     Friend WithEvents Panel1 As Panel
     Friend WithEvents btnDeleteRoom As Button
-    Friend WithEvents btnAddRoom As Button
     Friend WithEvents Panel2 As Panel
     Friend WithEvents lstBeds As ListBox
     Friend WithEvents btnAddBed As Button

@@ -1,4 +1,6 @@
-﻿Module PopulateRoomsCombBoxesMethods
+﻿Imports System.Text
+Module PopulateRoomsCombBoxesMethods
+
 
     '/*********************************************************************/
     '/*                   FILE NAME: PopulateRoomsCombBoxesMethods        */									  
@@ -34,6 +36,7 @@
     '/*											   */					  
     '/*  WHO   WHEN     WHAT								   */			  
     '/*  ---   ----     ------------------------------------------------- */
+    '/*  NP    2/16/2021 Added UpdateBedComboBox                          */
     '/*********************************************************************/
 
 
@@ -137,5 +140,59 @@
                 cboBed.Items.Add(row(EnumList.Rooms.BedName))
             End If
         Next
+    End Sub
+
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: UpdateBedComboBox      		   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		                */   
+    '/*		         DATE CREATED: 	2/16/2021                       	   */                             
+    '/*********************************************************************/
+    '/*  SUBPRORAM PURPOSE:								                   */             
+    '/*	 this is going to update the list of options in the beds combobox  */
+    '/*  based on what is selected in the rooms combobox.                  */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 cboBed - this is the combobox that is being used for the beds    */
+
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Sub UpdateBedComboBox(cboBed As ComboBox, cboRoom As ComboBox)
+        Dim strbSQL = New StringBuilder
+        Dim dsBeds As DataSet
+        strbSQL.Append("Select * from Rooms where Room_ID = '")
+        strbSQL.Append(cboRoom.SelectedItem & "' and active_flag = '" & 1 & "';")
+
+        dsBeds = CreateDatabase.ExecuteSelectQuery(strbSQL.ToString)
+
+        populateBedComboBox(cboBed, dsBeds)
+
+
     End Sub
 End Module

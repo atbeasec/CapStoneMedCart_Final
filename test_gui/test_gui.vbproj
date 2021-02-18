@@ -130,6 +130,7 @@
     <Compile Include="AdminActions.vb" />
     <Compile Include="CartInterfaceCode.vb" />
     <Compile Include="CheckComboBoxForDuplicateMethods.vb" />
+    <Compile Include="ConfigureRoomsBeds.vb" />
     <Compile Include="CreateDatabase.vb" />
     <Compile Include="Discrepancies.vb" />
     <Compile Include="Dispense.Designer.vb">

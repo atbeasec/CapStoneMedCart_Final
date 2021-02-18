@@ -253,15 +253,56 @@
 
     'End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: frmPatientInfo_Load  		   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		         */   
+    '/*		         DATE CREATED: 		   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								   */             
+    '/*											   */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  NP    2/16/2021 Changed cboBed to be disabled by default until a */
+    '/*                  selection in room is made.                       */
+    '/*  NP   2/16/2021  added a call to the GetRoom method in            */
+    '/*                  PatientInformation*/
+    '/*********************************************************************/
 
     Private Sub frmPatientInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        cboBed.Enabled = False 'this will stop the people from selecting a bed before they
+        'select a room. 
+        Dim intPatientMRN = txtMRN.Text
 
-
-
-        intPatientMRN = txtMRN.Text
         PatientInformation.GetAllergies(intPatientMRN)
         PatientInformation.GetPatientInformation(intPatientMRN)
         PatientInformation.getPrescriptions(intPatientMRN)
+        PatientInformation.getRoom(intPatientMRN, cboRoom, cboBed)
 
 
 
@@ -997,4 +1038,62 @@
 
     End Sub
 
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME:  cboRoom_SelectedIndexChanged  */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		               */   
+    '/*		         DATE CREATED: 	2/16/2021                       	   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								   */             
+    '/*	 This is going to update the cboBed list based on the selection in */
+    '/*  cboRoom. It will also try to save the selection made in the bed if*/
+    '/*  one is already made and try to re assign that. If it can't reassign*/
+    '/*  the old value it will just leave the cboBed selectItem blank. This*/
+    '/*  so when the form is first loaded if a person has a bed they won't */
+    '/*  lose it when the form is loaded.                                  */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*  strTemp - this is going to hold the old value that was selected in*/                     
+    '/*            cboBed and try to reassign it later.                    */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Private Sub cboRoom_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboRoom.SelectedIndexChanged
+        cboBed.Enabled = True
+        Dim strTemp As String = ""
+
+        If Not cboBed.SelectedIndex = -1 Then
+            strTemp = cboBed.SelectedItem
+        End If
+        cboBed.SelectedIndex = -1
+        PopulateRoomsCombBoxesMethods.UpdateBedComboBox(cboBed, cboRoom)
+        If cboBed.Items.Contains(strTemp) Then
+            cboBed.SelectedItem = strTemp
+        End If
+
+    End Sub
 End Class

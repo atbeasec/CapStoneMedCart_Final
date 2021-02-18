@@ -173,13 +173,21 @@ Public Class frmNewPatient
     '/*********************************************************************/
 
     Private Sub frmNewPatient_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        dsrooms = CreateDatabase.ExecuteSelectQuery("Select * From Rooms ORDER BY Room_ID, Bed_Name;")
-        dsPhysicians = CreateDatabase.ExecuteSelectQuery("Select * from Physician ORDER BY Physician_Last_Name, Physician_First_Name;")
+        dsrooms = CreateDatabase.ExecuteSelectQuery("Select * From Rooms where Active_flag = '" & 1 & "' ORDER BY Room_ID, Bed_Name;")
+        dsPhysicians = CreateDatabase.ExecuteSelectQuery("Select * from Physician where Active_flag = '" & 1 & "' ORDER BY Physician_Last_Name, Physician_First_Name ;")
         cmbSex.Items.AddRange({"Male", "Female"})
         PopulateStateComboBox(cmbState)
         PopulateRoomComboBox(cmbRoom, dsrooms)
         populateBedComboBox(cmbBed, dsrooms)
         populatePhysicianComboBox(cmbPhysician, dsPhysicians)
+
+        cmbBed.Enabled = False
+    End Sub
+
+    Private Sub cmbRoom_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbRoom.SelectedIndexChanged
+
+        PopulateRoomsCombBoxesMethods.UpdateBedComboBox(cmbBed, cmbRoom)
+        cmbBed.Enabled = True
     End Sub
 
 End Class
