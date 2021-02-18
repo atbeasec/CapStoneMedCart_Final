@@ -1,4 +1,5 @@
 ﻿Imports RestSharp
+Imports Newtonsoft.Json.Linq
 Module Interactions
     '/***************************************************************************/
     '/*                   FILE NAME: Interactions.vb                            */
@@ -77,11 +78,11 @@ Module Interactions
     '/* 			                                                      */
     '/*********************************************************************/
     '/*  RETURNS:								                          */
-    '/*            (NOTHING)								              */
+    '/*       								              */
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                  */
     '/*											                          */
-    '/*   getDrugInteraction("341248")					                  */
+    '/*    getDrugInteraction("153010", "$.interactionTypeGroup[0].interactionType[0].interactionPair[0].description")					                  */
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically):			    	          */
     '/*											                          */
@@ -96,15 +97,20 @@ Module Interactions
     '/*  WHO      WHEN     WHAT								              */
     '/*                                                                   */
     '/*  Dillen  02/3/21  Function that check Interations                 */
+<<<<<<< HEAD
+    '/*  Dillen  02/9/21  Added way to choose json Property to pull       */
+    '/*                   from Interaction API                            */
+    '/*********************************************************************/
+=======
     '/*  NP      02/9/2021 Added a return that returns the result to      */
     '/*                    remove the function has no return warning.     */
     '/********************************************************************/
+>>>>>>> main
     '//
-    Function getDrugInteraction(rxuiNum As String) As Object
-
+    Function getDrugInteraction(rxuiNum1 As String, rxcuiNum2 As String, jsonPointer As String)
 
         'URL for finding interactions 
-        Dim url As String = "https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=" + rxuiNum
+        Dim url As String = "https://rxnav.nlm.nih.gov/REST/interaction/list.json?rxcuis=" & rxuiNum1 & "+" & rxcuiNum2
 
 
         'web request to pull data 
@@ -112,14 +118,19 @@ Module Interactions
         Dim restRequest As New RestSharp.RestRequest(url)
 
 
-        'saves the result from request
-        Dim result = restClient.Get(restRequest)
+        'saves the ressult as IRestResponse 
+        Dim result As IRestResponse = restClient.Get(restRequest)
+
+        'save our json string as a jtoken 
+        Dim jsonResult As JToken = JToken.Parse(result.Content)
+
+        'this is the json path, easy way to create a new one https://jsonpath.com/   https://jsonformatter.curiousconcept.com/
+        'Dim myTrawlString As String = jsonPointer
+
+        'trawling the result/JToken with the pointer string to localize what we want: the rxnormID
+        Dim trawledResult As JToken = TrawlJSON(jsonResult, jsonPointer)
 
 
-        'debug to test if content is correct
-        Debug.WriteLine(result.Content)
-        'adding return result to make this work like a function -NP
-        Return result
-
+        Return trawledResult
     End Function
 End Module
