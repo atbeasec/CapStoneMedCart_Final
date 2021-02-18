@@ -297,7 +297,7 @@
     Private Sub frmPatientInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         cboBed.Enabled = False 'this will stop the people from selecting a bed before they
         'select a room. 
-        Dim intPatientMRN = txtMRN.Text
+        intPatientMRN = txtMRN.Text
 
         PatientInformation.GetAllergies(intPatientMRN)
         PatientInformation.GetPatientInformation(intPatientMRN)
