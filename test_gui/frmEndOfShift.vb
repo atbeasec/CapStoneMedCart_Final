@@ -366,14 +366,14 @@
 
             Case TypesOfReports.AllMedication
 
-                 ' EndofShiftAllMedications()
+                Inventory.EndofShiftAllMedications()
 
             Case TypesOfReports.Controlled
-
+                Inventory.ControlledMedsEndofShift()
 
             Case TypesOfReports.ControlledNonNarcotic
 
-                 ' ControlledMedsEndofShift()
+                Inventory.NonControlledMedsEndofShift()
 
             Case TypesOfReports.Narcotic
 
