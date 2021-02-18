@@ -531,7 +531,7 @@ Module rxNorm
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                  */
     '/*											                          */
-    '/*   getDrugRXCUI("advil")				                              */
+    '/*    GetRxcuiByName("advil")				                              */
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically):			    	          */
     '/*											                          */
