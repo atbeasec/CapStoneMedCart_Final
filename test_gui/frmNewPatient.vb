@@ -91,16 +91,21 @@ Public Class frmNewPatient
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
+    '/*  NP    2/18/2021 Swapped the numbers of strPhysiciansName() because*/
+    '/*                 They were inverted and were breaking the app. I also*/
+    '/*                 made it so the comma is trimed off the last name of */
+    '/*                 the physician.                                      */
     '/*********************************************************************/
 
 
     Private Sub SavePatientDataToDatabase()
         Dim strbSQL As New StringBuilder()
         Dim strPhysicianName As String() = Split(cmbPhysician.SelectedItem)
+
+        strPhysicianName(0) = strPhysicianName(0).TrimEnd(",")
         dsPhysicians = CreateDatabase.ExecuteSelectQuery("Select Physician_ID from  Physician where Physician_First_name = '" &
-                                                         strPhysicianName(0) & "' and Physician_Last_Name = '" &
-                                                         strPhysicianName(1) & "';")
+                                                         strPhysicianName(1) & "' and Physician_Last_Name = '" &
+                                                         strPhysicianName(0) & "';")
 
 
 
