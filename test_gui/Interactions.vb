@@ -97,39 +97,26 @@ Module Interactions
     '/*  WHO      WHEN     WHAT								              */
     '/*                                                                   */
     '/*  Dillen  02/3/21  Function that check Interations                 */
-<<<<<<< HEAD
+    '<<<<<<< HEAD
     '/*  Dillen  02/9/21  Added way to choose json Property to pull       */
     '/*                   from Interaction API                            */
     '/*********************************************************************/
-=======
+    '=======
     '/*  NP      02/9/2021 Added a return that returns the result to      */
     '/*                    remove the function has no return warning.     */
     '/********************************************************************/
->>>>>>> main
+    '>>>>>>> main
     '//
-    Function getDrugInteraction(rxuiNum1 As String, rxcuiNum2 As String, jsonPointer As String)
+    Function getDrugInteraction(rxcuiNum1 As String, rxcuiNum2 As String, jsonPointer As String)
 
         'URL for finding interactions 
-        Dim url As String = "https://rxnav.nlm.nih.gov/REST/interaction/list.json?rxcuis=" & rxuiNum1 & "+" & rxcuiNum2
-
-
-        'web request to pull data 
-        Dim restClient As New RestSharp.RestClient(url)
-        Dim restRequest As New RestSharp.RestRequest(url)
-
-
-        'saves the ressult as IRestResponse 
-        Dim result As IRestResponse = restClient.Get(restRequest)
-
-        'save our json string as a jtoken 
-        Dim jsonResult As JToken = JToken.Parse(result.Content)
-
-        'this is the json path, easy way to create a new one https://jsonpath.com/   https://jsonformatter.curiousconcept.com/
-        'Dim myTrawlString As String = jsonPointer
-
-        'trawling the result/JToken with the pointer string to localize what we want: the rxnormID
-        Dim trawledResult As JToken = TrawlJSON(jsonResult, jsonPointer)
-
+        Dim url As String = $"https://rxnav.nlm.nih.gov/REST/interaction/list.json?rxcuis={rxcuiNum1}+{rxcuiNum2}"
+        'location in json of properties
+        Dim trawlPointer As String = "$.interactionTypeGroup.interactionType.interactionPair"
+        'inputJSON
+        Dim inputJSON As JToken = rxNorm.GetJSON(url)
+        'set Jtoken into array to pull data from json
+        Dim trawledResult As JToken = inputJSON.SelectToken(trawlPointer)
 
         Return trawledResult
     End Function

@@ -85,14 +85,14 @@ Module rxNorm
     '/*  WHO      WHEN     WHAT								              */
     '/*                                                                   */
     '/*  Dillen  01/27/21  Function to make api call to get               */
-<<<<<<< HEAD
+    '<<<<<<< HEAD
     '/*                      drug information.                            */
     '/*  Dillen 02/17/2021  Optimzed code                                 */
-=======
+    '=======
     '/*                      drug information.			                  */
     '/* NP       02/9/2021 Changed function to return result to remove the*/
     '/*                    Warning for not returning a value.             */
->>>>>>> main
+    '>>>>>>> main
     '/*********************************************************************/
 
 
@@ -241,10 +241,15 @@ Module rxNorm
     '/*											                          */
     '/*  WHO      WHEN     WHAT								              */
     '/*                                                                   */
-<<<<<<< HEAD
+    '<<<<<<< HEAD
     '/*  Dillen  02/4/21  inital creation                                 */
     '/*  Dillen  02/5/21  Parsing data in api                             */  
     '/*  Dillen  02/17/21 Optimized code                                  */
+    '/*********************************************************************/
+    '/*  Dillen  01/27/21  Function to make api call to get               */
+    '/*                      drug properties            			      */
+    '/*  NP      02/9/2021 Added a return that returns the result to      */
+    '/*                    remove the function has no return warning.     */
     '/*********************************************************************/
     Function getDrugRXCUI(drugName As String, drugStrength As String, drugMeasurement As String, drugType As String) As String
         'URL for finding rxcui json file that contains the name and rxcui 
@@ -262,14 +267,6 @@ Module rxNorm
         'return the rxcui 
         Return jValueObj.Value
     End Function
-=======
-    '/*  Dillen  01/27/21  Function to make api call to get               */
-    '/*                      drug properties            			      */
-    '/*  NP      02/9/2021 Added a return that returns the result to      */
-    '/*                    remove the function has no return warning.     */
-    '/*********************************************************************/
->>>>>>> main
-
 
 
     '/*********************************************************************/
@@ -369,7 +366,6 @@ Module rxNorm
 
         Dim inputJSON As JToken = GetJSON(url)
 
-<<<<<<< HEAD
         Dim theJArray As JArray = inputJSON.SelectToken(jsonPointer)
 
         For Each item In theJArray
@@ -422,15 +418,15 @@ Module rxNorm
     '/*											                          */
     '/*  WHO      WHEN     WHAT								              */
     '/*                                                                   */
-<<<<<<< HEAD
+    '<<<<<<< HEAD
     '/*  Dillen  02/15/21  inital creation                                 */
     '/*                                                                   */  
     '/*                                                                   */
-=======
+    '=======
     '/*  Dillen  02/4/21  inital creation                                 */
     '/*  NP      02/9/2021 Added a return that returns the result to      */
     '/*                    remove the function has no return warning.     */
->>>>>>> main
+    '>>>>>>> main
     '/*********************************************************************/
     Function getSchedule(rxcuiID As String) As String
         'api location
