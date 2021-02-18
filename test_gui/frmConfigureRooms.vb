@@ -238,7 +238,7 @@ Public Class frmConfigureRooms
         lstRooms.Items.Clear()
         lstBeds.Items.Clear()
         ShowRooms("SELECT DISTINCT Room_ID FROM Rooms WHERE Active_Flag = 1 ORDER BY Room_ID ASC")
-        ShowBeds("SELECT DISTINCT Bed_Name FROM Rooms WHERE Active_Flag = 1 ORDER BY Bed_Name ASC")
+        'ShowBeds("SELECT DISTINCT Bed_Name FROM Rooms WHERE Active_Flag = 1 ORDER BY Bed_Name ASC")
     End Sub
 
     '/*******************************************************************/
