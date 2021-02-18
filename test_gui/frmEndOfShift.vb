@@ -376,11 +376,10 @@
                 Inventory.NonControlledMedsEndofShift()
 
             Case TypesOfReports.Narcotic
-
+                Inventory.NarcoticEndOfShift()
 
             Case TypesOfReports.NonNarcotic
-
-                'NonControlledMedsEndofShift()
+                Inventory.NonNarcoticEndOfShift()
 
         End Select
 

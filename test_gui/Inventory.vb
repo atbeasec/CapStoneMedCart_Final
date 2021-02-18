@@ -323,5 +323,30 @@
             frmEndOfShift.CreatePanel(frmEndOfShift.flpEndOfShiftCount, dr(0), dr(1), dr(2), dr(3), dr(4))
         Next
     End Sub
+
+
+    Public Sub NarcoticEndOfShift()
+        Dim strSqlCommand As String
+        Dim dsMedicationDataset As DataSet
+        strSqlCommand = "SELECT Medication_TUID, Drug_Name, Drawer_Number, Divider_Bin, Quantity FROM DrawerMedication " &
+            "INNER JOIN Medication on Medication.Medication_ID = DrawerMedication.Medication_TUID " &
+            "INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID WHERE Medication.NarcoticControlled_Flag = '1'"
+        dsMedicationDataset = CreateDatabase.ExecuteSelectQuery(strSqlCommand)
+        For Each dr As DataRow In dsMedicationDataset.Tables(0).Rows
+            frmEndOfShift.CreatePanel(frmEndOfShift.flpEndOfShiftCount, dr(0), dr(1), dr(2), dr(3), dr(4))
+        Next
+    End Sub
+
+    Public Sub NonNarcoticEndOfShift()
+        Dim strSqlCommand As String
+        Dim dsMedicationDataset As DataSet
+        strSqlCommand = "SELECT Medication_TUID, Drug_Name, Drawer_Number, Divider_Bin, Quantity FROM DrawerMedication " &
+            "INNER JOIN Medication on Medication.Medication_ID = DrawerMedication.Medication_TUID " &
+            "INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID WHERE Medication.NarcoticControlled_Flag = '0'"
+        dsMedicationDataset = CreateDatabase.ExecuteSelectQuery(strSqlCommand)
+        For Each dr As DataRow In dsMedicationDataset.Tables(0).Rows
+            frmEndOfShift.CreatePanel(frmEndOfShift.flpEndOfShiftCount, dr(0), dr(1), dr(2), dr(3), dr(4))
+        Next
+    End Sub
 End Module
 
