@@ -608,27 +608,32 @@
 
             'make the save and cancel button visible and hide button1
             frmConfiguration.btnSaveChanges.Visible = True
-                frmConfiguration.btnCancel.Visible = True
+            frmConfiguration.btnCancel.Visible = True
             frmConfiguration.Button1.Visible = False
 
         ElseIf getOpenedForm().GetType() Is frmPatientRecords.GetType() Then
+            'this will set up the functions for the editing pencil. 
+            Dim PatientInfo = New frmPatientInfo
 
-                ' call SQL method to set edit functionality
-                Debug.Print("patient records")
 
-            ElseIf getOpenedForm().GetType() Is frmConfigureInventory.GetType() Then
+            ' call SQL method to set edit functionality
+            Debug.Print("patient records")
 
-                ' call SQL method to set edit functionality
-                '  Debug.Print("removing this inventory piece")
+        ElseIf getOpenedForm().GetType() Is frmConfigureInventory.GetType() Then
 
-            ElseIf getOpenedForm().GetType() Is frmAllergies.GetType() Then
+            ' call SQL method to set edit functionality
+            '  Debug.Print("removing this inventory piece")
 
-                ' call SQL method to set edit functionality
-                ' Debug.Print("remove allergy assigned to patient")
+        ElseIf getOpenedForm().GetType() Is frmAllergies.GetType() Then
 
-            End If
+            ' call SQL method to set edit functionality
+            ' Debug.Print("remove allergy assigned to patient")
+
+        End If
 
     End Sub
+
+
 
     '/*********************************************************************/
     '/*                   Function NAME: getOpenedForm()                  */         

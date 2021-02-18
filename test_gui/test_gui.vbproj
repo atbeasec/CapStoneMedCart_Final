@@ -132,6 +132,7 @@
     <Compile Include="CheckComboBoxForDuplicateMethods.vb" />
     <Compile Include="ConfigureRoomsBeds.vb" />
     <Compile Include="CreateDatabase.vb" />
+    <Compile Include="DataVaildationMethods.vb" />
     <Compile Include="Discrepancies.vb" />
     <Compile Include="Dispense.Designer.vb">
       <DependentUpon>Dispense.vb</DependentUpon>
