@@ -365,15 +365,13 @@
         Select Case intIndex
 
             Case TypesOfReports.AllMedication
-
                 Inventory.EndofShiftAllMedications()
 
             Case TypesOfReports.Controlled
                 Inventory.ControlledMedsEndofShift()
 
             Case TypesOfReports.ControlledNonNarcotic
-
-                Inventory.NonControlledMedsEndofShift()
+                Inventory.ControlledNonNarcoticMedsEndofShift()
 
             Case TypesOfReports.Narcotic
                 Inventory.NarcoticEndOfShift()

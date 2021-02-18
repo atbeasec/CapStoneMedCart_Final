@@ -236,10 +236,12 @@
 
         Dim strSqlCommand As String
         Dim dsMedicationDataset As DataSet
+
         strSqlCommand = "SELECT Medication_TUID, Drug_Name, Drawer_Number, Divider_Bin, Quantity FROM DrawerMedication " &
             "INNER JOIN Medication on Medication.Medication_ID = DrawerMedication.Medication_TUID " &
             "INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID"
         dsMedicationDataset = CreateDatabase.ExecuteSelectQuery(strSqlCommand)
+
         For Each dr As DataRow In dsMedicationDataset.Tables(0).Rows
             frmEndOfShift.CreatePanel(frmEndOfShift.flpEndOfShiftCount, dr(0), dr(1), dr(2), dr(3), dr(4))
         Next
@@ -273,12 +275,12 @@
     '/*  ---                   ----     ----------------------------------*/
     '/*  Alexander Beasecker  02/10/21	  Initial creation of the code    */
     '/*********************************************************************/
-    Public Sub NonControlledMedsEndofShift()
+    Public Sub ControlledNonNarcoticMedsEndofShift()
         Dim strSqlCommand As String
         Dim dsMedicationDataset As DataSet
         strSqlCommand = "SELECT Medication_TUID, Drug_Name, Drawer_Number, Divider_Bin, Quantity FROM DrawerMedication " &
             "INNER JOIN Medication on Medication.Medication_ID = DrawerMedication.Medication_TUID " &
-            "INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID WHERE Medication.Controlled = '0'"
+            "INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID WHERE Medication.Controlled = '1' AND Medication.NarcoticControlled_Flag = '0'"
         dsMedicationDataset = CreateDatabase.ExecuteSelectQuery(strSqlCommand)
         For Each dr As DataRow In dsMedicationDataset.Tables(0).Rows
             frmEndOfShift.CreatePanel(frmEndOfShift.flpEndOfShiftCount, dr(0), dr(1), dr(2), dr(3), dr(4))
@@ -342,7 +344,7 @@
         Dim dsMedicationDataset As DataSet
         strSqlCommand = "SELECT Medication_TUID, Drug_Name, Drawer_Number, Divider_Bin, Quantity FROM DrawerMedication " &
             "INNER JOIN Medication on Medication.Medication_ID = DrawerMedication.Medication_TUID " &
-            "INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID WHERE Medication.NarcoticControlled_Flag = '0'"
+            "INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID WHERE Medication.Controlled = '0'"
         dsMedicationDataset = CreateDatabase.ExecuteSelectQuery(strSqlCommand)
         For Each dr As DataRow In dsMedicationDataset.Tables(0).Rows
             frmEndOfShift.CreatePanel(frmEndOfShift.flpEndOfShiftCount, dr(0), dr(1), dr(2), dr(3), dr(4))
