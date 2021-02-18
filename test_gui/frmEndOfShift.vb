@@ -87,13 +87,6 @@
 
 
         'Remove these once the SQL statements are corrected and updated.
-        CreatePanel(flpEndOfShiftCount, "123", "Advil", "2", "3", "54")
-        CreatePanel(flpEndOfShiftCount, "123", "Advil", "2", "3", "54")
-        CreatePanel(flpEndOfShiftCount, "123", "Advil", "2", "3", "54")
-        CreatePanel(flpEndOfShiftCount, "123", "Advil", "2", "3", "54")
-        CreatePanel(flpEndOfShiftCount, "123", "Advil", "2", "3", "54")
-        CreatePanel(flpEndOfShiftCount, "123", "Advil", "2", "3", "54")
-        CreatePanel(flpEndOfShiftCount, "123", "Advil", "2", "3", "54")
 
 
     End Sub
