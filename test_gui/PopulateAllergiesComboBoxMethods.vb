@@ -117,4 +117,24 @@ Module PopulateAllergiesComboBoxMethods
             .DataSource = dcAllergies
         End With
     End Sub
+    Sub populateAllergyTypeComboBox(cmbAllergyType As ComboBox, dsAllergyType As DataSet)
+        Dim strbTesting As New StringBuilder
+        Dim dcAllergies As New AutoCompleteStringCollection
+        cmbAllergyType.Items.Clear()
+
+
+        For Each row As DataRow In dsAllergyType.Tables(0).Rows
+            'If cmbAllergyType.FindStringExact(row(2).ToString()) = 0 Or dcAllergies.Count = 0 Then
+
+            dcAllergies.Add(row(0).ToString())
+
+            'End If
+        Next
+        With cmbAllergyType
+            .AutoCompleteMode = AutoCompleteMode.SuggestAppend
+            .AutoCompleteSource = AutoCompleteSource.CustomSource
+            .AutoCompleteCustomSource = dcAllergies
+            .DataSource = dcAllergies
+        End With
+    End Sub
 End Module

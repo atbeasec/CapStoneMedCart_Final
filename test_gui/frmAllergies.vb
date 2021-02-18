@@ -1,11 +1,14 @@
 ﻿Public Class frmAllergies
     Private Sub frmAllergies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         cmbAllergiesLocked()
+
         Dim dsAllergies = CreateDatabase.ExecuteSelectQuery("Select * From Allergy ORDER BY Allergy_Type, Allergy_Name ;")
         Dim dsDrugAllergies = CreateDatabase.ExecuteSelectQuery("Select * From Allergy WHERE Allergy_Type = 'Drug' ORDER BY Allergy_Type, Allergy_Name ;")
+        Dim dsAllergyType = CreateDatabase.ExecuteSelectQuery("Select DISTINCT Allergy_Type from Allergy;")
 
         populateAllergiesComboBox(cmbAllergies, dsAllergies)
         populateMedicationComboBox(cmbMedicationName, dsDrugAllergies)
+        populateAllergyTypeComboBox(cmbAllergiesType, dsAllergyType)
         Dim strSeverity As String = " "
         Dim intPatientTuid As Integer = GetPatientTuid()
         'get the allergy information from the patient allergy tables
@@ -15,7 +18,6 @@
                             " Where Active_Flag =1 And Patient_TUID =" & (intPatientTuid).ToString & ";")
         ' insert the select statement here and send the results to the createAllergiesPanel
         For Each dr As DataRow In dtsPatientAllergy.Tables(0).Rows
-
 
             If dr(2) = "Drug" Then
                 cmbMedicationName.Text = dr(0)
@@ -28,8 +30,7 @@
             End If
 
             strSeverity = CheckSeverity(dr)
-            txtAllergyType.Text = dr(2)
-            CreateAllergiesPanels(flpAllergies, cmbAllergies.Text, cmbMedicationName.Text, txtAllergyType.Text, strSeverity)
+            CreateAllergiesPanels(flpAllergies, cmbAllergies.Text, cmbMedicationName.Text, cmbAllergiesType.Text, strSeverity)
             cmbAllergiesLocked()
         Next
         'CreateAllergiesPanels()
@@ -168,14 +169,13 @@
             strAllergyName = cmbAllergies.Text
         End If
         Dim intMedicationTUID = "NUll" 'for now but medication tuid will need to be looked up
-        Dim strAllergyType = txtAllergyType.Text
         Dim intPatientTuid = GetPatientTuid()
 
         If cmbAllergies.FindStringExact(cmbAllergies.Text) = -1 Then
-            CreateDatabase.ExecuteInsertQuery("INSERT INTO Allergy(Allergy_Name,Medication_TUID,Allergy_Type) VALUES('" & strAllergyName & "'," & intMedicationTUID & ",'" & strAllergyType & "');")
+            CreateDatabase.ExecuteInsertQuery("INSERT INTO Allergy(Allergy_Name,Medication_TUID,Allergy_Type) VALUES('" & strAllergyName & "'," & intMedicationTUID & ",'" & cmbAllergiesType.Text & "');")
         End If
         ' insert into database statement/method goes here
-        CreateDatabase.ExecuteInsertQuery("INSERT INTO PatientAllergy (Patient_TUID, Allergy_Name, Allergy_Severity, Active_Flag) VALUES (" & intPatientTuid & ",'" & strAllergyName & "','" & strAllergyType & "',1);")
+        CreateDatabase.ExecuteInsertQuery("INSERT INTO PatientAllergy (Patient_TUID, Allergy_Name, Allergy_Severity, Active_Flag) VALUES (" & intPatientTuid & ",'" & strAllergyName & "','" & cmbAllergiesType.Text & "',1);")
         ' populate the screen from a manually added allergy.
         'probably going to need a select query to get the medication name from the TUID
         If cmbSeverity.SelectedIndex = -1 Then
@@ -184,20 +184,24 @@
             strSeverity = cmbSeverity.SelectedItem.ToString
         End If
 
-        CreateAllergiesPanels(flpAllergies, strAllergyName, cmbMedicationName.Text, strAllergyType, strSeverity)
+        CreateAllergiesPanels(flpAllergies, strAllergyName, cmbMedicationName.Text, cmbAllergiesType.Text, strSeverity)
 
     End Sub
 
     Private Sub cmbAllergies_LostFocus(sender As Object, e As EventArgs) Handles cmbAllergies.SelectedValueChanged
         cmbAllergies.DroppedDown = False
         If cmbAllergies.FindStringExact(cmbAllergies.Text) = -1 Then
-            Debug.WriteLine("")
+            cmbAllergiesType.SelectedIndex = -1
+            cmbSeverity.SelectedIndex = -1
 
         Else
             Dim objAllergyType = CreateDatabase.ExecuteScalarQuery("Select Allergy_Type From Allergy Where Allergy_Name = '" & cmbAllergies.Text & "';")
 
-            txtAllergyType.Text = objAllergyType.ToString
-            cmbSeverity.SelectedIndex = 1
+            cmbAllergiesType.SelectedItem = objAllergyType.ToString
+            If cmbAllergiesType.SelectedItem = "Drug" Then
+                cmbMedicationName.SelectedItem = cmbAllergies.SelectedItem
+                cmbSeverity.SelectedIndex = 1
+            End If
         End If
     End Sub
 
@@ -226,10 +230,10 @@
 
     Private Sub cmbAllergiesLocked()
         If cmbMedicationName.Text = "N/A" Or cmbMedicationName.SelectedIndex = -1 Then
-            cmbAllergies.Enabled = True
+            'cmbAllergies.Enabled = True
             cmbAllergies.SelectedIndex = -1
         Else
-            cmbAllergies.Enabled = False
+            'cmbAllergies.Enabled = False
 
         End If
     End Sub
