@@ -505,5 +505,64 @@ Module rxNorm
         Return jsonResult
 
     End Function
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME:  GetRxcuiByName                  */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:Dillen Perron  		              */
+    '/*		         DATE CREATED: 2/17/2021     			              */
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								                  */
+    '/*											                          */
+    '/* This function is a search for the rxcui number in the RxNorm data */
+    '/* Set and only requires a string name for the drug                  */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/*                                     				              */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */
+    '/*             (NONE)								                  */
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */
+    '/*											                          */
+    '/* 			                                                      */
+    '/*********************************************************************/
+    '/*  RETURNS:								                          */
+    '/*   	 Rxcui As String					                          */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */
+    '/*											                          */
+    '/*    GetRxcuiByName("advil")				                              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):			    	          */
+    '/*											                          */
+    '/*	 url - holds a link to the api with the selected rxui             */
+    '/*  restClient -			                                          */
+    '/*  restRequest - 			                                          */
+    '/*  result - holds the result of the api call (json format)          */
+    '/*											                          */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO      WHEN     WHAT								              */
+    '/*********************************************************************/
+    '/*  Dillen  02/17/21  Function to make api call to get               */
+    '/*                      drug rxcui by name            			      */
+    '/*********************************************************************/
+    Public Function GetRxcuiByName(drugName As String) As String
+        Dim url As String = $"https://rxnav.nlm.nih.gov/REST/rxcui?name={drugName}"
+        'location of json <rxnormId
+        Dim trawlPointer As String = "$.idGroup.rxnormId"
+        'convert web response to Jtoken
+        Dim inputJson As JToken = GetJSON(url)
+        'set Jtoken into array to pull data from JSON
+        Dim trawledResult As JToken = inputJson.SelectToken(trawlPointer)
+        ''set Jtoken into array to pull data from json
+        Dim JsonJArray As JArray = DirectCast(trawledResult, JArray)
+        ' convert value from jarray to a jvalue to store the rxcui
+        Dim jValueObj As JValue = DirectCast(JsonJArray.First, JValue)
+        'returns the rxcuiID
+        Return jValueObj.Value
+
+    End Function
 
 End Module
