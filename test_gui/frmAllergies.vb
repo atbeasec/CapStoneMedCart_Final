@@ -48,10 +48,10 @@
     Private Shared Function CheckSeverity(dr As DataRow) As String
         Dim strSeverity As String
 
-        If dr(2).Equals(DBNull.Value) Then
+        If dr(1).Equals(DBNull.Value) Then
             strSeverity = "N/A"
         Else
-            strSeverity = dr(2).ToString
+            strSeverity = dr(1).ToString
         End If
 
         Return strSeverity
