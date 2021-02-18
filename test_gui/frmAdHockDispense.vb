@@ -80,4 +80,5 @@
     Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantity.KeyPress
         DataVaildationMethods.KeyPressCheck(e, "0123456789")
     End Sub
+
 End Class
