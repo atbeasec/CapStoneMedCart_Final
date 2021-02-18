@@ -451,7 +451,7 @@ Module CreateDatabase
 			System.IO.File.Create(strApplicationPath).Dispose()
 
 			'Show a message asking the user if they want to open an existing file or create a new one
-			Dim dlgResult As DialogResult = MessageBox.Show("Would you like to open an existing file?" & vbCr & "If you would like to create a file, select No",
+			Dim dlgResult As DialogResult = MessageBox.Show("Would you like to open an existing file?" & vbCr & "If you would like to create a file, select No.",
 														"Open file", MessageBoxButtons.YesNo)
 
 			'If the user selects yes, they want to select an existing file
