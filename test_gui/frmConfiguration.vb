@@ -547,29 +547,29 @@ Public Class frmConfiguration
         End If
     End Sub
 
-    'Private Sub txtBarcode_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBarcode.KeyPress
-    '    If Not (Asc(e.KeyChar) = 8) Then
-    '        'string of allowed characters
-    '        Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()/.,<>=+"
-    '        'converts letter to lowercase to compare to allowedChars string to check if it is allowed in the text box
-    '        If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
-    '            e.KeyChar = ChrW(0)
-    '            e.Handled = True
-    '        End If
-    '    End If
-    'End Sub
+    Private Sub txtBarcode_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBarcode.KeyPress
+        If Not (Asc(e.KeyChar) = 8) Then
+            'string of allowed characters
+            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()/.,<>=+"
+            'converts letter to lowercase to compare to allowedChars string to check if it is allowed in the text box
+            If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
+                e.KeyChar = ChrW(0)
+                e.Handled = True
+            End If
+        End If
+    End Sub
 
-    'Private Sub txtPassword_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress, txtConfirmPassword.KeyPress
-    '    If Not (Asc(e.KeyChar) = 8) Then
-    '        String of allowed characters
-    '        Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()/.,<>=+"
-    '        converts letter to lowercase to compare to allowedChars string to check if it Is allowed in the text box
-    '        If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
-    '            e.KeyChar = ChrW(0)
-    '            e.Handled = True
-    '        End If
-    '    End If
-    'End Sub
+    Private Sub txtPassword_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress, txtConfirmPassword.KeyPress
+        If Not (Asc(e.KeyChar) = 8) Then
+            'String of allowed characters
+            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()/.,<>=+"
+            'converts letter to lowercase to compare to allowedChars string to check if it Is allowed in the text box
+            If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
+                e.KeyChar = ChrW(0)
+                e.Handled = True
+            End If
+        End If
+    End Sub
 
     Private Sub btnSaveChanges_Click(sender As Object, e As EventArgs) Handles btnSaveChanges.Click
         Dim intID As Integer = txtID.Text
