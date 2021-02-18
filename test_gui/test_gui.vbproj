@@ -329,6 +329,7 @@
     <Compile Include="FullCart.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="GenerateRandom.vb" />
     <Compile Include="GraphicalUserInterfaceReusableMethods.vb" />
     <Compile Include="ImportExportDatabase.vb" />
     <Compile Include="Interactions.vb" />

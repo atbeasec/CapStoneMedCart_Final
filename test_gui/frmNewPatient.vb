@@ -101,6 +101,7 @@ Public Class frmNewPatient
     Private Sub SavePatientDataToDatabase()
         Dim strbSQL As New StringBuilder()
         Dim strPhysicianName As String() = Split(cmbPhysician.SelectedItem)
+        Dim strCharactersForRandomGeneration = "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
         strPhysicianName(0) = strPhysicianName(0).TrimEnd(",")
         dsPhysicians = CreateDatabase.ExecuteSelectQuery("Select Physician_ID from  Physician where Physician_First_name = '" &
@@ -116,8 +117,12 @@ Public Class frmNewPatient
             "'Address', 'City', 'State', 'Zip_Code', 'Phone_Number', 'Email_address', 'Primary_Physician_ID', " &
             "'Active_Flag') Values ('")
 
-        strbSQL.Append(CInt(Rnd() * 20) & "','")
-        strbSQL.Append(CInt(Rnd() * 20) & "',") 'this is going to make a random barcode this is temporary
+        'strbSQL.Append(CInt(Rnd() * 20) & "','")
+        'strbSQL.Append(CInt(Rnd() * 20) & "',") 'this is going to make a random barcode this is temporary
+        strbSQL.Append(GenerateRandom.generateRandomAlphanumeric(20, strCharactersForRandomGeneration) & "','")
+        '^this is going to generate a random MRN number
+        strbSQL.Append(GenerateRandom.generateRandomAlphanumeric(20, strCharactersForRandomGeneration) & "',")
+        '^this is going to genereate a random Bar code. 
         strbSQL.Append("'" & txtFirstName.Text & "' , '" & txtMiddleName.Text & "',")
         strbSQL.Append("'" & txtLastName.Text & "','" & txtBirthday.Text & "',")
         strbSQL.Append("'" & cmbSex.SelectedItem & "','" & txtHeight.Text & "',")
