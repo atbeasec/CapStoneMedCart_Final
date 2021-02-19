@@ -131,6 +131,7 @@
         PatientInformation.getPrescriptions(intPatientMRN)
         PatientInformation.getRoom(intPatientMRN, cboRoom, cboBed)
 
+        ' CreateDispenseHistoryPanels(flpDispenseHistory, "test", "test", "test", "test", "test", "test", "test")
     End Sub
 
     Public Sub CreateDispenseHistoryPanels(ByVal flpPannel As FlowLayoutPanel, ByVal medicationName As String, ByVal strength As String, ByVal type As String, ByVal quantity As String, ByVal dispenseBy As String, ByVal dispenseDate As String, ByVal dispenseTime As String)
@@ -175,15 +176,14 @@
         Dim lblID4 As New Label
         Dim lblID5 As New Label
         Dim lblID6 As New Label
-        Dim lblID7 As New Label
 
         ' anywhere we have quotes except for the label names, we can call our Database and get method
         CreateIDLabel(pnlMainPanel, lblID, "lblMedicationName", lblMedication.Location.X, 20, medicationName, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID2, "lblStrength", lblStrength.Location.X, 20, strength, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID3, "lblType", lblType.Location.X, 20, type, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID4, "lblQuantity", lblQuantity.Location.X, 20, quantity, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID4, "lblDispensedBy", lblDispensedBy.Location.X, 20, dispenseBy, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID5, "lblDispenseTimeAndDate", lblDateTime.Location.X, 20, dispenseDate, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID5, "lblDispensedBy", lblDispensedBy.Location.X, 20, dispenseBy, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID6, "lblDispenseTimeAndDate", lblDateTime.Location.X, 20, dispenseDate, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)

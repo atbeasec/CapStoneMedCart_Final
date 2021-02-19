@@ -410,7 +410,7 @@ Partial Class frmPatientInfo
         Me.lblQuantity.AutoSize = True
         Me.lblQuantity.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblQuantity.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblQuantity.Location = New System.Drawing.Point(441, 16)
+        Me.lblQuantity.Location = New System.Drawing.Point(386, 16)
         Me.lblQuantity.Name = "lblQuantity"
         Me.lblQuantity.Size = New System.Drawing.Size(72, 21)
         Me.lblQuantity.TabIndex = 7
@@ -432,7 +432,7 @@ Partial Class frmPatientInfo
         Me.lblType.AutoSize = True
         Me.lblType.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblType.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblType.Location = New System.Drawing.Point(323, 16)
+        Me.lblType.Location = New System.Drawing.Point(298, 16)
         Me.lblType.Name = "lblType"
         Me.lblType.Size = New System.Drawing.Size(45, 21)
         Me.lblType.TabIndex = 9
@@ -443,7 +443,7 @@ Partial Class frmPatientInfo
         Me.lblDispensedBy.AutoSize = True
         Me.lblDispensedBy.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDispensedBy.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblDispensedBy.Location = New System.Drawing.Point(564, 16)
+        Me.lblDispensedBy.Location = New System.Drawing.Point(479, 16)
         Me.lblDispensedBy.Name = "lblDispensedBy"
         Me.lblDispensedBy.Size = New System.Drawing.Size(108, 21)
         Me.lblDispensedBy.TabIndex = 6
@@ -454,7 +454,7 @@ Partial Class frmPatientInfo
         Me.lblDateTime.AutoSize = True
         Me.lblDateTime.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDateTime.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblDateTime.Location = New System.Drawing.Point(731, 16)
+        Me.lblDateTime.Location = New System.Drawing.Point(678, 16)
         Me.lblDateTime.Name = "lblDateTime"
         Me.lblDateTime.Size = New System.Drawing.Size(87, 21)
         Me.lblDateTime.TabIndex = 4
