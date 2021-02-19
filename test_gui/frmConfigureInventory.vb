@@ -305,13 +305,23 @@
 
     End Sub
 
-    Private Sub UpdateScreenWithMedicationsInSelectedDrawer(sender As Object, e As EventArgs)
+    Private Sub UpdateScreenWithMedicationsInSelectedDrawer(sender As Button, e As EventArgs) Handles btnDrawer1.Click
+        Dim strDrugName As String = ""
+        Dim intStrength As Integer = 0
+        Dim intDividerBin As Integer = 0
+        Dim dsDrawerContents = GetDrawerDrugs(sender.TabIndex)
+        For Each dr As DataRow In dsDrawerContents.Tables(0).Rows
+            strDrugName = dr(0)
+            intStrength = CInt(dr(1))
+            intDividerBin = CInt(dr(2))
+        Next
+        Debug.WriteLine("")
 
 
 
         'based on the selected drawer we will need to call the database to see what medications are in the drawers
 
-
+        MessageBox.Show(strDrugName + " " + intStrength.ToString() + "   " + intDividerBin.ToString() + " In drawer number: " + sender.TabIndex.ToString())
 
 
         ' We will next need to use the method to create a panel and populate the labels with text from the database returned items
