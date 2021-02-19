@@ -314,7 +314,6 @@
             strDrugName = dr(0)
             intStrength = CInt(dr(1))
             intDividerBin = CInt(dr(2))
-            Debug.WriteLine("")
         Next
         Debug.WriteLine("")
 
@@ -322,7 +321,7 @@
 
         'based on the selected drawer we will need to call the database to see what medications are in the drawers
 
-
+        MessageBox.Show(strDrugName + " " + intStrength.ToString() + "   " + intDividerBin.ToString() + " In drawer number: " + sender.TabIndex.ToString())
 
 
         ' We will next need to use the method to create a panel and populate the labels with text from the database returned items
