@@ -87,13 +87,6 @@
 
 
         'Remove these once the SQL statements are corrected and updated.
-        CreatePanel(flpEndOfShiftCount, "123", "Advil", "2", "3", "54")
-        CreatePanel(flpEndOfShiftCount, "123", "Advil", "2", "3", "54")
-        CreatePanel(flpEndOfShiftCount, "123", "Advil", "2", "3", "54")
-        CreatePanel(flpEndOfShiftCount, "123", "Advil", "2", "3", "54")
-        CreatePanel(flpEndOfShiftCount, "123", "Advil", "2", "3", "54")
-        CreatePanel(flpEndOfShiftCount, "123", "Advil", "2", "3", "54")
-        CreatePanel(flpEndOfShiftCount, "123", "Advil", "2", "3", "54")
 
 
     End Sub
@@ -372,22 +365,19 @@
         Select Case intIndex
 
             Case TypesOfReports.AllMedication
-
-                 ' EndofShiftAllMedications()
+                Inventory.EndofShiftAllMedications()
 
             Case TypesOfReports.Controlled
-
+                Inventory.ControlledMedsEndofShift()
 
             Case TypesOfReports.ControlledNonNarcotic
-
-                 ' ControlledMedsEndofShift()
+                Inventory.ControlledNonNarcoticMedsEndofShift()
 
             Case TypesOfReports.Narcotic
-
+                Inventory.NarcoticEndOfShift()
 
             Case TypesOfReports.NonNarcotic
-
-                'NonControlledMedsEndofShift()
+                Inventory.NonNarcoticEndOfShift()
 
         End Select
 
