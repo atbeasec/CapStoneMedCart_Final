@@ -260,7 +260,33 @@ Module PatientInformation
         Dispense.txtPatientLastName.Text = dsPatientInfo.Tables(0).Rows(0)(2)
     End Sub
 
-
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME: PopulatePatientAllergiesDispenseInfo   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:Adam kott                             */   
+    '/*                 DATE CREATED:2/10/2021                           */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:                                                      */                    
+    '/*********************************************************************/
+    '/*  CALLS:                                                         */                            
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):                              */         
+    '/*********************************************************************/
+    '/*  RETURNS:                                                          */                   
+    '/*            (NOTHING)                                              */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:                                   */             
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:                                 */               
+    '/*                                               */                     
+    '/*  WHO   WHEN     WHAT                                   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  ATB   2/10/2021 initial code creation
+    '/*********************************************************************/
     Public Sub PopulatePatientAllergiesDispenseInfo(ByRef intPatientMRN As Integer)
         Dim dsPatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT Allergy_Name From PatientAllergy " &
                                                                          "INNER JOIN Patient on Patient.Patient_ID = PatientAllergy.Patient_TUID " &
@@ -299,7 +325,7 @@ Module PatientInformation
     Public Sub getPrescriptions(ByRef intPatientMRN As Integer)
         Dim strSQLiteCommand As String
         Dim dsPatientPrescription As DataSet
-        strSQLiteCommand = "SELECT Drug_Name, Strength, PatientMedication.Type, Quantity,Date_Presrcibed,Physician_First_Name,Physician_Last_Name,Schedule FROM PatientMedication " &
+        strSQLiteCommand = "SELECT Drug_Name, Strength, Frequency, PatientMedication.Type, Quantity ,Date_Presrcibed, Physician_First_Name, Physician_Last_Name FROM PatientMedication " &
             "INNER JOIN Medication on Medication.Medication_ID = PatientMedication.Medication_TUID " &
             "INNER JOIN Patient ON Patient.Patient_ID = PatientMedication.Patient_TUID " &
             "INNER JOIN Physician on Physician.Physician_ID = PatientMedication.Ordering_Physician_ID " &
@@ -307,7 +333,7 @@ Module PatientInformation
 
         dsPatientPrescription = CreateDatabase.ExecuteSelectQuery(strSQLiteCommand)
         For Each dr As DataRow In dsPatientPrescription.Tables(0).Rows
-            frmPatientInfo.CreateCurrentMedicationsPanels(frmPatientInfo.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), "Dr. " & dr(5) & " " & dr(6), dr(7))
+            frmPatientInfo.CreatePrescriptionsPanels(frmPatientInfo.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7))
         Next
     End Sub
 
