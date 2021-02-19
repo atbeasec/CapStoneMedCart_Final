@@ -305,7 +305,18 @@
 
     End Sub
 
-    Private Sub UpdateScreenWithMedicationsInSelectedDrawer(sender As Object, e As EventArgs)
+    Private Sub UpdateScreenWithMedicationsInSelectedDrawer(sender As Button, e As EventArgs) Handles btnDrawer1.Click
+        Dim strDrugName As String = ""
+        Dim intStrength As Integer = 0
+        Dim intDividerBin As Integer = 0
+        Dim dsDrawerContents = GetDrawerDrugs(sender.TabIndex)
+        For Each dr As DataRow In dsDrawerContents.Tables(0).Rows
+            strDrugName = dr(0)
+            intStrength = CInt(dr(1))
+            intDividerBin = CInt(dr(2))
+            Debug.WriteLine("")
+        Next
+        Debug.WriteLine("")
 
 
 
