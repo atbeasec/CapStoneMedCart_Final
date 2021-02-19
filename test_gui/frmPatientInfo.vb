@@ -1,6 +1,6 @@
 ﻿Public Class frmPatientInfo
 
-    'Dim intPatientMRN As Integer = frmPatientRecords.intSelectedPatientMRN
+    Dim intPatientMRN As Integer
     'Dim ContactPanelsAddedCount As Integer = 0
     'Dim CurrentContactPanelName As String = Nothing
 
