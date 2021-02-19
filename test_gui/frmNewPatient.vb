@@ -47,7 +47,7 @@ Public Class frmNewPatient
 
         SavePatientDataToDatabase()
 
-
+        Me.Close()
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
@@ -91,16 +91,22 @@ Public Class frmNewPatient
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
+    '/*  NP    2/18/2021 Swapped the numbers of strPhysiciansName() because*/
+    '/*                 They were inverted and were breaking the app. I also*/
+    '/*                 made it so the comma is trimed off the last name of */
+    '/*                 the physician.                                      */
     '/*********************************************************************/
 
 
     Private Sub SavePatientDataToDatabase()
         Dim strbSQL As New StringBuilder()
         Dim strPhysicianName As String() = Split(cmbPhysician.SelectedItem)
+        Dim strCharactersForRandomGeneration = "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+        strPhysicianName(0) = strPhysicianName(0).TrimEnd(",")
         dsPhysicians = CreateDatabase.ExecuteSelectQuery("Select Physician_ID from  Physician where Physician_First_name = '" &
-                                                         strPhysicianName(0) & "' and Physician_Last_Name = '" &
-                                                         strPhysicianName(1) & "';")
+                                                         strPhysicianName(1) & "' and Physician_Last_Name = '" &
+                                                         strPhysicianName(0) & "';")
 
 
 
@@ -111,8 +117,12 @@ Public Class frmNewPatient
             "'Address', 'City', 'State', 'Zip_Code', 'Phone_Number', 'Email_address', 'Primary_Physician_ID', " &
             "'Active_Flag') Values ('")
 
-        strbSQL.Append(CInt(Rnd() * 20) & "','")
-        strbSQL.Append(CInt(Rnd() * 20) & "',") 'this is going to make a random barcode this is temporary
+        'strbSQL.Append(CInt(Rnd() * 20) & "','")
+        'strbSQL.Append(CInt(Rnd() * 20) & "',") 'this is going to make a random barcode this is temporary
+        strbSQL.Append(GenerateRandom.generateRandomAlphanumeric(20, strCharactersForRandomGeneration) & "','")
+        '^this is going to generate a random MRN number
+        strbSQL.Append(GenerateRandom.generateRandomAlphanumeric(20, strCharactersForRandomGeneration) & "',")
+        '^this is going to genereate a random Bar code. 
         strbSQL.Append("'" & txtFirstName.Text & "' , '" & txtMiddleName.Text & "',")
         strbSQL.Append("'" & txtLastName.Text & "','" & txtBirthday.Text & "',")
         strbSQL.Append("'" & cmbSex.SelectedItem & "','" & txtHeight.Text & "',")

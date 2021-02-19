@@ -188,6 +188,7 @@ Partial Class frmAdHockDispense
         Me.txtDateOfBirth.BackColor = System.Drawing.Color.White
         Me.txtDateOfBirth.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtDateOfBirth.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtDateOfBirth.Enabled = False
         Me.txtDateOfBirth.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtDateOfBirth.Location = New System.Drawing.Point(1, 1)
         Me.txtDateOfBirth.Name = "txtDateOfBirth"
@@ -221,6 +222,7 @@ Partial Class frmAdHockDispense
         Me.txtMRN.BackColor = System.Drawing.Color.White
         Me.txtMRN.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtMRN.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtMRN.Enabled = False
         Me.txtMRN.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtMRN.Location = New System.Drawing.Point(1, 1)
         Me.txtMRN.Name = "txtMRN"
@@ -262,7 +264,7 @@ Partial Class frmAdHockDispense
         Me.btnDecrementQuantity.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDecrementQuantity.ForeColor = System.Drawing.Color.White
         Me.btnDecrementQuantity.Image = CType(resources.GetObject("btnDecrementQuantity.Image"), System.Drawing.Image)
-        Me.btnDecrementQuantity.Location = New System.Drawing.Point(495, 140)
+        Me.btnDecrementQuantity.Location = New System.Drawing.Point(509, 140)
         Me.btnDecrementQuantity.Name = "btnDecrementQuantity"
         Me.btnDecrementQuantity.Size = New System.Drawing.Size(28, 28)
         Me.btnDecrementQuantity.TabIndex = 6
@@ -277,7 +279,7 @@ Partial Class frmAdHockDispense
         Me.btnIncrementQuantity.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnIncrementQuantity.ForeColor = System.Drawing.Color.White
         Me.btnIncrementQuantity.Image = CType(resources.GetObject("btnIncrementQuantity.Image"), System.Drawing.Image)
-        Me.btnIncrementQuantity.Location = New System.Drawing.Point(461, 140)
+        Me.btnIncrementQuantity.Location = New System.Drawing.Point(475, 140)
         Me.btnIncrementQuantity.Name = "btnIncrementQuantity"
         Me.btnIncrementQuantity.Size = New System.Drawing.Size(28, 28)
         Me.btnIncrementQuantity.TabIndex = 5
@@ -291,7 +293,7 @@ Partial Class frmAdHockDispense
         Me.Panel5.Location = New System.Drawing.Point(402, 140)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel5.Size = New System.Drawing.Size(53, 28)
+        Me.Panel5.Size = New System.Drawing.Size(67, 28)
         Me.Panel5.TabIndex = 4
         '
         'txtQuantity
@@ -303,7 +305,7 @@ Partial Class frmAdHockDispense
         Me.txtQuantity.MaxLength = 3
         Me.txtQuantity.Multiline = True
         Me.txtQuantity.Name = "txtQuantity"
-        Me.txtQuantity.Size = New System.Drawing.Size(51, 26)
+        Me.txtQuantity.Size = New System.Drawing.Size(65, 26)
         Me.txtQuantity.TabIndex = 38
         '
         'frmAdHockDispense

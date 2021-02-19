@@ -4,6 +4,7 @@
     'Dim ContactPanelsAddedCount As Integer = 0
     'Dim CurrentContactPanelName As String = Nothing
 
+
     'Dim CurrentChartPanelName As String = Nothing
     'Dim ChartPanelsAddedCount As Integer = 0
 
@@ -124,7 +125,8 @@
     Private Sub frmPatientInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         cboBed.Enabled = False 'this will stop the people from selecting a bed before they
         'select a room. 
-        Dim intPatientMRN = txtMRN.Text
+
+        intPatientMRN = txtMRN.Text
 
         PatientInformation.GetAllergies(intPatientMRN)
         PatientInformation.GetPatientInformation(intPatientMRN)
@@ -277,6 +279,46 @@
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME:  					   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		         */   
+    '/*		         DATE CREATED: 		   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								   */             
+    '/*											   */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  NP    2/18/2021 Changed it so that the combo boxes are enabled when*/
+    '/*                  a user clikcs the edit button.                     */
+    '/*********************************************************************/
+
+
     Private Sub btnEditPatient_Click(sender As Object, e As EventArgs) Handles btnEditPatient.Click
 
         Dim ctl As Control
@@ -330,9 +372,9 @@
 
     Private Sub btnDispenseMedication_Click(sender As Object, e As EventArgs) Handles btnDispenseMedication.Click
         Dispense.Show()
-        'DispenseHistory.DispensemedicationPopulate(intPatientMRN)
-        'PatientInformation.PopulatePatientDispenseInfo(intPatientMRN)
-        'PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientMRN)
+        DispenseHistory.DispensemedicationPopulate(intPatientMRN)
+        PatientInformation.PopulatePatientDispenseInfo(intPatientMRN)
+        PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientMRN)
     End Sub
 
     ' Private Sub Button1_Click(sender As Object, e As EventArgs)

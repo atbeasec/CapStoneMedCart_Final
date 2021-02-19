@@ -1,17 +1,18 @@
 ﻿Imports System.Text
+Module GenerateRandom
 
-Module PopulateAllergiesComboBoxMethods
     '/*********************************************************************/
-    '/*                   FILE NAME: PopulatePatientComboBoxMethods          */									  
+    '/*                   FILE NAME:  GenerateRandom                      */									  
     '/*********************************************************************/
-    '/*                 PART OF PROJECT: Test_Gui		        		   */				  
+    '/*                 PART OF PROJECT: TEST_GUI       				   */				  
     '/*********************************************************************/
-    '/*                   WRITTEN BY:  Nathan Premo  		             */		  
-    '/*		         DATE CREATED:	2/8/2021                    		   */						  
+    '/*                   WRITTEN BY:  Nathan Premo  		                */		  
+    '/*		         DATE CREATED:	2/18/2021                   		   */						  
     '/*********************************************************************/
-    '/*  FILE PURPOSE:									                   */			  
-    '/*	 This contains the method to populate the patient Combo boxes on a */
-    '/*  number of forms.                                                  */
+    '/*  FILE PURPOSE:									   */			  
+    '/*  This is going to hold the methods to generate random numbers and/or*/
+    '/*  String.                                                            */
+    '/* 																	  
     '/*********************************************************************/
     '/*  COMMAND LINE PARAMETER LIST (In Parameter Order):			   */ 
     '/*                                                    (NONE)	   */	  
@@ -39,16 +40,20 @@ Module PopulateAllergiesComboBoxMethods
 
 
 
-
     '/*********************************************************************/
-    '/*                   SUBPROGRAM NAME: populatePatientNameComboBo      */         
+    '/*                   FUNCTION NAME: generateRandomAlphanumeric 	   */         
     '/*********************************************************************/
-    '/*                   WRITTEN BY:  Nathan Premo   		                */   
-    '/*		         DATE CREATED: 	2/7/2021                        	   */                             
+    '/*                   WRITTEN BY:  Nathan Premo   		               */   
+    '/*		         DATE CREATED: 2/18/2021                    		   */                             
     '/*********************************************************************/
-    '/*  SUBPROGRAM PURPOSE:								                 */             
-    '/*	 This is going to populate a combo box with a patients first and last*/                     
-    '/*  name.                                                             */
+    '/*  FUNCTION PURPOSE:								   */             
+    '/*	 This is going to generate a random string based on the length and*/
+    '/*  a string of the chartacter you want it to make up. This uses the */
+    '/*  System.random to get a random number between 0 and the size of the*/
+    '/*  pool. It used thread.sleep to make the program sleep for a random*/
+    '/*  amount of time as the random methods in VB are based on how long */
+    '/*  the application has been running so we are changing how long it has*/
+    '/*  been running to allow for a more ransom set of numbers.           */
     '/*                                                                   */
     '/*********************************************************************/
     '/*  CALLED BY:   	      						         */           
@@ -58,22 +63,20 @@ Module PopulateAllergiesComboBoxMethods
     '/*             (NONE)								   */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					   */         
-    '/*	 cboPatient - this is the combo box we are going to be populating */
-    '/*  dsPatients - this is the data set of the patients we have in the */
-    '/*     database.                                                     */
+    '/*	 Length - this is how long you want yoru random string to be.    */
+    '/*  Pool - this is the set of Characters you want your string to      */
+    '/*         consist of. this can also be numbers in a string and converted*/
+    '/*         back to numbers later.                                     */
     '/*                                                                     
     '/*********************************************************************/
     '/*  RETURNS:								         */                   
     '/*            (NOTHING)								   */             
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								   */             
-    '/*	miscMethods.populatePatientNameComboBox(cboPatientName,dsPatients) */                     
+    '/*											   */                     
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*	 strbTesting - this is a string builder that is used to make the  */                     
-    '/*     make the string that will be added to the combo box. It will be*/
-    '/*     The first and laste name.                                      */
     '/*											   */                     
     '/*                                                                     
     '/*********************************************************************/
@@ -85,56 +88,17 @@ Module PopulateAllergiesComboBoxMethods
     '/*********************************************************************/
 
 
-    Sub populateAllergiesComboBox(cmbAllergies As ComboBox, dsAllergies As DataSet)
-        Dim strbTesting As New StringBuilder
-        Dim dcAllergies As New AutoCompleteStringCollection
-        cmbAllergies.Items.Clear()
 
-
-        For Each row As DataRow In dsAllergies.Tables(0).Rows
-            dcAllergies.Add(row(0).ToString())
+    Public Function generateRandomAlphanumeric(Length As Integer, Pool As String) As String
+        Dim randomString As New StringBuilder
+        For i = 0 To Length Step 1
+            Dim generatorCharPosition = New System.Random
+            Dim intCharPosition = generatorCharPosition.Next(0, Pool.Length - 1)
+            Threading.Thread.Sleep(76 + generatorCharPosition.Next(5))
+            randomString.Append(Pool.ToCharArray.ElementAt(intCharPosition))
         Next
-        With cmbAllergies
-            .AutoCompleteMode = AutoCompleteMode.SuggestAppend
-            .AutoCompleteSource = AutoCompleteSource.CustomSource
-            .AutoCompleteCustomSource = dcAllergies
-            .DataSource = dcAllergies
-        End With
-    End Sub
-    Sub populateMedicationComboBox(cmbMedication As ComboBox, dsAllergies As DataSet)
-        Dim strbTesting As New StringBuilder
-        Dim dcAllergies As New AutoCompleteStringCollection
-        cmbMedication.Items.Clear()
 
 
-        For Each row As DataRow In dsAllergies.Tables(0).Rows
-            dcAllergies.Add(row(0).ToString())
-        Next
-        With cmbMedication
-            .AutoCompleteMode = AutoCompleteMode.SuggestAppend
-            .AutoCompleteSource = AutoCompleteSource.CustomSource
-            .AutoCompleteCustomSource = dcAllergies
-            .DataSource = dcAllergies
-        End With
-    End Sub
-    Sub populateAllergyTypeComboBox(cmbAllergyType As ComboBox, dsAllergyType As DataSet)
-        Dim strbTesting As New StringBuilder
-        Dim dcAllergies As New AutoCompleteStringCollection
-        cmbAllergyType.Items.Clear()
-
-
-        For Each row As DataRow In dsAllergyType.Tables(0).Rows
-            'If cmbAllergyType.FindStringExact(row(2).ToString()) = 0 Or dcAllergies.Count = 0 Then
-
-            dcAllergies.Add(row(0).ToString())
-
-            'End If
-        Next
-        With cmbAllergyType
-            .AutoCompleteMode = AutoCompleteMode.SuggestAppend
-            .AutoCompleteSource = AutoCompleteSource.CustomSource
-            .AutoCompleteCustomSource = dcAllergies
-            .DataSource = dcAllergies
-        End With
-    End Sub
+        Return randomString.ToString
+    End Function
 End Module

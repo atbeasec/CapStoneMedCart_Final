@@ -451,7 +451,7 @@ Module CreateDatabase
 			System.IO.File.Create(strApplicationPath).Dispose()
 
 			'Show a message asking the user if they want to open an existing file or create a new one
-			Dim dlgResult As DialogResult = MessageBox.Show("Would you like to open an existing file?" & vbCr & "If you would like to create a file, select No",
+			Dim dlgResult As DialogResult = MessageBox.Show("Would you like to open an existing file?" & vbCr & "If you would like to create a file, select No.",
 														"Open file", MessageBoxButtons.YesNo)
 
 			'If the user selects yes, they want to select an existing file
@@ -825,7 +825,7 @@ Module CreateDatabase
 		strCreateTable = "CREATE TABLE 'User' (
 	                    'User_ID'	INTEGER NOT NULL,
 						'Username'	TEXT NOT NULL UNIQUE,
-						'Salt'	TEXT,
+						'Salt'	TEXT NOT NULL,
 	                    'Password'	TEXT NOT NULL,
 						'User_First_Name'	TEXT,
 						'User_Last_Name'	TEXT,
@@ -1501,62 +1501,6 @@ Module CreateDatabase
 						FOREIGN KEY(" & "User_TUID" & ") REFERENCES " & "User" & "(" & "User_ID" & "));"
 
 		ExecuteQuery("AdHocOrder")
-	End Sub
-
-	'/*******************************************************************/
-	'/*    SUBROUTINE NAME:	CreatePatientMedicationPrescriptionTable	*/
-	'/*******************************************************************/
-	'/*                   WRITTEN BY:  	Breanna Howey					*/
-	'/*		         DATE CREATED: 	   01/23/21							*/
-	'/*******************************************************************/
-	'/*  SUBROUTINE PURPOSE:											*/
-	'/*	The purpose of this subroutine is to create the					*/
-	'/*	PatientMedicationPrescription table. SQL code is stored in the 	*/  
-	'/* strCreateTable variables and is executed in the call for the	*/ 
-	'/*	ExecuteQuery() subroutine										*/
-	'/*******************************************************************/
-	'/*  CALLED BY:   													*/
-	'/*   Main()						          						*/
-	'/*******************************************************************/
-	'/*  CALLS:															*/
-	'/*  ExecuteQuery()													*/
-	'/*******************************************************************/
-	'/*  PARAMETER LIST (In Parameter Order):							*/
-	'/*																	*/
-	'/*  (None)															*/
-	'/*******************************************************************/
-	'/* SAMPLE INVOCATION:												*/
-	'/*																	*/
-	'/* CreatePatientMedicationPrescriptionTable()						*/	
-	'/*******************************************************************/
-	'/*  LOCAL VARIABLE LIST (Alphabetically):							*/
-	'/*																	*/
-	'/*  (None)															*/
-	'/*******************************************************************/
-	'/* MODIFICATION HISTORY:											*/
-	'/*																	*/
-	'/*  WHO   WHEN     WHAT											*/
-	'/*  ---   ----     ------------------------------------------------*/
-	'/*  BRH  01/23/21  Initial creation of the code					*/
-	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
-	'/*******************************************************************/
-	Public Sub CreatePatientMedicationPrescriptionTable()
-		strCreateTable = "CREATE TABLE 'PatientMedication_Prescription' (
-						'PatientMedication_ID'	INTEGER NOT NULL UNIQUE,
-						'Patient_TUID'	INTEGER NOT NULL,
-						'Medication_TUID'	INTEGER NOT NULL,
-						'Ordering_Physician_ID'	INTEGER NOT NULL,
-						'Date_Prescribed'	TEXT NOT NULL,
-						'Quantity'	INTEGER NOT NULL,
-						'Method'	TEXT NOT NULL,
-						'Schedule'	TEXT NOT NULL,
-						'Active_Flag' INTEGER NOT NULL,
-						FOREIGN KEY(" & "Medication_TUID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
-						FOREIGN KEY(" & "Ordering_Physician_ID" & ") REFERENCES " & "Physician" & "(" & "Physician_ID" & "),
-						FOREIGN KEY(" & "Patient_TUID" & ") REFERENCES " & "Patient" & "(" & "Patient_ID" & "),
-						PRIMARY KEY('PatientMedication_ID' AUTOINCREMENT));"
-
-		ExecuteQuery("PatientMedication_Prescription")
 	End Sub
 
 	'/*******************************************************************/

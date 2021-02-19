@@ -214,6 +214,9 @@ Module LogIn
         '/*  WHO   WHEN     WHAT								              */             
         '/*  ---   ----     ------------------------------------------------  */
         '/*  Eric LaVoie  2/16/2021    Initial creation                       */
+        '/*  NP   2/18/2021 I changed the random generation function for the  */
+        '/*                 salt into its own module and made it generatic to */
+        '/*                 be able to be used in other forms and modules.    */
         '/*********************************************************************/
         Const STRSALTCHARS As String = "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         Dim strHashedSaltedPepperedPassword(2) As String
@@ -225,11 +228,14 @@ Module LogIn
         ' add the pepper to the password
         strUpdatedPassword = strPassword & STRPEPPER
         ' generate a random salt
-        For i = 0 To (7) Step 1
-            Dim generatorCharPosition = New System.Random
-            Dim intCharPosition = generatorCharPosition.Next(0, 61)
-            strSalt += STRSALTCHARS.ToCharArray.ElementAt(intCharPosition)
-        Next
+        strSalt = GenerateRandom.generateRandomAlphanumeric(7, STRSALTCHARS)
+
+        ' For i = 0 To (7) Step 1
+        '     Dim generatorCharPosition = New System.Random
+        '     Dim intCharPosition = generatorCharPosition.Next(0, 61)
+        '     Threading.Thread.Sleep(176 + generatorCharPosition.Next(5))
+        '     strSalt += STRSALTCHARS.ToCharArray.ElementAt(intCharPosition)
+        ' Next
         ' add the salt to the password prepended
         'strTemp = EncryptString(strUpdatedPassword)
         strUpdatedPassword = strSalt & strUpdatedPassword
