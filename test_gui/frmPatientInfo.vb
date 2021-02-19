@@ -297,6 +297,7 @@
     Private Sub frmPatientInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         cboBed.Enabled = False 'this will stop the people from selecting a bed before they
         'select a room. 
+
         intPatientMRN = txtMRN.Text
 
         PatientInformation.GetAllergies(intPatientMRN)
@@ -647,6 +648,46 @@
 
 
     End Sub
+
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME:  					   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		         */   
+    '/*		         DATE CREATED: 		   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								   */             
+    '/*											   */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  NP    2/18/2021 Changed it so that the combo boxes are enabled when*/
+    '/*                  a user clikcs the edit button.                     */
+    '/*********************************************************************/
+
 
     Private Sub btnEditPatient_Click(sender As Object, e As EventArgs) Handles btnEditPatient.Click
 
