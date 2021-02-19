@@ -1504,62 +1504,6 @@ Module CreateDatabase
 	End Sub
 
 	'/*******************************************************************/
-	'/*    SUBROUTINE NAME:	CreatePatientMedicationPrescriptionTable	*/
-	'/*******************************************************************/
-	'/*                   WRITTEN BY:  	Breanna Howey					*/
-	'/*		         DATE CREATED: 	   01/23/21							*/
-	'/*******************************************************************/
-	'/*  SUBROUTINE PURPOSE:											*/
-	'/*	The purpose of this subroutine is to create the					*/
-	'/*	PatientMedicationPrescription table. SQL code is stored in the 	*/  
-	'/* strCreateTable variables and is executed in the call for the	*/ 
-	'/*	ExecuteQuery() subroutine										*/
-	'/*******************************************************************/
-	'/*  CALLED BY:   													*/
-	'/*   Main()						          						*/
-	'/*******************************************************************/
-	'/*  CALLS:															*/
-	'/*  ExecuteQuery()													*/
-	'/*******************************************************************/
-	'/*  PARAMETER LIST (In Parameter Order):							*/
-	'/*																	*/
-	'/*  (None)															*/
-	'/*******************************************************************/
-	'/* SAMPLE INVOCATION:												*/
-	'/*																	*/
-	'/* CreatePatientMedicationPrescriptionTable()						*/	
-	'/*******************************************************************/
-	'/*  LOCAL VARIABLE LIST (Alphabetically):							*/
-	'/*																	*/
-	'/*  (None)															*/
-	'/*******************************************************************/
-	'/* MODIFICATION HISTORY:											*/
-	'/*																	*/
-	'/*  WHO   WHEN     WHAT											*/
-	'/*  ---   ----     ------------------------------------------------*/
-	'/*  BRH  01/23/21  Initial creation of the code					*/
-	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
-	'/*******************************************************************/
-	Public Sub CreatePatientMedicationPrescriptionTable()
-		strCreateTable = "CREATE TABLE 'PatientMedication_Prescription' (
-						'PatientMedication_ID'	INTEGER NOT NULL UNIQUE,
-						'Patient_TUID'	INTEGER NOT NULL,
-						'Medication_TUID'	INTEGER NOT NULL,
-						'Ordering_Physician_ID'	INTEGER NOT NULL,
-						'Date_Prescribed'	TEXT NOT NULL,
-						'Quantity'	INTEGER NOT NULL,
-						'Method'	TEXT NOT NULL,
-						'Schedule'	TEXT NOT NULL,
-						'Active_Flag' INTEGER NOT NULL,
-						FOREIGN KEY(" & "Medication_TUID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
-						FOREIGN KEY(" & "Ordering_Physician_ID" & ") REFERENCES " & "Physician" & "(" & "Physician_ID" & "),
-						FOREIGN KEY(" & "Patient_TUID" & ") REFERENCES " & "Patient" & "(" & "Patient_ID" & "),
-						PRIMARY KEY('PatientMedication_ID' AUTOINCREMENT));"
-
-		ExecuteQuery("PatientMedication_Prescription")
-	End Sub
-
-	'/*******************************************************************/
 	'/*    SUBROUTINE NAME:	CreatePersonalPatientDrawerMedicationTable	*/
 	'/*******************************************************************/
 	'/*                   WRITTEN BY:  	Breanna Howey					*/
