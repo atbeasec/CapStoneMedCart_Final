@@ -531,7 +531,7 @@ Module rxNorm
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                  */
     '/*											                          */
-    '/*    GetRxcuiByName("advil")				                              */
+    '/*    GetRxcuiByName("advil")				                          */
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically):			    	          */
     '/*											                          */
@@ -562,6 +562,23 @@ Module rxNorm
         Dim jValueObj As JValue = DirectCast(JsonJArray.First, JValue)
         'returns the rxcuiID
         Return jValueObj.Value
+
+    End Function
+
+    Public Function GetSuggestionList(name As String) As AutoCompleteStringCollection
+        If name = "" Then Return New AutoCompleteStringCollection
+        Dim trawlpointer As String = "$.suggestionGroup.suggestionList.suggestion"
+        Dim url As String = $"https://rxnav.nlm.nih.gov/REST/spellingsuggestions.json?name={name}"
+        Dim inputJSON As JToken = GetJSON(url)
+
+        Dim trawledResult As JToken = inputJSON.SelectToken(trawlpointer)
+        Dim jArrayObj As JArray = DirectCast(trawledResult, JArray)
+
+        'Dim jValueObj As JValue = DirectCast(jArrayObj.First, JValue)
+        Dim result As New AutoCompleteStringCollection
+        result.AddRange((From item As JValue In jArrayObj Select DirectCast(item.Value, String)).ToArray)    ' Return  jValueObj.Value
+
+        Return result
 
     End Function
 
