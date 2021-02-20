@@ -93,7 +93,7 @@
 
 
     '/**********************************************************************/
-    '/*                   SUBPROGRAM NAME:  KeyPressCheck   			   */         
+    '/*                   SUBPROGRAM NAME:  LimitQuantityToQuantityStocked */         
     '/**********************************************************************/
     '/*                   WRITTEN BY:  Collin Krygier   		           */   
     '/*		         DATE CREATED: 	2/19/2021                       	   */                             
