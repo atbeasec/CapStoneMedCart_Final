@@ -81,4 +81,10 @@
         DataVaildationMethods.KeyPressCheck(e, "0123456789")
     End Sub
 
+    Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantity.TextChanged
+
+
+        'LimitQuantityToQuantityStocked(SQLreturnValue, sender)
+
+    End Sub
 End Class
