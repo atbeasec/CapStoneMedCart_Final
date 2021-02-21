@@ -123,76 +123,79 @@
     '/*********************************************************************/
 
     Private Sub frmPatientInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        cboBed.Enabled = False 'this will stop the people from selecting a bed before they
+
+        Dim ctl As Control = Nothing
+
+        'cboBed.Enabled = False 'this will stop the people from selecting a bed before they
         'select a room. 
 
         intPatientMRN = txtMRN.Text
-
         PatientInformation.GetAllergies(intPatientMRN)
         PatientInformation.GetPatientInformation(intPatientMRN)
         PatientInformation.getPrescriptions(intPatientMRN)
         PatientInformation.getRoom(intPatientMRN, cboRoom, cboBed)
+        SetControlsToReadOnly(ctl)
 
         ' CreateDispenseHistoryPanels(flpDispenseHistory, "test", "test", "test", "test", "test", "test", "test")
     End Sub
 
-    Public Sub CreateDispenseHistoryPanels(ByVal flpPannel As FlowLayoutPanel, ByVal medicationName As String, ByVal strength As String, ByVal type As String, ByVal quantity As String, ByVal dispenseBy As String, ByVal dispenseDate As String, ByVal dispenseTime As String)
+    'Public Sub CreateDispenseHistoryPanels(ByVal flpPannel As FlowLayoutPanel, ByVal medicationName As String, ByVal strength As String, ByVal type As String, ByVal quantity As String, ByVal dispenseBy As String, ByVal dispenseDate As String, ByVal dispenseTime As String)
 
-        Dim pnl As Panel
-        pnl = New Panel
+    '    Dim pnl As Panel
+    '    pnl = New Panel
 
-        Dim pnlMainPanel As Panel
-        pnlMainPanel = New Panel
+    '    Dim pnlMainPanel As Panel
+    '    pnlMainPanel = New Panel
 
-        'Set panel properties
-        With pnl
-            .BackColor = Color.Gainsboro
-            .Size = New Size(880, 47)
-            .Name = "pnlIndividualPatientRecordPadding" + getPanelCount(flpPannel).ToString
-            .Tag = getPanelCount(flpPannel).ToString
-            .Padding = New Padding(0, 0, 0, 3)
-            ' .Dock = System.Windows.Forms.DockStyle.Top
-        End With
+    '    'Set panel properties
+    '    With pnl
+    '        .BackColor = Color.Gainsboro
+    '        .Size = New Size(880, 47)
+    '        .Name = "pnlIndividualPatientRecordPadding" + getPanelCount(flpPannel).ToString
+    '        .Tag = getPanelCount(flpPannel).ToString
+    '        .Padding = New Padding(0, 0, 0, 3)
+    '        ' .Dock = System.Windows.Forms.DockStyle.Top
+    '    End With
 
-        With pnlMainPanel
+    '    With pnlMainPanel
 
-            .BackColor = Color.White
-            .Size = New Size(880, 45)
-            .Name = "pnlIndividualPatientRecord" + getPanelCount(flpPannel).ToString
-            .Tag = getPanelCount(flpPannel).ToString
-            .Dock = System.Windows.Forms.DockStyle.Top
-        End With
+    '        .BackColor = Color.White
+    '        .Size = New Size(880, 45)
+    '        .Name = "pnlIndividualPatientRecord" + getPanelCount(flpPannel).ToString
+    '        .Tag = getPanelCount(flpPannel).ToString
+    '        .Dock = System.Windows.Forms.DockStyle.Top
+    '    End With
 
-        'put the boarder panel inside the main panel
-        pnl.Controls.Add(pnlMainPanel)
+    '    'put the boarder panel inside the main panel
+    '    pnl.Controls.Add(pnlMainPanel)
 
-        'AddHandler pnlMainPanel.DoubleClick, AddressOf DynamicDoubleClickNewOrder
-        AddHandler pnlMainPanel.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
-        AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
+    '    'AddHandler pnlMainPanel.DoubleClick, AddressOf DynamicDoubleClickNewOrder
+    '    AddHandler pnlMainPanel.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
+    '    AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
 
-        ' add controls to this panel
-        ' call database info here to populate
-        Dim lblID As New Label
-        Dim lblID2 As New Label
-        Dim lblID3 As New Label
-        Dim lblID4 As New Label
-        Dim lblID5 As New Label
-        Dim lblID6 As New Label
+    '    ' add controls to this panel
+    '    ' call database info here to populate
+    '    Dim lblID As New Label
+    '    Dim lblID2 As New Label
+    '    Dim lblID3 As New Label
+    '    Dim lblID4 As New Label
+    '    Dim lblID5 As New Label
+    '    Dim lblID6 As New Label
 
-        ' anywhere we have quotes except for the label names, we can call our Database and get method
-        CreateIDLabel(pnlMainPanel, lblID, "lblMedicationName", lblMedication.Location.X, 20, medicationName, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID2, "lblStrength", lblStrength.Location.X, 20, strength, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID3, "lblType", lblType.Location.X, 20, type, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID4, "lblQuantity", lblQuantity.Location.X, 20, quantity, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID5, "lblDispensedBy", lblDispensedBy.Location.X, 20, dispenseBy, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID6, "lblDispenseTimeAndDate", lblDateTime.Location.X, 20, dispenseDate, getPanelCount(flpPannel))
+    '    ' anywhere we have quotes except for the label names, we can call our Database and get method
+    '    CreateIDLabel(pnlMainPanel, lblID, "lblMedicationName", lblMedication.Location.X, 20, medicationName, getPanelCount(flpPannel))
+    '    CreateIDLabel(pnlMainPanel, lblID2, "lblStrength", lblStrength.Location.X, 20, strength, getPanelCount(flpPannel))
+    '    CreateIDLabel(pnlMainPanel, lblID3, "lblType", lblType.Location.X, 20, type, getPanelCount(flpPannel))
+    '    CreateIDLabel(pnlMainPanel, lblID4, "lblQuantity", lblQuantity.Location.X, 20, quantity, getPanelCount(flpPannel))
+    '    CreateIDLabel(pnlMainPanel, lblID5, "lblDispensedBy", lblDispensedBy.Location.X, 20, dispenseBy, getPanelCount(flpPannel))
+    '    CreateIDLabel(pnlMainPanel, lblID6, "lblDispenseTimeAndDate", lblDateTime.Location.X, 20, dispenseDate, getPanelCount(flpPannel))
 
-        'Add panel to flow layout panel
-        flpPannel.Controls.Add(pnl)
+    '    'Add panel to flow layout panel
+    '    flpPannel.Controls.Add(pnl)
 
-        'currentContactPanel = pnl.Name
+    '    'currentContactPanel = pnl.Name
 
-    End Sub
+    'End Sub
 
     Public Sub CreatePrescriptionsPanels(ByVal flpPannel As FlowLayoutPanel, ByVal medicationName As String, ByVal strength As String, ByVal frequency As String, ByVal type As String, ByVal quantity As String, ByVal datePrescribed As String, ByVal PrescribedBy As String)
         Dim pnl As Panel
@@ -321,51 +324,69 @@
 
     Private Sub btnEditPatient_Click(sender As Object, e As EventArgs) Handles btnEditPatient.Click
 
-        Dim ctl As Control
+        Dim ctl As Control = Nothing
 
         Dim arrPnl As Panel() = {pnlPersonalInformation}
 
         If Not btnEditPatient.Text = "Save Changes" Then
 
-            For Each ctl In pnlPersonalInformation.Controls
-
-                If TypeName(ctl) = "TextBox" Then
-                    Dim txtbox As TextBox = CType(ctl, TextBox)
-
-                    txtbox.ReadOnly = False
-                    txtbox.BorderStyle = BorderStyle.FixedSingle
-                    txtbox.BackColor = Color.White
-
-                End If
-            Next
+            SetControlsToAllowEdit(ctl)
 
             btnEditPatient.Text = "Save Changes"
 
         Else
-
-            ' we want to save the data here..
-
-
-            For Each ctl In pnlPersonalInformation.Controls
-
-                If TypeName(ctl) = "TextBox" Then
-                    Dim txtbox As TextBox = CType(ctl, TextBox)
-
-                    txtbox.ReadOnly = True
-                    txtbox.BorderStyle = BorderStyle.None
-                    txtbox.BackColor = Color.White
-
-                End If
-
-            Next
-
-
+            SetControlsToReadOnly(ctl)
             btnEditPatient.Text = "Edit Patient"
 
             ' call update database method here because we made changes to patient information.
             '
         End If
 
+
+    End Sub
+
+    Private Sub SetControlsToAllowEdit(ByVal ctl As Control)
+
+        For Each ctl In pnlPersonalInformation.Controls
+
+            If TypeName(ctl) = "TextBox" Then
+                Dim txtbox As TextBox = CType(ctl, TextBox)
+
+                txtbox.ReadOnly = False
+                txtbox.BorderStyle = BorderStyle.FixedSingle
+                txtbox.BackColor = Color.White
+
+            ElseIf TypeName(ctl) = "ComboBox" Then
+
+                Dim cmbBox As ComboBox = CType(ctl, ComboBox)
+                cmbBox.Enabled = True
+
+            End If
+        Next
+
+    End Sub
+
+    Private Sub SetControlsToReadOnly(ByVal ctl As Control)
+
+        For Each ctl In pnlPersonalInformation.Controls
+
+            If TypeName(ctl) = "TextBox" Then
+                Dim txtbox As TextBox = CType(ctl, TextBox)
+
+                txtbox.ReadOnly = True
+                ' txtbox.BorderStyle = BorderStyle.None
+                txtbox.BackColor = Color.White
+
+
+            ElseIf TypeName(ctl) = "ComboBox" Then
+                Dim cmbBox As ComboBox = CType(ctl, ComboBox)
+
+                cmbBox.BackColor = Color.White
+                cmbBox.Enabled = False
+
+
+            End If
+        Next
 
     End Sub
 
