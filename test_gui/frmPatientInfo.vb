@@ -123,10 +123,14 @@
     '/*********************************************************************/
 
     Private Sub frmPatientInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        cboBed.Enabled = False 'this will stop the people from selecting a bed before they
+        Dim ctl As Control
+
+        'cboBed.Enabled = False 'this will stop the people from selecting a bed before they
         'select a room. 
 
         intPatientMRN = txtMRN.Text
+        SetControlsToReadOnly(ctl)
+
 
         PatientInformation.GetAllergies(intPatientMRN)
         PatientInformation.GetPatientInformation(intPatientMRN)
@@ -327,45 +331,63 @@
 
         If Not btnEditPatient.Text = "Save Changes" Then
 
-            For Each ctl In pnlPersonalInformation.Controls
-
-                If TypeName(ctl) = "TextBox" Then
-                    Dim txtbox As TextBox = CType(ctl, TextBox)
-
-                    txtbox.ReadOnly = False
-                    txtbox.BorderStyle = BorderStyle.FixedSingle
-                    txtbox.BackColor = Color.White
-
-                End If
-            Next
+            SetControlsToAllowEdit(ctl)
 
             btnEditPatient.Text = "Save Changes"
 
         Else
-
-            ' we want to save the data here..
-
-
-            For Each ctl In pnlPersonalInformation.Controls
-
-                If TypeName(ctl) = "TextBox" Then
-                    Dim txtbox As TextBox = CType(ctl, TextBox)
-
-                    txtbox.ReadOnly = True
-                    txtbox.BorderStyle = BorderStyle.None
-                    txtbox.BackColor = Color.White
-
-                End If
-
-            Next
-
-
+            SetControlsToReadOnly(ctl)
             btnEditPatient.Text = "Edit Patient"
 
             ' call update database method here because we made changes to patient information.
             '
         End If
 
+
+    End Sub
+
+    Private Sub SetControlsToAllowEdit(ctl As Control)
+
+        For Each ctl In pnlPersonalInformation.Controls
+
+            If TypeName(ctl) = "TextBox" Then
+                Dim txtbox As TextBox = CType(ctl, TextBox)
+
+                txtbox.ReadOnly = False
+                txtbox.BorderStyle = BorderStyle.FixedSingle
+                txtbox.BackColor = Color.White
+
+            ElseIf TypeName(ctl) = "ComboBox" Then
+
+                Dim cmbBox As ComboBox = CType(ctl, ComboBox)
+                cmbBox.Enabled = True
+
+            End If
+        Next
+
+    End Sub
+
+    Private Sub SetControlsToReadOnly(ctl As Control)
+
+        For Each ctl In pnlPersonalInformation.Controls
+
+            If TypeName(ctl) = "TextBox" Then
+                Dim txtbox As TextBox = CType(ctl, TextBox)
+
+                txtbox.ReadOnly = True
+                txtbox.BorderStyle = BorderStyle.None
+                txtbox.BackColor = Color.White
+
+
+            ElseIf TypeName(ctl) = "ComboBox" Then
+                Dim cmbBox As ComboBox = CType(ctl, ComboBox)
+
+                cmbBox.BackColor = Color.White
+                cmbBox.Enabled = False
+
+
+            End If
+        Next
 
     End Sub
 
