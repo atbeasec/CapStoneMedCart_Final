@@ -319,6 +319,8 @@
     '/*  ---   ----     ------------------------------------------------- */
     '/*  NP    2/18/2021 Changed it so that the combo boxes are enabled when*/
     '/*                  a user clikcs the edit button.                     */
+    '/*  NP   2/18/2021  Made it so the comboboxes are enabled and disabled*/
+    '/*                  based on the text of the edit button.             */
     '/*********************************************************************/
 
 
@@ -338,11 +340,9 @@
             SetControlsToReadOnly(ctl)
             btnEditPatient.Text = "Edit Patient"
 
-            ' call update database method here because we made changes to patient information.
-            '
-        End If
-
-
+                End If
+                cboBed.Enabled = True
+        cboRoom.Enabled = True
     End Sub
 
     Private Sub SetControlsToAllowEdit(ByVal ctl As Control)
@@ -361,6 +361,8 @@
                 Dim cmbBox As ComboBox = CType(ctl, ComboBox)
                 cmbBox.Enabled = True
 
+                cboBed.Enabled = False
+                cboRoom.Enabled = False
             End If
         Next
 
