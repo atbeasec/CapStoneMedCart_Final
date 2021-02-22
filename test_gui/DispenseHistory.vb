@@ -375,11 +375,11 @@ Module DispenseHistory
         strbSQLcommand.Append("SELECT Quantity FROM PatientMedication WHERE Medication_TUID = '" & intMedID & "' AND Patient_TUID = '" & intPatientID & "'")
         intPrescribedQuantity = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
 
-        'update quantity to new amount
-        intPrescribedQuantity = intPrescribedQuantity - Dispense.txtQuantity.Text
-        strbSQLcommand.Clear()
-        strbSQLcommand.Append("UPDATE PatientMedication SET Quantity = " & intPrescribedQuantity & " WHERE Medication_TUID = '" & intMedID & "' AND Patient_TUID = '" & intPatientID & "'")
-        CreateDatabase.ExecuteInsertQuery(strbSQLcommand.ToString)
+        ''update quantity to new amount
+        'intPrescribedQuantity = intPrescribedQuantity - Dispense.txtQuantity.Text
+        'strbSQLcommand.Clear()
+        'strbSQLcommand.Append("UPDATE PatientMedication SET Quantity = " & intPrescribedQuantity & " WHERE Medication_TUID = '" & intMedID & "' AND Patient_TUID = '" & intPatientID & "'")
+        'CreateDatabase.ExecuteInsertQuery(strbSQLcommand.ToString)
 
         'clear string builder and set up sql to get the patientMedication_ID primary key from patient medication table to use in
         'the dispensing table as a foreign key
