@@ -342,8 +342,7 @@
 
                 End If
                 cboBed.Enabled = True
-                cboRoom.Enabled = True
-            Next
+        cboRoom.Enabled = True
     End Sub
 
     Private Sub SetControlsToAllowEdit(ByVal ctl As Control)
@@ -364,7 +363,8 @@
 
                 cboBed.Enabled = False
                 cboRoom.Enabled = False
-            Next
+            End If
+        Next
 
     End Sub
 
