@@ -166,12 +166,7 @@
 
     End Sub
 
-    Public Sub DynamicButtonEditRecord_Click(ByVal sender As Object, ByVal e As EventArgs)
 
-        'show the add new patient form filled in with the patients infromation
-        'frmUpdatePatient.Show()
-        ' frmPatientInfo.Show()
-    End Sub
 
 
     Public Sub CreateIDLabel(ByVal pnlName As Panel, lblName As Label, strLabelName As String, x As Integer, y As Integer, strLabelText As String, ByVal intPanelsAddedCount As Integer)
@@ -291,22 +286,58 @@
     End Sub
     Public Sub DynamicFlagMedicationButton(sender As Object, ByVal e As EventArgs)
 
+
         Dim pnlFlaggedPannel As Panel
+        Dim txtBoxOnFlaggedPanel As TextBox = Nothing
+
         pnlFlaggedPannel = CType(sender.parent, Panel)
+        txtBoxOnFlaggedPanel = FindTextBoxOnPanel(pnlFlaggedPannel)
         Debug.Print(pnlFlaggedPannel.Name)
 
         If Not pnlFlaggedPannel.BackColor = Color.Red Then
+
+            'find the textbox and set the field to be read only
+            'txtBoxOnFlaggedPanel.ReadOnly = True
+            'txtBoxOnFlaggedPanel.AcceptsTab = False
+
+            txtBoxOnFlaggedPanel.Enabled = False
+
+            ' change the panel color to be red
             pnlFlaggedPannel.BackColor = Color.Red
+
         Else
+
+            'find the textbox and set the field to be editable
+            'txtBoxOnFlaggedPanel.ReadOnly = False
+            'txtBoxOnFlaggedPanel.AcceptsTab = True
+            txtBoxOnFlaggedPanel.Enabled = True
+
+            ' change the panel color to be white
             pnlFlaggedPannel.BackColor = Color.White
+
         End If
-        'functionality will be assigned here
-
-        ' take the panel which this button lives on and highlight it differently
-
-
 
     End Sub
+
+    Public Function FindTextBoxOnPanel(ByVal pnlFlagged As Panel) As TextBox
+
+        ' search for control with the name txtCount
+        ' this control will be the textbox on the selected panel
+        Const TEXTBOXNAME As String = "txtCount"
+        Dim ctlControl As Control
+        Dim txtBox As TextBox = Nothing
+
+        ' looking at each control on the panel
+        For Each ctlControl In pnlFlagged.Controls
+            ' if the current control is the textbox, then asign the textbox variable to this 
+            If ctlControl.Name.Contains(TEXTBOXNAME) Then
+                txtBox = CType(ctlControl, TextBox)
+            End If
+        Next
+
+        Return txtBox
+
+    End Function
 
     Public Sub CreateTextBox(ByVal pnlPanelName As Panel, ByVal intPanelsAddedCount As Integer, ByVal intX As Integer, ByVal intY As Integer)
 
@@ -398,6 +429,7 @@
         pnlPanelName.Controls.Add(btnCheckMark)
         ' MessageBox.Show("again")
         'Add handler for click events
+        AddHandler btnCheckMark.Click, AddressOf DetermineQueryDelete_Click
         AddHandler btnCheckMark.Click, AddressOf DynamicButton_Click
 
     End Sub
@@ -433,6 +465,284 @@
         AddHandler btnCancel.Click, AddressOf RestDefaultButtons
 
     End Sub
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: DetermineQueryDelete_Click     */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:  Collin Krygier          		          */   
+    '/*		         DATE CREATED: 		 2/15/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to compare two instances of forms and see if they  */
+    '/*  are the same form or not. From here, the necessary method will be*/
+    '/* called based upon the functionality of the button based on that form
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  CreateCheckMarkBtn, it is working as a handler                   */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*             none                                                  */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	None                                                              */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	None                                 							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	None                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/15/2021    Initial creation                    */
+    '/*********************************************************************/
+    Public Sub DetermineQueryDelete_Click(sender As Object, ByVal e As EventArgs)
+
+        ' determine the form that is currently opened in the application because this
+        ' will influence the SQL query called to update the database
+
+        ' use reflection to determine if the form opened is the same as another form
+        ' because the functionality of the delete button varies depending on the form
+        ' that is currently opened.
+
+        If getOpenedForm().GetType() Is frmConfiguration.GetType() Then
+
+            ' call SQL method to set the user flag to inactive or delete the user from the DB
+
+            Dim intID As Integer = GetSelectedInformation(sender.parent, "lblID")
+            Dim strStatement As String = "SELECT Active_Flag FROM User WHERE User_ID = '" & intID & "'"
+            If ExecuteScalarQuery(strStatement) = 1 Then
+                strStatement = "UPDATE USER SET Active_Flag='0' WHERE User_ID='" & intID & "';"
+                ExecuteInsertQuery(strStatement)
+            Else
+                strStatement = "UPDATE USER SET Active_Flag='1' WHERE User_ID='" & intID & "';"
+                ExecuteInsertQuery(strStatement)
+            End If
+
+        ElseIf getOpenedForm().GetType() Is frmPatientRecords.GetType() Then
+
+                ' call SQL method to set the Patient Record flag to inactive or delete the user from the DB
+                '    Debug.Print("patient records")
+
+            ElseIf getOpenedForm().GetType() Is frmConfigureInventory.GetType() Then
+
+                ' call SQL method to remove the item from the list of currently stocked items in the med cart
+                '  Debug.Print("removing this inventory piece")
+
+            ElseIf getOpenedForm().GetType() Is frmAllergies.GetType() Then
+
+                ' call SQL method to remove the allergy that is currently assigned to the patient
+                '  Debug.Print("remove allergy assigned to patient")
+
+            End If
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: DynamicButtonEditRecord_Click  */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:  Collin Krygier          		          */   
+    '/*		         DATE CREATED: 		 2/15/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to compare two instances of forms and see if they  */
+    '/*  are the same form or not. From here, the necessary method will be*/
+    '/* called based upon the functionality of the button based on that form
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  CreateEditButton, it is working as a handler                     */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*             none                                                  */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	None                                                              */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	None                                 							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	None                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/15/2021    Initial creation                    */
+    '/*********************************************************************/
+
+    Public Sub DynamicButtonEditRecord_Click(ByVal sender As Object, ByVal e As EventArgs)
+
+        ' determine the form that is currently opened in the application because this
+        ' will influence the SQL query called to update the database
+
+        ' use reflection to determine if the form opened is the same as another form
+        ' because the functionality of the delete button varies depending on the form
+        ' that is currently opened.
+
+        If getOpenedForm().GetType() Is frmConfiguration.GetType() Then
+
+            'call GetSelectedInformation to get the selected username and ID
+            frmConfiguration.txtUsername.Text = GetSelectedInformation(sender.parent, "lblUsername")
+            frmConfiguration.txtID.Text = GetSelectedInformation(sender.parent, "lblID")
+
+            'calls to fill the other textboxes for editing the user
+            Dim strStatement = "SELECT User_First_Name FROM User WHERE User_ID = '" & frmConfiguration.txtID.Text & "';"
+            frmConfiguration.txtFirstName.Text = ExecuteScalarQuery(strStatement)
+            strStatement = "SELECT User_Last_Name FROM User WHERE User_ID = '" & frmConfiguration.txtID.Text & "';"
+            frmConfiguration.txtLastName.Text = ExecuteScalarQuery(strStatement)
+            'strStatement = "SELECT Barcode FROM User WHERE User_ID = '" & frmConfiguration.txtID.Text & "';"
+            frmConfiguration.txtBarcode.Text = ""
+            strStatement = "SELECT Admin_Flag FROM User WHERE User_ID = '" & frmConfiguration.txtID.Text & "';"
+            Dim strSupervisor = "SELECT Supervisor_Flag FROM User WHERE User_ID = '" & frmConfiguration.txtID.Text & "';"
+
+            'look at the users permissions on the user table and see what radio button should be selected
+            If ExecuteScalarQuery(strStatement) = 1 Then
+                frmConfiguration.rbtnAdministrator.Checked = True
+            ElseIf ExecuteScalarQuery(strSupervisor) = 1 Then
+                frmConfiguration.rbtnSupervisor.Checked = True
+            Else frmConfiguration.rbtnNurse.Checked = True
+            End If
+
+            'make the save and cancel button visible and hide button1
+            frmConfiguration.btnSaveChanges.Visible = True
+            frmConfiguration.btnCancel.Visible = True
+            frmConfiguration.Button1.Visible = False
+
+        ElseIf getOpenedForm().GetType() Is frmPatientRecords.GetType() Then
+            'this will set up the functions for the editing pencil. 
+            Dim PatientInfo = New frmPatientInfo
+
+
+            ' call SQL method to set edit functionality
+            Debug.Print("patient records")
+
+        ElseIf getOpenedForm().GetType() Is frmConfigureInventory.GetType() Then
+
+            ' call SQL method to set edit functionality
+            '  Debug.Print("removing this inventory piece")
+
+        ElseIf getOpenedForm().GetType() Is frmAllergies.GetType() Then
+
+            ' call SQL method to set edit functionality
+            ' Debug.Print("remove allergy assigned to patient")
+
+        End If
+
+    End Sub
+
+
+
+    '/*********************************************************************/
+    '/*                   Function NAME: getOpenedForm()                  */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:  Collin Krygier          		          */   
+    '/*		         DATE CREATED: 		 2/15/2021                        */                             
+    '/*********************************************************************/
+    '/*  Function PURPOSE:								                  */             
+    '/*	 This function simply retrieves the form that is currently on the */
+    '/*  pnlDockLocation panel.                                           */
+    '/*********************************************************************/
+    '/*  Function Return Value:					                          */         
+    '/*	 A form object representing the form that is opened on the screen */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  DynamicButtonEditRecord_Click                                    */ 
+    '/*  DetermineQueryDelete_Click                                       */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/* None                                                              */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	None                                                              */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	None                                 							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	None                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/15/2021    Initial creation                    */
+    '/*********************************************************************/
+    Public Function getOpenedForm() As Form
+
+        ' on frmMain, the panel called pnlDockedLocation is where we are shoving all of our forms into.
+        ' we arent really interested in the location, we are interested in the control that is inside
+        ' the pnlDockLocation. 
+        ' the GetChildAtPoint() requires point as a parameter and we will use 1,1 to get that.
+
+        Dim ptPoint As Point = New Point(1, 1)
+        Dim frmOpenedControl As Control = frmMain.pnlDockLocation.GetChildAtPoint(ptPoint)
+        Dim frmOpenedForm As Form = CType(frmOpenedControl, Form)
+
+        Return frmOpenedForm
+
+    End Function
+
+    '/*********************************************************************/
+    '/*                   Function NAME: GetSelectedInformation()         */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:  Dylan Walter          		          */   
+    '/*		         DATE CREATED: 		 2/16/2021                        */                             
+    '/*********************************************************************/
+    '/*  Function PURPOSE:								                  */             
+    '/*	 This function simply retrieves the requested information from    */
+    '/*  the selected form.                                               */
+    '/*********************************************************************/
+    '/*  Function Return Value:					                          */         
+    '/*	 strSelected- a string that contains the requested selection      */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  DynamicButtonEditRecord_Click                                    */ 
+    '/*  DetermineQueryDelete_Click                                       */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/* None                                                              */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	sender                                                            */ 
+    '/* strLable                                                          */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	None                                 							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	ctl                                                               */
+    '/*	Selected                                                          */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  DW  2/16/2021    Initial creation                                */
+    '/*********************************************************************/
+    Function GetSelectedInformation(ByVal sender As Object, ByVal strLabel As String) As String
+        Dim strSelected = Nothing
+        Dim ctl As Control
+
+        ' iterating over the list of controls in the panel
+        For Each ctl In sender.Controls
+
+            ' the label containing the wanted information is stored in strLabel and is sent by the user
+            ' to represent what number panel it is in the row of created panels.
+            If ctl.Name.Contains(strLabel) Then
+
+                Debug.Print(ctl.Text)
+                strSelected = (ctl.Text)
+            End If
+        Next
+        'returning the Requested information from the selected record
+        Return strSelected
+    End Function
+
+
+
     Public Function getCurrentPanel(ByVal flpPanel As FlowLayoutPanel, ByVal intPanelsAddedCount As Integer) As Panel
 
         Dim ctlName As String = "pnlIndividualPatientRecord"

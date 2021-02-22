@@ -1,6 +1,7 @@
 ﻿Imports System.IO.Ports
 Imports System.ComponentModel
 Imports System.Threading
+Imports System.Text
 Module CartInterfaceCode
     '/*********************************************************************/
     '/*                   FILE NAME: CartInterfaceCode                    */									  
@@ -38,7 +39,7 @@ Module CartInterfaceCode
     '/*  intDrawerCount - this is the number of drawers that is open. we  */
     '/*     will be using this to make sure that all the drawers are closed*/
     '/*     before the program is able to continue. 
-    '/*	 SimulationMode as boolean - this is going to be a true or false   */ 
+    '/*	 blnSimulationModeValue as boolean - this is going to be a true or false   */ 
     '/*     statement that will tell us if we are simulating the cart.     */
     '/*     If we are simulating the cart then the code that works with the */
     '/*     cart will not compile.  */
@@ -59,6 +60,9 @@ Module CartInterfaceCode
     '/*                 naming standards.                                   */
     '/* Np     2/4/2021Fixed bytFinal being used before it is assigned a value*/
     '/*                 Warning.                                            */
+    '/* NP     2/12/2021 added defaultCartSettings to set up the default   */
+    '/*                  settings for our cart so the software will always */
+    '/*                  be able to work for our cart out of the box.      */
     '/*********************************************************************/
 
     '26
@@ -70,18 +74,124 @@ Module CartInterfaceCode
     'TODO
     'set up a way to change the COM port. (by default it looks like it is COM3
     'default bit rate looks to be 115200
-    Dim blnSimulationMode = False 'this is going to dictate if the cart is going to be simulated or not.
+    Dim blnSimulationModeValue = False 'this is going to dictate if the cart is going to be simulated or not.
+
+
 
 
 
     Dim dicButtonDictionary As Dictionary(Of String, Control) = New Dictionary(Of String, Control)
 
+
+
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: setSimulationMode			   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		              */   
+    '/*		         DATE CREATED: 	2/12/2021                       	   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								             */             
+    '/*  This is going to set the simulation mode value                   */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 value - this is the value that we are setting the simulation mode*/
+    '/'          variable to.                                             */
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   */             
+    '/*	 cartInterfaceCode.setSimulationMode(true)		    			   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Sub setSimulationMode(value As Boolean)
+        blnSimulationMode = value
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   Property NAME:  blnSimulationMode 			   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		               */   
+    '/*		         DATE CREATED: 	2/12/2021                       	   */                             
+    '/*********************************************************************/
+    '/*  Property PURPOSE:								   */             
+    '/*	 This is going to handle the setting as setting of blnSimulationModeValue*/                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*	blnSimulationMode = true										   */    
+    '/* CartInterfaceCode.blnSimulationMode                                */
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	 value - this is the value we are setting blnSimulationModeValue to*/                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+
+
+    Public Property blnSimulationMode As Boolean 'this is going to dictate if the cart is going to be simulated or not.
+
+        Get
+            Return blnSimulationModeValue
+        End Get
+        Set(value As Boolean)
+            blnSimulationModeValue = value
+        End Set
+    End Property
+
+
+
     Sub main()
-        FrmCart.gettingConnectionSettings
+        ChangeSettings("115200", "COM4", True)
+        OpenMutliDrawer({"16", "17", "18"})
 
 
 
     End Sub
+
+
+
+
 
     '/*********************************************************************/
     '/*                   SubProgram NAME: OpenOneDrawer    			   */         
@@ -143,11 +253,11 @@ Module CartInterfaceCode
     Sub OpenOneDrawer(Number As String)
         Dim blnissue = errorChecking(Number)
         Dim comSerialPort1 = FrmCart.serialSetup()
-
+        intDrawerCount = 0 'reset the drawer count just in case. 
 
         If blnSimulationMode Then
             'this will comiple and be ran if the code is compiled in simulation mode. 
-        FrmCart.populateButtonDictionary(dicButtonDictionary)
+            FrmCart.populateButtonDictionary(dicButtonDictionary)
             If Not blnissue Then
                 '  FrmCart.LblDrawer.Text = "Drawer Number " + Number + " is Open"
                 '   FrmCart.ShowDialog()
@@ -158,7 +268,9 @@ Module CartInterfaceCode
                 FrmCart.showdialog()
             End If
         Else
+
             If Not blnissue Then
+                FrmCart.gettingConnectionSettings() 'get the settings in the database for the cart
                 intDrawerCount = 0 'reset the drawer count
                 'this will compiple and run if the cart is not in simulation mode. 
 
@@ -169,6 +281,7 @@ Module CartInterfaceCode
 
                 comSerialPort1.Open()
                 comSerialPort1.Write(bytFinal, 0, bytFinal.Length)
+                intDrawerCount += 1
                 Do
                     'this is going to keep looping until the drawer count reached zero. 
 
@@ -317,13 +430,15 @@ Module CartInterfaceCode
     End Sub
 
     '/*********************************************************************/
-    '/*                   FUNCTION NAME:  					   */         
+    '/*                   SUBPROGRAM NAME: ChangeSettings   			   */         
     '/*********************************************************************/
-    '/*                   WRITTEN BY:  Nathan Premo   		         */   
-    '/*		         DATE CREATED: 		   */                             
+    '/*                   WRITTEN BY:  Nathan Premo   		                */   
+    '/*		         DATE CREATED: 	2/12/2021                       	   */                             
     '/*********************************************************************/
-    '/*  FUNCTION PURPOSE:								   */             
-    '/*											   */                     
+    '/*  SUBPROGRAM PURPOSE:								   */             
+    '/*  This is going to create the string for the SQL call to update the */                     
+    '/*  cart settings in the database as well as call the method to update*/
+    '/*  the record in the database. 
     '/*                                                                   */
     '/*********************************************************************/
     '/*  CALLED BY:   	      						         */           
@@ -353,8 +468,13 @@ Module CartInterfaceCode
     '/*  ---   ----     ------------------------------------------------- */
     '/*                                                                     
     '/*********************************************************************/
-    Sub ChangeSettings()
+    Sub ChangeSettings(bitRate As String, comPort As String, simulationMode As Boolean)
+        Dim strbSQL As New StringBuilder()
+        strbSQL.Append("Update Settings set ")
+        strbSQL.Append("Bit_rate =  '" & bitRate & "', " & "Comm_Port = '" & comPort & "', ")
+        strbSQL.Append("Simulation_Mode_Flag ='" & Convert.ToInt32(simulationMode) & "' where Settings_ID = 0;")
 
+        CreateDatabase.ExecuteInsertQuery(strbSQL.ToString)
     End Sub
 
 
@@ -510,20 +630,34 @@ Module CartInterfaceCode
                 blnIssue = True
             End If
         Next
+        If blnSimulationMode Then
+            'this will comiple and be ran if the code is compiled in simulation mode. 
+            FrmCart.populateButtonDictionary(dicButtonDictionary)
+            If Not blnIssue Then
+                '  FrmCart.LblDrawer.Text = "Drawer Number " + Number + " is Open"
+                '   FrmCart.ShowDialog()
+                For Each number As String In Drawers
+                    dicButtonDictionary.Item(Number).BackColor = Color.Red 'changes the color of the button to red
+                    'to make it looks like it is red. 
+                Next
+                FrmCart.showdialog()
+            End If
+        Else
+            If Not blnIssue Then
+                FrmCart.gettingConnectionSettings() 'get the settings in the database for the cart
+                comSerialPort1.open
 
-        If Not blnIssue Then
-            comSerialPort1.open
+                For Each item As String In Drawers
+                    bytFinal = getSerialString(item) 'gets the byte your array
+                    comSerialPort1.Write(bytFinal, 0, bytFinal.Length) 'sends the byte array
+                    intDrawerCount += 1 'inceases the drawer count
+                Next
+                Do
+                    'this is going to keep looping until the drawer count reached zero. 
 
-            For Each item As String In Drawers
-                bytFinal = getSerialString(item) 'gets the byte your array
-                comSerialPort1.Write(bytFinal, 0, bytFinal.Length) 'sends the byte array
-                intDrawerCount += 1 'inceases the drawer count
-            Next
-            Do
-                'this is going to keep looping until the drawer count reached zero. 
-
-            Loop While (intDrawerCount > 0)
-            comSerialPort1.Close()
+                Loop While (intDrawerCount > 0)
+                comSerialPort1.Close()
+            End If
         End If
     End Sub
 
@@ -534,8 +668,7 @@ Module CartInterfaceCode
     '/*		         DATE CREATED: 	2/2/2021                        	   */                             
     '/*********************************************************************/
     '/*  SUBPROGRAM PURPOSE:								   */             
-    '/*	    This is going to subtracted 1 from the drawer count and will   */
-    '/*         be used to keep tracked of the drawers as they close.      */
+    '/*	    This is going to change the open drawer count to zero         */
     '/*                                                                   */
     '/*********************************************************************/
     '/*  CALLED BY:   	      						         */           
@@ -567,7 +700,7 @@ Module CartInterfaceCode
     '/*********************************************************************/
 
     Public Sub minusDrawerCount()
-        intDrawerCount -= 1
+        intDrawerCount = 0
     End Sub
 
 

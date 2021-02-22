@@ -1,4 +1,6 @@
 ﻿Imports System.Data.SQLite
+Imports System.Text
+
 Module DispenseHistory
     '/*******************************************************************/
     '/*                   FILE NAME: DispenseHistory.vb                 */
@@ -10,9 +12,8 @@ Module DispenseHistory
     '/*******************************************************************/
     '/*  MODULE PURPOSE:								                */
     '/*											                        */
-    '/* This module is responsible for populating dispensed medicaitons*/
-    '/* in both the patient charts and in the dispensed history form.   */
-    '/*                                                                 */
+    '/* This module is responsible for handling all dispensing medication
+    '/* related modules
     '/*******************************************************************/
     '/*  COMMAND LINE PARAMETER LIST (In Parameter Order):			    */
     '/*                         (NONE)	                                */
@@ -175,7 +176,7 @@ Module DispenseHistory
     '/*********************************************************************/
 
     Sub DispenseHistorySpecificPatient(ByRef intPatientMRN As Integer)
-        Dim Strdatacommand As String = "SELECT Drug_Name, PatientMedication.Method, Amount_Dispensed,User.User_Last_Name,User.User_First_Name, DateTime_Dispensed   
+        Dim Strdatacommand As String = "SELECT Drug_Name, Strength, PatientMedication.Type, Amount_Dispensed,User.User_Last_Name,User.User_First_Name, DateTime_Dispensed   
           FROM Dispensing 
           INNER JOIN PatientMedication
           On PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID
@@ -189,11 +190,251 @@ Module DispenseHistory
 
         Dim dsmydataset As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
 
-        For Each dr As DataRow In dsmydataset.Tables(0).Rows
-            frmPatientInfo.CreateDispenseHistoryPanels(frmPatientInfo.flpDispenseHistory, dr(0), "    ", dr(1), dr(2), dr(4) & " " & dr(3), dr(5), " ")
+        '  For Each dr As DataRow In dsmydataset.Tables(0).Rows
+        '       frmPatientInfo.CreateDispenseHistoryPanels(frmPatientInfo.flpDispenseHistory, dr(0), dr(1), dr(2), dr(3), dr(4) & " " & dr(5), dr(6), "")
+        '  Next
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:DispensemedicationPopulate  */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   02/10/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: 
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   		   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  02/10/21  Initial creation of the code      */
+    '/*********************************************************************/
+    Public Sub DispensemedicationPopulate(ByRef intPatientMRN As Integer)
+        Dispense.cmbMedications.Items.Clear()
+        Dim Strdatacommand As String
+        ' Currently the medication display is appending the RXCUI Number on too the medication
+        ' name, as searching by name alone could cause problems if medication names can repeat
+        Strdatacommand = "SELECT Drug_Name,RXCUI_ID FROM PatientMedication " &
+        "INNER JOIN Medication on Medication.Medication_ID = PatientMedication.Medication_TUID " &
+        "INNER JOIN Patient on Patient.Patient_ID = PatientMedication.Patient_TUID " &
+        "WHERE MRN_Number = '" & intPatientMRN & "'"
+
+        Dim dsMedicationDataSet As DataSet = New DataSet
+        dsMedicationDataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+        'add medication name and RXCUI to listbox
+        For Each dr As DataRow In dsMedicationDataSet.Tables(0).Rows
+            Dispense.cmbMedications.Items.Add(dr(0) & "--" & dr(1))
         Next
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:SetMedicationProperties  */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   02/10/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: 
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   		   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  02/10/21  Initial creation of the code      */
+    '/*********************************************************************/
+    Public Sub SetMedicationProperties()
+        Dispense.cmbMethod.Items.Clear()
+        Dispense.cmbDosage.Items.Clear()
+
+        'get selected medication
+        Dim strMedicationRXCUI As String = Dispense.cmbMedications.SelectedItem
+        'split out the RXCUI and name
+        Dim strArray() As String
+        strArray = strMedicationRXCUI.Split("--")
+        strMedicationRXCUI = strArray(2)
+        'select medication type and strength for the selected medication using rxcui 
+        Dim Strdatacommand As String
+        Strdatacommand = "SELECT PatientMedication.Type, Strength FROM PatientMedication " &
+            "INNER JOIN Medication on Medication.Medication_ID = PatientMedication.Medication_TUID " &
+            "WHERE RXCUI_ID = '" & strMedicationRXCUI & "'"
+
+        'make dataset and call the sql method
+        Dim dsMedicationInformation As DataSet = New DataSet
+        dsMedicationInformation = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+
+        'insert the method and dosage into comboboxes
+        Dispense.cmbMethod.Items.Add(dsMedicationInformation.Tables(0).Rows(0)(0))
+        Dispense.cmbMethod.SelectedItem = dsMedicationInformation.Tables(0).Rows(0)(0)
+
+        Dispense.cmbDosage.Items.Add(dsMedicationInformation.Tables(0).Rows(0)(1))
+        Dispense.cmbDosage.SelectedItem = dsMedicationInformation.Tables(0).Rows(0)(1)
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:SplitMedicationString  */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   02/15/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: 
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   		   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  02/15/21  Initial creation of the code      */
+    '/*********************************************************************/
+    Function SplitMedicationString(ByRef strMedicationString As String)
+        ''split string to get the RXCUI for the medication selected on form
+        Dim strArray() As String
+        strArray = strMedicationString.Split("--")
+
+        Return strArray(2)
+    End Function
+
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:DispenseMedication  */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   02/15/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: 
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   		   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  02/15/21  Initial creation of the code      */
+    '/*********************************************************************/
+    Public Sub DispenseMedication(ByRef strMedicationID As String, ByRef intPatientMRN As Integer)
+        'create variables
+        Dim strbSQLcommand As New StringBuilder()
+        Dim intMedID As Integer
+        Dim intPatientID As Integer
+        Dim intPrescribedQuantity As Integer
+        Dim intPatientMedicationDatabaseID As Integer
+        Dim intDrawerMedicationID As Integer
+        Dim dtmAdhocTime As String = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")
+
+        'using RXCUI get database ID for medication
+        strbSQLcommand.Append("SELECT Medication_ID FROM Medication WHERE RXCUI_ID = '" & strMedicationID & "'")
+        intMedID = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
+
+        'clear string builder and using MRN get database patient ID
+        strbSQLcommand.Clear()
+        strbSQLcommand.Append("SELECT Patient_ID FROM Patient WHERE MRN_Number = '" & intPatientMRN & "'")
+        intPatientID = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
+
+        'clear string builder using medID and PatientID get the quantity of the prescribed medication
+        strbSQLcommand.Clear()
+        strbSQLcommand.Append("SELECT Quantity FROM PatientMedication WHERE Medication_TUID = '" & intMedID & "' AND Patient_TUID = '" & intPatientID & "'")
+        intPrescribedQuantity = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
+
+        ''update quantity to new amount
+        'intPrescribedQuantity = intPrescribedQuantity - Dispense.txtQuantity.Text
+        'strbSQLcommand.Clear()
+        'strbSQLcommand.Append("UPDATE PatientMedication SET Quantity = " & intPrescribedQuantity & " WHERE Medication_TUID = '" & intMedID & "' AND Patient_TUID = '" & intPatientID & "'")
+        'CreateDatabase.ExecuteInsertQuery(strbSQLcommand.ToString)
+
+        'clear string builder and set up sql to get the patientMedication_ID primary key from patient medication table to use in
+        'the dispensing table as a foreign key
+        strbSQLcommand.Clear()
+        strbSQLcommand.Append("SELECT PatientMedication_ID FROM PatientMedication WHERE Medication_TUID = '" & intMedID & "' AND Patient_TUID = '" & intPatientID & "'")
+        intPatientMedicationDatabaseID = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
+
+        'clear string builder and set up sql statement to decrease drawer amount
+        strbSQLcommand.Clear()
+        strbSQLcommand.Append("SELECT Quantity FROM DrawerMedication WHERE Medication_TUID  = '" & intMedID & "'")
+        intPrescribedQuantity = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
+        intPrescribedQuantity = intPrescribedQuantity - Dispense.txtQuantity.Text
+        strbSQLcommand.Clear()
+        strbSQLcommand.Append("UPDATE DrawerMedication SET Quantity = '" & intPrescribedQuantity & "' WHERE Medication_TUID = '" & intMedID & "'")
+        CreateDatabase.ExecuteInsertQuery(strbSQLcommand.ToString)
+
+        'clear string builder and set up sql statement to insert into dispense history
+        strbSQLcommand.Clear()
+        strbSQLcommand.Append("SELECT DrawerMedication_ID From DrawerMedication WHERE Medication_TUID = '" & intMedID & "'")
+        intDrawerMedicationID = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
+        strbSQLcommand.Clear()
+        strbSQLcommand.Append("INSERT INTO Dispensing(PatientMedication_TUID, Primary_User_TUID, Approving_User_TUID, DateTime_Dispensed, Amount_Dispensed, DrawerMedication_TUID) ")
+        strbSQLcommand.Append("VALUES('" & intPatientMedicationDatabaseID & "','1','1','" & dtmAdhocTime & "','" & Dispense.txtQuantity.Text & "','" & intDrawerMedicationID & "')")
+        CreateDatabase.ExecuteInsertQuery(strbSQLcommand.ToString)
+
+    End Sub
+
+
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:SplitMedicationString  */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   02/15/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: 
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   		   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  02/15/21  Initial creation of the code      */
+    '/*********************************************************************/
+    Private Sub UpdateMedicationDrawerAmount()
+
+    End Sub
 End Module
 

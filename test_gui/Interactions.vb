@@ -1,4 +1,5 @@
 ﻿Imports RestSharp
+Imports Newtonsoft.Json.Linq
 Module Interactions
     '/***************************************************************************/
     '/*                   FILE NAME: Interactions.vb                            */
@@ -77,11 +78,11 @@ Module Interactions
     '/* 			                                                      */
     '/*********************************************************************/
     '/*  RETURNS:								                          */
-    '/*            (NOTHING)								              */
+    '/*       								                              */
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                  */
     '/*											                          */
-    '/*   getDrugInteraction("341248")					                  */
+    '/*    getDrugInteraction("153010", "2760")					          */
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically):			    	          */
     '/*											                          */
@@ -96,26 +97,76 @@ Module Interactions
     '/*  WHO      WHEN     WHAT								              */
     '/*                                                                   */
     '/*  Dillen  02/3/21  Function that check Interations                 */
+    '/*  Dillen  02/9/21  Added way to choose json Property to pull       */
+    '/*                   from Interaction API                            */
     '/*********************************************************************/
-    '//
-    Function getDrugInteraction(rxuiNum As String) As Object
+    '/*  NP      02/9/2021 Added a return that returns the result to      */
+    '/*                    remove the function has no return warning.     */
+    '/********************************************************************/
 
+    Function getDrugInteraction(rxcuiNum1 As String, rxcuiNum2 As String) As String
 
         'URL for finding interactions 
-        Dim url As String = "https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui=" + rxuiNum
+        Dim url As String = $"https://rxnav.nlm.nih.gov/REST/interaction/list.json?rxcuis={rxcuiNum1}+{rxcuiNum2}"
+        'location in json of properties
+        Dim trawlPointer As String = "$.interactionTypeGroup.interactionType.interactionPair"
+        'inputJSON
+        Dim inputJSON As JToken = rxNorm.GetJSON(url)
+        'set Jtoken into array to pull data from json
+        Dim trawledResult As JToken = inputJSON.SelectToken(trawlPointer)
+
+        Return trawledResult
+    End Function
 
 
-        'web request to pull data 
-        Dim restClient As New RestSharp.RestClient(url)
-        Dim restRequest As New RestSharp.RestRequest(url)
-
-
-        'saves the result from request
-        Dim result = restClient.Get(restRequest)
-
-
-        'debug to test if content is correct
-        Debug.WriteLine(result.Content)
-
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME:   getInteractionsByName          */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:Dillen Perron  		              */
+    '/*		         DATE CREATED: 2/18/2021         		              */
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								                  */
+    '/*											                          */
+    '/* This function Is responsible for taking an rxui number and        */
+    '/* check durg interactions                                           */
+    '/*											                          */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/*                                     				              */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */
+    '/*             (NONE)								                  */
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */
+    '/* 			                                                      */
+    '/* 			                                                      */
+    '/*********************************************************************/
+    '/*  RETURNS:								                          */
+    '/*       								                              */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */
+    '/*											                          */
+    '/*    getInteractionsByName("153010")		        			          */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):			    	          */
+    '/*											                          */
+    '/*	 url - holds a link to the api with the selected rxui             */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO      WHEN     WHAT								              */
+    '/*                                                                   */
+    '/*  Dillen  02/18/21  Function that check Interations                */
+    '/*********************************************************************/
+    Function getInteractionsByName(rxcuiNum As String) As String
+        'URL for finding interactions 
+        Dim url As String = $"https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui={rxcuiNum}"
+        'location in json of properties
+        Dim trawlPointer As String = "$.interactionTypeGroup.interactionType.interactionPair"
+        'inputJSON
+        Dim inputJSON As JToken = rxNorm.GetJSON(url)
+        'set Jtoken into array to pull data from json
+        Dim trawledResult As JToken = inputJSON.SelectToken(trawlPointer)
+        Return trawledResult
     End Function
 End Module

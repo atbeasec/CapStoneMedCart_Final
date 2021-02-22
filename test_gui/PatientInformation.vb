@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SQLite
+Imports System.Text
 Module PatientInformation
     '/*******************************************************************/
     '/*                   FILE NAME: PatientInformation.vb              */
@@ -51,6 +52,9 @@ Module PatientInformation
     '/*  Alexander Beasecker    1/25/2021   Initial creation            */
     '/*  Adam Kott              1/27/2021   added plans for module      */
     '/*  Adam Kott              1/28/2021   added database connection   */
+    '/*  Nathan Premo           2/16/2021   added getRoom method to     */
+    '/*                                     connect the room combo box  */
+    '/*                                     to the database.            */
     '/*******************************************************************/
 
 
@@ -90,15 +94,17 @@ Module PatientInformation
     '/*  WHO                   WHEN     WHAT							  */
     '/*  ---                   ----     ----------------------------------*/
     '/*  Alexander Beasecker  02/09/21  Initial creation of the code      */
+    '/*  NP                   02/9/2021 Changed intPhysicianID to be nothing*/
+    '/*                                 When first made to remove the used*/
+    '/*                                 before declared warning.          */
     '/*********************************************************************/
     Public Sub GetPatientInformation(ByRef intPatientMRN As Integer)
-
+        PopulateStateComboBox(frmPatientInfo.cboState)
         Dim dsPatientDataSet As DataSet = New DataSet
-        Dim intPhysicianID As String
+        'changed be nothing when made to clear up used before declared warning. 
+        Dim intPhysicianID As String = Nothing
         'sql taktement to get patient information
-        Dim strSQLiteCommand As String = "SELECT MRN_Number, Patient_First_Name,Patient_Middle_Name, Patient_Last_Name, " &
-            "Date_of_Birth, Sex, Height, Weight, Address, City, State, Email_address, Phone_Number, Primary_Physician_ID " &
-            " FROM Patient WHERE MRN_Number = '" & intPatientMRN & "'"
+        Dim strSQLiteCommand As String = "SELECT * FROM Patient WHERE MRN_Number = '" & intPatientMRN & "'"
 
         dsPatientDataSet = CreateDatabase.ExecuteSelectQuery(strSQLiteCommand)
         ''check each piece of dataset for null, if not null set it, set to N/A if null
@@ -107,58 +113,78 @@ Module PatientInformation
             If IsDBNull(dr(0)) Then
                 frmPatientInfo.txtMRN.Text = "N/A"
             Else
-                frmPatientInfo.txtMRN.Text = dr(0)
+                frmPatientInfo.txtMRN.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.MRN_Number)
             End If
 
             If IsDBNull(dr(4)) Then
                 frmPatientInfo.txtBirthday.Text = "N/A"
             Else
-                frmPatientInfo.txtBirthday.Text = dr(4)
+                frmPatientInfo.txtBirthday.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.DoB)
             End If
 
             If IsDBNull(dr(5)) Then
                 frmPatientInfo.txtGender.Text = "N/A"
             Else
-                frmPatientInfo.txtGender.Text = dr(5)
+                frmPatientInfo.txtGender.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Sex)
             End If
 
             If IsDBNull(dr(6)) Then
                 frmPatientInfo.txtHeight.Text = "N/A"
             Else
-                frmPatientInfo.txtHeight.Text = dr(6)
+                frmPatientInfo.txtHeight.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Height)
             End If
 
             If IsDBNull(dr(7)) Then
                 frmPatientInfo.txtWeight.Text = "N/A"
             Else
-                frmPatientInfo.txtWeight.Text = dr(7)
+                frmPatientInfo.txtWeight.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Weight)
             End If
 
             If IsDBNull(dr(8)) Then
                 frmPatientInfo.txtAddress.Text = "N/A"
             Else
-                frmPatientInfo.txtAddress.Text = dr(8) & " " & dr(9) & " " & dr(10)
+                frmPatientInfo.txtAddress.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.address)
+            End If
+
+            If IsDBNull(dr(8)) Then
+                frmPatientInfo.txtCity.Text = "N/A"
+            Else
+                frmPatientInfo.txtCity.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.City)
+            End If
+
+            If IsDBNull(dr(8)) Then
+                frmPatientInfo.cboState.SelectedItem = "N/A"
+            Else
+                frmPatientInfo.cboState.SelectedItem = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.state)
+            End If
+
+            If IsDBNull(dr(8)) Then
+                frmPatientInfo.txtZipCode.Text = "N/A"
+            Else
+                frmPatientInfo.txtZipCode.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.zip)
             End If
 
             If IsDBNull(dr(11)) Then
                 frmPatientInfo.txtEmail.Text = "N/A"
             Else
-                frmPatientInfo.txtEmail.Text = dr(11)
+                frmPatientInfo.txtEmail.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Email)
             End If
 
             If IsDBNull(dr(12)) Then
                 frmPatientInfo.txtPhone.Text = "N/A"
             Else
-                frmPatientInfo.txtPhone.Text = dr(12)
+                frmPatientInfo.txtPhone.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Phone)
             End If
 
             If IsDBNull(dr(1)) Then
                 frmPatientInfo.LblPatientName.Text = "N/A"
             Else
-                frmPatientInfo.LblPatientName.Text = dr(1) & " " & dr(2) & " " & dr(3)
+                frmPatientInfo.LblPatientName.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.FristName) &
+                    " " & dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.MiddleName) &
+                    " " & dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.LastName)
             End If
 
-            intPhysicianID = dr(13)
+            intPhysicianID = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.PhysicianID)
         Next
         'get name of physician that is assigned to patient
         strSQLiteCommand = "SELECT Physician_First_Name,Physician_Last_Name" &
@@ -174,7 +200,219 @@ Module PatientInformation
             End If
         Next
         'call dispense history to get dispensed history of the patient
-        DispenseHistory.DispenseHistorySpecificPatient(intPatientMRN)
+        '  DispenseHistory.DispenseHistorySpecificPatient(intPatientMRN)
     End Sub
 
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME: GetAllergies                       */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:Adam kott                             */   
+    '/*                 DATE CREATED:2/8/2021                                 */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:    receive a MRN number and push the              */             
+    '/* allergy information into the allergies list                       */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:                                                           */           
+    '/*                                                                   */         
+    '/*********************************************************************/
+    '/*  CALLS:                                                              */                 
+    '/*             (ExecuteScalar),(ExectueSelectQuery)                  */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):                              */         
+    '/*        intPatientInformationMRN                                      */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:                                                          */                   
+    '/*            (NOTHING)                                              */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:                                   */             
+    '/*                                               */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*           dtsPatientAllergy:                                         */
+    '/*        intPatientAllergyId:                                       */
+    '/*        intPatientInformationMRN:                                  */
+
+
+    '/*    */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:                                 */               
+    '/*                                               */                     
+    '/*  WHO   WHEN     WHAT                                   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  AK   2/8/2021 Created the SQL statements to pull back the       */
+    '/*                 information needed for Patient allergies list     */
+    '/*********************************************************************/
+    Public Sub GetAllergies(ByRef intPatientInformationMRN As Integer)
+
+        'default value for an mrn number so allergies are shown
+        'intPatientInformationMRN = 949764144
+
+        'get the patient id assiociated with the MRN Nummber
+        Dim intPatientAllergyId As Integer = CInt(CreateDatabase.ExecuteScalarQuery("select patient.Patient_ID From Patient " &
+                         "where Patient.MRN_Number=" & (intPatientInformationMRN).ToString & ";"))
+        'get the allergy information from the patient allergy tables
+        Dim dtsPatientAllergy As DataSet = CreateDatabase.ExecuteSelectQuery("Select Allergy_Name From PatientAllergy " &
+                            "Where Active_Flag =1 AND Patient_TUID =" & (intPatientAllergyId).ToString & ";")
+
+        'push each row from the
+        For Each item As DataRow In dtsPatientAllergy.Tables(0).Rows
+            With dtsPatientAllergy.Tables(0)
+                frmPatientInfo.lstBoxAllergies.Items.Add(item(0))
+            End With
+        Next
+        'get select from patient allergy inner join on patient table where tuid is the same
+        'join patients meds table and medications table
+    End Sub
+
+    Public Sub PopulatePatientDispenseInfo(ByRef intPatientMRN As Integer)
+
+        'get patient information using sql generic method
+        Dim dsPatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT Date_of_Birth,Patient_First_Name,Patient_Last_Name FROM Patient WHERE MRN_Number = '" & intPatientMRN & "'")
+        'set all patient information into dispense textboxes
+        Dispense.txtMRN.Text = intPatientMRN
+        Dispense.txtDOB.Text = dsPatientInfo.Tables(0).Rows(0)(0)
+        Dispense.txtPatientFirstName.Text = dsPatientInfo.Tables(0).Rows(0)(1)
+        Dispense.txtPatientLastName.Text = dsPatientInfo.Tables(0).Rows(0)(2)
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME: PopulatePatientAllergiesDispenseInfo   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:Adam kott                             */   
+    '/*                 DATE CREATED:2/10/2021                           */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:                                                      */                    
+    '/*********************************************************************/
+    '/*  CALLS:                                                         */                            
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):                              */         
+    '/*********************************************************************/
+    '/*  RETURNS:                                                          */                   
+    '/*            (NOTHING)                                              */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:                                   */             
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:                                 */               
+    '/*                                               */                     
+    '/*  WHO   WHEN     WHAT                                   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  ATB   2/10/2021 initial code creation
+    '/*********************************************************************/
+    Public Sub PopulatePatientAllergiesDispenseInfo(ByRef intPatientMRN As Integer)
+        Dim dsPatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT Allergy_Name From PatientAllergy " &
+                                                                         "INNER JOIN Patient on Patient.Patient_ID = PatientAllergy.Patient_TUID " &
+                                                                         "WHERE MRN_Number = '" & intPatientMRN & "'")
+        For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
+            Dispense.lstboxAllergies.Items.Add(dr(0))
+        Next
+    End Sub
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME: getPrescriptions                  */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:Adam kott                             */   
+    '/*                 DATE CREATED:2/10/2021                           */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:                                                      */                    
+    '/*********************************************************************/
+    '/*  CALLS:                                                         */                            
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):                              */         
+    '/*********************************************************************/
+    '/*  RETURNS:                                                          */                   
+    '/*            (NOTHING)                                              */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:                                   */             
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:                                 */               
+    '/*                                               */                     
+    '/*  WHO   WHEN     WHAT                                   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  ATB   2/10/2021 initial code creation
+    '/*********************************************************************/
+    Public Sub getPrescriptions(ByRef intPatientMRN As Integer)
+        Dim strSQLiteCommand As String
+        Dim dsPatientPrescription As DataSet
+        strSQLiteCommand = "SELECT Drug_Name, Strength, Frequency, PatientMedication.Type, Quantity ,Date_Presrcibed, Physician_First_Name, Physician_Last_Name FROM PatientMedication " &
+            "INNER JOIN Medication on Medication.Medication_ID = PatientMedication.Medication_TUID " &
+            "INNER JOIN Patient ON Patient.Patient_ID = PatientMedication.Patient_TUID " &
+            "INNER JOIN Physician on Physician.Physician_ID = PatientMedication.Ordering_Physician_ID " &
+            "WHERE MRN_Number = '" & intPatientMRN & "'"
+
+        dsPatientPrescription = CreateDatabase.ExecuteSelectQuery(strSQLiteCommand)
+        For Each dr As DataRow In dsPatientPrescription.Tables(0).Rows
+            frmPatientInfo.CreatePrescriptionsPanels(frmPatientInfo.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7))
+        Next
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: getRoom   					   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		               */   
+    '/*		         DATE CREATED: 2/16/2021                    		   */                             
+    '/*********************************************************************/
+    '/*  SUBPROHRAM PURPOSE:								               */             
+    '/*	 This is going to populate the room combo box as well as select the*/
+    '/*  select the room the patient is in. It is also going to populate   */
+    '/*  the room combo box using the populateRoomComboboxMethod           */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 intPatientMRN - this is the patient medical record we are going to*/                     
+    '/*                  be using for the SQL statements.                  */
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+
+    Public Sub getRoom(intPatientMRN As Integer, cboRoom As ComboBox, cboBed As ComboBox)
+        Dim strbSQL As StringBuilder = New StringBuilder
+        Dim dsPatient As DataSet
+        Dim dsPatientRoom As DataSet
+
+        dsPatient = CreateDatabase.ExecuteSelectQuery("Select * from Patient where MRN_Number = '" & intPatientMRN & "';")
+        strbSQL.Append("Select * from Rooms;")
+        PopulateRoomsCombBoxesMethods.PopulateRoomComboBox(cboRoom, CreateDatabase.ExecuteSelectQuery(strbSQL.ToString))
+        'calling that function will populate the room combobox for us. 
+
+        strbSQL.Clear()
+        strbSQL.Append("Select * from PatientRoom where Patient_TUID ='" & dsPatient.Tables(0).Rows(0)(EnumList.Patient.ID) & "';")
+
+        dsPatientRoom = CreateDatabase.ExecuteSelectQuery(strbSQL.ToString)
+        cboRoom.SelectedItem = dsPatientRoom.Tables(0).Rows(0)(EnumList.PatientRoom.RoomID)
+        PopulateRoomsCombBoxesMethods.UpdateBedComboBox(cboBed, cboRoom)
+        cboBed.SelectedItem = dsPatientRoom.Tables(0).Rows(0)(EnumList.PatientRoom.BedName)
+    End Sub
 End Module

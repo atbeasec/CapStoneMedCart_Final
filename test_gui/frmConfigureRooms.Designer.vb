@@ -29,7 +29,6 @@ Partial Class frmConfigureRooms
         Me.lstRooms = New System.Windows.Forms.ListBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.btnDeleteRoom = New System.Windows.Forms.Button()
-        Me.btnAddRoom = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.lstBeds = New System.Windows.Forms.ListBox()
         Me.btnAddBed = New System.Windows.Forms.Button()
@@ -48,7 +47,7 @@ Partial Class frmConfigureRooms
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(13, 76)
+        Me.Label12.Location = New System.Drawing.Point(12, 76)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(62, 21)
         Me.Label12.TabIndex = 173
@@ -58,7 +57,7 @@ Partial Class frmConfigureRooms
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(314, 76)
+        Me.Label13.Location = New System.Drawing.Point(216, 76)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(46, 21)
         Me.Label13.TabIndex = 172
@@ -94,17 +93,17 @@ Partial Class frmConfigureRooms
         Me.lstRooms.ItemHeight = 20
         Me.lstRooms.Location = New System.Drawing.Point(1, 1)
         Me.lstRooms.Name = "lstRooms"
-        Me.lstRooms.Size = New System.Drawing.Size(173, 210)
+        Me.lstRooms.Size = New System.Drawing.Size(173, 201)
         Me.lstRooms.TabIndex = 174
         '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.DarkGray
         Me.Panel1.Controls.Add(Me.lstRooms)
-        Me.Panel1.Location = New System.Drawing.Point(17, 99)
+        Me.Panel1.Location = New System.Drawing.Point(16, 99)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel1.Size = New System.Drawing.Size(175, 212)
+        Me.Panel1.Size = New System.Drawing.Size(175, 203)
         Me.Panel1.TabIndex = 3
         '
         'btnDeleteRoom
@@ -113,37 +112,22 @@ Partial Class frmConfigureRooms
         Me.btnDeleteRoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDeleteRoom.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDeleteRoom.ForeColor = System.Drawing.Color.White
-        Me.btnDeleteRoom.Location = New System.Drawing.Point(207, 76)
+        Me.btnDeleteRoom.Location = New System.Drawing.Point(16, 320)
         Me.btnDeleteRoom.Name = "btnDeleteRoom"
-        Me.btnDeleteRoom.Size = New System.Drawing.Size(87, 33)
+        Me.btnDeleteRoom.Size = New System.Drawing.Size(175, 32)
         Me.btnDeleteRoom.TabIndex = 4
-        Me.btnDeleteRoom.Text = "Delete"
+        Me.btnDeleteRoom.Text = "Delete Room"
         Me.btnDeleteRoom.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnDeleteRoom.UseVisualStyleBackColor = False
-        '
-        'btnAddRoom
-        '
-        Me.btnAddRoom.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnAddRoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAddRoom.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddRoom.ForeColor = System.Drawing.Color.White
-        Me.btnAddRoom.Location = New System.Drawing.Point(207, 31)
-        Me.btnAddRoom.Name = "btnAddRoom"
-        Me.btnAddRoom.Size = New System.Drawing.Size(87, 33)
-        Me.btnAddRoom.TabIndex = 2
-        Me.btnAddRoom.Text = "Add"
-        Me.btnAddRoom.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnAddRoom.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnAddRoom.UseVisualStyleBackColor = False
         '
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.DarkGray
         Me.Panel2.Controls.Add(Me.lstBeds)
-        Me.Panel2.Location = New System.Drawing.Point(318, 99)
+        Me.Panel2.Location = New System.Drawing.Point(220, 99)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel2.Size = New System.Drawing.Size(175, 212)
+        Me.Panel2.Size = New System.Drawing.Size(175, 203)
         Me.Panel2.TabIndex = 7
         '
         'lstBeds
@@ -155,7 +139,7 @@ Partial Class frmConfigureRooms
         Me.lstBeds.ItemHeight = 20
         Me.lstBeds.Location = New System.Drawing.Point(1, 1)
         Me.lstBeds.Name = "lstBeds"
-        Me.lstBeds.Size = New System.Drawing.Size(173, 210)
+        Me.lstBeds.Size = New System.Drawing.Size(173, 201)
         Me.lstBeds.TabIndex = 174
         '
         'btnAddBed
@@ -164,7 +148,7 @@ Partial Class frmConfigureRooms
         Me.btnAddBed.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAddBed.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAddBed.ForeColor = System.Drawing.Color.White
-        Me.btnAddBed.Location = New System.Drawing.Point(510, 31)
+        Me.btnAddBed.Location = New System.Drawing.Point(415, 30)
         Me.btnAddBed.Name = "btnAddBed"
         Me.btnAddBed.Size = New System.Drawing.Size(87, 33)
         Me.btnAddBed.TabIndex = 6
@@ -177,7 +161,7 @@ Partial Class frmConfigureRooms
         '
         Me.Panel3.BackColor = System.Drawing.Color.DarkGray
         Me.Panel3.Controls.Add(Me.txtBed)
-        Me.Panel3.Location = New System.Drawing.Point(319, 35)
+        Me.Panel3.Location = New System.Drawing.Point(221, 35)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel3.Size = New System.Drawing.Size(175, 28)
@@ -200,11 +184,11 @@ Partial Class frmConfigureRooms
         Me.btnDeleteBed.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDeleteBed.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDeleteBed.ForeColor = System.Drawing.Color.White
-        Me.btnDeleteBed.Location = New System.Drawing.Point(510, 76)
+        Me.btnDeleteBed.Location = New System.Drawing.Point(220, 319)
         Me.btnDeleteBed.Name = "btnDeleteBed"
-        Me.btnDeleteBed.Size = New System.Drawing.Size(87, 33)
+        Me.btnDeleteBed.Size = New System.Drawing.Size(175, 33)
         Me.btnDeleteBed.TabIndex = 8
-        Me.btnDeleteBed.Text = "Delete"
+        Me.btnDeleteBed.Text = "Delete Bed"
         Me.btnDeleteBed.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnDeleteBed.UseVisualStyleBackColor = False
         '
@@ -222,7 +206,7 @@ Partial Class frmConfigureRooms
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(316, 11)
+        Me.Label2.Location = New System.Drawing.Point(218, 11)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(107, 21)
         Me.Label2.TabIndex = 180
@@ -233,7 +217,7 @@ Partial Class frmConfigureRooms
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(629, 362)
+        Me.ClientSize = New System.Drawing.Size(741, 534)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnDeleteBed)
@@ -241,7 +225,6 @@ Partial Class frmConfigureRooms
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.btnDeleteRoom)
-        Me.Controls.Add(Me.btnAddRoom)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.Label13)
@@ -265,7 +248,6 @@ Partial Class frmConfigureRooms
     Friend WithEvents lstRooms As ListBox
     Friend WithEvents Panel1 As Panel
     Friend WithEvents btnDeleteRoom As Button
-    Friend WithEvents btnAddRoom As Button
     Friend WithEvents Panel2 As Panel
     Friend WithEvents lstBeds As ListBox
     Friend WithEvents btnAddBed As Button

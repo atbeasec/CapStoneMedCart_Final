@@ -33,13 +33,13 @@ Partial Class frmAdHockDispense
         Me.Label17 = New System.Windows.Forms.Label()
         Me.cmbDosage = New System.Windows.Forms.ComboBox()
         Me.lstboxAllergies = New System.Windows.Forms.ListBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.cmbPatientName = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel14 = New System.Windows.Forms.Panel()
-        Me.txtMRN = New System.Windows.Forms.TextBox()
+        Me.txtDateOfBirth = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtMRN = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnDispense = New System.Windows.Forms.Button()
         Me.btnDecrementQuantity = New System.Windows.Forms.Button()
@@ -55,7 +55,7 @@ Partial Class frmAdHockDispense
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(332, 269)
+        Me.Label13.Location = New System.Drawing.Point(397, 269)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(124, 21)
         Me.Label13.TabIndex = 210
@@ -65,7 +65,7 @@ Partial Class frmAdHockDispense
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(332, 113)
+        Me.Label5.Location = New System.Drawing.Point(397, 113)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(73, 21)
         Me.Label5.TabIndex = 209
@@ -76,30 +76,30 @@ Partial Class frmAdHockDispense
         Me.cmbMethod.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbMethod.FormattingEnabled = True
         Me.cmbMethod.Items.AddRange(New Object() {"Yes", "No"})
-        Me.cmbMethod.Location = New System.Drawing.Point(337, 64)
+        Me.cmbMethod.Location = New System.Drawing.Point(401, 64)
         Me.cmbMethod.Name = "cmbMethod"
-        Me.cmbMethod.Size = New System.Drawing.Size(243, 29)
+        Me.cmbMethod.Size = New System.Drawing.Size(322, 29)
         Me.cmbMethod.TabIndex = 2
         '
         'Label15
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(332, 40)
+        Me.Label15.Location = New System.Drawing.Point(397, 40)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(67, 21)
+        Me.Label15.Size = New System.Drawing.Size(45, 21)
         Me.Label15.TabIndex = 208
-        Me.Label15.Text = "Method:"
+        Me.Label15.Text = "Type:"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(37, 9)
+        Me.Label3.Location = New System.Drawing.Point(12, 9)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(147, 21)
+        Me.Label3.Size = New System.Drawing.Size(139, 21)
         Me.Label3.TabIndex = 207
-        Me.Label3.Text = "Ad Hock Dispense:"
+        Me.Label3.Text = "Ad Hoc Dispense:"
         '
         'cmbMedications
         '
@@ -108,7 +108,7 @@ Partial Class frmAdHockDispense
         Me.cmbMedications.Items.AddRange(New Object() {"Yes", "No"})
         Me.cmbMedications.Location = New System.Drawing.Point(35, 64)
         Me.cmbMedications.Name = "cmbMedications"
-        Me.cmbMedications.Size = New System.Drawing.Size(243, 29)
+        Me.cmbMedications.Size = New System.Drawing.Size(294, 29)
         Me.cmbMedications.TabIndex = 1
         '
         'Label14
@@ -117,9 +117,9 @@ Partial Class frmAdHockDispense
         Me.Label14.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label14.Location = New System.Drawing.Point(32, 116)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(65, 21)
+        Me.Label14.Size = New System.Drawing.Size(72, 21)
         Me.Label14.TabIndex = 206
-        Me.Label14.Text = "Dosage:"
+        Me.Label14.Text = "Strength:"
         '
         'Label17
         '
@@ -138,7 +138,7 @@ Partial Class frmAdHockDispense
         Me.cmbDosage.Items.AddRange(New Object() {"Yes", "No"})
         Me.cmbDosage.Location = New System.Drawing.Point(35, 140)
         Me.cmbDosage.Name = "cmbDosage"
-        Me.cmbDosage.Size = New System.Drawing.Size(243, 29)
+        Me.cmbDosage.Size = New System.Drawing.Size(294, 29)
         Me.cmbDosage.TabIndex = 3
         '
         'lstboxAllergies
@@ -146,22 +146,22 @@ Partial Class frmAdHockDispense
         Me.lstboxAllergies.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lstboxAllergies.FormattingEnabled = True
         Me.lstboxAllergies.ItemHeight = 20
-        Me.lstboxAllergies.Location = New System.Drawing.Point(337, 293)
+        Me.lstboxAllergies.Location = New System.Drawing.Point(401, 293)
         Me.lstboxAllergies.Name = "lstboxAllergies"
         Me.lstboxAllergies.SelectionMode = System.Windows.Forms.SelectionMode.None
-        Me.lstboxAllergies.Size = New System.Drawing.Size(243, 64)
+        Me.lstboxAllergies.Size = New System.Drawing.Size(321, 104)
         Me.lstboxAllergies.TabIndex = 203
         Me.lstboxAllergies.TabStop = False
         '
-        'ComboBox1
+        'cmbPatientName
         '
-        Me.ComboBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"Yes", "No"})
-        Me.ComboBox1.Location = New System.Drawing.Point(35, 216)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(243, 29)
-        Me.ComboBox1.TabIndex = 7
+        Me.cmbPatientName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbPatientName.FormattingEnabled = True
+        Me.cmbPatientName.Items.AddRange(New Object() {"Yes", "No"})
+        Me.cmbPatientName.Location = New System.Drawing.Point(35, 216)
+        Me.cmbPatientName.Name = "cmbPatientName"
+        Me.cmbPatientName.Size = New System.Drawing.Size(294, 29)
+        Me.cmbPatientName.TabIndex = 7
         '
         'Label1
         '
@@ -169,38 +169,39 @@ Partial Class frmAdHockDispense
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(32, 192)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(106, 21)
+        Me.Label1.Size = New System.Drawing.Size(105, 21)
         Me.Label1.TabIndex = 212
-        Me.Label1.Text = "Patient Name:"
+        Me.Label1.Text = "Select Patient:"
         '
         'Panel14
         '
         Me.Panel14.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel14.Controls.Add(Me.txtMRN)
-        Me.Panel14.Location = New System.Drawing.Point(337, 222)
+        Me.Panel14.Controls.Add(Me.txtDateOfBirth)
+        Me.Panel14.Location = New System.Drawing.Point(402, 216)
         Me.Panel14.Name = "Panel14"
         Me.Panel14.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel14.Size = New System.Drawing.Size(243, 24)
+        Me.Panel14.Size = New System.Drawing.Size(321, 24)
         Me.Panel14.TabIndex = 6
         '
-        'txtMRN
+        'txtDateOfBirth
         '
-        Me.txtMRN.BackColor = System.Drawing.Color.White
-        Me.txtMRN.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtMRN.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtMRN.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMRN.Location = New System.Drawing.Point(1, 1)
-        Me.txtMRN.Name = "txtMRN"
-        Me.txtMRN.ReadOnly = True
-        Me.txtMRN.Size = New System.Drawing.Size(241, 22)
-        Me.txtMRN.TabIndex = 6
-        Me.txtMRN.TabStop = False
+        Me.txtDateOfBirth.BackColor = System.Drawing.Color.White
+        Me.txtDateOfBirth.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtDateOfBirth.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtDateOfBirth.Enabled = False
+        Me.txtDateOfBirth.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDateOfBirth.Location = New System.Drawing.Point(1, 1)
+        Me.txtDateOfBirth.Name = "txtDateOfBirth"
+        Me.txtDateOfBirth.ReadOnly = True
+        Me.txtDateOfBirth.Size = New System.Drawing.Size(319, 22)
+        Me.txtDateOfBirth.TabIndex = 6
+        Me.txtDateOfBirth.TabStop = False
         '
         'Label8
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(332, 198)
+        Me.Label8.Location = New System.Drawing.Point(397, 192)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(96, 21)
         Me.Label8.TabIndex = 214
@@ -209,25 +210,26 @@ Partial Class frmAdHockDispense
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel2.Controls.Add(Me.TextBox1)
+        Me.Panel2.Controls.Add(Me.txtMRN)
         Me.Panel2.Location = New System.Drawing.Point(35, 292)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel2.Size = New System.Drawing.Size(243, 24)
+        Me.Panel2.Size = New System.Drawing.Size(294, 24)
         Me.Panel2.TabIndex = 6
         '
-        'TextBox1
+        'txtMRN
         '
-        Me.TextBox1.BackColor = System.Drawing.Color.White
-        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(1, 1)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(241, 22)
-        Me.TextBox1.TabIndex = 6
-        Me.TextBox1.TabStop = False
+        Me.txtMRN.BackColor = System.Drawing.Color.White
+        Me.txtMRN.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtMRN.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtMRN.Enabled = False
+        Me.txtMRN.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMRN.Location = New System.Drawing.Point(1, 1)
+        Me.txtMRN.Name = "txtMRN"
+        Me.txtMRN.ReadOnly = True
+        Me.txtMRN.Size = New System.Drawing.Size(292, 22)
+        Me.txtMRN.TabIndex = 6
+        Me.txtMRN.TabStop = False
         '
         'Label2
         '
@@ -246,7 +248,7 @@ Partial Class frmAdHockDispense
         Me.btnDispense.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDispense.ForeColor = System.Drawing.Color.White
         Me.btnDispense.Image = CType(resources.GetObject("btnDispense.Image"), System.Drawing.Image)
-        Me.btnDispense.Location = New System.Drawing.Point(185, 382)
+        Me.btnDispense.Location = New System.Drawing.Point(256, 419)
         Me.btnDispense.Name = "btnDispense"
         Me.btnDispense.Size = New System.Drawing.Size(229, 38)
         Me.btnDispense.TabIndex = 7
@@ -262,7 +264,7 @@ Partial Class frmAdHockDispense
         Me.btnDecrementQuantity.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDecrementQuantity.ForeColor = System.Drawing.Color.White
         Me.btnDecrementQuantity.Image = CType(resources.GetObject("btnDecrementQuantity.Image"), System.Drawing.Image)
-        Me.btnDecrementQuantity.Location = New System.Drawing.Point(430, 140)
+        Me.btnDecrementQuantity.Location = New System.Drawing.Point(509, 140)
         Me.btnDecrementQuantity.Name = "btnDecrementQuantity"
         Me.btnDecrementQuantity.Size = New System.Drawing.Size(28, 28)
         Me.btnDecrementQuantity.TabIndex = 6
@@ -277,7 +279,7 @@ Partial Class frmAdHockDispense
         Me.btnIncrementQuantity.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnIncrementQuantity.ForeColor = System.Drawing.Color.White
         Me.btnIncrementQuantity.Image = CType(resources.GetObject("btnIncrementQuantity.Image"), System.Drawing.Image)
-        Me.btnIncrementQuantity.Location = New System.Drawing.Point(396, 140)
+        Me.btnIncrementQuantity.Location = New System.Drawing.Point(475, 140)
         Me.btnIncrementQuantity.Name = "btnIncrementQuantity"
         Me.btnIncrementQuantity.Size = New System.Drawing.Size(28, 28)
         Me.btnIncrementQuantity.TabIndex = 5
@@ -288,10 +290,10 @@ Partial Class frmAdHockDispense
         '
         Me.Panel5.BackColor = System.Drawing.Color.DarkGray
         Me.Panel5.Controls.Add(Me.txtQuantity)
-        Me.Panel5.Location = New System.Drawing.Point(337, 140)
+        Me.Panel5.Location = New System.Drawing.Point(402, 140)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel5.Size = New System.Drawing.Size(53, 28)
+        Me.Panel5.Size = New System.Drawing.Size(67, 28)
         Me.Panel5.TabIndex = 4
         '
         'txtQuantity
@@ -300,10 +302,10 @@ Partial Class frmAdHockDispense
         Me.txtQuantity.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtQuantity.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtQuantity.Location = New System.Drawing.Point(1, 1)
-        Me.txtQuantity.MaxLength = 2
+        Me.txtQuantity.MaxLength = 3
         Me.txtQuantity.Multiline = True
         Me.txtQuantity.Name = "txtQuantity"
-        Me.txtQuantity.Size = New System.Drawing.Size(51, 26)
+        Me.txtQuantity.Size = New System.Drawing.Size(65, 26)
         Me.txtQuantity.TabIndex = 38
         '
         'frmAdHockDispense
@@ -311,7 +313,7 @@ Partial Class frmAdHockDispense
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(623, 445)
+        Me.ClientSize = New System.Drawing.Size(774, 519)
         Me.ControlBox = False
         Me.Controls.Add(Me.btnDecrementQuantity)
         Me.Controls.Add(Me.btnIncrementQuantity)
@@ -320,7 +322,7 @@ Partial Class frmAdHockDispense
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Panel14)
         Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.ComboBox1)
+        Me.Controls.Add(Me.cmbPatientName)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Label5)
@@ -357,13 +359,13 @@ Partial Class frmAdHockDispense
     Friend WithEvents Label17 As Label
     Friend WithEvents cmbDosage As ComboBox
     Friend WithEvents lstboxAllergies As ListBox
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents cmbPatientName As ComboBox
     Friend WithEvents Label1 As Label
     Friend WithEvents Panel14 As Panel
-    Friend WithEvents txtMRN As TextBox
+    Friend WithEvents txtDateOfBirth As TextBox
     Friend WithEvents Label8 As Label
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtMRN As TextBox
     Friend WithEvents Label2 As Label
     Friend WithEvents btnDecrementQuantity As Button
     Friend WithEvents btnIncrementQuantity As Button
