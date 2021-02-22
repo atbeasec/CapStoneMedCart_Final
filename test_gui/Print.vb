@@ -77,7 +77,9 @@ Module Print
         Dim intColumnCount As Integer = 0
         Dim intRowCount As Integer = 0
         GatherDataFromDatabaseTable(intColumnCount, intRowCount, lstOfDataValues)
-        GenerateReportToWord(strReport, intColumnCount, intRowCount, lstOfDataValues)
+
+        ' this is used only if the user wants to save the report
+        'GenerateReportToWord(strReport, intColumnCount, intRowCount, lstOfDataValues)
     End Sub
 
     Sub GatherDataFromDatabaseTable(ByRef intColumnCount As Integer, ByRef intRowCount As Integer, ByRef lstOfDataValues As List(Of String))
@@ -98,7 +100,7 @@ Module Print
 
             Next
         Next
-
+        ' here we have to add in the data to a datagridview
     End Sub
 
     Sub GenerateReportToWord(ByVal strItem As String, ByRef intColumnCount As Integer, ByRef intRowCount As Integer, ByRef lstOfDataValues As List(Of String))
