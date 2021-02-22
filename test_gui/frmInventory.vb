@@ -130,4 +130,7 @@
 
     End Sub
 
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        GetSuggestionList("Adklj")
+    End Sub
 End Class
