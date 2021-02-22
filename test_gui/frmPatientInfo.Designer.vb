@@ -30,8 +30,10 @@ Partial Class frmPatientInfo
         Me.Label16 = New System.Windows.Forms.Label()
         Me.pnlPersonalInformation = New System.Windows.Forms.Panel()
         Me.cboState = New System.Windows.Forms.ComboBox()
+        Me.btnAddAllergies = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.lstBoxAllergies = New System.Windows.Forms.ListBox()
+        Me.txtZipCode = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtCity = New System.Windows.Forms.TextBox()
         Me.cboBed = New System.Windows.Forms.ComboBox()
@@ -63,11 +65,9 @@ Partial Class frmPatientInfo
         Me.lblMedicationPrescription = New System.Windows.Forms.Label()
         Me.lblTypePrescription = New System.Windows.Forms.Label()
         Me.lblStrengthPrescription = New System.Windows.Forms.Label()
-        Me.lstBoxAllergies = New System.Windows.Forms.ListBox()
         Me.btnWaste = New System.Windows.Forms.Button()
         Me.btnDispenseMedication = New System.Windows.Forms.Button()
         Me.btnEditPatient = New System.Windows.Forms.Button()
-        Me.btnAddAllergies = New System.Windows.Forms.Button()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.btnBack = New System.Windows.Forms.Button()
@@ -138,7 +138,7 @@ Partial Class frmPatientInfo
         Me.pnlPersonalInformation.Controls.Add(Me.btnAddAllergies)
         Me.pnlPersonalInformation.Controls.Add(Me.Label2)
         Me.pnlPersonalInformation.Controls.Add(Me.lstBoxAllergies)
-        Me.pnlPersonalInformation.Controls.Add(Me.TextBox1)
+        Me.pnlPersonalInformation.Controls.Add(Me.txtZipCode)
         Me.pnlPersonalInformation.Controls.Add(Me.Label1)
         Me.pnlPersonalInformation.Controls.Add(Me.txtCity)
         Me.pnlPersonalInformation.Controls.Add(Me.cboBed)
@@ -180,6 +180,22 @@ Partial Class frmPatientInfo
         Me.cboState.Size = New System.Drawing.Size(151, 25)
         Me.cboState.TabIndex = 13
         '
+        'btnAddAllergies
+        '
+        Me.btnAddAllergies.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnAddAllergies.FlatAppearance.BorderSize = 0
+        Me.btnAddAllergies.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAddAllergies.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAddAllergies.ForeColor = System.Drawing.Color.White
+        Me.btnAddAllergies.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnAddAllergies.Location = New System.Drawing.Point(952, 46)
+        Me.btnAddAllergies.Name = "btnAddAllergies"
+        Me.btnAddAllergies.Size = New System.Drawing.Size(173, 37)
+        Me.btnAddAllergies.TabIndex = 15
+        Me.btnAddAllergies.Text = "  Add Allergies"
+        Me.btnAddAllergies.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnAddAllergies.UseVisualStyleBackColor = False
+        '
         'Label2
         '
         Me.Label2.AutoSize = True
@@ -191,16 +207,27 @@ Partial Class frmPatientInfo
         Me.Label2.TabIndex = 61
         Me.Label2.Text = "State:"
         '
-        'TextBox1
+        'lstBoxAllergies
         '
-        Me.TextBox1.BackColor = System.Drawing.Color.White
-        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(751, 185)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(151, 25)
-        Me.TextBox1.TabIndex = 14
+        Me.lstBoxAllergies.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lstBoxAllergies.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lstBoxAllergies.FormattingEnabled = True
+        Me.lstBoxAllergies.ItemHeight = 20
+        Me.lstBoxAllergies.Location = New System.Drawing.Point(952, 89)
+        Me.lstBoxAllergies.Name = "lstBoxAllergies"
+        Me.lstBoxAllergies.Size = New System.Drawing.Size(173, 122)
+        Me.lstBoxAllergies.TabIndex = 58
+        '
+        'txtZipCode
+        '
+        Me.txtZipCode.BackColor = System.Drawing.Color.White
+        Me.txtZipCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtZipCode.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtZipCode.Location = New System.Drawing.Point(751, 185)
+        Me.txtZipCode.Name = "txtZipCode"
+        Me.txtZipCode.ReadOnly = True
+        Me.txtZipCode.Size = New System.Drawing.Size(151, 25)
+        Me.txtZipCode.TabIndex = 14
         '
         'Label1
         '
@@ -540,17 +567,6 @@ Partial Class frmPatientInfo
         Me.lblStrengthPrescription.TabIndex = 10
         Me.lblStrengthPrescription.Text = "Strength"
         '
-        'lstBoxAllergies
-        '
-        Me.lstBoxAllergies.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lstBoxAllergies.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lstBoxAllergies.FormattingEnabled = True
-        Me.lstBoxAllergies.ItemHeight = 20
-        Me.lstBoxAllergies.Location = New System.Drawing.Point(952, 89)
-        Me.lstBoxAllergies.Name = "lstBoxAllergies"
-        Me.lstBoxAllergies.Size = New System.Drawing.Size(173, 122)
-        Me.lstBoxAllergies.TabIndex = 58
-        '
         'btnWaste
         '
         Me.btnWaste.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
@@ -599,22 +615,6 @@ Partial Class frmPatientInfo
         Me.btnEditPatient.Text = "  Edit Patient"
         Me.btnEditPatient.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnEditPatient.UseVisualStyleBackColor = False
-        '
-        'btnAddAllergies
-        '
-        Me.btnAddAllergies.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnAddAllergies.FlatAppearance.BorderSize = 0
-        Me.btnAddAllergies.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAddAllergies.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddAllergies.ForeColor = System.Drawing.Color.White
-        Me.btnAddAllergies.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnAddAllergies.Location = New System.Drawing.Point(952, 46)
-        Me.btnAddAllergies.Name = "btnAddAllergies"
-        Me.btnAddAllergies.Size = New System.Drawing.Size(173, 37)
-        Me.btnAddAllergies.TabIndex = 15
-        Me.btnAddAllergies.Text = "  Add Allergies"
-        Me.btnAddAllergies.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnAddAllergies.UseVisualStyleBackColor = False
         '
         'Label18
         '
@@ -725,7 +725,7 @@ Partial Class frmPatientInfo
     Friend WithEvents cboRoom As ComboBox
     Friend WithEvents cboState As ComboBox
     Friend WithEvents Label2 As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtZipCode As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents txtCity As TextBox
 End Class

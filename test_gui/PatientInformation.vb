@@ -99,14 +99,12 @@ Module PatientInformation
     '/*                                 before declared warning.          */
     '/*********************************************************************/
     Public Sub GetPatientInformation(ByRef intPatientMRN As Integer)
-
+        PopulateStateComboBox(frmPatientInfo.cboState)
         Dim dsPatientDataSet As DataSet = New DataSet
         'changed be nothing when made to clear up used before declared warning. 
         Dim intPhysicianID As String = Nothing
         'sql taktement to get patient information
-        Dim strSQLiteCommand As String = "SELECT MRN_Number, Patient_First_Name,Patient_Middle_Name, Patient_Last_Name, " &
-            "Date_of_Birth, Sex, Height, Weight, Address, City, State, Email_address, Phone_Number, Primary_Physician_ID " &
-            " FROM Patient WHERE MRN_Number = '" & intPatientMRN & "'"
+        Dim strSQLiteCommand As String = "SELECT * FROM Patient WHERE MRN_Number = '" & intPatientMRN & "'"
 
         dsPatientDataSet = CreateDatabase.ExecuteSelectQuery(strSQLiteCommand)
         ''check each piece of dataset for null, if not null set it, set to N/A if null
@@ -115,58 +113,78 @@ Module PatientInformation
             If IsDBNull(dr(0)) Then
                 frmPatientInfo.txtMRN.Text = "N/A"
             Else
-                frmPatientInfo.txtMRN.Text = dr(0)
+                frmPatientInfo.txtMRN.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.MRN_Number)
             End If
 
             If IsDBNull(dr(4)) Then
                 frmPatientInfo.txtBirthday.Text = "N/A"
             Else
-                frmPatientInfo.txtBirthday.Text = dr(4)
+                frmPatientInfo.txtBirthday.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.DoB)
             End If
 
             If IsDBNull(dr(5)) Then
                 frmPatientInfo.txtGender.Text = "N/A"
             Else
-                frmPatientInfo.txtGender.Text = dr(5)
+                frmPatientInfo.txtGender.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Sex)
             End If
 
             If IsDBNull(dr(6)) Then
                 frmPatientInfo.txtHeight.Text = "N/A"
             Else
-                frmPatientInfo.txtHeight.Text = dr(6)
+                frmPatientInfo.txtHeight.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Height)
             End If
 
             If IsDBNull(dr(7)) Then
                 frmPatientInfo.txtWeight.Text = "N/A"
             Else
-                frmPatientInfo.txtWeight.Text = dr(7)
+                frmPatientInfo.txtWeight.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Weight)
             End If
 
             If IsDBNull(dr(8)) Then
                 frmPatientInfo.txtAddress.Text = "N/A"
             Else
-                frmPatientInfo.txtAddress.Text = dr(8) & " " & dr(9) & " " & dr(10)
+                frmPatientInfo.txtAddress.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.address)
+            End If
+
+            If IsDBNull(dr(8)) Then
+                frmPatientInfo.txtCity.Text = "N/A"
+            Else
+                frmPatientInfo.txtCity.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.City)
+            End If
+
+            If IsDBNull(dr(8)) Then
+                frmPatientInfo.cboState.SelectedItem = "N/A"
+            Else
+                frmPatientInfo.cboState.SelectedItem = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.state)
+            End If
+
+            If IsDBNull(dr(8)) Then
+                frmPatientInfo.txtZipCode.Text = "N/A"
+            Else
+                frmPatientInfo.txtZipCode.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.zip)
             End If
 
             If IsDBNull(dr(11)) Then
                 frmPatientInfo.txtEmail.Text = "N/A"
             Else
-                frmPatientInfo.txtEmail.Text = dr(11)
+                frmPatientInfo.txtEmail.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Email)
             End If
 
             If IsDBNull(dr(12)) Then
                 frmPatientInfo.txtPhone.Text = "N/A"
             Else
-                frmPatientInfo.txtPhone.Text = dr(12)
+                frmPatientInfo.txtPhone.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Phone)
             End If
 
             If IsDBNull(dr(1)) Then
                 frmPatientInfo.LblPatientName.Text = "N/A"
             Else
-                frmPatientInfo.LblPatientName.Text = dr(1) & " " & dr(2) & " " & dr(3)
+                frmPatientInfo.LblPatientName.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.FristName) &
+                    " " & dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.MiddleName) &
+                    " " & dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.LastName)
             End If
 
-            intPhysicianID = dr(13)
+            intPhysicianID = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.PhysicianID)
         Next
         'get name of physician that is assigned to patient
         strSQLiteCommand = "SELECT Physician_First_Name,Physician_Last_Name" &
