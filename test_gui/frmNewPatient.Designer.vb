@@ -296,6 +296,8 @@ Partial Class frmNewPatient
         '
         'cmbState
         '
+        Me.cmbState.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbState.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbState.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbState.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cmbState.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -349,6 +351,8 @@ Partial Class frmNewPatient
         '
         'cmbBed
         '
+        Me.cmbBed.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbBed.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbBed.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbBed.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cmbBed.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -370,6 +374,8 @@ Partial Class frmNewPatient
         '
         'cmbRoom
         '
+        Me.cmbRoom.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbRoom.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbRoom.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbRoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cmbRoom.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -450,6 +456,8 @@ Partial Class frmNewPatient
         '
         'cmbPhysician
         '
+        Me.cmbPhysician.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbPhysician.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbPhysician.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbPhysician.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cmbPhysician.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))

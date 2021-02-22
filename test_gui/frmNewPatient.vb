@@ -153,7 +153,7 @@ Public Class frmNewPatient
 
         'strbSQL.Append(CInt(Rnd() * 20) & "','")
         'strbSQL.Append(CInt(Rnd() * 20) & "',") 'this is going to make a random barcode this is temporary
-        strbSQL.Append(GenerateRandom.generateRandomAlphanumeric(20, strCharactersForRandomGeneration) & "','")
+        strbSQL.Append(GenerateRandom.generateRandomAlphanumeric(20, "1234567890") & "','")
         '^this is going to generate a random MRN number
         strbSQL.Append(GenerateRandom.generateRandomAlphanumeric(20, strCharactersForRandomGeneration) & "',")
         '^this is going to genereate a random Bar code. 
@@ -630,6 +630,9 @@ Public Class frmNewPatient
     '/*                                                                     
     '/*********************************************************************/
 
+
+
+
     Private Sub txtAddress_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtAddress.KeyPress
         DataVaildationMethods.KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz 0123456789.'-#@%&/")
     End Sub
@@ -674,6 +677,8 @@ Public Class frmNewPatient
 
     Private Sub cmbState_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cmbState.KeyPress
         DataVaildationMethods.KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz")
+
+
 
     End Sub
     '/*********************************************************************/
@@ -787,7 +792,7 @@ Public Class frmNewPatient
             hasError = True
             strbErrorMessage.Append("Please Enter a valid email address." & vbCrLf)
         End Try
-        If cmbSex.Text = String.Empty Then
+        If cmbSex.SelectedIndex = -1 Then
             hasError = True
             strbErrorMessage.Append("Please select male or female for the patient sex." & vbCrLf)
         End If
@@ -819,7 +824,7 @@ Public Class frmNewPatient
             hasError = True
             strbErrorMessage.Append("Please enter a valid city name." & vbCrLf)
         End If
-        If cmbState.Text = String.Empty Then
+        If cmbState.SelectedIndex = -1 Then
             hasError = True
             strbErrorMessage.Append("Please enter a valid state." & vbCrLf)
         End If
@@ -831,7 +836,7 @@ Public Class frmNewPatient
             hasError = True
             strbErrorMessage.Append("Please enter a valid phone number." & vbCrLf)
         End If
-        If cmbPhysician.Text = String.Empty Then
+        If cmbPhysician.SelectedIndex = -1 Then
             hasError = True
             strbErrorMessage.Append("Please enter a valid physician name." & vbCrLf)
         End If

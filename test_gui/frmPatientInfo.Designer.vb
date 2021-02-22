@@ -120,7 +120,7 @@ Partial Class frmPatientInfo
         Me.txtPhysician.BackColor = System.Drawing.Color.White
         Me.txtPhysician.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtPhysician.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPhysician.Location = New System.Drawing.Point(207, 253)
+        Me.txtPhysician.Location = New System.Drawing.Point(207, 258)
         Me.txtPhysician.Name = "txtPhysician"
         Me.txtPhysician.ReadOnly = True
         Me.txtPhysician.Size = New System.Drawing.Size(151, 29)
@@ -172,18 +172,20 @@ Partial Class frmPatientInfo
         '
         'cboBed
         '
+        Me.cboBed.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.cboBed.FormattingEnabled = True
-        Me.cboBed.Location = New System.Drawing.Point(13, 258)
+        Me.cboBed.Location = New System.Drawing.Point(13, 256)
         Me.cboBed.Name = "cboBed"
-        Me.cboBed.Size = New System.Drawing.Size(151, 21)
+        Me.cboBed.Size = New System.Drawing.Size(151, 29)
         Me.cboBed.TabIndex = 57
         '
         'cboRoom
         '
+        Me.cboRoom.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.cboRoom.FormattingEnabled = True
-        Me.cboRoom.Location = New System.Drawing.Point(207, 196)
+        Me.cboRoom.Location = New System.Drawing.Point(207, 194)
         Me.cboRoom.Name = "cboRoom"
-        Me.cboRoom.Size = New System.Drawing.Size(151, 21)
+        Me.cboRoom.Size = New System.Drawing.Size(151, 29)
         Me.cboRoom.TabIndex = 56
         '
         'Label15

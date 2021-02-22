@@ -335,8 +335,6 @@
         'Runs the database creation module to determine if the database was created
         CreateDatabase.Main()
 
-        frmNewPatient.ShowDialog()
-        Me.Close()
         'CheckUserPermissions()
 
 
