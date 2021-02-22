@@ -82,7 +82,7 @@
 
 
     Sub KeyPressCheck(ByRef e As KeyPressEventArgs, AllowChars As String)
-        If Not (Asc(e.KeyChar) = 8) Then
+        If Not (Asc(e.KeyChar) = 8) Then 'char 8 is a backspace. So we don't care. 
             If Not AllowChars.Contains(e.KeyChar.ToString.ToLower) Then
                 e.KeyChar = ChrW(0)
                 e.Handled = True
