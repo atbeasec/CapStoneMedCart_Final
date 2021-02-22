@@ -137,6 +137,23 @@ Module Discrepancies
 
         Dim strbSQL As StringBuilder = New StringBuilder
         strbSQL.Append("INSERT INTO Discrepancies(Drawer_TUID, Medication_TUID, Expected_Count, Actual_Count, Primary_User_TUID, Approving_User_TUID, DateTime_Entered) ")
-        strbSQL.Append("VALUES(")
+        strbSQL.Append("VALUES('" & intDrawerTUID & "', '" & intMedicationID & "', '" & intExpectedCount & "', '" & intActualCount & "', '" & intPrimaryUserID & "', '" & intApprovingUserID & "', '" & dtmDateTimeEntered & "')")
+        CreateDatabase.ExecuteInsertQuery(strbSQL.ToString)
     End Sub
+
+    Private Function GetDrawerTUID(ByRef intDrawerNumber As Integer, ByRef intBinNumber As Integer)
+        Dim strbSQL As StringBuilder = New StringBuilder
+        Dim intDrawerTUID As Integer
+        strbSQL.Append("Select Drawers_ID from Drawers Where Drawer_Number = '" & intDrawerNumber & "' AND Drawer_Node = '" & intBinNumber & "'")
+        intDrawerTUID = CreateDatabase.ExecuteScalarQuery(strbSQL.ToString)
+        Return intDrawerTUID
+    End Function
+
+    Private Function GetMedicationID(ByRef intDrawerTUID As Integer)
+        Dim strbSQL As StringBuilder = New StringBuilder
+        Dim intMedicationTUID As Integer
+        strbSQL.Append("Select Medication_TUID from DrawerMedication Where Drawers_TUID = '" & intDrawerTUID & "'")
+        intMedicationTUID = CreateDatabase.ExecuteScalarQuery(strbSQL.ToString)
+        Return intMedicationTUID
+    End Function
 End Module
