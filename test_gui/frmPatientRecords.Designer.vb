@@ -142,7 +142,7 @@ Partial Class frmPatientRecords
         Me.pnlHeaderPatientRecords.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlHeaderPatientRecords.Location = New System.Drawing.Point(0, 0)
         Me.pnlHeaderPatientRecords.Name = "pnlHeaderPatientRecords"
-        Me.pnlHeaderPatientRecords.Size = New System.Drawing.Size(986, 61)
+        Me.pnlHeaderPatientRecords.Size = New System.Drawing.Size(994, 61)
         Me.pnlHeaderPatientRecords.TabIndex = 16
         '
         'btnNewPatient
@@ -204,7 +204,7 @@ Partial Class frmPatientRecords
         Me.flpPatientRecords.BackColor = System.Drawing.Color.White
         Me.flpPatientRecords.Location = New System.Drawing.Point(12, 118)
         Me.flpPatientRecords.Name = "flpPatientRecords"
-        Me.flpPatientRecords.Size = New System.Drawing.Size(950, 533)
+        Me.flpPatientRecords.Size = New System.Drawing.Size(950, 672)
         Me.flpPatientRecords.TabIndex = 17
         '
         'frmPatientRecords
@@ -214,7 +214,7 @@ Partial Class frmPatientRecords
         Me.AutoScroll = True
         Me.AutoSize = True
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(986, 663)
+        Me.ClientSize = New System.Drawing.Size(994, 861)
         Me.Controls.Add(Me.flpPatientRecords)
         Me.Controls.Add(Me.pnlHeaderPatientRecords)
         Me.Controls.Add(Me.pnlHeader)
