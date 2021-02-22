@@ -22,6 +22,7 @@ Partial Class frmNewPatient
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmNewPatient))
         Me.txtFirstName = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -35,9 +36,9 @@ Partial Class frmNewPatient
         Me.Panel12 = New System.Windows.Forms.Panel()
         Me.txtEmail = New System.Windows.Forms.TextBox()
         Me.Panel14 = New System.Windows.Forms.Panel()
-        Me.txtBirthday = New System.Windows.Forms.TextBox()
+        Me.mtbDoB = New System.Windows.Forms.MaskedTextBox()
         Me.Panel15 = New System.Windows.Forms.Panel()
-        Me.txtPhoneNumber = New System.Windows.Forms.TextBox()
+        Me.mtbPhone = New System.Windows.Forms.MaskedTextBox()
         Me.Panel16 = New System.Windows.Forms.Panel()
         Me.txtCity = New System.Windows.Forms.TextBox()
         Me.Panel17 = New System.Windows.Forms.Panel()
@@ -74,6 +75,7 @@ Partial Class frmNewPatient
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.btnCancel = New System.Windows.Forms.Button()
+        Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.Panel1.SuspendLayout()
         Me.Panel9.SuspendLayout()
         Me.Panel10.SuspendLayout()
@@ -90,6 +92,7 @@ Partial Class frmNewPatient
         Me.Panel6.SuspendLayout()
         Me.Panel7.SuspendLayout()
         Me.Panel8.SuspendLayout()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtFirstName
@@ -211,44 +214,42 @@ Partial Class frmNewPatient
         'Panel14
         '
         Me.Panel14.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel14.Controls.Add(Me.txtBirthday)
+        Me.Panel14.Controls.Add(Me.mtbDoB)
         Me.Panel14.Location = New System.Drawing.Point(198, 220)
         Me.Panel14.Name = "Panel14"
         Me.Panel14.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel14.Size = New System.Drawing.Size(100, 28)
+        Me.Panel14.Size = New System.Drawing.Size(100, 29)
         Me.Panel14.TabIndex = 6
         '
-        'txtBirthday
+        'mtbDoB
         '
-        Me.txtBirthday.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtBirthday.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtBirthday.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBirthday.Location = New System.Drawing.Point(1, 1)
-        Me.txtBirthday.Multiline = True
-        Me.txtBirthday.Name = "txtBirthday"
-        Me.txtBirthday.Size = New System.Drawing.Size(98, 26)
-        Me.txtBirthday.TabIndex = 6
+        Me.mtbDoB.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.mtbDoB.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.mtbDoB.Location = New System.Drawing.Point(1, 1)
+        Me.mtbDoB.Mask = "00/00/0000"
+        Me.mtbDoB.Name = "mtbDoB"
+        Me.mtbDoB.Size = New System.Drawing.Size(98, 29)
+        Me.mtbDoB.TabIndex = 0
+        Me.mtbDoB.ValidatingType = GetType(Date)
         '
         'Panel15
         '
         Me.Panel15.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel15.Controls.Add(Me.txtPhoneNumber)
+        Me.Panel15.Controls.Add(Me.mtbPhone)
         Me.Panel15.Location = New System.Drawing.Point(46, 501)
         Me.Panel15.Name = "Panel15"
         Me.Panel15.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel15.Size = New System.Drawing.Size(252, 28)
         Me.Panel15.TabIndex = 15
         '
-        'txtPhoneNumber
+        'mtbPhone
         '
-        Me.txtPhoneNumber.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtPhoneNumber.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtPhoneNumber.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPhoneNumber.Location = New System.Drawing.Point(1, 1)
-        Me.txtPhoneNumber.Multiline = True
-        Me.txtPhoneNumber.Name = "txtPhoneNumber"
-        Me.txtPhoneNumber.Size = New System.Drawing.Size(250, 26)
-        Me.txtPhoneNumber.TabIndex = 15
+        Me.mtbPhone.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.mtbPhone.Location = New System.Drawing.Point(0, 0)
+        Me.mtbPhone.Mask = "(999) 000-0000"
+        Me.mtbPhone.Name = "mtbPhone"
+        Me.mtbPhone.Size = New System.Drawing.Size(252, 29)
+        Me.mtbPhone.TabIndex = 0
         '
         'Panel16
         '
@@ -287,6 +288,7 @@ Partial Class frmNewPatient
         Me.txtZipCode.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtZipCode.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtZipCode.Location = New System.Drawing.Point(1, 1)
+        Me.txtZipCode.MaxLength = 5
         Me.txtZipCode.Multiline = True
         Me.txtZipCode.Name = "txtZipCode"
         Me.txtZipCode.Size = New System.Drawing.Size(106, 26)
@@ -299,6 +301,7 @@ Partial Class frmNewPatient
         Me.cmbState.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbState.FormattingEnabled = True
         Me.cmbState.Location = New System.Drawing.Point(1, 1)
+        Me.cmbState.MaxLength = 2
         Me.cmbState.Name = "cmbState"
         Me.cmbState.Size = New System.Drawing.Size(78, 25)
         Me.cmbState.TabIndex = 13
@@ -407,6 +410,7 @@ Partial Class frmNewPatient
         Me.txtHeight.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtHeight.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtHeight.Location = New System.Drawing.Point(1, 1)
+        Me.txtHeight.MaxLength = 4
         Me.txtHeight.Multiline = True
         Me.txtHeight.Name = "txtHeight"
         Me.txtHeight.Size = New System.Drawing.Size(101, 26)
@@ -428,6 +432,7 @@ Partial Class frmNewPatient
         Me.txtWeight.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtWeight.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtWeight.Location = New System.Drawing.Point(1, 1)
+        Me.txtWeight.MaxLength = 4
         Me.txtWeight.Multiline = True
         Me.txtWeight.Name = "txtWeight"
         Me.txtWeight.Size = New System.Drawing.Size(110, 26)
@@ -645,6 +650,10 @@ Partial Class frmNewPatient
         Me.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnCancel.UseVisualStyleBackColor = False
         '
+        'ErrorProvider1
+        '
+        Me.ErrorProvider1.ContainerControl = Me
+        '
         'frmNewPatient
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -715,6 +724,7 @@ Partial Class frmNewPatient
         Me.Panel7.ResumeLayout(False)
         Me.Panel7.PerformLayout()
         Me.Panel8.ResumeLayout(False)
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -732,9 +742,7 @@ Partial Class frmNewPatient
     Friend WithEvents Panel12 As Panel
     Friend WithEvents txtEmail As TextBox
     Friend WithEvents Panel14 As Panel
-    Friend WithEvents txtBirthday As TextBox
     Friend WithEvents Panel15 As Panel
-    Friend WithEvents txtPhoneNumber As TextBox
     Friend WithEvents Panel16 As Panel
     Friend WithEvents txtCity As TextBox
     Friend WithEvents Panel17 As Panel
@@ -770,4 +778,7 @@ Partial Class frmNewPatient
     Friend WithEvents Label16 As Label
     Friend WithEvents btnCancel As Button
     Friend WithEvents cmbPhysician As ComboBox
+    Friend WithEvents mtbDoB As MaskedTextBox
+    Friend WithEvents mtbPhone As MaskedTextBox
+    Friend WithEvents ErrorProvider1 As ErrorProvider
 End Class

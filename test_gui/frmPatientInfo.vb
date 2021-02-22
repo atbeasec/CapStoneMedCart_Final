@@ -316,6 +316,8 @@
     '/*  ---   ----     ------------------------------------------------- */
     '/*  NP    2/18/2021 Changed it so that the combo boxes are enabled when*/
     '/*                  a user clikcs the edit button.                     */
+    '/*  NP   2/18/2021  Made it so the comboboxes are enabled and disabled*/
+    '/*                  based on the text of the edit button.             */
     '/*********************************************************************/
 
 
@@ -337,6 +339,8 @@
                     txtbox.BackColor = Color.White
 
                 End If
+                cboBed.Enabled = True
+                cboRoom.Enabled = True
             Next
 
             btnEditPatient.Text = "Save Changes"
@@ -357,6 +361,8 @@
 
                 End If
 
+                cboBed.Enabled = False
+                cboRoom.Enabled = False
             Next
 
 
