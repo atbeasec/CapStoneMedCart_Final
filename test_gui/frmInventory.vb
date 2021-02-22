@@ -131,6 +131,19 @@
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        GetSuggestionList("Adklj")
+        Dim myPropertyNameList As New List(Of String)({"name", "rxcui"})
+        'GetSuggestionList("Adklj")
+        ' Debug.WriteLine(getDrugGeneric("5640"))
+
+        Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
+
+        outputList = GetRxcuiByName("advil", myPropertyNameList)
+
+        For Each item In outputList
+            Debug.WriteLine(item.PropertyName, item.PropertyValue)
+        Next
+        Debug.WriteLine(GetRxcuiByName("advil", myPropertyNameList).ToString)
+        Debug.WriteLine(getRxcuiProperty("2055307", myPropertyNameList).ToString)
+
     End Sub
 End Class
