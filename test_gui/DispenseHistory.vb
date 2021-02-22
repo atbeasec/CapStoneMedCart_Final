@@ -190,9 +190,9 @@ Module DispenseHistory
 
         Dim dsmydataset As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
 
-        '  For Each dr As DataRow In dsmydataset.Tables(0).Rows
-        '       frmPatientInfo.CreateDispenseHistoryPanels(frmPatientInfo.flpDispenseHistory, dr(0), dr(1), dr(2), dr(3), dr(4) & " " & dr(5), dr(6), "")
-        '  Next
+        For Each dr As DataRow In dsmydataset.Tables(0).Rows
+            frmPatientInfo.CreateDispenseHistoryPanels(frmPatientInfo.flpDispenseHistory, dr(0), dr(1), dr(2), dr(3), dr(4) & " " & dr(5), dr(6), "")
+        Next
 
     End Sub
 
