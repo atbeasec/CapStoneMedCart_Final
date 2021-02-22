@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.Net.Mail
 Imports System.Text
 Public Class frmNewPatient
     '/*********************************************************************/
@@ -40,14 +41,18 @@ Public Class frmNewPatient
     '/*  ---   ----     ------------------------------------------------- */
     '/*  NP    2/6/2021 Started to connect the GUI to the database. 
     '/*  NP    2/20/2021 Added datavaildation for the texboxs on the form.*/
+    '/*  NP    2/21/2021 added the error checking call to the save button.*/
     '/*********************************************************************/
 
 
     Dim dsrooms As DataSet
     Dim dsPhysicians As DataSet
+    Dim strAllowedNameCharacters = "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*()/.,<>=+"
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        If Not hasError() Then
+            SavePatientDataToDatabase()
+        End If
 
-        SavePatientDataToDatabase()
 
         Me.Close()
     End Sub
@@ -288,80 +293,6 @@ Public Class frmNewPatient
         DataVaildationMethods.KeyPressCheck(e, "0123456789")
     End Sub
 
-    '/*********************************************************************/
-    '/*                   SUBPROGRAM NAME:  mtbDoB_LostFocus    		   */         
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:  Nathan Premo   		                */   
-    '/*		         DATE CREATED: 	2/20/2021                          	   */                             
-    '/*********************************************************************/
-    '/*  SUBPROGRAM PURPOSE:	            							   */             
-    '/*	 This is going to make sure the date that has been entered into the*/                     
-    '/*  maskedtextbox is a valid date. If not it will problem the user to */
-    '/*  re enter the date.                                                */
-    '/*                                                                   */
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      						         */           
-    '/*                                         				   */         
-    '/*********************************************************************/
-    '/*  CALLS:										   */                 
-    '/*             (NONE)								   */             
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					          */         
-    '/*  sender – Identifies which particular control raised the          */
-    '/*          click event                                              */
-    '/*  e – Holds the EventArgs object sent to the routine               */  
-    '/*********************************************************************/
-    '/*  RETURNS:								         */                   
-    '/*            (NOTHING)								   */             
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								   */             
-    '/*											   */                     
-    '/*                                                                     
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
-    '/*                                                                     
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						         */               
-    '/*											   */                     
-    '/*  WHO   WHEN     WHAT								   */             
-    '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
-    '/*********************************************************************/
-
-
-    Private Sub mtbDoB_LostFocus(sender As Object, e As EventArgs) Handles mtbDoB.LostFocus
-        If ActiveControl.Name = "cmbSex" Then
-            'this was put in place so if the user is being bounced back to
-            'cmbSex the error checking doesn't fire. 
-        Else
-            If Not ActiveControl.Name = "btnCancel" Then
-                'If Not (IsDate(mtbDoB.Text)) Then
-                '    mtbDoB.Clear()
-                '    MessageBox.Show("Date Of Birth must contain a vaild date.")
-                '    mtbDoB.Focus()
-                'End If
-            End If
-        End If
-    End Sub
-
-
-
-
-
-
-
-    'Private Sub mtbDoB_Validating(sender As Object, e As CancelEventArgs) Handles mtbDoB.Validating
-    '    If Not (IsDate(mtbDoB.Text)) Then
-
-    '        ErrorProvider1.SetError(Me.mtbDoB, "Date Of Birth must contain a vaild date.")
-    '        e.Cancel = True
-
-    '    Else
-    '        ErrorProvider1.SetError(Me.mtbDoB, String.Empty)
-    '    End If
-    'End Sub
-
 
     '/*********************************************************************/
     '/*                   SUBPROGRAM NAME: cmbSex_KeyPress  			   */         
@@ -418,33 +349,383 @@ Public Class frmNewPatient
         End If
     End Sub
 
-    Private Sub cmbSex_LostFocus(sender As Object, e As EventArgs) Handles cmbSex.LostFocus
-        If Not ActiveControl.Name = "btnCancel" Then
-
-        End If
-    End Sub
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: txtHeight_KeyPress   		   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		               */   
+    '/*		         DATE CREATED: 	2/21/2021                       	   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								              */             
+    '/*	 This is going to check the keys that are pressed. All it does it */
+    '/*  is call the keypresscheck fucntion.                              */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
 
     Private Sub txtHeight_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtHeight.KeyPress
         DataVaildationMethods.KeyPressCheck(e, "0123456789")
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME:  txtWeight_KeyPress  		   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		               */   
+    '/*		         DATE CREATED: 	2/21/2021                       	   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								              */             
+    '/*	 This is going to check the keys that are pressed. All it does it */
+    '/*  is call the keypresscheck fucntion.                              */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
     Private Sub txtWeight_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtWeight.KeyPress
         DataVaildationMethods.KeyPressCheck(e, "0123456789")
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: txtFirstName_KeyPress		   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		               */   
+    '/*		         DATE CREATED: 	2/21/2021                       	   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								              */             
+    '/*	 This is going to check the keys that are pressed. All it does it */
+    '/*  is call the keypresscheck fucntion.                              */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Private Sub txtFirstName_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtFirstName.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, strAllowedNameCharacters)
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: txtMiddleName_KeyPress		   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		               */   
+    '/*		         DATE CREATED: 	2/21/2021                       	   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								              */             
+    '/*	 This is going to check the keys that are pressed. All it does it */
+    '/*  is call the keypresscheck fucntion.                              */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Private Sub txtMiddleName_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtMiddleName.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, strAllowedNameCharacters)
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: txtLastName_KeyPress 		   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		               */   
+    '/*		         DATE CREATED: 	2/21/2021                       	   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								              */             
+    '/*	 This is going to check the keys that are pressed. All it does it */
+    '/*  is call the keypresscheck fucntion.                              */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Private Sub txtLastName_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtLastName.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, strAllowedNameCharacters)
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: txtAddress_KeyPress 	           */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		               */   
+    '/*		         DATE CREATED: 	2/21/2021                       	   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								              */             
+    '/*	 This is going to check the keys that are pressed. All it does it */
+    '/*  is call the keypresscheck fucntion.                              */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Private Sub txtAddress_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtAddress.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz 0123456789.'-#@%&/")
+    End Sub
 
 
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME:  hasError  					   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		               */   
+    '/*		         DATE CREATED: 	2/21/2021	                           */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								   */             
+    '/*	 This is going to check the input boxes on the form to make sure that*/                     
+    '/*  there is information in the boxes. Most of the textboxes lock the */
+    '/*  characters that are allowed in them so we just need to check to see*/
+    '/*  if there are values in the boxes.                                 */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	 email - this is a test value to see if the email is valid.       */	
+    '/*  strbErrorMessage- This is the string builder that will be used to*/
+    '/*                    display the build error message based on what is*/
+    '/*                    missing on the form.                           */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
 
-    'Private Sub cmbSex_Validating(sender As Object, e As CancelEventArgs) Handles cmbSex.Validating
-    '    If Not cmbSex.SelectedItem = "Male" And Not cmbSex.SelectedItem = "Female" Then
-    '        Me.ErrorProvider1.SetError(Me.cmbSex, "Please select Male or Female for the Patient Sex")
-    '        e.Cancel = True
-    '        'MessageBox.Show("")
-    '        'cmbSex.Focus()
-    '    Else
-    '        ErrorProvider1.SetError(cmbSex, "")
-    '    End If
-    'End Sub
+    Function hasError() As Boolean
+        Dim strbErrorMessage As New StringBuilder
+        Dim email As MailAddress
+        hasError = False
+        If txtFirstName.Text = String.Empty Then
+            hasError = True
+            strbErrorMessage.Append("Please enter a valid first name." & vbCrLf)
+        End If
+        If txtMiddleName.Text = String.Empty Then
+            hasError = True
+            strbErrorMessage.Append("Please enter a valid middle name." & vbCrLf)
+        End If
+        If txtLastName.Text = String.Empty Then
+            hasError = True
+            strbErrorMessage.Append("Please enter a valid last name." & vbCrLf)
+        End If
+        Try
+            email = New MailAddress(txtEmail.Text) 'this allows .net to check
+            'to see if the email is vaild. 
 
-
+        Catch ex As Exception
+            hasError = True
+            strbErrorMessage.Append("Please Enter a valid email address." & vbCrLf)
+        End Try
+        If cmbSex.Text = String.Empty Then
+            hasError = True
+            strbErrorMessage.Append("Please select male or female for the patient sex." & vbCrLf)
+        End If
+        If Not IsDate(mtbDoB.Text) Then
+            hasError = True
+            strbErrorMessage.Append("Please enter a valid date of birth." & vbCrLf)
+        End If
+        If txtHeight.Text = String.Empty Then
+            hasError = True
+            strbErrorMessage.Append("Please enter a valid height." & vbCrLf)
+        End If
+        If txtWeight.Text = String.Empty Then
+            hasError = True
+            strbErrorMessage.Append("Please enter a valid weight." & vbCrLf)
+        End If
+        If cmbRoom.Text = String.Empty Then
+            hasError = True
+            strbErrorMessage.Append("Please enter a valid room." & vbCrLf)
+        End If
+        If cmbBed.Text = String.Empty Then
+            hasError = True
+            strbErrorMessage.Append("Please enter a valid bed name." & vbCrLf)
+        End If
+        If txtAddress.Text = String.Empty Then
+            hasError = True
+            strbErrorMessage.Append("Please enter a valid street address." & vbCrLf)
+        End If
+        If txtCity.Text = String.Empty Then
+            hasError = True
+            strbErrorMessage.Append("Please enter a valid city name." & vbCrLf)
+        End If
+        If cmbState.Text = String.Empty Then
+            hasError = True
+            strbErrorMessage.Append("Please enter a valid state." & vbCrLf)
+        End If
+        If txtZipCode.Text = String.Empty Then
+            hasError = True
+            strbErrorMessage.Append("Please enter a valid zip code" & vbCrLf)
+        End If
+        If mtbPhone.Text = String.Empty Then
+            hasError = True
+            strbErrorMessage.Append("Please enter a valid phone number." & vbCrLf)
+        End If
+        If cmbPhysician.Text = String.Empty Then
+            hasError = True
+            strbErrorMessage.Append("Please enter a valid physician name." & vbCrLf)
+        End If
+        If hasError Then
+            MessageBox.Show(strbErrorMessage.ToString)
+        End If
+        Return hasError
+    End Function
 End Class
