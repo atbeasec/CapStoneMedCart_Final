@@ -124,6 +124,8 @@ Module Discrepancies
         If CheckSystemCountVSActualCount(intExpectedCount, intActualCount).Equals(False) Then
 
             Dim dtmAdhocTime As String = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")
+            intDrawerTUID = GetDrawerTUID(intDrawerNumber, intBinNumber)
+            intMedicationTUID = GetMedicationID(intDrawerTUID)
             InsertDiscrepancy(intDrawerTUID, intMedicationTUID, intExpectedCount, intActualCount, intPrimaryUserID, intApprovingUserID, dtmAdhocTime)
         Else
             MessageBox.Show("No Discrepancy recorded, counts are equal")
