@@ -131,7 +131,7 @@ Module Discrepancies
     End Sub
 
 
-    Private Sub InsertDiscrepancy(ByRef intDrawerTUID As Integer, ByRef intBinNumber As Integer, ByRef intMedicationID As Integer,
+    Private Sub InsertDiscrepancy(ByRef intDrawerTUID As Integer, ByRef intMedicationID As Integer,
                                   ByRef intExpectedCount As Integer, ByRef intActualCount As Integer, ByRef intPrimaryUserID As Integer,
                                   ByRef intApprovingUserID As Integer, ByRef dtmDateTimeEntered As String)
 
