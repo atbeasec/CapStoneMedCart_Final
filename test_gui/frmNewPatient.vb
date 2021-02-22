@@ -1,6 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.Net.Mail
 Imports System.Text
+Imports System.Text.RegularExpressions
 Public Class frmNewPatient
     '/*********************************************************************/
     '/*                   FILE NAME:  */									  
@@ -51,10 +52,11 @@ Public Class frmNewPatient
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         If Not hasError() Then
             SavePatientDataToDatabase()
+            Me.Close()
         End If
 
 
-        Me.Close()
+
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
@@ -91,7 +93,24 @@ Public Class frmNewPatient
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
+    '/*	strAddress - this is going to hold the result of txtAddress.text  */
+    '/*              after all the ' have been escaped.                   */
+    '/* strbSQL - this is the string builder that is used to construct the*/
+    '/*           the SQL command.                                        */
+    '/* strCharactersForRandomGeneration - this is the string that is used*/
+    '/*          to randomly generate a string.                           */
+    '/* strCity - this is going ot hold the result of txtCity.text after  */
+    '/*           the ' have been escaped.                                *.
+    '/* strEmail - this is going to hold the result of txtemail.text after*/
+    '/*            the ' are escaped.                                     */
+    '/* strFirstName - This is going to hold the result of txtFirstName.text*/
+    '/*                after all the ' are escaped.                       */
+    '/* strLastName - this is going to hold the result of txtLastName.text*/
+    '/*               after all the ' have been escaped.                  */
+    '/* strMiddleName - this is going to hold the result of txtMiddleName.text*/
+    '/*                 after the ' have been escaped.                    */
+    '/* strPhysicianName - this used to remove teh trailing , in the selection*/
+    '/*                    of the combo box.                              */
     '/*                                                                     
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
@@ -102,6 +121,7 @@ Public Class frmNewPatient
     '/*                 They were inverted and were breaking the app. I also*/
     '/*                 made it so the comma is trimed off the last name of */
     '/*                 the physician.                                      */
+    '/* NP     2/22/2021 added the ability to have ' in the name and email. */   
     '/*********************************************************************/
 
 
@@ -109,6 +129,13 @@ Public Class frmNewPatient
         Dim strbSQL As New StringBuilder()
         Dim strPhysicianName As String() = Split(cmbPhysician.SelectedItem)
         Dim strCharactersForRandomGeneration = "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        'the following is just to escape the ' so that it won't break the SQL
+        Dim strFirstName = Regex.Replace(txtFirstName.Text, "'", "''")
+        Dim strMiddleName = Regex.Replace(txtMiddleName.Text, "'", "''")
+        Dim strLastName = Regex.Replace(txtLastName.Text, "'", "''")
+        Dim strEmail = Regex.Replace(txtEmail.Text, "'", "''")
+        Dim strAddress = Regex.Replace(txtAddress.Text, "'", "''")
+        Dim strCity = Regex.Replace(txtCity.Text, "'", "''")
 
         strPhysicianName(0) = strPhysicianName(0).TrimEnd(",")
         dsPhysicians = CreateDatabase.ExecuteSelectQuery("Select Physician_ID from  Physician where Physician_First_name = '" &
@@ -130,13 +157,13 @@ Public Class frmNewPatient
         '^this is going to generate a random MRN number
         strbSQL.Append(GenerateRandom.generateRandomAlphanumeric(20, strCharactersForRandomGeneration) & "',")
         '^this is going to genereate a random Bar code. 
-        strbSQL.Append("'" & txtFirstName.Text & "' , '" & txtMiddleName.Text & "',")
-        strbSQL.Append("'" & txtLastName.Text & "','" & mtbDoB.Text & "',")
+        strbSQL.Append("'" & strFirstName & "' , '" & strMiddleName & "',")
+        strbSQL.Append("'" & strLastName & "','" & mtbDoB.Text & "',")
         strbSQL.Append("'" & cmbSex.SelectedItem & "','" & txtHeight.Text & "',")
-        strbSQL.Append("'" & txtWeight.Text & "','" & txtAddress.Text & "',")
-        strbSQL.Append("'" & txtCity.Text & "','" & cmbState.SelectedItem & "',")
+        strbSQL.Append("'" & txtWeight.Text & "','" & strAddress & "',")
+        strbSQL.Append("'" & strCity & "','" & cmbState.SelectedItem & "',")
         strbSQL.Append("'" & txtZipCode.Text & "','" & mtbPhone.Text & "',")
-        strbSQL.Append("'" & txtEmail.Text & "','" & dsPhysicians.Tables(0).Rows(0)(EnumList.Physician.Id) & "',")
+        strbSQL.Append("'" & strEmail & "','" & dsPhysicians.Tables(0).Rows(0)(EnumList.Physician.Id) & "',")
         strbSQL.Append("'" & 1 & "');")
 
         CreateDatabase.ExecuteInsertQuery(strbSQL.ToString)
@@ -297,8 +324,8 @@ Public Class frmNewPatient
     '/*********************************************************************/
     '/*                   SUBPROGRAM NAME: cmbSex_KeyPress  			   */         
     '/*********************************************************************/
-    '/*                   WRITTEN BY:  Nathan Premo   		         */   
-    '/*		         DATE CREATED: 		   */                             
+    '/*                   WRITTEN BY:  Nathan Premo   		               */   
+    '/*		         DATE CREATED: 	2/21/2021                       	   */                             
     '/*********************************************************************/
     '/*  SUBPROGRAM PURPOSE:							            	   */             
     '/*	 This is checking what the user is typing in to auto fill the combo*/                     
@@ -606,6 +633,91 @@ Public Class frmNewPatient
     Private Sub txtAddress_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtAddress.KeyPress
         DataVaildationMethods.KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz 0123456789.'-#@%&/")
     End Sub
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: cmbState_KeyPress 	           */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		               */   
+    '/*		         DATE CREATED: 	2/21/2021                       	   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								              */             
+    '/*	 This is going to check the keys that are pressed. All it does it */
+    '/*  is call the keypresscheck fucntion.                              */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+
+    Private Sub cmbState_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cmbState.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz")
+
+    End Sub
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: txtCity_KeyPress 	           */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		               */   
+    '/*		         DATE CREATED: 	2/21/2021                       	   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								              */             
+    '/*	 This is going to check the keys that are pressed. All it does it */
+    '/*  is call the keypresscheck fucntion.                              */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Private Sub txtCity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtCity.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz 0123456789.'-#@%&/")
+    End Sub
+
 
 
     '/*********************************************************************/
