@@ -137,7 +137,7 @@ Public Class frmConfiguration
         'Set panel properties
         With pnl
             .BackColor = Color.Gainsboro
-            .Size = New Size(600, 47)
+            .Size = New Size(flpUserInfo.Size.Width - 25, 47)
             .Name = "pnlIndividualPatientRecordPadding" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Padding = New Padding(0, 0, 0, 3)
@@ -147,7 +147,7 @@ Public Class frmConfiguration
         With pnlMainPanel
 
             .BackColor = Color.White
-            .Size = New Size(600, 45)
+            .Size = New Size(flpUserInfo.Size.Width - 25, 45)
             .Name = "pnlIndividualPatientRecord" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Dock = System.Windows.Forms.DockStyle.Top
@@ -156,18 +156,11 @@ Public Class frmConfiguration
         'put the boarder panel inside the main panel
         pnl.Controls.Add(pnlMainPanel)
 
-        'AddHandler pnlMainPanel.DoubleClick, AddressOf DynamicDoubleClickNewOrder
         AddHandler pnlMainPanel.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
         AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
-        'AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
 
-        CreateEditButton(pnlMainPanel, getPanelCount(flpPannel), 500, 5)
-
-
-        CreateDeleteBtn(pnlMainPanel, getPanelCount(flpPannel), 550, 5)
-
-        'CreateDeleteBtn(pnlMainPanel)
-        'CreateEditButton(pnlMainPanel)
+        CreateEditButton(pnlMainPanel, getPanelCount(flpPannel), lblActions.Location.X - 15, 5)
+        CreateDeleteBtn(pnlMainPanel, getPanelCount(flpPannel), lblActions.Location.X + 30, 5)
 
         ' call database info here to populate
         Dim lblID As New Label
@@ -175,14 +168,16 @@ Public Class frmConfiguration
         Dim lblID3 As New Label
         Dim lblID4 As New Label
         Dim lblID5 As New Label
+        lblID.Visible = False
         Const INTTWENTY As Integer = 20
 
         ' anywhere we have quotes except for the label names, we can call our Database and get method
-        CreateIDLabel(pnlMainPanel, lblID, "lblID", lblID.Location.X, INTTWENTY, strID, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID, "lblID", lblName.Location.X - 15, INTTWENTY, strID, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID2, "lblNames", lblName.Location.X, INTTWENTY, strName, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID3, "lblUsername", lblIDNumber.Location.X, INTTWENTY, strUsername, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID4, "lblAccessLevel", lblAccess.Location.X, INTTWENTY, strAccess, getPanelCount(flpPannel))
-        'CreateIDLabel(pnlMainPanel, lblID5, "lblActive", lblActive.Location.X, INTTWENTY, strActive, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID3, "lblUsername", lblUserName.Location.X, INTTWENTY, strUsername, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID4, "lblPermissions", lblPermissions.Location.X, INTTWENTY, strAccess, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID4, "lblStatus", lblStatus.Location.X, INTTWENTY, strActive, getPanelCount(flpPannel))
+
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
@@ -650,4 +645,6 @@ Public Class frmConfiguration
         btnSaveChanges.Visible = False
         Button1.Visible = True
     End Sub
+
+
 End Class
