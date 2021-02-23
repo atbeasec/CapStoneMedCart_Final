@@ -67,8 +67,8 @@ Module Discrepancies
     '/*********************************************************************/
     '/*                   FUNCTION NAME: CheckSystemCountVSActualCount    */         
     '/*********************************************************************/
-    '/*                   WRITTEN BY:     		         */   
-    '/*		         DATE CREATED: 		   */                             
+    '/*                   WRITTEN BY: Alexander Beasecker    		         */   
+    '/*		         DATE CREATED: 2/22/2021 		   */                                               
     '/*********************************************************************/
     '/*  FUNCTION PURPOSE:								   */             
     '/*											   */                     
@@ -115,10 +115,10 @@ Module Discrepancies
     End Function
 
     '/*********************************************************************/
-    '/*                   FUNCTION NAME: CreateDiscrepancy    */         
+    '/*                   Sub NAME: CreateDiscrepancy    */         
     '/*********************************************************************/
-    '/*                   WRITTEN BY:     		         */   
-    '/*		         DATE CREATED: 		   */                             
+    '/*                   WRITTEN BY: Alexander Beasecker    		         */   
+    '/*		         DATE CREATED: 2/22/2021 		   */                                           
     '/*********************************************************************/
     '/*  FUNCTION PURPOSE:								   */             
     '/*											   */                     
@@ -169,10 +169,10 @@ Module Discrepancies
     End Sub
 
     '/*********************************************************************/
-    '/*                   FUNCTION NAME: InsertDiscrepancy    */         
+    '/*                   Sub NAME: InsertDiscrepancy    */         
     '/*********************************************************************/
-    '/*                   WRITTEN BY:     		         */   
-    '/*		         DATE CREATED: 		   */                             
+    '/*                   WRITTEN BY: Alexander Beasecker    		         */   
+    '/*		         DATE CREATED: 2/22/2021 		   */                                          
     '/*********************************************************************/
     '/*  FUNCTION PURPOSE:								   */             
     '/*											   */                     
@@ -218,8 +218,8 @@ Module Discrepancies
     '/*********************************************************************/
     '/*                   FUNCTION NAME: GetDrawerTUID    */         
     '/*********************************************************************/
-    '/*                   WRITTEN BY:     		         */   
-    '/*		         DATE CREATED: 		   */                             
+    '/*                   WRITTEN BY: Alexander Beasecker    		         */   
+    '/*		         DATE CREATED: 2/22/2021 		   */                                           
     '/*********************************************************************/
     '/*  FUNCTION PURPOSE:								   */             
     '/*											   */                     
@@ -263,8 +263,8 @@ Module Discrepancies
     '/*********************************************************************/
     '/*                   FUNCTION NAME: GetMedicationID    */         
     '/*********************************************************************/
-    '/*                   WRITTEN BY:     		         */   
-    '/*		         DATE CREATED: 		   */                             
+    '/*                   WRITTEN BY: Alexander Beasecker    		         */   
+    '/*		         DATE CREATED: 2/22/2021 		   */                            
     '/*********************************************************************/
     '/*  FUNCTION PURPOSE:								   */             
     '/*											   */                     
@@ -307,20 +307,25 @@ Module Discrepancies
 
 
     '/*********************************************************************/
-    '/*                   FUNCTION NAME: PopulateDiscrepancies    */         
+    '/*                   Sub NAME: PopulateDiscrepancies    */         
     '/*********************************************************************/
-    '/*                   WRITTEN BY:     		         */   
-    '/*		         DATE CREATED: 		   */                             
+    '/*                   WRITTEN BY: Alexander Beasecker    		         */   
+    '/*		         DATE CREATED: 2/22/2021 		   */                       
     '/*********************************************************************/
-    '/*  FUNCTION PURPOSE:								   */             
-    '/*											   */                     
-    '/*                                                                   */
+    '/*  FUNCTION PURPOSE:	this sub is used to populate all active
+    '/* discrepancies to the discrepancy form
+    '/*
     '/*********************************************************************/
     '/*  CALLED BY:   	      						         */           
     '/*                                         				   */         
     '/*********************************************************************/
     '/*  CALLS:										   */                 
-    '/*             (NONE)								   */             
+    '/* strbSQL.Append(
+    '*/ strbSQL.Clear()    
+    '*/ frmDiscrepancies.CreatePanel(
+    '*/ CreateDatabase.ExecuteSelectQuery(
+    '*/ CreateDatabase.ExecuteScalarQuery(
+    '*/
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					   */         
     '/*											   */                     
@@ -356,5 +361,48 @@ Module Discrepancies
             strMedicationName = CreateDatabase.ExecuteScalarQuery(strbSQL.ToString)
             frmDiscrepancies.CreatePanel(frmDiscrepancies.flpDiscrepancies, dr(EnumList.Discrepancies.ID), strMedicationName, dr(EnumList.Discrepancies.Drawer), dr(EnumList.Discrepancies.Expected), dr(EnumList.Discrepancies.actual), dr(EnumList.Discrepancies.DateTimeEntered))
         Next
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   Sub NAME: ResolveDiscrepancies    */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY: Alexander Beasecker    		         */   
+    '/*		         DATE CREATED: 2/22/2021 		   */                             
+    '/*********************************************************************/
+    '/*  Sub PURPOSE: this sub is used to update the discrepancy cleared 
+    '/* time. 
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*            ExecuteInsertQuery(strbSQL.ToString)			  */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*     intDiscrepID As Integer                                                                
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*      ResolveDiscrepancies(10)                                                               
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*		dtmAdhocTime									   */                     
+    '/*     strbSQL                                                               
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  AB    2/22/2021 Initial creation
+    '/*********************************************************************/
+    Public Sub ResolveDiscrepancies(ByRef intDiscrepID As Integer)
+        Dim dtmAdhocTime As String = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")
+        Dim strbSQL As StringBuilder = New StringBuilder
+        strbSQL.Append("UPDATE Discrepancies SET DateTime_Cleared ='" & dtmAdhocTime & "' WHERE Discrepancies_ID = '" & intDiscrepID & "';")
+        CreateDatabase.ExecuteInsertQuery(strbSQL.ToString)
     End Sub
 End Module
