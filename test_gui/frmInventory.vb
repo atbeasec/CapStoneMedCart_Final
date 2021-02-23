@@ -1,4 +1,5 @@
-﻿Public Class frmInventory
+﻿Imports System.Text.RegularExpressions
+Public Class frmInventory
     Private Sub NumericUpDown1_ValueChanged(sender As Object, e As EventArgs)
 
     End Sub
@@ -130,4 +131,45 @@
 
     End Sub
 
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        ' make sure the proper information is selected or entered
+        Dim strTrimmedString As String
+        ' take the split of the combobox selected item
+        strTrimmedString = (cmbMedicationName.Text.Split(","))(0)
+        ' then trim off everything that's not a number
+        strTrimmedString = Regex.Replace(strTrimmedString, "(", "")
+        ' search the information from the allproperties API call
+        ' double-check if the drug is in the database already
+        ' if yes, then update if there's differences
+        ' if no, then save those items
+        ' and pass it to the function to find interactions
+        ' double-check if the interactions with the matching pair of RXCUI's exist
+        ' if yes, then update if there's differences
+        ' or insert the new lines
+        ' and save those items
+    End Sub
+
+    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        Dim myPropertyNameList As New List(Of String)({"rxcui"})
+        Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
+
+        outputList = GetRxcuiByName(txtSearch.Text, myPropertyNameList)
+        If outputList.Count = 0 Then
+            'outputList = GetSuggestionList(txtSearch.Text)
+            ' then populate the combobox
+            ' and if they click again on an item put it into the search box and search
+            ' recursion 'til the cows come home
+        End If
+        cmbMedicationName.DataSource = outputList
+    End Sub
+
+    Private Sub cmbMedicationName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMedicationName.SelectedIndexChanged
+        Dim strTrimmedString As String
+        ' take the split of the combobox selected item
+        strTrimmedString = (cmbMedicationName.Text.Split(","))(0)
+        ' then trim off everything that's not a number
+        strTrimmedString = Regex.Replace(strTrimmedString, "(", "")
+        strTrimmedString = Regex.Replace(strTrimmedString, ")", "")
+        ' and pass it to the function to find better names
+    End Sub
 End Class
