@@ -115,7 +115,7 @@ Module Discrepancies
     End Function
 
     '/*********************************************************************/
-    '/*                   FUNCTION NAME: CheckSystemCountVSActualCount    */         
+    '/*                   FUNCTION NAME: CreateDiscrepancy    */         
     '/*********************************************************************/
     '/*                   WRITTEN BY:     		         */   
     '/*		         DATE CREATED: 		   */                             
@@ -169,7 +169,7 @@ Module Discrepancies
     End Sub
 
     '/*********************************************************************/
-    '/*                   FUNCTION NAME: CheckSystemCountVSActualCount    */         
+    '/*                   FUNCTION NAME: InsertDiscrepancy    */         
     '/*********************************************************************/
     '/*                   WRITTEN BY:     		         */   
     '/*		         DATE CREATED: 		   */                             
@@ -216,7 +216,7 @@ Module Discrepancies
     End Sub
 
     '/*********************************************************************/
-    '/*                   FUNCTION NAME: CheckSystemCountVSActualCount    */         
+    '/*                   FUNCTION NAME: GetDrawerTUID    */         
     '/*********************************************************************/
     '/*                   WRITTEN BY:     		         */   
     '/*		         DATE CREATED: 		   */                             
@@ -261,7 +261,7 @@ Module Discrepancies
     End Function
 
     '/*********************************************************************/
-    '/*                   FUNCTION NAME: CheckSystemCountVSActualCount    */         
+    '/*                   FUNCTION NAME: GetMedicationID    */         
     '/*********************************************************************/
     '/*                   WRITTEN BY:     		         */   
     '/*		         DATE CREATED: 		   */                             
@@ -306,7 +306,43 @@ Module Discrepancies
     End Function
 
 
-
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME: PopulateDiscrepancies    */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		         */   
+    '/*		         DATE CREATED: 		   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								   */             
+    '/*											   */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  AB    2/22/2021 Initial creation
+    '/*********************************************************************/
     Public Sub PopulateDiscrepancies()
         Dim strbSQL As StringBuilder = New StringBuilder
         Dim dsDiscrepancyDataset As DataSet
