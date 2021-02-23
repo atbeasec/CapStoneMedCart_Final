@@ -114,7 +114,43 @@ Module Discrepancies
         Return blnCountsEqual
     End Function
 
-
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME: CreateDiscrepancy    */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		         */   
+    '/*		         DATE CREATED: 		   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								   */             
+    '/*											   */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  AB    2/22/2021 Initial creation
+    '/*********************************************************************/
     Private Sub CreateDiscrepancy(ByRef intDrawerNumber As Integer, ByRef intBinNumber As Integer, ByRef strMedicationName As String,
                                   ByRef intExpectedCount As Integer, ByRef intActualCount As Integer, ByRef intPrimaryUserID As Integer,
                                   ByRef intApprovingUserID As Integer)
@@ -132,7 +168,43 @@ Module Discrepancies
         End If
     End Sub
 
-
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME: InsertDiscrepancy    */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		         */   
+    '/*		         DATE CREATED: 		   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								   */             
+    '/*											   */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  AB    2/22/2021 Initial creation
+    '/*********************************************************************/
     Private Sub InsertDiscrepancy(ByRef intDrawerTUID As Integer, ByRef intMedicationID As Integer,
                                   ByRef intExpectedCount As Integer, ByRef intActualCount As Integer, ByRef intPrimaryUserID As Integer,
                                   ByRef intApprovingUserID As Integer, ByRef dtmDateTimeEntered As String)
@@ -143,6 +215,43 @@ Module Discrepancies
         CreateDatabase.ExecuteInsertQuery(strbSQL.ToString)
     End Sub
 
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME: GetDrawerTUID    */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		         */   
+    '/*		         DATE CREATED: 		   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								   */             
+    '/*											   */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  AB    2/22/2021 Initial creation
+    '/*********************************************************************/
     Private Function GetDrawerTUID(ByRef intDrawerNumber As Integer, ByRef intBinNumber As Integer)
         Dim strbSQL As StringBuilder = New StringBuilder
         Dim intDrawerTUID As Integer
@@ -151,6 +260,43 @@ Module Discrepancies
         Return intDrawerTUID
     End Function
 
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME: GetMedicationID    */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		         */   
+    '/*		         DATE CREATED: 		   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								   */             
+    '/*											   */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  AB    2/22/2021 Initial creation
+    '/*********************************************************************/
     Private Function GetMedicationID(ByRef intDrawerTUID As Integer)
         Dim strbSQL As StringBuilder = New StringBuilder
         Dim intMedicationTUID As Integer
@@ -158,4 +304,53 @@ Module Discrepancies
         intMedicationTUID = CreateDatabase.ExecuteScalarQuery(strbSQL.ToString)
         Return intMedicationTUID
     End Function
+
+
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME: PopulateDiscrepancies    */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		         */   
+    '/*		         DATE CREATED: 		   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								   */             
+    '/*											   */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  AB    2/22/2021 Initial creation
+    '/*********************************************************************/
+    Public Sub PopulateDiscrepancies()
+        Dim strbSQL As StringBuilder = New StringBuilder
+        Dim dsDiscrepancyDataset As DataSet
+        strbSQL.Append("Select * from Discrepancies where DateTime_Cleared IS NULL")
+        dsDiscrepancyDataset = CreateDatabase.ExecuteSelectQuery(strbSQL.ToString)
+
+        For Each dr As DataRow In dsDiscrepancyDataset.Tables(0).Rows
+            frmDiscrepancies.CreatePanel(frmDiscrepancies.flpDiscrepancies, dr(EnumList.Discrepancies.ID), dr(EnumList.Discrepancies.MedicationID), dr(EnumList.Discrepancies.Drawer), dr(EnumList.Discrepancies.Expected), dr(EnumList.Discrepancies.actual), dr(EnumList.Discrepancies.DateTimeEntered), dr(EnumList.Discrepancies.DateTimeEntered))
+        Next
+    End Sub
 End Module
