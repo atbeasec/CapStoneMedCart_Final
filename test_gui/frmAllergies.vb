@@ -222,10 +222,10 @@
 
     End Sub
 
-    Private Sub cmbMedicationName_SelectedValueChanged(sender As Object, e As EventArgs) Handles cmbMedicationName.SelectedValueChanged
-        cmbAllergies.Text = cmbMedicationName.Text
-        cmbAllergiesLocked()
-    End Sub
+    'Private Sub cmbMedicationName_SelectedValueChanged(sender As Object, e As EventArgs) Handles cmbMedicationName.SelectedValueChanged
+    '    'cmbAllergies.Text = cmbMedicationName.Text
+    '    cmbAllergiesLocked()
+    'End Sub
 
 
     Private Sub cmbAllergiesLocked()
@@ -241,5 +241,17 @@
 
     Private Sub cmbMedicationName_MouseLeave(sender As Object, e As EventArgs) Handles cmbMedicationName.MouseLeave
         cmbAllergiesLocked()
+    End Sub
+
+    Private Sub cmbAllergies_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbAllergies.SelectedIndexChanged
+        If cmbAllergiesType.Text = "Drug" Then
+            Dim strMedTUID = CreateDatabase.ExecuteScalarQuery("Select Medication_TUID from Allergy WHERE Allergy_Name='" & cmbAllergies.Text & "';")
+            Dim MedAllergies = CreateDatabase.ExecuteScalarQuery("Select Drug_Name from Medication WHERE Medication_ID=" & CInt(strMedTUID) & ";")
+            cmbMedicationName.Text = MedAllergies.ToString()
+        End If
+    End Sub
+
+    Private Sub cmbAllergiesType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbAllergiesType.SelectedIndexChanged
+
     End Sub
 End Class
