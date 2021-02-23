@@ -53,10 +53,10 @@
         ' to send the database table data to the UI. replace the mock data with your tabledata
         '************************************************************************************
 
-        CreatePanel(flpDiscrepancies, strID, genName1, quantity2, dispensedBy5, quantity1, dispenseDate1, dispenseTime1)
-        CreatePanel(flpDiscrepancies, strID2, genName1, quantity2, dispensedBy5, quantity1, dispenseDate1, dispenseTime1)
-        CreatePanel(flpDiscrepancies, strID3, genName1, quantity2, dispensedBy5, quantity1, dispenseDate1, dispenseTime1)
-        CreatePanel(flpDiscrepancies, strID3, genName1, quantity2, dispensedBy5, quantity1, dispenseDate1, dispenseTime1)
+        CreatePanel(flpDiscrepancies, strID, genName1, quantity2, dispensedBy5, quantity1, dispenseDate1 & " " & dispenseTime1)
+        CreatePanel(flpDiscrepancies, strID2, genName1, quantity2, dispensedBy5, quantity1, dispenseDate1 & " " & dispenseTime1)
+        CreatePanel(flpDiscrepancies, strID3, genName1, quantity2, dispensedBy5, quantity1, dispenseDate1 & " " & dispenseTime1)
+        CreatePanel(flpDiscrepancies, strID3, genName1, quantity2, dispensedBy5, quantity1, dispenseDate1 & " " & dispenseTime1)
 
 
     End Sub
@@ -102,7 +102,7 @@
     '/*  ---            ----             ----				             */
     '/*  CK		        2/7/21		    initial creation                 */
     '/********************************************************************/ 
-    Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal strID As String, ByVal strMedication As String, ByVal strDrawerNumber As String, ByVal strExpectedCount As String, ByVal strActualCount As String, ByVal strDTE As String, ByVal strTime As String)
+    Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal strID As String, ByVal strMedication As String, ByVal strDrawerNumber As String, ByVal strExpectedCount As String, ByVal strActualCount As String, ByVal strDateAndTime As String)
 
         Dim pnl As Panel
         pnl = New Panel
@@ -152,8 +152,8 @@
         CreateIDLabel(pnlMainPanel, lblID2, "lblDrawer", lblDrawer.Location.X, Y, strDrawerNumber, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID3, "lblExpectedCount", lblExpectedCount.Location.X, Y, strExpectedCount, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID4, "lblActualCount", lblActualCount.Location.X, Y, strActualCount, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID5, "lblDate", lblDate.Location.X, Y, strDTE, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID6, "lblTime", lblTime.Location.X, Y, strTime, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID5, "lblDateAndTime", lblDateTime.Location.X, Y, strDateAndTime, getPanelCount(flpPannel))
+        ' CreateIDLabel(pnlMainPanel, lblID6, "lblTime", lblTime.Location.X, Y, strTime, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
