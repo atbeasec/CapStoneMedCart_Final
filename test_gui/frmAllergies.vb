@@ -1,6 +1,6 @@
 ﻿Public Class frmAllergies
     Private Sub frmAllergies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        cmbAllergiesLocked()
+        'cmbAllergiesLocked()
 
         Dim dsAllergies = CreateDatabase.ExecuteSelectQuery("Select * From Allergy ORDER BY Allergy_Type, Allergy_Name ;")
         Dim dsDrugAllergies = CreateDatabase.ExecuteSelectQuery("Select * From Allergy WHERE Allergy_Type = 'Drug' ORDER BY Allergy_Type, Allergy_Name ;")
@@ -17,6 +17,7 @@
                                                                              "INNER JOIN Allergy on PatientAllergy.Allergy_Name=Allergy.Allergy_Name" &
                             " Where Active_Flag =1 And Patient_TUID =" & (intPatientTuid).ToString & ";")
         ' insert the select statement here and send the results to the createAllergiesPanel
+        cmbAllergies.SelectedIndex = -1
         For Each dr As DataRow In dtsPatientAllergy.Tables(0).Rows
 
             If dr(2) = "Drug" Then
