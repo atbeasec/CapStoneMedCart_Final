@@ -57,7 +57,7 @@
         'CreatePanel(flpDiscrepancies, strID2, genName1, quantity2, dispensedBy5, quantity1, dispenseDate1, dispenseTime1)
         'CreatePanel(flpDiscrepancies, strID3, genName1, quantity2, dispensedBy5, quantity1, dispenseDate1, dispenseTime1)
         'CreatePanel(flpDiscrepancies, strID3, genName1, quantity2, dispensedBy5, quantity1, dispenseDate1, dispenseTime1)
-        PopulateDiscrepancies()
+        'PopulateDiscrepancies()
 
     End Sub
 
