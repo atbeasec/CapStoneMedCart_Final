@@ -26,8 +26,7 @@ Partial Class frmDiscrepancies
         Me.pnlHeader = New System.Windows.Forms.Panel()
         Me.lblDiscrepancyID = New System.Windows.Forms.Label()
         Me.lblActualCount = New System.Windows.Forms.Label()
-        Me.lblTime = New System.Windows.Forms.Label()
-        Me.lblDate = New System.Windows.Forms.Label()
+        Me.lblDateTime = New System.Windows.Forms.Label()
         Me.lblExpectedCount = New System.Windows.Forms.Label()
         Me.lblMedication = New System.Windows.Forms.Label()
         Me.lblDrawer = New System.Windows.Forms.Label()
@@ -51,8 +50,7 @@ Partial Class frmDiscrepancies
         Me.pnlHeader.BackColor = System.Drawing.Color.White
         Me.pnlHeader.Controls.Add(Me.lblDiscrepancyID)
         Me.pnlHeader.Controls.Add(Me.lblActualCount)
-        Me.pnlHeader.Controls.Add(Me.lblTime)
-        Me.pnlHeader.Controls.Add(Me.lblDate)
+        Me.pnlHeader.Controls.Add(Me.lblDateTime)
         Me.pnlHeader.Controls.Add(Me.lblExpectedCount)
         Me.pnlHeader.Controls.Add(Me.lblMedication)
         Me.pnlHeader.Controls.Add(Me.lblDrawer)
@@ -83,27 +81,16 @@ Partial Class frmDiscrepancies
         Me.lblActualCount.TabIndex = 10
         Me.lblActualCount.Text = "Actual Count"
         '
-        'lblTime
+        'lblDateTime
         '
-        Me.lblTime.AutoSize = True
-        Me.lblTime.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTime.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblTime.Location = New System.Drawing.Point(794, 16)
-        Me.lblTime.Name = "lblTime"
-        Me.lblTime.Size = New System.Drawing.Size(46, 21)
-        Me.lblTime.TabIndex = 1
-        Me.lblTime.Text = "Time"
-        '
-        'lblDate
-        '
-        Me.lblDate.AutoSize = True
-        Me.lblDate.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDate.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblDate.Location = New System.Drawing.Point(687, 16)
-        Me.lblDate.Name = "lblDate"
-        Me.lblDate.Size = New System.Drawing.Size(44, 21)
-        Me.lblDate.TabIndex = 5
-        Me.lblDate.Text = "Date"
+        Me.lblDateTime.AutoSize = True
+        Me.lblDateTime.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDateTime.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblDateTime.Location = New System.Drawing.Point(687, 16)
+        Me.lblDateTime.Name = "lblDateTime"
+        Me.lblDateTime.Size = New System.Drawing.Size(179, 21)
+        Me.lblDateTime.TabIndex = 5
+        Me.lblDateTime.Text = "Discrepancy Date/Time"
         '
         'lblExpectedCount
         '
@@ -185,8 +172,7 @@ Partial Class frmDiscrepancies
 
     Friend WithEvents flpDiscrepancies As FlowLayoutPanel
     Friend WithEvents pnlHeader As Panel
-    Friend WithEvents lblTime As Label
-    Friend WithEvents lblDate As Label
+    Friend WithEvents lblDateTime As Label
     Friend WithEvents lblExpectedCount As Label
     Friend WithEvents pnlHeaderPatientRecords As Panel
     Friend WithEvents lblMedication As Label
