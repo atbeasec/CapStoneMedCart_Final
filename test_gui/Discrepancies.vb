@@ -352,9 +352,11 @@ Module Discrepancies
         Dim strbSQL As StringBuilder = New StringBuilder
         Dim strMedicationName As String
         Dim dsDiscrepancyDataset As DataSet
+        'build sql command to return all discrepancies that do not have a cleared time
         strbSQL.Append("Select * from Discrepancies where DateTime_Cleared IS NULL")
         dsDiscrepancyDataset = CreateDatabase.ExecuteSelectQuery(strbSQL.ToString)
 
+        'loop through each row of the dataset, call sql statement to get medication name for each discrepancy and create panel
         For Each dr As DataRow In dsDiscrepancyDataset.Tables(0).Rows
             strbSQL.Clear()
             strbSQL.Append("Select Drug_Name from Medication where Medication_ID = '" & dr(EnumList.Discrepancies.MedicationID) & "'")
@@ -400,8 +402,11 @@ Module Discrepancies
     '/*  AB    2/22/2021 Initial creation
     '/*********************************************************************/
     Public Sub ResolveDiscrepancies(ByRef intDiscrepID As Integer)
+        'create current date and time for discrepancy database table
+        'create string builder to build sql command
         Dim dtmAdhocTime As String = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")
         Dim strbSQL As StringBuilder = New StringBuilder
+        'create sql update statement and call generic sql subroutine
         strbSQL.Append("UPDATE Discrepancies SET DateTime_Cleared ='" & dtmAdhocTime & "' WHERE Discrepancies_ID = '" & intDiscrepID & "';")
         CreateDatabase.ExecuteInsertQuery(strbSQL.ToString)
     End Sub
