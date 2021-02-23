@@ -162,7 +162,7 @@ Module Interactions
         'URL for finding interactions 
         Dim url As String = $"https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui={rxcuiNum}"
         'location in json of properties
-        Dim trawlPointer As String = "$.interactionTypeGroup.interactionType.interactionPair"
+        Dim trawlPointer As String = "$.interactionTypeGroup[0].interactionType[0].interactionPair"
         'inputJSON
         Dim inputJSON As JToken = rxNorm.GetJSON(url)
         'set Jtoken into array to pull data from json
