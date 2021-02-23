@@ -252,6 +252,7 @@
                 cmbMedicationName.Text = MedAllergies.ToString()
             Else
                 cmbMedicationName.Text = cmbAllergies.Text
+                Debug.WriteLine("")
             End If
         End If
     End Sub
