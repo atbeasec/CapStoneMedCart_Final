@@ -200,7 +200,7 @@ Public Class frmConfigureRooms
     '/*  ---   ----     ------------------------------------------------*/
     '/*  BRH        02/17/21   Initial creation of the code-------------*/
     '/*******************************************************************/
-    Private Sub btnDeleteBed_Click(sender As Object, e As EventArgs)
+    Private Sub btnDeleteBed_Click_1(sender As Object, e As EventArgs) Handles btnDeleteBed.Click
         DeleteBed(lstBeds.SelectedItem)
         lstRooms.Items.Clear()
         lstBeds.Items.Clear()
@@ -476,4 +476,6 @@ Public Class frmConfigureRooms
     Private Sub txtBed_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtBed.KeyPress
         DataVaildationMethods.KeyPressCheck(e, strAllowedNameCharacters)
     End Sub
+
+
 End Class
