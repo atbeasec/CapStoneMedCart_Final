@@ -131,7 +131,7 @@
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        Dim myPropertyNameList As New List(Of String)({"name", "rxcui"})
+        Dim myPropertyNameList As New List(Of String)({"rxcui"})
         'GetSuggestionList("Adklj")
         ' Debug.WriteLine(getDrugGeneric("5640"))
 

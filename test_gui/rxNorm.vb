@@ -565,8 +565,8 @@ Module rxNorm
         For Each propertyName As String In propertyNames
             For Each item As JObject In JsonJArray
                 For Each subItem As JProperty In item.Children
-                    If subItem.Name.ToString.ToUpper = propertyName.ToUpper Then
-                        myReturnList.Add((subItem.Value, DirectCast(subItem.Next, JProperty).Value))
+                    If subItem.Name.ToString.ToUpper = "NAME" Then
+                        myReturnList.Add((DirectCast(subItem.Previous, JProperty).Value, subItem.Value))
                     End If
                 Next
             Next
