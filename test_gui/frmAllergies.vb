@@ -245,9 +245,14 @@
 
     Private Sub cmbAllergies_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbAllergies.SelectedIndexChanged
         If cmbAllergiesType.Text = "Drug" Then
-            Dim strMedTUID = CreateDatabase.ExecuteScalarQuery("Select Medication_TUID from Allergy WHERE Allergy_Name='" & cmbAllergies.Text & "';")
-            Dim MedAllergies = CreateDatabase.ExecuteScalarQuery("Select Drug_Name from Medication WHERE Medication_ID=" & CInt(strMedTUID) & ";")
-            cmbMedicationName.Text = MedAllergies.ToString()
+            If cmbAllergies.SelectedIndex = 0 Then
+
+                Dim strMedTUID = CreateDatabase.ExecuteScalarQuery("Select Medication_TUID from Allergy WHERE Allergy_Name='" & cmbAllergies.Text & "';")
+                Dim MedAllergies = CreateDatabase.ExecuteScalarQuery("Select Drug_Name from Medication WHERE Medication_ID=" & CInt(strMedTUID) & ";")
+                cmbMedicationName.Text = MedAllergies.ToString()
+            Else
+                cmbMedicationName.Text = cmbAllergies.Text
+            End If
         End If
     End Sub
 
