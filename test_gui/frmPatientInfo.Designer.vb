@@ -71,9 +71,19 @@ Partial Class frmPatientInfo
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.btnBack = New System.Windows.Forms.Button()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.lblDateTime = New System.Windows.Forms.Label()
+        Me.lblDispensedBy = New System.Windows.Forms.Label()
+        Me.lblQuantity = New System.Windows.Forms.Label()
+        Me.lblMedication = New System.Windows.Forms.Label()
+        Me.lblType = New System.Windows.Forms.Label()
+        Me.lblStrength = New System.Windows.Forms.Label()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.flpDispenseHistory = New System.Windows.Forms.FlowLayoutPanel()
         Me.pnlPersonalInformation.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'LblPatientName
@@ -460,16 +470,16 @@ Partial Class frmPatientInfo
         '
         Me.flpMedications.AutoScroll = True
         Me.flpMedications.BackColor = System.Drawing.Color.White
-        Me.flpMedications.Location = New System.Drawing.Point(12, 371)
+        Me.flpMedications.Location = New System.Drawing.Point(12, 355)
         Me.flpMedications.Name = "flpMedications"
-        Me.flpMedications.Size = New System.Drawing.Size(1132, 199)
+        Me.flpMedications.Size = New System.Drawing.Size(1132, 200)
         Me.flpMedications.TabIndex = 51
         '
         'Label20
         '
         Me.Label20.AutoSize = True
         Me.Label20.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(7, 295)
+        Me.Label20.Location = New System.Drawing.Point(7, 279)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(122, 25)
         Me.Label20.TabIndex = 55
@@ -485,7 +495,7 @@ Partial Class frmPatientInfo
         Me.Panel3.Controls.Add(Me.lblMedicationPrescription)
         Me.Panel3.Controls.Add(Me.lblTypePrescription)
         Me.Panel3.Controls.Add(Me.lblStrengthPrescription)
-        Me.Panel3.Location = New System.Drawing.Point(12, 324)
+        Me.Panel3.Location = New System.Drawing.Point(12, 308)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(1132, 47)
         Me.Panel3.TabIndex = 48
@@ -657,12 +667,114 @@ Partial Class frmPatientInfo
         Me.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnBack.UseVisualStyleBackColor = False
         '
+        'Panel2
+        '
+        Me.Panel2.BackColor = System.Drawing.Color.White
+        Me.Panel2.Controls.Add(Me.lblDateTime)
+        Me.Panel2.Controls.Add(Me.lblDispensedBy)
+        Me.Panel2.Controls.Add(Me.lblQuantity)
+        Me.Panel2.Controls.Add(Me.lblMedication)
+        Me.Panel2.Controls.Add(Me.lblType)
+        Me.Panel2.Controls.Add(Me.lblStrength)
+        Me.Panel2.Location = New System.Drawing.Point(12, 595)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(1132, 47)
+        Me.Panel2.TabIndex = 61
+        '
+        'lblDateTime
+        '
+        Me.lblDateTime.AutoSize = True
+        Me.lblDateTime.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDateTime.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblDateTime.Location = New System.Drawing.Point(886, 16)
+        Me.lblDateTime.Name = "lblDateTime"
+        Me.lblDateTime.Size = New System.Drawing.Size(157, 21)
+        Me.lblDateTime.TabIndex = 15
+        Me.lblDateTime.Text = "Dispense Date/Time"
+        '
+        'lblDispensedBy
+        '
+        Me.lblDispensedBy.AutoSize = True
+        Me.lblDispensedBy.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDispensedBy.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblDispensedBy.Location = New System.Drawing.Point(644, 16)
+        Me.lblDispensedBy.Name = "lblDispensedBy"
+        Me.lblDispensedBy.Size = New System.Drawing.Size(108, 21)
+        Me.lblDispensedBy.TabIndex = 14
+        Me.lblDispensedBy.Text = "Dispensed By"
+        '
+        'lblQuantity
+        '
+        Me.lblQuantity.AutoSize = True
+        Me.lblQuantity.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblQuantity.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblQuantity.Location = New System.Drawing.Point(471, 16)
+        Me.lblQuantity.Name = "lblQuantity"
+        Me.lblQuantity.Size = New System.Drawing.Size(72, 21)
+        Me.lblQuantity.TabIndex = 12
+        Me.lblQuantity.Text = "Quantity"
+        '
+        'lblMedication
+        '
+        Me.lblMedication.AutoSize = True
+        Me.lblMedication.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblMedication.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblMedication.Location = New System.Drawing.Point(5, 16)
+        Me.lblMedication.Name = "lblMedication"
+        Me.lblMedication.Size = New System.Drawing.Size(140, 21)
+        Me.lblMedication.TabIndex = 11
+        Me.lblMedication.Text = "Medication Name"
+        '
+        'lblType
+        '
+        Me.lblType.AutoSize = True
+        Me.lblType.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblType.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblType.Location = New System.Drawing.Point(349, 16)
+        Me.lblType.Name = "lblType"
+        Me.lblType.Size = New System.Drawing.Size(45, 21)
+        Me.lblType.TabIndex = 13
+        Me.lblType.Text = "Type"
+        '
+        'lblStrength
+        '
+        Me.lblStrength.AutoSize = True
+        Me.lblStrength.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblStrength.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblStrength.Location = New System.Drawing.Point(202, 16)
+        Me.lblStrength.Name = "lblStrength"
+        Me.lblStrength.Size = New System.Drawing.Size(74, 21)
+        Me.lblStrength.TabIndex = 10
+        Me.lblStrength.Text = "Strength"
+        '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label24.Location = New System.Drawing.Point(7, 566)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(162, 25)
+        Me.Label24.TabIndex = 63
+        Me.Label24.Text = "Dispense History:"
+        '
+        'flpDispenseHistory
+        '
+        Me.flpDispenseHistory.AutoScroll = True
+        Me.flpDispenseHistory.BackColor = System.Drawing.Color.White
+        Me.flpDispenseHistory.Location = New System.Drawing.Point(12, 642)
+        Me.flpDispenseHistory.Name = "flpDispenseHistory"
+        Me.flpDispenseHistory.Size = New System.Drawing.Size(1132, 200)
+        Me.flpDispenseHistory.TabIndex = 62
+        '
         'frmPatientInfo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1157, 596)
+        Me.ClientSize = New System.Drawing.Size(1157, 861)
+        Me.Controls.Add(Me.Panel2)
+        Me.Controls.Add(Me.Label24)
+        Me.Controls.Add(Me.flpDispenseHistory)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Label20)
@@ -676,6 +788,8 @@ Partial Class frmPatientInfo
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
         Me.Panel1.ResumeLayout(False)
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -728,4 +842,13 @@ Partial Class frmPatientInfo
     Friend WithEvents txtZipCode As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents txtCity As TextBox
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents lblDateTime As Label
+    Friend WithEvents lblDispensedBy As Label
+    Friend WithEvents lblQuantity As Label
+    Friend WithEvents lblMedication As Label
+    Friend WithEvents lblType As Label
+    Friend WithEvents lblStrength As Label
+    Friend WithEvents Label24 As Label
+    Friend WithEvents flpDispenseHistory As FlowLayoutPanel
 End Class
