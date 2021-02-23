@@ -68,7 +68,7 @@ Partial Class frmMain
         Me.pnlSideMenu.Location = New System.Drawing.Point(0, 0)
         Me.pnlSideMenu.Margin = New System.Windows.Forms.Padding(2)
         Me.pnlSideMenu.Name = "pnlSideMenu"
-        Me.pnlSideMenu.Size = New System.Drawing.Size(227, 861)
+        Me.pnlSideMenu.Size = New System.Drawing.Size(227, 711)
         Me.pnlSideMenu.TabIndex = 0
         '
         'pnlSubMenuSettings
@@ -81,7 +81,7 @@ Partial Class frmMain
         Me.pnlSubMenuSettings.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlSubMenuSettings.Location = New System.Drawing.Point(0, 609)
         Me.pnlSubMenuSettings.Name = "pnlSubMenuSettings"
-        Me.pnlSubMenuSettings.Size = New System.Drawing.Size(227, 176)
+        Me.pnlSubMenuSettings.Size = New System.Drawing.Size(210, 176)
         Me.pnlSubMenuSettings.TabIndex = 58
         '
         'btnSerialPort
@@ -97,7 +97,7 @@ Partial Class frmMain
         Me.btnSerialPort.Margin = New System.Windows.Forms.Padding(2)
         Me.btnSerialPort.Name = "btnSerialPort"
         Me.btnSerialPort.Padding = New System.Windows.Forms.Padding(35, 5, 5, 5)
-        Me.btnSerialPort.Size = New System.Drawing.Size(227, 42)
+        Me.btnSerialPort.Size = New System.Drawing.Size(210, 42)
         Me.btnSerialPort.TabIndex = 28
         Me.btnSerialPort.Tag = "15"
         Me.btnSerialPort.Text = "Admin Settings"
@@ -118,7 +118,7 @@ Partial Class frmMain
         Me.btnEditRooms.Margin = New System.Windows.Forms.Padding(2)
         Me.btnEditRooms.Name = "btnEditRooms"
         Me.btnEditRooms.Padding = New System.Windows.Forms.Padding(35, 5, 5, 5)
-        Me.btnEditRooms.Size = New System.Drawing.Size(227, 42)
+        Me.btnEditRooms.Size = New System.Drawing.Size(210, 42)
         Me.btnEditRooms.TabIndex = 27
         Me.btnEditRooms.Tag = "14"
         Me.btnEditRooms.Text = "Edit Rooms / Beds"
@@ -139,7 +139,7 @@ Partial Class frmMain
         Me.btnDischargePatient.Margin = New System.Windows.Forms.Padding(2)
         Me.btnDischargePatient.Name = "btnDischargePatient"
         Me.btnDischargePatient.Padding = New System.Windows.Forms.Padding(35, 5, 5, 5)
-        Me.btnDischargePatient.Size = New System.Drawing.Size(227, 42)
+        Me.btnDischargePatient.Size = New System.Drawing.Size(210, 42)
         Me.btnDischargePatient.TabIndex = 26
         Me.btnDischargePatient.Tag = "13"
         Me.btnDischargePatient.Text = "Discharge / Admit"
@@ -160,7 +160,7 @@ Partial Class frmMain
         Me.btnUsers.Margin = New System.Windows.Forms.Padding(2)
         Me.btnUsers.Name = "btnUsers"
         Me.btnUsers.Padding = New System.Windows.Forms.Padding(35, 5, 5, 5)
-        Me.btnUsers.Size = New System.Drawing.Size(227, 42)
+        Me.btnUsers.Size = New System.Drawing.Size(210, 42)
         Me.btnUsers.TabIndex = 25
         Me.btnUsers.Tag = "12"
         Me.btnUsers.Text = "Add / Remove User"
@@ -182,7 +182,7 @@ Partial Class frmMain
         Me.btnSettings.Margin = New System.Windows.Forms.Padding(2)
         Me.btnSettings.Name = "btnSettings"
         Me.btnSettings.Padding = New System.Windows.Forms.Padding(10, 5, 5, 5)
-        Me.btnSettings.Size = New System.Drawing.Size(227, 58)
+        Me.btnSettings.Size = New System.Drawing.Size(210, 58)
         Me.btnSettings.TabIndex = 57
         Me.btnSettings.Tag = "11"
         Me.btnSettings.Text = "   Settings"
@@ -203,7 +203,7 @@ Partial Class frmMain
         Me.btnPharmacy.Margin = New System.Windows.Forms.Padding(2)
         Me.btnPharmacy.Name = "btnPharmacy"
         Me.btnPharmacy.Padding = New System.Windows.Forms.Padding(10, 5, 5, 5)
-        Me.btnPharmacy.Size = New System.Drawing.Size(227, 58)
+        Me.btnPharmacy.Size = New System.Drawing.Size(210, 58)
         Me.btnPharmacy.TabIndex = 56
         Me.btnPharmacy.Tag = "10"
         Me.btnPharmacy.Text = "   Pharmacy"
@@ -224,7 +224,7 @@ Partial Class frmMain
         Me.btnMaintenance.Margin = New System.Windows.Forms.Padding(2)
         Me.btnMaintenance.Name = "btnMaintenance"
         Me.btnMaintenance.Padding = New System.Windows.Forms.Padding(10, 5, 5, 5)
-        Me.btnMaintenance.Size = New System.Drawing.Size(227, 50)
+        Me.btnMaintenance.Size = New System.Drawing.Size(210, 50)
         Me.btnMaintenance.TabIndex = 55
         Me.btnMaintenance.Tag = "9"
         Me.btnMaintenance.Text = "   Maintenance"
@@ -245,7 +245,7 @@ Partial Class frmMain
         Me.btnDescrepancies.Margin = New System.Windows.Forms.Padding(2)
         Me.btnDescrepancies.Name = "btnDescrepancies"
         Me.btnDescrepancies.Padding = New System.Windows.Forms.Padding(10, 5, 5, 5)
-        Me.btnDescrepancies.Size = New System.Drawing.Size(227, 50)
+        Me.btnDescrepancies.Size = New System.Drawing.Size(210, 50)
         Me.btnDescrepancies.TabIndex = 54
         Me.btnDescrepancies.Tag = "8"
         Me.btnDescrepancies.Text = "   Discrepancies"
@@ -266,7 +266,7 @@ Partial Class frmMain
         Me.btnReport.Margin = New System.Windows.Forms.Padding(2)
         Me.btnReport.Name = "btnReport"
         Me.btnReport.Padding = New System.Windows.Forms.Padding(10, 5, 5, 5)
-        Me.btnReport.Size = New System.Drawing.Size(227, 50)
+        Me.btnReport.Size = New System.Drawing.Size(210, 50)
         Me.btnReport.TabIndex = 53
         Me.btnReport.Tag = "7"
         Me.btnReport.Text = "   Reports"
@@ -283,7 +283,7 @@ Partial Class frmMain
         Me.pnlSubMenuInventory.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlSubMenuInventory.Location = New System.Drawing.Point(0, 164)
         Me.pnlSubMenuInventory.Name = "pnlSubMenuInventory"
-        Me.pnlSubMenuInventory.Size = New System.Drawing.Size(227, 179)
+        Me.pnlSubMenuInventory.Size = New System.Drawing.Size(210, 179)
         Me.pnlSubMenuInventory.TabIndex = 24
         '
         'btnWaste
@@ -299,7 +299,7 @@ Partial Class frmMain
         Me.btnWaste.Margin = New System.Windows.Forms.Padding(2)
         Me.btnWaste.Name = "btnWaste"
         Me.btnWaste.Padding = New System.Windows.Forms.Padding(35, 5, 5, 5)
-        Me.btnWaste.Size = New System.Drawing.Size(227, 44)
+        Me.btnWaste.Size = New System.Drawing.Size(210, 44)
         Me.btnWaste.TabIndex = 28
         Me.btnWaste.Tag = "6"
         Me.btnWaste.Text = "Waste"
@@ -320,7 +320,7 @@ Partial Class frmMain
         Me.btnConfigureInventory.Margin = New System.Windows.Forms.Padding(2)
         Me.btnConfigureInventory.Name = "btnConfigureInventory"
         Me.btnConfigureInventory.Padding = New System.Windows.Forms.Padding(35, 5, 5, 5)
-        Me.btnConfigureInventory.Size = New System.Drawing.Size(227, 44)
+        Me.btnConfigureInventory.Size = New System.Drawing.Size(210, 44)
         Me.btnConfigureInventory.TabIndex = 27
         Me.btnConfigureInventory.Tag = "5"
         Me.btnConfigureInventory.Text = "Configure Inventory"
@@ -341,7 +341,7 @@ Partial Class frmMain
         Me.btnEndOfShiftCount.Margin = New System.Windows.Forms.Padding(2)
         Me.btnEndOfShiftCount.Name = "btnEndOfShiftCount"
         Me.btnEndOfShiftCount.Padding = New System.Windows.Forms.Padding(35, 5, 5, 5)
-        Me.btnEndOfShiftCount.Size = New System.Drawing.Size(227, 44)
+        Me.btnEndOfShiftCount.Size = New System.Drawing.Size(210, 44)
         Me.btnEndOfShiftCount.TabIndex = 26
         Me.btnEndOfShiftCount.Tag = "4"
         Me.btnEndOfShiftCount.Text = "End of Shift Count"
@@ -362,7 +362,7 @@ Partial Class frmMain
         Me.btnAdhockDispense.Margin = New System.Windows.Forms.Padding(2)
         Me.btnAdhockDispense.Name = "btnAdhockDispense"
         Me.btnAdhockDispense.Padding = New System.Windows.Forms.Padding(35, 5, 5, 5)
-        Me.btnAdhockDispense.Size = New System.Drawing.Size(227, 42)
+        Me.btnAdhockDispense.Size = New System.Drawing.Size(210, 42)
         Me.btnAdhockDispense.TabIndex = 25
         Me.btnAdhockDispense.Tag = "3"
         Me.btnAdhockDispense.Text = "Ad Hoc Dispense"
@@ -380,11 +380,11 @@ Partial Class frmMain
         Me.btnLogout.ForeColor = System.Drawing.Color.White
         Me.btnLogout.Image = CType(resources.GetObject("btnLogout.Image"), System.Drawing.Image)
         Me.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnLogout.Location = New System.Drawing.Point(0, 811)
+        Me.btnLogout.Location = New System.Drawing.Point(0, 785)
         Me.btnLogout.Margin = New System.Windows.Forms.Padding(2)
         Me.btnLogout.Name = "btnLogout"
         Me.btnLogout.Padding = New System.Windows.Forms.Padding(10, 5, 5, 5)
-        Me.btnLogout.Size = New System.Drawing.Size(227, 50)
+        Me.btnLogout.Size = New System.Drawing.Size(210, 50)
         Me.btnLogout.TabIndex = 14
         Me.btnLogout.Tag = "15"
         Me.btnLogout.Text = "   Log Out"
@@ -406,7 +406,7 @@ Partial Class frmMain
         Me.btnInventory.Margin = New System.Windows.Forms.Padding(2)
         Me.btnInventory.Name = "btnInventory"
         Me.btnInventory.Padding = New System.Windows.Forms.Padding(10, 5, 5, 5)
-        Me.btnInventory.Size = New System.Drawing.Size(227, 50)
+        Me.btnInventory.Size = New System.Drawing.Size(210, 50)
         Me.btnInventory.TabIndex = 9
         Me.btnInventory.Tag = "2"
         Me.btnInventory.Text = "   Inventory"
@@ -428,7 +428,7 @@ Partial Class frmMain
         Me.btnPatientRecords.Margin = New System.Windows.Forms.Padding(2)
         Me.btnPatientRecords.Name = "btnPatientRecords"
         Me.btnPatientRecords.Padding = New System.Windows.Forms.Padding(10, 5, 5, 5)
-        Me.btnPatientRecords.Size = New System.Drawing.Size(227, 50)
+        Me.btnPatientRecords.Size = New System.Drawing.Size(210, 50)
         Me.btnPatientRecords.TabIndex = 7
         Me.btnPatientRecords.Tag = "1"
         Me.btnPatientRecords.Text = "   Patient Records"
@@ -443,7 +443,7 @@ Partial Class frmMain
         Me.pnlLogo.Location = New System.Drawing.Point(0, 0)
         Me.pnlLogo.Margin = New System.Windows.Forms.Padding(2)
         Me.pnlLogo.Name = "pnlLogo"
-        Me.pnlLogo.Size = New System.Drawing.Size(227, 64)
+        Me.pnlLogo.Size = New System.Drawing.Size(210, 64)
         Me.pnlLogo.TabIndex = 8
         '
         'pnlDockLocation
@@ -451,7 +451,7 @@ Partial Class frmMain
         Me.pnlDockLocation.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlDockLocation.Location = New System.Drawing.Point(227, 0)
         Me.pnlDockLocation.Name = "pnlDockLocation"
-        Me.pnlDockLocation.Size = New System.Drawing.Size(1157, 861)
+        Me.pnlDockLocation.Size = New System.Drawing.Size(1107, 711)
         Me.pnlDockLocation.TabIndex = 1
         '
         'frmMain
@@ -459,7 +459,7 @@ Partial Class frmMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1384, 861)
+        Me.ClientSize = New System.Drawing.Size(1334, 711)
         Me.Controls.Add(Me.pnlDockLocation)
         Me.Controls.Add(Me.pnlSideMenu)
         Me.Margin = New System.Windows.Forms.Padding(2)
