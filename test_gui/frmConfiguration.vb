@@ -372,7 +372,8 @@ Public Class frmConfiguration
     '/*********************************************************************/
 
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub btnSaveUser_Click(sender As Object, e As EventArgs) Handles btnSaveUser.Click
+
         Dim intSupervisor As Integer = 0
         Dim intAdmin As Integer = 0
         Dim intActiveFlag As Integer = 1
@@ -418,14 +419,25 @@ Public Class frmConfiguration
             "VALUES('" & txtUsername.Text & "','" & strSalt & "','" & strPassword & "','" & strFirstName & "','" & strLastName & "','" & strHashedBarcode & "','" & intAdmin & "','" & intSupervisor & "','" & intActiveFlag & "')"
             ExecuteInsertQuery(strStatement)
 
+
+
+
+
+            ' do query to return the record that was just created and return the result into the create panel method below
+            ' CreatePanel(flpUserInfo, , , , , )
+
+
+
+
+
             'clear all text boxes
             txtFirstName.Text = ""
-            txtLastName.Text = ""
-            txtUsername.Text = ""
-            txtBarcode.Text = ""
-            txtPassword.Text = ""
-            txtConfirmPassword.Text = ""
-        End If
+                txtLastName.Text = ""
+                txtUsername.Text = ""
+                txtBarcode.Text = ""
+                txtPassword.Text = ""
+                txtConfirmPassword.Text = ""
+            End If
 
 
     End Sub
@@ -631,7 +643,7 @@ Public Class frmConfiguration
             txtConfirmPassword.Text = ""
             btnCancel.Visible = False
             btnSaveChanges.Visible = False
-            Button1.Visible = True
+            btnSaveUser.Visible = True
         End If
     End Sub
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
@@ -644,7 +656,7 @@ Public Class frmConfiguration
         txtConfirmPassword.Text = ""
         btnCancel.Visible = False
         btnSaveChanges.Visible = False
-        Button1.Visible = True
+        btnSaveUser.Visible = True
     End Sub
 
 

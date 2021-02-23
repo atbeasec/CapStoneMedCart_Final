@@ -609,7 +609,7 @@
             'make the save and cancel button visible and hide button1
             frmConfiguration.btnSaveChanges.Visible = True
             frmConfiguration.btnCancel.Visible = True
-            frmConfiguration.Button1.Visible = False
+            frmConfiguration.btnSaveUser.Visible = False
 
         ElseIf getOpenedForm().GetType() Is frmPatientRecords.GetType() Then
             'this will set up the functions for the editing pencil. 
