@@ -162,7 +162,8 @@ Public Class frmConfiguration
         CreateEditButton(pnlMainPanel, getPanelCount(flpPannel), lblActions.Location.X - 15, 5)
         CreateDeleteBtn(pnlMainPanel, getPanelCount(flpPannel), lblActions.Location.X + 30, 5)
 
-        ' call database info here to populate
+        ' create labels at run time and pass them to the create label method to format how the labels will look and their
+        ' properties
         Dim lblID As New Label
         Dim lblID2 As New Label
         Dim lblID3 As New Label
@@ -176,7 +177,7 @@ Public Class frmConfiguration
         CreateIDLabel(pnlMainPanel, lblID2, "lblNames", lblName.Location.X, INTTWENTY, strName, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID3, "lblUsername", lblUserName.Location.X, INTTWENTY, strUsername, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID4, "lblPermissions", lblPermissions.Location.X, INTTWENTY, strAccess, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID4, "lblStatus", lblStatus.Location.X, INTTWENTY, strActive, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID5, "lblStatus", lblStatus.Location.X, INTTWENTY, strActive, getPanelCount(flpPannel))
 
 
         'Add panel to flow layout panel
