@@ -304,4 +304,17 @@ Module Discrepancies
         intMedicationTUID = CreateDatabase.ExecuteScalarQuery(strbSQL.ToString)
         Return intMedicationTUID
     End Function
+
+
+
+    Public Sub PopulateDiscrepancies()
+        Dim strbSQL As StringBuilder = New StringBuilder
+        Dim dsDiscrepancyDataset As DataSet
+        strbSQL.Append("Select * from Discrepancies where DateTime_Cleared IS NULL")
+        dsDiscrepancyDataset = CreateDatabase.ExecuteSelectQuery(strbSQL.ToString)
+
+        For Each dr As DataRow In dsDiscrepancyDataset.Tables(0).Rows
+            frmDiscrepancies.CreatePanel(frmDiscrepancies.flpDiscrepancies, dr(EnumList.Discrepancies.ID), dr(EnumList.Discrepancies.MedicationID), dr(EnumList.Discrepancies.Drawer), dr(EnumList.Discrepancies.Expected), dr(EnumList.Discrepancies.actual), dr(EnumList.Discrepancies.DateTimeEntered), dr(EnumList.Discrepancies.DateTimeEntered))
+        Next
+    End Sub
 End Module
