@@ -114,7 +114,43 @@ Module Discrepancies
         Return blnCountsEqual
     End Function
 
-
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME: CheckSystemCountVSActualCount    */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		         */   
+    '/*		         DATE CREATED: 		   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								   */             
+    '/*											   */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  AB    2/22/2021 Initial creation
+    '/*********************************************************************/
     Private Sub CreateDiscrepancy(ByRef intDrawerNumber As Integer, ByRef intBinNumber As Integer, ByRef strMedicationName As String,
                                   ByRef intExpectedCount As Integer, ByRef intActualCount As Integer, ByRef intPrimaryUserID As Integer,
                                   ByRef intApprovingUserID As Integer)
@@ -132,7 +168,43 @@ Module Discrepancies
         End If
     End Sub
 
-
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME: CheckSystemCountVSActualCount    */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		         */   
+    '/*		         DATE CREATED: 		   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								   */             
+    '/*											   */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  AB    2/22/2021 Initial creation
+    '/*********************************************************************/
     Private Sub InsertDiscrepancy(ByRef intDrawerTUID As Integer, ByRef intMedicationID As Integer,
                                   ByRef intExpectedCount As Integer, ByRef intActualCount As Integer, ByRef intPrimaryUserID As Integer,
                                   ByRef intApprovingUserID As Integer, ByRef dtmDateTimeEntered As String)
@@ -143,6 +215,43 @@ Module Discrepancies
         CreateDatabase.ExecuteInsertQuery(strbSQL.ToString)
     End Sub
 
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME: CheckSystemCountVSActualCount    */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		         */   
+    '/*		         DATE CREATED: 		   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								   */             
+    '/*											   */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  AB    2/22/2021 Initial creation
+    '/*********************************************************************/
     Private Function GetDrawerTUID(ByRef intDrawerNumber As Integer, ByRef intBinNumber As Integer)
         Dim strbSQL As StringBuilder = New StringBuilder
         Dim intDrawerTUID As Integer
@@ -151,6 +260,43 @@ Module Discrepancies
         Return intDrawerTUID
     End Function
 
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME: CheckSystemCountVSActualCount    */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		         */   
+    '/*		         DATE CREATED: 		   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								   */             
+    '/*											   */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  AB    2/22/2021 Initial creation
+    '/*********************************************************************/
     Private Function GetMedicationID(ByRef intDrawerTUID As Integer)
         Dim strbSQL As StringBuilder = New StringBuilder
         Dim intMedicationTUID As Integer
