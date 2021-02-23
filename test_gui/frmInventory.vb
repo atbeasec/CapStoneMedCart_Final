@@ -131,19 +131,20 @@
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        Dim myPropertyNameList As New List(Of String)({"rxcui"})
-        'GetSuggestionList("Adklj")
-        ' Debug.WriteLine(getDrugGeneric("5640"))
 
+    End Sub
+
+    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        Dim myPropertyNameList As New List(Of String)({"rxcui"})
         Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
 
-        outputList = GetRxcuiByName("advil", myPropertyNameList)
-
-        For Each item In outputList
-            Debug.WriteLine(item.PropertyName, item.PropertyValue)
-        Next
-        Debug.WriteLine(GetRxcuiByName("advil", myPropertyNameList).ToString)
-        Debug.WriteLine(getRxcuiProperty("2055307", myPropertyNameList).ToString)
-
+        outputList = GetRxcuiByName(txtSearch.Text, myPropertyNameList)
+        If outputList.Count = 0 Then
+            'outputList = GetSuggestionList(txtSearch.Text)
+            ' then populate the combobox
+            ' and if they click again on an item put it into the search box and search
+            ' recursion 'til the cows come home
+        End If
+        cmbMedicationName.DataSource = outputList
     End Sub
 End Class
