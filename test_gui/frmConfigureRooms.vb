@@ -24,7 +24,8 @@
 '/* and FILENAME.EXE name in the Run box on the Windows Start Menu.		*/
 '/********************************************************************	*/
 '/*  GLOBAL VARIABLE LIST (Alphabetically):								*/
-'/* (None)                                                              */
+'/* strAllowedNameCharacters - Stores the allowed characters for room   */
+'/*                            and bed names                            */
 '/********************************************************************	*/
 '/* COMPILATION NOTES:													*/
 '/* 																	*/
@@ -38,8 +39,10 @@
 '/*																		*/
 '/*  WHO		WHEN		WHAT										*/
 '/*  BRH        02/17/21   Initial creation of the code-------------	*/
+'/*  BRH        02/22/21   Added new implementation for new controls	*/
 '/********************************************************************	*/
 Public Class frmConfigureRooms
+    Public strAllowedNameCharacters = "abcdefghijklmnopqrstuvwxyz """"-1234567890"
     '/*******************************************************************/
     '/*                   SUBROUTINE NAME:     frmConfigureRooms_Load	*/
     '/*******************************************************************/
@@ -75,6 +78,7 @@ Public Class frmConfigureRooms
 
     Private Sub frmConfigureRooms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ShowRoomsBeds()
+        SetControlVisibility(False, False)
     End Sub
 
     '/*******************************************************************/
@@ -112,11 +116,14 @@ Public Class frmConfigureRooms
     '/*  ---   ----     ------------------------------------------------*/
     '/*  BRH        02/17/21   Initial creation of the code-------------*/
     '/*******************************************************************/
-    Private Sub btnAddBed_Click(sender As Object, e As EventArgs) Handles btnAddBed.Click
+    Private Sub btnAddBed_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         AddRoomsBeds(txtRoom.Text, txtBed.Text, 1)
         txtRoom.Clear()
         txtBed.Clear()
+        ShowRoomsBeds()
     End Sub
+
+
 
     '/*******************************************************************/
     '/*                   SUBROUTINE NAME:     btnDeleteRoom_Click    	*/
@@ -193,7 +200,7 @@ Public Class frmConfigureRooms
     '/*  ---   ----     ------------------------------------------------*/
     '/*  BRH        02/17/21   Initial creation of the code-------------*/
     '/*******************************************************************/
-    Private Sub btnDeleteBed_Click(sender As Object, e As EventArgs) Handles btnDeleteBed.Click
+    Private Sub btnDeleteBed_Click(sender As Object, e As EventArgs)
         DeleteBed(lstBeds.SelectedItem)
         lstRooms.Items.Clear()
         lstBeds.Items.Clear()
@@ -238,7 +245,6 @@ Public Class frmConfigureRooms
         lstRooms.Items.Clear()
         lstBeds.Items.Clear()
         ShowRooms("SELECT DISTINCT Room_ID FROM Rooms WHERE Active_Flag = 1 ORDER BY Room_ID ASC")
-        'ShowBeds("SELECT DISTINCT Bed_Name FROM Rooms WHERE Active_Flag = 1 ORDER BY Bed_Name ASC")
     End Sub
 
     '/*******************************************************************/
@@ -276,8 +282,198 @@ Public Class frmConfigureRooms
     '/*  ---   ----     ------------------------------------------------*/
     '/*  BRH        02/17/21   Initial creation of the code-------------*/
     '/*******************************************************************/
-    Private Sub lstRooms_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstRooms.SelectedIndexChanged
+
+    Private Sub lstRooms_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles lstRooms.SelectedIndexChanged
         lstBeds.Items.Clear()
         ShowBeds("SELECT DISTINCT Bed_Name FROM Rooms WHERE Room_ID = '" & lstRooms.SelectedItem & "' AND Active_Flag = 1 ORDER BY Bed_Name ASC")
+    End Sub
+
+    '/*******************************************************************/
+    '/*         SUBROUTINE NAME:         	*/
+    '/*******************************************************************/
+    '/*                   WRITTEN BY:  	Breanna Howey					*/
+    '/*					DATE CREATED: 	   02/22/21						*/
+    '/*******************************************************************/
+    '/*  SUBROUTINE PURPOSE:											*/
+    '/*	The purpose of this subroutine is to show the add controls on   */
+    '/* the form when the Add Room Bed radio button is selected.        */
+    '/*******************************************************************/
+    '/*  CALLS:															*/
+    '/*  SetControlVisibility      										*/
+    '/*******************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):							*/
+    '/*																	*/
+    '/* sender - Holds the object the program is sending to the routine */
+    '/* e   - Stores other arguments passed to the routine.             */
+    '/*******************************************************************/
+    '/* SAMPLE INVOCATION:												*/
+    '/*																	*/
+    '/*	rdoAddRoomBed_CheckedChanged 								    */
+    '/*******************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+    '/*																	*/
+    '/* (None)                                                          */
+    '/*******************************************************************/
+    '/* MODIFICATION HISTORY:											*/
+    '/*																	*/
+    '/* WHO   WHEN     WHAT											    */
+    '/*  ---   ----     ------------------------------------------------*/
+    '/*  BRH        02/22/21   Initial creation of the code-------------*/
+    '/*******************************************************************/
+    Private Sub rdoAddRoomBed_CheckedChanged(sender As Object, e As EventArgs) Handles rdoAddRoomBed.CheckedChanged
+        SetControlVisibility(True, False)
+    End Sub
+
+    '/*******************************************************************/
+    '/*         SUBROUTINE NAME:     rdoDeleteRoomBed_CheckedChanged  	*/
+    '/*******************************************************************/
+    '/*                   WRITTEN BY:  	Breanna Howey					*/
+    '/*					DATE CREATED: 	   02/22/21						*/
+    '/*******************************************************************/
+    '/*  SUBROUTINE PURPOSE:											*/
+    '/*	The purpose of this subroutine is to show the deltee controls on*/
+    '/* the form when the Add Room Bed radio button is selected.        */
+    '/*******************************************************************/
+    '/*  CALLS:															*/
+    '/*  SetControlVisibility      										*/
+    '/*******************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):							*/
+    '/*																	*/
+    '/* sender - Holds the object the program is sending to the routine */
+    '/* e   - Stores other arguments passed to the routine.             */
+    '/*******************************************************************/
+    '/* SAMPLE INVOCATION:												*/
+    '/*																	*/
+    '/*	rdoDeleteRoomBed_CheckedChanged 								*/
+    '/*******************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+    '/*																	*/
+    '/* (None)                                                          */
+    '/*******************************************************************/
+    '/* MODIFICATION HISTORY:											*/
+    '/*																	*/
+    '/* WHO   WHEN     WHAT											    */
+    '/*  ---   ----     ------------------------------------------------*/
+    '/*  BRH        02/22/21   Initial creation of the code-------------*/
+    '/*******************************************************************/
+    Private Sub rdoDeleteRoomBed_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDeleteRoomBed.CheckedChanged
+        SetControlVisibility(False, True)
+        'Sets the panel of delete controls to the same locations as those of the add controls
+        pnlDelete.Location = New Point(12, 65)
+    End Sub
+
+    '/*******************************************************************/
+    '/*         SUBROUTINE NAME:     SetControlVisibility             	*/
+    '/*******************************************************************/
+    '/*                   WRITTEN BY:  	Breanna Howey					*/
+    '/*					DATE CREATED: 	   02/22/21						*/
+    '/*******************************************************************/
+    '/*  SUBROUTINE PURPOSE:											*/
+    '/*	The purpose of this subroutine is to set specific controls to be*/
+    '/* visible on the screen. The routine takes whether the add or delete
+    '/* controls need to be visible on the screen, from boolean variables,
+    '/* and sets the controls accordingly.                              */
+    '/*******************************************************************/
+    '/*  CALLS:															*/
+    '/*  (None)                   										*/
+    '/*******************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):							*/
+    '/*																	*/
+    '/* blnAddControls - Stores whether the add controls need to be visible
+    '/* blnDeleteControls - Stores whether the delete controls need to  */
+    '/*                     be visible                                  */
+    '/*******************************************************************/
+    '/* SAMPLE INVOCATION:												*/
+    '/*																	*/
+    '/*	SetControlVisibility(True, False) 								*/
+    '/*******************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+    '/*																	*/
+    '/* (None)                                                          */
+    '/*******************************************************************/
+    '/* MODIFICATION HISTORY:											*/
+    '/*																	*/
+    '/* WHO   WHEN     WHAT											    */
+    '/*  ---   ----     ------------------------------------------------*/
+    '/*  BRH        02/22/21   Initial creation of the code-------------*/
+    '/*******************************************************************/
+    Private Sub SetControlVisibility(blnAddControls As Boolean, blnDeleteControls As Boolean)
+        pnlAdd.Visible = blnAddControls
+        pnlDelete.Visible = blnDeleteControls
+    End Sub
+
+
+    '/*******************************************************************/
+    '/*         SUBROUTINE NAME:     txtRoom_KeyPress                  	*/
+    '/*******************************************************************/
+    '/*                   WRITTEN BY:  	Breanna Howey					*/
+    '/*					DATE CREATED: 	   02/22/21						*/
+    '/*******************************************************************/
+    '/*  SUBROUTINE PURPOSE:											*/
+    '/*	The purpose of this subroutine is to only allow the user to enter*/
+    '/* specific characters. If the user tries to enter invalid characters,
+    '/* the textbox won't show the characters.                          */
+    '/*******************************************************************/
+    '/*  CALLS:															*/
+    '/*   DataVaildationMethods.KeyPressCheck   						*/
+    '/*******************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):							*/
+    '/*																	*/
+    '/* sender - Holds the object the program is sending to the routine */
+    '/* e   - Stores what key was pressed                               */
+    '/*******************************************************************/
+    '/* SAMPLE INVOCATION:												*/
+    '/*																	*/
+    '/*	txtRoom_KeyPress                								*/
+    '/*******************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+    '/*																	*/
+    '/* (None)                                                          */
+    '/*******************************************************************/
+    '/* MODIFICATION HISTORY:											*/
+    '/*																	*/
+    '/* WHO   WHEN     WHAT											    */
+    '/*  ---   ----     ------------------------------------------------*/
+    '/*  BRH        02/22/21   Initial creation of the code-------------*/
+    '/*******************************************************************/
+    Private Sub txtRoom_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtRoom.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, strAllowedNameCharacters)
+    End Sub
+
+    '/*******************************************************************/
+    '/*         SUBROUTINE NAME:     txtBed_KeyPress                  	*/
+    '/*******************************************************************/
+    '/*                   WRITTEN BY:  	Breanna Howey					*/
+    '/*					DATE CREATED: 	   02/22/21						*/
+    '/*******************************************************************/
+    '/*  SUBROUTINE PURPOSE:											*/
+    '/*	The purpose of this subroutine is to only allow the user to enter*/
+    '/* specific characters. If the user tries to enter invalid characters,
+    '/* the textbox won't show the characters.                          */
+    '/*******************************************************************/
+    '/*  CALLS:															*/
+    '/*   DataVaildationMethods.KeyPressCheck   						*/
+    '/*******************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):							*/
+    '/*																	*/
+    '/* sender - Holds the object the program is sending to the routine */
+    '/* e   - Stores what key was pressed                               */
+    '/*******************************************************************/
+    '/* SAMPLE INVOCATION:												*/
+    '/*																	*/
+    '/*	txtBed_KeyPress                								*/
+    '/*******************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+    '/*																	*/
+    '/* (None)                                                          */
+    '/*******************************************************************/
+    '/* MODIFICATION HISTORY:											*/
+    '/*																	*/
+    '/* WHO   WHEN     WHAT											    */
+    '/*  ---   ----     ------------------------------------------------*/
+    '/*  BRH        02/22/21   Initial creation of the code-------------*/
+    '/*******************************************************************/
+    Private Sub txtBed_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtBed.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, strAllowedNameCharacters)
     End Sub
 End Class

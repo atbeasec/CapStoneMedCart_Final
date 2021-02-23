@@ -147,9 +147,6 @@ Module ConfigureRoomsBeds
         Else
             MessageBox.Show("Please make sure a room and a bed are entered before adding")
         End If
-
-        'Reload the listboxes to show the new room and bed in the database
-        frmConfigureRooms.ShowRoomsBeds()
     End Sub
 
     '/*******************************************************************/
