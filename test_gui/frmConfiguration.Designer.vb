@@ -22,6 +22,7 @@ Partial Class frmConfiguration
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmConfiguration))
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.txtUsername = New System.Windows.Forms.TextBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -57,6 +58,8 @@ Partial Class frmConfiguration
         Me.btnSaveChanges = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.txtID = New System.Windows.Forms.TextBox()
+        Me.btnPasswordEye = New System.Windows.Forms.Button()
+        Me.btnConfirmEye = New System.Windows.Forms.Button()
         Me.Panel5.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -90,6 +93,7 @@ Partial Class frmConfiguration
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel4.Controls.Add(Me.btnConfirmEye)
         Me.Panel4.Controls.Add(Me.txtConfirmPassword)
         Me.Panel4.Location = New System.Drawing.Point(19, 466)
         Me.Panel4.Name = "Panel4"
@@ -112,6 +116,7 @@ Partial Class frmConfiguration
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel3.Controls.Add(Me.btnPasswordEye)
         Me.Panel3.Controls.Add(Me.txtPassword)
         Me.Panel3.Location = New System.Drawing.Point(19, 383)
         Me.Panel3.Name = "Panel3"
@@ -459,6 +464,34 @@ Partial Class frmConfiguration
         Me.txtID.TabIndex = 184
         Me.txtID.Visible = False
         '
+        'btnPasswordEye
+        '
+        Me.btnPasswordEye.BackColor = System.Drawing.Color.White
+        Me.btnPasswordEye.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnPasswordEye.FlatAppearance.BorderSize = 0
+        Me.btnPasswordEye.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPasswordEye.ForeColor = System.Drawing.Color.Transparent
+        Me.btnPasswordEye.Image = CType(resources.GetObject("btnPasswordEye.Image"), System.Drawing.Image)
+        Me.btnPasswordEye.Location = New System.Drawing.Point(194, 1)
+        Me.btnPasswordEye.Name = "btnPasswordEye"
+        Me.btnPasswordEye.Size = New System.Drawing.Size(30, 26)
+        Me.btnPasswordEye.TabIndex = 39
+        Me.btnPasswordEye.UseVisualStyleBackColor = False
+        '
+        'btnConfirmEye
+        '
+        Me.btnConfirmEye.BackColor = System.Drawing.Color.White
+        Me.btnConfirmEye.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnConfirmEye.FlatAppearance.BorderSize = 0
+        Me.btnConfirmEye.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnConfirmEye.ForeColor = System.Drawing.Color.Transparent
+        Me.btnConfirmEye.Image = CType(resources.GetObject("btnConfirmEye.Image"), System.Drawing.Image)
+        Me.btnConfirmEye.Location = New System.Drawing.Point(193, 1)
+        Me.btnConfirmEye.Name = "btnConfirmEye"
+        Me.btnConfirmEye.Size = New System.Drawing.Size(30, 26)
+        Me.btnConfirmEye.TabIndex = 39
+        Me.btnConfirmEye.UseVisualStyleBackColor = False
+        '
         'frmConfiguration
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -544,4 +577,6 @@ Partial Class frmConfiguration
     Friend WithEvents btnCancel As Button
     Friend WithEvents txtID As TextBox
     Friend WithEvents lblStatus As Label
+    Friend WithEvents btnConfirmEye As Button
+    Friend WithEvents btnPasswordEye As Button
 End Class

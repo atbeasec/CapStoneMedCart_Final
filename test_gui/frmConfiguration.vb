@@ -421,10 +421,21 @@ Public Class frmConfiguration
 
 
 
+            strStatement = "SELECT User_ID FROM User ORDER BY User_ID DESC LIMIT 1;"
+            Dim strNewID As String = ExecuteScalarQuery(strStatement)
+            Dim strFullName As String = strFirstName & " " & strLastName
 
+            Dim strRole As String
+            'check what Role the user will have
+            If rbtnAdministrator.Checked = True Then
+                strRole = "Admin"
+            ElseIf rbtnSupervisor.Checked = True Then
+                strRole = "Supervisor"
+            Else strRole = "Nurse"
+            End If
 
             ' do query to return the record that was just created and return the result into the create panel method below
-            ' CreatePanel(flpUserInfo, , , , , )
+            CreatePanel(flpUserInfo, strNewID, strFullName, txtUsername.Text, strRole, "Yes")
 
 
 
@@ -518,65 +529,12 @@ Public Class frmConfiguration
         Return bolSecure
     End Function
 
-    Private Sub txtFirstName_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFirstName.KeyPress
-
-        If Not (Asc(e.KeyChar) = 8) Then
-            'string of allowed characters
-            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*()/.,<>=+"
-            'converts letter to lowercase to compare to allowedChars string to check if it is allowed in the text box
-            If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
-                e.KeyChar = ChrW(0)
-                e.Handled = True
-            End If
-        End If
+    Private Sub txtFirst_Last_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFirstName.KeyPress, txtLastName.KeyPress
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*()/.,<>=+")
     End Sub
 
-    Private Sub txtLastName_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtLastName.KeyPress
-        If Not (Asc(e.KeyChar) = 8) Then
-            'string of allowed characters
-            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*()/.,<>=+"
-            'converts letter to lowercase to compare to allowedChars string to check if it is allowed in the text box
-            If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
-                e.KeyChar = ChrW(0)
-                e.Handled = True
-            End If
-        End If
-    End Sub
-
-    Private Sub txtUserID_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtUsername.KeyPress
-        If Not (Asc(e.KeyChar) = 8) Then
-            'string of allowed characters
-            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()/.,<>=+"
-            'converts letter to lowercase to compare to allowedChars string to check if it is allowed in the text box
-            If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
-                e.KeyChar = ChrW(0)
-                e.Handled = True
-            End If
-        End If
-    End Sub
-
-    Private Sub txtBarcode_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBarcode.KeyPress
-        If Not (Asc(e.KeyChar) = 8) Then
-            'string of allowed characters
-            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()/.,<>=+"
-            'converts letter to lowercase to compare to allowedChars string to check if it is allowed in the text box
-            If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
-                e.KeyChar = ChrW(0)
-                e.Handled = True
-            End If
-        End If
-    End Sub
-
-    Private Sub txtPassword_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress, txtConfirmPassword.KeyPress
-        If Not (Asc(e.KeyChar) = 8) Then
-            'String of allowed characters
-            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()/.,<>=+"
-            'converts letter to lowercase to compare to allowedChars string to check if it Is allowed in the text box
-            If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
-                e.KeyChar = ChrW(0)
-                e.Handled = True
-            End If
-        End If
+    Private Sub txtPasswordKeypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress, txtConfirmPassword.KeyPress, txtBarcode.KeyPress, txtUsername.KeyPress
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()/.,<>=+")
     End Sub
 
     Private Sub btnSaveChanges_Click(sender As Object, e As EventArgs) Handles btnSaveChanges.Click
@@ -659,5 +617,28 @@ Public Class frmConfiguration
         btnSaveUser.Visible = True
     End Sub
 
+    Private Sub btnPasswordEye_Click(sender As Object, e As EventArgs) Handles btnPasswordEye.Click
+        'If checked then password is visible as plain text
+        If txtPassword.UseSystemPasswordChar = False Then
+
+            txtPassword.UseSystemPasswordChar = True
+            'If unchecked then password is visible as *
+        Else
+            txtPassword.UseSystemPasswordChar = False
+
+        End If
+    End Sub
+
+    Private Sub btnConfirmEye_Click(sender As Object, e As EventArgs) Handles btnConfirmEye.Click
+        'If checked then password is visible as plain text
+        If txtConfirmPassword.UseSystemPasswordChar = False Then
+
+            txtConfirmPassword.UseSystemPasswordChar = True
+            'If unchecked then password is visible as *
+        Else
+            txtConfirmPassword.UseSystemPasswordChar = False
+
+        End If
+    End Sub
 
 End Class
