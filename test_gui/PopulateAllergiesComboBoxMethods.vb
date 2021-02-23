@@ -41,14 +41,14 @@ Module PopulateAllergiesComboBoxMethods
 
 
     '/*********************************************************************/
-    '/*                   SUBPROGRAM NAME: populatePatientNameComboBo      */         
+    '/*                   SUBPROGRAM NAME: populateAllergiesComboBox      */         
     '/*********************************************************************/
-    '/*                   WRITTEN BY:  Nathan Premo   		                */   
-    '/*		         DATE CREATED: 	2/7/2021                        	   */                             
+    '/*                   WRITTEN BY:  Adam Kott   		                */   
+    '/*		         DATE CREATED: 	2/17/2021                        	   */                             
     '/*********************************************************************/
     '/*  SUBPROGRAM PURPOSE:								                 */             
-    '/*	 This is going to populate a combo box with a patients first and last*/                     
-    '/*  name.                                                             */
+    '/*	 This is going to populate a combo box with Medication               */                     
+    '/*                                                              */
     '/*                                                                   */
     '/*********************************************************************/
     '/*  CALLED BY:   	      						         */           
@@ -58,8 +58,8 @@ Module PopulateAllergiesComboBoxMethods
     '/*             (NONE)								   */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					   */         
-    '/*	 cboPatient - this is the combo box we are going to be populating */
-    '/*  dsPatients - this is the data set of the patients we have in the */
+    '/*	 cmbAllergies - this is the combo box we are going to be populating */
+    '/*  dsAllergies - this is the data set of the medication we have in the */
     '/*     database.                                                     */
     '/*                                                                     
     '/*********************************************************************/
@@ -67,7 +67,7 @@ Module PopulateAllergiesComboBoxMethods
     '/*            (NOTHING)								   */             
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								   */             
-    '/*	miscMethods.populatePatientNameComboBox(cboPatientName,dsPatients) */                     
+    '/*	miscMethods.populateAllergiesComboBox(cmbAllergies,dsAllergies) */                     
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
@@ -101,6 +101,49 @@ Module PopulateAllergiesComboBoxMethods
             .DataSource = dcAllergies
         End With
     End Sub
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: populateMedicationComboBox      */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Adam Kott   		                */   
+    '/*		         DATE CREATED: 	2/17/2021                        	   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								                 */             
+    '/*	 This is going to populate a combo box with Medication               */                     
+    '/*                                                              */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 cmbMedication - this is the combo box we are going to be populating */
+    '/*  dsMEdication - this is the data set of the medication we have in the */
+    '/*     database.                                                     */
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*	miscMethods.populateMedicationComboBox(cmbMedication,dsMedication) */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	 strbTesting - this is a string builder that is used to make the  */                     
+    '/*     make the string that will be added to the combo box. It will be*/
+    '/*     The first and laste name.                                      */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
     Sub populateMedicationComboBox(cmbMedication As ComboBox, dsAllergies As DataSet)
         Dim strbTesting As New StringBuilder
         Dim dcAllergies As New AutoCompleteStringCollection
