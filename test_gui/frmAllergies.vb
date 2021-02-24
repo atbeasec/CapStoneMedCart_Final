@@ -109,7 +109,7 @@
         With pnl
             .BackColor = Color.Gainsboro
             .Size = New Size(flpAllergies.Width - 7, 47)
-            .Name = "pnlIndividualPatientRecordPadding" + getPanelCount(flpPannel).ToString
+            .Name = "pnlAllergiesPadding" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Padding = New Padding(0, 0, 0, 3)
             ' .Dock = System.Windows.Forms.DockStyle.Top
@@ -119,7 +119,7 @@
 
             .BackColor = Color.White
             .Size = New Size(flpAllergies.Width - 7, 45)
-            .Name = "pnlIndividualPatientRecord" + getPanelCount(flpPannel).ToString
+            .Name = "pnlAllergiestRecord" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Dock = System.Windows.Forms.DockStyle.Top
         End With
