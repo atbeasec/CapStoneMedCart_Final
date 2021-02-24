@@ -541,7 +541,6 @@
             Else
                 ExecuteScalarQuery("UPDATE PatientAllergy SET Active_Flag='1' WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTUID & ";")
             End If
-            ' call SQL method to remove the allergy that is currently assigned to the patient
 
             Debug.Print("remove allergy assigned to patient")
 
