@@ -1,5 +1,7 @@
 ﻿Public Class frmAllergies
     Private Sub frmAllergies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        btnAllergyCancel.Visible = False
+        btnAllergySave.Visible = False
         'cmbAllergiesLocked()
 
         Dim dsAllergies = CreateDatabase.ExecuteSelectQuery("Select * From Allergy ORDER BY Allergy_Type, Allergy_Name ;")
@@ -262,5 +264,19 @@
             cmbAllergiesType.Enabled = True
             cmbMedicationName.SelectedIndex = -1
         End If
+    End Sub
+
+    Private Sub btnAllergySave_Click(sender As Object, e As EventArgs) Handles btnAllergySave.Click
+        DisableEditButtons()
+    End Sub
+
+    Private Sub DisableEditButtons()
+        btnAddAllergy.Visible = True
+        btnAllergyCancel.Visible = False
+        btnAllergySave.Visible = False
+    End Sub
+
+    Private Sub btnAllergyCancel_Click(sender As Object, e As EventArgs) Handles btnAllergyCancel.Click
+        btnAddAllergy.Visible = True
     End Sub
 End Class
