@@ -39,7 +39,7 @@
 
     End Sub
 
-    Private Shared Function GetPatientTuid() As Integer
+    Public Function GetPatientTuid() As Integer
         Dim intPatientInformationMRN = CInt(frmPatientInfo.txtMRN.Text)
         ' on form load we need to select all allergies from the database and show them here:
         Dim intPatientTuid As Integer = CInt(CreateDatabase.ExecuteScalarQuery("select patient.Patient_ID From Patient " &
@@ -145,7 +145,7 @@
         Dim lblID4 As New Label
 
         ' anywhere we have quotes except for the label names, we can call our Database and get method
-        CreateIDLabel(pnlMainPanel, lblID, "lblName", lblAllergyName.Location.X, 20, strAllergyName, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID, "lblAllergyName", lblAllergyName.Location.X, 20, strAllergyName, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID2, "lblSeverity", lblSeverity.Location.X, 20, strSeverity, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID3, "lblAllergyType", lblAllergyType.Location.X, 20, strAllergyType, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID4, "lblMedication", lblMedication.Location.X, 20, strMedicationName, getPanelCount(flpPannel))
@@ -159,34 +159,42 @@
     Private Sub btnAddAllergy_Click(sender As Object, e As EventArgs) Handles btnAddAllergy.Click
         Dim strAllergyName = " "
         Dim strSeverity = " "
+        Dim intPatientTuid = GetPatientTuid()
         ' at some point error handling will be added here and if all data is valid 2 things will occur:
         '   1. first we will take the items from all the textfields and insert it into the database.
         '   2. We will just take those same fields and call the create panel method to throw the items on the UI
         '   to save another database call and complexity of removing all the panels from the UI and repopulating them
-
         If cmbAllergies.SelectedIndex = -1 Then
             strAllergyName = cmbAllergies.Text
         Else
             strAllergyName = cmbAllergies.Text
         End If
-        Dim intMedicationTUID = "NUll" 'for now but medication tuid will need to be looked up
-        Dim intPatientTuid = GetPatientTuid()
-
-        If cmbAllergies.FindStringExact(cmbAllergies.Text) = -1 Then
-            CreateDatabase.ExecuteInsertQuery("INSERT INTO Allergy(Allergy_Name,Medication_TUID,Allergy_Type) VALUES('" & strAllergyName & "'," & intMedicationTUID & ",'" & cmbAllergiesType.Text & "');")
-        End If
-        ' insert into database statement/method goes here
-        CreateDatabase.ExecuteInsertQuery("INSERT INTO PatientAllergy (Patient_TUID, Allergy_Name, Allergy_Severity, Active_Flag) VALUES (" & intPatientTuid & ",'" & strAllergyName & "','" & cmbAllergiesType.Text & "',1);")
-        ' populate the screen from a manually added allergy.
-        'probably going to need a select query to get the medication name from the TUID
         If cmbSeverity.SelectedIndex = -1 Then
             strSeverity = "N/A"
         Else
             strSeverity = cmbSeverity.SelectedItem.ToString
         End If
+        Dim intMedicationTUID = "NUll" 'for now but medication tuid will need to be looked up
+        Dim strSqlStatment As String = ("Select Active_Flag FROM PatientAllergy WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID= " & intPatientTuid & ";")
+        Dim value = ExecuteScalarQuery(strSqlStatment)
+        If value = 0 Then
+            ExecuteScalarQuery("UPDATE PatientAllergy SET Active_Flag='1' WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTuid & ";")
+
+        ElseIf value = 1 Then
+
+            'do nothing for now but combo box should not contain the values
+        Else
+            If cmbAllergies.FindStringExact(cmbAllergies.Text) = -1 Then
+                CreateDatabase.ExecuteInsertQuery("INSERT INTO Allergy(Allergy_Name,Medication_TUID,Allergy_Type) VALUES('" & strAllergyName & "'," & intMedicationTUID & ",'" & cmbAllergiesType.Text & "');")
+            End If
+            ' insert into database statement/method goes here
+            CreateDatabase.ExecuteInsertQuery("INSERT INTO PatientAllergy (Patient_TUID, Allergy_Name, Allergy_Severity, Active_Flag) VALUES (" & intPatientTuid & ",'" & strAllergyName & "','" & cmbAllergiesType.Text & "',1);")
+            ' populate the screen from a manually added allergy.
+            'probably going to need a select query to get the medication name from the TUID
+            Debug.WriteLine("Value must already be in the table")
+        End If
 
         CreateAllergiesPanels(flpAllergies, strAllergyName, cmbMedicationName.Text, cmbAllergiesType.Text, strSeverity)
-
     End Sub
 
     Private Sub cmbAllergies_LostFocus(sender As Object, e As EventArgs) Handles cmbAllergies.SelectedValueChanged

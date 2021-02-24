@@ -1894,7 +1894,7 @@ Module CreateDatabase
                             " the following error occured: " & vbCrLf & vbCrLf & ex.ToString)
 
         End Try
-        DBConn.Close()
-        Return strReturnedScalar
+		DBConn.Close()
+		Return strReturnedScalar
     End Function
 End Module
