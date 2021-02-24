@@ -48,7 +48,8 @@
     '/*  lot of reduntant code that could be reused for checking keypresses*/
     '/*                                                                   */
     '/*********************************************************************/
-    '/*  CALLED BY:   	      						         */           
+    '/*  CALLED BY: frmConfiguration.txtFirst_Last_Keypress  	       */           
+    '/*             frmConfiguration.txtPasswordKeypress                 */          
     '/*                                         				   */         
     '/*********************************************************************/
     '/*  CALLS:										   */                 
@@ -65,7 +66,7 @@
     '/*            (NOTHING)								   */             
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								   */             
-    '/*											   */                     
+    '/*		(e, "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()/.,<>=+")    */                     
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
@@ -76,7 +77,7 @@
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
+    '/*  NP   2/18/21  Creation                                                                    
     '/*********************************************************************/
 
 
