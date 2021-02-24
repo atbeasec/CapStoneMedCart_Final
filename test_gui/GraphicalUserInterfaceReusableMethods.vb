@@ -643,6 +643,9 @@
                 .cmbAllergiesType.Text = selectedAllergyType
                 .cmbSeverity.Text = selectedAllergySeverity
                 .cmbMedicationName.Text = selectedMedication
+                .cmbAllergies.Enabled = False
+                .cmbAllergiesType.Enabled = False
+                .cmbMedicationName.Enabled = False
                 .btnAllergySave.Visible = True
                 .btnAllergyCancel.Visible = True
                 .btnAddAllergy.Visible = False

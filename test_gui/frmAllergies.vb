@@ -267,6 +267,11 @@
     End Sub
 
     Private Sub btnAllergySave_Click(sender As Object, e As EventArgs) Handles btnAllergySave.Click
+        Dim strAllergyName = cmbAllergies.Text
+        Dim intPatientTuid = GetPatientTuid()
+        Dim strNewSeverity = cmbSeverity.Text
+        ExecuteScalarQuery("UPDATE PatientAllergy SET Allergy_Severity='" & strNewSeverity & "' WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTuid & ";")
+
         DisableEditButtons()
     End Sub
 
@@ -274,9 +279,12 @@
         btnAddAllergy.Visible = True
         btnAllergyCancel.Visible = False
         btnAllergySave.Visible = False
+        cmbAllergies.Enabled = True
+        cmbAllergiesType.Enabled = True
+        cmbMedicationName.Enabled = True
     End Sub
 
     Private Sub btnAllergyCancel_Click(sender As Object, e As EventArgs) Handles btnAllergyCancel.Click
-        btnAddAllergy.Visible = True
+        DisableEditButtons()
     End Sub
 End Class
