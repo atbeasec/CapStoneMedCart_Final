@@ -541,7 +541,8 @@
             Else
                 ExecuteScalarQuery("UPDATE PatientAllergy SET Active_Flag='1' WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTUID & ";")
             End If
-
+            frmPatientInfo.lstBoxAllergies.Items.Clear()
+            GetAllergies(CInt(frmPatientInfo.txtMRN.Text))
             Debug.Print("remove allergy assigned to patient")
 
         End If
