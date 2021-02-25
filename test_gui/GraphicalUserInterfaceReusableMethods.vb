@@ -541,7 +541,8 @@
             Else
                 ExecuteScalarQuery("UPDATE PatientAllergy SET Active_Flag='1' WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTUID & ";")
             End If
-
+            frmPatientInfo.lstBoxAllergies.Items.Clear()
+            GetAllergies(CInt(frmPatientInfo.txtMRN.Text))
             Debug.Print("remove allergy assigned to patient")
 
         End If
@@ -632,11 +633,29 @@
             ' call SQL method to set edit functionality
             '  Debug.Print("removing this inventory piece")
 
-        ElseIf getOpenedForm().GetType() Is frmAllergies.GetType() Then
+        ElseIf frmAllergies.btnAddAllergy.Visible = True Then
+            Dim selectedAllergyName = GetSelectedInformation(sender.parent, "lblAllergyName")
+            Dim selectedAllergySeverity = GetSelectedInformation(sender.parent, "lblSeverity")
+            Dim selectedAllergyType = GetSelectedInformation(sender.parent, "lblAllergyType")
+            Dim selectedMedication = GetSelectedInformation(sender.parent, "lblMedication")
+
+            With frmAllergies
+                .cmbAllergies.Text = selectedAllergyName
+                .cmbAllergiesType.Text = selectedAllergyType
+                .cmbSeverity.Text = selectedAllergySeverity
+                .cmbMedicationName.Text = selectedMedication
+                .cmbAllergies.Enabled = False
+                .cmbAllergiesType.Enabled = False
+                .cmbMedicationName.Enabled = False
+                .btnAllergySave.Visible = True
+                .btnAllergyCancel.Visible = True
+                .btnAddAllergy.Visible = False
+            End With
+
 
             ' call SQL method to set edit functionality
             ' Debug.Print("remove allergy assigned to patient")
-
+            Debug.WriteLine("")
         End If
 
     End Sub

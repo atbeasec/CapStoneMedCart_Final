@@ -1,5 +1,7 @@
 ﻿Public Class frmAllergies
     Private Sub frmAllergies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        btnAllergyCancel.Visible = False
+        btnAllergySave.Visible = False
         'cmbAllergiesLocked()
 
         Dim dsAllergies = CreateDatabase.ExecuteSelectQuery("Select * From Allergy ORDER BY Allergy_Type, Allergy_Name ;")
@@ -160,10 +162,14 @@
         Dim strAllergyName = " "
         Dim strSeverity = " "
         Dim intPatientTuid = GetPatientTuid()
+        Dim intPatientInformationMRN = CInt(frmPatientInfo.txtMRN.Text)
         ' at some point error handling will be added here and if all data is valid 2 things will occur:
         '   1. first we will take the items from all the textfields and insert it into the database.
         '   2. We will just take those same fields and call the create panel method to throw the items on the UI
         '   to save another database call and complexity of removing all the panels from the UI and repopulating them
+
+
+
         If cmbAllergies.SelectedIndex = -1 Then
             strAllergyName = cmbAllergies.Text
         Else
@@ -177,6 +183,9 @@
         Dim intMedicationTUID = "NUll" 'for now but medication tuid will need to be looked up
         Dim strSqlStatment As String = ("Select Active_Flag FROM PatientAllergy WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID= " & intPatientTuid & ";")
         Dim value = ExecuteScalarQuery(strSqlStatment)
+        If value = Nothing Then
+            value = 2
+        End If
         If value = 0 Then
             ExecuteScalarQuery("UPDATE PatientAllergy SET Active_Flag='1' WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTuid & ";")
 
@@ -192,6 +201,9 @@
             ' populate the screen from a manually added allergy.
             'probably going to need a select query to get the medication name from the TUID
             Debug.WriteLine("Value must already be in the table")
+            frmPatientInfo.lstBoxAllergies.Items.Clear()
+
+            GetAllergies(intPatientInformationMRN)
         End If
 
         CreateAllergiesPanels(flpAllergies, strAllergyName, cmbMedicationName.Text, cmbAllergiesType.Text, strSeverity)
@@ -262,5 +274,27 @@
             cmbAllergiesType.Enabled = True
             cmbMedicationName.SelectedIndex = -1
         End If
+    End Sub
+
+    Private Sub btnAllergySave_Click(sender As Object, e As EventArgs) Handles btnAllergySave.Click
+        Dim strAllergyName = cmbAllergies.Text
+        Dim intPatientTuid = GetPatientTuid()
+        Dim strNewSeverity = cmbSeverity.Text
+        ExecuteScalarQuery("UPDATE PatientAllergy SET Allergy_Severity='" & strNewSeverity & "' WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTuid & ";")
+
+        DisableEditButtons()
+    End Sub
+
+    Private Sub DisableEditButtons()
+        btnAddAllergy.Visible = True
+        btnAllergyCancel.Visible = False
+        btnAllergySave.Visible = False
+        cmbAllergies.Enabled = True
+        cmbAllergiesType.Enabled = True
+        cmbMedicationName.Enabled = True
+    End Sub
+
+    Private Sub btnAllergyCancel_Click(sender As Object, e As EventArgs) Handles btnAllergyCancel.Click
+        DisableEditButtons()
     End Sub
 End Class
