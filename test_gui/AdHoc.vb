@@ -97,6 +97,7 @@ Module AdHoc
         Dim intMedRXCUI As Integer
         Dim intMedicationDrawerID As Integer
         Dim StrSelectedMedication As String
+        Dim intMedicationCount As Integer
 
         StrSelectedMedication = frmAdHockDispense.cmbMedications.SelectedItem
 
