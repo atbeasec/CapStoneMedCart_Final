@@ -162,6 +162,7 @@
         Dim strAllergyName = " "
         Dim strSeverity = " "
         Dim intPatientTuid = GetPatientTuid()
+        Dim intPatientInformationMRN = CInt(frmPatientInfo.txtMRN.Text)
         ' at some point error handling will be added here and if all data is valid 2 things will occur:
         '   1. first we will take the items from all the textfields and insert it into the database.
         '   2. We will just take those same fields and call the create panel method to throw the items on the UI
@@ -200,6 +201,8 @@
             ' populate the screen from a manually added allergy.
             'probably going to need a select query to get the medication name from the TUID
             Debug.WriteLine("Value must already be in the table")
+            frmPatientInfo.lstBoxAllergies.Items.Clear()
+            GetAllergies(intPatientInformationMRN)
         End If
 
         CreateAllergiesPanels(flpAllergies, strAllergyName, cmbMedicationName.Text, cmbAllergiesType.Text, strSeverity)
