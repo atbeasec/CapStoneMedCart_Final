@@ -173,8 +173,48 @@ Module Interactions
     End Function
 
 
-
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:GetPatientInformation           */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   02/09/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: The purpose of this subroutine is designed to handle
+    '/* the population of the patient information in the patient inforamtion
+    '/* screen.
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/* ExecuteSelectQuery()
+    '/* IsDBNull()
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   
+    '/*											   
+    '/*  intPatientMRN			   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*											                           
+    '/*   GetPatientInformation("233987")
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*  Dim strbSQL As StringBuilder = New StringBuilder
+    '/*  Dim intMEDID As Integer
+    '/*  Dim intPatientID As Integer
+    '/*  Dim dsPatientInteractions As DataSet
+    '/*  Dim strbInteractionsString As StringBuilder = New StringBuilder
+    '/*  Dim strDrugoneName As String
+    '/*  Dim strDrugtwoName As String
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  02/25/21  Initial creation of the code      */
+    '/*********************************************************************/
     Public Sub GetInteractionsDispense(ByRef intMedicationRXCUI As Integer, ByRef IntPatientMRN As Integer)
+
         Dim strbSQL As StringBuilder = New StringBuilder
         Dim intMEDID As Integer
         Dim intPatientID As Integer
@@ -213,6 +253,7 @@ Module Interactions
             strbInteractionsString.AppendLine(strDrugoneName & " interacts with " & strDrugtwoName)
             strbInteractionsString.AppendLine("Severity: " & dr(2))
             strbInteractionsString.AppendLine("Descriptions: " & dr(3))
+            strbInteractionsString.AppendLine("")
         Next
 
         If (strbInteractionsString.Length > 0) Then
