@@ -184,28 +184,32 @@ Module Interactions
     '/* screen.
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
-    '/*  (None)								           					  
+    '/*  Adhoc.InsertAdHoc()								           					  
     '/*********************************************************************/
     '/*  CALLS:														    	
-    '/* ExecuteSelectQuery()
-    '/* IsDBNull()
+    '/*  strbSQL.Append()
+    '/* strbSQL.Clear()
+    '/* CreateDatabase.ExecuteScalarQuery
+    '/* CreateDatabase.ExecuteSelectQuery
+    '/* MessageBox.Show
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					   
     '/*											   
-    '/*  intPatientMRN			   
+    '/* intMedicationRXCUI		
+    '/* IntPatientMRN
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                   
     '/*											                           
-    '/*   GetPatientInformation("233987")
+    '/*   GetInteractionsDispense("12345","2255")
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically):	
-    '/*  Dim strbSQL As StringBuilder = New StringBuilder
-    '/*  Dim intMEDID As Integer
-    '/*  Dim intPatientID As Integer
-    '/*  Dim dsPatientInteractions As DataSet
-    '/*  Dim strbInteractionsString As StringBuilder = New StringBuilder
-    '/*  Dim strDrugoneName As String
-    '/*  Dim strDrugtwoName As String
+    '/* dsPatientInteractions
+    '/* intMEDID
+    '/* intPatientID
+    '/* strDrugoneName
+    '/* strDrugtwoName
+    '/* strbInteractionsString
+    '/* strbSQL
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						                      */
     '/*											                          */
