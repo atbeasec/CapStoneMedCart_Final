@@ -158,15 +158,31 @@ Module Interactions
     '/*                                                                   */
     '/*  Dillen  02/18/21  Function that check Interations                */
     '/*********************************************************************/
-    Function getInteractionsByName(rxcuiNum As String) As String
+    Function getInteractionsByName(rxcuiNum As String, propertyNames As List(Of String)) As List(Of (PropertyName As String, PropertyValue As String))
         'URL for finding interactions 
         Dim url As String = $"https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui={rxcuiNum}"
         'location in json of properties
-        Dim trawlPointer As String = "$.interactionTypeGroup[0].interactionType[0].interactionPair"
+        Dim trawlPointer As String = "$.interactionTypeGroup[0].interactionType[0].interactionPair[0].interactionConcept"
         'inputJSON
         Dim inputJSON As JToken = rxNorm.GetJSON(url)
         'set Jtoken into array to pull data from json
-        Dim trawledResult As JToken = inputJSON.SelectToken(trawlPointer)
-        Return trawledResult
+        'Dim trawledResult As JToken = inputJSON.SelectToken(trawlPointer)
+        Dim JsonJArray As JArray = inputJSON.SelectToken(trawlPointer)
+        'Stores our List of properties selected 
+        Dim myReturnList As New List(Of (PropertyName As String, PropertyValue As String))
+
+        For Each propertyName As String In propertyNames
+            For Each item In JsonJArray
+                For Each subItem As JProperty In item.Children
+                    If subItem.Value.ToString.ToUpper = propertyName.ToUpper Then
+                        myReturnList.Add((subItem.Value, DirectCast(subItem.Next, JProperty).Value))
+                    End If
+                Next
+            Next
+        Next
+
+        'For Each
+        Debug.WriteLine(myReturnList.ToString)
+        Return myReturnList
     End Function
 End Module
