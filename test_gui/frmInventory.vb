@@ -164,12 +164,88 @@ Public Class frmInventory
     End Sub
 
     Private Sub cmbMedicationName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMedicationName.SelectedIndexChanged
-        Dim strTrimmedString As String
+        Dim strTrimmedString() As String
+        Dim lstProperties As List(Of String) = New List(Of String)
+        Dim lstResults As List(Of (strPropertyName As String, strPropertyValue As String)) = New List(Of (String, String))
         ' take the split of the combobox selected item
-        strTrimmedString = (cmbMedicationName.Text.Split(","))(0)
-        ' then trim off everything that's not a number
-        strTrimmedString = Regex.Replace(strTrimmedString, "(", "")
-        strTrimmedString = Regex.Replace(strTrimmedString, ")", "")
-        ' and pass it to the function to find better names
+        strTrimmedString = (cmbMedicationName.Text.Split(","))
+        ' then trim off everything that's not necessary
+        For Each strItem In strTrimmedString
+            strItem = Regex.Replace(strItem, "(", "").Trim
+            strItem = Regex.Replace(strItem, ")", "").Trim
+        Next
+        ' and pass it to the function to get the atrributes
+        lstProperties.Add("AVAILABLE_STRENGTH")
+        lstProperties.Add("STRENGTH")
+        lstProperties.Add("TYPE")
+        lstProperties.Add("SCHEDULE")
+        lstResults = getRxcuiProperty(strTrimmedString(0), lstProperties)
+        ' add the original items to the lstResults
+        lstResults.Add(("RXCUI", strTrimmedString(0)))
+        lstResults.Add(("NAME", strTrimmedString(1)))
+        ' the populate the form and pass the results on 
+
     End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME: AddItemsToForm	              */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Eric LaVoie           		      */   
+    '/*		         DATE CREATED: 2/25/2021		                      */                             
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:								              */             
+    '/*	 This function will take the items returned by the API calls and  */                     
+    '/*  populate the form accoringly.                                    */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*											   */                     
+    '/*                                                                   */ 
+    '/*********************************************************************/
+    '/*  RETURNS:								                          */                   
+    '/*            (NOTHING)								              */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*											   */                     
+    '/*                                                                   */ 
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											                          */                     
+    '/*                                                                   */ 
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  Eric LaVoie 2/25/2021  Initial creation                          */
+    '/*                                                                   */                                                                   
+    '/*********************************************************************/
+
+    Sub AddItemsToForm(lstItems As List(Of (ParameterName As String, ParameterValue As String)))
+        ' turn off the search group box, turn on the drug input group box and turn on the save/cancel buttons
+        ' take the items for the list and add them to the appropriate boxes
+        ' add the rxcui
+        ' add the description
+        ' add the type
+        ' add the checkboxes for schedule
+        ' Case 1 - this will be a narcotic and controlled
+        ' Case 2 - this will be a narcotic and controlled
+        ' Case 2N - this will controlled and non-narcotic
+        ' Case 3 - this will be a narcotic and controlled
+        ' Case 3N - this will controlled and non-narcotic
+        ' Case 4 - this will controlled and non-narcotic
+        ' Case 5 - this will controlled and non-narcotic
+        ' Case 0 - this is not controlled nor is it a narcotic
+        ' Case Else - anything else treat as non-controlled and non-narcotic
+        ' add the strengths
+        ' use an if statement for if strength is not nothing
+        ' add if else available_strength is not nothing
+        ' add an else which means neither has a value
+
+    End Sub
+
 End Class
