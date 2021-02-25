@@ -174,14 +174,14 @@ Module Interactions
 
 
     '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:GetPatientInformation           */
+    '/*                   SUBROUTINE NAME:GetInteractionsDispense           */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
-    '/*		         DATE CREATED: 	   02/09/21							  */
+    '/*		         DATE CREATED: 	   02/25/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE: The purpose of this subroutine is designed to handle
-    '/* the population of the patient information in the patient inforamtion
-    '/* screen.
+    '/*  SUBROUTINE PURPOSE: The purpose of this subroutine is to display a 
+    '/* messagebox to the screen that contains a list of all interactions
+    '/* that the selected drug as with other meds the patient is prescribed
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
     '/*  Adhoc.InsertAdHoc()								           					  
