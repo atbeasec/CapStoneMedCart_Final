@@ -641,4 +641,45 @@ Public Class frmConfiguration
         End If
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        'need to figure out a way to clear panels
+
+
+        'pull  the dataset from the user table in sqlite
+        Dim dsUserInfo As DataSet = CreateDatabase.ExecuteSelectQuery("select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
+                                                   "User.Supervisor_Flag, User.Active_Flag From User WHERE Username LIKE '" & txtSearch.Text & "%' Or User_First_Name LIKE '" & txtSearch.Text & "%' Or User_Last_Name LIKE '" & txtSearch.Text & "%';")
+
+
+
+        For Each item As DataRow In dsUserInfo.Tables(0).Rows()
+            With dsUserInfo.Tables(0)
+                'grab first name and last name and merge into one string
+                Dim strFirst As String = item.Item(2)
+                Dim strLast As String = item.Item(3)
+                Dim strName = strFirst & " " & strLast
+                Dim strActive As String = ""
+
+                If (item.Item(6)) = 1 Then
+                    strActive = "Yes"
+                Else strActive = "No"
+                End If
+                'check what role the person has, if adminis 1 then it does not matter what Supervisor is 
+                'if admin is 0 then check supervisor. If both admin and supervidor are 0 then the 
+                'user is a nurse
+                Dim strRole As String
+                If (item.Item(4)) = 1 Then
+                    strRole = "Admin"
+                ElseIf (item.Item(5)) = 1 Then
+                    strRole = "Supervisor"
+                Else strRole = "Nurse"
+                End If
+
+                'populate data into panels
+                CreatePanel(flpUserInfo, item.Item(0), strName, item.Item(1),
+                           strRole, strActive)
+
+            End With
+        Next
+
+    End Sub
 End Class

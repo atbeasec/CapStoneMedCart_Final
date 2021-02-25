@@ -26,8 +26,10 @@ Partial Class frmConfiguration
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.txtUsername = New System.Windows.Forms.TextBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.btnConfirmEye = New System.Windows.Forms.Button()
         Me.txtConfirmPassword = New System.Windows.Forms.TextBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.btnPasswordEye = New System.Windows.Forms.Button()
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.btnSaveUser = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -58,8 +60,8 @@ Partial Class frmConfiguration
         Me.btnSaveChanges = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.txtID = New System.Windows.Forms.TextBox()
-        Me.btnPasswordEye = New System.Windows.Forms.Button()
-        Me.btnConfirmEye = New System.Windows.Forms.Button()
+        Me.txtSearch = New System.Windows.Forms.TextBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel5.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -101,6 +103,20 @@ Partial Class frmConfiguration
         Me.Panel4.Size = New System.Drawing.Size(224, 28)
         Me.Panel4.TabIndex = 6
         '
+        'btnConfirmEye
+        '
+        Me.btnConfirmEye.BackColor = System.Drawing.Color.White
+        Me.btnConfirmEye.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnConfirmEye.FlatAppearance.BorderSize = 0
+        Me.btnConfirmEye.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnConfirmEye.ForeColor = System.Drawing.Color.Transparent
+        Me.btnConfirmEye.Image = CType(resources.GetObject("btnConfirmEye.Image"), System.Drawing.Image)
+        Me.btnConfirmEye.Location = New System.Drawing.Point(193, 1)
+        Me.btnConfirmEye.Name = "btnConfirmEye"
+        Me.btnConfirmEye.Size = New System.Drawing.Size(30, 26)
+        Me.btnConfirmEye.TabIndex = 39
+        Me.btnConfirmEye.UseVisualStyleBackColor = False
+        '
         'txtConfirmPassword
         '
         Me.txtConfirmPassword.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -123,6 +139,20 @@ Partial Class frmConfiguration
         Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel3.Size = New System.Drawing.Size(225, 28)
         Me.Panel3.TabIndex = 5
+        '
+        'btnPasswordEye
+        '
+        Me.btnPasswordEye.BackColor = System.Drawing.Color.White
+        Me.btnPasswordEye.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnPasswordEye.FlatAppearance.BorderSize = 0
+        Me.btnPasswordEye.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPasswordEye.ForeColor = System.Drawing.Color.Transparent
+        Me.btnPasswordEye.Image = CType(resources.GetObject("btnPasswordEye.Image"), System.Drawing.Image)
+        Me.btnPasswordEye.Location = New System.Drawing.Point(194, 1)
+        Me.btnPasswordEye.Name = "btnPasswordEye"
+        Me.btnPasswordEye.Size = New System.Drawing.Size(30, 26)
+        Me.btnPasswordEye.TabIndex = 39
+        Me.btnPasswordEye.UseVisualStyleBackColor = False
         '
         'txtPassword
         '
@@ -464,33 +494,21 @@ Partial Class frmConfiguration
         Me.txtID.TabIndex = 184
         Me.txtID.Visible = False
         '
-        'btnPasswordEye
+        'txtSearch
         '
-        Me.btnPasswordEye.BackColor = System.Drawing.Color.White
-        Me.btnPasswordEye.Dock = System.Windows.Forms.DockStyle.Right
-        Me.btnPasswordEye.FlatAppearance.BorderSize = 0
-        Me.btnPasswordEye.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnPasswordEye.ForeColor = System.Drawing.Color.Transparent
-        Me.btnPasswordEye.Image = CType(resources.GetObject("btnPasswordEye.Image"), System.Drawing.Image)
-        Me.btnPasswordEye.Location = New System.Drawing.Point(194, 1)
-        Me.btnPasswordEye.Name = "btnPasswordEye"
-        Me.btnPasswordEye.Size = New System.Drawing.Size(30, 26)
-        Me.btnPasswordEye.TabIndex = 39
-        Me.btnPasswordEye.UseVisualStyleBackColor = False
+        Me.txtSearch.Location = New System.Drawing.Point(853, 9)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(153, 20)
+        Me.txtSearch.TabIndex = 185
         '
-        'btnConfirmEye
+        'Button1
         '
-        Me.btnConfirmEye.BackColor = System.Drawing.Color.White
-        Me.btnConfirmEye.Dock = System.Windows.Forms.DockStyle.Right
-        Me.btnConfirmEye.FlatAppearance.BorderSize = 0
-        Me.btnConfirmEye.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnConfirmEye.ForeColor = System.Drawing.Color.Transparent
-        Me.btnConfirmEye.Image = CType(resources.GetObject("btnConfirmEye.Image"), System.Drawing.Image)
-        Me.btnConfirmEye.Location = New System.Drawing.Point(193, 1)
-        Me.btnConfirmEye.Name = "btnConfirmEye"
-        Me.btnConfirmEye.Size = New System.Drawing.Size(30, 26)
-        Me.btnConfirmEye.TabIndex = 39
-        Me.btnConfirmEye.UseVisualStyleBackColor = False
+        Me.Button1.Location = New System.Drawing.Point(772, 6)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 186
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'frmConfiguration
         '
@@ -498,6 +516,8 @@ Partial Class frmConfiguration
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1141, 822)
+        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.txtSearch)
         Me.Controls.Add(Me.txtID)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSaveChanges)
@@ -579,4 +599,6 @@ Partial Class frmConfiguration
     Friend WithEvents lblStatus As Label
     Friend WithEvents btnConfirmEye As Button
     Friend WithEvents btnPasswordEye As Button
+    Friend WithEvents txtSearch As TextBox
+    Friend WithEvents Button1 As Button
 End Class
