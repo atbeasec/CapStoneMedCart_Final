@@ -202,6 +202,7 @@
             'probably going to need a select query to get the medication name from the TUID
             Debug.WriteLine("Value must already be in the table")
             frmPatientInfo.lstBoxAllergies.Items.Clear()
+
             GetAllergies(intPatientInformationMRN)
         End If
 
