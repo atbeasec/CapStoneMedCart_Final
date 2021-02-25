@@ -1,5 +1,7 @@
 ﻿Imports RestSharp
 Imports Newtonsoft.Json.Linq
+Imports System.Text
+
 Module Interactions
     '/***************************************************************************/
     '/*                   FILE NAME: Interactions.vb                            */
@@ -169,4 +171,58 @@ Module Interactions
         Dim trawledResult As JToken = inputJSON.SelectToken(trawlPointer)
         Return trawledResult
     End Function
+
+
+
+    Public Sub GetInteractionsDispense(ByRef intMedicationRXCUI As Integer, ByRef IntPatientMRN As Integer)
+        Dim strbSQL As StringBuilder = New StringBuilder
+        Dim intMEDID As Integer
+        Dim intPatientID As Integer
+        Dim dsPatientInteractions As DataSet
+        Dim strbInteractionsString As StringBuilder = New StringBuilder
+        Dim strDrugoneName As String
+        Dim strDrugtwoName As String
+        'using RXCUI get the medication ID from the database to use to find the interactions
+        strbSQL.Append("SELECT Medication_ID FROM Medication WHERE RXCUI_ID = '" & intMedicationRXCUI & "'")
+        intMEDID = CreateDatabase.ExecuteScalarQuery(strbSQL.ToString)
+        strbSQL.Clear()
+        'using MRN number get patient ID for getting prescribed meds for interactions
+        strbSQL.Append("SELECT Patient_ID FROM Patient WHERE MRN_Number = '" & IntPatientMRN & "'")
+        intPatientID = CreateDatabase.ExecuteScalarQuery(strbSQL.ToString)
+        strbSQL.Clear()
+
+        strbSQL.Append("Select Medication_One_ID,Medication_Two_ID,Severity,Description From Drug_Interactions ")
+        strbSQL.Append("Inner join Medication ")
+        strbSQL.Append("ON Medication.Medication_ID = Drug_Interactions.Medication_One_ID ")
+        strbSQL.Append("Inner Join PatientMedication ")
+        strbSQL.Append("ON PatientMedication.Medication_TUID = Drug_Interactions.Medication_One_ID ")
+        strbSQL.Append("WHERE PatientMedication.Patient_TUID = '" & intPatientID & "' ")
+        strbSQL.Append("AND PatientMedication.Active_Flag = '1'")
+        strbSQL.Append("AND Drug_Interactions.Active_Flag = '1'")
+        dsPatientInteractions = CreateDatabase.ExecuteSelectQuery(strbSQL.ToString)
+
+
+        For Each dr As DataRow In dsPatientInteractions.Tables(0).Rows
+            strbSQL.Clear()
+            strbSQL.Append("SELECT Drug_Name FROM Medication WHERE Medication_ID = '" & dr(0) & "'")
+            strDrugoneName = CreateDatabase.ExecuteScalarQuery(strbSQL.ToString)
+            strbSQL.Clear()
+            strbSQL.Append("SELECT Drug_Name FROM Medication WHERE Medication_ID = '" & dr(1) & "'")
+            strDrugtwoName = CreateDatabase.ExecuteScalarQuery(strbSQL.ToString)
+
+            strbInteractionsString.AppendLine(strDrugoneName & " interacts with " & strDrugtwoName)
+            strbInteractionsString.AppendLine("Severity: " & dr(2))
+            strbInteractionsString.AppendLine("Descriptions: " & dr(3))
+        Next
+
+        If (strbInteractionsString.Length > 0) Then
+            MessageBox.Show(strbInteractionsString.ToString)
+        Else
+        End If
+
+
+
+    End Sub
+
+
 End Module
