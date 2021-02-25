@@ -166,6 +166,9 @@
         '   1. first we will take the items from all the textfields and insert it into the database.
         '   2. We will just take those same fields and call the create panel method to throw the items on the UI
         '   to save another database call and complexity of removing all the panels from the UI and repopulating them
+
+
+
         If cmbAllergies.SelectedIndex = -1 Then
             strAllergyName = cmbAllergies.Text
         Else
@@ -179,6 +182,9 @@
         Dim intMedicationTUID = "NUll" 'for now but medication tuid will need to be looked up
         Dim strSqlStatment As String = ("Select Active_Flag FROM PatientAllergy WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID= " & intPatientTuid & ";")
         Dim value = ExecuteScalarQuery(strSqlStatment)
+        If value = Nothing Then
+            value = 2
+        End If
         If value = 0 Then
             ExecuteScalarQuery("UPDATE PatientAllergy SET Active_Flag='1' WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTuid & ";")
 
