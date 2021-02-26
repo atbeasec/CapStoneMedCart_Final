@@ -387,7 +387,34 @@ Module AdHoc
         End If
     End Sub
 
-
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:clearAdhocBoxes                     */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   02/26/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: the purpose of tthis subroutine is to clear
+    '/* all the boxes on the adhoc form.
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/* frmAdhocDispense.btnDispense_Click						           					  
+    '/*********************************************************************/
+    '/*  CALLS:			
+    '/* frmAdHockDispense.lstboxAllergies.Items.Clear()
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   		   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*		clearAdhocBoxes()									                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	(none)
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  02/26/21	  Initial creation of the code     */
+    '/*********************************************************************/
     Public Sub clearAdhocBoxes()
         frmAdHockDispense.cmbMedications.SelectedIndex = -1
         frmAdHockDispense.cmbPatientName.SelectedIndex = -1
