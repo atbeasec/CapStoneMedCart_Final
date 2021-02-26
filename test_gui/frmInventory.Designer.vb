@@ -64,6 +64,8 @@ Partial Class frmInventory
         Me.chkControlled = New System.Windows.Forms.CheckBox()
         Me.chkNarcotic = New System.Windows.Forms.CheckBox()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Panel11 = New System.Windows.Forms.Panel()
         Me.pnlPatientName = New System.Windows.Forms.Panel()
         Me.lblPatientName = New System.Windows.Forms.Label()
@@ -570,6 +572,27 @@ Partial Class frmInventory
         Me.Label9.TabIndex = 110
         Me.Label9.Text = "Drawer Number:"
         '
+        'Panel6
+        '
+        Me.Panel6.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel6.Controls.Add(Me.ComboBox2)
+        Me.Panel6.Location = New System.Drawing.Point(272, 176)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel6.Size = New System.Drawing.Size(202, 28)
+        Me.Panel6.TabIndex = 3
+        '
+        'ComboBox2
+        '
+        Me.ComboBox2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ComboBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ComboBox2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Location = New System.Drawing.Point(1, 1)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(200, 25)
+        Me.ComboBox2.TabIndex = 10
+        '
         'Panel11
         '
         Me.Panel11.Location = New System.Drawing.Point(622, 113)
@@ -702,4 +725,5 @@ Partial Class frmInventory
     Friend WithEvents txtType As TextBox
     Friend WithEvents Panel10 As Panel
     Friend WithEvents txtStrength As TextBox
+
 End Class

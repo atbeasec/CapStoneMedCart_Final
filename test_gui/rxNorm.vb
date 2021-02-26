@@ -172,9 +172,11 @@ Module rxNorm
     '/*  Dillen  2/16/21    Fixed Functionality search any property       */
     '/*********************************************************************/
 
-    Function getRxcuiProperty(rxcuiNum As String, propertyNames As List(Of String)) As List(Of (PropertyName As String, PropertyValue As Object))
+    Function getRxcuiProperty(rxcuiNum As String, propertyNames As List(Of String)) As List(Of (PropertyName As String, PropertyValue As String))
+        Dim strName As String
+        Dim strValue As String
         'API url for get all properties
-        Dim url As String = $"https://rxnav.nlm.nih.gov/REST/rxcui/{rxcuiNum}/allProperties.json?prop=all"
+        Dim url As String = $"https://rxnav.nlm.nih.gov/REST/rxcui/{rxcuiNum}/allProperties.json?prop=attributes"
         'location in json of properties
         Dim trawlPointer As String = "$.propConceptGroup.propConcept"
         'convert web response to Jtoken
@@ -182,14 +184,15 @@ Module rxNorm
         'set Jtoken into array to pull data from json
         Dim JsonJArray As JArray = inputJSON.SelectToken(trawlPointer)
         'list that holds Property name and its value
-        Dim myReturnList As New List(Of (PropertyName As String, PropertyValue As Object))
+        Dim myReturnList As New List(Of (PropertyName As String, PropertyValue As String))
         'Goes through the  Json file and looks for the properties set in propertyNames List and pulls the value and stores in myReturnList
         For Each PropertyName As String In propertyNames
             For Each item In JsonJArray
                 For Each subItem As JProperty In item
-
                     If subItem.Value.ToString.ToUpper = PropertyName.ToUpper Then
-                        myReturnList.Add((subItem.Value, DirectCast(subItem.Next, JProperty).Value))
+                        strName = subItem.Value.ToString
+                        strValue = DirectCast(subItem.Next, JProperty).Value.ToString
+                        myReturnList.Add((strName, strValue))
                     End If
                 Next
             Next
@@ -550,6 +553,7 @@ Module rxNorm
     '/*                                                                   */
     '/*********************************************************************/
     Public Function GetRxcuiByName(drugName As String, propertyNames As List(Of String)) As List(Of (PropertyName As String, PropertyValue As String))
+        drugName = drugName.ToLower
         Dim url As String = $"https://rxnav.nlm.nih.gov/REST/drugs?name={drugName}"
         'location of json <rxnormId
         Dim trawlPointer As String = "$.drugGroup.conceptGroup[1].conceptProperties"
