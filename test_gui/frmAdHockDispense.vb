@@ -32,7 +32,7 @@
 
         'make sure that both patient and medication is selected before ordering the AdHoc
 
-        If Not IsNothing(cmbMedications.SelectedItem) And Not IsNothing(cmbPatientName.SelectedItem) Then
+        If Not IsNothing(cmbMedications.SelectedItem) And Not IsNothing(cmbPatientName.SelectedItem) And txtQuantity.Text > 0 Then
 
             Dim intMedRXCUI As Integer
             Dim StrSelectedMedication As String
@@ -48,6 +48,7 @@
 
             Interactions.GetInteractionsDispense(intMedRXCUI, intPatientMRN)
             AdHoc.InsertAdHoc(txtMRN.Text, "1", txtQuantity.Text)
+            AdHoc.clearAdhocBoxes()
         End If
     End Sub
 
