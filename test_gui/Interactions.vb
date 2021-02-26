@@ -178,7 +178,6 @@ Module Interactions
 
         For Each propertyName As String In propertyNames
             For Each item As JObject In JsonJArray
-                JsonJArrayRxcui = inputJSON.SelectToken(trawlPointerRxcui)
                 For Each subItem As JProperty In item.Children
                     For Each propertyIdentifier In propertyNames
                         If subItem.Name.ToString.ToUpper = propertyIdentifier.ToUpper Then
@@ -196,6 +195,21 @@ Module Interactions
                         End If
                     Next
                 Next
+                JsonJArrayRxcui = item("interactionConcept")
+                For Each interactionConcept In JsonJArrayRxcui
+                    For Each minConceptItem In interactionConcept
+                        For Each values In minConceptItem
+                            If values("rxcui") IsNot Nothing Then
+                                If values("rxcui").ToString <> rxcuiNum Then
+                                    ' ("Value")("First")("Value")
+                                    strName = "rxcui" ' subItem.First.Value.Last.First.First.First.Name
+                                    strValue = values("rxcui") 'subItem.First.Value.Last.First.First.First.Value
+                                    myReturnList.Add((strName, strValue))
+                                End If
+                            End If
+                        Next
+                    Next
+                    Next
             Next
         Next
 
