@@ -501,4 +501,111 @@
         Return intMRN
     End Function
 
+    Private Sub Panel11_Click(sender As Object, e As PaintEventArgs) Handles Panel11.Click
+
+        flpPatientRecords.Controls.Clear()
+
+        Dim dsPatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery("select Patient.MRN_Number, Patient.Patient_First_Name, " &
+                                                   "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name from Patient LEFT JOIN " &
+                                                   "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1 AND " &
+                                                   "(Patient_First_Name Like '" & TextBox1.Text & "%' OR Patient_Last_Name Like '" & TextBox1.Text & "%'" &
+                                                   "OR MRN_Number like '" & TextBox1.Text & "%' ORDER BY Patient.Patient_Last_Name ASC;")
+
+        Dim strRoom As String
+        Dim strBed As String
+
+
+        For Each item As DataRow In dsPatientInfo.Tables(0).Rows()
+            With dsPatientInfo.Tables(0)
+
+
+                If IsDBNull(item.Item(4)) Then
+                    strRoom = "N/A"
+                Else
+                    strRoom = item.Item(4).ToString
+                End If
+
+                If IsDBNull(item.Item(5)) Then
+                    strBed = "N/A"
+                Else
+                    strBed = item.Item(5).ToString
+
+                End If
+                CreatePanel(flpPatientRecords, item.Item(0), item.Item(1),
+                           item.Item(2), item.Item(3), strRoom, strBed)
+
+            End With
+        Next
+    End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+        If TextBox1.Text = "" Then
+
+            Dim dsPatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery("select Patient.MRN_Number, Patient.Patient_First_Name, " &
+                                                   "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name from Patient LEFT JOIN " &
+                                                   "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1 ORDER BY Patient.Patient_Last_Name ASC;")
+        Dim strRoom As String
+        Dim strBed As String
+
+
+        For Each item As DataRow In dsPatientInfo.Tables(0).Rows()
+            With dsPatientInfo.Tables(0)
+
+
+                If IsDBNull(item.Item(4)) Then
+                    strRoom = "N/A"
+                Else
+                    strRoom = item.Item(4).ToString
+                End If
+
+                If IsDBNull(item.Item(5)) Then
+                    strBed = "N/A"
+                Else
+                    strBed = item.Item(5).ToString
+
+                End If
+                CreatePanel(flpPatientRecords, item.Item(0), item.Item(1),
+                           item.Item(2), item.Item(3), strRoom, strBed)
+
+            End With
+        Next
+        End If
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+
+        flpPatientRecords.Controls.Clear()
+
+        Dim dsPatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery("select Patient.MRN_Number, Patient.Patient_First_Name, " &
+                                                   "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name from Patient LEFT JOIN " &
+                                                   "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1 AND " &
+                                                   "(Patient_First_Name Like '" & TextBox1.Text & "%' OR Patient_Last_Name Like '" & TextBox1.Text & "%'" &
+                                                   "OR MRN_Number like '" & TextBox1.Text & "%') ORDER BY Patient.Patient_Last_Name ASC;")
+
+        Dim strRoom As String
+        Dim strBed As String
+
+
+        For Each item As DataRow In dsPatientInfo.Tables(0).Rows()
+            With dsPatientInfo.Tables(0)
+
+
+                If IsDBNull(item.Item(4)) Then
+                    strRoom = "N/A"
+                Else
+                    strRoom = item.Item(4).ToString
+                End If
+
+                If IsDBNull(item.Item(5)) Then
+                    strBed = "N/A"
+                Else
+                    strBed = item.Item(5).ToString
+
+                End If
+                CreatePanel(flpPatientRecords, item.Item(0), item.Item(1),
+                           item.Item(2), item.Item(3), strRoom, strBed)
+
+            End With
+        Next
+    End Sub
 End Class

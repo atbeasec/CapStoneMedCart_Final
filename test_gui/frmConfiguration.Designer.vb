@@ -61,7 +61,7 @@ Partial Class frmConfiguration
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.txtID = New System.Windows.Forms.TextBox()
         Me.txtSearch = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnSearch = New System.Windows.Forms.Button()
         Me.Panel5.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -501,14 +501,14 @@ Partial Class frmConfiguration
         Me.txtSearch.Size = New System.Drawing.Size(153, 20)
         Me.txtSearch.TabIndex = 185
         '
-        'Button1
+        'btnSearch
         '
-        Me.Button1.Location = New System.Drawing.Point(772, 6)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 186
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnSearch.Location = New System.Drawing.Point(772, 6)
+        Me.btnSearch.Name = "btnSearch"
+        Me.btnSearch.Size = New System.Drawing.Size(75, 23)
+        Me.btnSearch.TabIndex = 186
+        Me.btnSearch.Text = "Search"
+        Me.btnSearch.UseVisualStyleBackColor = True
         '
         'frmConfiguration
         '
@@ -516,7 +516,7 @@ Partial Class frmConfiguration
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1141, 822)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.txtSearch)
         Me.Controls.Add(Me.txtID)
         Me.Controls.Add(Me.btnCancel)
@@ -600,5 +600,5 @@ Partial Class frmConfiguration
     Friend WithEvents btnConfirmEye As Button
     Friend WithEvents btnPasswordEye As Button
     Friend WithEvents txtSearch As TextBox
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnSearch As Button
 End Class
