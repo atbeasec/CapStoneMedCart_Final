@@ -145,7 +145,7 @@ Public Class frmInventory
         ' if yes, then update if there's differences
         ' if no, then save those items
         ' and pass it to the function to find interactions
-        Dim myPropertyNameList As New List(Of String)({"rxcui", "description", "name"})
+        Dim myPropertyNameList As New List(Of String)({"severity", "description", "rxcui"})
         Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
         outputList = getInteractionsByName("153008", myPropertyNameList)
         ' double-check if the interactions with the matching pair of RXCUI's exist

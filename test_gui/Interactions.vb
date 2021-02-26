@@ -162,7 +162,7 @@ Module Interactions
         'URL for finding interactions 
         Dim url As String = $"https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui={rxcuiNum}"
         'location in json of properties
-        Dim trawlPointer As String = "$.interactionTypeGroup[0].interactionType[0].interactionPair[0].interactionConcept"
+        Dim trawlPointer As String = "$.interactionTypeGroup[0].interactionType[0].interactionPair"
         'inputJSON
         Dim inputJSON As JToken = rxNorm.GetJSON(url)
         'set Jtoken into array to pull data from json
@@ -170,13 +170,20 @@ Module Interactions
         Dim JsonJArray As JArray = inputJSON.SelectToken(trawlPointer)
         'Stores our List of properties selected 
         Dim myReturnList As New List(Of (PropertyName As String, PropertyValue As String))
+        Dim strName As String
+        Dim strValue As String
 
         For Each propertyName As String In propertyNames
-            For Each item In JsonJArray
+            For Each item As JObject In JsonJArray
                 For Each subItem As JProperty In item.Children
-                    If subItem.Value.ToString.ToUpper = propertyName.ToUpper Then
-                        myReturnList.Add((subItem.Value, DirectCast(subItem.Next, JProperty).Value))
-                    End If
+                    For Each propertyIdentifier In propertyNames
+                        If subItem.Name.ToString.ToUpper = propertyIdentifier.ToUpper Then
+                            strName = subItem.Name
+                            strValue = subItem.Value
+                            myReturnList.Add((strName, strValue))
+                            'myReturnList.Add((subItem.Value, DirectCast(subItem.Next, JProperty).Value))
+                        End If
+                    Next
                 Next
             Next
         Next
