@@ -278,34 +278,58 @@ Module APIDatabaseSelection
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  Cody Russell 02/9/21  Initial creation of the code	        	*/
 	'/*  Cody Russell 02/9/21  Made changes to a few sql statements     */
+	'/*	BRH	 02/25/21	Made changes with updated database fields		*/
 	'/*******************************************************************/
 	Sub CompareMedications(DrugName As String, RXCUID As Integer, ControlledFlag As Integer, NarcoticFlag As Integer,
-								 Barcode As Integer, Type As String, Strength As Integer, ActiveFlag As Integer)
+								 Barcode As String, Type As String, Strength As String, Schedule As Integer, ActiveFlag As Integer)
 
 		'Create a dataset to hold database data for that
 		Dim dsMedications As DataSet
 
 		'Select the specific table and the data in each column, filling a dataset through the different parameters
-		dsMedications = ExecuteSelectQuery("SELECT Drug_Name, RXCUI_ID, Controlled, NarcoticControlled_Flag, Barcode, Type, Strength, Active_Flag
-	                          FROM Medication WHERE Drug_Name ='" & DrugName & "' AND RXCUI_ID = '" & RXCUID &
-						   "' AND Controlled = '" & ControlledFlag & "'AND NarcoticControlled_Flag = '" & NarcoticFlag &
-						   "' AND Barcode = '" & Barcode & "' AND Type = '" & Type & "'AND Strength = '" & Strength &
-						   "'AND Active_Flag = '" & ActiveFlag & "'")
+		'dsMedications = ExecuteSelectQuery("SELECT Drug_Name, RXCUI_ID, Controlled_Flag, NarcoticControlled_Flag, Barcode, Type, Strength, Schedule, Active_Flag
+		'                         FROM Medication WHERE Drug_Name ='" & DrugName & "' AND RXCUI_ID = '" & RXCUID &
+		'	   "' AND Controlled_Flag = '" & ControlledFlag & "'AND NarcoticControlled_Flag = '" & NarcoticFlag &
+		'	   "' AND Barcode = '" & Barcode & "' AND Type = '" & Type & "'AND Strength = '" & Strength &
+		'	   "'AND Schedule = '" & Schedule & "' AND Active_Flag = '" & ActiveFlag & "'")
 
-		If (dsMedications Is Nothing) Then
+		dsMedications = ExecuteSelectQuery("SELECT * FROM Medication WHERE Drug_Name='" & DrugName & "' AND RXCUI_ID = '" & RXCUID & "'")
+
+		'MessageBox.Show(dsMedications.Tables(0).Rows.Count)
+
+		'If there isn't a medication in the database with that rxcui, insert all information into the database
+		If dsMedications.Tables(0).Rows.Count = 0 Then
 
 			'Send an insert sql statement to the database
-			ExecuteInsertQuery("INSERT INTO Medication(Drug_Name, RXCUI_ID, Controlled, NarcoticControlled_Flag, Barcode, Type, 
-	                           Strength, Active_Flag) VALUES('" & DrugName & "','" & RXCUID & "','" & ControlledFlag & "','" & NarcoticFlag &
-							"','" & Barcode & "','" & Type & "','" & Strength & "','" & ActiveFlag & "')")
+			ExecuteInsertQuery("INSERT INTO Medication(Drug_Name, RXCUI_ID, Controlled_Flag, NarcoticControlled_Flag, Barcode, Type, 
+			                          Strength, Schedule, Active_Flag) VALUES('" & DrugName & "','" & RXCUID & "','" & ControlledFlag & "','" & NarcoticFlag &
+								"','" & Barcode & "','" & Type & "','" & Strength & "','" & Schedule & "','" & ActiveFlag & "')")
 
 		Else
 
-			'Send an update sql statement to the database
-			ExecuteScalarQuery("UPDATE Medication SET Controlled = '" & ControlledFlag & "', NarcoticControlled_Flag = '" & NarcoticFlag &
-							   "', Barcode = '" & Barcode & "', Type = '" & Type & "', Strength = '" & Strength &
-							   "', Active_Flag = '" & ActiveFlag & "'WHERE RXCUI_ID = '" & RXCUID &
-							   "'Drug_Name =" & DrugName & "';")
+			For Each dsValue As DataRow In dsMedications.Tables(0).Rows
+				If dsValue(2) <> ControlledFlag Then
+					'update the controlled flag field in database
+				ElseIf dsValue(3) <> NarcoticFlag Then
+					'update the narcotic flag field in database
+				ElseIf dsValue(4) <> Barcode Then
+					'update the barcode field in database
+				ElseIf dsValue(5) <> Type Then
+					'update the type field in database
+				ElseIf dsValue(6) <> Strength Then
+					'update the strength field in database
+				ElseIf dsValue(7) <> Schedule Then
+					'update the schedule field in datbase
+				ElseIf dsValue(8) <> ActiveFlag Then
+					'update the active flag in the database
+				End If
+			Next
+
+			'	'Send an update sql statement to the database
+			'	ExecuteScalarQuery("UPDATE Medication SET Controlled = '" & ControlledFlag & "', NarcoticControlled_Flag = '" & NarcoticFlag &
+			'					   "', Barcode = '" & Barcode & "', Type = '" & Type & "', Strength = '" & Strength &
+			'					   "', Active_Flag = '" & ActiveFlag & "'WHERE RXCUI_ID = '" & RXCUID &
+			'					   "'Drug_Name =" & DrugName & "';")
 
 			'Clear the dataset after it is sent to the database
 			dsMedications.Clear()

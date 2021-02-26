@@ -8,7 +8,7 @@ Public Class frmInventory
 
         DefaultSaveButtonLocation()
         txtQuantity.Text = 1
-
+        CompareMedications("Advilll", 123123, 1, 0, "4a", "pill", "1000MG", 1, 1)
     End Sub
 
     '/*********************************************************************/
