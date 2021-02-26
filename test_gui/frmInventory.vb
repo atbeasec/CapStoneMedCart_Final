@@ -6,6 +6,11 @@ Public Class frmInventory
 
     Private Sub frmInventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ' setdefault text to the search box
+        txtSearch.Text = txtSearch.Tag
+        txtSearch.ForeColor = Color.Silver
+
+
         DefaultSaveButtonLocation()
         txtQuantity.Text = 1
 
@@ -154,7 +159,7 @@ Public Class frmInventory
         ' and save those items
     End Sub
 
-    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+    Private Sub btnSearch_Click(sender As Object, e As EventArgs)
         Dim myPropertyNameList As New List(Of String)({"rxcui"})
         Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
 
@@ -176,5 +181,31 @@ Public Class frmInventory
         ' strTrimmedString = Regex.Replace(strTrimmedString, "(", "")
         'strTrimmedString = Regex.Replace(strTrimmedString, ")", "")
         ' and pass it to the function to find better names
+    End Sub
+
+    Private Sub txtSearch_GotFocus(sender As Object, e As EventArgs) Handles txtSearch.GotFocus
+
+        ' when the search box gains focus, we will remove the default text only if the user has not typed in it yet
+        If txtSearch.ForeColor = Color.Silver Then
+
+            txtSearch.Text = Nothing
+            ' update the color of the search text to be black
+            txtSearch.ForeColor = Color.Black
+
+        End If
+
+
+    End Sub
+
+
+    Private Sub txtSearch_LostFocus(sender As Object, e As EventArgs) Handles txtSearch.LostFocus
+
+        ' when the search box loses focus, we will check and see if they put any text in it
+        ' if they didnt, we will reset it to the default text.
+        If txtSearch.Text = "" Then
+            'reset the text to the default and set the font color to be black
+            txtSearch.Text = txtSearch.Tag
+            txtSearch.ForeColor = Color.Silver
+        End If
     End Sub
 End Class

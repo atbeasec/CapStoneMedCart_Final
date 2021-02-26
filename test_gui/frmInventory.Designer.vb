@@ -54,9 +54,13 @@ Partial Class frmInventory
         Me.Label3 = New System.Windows.Forms.Label()
         Me.pnlMainLocation = New System.Windows.Forms.Panel()
         Me.pnlMainFormFields = New System.Windows.Forms.Panel()
-        Me.btnSearch = New System.Windows.Forms.Button()
+        Me.Panel9 = New System.Windows.Forms.Panel()
+        Me.Panel8 = New System.Windows.Forms.Panel()
         Me.txtSearch = New System.Windows.Forms.TextBox()
-        Me.lblSearch = New System.Windows.Forms.Label()
+        Me.btnSearch = New System.Windows.Forms.Button()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.chkControlled = New System.Windows.Forms.CheckBox()
+        Me.chkNarcotic = New System.Windows.Forms.CheckBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Panel11 = New System.Windows.Forms.Panel()
         Me.pnlPatientName = New System.Windows.Forms.Panel()
@@ -73,6 +77,7 @@ Partial Class frmInventory
         Me.Panel7.SuspendLayout()
         Me.pnlMainLocation.SuspendLayout()
         Me.pnlMainFormFields.SuspendLayout()
+        Me.Panel9.SuspendLayout()
         Me.pnlPatientName.SuspendLayout()
         Me.pnlPatientNamePadding.SuspendLayout()
         Me.SuspendLayout()
@@ -82,7 +87,7 @@ Partial Class frmInventory
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label10.Location = New System.Drawing.Point(353, 223)
+        Me.Label10.Location = New System.Drawing.Point(353, 273)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(89, 21)
         Me.Label10.TabIndex = 111
@@ -93,7 +98,7 @@ Partial Class frmInventory
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label6.Location = New System.Drawing.Point(8, 301)
+        Me.Label6.Location = New System.Drawing.Point(8, 351)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(118, 21)
         Me.Label6.TabIndex = 107
@@ -104,7 +109,7 @@ Partial Class frmInventory
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label5.Location = New System.Drawing.Point(6, 82)
+        Me.Label5.Location = New System.Drawing.Point(6, 61)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(120, 21)
         Me.Label5.TabIndex = 106
@@ -114,52 +119,52 @@ Partial Class frmInventory
         '
         Me.Panel4.BackColor = System.Drawing.Color.DarkGray
         Me.Panel4.Controls.Add(Me.cmbBin)
-        Me.Panel4.Location = New System.Drawing.Point(356, 251)
+        Me.Panel4.Location = New System.Drawing.Point(356, 301)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel4.Size = New System.Drawing.Size(118, 28)
+        Me.Panel4.Size = New System.Drawing.Size(118, 31)
         Me.Panel4.TabIndex = 10
         '
         'cmbBin
         '
         Me.cmbBin.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbBin.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.cmbBin.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbBin.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbBin.FormattingEnabled = True
         Me.cmbBin.Location = New System.Drawing.Point(1, 1)
         Me.cmbBin.Name = "cmbBin"
-        Me.cmbBin.Size = New System.Drawing.Size(116, 25)
+        Me.cmbBin.Size = New System.Drawing.Size(116, 29)
         Me.cmbBin.TabIndex = 10
         '
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.DarkGray
         Me.Panel3.Controls.Add(Me.cmbMedicationName)
-        Me.Panel3.Location = New System.Drawing.Point(10, 109)
+        Me.Panel3.Location = New System.Drawing.Point(10, 88)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel3.Size = New System.Drawing.Size(464, 28)
+        Me.Panel3.Size = New System.Drawing.Size(464, 31)
         Me.Panel3.TabIndex = 1
         '
         'cmbMedicationName
         '
         Me.cmbMedicationName.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbMedicationName.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.cmbMedicationName.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbMedicationName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbMedicationName.FormattingEnabled = True
         Me.cmbMedicationName.Location = New System.Drawing.Point(1, 1)
         Me.cmbMedicationName.Name = "cmbMedicationName"
-        Me.cmbMedicationName.Size = New System.Drawing.Size(462, 25)
+        Me.cmbMedicationName.Size = New System.Drawing.Size(462, 29)
         Me.cmbMedicationName.TabIndex = 5
         '
         'Panel14
         '
         Me.Panel14.BackColor = System.Drawing.Color.DarkGray
         Me.Panel14.Controls.Add(Me.txtExpirationDate)
-        Me.Panel14.Location = New System.Drawing.Point(10, 327)
+        Me.Panel14.Location = New System.Drawing.Point(10, 377)
         Me.Panel14.Name = "Panel14"
         Me.Panel14.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel14.Size = New System.Drawing.Size(190, 28)
+        Me.Panel14.Size = New System.Drawing.Size(190, 31)
         Me.Panel14.TabIndex = 11
         '
         'txtExpirationDate
@@ -170,14 +175,14 @@ Partial Class frmInventory
         Me.txtExpirationDate.Location = New System.Drawing.Point(1, 1)
         Me.txtExpirationDate.Multiline = True
         Me.txtExpirationDate.Name = "txtExpirationDate"
-        Me.txtExpirationDate.Size = New System.Drawing.Size(188, 26)
+        Me.txtExpirationDate.Size = New System.Drawing.Size(188, 29)
         Me.txtExpirationDate.TabIndex = 6
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(182, 223)
+        Me.Label2.Location = New System.Drawing.Point(182, 273)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(73, 21)
         Me.Label2.TabIndex = 166
@@ -199,7 +204,7 @@ Partial Class frmInventory
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(269, 301)
+        Me.Label1.Location = New System.Drawing.Point(269, 351)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(204, 21)
         Me.Label1.TabIndex = 170
@@ -209,22 +214,22 @@ Partial Class frmInventory
         '
         Me.Panel1.BackColor = System.Drawing.Color.DarkGray
         Me.Panel1.Controls.Add(Me.cmbPatientPersonalMedication)
-        Me.Panel1.Location = New System.Drawing.Point(272, 329)
+        Me.Panel1.Location = New System.Drawing.Point(272, 377)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel1.Size = New System.Drawing.Size(202, 28)
+        Me.Panel1.Size = New System.Drawing.Size(202, 31)
         Me.Panel1.TabIndex = 12
         '
         'cmbPatientPersonalMedication
         '
         Me.cmbPatientPersonalMedication.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbPatientPersonalMedication.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.cmbPatientPersonalMedication.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbPatientPersonalMedication.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbPatientPersonalMedication.FormattingEnabled = True
         Me.cmbPatientPersonalMedication.Items.AddRange(New Object() {"Yes", "No"})
         Me.cmbPatientPersonalMedication.Location = New System.Drawing.Point(1, 1)
         Me.cmbPatientPersonalMedication.Name = "cmbPatientPersonalMedication"
-        Me.cmbPatientPersonalMedication.Size = New System.Drawing.Size(200, 25)
+        Me.cmbPatientPersonalMedication.Size = New System.Drawing.Size(200, 29)
         Me.cmbPatientPersonalMedication.TabIndex = 10
         '
         'btnSave
@@ -234,7 +239,7 @@ Partial Class frmInventory
         Me.btnSave.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.ForeColor = System.Drawing.Color.White
         Me.btnSave.Image = Global.test_gui.My.Resources.Resources.resolve
-        Me.btnSave.Location = New System.Drawing.Point(170, 82)
+        Me.btnSave.Location = New System.Drawing.Point(177, 81)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(120, 38)
         Me.btnSave.TabIndex = 13
@@ -246,10 +251,10 @@ Partial Class frmInventory
         '
         Me.Panel2.BackColor = System.Drawing.Color.DarkGray
         Me.Panel2.Controls.Add(Me.txtDrawerNumber)
-        Me.Panel2.Location = New System.Drawing.Point(11, 249)
+        Me.Panel2.Location = New System.Drawing.Point(11, 299)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel2.Size = New System.Drawing.Size(53, 28)
+        Me.Panel2.Size = New System.Drawing.Size(53, 33)
         Me.Panel2.TabIndex = 4
         '
         'txtDrawerNumber
@@ -260,7 +265,7 @@ Partial Class frmInventory
         Me.txtDrawerNumber.Location = New System.Drawing.Point(1, 1)
         Me.txtDrawerNumber.Multiline = True
         Me.txtDrawerNumber.Name = "txtDrawerNumber"
-        Me.txtDrawerNumber.Size = New System.Drawing.Size(51, 26)
+        Me.txtDrawerNumber.Size = New System.Drawing.Size(51, 31)
         Me.txtDrawerNumber.TabIndex = 38
         '
         'btnUp
@@ -271,9 +276,9 @@ Partial Class frmInventory
         Me.btnUp.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUp.ForeColor = System.Drawing.Color.White
         Me.btnUp.Image = CType(resources.GetObject("btnUp.Image"), System.Drawing.Image)
-        Me.btnUp.Location = New System.Drawing.Point(70, 249)
+        Me.btnUp.Location = New System.Drawing.Point(70, 299)
         Me.btnUp.Name = "btnUp"
-        Me.btnUp.Size = New System.Drawing.Size(28, 28)
+        Me.btnUp.Size = New System.Drawing.Size(33, 33)
         Me.btnUp.TabIndex = 5
         Me.btnUp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnUp.UseVisualStyleBackColor = False
@@ -286,9 +291,9 @@ Partial Class frmInventory
         Me.Button1.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button1.ForeColor = System.Drawing.Color.White
         Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.Location = New System.Drawing.Point(104, 249)
+        Me.Button1.Location = New System.Drawing.Point(109, 299)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(28, 28)
+        Me.Button1.Size = New System.Drawing.Size(33, 33)
         Me.Button1.TabIndex = 6
         Me.Button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.Button1.UseVisualStyleBackColor = False
@@ -301,9 +306,9 @@ Partial Class frmInventory
         Me.Button2.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button2.ForeColor = System.Drawing.Color.White
         Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
-        Me.Button2.Location = New System.Drawing.Point(279, 249)
+        Me.Button2.Location = New System.Drawing.Point(285, 299)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(28, 28)
+        Me.Button2.Size = New System.Drawing.Size(33, 33)
         Me.Button2.TabIndex = 9
         Me.Button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.Button2.UseVisualStyleBackColor = False
@@ -316,9 +321,9 @@ Partial Class frmInventory
         Me.Button3.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button3.ForeColor = System.Drawing.Color.White
         Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
-        Me.Button3.Location = New System.Drawing.Point(245, 249)
+        Me.Button3.Location = New System.Drawing.Point(245, 299)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(28, 28)
+        Me.Button3.Size = New System.Drawing.Size(33, 33)
         Me.Button3.TabIndex = 8
         Me.Button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.Button3.UseVisualStyleBackColor = False
@@ -327,10 +332,10 @@ Partial Class frmInventory
         '
         Me.Panel5.BackColor = System.Drawing.Color.DarkGray
         Me.Panel5.Controls.Add(Me.txtQuantity)
-        Me.Panel5.Location = New System.Drawing.Point(186, 249)
+        Me.Panel5.Location = New System.Drawing.Point(186, 299)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel5.Size = New System.Drawing.Size(53, 28)
+        Me.Panel5.Size = New System.Drawing.Size(53, 33)
         Me.Panel5.TabIndex = 7
         '
         'txtQuantity
@@ -341,14 +346,14 @@ Partial Class frmInventory
         Me.txtQuantity.Location = New System.Drawing.Point(1, 1)
         Me.txtQuantity.Multiline = True
         Me.txtQuantity.Name = "txtQuantity"
-        Me.txtQuantity.Size = New System.Drawing.Size(51, 26)
+        Me.txtQuantity.Size = New System.Drawing.Size(51, 31)
         Me.txtQuantity.TabIndex = 38
         '
         'Label15
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(269, 153)
+        Me.Label15.Location = New System.Drawing.Point(268, 196)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(45, 21)
         Me.Label15.TabIndex = 186
@@ -358,49 +363,49 @@ Partial Class frmInventory
         '
         Me.Panel6.BackColor = System.Drawing.Color.DarkGray
         Me.Panel6.Controls.Add(Me.ComboBox2)
-        Me.Panel6.Location = New System.Drawing.Point(272, 176)
+        Me.Panel6.Location = New System.Drawing.Point(272, 221)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel6.Size = New System.Drawing.Size(202, 28)
+        Me.Panel6.Size = New System.Drawing.Size(202, 31)
         Me.Panel6.TabIndex = 3
         '
         'ComboBox2
         '
         Me.ComboBox2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ComboBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ComboBox2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBox2.FormattingEnabled = True
         Me.ComboBox2.Location = New System.Drawing.Point(1, 1)
         Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(200, 25)
+        Me.ComboBox2.Size = New System.Drawing.Size(200, 29)
         Me.ComboBox2.TabIndex = 10
         '
         'Panel7
         '
         Me.Panel7.BackColor = System.Drawing.Color.DarkGray
         Me.Panel7.Controls.Add(Me.ComboBox3)
-        Me.Panel7.Location = New System.Drawing.Point(11, 176)
+        Me.Panel7.Location = New System.Drawing.Point(10, 220)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel7.Size = New System.Drawing.Size(202, 28)
+        Me.Panel7.Size = New System.Drawing.Size(202, 31)
         Me.Panel7.TabIndex = 2
         '
         'ComboBox3
         '
         Me.ComboBox3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ComboBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ComboBox3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBox3.FormattingEnabled = True
         Me.ComboBox3.Location = New System.Drawing.Point(1, 1)
         Me.ComboBox3.Name = "ComboBox3"
-        Me.ComboBox3.Size = New System.Drawing.Size(200, 25)
+        Me.ComboBox3.Size = New System.Drawing.Size(200, 29)
         Me.ComboBox3.TabIndex = 10
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(8, 152)
+        Me.Label3.Location = New System.Drawing.Point(7, 196)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(72, 21)
         Me.Label3.TabIndex = 188
@@ -413,14 +418,16 @@ Partial Class frmInventory
         Me.pnlMainLocation.Controls.Add(Me.pnlPatientName)
         Me.pnlMainLocation.Location = New System.Drawing.Point(17, 48)
         Me.pnlMainLocation.Name = "pnlMainLocation"
-        Me.pnlMainLocation.Size = New System.Drawing.Size(496, 491)
+        Me.pnlMainLocation.Size = New System.Drawing.Size(570, 565)
         Me.pnlMainLocation.TabIndex = 189
         '
         'pnlMainFormFields
         '
+        Me.pnlMainFormFields.Controls.Add(Me.Panel9)
         Me.pnlMainFormFields.Controls.Add(Me.btnSearch)
-        Me.pnlMainFormFields.Controls.Add(Me.txtSearch)
-        Me.pnlMainFormFields.Controls.Add(Me.lblSearch)
+        Me.pnlMainFormFields.Controls.Add(Me.Label4)
+        Me.pnlMainFormFields.Controls.Add(Me.chkControlled)
+        Me.pnlMainFormFields.Controls.Add(Me.chkNarcotic)
         Me.pnlMainFormFields.Controls.Add(Me.Panel3)
         Me.pnlMainFormFields.Controls.Add(Me.Button3)
         Me.pnlMainFormFields.Controls.Add(Me.Label9)
@@ -444,45 +451,98 @@ Partial Class frmInventory
         Me.pnlMainFormFields.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlMainFormFields.Location = New System.Drawing.Point(0, 0)
         Me.pnlMainFormFields.Name = "pnlMainFormFields"
-        Me.pnlMainFormFields.Size = New System.Drawing.Size(496, 361)
+        Me.pnlMainFormFields.Size = New System.Drawing.Size(570, 429)
         Me.pnlMainFormFields.TabIndex = 191
         '
-        'btnSearch
+        'Panel9
         '
-        Me.btnSearch.Location = New System.Drawing.Point(437, 45)
-        Me.btnSearch.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnSearch.Name = "btnSearch"
-        Me.btnSearch.Size = New System.Drawing.Size(36, 22)
-        Me.btnSearch.TabIndex = 190
-        Me.btnSearch.Text = "Search"
-        Me.btnSearch.UseVisualStyleBackColor = True
+        Me.Panel9.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel9.Controls.Add(Me.Panel8)
+        Me.Panel9.Controls.Add(Me.txtSearch)
+        Me.Panel9.Location = New System.Drawing.Point(9, 14)
+        Me.Panel9.Name = "Panel9"
+        Me.Panel9.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel9.Size = New System.Drawing.Size(466, 31)
+        Me.Panel9.TabIndex = 192
+        '
+        'Panel8
+        '
+        Me.Panel8.BackColor = System.Drawing.Color.White
+        Me.Panel8.BackgroundImage = CType(resources.GetObject("Panel8.BackgroundImage"), System.Drawing.Image)
+        Me.Panel8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.Panel8.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Panel8.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Panel8.ForeColor = System.Drawing.Color.White
+        Me.Panel8.Location = New System.Drawing.Point(1, 1)
+        Me.Panel8.Name = "Panel8"
+        Me.Panel8.Size = New System.Drawing.Size(33, 29)
+        Me.Panel8.TabIndex = 193
         '
         'txtSearch
         '
-        Me.txtSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSearch.Location = New System.Drawing.Point(12, 45)
-        Me.txtSearch.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtSearch.Dock = System.Windows.Forms.DockStyle.Right
+        Me.txtSearch.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSearch.Location = New System.Drawing.Point(34, 1)
+        Me.txtSearch.Multiline = True
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(426, 23)
-        Me.txtSearch.TabIndex = 190
+        Me.txtSearch.Size = New System.Drawing.Size(431, 29)
+        Me.txtSearch.TabIndex = 6
+        Me.txtSearch.Tag = "Search Medication by Name"
         '
-        'lblSearch
+        'btnSearch
         '
-        Me.lblSearch.AutoSize = True
-        Me.lblSearch.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSearch.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.lblSearch.Location = New System.Drawing.Point(8, 20)
-        Me.lblSearch.Name = "lblSearch"
-        Me.lblSearch.Size = New System.Drawing.Size(208, 21)
-        Me.lblSearch.TabIndex = 189
-        Me.lblSearch.Text = "Search by Medication Name:"
+        Me.btnSearch.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSearch.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSearch.ForeColor = System.Drawing.Color.White
+        Me.btnSearch.Location = New System.Drawing.Point(485, 13)
+        Me.btnSearch.Name = "btnSearch"
+        Me.btnSearch.Size = New System.Drawing.Size(80, 32)
+        Me.btnSearch.TabIndex = 192
+        Me.btnSearch.Text = "SEARCH"
+        Me.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnSearch.UseVisualStyleBackColor = False
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
+        Me.Label4.Location = New System.Drawing.Point(8, 129)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(123, 21)
+        Me.Label4.TabIndex = 193
+        Me.Label4.Text = "Medication Flag:"
+        '
+        'chkControlled
+        '
+        Me.chkControlled.AutoSize = True
+        Me.chkControlled.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkControlled.Location = New System.Drawing.Point(138, 160)
+        Me.chkControlled.Name = "chkControlled"
+        Me.chkControlled.Size = New System.Drawing.Size(102, 25)
+        Me.chkControlled.TabIndex = 192
+        Me.chkControlled.Text = "Controlled"
+        Me.chkControlled.UseVisualStyleBackColor = True
+        '
+        'chkNarcotic
+        '
+        Me.chkNarcotic.AutoSize = True
+        Me.chkNarcotic.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkNarcotic.Location = New System.Drawing.Point(24, 160)
+        Me.chkNarcotic.Name = "chkNarcotic"
+        Me.chkNarcotic.Size = New System.Drawing.Size(87, 25)
+        Me.chkNarcotic.TabIndex = 191
+        Me.chkNarcotic.Text = "Narcotic"
+        Me.chkNarcotic.UseVisualStyleBackColor = True
         '
         'Label9
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label9.Location = New System.Drawing.Point(7, 223)
+        Me.Label9.Location = New System.Drawing.Point(7, 273)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(126, 21)
         Me.Label9.TabIndex = 110
@@ -501,9 +561,9 @@ Partial Class frmInventory
         Me.pnlPatientName.Controls.Add(Me.btnSave)
         Me.pnlPatientName.Controls.Add(Me.pnlPatientNamePadding)
         Me.pnlPatientName.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.pnlPatientName.Location = New System.Drawing.Point(0, 367)
+        Me.pnlPatientName.Location = New System.Drawing.Point(0, 430)
         Me.pnlPatientName.Name = "pnlPatientName"
-        Me.pnlPatientName.Size = New System.Drawing.Size(496, 124)
+        Me.pnlPatientName.Size = New System.Drawing.Size(570, 135)
         Me.pnlPatientName.TabIndex = 189
         '
         'lblPatientName
@@ -512,9 +572,9 @@ Partial Class frmInventory
         Me.lblPatientName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblPatientName.Location = New System.Drawing.Point(4, 4)
         Me.lblPatientName.Name = "lblPatientName"
-        Me.lblPatientName.Size = New System.Drawing.Size(106, 21)
+        Me.lblPatientName.Size = New System.Drawing.Size(60, 21)
         Me.lblPatientName.TabIndex = 191
-        Me.lblPatientName.Text = "Patient Name:"
+        Me.lblPatientName.Text = "Patient:"
         '
         'pnlPatientNamePadding
         '
@@ -523,18 +583,18 @@ Partial Class frmInventory
         Me.pnlPatientNamePadding.Location = New System.Drawing.Point(9, 28)
         Me.pnlPatientNamePadding.Name = "pnlPatientNamePadding"
         Me.pnlPatientNamePadding.Padding = New System.Windows.Forms.Padding(1)
-        Me.pnlPatientNamePadding.Size = New System.Drawing.Size(465, 28)
+        Me.pnlPatientNamePadding.Size = New System.Drawing.Size(465, 31)
         Me.pnlPatientNamePadding.TabIndex = 190
         '
         'cmbPatientNames
         '
         Me.cmbPatientNames.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbPatientNames.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.cmbPatientNames.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbPatientNames.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbPatientNames.FormattingEnabled = True
         Me.cmbPatientNames.Location = New System.Drawing.Point(1, 1)
         Me.cmbPatientNames.Name = "cmbPatientNames"
-        Me.cmbPatientNames.Size = New System.Drawing.Size(463, 25)
+        Me.cmbPatientNames.Size = New System.Drawing.Size(463, 29)
         Me.cmbPatientNames.TabIndex = 10
         '
         'frmInventory
@@ -542,7 +602,7 @@ Partial Class frmInventory
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1005, 602)
+        Me.ClientSize = New System.Drawing.Size(1286, 686)
         Me.Controls.Add(Me.pnlMainLocation)
         Me.Controls.Add(Me.Label17)
         Me.Name = "frmInventory"
@@ -561,6 +621,8 @@ Partial Class frmInventory
         Me.pnlMainLocation.ResumeLayout(False)
         Me.pnlMainFormFields.ResumeLayout(False)
         Me.pnlMainFormFields.PerformLayout()
+        Me.Panel9.ResumeLayout(False)
+        Me.Panel9.PerformLayout()
         Me.pnlPatientName.ResumeLayout(False)
         Me.pnlPatientName.PerformLayout()
         Me.pnlPatientNamePadding.ResumeLayout(False)
@@ -604,8 +666,12 @@ Partial Class frmInventory
     Friend WithEvents lblPatientName As Label
     Friend WithEvents Panel11 As Panel
     Friend WithEvents pnlMainFormFields As Panel
-    Friend WithEvents txtSearch As TextBox
-    Friend WithEvents lblSearch As Label
     Friend WithEvents Label9 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents chkControlled As CheckBox
+    Friend WithEvents chkNarcotic As CheckBox
     Friend WithEvents btnSearch As Button
+    Friend WithEvents Panel9 As Panel
+    Friend WithEvents Panel8 As Panel
+    Friend WithEvents txtSearch As TextBox
 End Class
