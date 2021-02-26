@@ -173,8 +173,10 @@ Module rxNorm
     '/*********************************************************************/
 
     Function getRxcuiProperty(rxcuiNum As String, propertyNames As List(Of String)) As List(Of (PropertyName As String, PropertyValue As String))
+        Dim strName As String
+        Dim strValue As String
         'API url for get all properties
-        Dim url As String = $"https://rxnav.nlm.nih.gov/REST/rxcui/{rxcuiNum}/allProperties.json?prop=all"
+        Dim url As String = $"https://rxnav.nlm.nih.gov/REST/rxcui/{rxcuiNum}/allProperties.json?prop=attributes"
         'location in json of properties
         Dim trawlPointer As String = "$.propConceptGroup.propConcept"
         'convert web response to Jtoken
@@ -187,9 +189,10 @@ Module rxNorm
         For Each PropertyName As String In propertyNames
             For Each item In JsonJArray
                 For Each subItem As JProperty In item
-
                     If subItem.Value.ToString.ToUpper = PropertyName.ToUpper Then
-                        myReturnList.Add((subItem.Value, DirectCast(subItem.Next, JProperty).Value))
+                        strName = subItem.Value.ToString
+                        strValue = DirectCast(subItem.Next, JProperty).Value.ToString
+                        myReturnList.Add((strName, strValue))
                     End If
                 Next
             Next

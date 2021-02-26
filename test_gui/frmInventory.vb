@@ -169,27 +169,56 @@ Public Class frmInventory
     End Sub
 
     Private Sub cmbMedicationName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMedicationName.SelectedIndexChanged
-        Dim strTrimmedString() As String
+        Dim strTrimmedString As String
+        Dim strSplitString() As String
         Dim lstProperties As List(Of String) = New List(Of String)
-        Dim lstResults As List(Of (strPropertyName As String, strPropertyValue As String)) = New List(Of (String, String))
+        Dim lstResults As List(Of (strPropertyName As String, strPropertyValue As String))
         ' take the split of the combobox selected item
-        strTrimmedString = (cmbMedicationName.Text.Split(","))
-        ' then trim off everything that's not necessary
-        For Each strItem In strTrimmedString
-            strItem = Regex.Replace(strItem, "(", "").Trim
-            strItem = Regex.Replace(strItem, ")", "").Trim
+        strTrimmedString = cmbMedicationName.Text.ToString '.Split(","))
+        ' take off the parens
+        Dim intOpenParens = InStr(strTrimmedString, "(")
+        Dim intClosedParens = InStr(strTrimmedString, ")")
+        If intOpenParens > 0 And intClosedParens > 0 Then
+            strTrimmedString = strTrimmedString.Remove(intOpenParens - 1, 1)
+            strTrimmedString = strTrimmedString.Remove(intClosedParens - 2, 1) ' remove 2 because of 0 is beginning and because the open parens is gone now too
+        End If
+        strSplitString = strTrimmedString.Split(",")
+        'Dim strParens() As String = {"(", ")"}
+        ' then trim off every space that's not necessary
+        For Each strItem In strSplitString
+            strItem = strItem.Trim
         Next
         ' and pass it to the function to get the atrributes
         lstProperties.Add("AVAILABLE_STRENGTH")
         lstProperties.Add("STRENGTH")
-        lstProperties.Add("TYPE")
         lstProperties.Add("SCHEDULE")
-        lstResults = getRxcuiProperty(strTrimmedString(0), lstProperties)
+        lstResults = getRxcuiProperty(strSplitString(0), lstProperties)
         ' add the original items to the lstResults
-        lstResults.Add(("RXCUI", strTrimmedString(0)))
-        lstResults.Add(("NAME", strTrimmedString(1)))
-        ' the populate the form and pass the results on 
-
+        lstResults.Add(("RXCUI", strSplitString(0)))
+        lstResults.Add(("NAME", strSplitString(1)))
+        ' first clear the fields
+        ComboBox3.Items.Clear()
+        ComboBox2.Items.Clear()
+        ' then populate the form and pass the results on 
+        For Each result In lstResults
+            Select Case result.strPropertyName
+                Case "AVAILABLE_STRENGTH"
+                    ComboBox3.Items.Add(result.strPropertyValue)
+                Case "STRENGTH"
+                    ComboBox3.Items.Add(result.strPropertyValue)
+                Case "SCHEDULE"
+                    If result.strPropertyValue Is Nothing Then
+                        ' do nothing
+                    ElseIf result.strPropertyValue = "1" Or "2" Or "3" Then
+                        ' insert logic here to check the controlled and narcotic
+                    ElseIf result.strPropertyValue = "2N" Or "3N" Or "4" Or "5" Then
+                        ' insert logic here to check controlled only
+                    Else
+                        ' if the value isn't in these then it must be 0 or invalid - do nothing
+                    End If
+                    ' insert logic here to populate the schedule box.
+            End Select
+        Next
     End Sub
 
     '/*********************************************************************/
