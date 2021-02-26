@@ -41,6 +41,8 @@ Partial Class frmAllergies
         Me.cmbAllergies = New System.Windows.Forms.ComboBox()
         Me.cmbMedicationName = New System.Windows.Forms.ComboBox()
         Me.cmbAllergiesType = New System.Windows.Forms.ComboBox()
+        Me.btnAllergyCancel = New System.Windows.Forms.Button()
+        Me.btnAllergySave = New System.Windows.Forms.Button()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -245,12 +247,46 @@ Partial Class frmAllergies
         Me.cmbAllergiesType.Size = New System.Drawing.Size(286, 29)
         Me.cmbAllergiesType.TabIndex = 190
         '
+        'btnAllergyCancel
+        '
+        Me.btnAllergyCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnAllergyCancel.FlatAppearance.BorderSize = 0
+        Me.btnAllergyCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAllergyCancel.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAllergyCancel.ForeColor = System.Drawing.Color.White
+        Me.btnAllergyCancel.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnAllergyCancel.Location = New System.Drawing.Point(739, 86)
+        Me.btnAllergyCancel.Name = "btnAllergyCancel"
+        Me.btnAllergyCancel.Size = New System.Drawing.Size(146, 37)
+        Me.btnAllergyCancel.TabIndex = 191
+        Me.btnAllergyCancel.Text = "Cancel"
+        Me.btnAllergyCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnAllergyCancel.UseVisualStyleBackColor = False
+        '
+        'btnAllergySave
+        '
+        Me.btnAllergySave.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnAllergySave.FlatAppearance.BorderSize = 0
+        Me.btnAllergySave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAllergySave.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAllergySave.ForeColor = System.Drawing.Color.White
+        Me.btnAllergySave.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnAllergySave.Location = New System.Drawing.Point(739, 34)
+        Me.btnAllergySave.Name = "btnAllergySave"
+        Me.btnAllergySave.Size = New System.Drawing.Size(146, 37)
+        Me.btnAllergySave.TabIndex = 192
+        Me.btnAllergySave.Text = "Save"
+        Me.btnAllergySave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnAllergySave.UseVisualStyleBackColor = False
+        '
         'frmAllergies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(926, 478)
+        Me.Controls.Add(Me.btnAllergySave)
+        Me.Controls.Add(Me.btnAllergyCancel)
         Me.Controls.Add(Me.cmbAllergiesType)
         Me.Controls.Add(Me.cmbMedicationName)
         Me.Controls.Add(Me.cmbAllergies)
@@ -291,4 +327,6 @@ Partial Class frmAllergies
     Friend WithEvents cmbAllergies As ComboBox
     Friend WithEvents cmbMedicationName As ComboBox
     Friend WithEvents cmbAllergiesType As ComboBox
+    Friend WithEvents btnAllergyCancel As Button
+    Friend WithEvents btnAllergySave As Button
 End Class

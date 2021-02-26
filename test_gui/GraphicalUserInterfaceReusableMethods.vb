@@ -523,20 +523,29 @@
 
         ElseIf getOpenedForm().GetType() Is frmPatientRecords.GetType() Then
 
-                ' call SQL method to set the Patient Record flag to inactive or delete the user from the DB
-                '    Debug.Print("patient records")
+            ' call SQL method to set the Patient Record flag to inactive or delete the user from the DB
+            '    Debug.Print("patient records")
 
-            ElseIf getOpenedForm().GetType() Is frmConfigureInventory.GetType() Then
+        ElseIf getOpenedForm().GetType() Is frmConfigureInventory.GetType() Then
 
-                ' call SQL method to remove the item from the list of currently stocked items in the med cart
-                '  Debug.Print("removing this inventory piece")
+            ' call SQL method to remove the item from the list of currently stocked items in the med cart
+            '  Debug.Print("removing this inventory piece")
 
-            ElseIf getOpenedForm().GetType() Is frmAllergies.GetType() Then
-
-                ' call SQL method to remove the allergy that is currently assigned to the patient
-                '  Debug.Print("remove allergy assigned to patient")
-
+        ElseIf frmAllergies.Visible = True Then
+            Dim intPatientTUID As Integer = frmAllergies.GetPatientTuid()
+            Dim strAllergyName As String = GetSelectedInformation(sender.parent, "lblAllergyName")
+            Dim strSqlStatment As String = ("Select Active_Flag FROM PatientAllergy WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID= " & intPatientTUID & ";")
+            Dim value = ExecuteScalarQuery(strSqlStatment)
+            If value = 1 Then
+                ExecuteScalarQuery("UPDATE PatientAllergy SET Active_Flag='0' WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTUID & ";")
+            Else
+                ExecuteScalarQuery("UPDATE PatientAllergy SET Active_Flag='1' WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTUID & ";")
             End If
+            frmPatientInfo.lstBoxAllergies.Items.Clear()
+            GetAllergies(CInt(frmPatientInfo.txtMRN.Text))
+            Debug.Print("remove allergy assigned to patient")
+
+        End If
 
     End Sub
 
@@ -609,7 +618,7 @@
             'make the save and cancel button visible and hide button1
             frmConfiguration.btnSaveChanges.Visible = True
             frmConfiguration.btnCancel.Visible = True
-            frmConfiguration.Button1.Visible = False
+            frmConfiguration.btnSaveUser.Visible = False
 
         ElseIf getOpenedForm().GetType() Is frmPatientRecords.GetType() Then
             'this will set up the functions for the editing pencil. 
@@ -624,11 +633,29 @@
             ' call SQL method to set edit functionality
             '  Debug.Print("removing this inventory piece")
 
-        ElseIf getOpenedForm().GetType() Is frmAllergies.GetType() Then
+        ElseIf frmAllergies.btnAddAllergy.Visible = True Then
+            Dim selectedAllergyName = GetSelectedInformation(sender.parent, "lblAllergyName")
+            Dim selectedAllergySeverity = GetSelectedInformation(sender.parent, "lblSeverity")
+            Dim selectedAllergyType = GetSelectedInformation(sender.parent, "lblAllergyType")
+            Dim selectedMedication = GetSelectedInformation(sender.parent, "lblMedication")
+
+            With frmAllergies
+                .cmbAllergies.Text = selectedAllergyName
+                .cmbAllergiesType.Text = selectedAllergyType
+                .cmbSeverity.Text = selectedAllergySeverity
+                .cmbMedicationName.Text = selectedMedication
+                .cmbAllergies.Enabled = False
+                .cmbAllergiesType.Enabled = False
+                .cmbMedicationName.Enabled = False
+                .btnAllergySave.Visible = True
+                .btnAllergyCancel.Visible = True
+                .btnAddAllergy.Visible = False
+            End With
+
 
             ' call SQL method to set edit functionality
             ' Debug.Print("remove allergy assigned to patient")
-
+            Debug.WriteLine("")
         End If
 
     End Sub

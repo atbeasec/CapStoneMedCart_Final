@@ -172,9 +172,11 @@ Module rxNorm
     '/*  Dillen  2/16/21    Fixed Functionality search any property       */
     '/*********************************************************************/
 
-    Function getRxcuiProperty(rxcuiNum As String, propertyNames As List(Of String)) As List(Of (PropertyName As String, PropertyValue As Object))
+    Function getRxcuiProperty(rxcuiNum As String, propertyNames As List(Of String)) As List(Of (PropertyName As String, PropertyValue As String))
+        Dim strName As String
+        Dim strValue As String
         'API url for get all properties
-        Dim url As String = $"https://rxnav.nlm.nih.gov/REST/rxcui/{rxcuiNum}/allProperties.json?prop=all"
+        Dim url As String = $"https://rxnav.nlm.nih.gov/REST/rxcui/{rxcuiNum}/allProperties.json?prop=attributes"
         'location in json of properties
         Dim trawlPointer As String = "$.propConceptGroup.propConcept"
         'convert web response to Jtoken
@@ -182,14 +184,15 @@ Module rxNorm
         'set Jtoken into array to pull data from json
         Dim JsonJArray As JArray = inputJSON.SelectToken(trawlPointer)
         'list that holds Property name and its value
-        Dim myReturnList As New List(Of (PropertyName As String, PropertyValue As Object))
+        Dim myReturnList As New List(Of (PropertyName As String, PropertyValue As String))
         'Goes through the  Json file and looks for the properties set in propertyNames List and pulls the value and stores in myReturnList
         For Each PropertyName As String In propertyNames
             For Each item In JsonJArray
                 For Each subItem As JProperty In item
-
                     If subItem.Value.ToString.ToUpper = PropertyName.ToUpper Then
-                        myReturnList.Add((subItem.Value, DirectCast(subItem.Next, JProperty).Value))
+                        strName = subItem.Value.ToString
+                        strValue = DirectCast(subItem.Next, JProperty).Value.ToString
+                        myReturnList.Add((strName, strValue))
                     End If
                 Next
             Next
@@ -531,7 +534,7 @@ Module rxNorm
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                  */
     '/*											                          */
-    '/*    GetRxcuiByName("advil")				                              */
+    '/*    GetRxcuiByName("advil")				                          */
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically):			    	          */
     '/*											                          */
@@ -546,22 +549,93 @@ Module rxNorm
     '/*  WHO      WHEN     WHAT								              */
     '/*********************************************************************/
     '/*  Dillen  02/17/21  Function to make api call to get               */
-    '/*                      drug rxcui by name            			      */
+    '/*                      drug rxcui by name                           */
+    '/*                                                                   */
     '/*********************************************************************/
-    Public Function GetRxcuiByName(drugName As String) As String
-        Dim url As String = $"https://rxnav.nlm.nih.gov/REST/rxcui?name={drugName}"
+    Public Function GetRxcuiByName(drugName As String, propertyNames As List(Of String)) As List(Of (PropertyName As String, PropertyValue As String))
+        drugName = drugName.ToLower
+        Dim url As String = $"https://rxnav.nlm.nih.gov/REST/drugs?name={drugName}"
         'location of json <rxnormId
-        Dim trawlPointer As String = "$.idGroup.rxnormId"
+        Dim trawlPointer As String = "$.drugGroup.conceptGroup[1].conceptProperties"
         'convert web response to Jtoken
         Dim inputJson As JToken = GetJSON(url)
-        'set Jtoken into array to pull data from JSON
-        Dim trawledResult As JToken = inputJson.SelectToken(trawlPointer)
-        ''set Jtoken into array to pull data from json
-        Dim JsonJArray As JArray = DirectCast(trawledResult, JArray)
-        ' convert value from jarray to a jvalue to store the rxcui
-        Dim jValueObj As JValue = DirectCast(JsonJArray.First, JValue)
-        'returns the rxcuiID
-        Return jValueObj.Value
+        'contains the conceptProperties returned from jason
+        Dim JsonJArray As JArray = inputJson.SelectToken(trawlPointer)
+        'List of the returned results from the api 
+        Dim myReturnList As New List(Of (PropertyName As String, PropertyValue As String))
+
+        'looks through our JsonJArray for the properties specified 
+        For Each propertyName As String In propertyNames
+            For Each item As JObject In JsonJArray '
+                For Each subItem As JProperty In item.Children
+                    If subItem.Name.ToString.ToUpper = "NAME" Then
+                        myReturnList.Add((DirectCast(subItem.Previous, JProperty).Value, subItem.Value))
+                    End If
+                Next
+            Next
+        Next
+
+
+        Return myReturnList
+
+    End Function
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME: GetSuggestionList                 */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:Dillen Perron  		              */
+    '/*		         DATE CREATED: 2/25/2021     			              */
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								                  */
+    '/*											                          */
+    '/* This function calls the web api to get a list of suggested names  */
+    '/* of drugs from rxnorm api                                          */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/*                                     				              */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */
+    '/*             (NONE)								                  */
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */
+    '/*											                          */
+    '/* 			                                                      */
+    '/*********************************************************************/
+    '/*  RETURNS:								                          */
+    '/*   	 Rxcui As String					                          */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */
+    '/*											                          */
+    '/*    GetRxcuiByName("advil")				                          */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):			    	          */
+    '/*											                          */  
+    '/*											                          */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO      WHEN     WHAT								              */
+    '/*********************************************************************/
+    '/*  Dillen  02/25/21  Calls api to return suggested drug name        */
+    '/*                                                                   */
+    '/*********************************************************************/
+    Public Function GetSuggestionList(name As String) As AutoCompleteStringCollection
+        If name = "" Then Return New AutoCompleteStringCollection
+        'Location of result from api 
+        Dim trawlpointer As String = "$.suggestionGroup.suggestionList.suggestion"
+        'web address for api
+        Dim url As String = $"https://rxnav.nlm.nih.gov/REST/spellingsuggestions.json?name={name}"
+        'Gets json from web api 
+        Dim inputJSON As JToken = GetJSON(url)
+        'creates a jtoken of the location specified by twalpointer
+        Dim trawledResult As JToken = inputJSON.SelectToken(trawlpointer)
+        'creates jarray to store values of twaledResult
+        Dim jArrayObj As JArray = DirectCast(trawledResult, JArray)
+
+        'Dim jValueObj As JValue = DirectCast(jArrayObj.First, JValue)
+        Dim result As New AutoCompleteStringCollection
+        result.AddRange((From item As JValue In jArrayObj Select DirectCast(item.Value, String)).ToArray)    ' Return  jValueObj.Value
+
+        Return result
 
     End Function
 

@@ -68,7 +68,7 @@ Partial Class frmMain
         Me.pnlSideMenu.Location = New System.Drawing.Point(0, 0)
         Me.pnlSideMenu.Margin = New System.Windows.Forms.Padding(2)
         Me.pnlSideMenu.Name = "pnlSideMenu"
-        Me.pnlSideMenu.Size = New System.Drawing.Size(227, 692)
+        Me.pnlSideMenu.Size = New System.Drawing.Size(227, 711)
         Me.pnlSideMenu.TabIndex = 0
         '
         'pnlSubMenuSettings
@@ -451,7 +451,7 @@ Partial Class frmMain
         Me.pnlDockLocation.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlDockLocation.Location = New System.Drawing.Point(227, 0)
         Me.pnlDockLocation.Name = "pnlDockLocation"
-        Me.pnlDockLocation.Size = New System.Drawing.Size(1157, 692)
+        Me.pnlDockLocation.Size = New System.Drawing.Size(1107, 711)
         Me.pnlDockLocation.TabIndex = 1
         '
         'frmMain
@@ -459,7 +459,7 @@ Partial Class frmMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1384, 692)
+        Me.ClientSize = New System.Drawing.Size(1334, 711)
         Me.Controls.Add(Me.pnlDockLocation)
         Me.Controls.Add(Me.pnlSideMenu)
         Me.Margin = New System.Windows.Forms.Padding(2)

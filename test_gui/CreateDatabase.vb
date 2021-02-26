@@ -609,7 +609,7 @@ Module CreateDatabase
 							'Medication_ID'	INTEGER NOT NULL UNIQUE,
 							'Drug_Name'	TEXT NOT NULL,
 							'RXCUI_ID'	TEXT NOT NULL,
-							'Controlled'	INTEGER NOT NULL,
+							'Controlled_Flag'	INTEGER NOT NULL,
 							'NarcoticControlled_Flag'	INTEGER NOT NULL,
 							'Barcode'	TEXT NOT NULL UNIQUE,
 							'Type'	TEXT,
@@ -1428,6 +1428,7 @@ Module CreateDatabase
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  BRH  01/23/21  Initial creation of the code					*/
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
+	'/*  BRH  02/23/21  Added a Reason field							*/
 	'/*******************************************************************/
 	Public Sub CreateDiscrepanciesTable()
 		strCreateTable = "CREATE TABLE 'Discrepancies' (
@@ -1440,6 +1441,7 @@ Module CreateDatabase
 						'Approving_User_TUID'	INTEGER NOT NULL,
 						'DateTime_Entered'	TEXT NOT NULL,
 						'DateTime_Cleared'	TEXT,
+						'Reason'	TEXT NOT NULL,
 						FOREIGN KEY(" & "Primary_User_TUID" & ") REFERENCES " & "User" & "(" & "User_ID" & "),
 						FOREIGN KEY(" & "Drawer_TUID" & ") REFERENCES " & "Drawers" & "(" & "Drawers_ID" & "),
 						FOREIGN KEY(" & "Medication_TUID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
@@ -1892,7 +1894,7 @@ Module CreateDatabase
                             " the following error occured: " & vbCrLf & vbCrLf & ex.ToString)
 
         End Try
-        DBConn.Close()
-        Return strReturnedScalar
+		DBConn.Close()
+		Return strReturnedScalar
     End Function
 End Module

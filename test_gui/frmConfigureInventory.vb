@@ -315,9 +315,6 @@
             intStrength = CInt(dr(1))
             intDividerBin = CInt(dr(2))
         Next
-        Debug.WriteLine("")
-
-
 
         'based on the selected drawer we will need to call the database to see what medications are in the drawers
 
