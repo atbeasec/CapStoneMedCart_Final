@@ -546,7 +546,8 @@ Module rxNorm
     '/*  WHO      WHEN     WHAT								              */
     '/*********************************************************************/
     '/*  Dillen  02/17/21  Function to make api call to get               */
-    '/*                      drug rxcui by name            			      */
+    '/*                      drug rxcui by name                           */
+    '/*                                                                   */
     '/*********************************************************************/
     Public Function GetRxcuiByName(drugName As String, propertyNames As List(Of String)) As List(Of (PropertyName As String, PropertyValue As String))
         Dim url As String = $"https://rxnav.nlm.nih.gov/REST/drugs?name={drugName}"
@@ -554,16 +555,14 @@ Module rxNorm
         Dim trawlPointer As String = "$.drugGroup.conceptGroup[1].conceptProperties"
         'convert web response to Jtoken
         Dim inputJson As JToken = GetJSON(url)
-
+        'contains the conceptProperties returned from jason
         Dim JsonJArray As JArray = inputJson.SelectToken(trawlPointer)
-
-
-
+        'List of the returned results from the api 
         Dim myReturnList As New List(Of (PropertyName As String, PropertyValue As String))
 
-
+        'looks through our JsonJArray for the properties specified 
         For Each propertyName As String In propertyNames
-            For Each item As JObject In JsonJArray
+            For Each item As JObject In JsonJArray '
                 For Each subItem As JProperty In item.Children
                     If subItem.Name.ToString.ToUpper = "NAME" Then
                         myReturnList.Add((DirectCast(subItem.Previous, JProperty).Value, subItem.Value))
@@ -575,30 +574,57 @@ Module rxNorm
 
         Return myReturnList
 
-        'For Each item In JsonJArray
-
-        '    For Each subItem As JProperty In item
-        '        If subItem.Value = "name" Then
-        '            Return DirectCast(subItem.Next, JProperty).Value
-        '        End If
-        '    Next
-        'Next
-        'Return Nothing
-
-        ' convert value from jarray to a jvalue to store the rxcui
-        'Dim jValueObj As JValue = DirectCast(JsonJArray.First, JValue)
-        'returns the rxcuiID
-        'jValueObj.Value
-
     End Function
-
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME: GetSuggestionList                 */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:Dillen Perron  		              */
+    '/*		         DATE CREATED: 2/25/2021     			              */
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								                  */
+    '/*											                          */
+    '/* This function calls the web api to get a list of suggested names  */
+    '/* of drugs from rxnorm api                                          */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/*                                     				              */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */
+    '/*             (NONE)								                  */
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */
+    '/*											                          */
+    '/* 			                                                      */
+    '/*********************************************************************/
+    '/*  RETURNS:								                          */
+    '/*   	 Rxcui As String					                          */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */
+    '/*											                          */
+    '/*    GetRxcuiByName("advil")				                          */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):			    	          */
+    '/*											                          */  
+    '/*											                          */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO      WHEN     WHAT								              */
+    '/*********************************************************************/
+    '/*  Dillen  02/25/21  Calls api to return suggested drug name        */
+    '/*                                                                   */
+    '/*********************************************************************/
     Public Function GetSuggestionList(name As String) As AutoCompleteStringCollection
         If name = "" Then Return New AutoCompleteStringCollection
+        'Location of result from api 
         Dim trawlpointer As String = "$.suggestionGroup.suggestionList.suggestion"
+        'web address for api
         Dim url As String = $"https://rxnav.nlm.nih.gov/REST/spellingsuggestions.json?name={name}"
+        'Gets json from web api 
         Dim inputJSON As JToken = GetJSON(url)
-
+        'creates a jtoken of the location specified by twalpointer
         Dim trawledResult As JToken = inputJSON.SelectToken(trawlpointer)
+        'creates jarray to store values of twaledResult
         Dim jArrayObj As JArray = DirectCast(trawledResult, JArray)
 
         'Dim jValueObj As JValue = DirectCast(jArrayObj.First, JValue)

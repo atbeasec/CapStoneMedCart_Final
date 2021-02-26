@@ -609,7 +609,7 @@ Module CreateDatabase
 							'Medication_ID'	INTEGER NOT NULL UNIQUE,
 							'Drug_Name'	TEXT NOT NULL,
 							'RXCUI_ID'	TEXT NOT NULL,
-							'Controlled'	INTEGER NOT NULL,
+							'Controlled_Flag'	INTEGER NOT NULL,
 							'NarcoticControlled_Flag'	INTEGER NOT NULL,
 							'Barcode'	TEXT NOT NULL UNIQUE,
 							'Type'	TEXT,
