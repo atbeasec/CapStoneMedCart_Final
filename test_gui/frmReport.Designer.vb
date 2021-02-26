@@ -26,6 +26,8 @@ Partial Class frmReport
         Me.btnGenerateReport = New System.Windows.Forms.Button()
         Me.cmbReports = New System.Windows.Forms.ComboBox()
         Me.Label15 = New System.Windows.Forms.Label()
+        Me.dgvReport = New System.Windows.Forms.DataGridView()
+        CType(Me.dgvReport, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnGenerateReport
@@ -65,17 +67,29 @@ Partial Class frmReport
         Me.Label15.TabIndex = 167
         Me.Label15.Text = "Select Report:"
         '
+        'dgvReport
+        '
+        Me.dgvReport.AllowUserToOrderColumns = True
+        Me.dgvReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvReport.Location = New System.Drawing.Point(13, 65)
+        Me.dgvReport.Name = "dgvReport"
+        Me.dgvReport.Size = New System.Drawing.Size(965, 458)
+        Me.dgvReport.TabIndex = 168
+        Me.dgvReport.Visible = False
+        '
         'frmReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(990, 535)
+        Me.Controls.Add(Me.dgvReport)
         Me.Controls.Add(Me.cmbReports)
         Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.btnGenerateReport)
         Me.Name = "frmReport"
         Me.Text = "frmReport"
+        CType(Me.dgvReport, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -83,4 +97,5 @@ Partial Class frmReport
     Friend WithEvents btnGenerateReport As Button
     Friend WithEvents cmbReports As ComboBox
     Friend WithEvents Label15 As Label
+    Friend WithEvents dgvReport As DataGridView
 End Class
