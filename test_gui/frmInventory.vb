@@ -169,6 +169,117 @@ Public Class frmInventory
     End Sub
 
     Private Sub cmbMedicationName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMedicationName.SelectedIndexChanged
+        Dim strTrimmedString As String
+        Dim strSplitString() As String
+        Dim lstProperties As List(Of String) = New List(Of String)
+        Dim lstResults As List(Of (strPropertyName As String, strPropertyValue As String))
+        ' take the split of the combobox selected item
+        strTrimmedString = cmbMedicationName.Text.ToString '.Split(","))
+        ' take off the parens
+        Dim intOpenParens = InStr(strTrimmedString, "(")
+        Dim intClosedParens = InStr(strTrimmedString, ")")
+        If intOpenParens > 0 And intClosedParens > 0 Then
+            strTrimmedString = strTrimmedString.Remove(intOpenParens - 1, 1)
+            strTrimmedString = strTrimmedString.Remove(intClosedParens - 2, 1) ' remove 2 because of 0 is beginning and because the open parens is gone now too
+        End If
+        strSplitString = strTrimmedString.Split(",")
+        'Dim strParens() As String = {"(", ")"}
+        ' then trim off every space that's not necessary
+        For Each strItem In strSplitString
+            strItem = strItem.Trim
+        Next
+        ' and pass it to the function to get the atrributes
+        lstProperties.Add("AVAILABLE_STRENGTH")
+        lstProperties.Add("STRENGTH")
+        lstProperties.Add("SCHEDULE")
+        lstResults = getRxcuiProperty(strSplitString(0), lstProperties)
+        ' add the original items to the lstResults
+        lstResults.Add(("RXCUI", strSplitString(0)))
+        lstResults.Add(("NAME", strSplitString(1)))
+        ' first clear the fields
+        ComboBox3.Items.Clear()
+        ComboBox2.Items.Clear()
+        ' then populate the form and pass the results on 
+        For Each result In lstResults
+            Select Case result.strPropertyName
+                Case "AVAILABLE_STRENGTH"
+                    ComboBox3.Items.Add(result.strPropertyValue)
+                Case "STRENGTH"
+                    ComboBox3.Items.Add(result.strPropertyValue)
+                Case "SCHEDULE"
+                    If result.strPropertyValue Is Nothing Then
+                        ' do nothing
+                    ElseIf result.strPropertyValue = "1" Or "2" Or "3" Then
+                        ' insert logic here to check the controlled and narcotic
+                    ElseIf result.strPropertyValue = "2N" Or "3N" Or "4" Or "5" Then
+                        ' insert logic here to check controlled only
+                    Else
+                        ' if the value isn't in these then it must be 0 or invalid - do nothing
+                    End If
+                    ' insert logic here to populate the schedule box.
+            End Select
+        Next
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME: AddItemsToForm	              */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Eric LaVoie           		      */   
+    '/*		         DATE CREATED: 2/25/2021		                      */                             
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:								              */             
+    '/*	 This function will take the items returned by the API calls and  */                     
+    '/*  populate the form accoringly.                                    */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*											   */                     
+    '/*                                                                   */ 
+    '/*********************************************************************/
+    '/*  RETURNS:								                          */                   
+    '/*            (NOTHING)								              */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*											   */                     
+    '/*                                                                   */ 
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											                          */                     
+    '/*                                                                   */ 
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  Eric LaVoie 2/25/2021  Initial creation                          */
+    '/*                                                                   */                                                                   
+    '/*********************************************************************/
+
+    Sub AddItemsToForm(lstItems As List(Of (ParameterName As String, ParameterValue As String)))
+        ' turn off the search group box, turn on the drug input group box and turn on the save/cancel buttons
+        ' take the items for the list and add them to the appropriate boxes
+        ' add the rxcui
+        ' add the description
+        ' add the type
+        ' add the checkboxes for schedule
+        ' Case 1 - this will be a narcotic and controlled
+        ' Case 2 - this will be a narcotic and controlled
+        ' Case 2N - this will controlled and non-narcotic
+        ' Case 3 - this will be a narcotic and controlled
+        ' Case 3N - this will controlled and non-narcotic
+        ' Case 4 - this will controlled and non-narcotic
+        ' Case 5 - this will controlled and non-narcotic
+        ' Case 0 - this is not controlled nor is it a narcotic
+        ' Case Else - anything else treat as non-controlled and non-narcotic
+        ' add the strengths
+        ' use an if statement for if strength is not nothing
+        ' add if else available_strength is not nothing
+        ' add an else which means neither has a value
+
         'Dim strTrimmedString As String
         ' take the split of the combobox selected item
         ' strTrimmedString = (cmbMedicationName.Text.Split(","))(0)
@@ -177,4 +288,5 @@ Public Class frmInventory
         'strTrimmedString = Regex.Replace(strTrimmedString, ")", "")
         ' and pass it to the function to find better names
     End Sub
+
 End Class
