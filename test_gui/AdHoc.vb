@@ -117,6 +117,10 @@ Module AdHoc
         Strdatacommand = "SELECT Patient_ID FROM Patient WHERE MRN_Number = '" & intPatientMRN & "'"
         intPatientID = ExecuteScalarQuery(Strdatacommand)
 
+        Strdatacommand = "SELECT Quantity FROM DrawerMedication WHERE Medication_TUID  = '" & intMedicationID & "'"
+        intMedicationCount = CreateDatabase.ExecuteScalarQuery(Strdatacommand)
+        intMedicationCount = intMedicationCount - intAmount
+
 
         If Not IsDBNull(intMedicationDrawerID) Then
             'get current time for dateTime in table
@@ -125,6 +129,9 @@ Module AdHoc
                 "VALUES('" & intMedicationID & "', '" & intPatientID & "', '" & intUserID & "', '" & intAmount & "', '" & intMedicationDrawerID & "', '" & dtmAdhocTime & "')"
 
             'insert AdHoc
+            CreateDatabase.ExecuteInsertQuery(Strdatacommand)
+
+            Strdatacommand = "UPDATE DrawerMedication SET Quantity = '" & intMedicationCount & "' WHERE Medication_TUID = '" & intMedicationID & "'"
             CreateDatabase.ExecuteInsertQuery(Strdatacommand)
         End If
 
