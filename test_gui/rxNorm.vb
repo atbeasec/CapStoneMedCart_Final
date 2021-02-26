@@ -553,6 +553,7 @@ Module rxNorm
     '/*                                                                   */
     '/*********************************************************************/
     Public Function GetRxcuiByName(drugName As String, propertyNames As List(Of String)) As List(Of (PropertyName As String, PropertyValue As String))
+        drugName = drugName.ToLower
         Dim url As String = $"https://rxnav.nlm.nih.gov/REST/drugs?name={drugName}"
         'location of json <rxnormId
         Dim trawlPointer As String = "$.drugGroup.conceptGroup[1].conceptProperties"
