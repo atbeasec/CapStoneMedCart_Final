@@ -155,7 +155,7 @@ Partial Class frmNewPatient
         Me.Panel10.Location = New System.Drawing.Point(46, 361)
         Me.Panel10.Name = "Panel10"
         Me.Panel10.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel10.Size = New System.Drawing.Size(562, 28)
+        Me.Panel10.Size = New System.Drawing.Size(562, 31)
         Me.Panel10.TabIndex = 11
         '
         'txtAddress
@@ -166,7 +166,7 @@ Partial Class frmNewPatient
         Me.txtAddress.Location = New System.Drawing.Point(1, 1)
         Me.txtAddress.Multiline = True
         Me.txtAddress.Name = "txtAddress"
-        Me.txtAddress.Size = New System.Drawing.Size(560, 26)
+        Me.txtAddress.Size = New System.Drawing.Size(560, 29)
         Me.txtAddress.TabIndex = 11
         '
         'Panel11
@@ -220,7 +220,7 @@ Partial Class frmNewPatient
         Me.Panel14.Location = New System.Drawing.Point(206, 222)
         Me.Panel14.Name = "Panel14"
         Me.Panel14.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel14.Size = New System.Drawing.Size(100, 32)
+        Me.Panel14.Size = New System.Drawing.Size(92, 32)
         Me.Panel14.TabIndex = 6
         '
         'mtbDoB
@@ -231,7 +231,7 @@ Partial Class frmNewPatient
         Me.mtbDoB.Location = New System.Drawing.Point(1, 1)
         Me.mtbDoB.Mask = "00/00/0000"
         Me.mtbDoB.Name = "mtbDoB"
-        Me.mtbDoB.Size = New System.Drawing.Size(96, 22)
+        Me.mtbDoB.Size = New System.Drawing.Size(88, 22)
         Me.mtbDoB.TabIndex = 6
         Me.mtbDoB.ValidatingType = GetType(Date)
         '
@@ -265,7 +265,7 @@ Partial Class frmNewPatient
         Me.Panel16.Location = New System.Drawing.Point(46, 431)
         Me.Panel16.Name = "Panel16"
         Me.Panel16.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel16.Size = New System.Drawing.Size(251, 28)
+        Me.Panel16.Size = New System.Drawing.Size(251, 31)
         Me.Panel16.TabIndex = 12
         '
         'txtCity
@@ -276,7 +276,7 @@ Partial Class frmNewPatient
         Me.txtCity.Location = New System.Drawing.Point(1, 1)
         Me.txtCity.Multiline = True
         Me.txtCity.Name = "txtCity"
-        Me.txtCity.Size = New System.Drawing.Size(249, 26)
+        Me.txtCity.Size = New System.Drawing.Size(249, 29)
         Me.txtCity.TabIndex = 12
         '
         'Panel17
@@ -436,7 +436,7 @@ Partial Class frmNewPatient
         Me.Panel7.Location = New System.Drawing.Point(495, 222)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel7.Size = New System.Drawing.Size(112, 31)
+        Me.Panel7.Size = New System.Drawing.Size(112, 32)
         Me.Panel7.TabIndex = 8
         '
         'txtWeight
@@ -448,7 +448,7 @@ Partial Class frmNewPatient
         Me.txtWeight.MaxLength = 4
         Me.txtWeight.Multiline = True
         Me.txtWeight.Name = "txtWeight"
-        Me.txtWeight.Size = New System.Drawing.Size(110, 29)
+        Me.txtWeight.Size = New System.Drawing.Size(110, 30)
         Me.txtWeight.TabIndex = 8
         '
         'Panel8
@@ -657,7 +657,7 @@ Partial Class frmNewPatient
         Me.btnCancel.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCancel.ForeColor = System.Drawing.Color.White
         Me.btnCancel.Image = CType(resources.GetObject("btnCancel.Image"), System.Drawing.Image)
-        Me.btnCancel.Location = New System.Drawing.Point(177, 562)
+        Me.btnCancel.Location = New System.Drawing.Point(178, 562)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(120, 38)
         Me.btnCancel.TabIndex = 17
