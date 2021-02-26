@@ -64,8 +64,6 @@ Partial Class frmInventory
         Me.chkControlled = New System.Windows.Forms.CheckBox()
         Me.chkNarcotic = New System.Windows.Forms.CheckBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.Panel6 = New System.Windows.Forms.Panel()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Panel11 = New System.Windows.Forms.Panel()
         Me.pnlPatientName = New System.Windows.Forms.Panel()
         Me.lblPatientName = New System.Windows.Forms.Label()
@@ -358,7 +356,7 @@ Partial Class frmInventory
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(280, 214)
+        Me.Label15.Location = New System.Drawing.Point(273, 218)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(45, 21)
         Me.Label15.TabIndex = 186
@@ -422,11 +420,11 @@ Partial Class frmInventory
         '
         Me.Panel7.BackColor = System.Drawing.Color.DarkGray
         Me.Panel7.Controls.Add(Me.TextBox1)
-        Me.Panel7.Location = New System.Drawing.Point(282, 163)
+        Me.Panel7.Location = New System.Drawing.Point(274, 242)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel7.Size = New System.Drawing.Size(190, 31)
-        Me.Panel7.TabIndex = 6
+        Me.Panel7.Size = New System.Drawing.Size(202, 31)
+        Me.Panel7.TabIndex = 8
         '
         'TextBox1
         '
@@ -436,7 +434,7 @@ Partial Class frmInventory
         Me.TextBox1.Location = New System.Drawing.Point(1, 1)
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(188, 29)
+        Me.TextBox1.Size = New System.Drawing.Size(200, 29)
         Me.TextBox1.TabIndex = 5
         '
         'Label7
@@ -444,7 +442,7 @@ Partial Class frmInventory
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label7.Location = New System.Drawing.Point(277, 136)
+        Me.Label7.Location = New System.Drawing.Point(271, 137)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(76, 21)
         Me.Label7.TabIndex = 195
@@ -454,11 +452,11 @@ Partial Class frmInventory
         '
         Me.Panel6.BackColor = System.Drawing.Color.DarkGray
         Me.Panel6.Controls.Add(Me.txtType)
-        Me.Panel6.Location = New System.Drawing.Point(283, 243)
+        Me.Panel6.Location = New System.Drawing.Point(274, 160)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel6.Size = New System.Drawing.Size(190, 31)
-        Me.Panel6.TabIndex = 8
+        Me.Panel6.Size = New System.Drawing.Size(202, 28)
+        Me.Panel6.TabIndex = 6
         '
         'txtType
         '
@@ -468,7 +466,7 @@ Partial Class frmInventory
         Me.txtType.Location = New System.Drawing.Point(1, 1)
         Me.txtType.Multiline = True
         Me.txtType.Name = "txtType"
-        Me.txtType.Size = New System.Drawing.Size(188, 29)
+        Me.txtType.Size = New System.Drawing.Size(200, 26)
         Me.txtType.TabIndex = 7
         '
         'Panel10
@@ -571,27 +569,6 @@ Partial Class frmInventory
         Me.Label9.Size = New System.Drawing.Size(126, 21)
         Me.Label9.TabIndex = 110
         Me.Label9.Text = "Drawer Number:"
-        '
-        'Panel6
-        '
-        Me.Panel6.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel6.Controls.Add(Me.ComboBox2)
-        Me.Panel6.Location = New System.Drawing.Point(272, 176)
-        Me.Panel6.Name = "Panel6"
-        Me.Panel6.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel6.Size = New System.Drawing.Size(202, 28)
-        Me.Panel6.TabIndex = 3
-        '
-        'ComboBox2
-        '
-        Me.ComboBox2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ComboBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ComboBox2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(1, 1)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(200, 25)
-        Me.ComboBox2.TabIndex = 10
         '
         'Panel11
         '

@@ -204,15 +204,15 @@ Public Class frmInventory
         lstResults.Add(("RXCUI", strSplitString(0)))
         lstResults.Add(("NAME", strSplitString(1)))
         ' first clear the fields
-        ComboBox3.Items.Clear()
-        ComboBox2.Items.Clear()
+        '  ComboBox3.Items.Clear()
+        ' ComboBox2.Items.Clear()
         ' then populate the form and pass the results on 
         For Each result In lstResults
             Select Case result.strPropertyName
                 Case "AVAILABLE_STRENGTH"
-                    ComboBox3.Items.Add(result.strPropertyValue)
+                 '   ComboBox3.Items.Add(result.strPropertyValue)
                 Case "STRENGTH"
-                    ComboBox3.Items.Add(result.strPropertyValue)
+                 '   ComboBox3.Items.Add(result.strPropertyValue)
                 Case "SCHEDULE"
                     If result.strPropertyValue Is Nothing Then
                         ' do nothing
@@ -449,7 +449,7 @@ Public Class frmInventory
             '*********************************
             'Call method here to do the search
             '*********************************
-
+            SearchResults()
 
 
 
@@ -497,16 +497,30 @@ Public Class frmInventory
 
     Private Sub pnlSearchIcon_Click(sender As Object, e As EventArgs) Handles pnlSearch.Click
 
-        MessageBox.Show("Searched")
         '*********************************
         'Call method here to do the search
         '*********************************
-
+        SearchResults()
 
         'set the focus to the next control because it should be populated 
         cmbMedicationName.Select()
 
 
+    End Sub
+
+    Private Sub SearchResults()
+
+        Dim myPropertyNameList As New List(Of String)({"rxcui"})
+        Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
+
+        outputList = GetRxcuiByName(txtSearch.Text, myPropertyNameList)
+        If outputList.Count = 0 Then
+            'outputList = GetSuggestionList(txtSearch.Text)
+            ' then populate the combobox
+            ' and if they click again on an item put it into the search box and search
+            ' recursion 'til the cows come home
+        End If
+        cmbMedicationName.DataSource = outputList
     End Sub
 
 End Class
