@@ -146,7 +146,7 @@ Module Interactions
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                  */
     '/*											                          */
-    '/*    getInteractionsByName("153010")		        			          */
+    '/* getInteractionsByName("153008", myPropertyNameList)	              */
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically):			    	          */
     '/*											                          */
@@ -157,8 +157,9 @@ Module Interactions
     '/*  WHO      WHEN     WHAT								              */
     '/*                                                                   */
     '/*  Dillen  02/18/21  Function that check Interations                */
+    '/*  Dillen  02/25/21  Added functionality to return                  */
     '/*********************************************************************/
-    Function getInteractionsByName(rxcuiNum As String) As String
+    Function getInteractionsByName(rxcuiNum As String, propertyNames As List(Of String)) As List(Of (PropertyName As String, PropertyValue As String))
         'URL for finding interactions 
         Dim url As String = $"https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui={rxcuiNum}"
         'location in json of properties
@@ -166,7 +167,45 @@ Module Interactions
         'inputJSON
         Dim inputJSON As JToken = rxNorm.GetJSON(url)
         'set Jtoken into array to pull data from json
-        Dim trawledResult As JToken = inputJSON.SelectToken(trawlPointer)
-        Return trawledResult
+        Dim JsonJArray As JArray = inputJSON.SelectToken(trawlPointer)
+        Dim JsonJArrayRxcui As JArray = New JArray
+        'Stores our List of properties selected 
+        Dim myReturnList As New List(Of (PropertyName As String, PropertyValue As String))
+        Dim strName As String
+        Dim strValue As String
+
+
+        'Pulls out the data at our specified trawlPointer to retrieve severity, description, and rxcui
+        For Each propertyName As String In propertyNames
+            For Each item As JObject In JsonJArray
+                For Each subItem As JProperty In item.Children
+                    'this should return the property names severity and description
+                    For Each propertyIdentifier In propertyNames
+                        If subItem.Name.ToString.ToUpper = propertyIdentifier.ToUpper Then
+                            strName = subItem.Name
+                            strValue = subItem.Value
+                            myReturnList.Add((strName, strValue))
+                        End If
+                    Next
+                Next
+                'parses json for rxcui this will return both what drug is searched and what drug it interacts with
+                JsonJArrayRxcui = item("interactionConcept")
+                For Each interactionConcept In JsonJArrayRxcui
+                    For Each minConceptItem In interactionConcept
+                        For Each values In minConceptItem
+                            If values("rxcui") IsNot Nothing Then
+                                If values("rxcui").ToString <> rxcuiNum Then
+                                    strName = "rxcui" ' subItem.First.Value.Last.First.First.First.Name
+                                    strValue = values("rxcui") 'subItem.First.Value.Last.First.First.First.Value
+                                    myReturnList.Add((strName, strValue))
+                                End If
+                            End If
+                        Next
+                    Next
+                    Next
+            Next
+        Next
+
+        Return myReturnList
     End Function
 End Module
