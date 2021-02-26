@@ -31,7 +31,22 @@
     Private Sub btnDispense_Click(sender As Object, e As EventArgs) Handles btnDispense.Click
 
         'make sure that both patient and medication is selected before ordering the AdHoc
+
         If Not IsNothing(cmbMedications.SelectedItem) And Not IsNothing(cmbPatientName.SelectedItem) Then
+
+            Dim intMedRXCUI As Integer
+            Dim StrSelectedMedication As String
+            Dim intPatientMRN As Integer
+            Dim StrSelectedPatient As String
+
+            StrSelectedMedication = cmbMedications.SelectedItem
+            Dim strArray() As String = StrSelectedMedication.Split("--")
+            intMedRXCUI = strArray(2)
+            StrSelectedPatient = cmbPatientName.SelectedItem
+            strArray = StrSelectedPatient.Split("--")
+            intPatientMRN = strArray(2)
+
+            Interactions.GetInteractionsDispense(intMedRXCUI, intPatientMRN)
             AdHoc.InsertAdHoc(txtMRN.Text, "1", txtQuantity.Text)
         End If
     End Sub
