@@ -131,6 +131,7 @@ Module AdHoc
             'insert AdHoc
             CreateDatabase.ExecuteInsertQuery(Strdatacommand)
 
+            'send update command to the database to update the amount in the drawer minus the amount that was dispensed
             Strdatacommand = "UPDATE DrawerMedication SET Quantity = '" & intMedicationCount & "' WHERE Medication_TUID = '" & intMedicationID & "'"
             CreateDatabase.ExecuteInsertQuery(Strdatacommand)
         End If
