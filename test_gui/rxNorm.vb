@@ -557,8 +557,6 @@ Module rxNorm
 
         Dim JsonJArray As JArray = inputJson.SelectToken(trawlPointer)
 
-
-
         Dim myReturnList As New List(Of (PropertyName As String, PropertyValue As String))
 
 

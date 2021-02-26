@@ -163,18 +163,22 @@ Module Interactions
         Dim url As String = $"https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui={rxcuiNum}"
         'location in json of properties
         Dim trawlPointer As String = "$.interactionTypeGroup[0].interactionType[0].interactionPair"
+        Dim trawlPointerRxcui As String = "$.interactionTypeGroup[0].interactionType[0].interactionPair.interactionConcept"
         'inputJSON
         Dim inputJSON As JToken = rxNorm.GetJSON(url)
         'set Jtoken into array to pull data from json
         'Dim trawledResult As JToken = inputJSON.SelectToken(trawlPointer)
         Dim JsonJArray As JArray = inputJSON.SelectToken(trawlPointer)
+        Dim JsonJArrayRxcui As JArray = inputJSON.SelectToken(trawlPointerRxcui)
         'Stores our List of properties selected 
         Dim myReturnList As New List(Of (PropertyName As String, PropertyValue As String))
         Dim strName As String
         Dim strValue As String
+        'Dim arrJson As JArray = JObject.Parse(JsonJArray)
 
         For Each propertyName As String In propertyNames
             For Each item As JObject In JsonJArray
+                JsonJArrayRxcui = inputJSON.SelectToken(trawlPointerRxcui)
                 For Each subItem As JProperty In item.Children
                     For Each propertyIdentifier In propertyNames
                         If subItem.Name.ToString.ToUpper = propertyIdentifier.ToUpper Then
@@ -182,11 +186,20 @@ Module Interactions
                             strValue = subItem.Value
                             myReturnList.Add((strName, strValue))
                             'myReturnList.Add((subItem.Value, DirectCast(subItem.Next, JProperty).Value))
+                            'ElseIf subItem.minConceptItem.rxcui.value <> rxcuiNum Then
+
+                            'y($"interactionConcept[1]")
+                            'JObject.Parse(item) Then '  subItem.First.Value(Of JArray).Last.First.First.First.Name = propertyIdentifier Then
+                            'strName = "rxcui" ' subItem.First.Value.Last.First.First.First.Name
+                            'strValue = JsonJArray("interactionConcept")("1")("minConceptItem")("rxcui") 'subItem.First.Value.Last.First.First.First.Value
+                            ' myReturnList.Add((strName, strValue))
                         End If
                     Next
                 Next
             Next
         Next
+
+        ' or make another thrawler pointer and make another nested loop series.
 
         'For Each
         Debug.WriteLine(myReturnList.ToString)
