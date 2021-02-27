@@ -301,7 +301,10 @@
         ' typed something wrong. If the user tries to flag a medication without typing a value in, they should not
         ' be able to flag anything so the button will not respond.
 
-        If Not String.IsNullOrEmpty(txtBoxOnFlaggedPanel.Text) Then
+        If String.IsNullOrEmpty(txtBoxOnFlaggedPanel.Text) Then
+
+            MessageBox.Show("A count has not been entered. Please type a number into the count field.")
+        Else
 
             If systemCount = CInt(txtBoxOnFlaggedPanel.Text) Then
 
