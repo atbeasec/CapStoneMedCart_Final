@@ -553,31 +553,41 @@ Module rxNorm
     '/*                                                                   */
     '/*********************************************************************/
     Public Function GetRxcuiByName(drugName As String, propertyNames As List(Of String)) As List(Of (PropertyName As String, PropertyValue As String))
+        Dim intIndex = 1
+        Dim myReturnList As New List(Of (PropertyName As String, PropertyValue As String))
         drugName = drugName.ToLower
         Dim url As String = $"https://rxnav.nlm.nih.gov/REST/drugs?name={drugName}"
         'location of json <rxnormId
-        Dim trawlPointer As String = "$.drugGroup.conceptGroup[1].conceptProperties"
-        'convert web response to Jtoken
-        Dim inputJson As JToken = GetJSON(url)
-        'contains the conceptProperties returned from jason
-        Dim JsonJArray As JArray = inputJson.SelectToken(trawlPointer)
-        'List of the returned results from the api 
-        Dim myReturnList As New List(Of (PropertyName As String, PropertyValue As String))
 
-        'looks through our JsonJArray for the properties specified 
-        For Each propertyName As String In propertyNames
-            For Each item As JObject In JsonJArray '
-                For Each subItem As JProperty In item.Children
-                    If subItem.Name.ToString.ToUpper = "NAME" Then
-                        myReturnList.Add((DirectCast(subItem.Previous, JProperty).Value, subItem.Value))
-                    End If
+        'loop to make sure we've checked all the indexes
+        Do
+            Dim trawlPointer As String = "$.drugGroup.conceptGroup[" & intIndex & "].conceptProperties"
+            'convert web response to Jtoken
+            Dim inputJson As JToken = GetJSON(url)
+            'contains the conceptProperties returned from jason
+            Dim JsonJArray As JArray = inputJson.SelectToken(trawlPointer)
+            'List of the returned results from the api 
+
+
+            If JsonJArray Is Nothing Then
+                ' prepare for looking in the next index
+                intIndex += 1
+            Else
+                'looks through our JsonJArray for the properties specified 
+                For Each propertyName As String In propertyNames
+                    For Each item As JObject In JsonJArray '
+                        For Each subItem As JProperty In item.Children
+                            If subItem.Name.ToString.ToUpper = "NAME" Then
+                                myReturnList.Add((DirectCast(subItem.Previous, JProperty).Value, subItem.Value))
+                            End If
+                        Next
+                    Next
                 Next
-            Next
-        Next
-
-
+                ' prepare for looking in the next index
+                intIndex += 1
+            End If
+        Loop While intIndex < 5 ' arbitrarily picking 5 as we haven't seen one with more than 3 
         Return myReturnList
-
     End Function
     '/*********************************************************************/
     '/*                   FUNCTION NAME: GetSuggestionList                 */
@@ -618,25 +628,33 @@ Module rxNorm
     '/*  Dillen  02/25/21  Calls api to return suggested drug name        */
     '/*                                                                   */
     '/*********************************************************************/
-    Public Function GetSuggestionList(name As String) As AutoCompleteStringCollection
-        If name = "" Then Return New AutoCompleteStringCollection
-        'Location of result from api 
-        Dim trawlpointer As String = "$.suggestionGroup.suggestionList.suggestion"
-        'web address for api
-        Dim url As String = $"https://rxnav.nlm.nih.gov/REST/spellingsuggestions.json?name={name}"
-        'Gets json from web api 
-        Dim inputJSON As JToken = GetJSON(url)
-        'creates a jtoken of the location specified by twalpointer
-        Dim trawledResult As JToken = inputJSON.SelectToken(trawlpointer)
-        'creates jarray to store values of twaledResult
-        Dim jArrayObj As JArray = DirectCast(trawledResult, JArray)
+    Public Function GetSuggestionList(name As String) As List(Of String)
+        Dim result As New List(Of String)
+        If name = "" Then
+            result.Add("Nothing to Search")
+            Return result
+        Else
+            Dim strValue As String
+            name = name.ToLower
+            'Location of result from api 
+            Dim trawlpointer As String = "$.suggestionGroup.suggestionList.suggestion"
+            'web address for api
+            Dim url As String = $"https://rxnav.nlm.nih.gov/REST/spellingsuggestions.json?name={name}"
+            'Gets json from web api 
+            Dim inputJSON As JToken = GetJSON(url)
+            'creates a jtoken of the location specified by twalpointer
+            Dim trawledResult As JToken = inputJSON.SelectToken(trawlpointer)
+            'creates jarray to store values of twaledResult
+            Dim jArrayObj As JArray = DirectCast(trawledResult, JArray)
 
-        'Dim jValueObj As JValue = DirectCast(jArrayObj.First, JValue)
-        Dim result As New AutoCompleteStringCollection
-        result.AddRange((From item As JValue In jArrayObj Select DirectCast(item.Value, String)).ToArray)    ' Return  jValueObj.Value
+            ' now get the individual values out from the items and add them to the list
+            For Each item In jArrayObj
+                strValue = item.ToString
+                result.Add(strValue)
+            Next
 
-        Return result
-
+            Return result
+        End If
     End Function
 
 End Module

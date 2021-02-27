@@ -161,18 +161,23 @@ Public Class frmInventory
         ' and save those items
     End Sub
 
-    Private Sub btnSearch_Click(sender As Object, e As EventArgs)
+    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles pnlSearch.Click
         Dim myPropertyNameList As New List(Of String)({"rxcui"})
         Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
+        Dim suggestedList As New List(Of String)
 
         outputList = GetRxcuiByName(txtSearch.Text, myPropertyNameList)
+        ' check to see if anything comes back
         If outputList.Count = 0 Then
-            'outputList = GetSuggestionList(txtSearch.Text)
+            ' if nothing, then ask to suggest names
+            cboSuggestedNames.Visible = True
+            suggestedList = GetSuggestionList(txtSearch.Text)
             ' then populate the combobox
-            ' and if they click again on an item put it into the search box and search
-            ' recursion 'til the cows come home
+            cboSuggestedNames.DataSource = suggestedList
+        Else
+            ' otherwise populate the medication name comboBox
+            cmbMedicationName.DataSource = outputList
         End If
-        cmbMedicationName.DataSource = outputList
     End Sub
 
     Private Sub cmbMedicationName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMedicationName.SelectedIndexChanged
@@ -203,97 +208,42 @@ Public Class frmInventory
         ' add the original items to the lstResults
         lstResults.Add(("RXCUI", strSplitString(0)))
         lstResults.Add(("NAME", strSplitString(1)))
+
         ' first clear the fields
-        '  ComboBox3.Items.Clear()
-        ' ComboBox2.Items.Clear()
+        txtStrength.Text = ""
+        txtSchedule.Text = ""
+        txtType.Text = ""
+        chkControlled.Checked = False
+        chkNarcotic.Checked = False
+        txtDrawerNumber.Text = ""
+        cmbBin.Items.Clear()
+        txtQuantity.Text = ""
+        txtExpirationDate.Text = ""
+        cmbPatientPersonalMedication.SelectedItem = ""
+
         ' then populate the form and pass the results on 
         For Each result In lstResults
             Select Case result.strPropertyName
                 Case "AVAILABLE_STRENGTH"
-                 '   ComboBox3.Items.Add(result.strPropertyValue)
+                    txtStrength.Text = result.strPropertyValue
                 Case "STRENGTH"
-                 '   ComboBox3.Items.Add(result.strPropertyValue)
+                    txtStrength.Text = result.strPropertyValue
                 Case "SCHEDULE"
                     If result.strPropertyValue Is Nothing Then
                         ' do nothing
-                    ElseIf result.strPropertyValue = "1" Or "2" Or "3" Then
-                        ' insert logic here to check the controlled and narcotic
-                    ElseIf result.strPropertyValue = "2N" Or "3N" Or "4" Or "5" Then
-                        ' insert logic here to check controlled only
+                    ElseIf result.strPropertyValue = "1" Or result.strPropertyValue = "2" Or result.strPropertyValue = "3" Then
+                        ' check the controlled and narcotic
+                        chkControlled.Checked = True
+                        chkNarcotic.Checked = True
+                    ElseIf result.strPropertyValue = "2N" Or result.strPropertyValue = "3N" Or result.strPropertyValue = "4" Or result.strPropertyValue = "5" Then
+                        ' check controlled only
+                        chkControlled.Checked = True
                     Else
                         ' if the value isn't in these then it must be 0 or invalid - do nothing
                     End If
-                    ' insert logic here to populate the schedule box.
+                    txtSchedule.Text = result.strPropertyValue
             End Select
         Next
-    End Sub
-
-    '/*********************************************************************/
-    '/*                   SUBROUTINE NAME: AddItemsToForm	              */         
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:  Eric LaVoie           		      */   
-    '/*		         DATE CREATED: 2/25/2021		                      */                             
-    '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE:								              */             
-    '/*	 This function will take the items returned by the API calls and  */                     
-    '/*  populate the form accoringly.                                    */
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      						                      */           
-    '/*                                         				   */         
-    '/*********************************************************************/
-    '/*  CALLS:										                      */                 
-    '/*             (NONE)								   */             
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					          */         
-    '/*											   */                     
-    '/*                                                                   */ 
-    '/*********************************************************************/
-    '/*  RETURNS:								                          */                   
-    '/*            (NOTHING)								              */             
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								                  */             
-    '/*											   */                     
-    '/*                                                                   */ 
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											                          */                     
-    '/*                                                                   */ 
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						                      */               
-    '/*											                          */                     
-    '/*  WHO   WHEN     WHAT								              */             
-    '/*  Eric LaVoie 2/25/2021  Initial creation                          */
-    '/*                                                                   */                                                                   
-    '/*********************************************************************/
-
-    Sub AddItemsToForm(lstItems As List(Of (ParameterName As String, ParameterValue As String)))
-        ' turn off the search group box, turn on the drug input group box and turn on the save/cancel buttons
-        ' take the items for the list and add them to the appropriate boxes
-        ' add the rxcui
-        ' add the description
-        ' add the type
-        ' add the checkboxes for schedule
-        ' Case 1 - this will be a narcotic and controlled
-        ' Case 2 - this will be a narcotic and controlled
-        ' Case 2N - this will controlled and non-narcotic
-        ' Case 3 - this will be a narcotic and controlled
-        ' Case 3N - this will controlled and non-narcotic
-        ' Case 4 - this will controlled and non-narcotic
-        ' Case 5 - this will controlled and non-narcotic
-        ' Case 0 - this is not controlled nor is it a narcotic
-        ' Case Else - anything else treat as non-controlled and non-narcotic
-        ' add the strengths
-        ' use an if statement for if strength is not nothing
-        ' add if else available_strength is not nothing
-        ' add an else which means neither has a value
-
-        'Dim strTrimmedString As String
-        ' take the split of the combobox selected item
-        ' strTrimmedString = (cmbMedicationName.Text.Split(","))(0)
-        ' then trim off everything that's not a number
-        ' strTrimmedString = Regex.Replace(strTrimmedString, "(", "")
-        'strTrimmedString = Regex.Replace(strTrimmedString, ")", "")
-        ' and pass it to the function to find better names
     End Sub
 
     '/*********************************************************************/
@@ -462,52 +412,6 @@ Public Class frmInventory
 
     End Sub
 
-    '/*********************************************************************/
-    '/* SubProgram NAME:pnlSearchIcon_Click                               */         
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:  Collin Krygier   		          */   
-    '/*		         DATE CREATED: 		 2/26/2021                        */                             
-    '/*********************************************************************/
-    '/*  Subprogram PURPOSE:								              */             
-    '/*	 The user can select the search icon to search as an alternative  */
-    '/*  clicking enter                                                   */
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      						                      */           
-    '/*  None                                                             */
-    '/*********************************************************************/
-    '/*  CALLS:										                      */                 
-    '/*                          */
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					          */         
-    '/*	 sender- object representing a control                            */
-    '/*  e- eventargs indicating there is an event handle assigned        */
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								                  */             
-    '/*                                     */     
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*	 None                                                             */
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						                      */               
-    '/*											                          */                     
-    '/*  WHO   WHEN     WHAT								              */             
-    '/*  ---   ----     ------------------------------------------------  */
-    '/*  Collin Krygier  2/16/2021    Initial creation                    */
-    '/*********************************************************************/
-
-    Private Sub pnlSearchIcon_Click(sender As Object, e As EventArgs) Handles pnlSearch.Click
-
-        '*********************************
-        'Call method here to do the search
-        '*********************************
-        SearchResults()
-
-        'set the focus to the next control because it should be populated 
-        cmbMedicationName.Select()
-
-
-    End Sub
-
     Private Sub SearchResults()
 
         Dim myPropertyNameList As New List(Of String)({"rxcui"})
@@ -523,4 +427,55 @@ Public Class frmInventory
         cmbMedicationName.DataSource = outputList
     End Sub
 
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME:  					   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Eric LaVoie           		         */   
+    '/*		         DATE CREATED: 		   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								   */             
+    '/*											   */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Private Sub cboSuggestedNames_SelectedItemChanged(sender As Object, e As EventArgs) Handles cboSuggestedNames.Leave
+        Dim strTrimmedSelection As String = cboSuggestedNames.SelectedItem.ToString
+        ' if we'd have to trim it the logic would be here
+
+        'send the item into the search box
+        txtSearch.Text = strTrimmedSelection
+        ' change the visibility of the comboboxes and clear them out
+        cboSuggestedNames.Visible = False
+        'cboSuggestedNames.Items.Clear()
+        cmbMedicationName.Visible = True
+        'cmbMedicationName.Items.Clear()
+        pnlSearch.Select()
+    End Sub
 End Class
