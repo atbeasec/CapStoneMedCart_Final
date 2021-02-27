@@ -173,7 +173,7 @@
             .Name = "pnlMedicationFlagged" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Dock = System.Windows.Forms.DockStyle.Top
-            .Tag = intMedicationTUID
+            .Tag = intMedicationTUID & "," & strMedicationName & "," & strDrawerNumber & "," & strSection & "," & strSystemCount
         End With
 
         'put the border panel inside the main panel
@@ -270,7 +270,7 @@
                             'Debug.Print(txtBox.Text) 'textbox will contain the typed count 
                             'Debug.Print(pnlPanel.BackColor.ToString) 'if the backcolor is red, then the item was flagged
 
-                            Dim medicationID As Integer = CInt(pnlPanel.Tag)
+                            Dim medicationID As String = pnlPanel.Tag
                             Dim userCount As Integer = CInt(txtBox.Text)
 
 
