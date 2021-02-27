@@ -157,15 +157,11 @@ Module Discrepancies
         Dim intDrawerTUID As Integer
         Dim intMedicationTUID As Integer
 
-        If CheckSystemCountVSActualCount(intExpectedCount, intActualCount).Equals(False) Then
-
-            Dim dtmAdhocTime As String = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")
+        Dim dtmAdhocTime As String = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")
             intDrawerTUID = GetDrawerTUID(intDrawerNumber, intBinNumber)
             intMedicationTUID = GetMedicationID(intDrawerTUID)
-            InsertDiscrepancy(intDrawerTUID, intMedicationTUID, intExpectedCount, intActualCount, intPrimaryUserID, intApprovingUserID, dtmAdhocTime)
-        Else
-            MessageBox.Show("No Discrepancy recorded, counts are equal")
-        End If
+        InsertDiscrepancy(intDrawerTUID, intMedicationTUID, intExpectedCount, intActualCount, intPrimaryUserID, intApprovingUserID, dtmAdhocTime)
+
     End Sub
 
     '/*********************************************************************/
@@ -410,4 +406,24 @@ Module Discrepancies
         strbSQL.Append("UPDATE Discrepancies SET DateTime_Cleared ='" & dtmAdhocTime & "' WHERE Discrepancies_ID = '" & intDiscrepID & "';")
         CreateDatabase.ExecuteInsertQuery(strbSQL.ToString)
     End Sub
+
+
+    Public Function IsInsertedAlready(ByRef intMedicationID As Integer, ByRef intCount As Integer)
+        Dim strbSQL As StringBuilder = New StringBuilder
+        Dim intDatabaseCount As Integer
+
+
+        strbSQL.Append("SELECT Actual_Count FROM Discrepancies where Medication_TUID = " & intMedicationID & " AND DateTime_Cleared IS NULL")
+        intDatabaseCount = CreateDatabase.ExecuteScalarQuery(strbSQL.ToString)
+
+        If IsDBNull(intDatabaseCount) Then
+            Return False
+        Else
+            Return True
+        End If
+    End Function
+
+
+
+
 End Module

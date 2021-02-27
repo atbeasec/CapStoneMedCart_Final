@@ -274,16 +274,16 @@
                             Dim userCount As Integer = CInt(txtBox.Text)
 
 
-                            'If IsInsertedAlready(medicationID, userCount) = True Then
+                            If Discrepancies.IsInsertedAlready(medicationID, userCount) = True Then
 
-                            '   update the record to make sure the new count is selected.
-                            '   UpdateTheRecord(medicationID,userCount)
-                            'Else
+                                '   update the record to make sure the new count is selected.
+                                '   UpdateTheRecord(medicationID,userCount)
+                            Else
 
-                            '   insert the record because it is not already in the database.
-                            '   InsertDiscrepancy(medicationID,userCount)
+                                '   insert the record because it is not already in the database.
+                                '   InsertDiscrepancy(medicationID,userCount)
 
-                            'End If
+                            End If
 
                         End If
                     Next
