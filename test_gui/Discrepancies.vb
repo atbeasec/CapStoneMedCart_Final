@@ -151,15 +151,14 @@ Module Discrepancies
     '/*  ---   ----     ------------------------------------------------- */
     '/*  AB    2/22/2021 Initial creation
     '/*********************************************************************/
-    Private Sub CreateDiscrepancy(ByRef intDrawerNumber As Integer, ByRef intBinNumber As Integer, ByRef strMedicationName As String,
-                                  ByRef intExpectedCount As Integer, ByRef intActualCount As Integer, ByRef intPrimaryUserID As Integer,
-                                  ByRef intApprovingUserID As Integer)
+    Private Sub CreateDiscrepancy(ByRef intDrawerNumber As Integer, ByRef intBinNumber As Integer, ByRef intExpectedCount As Integer,
+                                  ByRef intActualCount As Integer, ByRef intPrimaryUserID As Integer, ByRef intApprovingUserID As Integer)
         Dim intDrawerTUID As Integer
         Dim intMedicationTUID As Integer
 
         Dim dtmAdhocTime As String = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")
-            intDrawerTUID = GetDrawerTUID(intDrawerNumber, intBinNumber)
-            intMedicationTUID = GetMedicationID(intDrawerTUID)
+        intDrawerTUID = GetDrawerTUID(intDrawerNumber, intBinNumber)
+        intMedicationTUID = GetMedicationID(intDrawerTUID)
         InsertDiscrepancy(intDrawerTUID, intMedicationTUID, intExpectedCount, intActualCount, intPrimaryUserID, intApprovingUserID, dtmAdhocTime)
 
     End Sub
