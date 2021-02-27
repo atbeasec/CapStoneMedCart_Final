@@ -248,32 +248,46 @@
         Dim ctlControl As Control
         Dim txtBox As TextBox
 
+
         'the construction of the panels is important to consider here. Look over the createPanel method to understand
         'there is a panel docked inside of another panel which is used to create a padding effect.
         'to get any controls off of the panel, we need to iterate twice through the controls to reach these items
 
         For Each ctlPanelPadding In flpEndOfShiftCount.Controls
             ' retreiving the pannels for padding
-
             For Each pnlPanel In ctlPanelPadding.Controls
                 ' retreiving list of all panels within the padding
 
-                For Each ctlControl In pnlPanel.Controls
-                    ' retreiving the items in the panel such as labels and textbox values
+                'check if the panel is marked as red
+                If pnlPanel.BackColor = Color.Red Then
 
-                    If TypeName(ctlControl) = "TextBox" Then
-                        txtBox = CType(ctlControl, TextBox)
+                    For Each ctlControl In pnlPanel.Controls
+                        ' retreiving the items in the panel such as labels and textbox values
+                        If TypeName(ctlControl) = "TextBox" Then
+
+                            txtBox = CType(ctlControl, TextBox)
+                            'Debug.Print(pnlPanel.Tag) 'tag will retreive the ID of the medication because it is added there in there create panel method
+                            'Debug.Print(txtBox.Text) 'textbox will contain the typed count 
+                            'Debug.Print(pnlPanel.BackColor.ToString) 'if the backcolor is red, then the item was flagged
+
+                            Dim medicationID As Integer = CInt(pnlPanel.Tag)
+                            Dim userCount As Integer = CInt(txtBox.Text)
 
 
-                        'HERE call the insert or update statement to database to pipe the data over for reporting
-                        Debug.Print(pnlPanel.Tag) 'tag will retreive the ID of the medication because it is added there inthe create panel method
-                        Debug.Print(txtBox.Text) 'textbox will contain the typed count 
-                        Debug.Print(pnlPanel.BackColor.ToString) 'if the backcolor is red, then the item was flagged
-                        'Debug.Print(ctlControl.Name)
+                            'If IsInsertedAlready(medicationID, userCount) = True Then
 
+                            '   update the record to make sure the new count is selected.
+                            '   UpdateTheRecord(medicationID,userCount)
+                            'Else
 
-                    End If
-                Next
+                            '   insert the record because it is not already in the database.
+                            '   InsertDiscrepancy(medicationID,userCount)
+
+                            'End If
+
+                        End If
+                    Next
+                End If
             Next
         Next
 
@@ -532,4 +546,12 @@
         flpFlowPanel.Controls.Clear()
 
     End Sub
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+
+
+        ExtractFormDataForDatabase()
+
+    End Sub
+
 End Class
