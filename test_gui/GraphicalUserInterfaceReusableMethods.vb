@@ -308,7 +308,7 @@
 
             If systemCount = CInt(txtBoxOnFlaggedPanel.Text) Then
 
-                MessageBox.Show("The system count matches the entered count. This will not be flagged as a descrepancy.")
+                MessageBox.Show("The system count matches the entered count. This will not be flagged as a discrepancy .")
 
             Else
 
