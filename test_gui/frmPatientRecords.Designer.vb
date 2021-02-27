@@ -37,6 +37,7 @@ Partial Class frmPatientRecords
         Me.Panel11 = New System.Windows.Forms.Panel()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.flpPatientRecords = New System.Windows.Forms.FlowLayoutPanel()
+        Me.btnSearch = New System.Windows.Forms.Button()
         Me.pnlHeader.SuspendLayout()
         Me.pnlHeaderPatientRecords.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -137,6 +138,7 @@ Partial Class frmPatientRecords
         'pnlHeaderPatientRecords
         '
         Me.pnlHeaderPatientRecords.BackColor = System.Drawing.Color.White
+        Me.pnlHeaderPatientRecords.Controls.Add(Me.btnSearch)
         Me.pnlHeaderPatientRecords.Controls.Add(Me.btnNewPatient)
         Me.pnlHeaderPatientRecords.Controls.Add(Me.Panel2)
         Me.pnlHeaderPatientRecords.Dock = System.Windows.Forms.DockStyle.Top
@@ -207,6 +209,15 @@ Partial Class frmPatientRecords
         Me.flpPatientRecords.Size = New System.Drawing.Size(950, 543)
         Me.flpPatientRecords.TabIndex = 17
         '
+        'btnSearch
+        '
+        Me.btnSearch.Location = New System.Drawing.Point(332, 18)
+        Me.btnSearch.Name = "btnSearch"
+        Me.btnSearch.Size = New System.Drawing.Size(75, 23)
+        Me.btnSearch.TabIndex = 19
+        Me.btnSearch.Text = "Search"
+        Me.btnSearch.UseVisualStyleBackColor = True
+        '
         'frmPatientRecords
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -242,4 +253,5 @@ Partial Class frmPatientRecords
     Friend WithEvents Label7 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents flpPatientRecords As FlowLayoutPanel
+    Friend WithEvents btnSearch As Button
 End Class
