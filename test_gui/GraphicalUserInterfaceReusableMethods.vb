@@ -287,35 +287,65 @@
     Public Sub DynamicFlagMedicationButton(sender As Object, ByVal e As EventArgs)
 
 
-        Dim pnlFlaggedPannel As Panel
-        Dim txtBoxOnFlaggedPanel As TextBox = Nothing
+        ' Dim pnlFlaggedPannel As Panel
+        ' Dim txtBoxOnFlaggedPanel As TextBox = Nothing
 
-        pnlFlaggedPannel = CType(sender.parent, Panel)
-        txtBoxOnFlaggedPanel = FindTextBoxOnPanel(pnlFlaggedPannel)
-        Debug.Print(pnlFlaggedPannel.Name)
+        Dim pnlFlaggedPannel As Panel = CType(sender.parent, Panel)
+        Dim txtBoxOnFlaggedPanel As TextBox = FindTextBoxOnPanel(pnlFlaggedPannel)
 
-        If Not pnlFlaggedPannel.BackColor = Color.Red Then
+        Dim systemCount As Integer = CInt(FindLabelOnPanel(pnlFlaggedPannel).Text)
 
-            'find the textbox and set the field to be read only
-            'txtBoxOnFlaggedPanel.ReadOnly = True
-            'txtBoxOnFlaggedPanel.AcceptsTab = False
 
-            txtBoxOnFlaggedPanel.Enabled = False
+        ' when using the flag, we need to check that the system count is not the same as the user count
+        ' if it is, then there is nothing to flag and we need to let the user know that incase they
+        ' typed something wrong. If the user tries to flag a medication without typing a value in, they should not
+        ' be able to flag anything so the button will not respond.
 
-            ' change the panel color to be red
-            pnlFlaggedPannel.BackColor = Color.Red
+        If String.IsNullOrEmpty(txtBoxOnFlaggedPanel.Text) Then
 
+            MessageBox.Show("A count has not been entered. Please type a number into the count field.")
         Else
 
-            'find the textbox and set the field to be editable
-            'txtBoxOnFlaggedPanel.ReadOnly = False
-            'txtBoxOnFlaggedPanel.AcceptsTab = True
-            txtBoxOnFlaggedPanel.Enabled = True
+            If systemCount = CInt(txtBoxOnFlaggedPanel.Text) Then
 
-            ' change the panel color to be white
-            pnlFlaggedPannel.BackColor = Color.White
+                MessageBox.Show("The system count matches the entered count. This will not be flagged as a discrepancy .")
+
+            Else
+
+                ' at this point there is a valid difference and we will want to lock the textbox and change
+                ' the color of the panel so it is clear a discrepancy is being marked.
+
+                If Not pnlFlaggedPannel.BackColor = Color.Red Then
+
+                    'find the textbox and set the field to be read only
+                    'txtBoxOnFlaggedPanel.ReadOnly = True
+                    'txtBoxOnFlaggedPanel.AcceptsTab = False
+
+                    txtBoxOnFlaggedPanel.Enabled = False
+
+                    ' change the panel color to be red
+                    pnlFlaggedPannel.BackColor = Color.Red
+
+                Else
+
+                    'find the textbox and set the field to be editable
+                    'txtBoxOnFlaggedPanel.ReadOnly = False
+                    'txtBoxOnFlaggedPanel.AcceptsTab = True
+                    txtBoxOnFlaggedPanel.Enabled = True
+
+                    ' change the panel color to be white
+                    pnlFlaggedPannel.BackColor = Color.White
+
+                End If
+
+            End If
+
 
         End If
+
+
+
+        ' Debug.Print(pnlFlaggedPannel.Name)
 
     End Sub
 
@@ -338,6 +368,27 @@
         Return txtBox
 
     End Function
+
+    Public Function FindLabelOnPanel(ByVal pnlFlagged As Panel) As Label
+
+        ' search for control with the name txtCount
+        ' this control will be the textbox on the selected panel
+        Const lblName As String = "lblSystemCount"
+        Dim ctlControl As Control
+        Dim lblLabel As Label = Nothing
+
+        ' looking at each control on the panel
+        For Each ctlControl In pnlFlagged.Controls
+            ' if the current control is the textbox, then asign the textbox variable to this 
+            If ctlControl.Name.Contains(lblName) Then
+                lblLabel = CType(ctlControl, Label)
+            End If
+        Next
+
+        Return lblLabel
+
+    End Function
+
 
     Public Sub CreateTextBox(ByVal pnlPanelName As Panel, ByVal intPanelsAddedCount As Integer, ByVal intX As Integer, ByVal intY As Integer)
 
