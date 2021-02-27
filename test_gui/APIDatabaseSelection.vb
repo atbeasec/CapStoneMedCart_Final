@@ -1,6 +1,7 @@
 'Import necessary libraries to connect to the SQLite database
 Imports System.IO
-
+'Import necessary to use StringBuilder class
+Imports System.Text
 '/*******************************************************************/
 '/*                   FILE NAME: APIDatabaseSelection.vb            */
 '/*******************************************************************/
@@ -42,7 +43,8 @@ Imports System.IO
 '/*  Cody Russell    02/3/21   Initial creation                     */
 '/*******************************************************************/
 Module APIDatabaseSelection
-
+	Public strRXCUI As String
+	Public strName As String
 	'/*******************************************************************/
 	'/*                   Subroutine NAME:        GetDrugRXCUI		    */
 	'/*******************************************************************/
@@ -279,21 +281,18 @@ Module APIDatabaseSelection
 	'/*  Cody Russell 02/9/21  Initial creation of the code	        	*/
 	'/*  Cody Russell 02/9/21  Made changes to a few sql statements     */
 	'/*	BRH	 02/25/21	Made changes with updated database fields		*/
+	'/*	BRH	 02/27/21	Updated functionality for new API implementation*/
 	'/*******************************************************************/
-	Sub CompareMedications(DrugName As String, RXCUID As Integer, ControlledFlag As Integer, NarcoticFlag As Integer,
+	Sub CompareMedications(DrugName As String, RXCUID As String, ControlledFlag As Integer, NarcoticFlag As Integer,
 								 Barcode As String, Type As String, Strength As String, Schedule As Integer, ActiveFlag As Integer)
 
 		'Create a dataset to hold database data for that
 		Dim dsMedications As DataSet
 
 		'Select the specific table and the data in each column, filling a dataset through the different parameters
-		'dsMedications = ExecuteSelectQuery("SELECT Drug_Name, RXCUI_ID, Controlled_Flag, NarcoticControlled_Flag, Barcode, Type, Strength, Schedule, Active_Flag
-		'                         FROM Medication WHERE Drug_Name ='" & DrugName & "' AND RXCUI_ID = '" & RXCUID &
-		'	   "' AND Controlled_Flag = '" & ControlledFlag & "'AND NarcoticControlled_Flag = '" & NarcoticFlag &
-		'	   "' AND Barcode = '" & Barcode & "' AND Type = '" & Type & "'AND Strength = '" & Strength &
-		'	   "'AND Schedule = '" & Schedule & "' AND Active_Flag = '" & ActiveFlag & "'")
-
-		dsMedications = ExecuteSelectQuery("SELECT * FROM Medication WHERE Drug_Name='" & DrugName & "' AND RXCUI_ID = '" & RXCUID & "'")
+		'Searching by RXCUI because they are never reused or deleted
+		'Source: https://www.nlm.nih.gov/research/umls/rxnorm/docs/techdoc.html Section 11.5
+		dsMedications = ExecuteSelectQuery("SELECT * FROM Medication WHERE RXCUI_ID = '" & RXCUID & "'")
 
 		'MessageBox.Show(dsMedications.Tables(0).Rows.Count)
 
@@ -305,34 +304,148 @@ Module APIDatabaseSelection
 			                          Strength, Schedule, Active_Flag) VALUES('" & DrugName & "','" & RXCUID & "','" & ControlledFlag & "','" & NarcoticFlag &
 								"','" & Barcode & "','" & Type & "','" & Strength & "','" & Schedule & "','" & ActiveFlag & "')")
 
+			MessageBox.Show("Medication was successfully inserted")
+
 		Else
 
 			For Each dsValue As DataRow In dsMedications.Tables(0).Rows
-				If dsValue(2) <> ControlledFlag Then
-					'update the controlled flag field in database
-				ElseIf dsValue(3) <> NarcoticFlag Then
-					'update the narcotic flag field in database
-				ElseIf dsValue(4) <> Barcode Then
-					'update the barcode field in database
-				ElseIf dsValue(5) <> Type Then
-					'update the type field in database
-				ElseIf dsValue(6) <> Strength Then
-					'update the strength field in database
-				ElseIf dsValue(7) <> Schedule Then
-					'update the schedule field in datbase
-				ElseIf dsValue(8) <> ActiveFlag Then
-					'update the active flag in the database
-				End If
-			Next
+				'Send an update sql statement to the database
 
-			'	'Send an update sql statement to the database
-			'	ExecuteScalarQuery("UPDATE Medication SET Controlled = '" & ControlledFlag & "', NarcoticControlled_Flag = '" & NarcoticFlag &
-			'					   "', Barcode = '" & Barcode & "', Type = '" & Type & "', Strength = '" & Strength &
-			'					   "', Active_Flag = '" & ActiveFlag & "'WHERE RXCUI_ID = '" & RXCUID &
-			'					   "'Drug_Name =" & DrugName & "';")
+				If dsValue(3) <> ControlledFlag Then
+					'update the controlled flag field in database
+					ExecuteScalarQuery("UPDATE Medication SET Controlled_Flag = '" & ControlledFlag & "' WHERE RXCUI_ID = '" & RXCUID & "';")
+				End If
+
+				If dsValue(4) <> NarcoticFlag Then
+					'update the narcotic flag field in database
+					ExecuteScalarQuery("UPDATE Medication SET NarcoticControlled_Flag = '" & NarcoticFlag & "' WHERE RXCUI_ID = '" & RXCUID & "';")
+				End If
+
+				If dsValue(6) <> Type Then
+					'update the type field in database
+					ExecuteScalarQuery("UPDATE Medication SET Type = '" & Type & "' WHERE RXCUI_ID = '" & RXCUID & "';")
+				End If
+
+				If dsValue(7) <> Strength Then
+					'update the strength field in database
+					ExecuteScalarQuery("UPDATE Medication SET Strength = '" & Strength & "' WHERE RXCUI_ID = '" & RXCUID & "';")
+				End If
+
+				If dsValue(8) <> Schedule Then
+					'update the schedule field in datbase
+					ExecuteScalarQuery("UPDATE Medication SET Schedule = '" & "' WHERE RXCUI_ID = '" & RXCUID & "';")
+				End If
+
+				If dsValue(9) <> ActiveFlag Then
+					'update the active flag in the database
+					ExecuteScalarQuery("UPDATE Medication SET Active_Flag = '" & "' WHERE RXCUI_ID = '" & RXCUID & "';")
+				End If
+
+				MessageBox.Show("Medication was successfully updated")
+
+			Next
 
 			'Clear the dataset after it is sent to the database
 			dsMedications.Clear()
 		End If
 	End Sub
+
+	'/*******************************************************************/
+	'/*    SUBROUTINE NAME:			getDrugNameRxcui					*/
+	'/*******************************************************************/
+	'/*                   WRITTEN BY:  	Breanna Howey					*/
+	'/*		         DATE CREATED: 	   02/27/21							*/
+	'/*******************************************************************/
+	'/*  SUBROUTINE PURPOSE:											*/
+	'/*	The purpose of this subroutine is to store the drug RXCUI and name
+	'/* found in the frmInventory file									*/
+	'/*******************************************************************/
+	'/*  CALLED BY:   													*/
+	'/*   cmbMedicationName_SelectedIndexChanged   						*/
+	'/*******************************************************************/
+	'/*  CALLS:															*/
+	'/*  ExecuteQuery()													*/
+	'/*******************************************************************/
+	'/*  PARAMETER LIST (In Parameter Order):							*/
+	'/*																	*/
+	'/*  lstResults - Stores a list of RXCUI's and names				*/
+	'/*******************************************************************/
+	'/* SAMPLE INVOCATION:												*/
+	'/*																	*/
+	'/* getDrugNameRxcui(lstResults										*/	
+	'/*******************************************************************/
+	'/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+	'/*																	*/
+	'/*  (None)															*/
+	'/*******************************************************************/
+	'/* MODIFICATION HISTORY:											*/
+	'/*																	*/
+	'/*  WHO   WHEN     WHAT											*/
+	'/*  ---   ----     ------------------------------------------------*/
+	'/*  BRH  02/27/21  Initial creation of the code					*/
+	'/*******************************************************************/
+	Public Sub getDrugNameRxcui(lstResults As List(Of (strPropertyName As String, strPropertyValue As String)))
+
+		For Each result In lstResults
+			Select Case result.strPropertyName
+				Case "RXCUI"
+					strRXCUI = result.strPropertyValue
+				Case "NAME"
+					strName = result.strPropertyValue
+			End Select
+		Next
+	End Sub
+
+	'/*******************************************************************/
+	'/*    SUBROUTINE NAME:			generateSampleBarcode				*/
+	'/*******************************************************************/
+	'/*                   WRITTEN BY:  	Breanna Howey					*/
+	'/*		         DATE CREATED: 	   02/27/21							*/
+	'/*******************************************************************/
+	'/*  SUBROUTINE PURPOSE:											*/
+	'/*	The purpose of this subroutine is to generate sample barcodes for/
+	'/*	insertion in the database.										*/
+	'/*******************************************************************/
+	'/*  CALLED BY:   													*/
+	'/*   btnSave_Click()						   						*/
+	'/*******************************************************************/
+	'/*  CALLS:															*/
+	'/*  (NONE)															*/
+	'/*******************************************************************/
+	'/*  PARAMETER LIST (In Parameter Order):							*/
+	'/*																	*/
+	'/* (None)															*/
+	'/*******************************************************************/
+	'/* SAMPLE INVOCATION:												*/
+	'/*																	*/
+	'/* generateSampleBarcode()											*/	
+	'/*******************************************************************/
+	'/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+	'/*																	*/
+	'/*	intCharacterInString - Stores the random length of the barcode	*/
+	'/*  strPossibleCharacters - Stores a list of possible barcode		*/
+	'/*							characters								*/
+	'/*	strRandom - Stores a new random variable						*/
+	'/*	strStringBuilder - Stores a new stringbuilder variable			*/
+	'/*******************************************************************/
+	'/* MODIFICATION HISTORY:											*/
+	'/*																	*/
+	'/*  WHO   WHEN     WHAT											*/
+	'/*  ---   ----     ------------------------------------------------*/
+	'/*  BRH  02/27/21  Initial creation of the code					*/
+	'/*******************************************************************/
+	Function generateSampleBarcode() As String
+		Dim strPossibleCharacters As String = "abcdefghijklmnopqrstuvwxyz0123456789"
+		Static strRandom As New Random
+		Dim intCharactersInString As Integer = strRandom.Next(1, 10)
+		Dim strStringBuilder As New StringBuilder
+		For i As Integer = 1 To intCharactersInString
+			Dim idx As Integer = strRandom.Next(0, strPossibleCharacters.Length)
+			strStringBuilder.Append(strPossibleCharacters.Substring(idx, 1))
+		Next
+		'Adding Sample to the end of the barcode to denote that it is a sample barcode
+		strStringBuilder.Append("SAMPLE")
+		Return strStringBuilder.ToString()
+	End Function
+
 End Module
