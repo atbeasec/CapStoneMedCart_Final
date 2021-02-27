@@ -280,7 +280,7 @@
         Dim dsMedicationDataset As DataSet
         strSqlCommand = "SELECT Medication_TUID, Drug_Name, Drawer_Number, Divider_Bin, Quantity FROM DrawerMedication " &
             "INNER JOIN Medication on Medication.Medication_ID = DrawerMedication.Medication_TUID " &
-            "INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID WHERE Medication.Controlled = '1' AND Medication.NarcoticControlled_Flag = '0'"
+            "INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID WHERE Medication.Controlled_Flag = '1' AND Medication.NarcoticControlled_Flag = '0'"
         dsMedicationDataset = CreateDatabase.ExecuteSelectQuery(strSqlCommand)
         For Each dr As DataRow In dsMedicationDataset.Tables(0).Rows
             frmEndOfShift.CreatePanel(frmEndOfShift.flpEndOfShiftCount, dr(0), dr(1), dr(2), dr(3), dr(4))
@@ -319,14 +319,40 @@
         Dim dsMedicationDataset As DataSet
         strSqlCommand = "SELECT Medication_TUID, Drug_Name, Drawer_Number, Divider_Bin, Quantity FROM DrawerMedication " &
             "INNER JOIN Medication on Medication.Medication_ID = DrawerMedication.Medication_TUID " &
-            "INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID WHERE Medication.Controlled = '1'"
+            "INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID WHERE Medication.Controlled_Flag = '1'"
         dsMedicationDataset = CreateDatabase.ExecuteSelectQuery(strSqlCommand)
         For Each dr As DataRow In dsMedicationDataset.Tables(0).Rows
             frmEndOfShift.CreatePanel(frmEndOfShift.flpEndOfShiftCount, dr(0), dr(1), dr(2), dr(3), dr(4))
         Next
     End Sub
 
-
+    '/*********************************************************************/
+    '/*                   Function NAME:NarcoticEndOfShift           */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   02/10/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: 
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):			   		   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*	 									                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  02/10/21	  Initial creation of the code    */
+    '/*********************************************************************/
     Public Sub NarcoticEndOfShift()
         Dim strSqlCommand As String
         Dim dsMedicationDataset As DataSet
@@ -339,12 +365,39 @@
         Next
     End Sub
 
+    '/*********************************************************************/
+    '/*                   Function NAME:NonNarcoticEndOfShift           */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   02/10/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: 
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):			   		   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*	 									                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  02/10/21	  Initial creation of the code    */
+    '/*********************************************************************/
     Public Sub NonNarcoticEndOfShift()
         Dim strSqlCommand As String
         Dim dsMedicationDataset As DataSet
         strSqlCommand = "SELECT Medication_TUID, Drug_Name, Drawer_Number, Divider_Bin, Quantity FROM DrawerMedication " &
             "INNER JOIN Medication on Medication.Medication_ID = DrawerMedication.Medication_TUID " &
-            "INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID WHERE Medication.Controlled = '0'"
+            "INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID WHERE Medication.Controlled_Flag = '0'"
         dsMedicationDataset = CreateDatabase.ExecuteSelectQuery(strSqlCommand)
         For Each dr As DataRow In dsMedicationDataset.Tables(0).Rows
             frmEndOfShift.CreatePanel(frmEndOfShift.flpEndOfShiftCount, dr(0), dr(1), dr(2), dr(3), dr(4))
