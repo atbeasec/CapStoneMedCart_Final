@@ -334,7 +334,8 @@ Module Discrepancies
         strArray = intMedicationID.Split(",")
         Dim intDatabaseCount As String
 
-
+        'create a sql statement for checking if a actual count is returned with the medication ID and no cleared time.
+        'if the sql command returns nothing then there is no entry already, if true then it is already in the database as an uncleared discrepancy
         strbSQL.Append("SELECT Actual_Count FROM Discrepancies where Medication_TUID = " & strArray(0) & " AND DateTime_Cleared IS NULL")
         intDatabaseCount = CreateDatabase.ExecuteScalarQuery(strbSQL.ToString)
 
