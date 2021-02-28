@@ -195,8 +195,8 @@ Module Discrepancies
                                   ByRef intApprovingUserID As Integer, ByRef dtmDateTimeEntered As String)
 
         Dim strbSQL As StringBuilder = New StringBuilder
-        strbSQL.Append("INSERT INTO Discrepancies(Drawer_TUID, Medication_TUID, Expected_Count, Actual_Count, Primary_User_TUID, Approving_User_TUID, DateTime_Entered) ")
-        strbSQL.Append("VALUES('" & intDrawerTUID & "', '" & intMedicationID & "', '" & intExpectedCount & "', '" & intActualCount & "', '" & intPrimaryUserID & "', '" & intApprovingUserID & "', '" & dtmDateTimeEntered & "')")
+        strbSQL.Append("INSERT INTO Discrepancies(Drawer_TUID, Medication_TUID, Expected_Count, Actual_Count, Primary_User_TUID, Approving_User_TUID, DateTime_Entered, Reason) ")
+        strbSQL.Append("VALUES('" & intDrawerTUID & "', '" & intMedicationID & "', '" & intExpectedCount & "', '" & intActualCount & "', '" & intPrimaryUserID & "', '" & intApprovingUserID & "', '" & dtmDateTimeEntered & "', ' ')")
         CreateDatabase.ExecuteInsertQuery(strbSQL.ToString)
     End Sub
 
