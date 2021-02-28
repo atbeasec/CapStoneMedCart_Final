@@ -157,13 +157,14 @@ Module Discrepancies
     End Sub
 
     '/*********************************************************************/
-    '/*                   Sub NAME: ResolveDiscrepancies    */         
+    '/*                   Sub NAME: InsertDiscrepancy    */         
     '/*********************************************************************/
     '/*                   WRITTEN BY: Alexander Beasecker    		         */   
     '/*		         DATE CREATED: 2/22/2021 		   */                             
     '/*********************************************************************/
-    '/*  Sub PURPOSE: this sub is used to update the discrepancy cleared 
-    '/* time. 
+    '/*  Sub PURPOSE: this subs purpose is to create the sql command string
+    '/*   with the provided variables to pass along to the generic insert method
+    '/*  it will insert a entry into the discrepancies table
     '/*********************************************************************/
     '/*  CALLED BY:   	      						         */           
     '/*                                         				   */         
@@ -198,51 +199,6 @@ Module Discrepancies
         strbSQL.Append("VALUES('" & intDrawerTUID & "', '" & intMedicationID & "', '" & intExpectedCount & "', '" & intActualCount & "', '" & intPrimaryUserID & "', '" & intApprovingUserID & "', '" & dtmDateTimeEntered & "')")
         CreateDatabase.ExecuteInsertQuery(strbSQL.ToString)
     End Sub
-
-    '/*********************************************************************/
-    '/*                   FUNCTION NAME: GetDrawerTUID    */         
-    '/*********************************************************************/
-    '/*                   WRITTEN BY: Alexander Beasecker    		         */   
-    '/*		         DATE CREATED: 2/22/2021 		   */                                           
-    '/*********************************************************************/
-    '/*  FUNCTION PURPOSE:								   */             
-    '/*											   */                     
-    '/*                                                                   */
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      						         */           
-    '/*                                         				   */         
-    '/*********************************************************************/
-    '/*  CALLS:										   */                 
-    '/*             (NONE)								   */             
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					   */         
-    '/*											   */                     
-    '/*                                                                     
-    '/*********************************************************************/
-    '/*  RETURNS:								         */                   
-    '/*            (NOTHING)								   */             
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								   */             
-    '/*											   */                     
-    '/*                                                                     
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
-    '/*                                                                     
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						         */               
-    '/*											   */                     
-    '/*  WHO   WHEN     WHAT								   */             
-    '/*  ---   ----     ------------------------------------------------- */
-    '/*  AB    2/22/2021 Initial creation
-    '/*********************************************************************/
-    Private Function GetDrawerTUID(ByRef intDrawerNumber As Integer, ByRef intBinNumber As Integer)
-        Dim strbSQL As StringBuilder = New StringBuilder
-        Dim intDrawerTUID As Integer
-        strbSQL.Append("Select Drawers_ID from Drawers Where Drawer_Number = '" & intDrawerNumber & "' AND Drawer_Node = '" & intBinNumber & "'")
-        intDrawerTUID = CreateDatabase.ExecuteScalarQuery(strbSQL.ToString)
-        Return intDrawerTUID
-    End Function
 
     '/*********************************************************************/
     '/*                   FUNCTION NAME: GetMedicationID    */         
