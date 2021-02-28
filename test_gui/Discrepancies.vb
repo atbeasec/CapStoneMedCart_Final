@@ -153,7 +153,6 @@ Module Discrepancies
     '/*********************************************************************/
     Private Sub CreateDiscrepancy(ByRef intDrawerNumber As Integer, ByRef intBinNumber As Integer, ByRef intExpectedCount As Integer,
                                   ByRef intActualCount As Integer, ByRef intPrimaryUserID As Integer, ByRef intApprovingUserID As Integer, ByRef intMedicationTUID As Integer)
-        Dim intDrawerTUID As Integer
 
         Dim dtmAdhocTime As String = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")
 
@@ -377,9 +376,6 @@ Module Discrepancies
     '/*											   */                     
     '/*     intDiscrepID As Integer                                                                
     '/*********************************************************************/
-    '/*  RETURNS:								         */                   
-    '/*            (NOTHING)								   */             
-    '/*********************************************************************/
     '/* SAMPLE INVOCATION:								   */             
     '/*											   */                     
     '/*      ResolveDiscrepancies(10)                                                               
@@ -405,46 +401,30 @@ Module Discrepancies
     End Sub
 
     '/*********************************************************************/
-    '/*                   Sub NAME: PopulateDiscrepancies    */         
+    '/*                   Sub NAME: IsInsertedAlready    */         
     '/*********************************************************************/
     '/*                   WRITTEN BY: Alexander Beasecker    		         */   
-    '/*		         DATE CREATED: 2/22/2021 		   */                       
+    '/*		         DATE CREATED: 2/27/2021 		   */                       
     '/*********************************************************************/
-    '/*  FUNCTION PURPOSE:	this sub is used to populate all active
-    '/* discrepancies to the discrepancy form
-    '/*
+    '/*  Sub PURPOSE
     '/*********************************************************************/
     '/*  CALLED BY:   	      						         */           
-    '/*                                         				   */         
     '/*********************************************************************/
     '/*  CALLS:										   */                 
-    '/* strbSQL.Append(
-    '*/ strbSQL.Clear()    
-    '*/ frmDiscrepancies.CreatePanel(
-    '*/ CreateDatabase.ExecuteSelectQuery(
-    '*/ CreateDatabase.ExecuteScalarQuery(
-    '*/
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					   */         
-    '/*											   */                     
-    '/*                                                                     
-    '/*********************************************************************/
-    '/*  RETURNS:								         */                   
-    '/*            (NOTHING)								   */             
+    '/*											   */                                                                              
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								   */             
-    '/*											   */                     
-    '/*                                                                     
+    '/*											   */                                                                                
     '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
-    '/*                                                                     
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */                                                         
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
-    '/*  AB    2/22/2021 Initial creation
+    '/*  AB    2/27/2021 Initial creation
     '/*********************************************************************/
     Public Function IsInsertedAlready(ByRef intMedicationID As String, ByRef intCount As Integer)
         Dim strbSQL As StringBuilder = New StringBuilder
