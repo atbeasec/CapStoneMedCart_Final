@@ -404,7 +404,48 @@ Module Discrepancies
         CreateDatabase.ExecuteInsertQuery(strbSQL.ToString)
     End Sub
 
-
+    '/*********************************************************************/
+    '/*                   Sub NAME: PopulateDiscrepancies    */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY: Alexander Beasecker    		         */   
+    '/*		         DATE CREATED: 2/22/2021 		   */                       
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:	this sub is used to populate all active
+    '/* discrepancies to the discrepancy form
+    '/*
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/* strbSQL.Append(
+    '*/ strbSQL.Clear()    
+    '*/ frmDiscrepancies.CreatePanel(
+    '*/ CreateDatabase.ExecuteSelectQuery(
+    '*/ CreateDatabase.ExecuteScalarQuery(
+    '*/
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  AB    2/22/2021 Initial creation
+    '/*********************************************************************/
     Public Function IsInsertedAlready(ByRef intMedicationID As String, ByRef intCount As Integer)
         Dim strbSQL As StringBuilder = New StringBuilder
         Dim strArray() As String
@@ -422,14 +463,136 @@ Module Discrepancies
         End If
     End Function
 
+    '/*********************************************************************/
+    '/*                   Sub NAME: PopulateDiscrepancies    */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY: Alexander Beasecker    		         */   
+    '/*		         DATE CREATED: 2/22/2021 		   */                       
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:	this sub is used to populate all active
+    '/* discrepancies to the discrepancy form
+    '/*
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/* strbSQL.Append(
+    '*/ strbSQL.Clear()    
+    '*/ frmDiscrepancies.CreatePanel(
+    '*/ CreateDatabase.ExecuteSelectQuery(
+    '*/ CreateDatabase.ExecuteScalarQuery(
+    '*/
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  AB    2/22/2021 Initial creation
+    '/*********************************************************************/
     Public Sub UpdateSplit(ByRef intMedicationString As String, ByRef intCount As Integer)
         Dim strArray() As String
         strArray = intMedicationString.Split(",")
     End Sub
+
+    '/*********************************************************************/
+    '/*                   Sub NAME: PopulateDiscrepancies    */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY: Alexander Beasecker    		         */   
+    '/*		         DATE CREATED: 2/22/2021 		   */                       
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:	this sub is used to populate all active
+    '/* discrepancies to the discrepancy form
+    '/*
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/* strbSQL.Append(
+    '*/ strbSQL.Clear()    
+    '*/ frmDiscrepancies.CreatePanel(
+    '*/ CreateDatabase.ExecuteSelectQuery(
+    '*/ CreateDatabase.ExecuteScalarQuery(
+    '*/
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  AB    2/22/2021 Initial creation
+    '/*********************************************************************/
     Private Sub UpdateDiscrepancy()
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   Sub NAME: InsertSplit    */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY: Alexander Beasecker    		         */   
+    '/*		         DATE CREATED: 2/22/2021 		   */                       
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:	this sub is used to populate all active
+    '/* discrepancies to the discrepancy form
+    '/*
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '*/
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  AB    2/27/2021 Initial creation
+    '/*********************************************************************/
     Public Sub InsertSplit(ByRef intMedicationString As String, ByRef intCount As Integer)
         Dim strArray() As String
         strArray = intMedicationString.Split(",")
