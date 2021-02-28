@@ -549,7 +549,7 @@ Module Discrepancies
 
         Dim Strdatacommand As String
 
-        'create update statement for setting the barcode
+        'create update statement for updating discrepancy amount on uncleared discrepancy
         Strdatacommand = "UPDATE Discrepancies SET Actual_Count = '" & intActualCount & "' WHERE Medication_TUID = ' " & intMedicationID & " ' AND DateTime_Cleared IS NULL"
         CreateDatabase.ExecuteInsertQuery(Strdatacommand)
 
