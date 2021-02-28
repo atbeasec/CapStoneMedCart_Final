@@ -419,9 +419,6 @@ Public Class frmInventory
             txtSearch.Select(txtSearch.Text.Length, 0)
 
 
-
-
-
             '*********************************
             'Call method here to do the search
             '*********************************
