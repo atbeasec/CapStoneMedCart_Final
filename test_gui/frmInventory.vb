@@ -139,12 +139,36 @@ Public Class frmInventory
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        Dim intControlled As Integer
+        Dim intNarcotic As Integer
+
+        If chkControlled.Checked Then
+            intControlled = 1
+        Else
+            intControlled = 0
+        End If
+
+        If chkNarcotic.Checked Then
+            intNarcotic = 1
+        Else
+            intNarcotic = 0
+        End If
         ' make sure the proper information is selected or entered
         'Dim strTrimmedString As String
         ' take the split of the combobox selected item
         'strTrimmedString = (cmbMedicationName.Text.Split(","))(0)
         ' then trim off everything that's not a number
         'strTrimmedString = Regex.Replace(strTrimmedString, "(", "")
+
+        'Check if all necessary textboxes for a new medication are full
+        'If yes, then compare the medications in the database and either insert
+        'the record or update records in the database
+        If txtSchedule.Text <> Nothing And txtType.Text <> Nothing And txtStrength.Text <> Nothing Then
+            CompareMedications(strName.Substring(0, strName.Length), strRXCUI, intControlled, intNarcotic, generateSampleBarcode(), txtType.Text, txtStrength.Text, CInt(txtSchedule.Text), 1)
+        Else
+            MessageBox.Show("Please enter data in all fields before saving.")
+        End If
+
 
 
         ' search the information from the allproperties API call
@@ -244,6 +268,8 @@ Public Class frmInventory
                     txtSchedule.Text = result.strPropertyValue
             End Select
         Next
+
+        getDrugNameRxcui(lstResults)
     End Sub
 
     '/*********************************************************************/
@@ -478,4 +504,5 @@ Public Class frmInventory
         'cmbMedicationName.Items.Clear()
         pnlSearch.Select()
     End Sub
+
 End Class
