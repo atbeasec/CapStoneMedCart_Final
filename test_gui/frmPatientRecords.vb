@@ -71,6 +71,8 @@
                                            "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1 ORDER BY Patient.Patient_Last_Name ASC;")
         Fill_Patient_Table(strFillSQL)
 
+        txtSearch.Text = txtSearch.Tag
+        txtSearch.ForeColor = Color.Silver
     End Sub
 
     Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal strID As String, ByVal strFirstName As String, ByVal strLastName As String, ByVal strBirthday As String, ByVal strRoom As String, ByVal strBed As String)
@@ -485,23 +487,50 @@
         Return intMRN
     End Function
 
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
-        Dim strFillSQL As String
-        If TextBox1.Text = "" Then
+    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
 
-            strFillSQL = "select Patient.MRN_Number, Patient.Patient_First_Name, " &
-                                           "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name from Patient LEFT JOIN " &
-                                           "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1 ORDER BY Patient.Patient_Last_Name ASC;"
-            Fill_Patient_Table(strFillSQL)
+        ' detects if there has been another line added to the textbox
+        ' indicating the user has selected the "enter" key
+        If txtSearch.Lines.Length > 1 Then
+
+            ' since we know the user selected enter and we are using a multiline textbox,
+            ' the text input will be equal to whatever the user typed + a CRLF character
+            ' we will replace that character with an empty string as if it was never typed.
+            Dim singleLine = txtSearch.Text.Replace(vbCrLf, "")
+
+            ' reset the textbox to be empty because it currently contains the user types string + CRLF
+            txtSearch.Text = ""
+
+            ' set the textbox to contain the searched word on a single line
+            txtSearch.Text = singleLine
+
+            ' by default VB will move the text cursor position to be at the first character after adding
+            ' a new string to the textbox. This looks weird and seems like a bug to the user when the
+            ' cursor position moves from the last character to the first. We will set to be the last 
+            ' with the code below.
+            txtSearch.Select(txtSearch.Text.Length, 0)
+
+            ' this information will be called when the user selects enter and the search event detects this being done.
+            Dim strFillSQL As String
+            If txtSearch.Text = "" Then
+
+                strFillSQL = "select Patient.MRN_Number, Patient.Patient_First_Name, " &
+                                               "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name from Patient LEFT JOIN " &
+                                               "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1 ORDER BY Patient.Patient_Last_Name ASC;"
+                Fill_Patient_Table(strFillSQL)
+            End If
+
         End If
+
+
     End Sub
 
-    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+    Private Sub searchIcon_Click(sender As Object, e As EventArgs) Handles pnlSearch.Click
         Dim strFillSQL As String = "select Patient.MRN_Number, Patient.Patient_First_Name, " &
                                                    "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name from Patient LEFT JOIN " &
                                                    "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1 AND " &
-                                                   "(Patient_First_Name Like '" & TextBox1.Text & "%' OR Patient_Last_Name Like '" & TextBox1.Text & "%'" &
-                                                   "OR MRN_Number like '" & TextBox1.Text & "%') ORDER BY Patient.Patient_Last_Name ASC;"
+                                                   "(Patient_First_Name Like '" & txtSearch.Text & "%' OR Patient_Last_Name Like '" & txtSearch.Text & "%'" &
+                                                   "OR MRN_Number like '" & txtSearch.Text & "%') ORDER BY Patient.Patient_Last_Name ASC;"
         Fill_Patient_Table(strFillSQL)
     End Sub
 
@@ -537,4 +566,18 @@
             End With
         Next
     End Sub
+
+    Private Sub txtSearch_GotFocus(sender As Object, e As EventArgs) Handles txtSearch.GotFocus
+
+        SearchLogic.txtSearchGotFocusEvent(txtSearch)
+
+    End Sub
+
+    Private Sub txtSearch_LostFocus(sender As Object, e As EventArgs) Handles txtSearch.LostFocus
+
+        SearchLogic.txtSearchLostFocusEvent(txtSearch)
+
+    End Sub
+
+
 End Class
