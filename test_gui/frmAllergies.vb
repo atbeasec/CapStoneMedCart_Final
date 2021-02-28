@@ -336,7 +336,47 @@
             cmbMedicationName.SelectedIndex = -1
         End If
     End Sub
-
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: btnAllergySave_Click           */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:Adam Kott            		          */   
+    '/*		         DATE CREATED:2/24/2021                     		   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:	When the user clicks the save button the      */             
+    '/* database needs to be updated and then form needs to be reset and  */                     
+    '/*  locked                                                            */
+    '/*********************************************************************/
+    '/*  CALLED BY: user clicking save button					         */           
+    '/*                                                    				   */         
+    '/*********************************************************************/
+    '/*  CALLS: DisableEditButtons
+    '/* ExecuteScalarQuery						                           */                 
+    '/* GetPatientTuid                  								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*   */
+    '/*                                       */
+    '/*              */
+    '/*   
+    '/*********************************************************************/
     Private Sub btnAllergySave_Click(sender As Object, e As EventArgs) Handles btnAllergySave.Click
         Dim strAllergyName = cmbAllergies.Text
         Dim intPatientTuid = GetPatientTuid()
