@@ -508,51 +508,50 @@ Module Discrepancies
     Public Sub UpdateSplit(ByRef intMedicationString As String, ByRef intCount As Integer)
         Dim strArray() As String
         strArray = intMedicationString.Split(",")
+        UpdateDiscrepancy(strArray(0), intCount)
     End Sub
 
     '/*********************************************************************/
-    '/*                   Sub NAME: PopulateDiscrepancies    */         
+    '/*                   Sub NAME: UpdateDiscrepancy    */         
     '/*********************************************************************/
     '/*                   WRITTEN BY: Alexander Beasecker    		         */   
-    '/*		         DATE CREATED: 2/22/2021 		   */                       
+    '/*		         DATE CREATED: 2/27/2021 		   */                       
     '/*********************************************************************/
-    '/*  FUNCTION PURPOSE:	this sub is used to populate all active
-    '/* discrepancies to the discrepancy form
-    '/*
+    '/*  Sub PURPOSE:	this subs purpose is to update a discrepancy amount
+    '/* for a discrepancy record that is already in the system but not cleared
     '/*********************************************************************/
     '/*  CALLED BY:   	      						         */           
-    '/*                                         				   */         
+    '/*  frmEndOfSHift when saving a report and the discrepancy is already
+    '/*  in the system but not cleared
     '/*********************************************************************/
     '/*  CALLS:										   */                 
-    '/* strbSQL.Append(
-    '*/ strbSQL.Clear()    
-    '*/ frmDiscrepancies.CreatePanel(
-    '*/ CreateDatabase.ExecuteSelectQuery(
-    '*/ CreateDatabase.ExecuteScalarQuery(
-    '*/
+    '*/ CreateDatabase.ExecuteInsertQuery(
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					   */         
     '/*											   */                     
-    '/*                                                                     
-    '/*********************************************************************/
-    '/*  RETURNS:								         */                   
-    '/*            (NOTHING)								   */             
+    '/*  intMedicationID,  intActualCount                                                                    
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								   */             
     '/*											   */                     
-    '/*                                                                     
+    '/*     InsertSplit(1,12)                                                                
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
     '/*											   */                     
-    '/*                                                                     
+    '/*     Strdatacommand                                                               
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
-    '/*  AB    2/22/2021 Initial creation
+    '/*  AB    2/27/2021 Initial creation
     '/*********************************************************************/
-    Private Sub UpdateDiscrepancy()
+    Private Sub UpdateDiscrepancy(ByRef intMedicationID As Integer, ByRef intActualCount As Integer)
+
+        Dim Strdatacommand As String
+
+        'create update statement for setting the barcode
+        Strdatacommand = "UPDATE Discrepancies SET Actual_Count = '" & intActualCount & "' WHERE Medication_TUID = ' " & intMedicationID & " ' AND DateTime_Cleared IS NULL"
+        CreateDatabase.ExecuteInsertQuery(Strdatacommand)
 
     End Sub
 
@@ -560,32 +559,29 @@ Module Discrepancies
     '/*                   Sub NAME: InsertSplit    */         
     '/*********************************************************************/
     '/*                   WRITTEN BY: Alexander Beasecker    		         */   
-    '/*		         DATE CREATED: 2/22/2021 		   */                       
+    '/*		         DATE CREATED: 2/27/2021 		   */                       
     '/*********************************************************************/
-    '/*  FUNCTION PURPOSE:	this sub is used to populate all active
-    '/* discrepancies to the discrepancy form
-    '/*
+    '/*  Sub PURPOSE:	this subs purpose is to split the string array that is 
+    '/* passed to then pass it to the discrepancy inserting method
     '/*********************************************************************/
     '/*  CALLED BY:   	      						         */           
-    '/*                                         				   */         
+    '/*  frmEndOfSHift when saving a report and the discrepancy is not already 
+    '*/  in the system        
     '/*********************************************************************/
     '/*  CALLS:										   */                 
-    '*/
+    '*/ CreateDiscrepancy()
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					   */         
     '/*											   */                     
-    '/*                                                                     
-    '/*********************************************************************/
-    '/*  RETURNS:								         */                   
-    '/*            (NOTHING)								   */             
+    '/*  intMedicationString,  intCount                                                                    
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								   */             
     '/*											   */                     
-    '/*                                                                     
+    '/*     InsertSplit(StringArray,12)                                                                
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
     '/*											   */                     
-    '/*                                                                     
+    '/*     strArray()                                                                
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
@@ -594,9 +590,12 @@ Module Discrepancies
     '/*  AB    2/27/2021 Initial creation
     '/*********************************************************************/
     Public Sub InsertSplit(ByRef intMedicationString As String, ByRef intCount As Integer)
+
+        'split array that has all the medication information
         Dim strArray() As String
         strArray = intMedicationString.Split(",")
 
+        'pass to method to create discrepancy 
         CreateDiscrepancy(strArray(2), strArray(3), strArray(4), intCount, 1, 1, strArray(0))
     End Sub
 

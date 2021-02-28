@@ -277,7 +277,7 @@
                             If Discrepancies.IsInsertedAlready(medicationID, userCount) = True Then
 
                                 '   update the record to make sure the new count is selected.
-                                '   UpdateTheRecord(medicationID,userCount)
+                                Discrepancies.UpdateSplit(medicationID, userCount)
                             Else
 
                                 '   insert the record because it is not already in the database.
