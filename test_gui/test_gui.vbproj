@@ -367,6 +367,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="rxNorm.vb" />
+    <Compile Include="SearchLogic.vb" />
     <Compile Include="SettingsChange.Designer.vb">
       <DependentUpon>SettingsChange.vb</DependentUpon>
     </Compile>
