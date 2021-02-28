@@ -149,7 +149,6 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormPassing.vb" />
     <Compile Include="frmAdminSettings.Designer.vb">
       <DependentUpon>frmAdminSettings.vb</DependentUpon>
     </Compile>
