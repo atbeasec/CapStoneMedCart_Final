@@ -201,52 +201,6 @@ Module Discrepancies
     End Sub
 
     '/*********************************************************************/
-    '/*                   FUNCTION NAME: GetMedicationID    */         
-    '/*********************************************************************/
-    '/*                   WRITTEN BY: Alexander Beasecker    		         */   
-    '/*		         DATE CREATED: 2/22/2021 		   */                            
-    '/*********************************************************************/
-    '/*  FUNCTION PURPOSE:								   */             
-    '/*											   */                     
-    '/*                                                                   */
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      						         */           
-    '/*                                         				   */         
-    '/*********************************************************************/
-    '/*  CALLS:										   */                 
-    '/*             (NONE)								   */             
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					   */         
-    '/*											   */                     
-    '/*                                                                     
-    '/*********************************************************************/
-    '/*  RETURNS:								         */                   
-    '/*            (NOTHING)								   */             
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								   */             
-    '/*											   */                     
-    '/*                                                                     
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
-    '/*                                                                     
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						         */               
-    '/*											   */                     
-    '/*  WHO   WHEN     WHAT								   */             
-    '/*  ---   ----     ------------------------------------------------- */
-    '/*  AB    2/22/2021 Initial creation
-    '/*********************************************************************/
-    Private Function GetMedicationID(ByRef intDrawerTUID As Integer)
-        Dim strbSQL As StringBuilder = New StringBuilder
-        Dim intMedicationTUID As Integer
-        strbSQL.Append("Select Medication_TUID from DrawerMedication Where Drawers_TUID = '" & intDrawerTUID & "'")
-        intMedicationTUID = CreateDatabase.ExecuteScalarQuery(strbSQL.ToString)
-        Return intMedicationTUID
-    End Function
-
-
-    '/*********************************************************************/
     '/*                   Sub NAME: PopulateDiscrepancies    */         
     '/*********************************************************************/
     '/*                   WRITTEN BY: Alexander Beasecker    		         */   
