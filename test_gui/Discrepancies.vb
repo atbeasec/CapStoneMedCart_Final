@@ -152,14 +152,12 @@ Module Discrepancies
     '/*  AB    2/22/2021 Initial creation
     '/*********************************************************************/
     Private Sub CreateDiscrepancy(ByRef intDrawerNumber As Integer, ByRef intBinNumber As Integer, ByRef intExpectedCount As Integer,
-                                  ByRef intActualCount As Integer, ByRef intPrimaryUserID As Integer, ByRef intApprovingUserID As Integer)
+                                  ByRef intActualCount As Integer, ByRef intPrimaryUserID As Integer, ByRef intApprovingUserID As Integer, ByRef intMedicationTUID As Integer)
         Dim intDrawerTUID As Integer
-        Dim intMedicationTUID As Integer
 
         Dim dtmAdhocTime As String = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")
-        intDrawerTUID = GetDrawerTUID(intDrawerNumber, intBinNumber)
-        intMedicationTUID = GetMedicationID(intDrawerTUID)
-        InsertDiscrepancy(intDrawerTUID, intMedicationTUID, intExpectedCount, intActualCount, intPrimaryUserID, intApprovingUserID, dtmAdhocTime)
+
+        InsertDiscrepancy(intDrawerNumber, intMedicationTUID, intExpectedCount, intActualCount, intPrimaryUserID, intApprovingUserID, dtmAdhocTime)
 
     End Sub
 
@@ -407,22 +405,36 @@ Module Discrepancies
     End Sub
 
 
-    Public Function IsInsertedAlready(ByRef intMedicationID As Integer, ByRef intCount As Integer)
+    Public Function IsInsertedAlready(ByRef intMedicationID As String, ByRef intCount As Integer)
         Dim strbSQL As StringBuilder = New StringBuilder
-        Dim intDatabaseCount As Integer
+        Dim strArray() As String
+        strArray = intMedicationID.Split(",")
+        Dim intDatabaseCount As String
 
 
-        strbSQL.Append("SELECT Actual_Count FROM Discrepancies where Medication_TUID = " & intMedicationID & " AND DateTime_Cleared IS NULL")
+        strbSQL.Append("SELECT Actual_Count FROM Discrepancies where Medication_TUID = " & strArray(0) & " AND DateTime_Cleared IS NULL")
         intDatabaseCount = CreateDatabase.ExecuteScalarQuery(strbSQL.ToString)
 
-        If IsDBNull(intDatabaseCount) Then
+        If IsNothing(intDatabaseCount) Then
             Return False
         Else
             Return True
         End If
     End Function
 
+    Public Sub UpdateSplit(ByRef intMedicationString As String, ByRef intCount As Integer)
+        Dim strArray() As String
+        strArray = intMedicationString.Split(",")
+    End Sub
+    Private Sub UpdateDiscrepancy()
 
+    End Sub
 
+    Public Sub InsertSplit(ByRef intMedicationString As String, ByRef intCount As Integer)
+        Dim strArray() As String
+        strArray = intMedicationString.Split(",")
+
+        CreateDiscrepancy(strArray(2), strArray(3), strArray(4), intCount, 1, 1, strArray(0))
+    End Sub
 
 End Module

@@ -281,7 +281,7 @@
                             Else
 
                                 '   insert the record because it is not already in the database.
-                                '   InsertDiscrepancy(medicationID,userCount)
+                                Discrepancies.InsertSplit(medicationID, userCount)
 
                             End If
 
