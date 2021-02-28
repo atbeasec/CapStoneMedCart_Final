@@ -1,6 +1,13 @@
 ﻿Public Class frmPatientInfo
 
-    Dim intPatientMRN As Integer
+    Private intPatientMRN As Integer
+
+    Public Sub setPatientMrn(ByVal mrn As Integer)
+
+        intPatientMRN = mrn
+
+    End Sub
+
     'Dim ContactPanelsAddedCount As Integer = 0
     'Dim CurrentContactPanelName As String = Nothing
 
@@ -71,6 +78,15 @@
 
     'End Sub
 
+    '  Public Sub New()
+
+
+    ' This call is required by the designer.
+    '     InitializeComponent()
+
+    ' Add any initialization after the InitializeComponent() call.
+
+    ' End Sub
     Public Sub DynamicButtonEditRecord_Click(ByVal sender As Object, ByVal e As EventArgs)
 
         'show the add new patient form filled in with the patients infromation
@@ -129,7 +145,7 @@
         'cboBed.Enabled = False 'this will stop the people from selecting a bed before they
         'select a room. 
 
-        intPatientMRN = txtMRN.Text
+        ' intPatientMRN = txtMRN.Text
         PatientInformation.GetAllergies(intPatientMRN)
         PatientInformation.GetPatientInformation(intPatientMRN)
         PatientInformation.getPrescriptions(intPatientMRN)
@@ -394,10 +410,19 @@
 
 
     Private Sub btnDispenseMedication_Click(sender As Object, e As EventArgs) Handles btnDispenseMedication.Click
-        Dispense.Show()
+
+        ' pass MRN to the dispense screen because it needs to be used to be sent back to the patient info screen if the user
+        ' decides to go back a screen.
+
+        Dispense.SetPatientMrn(intPatientMRN)
+        frmMain.OpenChildForm(Dispense)
         DispenseHistory.DispensemedicationPopulate(intPatientMRN)
         PatientInformation.PopulatePatientDispenseInfo(intPatientMRN)
         PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientMRN)
+
+        '  Dim frmCurrentForm As Form = Me
+
+
     End Sub
 
     ' Private Sub Button1_Click(sender As Object, e As EventArgs)
@@ -405,14 +430,20 @@
     '  End Sub
 
     Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
-        Waste.Show()
+
+        Waste.SetPatientMRN(intPatientMRN)
+        frmMain.OpenChildForm(Waste)
+
     End Sub
 
 
-
     Private Sub btnAddAllergies_Click(sender As Object, e As EventArgs) Handles btnAddAllergies.Click
-        'frmAllergies.Label5.Text = intPatientMRN
-        frmAllergies.Show()
+
+        ' pass the MRN of the current patient to the next form
+        frmAllergies.SetPatientMrn(CInt(txtMRN.Text))
+
+        ' closing this form and making the main container open the allergies page
+        frmMain.OpenChildForm(frmAllergies)
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click

@@ -845,4 +845,11 @@ Public Class frmNewPatient
         End If
         Return hasError
     End Function
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+
+
+        frmMain.OpenChildForm(frmPatientRecords)
+
+    End Sub
 End Class

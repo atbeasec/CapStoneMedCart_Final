@@ -1,4 +1,18 @@
 ﻿Public Class frmAllergies
+
+    Private intPatientInformationMRN As Integer
+
+    Public Sub SetPatientMrn(ByVal mrn As Integer)
+
+        intPatientInformationMRN = mrn
+
+    End Sub
+    Public Function GetPatientMrn() As Integer
+
+        Return intPatientInformationMRN
+
+    End Function
+
     Private Sub frmAllergies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         btnAllergyCancel.Visible = False
         btnAllergySave.Visible = False
@@ -42,7 +56,7 @@
     End Sub
 
     Public Function GetPatientTuid() As Integer
-        Dim intPatientInformationMRN = CInt(frmPatientInfo.txtMRN.Text)
+        ' Dim intPatientInformationMRN = CInt(frmPatientInfo.txtMRN.Text)
         ' on form load we need to select all allergies from the database and show them here:
         Dim intPatientTuid As Integer = CInt(CreateDatabase.ExecuteScalarQuery("select patient.Patient_ID From Patient " &
                         "where Patient.MRN_Number=" & (intPatientInformationMRN).ToString & ";"))
@@ -162,7 +176,7 @@
         Dim strAllergyName = " "
         Dim strSeverity = " "
         Dim intPatientTuid = GetPatientTuid()
-        Dim intPatientInformationMRN = CInt(frmPatientInfo.txtMRN.Text)
+
         ' at some point error handling will be added here and if all data is valid 2 things will occur:
         '   1. first we will take the items from all the textfields and insert it into the database.
         '   2. We will just take those same fields and call the create panel method to throw the items on the UI
@@ -201,7 +215,14 @@
             ' populate the screen from a manually added allergy.
             'probably going to need a select query to get the medication name from the TUID
             Debug.WriteLine("Value must already be in the table")
-            frmPatientInfo.lstBoxAllergies.Items.Clear()
+
+
+            'cant update the allergies list box this way because the form is not opened and cannot be referenced.
+            'frmPatientInfo.lstBoxAllergies.Items.Clear()
+
+            '************************
+            ' update the allergies table in the database instead for the patient. When the form loads, the patient's new allergies will be visible.
+            '************************
 
             GetAllergies(intPatientInformationMRN)
         End If
@@ -237,6 +258,7 @@
         cmbMedicationName.DroppedDown = True
 
     End Sub
+
 
     Private Sub cmbMedicationName_LostFocus(sender As Object, e As EventArgs) Handles cmbMedicationName.LostFocus
         cmbMedicationName.DroppedDown = False
@@ -296,5 +318,13 @@
 
     Private Sub btnAllergyCancel_Click(sender As Object, e As EventArgs) Handles btnAllergyCancel.Click
         DisableEditButtons()
+    End Sub
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+
+        frmPatientInfo.setPatientMrn(intPatientInformationMRN)
+        frmMain.OpenChildForm(frmPatientInfo)
+
+
     End Sub
 End Class

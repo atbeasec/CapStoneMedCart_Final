@@ -13,7 +13,8 @@
     Private Sub btnNewPatient_Click_1(sender As Object, e As EventArgs) Handles btnNewPatient.Click
 
         ' CreatePanel(flpPatientRecords)
-        frmNewPatient.Show()
+        ' frmNewPatient.Show()
+        frmMain.OpenChildForm(frmNewPatient)
 
     End Sub
     '/*********************************************************************/
@@ -152,7 +153,13 @@
 
     Private Sub DynamicSingleClickOpenPatient(sender As Object, e As EventArgs)
 
-        frmPatientInfo.txtMRN.Text = GetSelectedPatientMRN(sender)
+        ' frmPatientInfo.txtMRN.Text = GetSelectedPatientMRN(sender)
+        frmPatientInfo.setPatientMrn(GetSelectedPatientMRN(sender))
+        ' going to need to send this value to every form that could open from this selected patient record.
+
+        ' open the form first. then pass this integer to the next form.
+
+
         ' allows panel to have double click functionality to open it
         ' frmPatientInfo.Show()
 
