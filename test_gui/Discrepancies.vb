@@ -464,46 +464,38 @@ Module Discrepancies
     End Function
 
     '/*********************************************************************/
-    '/*                   Sub NAME: PopulateDiscrepancies    */         
+    '/*                   Sub NAME: UpdateSplit    */         
     '/*********************************************************************/
     '/*                   WRITTEN BY: Alexander Beasecker    		         */   
-    '/*		         DATE CREATED: 2/22/2021 		   */                       
+    '/*		         DATE CREATED: 2/27/2021 		   */                       
     '/*********************************************************************/
-    '/*  FUNCTION PURPOSE:	this sub is used to populate all active
-    '/* discrepancies to the discrepancy form
-    '/*
+    '/*  Sub PURPOSE:	this subs purpose is to split the string array for
+    '/* the updating amount method
     '/*********************************************************************/
     '/*  CALLED BY:   	      						         */           
-    '/*                                         				   */         
+    '/*  frmEndOfSHift when saving a report and the discrepancy is already
+    '/*  in the system but not cleared
     '/*********************************************************************/
     '/*  CALLS:										   */                 
-    '/* strbSQL.Append(
-    '*/ strbSQL.Clear()    
-    '*/ frmDiscrepancies.CreatePanel(
-    '*/ CreateDatabase.ExecuteSelectQuery(
-    '*/ CreateDatabase.ExecuteScalarQuery(
-    '*/
+    '*/ UpdateDiscrepancy
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					   */         
     '/*											   */                     
-    '/*                                                                     
-    '/*********************************************************************/
-    '/*  RETURNS:								         */                   
-    '/*            (NOTHING)								   */             
+    '/*  intMedicationID,  intActualCount                                                                    
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								   */             
     '/*											   */                     
-    '/*                                                                     
+    '/*     InsertSplit(intMedicationString,12)                                                                
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
     '/*											   */                     
-    '/*                                                                     
+    '/*     strArray                                                               
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
-    '/*  AB    2/22/2021 Initial creation
+    '/*  AB    2/27/2021 Initial creation
     '/*********************************************************************/
     Public Sub UpdateSplit(ByRef intMedicationString As String, ByRef intCount As Integer)
         Dim strArray() As String
