@@ -1,4 +1,12 @@
 ﻿Public Class Waste
+    Private intPatientInformationMRN As Integer
+
+    Public Sub SetPatientMRN(ByVal mrn As Integer)
+
+        intPatientInformationMRN = mrn
+
+    End Sub
+
     Private Sub RadioButton6_CheckedChanged(sender As Object, e As EventArgs) Handles rbtnOther.CheckedChanged
 
         MovePanelOnScreen()
@@ -66,4 +74,12 @@
     Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
         Inventory.WasteMedication()
     End Sub
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        frmPatientInfo.setPatientMrn(intPatientInformationMRN)
+        frmMain.OpenChildForm(frmPatientInfo)
+
+    End Sub
+
+
 End Class
