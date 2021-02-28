@@ -67,12 +67,12 @@ Module Discrepancies
     '/*********************************************************************/
     '/*                   FUNCTION NAME: CheckSystemCountVSActualCount    */         
     '/*********************************************************************/
-    '/*                   WRITTEN BY: Alexander Beasecker    		         */   
-    '/*		         DATE CREATED: 2/22/2021 		   */                                               
+    '/*                   WRITTEN BY: Alexander Beasecker    		       */   
+    '/*		         DATE CREATED: 2/22/2021 		                      */                                          
     '/*********************************************************************/
-    '/*  FUNCTION PURPOSE:								   */             
-    '/*											   */                     
-    '/*                                                                   */
+    '/*  FUNCTION PURPOSE:	the purpose of this is to check two different */
+    '/*       numbers together and see if they are equal, returning a true or
+    '/*      false depending
     '/*********************************************************************/
     '/*  CALLED BY:   	      						         */           
     '/*                                         				   */         
@@ -81,25 +81,26 @@ Module Discrepancies
     '/*             (NONE)								   */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					   */         
-    '/*											   */                     
-    '/*                                                                     
+    '/*		intSystemCount									   */                     
+    '/*     intActualCount                                                                
     '/*********************************************************************/
     '/*  RETURNS:								         */                   
-    '/*            (NOTHING)								   */             
+    '/*            Boolean, True or false     
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								   */             
-    '/*											   */                     
-    '/*                                                                     
+    '/*		CheckSystemCountVSActualCount(10,10)				     	   */                     
+    '/*           check if 10, and 10 are equal
+    '/*           returns True
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
+    '/*			blnCountsEqual								   */                     
     '/*                                                                     
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
-    '/*  AB    2/22/2021 Initial creation
+    '/*  AB    2/27/2021 Initial creation
     '/*********************************************************************/
 
     Public Function CheckSystemCountVSActualCount(ByRef intSystemCount As Integer, ByRef intActualCount As Integer)
@@ -118,38 +119,33 @@ Module Discrepancies
     '/*                   Sub NAME: CreateDiscrepancy    */         
     '/*********************************************************************/
     '/*                   WRITTEN BY: Alexander Beasecker    		         */   
-    '/*		         DATE CREATED: 2/22/2021 		   */                                           
+    '/*		         DATE CREATED: 2/27/2021 		   */                             
     '/*********************************************************************/
-    '/*  FUNCTION PURPOSE:								   */             
-    '/*											   */                     
-    '/*                                                                   */
+    '/*  Sub PURPOSE: this sub is used to begin the creation of the discrepancies
+    '/* it will create the system date object and push them along to this insert method
     '/*********************************************************************/
     '/*  CALLED BY:   	      						         */           
-    '/*                                         				   */         
+    '/*   InsertSplit                                 				   */         
     '/*********************************************************************/
     '/*  CALLS:										   */                 
-    '/*             (NONE)								   */             
+    '/*            InsertDiscrepancy		  */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					   */         
     '/*											   */                     
-    '/*                                                                     
-    '/*********************************************************************/
-    '/*  RETURNS:								         */                   
-    '/*            (NOTHING)								   */             
+    '/*     intDiscrepID As Integer                                                                
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								   */             
     '/*											   */                     
-    '/*                                                                     
+    '/*      CreateDiscrepancy(10,1,25,22,1,1,1)                                                               
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
-    '/*                                                                     
+    '/*		dtmAdhocTime									   */                                                                                  
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
-    '/*  AB    2/22/2021 Initial creation
+    '/*  AB    2/27/2021 Initial creation
     '/*********************************************************************/
     Private Sub CreateDiscrepancy(ByRef intDrawerNumber As Integer, ByRef intBinNumber As Integer, ByRef intExpectedCount As Integer,
                                   ByRef intActualCount As Integer, ByRef intPrimaryUserID As Integer, ByRef intApprovingUserID As Integer, ByRef intMedicationTUID As Integer)
@@ -161,35 +157,31 @@ Module Discrepancies
     End Sub
 
     '/*********************************************************************/
-    '/*                   Sub NAME: InsertDiscrepancy    */         
+    '/*                   Sub NAME: ResolveDiscrepancies    */         
     '/*********************************************************************/
     '/*                   WRITTEN BY: Alexander Beasecker    		         */   
-    '/*		         DATE CREATED: 2/22/2021 		   */                                          
+    '/*		         DATE CREATED: 2/22/2021 		   */                             
     '/*********************************************************************/
-    '/*  FUNCTION PURPOSE:								   */             
-    '/*											   */                     
-    '/*                                                                   */
+    '/*  Sub PURPOSE: this sub is used to update the discrepancy cleared 
+    '/* time. 
     '/*********************************************************************/
     '/*  CALLED BY:   	      						         */           
     '/*                                         				   */         
     '/*********************************************************************/
     '/*  CALLS:										   */                 
-    '/*             (NONE)								   */             
+    '/*            ExecuteInsertQuery(strbSQL.ToString)			  */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					   */         
     '/*											   */                     
-    '/*                                                                     
-    '/*********************************************************************/
-    '/*  RETURNS:								         */                   
-    '/*            (NOTHING)								   */             
+    '/*     intDiscrepID As Integer                                                                
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								   */             
     '/*											   */                     
-    '/*                                                                     
+    '/*      ResolveDiscrepancies(10)                                                               
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
-    '/*                                                                     
+    '/*		dtmAdhocTime									   */                     
+    '/*     strbSQL                                                               
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
@@ -304,7 +296,7 @@ Module Discrepancies
     '/*                   WRITTEN BY: Alexander Beasecker    		         */   
     '/*		         DATE CREATED: 2/22/2021 		   */                       
     '/*********************************************************************/
-    '/*  FUNCTION PURPOSE:	this sub is used to populate all active
+    '/*  Sub PURPOSE:	this sub is used to populate all active
     '/* discrepancies to the discrepancy form
     '/*
     '/*********************************************************************/
