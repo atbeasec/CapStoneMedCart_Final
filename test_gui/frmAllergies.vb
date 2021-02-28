@@ -1,7 +1,46 @@
 ﻿Public Class frmAllergies
 
     Private intPatientInformationMRN As Integer
-
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: SetPatientMrn          		   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		         */   
+    '/*		         DATE CREATED: 		   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								   */             
+    '/*											   */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  NP    2/16/2021 Changed cboBed to be disabled by default until a */
+    '/*                  selection in room is made.                       */
+    '/*  NP   2/16/2021  added a call to the GetRoom method in            */
+    '/*                  PatientInformation*/
+    '/*********************************************************************/
     Public Sub SetPatientMrn(ByVal mrn As Integer)
 
         intPatientInformationMRN = mrn
@@ -303,7 +342,6 @@
         Dim intPatientTuid = GetPatientTuid()
         Dim strNewSeverity = cmbSeverity.Text
         ExecuteScalarQuery("UPDATE PatientAllergy SET Allergy_Severity='" & strNewSeverity & "' WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTuid & ";")
-
         DisableEditButtons()
     End Sub
 
@@ -324,6 +362,7 @@
 
         frmPatientInfo.setPatientMrn(intPatientInformationMRN)
         frmMain.OpenChildForm(frmPatientInfo)
+        GetAllergies(intPatientInformationMRN)
 
 
     End Sub
