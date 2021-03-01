@@ -39,8 +39,6 @@ Partial Class frmInventory
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.cmbPatientPersonalMedication = New System.Windows.Forms.ComboBox()
         Me.btnSave = New System.Windows.Forms.Button()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.txtDrawerNumber = New System.Windows.Forms.TextBox()
         Me.btnUp = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
@@ -72,11 +70,13 @@ Partial Class frmInventory
         Me.pnlPatientNamePadding = New System.Windows.Forms.Panel()
         Me.cmbPatientNames = New System.Windows.Forms.ComboBox()
         Me.eprError = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.cmbDrawerNumber = New System.Windows.Forms.ComboBox()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel14.SuspendLayout()
         Me.Panel1.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.pnlMainLocation.SuspendLayout()
         Me.pnlMainFormFields.SuspendLayout()
@@ -125,6 +125,7 @@ Partial Class frmInventory
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel4.Controls.Add(Me.ComboBox1)
         Me.Panel4.Controls.Add(Me.cmbBin)
         Me.Panel4.Location = New System.Drawing.Point(356, 323)
         Me.Panel4.Name = "Panel4"
@@ -220,6 +221,7 @@ Partial Class frmInventory
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel1.Controls.Add(Me.ComboBox2)
         Me.Panel1.Controls.Add(Me.cmbPatientPersonalMedication)
         Me.Panel1.Location = New System.Drawing.Point(272, 399)
         Me.Panel1.Name = "Panel1"
@@ -253,27 +255,6 @@ Partial Class frmInventory
         Me.btnSave.Text = "   SAVE "
         Me.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnSave.UseVisualStyleBackColor = False
-        '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel2.Controls.Add(Me.txtDrawerNumber)
-        Me.Panel2.Location = New System.Drawing.Point(11, 321)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel2.Size = New System.Drawing.Size(53, 33)
-        Me.Panel2.TabIndex = 9
-        '
-        'txtDrawerNumber
-        '
-        Me.txtDrawerNumber.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtDrawerNumber.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtDrawerNumber.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDrawerNumber.Location = New System.Drawing.Point(1, 1)
-        Me.txtDrawerNumber.Multiline = True
-        Me.txtDrawerNumber.Name = "txtDrawerNumber"
-        Me.txtDrawerNumber.Size = New System.Drawing.Size(51, 31)
-        Me.txtDrawerNumber.TabIndex = 40
         '
         'btnUp
         '
@@ -388,6 +369,7 @@ Partial Class frmInventory
         '
         'pnlMainFormFields
         '
+        Me.pnlMainFormFields.Controls.Add(Me.cmbDrawerNumber)
         Me.pnlMainFormFields.Controls.Add(Me.cboSuggestedNames)
         Me.pnlMainFormFields.Controls.Add(Me.Panel7)
         Me.pnlMainFormFields.Controls.Add(Me.Label7)
@@ -404,7 +386,6 @@ Partial Class frmInventory
         Me.pnlMainFormFields.Controls.Add(Me.Button2)
         Me.pnlMainFormFields.Controls.Add(Me.Panel14)
         Me.pnlMainFormFields.Controls.Add(Me.Panel5)
-        Me.pnlMainFormFields.Controls.Add(Me.Panel2)
         Me.pnlMainFormFields.Controls.Add(Me.Label6)
         Me.pnlMainFormFields.Controls.Add(Me.Label3)
         Me.pnlMainFormFields.Controls.Add(Me.Label2)
@@ -639,6 +620,38 @@ Partial Class frmInventory
         '
         Me.eprError.ContainerControl = Me
         '
+        'ComboBox1
+        '
+        Me.ComboBox1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ComboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ComboBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(1, 1)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(116, 29)
+        Me.ComboBox1.TabIndex = 51
+        '
+        'ComboBox2
+        '
+        Me.ComboBox2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ComboBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ComboBox2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Items.AddRange(New Object() {"Yes", "No"})
+        Me.ComboBox2.Location = New System.Drawing.Point(1, 1)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(200, 29)
+        Me.ComboBox2.TabIndex = 61
+        '
+        'cmbDrawerNumber
+        '
+        Me.cmbDrawerNumber.FormattingEnabled = True
+        Me.cmbDrawerNumber.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25"})
+        Me.cmbDrawerNumber.Location = New System.Drawing.Point(15, 330)
+        Me.cmbDrawerNumber.Name = "cmbDrawerNumber"
+        Me.cmbDrawerNumber.Size = New System.Drawing.Size(49, 21)
+        Me.cmbDrawerNumber.TabIndex = 36
+        '
         'frmInventory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -654,8 +667,6 @@ Partial Class frmInventory
         Me.Panel14.ResumeLayout(False)
         Me.Panel14.PerformLayout()
         Me.Panel1.ResumeLayout(False)
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
         Me.pnlMainLocation.ResumeLayout(False)
@@ -692,8 +703,6 @@ Partial Class frmInventory
     Friend WithEvents Label1 As Label
     Friend WithEvents Panel1 As Panel
     Friend WithEvents cmbPatientPersonalMedication As ComboBox
-    Friend WithEvents Panel2 As Panel
-    Friend WithEvents txtDrawerNumber As TextBox
     Friend WithEvents btnUp As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents Button2 As Button
@@ -725,4 +734,7 @@ Partial Class frmInventory
     Friend WithEvents txtStrength As TextBox
     Friend WithEvents cboSuggestedNames As ComboBox
     Friend WithEvents eprError As ErrorProvider
+    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents ComboBox2 As ComboBox
+    Friend WithEvents cmbDrawerNumber As ComboBox
 End Class

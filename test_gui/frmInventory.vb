@@ -193,15 +193,15 @@ Public Class frmInventory
 
         intDrawerMedication_ID = ExecuteScalarQuery("SELECT COUNT(DISTINCT DrawerMedication_ID) FROM DrawerMedication;")
         Try
-            If CInt(txtDrawerNumber.Text) > 25 Or CInt(txtDrawerNumber.Text) < 0 Then
+            If CInt(cmbDrawerNumber.Text) > 25 Or CInt(cmbDrawerNumber.Text) < 0 Then
 
-                Drawers_Tuid = txtDrawerNumber.Text
+                Drawers_Tuid = cmbDrawerNumber.Text
 
 
             End If
 
         Catch ex As Exception
-            eprError.SetError(txtDrawerNumber, "please enter an integer between 1-25")
+            eprError.SetError(cmbDrawerNumber, "please enter an integer between 1-25")
         End Try
 
         intMedicationTuid = ExecuteScalarQuery("Select Medication_ID From Medication WHERE Drug_Name ='" & strName & "';")
@@ -211,7 +211,7 @@ Public Class frmInventory
         Try
             intMedQuanitiy = CInt(txtQuantity.Text)
         Catch ex As Exception
-            eprError.SetError(txtDrawerNumber, "please enter an integer")
+            eprError.SetError(cmbDrawerNumber, "please enter an integer")
         End Try
         intDividerBin = cmbBin.Text
 
@@ -276,7 +276,7 @@ Public Class frmInventory
         txtType.Text = ""
         chkControlled.Checked = False
         chkNarcotic.Checked = False
-        txtDrawerNumber.Text = ""
+        cmbDrawerNumber.Text = ""
         cmbBin.Items.Clear()
         txtQuantity.Text = ""
         txtExpirationDate.Text = ""
@@ -539,4 +539,7 @@ Public Class frmInventory
         pnlSearch.Select()
     End Sub
 
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+
+    End Sub
 End Class
