@@ -180,7 +180,9 @@
         If checkIfSelected = False Then
             MessageBox.Show("Please Select a discrepancy to resolve")
         Else
-            frmResolve.Show()
+
+            frmMain.OpenChildForm(frmResolve)
+            ' frmResolve.Show()
         End If
 
 
