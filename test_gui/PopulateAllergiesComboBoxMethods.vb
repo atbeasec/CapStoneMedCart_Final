@@ -101,6 +101,18 @@ Module PopulateAllergiesComboBoxMethods
             .DataSource = dcAllergies
         End With
     End Sub
+
+    Sub populateGenericComboBox(cmbGenericBox As ComboBox, dsGenericDataset As DataSet)
+        Dim strbTesting As New StringBuilder
+        Dim dcAllergies As New AutoCompleteStringCollection
+        cmbGenericBox.Items.Clear()
+
+
+        For Each row As DataRow In dsGenericDataset.Tables(0).Rows
+            cmbGenericBox.Items.Add(row(0).ToString())
+        Next
+    End Sub
+
     '/*********************************************************************/
     '/*                   SUBPROGRAM NAME: populateMedicationComboBox      */         
     '/*********************************************************************/
