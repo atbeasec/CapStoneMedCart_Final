@@ -419,6 +419,17 @@ Module PatientInformation
 
     Public Sub DisplayPatientPrescriptionsDispense(ByRef intPatientMRN As Integer)
         Dim dsPatientID As Integer = CreateDatabase.ExecuteSelectQuery("SELECT Patient_ID from Patient WHERE MRN_Number = '" & intPatientMRN & "'")
-        Dim dsPatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT * From PatientMedication WHERE Patient_TUID = '" & dsPatientID & "' AND Active_Flag = '1'")
+        Dim dsPatientInfo As DataSet
+        Dim strbSqlCommand As StringBuilder = New StringBuilder
+        strbSqlCommand.Append("SELECT Drug_Name, Strength, Frequency, Medication.Type, PatientMedication.Quantity, ")
+        strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name ")
+        strbSqlCommand.Append("FROM Medication Inner Join PatientMedication ON PatientMedication.Medication_TUID = Medication.Medication_ID ")
+        strbSqlCommand.Append("Inner Join Physician ON Physician.Physician_ID = PatientMedication.Ordering_Physician_ID ")
+        strbSqlCommand.Append("WHERE PatientMedication.Patient_TUID = '" & dsPatientID & "'")
+        dsPatientInfo = CreateDatabase.ExecuteSelectQuery(strbSqlCommand.ToString)
+        For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
+            Dispense.CreatePrescriptionsPanels(Dispense.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7))
+        Next
+
     End Sub
 End Module
