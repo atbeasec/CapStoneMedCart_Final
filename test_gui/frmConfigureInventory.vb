@@ -5,7 +5,8 @@
 
 
     Private Sub frmConfigureInventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        txtCapacity.Enabled = False
+        txtDividers.Enabled = False
         UpdateButtonsOnScreen()
         AddHandlerToDrawerButtons()
         PopulateInventory()
