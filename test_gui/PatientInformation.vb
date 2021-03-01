@@ -415,4 +415,10 @@ Module PatientInformation
         PopulateRoomsCombBoxesMethods.UpdateBedComboBox(cboBed, cboRoom)
         cboBed.SelectedItem = dsPatientRoom.Tables(0).Rows(0)(EnumList.PatientRoom.BedName)
     End Sub
+
+
+    Public Sub DisplayPatientPrescriptionsDispense(ByRef intPatientMRN As Integer)
+        Dim dsPatientID As Integer = CreateDatabase.ExecuteSelectQuery("SELECT Patient_ID from Patient WHERE MRN_Number = '" & intPatientMRN & "'")
+        Dim dsPatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT * From PatientMedication WHERE Patient_TUID = '" & dsPatientID & "' AND Active_Flag = '1'")
+    End Sub
 End Module
