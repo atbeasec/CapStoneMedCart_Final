@@ -229,7 +229,7 @@ Module DispenseHistory
         Strdatacommand = "SELECT Drug_Name,RXCUI_ID FROM PatientMedication " &
         "INNER JOIN Medication on Medication.Medication_ID = PatientMedication.Medication_TUID " &
         "INNER JOIN Patient on Patient.Patient_ID = PatientMedication.Patient_TUID " &
-        "WHERE MRN_Number = '" & intPatientMRN & "'"
+        "WHERE MRN_Number = '" & intPatientMRN & "' AND PatientMedication.Active_Flag = '1'"
 
         Dim dsMedicationDataSet As DataSet = New DataSet
         dsMedicationDataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
@@ -279,7 +279,7 @@ Module DispenseHistory
         Dim Strdatacommand As String
         Strdatacommand = "SELECT PatientMedication.Type, Strength FROM PatientMedication " &
             "INNER JOIN Medication on Medication.Medication_ID = PatientMedication.Medication_TUID " &
-            "WHERE RXCUI_ID = '" & strMedicationRXCUI & "'"
+            "WHERE RXCUI_ID = '" & strMedicationRXCUI & "' AND PatientMedication.Active_Flag = '1'"
 
         'make dataset and call the sql method
         Dim dsMedicationInformation As DataSet = New DataSet
