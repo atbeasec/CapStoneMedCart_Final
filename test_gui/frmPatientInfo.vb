@@ -419,7 +419,7 @@
         DispenseHistory.DispensemedicationPopulate(intPatientMRN)
         PatientInformation.PopulatePatientDispenseInfo(intPatientMRN)
         PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientMRN)
-
+        PatientInformation.DisplayPatientPrescriptionsDispense(intPatientMRN)
         '  Dim frmCurrentForm As Form = Me
 
 
