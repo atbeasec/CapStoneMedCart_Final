@@ -183,14 +183,6 @@ Public Class frmInventory
         ' if yes, then update if there's differences
         ' or insert the new lines
         ' and save those items
-        Dim tablecount = ExecuteScalarQuery("SELECT COUNT(DISTINCT DrawerMedication_ID) FROM DrawerMedication;")
-
-        Debug.WriteLine("")
-
-
-
-
-
     End Sub
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles pnlSearch.Click
