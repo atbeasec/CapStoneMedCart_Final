@@ -30,8 +30,8 @@
     Private Sub Loadcmb()
         Dim dsInactivePatients = CreateDatabase.ExecuteSelectQuery("Select MRN_Number From Patient WHERE Active_Flag = 0 ;")
         Dim dsactivePatients = CreateDatabase.ExecuteSelectQuery("Select MRN_Number From Patient WHERE Active_Flag = 1 ;")
-        populateAllergiesComboBox(cmbAdmitPatients, dsInactivePatients)
-        populateAllergiesComboBox(cmbDischargePatients, dsactivePatients)
+        populateGenericComboBox(cmbAdmitPatients, dsInactivePatients)
+        populateGenericComboBox(cmbDischargePatients, dsactivePatients)
     End Sub
 
     Private Sub frmDischarge_Load(sender As Object, e As EventArgs) Handles MyBase.Load
