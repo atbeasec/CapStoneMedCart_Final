@@ -117,4 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="lblDetailedInstructions.Text" xml:space="preserve">
+    <value>• Delete a room:
+    • Select room from the room name box
+        • Beds listed in the beds box will be
+           listed in the beds box.
+    • Select the "Delete Rooms" button
+
+• Delete a bed:
+    • Select bed from the bed name box
+        • This will delete the beds from all rooms
+           it is listed.
+    • Select the "Delete Beds" button
+</value>
+  </data>
+  <data name="lblDetailAddInstruc.Text" xml:space="preserve">
+    <value>• Add a room and bed:
+    • Enter room name and 
+       bed name into the 
+       textboxes
+        • Please note: A 
+           room name and 
+           bed name must be 
+           entered in order to 
+           add to the system.</value>
+  </data>
 </root>

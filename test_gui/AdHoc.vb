@@ -97,6 +97,7 @@ Module AdHoc
         Dim intMedRXCUI As Integer
         Dim intMedicationDrawerID As Integer
         Dim StrSelectedMedication As String
+        Dim intMedicationCount As Integer
 
         StrSelectedMedication = frmAdHockDispense.cmbMedications.SelectedItem
 
@@ -116,6 +117,10 @@ Module AdHoc
         Strdatacommand = "SELECT Patient_ID FROM Patient WHERE MRN_Number = '" & intPatientMRN & "'"
         intPatientID = ExecuteScalarQuery(Strdatacommand)
 
+        Strdatacommand = "SELECT Quantity FROM DrawerMedication WHERE Medication_TUID  = '" & intMedicationID & "'"
+        intMedicationCount = CreateDatabase.ExecuteScalarQuery(Strdatacommand)
+        intMedicationCount = intMedicationCount - intAmount
+
 
         If Not IsDBNull(intMedicationDrawerID) Then
             'get current time for dateTime in table
@@ -125,6 +130,11 @@ Module AdHoc
 
             'insert AdHoc
             CreateDatabase.ExecuteInsertQuery(Strdatacommand)
+
+            'send update command to the database to update the amount in the drawer minus the amount that was dispensed
+            Strdatacommand = "UPDATE DrawerMedication SET Quantity = '" & intMedicationCount & "' WHERE Medication_TUID = '" & intMedicationID & "'"
+            CreateDatabase.ExecuteInsertQuery(Strdatacommand)
+            clearAdhocBoxes()
         End If
 
     End Sub
@@ -212,30 +222,33 @@ Module AdHoc
     '/*  Alexander Beasecker  02/09/21	  Initial creation of the code     */
     '/*********************************************************************/
     Public Sub SetMedicationProperties()
-        'clear the textboxes
-        frmAdHockDispense.cmbMethod.Items.Clear()
-        frmAdHockDispense.cmbDosage.Items.Clear()
+        If Not frmAdHockDispense.cmbMedications.SelectedIndex = -1 Then
+            'clear the textboxes
+            frmAdHockDispense.cmbMethod.Items.Clear()
+            frmAdHockDispense.cmbDosage.Items.Clear()
 
-        'get selected medication
-        Dim strMedicationRXCUI As String = frmAdHockDispense.cmbMedications.SelectedItem
-        'split out the RXCUI and name
-        Dim strArray() As String
-        strArray = strMedicationRXCUI.Split("--")
-        strMedicationRXCUI = strArray(2)
-        'select medication type and strength for the selected medication using rxcui 
-        Dim Strdatacommand As String
-        Strdatacommand = "SELECT Type, Strength From Medication WHERE RXCUI_ID = '" & strMedicationRXCUI & "'"
+            'get selected medication
+            Dim strMedicationRXCUI As String = frmAdHockDispense.cmbMedications.SelectedItem
+            'split out the RXCUI and name
+            Dim strArray() As String
+            strArray = strMedicationRXCUI.Split("--")
+            strMedicationRXCUI = strArray(2)
+            'select medication type and strength for the selected medication using rxcui 
+            Dim Strdatacommand As String
+            Strdatacommand = "SELECT Type, Strength From Medication WHERE RXCUI_ID = '" & strMedicationRXCUI & "'"
 
-        'make dataset and call the sql method
-        Dim dsMedicationInformation As DataSet = New DataSet
-        dsMedicationInformation = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+            'make dataset and call the sql method
+            Dim dsMedicationInformation As DataSet = New DataSet
+            dsMedicationInformation = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
 
-        'insert the method and dosage into comboboxes
-        frmAdHockDispense.cmbMethod.Items.Add(dsMedicationInformation.Tables(0).Rows(0)(0))
-        frmAdHockDispense.cmbMethod.SelectedItem = dsMedicationInformation.Tables(0).Rows(0)(0)
+            'insert the method and dosage into comboboxes
+            frmAdHockDispense.cmbMethod.Items.Add(dsMedicationInformation.Tables(0).Rows(0)(0))
+            frmAdHockDispense.cmbMethod.SelectedItem = dsMedicationInformation.Tables(0).Rows(0)(0)
 
-        frmAdHockDispense.cmbDosage.Items.Add(dsMedicationInformation.Tables(0).Rows(0)(1))
-        frmAdHockDispense.cmbDosage.SelectedItem = dsMedicationInformation.Tables(0).Rows(0)(1)
+            frmAdHockDispense.cmbDosage.Items.Add(dsMedicationInformation.Tables(0).Rows(0)(1))
+            frmAdHockDispense.cmbDosage.SelectedItem = dsMedicationInformation.Tables(0).Rows(0)(1)
+        End If
+
 
     End Sub
 
@@ -337,40 +350,80 @@ Module AdHoc
     '/*  Alexander Beasecker  02/09/21	  Initial creation of the code     */
     '/*********************************************************************/
     Public Sub PopulatePatientInformation()
+        If Not frmAdHockDispense.cmbPatientName.SelectedIndex = -1 Then
+            'local variables for splitting array and holding patient ID
+            Dim strArray() As String
+            Dim intPatientID As Integer
 
-        'local variables for splitting array and holding patient ID
-        Dim strArray() As String
-        Dim intPatientID As Integer
+            'clear textboxes so no overlapping data
+            frmAdHockDispense.txtDateOfBirth.Clear()
+            frmAdHockDispense.txtMRN.Clear()
+            frmAdHockDispense.lstboxAllergies.Items.Clear()
 
-        'clear textboxes so no overlapping data
-        frmAdHockDispense.txtDateOfBirth.Clear()
-        frmAdHockDispense.txtMRN.Clear()
+            'get selected patient and split
+            Dim strPatientSelected As String = frmAdHockDispense.cmbPatientName.SelectedItem
+            strArray = strPatientSelected.Split("--")
+
+            'create sql command string
+            Dim Strdatacommand As String
+            frmAdHockDispense.txtMRN.Text = strArray(2)
+            Strdatacommand = "SELECT Date_of_Birth, Patient_ID from Patient Where MRN_Number = '" & frmAdHockDispense.txtMRN.Text & "'"
+
+            'create dataset and call sql method
+            Dim dsPatientRecords As DataSet = New DataSet
+            dsPatientRecords = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+            'set patient properties in textboxes
+            frmAdHockDispense.txtDateOfBirth.Text = dsPatientRecords.Tables(0).Rows(0)(0)
+            intPatientID = dsPatientRecords.Tables(0).Rows(0)(1)
+
+            'get patient allergies
+            Strdatacommand = "SELECT Allergy_Name From PatientAllergy Where Patient_TUID = '" & intPatientID & "'"
+            dsPatientRecords = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+
+            'place all allergies for the patient
+            For Each dr As DataRow In dsPatientRecords.Tables(0).Rows
+                frmAdHockDispense.lstboxAllergies.Items.Add(dr(0))
+            Next
+        End If
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:clearAdhocBoxes                     */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   02/26/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: the purpose of tthis subroutine is to clear
+    '/* all the boxes on the adhoc form.
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/* frmAdhocDispense.btnDispense_Click						           					  
+    '/*********************************************************************/
+    '/*  CALLS:			
+    '/* frmAdHockDispense.lstboxAllergies.Items.Clear()
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   		   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*		clearAdhocBoxes()									                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	(none)
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  02/26/21	  Initial creation of the code     */
+    '/*********************************************************************/
+    Public Sub clearAdhocBoxes()
+        frmAdHockDispense.cmbMedications.SelectedIndex = -1
+        frmAdHockDispense.cmbPatientName.SelectedIndex = -1
+        frmAdHockDispense.txtDateOfBirth.Text = ""
+        frmAdHockDispense.txtMRN.Text = ""
+        frmAdHockDispense.txtQuantity.Text = 0
+        frmAdHockDispense.cmbDosage.SelectedIndex = -1
+        frmAdHockDispense.cmbMethod.SelectedIndex = -1
         frmAdHockDispense.lstboxAllergies.Items.Clear()
-
-        'get selected patient and split
-        Dim strPatientSelected As String = frmAdHockDispense.cmbPatientName.SelectedItem
-        strArray = strPatientSelected.Split("--")
-
-        'create sql command string
-        Dim Strdatacommand As String
-        frmAdHockDispense.txtMRN.Text = strArray(2)
-        Strdatacommand = "SELECT Date_of_Birth, Patient_ID from Patient Where MRN_Number = '" & frmAdHockDispense.txtMRN.Text & "'"
-
-        'create dataset and call sql method
-        Dim dsPatientRecords As DataSet = New DataSet
-        dsPatientRecords = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
-        'set patient properties in textboxes
-        frmAdHockDispense.txtDateOfBirth.Text = dsPatientRecords.Tables(0).Rows(0)(0)
-        intPatientID = dsPatientRecords.Tables(0).Rows(0)(1)
-
-        'get patient allergies
-        Strdatacommand = "SELECT Allergy_Name From PatientAllergy Where Patient_TUID = '" & intPatientID & "'"
-        dsPatientRecords = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
-
-        'place all allergies for the patient
-        For Each dr As DataRow In dsPatientRecords.Tables(0).Rows
-            frmAdHockDispense.lstboxAllergies.Items.Add(dr(0))
-        Next
     End Sub
 
 End Module

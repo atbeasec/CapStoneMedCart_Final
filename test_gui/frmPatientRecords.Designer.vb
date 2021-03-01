@@ -32,14 +32,14 @@ Partial Class frmPatientRecords
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.pnlHeaderPatientRecords = New System.Windows.Forms.Panel()
+        Me.Panel9 = New System.Windows.Forms.Panel()
+        Me.pnlSearch = New System.Windows.Forms.Panel()
+        Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.btnNewPatient = New System.Windows.Forms.Button()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Panel11 = New System.Windows.Forms.Panel()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.flpPatientRecords = New System.Windows.Forms.FlowLayoutPanel()
         Me.pnlHeader.SuspendLayout()
         Me.pnlHeaderPatientRecords.SuspendLayout()
-        Me.Panel2.SuspendLayout()
+        Me.Panel9.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlHeader
@@ -52,7 +52,7 @@ Partial Class frmPatientRecords
         Me.pnlHeader.Controls.Add(Me.Label3)
         Me.pnlHeader.Controls.Add(Me.Label2)
         Me.pnlHeader.Controls.Add(Me.Label1)
-        Me.pnlHeader.Location = New System.Drawing.Point(12, 67)
+        Me.pnlHeader.Location = New System.Drawing.Point(15, 67)
         Me.pnlHeader.Name = "pnlHeader"
         Me.pnlHeader.Size = New System.Drawing.Size(950, 47)
         Me.pnlHeader.TabIndex = 8
@@ -137,13 +137,49 @@ Partial Class frmPatientRecords
         'pnlHeaderPatientRecords
         '
         Me.pnlHeaderPatientRecords.BackColor = System.Drawing.Color.White
+        Me.pnlHeaderPatientRecords.Controls.Add(Me.Panel9)
         Me.pnlHeaderPatientRecords.Controls.Add(Me.btnNewPatient)
-        Me.pnlHeaderPatientRecords.Controls.Add(Me.Panel2)
         Me.pnlHeaderPatientRecords.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlHeaderPatientRecords.Location = New System.Drawing.Point(0, 0)
         Me.pnlHeaderPatientRecords.Name = "pnlHeaderPatientRecords"
-        Me.pnlHeaderPatientRecords.Size = New System.Drawing.Size(986, 61)
+        Me.pnlHeaderPatientRecords.Size = New System.Drawing.Size(976, 61)
         Me.pnlHeaderPatientRecords.TabIndex = 16
+        '
+        'Panel9
+        '
+        Me.Panel9.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel9.Controls.Add(Me.pnlSearch)
+        Me.Panel9.Controls.Add(Me.txtSearch)
+        Me.Panel9.Location = New System.Drawing.Point(15, 15)
+        Me.Panel9.Name = "Panel9"
+        Me.Panel9.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel9.Size = New System.Drawing.Size(466, 31)
+        Me.Panel9.TabIndex = 20
+        '
+        'pnlSearch
+        '
+        Me.pnlSearch.BackColor = System.Drawing.Color.White
+        Me.pnlSearch.BackgroundImage = CType(resources.GetObject("pnlSearch.BackgroundImage"), System.Drawing.Image)
+        Me.pnlSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.pnlSearch.Dock = System.Windows.Forms.DockStyle.Right
+        Me.pnlSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.pnlSearch.ForeColor = System.Drawing.Color.White
+        Me.pnlSearch.Location = New System.Drawing.Point(432, 1)
+        Me.pnlSearch.Name = "pnlSearch"
+        Me.pnlSearch.Size = New System.Drawing.Size(33, 29)
+        Me.pnlSearch.TabIndex = 2
+        '
+        'txtSearch
+        '
+        Me.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtSearch.Dock = System.Windows.Forms.DockStyle.Left
+        Me.txtSearch.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSearch.Location = New System.Drawing.Point(1, 1)
+        Me.txtSearch.Multiline = True
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(431, 29)
+        Me.txtSearch.TabIndex = 1
+        Me.txtSearch.Tag = "Search Patients"
         '
         'btnNewPatient
         '
@@ -154,7 +190,7 @@ Partial Class frmPatientRecords
         Me.btnNewPatient.ForeColor = System.Drawing.Color.White
         Me.btnNewPatient.Image = CType(resources.GetObject("btnNewPatient.Image"), System.Drawing.Image)
         Me.btnNewPatient.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnNewPatient.Location = New System.Drawing.Point(771, 15)
+        Me.btnNewPatient.Location = New System.Drawing.Point(796, 15)
         Me.btnNewPatient.Name = "btnNewPatient"
         Me.btnNewPatient.Size = New System.Drawing.Size(166, 37)
         Me.btnNewPatient.TabIndex = 18
@@ -162,49 +198,13 @@ Partial Class frmPatientRecords
         Me.btnNewPatient.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnNewPatient.UseVisualStyleBackColor = False
         '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.Color.Black
-        Me.Panel2.Controls.Add(Me.Panel11)
-        Me.Panel2.Controls.Add(Me.TextBox1)
-        Me.Panel2.Location = New System.Drawing.Point(53, 17)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Padding = New System.Windows.Forms.Padding(0, 0, 0, 2)
-        Me.Panel2.Size = New System.Drawing.Size(273, 35)
-        Me.Panel2.TabIndex = 16
-        '
-        'Panel11
-        '
-        Me.Panel11.BackColor = System.Drawing.Color.White
-        Me.Panel11.BackgroundImage = CType(resources.GetObject("Panel11.BackgroundImage"), System.Drawing.Image)
-        Me.Panel11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Panel11.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel11.Location = New System.Drawing.Point(0, 0)
-        Me.Panel11.Name = "Panel11"
-        Me.Panel11.Size = New System.Drawing.Size(32, 33)
-        Me.Panel11.TabIndex = 13
-        '
-        'TextBox1
-        '
-        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox1.Dock = System.Windows.Forms.DockStyle.Right
-        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.ForeColor = System.Drawing.SystemColors.ScrollBar
-        Me.TextBox1.Location = New System.Drawing.Point(32, 0)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(241, 33)
-        Me.TextBox1.TabIndex = 5
-        Me.TextBox1.Tag = "Search Patient"
-        Me.TextBox1.Text = "Search Patient"
-        '
         'flpPatientRecords
         '
         Me.flpPatientRecords.AutoScroll = True
         Me.flpPatientRecords.BackColor = System.Drawing.Color.White
-        Me.flpPatientRecords.Location = New System.Drawing.Point(12, 118)
+        Me.flpPatientRecords.Location = New System.Drawing.Point(15, 118)
         Me.flpPatientRecords.Name = "flpPatientRecords"
-        Me.flpPatientRecords.Size = New System.Drawing.Size(950, 533)
+        Me.flpPatientRecords.Size = New System.Drawing.Size(950, 543)
         Me.flpPatientRecords.TabIndex = 17
         '
         'frmPatientRecords
@@ -214,7 +214,7 @@ Partial Class frmPatientRecords
         Me.AutoScroll = True
         Me.AutoSize = True
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(986, 663)
+        Me.ClientSize = New System.Drawing.Size(976, 672)
         Me.Controls.Add(Me.flpPatientRecords)
         Me.Controls.Add(Me.pnlHeaderPatientRecords)
         Me.Controls.Add(Me.pnlHeader)
@@ -223,8 +223,8 @@ Partial Class frmPatientRecords
         Me.pnlHeader.ResumeLayout(False)
         Me.pnlHeader.PerformLayout()
         Me.pnlHeaderPatientRecords.ResumeLayout(False)
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
+        Me.Panel9.ResumeLayout(False)
+        Me.Panel9.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -236,10 +236,10 @@ Partial Class frmPatientRecords
     Friend WithEvents Label1 As Label
     Friend WithEvents pnlHeaderPatientRecords As Panel
     Friend WithEvents btnNewPatient As Button
-    Friend WithEvents Panel2 As Panel
-    Friend WithEvents Panel11 As Panel
-    Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents flpPatientRecords As FlowLayoutPanel
+    Friend WithEvents Panel9 As Panel
+    Friend WithEvents pnlSearch As Panel
+    Friend WithEvents txtSearch As TextBox
 End Class

@@ -38,15 +38,18 @@ Partial Class Waste
         Me.RadioButton3 = New System.Windows.Forms.RadioButton()
         Me.RadioButton2 = New System.Windows.Forms.RadioButton()
         Me.rbtnDispenseDevice = New System.Windows.Forms.RadioButton()
+        Me.pnlHeader = New System.Windows.Forms.Panel()
+        Me.btnBack = New System.Windows.Forms.Button()
         Me.pnlRadioButtons.SuspendLayout()
         Me.pnlSignOff.SuspendLayout()
+        Me.pnlHeader.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(52, 101)
+        Me.Label2.Location = New System.Drawing.Point(99, 145)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(163, 25)
         Me.Label2.TabIndex = 26
@@ -56,7 +59,7 @@ Partial Class Waste
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(52, 19)
+        Me.Label1.Location = New System.Drawing.Point(24, 63)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(233, 25)
         Me.Label1.TabIndex = 25
@@ -66,7 +69,7 @@ Partial Class Waste
         '
         Me.ComboBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(57, 58)
+        Me.ComboBox1.Location = New System.Drawing.Point(29, 102)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(325, 29)
         Me.ComboBox1.TabIndex = 24
@@ -81,7 +84,7 @@ Partial Class Waste
         Me.pnlRadioButtons.Controls.Add(Me.RadioButton3)
         Me.pnlRadioButtons.Controls.Add(Me.RadioButton2)
         Me.pnlRadioButtons.Controls.Add(Me.rbtnDispenseDevice)
-        Me.pnlRadioButtons.Location = New System.Drawing.Point(57, 139)
+        Me.pnlRadioButtons.Location = New System.Drawing.Point(29, 183)
         Me.pnlRadioButtons.Name = "pnlRadioButtons"
         Me.pnlRadioButtons.Size = New System.Drawing.Size(325, 482)
         Me.pnlRadioButtons.TabIndex = 23
@@ -100,7 +103,7 @@ Partial Class Waste
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(39, 10)
+        Me.Label3.Location = New System.Drawing.Point(37, 10)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(235, 25)
         Me.Label3.TabIndex = 32
@@ -123,7 +126,7 @@ Partial Class Waste
         Me.btnWaste.ForeColor = System.Drawing.Color.White
         Me.btnWaste.Image = CType(resources.GetObject("btnWaste.Image"), System.Drawing.Image)
         Me.btnWaste.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnWaste.Location = New System.Drawing.Point(91, 83)
+        Me.btnWaste.Location = New System.Drawing.Point(80, 83)
         Me.btnWaste.Name = "btnWaste"
         Me.btnWaste.Size = New System.Drawing.Size(150, 37)
         Me.btnWaste.TabIndex = 31
@@ -212,12 +215,40 @@ Partial Class Waste
         Me.rbtnDispenseDevice.Text = "Dispense Device"
         Me.rbtnDispenseDevice.UseVisualStyleBackColor = True
         '
+        'pnlHeader
+        '
+        Me.pnlHeader.BackColor = System.Drawing.Color.White
+        Me.pnlHeader.Controls.Add(Me.btnBack)
+        Me.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnlHeader.Location = New System.Drawing.Point(0, 0)
+        Me.pnlHeader.Name = "pnlHeader"
+        Me.pnlHeader.Size = New System.Drawing.Size(771, 46)
+        Me.pnlHeader.TabIndex = 202
+        '
+        'btnBack
+        '
+        Me.btnBack.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnBack.FlatAppearance.BorderSize = 0
+        Me.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnBack.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnBack.ForeColor = System.Drawing.Color.White
+        Me.btnBack.Image = CType(resources.GetObject("btnBack.Image"), System.Drawing.Image)
+        Me.btnBack.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnBack.Location = New System.Drawing.Point(17, 0)
+        Me.btnBack.Name = "btnBack"
+        Me.btnBack.Size = New System.Drawing.Size(89, 37)
+        Me.btnBack.TabIndex = 61
+        Me.btnBack.Text = "Back"
+        Me.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnBack.UseVisualStyleBackColor = False
+        '
         'Waste
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(771, 647)
+        Me.ClientSize = New System.Drawing.Size(771, 698)
+        Me.Controls.Add(Me.pnlHeader)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ComboBox1)
@@ -228,6 +259,7 @@ Partial Class Waste
         Me.pnlRadioButtons.PerformLayout()
         Me.pnlSignOff.ResumeLayout(False)
         Me.pnlSignOff.PerformLayout()
+        Me.pnlHeader.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -247,4 +279,6 @@ Partial Class Waste
     Friend WithEvents Label3 As Label
     Friend WithEvents TextBox2 As TextBox
     Friend WithEvents btnWaste As Button
+    Friend WithEvents pnlHeader As Panel
+    Friend WithEvents btnBack As Button
 End Class

@@ -287,35 +287,65 @@
     Public Sub DynamicFlagMedicationButton(sender As Object, ByVal e As EventArgs)
 
 
-        Dim pnlFlaggedPannel As Panel
-        Dim txtBoxOnFlaggedPanel As TextBox = Nothing
+        ' Dim pnlFlaggedPannel As Panel
+        ' Dim txtBoxOnFlaggedPanel As TextBox = Nothing
 
-        pnlFlaggedPannel = CType(sender.parent, Panel)
-        txtBoxOnFlaggedPanel = FindTextBoxOnPanel(pnlFlaggedPannel)
-        Debug.Print(pnlFlaggedPannel.Name)
+        Dim pnlFlaggedPannel As Panel = CType(sender.parent, Panel)
+        Dim txtBoxOnFlaggedPanel As TextBox = FindTextBoxOnPanel(pnlFlaggedPannel)
 
-        If Not pnlFlaggedPannel.BackColor = Color.Red Then
+        Dim systemCount As Integer = CInt(FindLabelOnPanel(pnlFlaggedPannel).Text)
 
-            'find the textbox and set the field to be read only
-            'txtBoxOnFlaggedPanel.ReadOnly = True
-            'txtBoxOnFlaggedPanel.AcceptsTab = False
 
-            txtBoxOnFlaggedPanel.Enabled = False
+        ' when using the flag, we need to check that the system count is not the same as the user count
+        ' if it is, then there is nothing to flag and we need to let the user know that incase they
+        ' typed something wrong. If the user tries to flag a medication without typing a value in, they should not
+        ' be able to flag anything so the button will not respond.
 
-            ' change the panel color to be red
-            pnlFlaggedPannel.BackColor = Color.Red
+        If String.IsNullOrEmpty(txtBoxOnFlaggedPanel.Text) Then
 
+            MessageBox.Show("A count has not been entered. Please type a number into the count field.")
         Else
 
-            'find the textbox and set the field to be editable
-            'txtBoxOnFlaggedPanel.ReadOnly = False
-            'txtBoxOnFlaggedPanel.AcceptsTab = True
-            txtBoxOnFlaggedPanel.Enabled = True
+            If systemCount = CInt(txtBoxOnFlaggedPanel.Text) Then
 
-            ' change the panel color to be white
-            pnlFlaggedPannel.BackColor = Color.White
+                MessageBox.Show("The system count matches the entered count. This will not be flagged as a discrepancy .")
+
+            Else
+
+                ' at this point there is a valid difference and we will want to lock the textbox and change
+                ' the color of the panel so it is clear a discrepancy is being marked.
+
+                If Not pnlFlaggedPannel.BackColor = Color.Red Then
+
+                    'find the textbox and set the field to be read only
+                    'txtBoxOnFlaggedPanel.ReadOnly = True
+                    'txtBoxOnFlaggedPanel.AcceptsTab = False
+
+                    txtBoxOnFlaggedPanel.Enabled = False
+
+                    ' change the panel color to be red
+                    pnlFlaggedPannel.BackColor = Color.Red
+
+                Else
+
+                    'find the textbox and set the field to be editable
+                    'txtBoxOnFlaggedPanel.ReadOnly = False
+                    'txtBoxOnFlaggedPanel.AcceptsTab = True
+                    txtBoxOnFlaggedPanel.Enabled = True
+
+                    ' change the panel color to be white
+                    pnlFlaggedPannel.BackColor = Color.White
+
+                End If
+
+            End If
+
 
         End If
+
+
+
+        ' Debug.Print(pnlFlaggedPannel.Name)
 
     End Sub
 
@@ -338,6 +368,27 @@
         Return txtBox
 
     End Function
+
+    Public Function FindLabelOnPanel(ByVal pnlFlagged As Panel) As Label
+
+        ' search for control with the name txtCount
+        ' this control will be the textbox on the selected panel
+        Const lblName As String = "lblSystemCount"
+        Dim ctlControl As Control
+        Dim lblLabel As Label = Nothing
+
+        ' looking at each control on the panel
+        For Each ctlControl In pnlFlagged.Controls
+            ' if the current control is the textbox, then asign the textbox variable to this 
+            If ctlControl.Name.Contains(lblName) Then
+                lblLabel = CType(ctlControl, Label)
+            End If
+        Next
+
+        Return lblLabel
+
+    End Function
+
 
     Public Sub CreateTextBox(ByVal pnlPanelName As Panel, ByVal intPanelsAddedCount As Integer, ByVal intX As Integer, ByVal intY As Integer)
 
@@ -523,20 +574,34 @@
 
         ElseIf getOpenedForm().GetType() Is frmPatientRecords.GetType() Then
 
-                ' call SQL method to set the Patient Record flag to inactive or delete the user from the DB
-                '    Debug.Print("patient records")
+            ' call SQL method to set the Patient Record flag to inactive or delete the user from the DB
+            '    Debug.Print("patient records")
 
-            ElseIf getOpenedForm().GetType() Is frmConfigureInventory.GetType() Then
+        ElseIf getOpenedForm().GetType() Is frmConfigureInventory.GetType() Then
 
-                ' call SQL method to remove the item from the list of currently stocked items in the med cart
-                '  Debug.Print("removing this inventory piece")
+            ' call SQL method to remove the item from the list of currently stocked items in the med cart
+            '  Debug.Print("removing this inventory piece")
 
-            ElseIf getOpenedForm().GetType() Is frmAllergies.GetType() Then
+        ElseIf getOpenedForm().GetType() Is frmAllergies.GetType() Then
 
-                ' call SQL method to remove the allergy that is currently assigned to the patient
-                '  Debug.Print("remove allergy assigned to patient")
-
+            Dim intPatientTUID As Integer = frmAllergies.GetPatientTuid()
+            Dim strAllergyName As String = GetSelectedInformation(sender.parent, "lblAllergyName")
+            Dim strSqlStatment As String = ("Select Active_Flag FROM PatientAllergy WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID= " & intPatientTUID & ";")
+            Dim value = ExecuteScalarQuery(strSqlStatment)
+            If value = 1 Then
+                ExecuteScalarQuery("UPDATE PatientAllergy SET Active_Flag='0' WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTUID & ";")
+            Else
+                ExecuteScalarQuery("UPDATE PatientAllergy SET Active_Flag='1' WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTUID & ";")
             End If
+
+            ' add the update to the patients table because the patient information form is not visible anymore. the update will be reflected
+            ' when the patient info form is loaded again
+            'frmPatientInfo.lstBoxAllergies.Items.Clear()
+
+            GetAllergies(frmAllergies.GetPatientMrn())
+            Debug.Print("remove allergy assigned to patient")
+
+        End If
 
     End Sub
 
@@ -609,7 +674,7 @@
             'make the save and cancel button visible and hide button1
             frmConfiguration.btnSaveChanges.Visible = True
             frmConfiguration.btnCancel.Visible = True
-            frmConfiguration.Button1.Visible = False
+            frmConfiguration.btnSaveUser.Visible = False
 
         ElseIf getOpenedForm().GetType() Is frmPatientRecords.GetType() Then
             'this will set up the functions for the editing pencil. 
@@ -626,10 +691,33 @@
 
         ElseIf getOpenedForm().GetType() Is frmAllergies.GetType() Then
 
-            ' call SQL method to set edit functionality
-            ' Debug.Print("remove allergy assigned to patient")
+            If frmAllergies.btnAddAllergy.Visible = True Then
+                Dim selectedAllergyName = GetSelectedInformation(sender.parent, "lblAllergyName")
+                Dim selectedAllergySeverity = GetSelectedInformation(sender.parent, "lblSeverity")
+                Dim selectedAllergyType = GetSelectedInformation(sender.parent, "lblAllergyType")
+                Dim selectedMedication = GetSelectedInformation(sender.parent, "lblMedication")
+
+                With frmAllergies
+                    .cmbAllergies.Text = selectedAllergyName
+                    .cmbAllergiesType.Text = selectedAllergyType
+                    .cmbSeverity.Text = selectedAllergySeverity
+                    .cmbMedicationName.Text = selectedMedication
+                    .cmbAllergies.Enabled = False
+                    .cmbAllergiesType.Enabled = False
+                    .cmbMedicationName.Enabled = False
+                    .btnAllergySave.Visible = True
+                    .btnAllergyCancel.Visible = True
+                    .btnAddAllergy.Visible = False
+                End With
+
+
+                ' call SQL method to set edit functionality
+                ' Debug.Print("remove allergy assigned to patient")
+                Debug.WriteLine("")
+            End If
 
         End If
+
 
     End Sub
 

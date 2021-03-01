@@ -13,7 +13,8 @@
     Private Sub btnNewPatient_Click_1(sender As Object, e As EventArgs) Handles btnNewPatient.Click
 
         ' CreatePanel(flpPatientRecords)
-        frmNewPatient.Show()
+        ' frmNewPatient.Show()
+        frmMain.OpenChildForm(frmNewPatient)
 
     End Sub
     '/*********************************************************************/
@@ -65,34 +66,13 @@
 
 
     Private Sub frmPatientRecords_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim dsPatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery("select Patient.MRN_Number, Patient.Patient_First_Name, " &
-                                                   "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name from Patient LEFT JOIN " &
-                                                   "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1 ORDER BY Patient.Patient_Last_Name ASC;")
-        Dim strRoom As String
-        Dim strBed As String
+        Dim strFillSQL As String = ("select Patient.MRN_Number, Patient.Patient_First_Name, " &
+                                           "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name from Patient LEFT JOIN " &
+                                           "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1 ORDER BY Patient.Patient_Last_Name ASC;")
+        Fill_Patient_Table(strFillSQL)
 
-
-        For Each item As DataRow In dsPatientInfo.Tables(0).Rows()
-            With dsPatientInfo.Tables(0)
-
-
-                If IsDBNull(item.Item(4)) Then
-                    strRoom = "N/A"
-                Else
-                    strRoom = item.Item(4).ToString
-                End If
-
-                If IsDBNull(item.Item(5)) Then
-                    strBed = "N/A"
-                Else
-                    strBed = item.Item(5).ToString
-
-                End If
-                CreatePanel(flpPatientRecords, item.Item(0), item.Item(1),
-                           item.Item(2), item.Item(3), strRoom, strBed)
-
-            End With
-        Next
+        txtSearch.Text = txtSearch.Tag
+        txtSearch.ForeColor = Color.Silver
     End Sub
 
     Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal strID As String, ByVal strFirstName As String, ByVal strLastName As String, ByVal strBirthday As String, ByVal strRoom As String, ByVal strBed As String)
@@ -175,7 +155,13 @@
 
     Private Sub DynamicSingleClickOpenPatient(sender As Object, e As EventArgs)
 
-        frmPatientInfo.txtMRN.Text = GetSelectedPatientMRN(sender)
+        ' frmPatientInfo.txtMRN.Text = GetSelectedPatientMRN(sender)
+        frmPatientInfo.setPatientMrn(GetSelectedPatientMRN(sender))
+        ' going to need to send this value to every form that could open from this selected patient record.
+
+        ' open the form first. then pass this integer to the next form.
+
+
         ' allows panel to have double click functionality to open it
         ' frmPatientInfo.Show()
 
@@ -500,5 +486,98 @@
         'returning the MRN of the patient from the selected record
         Return intMRN
     End Function
+
+    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+
+        ' detects if there has been another line added to the textbox
+        ' indicating the user has selected the "enter" key
+        If txtSearch.Lines.Length > 1 Then
+
+            ' since we know the user selected enter and we are using a multiline textbox,
+            ' the text input will be equal to whatever the user typed + a CRLF character
+            ' we will replace that character with an empty string as if it was never typed.
+            Dim singleLine = txtSearch.Text.Replace(vbCrLf, "")
+
+            ' reset the textbox to be empty because it currently contains the user types string + CRLF
+            txtSearch.Text = ""
+
+            ' set the textbox to contain the searched word on a single line
+            txtSearch.Text = singleLine
+
+            ' by default VB will move the text cursor position to be at the first character after adding
+            ' a new string to the textbox. This looks weird and seems like a bug to the user when the
+            ' cursor position moves from the last character to the first. We will set to be the last 
+            ' with the code below.
+            txtSearch.Select(txtSearch.Text.Length, 0)
+
+            ' this information will be called when the user selects enter and the search event detects this being done.
+            Dim strFillSQL As String
+            If txtSearch.Text = "" Then
+
+                strFillSQL = "select Patient.MRN_Number, Patient.Patient_First_Name, " &
+                                               "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name from Patient LEFT JOIN " &
+                                               "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1 ORDER BY Patient.Patient_Last_Name ASC;"
+                Fill_Patient_Table(strFillSQL)
+            End If
+
+        End If
+
+
+    End Sub
+
+    Private Sub searchIcon_Click(sender As Object, e As EventArgs) Handles pnlSearch.Click
+        Dim strFillSQL As String = "select Patient.MRN_Number, Patient.Patient_First_Name, " &
+                                                   "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name from Patient LEFT JOIN " &
+                                                   "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1 AND " &
+                                                   "(Patient_First_Name Like '" & txtSearch.Text & "%' OR Patient_Last_Name Like '" & txtSearch.Text & "%'" &
+                                                   "OR MRN_Number like '" & txtSearch.Text & "%') ORDER BY Patient.Patient_Last_Name ASC;"
+        Fill_Patient_Table(strFillSQL)
+    End Sub
+
+    Private Sub Fill_Patient_Table(ByVal strFillSQL As String)
+        flpPatientRecords.Controls.Clear()
+
+        Dim dsPatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery("select Patient.MRN_Number, Patient.Patient_First_Name, " &
+                                           "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name from Patient LEFT JOIN " &
+                                           "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1 ORDER BY Patient.Patient_Last_Name ASC;")
+        Dim strRoom As String
+        Dim strBed As String
+
+
+        For Each item As DataRow In dsPatientInfo.Tables(0).Rows()
+            With dsPatientInfo.Tables(0)
+
+
+                If IsDBNull(item.Item(4)) Then
+                    strRoom = "N/A"
+                Else
+                    strRoom = item.Item(4).ToString
+                End If
+
+                If IsDBNull(item.Item(5)) Then
+                    strBed = "N/A"
+                Else
+                    strBed = item.Item(5).ToString
+
+                End If
+                CreatePanel(flpPatientRecords, item.Item(0), item.Item(1),
+                           item.Item(2), item.Item(3), strRoom, strBed)
+
+            End With
+        Next
+    End Sub
+
+    Private Sub txtSearch_GotFocus(sender As Object, e As EventArgs) Handles txtSearch.GotFocus
+
+        SearchLogic.txtSearchGotFocusEvent(txtSearch)
+
+    End Sub
+
+    Private Sub txtSearch_LostFocus(sender As Object, e As EventArgs) Handles txtSearch.LostFocus
+
+        SearchLogic.txtSearchLostFocusEvent(txtSearch)
+
+    End Sub
+
 
 End Class

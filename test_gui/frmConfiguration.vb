@@ -38,47 +38,14 @@ Public Class frmConfiguration
     '/*  Dylan W    2/10/2021    Initial creation and pull data from DB   */
     '/*********************************************************************/
     Private Sub frmConfiguration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'pull  the dataset from the user table in sqlite
-        Dim dsUserInfo As DataSet = CreateDatabase.ExecuteSelectQuery("select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-                                                   "User.Supervisor_Flag, User.Active_Flag From User;")
-
-
-
-        For Each item As DataRow In dsUserInfo.Tables(0).Rows()
-            With dsUserInfo.Tables(0)
-                'grab first name and last name and merge into one string
-                Dim strFirst As String = item.Item(2)
-                Dim strLast As String = item.Item(3)
-                Dim strName = strFirst & " " & strLast
-                Dim strActive As String = ""
-
-                If (item.Item(6)) = 1 Then
-                    strActive = "Yes"
-                Else strActive = "No"
-                End If
-                'check what role the person has, if adminis 1 then it does not matter what Supervisor is 
-                'if admin is 0 then check supervisor. If both admin and supervidor are 0 then the 
-                'user is a nurse
-                Dim strRole As String
-                If (item.Item(4)) = 1 Then
-                    strRole = "Admin"
-                ElseIf (item.Item(5)) = 1 Then
-                    strRole = "Supervisor"
-                Else strRole = "Nurse"
-                End If
-
-                'populate data into panels
-                CreatePanel(flpUserInfo, item.Item(0), strName, item.Item(1),
-                           strRole, strActive)
-
-            End With
-        Next
+        Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
+                                                  "User.Supervisor_Flag, User.Active_Flag From User;"
+        Fill_Table(strFillSQL)
 
         'have new users assigned as Nurses by default
         rbtnNurse.Checked = True
         btnSaveChanges.Visible = False
         btnCancel.Visible = False
-
 
     End Sub
 
@@ -137,7 +104,7 @@ Public Class frmConfiguration
         'Set panel properties
         With pnl
             .BackColor = Color.Gainsboro
-            .Size = New Size(600, 47)
+            .Size = New Size(flpUserInfo.Size.Width - 25, 47)
             .Name = "pnlIndividualPatientRecordPadding" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Padding = New Padding(0, 0, 0, 3)
@@ -147,7 +114,7 @@ Public Class frmConfiguration
         With pnlMainPanel
 
             .BackColor = Color.White
-            .Size = New Size(600, 45)
+            .Size = New Size(flpUserInfo.Size.Width - 25, 45)
             .Name = "pnlIndividualPatientRecord" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Dock = System.Windows.Forms.DockStyle.Top
@@ -156,33 +123,29 @@ Public Class frmConfiguration
         'put the boarder panel inside the main panel
         pnl.Controls.Add(pnlMainPanel)
 
-        'AddHandler pnlMainPanel.DoubleClick, AddressOf DynamicDoubleClickNewOrder
         AddHandler pnlMainPanel.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
         AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
-        'AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
 
-        CreateEditButton(pnlMainPanel, getPanelCount(flpPannel), 500, 5)
+        CreateEditButton(pnlMainPanel, getPanelCount(flpPannel), lblActions.Location.X - 15, 5)
+        CreateDeleteBtn(pnlMainPanel, getPanelCount(flpPannel), lblActions.Location.X + 30, 5)
 
-
-        CreateDeleteBtn(pnlMainPanel, getPanelCount(flpPannel), 550, 5)
-
-        'CreateDeleteBtn(pnlMainPanel)
-        'CreateEditButton(pnlMainPanel)
-
-        ' call database info here to populate
+        ' create labels at run time and pass them to the create label method to format how the labels will look and their
+        ' properties
         Dim lblID As New Label
         Dim lblID2 As New Label
         Dim lblID3 As New Label
         Dim lblID4 As New Label
         Dim lblID5 As New Label
+        lblID.Visible = False
         Const INTTWENTY As Integer = 20
 
         ' anywhere we have quotes except for the label names, we can call our Database and get method
-        CreateIDLabel(pnlMainPanel, lblID, "lblID", lblID.Location.X, INTTWENTY, strID, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID, "lblID", lblName.Location.X - 15, INTTWENTY, strID, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID2, "lblNames", lblName.Location.X, INTTWENTY, strName, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID3, "lblUsername", lblIDNumber.Location.X, INTTWENTY, strUsername, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID4, "lblAccessLevel", lblAccess.Location.X, INTTWENTY, strAccess, getPanelCount(flpPannel))
-        'CreateIDLabel(pnlMainPanel, lblID5, "lblActive", lblActive.Location.X, INTTWENTY, strActive, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID3, "lblUsername", lblUserName.Location.X, INTTWENTY, strUsername, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID4, "lblPermissions", lblPermissions.Location.X, INTTWENTY, strAccess, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID5, "lblStatus", lblStatus.Location.X, INTTWENTY, strActive, getPanelCount(flpPannel))
+
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
@@ -376,7 +339,8 @@ Public Class frmConfiguration
     '/*********************************************************************/
 
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub btnSaveUser_Click(sender As Object, e As EventArgs) Handles btnSaveUser.Click
+
         Dim intSupervisor As Integer = 0
         Dim intAdmin As Integer = 0
         Dim intActiveFlag As Integer = 1
@@ -422,14 +386,36 @@ Public Class frmConfiguration
             "VALUES('" & txtUsername.Text & "','" & strSalt & "','" & strPassword & "','" & strFirstName & "','" & strLastName & "','" & strHashedBarcode & "','" & intAdmin & "','" & intSupervisor & "','" & intActiveFlag & "')"
             ExecuteInsertQuery(strStatement)
 
+
+
+            strStatement = "SELECT User_ID FROM User ORDER BY User_ID DESC LIMIT 1;"
+            Dim strNewID As String = ExecuteScalarQuery(strStatement)
+            Dim strFullName As String = strFirstName & " " & strLastName
+
+            Dim strRole As String
+            'check what Role the user will have
+            If rbtnAdministrator.Checked = True Then
+                strRole = "Admin"
+            ElseIf rbtnSupervisor.Checked = True Then
+                strRole = "Supervisor"
+            Else strRole = "Nurse"
+            End If
+
+            ' do query to return the record that was just created and return the result into the create panel method below
+            CreatePanel(flpUserInfo, strNewID, strFullName, txtUsername.Text, strRole, "Yes")
+
+
+
+
+
             'clear all text boxes
             txtFirstName.Text = ""
-            txtLastName.Text = ""
-            txtUsername.Text = ""
-            txtBarcode.Text = ""
-            txtPassword.Text = ""
-            txtConfirmPassword.Text = ""
-        End If
+                txtLastName.Text = ""
+                txtUsername.Text = ""
+                txtBarcode.Text = ""
+                txtPassword.Text = ""
+                txtConfirmPassword.Text = ""
+            End If
 
 
     End Sub
@@ -510,65 +496,12 @@ Public Class frmConfiguration
         Return bolSecure
     End Function
 
-    Private Sub txtFirstName_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFirstName.KeyPress
-
-        If Not (Asc(e.KeyChar) = 8) Then
-            'string of allowed characters
-            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*()/.,<>=+"
-            'converts letter to lowercase to compare to allowedChars string to check if it is allowed in the text box
-            If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
-                e.KeyChar = ChrW(0)
-                e.Handled = True
-            End If
-        End If
+    Private Sub txtFirst_Last_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFirstName.KeyPress, txtLastName.KeyPress
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*()/.,<>=+")
     End Sub
 
-    Private Sub txtLastName_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtLastName.KeyPress
-        If Not (Asc(e.KeyChar) = 8) Then
-            'string of allowed characters
-            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*()/.,<>=+"
-            'converts letter to lowercase to compare to allowedChars string to check if it is allowed in the text box
-            If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
-                e.KeyChar = ChrW(0)
-                e.Handled = True
-            End If
-        End If
-    End Sub
-
-    Private Sub txtUserID_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtUsername.KeyPress
-        If Not (Asc(e.KeyChar) = 8) Then
-            'string of allowed characters
-            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()/.,<>=+"
-            'converts letter to lowercase to compare to allowedChars string to check if it is allowed in the text box
-            If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
-                e.KeyChar = ChrW(0)
-                e.Handled = True
-            End If
-        End If
-    End Sub
-
-    Private Sub txtBarcode_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBarcode.KeyPress
-        If Not (Asc(e.KeyChar) = 8) Then
-            'string of allowed characters
-            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()/.,<>=+"
-            'converts letter to lowercase to compare to allowedChars string to check if it is allowed in the text box
-            If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
-                e.KeyChar = ChrW(0)
-                e.Handled = True
-            End If
-        End If
-    End Sub
-
-    Private Sub txtPassword_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress, txtConfirmPassword.KeyPress
-        If Not (Asc(e.KeyChar) = 8) Then
-            'String of allowed characters
-            Dim allowedChars As String = "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()/.,<>=+"
-            'converts letter to lowercase to compare to allowedChars string to check if it Is allowed in the text box
-            If Not allowedChars.Contains(e.KeyChar.ToString.ToLower) Then
-                e.KeyChar = ChrW(0)
-                e.Handled = True
-            End If
-        End If
+    Private Sub txtPasswordKeypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress, txtConfirmPassword.KeyPress, txtBarcode.KeyPress, txtUsername.KeyPress
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()/.,<>=+")
     End Sub
 
     Private Sub btnSaveChanges_Click(sender As Object, e As EventArgs) Handles btnSaveChanges.Click
@@ -635,7 +568,7 @@ Public Class frmConfiguration
             txtConfirmPassword.Text = ""
             btnCancel.Visible = False
             btnSaveChanges.Visible = False
-            Button1.Visible = True
+            btnSaveUser.Visible = True
         End If
     End Sub
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
@@ -648,6 +581,154 @@ Public Class frmConfiguration
         txtConfirmPassword.Text = ""
         btnCancel.Visible = False
         btnSaveChanges.Visible = False
-        Button1.Visible = True
+        btnSaveUser.Visible = True
     End Sub
+
+    Private Sub btnPasswordEye_Click(sender As Object, e As EventArgs) Handles btnPasswordEye.Click
+        'If checked then password is visible as plain text
+        If txtPassword.UseSystemPasswordChar = False Then
+
+            txtPassword.UseSystemPasswordChar = True
+            'If unchecked then password is visible as *
+        Else
+            txtPassword.UseSystemPasswordChar = False
+
+        End If
+    End Sub
+
+    Private Sub btnConfirmEye_Click(sender As Object, e As EventArgs) Handles btnConfirmEye.Click
+        'If checked then password is visible as plain text
+        If txtConfirmPassword.UseSystemPasswordChar = False Then
+
+            txtConfirmPassword.UseSystemPasswordChar = True
+            'If unchecked then password is visible as *
+        Else
+            txtConfirmPassword.UseSystemPasswordChar = False
+
+        End If
+    End Sub
+
+    Private Sub SearchIcon_Click(sender As Object, e As EventArgs) Handles pnlSearch.Click
+        Dim strFillSQL As String
+        strFillSQL = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
+                                                       "User.Supervisor_Flag, User.Active_Flag From User WHERE Username LIKE '" & txtSearchBox.Text & "%' Or User_First_Name LIKE '" & txtSearchBox.Text & "%' Or User_Last_Name LIKE '" & txtSearchBox.Text & "%';"
+        Fill_Table(strFillSQL)
+
+    End Sub
+
+    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearchBox.TextChanged
+        Dim strFillSQL As String
+
+        KeepSearchOnOneLine(txtSearchBox)
+
+        If txtSearchBox.Text = "" Then
+            strFillSQL = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
+                                                  "User.Supervisor_Flag, User.Active_Flag From User;"
+            Fill_Table(strFillSQL)
+        Else
+            strFillSQL = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
+                                                       "User.Supervisor_Flag, User.Active_Flag From User WHERE Username LIKE '" & txtSearchBox.Text & "%' Or User_First_Name LIKE '" & txtSearchBox.Text & "%' Or User_Last_Name LIKE '" & txtSearchBox.Text & "%';"
+            Fill_Table(strFillSQL)
+        End If
+
+
+
+    End Sub
+
+    Private Sub Fill_Table(ByVal strFillSQL As String)
+        flpUserInfo.Controls.Clear()
+        Dim dsUserInfo As DataSet = CreateDatabase.ExecuteSelectQuery(strFillSQL)
+
+
+
+        For Each item As DataRow In dsUserInfo.Tables(0).Rows()
+            With dsUserInfo.Tables(0)
+                'grab first name and last name and merge into one string
+                Dim strFirst As String = item.Item(2)
+                Dim strLast As String = item.Item(3)
+                Dim strName = strFirst & " " & strLast
+                Dim strActive As String = ""
+
+                If (item.Item(6)) = 1 Then
+                    strActive = "Yes"
+                Else strActive = "No"
+                End If
+                'check what role the person has, if adminis 1 then it does not matter what Supervisor is 
+                'if admin is 0 then check supervisor. If both admin and supervidor are 0 then the 
+                'user is a nurse
+                Dim strRole As String
+                If (item.Item(4)) = 1 Then
+                    strRole = "Admin"
+                ElseIf (item.Item(5)) = 1 Then
+                    strRole = "Supervisor"
+                Else strRole = "Nurse"
+                End If
+
+                'populate data into panels
+                CreatePanel(flpUserInfo, item.Item(0), strName, item.Item(1),
+                               strRole, strActive)
+
+            End With
+        Next
+    End Sub
+
+    '/*********************************************************************/
+    '/* SubProgram NAME:txtSearch_TextChanged                             */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/26/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This method ensures that when the user selects the enter key the */
+    '/* the textbox does not go to the nextline, and that it searches.    */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  None                                                             */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                          */
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 sender- object representing a control                            */
+    '/*  e- eventargs indicating there is an event handle assigned        */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*                                     */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	 None                                                             */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/16/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub KeepSearchOnOneLine(ByVal txtSearch As TextBox)
+
+        ' detects if there has been another line added to the textbox
+        ' indicating the user has selected the "enter" key
+        If txtSearch.Lines.Length > 1 Then
+
+            ' since we know the user selected enter and we are using a multiline textbox,
+            ' the text input will be equal to whatever the user typed + a CRLF character
+            ' we will replace that character with an empty string as if it was never typed.
+            Dim singleLine = txtSearch.Text.Replace(vbCrLf, "")
+
+            ' reset the textbox to be empty because it currently contains the user types string + CRLF
+            txtSearch.Text = ""
+
+            ' set the textbox to contain the searched word on a single line
+            txtSearch.Text = singleLine
+
+            ' by default VB will move the text cursor position to be at the first character after adding
+            ' a new string to the textbox. This looks weird and seems like a bug to the user when the
+            ' cursor position moves from the last character to the first. We will set to be the last 
+            ' with the code below.
+            txtSearch.Select(txtSearch.Text.Length, 0)
+        End If
+
+    End Sub
+
+
 End Class

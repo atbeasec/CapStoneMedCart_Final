@@ -176,7 +176,7 @@ Module DispenseHistory
     '/*********************************************************************/
 
     Sub DispenseHistorySpecificPatient(ByRef intPatientMRN As Integer)
-        Dim Strdatacommand As String = "SELECT Drug_Name, PatientMedication.Type, Amount_Dispensed,User.User_Last_Name,User.User_First_Name, DateTime_Dispensed   
+        Dim Strdatacommand As String = "SELECT Drug_Name, Strength, PatientMedication.Type, Amount_Dispensed,User.User_Last_Name,User.User_First_Name, DateTime_Dispensed   
           FROM Dispensing 
           INNER JOIN PatientMedication
           On PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID
@@ -191,7 +191,7 @@ Module DispenseHistory
         Dim dsmydataset As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
 
         For Each dr As DataRow In dsmydataset.Tables(0).Rows
-            frmPatientInfo.CreateDispenseHistoryPanels(frmPatientInfo.flpDispenseHistory, dr(0), "    ", dr(1), dr(2), dr(4) & " " & dr(3), dr(5), " ")
+            frmPatientInfo.CreateDispenseHistoryPanels(frmPatientInfo.flpDispenseHistory, dr(0), dr(1), dr(2), dr(3), dr(4) & " " & dr(5), dr(6), "")
         Next
 
     End Sub
@@ -375,11 +375,11 @@ Module DispenseHistory
         strbSQLcommand.Append("SELECT Quantity FROM PatientMedication WHERE Medication_TUID = '" & intMedID & "' AND Patient_TUID = '" & intPatientID & "'")
         intPrescribedQuantity = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
 
-        'update quantity to new amount
-        intPrescribedQuantity = intPrescribedQuantity - Dispense.txtQuantity.Text
-        strbSQLcommand.Clear()
-        strbSQLcommand.Append("UPDATE PatientMedication SET Quantity = " & intPrescribedQuantity & " WHERE Medication_TUID = '" & intMedID & "' AND Patient_TUID = '" & intPatientID & "'")
-        CreateDatabase.ExecuteInsertQuery(strbSQLcommand.ToString)
+        ''update quantity to new amount
+        'intPrescribedQuantity = intPrescribedQuantity - Dispense.txtQuantity.Text
+        'strbSQLcommand.Clear()
+        'strbSQLcommand.Append("UPDATE PatientMedication SET Quantity = " & intPrescribedQuantity & " WHERE Medication_TUID = '" & intMedID & "' AND Patient_TUID = '" & intPatientID & "'")
+        'CreateDatabase.ExecuteInsertQuery(strbSQLcommand.ToString)
 
         'clear string builder and set up sql to get the patientMedication_ID primary key from patient medication table to use in
         'the dispensing table as a foreign key

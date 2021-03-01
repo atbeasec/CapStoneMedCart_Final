@@ -127,6 +127,7 @@
         ' this is where we dock the form as a frmChild form onto the panel
         ' if there is currently a form here we need to close it
 
+
         If Not frmPreviousChildForm Is Nothing Then
             If Not frmPreviousChildForm Is frmChild Then
                 frmPreviousChildForm.Close()
@@ -141,11 +142,17 @@
         ' removes boarder on form which is where someone can close the form. We will close it on button clicks instead
         frmChild.FormBorderStyle = FormBorderStyle.None
 
+        frmChild.Parent = Me
+
         'add form to panel
         Me.pnlDockLocation.Controls.Add(frmChild)
 
         'make form visible
         frmChild.Show()
+
+        For Each ctl In frmChild.Controls
+            Debug.Print(ctl.name)
+        Next
 
     End Sub
 

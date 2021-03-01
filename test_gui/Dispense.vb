@@ -1,12 +1,20 @@
 ﻿Public Class Dispense
 
+    Private intPatientMrn As Integer
+
     Dim contactPanelsAddedCount As Integer = 0
     Dim currentContactPanelName As String = Nothing
+
+    Public Sub SetPatientMrn(ByVal mrn As Integer)
+        intPatientMrn = mrn
+    End Sub
+
 
     Private Sub btnDispense_Click(sender As Object, e As EventArgs)
 
         MessageBox.Show("CAUTION: This drug interacts with (insert drug name here) that the patient is currently taking. Or the patient is allergic to this drug")
-        frmWitnessSignOff.Show()
+
+        'frmWitnessSignOff.Show()
         ' call emthod to open serial port connection and open drawer
 
     End Sub
@@ -143,19 +151,6 @@
 
     End Sub
 
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs)
-
-        Dim strAnswer As MsgBoxResult = MsgBox(" Are you sure you want to close this form? ", MsgBoxStyle.YesNo, "Confirm ")
-
-
-        If strAnswer = MsgBoxResult.Yes Then
-            Me.Close()
-        Else
-
-        End If
-
-    End Sub
-
     Private Sub btnUp_Click(sender As Object, e As EventArgs) Handles btnUp.Click
         ButtonIncrement(txtQuantity)
     End Sub
@@ -176,10 +171,15 @@
         DispenseHistory.SetMedicationProperties()
     End Sub
 
-    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+    Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantity.TextChanged
 
+        'LimitQuantityToQuantityStocked(SQLreturnValue, sender)
 
     End Sub
 
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        frmPatientInfo.setPatientMrn(intPatientMrn)
+        frmMain.OpenChildForm(frmPatientInfo)
 
+    End Sub
 End Class
