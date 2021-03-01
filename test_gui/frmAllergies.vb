@@ -108,6 +108,8 @@
         Dim strNewSeverity = cmbSeverity.Text
         ExecuteScalarQuery("UPDATE PatientAllergy SET Allergy_Severity='" & strNewSeverity & "' WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTuid & ";")
         DisableEditButtons()
+        flpAllergies.Controls.Clear()
+        LoadAllergiesPanel(strNewSeverity, intPatientTuid)
     End Sub
     '/*********************************************************************/
     '/*                   SUBPROGRAM NAME: cmbMedicationName_Click           */         
@@ -627,8 +629,12 @@
         populateAllergyTypeComboBox(cmbAllergiesType, dsAllergyType)
         Dim strSeverity As String = " "
         Dim intPatientTuid As Integer = GetPatientTuid()
-        'get the allergy information from the patient allergy tables
-        Dim dtsPatientAllergy As DataSet = CreateDatabase.ExecuteSelectQuery("Select Allergy.Allergy_Name, PatientAllergy.Allergy_Severity," &
+        strSeverity = LoadAllergiesPanel(strSeverity, intPatientTuid)
+    End Sub
+
+    Private Function LoadAllergiesPanel(strSeverity As String, intPatientTuid As Integer) As String
+        'get the allergy information from the patient allergy tables
+        Dim dtsPatientAllergy As DataSet = CreateDatabase.ExecuteSelectQuery("Select Allergy.Allergy_Name, PatientAllergy.Allergy_Severity," &
                                                                              "Allergy.Allergy_Type, Allergy.Medication_TUID From PatientAllergy " &
                                                                              "INNER JOIN Allergy on PatientAllergy.Allergy_Name=Allergy.Allergy_Name" &
                             " Where Active_Flag =1 And Patient_TUID =" & (intPatientTuid).ToString & ";")
@@ -652,8 +658,9 @@
         Next
         'CreateAllergiesPanels()
 
+        Return strSeverity
+    End Function
 
-    End Sub
     Public Function GetPatientMrn() As Integer
 
         Return intPatientInformationMRN
