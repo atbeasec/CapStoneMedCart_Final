@@ -173,7 +173,7 @@
             .Name = "pnlMedicationFlagged" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Dock = System.Windows.Forms.DockStyle.Top
-            .Tag = intMedicationTUID
+            .Tag = intMedicationTUID & "," & strMedicationName & "," & strDrawerNumber & "," & strSection & "," & strSystemCount
         End With
 
         'put the border panel inside the main panel
@@ -270,20 +270,20 @@
                             'Debug.Print(txtBox.Text) 'textbox will contain the typed count 
                             'Debug.Print(pnlPanel.BackColor.ToString) 'if the backcolor is red, then the item was flagged
 
-                            Dim medicationID As Integer = CInt(pnlPanel.Tag)
+                            Dim medicationID As String = pnlPanel.Tag
                             Dim userCount As Integer = CInt(txtBox.Text)
 
 
-                            'If IsInsertedAlready(medicationID, userCount) = True Then
+                            If Discrepancies.IsInsertedAlready(medicationID, userCount) = True Then
 
-                            '   update the record to make sure the new count is selected.
-                            '   UpdateTheRecord(medicationID,userCount)
-                            'Else
+                                '   update the record to make sure the new count is selected.
+                                Discrepancies.UpdateSplit(medicationID, userCount)
+                            Else
 
-                            '   insert the record because it is not already in the database.
-                            '   InsertDiscrepancy(medicationID,userCount)
+                                '   insert the record because it is not already in the database.
+                                Discrepancies.InsertSplit(medicationID, userCount)
 
-                            'End If
+                            End If
 
                         End If
                     Next
