@@ -634,6 +634,7 @@
 
     Private Function LoadAllergiesPanel(strSeverity As String, intPatientTuid As Integer) As String
         'get the allergy information from the patient allergy tables
+        Dim allergy As String = ""
         Dim dtsPatientAllergy As DataSet = CreateDatabase.ExecuteSelectQuery("Select Allergy.Allergy_Name, PatientAllergy.Allergy_Severity," &
                                                                              "Allergy.Allergy_Type, Allergy.Medication_TUID From PatientAllergy " &
                                                                              "INNER JOIN Allergy on PatientAllergy.Allergy_Name=Allergy.Allergy_Name" &
@@ -644,16 +645,19 @@
 
             If dr(2) = "Drug" Then
                 cmbMedicationName.Text = dr(0)
-                cmbAllergies.Text = "N/A"
+                allergy = "N/A"
+                cmbAllergies.Text = allergy
+                cmbAllergiesType.Text = dr(2)
             Else
-                cmbAllergies.Text = dr(0)
+                allergy = dr(0)
+                cmbAllergies.Text = allergy
                 cmbMedicationName.Text = "N/A"
-
+                cmbAllergiesType.Text = dr(2)
                 Debug.WriteLine("")
             End If
 
             strSeverity = CheckSeverity(dr)
-            CreateAllergiesPanels(flpAllergies, cmbAllergies.Text, cmbMedicationName.Text, cmbAllergiesType.Text, strSeverity)
+            CreateAllergiesPanels(flpAllergies, allergy, cmbMedicationName.Text, cmbAllergiesType.Text, strSeverity)
             cmbAllergiesLocked()
         Next
         'CreateAllergiesPanels()
