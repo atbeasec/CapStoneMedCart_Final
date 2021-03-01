@@ -418,7 +418,7 @@ Module PatientInformation
 
 
     Public Sub DisplayPatientPrescriptionsDispense(ByRef intPatientMRN As Integer)
-        Dim dsPatientID As Integer = CreateDatabase.ExecuteSelectQuery("SELECT Patient_ID from Patient WHERE MRN_Number = '" & intPatientMRN & "'")
+        Dim dsPatientID As Integer = CreateDatabase.ExecuteScalarQuery("SELECT Patient_ID from Patient WHERE MRN_Number = '" & intPatientMRN & "'")
         Dim dsPatientInfo As DataSet
         Dim strbSqlCommand As StringBuilder = New StringBuilder
         strbSqlCommand.Append("SELECT Drug_Name, Strength, Frequency, Medication.Type, PatientMedication.Quantity, ")
