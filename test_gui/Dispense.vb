@@ -19,8 +19,7 @@
 
     End Sub
 
-    Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal genericName As String, ByVal brandName As String, ByVal quantity As String, ByVal lastRefill As String)
-
+    Public Sub CreatePrescriptionsPanels(ByVal flpPannel As FlowLayoutPanel, ByVal medicationName As String, ByVal strength As String, ByVal frequency As String, ByVal type As String, ByVal quantity As String, ByVal datePrescribed As String, ByVal PrescribedBy As String)
         Dim pnl As Panel
         pnl = New Panel
 
@@ -32,9 +31,9 @@
         'Set panel properties
         With pnl
             .BackColor = Color.Gainsboro
-            .Size = New Size(665, 47)
-            .Name = "pnlIndividualPatientRecordPadding" + (contactPanelsAddedCount + 1).ToString
-            .Tag = contactPanelsAddedCount + 1
+            .Size = New Size(1040, 47)
+            .Name = "pnlIndividualPatientRecordPadding" + getPanelCount(flpPannel).ToString
+            .Tag = getPanelCount(flpPannel).ToString
             .Padding = New Padding(0, 0, 0, 3)
             ' .Dock = System.Windows.Forms.DockStyle.Top
         End With
@@ -42,20 +41,21 @@
         With pnlMainPanel
 
             .BackColor = Color.White
-            .Size = New Size(665, 45)
-            .Name = "pnlIndividualPatientRecord" + (contactPanelsAddedCount + 1).ToString
-            .Tag = contactPanelsAddedCount + 1
+            .Size = New Size(1040, 45)
+            .Name = "pnlIndividualPatientRecord" + getPanelCount(flpPannel).ToString
+            .Tag = getPanelCount(flpPannel).ToString
             .Dock = System.Windows.Forms.DockStyle.Top
         End With
 
         'put the boarder panel inside the main panel
         pnl.Controls.Add(pnlMainPanel)
 
+
+        'AddHandler pnlMainPanel.DoubleClick, AddressOf DynamicDoubleClickNewOrder
+        AddHandler pnlMainPanel.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
+        AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
+
         ' add controls to this panel
-
-        '  CreateContactDeleteBtn(pnlMainPanel)
-        ' CreateEditButton(pnlMainPanel)
-
         ' call database info here to populate
         Dim lblID As New Label
         Dim lblID2 As New Label
@@ -63,28 +63,23 @@
         Dim lblID4 As New Label
         Dim lblID5 As New Label
         Dim lblID6 As New Label
+        Dim lblID7 As New Label
 
-        Dim location As New Point(10, 20)
-        Dim location2 As New Point(95, 20)
-        Dim location3 As New Point(220, 20)
-        Dim location4 As New Point(320, 20)
-        Dim location5 As New Point(395, 20)
-        Dim location6 As New Point(500, 20)
-
-        CreateIDLabel(pnlMainPanel, lblID, "lblGenericName", 10, 20, genericName, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID2, "lblBrandName", 230, 20, brandName, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID3, "lblQuantity", 440, 20, quantity, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID4, "lblMeasure", 560, 20, lastRefill, getPanelCount(flpPannel))
+        ' anywhere we have quotes except for the label names, we can call our Database and get method
+        ' to ensure all of the text being added to the panel is inline with the  headers, we will use the label location of the
+        ' header as the reference point for the X axis when creating these labels at run time.
+        CreateIDLabel(pnlMainPanel, lblID, "lblMedicationPrescription", lblMedicationName.Location.X, 20, medicationName, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID2, "lblStrengthPrescription", lblStrength.Location.X, 20, strength, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID3, "lblFrequencyPrescription", lblFrequency.Location.X, 20, frequency, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID4, "lblTypePrescription", lblType.Location.X, 20, type, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID5, "lblQuantityPrescription", lblQuantity.Location.X, 20, quantity, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID6, "lblDatePrescribed", lblDatePrescribed.Location.X, 20, datePrescribed, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, PrescribedBy, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
-        'flpCamera.Controls.Add(contactPanel)
-        'Update panel variables
-        AddHandler pnlMainPanel.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
-        AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
 
-        currentContactPanelName = pnl.Name
-        contactPanelsAddedCount += 1
+        'currentContactPanel = pnl.Name
 
     End Sub
 
@@ -124,32 +119,6 @@
 
     End Sub
 
-    Private Sub pnlHeader_Paint(sender As Object, e As PaintEventArgs)
-
-    End Sub
-
-    Private Sub flpAssignedMedications_Paint(sender As Object, e As PaintEventArgs)
-
-    End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs)
-        Me.Close()
-    End Sub
-
-
-    Private Sub AllergiesExist()
-
-        'If allergies exist show the allergies panel and move the other panel over to specific location
-
-    End Sub
-
-    Private Sub lstboxAllergies_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstboxAllergies.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub Label13_Click(sender As Object, e As EventArgs) Handles Label13.Click
-
-    End Sub
 
     Private Sub btnUp_Click(sender As Object, e As EventArgs) Handles btnUp.Click
         ButtonIncrement(txtQuantity)
