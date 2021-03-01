@@ -70,7 +70,7 @@ Partial Class frmInventory
         Me.pnlPatientNamePadding = New System.Windows.Forms.Panel()
         Me.cmbPatientNames = New System.Windows.Forms.ComboBox()
         Me.eprError = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.cmbDividerBin = New System.Windows.Forms.ComboBox()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.cmbDrawerNumber = New System.Windows.Forms.ComboBox()
         Me.Panel4.SuspendLayout()
@@ -125,7 +125,7 @@ Partial Class frmInventory
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel4.Controls.Add(Me.ComboBox1)
+        Me.Panel4.Controls.Add(Me.cmbDividerBin)
         Me.Panel4.Controls.Add(Me.cmbBin)
         Me.Panel4.Location = New System.Drawing.Point(356, 323)
         Me.Panel4.Name = "Panel4"
@@ -620,16 +620,16 @@ Partial Class frmInventory
         '
         Me.eprError.ContainerControl = Me
         '
-        'ComboBox1
+        'cmbDividerBin
         '
-        Me.ComboBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ComboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ComboBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(1, 1)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(116, 29)
-        Me.ComboBox1.TabIndex = 51
+        Me.cmbDividerBin.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cmbDividerBin.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cmbDividerBin.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbDividerBin.FormattingEnabled = True
+        Me.cmbDividerBin.Location = New System.Drawing.Point(1, 1)
+        Me.cmbDividerBin.Name = "cmbDividerBin"
+        Me.cmbDividerBin.Size = New System.Drawing.Size(116, 29)
+        Me.cmbDividerBin.TabIndex = 51
         '
         'ComboBox2
         '
@@ -734,7 +734,7 @@ Partial Class frmInventory
     Friend WithEvents txtStrength As TextBox
     Friend WithEvents cboSuggestedNames As ComboBox
     Friend WithEvents eprError As ErrorProvider
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents cmbDividerBin As ComboBox
     Friend WithEvents ComboBox2 As ComboBox
     Friend WithEvents cmbDrawerNumber As ComboBox
 End Class

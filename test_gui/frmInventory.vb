@@ -5,7 +5,7 @@ Public Class frmInventory
     End Sub
 
     Private Sub frmInventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        cmbDrawerNumber.SelectedIndex = 1
         ' setdefault text to the search box
         txtSearch.Text = txtSearch.Tag
         txtSearch.ForeColor = Color.Silver
@@ -539,7 +539,29 @@ Public Class frmInventory
         pnlSearch.Select()
     End Sub
 
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDividerBin.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub cmbDrawerNumber_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDrawerNumber.SelectedIndexChanged
+        cmbDividerBin.Items.Clear()
+        Dim intDrawerSize As Integer = 0
+        Dim intNumDividers As Integer = 0
+        Dim intDrawerNumber As Integer = CInt(cmbDrawerNumber.Text)
+        Try
+            intDrawerSize = ExecuteScalarQuery("SELECT Size FROM Drawers where Drawers_ID = " & intDrawerNumber.ToString & ";")
+            intNumDividers = ExecuteScalarQuery("SELECT Number_of_Dividers FROM Drawers where Drawers_ID = " & intDrawerNumber.ToString & ";")
+        Catch ex As Exception
+            ' do nothing because there are empty values in the database
+        End Try
+        txtQuantity.Text = intDrawerSize.ToString
+        Dim dividerspopulation As New ArrayList(intNumDividers)
+        Dim intCounter As Integer = 1
+        Do Until intCounter > intNumDividers
+            cmbDividerBin.Items.Add(intCounter)
+            intCounter += 1
+        Loop
+
 
     End Sub
 End Class
