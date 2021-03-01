@@ -198,6 +198,9 @@ Module Discrepancies
         strbSQL.Append("INSERT INTO Discrepancies(Drawer_TUID, Medication_TUID, Expected_Count, Actual_Count, Primary_User_TUID, Approving_User_TUID, DateTime_Entered, Reason) ")
         strbSQL.Append("VALUES('" & intDrawerTUID & "', '" & intMedicationID & "', '" & intExpectedCount & "', '" & intActualCount & "', '" & intPrimaryUserID & "', '" & intApprovingUserID & "', '" & dtmDateTimeEntered & "', ' ')")
         CreateDatabase.ExecuteInsertQuery(strbSQL.ToString)
+
+        strbSQL.Clear()
+        strbSQL.Append("UPDATE DrawerMedication SET Discrepancy_Flag = '1' WHERE Medication_TUID = '" & intMedicationID & "' AND Active_Flag = '1'")
     End Sub
 
     '/*********************************************************************/
