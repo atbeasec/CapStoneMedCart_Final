@@ -141,6 +141,12 @@ Public Class frmInventory
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Dim intControlled As Integer
         Dim intNarcotic As Integer
+        Dim intDrawerMedication_ID As Integer = 0
+        Dim Drawers_Tuid As Integer = 0
+        Dim intMedicationTuid As Integer = 0
+        Dim intMedQuanitiy As Integer = 0
+        Dim intDividerBin As Integer = 0
+        Dim intDiscrepancies As Integer = 0
 
         If chkControlled.Checked Then
             intControlled = 1
@@ -183,6 +189,37 @@ Public Class frmInventory
         ' if yes, then update if there's differences
         ' or insert the new lines
         ' and save those items
+
+
+        intDrawerMedication_ID = ExecuteScalarQuery("SELECT COUNT(DISTINCT DrawerMedication_ID) FROM DrawerMedication;")
+        Try
+            If CInt(txtDrawerNumber.Text) > 25 Or CInt(txtDrawerNumber.Text) < 0 Then
+
+                Drawers_Tuid = txtDrawerNumber.Text
+
+
+            End If
+
+        Catch ex As Exception
+            eprError.SetError(txtDrawerNumber, "please enter an integer between 1-25")
+        End Try
+
+        intMedicationTuid = ExecuteScalarQuery("Select Medication_ID From Medication WHERE Drug_Name ='" & strName & "';")
+        'because we are adding a new drawermedication for now
+        intDrawerMedication_ID += 1
+
+        Try
+            intMedQuanitiy = CInt(txtQuantity.Text)
+        Catch ex As Exception
+            eprError.SetError(txtDrawerNumber, "please enter an integer")
+        End Try
+        intDividerBin = cmbBin.Text
+
+        ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Divider_Bin,Expiration_Date,Discrepancy_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & intDividerBin & " , '" & txtExpirationDate.Text & "'," & intDiscrepancies & ");")
+        Debug.WriteLine("")
+
+        eprError.Clear()
+
     End Sub
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles pnlSearch.Click

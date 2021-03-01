@@ -415,4 +415,65 @@ Module PatientInformation
         PopulateRoomsCombBoxesMethods.UpdateBedComboBox(cboBed, cboRoom)
         cboBed.SelectedItem = dsPatientRoom.Tables(0).Rows(0)(EnumList.PatientRoom.BedName)
     End Sub
+
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: DisplayPatientPrescriptionsDispense    */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker  		       */   
+    '/*		         DATE CREATED: 2/28/2021                    		   */                             
+    '/*********************************************************************/
+    '/*  SUBPROHRAM PURPOSE:								               */             
+    '/*	 This sub will populate the patient prescription panels on the 
+    '/*  patient dispense form
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 intPatientMRN - this is the patient medical record we are going to*/                     
+    '/*                  be using for the SQL statements.                  */
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*   AB    2/28/2021   Initial creation                                                                  
+    '/*********************************************************************/
+    Public Sub DisplayPatientPrescriptionsDispense(ByRef intPatientMRN As Integer)
+        Dim dsPatientID As Integer = CreateDatabase.ExecuteScalarQuery("SELECT Patient_ID from Patient WHERE MRN_Number = '" & intPatientMRN & "'")
+        Dim dsPatientInfo As DataSet
+        Dim strbSqlCommand As StringBuilder = New StringBuilder
+
+        'set up sql command inner joining the medication, patientMedicaiton and physician table
+        ' this is done to get the drug name, strength, type and frequency of the medication the specific patient
+        ' is prescribed, it then joins the patient medicaiton table to get the quantity, date prescribed and 
+        ' the physician ID who prescribed it, inner joining the physician table with the ID to get the name of the physician
+        strbSqlCommand.Append("SELECT Drug_Name, Strength, Frequency, Medication.Type, PatientMedication.Quantity, ")
+        strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name ")
+        strbSqlCommand.Append("FROM Medication Inner Join PatientMedication ON PatientMedication.Medication_TUID = Medication.Medication_ID ")
+        strbSqlCommand.Append("Inner Join Physician ON Physician.Physician_ID = PatientMedication.Ordering_Physician_ID ")
+        strbSqlCommand.Append("WHERE PatientMedication.Patient_TUID = '" & dsPatientID & "'")
+        dsPatientInfo = CreateDatabase.ExecuteSelectQuery(strbSqlCommand.ToString)
+        'look create panel method for each prescription the patient has
+        For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
+            Dispense.CreatePrescriptionsPanels(Dispense.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7))
+        Next
+
+    End Sub
 End Module

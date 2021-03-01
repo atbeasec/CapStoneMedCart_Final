@@ -22,6 +22,7 @@ Partial Class frmInventory
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmInventory))
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -70,6 +71,7 @@ Partial Class frmInventory
         Me.lblPatientName = New System.Windows.Forms.Label()
         Me.pnlPatientNamePadding = New System.Windows.Forms.Panel()
         Me.cmbPatientNames = New System.Windows.Forms.ComboBox()
+        Me.eprError = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel14.SuspendLayout()
@@ -84,6 +86,7 @@ Partial Class frmInventory
         Me.Panel9.SuspendLayout()
         Me.pnlPatientName.SuspendLayout()
         Me.pnlPatientNamePadding.SuspendLayout()
+        CType(Me.eprError, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label10
@@ -125,7 +128,7 @@ Partial Class frmInventory
         Me.Panel4.Controls.Add(Me.cmbBin)
         Me.Panel4.Location = New System.Drawing.Point(356, 323)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Padding = New System.Windows.Forms.Padding(1, 1, 1, 1)
+        Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel4.Size = New System.Drawing.Size(118, 31)
         Me.Panel4.TabIndex = 15
         '
@@ -146,7 +149,7 @@ Partial Class frmInventory
         Me.Panel3.Controls.Add(Me.cmbMedicationName)
         Me.Panel3.Location = New System.Drawing.Point(10, 88)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Padding = New System.Windows.Forms.Padding(1, 1, 1, 1)
+        Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel3.Size = New System.Drawing.Size(464, 31)
         Me.Panel3.TabIndex = 3
         '
@@ -167,7 +170,7 @@ Partial Class frmInventory
         Me.Panel14.Controls.Add(Me.txtExpirationDate)
         Me.Panel14.Location = New System.Drawing.Point(10, 399)
         Me.Panel14.Name = "Panel14"
-        Me.Panel14.Padding = New System.Windows.Forms.Padding(1, 1, 1, 1)
+        Me.Panel14.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel14.Size = New System.Drawing.Size(190, 31)
         Me.Panel14.TabIndex = 16
         '
@@ -220,7 +223,7 @@ Partial Class frmInventory
         Me.Panel1.Controls.Add(Me.cmbPatientPersonalMedication)
         Me.Panel1.Location = New System.Drawing.Point(272, 399)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Padding = New System.Windows.Forms.Padding(1, 1, 1, 1)
+        Me.Panel1.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel1.Size = New System.Drawing.Size(202, 31)
         Me.Panel1.TabIndex = 17
         '
@@ -257,7 +260,7 @@ Partial Class frmInventory
         Me.Panel2.Controls.Add(Me.txtDrawerNumber)
         Me.Panel2.Location = New System.Drawing.Point(11, 321)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Padding = New System.Windows.Forms.Padding(1, 1, 1, 1)
+        Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel2.Size = New System.Drawing.Size(53, 33)
         Me.Panel2.TabIndex = 9
         '
@@ -338,7 +341,7 @@ Partial Class frmInventory
         Me.Panel5.Controls.Add(Me.txtQuantity)
         Me.Panel5.Location = New System.Drawing.Point(186, 321)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Padding = New System.Windows.Forms.Padding(1, 1, 1, 1)
+        Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel5.Size = New System.Drawing.Size(53, 33)
         Me.Panel5.TabIndex = 12
         '
@@ -434,7 +437,7 @@ Partial Class frmInventory
         Me.Panel7.Controls.Add(Me.txtType)
         Me.Panel7.Location = New System.Drawing.Point(274, 242)
         Me.Panel7.Name = "Panel7"
-        Me.Panel7.Padding = New System.Windows.Forms.Padding(1, 1, 1, 1)
+        Me.Panel7.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel7.Size = New System.Drawing.Size(202, 31)
         Me.Panel7.TabIndex = 8
         '
@@ -466,7 +469,7 @@ Partial Class frmInventory
         Me.Panel6.Controls.Add(Me.txtSchedule)
         Me.Panel6.Location = New System.Drawing.Point(274, 160)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Padding = New System.Windows.Forms.Padding(1, 1, 1, 1)
+        Me.Panel6.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel6.Size = New System.Drawing.Size(202, 28)
         Me.Panel6.TabIndex = 6
         '
@@ -488,7 +491,7 @@ Partial Class frmInventory
         Me.Panel10.Controls.Add(Me.txtStrength)
         Me.Panel10.Location = New System.Drawing.Point(11, 242)
         Me.Panel10.Name = "Panel10"
-        Me.Panel10.Padding = New System.Windows.Forms.Padding(1, 1, 1, 1)
+        Me.Panel10.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel10.Size = New System.Drawing.Size(190, 31)
         Me.Panel10.TabIndex = 7
         '
@@ -510,7 +513,7 @@ Partial Class frmInventory
         Me.Panel9.Controls.Add(Me.txtSearch)
         Me.Panel9.Location = New System.Drawing.Point(9, 14)
         Me.Panel9.Name = "Panel9"
-        Me.Panel9.Padding = New System.Windows.Forms.Padding(1, 1, 1, 1)
+        Me.Panel9.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel9.Size = New System.Drawing.Size(466, 31)
         Me.Panel9.TabIndex = 1
         '
@@ -617,7 +620,7 @@ Partial Class frmInventory
         Me.pnlPatientNamePadding.Controls.Add(Me.cmbPatientNames)
         Me.pnlPatientNamePadding.Location = New System.Drawing.Point(9, 28)
         Me.pnlPatientNamePadding.Name = "pnlPatientNamePadding"
-        Me.pnlPatientNamePadding.Padding = New System.Windows.Forms.Padding(1, 1, 1, 1)
+        Me.pnlPatientNamePadding.Padding = New System.Windows.Forms.Padding(1)
         Me.pnlPatientNamePadding.Size = New System.Drawing.Size(465, 31)
         Me.pnlPatientNamePadding.TabIndex = 18
         '
@@ -631,6 +634,10 @@ Partial Class frmInventory
         Me.cmbPatientNames.Name = "cmbPatientNames"
         Me.cmbPatientNames.Size = New System.Drawing.Size(463, 29)
         Me.cmbPatientNames.TabIndex = 65
+        '
+        'eprError
+        '
+        Me.eprError.ContainerControl = Me
         '
         'frmInventory
         '
@@ -665,6 +672,7 @@ Partial Class frmInventory
         Me.pnlPatientName.ResumeLayout(False)
         Me.pnlPatientName.PerformLayout()
         Me.pnlPatientNamePadding.ResumeLayout(False)
+        CType(Me.eprError, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -716,4 +724,5 @@ Partial Class frmInventory
     Friend WithEvents Panel10 As Panel
     Friend WithEvents txtStrength As TextBox
     Friend WithEvents cboSuggestedNames As ComboBox
+    Friend WithEvents eprError As ErrorProvider
 End Class
