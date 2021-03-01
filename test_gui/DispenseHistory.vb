@@ -229,7 +229,7 @@ Module DispenseHistory
         Strdatacommand = "SELECT Drug_Name,RXCUI_ID FROM PatientMedication " &
         "INNER JOIN Medication on Medication.Medication_ID = PatientMedication.Medication_TUID " &
         "INNER JOIN Patient on Patient.Patient_ID = PatientMedication.Patient_TUID " &
-        "WHERE MRN_Number = '" & intPatientMRN & "'"
+        "WHERE MRN_Number = '" & intPatientMRN & "' AND PatientMedication.Active_Flag = '1'"
 
         Dim dsMedicationDataSet As DataSet = New DataSet
         dsMedicationDataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
@@ -279,7 +279,7 @@ Module DispenseHistory
         Dim Strdatacommand As String
         Strdatacommand = "SELECT PatientMedication.Type, Strength FROM PatientMedication " &
             "INNER JOIN Medication on Medication.Medication_ID = PatientMedication.Medication_TUID " &
-            "WHERE RXCUI_ID = '" & strMedicationRXCUI & "'"
+            "WHERE RXCUI_ID = '" & strMedicationRXCUI & "' AND PatientMedication.Active_Flag = '1'"
 
         'make dataset and call the sql method
         Dim dsMedicationInformation As DataSet = New DataSet
@@ -372,7 +372,7 @@ Module DispenseHistory
 
         'clear string builder using medID and PatientID get the quantity of the prescribed medication
         strbSQLcommand.Clear()
-        strbSQLcommand.Append("SELECT Quantity FROM PatientMedication WHERE Medication_TUID = '" & intMedID & "' AND Patient_TUID = '" & intPatientID & "'")
+        strbSQLcommand.Append("SELECT Quantity FROM PatientMedication WHERE Medication_TUID = '" & intMedID & "' AND Patient_TUID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1'")
         intPrescribedQuantity = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
 
         ''update quantity to new amount
@@ -384,21 +384,21 @@ Module DispenseHistory
         'clear string builder and set up sql to get the patientMedication_ID primary key from patient medication table to use in
         'the dispensing table as a foreign key
         strbSQLcommand.Clear()
-        strbSQLcommand.Append("SELECT PatientMedication_ID FROM PatientMedication WHERE Medication_TUID = '" & intMedID & "' AND Patient_TUID = '" & intPatientID & "'")
+        strbSQLcommand.Append("SELECT PatientMedication_ID FROM PatientMedication WHERE Medication_TUID = '" & intMedID & "' AND Patient_TUID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1'")
         intPatientMedicationDatabaseID = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
 
         'clear string builder and set up sql statement to decrease drawer amount
         strbSQLcommand.Clear()
-        strbSQLcommand.Append("SELECT Quantity FROM DrawerMedication WHERE Medication_TUID  = '" & intMedID & "'")
+        strbSQLcommand.Append("SELECT Quantity FROM DrawerMedication WHERE Medication_TUID  = '" & intMedID & "' AND DrawerMedication.Active_Flag = '1'")
         intPrescribedQuantity = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
         intPrescribedQuantity = intPrescribedQuantity - Dispense.txtQuantity.Text
         strbSQLcommand.Clear()
-        strbSQLcommand.Append("UPDATE DrawerMedication SET Quantity = '" & intPrescribedQuantity & "' WHERE Medication_TUID = '" & intMedID & "'")
+        strbSQLcommand.Append("UPDATE DrawerMedication SET Quantity = '" & intPrescribedQuantity & "' WHERE Medication_TUID = '" & intMedID & "' AND DrawerMedication.Active_Flag = '1'")
         CreateDatabase.ExecuteInsertQuery(strbSQLcommand.ToString)
 
         'clear string builder and set up sql statement to insert into dispense history
         strbSQLcommand.Clear()
-        strbSQLcommand.Append("SELECT DrawerMedication_ID From DrawerMedication WHERE Medication_TUID = '" & intMedID & "'")
+        strbSQLcommand.Append("SELECT DrawerMedication_ID From DrawerMedication WHERE Medication_TUID = '" & intMedID & "' AND DrawerMedication.Active_Flag = '1'")
         intDrawerMedicationID = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
         strbSQLcommand.Clear()
         strbSQLcommand.Append("INSERT INTO Dispensing(PatientMedication_TUID, Primary_User_TUID, Approving_User_TUID, DateTime_Dispensed, Amount_Dispensed, DrawerMedication_TUID) ")
