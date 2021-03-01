@@ -324,6 +324,7 @@
         Next
         Dim size = CreateDatabase.ExecuteScalarQuery("SELECT size FROM Drawers where Drawers_ID = " & sender.TabIndex.ToString() & ";")
         txtCapacity.Text = size
+        txtDividers.Text = intDividerBin
         If intDrugQuantity = 0 Then
 
         Else
