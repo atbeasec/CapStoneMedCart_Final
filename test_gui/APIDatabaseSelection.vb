@@ -282,6 +282,7 @@ Module APIDatabaseSelection
 	'/*  Cody Russell 02/9/21  Made changes to a few sql statements     */
 	'/*	BRH	 02/25/21	Made changes with updated database fields		*/
 	'/*	BRH	 02/27/21	Updated functionality for new API implementation*/
+	'/*	BRH	 03/01/21	Updated functionality for updating a barcode	*/
 	'/*******************************************************************/
 	Sub CompareMedications(DrugName As String, RXCUID As String, ControlledFlag As Integer, NarcoticFlag As Integer,
 								 Barcode As String, Type As String, Strength As String, Schedule As Integer, ActiveFlag As Integer)
@@ -319,6 +320,11 @@ Module APIDatabaseSelection
 				If dsValue(4) <> NarcoticFlag Then
 					'update the narcotic flag field in database
 					ExecuteScalarQuery("UPDATE Medication SET NarcoticControlled_Flag = '" & NarcoticFlag & "' WHERE RXCUI_ID = '" & RXCUID & "';")
+				End If
+
+				If dsValue(5) <> Barcode Then
+					'update the barcode field in database
+					ExecuteScalarQuery("UPDATE Medication SET Barcode = '" & Barcode & "' WHERE RXCUI_ID = '" & RXCUID & "';")
 				End If
 
 				If dsValue(6) <> Type Then
@@ -433,11 +439,12 @@ Module APIDatabaseSelection
 	'/*  WHO   WHEN     WHAT											*/
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  BRH  02/27/21  Initial creation of the code					*/
+	'/*  BRH  03/01/21  Changed the length of possible barcodes			*/
 	'/*******************************************************************/
 	Function generateSampleBarcode() As String
 		Dim strPossibleCharacters As String = "abcdefghijklmnopqrstuvwxyz0123456789"
 		Static strRandom As New Random
-		Dim intCharactersInString As Integer = strRandom.Next(1, 10)
+		Dim intCharactersInString As Integer = strRandom.Next(5, 10)
 		Dim strStringBuilder As New StringBuilder
 		For i As Integer = 1 To intCharactersInString
 			Dim idx As Integer = strRandom.Next(0, strPossibleCharacters.Length)
