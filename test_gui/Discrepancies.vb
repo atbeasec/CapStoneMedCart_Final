@@ -310,7 +310,7 @@ Module Discrepancies
         intMedicationTUID = CreateDatabase.ExecuteScalarQuery(strbSQL.ToString)
 
         strbSQL.Clear()
-        strbSQL.Append("UPDATE DrawerMedication SET Discrepancy_Flag = '1' WHERE Medication_TUID = '" & intMedicationTUID & "' AND Active_Flag = '1'")
+        strbSQL.Append("UPDATE DrawerMedication SET Discrepancy_Flag = '0' WHERE Medication_TUID = '" & intMedicationTUID & "' AND Active_Flag = '1'")
         CreateDatabase.ExecuteSelectQuery(strbSQL.ToString)
     End Sub
 
