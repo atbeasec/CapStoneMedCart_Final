@@ -27,7 +27,10 @@
             Discrepancies.ResolveDiscrepancies(discrepancyID, txtResolved.Text)
             'close the resolve form 
             'Me.Close()
+            MessageBox.Show("Reason recorded and discrepancy resolved")
             frmMain.OpenChildForm(frmDiscrepancies)
+        Else
+            MessageBox.Show("Please enter a reason to resolve the discrepancy")
         End If
 
 

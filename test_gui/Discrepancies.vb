@@ -303,7 +303,7 @@ Module Discrepancies
         Dim strbSQL As StringBuilder = New StringBuilder
         Dim intMedicationTUID As Integer
         'create sql update statement and call generic sql subroutine
-        strbSQL.Append("UPDATE Discrepancies SET DateTime_Cleared ='" & dtmAdhocTime & "' WHERE Discrepancies_ID = '" & intDiscrepID & "';")
+        strbSQL.Append("UPDATE Discrepancies SET DateTime_Cleared ='" & dtmAdhocTime & "', Reason = '" & strReasonString & "' WHERE Discrepancies_ID = '" & intDiscrepID & "';")
         CreateDatabase.ExecuteInsertQuery(strbSQL.ToString)
         strbSQL.Clear()
         strbSQL.Append("SELECT Medication_TUID FROM Discrepancies WHERE Discrepancies_ID = '" & intDiscrepID & "'")
