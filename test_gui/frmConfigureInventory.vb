@@ -329,8 +329,8 @@
     Private Sub Button26_Click(sender As Object, e As EventArgs) Handles btnAddToDrawer.Click
 
         'call new form to show inventory. already coded somewhere
-
-        frmInventory.Show()
+        frmMain.OpenChildForm(frmInventory)
+        'frmInventory.Show()
         ' NewNurse.Show()
         'frmImport.Show()
         'frmChangePassword.Show()
