@@ -215,12 +215,6 @@
     <Compile Include="frmEndOfShift.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmImport.Designer.vb">
-      <DependentUpon>frmImport.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmImport.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmInventory.Designer.vb">
       <DependentUpon>frmInventory.vb</DependentUpon>
     </Compile>
@@ -243,18 +237,6 @@
       <DependentUpon>frmMaintenance.vb</DependentUpon>
     </Compile>
     <Compile Include="frmMaintenance.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmNewInventory.Designer.vb">
-      <DependentUpon>frmNewInventory.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmNewInventory.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmNewOrder.Designer.vb">
-      <DependentUpon>frmNewOrder.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmNewOrder.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmNewPatient.Designer.vb">
@@ -303,18 +285,6 @@
       <DependentUpon>frmSerialPort.vb</DependentUpon>
     </Compile>
     <Compile Include="frmSerialPort.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmUpdatePatient.Designer.vb">
-      <DependentUpon>frmUpdatePatient.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmUpdatePatient.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmWitness.Designer.vb">
-      <DependentUpon>frmWitness.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmWitness.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmWitnessSignOff.Designer.vb">
@@ -421,9 +391,6 @@
     <EmbeddedResource Include="frmEndOfShift.resx">
       <DependentUpon>frmEndOfShift.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmImport.resx">
-      <DependentUpon>frmImport.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmInventory.resx">
       <DependentUpon>frmInventory.vb</DependentUpon>
     </EmbeddedResource>
@@ -435,12 +402,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMaintenance.resx">
       <DependentUpon>frmMaintenance.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmNewInventory.resx">
-      <DependentUpon>frmNewInventory.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmNewOrder.resx">
-      <DependentUpon>frmNewOrder.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNewPatient.resx">
       <DependentUpon>frmNewPatient.vb</DependentUpon>
@@ -465,12 +426,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSerialPort.resx">
       <DependentUpon>frmSerialPort.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmUpdatePatient.resx">
-      <DependentUpon>frmUpdatePatient.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmWitness.resx">
-      <DependentUpon>frmWitness.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmWitnessSignOff.resx">
       <DependentUpon>frmWitnessSignOff.vb</DependentUpon>
