@@ -246,7 +246,7 @@ Module PatientInformation
     '/*                 information needed for Patient allergies list     */
     '/*********************************************************************/
     Public Sub GetAllergies(ByRef intPatientInformationMRN As Integer)
-
+        frmPatientInfo.lstBoxAllergies.Items.Clear()
         'default value for an mrn number so allergies are shown
         'intPatientInformationMRN = 949764144
 
