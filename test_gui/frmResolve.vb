@@ -110,4 +110,8 @@
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         frmMain.OpenChildForm(frmDiscrepancies)
     End Sub
+
+    Private Sub txtResolved_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtResolved.KeyPress
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz1234567890/-")
+    End Sub
 End Class
