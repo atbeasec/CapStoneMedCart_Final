@@ -5,11 +5,15 @@
 
 
     Private Sub frmConfigureInventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         txtCapacity.Enabled = False
         txtDividers.Enabled = False
+
         UpdateButtonsOnScreen()
         AddHandlerToDrawerButtons()
         PopulateInventory()
+
+        btnDrawer1.PerformClick()
 
         ' method is going to be needed to load the capacity from the database and the number of dividers in the selected drawer
         ' we will take that data and put it into the textbox for capacity and divider.
@@ -24,7 +28,7 @@
     End Sub
 
 
-    Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal strDrugName As String, ByVal strStrength As String, ByVal strQuantity As String)
+    Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal strDrugName As String, ByVal strDividerBin As String, ByVal strStrength As String, ByVal strQuantity As String)
 
         Dim pnl As Panel
         pnl = New Panel
@@ -37,7 +41,7 @@
         'Set panel properties
         With pnl
             .BackColor = Color.Gainsboro
-            .Size = New Size(613, 47)
+            .Size = New Size(670, 47)
             .Name = "pnlMedicationRecordPadding" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Padding = New Padding(0, 0, 0, 3)
@@ -47,7 +51,7 @@
         With pnlMainPanel
 
             .BackColor = Color.White
-            .Size = New Size(613, 45)
+            .Size = New Size(670, 45)
             .Name = "pnlMedicationRecord" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Dock = System.Windows.Forms.DockStyle.Top
@@ -62,8 +66,8 @@
         AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
 
         ' add controls to this panel
-        CreateEditButton(pnlMainPanel, getPanelCount(flpPannel), 480, 5)
-        CreateDeleteBtn(pnlMainPanel, getPanelCount(flpPannel), 535, 5)
+        CreateEditButton(pnlMainPanel, getPanelCount(flpPannel), lblActions.Location.X, 5)
+        CreateDeleteBtn(pnlMainPanel, getPanelCount(flpPannel), lblActions.Location.X + 40, 5)
 
         ' add controls to this panel
         ' call database info here to populate
@@ -76,10 +80,11 @@
         Dim lblID7 As New Label
 
         ' anywhere we have quotes except for the label names, we can call our Database and get method
-        CreateIDLabel(pnlMainPanel, lblID, "lblDrugName", 5, 20, strDrugName, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID2, "lblStrength", 206, 20, strStrength, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID, "lblDrugName", lblDrugName.Location.X, 20, strDrugName, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID5, "lblDivider", lblDivider.Location.X, 20, strDividerBin, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID2, "lblStrength", lblStrength.Location.X, 20, strStrength, getPanelCount(flpPannel))
         'CreateIDLabel(pnlMainPanel, lblID3, "lblType", 220, 20, strType, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID4, "lblQuantity", 340, 20, strQuantity, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID4, "lblQuantity", lblQuantity.Location.X, 20, strQuantity, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
@@ -131,7 +136,7 @@
         Dim dispenseTime4 As String = "1:05 PM"
         Dim dispenseTime5 As String = "5:04 AM"
 
-        'CreatePanel(flpMedication, genName1, brandName1, quantity1, measure1)
+        CreatePanel(flpMedication, genName1, quantity1, brandName1, quantity1)
 
     End Sub
 
@@ -151,7 +156,7 @@
     Private Sub UpdateButtonsOnScreen()
 
         'aray used to throw temporary data here for dumping. only for prototype purposes
-        Dim arrQuantity As Integer() = {6, 7, 3, 78, 7, 8, 8, 9, 12, 144, 34, 55, 23, 67, 8, 67, 12, 34, 1, 65, 87, 43, 65, 21, 59}
+        Dim arrQuantity As Integer() = {6, 7, 5, 78, 7, 8, 8, 9, 12, 144, 34, 55, 23, 67, 8, 67, 12, 34, 5, 65, 87, 43, 65, 21, 59}
 
         Dim tp As New ToolTip
 
@@ -330,7 +335,7 @@
             ' the drawer is empty. Do nothing
         Else
             'based on the selected drawer we will need to call the database to see what medications are in the drawers
-            CreatePanel(flpMedication, strDrugName, intStrength.ToString(), intDrugQuantity.ToString())
+            '   CreatePanel(flpMedication, strDrugName, intStrength.ToString(), intDrugQuantity.ToString())
         End If
         'MessageBox.Show(strDrugName + " " + intStrength.ToString() + "   " + intDividerBin.ToString() + " In drawer number: " + sender.TabIndex.ToString())
 
@@ -376,7 +381,7 @@
 
     End Sub
 
-    Private Sub Label38_Click(sender As Object, e As EventArgs) Handles Label38.Click
+    Private Sub Label38_Click(sender As Object, e As EventArgs) Handles lblStrength.Click
 
     End Sub
 End Class
