@@ -322,11 +322,12 @@
 
 
         Next
-        Dim size = CreateDatabase.ExecuteScalarQuery("SELECT size FROM Drawers where Drawers_ID = " & sender.TabIndex.ToString() & ";")
+        Dim size = CreateDatabase.ExecuteScalarQuery("SELECT Size FROM Drawers where Drawers_ID = " & sender.TabIndex.ToString() & ";")
         txtCapacity.Text = size
-        txtDividers.Text = intDividerBin
+        Dim dividers = CreateDatabase.ExecuteScalarQuery("SELECT Number_of_Dividers FROM Drawers where Drawers_ID = " & sender.TabIndex.ToString() & ";")
+        txtDividers.Text = dividers
         If intDrugQuantity = 0 Then
-
+            ' the drawer is empty. Do nothing
         Else
             'based on the selected drawer we will need to call the database to see what medications are in the drawers
             CreatePanel(flpMedication, strDrugName, intStrength.ToString(), intDrugQuantity.ToString())
