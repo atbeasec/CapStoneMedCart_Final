@@ -201,6 +201,7 @@ Module Discrepancies
 
         strbSQL.Clear()
         strbSQL.Append("UPDATE DrawerMedication SET Discrepancy_Flag = '1' WHERE Medication_TUID = '" & intMedicationID & "' AND Active_Flag = '1'")
+        CreateDatabase.ExecuteInsertQuery(strbSQL.ToString)
     End Sub
 
     '/*********************************************************************/
@@ -295,16 +296,22 @@ Module Discrepancies
     '/*  ---   ----     ------------------------------------------------- */
     '/*  AB    2/22/2021 Initial creation
     '/*********************************************************************/
-    Public Sub ResolveDiscrepancies(ByRef intDiscrepID As Integer)
+    Public Sub ResolveDiscrepancies(ByRef intDiscrepID As Integer, ByRef strReasonString As String)
         'create current date and time for discrepancy database table
         'create string builder to build sql command
         Dim dtmAdhocTime As String = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")
         Dim strbSQL As StringBuilder = New StringBuilder
+        Dim intMedicationTUID As Integer
         'create sql update statement and call generic sql subroutine
         strbSQL.Append("UPDATE Discrepancies SET DateTime_Cleared ='" & dtmAdhocTime & "' WHERE Discrepancies_ID = '" & intDiscrepID & "';")
         CreateDatabase.ExecuteInsertQuery(strbSQL.ToString)
         strbSQL.Clear()
-        strbSQL.Append("")
+        strbSQL.Append("SELECT Medication_TUID FROM Discrepancies WHERE Discrepancies_ID = '" & intDiscrepID & "'")
+        intMedicationTUID = CreateDatabase.ExecuteScalarQuery(strbSQL.ToString)
+
+        strbSQL.Clear()
+        strbSQL.Append("UPDATE DrawerMedication SET Discrepancy_Flag = '1' WHERE Medication_TUID = '" & intMedicationTUID & "' AND Active_Flag = '1'")
+        CreateDatabase.ExecuteSelectQuery(strbSQL.ToString)
     End Sub
 
     '/*********************************************************************/
