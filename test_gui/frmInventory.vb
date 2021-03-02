@@ -147,6 +147,7 @@ Public Class frmInventory
         Dim intMedQuanitiy As Integer = 0
         Dim intDividerBin As Integer = 0
         Dim intDiscrepancies As Integer = 0
+        Dim strBarcode As String
 
         If chkControlled.Checked Then
             intControlled = 1
@@ -170,7 +171,15 @@ Public Class frmInventory
         'If yes, then compare the medications in the database and either insert
         'the record or update records in the database
         If txtSchedule.Text <> Nothing And txtType.Text <> Nothing And txtStrength.Text <> Nothing Then
-            CompareMedications(strName.Substring(0, strName.Length), strRXCUI, intControlled, intNarcotic, generateSampleBarcode(), txtType.Text, txtStrength.Text, CInt(txtSchedule.Text), 1)
+            'Check if a barcode is entered
+            'If no, generate a sample
+            'If yes, pass that to the barcode variable
+            If txtBarcode.Text = Nothing Then
+                strBarcode = generateSampleBarcode()
+            Else
+                strBarcode = txtBarcode.Text
+            End If
+            CompareMedications(strName.Substring(0, strName.Length), strRXCUI, intControlled, intNarcotic, strBarcode, txtType.Text, txtStrength.Text, CInt(txtSchedule.Text), 1)
         Else
             MessageBox.Show("Please enter data in all fields before saving.")
         End If
@@ -182,43 +191,50 @@ Public Class frmInventory
         ' if yes, then update if there's differences
         ' if no, then save those items
         ' and pass it to the function to find interactions
-        Dim myPropertyNameList As New List(Of String)({"severity", "description", "rxcui"})
-        Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
-        outputList = getInteractionsByName("153008", myPropertyNameList)
+
+        'Dim myPropertyNameList As New List(Of String)({"severity", "description", "rxcui"})
+        'Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
+        'outputList = getInteractionsByName("153008", myPropertyNameList)
+
+
+        'For Each result In outputList
+        '    MessageBox.Show(result.PropertyName & "," & result.PropertyValue)
+        'Next
+
         ' double-check if the interactions with the matching pair of RXCUI's exist
         ' if yes, then update if there's differences
         ' or insert the new lines
         ' and save those items
 
 
-        intDrawerMedication_ID = ExecuteScalarQuery("SELECT COUNT(DISTINCT DrawerMedication_ID) FROM DrawerMedication;")
-        Try
-            If CInt(txtDrawerNumber.Text) > 25 Or CInt(txtDrawerNumber.Text) < 0 Then
+        'intDrawerMedication_ID = ExecuteScalarQuery("SELECT COUNT(DISTINCT DrawerMedication_ID) FROM DrawerMedication;")
+        'Try
+        '    If CInt(txtDrawerNumber.Text) > 25 Or CInt(txtDrawerNumber.Text) < 0 Then
 
-                Drawers_Tuid = txtDrawerNumber.Text
+        '        Drawers_Tuid = txtDrawerNumber.Text
 
 
-            End If
+        '    End If
 
-        Catch ex As Exception
-            eprError.SetError(txtDrawerNumber, "please enter an integer between 1-25")
-        End Try
+        'Catch ex As Exception
+        '    eprError.SetError(txtDrawerNumber, "please enter an integer between 1-25")
+        'End Try
 
-        intMedicationTuid = ExecuteScalarQuery("Select Medication_ID From Medication WHERE Drug_Name ='" & strName & "';")
-        'because we are adding a new drawermedication for now
-        intDrawerMedication_ID += 1
+        'intMedicationTuid = ExecuteScalarQuery("Select Medication_ID From Medication WHERE Drug_Name ='" & strName & "';")
+        ''because we are adding a new drawermedication for now
+        'intDrawerMedication_ID += 1
 
-        Try
-            intMedQuanitiy = CInt(txtQuantity.Text)
-        Catch ex As Exception
-            eprError.SetError(txtDrawerNumber, "please enter an integer")
-        End Try
-        intDividerBin = cmbBin.Text
+        'Try
+        '    intMedQuanitiy = CInt(txtQuantity.Text)
+        'Catch ex As Exception
+        '    eprError.SetError(txtDrawerNumber, "please enter an integer")
+        'End Try
+        'intDividerBin = cmbBin.Text
 
-        ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Divider_Bin,Expiration_Date,Discrepancy_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & intDividerBin & " , '" & txtExpirationDate.Text & "'," & intDiscrepancies & ");")
-        Debug.WriteLine("")
+        'ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Divider_Bin,Expiration_Date,Discrepancy_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & intDividerBin & " , '" & txtExpirationDate.Text & "'," & intDiscrepancies & ");")
+        'Debug.WriteLine("")
 
-        eprError.Clear()
+        'eprError.Clear()
 
     End Sub
 
@@ -544,5 +560,4 @@ Public Class frmInventory
         frmMain.OpenChildForm(frmConfigureInventory)
 
     End Sub
-
 End Class
