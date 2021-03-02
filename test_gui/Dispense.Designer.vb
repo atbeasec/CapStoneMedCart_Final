@@ -481,6 +481,7 @@ Partial Class Dispense
         Me.txtQuantity.Name = "txtQuantity"
         Me.txtQuantity.Size = New System.Drawing.Size(51, 26)
         Me.txtQuantity.TabIndex = 38
+        Me.txtQuantity.Text = "0"
         '
         'pnlHeader
         '
