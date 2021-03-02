@@ -72,6 +72,8 @@ Partial Class frmInventory
         Me.pnlPatientNamePadding = New System.Windows.Forms.Panel()
         Me.cmbPatientNames = New System.Windows.Forms.ComboBox()
         Me.eprError = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.pnlHeader = New System.Windows.Forms.Panel()
+        Me.btnBack = New System.Windows.Forms.Button()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel14.SuspendLayout()
@@ -87,6 +89,7 @@ Partial Class frmInventory
         Me.pnlPatientName.SuspendLayout()
         Me.pnlPatientNamePadding.SuspendLayout()
         CType(Me.eprError, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlHeader.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label10
@@ -200,7 +203,7 @@ Partial Class frmInventory
         Me.Label17.AutoSize = True
         Me.Label17.BackColor = System.Drawing.Color.White
         Me.Label17.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(12, 20)
+        Me.Label17.Location = New System.Drawing.Point(12, 49)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(208, 25)
         Me.Label17.TabIndex = 168
@@ -381,7 +384,7 @@ Partial Class frmInventory
         Me.pnlMainLocation.Controls.Add(Me.pnlMainFormFields)
         Me.pnlMainLocation.Controls.Add(Me.Panel11)
         Me.pnlMainLocation.Controls.Add(Me.pnlPatientName)
-        Me.pnlMainLocation.Location = New System.Drawing.Point(17, 48)
+        Me.pnlMainLocation.Location = New System.Drawing.Point(17, 77)
         Me.pnlMainLocation.Name = "pnlMainLocation"
         Me.pnlMainLocation.Size = New System.Drawing.Size(570, 603)
         Me.pnlMainLocation.TabIndex = 189
@@ -639,12 +642,40 @@ Partial Class frmInventory
         '
         Me.eprError.ContainerControl = Me
         '
+        'pnlHeader
+        '
+        Me.pnlHeader.BackColor = System.Drawing.Color.White
+        Me.pnlHeader.Controls.Add(Me.btnBack)
+        Me.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnlHeader.Location = New System.Drawing.Point(0, 0)
+        Me.pnlHeader.Name = "pnlHeader"
+        Me.pnlHeader.Size = New System.Drawing.Size(962, 46)
+        Me.pnlHeader.TabIndex = 203
+        '
+        'btnBack
+        '
+        Me.btnBack.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnBack.FlatAppearance.BorderSize = 0
+        Me.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnBack.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnBack.ForeColor = System.Drawing.Color.White
+        Me.btnBack.Image = CType(resources.GetObject("btnBack.Image"), System.Drawing.Image)
+        Me.btnBack.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnBack.Location = New System.Drawing.Point(17, 0)
+        Me.btnBack.Name = "btnBack"
+        Me.btnBack.Size = New System.Drawing.Size(89, 37)
+        Me.btnBack.TabIndex = 61
+        Me.btnBack.Text = "Back"
+        Me.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnBack.UseVisualStyleBackColor = False
+        '
         'frmInventory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(962, 670)
+        Me.ClientSize = New System.Drawing.Size(962, 715)
+        Me.Controls.Add(Me.pnlHeader)
         Me.Controls.Add(Me.pnlMainLocation)
         Me.Controls.Add(Me.Label17)
         Me.Name = "frmInventory"
@@ -673,6 +704,7 @@ Partial Class frmInventory
         Me.pnlPatientName.PerformLayout()
         Me.pnlPatientNamePadding.ResumeLayout(False)
         CType(Me.eprError, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlHeader.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -725,4 +757,6 @@ Partial Class frmInventory
     Friend WithEvents txtStrength As TextBox
     Friend WithEvents cboSuggestedNames As ComboBox
     Friend WithEvents eprError As ErrorProvider
+    Friend WithEvents pnlHeader As Panel
+    Friend WithEvents btnBack As Button
 End Class
