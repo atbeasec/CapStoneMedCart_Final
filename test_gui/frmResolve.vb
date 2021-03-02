@@ -1,27 +1,32 @@
 ﻿Public Class frmResolve
 
+    Private discrepancyID As Integer
+
+    Public Sub SetDiscrepancyID(ByVal ID As Integer)
+
+        discrepancyID = ID
+
+    End Sub
 
     Private Sub frmResolve_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         ' take the selected panel from the flow panel and pass over the ID of it. We can also use this data
         ' to to delete from the database because we can search by ID in the where statement.
-        lblDiscrepancyID.Text = "Discrepancy ID " & frmDiscrepancies.getSelectedDiscrepancyLabel().Text
-
+        ' lblDiscrepancyID.Text = "Discrepancy ID " & frmDiscrepancies.getSelectedDiscrepancyLabel().Text
+        'txtResolved.Tag = frmDiscrepancies.getSelectedDiscrepancyLabel().Text
+        ' MessageBox.Show(discrepancyID)
     End Sub
 
     Private Sub btnResolve_Click(sender As Object, e As EventArgs) Handles btnResolve.Click
 
-
-
         'CALL TO DELETE DISCREPANCY FROM DATABASE TABLE HERE
-
-
 
         'call method to remove the selected discrepancy from the panel and list
         RemoveItemFromFlowPanel(frmDiscrepancies.getSelectedDiscrepancyLabel())
 
         'close the resolve form 
-        Me.Close()
+        'Me.Close()
+        frmMain.OpenChildForm(frmDiscrepancies)
 
     End Sub
 
@@ -96,4 +101,7 @@
 
     End Sub
 
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        frmMain.OpenChildForm(frmDiscrepancies)
+    End Sub
 End Class
