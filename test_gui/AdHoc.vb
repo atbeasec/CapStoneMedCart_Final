@@ -98,6 +98,8 @@ Module AdHoc
         Dim intMedicationDrawerID As Integer
         Dim StrSelectedMedication As String
         Dim intMedicationCount As Integer
+        Dim intDrawerTUID As Integer
+        Dim intDrawerNumber As Integer
 
         StrSelectedMedication = frmAdHockDispense.cmbMedications.SelectedItem
 
@@ -135,6 +137,14 @@ Module AdHoc
             Strdatacommand = "UPDATE DrawerMedication SET Quantity = '" & intMedicationCount & "' WHERE Medication_TUID = '" & intMedicationID & "'"
             CreateDatabase.ExecuteInsertQuery(Strdatacommand)
             clearAdhocBoxes()
+
+            Strdatacommand = ("SELECT Drawers_TUID FROM DrawerMedication WHERE Medication_TUID = '" & intMedicationDrawerID & "' AND DrawerMedication.Active_Flag = '1'")
+            intDrawerTUID = CreateDatabase.ExecuteScalarQuery(Strdatacommand)
+
+            Strdatacommand = ("SELECT Drawer_Number FROM Drawers WHERE Drawers_ID = '" & intDrawerTUID & "' AND Drawers.Active_Flag = '1'")
+            intDrawerNumber = CreateDatabase.ExecuteScalarQuery(Strdatacommand)
+            CartInterfaceCode.OpenOneDrawer(intDrawerNumber)
+
         End If
 
     End Sub
