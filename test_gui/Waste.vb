@@ -1,4 +1,5 @@
 ﻿Public Class Waste
+
     Private intPatientInformationMRN As Integer
 
     Public Sub SetPatientMRN(ByVal mrn As Integer)
@@ -15,6 +16,15 @@
 
     Private Sub Waste_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'TextBox1.Visible = False
+
+        ' if the patient mrn is nothing it means the waste form is being accessed
+        ' from the ad hoc menu, otherwise it would be pased a value.
+        If intPatientInformationMRN = Nothing Then
+            btnBack.Visible = False
+        End If
+
+
+
         Inventory.PopulateWasteComboBoxMedication()
     End Sub
 
