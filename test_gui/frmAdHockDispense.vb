@@ -49,6 +49,7 @@
             Interactions.GetInteractionsDispense(intMedRXCUI, intPatientMRN)
             AdHoc.InsertAdHoc(txtMRN.Text, "1", txtQuantity.Text)
             AdHoc.clearAdhocBoxes()
+            MessageBox.Show("Drawer Has Opened")
         End If
     End Sub
 
