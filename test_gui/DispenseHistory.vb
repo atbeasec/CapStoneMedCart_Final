@@ -409,37 +409,8 @@ Module DispenseHistory
         strbSQLcommand.Clear()
         strbSQLcommand.Append("SELECT Drawer_Number FROM Drawers WHERE Drawers_ID = '" & intDrawerTUID & "' AND Drawers.Active_Flag = '1'")
         intDrawerNumber = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
-
+        CartInterfaceCode.OpenOneDrawer(intDrawerNumber)
     End Sub
 
-
-    '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:SplitMedicationString  */
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
-    '/*		         DATE CREATED: 	   02/15/21							  */
-    '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE: 
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      									          
-    '/*  (None)								           					  
-    '/*********************************************************************/
-    '/*  CALLS:														    	
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					   		   
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								                   
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically):	
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						                      */
-    '/*											                          */
-    '/*  WHO                   WHEN     WHAT							  */
-    '/*  ---                   ----     ----------------------------------*/
-    '/*  Alexander Beasecker  02/15/21  Initial creation of the code      */
-    '/*********************************************************************/
-    Private Sub UpdateMedicationDrawerAmount()
-
-    End Sub
 End Module
 

@@ -403,5 +403,9 @@
             frmEndOfShift.CreatePanel(frmEndOfShift.flpEndOfShiftCount, dr(0), dr(1), dr(2), dr(3), dr(4))
         Next
     End Sub
+
+    Public Sub GetAmountInsideDrawer()
+
+    End Sub
 End Module
 
