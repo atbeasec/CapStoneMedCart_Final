@@ -560,4 +560,108 @@ Public Class frmInventory
         frmMain.OpenChildForm(frmConfigureInventory)
 
     End Sub
+
+    '/*********************************************************************/
+    '/* SubProgram NAME:        txtStrength_KeyPress                      */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Breanna Howey       		          */   
+    '/*		         DATE CREATED: 		3/01/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This assess what key is pressed and restricts the keys to the string
+    '/* passed to the KeyPressCheck function.                             */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  None                                                             */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*  KeyPressCheck                                                    */
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 sender- object representing a control                            */
+    '/*  e- eventargs indicating there is an event handle assigned        */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*  txtStrength_KeyPress()                                           */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	 None                                                             */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  BRH  3/01/21    Initial creation                                 */
+    Private Sub txtStrength_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtStrength.KeyPress
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz1234567890/")
+    End Sub
+
+    '/*********************************************************************/
+    '/* SubProgram NAME:        txtType_KeyPress                          */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Breanna Howey       		          */   
+    '/*		         DATE CREATED: 		3/01/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This assess what key is pressed and restricts the keys to the string
+    '/* passed to the KeyPressCheck function.                             */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  None                                                             */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*  KeyPressCheck                                                    */
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 sender- object representing a control                            */
+    '/*  e- eventargs indicating there is an event handle assigned        */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*  txtType_KeyPress()                                               */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	 None                                                             */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  BRH  3/01/21    Initial creation                                 */
+    Private Sub txtType_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtType.KeyPress
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz1234567890/")
+    End Sub
+
+    '/*********************************************************************/
+    '/* SubProgram NAME:        txtBarcode_KeyPress                       */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Breanna Howey       		          */   
+    '/*		         DATE CREATED: 		3/01/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This assess what key is pressed and restricts the keys to the string
+    '/* passed to the KeyPressCheck function.                             */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  None                                                             */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*  KeyPressCheck                                                    */
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 sender- object representing a control                            */
+    '/*  e- eventargs indicating there is an event handle assigned        */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*  txtBarcode_KeyPress                                              */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	 None                                                             */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    Private Sub txtBarcode_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtBarcode.KeyPress
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz1234567890/")
+    End Sub
 End Class
