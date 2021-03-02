@@ -303,6 +303,8 @@ Module Discrepancies
         'create sql update statement and call generic sql subroutine
         strbSQL.Append("UPDATE Discrepancies SET DateTime_Cleared ='" & dtmAdhocTime & "' WHERE Discrepancies_ID = '" & intDiscrepID & "';")
         CreateDatabase.ExecuteInsertQuery(strbSQL.ToString)
+        strbSQL.Clear()
+        strbSQL.Append("")
     End Sub
 
     '/*********************************************************************/

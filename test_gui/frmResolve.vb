@@ -23,7 +23,7 @@
 
         'call method to remove the selected discrepancy from the panel and list
         RemoveItemFromFlowPanel(frmDiscrepancies.getSelectedDiscrepancyLabel())
-
+        Discrepancies.ResolveDiscrepancies(discrepancyID)
         'close the resolve form 
         'Me.Close()
         frmMain.OpenChildForm(frmDiscrepancies)
