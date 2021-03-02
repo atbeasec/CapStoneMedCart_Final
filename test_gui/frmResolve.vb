@@ -111,6 +111,40 @@
         frmMain.OpenChildForm(frmDiscrepancies)
     End Sub
 
+    '/*********************************************************************/
+    '/* SubProgram NAME:        txtResolved_KeyPress                       */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker       		          */   
+    '/*		         DATE CREATED: 		3/02/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This assess what key is pressed and restricts the keys to the string
+    '/* passed to the KeyPressCheck function.                             */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  None                                                             */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*  KeyPressCheck                                                    */
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 sender- object representing a control                            */
+    '/*  e- eventargs indicating there is an event handle assigned        */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*  txtResolved_KeyPress                                              */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	 None                                                             */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*	 AB    03/03/2021   Initial Creation	
+    '/*											                          */ 
+    '/*  ---   ----     ------------------------------------------------  */
+
     Private Sub txtResolved_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtResolved.KeyPress
         KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz1234567890/-")
     End Sub
