@@ -5,7 +5,8 @@
 
 
     Private Sub frmConfigureInventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        txtCapacity.Enabled = False
+        txtDividers.Enabled = False
         UpdateButtonsOnScreen()
         AddHandlerToDrawerButtons()
         PopulateInventory()
@@ -23,7 +24,7 @@
     End Sub
 
 
-    Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal strDrugName As String, ByVal strDosage As String, ByVal strType As String, ByVal strNode As String)
+    Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal strDrugName As String, ByVal strStrength As String, ByVal strQuantity As String)
 
         Dim pnl As Panel
         pnl = New Panel
@@ -76,9 +77,9 @@
 
         ' anywhere we have quotes except for the label names, we can call our Database and get method
         CreateIDLabel(pnlMainPanel, lblID, "lblDrugName", 5, 20, strDrugName, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID2, "lblDosage", 206, 20, strDosage, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID2, "lblStrength", 206, 20, strStrength, getPanelCount(flpPannel))
         'CreateIDLabel(pnlMainPanel, lblID3, "lblType", 220, 20, strType, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID4, "lblNode", 340, 20, strNode, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID4, "lblQuantity", 340, 20, strQuantity, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
@@ -130,7 +131,7 @@
         Dim dispenseTime4 As String = "1:05 PM"
         Dim dispenseTime5 As String = "5:04 AM"
 
-        CreatePanel(flpMedication, genName1, brandName1, quantity1, measure1)
+        'CreatePanel(flpMedication, genName1, brandName1, quantity1, measure1)
 
     End Sub
 
@@ -306,19 +307,32 @@
     End Sub
 
     Private Sub UpdateScreenWithMedicationsInSelectedDrawer(sender As Button, e As EventArgs) Handles btnDrawer1.Click
+        flpMedication.Controls.Clear()
         Dim strDrugName As String = ""
         Dim intStrength As Integer = 0
         Dim intDividerBin As Integer = 0
+        Dim intDrawerSize As Integer = 0
+        Dim intDrugQuantity As Integer = 0
         Dim dsDrawerContents = GetDrawerDrugs(sender.TabIndex)
         For Each dr As DataRow In dsDrawerContents.Tables(0).Rows
             strDrugName = dr(0)
             intStrength = CInt(dr(1))
-            intDividerBin = CInt(dr(2))
+            intDrugQuantity = CInt(dr(2))
+            intDividerBin = dr(3)
+
+
         Next
-
-        'based on the selected drawer we will need to call the database to see what medications are in the drawers
-
-        MessageBox.Show(strDrugName + " " + intStrength.ToString() + "   " + intDividerBin.ToString() + " In drawer number: " + sender.TabIndex.ToString())
+        Dim size = CreateDatabase.ExecuteScalarQuery("SELECT Size FROM Drawers where Drawers_ID = " & sender.TabIndex.ToString() & ";")
+        txtCapacity.Text = size
+        Dim dividers = CreateDatabase.ExecuteScalarQuery("SELECT Number_of_Dividers FROM Drawers where Drawers_ID = " & sender.TabIndex.ToString() & ";")
+        txtDividers.Text = dividers
+        If intDrugQuantity = 0 Then
+            ' the drawer is empty. Do nothing
+        Else
+            'based on the selected drawer we will need to call the database to see what medications are in the drawers
+            CreatePanel(flpMedication, strDrugName, intStrength.ToString(), intDrugQuantity.ToString())
+        End If
+        'MessageBox.Show(strDrugName + " " + intStrength.ToString() + "   " + intDividerBin.ToString() + " In drawer number: " + sender.TabIndex.ToString())
 
 
         ' We will next need to use the method to create a panel and populate the labels with text from the database returned items
@@ -326,7 +340,7 @@
 
 
     End Sub
-    Private Sub Button26_Click(sender As Object, e As EventArgs) Handles btnAddToDrawer.Click
+    Private Sub btnAddtoDrawer_Click(sender As Object, e As EventArgs) Handles btnAddToDrawer.Click
 
         'call new form to show inventory. already coded somewhere
         frmMain.OpenChildForm(frmInventory)
@@ -359,6 +373,10 @@
     Private Sub btnDecrementDividers_Click(sender As Object, e As EventArgs) Handles btnDecrementDividers.Click
 
         ButtonDecrement(txtDividers)
+
+    End Sub
+
+    Private Sub Label38_Click(sender As Object, e As EventArgs) Handles Label38.Click
 
     End Sub
 End Class

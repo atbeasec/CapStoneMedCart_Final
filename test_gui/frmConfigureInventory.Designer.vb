@@ -495,9 +495,9 @@ Partial Class frmConfigureInventory
         Me.Label36.ForeColor = System.Drawing.SystemColors.ControlDarkDark
         Me.Label36.Location = New System.Drawing.Point(346, 19)
         Me.Label36.Name = "Label36"
-        Me.Label36.Size = New System.Drawing.Size(51, 21)
+        Me.Label36.Size = New System.Drawing.Size(72, 21)
         Me.Label36.TabIndex = 2
-        Me.Label36.Text = "Node"
+        Me.Label36.Text = "Quantity"
         '
         'Label38
         '
@@ -506,9 +506,9 @@ Partial Class frmConfigureInventory
         Me.Label38.ForeColor = System.Drawing.SystemColors.ControlDarkDark
         Me.Label38.Location = New System.Drawing.Point(207, 19)
         Me.Label38.Name = "Label38"
-        Me.Label38.Size = New System.Drawing.Size(65, 21)
+        Me.Label38.Size = New System.Drawing.Size(74, 21)
         Me.Label38.TabIndex = 0
-        Me.Label38.Text = "Dosage"
+        Me.Label38.Text = "Strength"
         '
         'Label2
         '
