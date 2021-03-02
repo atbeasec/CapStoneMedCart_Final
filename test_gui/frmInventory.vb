@@ -195,6 +195,8 @@ Public Class frmInventory
         Try
             If CInt(cmbDrawerNumber.Text) > 25 Or CInt(cmbDrawerNumber.Text) < 0 Then
 
+            Else
+
                 Drawers_Tuid = cmbDrawerNumber.Text
 
 
@@ -213,9 +215,9 @@ Public Class frmInventory
         Catch ex As Exception
             eprError.SetError(cmbDrawerNumber, "please enter an integer")
         End Try
-        intDividerBin = cmbBin.Text
+        intDividerBin = cmbDividerBin.Text
 
-        ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Divider_Bin,Expiration_Date,Discrepancy_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & intDividerBin & " , '" & txtExpirationDate.Text & "'," & intDiscrepancies & ");")
+        ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Divider_Bin,Expiration_Date,Discrepancy_Flag, Active_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & intDividerBin & " , '" & txtExpirationDate.Text & "'," & intDiscrepancies & ",1);")
         Debug.WriteLine("")
 
         eprError.Clear()
