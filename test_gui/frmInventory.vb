@@ -5,7 +5,7 @@ Public Class frmInventory
     End Sub
 
     Private Sub frmInventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        cmbDrawerNumber.SelectedIndex = 1
         ' setdefault text to the search box
         txtSearch.Text = txtSearch.Tag
         txtSearch.ForeColor = Color.Silver
@@ -207,32 +207,37 @@ Public Class frmInventory
         ' and save those items
 
 
-        'intDrawerMedication_ID = ExecuteScalarQuery("SELECT COUNT(DISTINCT DrawerMedication_ID) FROM DrawerMedication;")
-        'Try
-        '    If CInt(txtDrawerNumber.Text) > 25 Or CInt(txtDrawerNumber.Text) < 0 Then
 
-        '        Drawers_Tuid = txtDrawerNumber.Text
+        intDrawerMedication_ID = ExecuteScalarQuery("SELECT COUNT(DISTINCT DrawerMedication_ID) FROM DrawerMedication;")
+        Try
+            If CInt(cmbDrawerNumber.Text) > 25 Or CInt(cmbDrawerNumber.Text) < 0 Then
+
+            Else
+
+                Drawers_Tuid = cmbDrawerNumber.Text
 
 
-        '    End If
 
-        'Catch ex As Exception
-        '    eprError.SetError(txtDrawerNumber, "please enter an integer between 1-25")
-        'End Try
+            End If
+
+        Catch ex As Exception
+            eprError.SetError(cmbDrawerNumber, "please enter an integer between 1-25")
+        End Try
 
         'intMedicationTuid = ExecuteScalarQuery("Select Medication_ID From Medication WHERE Drug_Name ='" & strName & "';")
         ''because we are adding a new drawermedication for now
         'intDrawerMedication_ID += 1
 
-        'Try
-        '    intMedQuanitiy = CInt(txtQuantity.Text)
-        'Catch ex As Exception
-        '    eprError.SetError(txtDrawerNumber, "please enter an integer")
-        'End Try
-        'intDividerBin = cmbBin.Text
 
-        'ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Divider_Bin,Expiration_Date,Discrepancy_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & intDividerBin & " , '" & txtExpirationDate.Text & "'," & intDiscrepancies & ");")
-        'Debug.WriteLine("")
+        Try
+            intMedQuanitiy = CInt(txtQuantity.Text)
+        Catch ex As Exception
+            eprError.SetError(cmbDrawerNumber, "please enter an integer")
+        End Try
+        intDividerBin = cmbDividerBin.Text
+
+        ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Divider_Bin,Expiration_Date,Discrepancy_Flag, Active_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & intDividerBin & " , '" & txtExpirationDate.Text & "'," & intDiscrepancies & ",1);")
+        Debug.WriteLine("")
 
         'eprError.Clear()
 
@@ -292,7 +297,7 @@ Public Class frmInventory
         txtType.Text = ""
         chkControlled.Checked = False
         chkNarcotic.Checked = False
-        txtDrawerNumber.Text = ""
+        cmbDrawerNumber.Text = ""
         cmbBin.Items.Clear()
         txtQuantity.Text = ""
         txtExpirationDate.Text = ""
@@ -553,6 +558,31 @@ Public Class frmInventory
         cmbMedicationName.Visible = True
         'cmbMedicationName.Items.Clear()
         pnlSearch.Select()
+    End Sub
+
+
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDividerBin.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub cmbDrawerNumber_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDrawerNumber.SelectedIndexChanged
+        cmbDividerBin.Items.Clear()
+        Dim intDrawerSize As Integer = 0
+        Dim intNumDividers As Integer = 0
+        Dim intDrawerNumber As Integer = CInt(cmbDrawerNumber.Text)
+        Try
+            intDrawerSize = ExecuteScalarQuery("SELECT Size FROM Drawers where Drawers_ID = " & intDrawerNumber.ToString & ";")
+            intNumDividers = ExecuteScalarQuery("SELECT Number_of_Dividers FROM Drawers where Drawers_ID = " & intDrawerNumber.ToString & ";")
+        Catch ex As Exception
+            ' do nothing because there are empty values in the database
+        End Try
+        txtQuantity.Text = intDrawerSize.ToString
+        Dim dividerspopulation As New ArrayList(intNumDividers)
+        Dim intCounter As Integer = 1
+        Do Until intCounter > intNumDividers
+            cmbDividerBin.Items.Add(intCounter)
+            intCounter += 1
+        Loop
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
