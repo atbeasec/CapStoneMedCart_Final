@@ -48,13 +48,13 @@
     '/*********************************************************************/
 
 
-    Dim lngMRN_Number As Long
-    Dim strBarcode As String
-    Dim strDob As String
-    Dim strSex As String
-    Dim intHeight As Integer
-    Dim intWeight As Integer
-    Dim lngPrimaryPhysicianID As Long
+    Private lngMRN_Number As Long
+    Private strBarcode As String
+    Private strDob As String
+    Private strSex As String
+    Private intHeight As Integer
+    Private intWeight As Integer
+    Private lngPrimaryPhysicianID As Long
 
 
     '/*********************************************************************/
@@ -73,8 +73,22 @@
     '/*  CALLS:										   */                 
     '/*             (NONE)								   */             
     '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					   */         
-    '/*											   */                     
+    '/*  PARAMETER LIST (In Parameter Order):					           */         
+    '/*	 strAddress - This is the address of the patient.                  */
+    '/*  strBarcode - this is going to be the barcode for the patient.     */
+    '/* strDoB - this is the birth day of the patient.                     */
+    '/* strFirstName - this is the first name of the patient.              */
+    '/* intHeight - this is the height of the patient.                     */
+    '/* strLastName - this is the alst name of the patient.                */
+    '/* strMiddleName - This is the middle name of the patient.            */
+    '/* lngMRN_Number - this is the medical record number of the patient   */
+    '/* strPhoneNumber - this is the patient phone number.                 */
+    '/* lngPrimaryPhysicianID - this is the ID of the physician taking care*/
+    '/*                         of the patient.                            */
+    '/* strSex - this is the gender of the patient. It will be male or female*/
+    '/* strState - this is the state the patient lives in.                 */
+    '/* intWeight - this is the weight of the patient.                     */
+    '/* strZip - this is the zip code the patient lives in. 			   */                     
     '/*                                                                     
     '/*********************************************************************/
     '/*  RETURNS:								         */                   
@@ -94,6 +108,7 @@
     '/*  ---   ----     ------------------------------------------------- */
     '/*                                                                     
     '/*********************************************************************/
+
 
     Public Sub New(lngMRN_Number As Long, strBarcode As String, strFirstName As String, strMiddleName As String, strLastName As String, strDoB As String,
                    strSex As String, intHeight As Integer, intWeight As Integer, strPhoneNumber As String, strAddress As String, strState As String, strZip As String,

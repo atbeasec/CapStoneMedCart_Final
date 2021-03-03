@@ -310,6 +310,7 @@
     <Compile Include="PatientInformation.vb" />
     <Compile Include="PersonClass.vb" />
     <Compile Include="PharmacyOrder.vb" />
+    <Compile Include="PhysicianClass.vb" />
     <Compile Include="PopulateAllergiesComboBoxMethods.vb" />
     <Compile Include="PopulatePatientComboBoxMethods.vb" />
     <Compile Include="PopulatePhysicanComboBoxesMethods.vb" />
