@@ -306,7 +306,9 @@
     <Compile Include="Inventory.vb" />
     <Compile Include="Login.vb" />
     <Compile Include="Medications.vb" />
+    <Compile Include="PatientClass.vb" />
     <Compile Include="PatientInformation.vb" />
+    <Compile Include="PersonClass.vb" />
     <Compile Include="PharmacyOrder.vb" />
     <Compile Include="PopulateAllergiesComboBoxMethods.vb" />
     <Compile Include="PopulatePatientComboBoxMethods.vb" />
