@@ -218,11 +218,11 @@ Public Class frmInventory
 
         intDrawerMedication_ID = ExecuteScalarQuery("SELECT COUNT(DISTINCT DrawerMedication_ID) FROM DrawerMedication;")
         Try
-            If CInt(cmbDrawerNumber.Text) > 25 Or CInt(cmbDrawerNumber.Text) < 0 Then
+            If CInt(cmbDrawerNumber.SelectedItem) > 25 Or CInt(cmbDrawerNumber.SelectedItem) < 0 Then
 
             Else
 
-                Drawers_Tuid = cmbDrawerNumber.Text
+                Drawers_Tuid = CInt(cmbDrawerNumber.SelectedItem)
 
             End If
 
@@ -240,7 +240,7 @@ Public Class frmInventory
         Catch ex As Exception
             eprError.SetError(cmbDrawerNumber, "please enter an integer")
         End Try
-        intDividerBin = cmbDividerBin.Text
+        intDividerBin = CInt(cmbDividerBin.SelectedItem)
 
         ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Divider_Bin,Expiration_Date,Discrepancy_Flag, Active_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & intDividerBin & " , '" & txtExpirationDate.Text & "'," & intDiscrepancies & ",1);")
 
