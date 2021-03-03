@@ -359,6 +359,8 @@ Module DispenseHistory
         Dim intPrescribedQuantity As Integer
         Dim intPatientMedicationDatabaseID As Integer
         Dim intDrawerMedicationID As Integer
+        Dim intDrawerNumber As Integer
+        Dim intDrawerTUID As Integer
         Dim dtmAdhocTime As String = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")
 
         'using RXCUI get database ID for medication
@@ -375,11 +377,6 @@ Module DispenseHistory
         strbSQLcommand.Append("SELECT Quantity FROM PatientMedication WHERE Medication_TUID = '" & intMedID & "' AND Patient_TUID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1'")
         intPrescribedQuantity = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
 
-        ''update quantity to new amount
-        'intPrescribedQuantity = intPrescribedQuantity - Dispense.txtQuantity.Text
-        'strbSQLcommand.Clear()
-        'strbSQLcommand.Append("UPDATE PatientMedication SET Quantity = " & intPrescribedQuantity & " WHERE Medication_TUID = '" & intMedID & "' AND Patient_TUID = '" & intPatientID & "'")
-        'CreateDatabase.ExecuteInsertQuery(strbSQLcommand.ToString)
 
         'clear string builder and set up sql to get the patientMedication_ID primary key from patient medication table to use in
         'the dispensing table as a foreign key
@@ -405,36 +402,15 @@ Module DispenseHistory
         strbSQLcommand.Append("VALUES('" & intPatientMedicationDatabaseID & "','1','1','" & dtmAdhocTime & "','" & Dispense.txtQuantity.Text & "','" & intDrawerMedicationID & "')")
         CreateDatabase.ExecuteInsertQuery(strbSQLcommand.ToString)
 
+
+        strbSQLcommand.Clear()
+        strbSQLcommand.Append("SELECT Drawers_TUID FROM DrawerMedication WHERE Medication_TUID = '" & intMedID & "' AND DrawerMedication.Active_Flag = '1'")
+        intDrawerTUID = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
+        strbSQLcommand.Clear()
+        strbSQLcommand.Append("SELECT Drawer_Number FROM Drawers WHERE Drawers_ID = '" & intDrawerTUID & "' AND Drawers.Active_Flag = '1'")
+        intDrawerNumber = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
+        CartInterfaceCode.OpenOneDrawer(intDrawerNumber)
     End Sub
 
-
-    '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:SplitMedicationString  */
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
-    '/*		         DATE CREATED: 	   02/15/21							  */
-    '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE: 
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      									          
-    '/*  (None)								           					  
-    '/*********************************************************************/
-    '/*  CALLS:														    	
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					   		   
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								                   
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically):	
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						                      */
-    '/*											                          */
-    '/*  WHO                   WHEN     WHAT							  */
-    '/*  ---                   ----     ----------------------------------*/
-    '/*  Alexander Beasecker  02/15/21  Initial creation of the code      */
-    '/*********************************************************************/
-    Private Sub UpdateMedicationDrawerAmount()
-
-    End Sub
 End Module
 

@@ -86,37 +86,6 @@
 
     Private Sub Dispense_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        Dim genName1 As String = "benzhydrocodone "
-        Dim genName2 As String = "hydrocodone bitartrate"
-        Dim genName3 As String = "phenylephrine"
-        Dim genName4 As String = "Morphine"
-        Dim genName5 As String = "Codeine"
-
-        Dim brandName1 As String = "Apadaz "
-        Dim brandName2 As String = "Flowtuss "
-        Dim brandName3 As String = "Histinex HC"
-        Dim brandName4 As String = "Duramorph "
-        Dim brandName5 As String = "Robitussin Ac"
-
-        Dim measure1 As String = "10 mg"
-        Dim measure2 As String = "10 mg"
-        Dim measure3 As String = "50 mg"
-        Dim measure4 As String = "10 mg"
-        Dim measure5 As String = "10 mg"
-
-        Dim dispenseDate1 As String = "11/11/2020"
-        Dim dispenseDate2 As String = "11/5/2020"
-        Dim dispenseDate3 As String = "11/4/2020"
-        Dim dispenseDate4 As String = "11/1/2020"
-        Dim dispenseDate5 As String = "10/28/2020"
-
-        txtQuantity.Text = "1"
-
-        ' CreatePanel(flpAssignedMedications, genName1, brandName1, measure1, dispenseDate1)
-        ' CreatePanel(flpAssignedMedications, genName2, brandName2, measure2, dispenseDate2)
-        ' CreatePanel(flpAssignedMedications, genName3, brandName3, measure3, dispenseDate3)
-        ' CreatePanel(flpAssignedMedications, genName4, brandName4, measure4, dispenseDate4)
-
     End Sub
 
 
@@ -130,7 +99,6 @@
 
     Private Sub btnDispense_Click_1(sender As Object, e As EventArgs) Handles btnDispense.Click
         If Not IsNothing(cmbMedications.SelectedItem) Then
-            MessageBox.Show("Drawer Has Opened")
             DispenseHistory.DispenseMedication(DispenseHistory.SplitMedicationString(cmbMedications.SelectedItem), txtMRN.Text)
         End If
 
