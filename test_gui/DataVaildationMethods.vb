@@ -1,4 +1,6 @@
-﻿Module DataVaildationMethods
+﻿Imports System.Text.RegularExpressions
+
+Module DataVaildationMethods
     '/*********************************************************************/
     '/*                   FILE NAME:  DataVaildationMethods                 */									  
     '/*********************************************************************/
@@ -141,9 +143,9 @@
 
 
     '/**********************************************************************/
-    '/*               SUBPROGRAM NAME:  checkSQLInjection()                */         
+    '/*               FUNCTION NAME: checkSQLInjection                     */         
     '/**********************************************************************/
-    '/*                 WRITTEN BY:  Collin Krygier   		               */   
+    '/*                    WRITTEN BY:  Dillen Perron  		               */   
     '/*		              DATE CREATED: 	2/19/2021                  	   */                             
     '/**********************************************************************/
     '/*  SUBPROGRAM PURPOSE:							            	   */             
@@ -175,9 +177,12 @@
     '/*  dillen      3/1/21        Creation                                */
     '/*********************************************************************/
 
-    Function checkSQLInjection(Textbox As String) As String
+    Function checkSQLInjection(TextToCheck As String) As String
+        TextToCheck = Regex.Replace(TextToCheck, "'", "''") ' check for '
+        TextToCheck = Regex.Replace(TextToCheck, Chr(34), "''") 'check for "
+        TextToCheck = Regex.Replace(TextToCheck, Chr(92), "''") ' check for \
 
-        Return Textbox
+        Return TextToCheck
     End Function
 
 End Module
