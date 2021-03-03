@@ -192,49 +192,59 @@ Public Class frmInventory
         ' if no, then save those items
         ' and pass it to the function to find interactions
 
-        'Dim myPropertyNameList As New List(Of String)({"severity", "description", "rxcui"})
-        'Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
-        'outputList = getInteractionsByName("153008", myPropertyNameList)
+        Dim myPropertyNameList As New List(Of String)({"severity", "description", "rxcui"})
+        Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
+        outputList = getInteractionsByName(strRXCUI, myPropertyNameList)
+
+        'Double-check if the interactions with the matching pair of RXCUI's exist
+        'If yes, Then update If there's differences
+        ' Or insert the New lines
+        ' And save those items
+
+        Try
+            MessageBox.Show("Please wait while the information is inserted")
+            'There are four items returned from the API
+            'Therefore, we step over 4 items every time 
+            'we run the call
+            For i = 0 To outputList.Count - 4 Step 4
+                'In the fourth item passed, we want to remove the ' character because it breaks SQL inserts
+                CompareDrugInteractions(CInt(strRXCUI), CInt(outputList.Item(i + 3).PropertyValue), outputList.Item(i).PropertyValue, outputList.Item(i + 1).PropertyValue.Replace("'", ""), 1)
+            Next
+
+            MessageBox.Show("All interaction records have been added")
+        Catch ex As Exception
+            MessageBox.Show("Interactions could not be recorded")
+        End Try
 
 
-        'For Each result In outputList
-        '    MessageBox.Show(result.PropertyName & "," & result.PropertyValue)
-        'Next
+        intDrawerMedication_ID = ExecuteScalarQuery("SELECT COUNT(DISTINCT DrawerMedication_ID) FROM DrawerMedication;")
+        Try
+            If CInt(txtDrawerNumber.Text) > 25 Or CInt(txtDrawerNumber.Text) < 0 Then
 
-        ' double-check if the interactions with the matching pair of RXCUI's exist
-        ' if yes, then update if there's differences
-        ' or insert the new lines
-        ' and save those items
+                Drawers_Tuid = txtDrawerNumber.Text
 
 
-        'intDrawerMedication_ID = ExecuteScalarQuery("SELECT COUNT(DISTINCT DrawerMedication_ID) FROM DrawerMedication;")
-        'Try
-        '    If CInt(txtDrawerNumber.Text) > 25 Or CInt(txtDrawerNumber.Text) < 0 Then
+            End If
 
-        '        Drawers_Tuid = txtDrawerNumber.Text
+        Catch ex As Exception
+            eprError.SetError(txtDrawerNumber, "please enter an integer between 1-25")
+        End Try
 
+        intMedicationTuid = ExecuteScalarQuery("Select Medication_ID From Medication WHERE Drug_Name ='" & strName & "';")
+        'because we are adding a new drawermedication for now
+        intDrawerMedication_ID += 1
 
-        '    End If
+        Try
+            intMedQuanitiy = CInt(txtQuantity.Text)
+        Catch ex As Exception
+            eprError.SetError(txtDrawerNumber, "please enter an integer")
+        End Try
+        intDividerBin = cmbBin.Text
 
-        'Catch ex As Exception
-        '    eprError.SetError(txtDrawerNumber, "please enter an integer between 1-25")
-        'End Try
+        ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Divider_Bin,Expiration_Date,Discrepancy_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & intDividerBin & " , '" & txtExpirationDate.Text & "'," & intDiscrepancies & ");")
+        Debug.WriteLine("")
 
-        'intMedicationTuid = ExecuteScalarQuery("Select Medication_ID From Medication WHERE Drug_Name ='" & strName & "';")
-        ''because we are adding a new drawermedication for now
-        'intDrawerMedication_ID += 1
-
-        'Try
-        '    intMedQuanitiy = CInt(txtQuantity.Text)
-        'Catch ex As Exception
-        '    eprError.SetError(txtDrawerNumber, "please enter an integer")
-        'End Try
-        'intDividerBin = cmbBin.Text
-
-        'ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Divider_Bin,Expiration_Date,Discrepancy_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & intDividerBin & " , '" & txtExpirationDate.Text & "'," & intDiscrepancies & ");")
-        'Debug.WriteLine("")
-
-        'eprError.Clear()
+        eprError.Clear()
 
     End Sub
 
