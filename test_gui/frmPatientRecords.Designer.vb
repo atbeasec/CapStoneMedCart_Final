@@ -34,12 +34,14 @@ Partial Class frmPatientRecords
         Me.pnlHeaderPatientRecords = New System.Windows.Forms.Panel()
         Me.Panel9 = New System.Windows.Forms.Panel()
         Me.pnlSearch = New System.Windows.Forms.Panel()
+        Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.btnNewPatient = New System.Windows.Forms.Button()
         Me.flpPatientRecords = New System.Windows.Forms.FlowLayoutPanel()
         Me.pnlHeader.SuspendLayout()
         Me.pnlHeaderPatientRecords.SuspendLayout()
         Me.Panel9.SuspendLayout()
+        Me.pnlSearch.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlHeader
@@ -161,6 +163,7 @@ Partial Class frmPatientRecords
         Me.pnlSearch.BackColor = System.Drawing.Color.White
         Me.pnlSearch.BackgroundImage = CType(resources.GetObject("pnlSearch.BackgroundImage"), System.Drawing.Image)
         Me.pnlSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.pnlSearch.Controls.Add(Me.btnSearch)
         Me.pnlSearch.Dock = System.Windows.Forms.DockStyle.Right
         Me.pnlSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.pnlSearch.ForeColor = System.Drawing.Color.White
@@ -168,6 +171,20 @@ Partial Class frmPatientRecords
         Me.pnlSearch.Name = "pnlSearch"
         Me.pnlSearch.Size = New System.Drawing.Size(33, 29)
         Me.pnlSearch.TabIndex = 2
+        '
+        'btnSearch
+        '
+        Me.btnSearch.BackColor = System.Drawing.Color.White
+        Me.btnSearch.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnSearch.FlatAppearance.BorderSize = 0
+        Me.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSearch.ForeColor = System.Drawing.Color.Transparent
+        Me.btnSearch.Image = Global.test_gui.My.Resources.Resources.Search
+        Me.btnSearch.Location = New System.Drawing.Point(3, 0)
+        Me.btnSearch.Name = "btnSearch"
+        Me.btnSearch.Size = New System.Drawing.Size(30, 29)
+        Me.btnSearch.TabIndex = 40
+        Me.btnSearch.UseVisualStyleBackColor = False
         '
         'txtSearch
         '
@@ -225,6 +242,7 @@ Partial Class frmPatientRecords
         Me.pnlHeaderPatientRecords.ResumeLayout(False)
         Me.Panel9.ResumeLayout(False)
         Me.Panel9.PerformLayout()
+        Me.pnlSearch.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -242,4 +260,5 @@ Partial Class frmPatientRecords
     Friend WithEvents Panel9 As Panel
     Friend WithEvents pnlSearch As Panel
     Friend WithEvents txtSearch As TextBox
+    Friend WithEvents btnSearch As Button
 End Class
