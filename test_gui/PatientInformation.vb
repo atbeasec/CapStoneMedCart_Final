@@ -246,7 +246,7 @@ Module PatientInformation
     '/*                 information needed for Patient allergies list     */
     '/*********************************************************************/
     Public Sub GetAllergies(ByRef intPatientInformationMRN As Integer)
-
+        frmPatientInfo.lstBoxAllergies.Items.Clear()
         'default value for an mrn number so allergies are shown
         'intPatientInformationMRN = 949764144
 
@@ -347,7 +347,7 @@ Module PatientInformation
             "INNER JOIN Medication on Medication.Medication_ID = PatientMedication.Medication_TUID " &
             "INNER JOIN Patient ON Patient.Patient_ID = PatientMedication.Patient_TUID " &
             "INNER JOIN Physician on Physician.Physician_ID = PatientMedication.Ordering_Physician_ID " &
-            "WHERE MRN_Number = '" & intPatientMRN & "'"
+            "WHERE MRN_Number = '" & intPatientMRN & "' AND PatientMedication.Active_Flag = '1'"
 
         dsPatientPrescription = CreateDatabase.ExecuteSelectQuery(strSQLiteCommand)
         For Each dr As DataRow In dsPatientPrescription.Tables(0).Rows
@@ -468,7 +468,7 @@ Module PatientInformation
         strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name ")
         strbSqlCommand.Append("FROM Medication Inner Join PatientMedication ON PatientMedication.Medication_TUID = Medication.Medication_ID ")
         strbSqlCommand.Append("Inner Join Physician ON Physician.Physician_ID = PatientMedication.Ordering_Physician_ID ")
-        strbSqlCommand.Append("WHERE PatientMedication.Patient_TUID = '" & dsPatientID & "'")
+        strbSqlCommand.Append("WHERE PatientMedication.Patient_TUID = '" & dsPatientID & "' AND PatientMedication.Active_Flag = '1'")
         dsPatientInfo = CreateDatabase.ExecuteSelectQuery(strbSqlCommand.ToString)
         'look create panel method for each prescription the patient has
         For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
