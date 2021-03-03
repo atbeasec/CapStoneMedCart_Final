@@ -218,7 +218,7 @@ Public Class frmInventory
 
 
 
-        '    End If
+            End If
 
         Catch ex As Exception
             eprError.SetError(cmbDrawerNumber, "please enter an integer between 1-25")
@@ -583,7 +583,7 @@ Public Class frmInventory
             cmbDividerBin.Items.Add(intCounter)
             intCounter += 1
         Loop
-
+    End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
 
