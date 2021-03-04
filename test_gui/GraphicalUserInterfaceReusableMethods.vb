@@ -942,6 +942,7 @@ Module GraphicalUserInterfaceReusableMethods
         If intCurrent > 0 Then
             cboBox.SelectedIndex = intCurrent - 1
         End If
+    End Sub
 
     Public Sub ThreadedMessageBox()
         MessageBox.Show(Thread.CurrentThread.Name())
