@@ -88,11 +88,10 @@
         'create select to send to select function
         Dim Strdatacommand As String = ("SELECT Drug_Name, Strength, Quantity, Divider_Bin FROM DrawerMedication " &
             "INNER JOIN Medication ON Medication.Medication_ID = DrawerMedication.Medication_TUID " &
-            "WHERE DrawerMedication.Drawers_TUID =" & intDrawerID & ";")
+            "WHERE DrawerMedication.Drawers_TUID =" & intDrawerID & " AND DrawerMedication.Active_Flag = '1';")
 
         'set dataset = to returned dataset from select function from createdatabase file
         dsDataset = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
-        Debug.WriteLine("")
         'return dataset that holds drawer medications
         Return dsDataset
     End Function

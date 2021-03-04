@@ -18,9 +18,6 @@
         ' method is going to be needed to load the capacity from the database and the number of dividers in the selected drawer
         ' we will take that data and put it into the textbox for capacity and divider.
         ' Everytime we increment that data we will send and update statement to the database
-
-        txtCapacity.Text = "2"
-        txtDividers.Text = "1"
     End Sub
 
     Private Sub CreateDrawers(sender As Object, e As EventArgs)
@@ -314,17 +311,16 @@
     Private Sub UpdateScreenWithMedicationsInSelectedDrawer(sender As Button, e As EventArgs) Handles btnDrawer1.Click
         flpMedication.Controls.Clear()
         Dim strDrugName As String = ""
-        Dim intStrength As Integer = 0
+        Dim intStrength As String = ""
         Dim intDividerBin As Integer = 0
         Dim intDrawerSize As Integer = 0
         Dim intDrugQuantity As Integer = 0
-        Dim dsDrawerContents = GetDrawerDrugs(sender.TabIndex)
+        Dim dsDrawerContents As DataSet = GetDrawerDrugs(sender.TabIndex)
         For Each dr As DataRow In dsDrawerContents.Tables(0).Rows
             strDrugName = dr(0)
-            intStrength = CInt(dr(1))
+            intStrength = dr(1)
             intDrugQuantity = CInt(dr(2))
             intDividerBin = dr(3)
-
 
         Next
         Dim size = CreateDatabase.ExecuteScalarQuery("SELECT Size FROM Drawers where Drawers_ID = " & sender.TabIndex.ToString() & ";")
@@ -335,7 +331,7 @@
             ' the drawer is empty. Do nothing
         Else
             'based on the selected drawer we will need to call the database to see what medications are in the drawers
-            '   CreatePanel(flpMedication, strDrugName, intStrength.ToString(), intDrugQuantity.ToString())
+            CreatePanel(flpMedication, strDrugName, intDividerBin, intStrength.ToString(), intDrugQuantity.ToString())
         End If
         'MessageBox.Show(strDrugName + " " + intStrength.ToString() + "   " + intDividerBin.ToString() + " In drawer number: " + sender.TabIndex.ToString())
 
@@ -384,4 +380,5 @@
     Private Sub Label38_Click(sender As Object, e As EventArgs) Handles lblStrength.Click
 
     End Sub
+
 End Class
