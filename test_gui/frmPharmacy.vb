@@ -95,7 +95,7 @@
     End Sub
 
     Private Sub btnIncrement_Click(sender As Object, e As EventArgs) Handles btnIncrement.Click
-        ButtonIncrement(txtQuantity)
+        ButtonIncrement(1000, txtQuantity)
 
     End Sub
 

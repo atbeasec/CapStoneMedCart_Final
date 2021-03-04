@@ -909,19 +909,38 @@
         End If
     End Sub
 
-    Public Sub ButtonIncrement(ByVal txtBox As TextBox)
+    Public Sub ButtonIncrement(intMaxValue As Integer, ByVal txtBox As TextBox)
 
-        txtBox.Text = CInt(txtBox.Text) + 1
+        If Not CInt(txtBox.Text) = intMaxValue Then
+            txtBox.Text = Int(txtBox.Text) + 1
+        End If
 
     End Sub
 
     Public Sub ButtonDecrement(ByVal txtBox As TextBox)
 
-        If Not CInt(txtBox.Text) = 0 Then
+        If Not CInt(txtBox.Text) = 1 Then
             txtBox.Text = Int(txtBox.Text) - 1
         End If
 
     End Sub
 
+    Public Sub MaxValue(intValue As Integer, intTest As Integer, ByVal txtBox As TextBox)
+        If intValue > intTest Then
+            txtBox.Text = intTest
+            MessageBox.Show("Maximum value is " & intTest & ".")
+        End If
+    End Sub
+
+    Public Sub IndexButtonIncrement(intCurrent As Integer, intMax As Integer, ByVal cboBox As ComboBox)
+        If intCurrent <= intMax Then
+            cboBox.SelectedIndex = intCurrent + 1
+        End If
+    End Sub
+    Public Sub IndexButtonDecrement(intCurrent As Integer, ByVal cboBox As ComboBox)
+        If intCurrent > 0 Then
+            cboBox.SelectedIndex = intCurrent - 1
+        End If
+    End Sub
 
 End Module

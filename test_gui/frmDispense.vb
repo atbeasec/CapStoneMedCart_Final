@@ -1,4 +1,4 @@
-﻿Public Class Dispense
+﻿Public Class frmDispense
 
     Private intPatientMrn As Integer
 
@@ -90,7 +90,7 @@
 
 
     Private Sub btnUp_Click(sender As Object, e As EventArgs) Handles btnUp.Click
-        ButtonIncrement(txtQuantity)
+        ButtonIncrement(1000, txtQuantity)
     End Sub
 
     Private Sub btnDown_Click(sender As Object, e As EventArgs) Handles btnDown.Click
