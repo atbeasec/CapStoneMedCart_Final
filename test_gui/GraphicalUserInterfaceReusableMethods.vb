@@ -1,4 +1,5 @@
-﻿Module GraphicalUserInterfaceReusableMethods
+﻿Imports System.Threading
+Module GraphicalUserInterfaceReusableMethods
 
     'Method that allows for highlighting when hovering over panels. has two parts
     'part 1
@@ -941,6 +942,10 @@
         If intCurrent > 0 Then
             cboBox.SelectedIndex = intCurrent - 1
         End If
+
+    Public Sub ThreadedMessageBox()
+        MessageBox.Show(Thread.CurrentThread.Name())
+
     End Sub
 
 End Module

@@ -1,4 +1,5 @@
 'Import necessary libraries to connect to the SQLite database
+Imports System.Data.SQLite
 Imports System.IO
 'Import necessary to use StringBuilder class
 Imports System.Text
@@ -212,32 +213,75 @@ Module APIDatabaseSelection
 
 	'/*	BRH	 03/02/21	Updated functionality for interactions			*/
 	'/*******************************************************************/
-	Sub CompareDrugInteractions(Drug1 As Integer, Drug2 As Integer, Severity As String, Description As String,
-								ActiveFlag As Integer)
+	Sub CompareDrugInteractions(Drug1 As Integer, ByRef outputList As List(Of (PropertyName As String, PropertyValue As String))) ' Drug2 As Integer, Severity As String, Description As String,
+		'ActiveFlag As Integer)
 
 		'Create a dataset to hold database data
-		Dim dtCompareDrugInteractions As DataSet
+		'Dim dtCompareDrugInteractions As DataSet
+		Dim intRows As Integer = 0
+		Dim strStatement As String
+		Dim Drug2 As Integer
+		Dim Severity As String
+		Dim Description As String
+		Const ACTIVEFLAG As Integer = 1
+		DBConn = New SQLiteConnection(strCONNECTION)
+		'DBCmd = New SQLiteCommand(strStatement, DBConn)
+		DBConn.Open()
 
-		'Select the specific table and the data in each column, filling a dataset through the different parameters
-		dtCompareDrugInteractions = ExecuteSelectQuery("SELECT * FROM Drug_Interactions WHERE Medication_One_ID = '" & Drug1 & "'AND Medication_Two_ID = '" & Drug2 & "'")
+		For i = 0 To outputList.Count - 4 Step 4
+			Drug2 = CInt(outputList.Item(i + 3).PropertyValue)
+			Severity = outputList.Item(i).PropertyValue
+			Description = outputList.Item(i + 1).PropertyValue.Replace("'", "")
 
-		'If there isn't a medication in the database with that rxcui, insert all information into the database
-		If dtCompareDrugInteractions.Tables(0).Rows.Count = 0 Then
+			'Select the specific table and the data in each column, filling a dataset through the different parameters
+			strStatement = "SELECT * FROM Drug_Interactions WHERE Medication_One_ID = '" & Drug1 & "'AND Medication_Two_ID = '" & Drug2 & "'"
+			DBCmd = New SQLiteCommand(strStatement, DBConn)
+			Try
+				intRows = DBCmd.ExecuteNonQuery()
+			Catch ex As Exception
+				MessageBox.Show("could not complete the following SQL statement: " & strStatement &
+								" the following error occured: " & vbCrLf & vbCrLf & ex.ToString)
+			End Try '("SELECT * FROM Drug_Interactions WHERE Medication_One_ID = '" & Drug1 & "'AND Medication_Two_ID = '" & Drug2 & "'")
 
-			'Send an insert sql statement to the database
-			ExecuteInsertQuery("INSERT INTO Drug_Interactions(Medication_One_ID, Medication_Two_ID, 
-                            Severity, Description, Active_Flag) VALUES('" & Drug1 & "','" & Drug2 & "','" &
-								Severity & "','" & Description & "','" & ActiveFlag & "');")
+			'If there isn't a medication in the database with that rxcui, insert all information into the database
+			If intRows = -1 Then
 
-		Else
+				'Send an insert sql statement to the database
+				'ExecuteInsertQuery("INSERT INTO Drug_Interactions(Medication_One_ID, Medication_Two_ID, 
+				'Severity, Description, Active_Flag) VALUES('" & Drug1 & "','" & Drug2 & "','" &
+				'Severity & "','" & Description & "','" & ACTIVEFLAG & "');")
+				strStatement = "INSERT INTO Drug_Interactions(Medication_One_ID, Medication_Two_ID," &
+					"Severity, Description, Active_Flag) VALUES('" & Drug1 & "','" & Drug2 & "','" &
+					Severity & "','" & Description & "','" & ACTIVEFLAG & "');"
+				DBCmd = New SQLiteCommand(strStatement, DBConn)
+				Try
+					DBCmd.ExecuteNonQuery()
+				Catch ex As Exception
+					MessageBox.Show("could not complete the following SQL statement: " & strStatement &
+									" the following error occured: " & vbCrLf & vbCrLf & ex.ToString)
+				End Try
+			Else
 
-			'Send an update sql statement to the database
-			ExecuteScalarQuery("UPDATE Drug_Interactions SET Severity = '" & Severity & "', Description = '" & Description & "', Active_Flag = '" & ActiveFlag &
-						   "'WHERE Medication_One_ID = '" & Drug1 & "' AND Medication_Two_ID = '" & Drug2 & "';")
-
+				'Send an update sql statement to the database
+				'ExecuteScalarQuery("UPDATE Drug_Interactions SET Severity = '" & Severity & "', Description = '" & Description & "', Active_Flag = '" & ActiveFlag &
+				'			   "'WHERE Medication_One_ID = '" & Drug1 & "' AND Medication_Two_ID = '" & Drug2 & "';")
+				strStatement = "UPDATE Drug_Interactions SET Severity = '" & Severity & "', Description = '" & Description & "', Active_Flag = '" & ACTIVEFLAG &
+					"'WHERE Medication_One_ID = '" & Drug1 & "' AND Medication_Two_ID = '" & Drug2 & "';"
+				DBCmd = New SQLiteCommand(strStatement, DBConn)
+				Try
+					DBCmd.ExecuteNonQuery()
+				Catch ex As Exception
+					MessageBox.Show("could not complete the following SQL statement: " & strStatement &
+									" the following error occured: " & vbCrLf & vbCrLf & ex.ToString)
+				End Try
+			End If
 			'Clear the dataset after it is sent to the database
-			dtCompareDrugInteractions.Clear()
-		End If
+			'dtCompareDrugInteractions.Clear()
+		Next
+		' close the db connection
+		DBConn.Close()
+		' clear the outputList
+		outputList.Clear()
 	End Sub
 
 	'/*******************************************************************/
@@ -304,7 +348,7 @@ Module APIDatabaseSelection
 			                          Strength, Schedule, Active_Flag) VALUES('" & DrugName & "','" & RXCUID & "','" & ControlledFlag & "','" & NarcoticFlag &
 								"','" & Barcode & "','" & Type & "','" & Strength & "','" & Schedule & "','" & ActiveFlag & "')")
 
-			MessageBox.Show("Medication was successfully inserted")
+			MessageBox.Show("Saved basic medication information to the system. Please wait...")
 
 		Else
 
@@ -346,7 +390,7 @@ Module APIDatabaseSelection
 					ExecuteScalarQuery("UPDATE Medication SET Active_Flag = '" & "' WHERE RXCUI_ID = '" & RXCUID & "';")
 				End If
 
-				MessageBox.Show("Medication was successfully updated")
+				MessageBox.Show("Basic Medication was updated on the system. Please wait...")
 
 			Next
 
