@@ -11,7 +11,6 @@
 
         UpdateButtonsOnScreen()
         AddHandlerToDrawerButtons()
-        PopulateInventory()
 
         btnDrawer1.PerformClick()
 
