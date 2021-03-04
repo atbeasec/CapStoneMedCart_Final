@@ -551,7 +551,7 @@
 
 
         ExtractFormDataForDatabase()
-
+        MessageBox.Show("All flagged discrepancies have been saved.")
     End Sub
 
 End Class

@@ -168,4 +168,15 @@
   <metadata name="eprError.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>45</value>
+  </metadata>
+  <data name="btnBack.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAJRJREFUSEvt
+        ljsKgDAQBXMIv51X8GpaeU0bW0/iOisraCMiu4WQgYewgXmEIEn6BSJSk4kUNvIFcUsWogw29gPptUC/
+        pS35gLAjq9phJrngDsJc8AzC8IKKXP+Dxpb8QDoeepGN9Db2BXH8ThTEJdGzUPRsOlvyBXEu+gbiXPQN
+        xLE34wni2Dv+BLm+VgYS81p5R0o7CBl/cN1KdCcAAAAASUVORK5CYII=
+</value>
+  </data>
 </root>

@@ -227,23 +227,42 @@
         Dim btnDeleteButton As Button
         btnDeleteButton = New Button
         'declare our image and point at the resource
-        Dim mapImageTrash As New Bitmap(New Bitmap(My.Resources.icons8_delete_trash), 25, 25)
 
-        'Set button properties
-        With btnDeleteButton
-            .AutoSize = True
-            .Size = New Size(30, 30)
-            .FlatStyle = FlatStyle.Flat
-            .FlatAppearance.BorderSize = 0
-            .ForeColor = Color.Transparent
-            ' .Font = New Font(New FontFamily("Microsoft Sans Serif"), 11)
-            ' .Location = New Point(  )
-            .Location = New Point(intX, intY)
-            .Name = "btnDeletePatientRecord" + (intPanelsAddedCount).ToString
-            .Image = mapImageTrash
-            .ImageAlign = ContentAlignment.MiddleCenter
-            .Tag = intPanelsAddedCount + 1
-        End With
+        If getOpenedForm().GetType() Is frmConfiguration.GetType() Then
+            Dim mapImageTrash As New Bitmap(New Bitmap(My.Resources.plusminus), 25, 25)
+            'Set button properties
+            With btnDeleteButton
+                .AutoSize = True
+                .Size = New Size(30, 30)
+                .FlatStyle = FlatStyle.Flat
+                .FlatAppearance.BorderSize = 0
+                .ForeColor = Color.Transparent
+                ' .Font = New Font(New FontFamily("Microsoft Sans Serif"), 11)
+                ' .Location = New Point(  )
+                .Location = New Point(intX, intY)
+                .Name = "btnDeletePatientRecord" + (intPanelsAddedCount).ToString
+                .Image = mapImageTrash
+                .ImageAlign = ContentAlignment.MiddleCenter
+                .Tag = intPanelsAddedCount + 1
+            End With
+        Else
+            Dim mapImageTrash As New Bitmap(New Bitmap(My.Resources.icons8_delete_trash), 25, 25)
+            'Set button properties
+            With btnDeleteButton
+                .AutoSize = True
+                .Size = New Size(30, 30)
+                .FlatStyle = FlatStyle.Flat
+                .FlatAppearance.BorderSize = 0
+                .ForeColor = Color.Transparent
+                ' .Font = New Font(New FontFamily("Microsoft Sans Serif"), 11)
+                ' .Location = New Point(  )
+                .Location = New Point(intX, intY)
+                .Name = "btnDeletePatientRecord" + (intPanelsAddedCount).ToString
+                .Image = mapImageTrash
+                .ImageAlign = ContentAlignment.MiddleCenter
+                .Tag = intPanelsAddedCount + 1
+            End With
+        End If
 
         pnlPanelName.Controls.Add(btnDeleteButton)
 
@@ -571,6 +590,9 @@
                 strStatement = "UPDATE USER SET Active_Flag='1' WHERE User_ID='" & intID & "';"
                 ExecuteInsertQuery(strStatement)
             End If
+            Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
+                                                  "User.Supervisor_Flag, User.Active_Flag From User;"
+            frmConfiguration.Fill_Table(strFillSQL)
 
         ElseIf getOpenedForm().GetType() Is frmPatientRecords.GetType() Then
 

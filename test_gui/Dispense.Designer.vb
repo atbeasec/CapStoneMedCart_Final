@@ -87,11 +87,11 @@ Partial Class Dispense
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(14, 259)
+        Me.Label10.Location = New System.Drawing.Point(14, 312)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(158, 21)
+        Me.Label10.Size = New System.Drawing.Size(159, 21)
         Me.Label10.TabIndex = 47
-        Me.Label10.Text = "Active Perscriptions:"
+        Me.Label10.Text = "Active Prescriptions:"
         '
         'Panel3
         '
@@ -103,7 +103,7 @@ Partial Class Dispense
         Me.Panel3.Controls.Add(Me.lblMedicationName)
         Me.Panel3.Controls.Add(Me.lblType)
         Me.Panel3.Controls.Add(Me.lblStrength)
-        Me.Panel3.Location = New System.Drawing.Point(18, 292)
+        Me.Panel3.Location = New System.Drawing.Point(18, 345)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(1080, 47)
         Me.Panel3.TabIndex = 52
@@ -189,7 +189,7 @@ Partial Class Dispense
         '
         Me.flpMedications.AutoScroll = True
         Me.flpMedications.BackColor = System.Drawing.Color.White
-        Me.flpMedications.Location = New System.Drawing.Point(18, 339)
+        Me.flpMedications.Location = New System.Drawing.Point(18, 392)
         Me.flpMedications.Name = "flpMedications"
         Me.flpMedications.Size = New System.Drawing.Size(1080, 186)
         Me.flpMedications.TabIndex = 53
@@ -308,7 +308,7 @@ Partial Class Dispense
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(634, 220)
+        Me.Label5.Location = New System.Drawing.Point(15, 224)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(73, 21)
         Me.Label5.TabIndex = 185
@@ -321,7 +321,7 @@ Partial Class Dispense
         Me.btnDispense.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDispense.ForeColor = System.Drawing.Color.White
         Me.btnDispense.Image = CType(resources.GetObject("btnDispense.Image"), System.Drawing.Image)
-        Me.btnDispense.Location = New System.Drawing.Point(433, 541)
+        Me.btnDispense.Location = New System.Drawing.Point(433, 594)
         Me.btnDispense.Name = "btnDispense"
         Me.btnDispense.Size = New System.Drawing.Size(229, 38)
         Me.btnDispense.TabIndex = 7
@@ -439,7 +439,7 @@ Partial Class Dispense
         Me.btnDown.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDown.ForeColor = System.Drawing.Color.White
         Me.btnDown.Image = CType(resources.GetObject("btnDown.Image"), System.Drawing.Image)
-        Me.btnDown.Location = New System.Drawing.Point(730, 244)
+        Me.btnDown.Location = New System.Drawing.Point(111, 248)
         Me.btnDown.Name = "btnDown"
         Me.btnDown.Size = New System.Drawing.Size(28, 28)
         Me.btnDown.TabIndex = 6
@@ -454,7 +454,7 @@ Partial Class Dispense
         Me.btnUp.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUp.ForeColor = System.Drawing.Color.White
         Me.btnUp.Image = CType(resources.GetObject("btnUp.Image"), System.Drawing.Image)
-        Me.btnUp.Location = New System.Drawing.Point(696, 244)
+        Me.btnUp.Location = New System.Drawing.Point(77, 248)
         Me.btnUp.Name = "btnUp"
         Me.btnUp.Size = New System.Drawing.Size(28, 28)
         Me.btnUp.TabIndex = 5
@@ -465,7 +465,7 @@ Partial Class Dispense
         '
         Me.Panel5.BackColor = System.Drawing.Color.DarkGray
         Me.Panel5.Controls.Add(Me.txtQuantity)
-        Me.Panel5.Location = New System.Drawing.Point(637, 244)
+        Me.Panel5.Location = New System.Drawing.Point(18, 248)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel5.Size = New System.Drawing.Size(53, 28)
@@ -481,6 +481,7 @@ Partial Class Dispense
         Me.txtQuantity.Name = "txtQuantity"
         Me.txtQuantity.Size = New System.Drawing.Size(51, 26)
         Me.txtQuantity.TabIndex = 38
+        Me.txtQuantity.Text = "0"
         '
         'pnlHeader
         '
@@ -514,7 +515,7 @@ Partial Class Dispense
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1116, 599)
+        Me.ClientSize = New System.Drawing.Size(1116, 650)
         Me.Controls.Add(Me.pnlHeader)
         Me.Controls.Add(Me.btnDown)
         Me.Controls.Add(Me.btnUp)

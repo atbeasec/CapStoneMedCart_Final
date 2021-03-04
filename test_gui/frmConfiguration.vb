@@ -525,51 +525,103 @@ Public Class frmConfiguration
             intSupervisor = 1
         End If
 
-        'if it returns 2 then the username was changed to something already in the database 
-        If ExecuteScalarQuery(strStatement) = 2 Then
-            MsgBox("A User already has that Username")
-            'call CheckPassword Function to see if password mets security standards
-        ElseIf CheckPassword(strPassword) = False Then
-            MsgBox("Password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special characters !@#$%^&* ")
-            txtPassword.Focus()
-            ' make sure password and Confirm Password Match
-        ElseIf txtPassword.Text <> txtConfirmPassword.Text Then
-            MsgBox("Confirm Password must match Password")
-            txtConfirmPassword.Focus()
-            'Make Sure all fields are filled
-        ElseIf txtFirstName.Text = "" Or txtLastName.Text = "" Or txtUsername.Text = "" Or txtBarcode.Text = "" Then
-            MsgBox("All Fields must be filled")
-        Else
-            ' get the peppered hash of the password
-            strResults = LogIn.MakeSaltPepperAndHash(strPassword)
-            strPassword = strResults(0)
-            strSalt = strResults(1)
+        'check if the user is changing the password and ran if yes
 
-            If txtBarcode.Text = "" Then
-                'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
-                strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',Salt='" & strSalt & "',Password='" & strPassword & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "' WHERE User_ID='" & txtID.Text & "';"
-                ExecuteInsertQuery(strStatement)
+        If txtConfirmPassword.Text <> "" And txtPassword.Text <> "" Then
+            'if it returns 2 then the username was changed to something already in the database 
+            If ExecuteScalarQuery(strStatement) = 2 Then
+                MsgBox("A User already has that Username")
+                'call CheckPassword Function to see if password mets security standards
+            ElseIf CheckPassword(strPassword) = False Then
+                MsgBox("Password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special characters !@#$%^&* ")
+                txtPassword.Focus()
+                ' make sure password and Confirm Password Match
+            ElseIf txtPassword.Text <> txtConfirmPassword.Text Then
+                MsgBox("Confirm Password must match Password")
+                txtConfirmPassword.Focus()
+                'Make Sure all fields are filled
+            ElseIf txtFirstName.Text = "" Or txtLastName.Text = "" Or txtUsername.Text = "" Then
+                MsgBox("All Fields must be filled12")
             Else
-                ' Convert the barcode to the peppered hash
-                strHashedBarcode = ConvertBarcodePepperAndHash(txtBarcode.Text)
-                'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
-                strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',Salt='" & strSalt & "',Password='" & strPassword & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Barcode='" & strHashedBarcode & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "' WHERE User_ID='" & txtID.Text & "';"
-                ExecuteInsertQuery(strStatement)
+                ' get the peppered hash of the password
+                strResults = LogIn.MakeSaltPepperAndHash(strPassword)
+                strPassword = strResults(0)
+                strSalt = strResults(1)
+
+                If txtBarcode.Text = "" Then
+                    'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
+                    strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',Salt='" & strSalt & "',Password='" & strPassword & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "',Active_Flag=1 WHERE User_ID='" & txtID.Text & "';"
+                    ExecuteInsertQuery(strStatement)
+                Else
+                    ' Convert the barcode to the peppered hash
+                    strHashedBarcode = ConvertBarcodePepperAndHash(txtBarcode.Text)
+                    'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
+                    strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',Salt='" & strSalt & "',Password='" & strPassword & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Barcode='" & strHashedBarcode & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "',Active_Flag=1 WHERE User_ID='" & txtID.Text & "';"
+                    ExecuteInsertQuery(strStatement)
+                End If
+
+
+
+                'clear all text boxes and change button visibility back to default 
+                txtFirstName.Text = ""
+                txtLastName.Text = ""
+                txtUsername.Text = ""
+                txtBarcode.Text = ""
+                txtPassword.Text = ""
+                txtConfirmPassword.Text = ""
+                txtID.Text = ""
+                btnCancel.Visible = False
+                btnSaveChanges.Visible = False
+                btnSaveUser.Visible = True
             End If
-
-
-
-            'clear all text boxes and change button visibility back to default 
-            txtFirstName.Text = ""
-            txtLastName.Text = ""
-            txtUsername.Text = ""
-            txtBarcode.Text = ""
-            txtPassword.Text = ""
-            txtConfirmPassword.Text = ""
-            btnCancel.Visible = False
-            btnSaveChanges.Visible = False
-            btnSaveUser.Visible = True
         End If
+
+
+
+        'check if the user is changing the password and ran if no
+        If txtConfirmPassword.Text = "" And txtPassword.Text = "" And txtID.Text <> "" Then
+            'if it returns 2 then the username was changed to something already in the database 
+            If ExecuteScalarQuery(strStatement) = 2 Then
+                MsgBox("A User already has that Username")
+                'call CheckPassword Function to see if password mets security standards
+                ' make sure password and Confirm Password Match
+            ElseIf txtPassword.Text <> txtConfirmPassword.Text Then
+                MsgBox("Confirm Password must match Password")
+                txtConfirmPassword.Focus()
+                'Make Sure all fields are filled
+            ElseIf txtFirstName.Text = "" Or txtLastName.Text = "" Or txtUsername.Text = "" Then
+                MsgBox("All Fields must be filled56")
+            Else
+                If txtBarcode.Text = "" Then
+                    'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
+                    strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "',Active_Flag=1  WHERE User_ID='" & txtID.Text & "';"
+                    ExecuteInsertQuery(strStatement)
+                Else
+                    ' Convert the barcode to the peppered hash
+                    strHashedBarcode = ConvertBarcodePepperAndHash(txtBarcode.Text)
+                    'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
+                    strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Barcode='" & strHashedBarcode & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "',Active_Flag=1  WHERE User_ID='" & txtID.Text & "';"
+                    ExecuteInsertQuery(strStatement)
+                End If
+
+
+
+                'clear all text boxes and change button visibility back to default 
+                txtFirstName.Text = ""
+                txtLastName.Text = ""
+                txtUsername.Text = ""
+                txtBarcode.Text = ""
+                txtPassword.Text = ""
+                txtConfirmPassword.Text = ""
+                btnCancel.Visible = False
+                btnSaveChanges.Visible = False
+                btnSaveUser.Visible = True
+            End If
+        End If
+
+        Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
+                                      "User.Supervisor_Flag, User.Active_Flag From User;"
+        Fill_Table(strFillSQL)
     End Sub
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         'clear all text boxes and change button visibility back to default 
@@ -635,7 +687,7 @@ Public Class frmConfiguration
 
     End Sub
 
-    Private Sub Fill_Table(ByVal strFillSQL As String)
+    Public Sub Fill_Table(ByVal strFillSQL As String)
         flpUserInfo.Controls.Clear()
         Dim dsUserInfo As DataSet = CreateDatabase.ExecuteSelectQuery(strFillSQL)
 

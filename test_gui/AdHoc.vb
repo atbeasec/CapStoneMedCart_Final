@@ -98,6 +98,8 @@ Module AdHoc
         Dim intMedicationDrawerID As Integer
         Dim StrSelectedMedication As String
         Dim intMedicationCount As Integer
+        Dim intDrawerTUID As Integer
+        Dim intDrawerNumber As Integer
 
         StrSelectedMedication = frmAdHockDispense.cmbMedications.SelectedItem
 
@@ -135,6 +137,14 @@ Module AdHoc
             Strdatacommand = "UPDATE DrawerMedication SET Quantity = '" & intMedicationCount & "' WHERE Medication_TUID = '" & intMedicationID & "'"
             CreateDatabase.ExecuteInsertQuery(Strdatacommand)
             clearAdhocBoxes()
+
+            Strdatacommand = ("SELECT Drawers_TUID FROM DrawerMedication WHERE Medication_TUID = '" & intMedicationDrawerID & "' AND DrawerMedication.Active_Flag = '1'")
+            intDrawerTUID = CreateDatabase.ExecuteScalarQuery(Strdatacommand)
+
+            Strdatacommand = ("SELECT Drawer_Number FROM Drawers WHERE Drawers_ID = '" & intDrawerTUID & "' AND Drawers.Active_Flag = '1'")
+            intDrawerNumber = CreateDatabase.ExecuteScalarQuery(Strdatacommand)
+            CartInterfaceCode.OpenOneDrawer(intDrawerNumber)
+
         End If
 
     End Sub
@@ -173,7 +183,7 @@ Module AdHoc
         Dim Strdatacommand As String
         ' Currently the medication display is appending the RXCUI Number on too the medication
         ' name, as searching by name alone could cause problems if medication names can repeat
-        Strdatacommand = "Select Drug_Name, RXCUI_ID FROM Medication INNER JOIN DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE Active_Flag = 1"
+        Strdatacommand = "Select Drug_Name, RXCUI_ID FROM Medication INNER JOIN DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE DrawerMedication.Active_Flag = 1"
 
         Dim dsMedicationDataSet As DataSet = New DataSet
         dsMedicationDataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)

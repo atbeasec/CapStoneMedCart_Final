@@ -5,7 +5,7 @@ Public Class frmInventory
     End Sub
 
     Private Sub frmInventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        cmbDrawerNumber.SelectedIndex = 1
         ' setdefault text to the search box
         txtSearch.Text = txtSearch.Tag
         txtSearch.ForeColor = Color.Silver
@@ -147,6 +147,7 @@ Public Class frmInventory
         Dim intMedQuanitiy As Integer = 0
         Dim intDividerBin As Integer = 0
         Dim intDiscrepancies As Integer = 0
+        Dim strBarcode As String
 
         If chkControlled.Checked Then
             intControlled = 1
@@ -170,7 +171,15 @@ Public Class frmInventory
         'If yes, then compare the medications in the database and either insert
         'the record or update records in the database
         If txtSchedule.Text <> Nothing And txtType.Text <> Nothing And txtStrength.Text <> Nothing Then
-            CompareMedications(strName.Substring(0, strName.Length), strRXCUI, intControlled, intNarcotic, generateSampleBarcode(), txtType.Text, txtStrength.Text, CInt(txtSchedule.Text), 1)
+            'Check if a barcode is entered
+            'If no, generate a sample
+            'If yes, pass that to the barcode variable
+            If txtBarcode.Text = Nothing Then
+                strBarcode = generateSampleBarcode()
+            Else
+                strBarcode = txtBarcode.Text
+            End If
+            CompareMedications(strName.Substring(0, strName.Length), strRXCUI, intControlled, intNarcotic, strBarcode, txtType.Text, txtStrength.Text, CInt(txtSchedule.Text), 1)
         Else
             MessageBox.Show("Please enter data in all fields before saving.")
         End If
@@ -182,26 +191,44 @@ Public Class frmInventory
         ' if yes, then update if there's differences
         ' if no, then save those items
         ' and pass it to the function to find interactions
+
         Dim myPropertyNameList As New List(Of String)({"severity", "description", "rxcui"})
         Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
-        outputList = getInteractionsByName("153008", myPropertyNameList)
-        ' double-check if the interactions with the matching pair of RXCUI's exist
-        ' if yes, then update if there's differences
-        ' or insert the new lines
-        ' and save those items
+        outputList = getInteractionsByName(strRXCUI, myPropertyNameList)
 
+        'Double-check if the interactions with the matching pair of RXCUI's exist
+        'If yes, Then update If there's differences
+        ' Or insert the New lines
+        ' And save those items
+
+        Try
+            MessageBox.Show("Please wait while the information is inserted")
+            'There are four items returned from the API
+            'Therefore, we step over 4 items every time 
+            'we run the call
+            For i = 0 To outputList.Count - 4 Step 4
+                'In the fourth item passed, we want to remove the ' character because it breaks SQL inserts
+                CompareDrugInteractions(CInt(strRXCUI), CInt(outputList.Item(i + 3).PropertyValue), outputList.Item(i).PropertyValue, outputList.Item(i + 1).PropertyValue.Replace("'", ""), 1)
+            Next
+
+            MessageBox.Show("All interaction records have been added")
+        Catch ex As Exception
+            MessageBox.Show("Interactions could not be recorded")
+        End Try
 
         intDrawerMedication_ID = ExecuteScalarQuery("SELECT COUNT(DISTINCT DrawerMedication_ID) FROM DrawerMedication;")
         Try
-            If CInt(txtDrawerNumber.Text) > 25 Or CInt(txtDrawerNumber.Text) < 0 Then
+            If CInt(cmbDrawerNumber.SelectedItem) > 25 Or CInt(cmbDrawerNumber.SelectedItem) < 0 Then
 
-                Drawers_Tuid = txtDrawerNumber.Text
+            Else
 
+                Drawers_Tuid = CInt(cmbDrawerNumber.SelectedItem)
 
             End If
 
         Catch ex As Exception
-            eprError.SetError(txtDrawerNumber, "please enter an integer between 1-25")
+            eprError.SetError(cmbDrawerNumber, "please enter an integer between 1-25")
+
         End Try
 
         intMedicationTuid = ExecuteScalarQuery("Select Medication_ID From Medication WHERE Drug_Name ='" & strName & "';")
@@ -211,11 +238,12 @@ Public Class frmInventory
         Try
             intMedQuanitiy = CInt(txtQuantity.Text)
         Catch ex As Exception
-            eprError.SetError(txtDrawerNumber, "please enter an integer")
+            eprError.SetError(cmbDrawerNumber, "please enter an integer")
         End Try
-        intDividerBin = cmbBin.Text
+        intDividerBin = CInt(cmbDividerBin.SelectedItem)
 
-        ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Divider_Bin,Expiration_Date,Discrepancy_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & intDividerBin & " , '" & txtExpirationDate.Text & "'," & intDiscrepancies & ");")
+        ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Divider_Bin,Expiration_Date,Discrepancy_Flag, Active_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & intDividerBin & " , '" & txtExpirationDate.Text & "'," & intDiscrepancies & ",1);")
+
         Debug.WriteLine("")
 
         eprError.Clear()
@@ -276,7 +304,7 @@ Public Class frmInventory
         txtType.Text = ""
         chkControlled.Checked = False
         chkNarcotic.Checked = False
-        txtDrawerNumber.Text = ""
+        cmbDrawerNumber.Text = ""
         cmbBin.Items.Clear()
         txtQuantity.Text = ""
         txtExpirationDate.Text = ""
@@ -539,4 +567,138 @@ Public Class frmInventory
         pnlSearch.Select()
     End Sub
 
+
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDividerBin.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub cmbDrawerNumber_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDrawerNumber.SelectedIndexChanged
+        cmbDividerBin.Items.Clear()
+        Dim intDrawerSize As Integer = 0
+        Dim intNumDividers As Integer = 0
+        Dim intDrawerNumber As Integer = CInt(cmbDrawerNumber.Text)
+        Try
+            intDrawerSize = ExecuteScalarQuery("SELECT Size FROM Drawers where Drawers_ID = " & intDrawerNumber.ToString & ";")
+            intNumDividers = ExecuteScalarQuery("SELECT Number_of_Dividers FROM Drawers where Drawers_ID = " & intDrawerNumber.ToString & ";")
+        Catch ex As Exception
+            ' do nothing because there are empty values in the database
+        End Try
+        txtQuantity.Text = intDrawerSize.ToString
+        Dim dividerspopulation As New ArrayList(intNumDividers)
+        Dim intCounter As Integer = 1
+        Do Until intCounter > intNumDividers
+            cmbDividerBin.Items.Add(intCounter)
+            intCounter += 1
+        Loop
+    End Sub
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+
+        frmMain.OpenChildForm(frmConfigureInventory)
+
+    End Sub
+
+    '/*********************************************************************/
+    '/* SubProgram NAME:        txtStrength_KeyPress                      */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Breanna Howey       		          */   
+    '/*		         DATE CREATED: 		3/01/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This assess what key is pressed and restricts the keys to the string
+    '/* passed to the KeyPressCheck function.                             */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  None                                                             */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*  KeyPressCheck                                                    */
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 sender- object representing a control                            */
+    '/*  e- eventargs indicating there is an event handle assigned        */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*  txtStrength_KeyPress()                                           */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	 None                                                             */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  BRH  3/01/21    Initial creation                                 */
+    Private Sub txtStrength_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtStrength.KeyPress
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz1234567890/")
+    End Sub
+
+    '/*********************************************************************/
+    '/* SubProgram NAME:        txtType_KeyPress                          */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Breanna Howey       		          */   
+    '/*		         DATE CREATED: 		3/01/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This assess what key is pressed and restricts the keys to the string
+    '/* passed to the KeyPressCheck function.                             */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  None                                                             */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*  KeyPressCheck                                                    */
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 sender- object representing a control                            */
+    '/*  e- eventargs indicating there is an event handle assigned        */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*  txtType_KeyPress()                                               */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	 None                                                             */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  BRH  3/01/21    Initial creation                                 */
+    Private Sub txtType_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtType.KeyPress
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz1234567890/")
+    End Sub
+
+    '/*********************************************************************/
+    '/* SubProgram NAME:        txtBarcode_KeyPress                       */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Breanna Howey       		          */   
+    '/*		         DATE CREATED: 		3/01/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This assess what key is pressed and restricts the keys to the string
+    '/* passed to the KeyPressCheck function.                             */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  None                                                             */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*  KeyPressCheck                                                    */
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 sender- object representing a control                            */
+    '/*  e- eventargs indicating there is an event handle assigned        */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*  txtBarcode_KeyPress                                              */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	 None                                                             */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    Private Sub txtBarcode_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtBarcode.KeyPress
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz1234567890/")
+    End Sub
 End Class

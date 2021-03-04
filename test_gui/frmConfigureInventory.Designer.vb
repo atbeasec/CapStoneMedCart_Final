@@ -51,11 +51,12 @@ Partial Class frmConfigureInventory
         Me.btnDrawer15 = New System.Windows.Forms.Button()
         Me.flpMedication = New System.Windows.Forms.FlowLayoutPanel()
         Me.pnlHeader = New System.Windows.Forms.Panel()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label37 = New System.Windows.Forms.Label()
+        Me.lblDivider = New System.Windows.Forms.Label()
+        Me.lblActions = New System.Windows.Forms.Label()
+        Me.lblDrugName = New System.Windows.Forms.Label()
         Me.Label32 = New System.Windows.Forms.Label()
-        Me.Label36 = New System.Windows.Forms.Label()
-        Me.Label38 = New System.Windows.Forms.Label()
+        Me.lblQuantity = New System.Windows.Forms.Label()
+        Me.lblStrength = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.lblDrawerNumber = New System.Windows.Forms.Label()
         Me.btnAddToDrawer = New System.Windows.Forms.Button()
@@ -438,45 +439,57 @@ Partial Class frmConfigureInventory
         '
         Me.flpMedication.AutoScroll = True
         Me.flpMedication.BackColor = System.Drawing.Color.White
-        Me.flpMedication.Location = New System.Drawing.Point(364, 131)
+        Me.flpMedication.Location = New System.Drawing.Point(350, 131)
         Me.flpMedication.Name = "flpMedication"
-        Me.flpMedication.Size = New System.Drawing.Size(646, 222)
+        Me.flpMedication.Size = New System.Drawing.Size(681, 222)
         Me.flpMedication.TabIndex = 42
         '
         'pnlHeader
         '
         Me.pnlHeader.BackColor = System.Drawing.Color.White
-        Me.pnlHeader.Controls.Add(Me.Label3)
-        Me.pnlHeader.Controls.Add(Me.Label37)
+        Me.pnlHeader.Controls.Add(Me.lblDivider)
+        Me.pnlHeader.Controls.Add(Me.lblActions)
+        Me.pnlHeader.Controls.Add(Me.lblDrugName)
         Me.pnlHeader.Controls.Add(Me.Label32)
-        Me.pnlHeader.Controls.Add(Me.Label36)
-        Me.pnlHeader.Controls.Add(Me.Label38)
-        Me.pnlHeader.Location = New System.Drawing.Point(364, 78)
+        Me.pnlHeader.Controls.Add(Me.lblQuantity)
+        Me.pnlHeader.Controls.Add(Me.lblStrength)
+        Me.pnlHeader.Location = New System.Drawing.Point(350, 78)
         Me.pnlHeader.Name = "pnlHeader"
-        Me.pnlHeader.Size = New System.Drawing.Size(646, 47)
+        Me.pnlHeader.Size = New System.Drawing.Size(679, 47)
         Me.pnlHeader.TabIndex = 41
         '
-        'Label3
+        'lblDivider
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label3.Location = New System.Drawing.Point(497, 19)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(65, 21)
-        Me.Label3.TabIndex = 8
-        Me.Label3.Text = "Actions"
+        Me.lblDivider.AutoSize = True
+        Me.lblDivider.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDivider.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblDivider.Location = New System.Drawing.Point(222, 19)
+        Me.lblDivider.Name = "lblDivider"
+        Me.lblDivider.Size = New System.Drawing.Size(62, 21)
+        Me.lblDivider.TabIndex = 9
+        Me.lblDivider.Text = "Divider"
         '
-        'Label37
+        'lblActions
         '
-        Me.Label37.AutoSize = True
-        Me.Label37.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label37.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label37.Location = New System.Drawing.Point(3, 19)
-        Me.Label37.Name = "Label37"
-        Me.Label37.Size = New System.Drawing.Size(93, 21)
-        Me.Label37.TabIndex = 1
-        Me.Label37.Text = "Drug Name"
+        Me.lblActions.AutoSize = True
+        Me.lblActions.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblActions.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblActions.Location = New System.Drawing.Point(591, 19)
+        Me.lblActions.Name = "lblActions"
+        Me.lblActions.Size = New System.Drawing.Size(65, 21)
+        Me.lblActions.TabIndex = 8
+        Me.lblActions.Text = "Actions"
+        '
+        'lblDrugName
+        '
+        Me.lblDrugName.AutoSize = True
+        Me.lblDrugName.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDrugName.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblDrugName.Location = New System.Drawing.Point(3, 19)
+        Me.lblDrugName.Name = "lblDrugName"
+        Me.lblDrugName.Size = New System.Drawing.Size(93, 21)
+        Me.lblDrugName.TabIndex = 1
+        Me.lblDrugName.Text = "Drug Name"
         '
         'Label32
         '
@@ -488,27 +501,27 @@ Partial Class frmConfigureInventory
         Me.Label32.Size = New System.Drawing.Size(0, 21)
         Me.Label32.TabIndex = 6
         '
-        'Label36
+        'lblQuantity
         '
-        Me.Label36.AutoSize = True
-        Me.Label36.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label36.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label36.Location = New System.Drawing.Point(346, 19)
-        Me.Label36.Name = "Label36"
-        Me.Label36.Size = New System.Drawing.Size(51, 21)
-        Me.Label36.TabIndex = 2
-        Me.Label36.Text = "Node"
+        Me.lblQuantity.AutoSize = True
+        Me.lblQuantity.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblQuantity.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblQuantity.Location = New System.Drawing.Point(472, 19)
+        Me.lblQuantity.Name = "lblQuantity"
+        Me.lblQuantity.Size = New System.Drawing.Size(72, 21)
+        Me.lblQuantity.TabIndex = 2
+        Me.lblQuantity.Text = "Quantity"
         '
-        'Label38
+        'lblStrength
         '
-        Me.Label38.AutoSize = True
-        Me.Label38.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label38.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label38.Location = New System.Drawing.Point(207, 19)
-        Me.Label38.Name = "Label38"
-        Me.Label38.Size = New System.Drawing.Size(65, 21)
-        Me.Label38.TabIndex = 0
-        Me.Label38.Text = "Dosage"
+        Me.lblStrength.AutoSize = True
+        Me.lblStrength.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblStrength.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblStrength.Location = New System.Drawing.Point(336, 19)
+        Me.lblStrength.Name = "lblStrength"
+        Me.lblStrength.Size = New System.Drawing.Size(74, 21)
+        Me.lblStrength.TabIndex = 0
+        Me.lblStrength.Text = "Strength"
         '
         'Label2
         '
@@ -539,7 +552,7 @@ Partial Class frmConfigureInventory
         Me.btnAddToDrawer.ForeColor = System.Drawing.Color.White
         Me.btnAddToDrawer.Image = CType(resources.GetObject("btnAddToDrawer.Image"), System.Drawing.Image)
         Me.btnAddToDrawer.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnAddToDrawer.Location = New System.Drawing.Point(813, 39)
+        Me.btnAddToDrawer.Location = New System.Drawing.Point(832, 40)
         Me.btnAddToDrawer.Name = "btnAddToDrawer"
         Me.btnAddToDrawer.Size = New System.Drawing.Size(197, 32)
         Me.btnAddToDrawer.TabIndex = 32
@@ -688,7 +701,7 @@ Partial Class frmConfigureInventory
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1022, 500)
+        Me.ClientSize = New System.Drawing.Size(1041, 500)
         Me.Controls.Add(Me.btnDecrementCapacity)
         Me.Controls.Add(Me.btnIncrementCapacity)
         Me.Controls.Add(Me.Panel1)
@@ -746,14 +759,14 @@ Partial Class frmConfigureInventory
     Friend WithEvents btnDrawer1 As Button
     Friend WithEvents flpMedication As FlowLayoutPanel
     Friend WithEvents pnlHeader As Panel
-    Friend WithEvents Label37 As Label
+    Friend WithEvents lblDrugName As Label
     Friend WithEvents Label32 As Label
-    Friend WithEvents Label36 As Label
-    Friend WithEvents Label38 As Label
+    Friend WithEvents lblQuantity As Label
+    Friend WithEvents lblStrength As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents lblDrawerNumber As Label
     Friend WithEvents btnAddToDrawer As Button
-    Friend WithEvents Label3 As Label
+    Friend WithEvents lblActions As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label7 As Label
@@ -765,4 +778,5 @@ Partial Class frmConfigureInventory
     Friend WithEvents btnIncrementCapacity As Button
     Friend WithEvents Panel1 As Panel
     Friend WithEvents txtCapacity As TextBox
+    Friend WithEvents lblDivider As Label
 End Class
