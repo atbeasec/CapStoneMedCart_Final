@@ -5,7 +5,9 @@ Public Class frmInventory
     End Sub
 
     Private Sub frmInventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        cmbDrawerNumber.SelectedIndex = 1
+        cmbDrawerNumber.SelectedIndex = 0
+        cmbDividerBin.SelectedIndex = 0
+        txtQuantity.Text = "1"
         ' setdefault text to the search box
         txtSearch.Text = txtSearch.Tag
         txtSearch.ForeColor = Color.Silver
@@ -130,7 +132,7 @@ Public Class frmInventory
 
         Const YES As String = "Yes"
 
-        If cmbPatientPersonalMedication.Text.Contains(YES) Then
+        If cmbPatientPersonalMedication.SelectedItem.Contains(YES) Then
             MoveControlsIfPatientMedication()
         Else
             DefaultSaveButtonLocation()
@@ -148,6 +150,7 @@ Public Class frmInventory
         Dim intDividerBin As Integer = 0
         Dim intDiscrepancies As Integer = 0
         Dim strBarcode As String
+        Dim strMessage As String
 
         If chkControlled.Checked Then
             intControlled = 1
@@ -170,7 +173,7 @@ Public Class frmInventory
         'Check if all necessary textboxes for a new medication are full
         'If yes, then compare the medications in the database and either insert
         'the record or update records in the database
-        If txtSchedule.Text <> Nothing And txtType.Text <> Nothing And txtStrength.Text <> Nothing Then
+        If txtSchedule.Text <> "" And txtType.Text <> "" And txtStrength.Text <> "" Then
             'Check if a barcode is entered
             'If no, generate a sample
             'If yes, pass that to the barcode variable
@@ -180,9 +183,30 @@ Public Class frmInventory
                 strBarcode = txtBarcode.Text
             End If
             CompareMedications(strName.Substring(0, strName.Length), strRXCUI, intControlled, intNarcotic, strBarcode, txtType.Text, txtStrength.Text, CInt(txtSchedule.Text), 1)
-        Else
+        ElseIf txtSchedule.Text = "" Then
             MessageBox.Show("Please enter data in all fields before saving.")
+            Exit Sub
         End If
+
+        Try
+            If CInt(cmbDrawerNumber.SelectedItem) > 25 Or CInt(cmbDrawerNumber.SelectedItem) < 0 Then
+                MessageBox.Show("Please select an appropriate drawer number")
+            Else
+
+                Drawers_Tuid = CInt(cmbDrawerNumber.SelectedItem)
+
+            End If
+
+        Catch ex As Exception
+            eprError.SetError(cmbDrawerNumber, "please enter an integer for drawer number between 1-25")
+
+        End Try
+
+        Try
+            intMedQuanitiy = CInt(txtQuantity.Text)
+        Catch ex As Exception
+            eprError.SetError(cmbDrawerNumber, "please enter an amount that is a positive whole number")
+        End Try
 
 
 
@@ -194,6 +218,10 @@ Public Class frmInventory
 
         Dim myPropertyNameList As New List(Of String)({"severity", "description", "rxcui"})
         Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
+        strMessage = "Retrieving drug interactions from the NIH website"
+        Dim thdThread1 As New Threading.Thread(AddressOf ThreadedMessageBox)
+        thdThread1.Name = strMessage
+        thdThread1.Start()
         outputList = getInteractionsByName(strRXCUI, myPropertyNameList)
 
         'Double-check if the interactions with the matching pair of RXCUI's exist
@@ -202,48 +230,38 @@ Public Class frmInventory
         ' And save those items
 
         Try
-            MessageBox.Show("Please wait while the information is inserted")
+            strMessage = "Please wait while the interactions are saved to the database"
+            Dim thdThread2 As New Threading.Thread(AddressOf ThreadedMessageBox)
+            thdThread2.Name = strMessage
+            thdThread2.Start()
             'There are four items returned from the API
             'Therefore, we step over 4 items every time 
             'we run the call
-            For i = 0 To outputList.Count - 4 Step 4
-                'In the fourth item passed, we want to remove the ' character because it breaks SQL inserts
-                CompareDrugInteractions(CInt(strRXCUI), CInt(outputList.Item(i + 3).PropertyValue), outputList.Item(i).PropertyValue, outputList.Item(i + 1).PropertyValue.Replace("'", ""), 1)
-            Next
+            'For i = 0 To outputList.Count - 4 Step 4
+            'In the fourth item passed, we want to remove the ' character because it breaks SQL inserts
+            CompareDrugInteractions(CInt(strRXCUI), outputList) 'CInt(outputList.Item(i + 3).PropertyValue), outputList.Item(i).PropertyValue, outputList.Item(i + 1).PropertyValue.Replace("'", ""), 1)
+            'Next
 
-            MessageBox.Show("All interaction records have been added")
+            strMessage = "All interaction records have been added"
+            Dim thdThread3 As New Threading.Thread(AddressOf ThreadedMessageBox)
+            thdThread3.Name = strMessage
+            thdThread3.Start()
         Catch ex As Exception
             MessageBox.Show("Interactions could not be recorded")
         End Try
 
         intDrawerMedication_ID = ExecuteScalarQuery("SELECT COUNT(DISTINCT DrawerMedication_ID) FROM DrawerMedication;")
-        Try
-            If CInt(cmbDrawerNumber.SelectedItem) > 25 Or CInt(cmbDrawerNumber.SelectedItem) < 0 Then
 
-            Else
-
-                Drawers_Tuid = CInt(cmbDrawerNumber.SelectedItem)
-
-            End If
-
-        Catch ex As Exception
-            eprError.SetError(cmbDrawerNumber, "please enter an integer between 1-25")
-
-        End Try
 
         intMedicationTuid = ExecuteScalarQuery("Select Medication_ID From Medication WHERE Drug_Name ='" & strName & "';")
         'because we are adding a new drawermedication for now
         intDrawerMedication_ID += 1
 
-        Try
-            intMedQuanitiy = CInt(txtQuantity.Text)
-        Catch ex As Exception
-            eprError.SetError(cmbDrawerNumber, "please enter an integer")
-        End Try
+
         intDividerBin = CInt(cmbDividerBin.SelectedItem)
 
         ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Divider_Bin,Expiration_Date,Discrepancy_Flag, Active_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & intDividerBin & " , '" & txtExpirationDate.Text & "'," & intDiscrepancies & ",1);")
-
+        MessageBox.Show("Medication has been added to the drawer")
         Debug.WriteLine("")
 
         eprError.Clear()
@@ -487,7 +505,7 @@ Public Class frmInventory
             '*********************************
             'Call method here to do the search
             '*********************************
-            SearchResults()
+            btnSearch_Click(sender, e)
 
 
 
@@ -553,7 +571,7 @@ Public Class frmInventory
     '/*                                                                     
     '/*********************************************************************/
 
-    Private Sub cboSuggestedNames_SelectedItemChanged(sender As Object, e As EventArgs) Handles cboSuggestedNames.Leave
+    Private Sub cboSuggestedNames_SelectedItemChanged(sender As Object, e As EventArgs) Handles cboSuggestedNames.DropDownClosed
         Dim strTrimmedSelection As String = cboSuggestedNames.SelectedItem.ToString
         ' if we'd have to trim it the logic would be here
 
@@ -562,15 +580,11 @@ Public Class frmInventory
         ' change the visibility of the comboboxes and clear them out
         cboSuggestedNames.Visible = False
         'cboSuggestedNames.Items.Clear()
-        cmbMedicationName.Visible = True
+        'cmbMedicationName.Visible = True
         'cmbMedicationName.Items.Clear()
-        pnlSearch.Select()
+        btnSearch_Click(sender, e)
     End Sub
 
-
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDividerBin.SelectedIndexChanged
-
-    End Sub
 
     Private Sub cmbDrawerNumber_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDrawerNumber.SelectedIndexChanged
         cmbDividerBin.Items.Clear()
@@ -583,13 +597,14 @@ Public Class frmInventory
         Catch ex As Exception
             ' do nothing because there are empty values in the database
         End Try
-        txtQuantity.Text = intDrawerSize.ToString
-        Dim dividerspopulation As New ArrayList(intNumDividers)
+        'txtQuantity.Text = intDrawerSize.ToString
+        Dim dividerspopulation As New ArrayList(intNumDividers + 1)
         Dim intCounter As Integer = 1
-        Do Until intCounter > intNumDividers
+        Do Until intCounter > (intNumDividers + 1)
             cmbDividerBin.Items.Add(intCounter)
             intCounter += 1
         Loop
+        cmbDividerBin.SelectedIndex = 0
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click

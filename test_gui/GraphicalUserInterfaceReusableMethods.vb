@@ -1,4 +1,5 @@
-﻿Module GraphicalUserInterfaceReusableMethods
+﻿Imports System.Threading
+Module GraphicalUserInterfaceReusableMethods
 
     'Method that allows for highlighting when hovering over panels. has two parts
     'part 1
@@ -923,5 +924,8 @@
 
     End Sub
 
+    Public Sub ThreadedMessageBox()
+        MessageBox.Show(Thread.CurrentThread.Name())
+    End Sub
 
 End Module
