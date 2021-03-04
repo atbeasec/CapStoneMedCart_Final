@@ -585,7 +585,6 @@ Public Class frmInventory
         btnSearch_Click(sender, e)
     End Sub
 
-
     Private Sub cmbDrawerNumber_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDrawerNumber.SelectedIndexChanged
         cmbDividerBin.Items.Clear()
         Dim intDrawerSize As Integer = 0
@@ -715,5 +714,25 @@ Public Class frmInventory
     '/*  ---   ----     ------------------------------------------------  */
     Private Sub txtBarcode_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtBarcode.KeyPress
         KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz1234567890/")
+    End Sub
+
+    Private Sub btnDrawerUp_Click(sender As Object, e As EventArgs) Handles btnDrawerUp.Click
+        IndexButtonIncrement(cmbDrawerNumber.SelectedIndex, cmbDrawerNumber.Items.Count - 1, cmbDrawerNumber)
+    End Sub
+
+    Private Sub btnDrawerDown_Click(sender As Object, e As EventArgs) Handles btnDrawerDown.Click
+        IndexButtonDecrement(cmbDrawerNumber.SelectedIndex, cmbDrawerNumber)
+    End Sub
+    Private Sub btnQuantityUp_Click(sender As Object, e As EventArgs) Handles btnQuantityUp.Click
+        ButtonIncrement(1000, txtQuantity)
+    End Sub
+
+    Private Sub btnQuantityDown_Click(sender As Object, e As EventArgs) Handles btnQuantityDown.Click
+        ButtonDecrement(txtQuantity)
+    End Sub
+
+    Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantity.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789")
+        GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
     End Sub
 End Class

@@ -414,8 +414,8 @@
         ' pass MRN to the dispense screen because it needs to be used to be sent back to the patient info screen if the user
         ' decides to go back a screen.
 
-        Dispense.SetPatientMrn(intPatientMRN)
-        frmMain.OpenChildForm(Dispense)
+        frmDispense.SetPatientMrn(intPatientMRN)
+        frmMain.OpenChildForm(frmDispense)
         DispenseHistory.DispensemedicationPopulate(intPatientMRN)
         PatientInformation.PopulatePatientDispenseInfo(intPatientMRN)
         PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientMRN)

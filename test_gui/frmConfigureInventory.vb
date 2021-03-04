@@ -305,13 +305,13 @@
 
     Private Sub btnIncrementCapacity_Click(sender As Object, e As EventArgs) Handles btnIncrementCapacity.Click
 
-        ButtonIncrement(txtCapacity)
+        ButtonIncrement(8, txtCapacity)
 
     End Sub
 
     Private Sub btnIncrementDividers_Click(sender As Object, e As EventArgs) Handles btnIncrementDividers.Click
 
-        ButtonIncrement(txtDividers)
+        ButtonIncrement(5, txtDividers)
 
     End Sub
 

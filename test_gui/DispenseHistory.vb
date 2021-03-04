@@ -222,7 +222,7 @@ Module DispenseHistory
     '/*  Alexander Beasecker  02/10/21  Initial creation of the code      */
     '/*********************************************************************/
     Public Sub DispensemedicationPopulate(ByRef intPatientMRN As Integer)
-        Dispense.cmbMedications.Items.Clear()
+        frmDispense.cmbMedications.Items.Clear()
         Dim Strdatacommand As String
         ' Currently the medication display is appending the RXCUI Number on too the medication
         ' name, as searching by name alone could cause problems if medication names can repeat
@@ -235,7 +235,7 @@ Module DispenseHistory
         dsMedicationDataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
         'add medication name and RXCUI to listbox
         For Each dr As DataRow In dsMedicationDataSet.Tables(0).Rows
-            Dispense.cmbMedications.Items.Add(dr(0) & "--" & dr(1))
+            frmDispense.cmbMedications.Items.Add(dr(0) & "--" & dr(1))
         Next
 
     End Sub
@@ -266,11 +266,11 @@ Module DispenseHistory
     '/*  Alexander Beasecker  02/10/21  Initial creation of the code      */
     '/*********************************************************************/
     Public Sub SetMedicationProperties()
-        Dispense.cmbMethod.Items.Clear()
-        Dispense.cmbDosage.Items.Clear()
+        frmDispense.cmbMethod.Items.Clear()
+        frmDispense.cmbDosage.Items.Clear()
 
         'get selected medication
-        Dim strMedicationRXCUI As String = Dispense.cmbMedications.SelectedItem
+        Dim strMedicationRXCUI As String = frmDispense.cmbMedications.SelectedItem
         'split out the RXCUI and name
         Dim strArray() As String
         strArray = strMedicationRXCUI.Split("--")
@@ -286,11 +286,11 @@ Module DispenseHistory
         dsMedicationInformation = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
 
         'insert the method and dosage into comboboxes
-        Dispense.cmbMethod.Items.Add(dsMedicationInformation.Tables(0).Rows(0)(0))
-        Dispense.cmbMethod.SelectedItem = dsMedicationInformation.Tables(0).Rows(0)(0)
+        frmDispense.cmbMethod.Items.Add(dsMedicationInformation.Tables(0).Rows(0)(0))
+        frmDispense.cmbMethod.SelectedItem = dsMedicationInformation.Tables(0).Rows(0)(0)
 
-        Dispense.cmbDosage.Items.Add(dsMedicationInformation.Tables(0).Rows(0)(1))
-        Dispense.cmbDosage.SelectedItem = dsMedicationInformation.Tables(0).Rows(0)(1)
+        frmDispense.cmbDosage.Items.Add(dsMedicationInformation.Tables(0).Rows(0)(1))
+        frmDispense.cmbDosage.SelectedItem = dsMedicationInformation.Tables(0).Rows(0)(1)
     End Sub
 
     '/*********************************************************************/
@@ -388,7 +388,7 @@ Module DispenseHistory
         strbSQLcommand.Clear()
         strbSQLcommand.Append("SELECT Quantity FROM DrawerMedication WHERE Medication_TUID  = '" & intMedID & "' AND DrawerMedication.Active_Flag = '1'")
         intPrescribedQuantity = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
-        intPrescribedQuantity = intPrescribedQuantity - Dispense.txtQuantity.Text
+        intPrescribedQuantity = intPrescribedQuantity - frmDispense.txtQuantity.Text
         strbSQLcommand.Clear()
         strbSQLcommand.Append("UPDATE DrawerMedication SET Quantity = '" & intPrescribedQuantity & "' WHERE Medication_TUID = '" & intMedID & "' AND DrawerMedication.Active_Flag = '1'")
         CreateDatabase.ExecuteInsertQuery(strbSQLcommand.ToString)
@@ -399,7 +399,7 @@ Module DispenseHistory
         intDrawerMedicationID = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
         strbSQLcommand.Clear()
         strbSQLcommand.Append("INSERT INTO Dispensing(PatientMedication_TUID, Primary_User_TUID, Approving_User_TUID, DateTime_Dispensed, Amount_Dispensed, DrawerMedication_TUID) ")
-        strbSQLcommand.Append("VALUES('" & intPatientMedicationDatabaseID & "','1','1','" & dtmAdhocTime & "','" & Dispense.txtQuantity.Text & "','" & intDrawerMedicationID & "')")
+        strbSQLcommand.Append("VALUES('" & intPatientMedicationDatabaseID & "','1','1','" & dtmAdhocTime & "','" & frmDispense.txtQuantity.Text & "','" & intDrawerMedicationID & "')")
         CreateDatabase.ExecuteInsertQuery(strbSQLcommand.ToString)
 
 
