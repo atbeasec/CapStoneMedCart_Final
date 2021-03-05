@@ -148,8 +148,13 @@ Partial Class frmLoginScan
         Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Panel1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmLoginScan"
-        Me.Text = "frmLoginScan"
+        Me.ShowIcon = False
+        Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.Panel3.ResumeLayout(False)
