@@ -22,8 +22,6 @@ Partial Class frmLoginScan
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLoginScan))
-        Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.lblBadge = New System.Windows.Forms.Label()
@@ -35,15 +33,6 @@ Partial Class frmLoginScan
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'Panel4
-        '
-        Me.Panel4.BackgroundImage = CType(resources.GetObject("Panel4.BackgroundImage"), System.Drawing.Image)
-        Me.Panel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Panel4.Location = New System.Drawing.Point(305, 21)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(50, 48)
-        Me.Panel4.TabIndex = 12
         '
         'Label1
         '
@@ -145,7 +134,6 @@ Partial Class frmLoginScan
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(664, 496)
-        Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -163,8 +151,6 @@ Partial Class frmLoginScan
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents Panel4 As Panel
     Friend WithEvents Label1 As Label
     Friend WithEvents Panel1 As Panel
     Friend WithEvents lblForgotID As Label
