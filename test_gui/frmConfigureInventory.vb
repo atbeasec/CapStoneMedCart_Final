@@ -72,11 +72,18 @@
         Dim lblID3 As New Label
         Dim lblID4 As New Label
         Dim lblID5 As New Label
-        Dim lblID6 As New Label
-        Dim lblID7 As New Label
+        Dim tpToolTip As New ToolTip
 
+        Dim intLength As Integer = strDrugName.Length
+
+        If intLength > 30 Then
+            intLength = 30
+        End If
+
+        Dim strTuncated As String = strDrugName.Substring(0, intLength)
         ' anywhere we have quotes except for the label names, we can call our Database and get method
-        CreateIDLabel(pnlMainPanel, lblID, "lblDrugName", lblDrugName.Location.X, 20, strDrugName, getPanelCount(flpPannel))
+        'CreateIDLabel(pnlMainPanel, lblID, "lblDrugName", lblDrugName.Location.X, 20, strDrugName, getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID, "lblDrugName", lblDrugName.Location.X, 20, strDrugName, getPanelCount(flpPannel), tpToolTip, strTuncated)
         CreateIDLabel(pnlMainPanel, lblID5, "lblDivider", lblDivider.Location.X, 20, strDividerBin, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID2, "lblStrength", lblStrength.Location.X, 20, strStrength, getPanelCount(flpPannel))
         'CreateIDLabel(pnlMainPanel, lblID3, "lblType", 220, 20, strType, getPanelCount(flpPannel))

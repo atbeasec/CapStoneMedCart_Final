@@ -197,6 +197,29 @@ Module GraphicalUserInterfaceReusableMethods
 
     End Sub
 
+    Public Sub CreateIDLabelWithToolTip(ByVal pnlName As Panel, lblName As Label, strLabelName As String, x As Integer, y As Integer, strLabelText As String, ByVal intPanelsAddedCount As Integer, ByVal toolTip As ToolTip, ByVal strTruncatedText As String)
+
+        'Set button properties
+        With lblName
+            .AutoSize = True
+            '.Size = New Size(30, 30)
+
+            .FlatStyle = FlatStyle.Flat
+            ' .FlatAppearance.BorderSize = 0
+            .ForeColor = Color.Black
+            .Font = New Font(New FontFamily("Segoe UI"), 11, FontStyle.Regular)
+            .Location = New Point(x, y) 'new Point(600, 5)
+            .Name = strLabelName + (intPanelsAddedCount).ToString
+            .Text = strTruncatedText
+            .Tag = intPanelsAddedCount + 1
+        End With
+
+        toolTip.SetToolTip(lblName, strLabelText)
+        pnlName.Controls.Add(lblName)
+
+
+    End Sub
+
     Public Sub DynamicRemoveHandlerFromSender(ByVal sender As Object, ByVal e As EventArgs)
 
         'the parent of the button will be the panel the control is located on.
