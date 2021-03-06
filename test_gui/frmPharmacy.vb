@@ -8,83 +8,12 @@
     Private Sub frmPharmacy_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         txtQuantity.Text = 0
-        'Jonie Nicolas
-        'Mauricio Adkisson
+
         dsPhysicians = ExecuteSelectQuery("Select * From Physician ORDER BY Physician_Last_Name, Physician_First_Name;")
         dsPatients = ExecuteSelectQuery("Select * From Patient ORDER BY Patient_Last_Name, Patient_First_Name;")
         populatePhysicianComboBox(cmbOrderedBy, dsPhysicians)
         populatePatientNameComboBox(cmbPatientName, dsPatients)
 
-
-        Dim strID1 As String = "123456"
-        Dim strID2 As String = "123457"
-        Dim strID3 As String = "123458"
-        Dim strID4 As String = "123459"
-        Dim strID5 As String = "123460"
-        Dim strID6 As String = "123461"
-        Dim strID7 As String = "123462"
-        Dim strID8 As String = "123463"
-        Dim strID9 As String = "123464"
-
-        Dim strFirstName1 As String = "John"
-        Dim strFirstName2 As String = "Sally"
-        Dim strFirstName3 As String = "Abigail"
-        Dim strFirstName4 As String = "Oren"
-        Dim strFirstName5 As String = "Birgit"
-        Dim strFirstName6 As String = "Roslyn"
-        Dim strFirstName7 As String = "Hae"
-        Dim strFirstName8 As String = "Fairy"
-        Dim strFirstName9 As String = "Raymundo"
-
-        Dim strLastName1 As String = "Smith"
-        Dim strLastName2 As String = "Jones"
-        Dim strLastName3 As String = "Montilla"
-        Dim strLastName4 As String = "Herndon"
-        Dim strLastName5 As String = "Horner"
-        Dim strLastName6 As String = "Chiaramonte"
-        Dim strLastName7 As String = "Fix"
-        Dim strLastName8 As String = "Johnson"
-        Dim strLastName9 As String = "Yurick"
-
-        Dim strRoomNumber1 As String = "B-21"
-        Dim strRoomNumber2 As String = "B-22"
-        Dim strRoomNumber3 As String = "B-23"
-        Dim strRoomNumber4 As String = "B-24"
-        Dim strRoomNumber5 As String = "B-25"
-        Dim strRoomNumber6 As String = "B-26"
-        Dim strRoomNumber7 As String = "B-27"
-        Dim strRoomNumber8 As String = "B-28"
-        Dim strRoomNumber9 As String = "B-29"
-
-        Dim strStatus1 As String = "Admitted"
-        Dim strStatus2 As String = "Admitted"
-        Dim strStatus3 As String = "Admitted"
-        Dim strStatus4 As String = "Admitted"
-        Dim strStatus5 As String = "Admitted"
-        Dim strStatus6 As String = "Admitted"
-        Dim strStatus7 As String = "Admitted"
-        Dim strStatus8 As String = "Admitted"
-        Dim strStatus9 As String = "Admitted"
-
-        Dim strAdmitDate1 As String = "11/3/2020"
-        Dim strAdmitDate2 As String = "10/1/2020"
-        Dim strAdmitDate3 As String = "12/2/2020"
-        Dim strAdmitDate4 As String = "11/12/2020"
-        Dim strAdmitDate5 As String = "11/1/2020"
-        Dim strAdmitDate6 As String = "11/16/2020"
-        Dim strAdmitDate7 As String = "11/12/2020"
-        Dim strAdmitDate8 As String = "11/1/2020"
-        Dim strAdmitDate9 As String = "11/16/2020"
-
-        'CreatePanel(flpPatients, strID1, strFirstName1, strLastName1, strRoomNumber1, strStatus1, strAdmitDate1)
-        'CreatePanel(flpPatients, strID2, strFirstName2, strLastName2, strRoomNumber2, strStatus2, strAdmitDate2)
-        'CreatePanel(flpPatients, strID3, strFirstName3, strLastName3, strRoomNumber3, strStatus3, strAdmitDate3)
-        'CreatePanel(flpPatients, strID4, strFirstName4, strLastName4, strRoomNumber4, strStatus4, strAdmitDate4)
-        'CreatePanel(flpPatients, strID5, strFirstName5, strLastName5, strRoomNumber5, strStatus5, strAdmitDate5)
-        'CreatePanel(flpPatients, strID6, strFirstName6, strLastName6, strRoomNumber6, strStatus6, strAdmitDate6)
-        'CreatePanel(flpPatients, strID7, strFirstName7, strLastName7, strRoomNumber7, strStatus7, strAdmitDate7)
-        'CreatePanel(flpPatients, strID8, strFirstName8, strLastName8, strRoomNumber8, strStatus8, strAdmitDate8)
-        'CreatePanel(flpPatients, strID9, strFirstName9, strLastName9, strRoomNumber9, strStatus9, strAdmitDate9)
 
     End Sub
 
