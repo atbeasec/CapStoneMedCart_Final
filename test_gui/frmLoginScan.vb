@@ -20,15 +20,15 @@ Public Class frmLoginScan
         ElseIf LogIn.ScanLogIn(strBarcode) = "True" Then
             'If users barcode is in the User table in the database then close current form and open frmMain
             Me.Close()
+            frmMain.DetermineFormToOpen(1)
+            frmMain.Text = "Medical Dispence - " & frmMain.Label2.Text
             frmMain.Show()
+            frmMain.btnPatientRecords.PerformClick()
+
         Else
             'If users barcode is not in the User table then inform the user
             MsgBox("No User With That Barcode")
         End If
-
-    End Sub
-
-    Private Sub frmLoginScan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 
@@ -46,8 +46,11 @@ Public Class frmLoginScan
             ElseIf LogIn.ScanLogIn(strBarcode) = "True" Then
                 'If users barcode is in the User table in the database then close current form and open frmMain
                 Me.Close()
-                    frmMain.Show()
-                Else
+                frmMain.DetermineFormToOpen(1)
+                frmMain.Text = "Medical Dispence - " & frmMain.Label2.Text
+                frmMain.Show()
+                frmMain.btnPatientRecords.PerformClick()
+            Else
                     'If users barcode is not in the User table then inform the user
                     MsgBox("No User With That Barcode")
                 End If

@@ -13,11 +13,17 @@
         ElseIf LogIn.UsernameLogIn(strUsername, strPassword) = "True" Then
             'If users Username and Password is in the User table in the database then close current form and open frmMain
             Me.Close()
-                frmMain.Show()
-            Else
-                'If users Username and Password is not in the User table then inform the user
-                MsgBox("No User With That Username and Password")
-            End If
+            'call to set what sub form should be open
+            frmMain.DetermineFormToOpen(1)
+            'set the header for main to show who is logged in
+            frmMain.Text = "Medical Dispence - " & frmMain.Label2.Text
+            frmMain.Show()
+            'make btnPatientRecords have focus
+            frmMain.btnPatientRecords.PerformClick()
+        Else
+            'If users Username and Password is not in the User table then inform the user
+            MsgBox("No User With That Username and Password")
+        End If
 
 
     End Sub
@@ -74,7 +80,13 @@
             ElseIf LogIn.UsernameLogIn(strUsername, strPassword) = "True" Then
                 'If users Username and Password is in the User table in the database then close current form and open frmMain
                 Me.Close()
+                'call to set what sub form should be open
+                frmMain.DetermineFormToOpen(1)
+                'set the header for main to show who is logged in
+                frmMain.Text = "Medical Dispence - " & frmMain.Label2.Text
                 frmMain.Show()
+                'make btnPatientRecords have focus
+                frmMain.btnPatientRecords.PerformClick()
             Else
                 'If users Username and Password is not in the User table then inform the user
                 MsgBox("No User With That Username or Password")

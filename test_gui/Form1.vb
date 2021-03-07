@@ -193,7 +193,7 @@
     '/*  Collin Krygier  2/14/2021    Initial creation                    */
     '/*********************************************************************/
 
-    Private Sub DetermineFormToOpen(ByVal intTagNum As Integer)
+    Public Sub DetermineFormToOpen(ByVal intTagNum As Integer)
 
         ' based on the button that is clicked this is where we decide
         ' which form we need to open
@@ -353,7 +353,7 @@
 
         'set the patient records form to be selected on default application startup
         btnPatientRecords.PerformClick()
-
+        Me.Text = "Medical Dispence"
     End Sub
 
     '/*********************************************************************/
@@ -500,7 +500,7 @@
     '/*  ---   ----     ------------------------------------------------  */
     '/*  Collin Krygier  2/14/2021    Initial creation                    */
     '/*********************************************************************/
-    Private Sub HideSettingsSubMenu()
+    Public Sub HideSettingsSubMenu()
 
         If pnlSubMenuSettings.Visible = True Then
             pnlSubMenuSettings.Visible = False
@@ -541,7 +541,7 @@
     '/*  ---   ----     ------------------------------------------------  */
     '/*  Collin Krygier  2/14/2021    Initial creation                    */
     '/*********************************************************************/
-    Private Sub HideInventorySubMenu()
+    Public Sub HideInventorySubMenu()
 
         If pnlSubMenuInventory.Visible = True Then
             pnlSubMenuInventory.Visible = False
@@ -851,5 +851,4 @@
         frmLoginScan.Show()
 
     End Sub
-
 End Class
