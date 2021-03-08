@@ -1,6 +1,6 @@
 All files are going to  be delimited with a tab. the spacing looks off but they are all tabs. Might want to make the data using excel. 
 
-MRN_Number	Barcode		Patient_First_Name	Patient_Middle_Name	Patient_last_name	Date_Of_Bith	Sex	Height	Weight	Address	city	state	Zip_Code	Phone_Number	Primary_Physician_ID	1
+MRN_Number	Barcode		Patient_First_Name	Patient_Middle_Name	Patient_last_name	Date_Of_Bith	Sex	Height	Weight	Address	city	state	Zip_Code	Phone_Number	Primary_Physician_ID
 
 
 MRN_Number has to be a integer

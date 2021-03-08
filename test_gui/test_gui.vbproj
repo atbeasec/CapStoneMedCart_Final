@@ -339,6 +339,7 @@
     <Compile Include="NewNurse.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="RoomClass.vb" />
     <Compile Include="rxNorm.vb" />
     <Compile Include="SearchLogic.vb" />
     <Compile Include="SettingsChange.Designer.vb">
@@ -347,6 +348,7 @@
     <Compile Include="SettingsChange.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UserClass.vb" />
     <Compile Include="Waste.Designer.vb">
       <DependentUpon>Waste.vb</DependentUpon>
     </Compile>
