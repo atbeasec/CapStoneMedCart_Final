@@ -128,6 +128,7 @@
     <Compile Include="AdHoc.vb" />
     <Compile Include="APIDatabaseSelection.vb" />
     <Compile Include="AdminActions.vb" />
+    <Compile Include="BulkImportMethods.vb" />
     <Compile Include="CartInterfaceCode.vb" />
     <Compile Include="CheckComboBoxForDuplicateMethods.vb" />
     <Compile Include="ConfigureRoomsBeds.vb" />
