@@ -272,10 +272,10 @@ Module PatientInformation
         'get patient information using sql generic method
         Dim dsPatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT Date_of_Birth,Patient_First_Name,Patient_Last_Name FROM Patient WHERE MRN_Number = '" & intPatientMRN & "'")
         'set all patient information into dispense textboxes
-        Dispense.txtMRN.Text = intPatientMRN
-        Dispense.txtDOB.Text = dsPatientInfo.Tables(0).Rows(0)(0)
-        Dispense.txtPatientFirstName.Text = dsPatientInfo.Tables(0).Rows(0)(1)
-        Dispense.txtPatientLastName.Text = dsPatientInfo.Tables(0).Rows(0)(2)
+        frmDispense.txtMRN.Text = intPatientMRN
+        frmDispense.txtDOB.Text = dsPatientInfo.Tables(0).Rows(0)(0)
+        frmDispense.txtPatientFirstName.Text = dsPatientInfo.Tables(0).Rows(0)(1)
+        frmDispense.txtPatientLastName.Text = dsPatientInfo.Tables(0).Rows(0)(2)
     End Sub
 
     '/*********************************************************************/
@@ -310,7 +310,7 @@ Module PatientInformation
                                                                          "INNER JOIN Patient on Patient.Patient_ID = PatientAllergy.Patient_TUID " &
                                                                          "WHERE MRN_Number = '" & intPatientMRN & "'")
         For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
-            Dispense.lstboxAllergies.Items.Add(dr(0))
+            frmDispense.lstboxAllergies.Items.Add(dr(0))
         Next
     End Sub
     '/*********************************************************************/
@@ -472,7 +472,7 @@ Module PatientInformation
         dsPatientInfo = CreateDatabase.ExecuteSelectQuery(strbSqlCommand.ToString)
         'look create panel method for each prescription the patient has
         For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
-            Dispense.CreatePrescriptionsPanels(Dispense.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7))
+            frmDispense.CreatePrescriptionsPanels(frmDispense.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7))
         Next
 
     End Sub

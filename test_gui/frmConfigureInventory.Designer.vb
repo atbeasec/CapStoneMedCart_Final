@@ -51,6 +51,7 @@ Partial Class frmConfigureInventory
         Me.btnDrawer15 = New System.Windows.Forms.Button()
         Me.flpMedication = New System.Windows.Forms.FlowLayoutPanel()
         Me.pnlHeader = New System.Windows.Forms.Panel()
+        Me.lblDivider = New System.Windows.Forms.Label()
         Me.lblActions = New System.Windows.Forms.Label()
         Me.lblDrugName = New System.Windows.Forms.Label()
         Me.Label32 = New System.Windows.Forms.Label()
@@ -70,7 +71,6 @@ Partial Class frmConfigureInventory
         Me.btnIncrementCapacity = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.txtCapacity = New System.Windows.Forms.TextBox()
-        Me.lblDivider = New System.Windows.Forms.Label()
         Me.pnlLayoutButtons.SuspendLayout()
         Me.pnlHeader.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -458,6 +458,17 @@ Partial Class frmConfigureInventory
         Me.pnlHeader.Size = New System.Drawing.Size(679, 47)
         Me.pnlHeader.TabIndex = 41
         '
+        'lblDivider
+        '
+        Me.lblDivider.AutoSize = True
+        Me.lblDivider.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDivider.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblDivider.Location = New System.Drawing.Point(222, 19)
+        Me.lblDivider.Name = "lblDivider"
+        Me.lblDivider.Size = New System.Drawing.Size(62, 21)
+        Me.lblDivider.TabIndex = 9
+        Me.lblDivider.Text = "Divider"
+        '
         'lblActions
         '
         Me.lblActions.AutoSize = True
@@ -684,17 +695,6 @@ Partial Class frmConfigureInventory
         Me.txtCapacity.Name = "txtCapacity"
         Me.txtCapacity.Size = New System.Drawing.Size(66, 26)
         Me.txtCapacity.TabIndex = 38
-        '
-        'lblDivider
-        '
-        Me.lblDivider.AutoSize = True
-        Me.lblDivider.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDivider.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblDivider.Location = New System.Drawing.Point(222, 19)
-        Me.lblDivider.Name = "lblDivider"
-        Me.lblDivider.Size = New System.Drawing.Size(62, 21)
-        Me.lblDivider.TabIndex = 9
-        Me.lblDivider.Text = "Divider"
         '
         'frmConfigureInventory
         '

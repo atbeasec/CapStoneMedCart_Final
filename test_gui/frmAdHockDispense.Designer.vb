@@ -73,6 +73,8 @@ Partial Class frmAdHockDispense
         '
         'cmbMethod
         '
+        Me.cmbMethod.BackColor = System.Drawing.Color.White
+        Me.cmbMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbMethod.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbMethod.FormattingEnabled = True
         Me.cmbMethod.Items.AddRange(New Object() {"Yes", "No"})
@@ -103,6 +105,8 @@ Partial Class frmAdHockDispense
         '
         'cmbMedications
         '
+        Me.cmbMedications.BackColor = System.Drawing.Color.White
+        Me.cmbMedications.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbMedications.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbMedications.FormattingEnabled = True
         Me.cmbMedications.Items.AddRange(New Object() {"Yes", "No"})
@@ -133,6 +137,8 @@ Partial Class frmAdHockDispense
         '
         'cmbDosage
         '
+        Me.cmbDosage.BackColor = System.Drawing.Color.White
+        Me.cmbDosage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbDosage.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbDosage.FormattingEnabled = True
         Me.cmbDosage.Items.AddRange(New Object() {"Yes", "No"})
@@ -155,6 +161,8 @@ Partial Class frmAdHockDispense
         '
         'cmbPatientName
         '
+        Me.cmbPatientName.BackColor = System.Drawing.Color.White
+        Me.cmbPatientName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbPatientName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbPatientName.FormattingEnabled = True
         Me.cmbPatientName.Items.AddRange(New Object() {"Yes", "No"})
@@ -302,11 +310,12 @@ Partial Class frmAdHockDispense
         Me.txtQuantity.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtQuantity.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtQuantity.Location = New System.Drawing.Point(1, 1)
-        Me.txtQuantity.MaxLength = 3
+        Me.txtQuantity.MaxLength = 4
         Me.txtQuantity.Multiline = True
         Me.txtQuantity.Name = "txtQuantity"
         Me.txtQuantity.Size = New System.Drawing.Size(65, 26)
         Me.txtQuantity.TabIndex = 38
+        Me.txtQuantity.Text = "1"
         '
         'frmAdHockDispense
         '

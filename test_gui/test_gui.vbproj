@@ -135,10 +135,10 @@
     <Compile Include="CreateDatabase.vb" />
     <Compile Include="DataVaildationMethods.vb" />
     <Compile Include="Discrepancies.vb" />
-    <Compile Include="Dispense.Designer.vb">
-      <DependentUpon>Dispense.vb</DependentUpon>
+    <Compile Include="frmDispense.Designer.vb">
+      <DependentUpon>frmDispense.vb</DependentUpon>
     </Compile>
-    <Compile Include="Dispense.vb">
+    <Compile Include="frmDispense.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DispenseHistory.vb" />
@@ -358,8 +358,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Dispense.resx">
-      <DependentUpon>Dispense.vb</DependentUpon>
+    <EmbeddedResource Include="frmDispense.resx">
+      <DependentUpon>frmDispense.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
@@ -508,6 +508,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\plusminus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Search.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

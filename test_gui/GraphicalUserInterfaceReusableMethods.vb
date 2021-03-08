@@ -1,4 +1,5 @@
-﻿Module GraphicalUserInterfaceReusableMethods
+﻿Imports System.Threading
+Module GraphicalUserInterfaceReusableMethods
 
     'Method that allows for highlighting when hovering over panels. has two parts
     'part 1
@@ -193,6 +194,29 @@
 
 
         pnlName.Controls.Add(lblName)
+
+    End Sub
+
+    Public Sub CreateIDLabelWithToolTip(ByVal pnlName As Panel, lblName As Label, strLabelName As String, x As Integer, y As Integer, strLabelText As String, ByVal intPanelsAddedCount As Integer, ByVal toolTip As ToolTip, ByVal strTruncatedText As String)
+
+        'Set button properties
+        With lblName
+            .AutoSize = True
+            '.Size = New Size(30, 30)
+
+            .FlatStyle = FlatStyle.Flat
+            ' .FlatAppearance.BorderSize = 0
+            .ForeColor = Color.Black
+            .Font = New Font(New FontFamily("Segoe UI"), 11, FontStyle.Regular)
+            .Location = New Point(x, y) 'new Point(600, 5)
+            .Name = strLabelName + (intPanelsAddedCount).ToString
+            .Text = strTruncatedText
+            .Tag = intPanelsAddedCount + 1
+        End With
+
+        toolTip.SetToolTip(lblName, strLabelText)
+        pnlName.Controls.Add(lblName)
+
 
     End Sub
 
@@ -909,19 +933,43 @@
         End If
     End Sub
 
-    Public Sub ButtonIncrement(ByVal txtBox As TextBox)
+    Public Sub ButtonIncrement(intMaxValue As Integer, ByVal txtBox As TextBox)
 
-        txtBox.Text = CInt(txtBox.Text) + 1
+        If Not CInt(txtBox.Text) = intMaxValue Then
+            txtBox.Text = Int(txtBox.Text) + 1
+        End If
 
     End Sub
 
     Public Sub ButtonDecrement(ByVal txtBox As TextBox)
 
-        If Not CInt(txtBox.Text) = 0 Then
+        If Not CInt(txtBox.Text) = 1 Then
             txtBox.Text = Int(txtBox.Text) - 1
         End If
 
     End Sub
 
+    Public Sub MaxValue(intValue As Integer, intTest As Integer, ByVal txtBox As TextBox)
+        If intValue > intTest Then
+            txtBox.Text = intTest
+            MessageBox.Show("Maximum value is " & intTest & ".")
+        End If
+    End Sub
+
+    Public Sub IndexButtonIncrement(intCurrent As Integer, intMax As Integer, ByVal cboBox As ComboBox)
+        If intCurrent <= intMax Then
+            cboBox.SelectedIndex = intCurrent + 1
+        End If
+    End Sub
+    Public Sub IndexButtonDecrement(intCurrent As Integer, ByVal cboBox As ComboBox)
+        If intCurrent > 0 Then
+            cboBox.SelectedIndex = intCurrent - 1
+        End If
+    End Sub
+
+    Public Sub ThreadedMessageBox()
+        MessageBox.Show(Thread.CurrentThread.Name())
+
+    End Sub
 
 End Module

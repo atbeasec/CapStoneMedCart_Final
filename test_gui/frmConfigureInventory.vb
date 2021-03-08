@@ -11,16 +11,12 @@
 
         UpdateButtonsOnScreen()
         AddHandlerToDrawerButtons()
-        PopulateInventory()
 
         btnDrawer1.PerformClick()
 
         ' method is going to be needed to load the capacity from the database and the number of dividers in the selected drawer
         ' we will take that data and put it into the textbox for capacity and divider.
         ' Everytime we increment that data we will send and update statement to the database
-
-        txtCapacity.Text = "2"
-        txtDividers.Text = "1"
     End Sub
 
     Private Sub CreateDrawers(sender As Object, e As EventArgs)
@@ -76,11 +72,18 @@
         Dim lblID3 As New Label
         Dim lblID4 As New Label
         Dim lblID5 As New Label
-        Dim lblID6 As New Label
-        Dim lblID7 As New Label
+        Dim tpToolTip As New ToolTip
 
+        Dim intLength As Integer = strDrugName.Length
+
+        If intLength > 30 Then
+            intLength = 30
+        End If
+
+        Dim strTuncated As String = strDrugName.Substring(0, intLength)
         ' anywhere we have quotes except for the label names, we can call our Database and get method
-        CreateIDLabel(pnlMainPanel, lblID, "lblDrugName", lblDrugName.Location.X, 20, strDrugName, getPanelCount(flpPannel))
+        'CreateIDLabel(pnlMainPanel, lblID, "lblDrugName", lblDrugName.Location.X, 20, strDrugName, getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID, "lblDrugName", lblDrugName.Location.X, 20, strDrugName, getPanelCount(flpPannel), tpToolTip, strTuncated)
         CreateIDLabel(pnlMainPanel, lblID5, "lblDivider", lblDivider.Location.X, 20, strDividerBin, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID2, "lblStrength", lblStrength.Location.X, 20, strStrength, getPanelCount(flpPannel))
         'CreateIDLabel(pnlMainPanel, lblID3, "lblType", 220, 20, strType, getPanelCount(flpPannel))
@@ -88,55 +91,6 @@
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
-
-    End Sub
-
-
-    Private Sub PopulateInventory()
-
-        Dim genName1 As String = "benzhydrocodone "
-        Dim genName2 As String = "hydrocodone bitartrate"
-        Dim genName3 As String = "phenylephrine"
-        Dim genName4 As String = "Morphine"
-        Dim genName5 As String = "Codeine"
-
-        Dim brandName1 As String = "Apadaz "
-        Dim brandName2 As String = "Flowtuss "
-        Dim brandName3 As String = "Histinex HC"
-        Dim brandName4 As String = "Duramorph "
-        Dim brandName5 As String = "Robitussin Ac"
-
-        Dim quantity1 As String = "13"
-        Dim quantity2 As String = "1"
-        Dim quantity3 As String = "2"
-        Dim quantity4 As String = "1"
-        Dim quantity5 As String = "3"
-
-        Dim measure1 As String = "10 mg"
-        Dim measure2 As String = "10 mg"
-        Dim measure3 As String = "50 mg"
-        Dim measure4 As String = "10 mg"
-        Dim measure5 As String = "10 mg"
-
-        Dim dispensedBy1 As String = "Kathryn Bonner"
-        Dim dispensedBy2 As String = "Lola Stanley"
-        Dim dispensedBy3 As String = "Kathryn Bonner"
-        Dim dispensedBy4 As String = "Kathryn Bonner"
-        Dim dispensedBy5 As String = "Lola Stanley"
-
-        Dim dispenseDate1 As String = "11/11/2020"
-        Dim dispenseDate2 As String = "11/5/2020"
-        Dim dispenseDate3 As String = "11/4/2020"
-        Dim dispenseDate4 As String = "11/1/2020"
-        Dim dispenseDate5 As String = "10/28/2020"
-
-        Dim dispenseTime1 As String = "8:05 AM"
-        Dim dispenseTime2 As String = "9:13 AM"
-        Dim dispenseTime3 As String = "8:34 AM"
-        Dim dispenseTime4 As String = "1:05 PM"
-        Dim dispenseTime5 As String = "5:04 AM"
-
-        CreatePanel(flpMedication, genName1, quantity1, brandName1, quantity1)
 
     End Sub
 
@@ -314,28 +268,27 @@
     Private Sub UpdateScreenWithMedicationsInSelectedDrawer(sender As Button, e As EventArgs) Handles btnDrawer1.Click
         flpMedication.Controls.Clear()
         Dim strDrugName As String = ""
-        Dim intStrength As Integer = 0
+        Dim intStrength As String = ""
         Dim intDividerBin As Integer = 0
         Dim intDrawerSize As Integer = 0
         Dim intDrugQuantity As Integer = 0
-        Dim dsDrawerContents = GetDrawerDrugs(sender.TabIndex)
+        Dim dsDrawerContents As DataSet = GetDrawerDrugs(sender.TabIndex)
         For Each dr As DataRow In dsDrawerContents.Tables(0).Rows
             strDrugName = dr(0)
-            intStrength = CInt(dr(1))
+            intStrength = dr(1)
             intDrugQuantity = CInt(dr(2))
             intDividerBin = dr(3)
 
-
         Next
-        Dim size = CreateDatabase.ExecuteScalarQuery("SELECT Size FROM Drawers where Drawers_ID = " & sender.TabIndex.ToString() & ";")
+        Dim size As Integer = CreateDatabase.ExecuteScalarQuery("SELECT Size FROM Drawers where Drawers_ID = " & sender.TabIndex.ToString() & ";")
         txtCapacity.Text = size
-        Dim dividers = CreateDatabase.ExecuteScalarQuery("SELECT Number_of_Dividers FROM Drawers where Drawers_ID = " & sender.TabIndex.ToString() & ";")
+        Dim dividers As Integer = CreateDatabase.ExecuteScalarQuery("SELECT Number_of_Dividers FROM Drawers where Drawers_ID = " & sender.TabIndex.ToString() & ";")
         txtDividers.Text = dividers
         If intDrugQuantity = 0 Then
             ' the drawer is empty. Do nothing
         Else
             'based on the selected drawer we will need to call the database to see what medications are in the drawers
-            '   CreatePanel(flpMedication, strDrugName, intStrength.ToString(), intDrugQuantity.ToString())
+            CreatePanel(flpMedication, strDrugName, intDividerBin, intStrength.ToString(), intDrugQuantity.ToString())
         End If
         'MessageBox.Show(strDrugName + " " + intStrength.ToString() + "   " + intDividerBin.ToString() + " In drawer number: " + sender.TabIndex.ToString())
 
@@ -359,13 +312,13 @@
 
     Private Sub btnIncrementCapacity_Click(sender As Object, e As EventArgs) Handles btnIncrementCapacity.Click
 
-        ButtonIncrement(txtCapacity)
+        ButtonIncrement(8, txtCapacity)
 
     End Sub
 
     Private Sub btnIncrementDividers_Click(sender As Object, e As EventArgs) Handles btnIncrementDividers.Click
 
-        ButtonIncrement(txtDividers)
+        ButtonIncrement(5, txtDividers)
 
     End Sub
 
@@ -384,4 +337,5 @@
     Private Sub Label38_Click(sender As Object, e As EventArgs) Handles lblStrength.Click
 
     End Sub
+
 End Class
