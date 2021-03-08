@@ -209,6 +209,8 @@ Module APIDatabaseSelection
 	'/* hold data in a reader than compare from the database it pulls.  */
 	'/* Cody Russell  02/8/21 Altered the subroutine more to make it more*/
 	'/* simple and easier to read and understand.                       */
+
+	'/*	BRH	 03/02/21	Updated functionality for interactions			*/
 	'/*******************************************************************/
 	Sub CompareDrugInteractions(Drug1 As Integer, Drug2 As Integer, Severity As String, Description As String,
 								ActiveFlag As Integer)
@@ -217,18 +219,15 @@ Module APIDatabaseSelection
 		Dim dtCompareDrugInteractions As DataSet
 
 		'Select the specific table and the data in each column, filling a dataset through the different parameters
-		dtCompareDrugInteractions = ExecuteSelectQuery("SELECT Medication_One_ID, Medication_Two_ID, Severity, Description,
-		                                          Active_Flag FROM Drug_Interactions WHERE Medication_One_ID ='" & Drug1 & "'
-										    AND Medication_Two_ID = '" & Drug2 & "' AND Severity = '" & Severity &
-											"'AND Description = '" & Description & "' AND Active_Flag = '" & ActiveFlag & "'")
+		dtCompareDrugInteractions = ExecuteSelectQuery("SELECT * FROM Drug_Interactions WHERE Medication_One_ID = '" & Drug1 & "'AND Medication_Two_ID = '" & Drug2 & "'")
 
-
-		If (dtCompareDrugInteractions Is Nothing) Then
+		'If there isn't a medication in the database with that rxcui, insert all information into the database
+		If dtCompareDrugInteractions.Tables(0).Rows.Count = 0 Then
 
 			'Send an insert sql statement to the database
 			ExecuteInsertQuery("INSERT INTO Drug_Interactions(Medication_One_ID, Medication_Two_ID, 
                             Severity, Description, Active_Flag) VALUES('" & Drug1 & "','" & Drug2 & "','" &
-								Severity & "','" & Description & "','" & ActiveFlag & "')")
+								Severity & "','" & Description & "','" & ActiveFlag & "');")
 
 		Else
 
