@@ -74,7 +74,7 @@ Module CartInterfaceCode
     'TODO
     'set up a way to change the COM port. (by default it looks like it is COM3
     'default bit rate looks to be 115200
-    Dim blnSimulationModeValue = False 'this is going to dictate if the cart is going to be simulated or not.
+    Dim blnSimulationModeValue = True 'this is going to dictate if the cart is going to be simulated or not.
 
 
 
