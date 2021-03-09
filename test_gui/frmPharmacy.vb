@@ -15,7 +15,7 @@
 
         For Each dr As DataRow In dsPatients.Tables(0).Rows
             cmbPatientName.Items.Add(dr(EnumList.Patient.LastName) & ", " & dr(EnumList.Patient.FristName) &
-                                     "   ID: " & dr(EnumList.Patient.MRN_Number))
+                                     "   ID: " & dr(EnumList.Patient.ID))
         Next
 
         For Each dr As DataRow In dsPhysicians.Tables(0).Rows
