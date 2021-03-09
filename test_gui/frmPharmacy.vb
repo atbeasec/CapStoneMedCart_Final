@@ -4,12 +4,15 @@
 
     Dim dsPhysicians As DataSet
     Dim dsPatients As DataSet
+    Dim dsMedications As DataSet
 
     Private Sub frmPharmacy_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         cmbPatientName.Items.Clear()
         cmbOrderedBy.Items.Clear()
-        txtQuantity.Text = 0
+        cmbMedication.Items.Clear()
+        txtQuantity.Text = 1
 
+        dsMedications = ExecuteSelectQuery("SELECT * From Medication Inner Join DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE DrawerMedication.Active_Flag = '1' ORDER BY Medication.Medication_ID")
         dsPhysicians = ExecuteSelectQuery("Select * From Physician WHERE Active_Flag = '1' ORDER BY Physician_Last_Name, Physician_First_Name;")
         dsPatients = ExecuteSelectQuery("Select * From Patient WHERE Active_Flag = '1' ORDER BY Patient_Last_Name, Patient_First_Name;")
 
@@ -21,6 +24,11 @@
         For Each dr As DataRow In dsPhysicians.Tables(0).Rows
             cmbOrderedBy.Items.Add(dr(EnumList.Physician.LastName) & ", " & dr(EnumList.Physician.FirstName) &
                                     "   ID: " & dr(EnumList.Physician.Id))
+        Next
+
+        For Each dr As DataRow In dsMedications.Tables(0).Rows
+            cmbMedication.Items.Add(dr(EnumList.Medication.Name) &
+                                    "   ID: " & dr(EnumList.Medication.ID))
         Next
 
     End Sub
