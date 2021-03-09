@@ -1,6 +1,6 @@
 All files are going to  be delimited with a tab. the spacing looks off but they are all tabs. Might want to make the data using excel. 
 
-MRN_Number	Barcode		Patient_First_Name	Patient_Middle_Name	Patient_last_name	Date_Of_Bith	Sex	Height	Weight	Address	city	state	Zip_Code	Phone_Number	Primary_Physician_ID
+MRN_Number	Barcode		Patient_First_Name	Patient_Middle_Name	Patient_last_name	Date_Of_Bith	Sex	Height	Weight	Address	city	state	email_address	Zip_Code	Phone_Number	Primary_Physician_ID
 
 
 MRN_Number has to be a integer
@@ -26,6 +26,8 @@ Address has to be a alphanumeric string of a street address
 city has to be a alphanumeric string
 
 State has to be a 2 character string that matches one of the 50 states
+
+email_address has to be in the format of a standard email address. alphanumeric@domain.com
 
 Zip_Code has to be a 5 digit integer (perherably that exists)
 
