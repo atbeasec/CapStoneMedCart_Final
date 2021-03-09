@@ -11,9 +11,16 @@
 
         dsPhysicians = ExecuteSelectQuery("Select * From Physician WHERE Active_Flag = '1' ORDER BY Physician_Last_Name, Physician_First_Name;")
         dsPatients = ExecuteSelectQuery("Select * From Patient WHERE Active_Flag = '1' ORDER BY Patient_Last_Name, Patient_First_Name;")
-        populatePhysicianComboBox(cmbOrderedBy, dsPhysicians)
-        populatePatientNameComboBox(cmbPatientName, dsPatients)
 
+        For Each dr As DataRow In dsPatients.Tables(0).Rows
+            cmbPatientName.Items.Add(dr(EnumList.Patient.LastName) & ", " & dr(EnumList.Patient.FristName) &
+                                     "  MRN: " & dr(EnumList.Patient.MRN_Number))
+        Next
+
+        For Each dr As DataRow In dsPhysicians.Tables(0).Rows
+            cmbOrderedBy.Items.Add(dr(EnumList.Physician.LastName) & ", " & dr(EnumList.Physician.FirstName) &
+                                    " ID: " & dr(EnumList.Physician.Id))
+        Next
 
     End Sub
 
