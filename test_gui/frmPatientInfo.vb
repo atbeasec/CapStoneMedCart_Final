@@ -1,10 +1,10 @@
 ﻿Public Class frmPatientInfo
 
-    Private intPatientMRN As Integer
+    Private intPatientID As Integer
 
-    Public Sub setPatientMrn(ByVal mrn As Integer)
+    Public Sub setPatientMrn(ByVal ID As Integer)
 
-        intPatientMRN = mrn
+        intPatientID = ID
 
     End Sub
 
@@ -146,10 +146,10 @@
         'select a room. 
 
         ' intPatientMRN = txtMRN.Text
-        PatientInformation.GetAllergies(intPatientMRN)
-        PatientInformation.GetPatientInformation(intPatientMRN)
-        PatientInformation.getPrescriptions(intPatientMRN)
-        PatientInformation.getRoom(intPatientMRN, cboRoom, cboBed)
+        PatientInformation.GetAllergies(intPatientID)
+        PatientInformation.GetPatientInformation(intPatientID)
+        PatientInformation.getPrescriptions(intPatientID)
+        PatientInformation.getRoom(intPatientID, cboRoom, cboBed)
         SetControlsToReadOnly(ctl)
 
         ' CreateDispenseHistoryPanels(flpDispenseHistory, "test", "test", "test", "test", "test", "test", "test")
@@ -355,10 +355,8 @@
         Else
             SetControlsToReadOnly(ctl)
             btnEditPatient.Text = "Edit Patient"
+        End If
 
-                End If
-                cboBed.Enabled = True
-        cboRoom.Enabled = True
     End Sub
 
     Private Sub SetControlsToAllowEdit(ByVal ctl As Control)
@@ -377,8 +375,8 @@
                 Dim cmbBox As ComboBox = CType(ctl, ComboBox)
                 cmbBox.Enabled = True
 
-                cboBed.Enabled = False
-                cboRoom.Enabled = False
+                'cboBed.Enabled = False
+                'cboRoom.Enabled = False
             End If
         Next
 
@@ -402,10 +400,10 @@
                 cmbBox.BackColor = Color.White
                 cmbBox.Enabled = False
 
-
             End If
         Next
-
+        cboBed.Enabled = False
+        cboRoom.Enabled = False
     End Sub
 
 
@@ -414,12 +412,12 @@
         ' pass MRN to the dispense screen because it needs to be used to be sent back to the patient info screen if the user
         ' decides to go back a screen.
 
-        frmDispense.SetPatientMrn(intPatientMRN)
+        frmDispense.SetPatientMrn(intPatientID)
         frmMain.OpenChildForm(frmDispense)
-        DispenseHistory.DispensemedicationPopulate(intPatientMRN)
-        PatientInformation.PopulatePatientDispenseInfo(intPatientMRN)
-        PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientMRN)
-        PatientInformation.DisplayPatientPrescriptionsDispense(intPatientMRN)
+        DispenseHistory.DispensemedicationPopulate(intPatientID)
+        PatientInformation.PopulatePatientDispenseInfo(intPatientID)
+        PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientID)
+        PatientInformation.DisplayPatientPrescriptionsDispense(intPatientID)
         '  Dim frmCurrentForm As Form = Me
 
 
@@ -431,7 +429,7 @@
 
     Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
 
-        Waste.SetPatientMRN(intPatientMRN)
+        Waste.SetPatientMRN(intPatientID)
         frmMain.OpenChildForm(Waste)
 
     End Sub

@@ -98,13 +98,13 @@ Module PatientInformation
     '/*                                 When first made to remove the used*/
     '/*                                 before declared warning.          */
     '/*********************************************************************/
-    Public Sub GetPatientInformation(ByRef intPatientMRN As Integer)
+    Public Sub GetPatientInformation(ByRef intPatient_ID As Integer)
         PopulateStateComboBox(frmPatientInfo.cboState)
         Dim dsPatientDataSet As DataSet = New DataSet
         'changed be nothing when made to clear up used before declared warning. 
         Dim intPhysicianID As String = Nothing
         'sql taktement to get patient information
-        Dim strSQLiteCommand As String = "SELECT * FROM Patient WHERE MRN_Number = '" & intPatientMRN & "'"
+        Dim strSQLiteCommand As String = "SELECT * FROM Patient WHERE Patient_ID = '" & intPatient_ID & "'"
 
         dsPatientDataSet = CreateDatabase.ExecuteSelectQuery(strSQLiteCommand)
         ''check each piece of dataset for null, if not null set it, set to N/A if null
@@ -200,7 +200,7 @@ Module PatientInformation
             End If
         Next
         'call dispense history to get dispensed history of the patient
-        DispenseHistory.DispenseHistorySpecificPatient(intPatientMRN)
+        DispenseHistory.DispenseHistorySpecificPatient(intPatient_ID)
     End Sub
 
     '/*********************************************************************/
@@ -245,16 +245,16 @@ Module PatientInformation
     '/*  AK   2/8/2021 Created the SQL statements to pull back the       */
     '/*                 information needed for Patient allergies list     */
     '/*********************************************************************/
-    Public Sub GetAllergies(ByRef intPatientInformationMRN As Integer)
+    Public Sub GetAllergies(ByRef intPatient_ID As Integer)
         frmPatientInfo.lstBoxAllergies.Items.Clear()
         'default value for an mrn number so allergies are shown
         'intPatientInformationMRN = 949764144
 
         'get the patient id assiociated with the MRN Nummber
-        Dim intPatientAllergyId As Integer = CInt(CreateDatabase.ExecuteScalarQuery("select patient.Patient_ID From Patient " &
-                         "where Patient.MRN_Number=" & (intPatientInformationMRN).ToString & ";"))
-        'get the allergy information from the patient allergy tables
-        Dim dtsPatientAllergy As DataSet = CreateDatabase.ExecuteSelectQuery("Select Allergy_Name From PatientAllergy " &
+        Dim intPatientAllergyId As Integer = intPatient_ID ' CInt(CreateDatabase.ExecuteScalarQuery("select patient.Patient_ID From Patient " &
+        '"where Patient.Patient_ID=" & (intPatient_ID).ToString & ";"))
+        'get the allergy information from the patient allergy tables
+        Dim dtsPatientAllergy As DataSet = CreateDatabase.ExecuteSelectQuery("Select Allergy_Name From PatientAllergy " &
                             "Where Active_Flag =1 AND Patient_TUID =" & (intPatientAllergyId).ToString & ";")
 
         'push each row from the
@@ -267,12 +267,12 @@ Module PatientInformation
         'join patients meds table and medications table
     End Sub
 
-    Public Sub PopulatePatientDispenseInfo(ByRef intPatientMRN As Integer)
+    Public Sub PopulatePatientDispenseInfo(ByRef intPatient_ID As Integer)
 
         'get patient information using sql generic method
-        Dim dsPatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT Date_of_Birth,Patient_First_Name,Patient_Last_Name FROM Patient WHERE MRN_Number = '" & intPatientMRN & "'")
+        Dim dsPatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT Date_of_Birth,Patient_First_Name,Patient_Last_Name FROM Patient WHERE Patient_ID = '" & intPatient_ID & "'")
         'set all patient information into dispense textboxes
-        frmDispense.txtMRN.Text = intPatientMRN
+        frmDispense.txtMRN.Text = intPatient_ID
         frmDispense.txtDOB.Text = dsPatientInfo.Tables(0).Rows(0)(0)
         frmDispense.txtPatientFirstName.Text = dsPatientInfo.Tables(0).Rows(0)(1)
         frmDispense.txtPatientLastName.Text = dsPatientInfo.Tables(0).Rows(0)(2)
@@ -305,10 +305,10 @@ Module PatientInformation
     '/*  ---   ----     ------------------------------------------------- */
     '/*  ATB   2/10/2021 initial code creation
     '/*********************************************************************/
-    Public Sub PopulatePatientAllergiesDispenseInfo(ByRef intPatientMRN As Integer)
+    Public Sub PopulatePatientAllergiesDispenseInfo(ByRef intPatient_ID As Integer)
         Dim dsPatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT Allergy_Name From PatientAllergy " &
                                                                          "INNER JOIN Patient on Patient.Patient_ID = PatientAllergy.Patient_TUID " &
-                                                                         "WHERE MRN_Number = '" & intPatientMRN & "'")
+                                                                         "WHERE Patient_ID = '" & intPatient_ID & "'")
         For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
             frmDispense.lstboxAllergies.Items.Add(dr(0))
         Next
@@ -340,14 +340,14 @@ Module PatientInformation
     '/*  ---   ----     ------------------------------------------------- */
     '/*  ATB   2/10/2021 initial code creation
     '/*********************************************************************/
-    Public Sub getPrescriptions(ByRef intPatientMRN As Integer)
+    Public Sub getPrescriptions(ByRef intPatient_ID As Integer)
         Dim strSQLiteCommand As String
         Dim dsPatientPrescription As DataSet
         strSQLiteCommand = "SELECT Drug_Name, Strength, Frequency, PatientMedication.Type, Quantity ,Date_Presrcibed, Physician_First_Name, Physician_Last_Name FROM PatientMedication " &
             "INNER JOIN Medication on Medication.Medication_ID = PatientMedication.Medication_TUID " &
             "INNER JOIN Patient ON Patient.Patient_ID = PatientMedication.Patient_TUID " &
             "INNER JOIN Physician on Physician.Physician_ID = PatientMedication.Ordering_Physician_ID " &
-            "WHERE MRN_Number = '" & intPatientMRN & "' AND PatientMedication.Active_Flag = '1'"
+            "WHERE Patient.Patient_ID = '" & intPatient_ID & "' AND PatientMedication.Active_Flag = '1'"
 
         dsPatientPrescription = CreateDatabase.ExecuteSelectQuery(strSQLiteCommand)
         For Each dr As DataRow In dsPatientPrescription.Tables(0).Rows
@@ -397,12 +397,12 @@ Module PatientInformation
     '/*********************************************************************/
 
 
-    Public Sub getRoom(intPatientMRN As Integer, cboRoom As ComboBox, cboBed As ComboBox)
+    Public Sub getRoom(intPatient_ID As Integer, cboRoom As ComboBox, cboBed As ComboBox)
         Dim strbSQL As StringBuilder = New StringBuilder
         Dim dsPatient As DataSet
         Dim dsPatientRoom As DataSet
 
-        dsPatient = CreateDatabase.ExecuteSelectQuery("Select * from Patient where MRN_Number = '" & intPatientMRN & "';")
+        dsPatient = CreateDatabase.ExecuteSelectQuery("Select * from Patient where Patient_ID = '" & intPatient_ID & "';")
         strbSQL.Append("Select * from Rooms;")
         PopulateRoomsCombBoxesMethods.PopulateRoomComboBox(cboRoom, CreateDatabase.ExecuteSelectQuery(strbSQL.ToString))
         'calling that function will populate the room combobox for us. 
@@ -455,8 +455,8 @@ Module PatientInformation
     '/*  ---   ----     ------------------------------------------------- */
     '/*   AB    2/28/2021   Initial creation                                                                  
     '/*********************************************************************/
-    Public Sub DisplayPatientPrescriptionsDispense(ByRef intPatientMRN As Integer)
-        Dim dsPatientID As Integer = CreateDatabase.ExecuteScalarQuery("SELECT Patient_ID from Patient WHERE MRN_Number = '" & intPatientMRN & "'")
+    Public Sub DisplayPatientPrescriptionsDispense(ByRef intPatient_ID As Integer)
+        Dim dsPatientID As Integer = intPatient_ID ' CreateDatabase.ExecuteScalarQuery("SELECT Patient_ID from Patient WHERE Patient_ID = '" & intPatient_ID & "'")
         Dim dsPatientInfo As DataSet
         Dim strbSqlCommand As StringBuilder = New StringBuilder
 

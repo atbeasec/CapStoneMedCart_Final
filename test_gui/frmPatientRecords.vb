@@ -34,14 +34,14 @@
     '/*             (NONE)								   */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					   */         
-    '/*											   */                     
+    '/*											                          */                     
     '/*                                                                     
     '/*********************************************************************/
-    '/*  RETURNS:								         */                   
-    '/*            (NOTHING)								   */             
+    '/*  RETURNS:								                          */                   
+    '/*            (NOTHING)								              */             
     '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								   */             
-    '/*											   */                     
+    '/* SAMPLE INVOCATION:							                      */             
+    '/*											                          */                     
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
@@ -52,9 +52,9 @@
     '/*     in the patientRomm database. If tehre isn't it will display as */
     '/*     N/A
     '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						         */               
-    '/*											   */                     
-    '/*  WHO   WHEN     WHAT								   */             
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
     '/*  ---   ----     ------------------------------------------------- */
     '/*  NP    2/4/2021 Created the SQL statements to pull back the       */
     '/*                 information needed for Patient Records Form.      */
@@ -432,43 +432,44 @@
     '/********************************************************************/
     '/*                   FUNCTION NAME: GetSelectedPatientMRN	         */         
     '/********************************************************************/
-    '/*                   WRITTEN BY: Collin Krygier  		         */   
-    '/*		         DATE CREATED: 	2/6/21			         */                             
+    '/*                   WRITTEN BY: Collin Krygier  		             */   
+    '/*		         DATE CREATED: 	2/6/21			                     */                             
     '/********************************************************************/
     '/*  FUNCTION PURPOSE: this function retrieves the the MRN of the	 */					            
-    '/*	 patient selected by the user.					 */					                       
+    '/*	 patient selected by the user.					                 */					                       
     '/*                                                                  */
     '/********************************************************************/
-    '/*  CALLED BY: DynamicSingleClickOpenPatient   	      		 */				            
-    '/*                                        				 */         
+    '/*  CALLED BY: DynamicSingleClickOpenPatient   	      		     */				            
+    '/*                                        				             */         
     '/********************************************************************/
-    '/*  CALLS:								 */		                  
-    '/*             (NONE)						 */		               
+    '/*  CALLS:								                             */		                  
+    '/*             (NONE)						                         */		               
     '/********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):				 */	           
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
     '/*	 sender- an object representing the control that was selected    */								                        
     '/*                                                                  */  
     '/********************************************************************/
-    '/*  RETURNS:							 */	                          
+    '/*  RETURNS:							                             */	                          
     '/*  intMRN- an integer that is the MRN number of the selected patient/								             
     '/********************************************************************/
-    '/* SAMPLE INVOCATION:						 */		             
-    '/*	GetSelectedPatientMRN(sender)					 */					                       
+    '/* SAMPLE INVOCATION:						                         */		             
+    '/*	GetSelectedPatientMRN(sender)					                 */					                       
     '/*                                                                  */   
     '/********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
     '/*	 ctl- a control object that is used to hold all of the controls  */
-    '/*  that will be iterated over.					 */
+    '/*  that will be iterated over.					                 */
     '/********************************************************************/
-    '/* MODIFICATION HISTORY:						 */		                 
-    '/*									 */		                   
-    '/*  WHO            WHEN             WHAT				 */		            
-    '/*  ---            ----             ----				 */
-    '/*  CK		2/6/21		 initial creation                */
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									                                 */		                   
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  CK		       2/6/21		 initial creation                    */
+    '/*  DP            3/9/21        updated to return Patient_ID        */
     '/********************************************************************/ 
     Function GetSelectedPatientMRN(sender As Object) As Integer
 
-        Dim intMRN As Integer = Nothing
+        Dim intPatientID As Integer = Nothing
         Dim ctl As Control
 
         ' iterating over the list of controls in the panel
@@ -480,11 +481,15 @@
             If ctl.Name.Contains("MRN") Then
 
                 Debug.Print(ctl.Text)
-                intMRN = CInt(ctl.Text)
+                intPatientID = CInt(ctl.Text)
             End If
         Next
-        'returning the MRN of the patient from the selected record
-        Return intMRN
+        'Get Patient ID using MRN where Active_Flag is = 1
+
+        'SELECT Patient_ID from Patient WHERE MRN_Number = 247413140 AND Active_Flag = 1
+        intPatientID = (ExecuteScalarQuery("SELECT Patient_ID from Patient WHERE MRN_Number = " & intPatientID & " AND Active_Flag = 1"))
+        'returning the PatientID of the patient from the selected record
+        Return intPatientID
     End Function
 
     'Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
