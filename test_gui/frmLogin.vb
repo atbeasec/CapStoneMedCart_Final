@@ -71,7 +71,7 @@
             Dim strUsername = txtUserName.Text
             Dim strPassword = txtPassword.Text
             If strUsername = "" Then
-                MsgBox("            WARNING" & vbCrLf & "User Name Field is Blank")
+                MsgBox("            WARNING" & vbCrLf & "Username Field is Blank")
                 txtUserName.Focus()
             ElseIf strPassword = "" Then
                 MsgBox("            WARNING" & vbCrLf & "Password Field is Blank")
@@ -83,13 +83,13 @@
                 'call to set what sub form should be open
                 frmMain.DetermineFormToOpen(1)
                 'set the header for main to show who is logged in
-                frmMain.Text = "Medical Dispence - " & frmMain.Label2.Text
+                frmMain.Text = "Medical Dispense - " & frmMain.Label2.Text
                 frmMain.Show()
                 'make btnPatientRecords have focus
                 frmMain.btnPatientRecords.PerformClick()
             Else
                 'If users Username and Password is not in the User table then inform the user
-                MsgBox("No User With That Username or Password")
+                MsgBox("No User with that Username or Password")
             End If
         End If
     End Sub

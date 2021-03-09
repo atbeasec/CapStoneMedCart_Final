@@ -353,7 +353,7 @@
 
         'set the patient records form to be selected on default application startup
         btnPatientRecords.PerformClick()
-        Me.Text = "Medical Dispence"
+        Me.Text = "Medical Dispense"
     End Sub
 
     '/*********************************************************************/
