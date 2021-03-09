@@ -138,7 +138,7 @@ Module AdHoc
             CreateDatabase.ExecuteInsertQuery(Strdatacommand)
             clearAdhocBoxes()
 
-            Strdatacommand = ("SELECT Drawers_TUID FROM DrawerMedication WHERE Medication_TUID = '" & intMedicationDrawerID & "' AND DrawerMedication.Active_Flag = '1'")
+            Strdatacommand = ("SELECT Drawers_TUID FROM DrawerMedication WHERE DrawerMedication_ID = '" & intMedicationDrawerID & "' AND DrawerMedication.Active_Flag = '1'")
             intDrawerTUID = CreateDatabase.ExecuteScalarQuery(Strdatacommand)
 
             Strdatacommand = ("SELECT Drawer_Number FROM Drawers WHERE Drawers_ID = '" & intDrawerTUID & "' AND Drawers.Active_Flag = '1'")
@@ -430,7 +430,7 @@ Module AdHoc
         frmAdHockDispense.cmbPatientName.SelectedIndex = -1
         frmAdHockDispense.txtDateOfBirth.Text = ""
         frmAdHockDispense.txtMRN.Text = ""
-        frmAdHockDispense.txtQuantity.Text = 0
+        frmAdHockDispense.txtQuantity.Text = 1
         frmAdHockDispense.cmbDosage.SelectedIndex = -1
         frmAdHockDispense.cmbMethod.SelectedIndex = -1
         frmAdHockDispense.lstboxAllergies.Items.Clear()
