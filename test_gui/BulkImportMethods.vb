@@ -88,7 +88,10 @@ Module BulkImportMethods
         Dim srReader As StreamReader = New StreamReader(strFileName)
         Select Case strFileType
             Case "patient"
-                ImportPatient(srReader)
+                Dim PatientArray As ArrayList = ParsePatientFile(srReader)
+                If Not IsNothing(PatientArray) Then
+                    addPatientToDatabase(PatientArray)
+                End If
             Case "physician"
                 importPhysician(srReader)
             Case "room"
@@ -151,13 +154,17 @@ Module BulkImportMethods
     End Function
 
     '/*********************************************************************/
-    '/*                   SUBPROGRAM NAME:  ImportPatient   			  */         
+    '/*                   FUNCTION NAME:  ParsePatientFile   			  */         
     '/*********************************************************************/
     '/*                   WRITTEN BY:  Nathan Premo   		         */   
     '/*		         DATE CREATED: 	3/8/2021	                           */   
     '/*********************************************************************/
     '/*  SUBPROGRAM PURPOSE:								   */             
-    '/*											   */                     
+    '/*	 This is going to parse the patient file the user is trying to    */  
+    '/*  import and will check it for errors. If there are errors it will */
+    '/*  show an error message of everything wrong with file and return   */
+    '/*  nothing. Other wise it will return an array list of all the      */
+    '/*  records in PatientClass objects.                                 */
     '/*                                                                   */
     '/*********************************************************************/
     '/*  CALLED BY:   	      						         */           
@@ -178,7 +185,17 @@ Module BulkImportMethods
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
+    '/*	 strbErrorMessage - this is the message that is going to be built */
+    '/*                     that contains all issues with the file.       */
+    '/* blnIssue - this is the boolean that tells us if there was an issue*/
+    '/*            with the file and we should block the import.          */
+    '/* strLine - this is the array that the text from the file is sent to*/
+    '/* intLineNum - this is keeping track of what line number we are on  */
+    '/*              in the file so we can tell the user where the error is*/
+    '/* PatientArray - this is the arraylist that will hold all the patient*/
+    '/*                 objects.                                           */
+    '/* strbSQLPull - this is going to be the SQL statement that pulls back*/
+    '/*               if the physician exists in the datbaase.             */
     '/*                                                                     
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
@@ -188,12 +205,14 @@ Module BulkImportMethods
     '/*                                                                     
     '/*********************************************************************/
 
-    Sub ImportPatient(srReader As StreamReader)
+
+    Function ParsePatientFile(srReader As StreamReader)
         Dim strLine As String()
         Dim intLineNum As Integer = 1
         Dim blnIssue = False
         Dim strbErrorMessage As StringBuilder = New StringBuilder
         Dim strbSQLPull As StringBuilder = New StringBuilder
+        Dim PatientArray As ArrayList = New ArrayList()
         Do
             strLine = srReader.ReadLine.Split(vbTab)
             If Not IsNumeric(strLine(0)) Then
@@ -212,31 +231,40 @@ Module BulkImportMethods
                         Case 4
                             strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Patient last name can not contain a ;")
                     End Select
+                    blnIssue = True
                 End If
                 If Not IsDate(strLine(5)) Then
                     strbErrorMessage.AppendLine("Issue on line " & intLineNum & " date of birth must be a valid date")
+                    blnIssue = True
                 Else
                     If Convert.ToDateTime(strLine(5)) > DateTime.Now Then
                         strbErrorMessage.AppendLine("Issue on line " & intLineNum & " date of birth can not be a future date")
+                        blnIssue = True
                     End If
                 End If
                 If Not strLine(6).ToLower.Equals("male") And Not strLine(6).ToLower.Equals("female") Then
                     strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Sex must be male or female")
+                    blnIssue = True
                 End If
                 If Not IsNumeric(strLine(7)) Then
                     strbErrorMessage.AppendLine("Issue on line " & intLineNum & " height must be numeric")
+                    blnIssue = True
                 End If
                 If Not IsNumeric(strLine(8)) Then
                     strbErrorMessage.AppendLine("Issue on line " & intLineNum & " weight must be numeric")
+                    blnIssue = True
                 End If
                 If TextCheck(strLine(9)) Then
                     strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Address can not contain a ;")
+                    blnIssue = True
                 End If
                 If TextCheck(strLine(10)) Then
                     strbErrorMessage.AppendLine("Issue on line " & intLineNum & " city can not contain a ;")
+                    blnIssue = True
                 End If
                 If Not PopulateStateComboBoxesMethod.states.Contains(strLine(11)) Then
                     strbErrorMessage.AppendLine("Issue on line " & intLineNum & " state has to be a valid state")
+                    blnIssue = True
                 End If
                 Try
 
@@ -244,19 +272,24 @@ Module BulkImportMethods
                     'to see if the email is vaild. 
                 Catch ex As Exception
                     strbErrorMessage.AppendLine("Issue on line " & intLineNum & " email must follow a vaild email format")
+                    blnIssue = True
                 End Try
                 If IsNumeric(strLine(13)) Then
                     If strLine(13).Length > 5 Or strLine(13) < 5 Then
                         strbErrorMessage.AppendLine("Issue on line " & intLineNum & " zip code must be 5 digits long")
+                        blnIssue = True
                     End If
                 Else
                     strbErrorMessage.AppendLine("Issue on line " & intLineNum & " zip code must be numeric")
+                    blnIssue = True
                 End If
                 If Not RegularExpressions.Regex.IsMatch(strLine(14), "^(1-)?\d{3}-\d{3}-\d{4}$") Then
                     strbErrorMessage.AppendLine("Issue on line " & intLineNum & " phone number must follow the following format xxx-xxx-xxxx with an optional 1- at the front")
+                    blnIssue = True
                 End If
                 If Not IsNumeric(strLine(15)) Then
                     strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Physician ID must be numeric and be a physciain in the system")
+                    blnIssue = True
                 Else
                     strbSQLPull.Clear()
                     strbSQLPull.Append("Select count(Physician_ID) from Physician where Physician_ID = " & strLine(15))
@@ -264,11 +297,85 @@ Module BulkImportMethods
                         strbErrorMessage.AppendLine("Issue on line " * intLineNum & " Physician ID of " & strLine(15) &
                                                     "found in the system. Please a " &
                                                     "Physician ID that is in the system.")
+                        blnIssue = True
                     End If
                 End If
             Next
+            If Not blnIssue Then
+                PatientArray.Add(New PatientClass(strLine(0), strLine(1), strLine(2), strLine(3), strLine(4), strLine(5),
+                                strLine(6), strLine(7), strLine(8), strLine(9), strLine(10), strLine(11), strLine(12), strLine(13),
+                                strLine(14), strLine(15)))
+            End If
             intLineNum += 1
         Loop While (Not srReader.EndOfStream)
+        If blnIssue Then
+            MessageBox.Show(strbErrorMessage.ToString)
+            PatientArray.Clear()
+            PatientArray = Nothing
+        End If
+        Return PatientArray
+    End Function
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME:  addPatientToDatabase    	   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		              */   
+    '/*		         DATE CREATED: 	3/9/2021                        	   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								   */             
+    '/*	 This is going to loop through the PatientArray and get all the   */
+    '/*  patient information into a large SQL statement to the database in*/
+    '/*  one shot.                                                        */
+    '/*  
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 										   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+
+    Sub addPatientToDatabase(PatientArray As ArrayList)
+        Dim strbSQLStatement As StringBuilder = New StringBuilder
+        strbSQLStatement.Append("INSERT INTO Patient ('MRN_Number', 'Barcode', 'Patient_First_Name'," &
+            "'Patient_Middle_Name', 'Patient_Last_Name', 'Date_of_Birth', 'Sex', 'Height', 'Weight', " &
+            "'Address', 'City', 'State', 'Zip_Code', 'Phone_Number', 'Email_address', 'Primary_Physician_ID', " &
+            "'Active_Flag') Values ('")
+        For Each Patient As PatientClass In PatientArray
+            With Patient
+                strbSQLStatement.Append(.MRN_Number & "', '" & .barcode & "', '" & .FirstName & "', '" & .MiddleName & "', '")
+                strbSQLStatement.Append(.LastName & "', '" & .DoB & "' , '" & .sex & "', '" & .Height & "', '" & .weight & "', '")
+                strbSQLStatement.Append(.Address & "', '" & .city & "', '" & .State & "', '" & .ZipCode & "', '" & .PhoneNumber & "', '")
+                strbSQLStatement.Append(.email & "', '" & .PhoneNumber & "', '" & .PrimaryPhysicianID & "', '1'),")
+            End With
+
+        Next
+        strbSQLStatement.Remove(strbSQLStatement.Length - 1, 1) 'remove the last comma
+        strbSQLStatement.Append(";")
+        CreateDatabase.ExecuteInsertQuery(strbSQLStatement.ToString)
     End Sub
 
     '/*********************************************************************/

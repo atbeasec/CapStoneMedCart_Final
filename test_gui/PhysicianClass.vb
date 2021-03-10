@@ -91,9 +91,9 @@
     '/*********************************************************************/
 
 
-    Public Sub New(strFirstName As String, strMiddleName As String, strLastName As String, strPhoneNumber As String, strAddress As String, strState As String, strZip As String,
-                   strCredentials As String, strFaxNumber As String)
-        MyBase.New(strFirstName, strMiddleName, strLastName, strPhoneNumber, strAddress, strState, strZip)
+    Public Sub New(strFirstName As String, strMiddleName As String, strLastName As String, strCredentials As String, strPhoneNumber As String, strFaxNumber As String, strAddress As String,
+                    strCity As String, strState As String, strZip As String)
+        MyBase.New(strFirstName, strMiddleName, strLastName, strPhoneNumber, strAddress, strCity, strState, strZip)
         Me.Credentials = strCredentials
         Me.FaxNumber = strFaxNumber
     End Sub

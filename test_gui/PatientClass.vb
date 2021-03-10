@@ -55,6 +55,7 @@
     Private intHeight As Integer
     Private intWeight As Integer
     Private lngPrimaryPhysicianID As Long
+    Private strEmail_Address As String
 
 
     '/*********************************************************************/
@@ -111,10 +112,11 @@
 
 
     Public Sub New(lngMRN_Number As Long, strBarcode As String, strFirstName As String, strMiddleName As String, strLastName As String, strDoB As String,
-                   strSex As String, intHeight As Integer, intWeight As Integer, strPhoneNumber As String, strAddress As String, strState As String, strZip As String,
-                   lngPrimaryPhysicianID As Long)
-        MyBase.New(strFirstName, strMiddleName, strLastName, strPhoneNumber, strAddress, strState, strZip)
+                   strSex As String, intHeight As Integer, intWeight As Integer, strAddress As String, strCity As String, strState As String, strEmail_address As String, strZip As String,
+                   strPhoneNumber As String, lngPrimaryPhysicianID As Long)
+        MyBase.New(strFirstName, strMiddleName, strLastName, strPhoneNumber, strCity, strAddress, strState, strZip)
         Me.MRN_Number = lngMRN_Number
+        Me.email = strEmail_address
         Me.barcode = strBarcode
         Me.DoB = strDoB
         Me.sex = strSex
@@ -122,6 +124,54 @@
         Me.weight = intWeight
         Me.PrimaryPhysicianID = lngPrimaryPhysicianID
     End Sub
+
+
+    '/*********************************************************************/
+    '/*                   Property NAME: email       					   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		                 */   
+    '/*		         DATE CREATED: 3/9/2021                     		   */                             
+    '/*********************************************************************/
+    '/*  Property PURPOSE:								   */             
+    '/*	 this is a getter and setter for strEmail_Address       		   */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 value - this is what is going to be assgined to strEmail_Address  */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            strEmail_Address								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Public Property email As String
+        Get
+            Return strEmail_Address
+        End Get
+        Set(value As String)
+            strEmail_Address = value
+        End Set
+    End Property
 
 
     '/*********************************************************************/

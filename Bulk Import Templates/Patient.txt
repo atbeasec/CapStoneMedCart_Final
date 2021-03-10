@@ -31,6 +31,6 @@ email_address has to be in the format of a standard email address. alphanumeric@
 
 Zip_Code has to be a 5 digit integer (perherably that exists)
 
-Phone_Numer has to be a numeric string in the following format xxx-xxx-xxxx
+Phone_Numer has to be a numeric string in the following format xxx-xxx-xxxx with an optional 1- at the front
 
 Primary_Physician_ID has to be an integer ID of a physician that already exists in the system.

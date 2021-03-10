@@ -68,7 +68,6 @@
         End Select
 
         If Not IsNothing(strFileName) Then
-            MessageBox.Show(strFileName)
             importStart(strFileName, strFileType)
         End If
     End Sub

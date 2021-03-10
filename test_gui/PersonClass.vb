@@ -49,6 +49,7 @@
     Private strPhoneNumber As String
     Private strAddress As String
     Private strState As String
+    Private strCity As String
     Private strZip As String
 
 
@@ -70,7 +71,8 @@
     '/*  CALLS:										                     */                 
     '/*             (NONE)								                 */             
     '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*  PARAMETER LIST (In Parameter Order):					          */ 
+    '/*  strCity - this is the city in which the person lives             */
     '/*	 strFirstName - this is the persons first name                    */
     '/*  strMiddleName - this is going to be the persons middle name      */       
     '/*  strLastName - This is going to be the persons last name          */
@@ -98,16 +100,64 @@
     '/*                                                                     
     '/*********************************************************************/
 
-    Public Sub New(strFirstName As String, strMiddleName As String, strLastName As String, strPhoneNumber As String, strAddress As String, strState As String, strZip As String)
+    Public Sub New(strFirstName As String, strMiddleName As String, strLastName As String, strPhoneNumber As String, strAddress As String, strCity As String, strState As String, strZip As String)
         Me.FirstName = strFirstName
         Me.MiddleName = strMiddleName
         Me.LastName = strLastName
         Me.PhoneNumber = strPhoneNumber
         Me.Address = strAddress
+        Me.city = strCity
         Me.State = strState
         Me.ZipCode = strZip
     End Sub
 
+
+    '/*********************************************************************/
+    '/*                   Property NAME:  	city				   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		            */   
+    '/*		         DATE CREATED: 	3/9/2021                        	   */                             
+    '/*********************************************************************/
+    '/*  Property PURPOSE:								   */             
+    '/*	 this is the getter and setter for strCity  					   */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*  value - this will be assigned to strCity   					   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            strCity								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Public Property city As String
+        Get
+            Return strCity
+        End Get
+        Set(value As String)
+            strCity = value
+        End Set
+    End Property
 
     '/*********************************************************************/
     '/*                   Property NAME: FirstName 					     */         
