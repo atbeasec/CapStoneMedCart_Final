@@ -186,7 +186,7 @@ Module DispenseHistory
           On Medication.Medication_ID = PatientMedication.Medication_TUID
           INNER JOIN User
 		  ON User.User_ID = Dispensing.Primary_User_TUID
-          WHERE Patient.MRN_Number = '" & intPatientMRN & "' ORDER BY DateTime_Dispensed DESC;"
+          WHERE Patient.Patient_ID = '" & intPatientMRN & "' ORDER BY DateTime_Dispensed DESC;"
 
         Dim dsmydataset As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
 
@@ -229,7 +229,7 @@ Module DispenseHistory
         Strdatacommand = "SELECT Drug_Name,RXCUI_ID FROM PatientMedication " &
         "INNER JOIN Medication on Medication.Medication_ID = PatientMedication.Medication_TUID " &
         "INNER JOIN Patient on Patient.Patient_ID = PatientMedication.Patient_TUID " &
-        "WHERE MRN_Number = '" & intPatientMRN & "' AND PatientMedication.Active_Flag = '1'"
+        "WHERE Patient.Patient_ID = '" & intPatientMRN & "' AND PatientMedication.Active_Flag = '1'"
 
         Dim dsMedicationDataSet As DataSet = New DataSet
         dsMedicationDataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)

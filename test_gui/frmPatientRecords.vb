@@ -24,14 +24,14 @@
     '/*             (NONE)								   */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					   */         
-    '/*											   */                     
+    '/*											                          */                     
     '/*                                                                     
     '/*********************************************************************/
-    '/*  RETURNS:								         */                   
-    '/*            (NOTHING)								   */             
+    '/*  RETURNS:								                          */                   
+    '/*            (NOTHING)								              */             
     '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								   */             
-    '/*											   */                     
+    '/* SAMPLE INVOCATION:							                      */             
+    '/*											                          */                     
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
@@ -42,9 +42,9 @@
     '/*     in the patientRomm database. If tehre isn't it will display as */
     '/*     N/A
     '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						         */               
-    '/*											   */                     
-    '/*  WHO   WHEN     WHAT								   */             
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
     '/*  ---   ----     ------------------------------------------------- */
     '/*  NP    2/4/2021 Created the SQL statements to pull back the       */
     '/*                 information needed for Patient Records Form.      */
@@ -247,14 +247,16 @@
     '/*	 ctl- a control object that is used to hold all of the controls  */
     '/*  that will be iterated over.					                 */
     '/********************************************************************/
-    '/* MODIFICATION HISTORY:						                     */		                                 
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									                                 */		                   
     '/*  WHO            WHEN             WHAT				             */		            
     '/*  ---            ----             ----				             */
-    '/*  CK		2/6/21		 initial creation                            */
+    '/*  CK		       2/6/21		 initial creation                    */
+    '/*  DP            3/9/21        updated to return Patient_ID        */
     '/********************************************************************/ 
     Function GetSelectedPatientMRN(sender As Object) As Integer
 
-        Dim intMRN As Integer = Nothing
+        Dim intPatientID As Integer = Nothing
         Dim ctl As Control
 
         ' iterating over the list of controls in the panel
@@ -266,13 +268,15 @@
             If ctl.Name.Contains("MRN") Then
 
                 Debug.Print(ctl.Text)
-                intMRN = CInt(ctl.Text)
+                intPatientID = CInt(ctl.Text)
             End If
         Next
+        'Get Patient ID using MRN where Active_Flag is = 1
 
-        'returning the MRN of the patient from the selected record
-        Return intMRN
-
+        'SELECT Patient_ID from Patient WHERE MRN_Number = 247413140 AND Active_Flag = 1
+        intPatientID = (ExecuteScalarQuery("SELECT Patient_ID from Patient WHERE MRN_Number = " & intPatientID & " AND Active_Flag = 1"))
+        'returning the PatientID of the patient from the selected record
+        Return intPatientID
     End Function
 
     '/*********************************************************************/

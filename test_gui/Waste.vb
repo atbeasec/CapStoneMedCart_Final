@@ -2,6 +2,7 @@
 
     Private intPatientInformationMRN As Integer
 
+    'this function should set Patient MRN using PatientID
     Public Sub SetPatientMRN(ByVal mrn As Integer)
 
         intPatientInformationMRN = mrn
