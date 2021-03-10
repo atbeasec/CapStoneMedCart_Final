@@ -232,8 +232,10 @@ Module BulkImportMethods
                             strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Patient last name can not contain a ;")
                     End Select
                     blnIssue = True
+
                 End If
-                If Not IsDate(strLine(5)) Then
+            Next
+            If Not IsDate(strLine(5)) Then
                     strbErrorMessage.AppendLine("Issue on line " & intLineNum & " date of birth must be a valid date")
                     blnIssue = True
                 Else
@@ -287,20 +289,19 @@ Module BulkImportMethods
                     strbErrorMessage.AppendLine("Issue on line " & intLineNum & " phone number must follow the following format xxx-xxx-xxxx with an optional 1- at the front")
                     blnIssue = True
                 End If
-                If Not IsNumeric(strLine(15)) Then
-                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Physician ID must be numeric and be a physciain in the system")
-                    blnIssue = True
-                Else
-                    strbSQLPull.Clear()
-                    strbSQLPull.Append("Select count(Physician_ID) from Physician where Physician_ID = " & strLine(15))
-                    If CreateDatabase.ExecuteScalarQuery(strbSQLPull.ToString) < 1 Then
-                        strbErrorMessage.AppendLine("Issue on line " * intLineNum & " Physician ID of " & strLine(15) &
-                                                    "found in the system. Please a " &
+            If Not IsNumeric(strLine(15)) Then
+                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Physician ID must be numeric and be a physciain in the system")
+                blnIssue = True
+            Else
+                strbSQLPull.Clear()
+                strbSQLPull.Append("Select count(Physician_ID) from Physician where Physician_ID = " & strLine(15))
+                If CreateDatabase.ExecuteScalarQuery(strbSQLPull.ToString) < 1 Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Physician ID of " & strLine(15) &
+                                                    " found in the system. Please use a " &
                                                     "Physician ID that is in the system.")
-                        blnIssue = True
-                    End If
+                    blnIssue = True
                 End If
-            Next
+            End If
             If Not blnIssue Then
                 PatientArray.Add(New PatientClass(strLine(0), strLine(1), strLine(2), strLine(3), strLine(4), strLine(5),
                                 strLine(6), strLine(7), strLine(8), strLine(9), strLine(10), strLine(11), strLine(12), strLine(13),
@@ -366,8 +367,8 @@ Module BulkImportMethods
             "'Active_Flag') Values")
         For Each Patient As PatientClass In PatientArray
             With Patient
-                strbSQLStatement.Append(" ('" & .MRN_Number & "', '" & .barcode & "', '" & .FirstName & "', '" & .MiddleName & "', '")
-                strbSQLStatement.Append(.LastName & "', '" & .DoB & "' , '" & .sex & "', '" & .Height & "', '" & .weight & "', '")
+                strbSQLStatement.Append(" ('" & .MRN_Number & "', '" & checkSQLInjection(.barcode) & "', '" & checkSQLInjection(.FirstName) & "', '" & checkSQLInjection(.MiddleName) & "', '")
+                strbSQLStatement.Append(checkSQLInjection(.LastName) & "', '" & .DoB & "' , '" & .sex & "', '" & .Height & "', '" & .weight & "', '")
                 strbSQLStatement.Append(.Address & "', '" & .city & "', '" & .State & "', '" & .ZipCode & "', '" & .PhoneNumber & "', '")
                 strbSQLStatement.Append(.email & "', '" & .PrimaryPhysicianID & "', '1'),")
             End With
