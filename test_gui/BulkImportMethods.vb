@@ -363,19 +363,20 @@ Module BulkImportMethods
         strbSQLStatement.Append("INSERT INTO Patient ('MRN_Number', 'Barcode', 'Patient_First_Name'," &
             "'Patient_Middle_Name', 'Patient_Last_Name', 'Date_of_Birth', 'Sex', 'Height', 'Weight', " &
             "'Address', 'City', 'State', 'Zip_Code', 'Phone_Number', 'Email_address', 'Primary_Physician_ID', " &
-            "'Active_Flag') Values ('")
+            "'Active_Flag') Values")
         For Each Patient As PatientClass In PatientArray
             With Patient
-                strbSQLStatement.Append(.MRN_Number & "', '" & .barcode & "', '" & .FirstName & "', '" & .MiddleName & "', '")
+                strbSQLStatement.Append(" ('" & .MRN_Number & "', '" & .barcode & "', '" & .FirstName & "', '" & .MiddleName & "', '")
                 strbSQLStatement.Append(.LastName & "', '" & .DoB & "' , '" & .sex & "', '" & .Height & "', '" & .weight & "', '")
                 strbSQLStatement.Append(.Address & "', '" & .city & "', '" & .State & "', '" & .ZipCode & "', '" & .PhoneNumber & "', '")
-                strbSQLStatement.Append(.email & "', '" & .PhoneNumber & "', '" & .PrimaryPhysicianID & "', '1'),")
+                strbSQLStatement.Append(.email & "', '" & .PrimaryPhysicianID & "', '1'),")
             End With
 
         Next
         strbSQLStatement.Remove(strbSQLStatement.Length - 1, 1) 'remove the last comma
         strbSQLStatement.Append(";")
         CreateDatabase.ExecuteInsertQuery(strbSQLStatement.ToString)
+        MessageBox.Show("import Finished")
     End Sub
 
     '/*********************************************************************/
