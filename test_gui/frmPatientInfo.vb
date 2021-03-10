@@ -1,10 +1,10 @@
 ﻿Public Class frmPatientInfo
 
-    Private intPatientMRN As Integer
+    Private intPatientID As Integer
 
-    Public Sub setPatientMrn(ByVal mrn As Integer)
+    Public Sub setPatientMrn(ByVal ID As Integer)
 
-        intPatientMRN = mrn
+        intPatientID = ID
 
     End Sub
 
@@ -87,6 +87,7 @@
     ' Add any initialization after the InitializeComponent() call.
 
     ' End Sub
+
     Public Sub DynamicButtonEditRecord_Click(ByVal sender As Object, ByVal e As EventArgs)
 
         'show the add new patient form filled in with the patients infromation
@@ -146,15 +147,51 @@
         'select a room. 
 
         ' intPatientMRN = txtMRN.Text
-        PatientInformation.GetAllergies(intPatientMRN)
-        PatientInformation.GetPatientInformation(intPatientMRN)
-        PatientInformation.getPrescriptions(intPatientMRN)
-        PatientInformation.getRoom(intPatientMRN, cboRoom, cboBed)
+        PatientInformation.GetAllergies(intPatientID)
+        PatientInformation.GetPatientInformation(intPatientID)
+        PatientInformation.getPrescriptions(intPatientID)
+        PatientInformation.getRoom(intPatientID, cboRoom, cboBed)
         SetControlsToReadOnly(ctl)
 
         ' CreateDispenseHistoryPanels(flpDispenseHistory, "test", "test", "test", "test", "test", "test", "test")
     End Sub
-
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME:  CreateDispenseHistoryPanels   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		                          */   
+    '/*		              DATE CREATED: 	                              */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                         				          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*             (NONE)								                  */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  RETURNS:								                          */                   
+    '/*            (NOTHING)								              */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */ 
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                   */
+    '/*********************************************************************/
     Public Sub CreateDispenseHistoryPanels(ByVal flpPannel As FlowLayoutPanel, ByVal medicationName As String, ByVal strength As String, ByVal type As String, ByVal quantity As String, ByVal dispenseBy As String, ByVal dispenseDate As String, ByVal dispenseTime As String)
 
         Dim pnl As Panel
@@ -212,7 +249,43 @@
         'currentContactPanel = pnl.Name
 
     End Sub
-
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: CreatePrescriptionsPanels 	  */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		                          */   
+    '/*		              DATE CREATED: 	                              */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                         				          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*             (NONE)								                  */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  RETURNS:								                          */                   
+    '/*            (NOTHING)								              */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */ 
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                   */
+    '/*********************************************************************/
     Public Sub CreatePrescriptionsPanels(ByVal flpPannel As FlowLayoutPanel, ByVal medicationName As String, ByVal strength As String, ByVal frequency As String, ByVal type As String, ByVal quantity As String, ByVal datePrescribed As String, ByVal PrescribedBy As String)
         Dim pnl As Panel
         pnl = New Panel
@@ -355,12 +428,46 @@
         Else
             SetControlsToReadOnly(ctl)
             btnEditPatient.Text = "Edit Patient"
+        End If
 
-                End If
-                cboBed.Enabled = True
-        cboRoom.Enabled = True
     End Sub
-
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: CreatePrescriptionsPanels 	  */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		                          */   
+    '/*		              DATE CREATED: 	                              */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                         				          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*             (NONE)								                  */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  RETURNS:								                          */                   
+    '/*            (NOTHING)								              */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */ 
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                   */
+    '/*********************************************************************/
     Private Sub SetControlsToAllowEdit(ByVal ctl As Control)
 
         For Each ctl In pnlPersonalInformation.Controls
@@ -377,13 +484,49 @@
                 Dim cmbBox As ComboBox = CType(ctl, ComboBox)
                 cmbBox.Enabled = True
 
-                cboBed.Enabled = False
-                cboRoom.Enabled = False
+                'cboBed.Enabled = False
+                'cboRoom.Enabled = False
             End If
         Next
 
     End Sub
-
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: SetControlsToReadOnly     	  */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		                          */   
+    '/*		              DATE CREATED: 	                              */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                         				          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*             (NONE)								                  */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  RETURNS:								                          */                   
+    '/*            (NOTHING)								              */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */ 
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                   */
+    '/*********************************************************************/
     Private Sub SetControlsToReadOnly(ByVal ctl As Control)
 
         For Each ctl In pnlPersonalInformation.Controls
@@ -402,24 +545,60 @@
                 cmbBox.BackColor = Color.White
                 cmbBox.Enabled = False
 
-
             End If
         Next
-
+        cboBed.Enabled = False
+        cboRoom.Enabled = False
     End Sub
 
-
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: btnDispenseMedication_Click 	  */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		                          */   
+    '/*		              DATE CREATED: 	                              */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                         				          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*             (NONE)								                  */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  RETURNS:								                          */                   
+    '/*            (NOTHING)								              */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */ 
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                   */
+    '/*********************************************************************/
     Private Sub btnDispenseMedication_Click(sender As Object, e As EventArgs) Handles btnDispenseMedication.Click
 
         ' pass MRN to the dispense screen because it needs to be used to be sent back to the patient info screen if the user
         ' decides to go back a screen.
 
-        frmDispense.SetPatientMrn(intPatientMRN)
+        frmDispense.SetPatientMrn(intPatientID)
         frmMain.OpenChildForm(frmDispense)
-        DispenseHistory.DispensemedicationPopulate(intPatientMRN)
-        PatientInformation.PopulatePatientDispenseInfo(intPatientMRN)
-        PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientMRN)
-        PatientInformation.DisplayPatientPrescriptionsDispense(intPatientMRN)
+        DispenseHistory.DispensemedicationPopulate(intPatientID)
+        PatientInformation.PopulatePatientDispenseInfo(intPatientID)
+        PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientID)
+        PatientInformation.DisplayPatientPrescriptionsDispense(intPatientID)
         '  Dim frmCurrentForm As Form = Me
 
 
@@ -428,15 +607,87 @@
     ' Private Sub Button1_Click(sender As Object, e As EventArgs)
     '     Returns.Show()
     '  End Sub
-
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: btnWaste_Click            	  */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		                          */   
+    '/*		              DATE CREATED: 	                              */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                         				          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*             (NONE)								                  */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  RETURNS:								                          */                   
+    '/*            (NOTHING)								              */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */ 
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                   */
+    '/*********************************************************************/
     Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
 
-        Waste.SetPatientMRN(intPatientMRN)
+        Waste.SetPatientMRN(intPatientID) 'this should set the patient MRN using the given patientID
         frmMain.OpenChildForm(Waste)
 
     End Sub
 
-
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: btnAddAllergies_Click     	  */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		                          */   
+    '/*		              DATE CREATED: 	                              */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                         				          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*             (NONE)								                  */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  RETURNS:								                          */                   
+    '/*            (NOTHING)								              */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */ 
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                   */
+    '/*********************************************************************/
     Private Sub btnAddAllergies_Click(sender As Object, e As EventArgs) Handles btnAddAllergies.Click
 
         ' pass the MRN of the current patient to the next form
@@ -445,7 +696,43 @@
         ' closing this form and making the main container open the allergies page
         frmMain.OpenChildForm(frmAllergies)
     End Sub
-
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: btnBack_Click            	  */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		                          */   
+    '/*		              DATE CREATED: 	                              */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                         				          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*             (NONE)								                  */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  RETURNS:								                          */                   
+    '/*            (NOTHING)								              */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */ 
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                   */
+    '/*********************************************************************/
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
 
         frmMain.OpenChildForm(frmPatientRecords)
