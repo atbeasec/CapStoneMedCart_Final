@@ -21,7 +21,8 @@
         Discharge = 15
         ConfigureRooms = 16
         SerialPortSettings = 17
-        LogOut = 18
+        AssignNurse = 18
+        LogOut = 19
     End Enum
 
     '/*********************************************************************/
@@ -60,7 +61,8 @@
     '/*  ---   ----     ------------------------------------------------  */
     '/*  Collin Krygier  2/14/2021    Initial creation                    */
     '/*********************************************************************/
-    Private Sub btnMenu_Click(sender As Object, e As EventArgs) Handles btnAllPatients.Click, btnMyPatients.Click, btnAdhockDispense.Click, btnEndOfShiftCount.Click, btnConfigureInventory.Click, btnWaste.Click, btnReport.Click, btnDescrepancies.Click, btnMaintenance.Click, btnPharmacy.Click, btnUsers.Click, btnDischargePatient.Click, btnEditRooms.Click, btnSerialPort.Click
+    Private Sub btnMenu_Click(sender As Object, e As EventArgs) Handles btnAllPatients.Click, btnMyPatients.Click, btnAdhockDispense.Click, btnEndOfShiftCount.Click, btnConfigureInventory.Click, btnWaste.Click, btnReport.Click, btnDescrepancies.Click, btnMaintenance.Click, btnPharmacy.Click, btnUsers.Click, btnDischargePatient.Click, btnEditRooms.Click, btnSerialPort.Click, btnAssignNurse.Click
+
 
 
         ' ensure that the colors of the buttons change accordingly. We need to know which button is clicked,
@@ -220,7 +222,6 @@
                 frmCurrentChildForm = frmMyPatients
                 OpenChildForm(frmPatientRecords)
 
-
             Case SelectedForm.InventoryDropDown
 
                 'nothing will happen here because we have a submenu that needs to be displayed to show more buttons
@@ -302,6 +303,11 @@
 
                 frmCurrentChildForm = frmSerialPort
                 OpenChildForm(frmSerialPort)
+
+            Case SelectedForm.AssignNurse
+
+                frmCurrentChildForm = frmAssignNurse
+                OpenChildForm(frmAssignNurse)
 
             Case SelectedForm.LogOut
 
