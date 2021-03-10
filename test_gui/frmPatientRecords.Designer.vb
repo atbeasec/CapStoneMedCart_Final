@@ -24,13 +24,12 @@ Partial Class frmPatientRecords
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPatientRecords))
         Me.pnlHeader = New System.Windows.Forms.Panel()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblDOB = New System.Windows.Forms.Label()
+        Me.lblLastName = New System.Windows.Forms.Label()
+        Me.lblBed = New System.Windows.Forms.Label()
+        Me.lblRoom = New System.Windows.Forms.Label()
+        Me.lblMRN = New System.Windows.Forms.Label()
+        Me.lblFirstName = New System.Windows.Forms.Label()
         Me.pnlHeaderPatientRecords = New System.Windows.Forms.Panel()
         Me.Panel9 = New System.Windows.Forms.Panel()
         Me.pnlSearch = New System.Windows.Forms.Panel()
@@ -47,94 +46,82 @@ Partial Class frmPatientRecords
         'pnlHeader
         '
         Me.pnlHeader.BackColor = System.Drawing.Color.White
-        Me.pnlHeader.Controls.Add(Me.Label7)
-        Me.pnlHeader.Controls.Add(Me.Label6)
-        Me.pnlHeader.Controls.Add(Me.Label5)
-        Me.pnlHeader.Controls.Add(Me.Label4)
-        Me.pnlHeader.Controls.Add(Me.Label3)
-        Me.pnlHeader.Controls.Add(Me.Label2)
-        Me.pnlHeader.Controls.Add(Me.Label1)
+        Me.pnlHeader.Controls.Add(Me.lblDOB)
+        Me.pnlHeader.Controls.Add(Me.lblLastName)
+        Me.pnlHeader.Controls.Add(Me.lblBed)
+        Me.pnlHeader.Controls.Add(Me.lblRoom)
+        Me.pnlHeader.Controls.Add(Me.lblMRN)
+        Me.pnlHeader.Controls.Add(Me.lblFirstName)
         Me.pnlHeader.Location = New System.Drawing.Point(15, 67)
         Me.pnlHeader.Name = "pnlHeader"
         Me.pnlHeader.Size = New System.Drawing.Size(950, 47)
         Me.pnlHeader.TabIndex = 8
         '
-        'Label7
+        'lblDOB
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label7.Location = New System.Drawing.Point(431, 19)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(43, 21)
-        Me.Label7.TabIndex = 6
-        Me.Label7.Text = "DOB"
+        Me.lblDOB.AutoSize = True
+        Me.lblDOB.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDOB.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblDOB.Location = New System.Drawing.Point(496, 19)
+        Me.lblDOB.Name = "lblDOB"
+        Me.lblDOB.Size = New System.Drawing.Size(43, 21)
+        Me.lblDOB.TabIndex = 6
+        Me.lblDOB.Text = "DOB"
         '
-        'Label6
+        'lblLastName
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label6.Location = New System.Drawing.Point(268, 19)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(86, 21)
-        Me.Label6.TabIndex = 5
-        Me.Label6.Text = "Last Name"
+        Me.lblLastName.AutoSize = True
+        Me.lblLastName.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblLastName.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblLastName.Location = New System.Drawing.Point(329, 19)
+        Me.lblLastName.Name = "lblLastName"
+        Me.lblLastName.Size = New System.Drawing.Size(86, 21)
+        Me.lblLastName.TabIndex = 5
+        Me.lblLastName.Text = "Last Name"
         '
-        'Label5
+        'lblBed
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label5.Location = New System.Drawing.Point(803, 19)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(65, 21)
-        Me.Label5.TabIndex = 4
-        Me.Label5.Text = "Actions"
+        Me.lblBed.AutoSize = True
+        Me.lblBed.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblBed.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblBed.Location = New System.Drawing.Point(748, 19)
+        Me.lblBed.Name = "lblBed"
+        Me.lblBed.Size = New System.Drawing.Size(39, 21)
+        Me.lblBed.TabIndex = 3
+        Me.lblBed.Text = "Bed"
         '
-        'Label4
+        'lblRoom
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label4.Location = New System.Drawing.Point(672, 19)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(39, 21)
-        Me.Label4.TabIndex = 3
-        Me.Label4.Text = "Bed"
+        Me.lblRoom.AutoSize = True
+        Me.lblRoom.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRoom.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblRoom.Location = New System.Drawing.Point(625, 19)
+        Me.lblRoom.Name = "lblRoom"
+        Me.lblRoom.Size = New System.Drawing.Size(54, 21)
+        Me.lblRoom.TabIndex = 2
+        Me.lblRoom.Text = "Room"
         '
-        'Label3
+        'lblMRN
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label3.Location = New System.Drawing.Point(546, 19)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(54, 21)
-        Me.Label3.TabIndex = 2
-        Me.Label3.Text = "Room"
+        Me.lblMRN.AutoSize = True
+        Me.lblMRN.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblMRN.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblMRN.Location = New System.Drawing.Point(10, 19)
+        Me.lblMRN.Name = "lblMRN"
+        Me.lblMRN.Size = New System.Drawing.Size(47, 21)
+        Me.lblMRN.TabIndex = 1
+        Me.lblMRN.Text = "MRN"
         '
-        'Label2
+        'lblFirstName
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label2.Location = New System.Drawing.Point(10, 19)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(47, 21)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "MRN"
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label1.Location = New System.Drawing.Point(124, 19)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(88, 21)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "First Name"
+        Me.lblFirstName.AutoSize = True
+        Me.lblFirstName.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFirstName.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblFirstName.Location = New System.Drawing.Point(152, 19)
+        Me.lblFirstName.Name = "lblFirstName"
+        Me.lblFirstName.Size = New System.Drawing.Size(88, 21)
+        Me.lblFirstName.TabIndex = 0
+        Me.lblFirstName.Text = "First Name"
         '
         'pnlHeaderPatientRecords
         '
@@ -247,15 +234,14 @@ Partial Class frmPatientRecords
 
     End Sub
     Friend WithEvents pnlHeader As Panel
-    Friend WithEvents Label5 As Label
-    Friend WithEvents Label4 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblBed As Label
+    Friend WithEvents lblRoom As Label
+    Friend WithEvents lblMRN As Label
+    Friend WithEvents lblFirstName As Label
     Friend WithEvents pnlHeaderPatientRecords As Panel
     Friend WithEvents btnNewPatient As Button
-    Friend WithEvents Label7 As Label
-    Friend WithEvents Label6 As Label
+    Friend WithEvents lblDOB As Label
+    Friend WithEvents lblLastName As Label
     Friend WithEvents flpPatientRecords As FlowLayoutPanel
     Friend WithEvents Panel9 As Panel
     Friend WithEvents pnlSearch As Panel
