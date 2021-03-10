@@ -181,6 +181,7 @@ Module DataVaildationMethods
         TextToCheck = Regex.Replace(TextToCheck, "'", "''") ' check for '
         TextToCheck = Regex.Replace(TextToCheck, Chr(34), "''") 'check for "
         TextToCheck = Regex.Replace(TextToCheck, Chr(92), "''") ' check for \
+        TextToCheck = Regex.Replace(TextToCheck, Chr(47), "''") ' check for /
 
         Return TextToCheck
     End Function
