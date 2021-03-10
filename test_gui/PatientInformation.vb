@@ -266,7 +266,43 @@ Module PatientInformation
         'get select from patient allergy inner join on patient table where tuid is the same
         'join patients meds table and medications table
     End Sub
-
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: PopulatePatientDispenseInfo 	  */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		                          */   
+    '/*		              DATE CREATED: 	                              */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                         				          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*             (NONE)								                  */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  RETURNS:								                          */                   
+    '/*            (NOTHING)								              */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */ 
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                   */
+    '/*********************************************************************/
     Public Sub PopulatePatientDispenseInfo(ByRef intPatient_ID As Integer)
 
         'get patient information using sql generic method
