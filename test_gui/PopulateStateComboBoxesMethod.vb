@@ -22,7 +22,9 @@
     '/* 																	  
     '/*********************************************************************/
     '/*  GLOBAL VARIABLE LIST (Alphabetically):			         */		  
-    '/*						  	 (NONE)			   */					  
+    '/*	 strStatesArray - this is going to hold the array of states that is*/
+    '/*      that is going to be used to populate ComboBoxs
+    '/*                                                                     			   */					  
     '/*********************************************************************/
     '/* COMPILATION NOTES(will include version notes including libraries):*/
     '/* 											   */					  
@@ -32,11 +34,18 @@
     '/*											   */					  
     '/*  WHO   WHEN     WHAT								   */			  
     '/*  ---   ----     ------------------------------------------------- */
+    '/*  NP    3/9/2021 moved the states array out of the populate method */
+    '/*                 so I could make a property and use it in other    */
+    '/*                 places for error checking                         */
     '/*********************************************************************/
 
 
 
-
+    Dim strStatesArray As String() = {"ME", "NH", "VT", "MA", "CT", "RI", "NY", "VA", "NC",
+        "SC", "GA", "FL", "DE", "NJ", "OH", "MI", "IL", "IN", "IA", "KS", "NE", "OK",
+        "TX", "AL", "TN", "MO", "ND", "SD", "WY", "MT", "ID", "NV", "WA", "OR", "CO",
+        "NM", "AZ", "WV", "PA", "CA", "AR", "HI", "MN", "WI", "MD", "MS", "AK", "LA",
+        "UT", "KY"}
 
     '/*********************************************************************/
     '/*                   SUBPROGRAM NAME:  	PopulateStateComboBox  	   */         
@@ -66,28 +75,28 @@
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*	 strStatesArray - this is going to hold the array of states that is*/
-    '/*      that is going to be used to populate ComboBoxs
-    '/*                                                                     
+
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
+    '/*  NP    3/9/2021 I moved the states array out of the method so I   */
+    '/*                 could use it for error checking else were.        */
     '/*********************************************************************/
 
     Sub PopulateStateComboBox(cboState As ComboBox)
         cboState.Items.Clear()
-        Dim strStatesArray As String() = {"ME", "NH", "VT", "MA", "CT", "RI", "NY", "VA", "NC",
-        "SC", "GA", "FL", "DE", "NJ", "OH", "MI", "IL", "IN", "IA", "KS", "NE", "OK",
-        "TX", "AL", "TN", "MO", "ND", "SD", "WY", "MT", "ID", "NV", "WA", "OR", "CO",
-        "NM", "AZ", "WV", "PA", "CA", "AR", "HI", "MN", "WI", "MD", "MS", "AK", "LA",
-        "UT", "KY"}
-        System.Array.Sort(strStatesArray)
-        For Each item As String In strStatesArray
+        For Each item As String In states
             cboState.Items.Add(item)
         Next
 
     End Sub
+
+    Public ReadOnly Property states As String()
+        Get
+            System.Array.Sort(strStatesArray)
+            Return strStatesArray
+        End Get
+    End Property
 End Module

@@ -128,12 +128,19 @@
     <Compile Include="AdHoc.vb" />
     <Compile Include="APIDatabaseSelection.vb" />
     <Compile Include="AdminActions.vb" />
+    <Compile Include="BulkImportMethods.vb" />
     <Compile Include="CartInterfaceCode.vb" />
     <Compile Include="CheckComboBoxForDuplicateMethods.vb" />
     <Compile Include="ConfigureRoomsBeds.vb" />
     <Compile Include="CreateDatabase.vb" />
     <Compile Include="DataVaildationMethods.vb" />
     <Compile Include="Discrepancies.vb" />
+    <Compile Include="frmAssignNurse.Designer.vb">
+      <DependentUpon>frmAssignNurse.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAssignNurse.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmDispense.Designer.vb">
       <DependentUpon>frmDispense.vb</DependentUpon>
     </Compile>
@@ -239,6 +246,12 @@
     <Compile Include="frmMaintenance.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmMyPatients.Designer.vb">
+      <DependentUpon>frmMyPatients.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMyPatients.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmNewPatient.Designer.vb">
       <DependentUpon>frmNewPatient.vb</DependentUpon>
     </Compile>
@@ -306,8 +319,11 @@
     <Compile Include="Inventory.vb" />
     <Compile Include="Login.vb" />
     <Compile Include="Medications.vb" />
+    <Compile Include="PatientClass.vb" />
     <Compile Include="PatientInformation.vb" />
+    <Compile Include="PersonClass.vb" />
     <Compile Include="PharmacyOrder.vb" />
+    <Compile Include="PhysicianClass.vb" />
     <Compile Include="PopulateAllergiesComboBoxMethods.vb" />
     <Compile Include="PopulatePatientComboBoxMethods.vb" />
     <Compile Include="PopulatePhysicanComboBoxesMethods.vb" />
@@ -336,6 +352,7 @@
     <Compile Include="NewNurse.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="RoomClass.vb" />
     <Compile Include="rxNorm.vb" />
     <Compile Include="SearchLogic.vb" />
     <Compile Include="SettingsChange.Designer.vb">
@@ -344,6 +361,7 @@
     <Compile Include="SettingsChange.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UserClass.vb" />
     <Compile Include="Waste.Designer.vb">
       <DependentUpon>Waste.vb</DependentUpon>
     </Compile>
@@ -352,6 +370,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmAssignNurse.resx">
+      <DependentUpon>frmAssignNurse.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmDispense.resx">
       <DependentUpon>frmDispense.vb</DependentUpon>
     </EmbeddedResource>
@@ -402,6 +423,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMaintenance.resx">
       <DependentUpon>frmMaintenance.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMyPatients.resx">
+      <DependentUpon>frmMyPatients.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNewPatient.resx">
       <DependentUpon>frmNewPatient.vb</DependentUpon>
