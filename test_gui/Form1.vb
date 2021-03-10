@@ -216,7 +216,8 @@
                 OpenChildForm(frmPatientRecords)
 
             Case SelectedForm.MyPatients
-                frmCurrentChildForm = frmPatientRecords
+
+                frmCurrentChildForm = frmMyPatients
                 OpenChildForm(frmPatientRecords)
 
 
