@@ -220,7 +220,7 @@
             Case SelectedForm.MyPatients
 
                 frmCurrentChildForm = frmMyPatients
-                OpenChildForm(frmPatientRecords)
+                OpenChildForm(frmMyPatients)
 
             Case SelectedForm.InventoryDropDown
 
