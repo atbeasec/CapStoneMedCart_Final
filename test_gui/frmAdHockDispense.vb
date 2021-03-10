@@ -98,9 +98,13 @@
         GraphicalUserInterfaceReusableMethods.MaxValue(CInt(sender.Text), 1000, txtQuantity)
     End Sub
 
-    Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantity.Validating
-        GraphicalUserInterfaceReusableMethods.MaxValue(CInt(sender.Text), 1000, txtQuantity)
-
+    Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantity.Validated
+        If IsNumeric(sender.Text) Then
+            GraphicalUserInterfaceReusableMethods.MaxValue(CInt(sender.Text), 1000, txtQuantity)
+        Else
+            MessageBox.Show("Please make sure you enter a positive number 1-1000")
+            sender.Text = "1"
+        End If
         'LimitQuantityToQuantityStocked(SQLreturnValue, sender)
 
     End Sub

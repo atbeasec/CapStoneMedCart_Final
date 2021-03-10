@@ -74,7 +74,7 @@ Module CartInterfaceCode
     'TODO
     'set up a way to change the COM port. (by default it looks like it is COM3
     'default bit rate looks to be 115200
-    Dim blnSimulationModeValue = False 'this is going to dictate if the cart is going to be simulated or not.
+    Dim blnSimulationModeValue = True 'this is going to dictate if the cart is going to be simulated or not.
 
 
 
@@ -182,8 +182,8 @@ Module CartInterfaceCode
 
 
     Sub main()
-        ChangeSettings("115200", "COM4", True)
-        OpenMutliDrawer({"16", "17", "18"})
+        'ChangeSettings("115200", "COM4", True)
+        OpenOneDrawer("16")
 
 
 
@@ -259,7 +259,7 @@ Module CartInterfaceCode
             'this will comiple and be ran if the code is compiled in simulation mode. 
             FrmCart.populateButtonDictionary(dicButtonDictionary)
             If Not blnissue Then
-                '  FrmCart.LblDrawer.Text = "Drawer Number " + Number + " is Open"
+                '  FrmCart.LblDrawer.Text = "Drawer Number " + Number + " Is Open"
                 '   FrmCart.ShowDialog()
 
                 dicButtonDictionary.Item(Number).BackColor = Color.Red 'changes the color of the button to red
