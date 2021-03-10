@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class frmPatientRecords
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Partial Class frmMyPatients
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()>
+    <System.Diagnostics.DebuggerNonUserCode()> _
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,9 +20,16 @@ Partial Class frmPatientRecords
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()>
+    <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPatientRecords))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMyPatients))
+        Me.flpPatientRecords = New System.Windows.Forms.FlowLayoutPanel()
+        Me.pnlHeaderPatientRecords = New System.Windows.Forms.Panel()
+        Me.Panel9 = New System.Windows.Forms.Panel()
+        Me.pnlSearch = New System.Windows.Forms.Panel()
+        Me.btnSearch = New System.Windows.Forms.Button()
+        Me.txtSearch = New System.Windows.Forms.TextBox()
+        Me.btnNewPatient = New System.Windows.Forms.Button()
         Me.pnlHeader = New System.Windows.Forms.Panel()
         Me.lblDOB = New System.Windows.Forms.Label()
         Me.lblLastName = New System.Windows.Forms.Label()
@@ -30,98 +37,20 @@ Partial Class frmPatientRecords
         Me.lblRoom = New System.Windows.Forms.Label()
         Me.lblMRN = New System.Windows.Forms.Label()
         Me.lblFirstName = New System.Windows.Forms.Label()
-        Me.pnlHeaderPatientRecords = New System.Windows.Forms.Panel()
-        Me.Panel9 = New System.Windows.Forms.Panel()
-        Me.pnlSearch = New System.Windows.Forms.Panel()
-        Me.btnSearch = New System.Windows.Forms.Button()
-        Me.txtSearch = New System.Windows.Forms.TextBox()
-        Me.btnNewPatient = New System.Windows.Forms.Button()
-        Me.flpPatientRecords = New System.Windows.Forms.FlowLayoutPanel()
-        Me.pnlHeader.SuspendLayout()
         Me.pnlHeaderPatientRecords.SuspendLayout()
         Me.Panel9.SuspendLayout()
         Me.pnlSearch.SuspendLayout()
+        Me.pnlHeader.SuspendLayout()
         Me.SuspendLayout()
         '
-        'pnlHeader
+        'flpPatientRecords
         '
-        Me.pnlHeader.BackColor = System.Drawing.Color.White
-        Me.pnlHeader.Controls.Add(Me.lblDOB)
-        Me.pnlHeader.Controls.Add(Me.lblLastName)
-        Me.pnlHeader.Controls.Add(Me.lblBed)
-        Me.pnlHeader.Controls.Add(Me.lblRoom)
-        Me.pnlHeader.Controls.Add(Me.lblMRN)
-        Me.pnlHeader.Controls.Add(Me.lblFirstName)
-        Me.pnlHeader.Location = New System.Drawing.Point(15, 67)
-        Me.pnlHeader.Name = "pnlHeader"
-        Me.pnlHeader.Size = New System.Drawing.Size(950, 47)
-        Me.pnlHeader.TabIndex = 8
-        '
-        'lblDOB
-        '
-        Me.lblDOB.AutoSize = True
-        Me.lblDOB.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDOB.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblDOB.Location = New System.Drawing.Point(496, 19)
-        Me.lblDOB.Name = "lblDOB"
-        Me.lblDOB.Size = New System.Drawing.Size(43, 21)
-        Me.lblDOB.TabIndex = 6
-        Me.lblDOB.Text = "DOB"
-        '
-        'lblLastName
-        '
-        Me.lblLastName.AutoSize = True
-        Me.lblLastName.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblLastName.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblLastName.Location = New System.Drawing.Point(329, 19)
-        Me.lblLastName.Name = "lblLastName"
-        Me.lblLastName.Size = New System.Drawing.Size(86, 21)
-        Me.lblLastName.TabIndex = 5
-        Me.lblLastName.Text = "Last Name"
-        '
-        'lblBed
-        '
-        Me.lblBed.AutoSize = True
-        Me.lblBed.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblBed.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblBed.Location = New System.Drawing.Point(748, 19)
-        Me.lblBed.Name = "lblBed"
-        Me.lblBed.Size = New System.Drawing.Size(39, 21)
-        Me.lblBed.TabIndex = 3
-        Me.lblBed.Text = "Bed"
-        '
-        'lblRoom
-        '
-        Me.lblRoom.AutoSize = True
-        Me.lblRoom.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblRoom.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblRoom.Location = New System.Drawing.Point(625, 19)
-        Me.lblRoom.Name = "lblRoom"
-        Me.lblRoom.Size = New System.Drawing.Size(54, 21)
-        Me.lblRoom.TabIndex = 2
-        Me.lblRoom.Text = "Room"
-        '
-        'lblMRN
-        '
-        Me.lblMRN.AutoSize = True
-        Me.lblMRN.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblMRN.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblMRN.Location = New System.Drawing.Point(10, 19)
-        Me.lblMRN.Name = "lblMRN"
-        Me.lblMRN.Size = New System.Drawing.Size(47, 21)
-        Me.lblMRN.TabIndex = 1
-        Me.lblMRN.Text = "MRN"
-        '
-        'lblFirstName
-        '
-        Me.lblFirstName.AutoSize = True
-        Me.lblFirstName.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFirstName.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblFirstName.Location = New System.Drawing.Point(152, 19)
-        Me.lblFirstName.Name = "lblFirstName"
-        Me.lblFirstName.Size = New System.Drawing.Size(88, 21)
-        Me.lblFirstName.TabIndex = 0
-        Me.lblFirstName.Text = "First Name"
+        Me.flpPatientRecords.AutoScroll = True
+        Me.flpPatientRecords.BackColor = System.Drawing.Color.White
+        Me.flpPatientRecords.Location = New System.Drawing.Point(15, 120)
+        Me.flpPatientRecords.Name = "flpPatientRecords"
+        Me.flpPatientRecords.Size = New System.Drawing.Size(950, 543)
+        Me.flpPatientRecords.TabIndex = 20
         '
         'pnlHeaderPatientRecords
         '
@@ -132,7 +61,7 @@ Partial Class frmPatientRecords
         Me.pnlHeaderPatientRecords.Location = New System.Drawing.Point(0, 0)
         Me.pnlHeaderPatientRecords.Name = "pnlHeaderPatientRecords"
         Me.pnlHeaderPatientRecords.Size = New System.Drawing.Size(976, 61)
-        Me.pnlHeaderPatientRecords.TabIndex = 16
+        Me.pnlHeaderPatientRecords.TabIndex = 19
         '
         'Panel9
         '
@@ -202,49 +131,119 @@ Partial Class frmPatientRecords
         Me.btnNewPatient.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnNewPatient.UseVisualStyleBackColor = False
         '
-        'flpPatientRecords
+        'pnlHeader
         '
-        Me.flpPatientRecords.AutoScroll = True
-        Me.flpPatientRecords.BackColor = System.Drawing.Color.White
-        Me.flpPatientRecords.Location = New System.Drawing.Point(15, 118)
-        Me.flpPatientRecords.Name = "flpPatientRecords"
-        Me.flpPatientRecords.Size = New System.Drawing.Size(950, 543)
-        Me.flpPatientRecords.TabIndex = 17
+        Me.pnlHeader.BackColor = System.Drawing.Color.White
+        Me.pnlHeader.Controls.Add(Me.lblDOB)
+        Me.pnlHeader.Controls.Add(Me.lblLastName)
+        Me.pnlHeader.Controls.Add(Me.lblBed)
+        Me.pnlHeader.Controls.Add(Me.lblRoom)
+        Me.pnlHeader.Controls.Add(Me.lblMRN)
+        Me.pnlHeader.Controls.Add(Me.lblFirstName)
+        Me.pnlHeader.Location = New System.Drawing.Point(15, 69)
+        Me.pnlHeader.Name = "pnlHeader"
+        Me.pnlHeader.Size = New System.Drawing.Size(950, 47)
+        Me.pnlHeader.TabIndex = 18
         '
-        'frmPatientRecords
+        'lblDOB
+        '
+        Me.lblDOB.AutoSize = True
+        Me.lblDOB.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDOB.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblDOB.Location = New System.Drawing.Point(496, 19)
+        Me.lblDOB.Name = "lblDOB"
+        Me.lblDOB.Size = New System.Drawing.Size(43, 21)
+        Me.lblDOB.TabIndex = 6
+        Me.lblDOB.Text = "DOB"
+        '
+        'lblLastName
+        '
+        Me.lblLastName.AutoSize = True
+        Me.lblLastName.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblLastName.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblLastName.Location = New System.Drawing.Point(329, 19)
+        Me.lblLastName.Name = "lblLastName"
+        Me.lblLastName.Size = New System.Drawing.Size(86, 21)
+        Me.lblLastName.TabIndex = 5
+        Me.lblLastName.Text = "Last Name"
+        '
+        'lblBed
+        '
+        Me.lblBed.AutoSize = True
+        Me.lblBed.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblBed.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblBed.Location = New System.Drawing.Point(748, 19)
+        Me.lblBed.Name = "lblBed"
+        Me.lblBed.Size = New System.Drawing.Size(39, 21)
+        Me.lblBed.TabIndex = 3
+        Me.lblBed.Text = "Bed"
+        '
+        'lblRoom
+        '
+        Me.lblRoom.AutoSize = True
+        Me.lblRoom.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblRoom.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblRoom.Location = New System.Drawing.Point(625, 19)
+        Me.lblRoom.Name = "lblRoom"
+        Me.lblRoom.Size = New System.Drawing.Size(54, 21)
+        Me.lblRoom.TabIndex = 2
+        Me.lblRoom.Text = "Room"
+        '
+        'lblMRN
+        '
+        Me.lblMRN.AutoSize = True
+        Me.lblMRN.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblMRN.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblMRN.Location = New System.Drawing.Point(10, 19)
+        Me.lblMRN.Name = "lblMRN"
+        Me.lblMRN.Size = New System.Drawing.Size(47, 21)
+        Me.lblMRN.TabIndex = 1
+        Me.lblMRN.Text = "MRN"
+        '
+        'lblFirstName
+        '
+        Me.lblFirstName.AutoSize = True
+        Me.lblFirstName.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFirstName.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblFirstName.Location = New System.Drawing.Point(152, 19)
+        Me.lblFirstName.Name = "lblFirstName"
+        Me.lblFirstName.Size = New System.Drawing.Size(88, 21)
+        Me.lblFirstName.TabIndex = 0
+        Me.lblFirstName.Text = "First Name"
+        '
+        'frmMyPatients
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.AutoScroll = True
-        Me.AutoSize = True
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(976, 672)
         Me.Controls.Add(Me.flpPatientRecords)
         Me.Controls.Add(Me.pnlHeaderPatientRecords)
         Me.Controls.Add(Me.pnlHeader)
-        Me.Name = "frmPatientRecords"
-        Me.Text = "frmPatientRecords"
-        Me.pnlHeader.ResumeLayout(False)
-        Me.pnlHeader.PerformLayout()
+        Me.Name = "frmMyPatients"
+        Me.Text = "frmMyPatients"
         Me.pnlHeaderPatientRecords.ResumeLayout(False)
         Me.Panel9.ResumeLayout(False)
         Me.Panel9.PerformLayout()
         Me.pnlSearch.ResumeLayout(False)
+        Me.pnlHeader.ResumeLayout(False)
+        Me.pnlHeader.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
+
+    Friend WithEvents flpPatientRecords As FlowLayoutPanel
+    Friend WithEvents pnlHeaderPatientRecords As Panel
+    Friend WithEvents Panel9 As Panel
+    Friend WithEvents pnlSearch As Panel
+    Friend WithEvents btnSearch As Button
+    Friend WithEvents txtSearch As TextBox
+    Friend WithEvents btnNewPatient As Button
     Friend WithEvents pnlHeader As Panel
+    Friend WithEvents lblDOB As Label
+    Friend WithEvents lblLastName As Label
     Friend WithEvents lblBed As Label
     Friend WithEvents lblRoom As Label
     Friend WithEvents lblMRN As Label
     Friend WithEvents lblFirstName As Label
-    Friend WithEvents pnlHeaderPatientRecords As Panel
-    Friend WithEvents btnNewPatient As Button
-    Friend WithEvents lblDOB As Label
-    Friend WithEvents lblLastName As Label
-    Friend WithEvents flpPatientRecords As FlowLayoutPanel
-    Friend WithEvents Panel9 As Panel
-    Friend WithEvents pnlSearch As Panel
-    Friend WithEvents txtSearch As TextBox
-    Friend WithEvents btnSearch As Button
 End Class

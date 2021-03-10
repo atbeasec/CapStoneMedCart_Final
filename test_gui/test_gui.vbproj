@@ -134,6 +134,12 @@
     <Compile Include="CreateDatabase.vb" />
     <Compile Include="DataVaildationMethods.vb" />
     <Compile Include="Discrepancies.vb" />
+    <Compile Include="frmAssignNurse.Designer.vb">
+      <DependentUpon>frmAssignNurse.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAssignNurse.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmDispense.Designer.vb">
       <DependentUpon>frmDispense.vb</DependentUpon>
     </Compile>
@@ -237,6 +243,12 @@
       <DependentUpon>frmMaintenance.vb</DependentUpon>
     </Compile>
     <Compile Include="frmMaintenance.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMyPatients.Designer.vb">
+      <DependentUpon>frmMyPatients.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMyPatients.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmNewPatient.Designer.vb">
@@ -352,6 +364,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmAssignNurse.resx">
+      <DependentUpon>frmAssignNurse.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmDispense.resx">
       <DependentUpon>frmDispense.vb</DependentUpon>
     </EmbeddedResource>
@@ -402,6 +417,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMaintenance.resx">
       <DependentUpon>frmMaintenance.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMyPatients.resx">
+      <DependentUpon>frmMyPatients.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNewPatient.resx">
       <DependentUpon>frmNewPatient.vb</DependentUpon>
