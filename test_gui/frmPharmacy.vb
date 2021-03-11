@@ -48,16 +48,26 @@
     End Sub
 
     Private Sub btnIncrement_Click(sender As Object, e As EventArgs) Handles btnIncrement.Click
+        If Not IsNumeric(txtQuantity.Text) Then
+            txtQuantity.Text = 0
+        End If
         ButtonIncrement(1000, txtQuantity)
 
     End Sub
 
     Private Sub btnDecrement_Click(sender As Object, e As EventArgs) Handles btnDecrement.Click
+        If Not IsNumeric(txtQuantity.Text) Then
+            txtQuantity.Text = 2
+        End If
         ButtonDecrement(txtQuantity)
     End Sub
 
     Private Sub cmbPatientName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPatientName.SelectedIndexChanged
         intPatientIDfromArray = intPatientID(cmbPatientName.SelectedIndex)
         txtPatientDOB.Text = ExecuteScalarQuery("select Date_of_Birth from Patient where Patient_ID = '" & intPatientIDfromArray & "'")
+    End Sub
+
+    Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantity.KeyPress
+        KeyPressCheck(e, "0123456789")
     End Sub
 End Class
