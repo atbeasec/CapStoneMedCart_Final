@@ -6,6 +6,8 @@
     Dim dsPatients As DataSet
     Dim dsMedications As DataSet
     Dim intPatientID As New ArrayList
+    Dim intMedID As New ArrayList
+    Dim intPhysicianID As New ArrayList
     Dim intPatientIDfromArray As Integer = 0
 
     Private Sub frmPharmacy_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -25,13 +27,13 @@
         Next
 
         For Each dr As DataRow In dsPhysicians.Tables(0).Rows
-            cmbOrderedBy.Items.Add(dr(EnumList.Physician.LastName) & ", " & dr(EnumList.Physician.FirstName) &
-                                    "   ID: " & dr(EnumList.Physician.Id))
+            cmbOrderedBy.Items.Add(dr(EnumList.Physician.LastName) & ", " & dr(EnumList.Physician.FirstName))
+            intPhysicianID.Add(dr(EnumList.Physician.Id))
         Next
 
         For Each dr As DataRow In dsMedications.Tables(0).Rows
-            cmbMedication.Items.Add(dr(EnumList.Medication.Name) &
-                                    "   ID: " & dr(EnumList.Medication.ID))
+            cmbMedication.Items.Add(dr(EnumList.Medication.Name))
+            intMedID.Add(dr(EnumList.Medication.ID))
         Next
 
     End Sub
