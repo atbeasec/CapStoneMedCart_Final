@@ -10,6 +10,7 @@
     Dim intPhysicianID As New ArrayList
     Dim intPatientIDfromArray As Integer = 0
 
+
     Private Sub frmPharmacy_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         cmbPatientName.Items.Clear()
         cmbOrderedBy.Items.Clear()
@@ -35,13 +36,15 @@
             cmbMedication.Items.Add(dr(EnumList.Medication.Name))
             intMedID.Add(dr(EnumList.Medication.ID))
         Next
-
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnORder.Click
-        Dim dtmOrderTime As String = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
-        'PharmacyOrder()
-
+        If cmbPatientName.SelectedIndex = -1 Or cmbMedication.SelectedIndex = -1 Or cmbOrderedBy.SelectedIndex = -1 Then
+            MessageBox.Show("Please select a patient, medication and physician before placing the order")
+        Else
+            Dim dtmOrderTime As String = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
+            'PharmacyOrder()
+        End If
     End Sub
 
     Private Sub btnIncrement_Click(sender As Object, e As EventArgs) Handles btnIncrement.Click
