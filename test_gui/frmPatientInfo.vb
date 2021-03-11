@@ -554,7 +554,7 @@
     Private Sub DispenseHistorySelectedField(ByVal field As Integer)
 
         ' clear the controls as they will need to be rebuilt when sorting
-        flpDispenseHistory.Controls.Clear()
+        ' flpDispenseHistory.Controls.Clear()
 
         Select Case field
 
@@ -610,7 +610,7 @@
     Private Sub PrescriptionsSelectedField(ByVal field As Integer)
 
         ' clear the controls as they will need to be rebuilt when sorting
-        flpMedications.Controls.Clear()
+        ' flpMedications.Controls.Clear()
 
         Select Case field
 
