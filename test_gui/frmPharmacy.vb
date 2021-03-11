@@ -17,6 +17,7 @@
         cmbPatientName.Items.Clear()
         cmbOrderedBy.Items.Clear()
         cmbMedication.Items.Clear()
+        cmbStrength.Items.Clear()
         txtQuantity.Text = 1
         Dim intCounter As Integer = 0
         dsMedications = ExecuteSelectQuery("SELECT * From Medication Inner Join DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE DrawerMedication.Active_Flag = '1' ORDER BY Medication.Medication_ID")
@@ -74,8 +75,11 @@
     End Sub
 
     Private Sub cmbMedication_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMedication.SelectedIndexChanged
+        cmbStrength.Items.Clear()
         intMedIDfromArray = intMedID(cmbMedication.SelectedIndex)
         Dim dsMedication As DataSet = ExecuteSelectQuery("select * from Medication where Medication_ID = '" & intMedIDfromArray & "'")
-
+        txtType.Text = dsMedication.Tables(0).Rows(0)(EnumList.Medication.Snyonym)
+        cmbStrength.Items.Add(dsMedication.Tables(0).Rows(0)(EnumList.Medication.type))
+        cmbStrength.SelectedIndex = 0
     End Sub
 End Class
