@@ -9,6 +9,8 @@
     Dim intMedID As New ArrayList
     Dim intPhysicianID As New ArrayList
     Dim intPatientIDfromArray As Integer = 0
+    Dim intMedIDfromArray As Integer = 0
+    Dim intPhysicianIDfromArray As Integer = 0
 
 
     Private Sub frmPharmacy_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -69,5 +71,11 @@
 
     Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantity.KeyPress
         KeyPressCheck(e, "0123456789")
+    End Sub
+
+    Private Sub cmbMedication_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMedication.SelectedIndexChanged
+        intMedIDfromArray = intMedID(cmbMedication.SelectedIndex)
+        Dim dsMedication As DataSet = ExecuteSelectQuery("select * from Medication where Medication_ID = '" & intMedIDfromArray & "'")
+
     End Sub
 End Class
