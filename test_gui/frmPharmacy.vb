@@ -12,7 +12,31 @@
     Dim intMedIDfromArray As Integer = 0
     Dim intPhysicianIDfromArray As Integer = 0
 
-
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:       */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/11/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   						                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
+    '/*********************************************************************/
     Private Sub frmPharmacy_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         cmbPatientName.Items.Clear()
         cmbOrderedBy.Items.Clear()
