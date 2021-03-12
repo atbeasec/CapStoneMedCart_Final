@@ -153,7 +153,7 @@ Public Class frmNewPatient
 
         'strbSQL.Append(CInt(Rnd() * 20) & "','")
         'strbSQL.Append(CInt(Rnd() * 20) & "',") 'this is going to make a random barcode this is temporary
-        strbSQL.Append(GenerateRandom.generateRandomAlphanumeric(20, "1234567890") & "','")
+        strbSQL.Append(GenerateRandom.generateRandomAlphanumeric(10, "1234567890") & "','")
         '^this is going to generate a random MRN number
         strbSQL.Append(GenerateRandom.generateRandomAlphanumeric(20, strCharactersForRandomGeneration) & "',")
         '^this is going to genereate a random Bar code. 

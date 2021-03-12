@@ -13,85 +13,6 @@
         Debug.WriteLine("")
     End Sub
 
-    'Dim ContactPanelsAddedCount As Integer = 0
-    'Dim CurrentContactPanelName As String = Nothing
-
-
-    'Dim CurrentChartPanelName As String = Nothing
-    'Dim ChartPanelsAddedCount As Integer = 0
-
-
-    'Public Sub DynamicButton_Click(ByVal sender As Object, ByVal e As EventArgs)
-
-    '    'the parent of the button will be the panel the control is located on.
-    '    'we want to get one step removed so we need to next take the parent of the control
-    '    ' to get the name of flowpanel which the button is laid out on
-    '    Dim control As Control = sender.Parent
-    '    Dim parents As Control = control.Parent
-
-
-
-    '    Dim parentFlowPanel As Control = control.Parent
-    '    'Dim strFlowPanelName As String = control.Parent.Name
-
-    '    ' Debug.Print(control.Parent.Name)
-
-    '    Dim parentPanelName As String
-
-    '    parentPanelName = Nothing
-
-    '    'Remove handler from sender
-    '    For Each controlObj As Control In parentFlowPanel.Controls
-    '        For Each childControlObj As Control In controlObj.Controls
-    '            If childControlObj.Name = sender.name Then
-
-    '                RemoveHandler childControlObj.Click, AddressOf DynamicButton_Click
-
-    '                parentPanelName = childControlObj.Parent.Name
-    '            End If
-    '        Next
-    '    Next
-
-
-
-    '    'Remove contact panel
-    '    For Each controlObj As Control In parentFlowPanel.Controls
-    '        If controlObj.Name = parentPanelName Then
-
-    '            ' prompt user if they are sure they want to delete the record
-
-
-    '            ' remove the record from the database
-
-    '            'remove the padding panel from the flow panel
-    '            '  flpMedications.Controls.Remove(controlObj.Parent)
-    '            controlObj.Parent.Dispose()
-
-    '            'remove the panel from the flow panel
-    '            '  flpMedications.Controls.Remove(controlObj)
-    '            controlObj.Dispose()
-
-
-    '        End If
-    '    Next
-
-    'parents.Name
-    ' Dim connn As Control = parentFlowPanel.Parent
-    'Debug.Print(connn.Name)
-    'Debug.Print(parentFlowPanel.Name)
-    'UpdateCamerasSubtotalLabel(parentFlowPanel)
-
-    'End Sub
-
-    '  Public Sub New()
-
-
-    ' This call is required by the designer.
-    '     InitializeComponent()
-
-    ' Add any initialization after the InitializeComponent() call.
-
-    ' End Sub
 
     Public Sub DynamicButtonEditRecord_Click(ByVal sender As Object, ByVal e As EventArgs)
 
@@ -158,46 +79,70 @@
         PatientInformation.getRoom(intPatientID, cboRoom, cboBed)
         SetControlsToReadOnly(ctl)
 
+        CreateToolTips(pnlPrescriptionsHeader, tpLabelDirections)
+        CreateToolTips(pnlDispenseHistoryHeader, tpLabelDirections)
+
+        AddHandlerToLabelClick(pnlDispenseHistoryHeader)
+        AddHandlerToLabelClick(pnlPrescriptionsHeader)
+
+
         ' CreateDispenseHistoryPanels(flpDispenseHistory, "test", "test", "test", "test", "test", "test", "test")
     End Sub
     '/*********************************************************************/
-    '/*                   SUBPROGRAM NAME:  CreateDispenseHistoryPanels   */         
+    '/*            SubProgram NAME: CreateDispenseHistoryPanels()         */         
     '/*********************************************************************/
-    '/*                   WRITTEN BY:     		                          */   
-    '/*		              DATE CREATED: 	                              */                             
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/6/2021                         */                             
     '/*********************************************************************/
-    '/*  FUNCTION PURPOSE:								                  */             
-    '/*											                          */                     
-    '/*                                                                   */
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is routine is dynamically creates panels that are placed    */ 
+    '/*	 inside of the flowpanel that is fixed on the form. The panels are*/
+    '/*	 created here, assigned handlers, and the contents of the panels  */
+    '/*	 are updated in this routine                                      */
     '/*********************************************************************/
-    '/*  CALLED BY:   	      						                      */           
-    '/*                                         				          */         
+    '/*  CALLED BY: frmConfiguration_Load  	      						  */           
+    '/*                                                                   */         
     '/*********************************************************************/
     '/*  CALLS:										                      */                 
-    '/*             (NONE)								                  */             
+    '/*                                             				      */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					          */         
-    '/*											                          */                     
-    '/*                                                                   */  
-    '/*********************************************************************/
-    '/*  RETURNS:								                          */                   
-    '/*            (NOTHING)								              */             
+    '/*	 NONE                                                             */ 
+    '/* flpPannel- the flow panel which the user wants to create the      */
+    '/*     create the single panel.                                      */
+    '/* strMedicationName- medication name from the database we will display   
+    '/* strStrength- strength value from the the database                 */
+    '/* strType- type value from the database                             */
+    '/* strQuantity- quantity value from the database                     */
+    '/* strDispenseBy- dispensedby value from the database                */
+    '/* strDispenseDate- dispense date from the database                  */
+    '/* strDispenseTime=- dispense time from the database                 */
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                  */             
-    '/*											                          */                     
-    '/*                                                                   */ 
+    '/*	 CreateDispenseHistoryPanels(frmPatientInfo.flpDispenseHistory, dr(0), dr(1), dr(2), dr(3), dr(4) & " " & dr(5), dr(6), "")   
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											                          */                     
-    '/*                                                                   */  
+    '/*	pnl- is the pnl which we are creating for padding purposes        */
+    '/* pnlMainPanel- is the pnl which we are going to add controls       */
+    '/* lblID1 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID2 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID3 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID4 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID5 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID6 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						                      */               
     '/*											                          */                     
     '/*  WHO   WHEN     WHAT								              */             
-    '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                   */
+    '/*  Collin Krygier  2/6/2021    Initial creation                     */
     '/*********************************************************************/
-    Public Sub CreateDispenseHistoryPanels(ByVal flpPannel As FlowLayoutPanel, ByVal medicationName As String, ByVal strength As String, ByVal type As String, ByVal quantity As String, ByVal dispenseBy As String, ByVal dispenseDate As String, ByVal dispenseTime As String)
+    Public Sub CreateDispenseHistoryPanels(ByVal flpPannel As FlowLayoutPanel, ByVal strMedicationName As String, ByVal strStrength As String, ByVal strType As String, ByVal strQuantity As String, ByVal strDispenseBy As String, ByVal strDispenseDate As String, ByVal strDispenseTime As String)
 
         Dim pnl As Panel
         pnl = New Panel
@@ -241,12 +186,12 @@
         Dim lblID6 As New Label
 
         ' anywhere we have quotes except for the label names, we can call our Database and get method
-        CreateIDLabel(pnlMainPanel, lblID, "lblMedicationName", lblMedication.Location.X, 20, medicationName, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID2, "lblStrength", lblStrength.Location.X, 20, strength, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID3, "lblType", lblType.Location.X, 20, type, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID4, "lblQuantity", lblQuantity.Location.X, 20, quantity, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID5, "lblDispensedBy", lblDispensedBy.Location.X, 20, dispenseBy, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID6, "lblDispenseTimeAndDate", lblDateTime.Location.X, 20, dispenseDate, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID, "lblMedicationName", lblMedication.Location.X, 20, strMedicationName, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID2, "lblStrength", lblStrength.Location.X, 20, strStrength, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID3, "lblType", lblType.Location.X, 20, strType, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID4, "lblQuantity", lblQuantity.Location.X, 20, strQuantity, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID5, "lblDispensedBy", lblDispensedBy.Location.X, 20, strDispenseBy, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID6, "lblDispenseTimeAndDate", lblDateTime.Location.X, 20, strDispenseDate, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
@@ -255,50 +200,68 @@
 
     End Sub
     '/*********************************************************************/
-    '/*                   SUBPROGRAM NAME: CreatePrescriptionsPanels 	  */         
+    '/*            SubProgram NAME: CreateDispenseHistoryPanels()         */         
     '/*********************************************************************/
-    '/*                   WRITTEN BY:     		                          */   
-    '/*		              DATE CREATED: 	                              */                             
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/6/2021                         */                             
     '/*********************************************************************/
-    '/*  FUNCTION PURPOSE:								                  */             
-    '/*											                          */                     
-    '/*                                                                   */
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is routine is dynamically creates panels that are placed    */ 
+    '/*	 inside of the flowpanel that is fixed on the form. The panels are*/
+    '/*	 created here, assigned handlers, and the contents of the panels  */
+    '/*	 are updated in this routine                                      */
     '/*********************************************************************/
-    '/*  CALLED BY:   	      						                      */           
-    '/*                                         				          */         
+    '/*  CALLED BY:   	      						  */           
+    '/*                                                                   */         
     '/*********************************************************************/
     '/*  CALLS:										                      */                 
-    '/*             (NONE)								                  */             
+    '/*                                             				      */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					          */         
-    '/*											                          */                     
-    '/*                                                                   */  
-    '/*********************************************************************/
-    '/*  RETURNS:								                          */                   
-    '/*            (NOTHING)								              */             
+    '/*	 NONE                                                             */ 
+    '/* flpPannel- the flow panel which the user wants to create the      */
+    '/*     create the single panel.                                      */
+    '/* strMedicationName- medication name from the database we will display   
+    '/* strStrength- strength value from the the database                 */
+    '/* strFrequency - type frequency from the database                   */
+    '/* strType- type value from the database                             */
+    '/* strQuantity- quantity value from the database                     */
+    '/* strDatePrescribed- dispense date from the database                */
+    '/* strPrescribedBy- dispensedby value from the database              */
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                  */             
-    '/*											                          */                     
-    '/*                                                                   */ 
+    '/*	 CreateDispenseHistoryPanels(frmPatientInfo.flpDispenseHistory, dr(0), dr(1), dr(2), dr(3), dr(4) & " " & dr(5), dr(6), "")   
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											                          */                     
-    '/*                                                                   */  
+    '/*	pnl- is the pnl which we are creating for padding purposes        */
+    '/* pnlMainPanel- is the pnl which we are going to add controls       */
+    '/* lblID1 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID2 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID3 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID4 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID5 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID6 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID7 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						                      */               
     '/*											                          */                     
     '/*  WHO   WHEN     WHAT								              */             
-    '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                   */
+    '/*  Collin Krygier  2/6/2021    Initial creation                     */
     '/*********************************************************************/
-    Public Sub CreatePrescriptionsPanels(ByVal flpPannel As FlowLayoutPanel, ByVal medicationName As String, ByVal strength As String, ByVal frequency As String, ByVal type As String, ByVal quantity As String, ByVal datePrescribed As String, ByVal PrescribedBy As String)
+    Public Sub CreatePrescriptionsPanels(ByVal flpPannel As FlowLayoutPanel, ByVal strMedicationName As String, ByVal strStrength As String, ByVal strFrequency As String, ByVal strType As String, ByVal strQuantity As String, ByVal strDatePrescribed As String, ByVal strPrescribedBy As String)
         Dim pnl As Panel
         pnl = New Panel
 
         Dim pnlMainPanel As Panel
         pnlMainPanel = New Panel
         ' call method here to get the count from the database and update the panel number so the next item is correct
-
 
         'Set panel properties
         With pnl
@@ -321,7 +284,6 @@
 
         'put the boarder panel inside the main panel
         pnl.Controls.Add(pnlMainPanel)
-
 
         'AddHandler pnlMainPanel.DoubleClick, AddressOf DynamicDoubleClickNewOrder
         AddHandler pnlMainPanel.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
@@ -340,41 +302,324 @@
         ' anywhere we have quotes except for the label names, we can call our Database and get method
         ' to ensure all of the text being added to the panel is inline with the  headers, we will use the label location of the
         ' header as the reference point for the X axis when creating these labels at run time.
-        CreateIDLabel(pnlMainPanel, lblID, "lblMedicationPrescription", lblMedicationPrescription.Location.X, 20, medicationName, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID2, "lblStrengthPrescription", lblStrengthPrescription.Location.X, 20, strength, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID3, "lblFrequencyPrescription", lblFrequencyPrescription.Location.X, 20, frequency, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID4, "lblTypePrescription", lblTypePrescription.Location.X, 20, type, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID5, "lblQuantityPrescription", lblQuantityPrescription.Location.X, 20, quantity, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID6, "lblDatePrescribed", lblDatePrescribed.Location.X, 20, datePrescribed, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, PrescribedBy, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID, "lblMedicationPrescription", lblMedicationPrescription.Location.X, 20, strMedicationName, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID2, "lblStrengthPrescription", lblStrengthPrescription.Location.X, 20, strStrength, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID3, "lblFrequencyPrescription", lblFrequencyPrescription.Location.X, 20, strFrequency, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID4, "lblTypePrescription", lblTypePrescription.Location.X, 20, strType, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID5, "lblQuantityPrescription", lblQuantityPrescription.Location.X, 20, strQuantity, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID6, "lblDatePrescribed", lblDatePrescribed.Location.X, 20, strDatePrescribed, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, strPrescribedBy, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
 
-        'currentContactPanel = pnl.Name
-
-    End Sub
-    Private Sub PopulateNotes()
-
-        ' CreateNotesPanels(flpNotes, "Customer had an allergic reaction to the phenylephrine")
-        'CreateNotesPanels(flpNotes,)
-        'CreateNotesPanels(flpNotes,)
-
-
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: CreateToolTips                 */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/14/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to iterate over the  panel that contains labels and*/
+    '/*  assign each label a tooltip
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      frmPatientInfo_load      */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                           */  
+    '/*              
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 PanelWithLabels- a panel which contains only labels              */ 
+    '/*	 tp- a tooltip control                                            */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	CreateToolTips(Panel1, ToolTip1)     							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	directions- string to be appended                                 */
+    '/*	newDirections- result of the appending of strings                 */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/14/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub CreateToolTips(ByVal PanelWithLabels As Panel, ByVal tp As ToolTip)
+
+        'iterating over the header panel which will only contain labels within it
+        'each label needs to have a tooltip added to it.
+
+        Dim directions As String = "click to sort by "
 
 
+        For Each ctl In PanelWithLabels.Controls
 
-    Private Sub DynamicDownloadButton_Click(sender As Object, e As EventArgs)
+            Dim newDirections As String = Nothing
+            newDirections = directions & CStr(ctl.Text)
+            tp.SetToolTip(ctl, newDirections)
+
+        Next
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: AddHandlerToLabelClick         */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/14/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to iterate over the  panel that contains labels and*/
+    '/*  assign each label a a click event handler                        */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      frmPatientInfo_load                                          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 PanelWithLabels- a panel which contains only labels              */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	AddHandlerToLabelClick(Panel1)     							      */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	lbl- label control*/
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/14/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub AddHandlerToLabelClick(ByVal PanelWithLabels As Panel)
+
+        'assign a handler to each label in the header panels to allow for a reusable click event
+
+        Dim lbl As Label
+
+        For Each lbl In PanelWithLabels.Controls
+            AddHandler lbl.Click, AddressOf SortBySelectedLabel
+        Next
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: BoldLabelToSortBy              */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/14/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to iterate over the  panel that contains labels and*/
+    '/*  check which one selected and change the font to be underlined    */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      frmPatientInfo_load                                          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 clickedLabel- a label that was selected                          */ 
+    '/*	 parent- a panel object that the label lives on                   */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 BoldLabelToSortBy(sender, parent)     							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	lbl- label control*/
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/14/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub BoldLabelToSortBy(ByVal clickedLabel As Label, ByVal parent As Panel)
+
+        Dim lbl As Label
+        ' remove underlined font from all labels
+        For Each lbl In parent.Controls
+            lbl.Font = New Font(New FontFamily("Segoe UI Semibold"), 12, FontStyle.Regular)
+
+        Next
+
+        ' underline just the selected label
+        clickedLabel.Font = New Font(New FontFamily("Segoe UI Semibold"), 12, FontStyle.Underline)
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: SortBySelectedLabel            */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/14/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to be called as the click event for any label the  */
+    '/*  user clicks on. Underline the label, and update the panel contents/
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      frmPatientInfo_load                                          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 field- an integer equal to the tag value of the selected label   */ 
+    '/*	 parent- a panel object that the label lives on                   */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 BoldLabelToSortBy(sender, parent)     							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	lbl- label control*/
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/14/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub SortBySelectedLabel(sender As Object, e As EventArgs)
+
+        ' if we know the parent then we can determine if we need the prescription table
+        ' or if we need the dispense history tables
+
+        Dim parent As Panel = sender.parent
+        Dim field As Integer = CInt(sender.tag)
+
+        BoldLabelToSortBy(sender, parent)
+
+        'check If the user Is selecting a dispense history field to sort by
+        If parent.Name = pnlDispenseHistoryHeader.Name Then
+
+            DispenseHistorySelectedField(field)
+        Else
+            PrescriptionsSelectedField(field)
+        End If
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: DispenseHistorySelectedField   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/14/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to be called when a user selects a label to sort by*/
+    '/*  the logic to re-create the panels in the order will be caled here*/
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      frmPatientInfo_load                                          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 field- an integer equal to the tag value of the selected label   */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 DispenseHistorySelectedField(Cint(Label1.Tag))   	              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/14/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub DispenseHistorySelectedField(ByVal field As Integer)
+
+        ' clear the controls as they will need to be rebuilt when sorting
+        ' flpDispenseHistory.Controls.Clear()
+
+        Select Case field
+
+            Case DispenseHistoryEnum.MedicationName
+
+            Case DispenseHistoryEnum.Strength
+
+            Case DispenseHistoryEnum.Type
+
+            Case DispenseHistoryEnum.Quantity
+
+            Case DispenseHistoryEnum.DispensedBy
+
+            Case DispenseHistoryEnum.DispenseDateAndTime
+
+        End Select
 
 
     End Sub
 
-    Private Sub DynamicDocumentDeleteButton_Click(sender As Object, e As EventArgs)
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: PrescriptionsSelectedField     */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/14/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to be called when a user selects a label to sort by*/
+    '/*  the logic to re-create the panels in the order will be caled here*/
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      frmPatientInfo_load                                          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 field- an integer equal to the tag value of the selected label   */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 PrescriptionsSelectedField(Cint(Label1.Tag))   				  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/14/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub PrescriptionsSelectedField(ByVal field As Integer)
+
+        ' clear the controls as they will need to be rebuilt when sorting
+        ' flpMedications.Controls.Clear()
+
+        Select Case field
+
+            Case PrescriptionsEnum.MedicationName
+
+            Case PrescriptionsEnum.Strength
+
+            Case PrescriptionsEnum.Type
+
+            Case PrescriptionsEnum.Quantity
+
+            Case PrescriptionsEnum.DatePrescribed
+
+            Case PrescriptionsEnum.PrescribedBy
+
+            Case PrescriptionsEnum.Frequency
+
+        End Select
 
     End Sub
+
 
     '/*********************************************************************/
     '/*                   FUNCTION NAME:  					   */         

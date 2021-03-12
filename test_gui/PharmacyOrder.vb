@@ -81,19 +81,33 @@
     '/*  Alexander Beasecker  02/05/2021  Initial creation of the code    */
     '/*********************************************************************/
     Public Sub PharmacyOrder(ByRef intPatientID As Integer, ByRef intMedicationID As Integer, ByRef intPhysicianID As Integer,
-                             ByRef intAmount As Integer, ByRef strMethod As String, ByRef strSchedule As String)
+                             ByRef intAmount As Integer, ByRef strType As String, ByRef strFrequency As String)
 
         'get current time and date
         Dim dtmOrderTime As String = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
         'set active flag
         Dim intActiveFlag As Integer = 1
         'create sql statement command
-        Dim Strdatacommand As String = "INSERT INTO PatientMedication(Patient_TUID,Medication_TUID,Ordering_Physician_ID, " &
-            "Date_Presrcibed, Quantity, Method, Schedule, Active_Flag) " &
-            "VALUES(" & intPatientID & ", " & intMedicationID & ", " & intPhysicianID & ", " & dtmOrderTime & ", " &
-            intAmount & ", " & strMethod & ", " & strSchedule & ", " & intActiveFlag & ")"
+        Dim Strdatacommand As String = "INSERT INTO PatientMedication(Patient_TUID, Medication_TUID, Ordering_Physician_ID, Date_Presrcibed, Quantity, Type, Frequency, Active_Flag) " &
+            "VALUES('" & intPatientID & "', '" & intMedicationID & "', '" & intPhysicianID & "', '" & dtmOrderTime & "', '" &
+            intAmount & "', '" & strType & "', '" & strFrequency & "', '" & intActiveFlag & "')"
         'call sql insert method to run command
         CreateDatabase.ExecuteInsertQuery(Strdatacommand)
 
     End Sub
+
+    Public Sub PopulateFrequencyNumberComboBox()
+        frmPharmacy.cmbFrequencyNumber.Sorted = False
+        For intCount As Integer = 1 To 24
+
+            If intCount = 1 Then
+                frmPharmacy.cmbFrequencyNumber.Items.Add(intCount & " Hour")
+            Else
+                frmPharmacy.cmbFrequencyNumber.Items.Add(intCount & " Hours")
+            End If
+
+        Next
+    End Sub
+
+
 End Module
