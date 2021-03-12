@@ -615,7 +615,7 @@
     Private Sub PrescriptionsSelectedField(ByVal field As Integer)
 
         ' clear the controls as they will need to be rebuilt when sorting
-        ' flpMedications.Controls.Clear()
+        flpMedications.Controls.Clear()
 
         Select Case field
 
@@ -632,7 +632,7 @@
             Case PrescriptionsEnum.PrescribedBy
 
             Case PrescriptionsEnum.Frequency
-
+                PatientInformation.PatinetInfoSortedByFrequency(intPatientID)
         End Select
 
     End Sub
