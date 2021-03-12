@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmPharmacy
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmPharmacy
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPharmacy))
         Me.Label10 = New System.Windows.Forms.Label()
@@ -46,7 +46,6 @@ Partial Class frmPharmacy
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.txtType = New System.Windows.Forms.TextBox()
         Me.cmbFrequencyNumber = New System.Windows.Forms.ComboBox()
-        Me.cboFrequencyAmount = New System.Windows.Forms.ComboBox()
         Me.Panel5.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -330,23 +329,6 @@ Partial Class frmPharmacy
         Me.cmbFrequencyNumber.Sorted = True
         Me.cmbFrequencyNumber.TabIndex = 8
         '
-        'cboFrequencyAmount
-        '
-        Me.cboFrequencyAmount.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cboFrequencyAmount.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cboFrequencyAmount.DropDownHeight = 250
-        Me.cboFrequencyAmount.DropDownWidth = 100
-        Me.cboFrequencyAmount.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboFrequencyAmount.FormattingEnabled = True
-        Me.cboFrequencyAmount.IntegralHeight = False
-        Me.cboFrequencyAmount.Items.AddRange(New Object() {"", "hs", "noct", "prn", "q 10am", "q 10pm", "q 11am", "q 11pm", "q 12pm", "q 1am", "q 1pm", "q 2am", "q 2pm", "q 3am", "q 3pm", "q 4am", "q 4pm", "q 5am", "q 5pm", "q 6am", "q 6pm", "q 7am", "q 7pm", "q 8am", "q 8pm", "q 9am", "q 9pm", "q am", "q12h", "q2-3h", "q2-4h", "q24h", "q4-6h", "q4h", "q6h", "qd", "qd pm", "qh", "qhs", "qid", "qod", "qpm", "qw", "tat", "tiw", "tud", "uat", "ud"})
-        Me.cboFrequencyAmount.Location = New System.Drawing.Point(546, 311)
-        Me.cboFrequencyAmount.MaxDropDownItems = 25
-        Me.cboFrequencyAmount.Name = "cboFrequencyAmount"
-        Me.cboFrequencyAmount.Size = New System.Drawing.Size(139, 29)
-        Me.cboFrequencyAmount.Sorted = True
-        Me.cboFrequencyAmount.TabIndex = 176
-        '
         'frmPharmacy
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -354,7 +336,6 @@ Partial Class frmPharmacy
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(717, 494)
-        Me.Controls.Add(Me.cboFrequencyAmount)
         Me.Controls.Add(Me.cmbFrequencyNumber)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.btnDecrement)
@@ -413,5 +394,4 @@ Partial Class frmPharmacy
     Friend WithEvents Panel3 As Panel
     Friend WithEvents txtType As TextBox
     Friend WithEvents cmbFrequencyNumber As ComboBox
-    Friend WithEvents cboFrequencyAmount As ComboBox
 End Class

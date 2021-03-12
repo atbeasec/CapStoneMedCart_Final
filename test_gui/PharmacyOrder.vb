@@ -100,14 +100,15 @@
     Public Sub PopulateFrequencyNumberComboBox()
         frmPharmacy.cmbFrequencyNumber.Sorted = False
         For intCount As Integer = 1 To 24
-            frmPharmacy.cmbFrequencyNumber.Items.Add(intCount)
+
+            If intCount = 1 Then
+                frmPharmacy.cmbFrequencyNumber.Items.Add(intCount & " Hour")
+            Else
+                frmPharmacy.cmbFrequencyNumber.Items.Add(intCount & " Hours")
+            End If
+
         Next
     End Sub
 
-    Public Sub PopulateFrequencyAmount()
-        frmPharmacy.cboFrequencyAmount.Items.Add("Hour")
-        frmPharmacy.cboFrequencyAmount.Items.Add("Days")
-        frmPharmacy.cboFrequencyAmount.Items.Add("Weeks")
-    End Sub
 
 End Module
