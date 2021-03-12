@@ -48,7 +48,7 @@
             MessageBox.Show("Please select a patient, medication and physician before placing the order")
         Else
             Dim dtmOrderTime As String = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
-            'PharmacyOrder()
+            PharmacyOrder.PharmacyOrder(intPatientIDfromArray, intMedIDfromArray, intPhysicianIDfromArray, txtQuantity.Text, txtType.Text, cmbFrequencyNumber.SelectedItem.ToString)
         End If
     End Sub
 
