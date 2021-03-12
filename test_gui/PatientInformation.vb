@@ -544,4 +544,136 @@ Module PatientInformation
         Next
 
     End Sub
+
+    Public Sub PatinetInfoSortedByDoctor(ByRef intPatient_ID As Integer)
+        Dim intPatientID As Integer = intPatient_ID ' CreateDatabase.ExecuteScalarQuery("SELECT Patient_ID from Patient WHERE Patient_ID = '" & intPatient_ID & "'")
+        Dim dsPatientInfo As DataSet
+        Dim strbSqlCommand As StringBuilder = New StringBuilder
+
+        'set up sql command inner joining the medication, patientMedicaiton and physician table
+        ' this is done to get the drug name, strength, type and frequency of the medication the specific patient
+        ' is prescribed, it then joins the patient medicaiton table to get the quantity, date prescribed and 
+        ' the physician ID who prescribed it, inner joining the physician table with the ID to get the name of the physician
+        strbSqlCommand.Append("SELECT Drug_Name, Strength, Frequency, Medication.Type, PatientMedication.Quantity, ")
+        strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name ")
+        strbSqlCommand.Append("FROM Medication Inner Join PatientMedication ON PatientMedication.Medication_TUID = Medication.Medication_ID ")
+        strbSqlCommand.Append("Inner Join Physician ON Physician.Physician_ID = PatientMedication.Ordering_Physician_ID ")
+        strbSqlCommand.Append("WHERE PatientMedication.Patient_TUID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1' ORDER BY Physician_Last_Name, Physician_First_Name")
+        dsPatientInfo = CreateDatabase.ExecuteSelectQuery(strbSqlCommand.ToString)
+        'look create panel method for each prescription the patient has
+        For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
+            frmPatientInfo.CreatePrescriptionsPanels(frmPatientInfo.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7))
+        Next
+
+    End Sub
+
+    Public Sub PatinetInfoSortedByDate(ByRef intPatient_ID As Integer)
+        Dim intPatientID As Integer = intPatient_ID ' CreateDatabase.ExecuteScalarQuery("SELECT Patient_ID from Patient WHERE Patient_ID = '" & intPatient_ID & "'")
+        Dim dsPatientInfo As DataSet
+        Dim strbSqlCommand As StringBuilder = New StringBuilder
+
+        'set up sql command inner joining the medication, patientMedicaiton and physician table
+        ' this is done to get the drug name, strength, type and frequency of the medication the specific patient
+        ' is prescribed, it then joins the patient medicaiton table to get the quantity, date prescribed and 
+        ' the physician ID who prescribed it, inner joining the physician table with the ID to get the name of the physician
+        strbSqlCommand.Append("SELECT Drug_Name, Strength, Frequency, Medication.Type, PatientMedication.Quantity, ")
+        strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name ")
+        strbSqlCommand.Append("FROM Medication Inner Join PatientMedication ON PatientMedication.Medication_TUID = Medication.Medication_ID ")
+        strbSqlCommand.Append("Inner Join Physician ON Physician.Physician_ID = PatientMedication.Ordering_Physician_ID ")
+        strbSqlCommand.Append("WHERE PatientMedication.Patient_TUID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1' ORDER BY Date_Presrcibed")
+        dsPatientInfo = CreateDatabase.ExecuteSelectQuery(strbSqlCommand.ToString)
+        'look create panel method for each prescription the patient has
+        For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
+            frmPatientInfo.CreatePrescriptionsPanels(frmPatientInfo.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7))
+        Next
+
+    End Sub
+
+    Public Sub PatinetInfoSortedByQuantity(ByRef intPatient_ID As Integer)
+        Dim intPatientID As Integer = intPatient_ID ' CreateDatabase.ExecuteScalarQuery("SELECT Patient_ID from Patient WHERE Patient_ID = '" & intPatient_ID & "'")
+        Dim dsPatientInfo As DataSet
+        Dim strbSqlCommand As StringBuilder = New StringBuilder
+
+        'set up sql command inner joining the medication, patientMedicaiton and physician table
+        ' this is done to get the drug name, strength, type and frequency of the medication the specific patient
+        ' is prescribed, it then joins the patient medicaiton table to get the quantity, date prescribed and 
+        ' the physician ID who prescribed it, inner joining the physician table with the ID to get the name of the physician
+        strbSqlCommand.Append("SELECT Drug_Name, Strength, Frequency, Medication.Type, PatientMedication.Quantity, ")
+        strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name ")
+        strbSqlCommand.Append("FROM Medication Inner Join PatientMedication ON PatientMedication.Medication_TUID = Medication.Medication_ID ")
+        strbSqlCommand.Append("Inner Join Physician ON Physician.Physician_ID = PatientMedication.Ordering_Physician_ID ")
+        strbSqlCommand.Append("WHERE PatientMedication.Patient_TUID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1' ORDER BY Quantity")
+        dsPatientInfo = CreateDatabase.ExecuteSelectQuery(strbSqlCommand.ToString)
+        'look create panel method for each prescription the patient has
+        For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
+            frmPatientInfo.CreatePrescriptionsPanels(frmPatientInfo.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7))
+        Next
+
+    End Sub
+
+    Public Sub PatinetInfoSortedByType(ByRef intPatient_ID As Integer)
+        Dim intPatientID As Integer = intPatient_ID ' CreateDatabase.ExecuteScalarQuery("SELECT Patient_ID from Patient WHERE Patient_ID = '" & intPatient_ID & "'")
+        Dim dsPatientInfo As DataSet
+        Dim strbSqlCommand As StringBuilder = New StringBuilder
+
+        'set up sql command inner joining the medication, patientMedicaiton and physician table
+        ' this is done to get the drug name, strength, type and frequency of the medication the specific patient
+        ' is prescribed, it then joins the patient medicaiton table to get the quantity, date prescribed and 
+        ' the physician ID who prescribed it, inner joining the physician table with the ID to get the name of the physician
+        strbSqlCommand.Append("SELECT Drug_Name, Strength, Frequency, Medication.Type, PatientMedication.Quantity, ")
+        strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name ")
+        strbSqlCommand.Append("FROM Medication Inner Join PatientMedication ON PatientMedication.Medication_TUID = Medication.Medication_ID ")
+        strbSqlCommand.Append("Inner Join Physician ON Physician.Physician_ID = PatientMedication.Ordering_Physician_ID ")
+        strbSqlCommand.Append("WHERE PatientMedication.Patient_TUID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1' ORDER BY PatientMedication.Type")
+        dsPatientInfo = CreateDatabase.ExecuteSelectQuery(strbSqlCommand.ToString)
+        'look create panel method for each prescription the patient has
+        For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
+            frmPatientInfo.CreatePrescriptionsPanels(frmPatientInfo.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7))
+        Next
+
+    End Sub
+
+    Public Sub PatinetInfoSortedByStrength(ByRef intPatient_ID As Integer)
+        Dim intPatientID As Integer = intPatient_ID ' CreateDatabase.ExecuteScalarQuery("SELECT Patient_ID from Patient WHERE Patient_ID = '" & intPatient_ID & "'")
+        Dim dsPatientInfo As DataSet
+        Dim strbSqlCommand As StringBuilder = New StringBuilder
+
+        'set up sql command inner joining the medication, patientMedicaiton and physician table
+        ' this is done to get the drug name, strength, type and frequency of the medication the specific patient
+        ' is prescribed, it then joins the patient medicaiton table to get the quantity, date prescribed and 
+        ' the physician ID who prescribed it, inner joining the physician table with the ID to get the name of the physician
+        strbSqlCommand.Append("SELECT Drug_Name, Strength, Frequency, Medication.Type, PatientMedication.Quantity, ")
+        strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name ")
+        strbSqlCommand.Append("FROM Medication Inner Join PatientMedication ON PatientMedication.Medication_TUID = Medication.Medication_ID ")
+        strbSqlCommand.Append("Inner Join Physician ON Physician.Physician_ID = PatientMedication.Ordering_Physician_ID ")
+        strbSqlCommand.Append("WHERE PatientMedication.Patient_TUID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1' ORDER BY CAST(Strength as INTEGER)")
+        dsPatientInfo = CreateDatabase.ExecuteSelectQuery(strbSqlCommand.ToString)
+        'look create panel method for each prescription the patient has
+        For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
+            frmPatientInfo.CreatePrescriptionsPanels(frmPatientInfo.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7))
+        Next
+
+    End Sub
+
+    Public Sub PatinetInfoSortedByDrugName(ByRef intPatient_ID As Integer)
+        Dim intPatientID As Integer = intPatient_ID ' CreateDatabase.ExecuteScalarQuery("SELECT Patient_ID from Patient WHERE Patient_ID = '" & intPatient_ID & "'")
+        Dim dsPatientInfo As DataSet
+        Dim strbSqlCommand As StringBuilder = New StringBuilder
+
+        'set up sql command inner joining the medication, patientMedicaiton and physician table
+        ' this is done to get the drug name, strength, type and frequency of the medication the specific patient
+        ' is prescribed, it then joins the patient medicaiton table to get the quantity, date prescribed and 
+        ' the physician ID who prescribed it, inner joining the physician table with the ID to get the name of the physician
+        strbSqlCommand.Append("SELECT Drug_Name, Strength, Frequency, Medication.Type, PatientMedication.Quantity, ")
+        strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name ")
+        strbSqlCommand.Append("FROM Medication Inner Join PatientMedication ON PatientMedication.Medication_TUID = Medication.Medication_ID ")
+        strbSqlCommand.Append("Inner Join Physician ON Physician.Physician_ID = PatientMedication.Ordering_Physician_ID ")
+        strbSqlCommand.Append("WHERE PatientMedication.Patient_TUID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1' ORDER BY Drug_Name")
+        dsPatientInfo = CreateDatabase.ExecuteSelectQuery(strbSqlCommand.ToString)
+        'look create panel method for each prescription the patient has
+        For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
+            frmPatientInfo.CreatePrescriptionsPanels(frmPatientInfo.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7))
+        Next
+
+    End Sub
 End Module
