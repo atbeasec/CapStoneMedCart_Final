@@ -481,7 +481,7 @@ Partial Class frmDispense
         Me.txtQuantity.Name = "txtQuantity"
         Me.txtQuantity.Size = New System.Drawing.Size(51, 26)
         Me.txtQuantity.TabIndex = 38
-        Me.txtQuantity.Text = "0"
+        Me.txtQuantity.Text = "1"
         '
         'pnlHeader
         '
@@ -510,7 +510,7 @@ Partial Class frmDispense
         Me.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnBack.UseVisualStyleBackColor = False
         '
-        'Dispense
+        'frmDispense
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -542,7 +542,7 @@ Partial Class frmDispense
         Me.Controls.Add(Me.flpMedications)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.lstboxAllergies)
-        Me.Name = "Dispense"
+        Me.Name = "frmDispense"
         Me.Text = "    Dispense"
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()

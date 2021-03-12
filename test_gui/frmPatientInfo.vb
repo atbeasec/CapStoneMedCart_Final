@@ -1,6 +1,7 @@
 ﻿Public Class frmPatientInfo
 
     Private intPatientID As Integer
+    Private intPatientMRN As Integer
     Public Enum DispenseHistoryEnum As Integer
         MedicationName = 1
         Strength = 2
@@ -20,13 +21,13 @@
     End Enum
 
     Public Sub setPatientID(ByVal ID As Integer)
-
         intPatientID = ID
+        intPatientMRN = ExecuteScalarQuery("SELECT MRN_Number from Patient WHERE Patient_ID =" & intPatientID & ";")
+        Debug.WriteLine("")
     End Sub
     Public Sub setPatientMrn(ByVal Mrn As Integer)
-        Dim intpatientmrn = Mrn
-
-        intPatientID = ExecuteScalarQuery("SELECT Patient_ID from Patient WHERE MRN_Number =" & intpatientmrn & ";")
+        intPatientMRN = Mrn
+        intPatientID = ExecuteScalarQuery("SELECT Patient_ID from Patient WHERE MRN_Number =" & intPatientMRN & ";")
         Debug.WriteLine("")
     End Sub
 
@@ -860,7 +861,7 @@
         ' pass MRN to the dispense screen because it needs to be used to be sent back to the patient info screen if the user
         ' decides to go back a screen.
 
-        frmDispense.SetPatientMrn(intPatientID)
+        frmDispense.SetPatientID(intPatientID)
         frmMain.OpenChildForm(frmDispense)
         DispenseHistory.DispensemedicationPopulate(intPatientID)
         PatientInformation.PopulatePatientDispenseInfo(intPatientID)
