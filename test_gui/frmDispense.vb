@@ -1,14 +1,22 @@
 ﻿Public Class frmDispense
 
-    Private intPatientMrn As Integer
+    Private intPatientID As Integer
+    Private intPatientMRN As Integer
 
     Dim contactPanelsAddedCount As Integer = 0
     Dim currentContactPanelName As String = Nothing
 
-    Public Sub SetPatientMrn(ByVal mrn As Integer)
-        intPatientMrn = mrn
+    Public Sub SetPatientID(ByVal ID As Integer)
+        intPatientID = ID
+        intPatientMRN = ExecuteScalarQuery("SELECT MRN_Number from Patient WHERE Patient_ID =" & intPatientID & ";")
+        Debug.WriteLine("")
     End Sub
 
+    Public Sub SetPatientMrn(ByVal mrn As Integer)
+        intPatientMRN = mrn
+        intPatientID = ExecuteScalarQuery("SELECT Patient_ID from Patient WHERE MRN_Number =" & intPatientMRN & ";")
+        Debug.WriteLine("")
+    End Sub
 
     Private Sub btnDispense_Click(sender As Object, e As EventArgs)
 
@@ -108,14 +116,21 @@
         DispenseHistory.SetMedicationProperties()
     End Sub
 
+    Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantity.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789")
+        GraphicalUserInterfaceReusableMethods.MaxValue(CInt(sender.Text), 1000, txtQuantity)
+    End Sub
     Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantity.TextChanged
-
-        'LimitQuantityToQuantityStocked(SQLreturnValue, sender)
-
+        If IsNumeric(sender.Text) Then
+            GraphicalUserInterfaceReusableMethods.MaxValue(CInt(sender.Text), 1000, txtQuantity)
+        Else
+            MessageBox.Show("Please make sure you enter a positive number 1-1000")
+            sender.Text = "1"
+        End If
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        frmPatientInfo.setPatientID(intPatientMrn)
+        frmPatientInfo.setPatientID(intPatientID)
         frmMain.OpenChildForm(frmPatientInfo)
 
     End Sub
