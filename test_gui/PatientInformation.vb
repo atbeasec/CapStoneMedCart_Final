@@ -434,9 +434,13 @@ Module PatientInformation
 
 
     Public Sub getRoom(intPatient_ID As Integer, cboRoom As ComboBox, cboBed As ComboBox)
+
         Dim strbSQL As StringBuilder = New StringBuilder
         Dim dsPatient As DataSet
         Dim dsPatientRoom As DataSet
+        Dim intPatient_TUID As Integer
+        Dim strbed As String = ""
+        Dim strroom As String = ""
 
         dsPatient = CreateDatabase.ExecuteSelectQuery("Select * from Patient where Patient_ID = '" & intPatient_ID & "';")
         strbSQL.Append("Select * from Rooms;")
@@ -444,12 +448,18 @@ Module PatientInformation
         'calling that function will populate the room combobox for us. 
 
         strbSQL.Clear()
-        strbSQL.Append("Select * from PatientRoom where Patient_TUID ='" & dsPatient.Tables(0).Rows(0)(EnumList.Patient.ID) & "';")
-
-        dsPatientRoom = CreateDatabase.ExecuteSelectQuery(strbSQL.ToString)
-        cboRoom.SelectedItem = dsPatientRoom.Tables(0).Rows(0)(EnumList.PatientRoom.RoomID)
+        For Each row As DataRow In dsPatient.Tables(0).Rows
+            intPatient_TUID = row(0)
+        Next
+        dsPatientRoom = CreateDatabase.ExecuteSelectQuery("Select * from PatientRoom where Patient_TUID ='" & intPatient_TUID & "';")
+        For Each row As DataRow In dsPatientRoom.Tables(0).Rows
+            strbed = row(1)
+            strroom = row(2)
+            Debug.WriteLine(" ")
+        Next
         PopulateRoomsCombBoxesMethods.UpdateBedComboBox(cboBed, cboRoom)
-        cboBed.SelectedItem = dsPatientRoom.Tables(0).Rows(0)(EnumList.PatientRoom.BedName)
+        cboRoom.SelectedItem = strroom
+        cboBed.SelectedItem = strbed
     End Sub
 
 

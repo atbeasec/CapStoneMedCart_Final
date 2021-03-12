@@ -2,10 +2,15 @@
 
     Private intPatientID As Integer
 
-    Public Sub setPatientMrn(ByVal ID As Integer)
+    Public Sub setPatientID(ByVal ID As Integer)
 
         intPatientID = ID
+    End Sub
+    Public Sub setPatientMrn(ByVal Mrn As Integer)
+        Dim intpatientmrn = Mrn
 
+        intPatientID = ExecuteScalarQuery("SELECT Patient_ID from Patient WHERE MRN_Number =" & intpatientmrn & ";")
+        Debug.WriteLine("")
     End Sub
 
     'Dim ContactPanelsAddedCount As Integer = 0
