@@ -12,31 +12,6 @@
     Dim intMedIDfromArray As Integer = 0
     Dim intPhysicianIDfromArray As Integer = 0
 
-    '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:       */
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
-    '/*		         DATE CREATED: 	   03/11/21							  */
-    '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE:
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      									          
-    '/*  (None)								           					  
-    '/*********************************************************************/
-    '/*  CALLS:														    	
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								                   						                           
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically):	
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						                      */
-    '/*											                          */
-    '/*  WHO                   WHEN     WHAT							  */
-    '/*  ---                   ----     ----------------------------------*/
-    '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
-    '/*********************************************************************/
     Private Sub frmPharmacy_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         cmbPatientName.Items.Clear()
         cmbOrderedBy.Items.Clear()
@@ -67,6 +42,31 @@
         Next
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:       */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/11/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   						                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
+    '/*********************************************************************/
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnORder.Click
         If cmbPatientName.SelectedIndex = -1 Or cmbMedication.SelectedIndex = -1 Or cmbOrderedBy.SelectedIndex = -1 Then
             MessageBox.Show("Please select a patient, medication and physician before placing the order")
@@ -76,6 +76,31 @@
         End If
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:       */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/11/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   						                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
+    '/*********************************************************************/
     Private Sub btnIncrement_Click(sender As Object, e As EventArgs) Handles btnIncrement.Click
         If Not IsNumeric(txtQuantity.Text) Then
             txtQuantity.Text = 0
@@ -84,6 +109,31 @@
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:       */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/11/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   						                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
+    '/*********************************************************************/
     Private Sub btnDecrement_Click(sender As Object, e As EventArgs) Handles btnDecrement.Click
         If Not IsNumeric(txtQuantity.Text) Then
             txtQuantity.Text = 2
@@ -96,10 +146,60 @@
         txtPatientDOB.Text = ExecuteScalarQuery("select Date_of_Birth from Patient where Patient_ID = '" & intPatientIDfromArray & "'")
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:       */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/11/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   						                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
+    '/*********************************************************************/
     Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantity.KeyPress
         KeyPressCheck(e, "0123456789")
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:       */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/11/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   						                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
+    '/*********************************************************************/
     Private Sub cmbMedication_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMedication.SelectedIndexChanged
         cmbStrength.Items.Clear()
         intMedIDfromArray = intMedID(cmbMedication.SelectedIndex)
@@ -109,6 +209,31 @@
         cmbStrength.SelectedIndex = 0
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:       */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/11/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   						                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
+    '/*********************************************************************/
     Private Sub cmbOrderedBy_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbOrderedBy.SelectedIndexChanged
         intPhysicianIDfromArray = intPhysicianID(cmbOrderedBy.SelectedIndex)
     End Sub
