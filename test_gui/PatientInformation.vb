@@ -453,8 +453,8 @@ Module PatientInformation
         Next
         dsPatientRoom = CreateDatabase.ExecuteSelectQuery("Select * from PatientRoom where Patient_TUID ='" & intPatient_TUID & "';")
         For Each row As DataRow In dsPatientRoom.Tables(0).Rows
-            strbed = row(1)
-            strroom = row(2)
+            strbed = row(2)
+            strroom = row(1)
             Debug.WriteLine(" ")
         Next
         PopulateRoomsCombBoxesMethods.UpdateBedComboBox(cboBed, cboRoom)
