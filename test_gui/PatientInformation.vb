@@ -409,10 +409,10 @@ Module PatientInformation
     '/*  CALLS:										   */                 
     '/*             (NONE)								   */             
     '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					   */         
-    '/*	 intPatientMRN - this is the patient medical record we are going to*/                     
+    '/*  PARAMETER LIST (In Parameter Order):					   */               
+    '/*	 intPatient_ID - this is the patient ID we are going to*/                     
     '/*                  be using for the SQL statements.                  */
-    '/*                                                                     
+    '/*                                                                    
     '/*********************************************************************/
     '/*  RETURNS:								         */                   
     '/*            (NOTHING)								   */             
@@ -480,9 +480,9 @@ Module PatientInformation
     '/*             (NONE)								   */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					   */         
-    '/*	 intPatientMRN - this is the patient medical record we are going to*/                     
+    '/*	 intPatient_ID - this is the patient ID we are going to*/                     
     '/*                  be using for the SQL statements.                  */
-    '/*                                                                     
+    '/*                                                                    
     '/*********************************************************************/
     '/*  RETURNS:								         */                   
     '/*            (NOTHING)								   */             
@@ -523,6 +523,44 @@ Module PatientInformation
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: PatinetInfoSortedByFrequency    */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker  		       */   
+    '/*		         DATE CREATED: 3/12/2021                    		   */                             
+    '/*********************************************************************/
+    '/*  SUBPROHRAM PURPOSE:								               */             
+    '/*	 This sub will populate the patient prescription panels on the 
+    '/*  patient dispense form sorted by the frequency in dispense time
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 intPatient_ID - this is the patient ID we are going to*/                     
+    '/*                  be using for the SQL statements.                  */
+    '/*                                                                    
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*   AB    3/12/2021    Initial creation                                     
+    '/*********************************************************************/
     Public Sub PatinetInfoSortedByFrequency(ByRef intPatient_ID As Integer)
         Dim intPatientID As Integer = intPatient_ID ' CreateDatabase.ExecuteScalarQuery("SELECT Patient_ID from Patient WHERE Patient_ID = '" & intPatient_ID & "'")
         Dim dsPatientInfo As DataSet
@@ -545,6 +583,44 @@ Module PatientInformation
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: PatinetInfoSortedByDoctor    */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker  		       */   
+    '/*		         DATE CREATED:  3/12/2021                       		   */                             
+    '/*********************************************************************/
+    '/*  SUBPROHRAM PURPOSE:								               */             
+    '/*	 This sub will populate the patient prescription panels on the 
+    '/*  patient dispense form sorted by the doctors last name and first name
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 intPatient_ID - this is the patient ID we are going to*/                     
+    '/*                  be using for the SQL statements.                  */
+    '/*                                                                    
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*   AB    3/12/2021    Initial creation                                     
+    '/*********************************************************************/
     Public Sub PatinetInfoSortedByDoctor(ByRef intPatient_ID As Integer)
         Dim intPatientID As Integer = intPatient_ID ' CreateDatabase.ExecuteScalarQuery("SELECT Patient_ID from Patient WHERE Patient_ID = '" & intPatient_ID & "'")
         Dim dsPatientInfo As DataSet
@@ -567,6 +643,44 @@ Module PatientInformation
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: PatinetInfoSortedByDate    */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker  		       */   
+    '/*		         DATE CREATED:  3/12/2021                          		   */                             
+    '/*********************************************************************/
+    '/*  SUBPROHRAM PURPOSE:								               */             
+    '/*	 This sub will populate the patient prescription panels on the 
+    '/*  patient dispense form  sorted by the prescription date
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 intPatient_ID - this is the patient ID we are going to*/                     
+    '/*                  be using for the SQL statements.                  */
+    '/*                                                                    
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*   AB    3/12/2021    Initial creation                                     
+    '/*********************************************************************/
     Public Sub PatinetInfoSortedByDate(ByRef intPatient_ID As Integer)
         Dim intPatientID As Integer = intPatient_ID ' CreateDatabase.ExecuteScalarQuery("SELECT Patient_ID from Patient WHERE Patient_ID = '" & intPatient_ID & "'")
         Dim dsPatientInfo As DataSet
@@ -589,6 +703,44 @@ Module PatientInformation
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: PatinetInfoSortedByQuantity    */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker  		       */   
+    '/*		         DATE CREATED:  3/12/2021                          		   */                             
+    '/*********************************************************************/
+    '/*  SUBPROHRAM PURPOSE:								               */             
+    '/*	 This sub will populate the patient prescription panels on the 
+    '/*  patient dispense form  sorted by the prescription quantity
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 intPatient_ID - this is the patient ID we are going to*/                     
+    '/*                  be using for the SQL statements.                  */
+    '/*                                                                    
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*   AB    3/12/2021    Initial creation                                     
+    '/*********************************************************************/
     Public Sub PatinetInfoSortedByQuantity(ByRef intPatient_ID As Integer)
         Dim intPatientID As Integer = intPatient_ID ' CreateDatabase.ExecuteScalarQuery("SELECT Patient_ID from Patient WHERE Patient_ID = '" & intPatient_ID & "'")
         Dim dsPatientInfo As DataSet
@@ -611,6 +763,44 @@ Module PatientInformation
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: PatinetInfoSortedByType    */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker  		       */   
+    '/*		         DATE CREATED: 3/12/2021              		   */                             
+    '/*********************************************************************/
+    '/*  SUBPROHRAM PURPOSE:								               */             
+    '/*	 This sub will populate the patient prescription panels on the 
+    '/*  patient dispense form sorted by the type of the medication
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 intPatient_ID - this is the patient ID we are going to*/                     
+    '/*                  be using for the SQL statements.                  */
+    '/*                                                                    
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*   AB    3/12/2021    Initial creation                                     
+    '/*********************************************************************/
     Public Sub PatinetInfoSortedByType(ByRef intPatient_ID As Integer)
         Dim intPatientID As Integer = intPatient_ID ' CreateDatabase.ExecuteScalarQuery("SELECT Patient_ID from Patient WHERE Patient_ID = '" & intPatient_ID & "'")
         Dim dsPatientInfo As DataSet
@@ -633,6 +823,44 @@ Module PatientInformation
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: PatinetInfoSortedByStrength    */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker  		       */   
+    '/*		         DATE CREATED:  3/12/2021                    		   */                             
+    '/*********************************************************************/
+    '/*  SUBPROHRAM PURPOSE:								               */             
+    '/*	 This sub will populate the patient prescription panels on the 
+    '/*  patient dispense form sorted by the strength of the medication
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 intPatient_ID - this is the patient ID we are going to*/                     
+    '/*                  be using for the SQL statements.                  */
+    '/*                                                                    
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*   AB    3/12/2021    Initial creation                                                                      
+    '/*********************************************************************/
     Public Sub PatinetInfoSortedByStrength(ByRef intPatient_ID As Integer)
         Dim intPatientID As Integer = intPatient_ID ' CreateDatabase.ExecuteScalarQuery("SELECT Patient_ID from Patient WHERE Patient_ID = '" & intPatient_ID & "'")
         Dim dsPatientInfo As DataSet
@@ -655,6 +883,44 @@ Module PatientInformation
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: PatinetInfoSortedByDrugName    */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker  		       */   
+    '/*		         DATE CREATED:  3/12/2021                       		   */                             
+    '/*********************************************************************/
+    '/*  SUBPROHRAM PURPOSE:								               */             
+    '/*	 This sub will populate the patient prescription panels on the 
+    '/*  patient dispense form sorted by the medication names
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 intPatient_ID - this is the patient ID we are going to*/                     
+    '/*                  be using for the SQL statements.                  */
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*   AB    3/12/2021    Initial creation                                                                  
+    '/*********************************************************************/
     Public Sub PatinetInfoSortedByDrugName(ByRef intPatient_ID As Integer)
         Dim intPatientID As Integer = intPatient_ID ' CreateDatabase.ExecuteScalarQuery("SELECT Patient_ID from Patient WHERE Patient_ID = '" & intPatient_ID & "'")
         Dim dsPatientInfo As DataSet
