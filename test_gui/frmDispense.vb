@@ -115,7 +115,7 @@
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        frmPatientInfo.setPatientMrn(intPatientMrn)
+        frmPatientInfo.setPatientID(intPatientMrn)
         frmMain.OpenChildForm(frmPatientInfo)
 
     End Sub

@@ -210,7 +210,7 @@
     Private Sub DynamicSingleClickOpenPatient(sender As Object, e As EventArgs)
 
         ' frmPatientInfo.txtMRN.Text = GetSelectedPatientMRN(sender)
-        frmPatientInfo.setPatientMrn(GetSelectedPatientMRN(sender))
+        frmPatientInfo.setPatientID(GetSelectedPatientMRN(sender))
         ' open the patient record form of the matching patient
         frmMain.OpenChildForm(frmPatientInfo)
 

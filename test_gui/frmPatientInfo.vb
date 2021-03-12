@@ -1,7 +1,6 @@
 ﻿Public Class frmPatientInfo
 
     Private intPatientID As Integer
-
     Public Enum DispenseHistoryEnum As Integer
         MedicationName = 1
         Strength = 2
@@ -19,10 +18,16 @@
         PrescribedBy = 6
         Frequency = 7
     End Enum
-    Public Sub setPatientMrn(ByVal ID As Integer)
+
+    Public Sub setPatientID(ByVal ID As Integer)
 
         intPatientID = ID
+    End Sub
+    Public Sub setPatientMrn(ByVal Mrn As Integer)
+        Dim intpatientmrn = Mrn
 
+        intPatientID = ExecuteScalarQuery("SELECT Patient_ID from Patient WHERE MRN_Number =" & intpatientmrn & ";")
+        Debug.WriteLine("")
     End Sub
 
 
