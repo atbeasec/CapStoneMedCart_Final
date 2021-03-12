@@ -1,6 +1,23 @@
 ﻿Public Class frmPatientInfo
 
     Private intPatientID As Integer
+    Public Enum DispenseHistoryEnum As Integer
+        MedicationName = 1
+        Strength = 2
+        Type = 3
+        Quantity = 4
+        DispensedBy = 5
+        DispenseDateAndTime = 6
+    End Enum
+    Public Enum PrescriptionsEnum As Integer
+        MedicationName = 1
+        Strength = 2
+        Type = 3
+        Quantity = 4
+        DatePrescribed = 5
+        PrescribedBy = 6
+        Frequency = 7
+    End Enum
 
     Public Sub setPatientID(ByVal ID As Integer)
 
