@@ -45,8 +45,8 @@ Partial Class frmPharmacy
         Me.txtQuantity = New System.Windows.Forms.TextBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.txtType = New System.Windows.Forms.TextBox()
-        Me.cmbFrequency = New System.Windows.Forms.ComboBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.cmbFrequencyNumber = New System.Windows.Forms.ComboBox()
+        Me.cboFrequencyAmount = New System.Windows.Forms.ComboBox()
         Me.Panel5.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -313,39 +313,39 @@ Partial Class frmPharmacy
         Me.txtType.TabIndex = 38
         Me.txtType.TabStop = False
         '
-        'cmbFrequency
+        'cmbFrequencyNumber
         '
-        Me.cmbFrequency.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cmbFrequency.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cmbFrequency.DropDownHeight = 250
-        Me.cmbFrequency.DropDownWidth = 100
-        Me.cmbFrequency.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbFrequency.FormattingEnabled = True
-        Me.cmbFrequency.IntegralHeight = False
-        Me.cmbFrequency.Items.AddRange(New Object() {"", "hs", "noct", "prn", "q 10am", "q 10pm", "q 11am", "q 11pm", "q 12pm", "q 1am", "q 1pm", "q 2am", "q 2pm", "q 3am", "q 3pm", "q 4am", "q 4pm", "q 5am", "q 5pm", "q 6am", "q 6pm", "q 7am", "q 7pm", "q 8am", "q 8pm", "q 9am", "q 9pm", "q am", "q12h", "q2-3h", "q2-4h", "q24h", "q4-6h", "q4h", "q6h", "qd", "qd pm", "qh", "qhs", "qid", "qod", "qpm", "qw", "tat", "tiw", "tud", "uat", "ud"})
-        Me.cmbFrequency.Location = New System.Drawing.Point(397, 311)
-        Me.cmbFrequency.MaxDropDownItems = 25
-        Me.cmbFrequency.Name = "cmbFrequency"
-        Me.cmbFrequency.Size = New System.Drawing.Size(121, 29)
-        Me.cmbFrequency.Sorted = True
-        Me.cmbFrequency.TabIndex = 8
+        Me.cmbFrequencyNumber.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbFrequencyNumber.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cmbFrequencyNumber.DropDownHeight = 250
+        Me.cmbFrequencyNumber.DropDownWidth = 100
+        Me.cmbFrequencyNumber.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbFrequencyNumber.FormattingEnabled = True
+        Me.cmbFrequencyNumber.IntegralHeight = False
+        Me.cmbFrequencyNumber.Items.AddRange(New Object() {"", "hs", "noct", "prn", "q 10am", "q 10pm", "q 11am", "q 11pm", "q 12pm", "q 1am", "q 1pm", "q 2am", "q 2pm", "q 3am", "q 3pm", "q 4am", "q 4pm", "q 5am", "q 5pm", "q 6am", "q 6pm", "q 7am", "q 7pm", "q 8am", "q 8pm", "q 9am", "q 9pm", "q am", "q12h", "q2-3h", "q2-4h", "q24h", "q4-6h", "q4h", "q6h", "qd", "qd pm", "qh", "qhs", "qid", "qod", "qpm", "qw", "tat", "tiw", "tud", "uat", "ud"})
+        Me.cmbFrequencyNumber.Location = New System.Drawing.Point(397, 311)
+        Me.cmbFrequencyNumber.MaxDropDownItems = 25
+        Me.cmbFrequencyNumber.Name = "cmbFrequencyNumber"
+        Me.cmbFrequencyNumber.Size = New System.Drawing.Size(121, 29)
+        Me.cmbFrequencyNumber.Sorted = True
+        Me.cmbFrequencyNumber.TabIndex = 8
         '
-        'ComboBox1
+        'cboFrequencyAmount
         '
-        Me.ComboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.ComboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.ComboBox1.DropDownHeight = 250
-        Me.ComboBox1.DropDownWidth = 100
-        Me.ComboBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.IntegralHeight = False
-        Me.ComboBox1.Items.AddRange(New Object() {"", "hs", "noct", "prn", "q 10am", "q 10pm", "q 11am", "q 11pm", "q 12pm", "q 1am", "q 1pm", "q 2am", "q 2pm", "q 3am", "q 3pm", "q 4am", "q 4pm", "q 5am", "q 5pm", "q 6am", "q 6pm", "q 7am", "q 7pm", "q 8am", "q 8pm", "q 9am", "q 9pm", "q am", "q12h", "q2-3h", "q2-4h", "q24h", "q4-6h", "q4h", "q6h", "qd", "qd pm", "qh", "qhs", "qid", "qod", "qpm", "qw", "tat", "tiw", "tud", "uat", "ud"})
-        Me.ComboBox1.Location = New System.Drawing.Point(546, 311)
-        Me.ComboBox1.MaxDropDownItems = 25
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(139, 29)
-        Me.ComboBox1.Sorted = True
-        Me.ComboBox1.TabIndex = 176
+        Me.cboFrequencyAmount.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cboFrequencyAmount.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cboFrequencyAmount.DropDownHeight = 250
+        Me.cboFrequencyAmount.DropDownWidth = 100
+        Me.cboFrequencyAmount.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboFrequencyAmount.FormattingEnabled = True
+        Me.cboFrequencyAmount.IntegralHeight = False
+        Me.cboFrequencyAmount.Items.AddRange(New Object() {"", "hs", "noct", "prn", "q 10am", "q 10pm", "q 11am", "q 11pm", "q 12pm", "q 1am", "q 1pm", "q 2am", "q 2pm", "q 3am", "q 3pm", "q 4am", "q 4pm", "q 5am", "q 5pm", "q 6am", "q 6pm", "q 7am", "q 7pm", "q 8am", "q 8pm", "q 9am", "q 9pm", "q am", "q12h", "q2-3h", "q2-4h", "q24h", "q4-6h", "q4h", "q6h", "qd", "qd pm", "qh", "qhs", "qid", "qod", "qpm", "qw", "tat", "tiw", "tud", "uat", "ud"})
+        Me.cboFrequencyAmount.Location = New System.Drawing.Point(546, 311)
+        Me.cboFrequencyAmount.MaxDropDownItems = 25
+        Me.cboFrequencyAmount.Name = "cboFrequencyAmount"
+        Me.cboFrequencyAmount.Size = New System.Drawing.Size(139, 29)
+        Me.cboFrequencyAmount.Sorted = True
+        Me.cboFrequencyAmount.TabIndex = 176
         '
         'frmPharmacy
         '
@@ -354,8 +354,8 @@ Partial Class frmPharmacy
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(717, 494)
-        Me.Controls.Add(Me.ComboBox1)
-        Me.Controls.Add(Me.cmbFrequency)
+        Me.Controls.Add(Me.cboFrequencyAmount)
+        Me.Controls.Add(Me.cmbFrequencyNumber)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.btnDecrement)
         Me.Controls.Add(Me.btnIncrement)
@@ -412,6 +412,6 @@ Partial Class frmPharmacy
     Friend WithEvents txtQuantity As TextBox
     Friend WithEvents Panel3 As Panel
     Friend WithEvents txtType As TextBox
-    Friend WithEvents cmbFrequency As ComboBox
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents cmbFrequencyNumber As ComboBox
+    Friend WithEvents cboFrequencyAmount As ComboBox
 End Class

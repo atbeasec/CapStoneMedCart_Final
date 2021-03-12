@@ -18,7 +18,11 @@
         cmbOrderedBy.Items.Clear()
         cmbMedication.Items.Clear()
         cmbStrength.Items.Clear()
+        cmbFrequencyNumber.Items.Clear()
+        cboFrequencyAmount.Items.Clear()
         txtQuantity.Text = 1
+        PopulateFrequencyNumberComboBox()
+        PopulateFrequencyAmount()
         Dim intCounter As Integer = 0
         dsMedications = ExecuteSelectQuery("SELECT * From Medication Inner Join DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE DrawerMedication.Active_Flag = '1' ORDER BY Medication.Medication_ID")
         dsPhysicians = ExecuteSelectQuery("Select * From Physician WHERE Active_Flag = '1' ORDER BY Physician_Last_Name, Physician_First_Name;")
