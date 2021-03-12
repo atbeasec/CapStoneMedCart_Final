@@ -37,6 +37,9 @@ Partial Class frmMyPatients
         Me.lblRoom = New System.Windows.Forms.Label()
         Me.lblMRN = New System.Windows.Forms.Label()
         Me.lblFirstName = New System.Windows.Forms.Label()
+        Me.txtPhysician = New System.Windows.Forms.TextBox()
+        Me.rdbShowAll = New System.Windows.Forms.RadioButton()
+        Me.rdbOnlyActive = New System.Windows.Forms.RadioButton()
         Me.pnlHeaderPatientRecords.SuspendLayout()
         Me.Panel9.SuspendLayout()
         Me.pnlSearch.SuspendLayout()
@@ -55,6 +58,9 @@ Partial Class frmMyPatients
         'pnlHeaderPatientRecords
         '
         Me.pnlHeaderPatientRecords.BackColor = System.Drawing.Color.White
+        Me.pnlHeaderPatientRecords.Controls.Add(Me.rdbOnlyActive)
+        Me.pnlHeaderPatientRecords.Controls.Add(Me.rdbShowAll)
+        Me.pnlHeaderPatientRecords.Controls.Add(Me.txtPhysician)
         Me.pnlHeaderPatientRecords.Controls.Add(Me.Panel9)
         Me.pnlHeaderPatientRecords.Controls.Add(Me.btnNewPatient)
         Me.pnlHeaderPatientRecords.Dock = System.Windows.Forms.DockStyle.Top
@@ -211,6 +217,37 @@ Partial Class frmMyPatients
         Me.lblFirstName.TabIndex = 0
         Me.lblFirstName.Text = "First Name"
         '
+        'txtPhysician
+        '
+        Me.txtPhysician.Enabled = False
+        Me.txtPhysician.Location = New System.Drawing.Point(505, 12)
+        Me.txtPhysician.Name = "txtPhysician"
+        Me.txtPhysician.Size = New System.Drawing.Size(244, 20)
+        Me.txtPhysician.TabIndex = 21
+        '
+        'rdbShowAll
+        '
+        Me.rdbShowAll.AutoSize = True
+        Me.rdbShowAll.Checked = True
+        Me.rdbShowAll.Location = New System.Drawing.Point(515, 38)
+        Me.rdbShowAll.Name = "rdbShowAll"
+        Me.rdbShowAll.Size = New System.Drawing.Size(66, 17)
+        Me.rdbShowAll.TabIndex = 22
+        Me.rdbShowAll.TabStop = True
+        Me.rdbShowAll.Text = "Show All"
+        Me.rdbShowAll.UseVisualStyleBackColor = True
+        '
+        'rdbOnlyActive
+        '
+        Me.rdbOnlyActive.AutoSize = True
+        Me.rdbOnlyActive.Location = New System.Drawing.Point(630, 38)
+        Me.rdbOnlyActive.Name = "rdbOnlyActive"
+        Me.rdbOnlyActive.Size = New System.Drawing.Size(79, 17)
+        Me.rdbOnlyActive.TabIndex = 23
+        Me.rdbOnlyActive.TabStop = True
+        Me.rdbOnlyActive.Text = "Only Active"
+        Me.rdbOnlyActive.UseVisualStyleBackColor = True
+        '
         'frmMyPatients
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -223,6 +260,7 @@ Partial Class frmMyPatients
         Me.Name = "frmMyPatients"
         Me.Text = "frmMyPatients"
         Me.pnlHeaderPatientRecords.ResumeLayout(False)
+        Me.pnlHeaderPatientRecords.PerformLayout()
         Me.Panel9.ResumeLayout(False)
         Me.Panel9.PerformLayout()
         Me.pnlSearch.ResumeLayout(False)
@@ -246,4 +284,7 @@ Partial Class frmMyPatients
     Friend WithEvents lblRoom As Label
     Friend WithEvents lblMRN As Label
     Friend WithEvents lblFirstName As Label
+    Friend WithEvents txtPhysician As TextBox
+    Friend WithEvents rdbOnlyActive As RadioButton
+    Friend WithEvents rdbShowAll As RadioButton
 End Class
