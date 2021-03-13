@@ -334,8 +334,8 @@
 
     End Sub
 
-    Private Sub Label38_Click(sender As Object, e As EventArgs) Handles lblStrength.Click
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
 
+        ' call code here to update the database with the txtCapacity and txtDividers information about the drawer.
     End Sub
-
 End Class
