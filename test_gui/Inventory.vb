@@ -170,10 +170,10 @@
     Public Sub WasteMedication()
         If Not IsNothing(Waste.cboMedication.SelectedItem) Then
             Dim strSqlCommand As String
-            Dim strArray() As String
-            Dim strMedication As String = Waste.cboMedication.SelectedItem
             Dim intDrawerMedID As Integer
             Dim strWasteReason As String = " "
+            Dim intSelectedIndex As Integer = Waste.cboMedication.SelectedIndex
+            intSelectedIndex = Waste.intMedicationID(intSelectedIndex)
 
             If Waste.rbtnOther.Checked Then
                 strWasteReason = Waste.TextBox1.Text
@@ -190,9 +190,8 @@
             End If
 
             Dim dtmAdhocTime As String = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")
-            strArray = strMedication.Split("--")
-            strMedication = strArray(2)
-            strSqlCommand = "SELECT DrawerMedication_ID FROM DrawerMedication INNER JOIN Medication on Medication.Medication_ID = DrawerMedication.Medication_TUID WHERE Medication.RXCUI_ID = '" & strMedication & "'"
+
+            strSqlCommand = "SELECT DrawerMedication_ID FROM DrawerMedication INNER JOIN Medication on Medication.Medication_ID = DrawerMedication.Medication_TUID WHERE Medication.Medication_ID = '" & intSelectedIndex & "'"
             intDrawerMedID = CreateDatabase.ExecuteScalarQuery(strSqlCommand)
 
             strSqlCommand = "INSERT INTO Wastes(Primary_User_TUID,Secondary_User_TUID,DrawerMedication_TUID,DateTime,Reason) VALUES('1','1','" & intDrawerMedID & "','" & dtmAdhocTime & "','" & strWasteReason & "')"
