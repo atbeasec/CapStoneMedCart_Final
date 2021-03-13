@@ -107,7 +107,7 @@
 
     Private Sub btnDispense_Click_1(sender As Object, e As EventArgs) Handles btnDispense.Click
         If Not IsNothing(cmbMedications.SelectedItem) Then
-            DispenseHistory.DispenseMedication(DispenseHistory.SplitMedicationString(cmbMedications.SelectedItem), txtMRN.Text)
+            DispenseHistory.DispenseMedication(DispenseHistory.SplitMedicationString(cmbMedications.SelectedItem), txtPatientID.Text)
         End If
 
     End Sub
