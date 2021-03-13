@@ -29,7 +29,7 @@ Partial Class Waste
         Me.pnlRadioButtons = New System.Windows.Forms.Panel()
         Me.pnlSignOff = New System.Windows.Forms.Panel()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.txtWitness = New System.Windows.Forms.TextBox()
         Me.btnWaste = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.rbtnOther = New System.Windows.Forms.RadioButton()
@@ -92,7 +92,7 @@ Partial Class Waste
         'pnlSignOff
         '
         Me.pnlSignOff.Controls.Add(Me.Label3)
-        Me.pnlSignOff.Controls.Add(Me.TextBox2)
+        Me.pnlSignOff.Controls.Add(Me.txtWitness)
         Me.pnlSignOff.Controls.Add(Me.btnWaste)
         Me.pnlSignOff.Location = New System.Drawing.Point(0, 248)
         Me.pnlSignOff.Name = "pnlSignOff"
@@ -109,13 +109,13 @@ Partial Class Waste
         Me.Label3.TabIndex = 32
         Me.Label3.Text = "Witness Sign-off Required"
         '
-        'TextBox2
+        'txtWitness
         '
-        Me.TextBox2.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(4, 38)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(306, 27)
-        Me.TextBox2.TabIndex = 30
+        Me.txtWitness.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtWitness.Location = New System.Drawing.Point(4, 38)
+        Me.txtWitness.Name = "txtWitness"
+        Me.txtWitness.Size = New System.Drawing.Size(306, 27)
+        Me.txtWitness.TabIndex = 30
         '
         'btnWaste
         '
@@ -277,7 +277,7 @@ Partial Class Waste
     Friend WithEvents rbtnDispenseDevice As RadioButton
     Friend WithEvents pnlSignOff As Panel
     Friend WithEvents Label3 As Label
-    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents txtWitness As TextBox
     Friend WithEvents btnWaste As Button
     Friend WithEvents pnlHeader As Panel
     Friend WithEvents btnBack As Button
