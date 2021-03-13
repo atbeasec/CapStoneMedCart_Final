@@ -71,7 +71,7 @@ Partial Class Waste
         Me.cboMedication.FormattingEnabled = True
         Me.cboMedication.Location = New System.Drawing.Point(29, 102)
         Me.cboMedication.Name = "cboMedication"
-        Me.cboMedication.Size = New System.Drawing.Size(325, 29)
+        Me.cboMedication.Size = New System.Drawing.Size(447, 29)
         Me.cboMedication.TabIndex = 24
         '
         'pnlRadioButtons
@@ -86,7 +86,7 @@ Partial Class Waste
         Me.pnlRadioButtons.Controls.Add(Me.rbtnDispenseDevice)
         Me.pnlRadioButtons.Location = New System.Drawing.Point(29, 183)
         Me.pnlRadioButtons.Name = "pnlRadioButtons"
-        Me.pnlRadioButtons.Size = New System.Drawing.Size(325, 482)
+        Me.pnlRadioButtons.Size = New System.Drawing.Size(447, 482)
         Me.pnlRadioButtons.TabIndex = 23
         '
         'pnlSignOff
@@ -96,7 +96,7 @@ Partial Class Waste
         Me.pnlSignOff.Controls.Add(Me.btnWaste)
         Me.pnlSignOff.Location = New System.Drawing.Point(0, 248)
         Me.pnlSignOff.Name = "pnlSignOff"
-        Me.pnlSignOff.Size = New System.Drawing.Size(325, 135)
+        Me.pnlSignOff.Size = New System.Drawing.Size(444, 135)
         Me.pnlSignOff.TabIndex = 24
         '
         'Label3
@@ -114,7 +114,7 @@ Partial Class Waste
         Me.txtWitness.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtWitness.Location = New System.Drawing.Point(4, 38)
         Me.txtWitness.Name = "txtWitness"
-        Me.txtWitness.Size = New System.Drawing.Size(306, 27)
+        Me.txtWitness.Size = New System.Drawing.Size(437, 27)
         Me.txtWitness.TabIndex = 30
         '
         'btnWaste
@@ -126,7 +126,7 @@ Partial Class Waste
         Me.btnWaste.ForeColor = System.Drawing.Color.White
         Me.btnWaste.Image = CType(resources.GetObject("btnWaste.Image"), System.Drawing.Image)
         Me.btnWaste.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnWaste.Location = New System.Drawing.Point(80, 83)
+        Me.btnWaste.Location = New System.Drawing.Point(122, 82)
         Me.btnWaste.Name = "btnWaste"
         Me.btnWaste.Size = New System.Drawing.Size(150, 37)
         Me.btnWaste.TabIndex = 31

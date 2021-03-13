@@ -1,6 +1,7 @@
 ﻿Public Class Waste
 
     Private intPatientInformationMRN As Integer
+    Public intMedicationID As New ArrayList
 
     'this function should set Patient MRN using PatientID
     Public Sub SetPatientMRN(ByVal mrn As Integer)

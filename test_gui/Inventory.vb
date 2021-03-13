@@ -128,13 +128,14 @@
         Dim Strdatacommand As String
         ' Currently the medication display is appending the RXCUI Number on too the medication
         ' name, as searching by name alone could cause problems if medication names can repeat
-        Strdatacommand = "Select Drug_Name, RXCUI_ID FROM Medication INNER JOIN DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE DrawerMedication.Active_Flag = 1"
+        Strdatacommand = "Select * FROM Medication INNER JOIN DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE DrawerMedication.Active_Flag = 1"
 
         Dim dsMedicationDataSet As DataSet = New DataSet
         dsMedicationDataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
         'add medication name and RXCUI to listbox
         For Each dr As DataRow In dsMedicationDataSet.Tables(0).Rows
-            Waste.cboMedication.Items.Add(dr(0) & "--" & dr(1))
+            Waste.cboMedication.Items.Add(dr(EnumList.Medication.Name) & "  RXCUI: " & dr(EnumList.Medication.RXCUI))
+            Waste.intMedicationID.Add(dr(EnumList.Medication.ID))
         Next
 
     End Sub
