@@ -85,7 +85,7 @@
         Inventory.WasteMedication()
         cboMedication.SelectedIndex = -1
         rbtnDispenseDevice.Checked = True
-        txtWitness.Text = Nothing
+        cboWitness.SelectedIndex = -1
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click

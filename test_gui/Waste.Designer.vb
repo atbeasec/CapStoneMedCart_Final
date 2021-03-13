@@ -29,7 +29,6 @@ Partial Class Waste
         Me.pnlRadioButtons = New System.Windows.Forms.Panel()
         Me.pnlSignOff = New System.Windows.Forms.Panel()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.txtWitness = New System.Windows.Forms.TextBox()
         Me.btnWaste = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.rbtnOther = New System.Windows.Forms.RadioButton()
@@ -40,6 +39,7 @@ Partial Class Waste
         Me.rbtnDispenseDevice = New System.Windows.Forms.RadioButton()
         Me.pnlHeader = New System.Windows.Forms.Panel()
         Me.btnBack = New System.Windows.Forms.Button()
+        Me.cboWitness = New System.Windows.Forms.ComboBox()
         Me.pnlRadioButtons.SuspendLayout()
         Me.pnlSignOff.SuspendLayout()
         Me.pnlHeader.SuspendLayout()
@@ -91,10 +91,10 @@ Partial Class Waste
         '
         'pnlSignOff
         '
+        Me.pnlSignOff.Controls.Add(Me.cboWitness)
         Me.pnlSignOff.Controls.Add(Me.Label3)
-        Me.pnlSignOff.Controls.Add(Me.txtWitness)
         Me.pnlSignOff.Controls.Add(Me.btnWaste)
-        Me.pnlSignOff.Location = New System.Drawing.Point(0, 248)
+        Me.pnlSignOff.Location = New System.Drawing.Point(3, 248)
         Me.pnlSignOff.Name = "pnlSignOff"
         Me.pnlSignOff.Size = New System.Drawing.Size(444, 135)
         Me.pnlSignOff.TabIndex = 24
@@ -108,14 +108,6 @@ Partial Class Waste
         Me.Label3.Size = New System.Drawing.Size(235, 25)
         Me.Label3.TabIndex = 32
         Me.Label3.Text = "Witness Sign-off Required"
-        '
-        'txtWitness
-        '
-        Me.txtWitness.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtWitness.Location = New System.Drawing.Point(4, 38)
-        Me.txtWitness.Name = "txtWitness"
-        Me.txtWitness.Size = New System.Drawing.Size(437, 27)
-        Me.txtWitness.TabIndex = 30
         '
         'btnWaste
         '
@@ -139,7 +131,7 @@ Partial Class Waste
         Me.TextBox1.Location = New System.Drawing.Point(39, 248)
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(250, 86)
+        Me.TextBox1.Size = New System.Drawing.Size(329, 124)
         Me.TextBox1.TabIndex = 6
         '
         'rbtnOther
@@ -242,6 +234,15 @@ Partial Class Waste
         Me.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnBack.UseVisualStyleBackColor = False
         '
+        'cboWitness
+        '
+        Me.cboWitness.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboWitness.FormattingEnabled = True
+        Me.cboWitness.Location = New System.Drawing.Point(0, 38)
+        Me.cboWitness.Name = "cboWitness"
+        Me.cboWitness.Size = New System.Drawing.Size(441, 29)
+        Me.cboWitness.TabIndex = 33
+        '
         'Waste
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -277,8 +278,8 @@ Partial Class Waste
     Friend WithEvents rbtnDispenseDevice As RadioButton
     Friend WithEvents pnlSignOff As Panel
     Friend WithEvents Label3 As Label
-    Friend WithEvents txtWitness As TextBox
     Friend WithEvents btnWaste As Button
     Friend WithEvents pnlHeader As Panel
     Friend WithEvents btnBack As Button
+    Friend WithEvents cboWitness As ComboBox
 End Class
