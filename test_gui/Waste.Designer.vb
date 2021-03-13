@@ -25,7 +25,7 @@ Partial Class Waste
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Waste))
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.cboMedication = New System.Windows.Forms.ComboBox()
         Me.pnlRadioButtons = New System.Windows.Forms.Panel()
         Me.pnlSignOff = New System.Windows.Forms.Panel()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -65,14 +65,14 @@ Partial Class Waste
         Me.Label1.TabIndex = 25
         Me.Label1.Text = "Select Wasted Medication"
         '
-        'ComboBox1
+        'cboMedication
         '
-        Me.ComboBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(29, 102)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(325, 29)
-        Me.ComboBox1.TabIndex = 24
+        Me.cboMedication.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboMedication.FormattingEnabled = True
+        Me.cboMedication.Location = New System.Drawing.Point(29, 102)
+        Me.cboMedication.Name = "cboMedication"
+        Me.cboMedication.Size = New System.Drawing.Size(325, 29)
+        Me.cboMedication.TabIndex = 24
         '
         'pnlRadioButtons
         '
@@ -251,7 +251,7 @@ Partial Class Waste
         Me.Controls.Add(Me.pnlHeader)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.ComboBox1)
+        Me.Controls.Add(Me.cboMedication)
         Me.Controls.Add(Me.pnlRadioButtons)
         Me.Name = "Waste"
         Me.Text = "Waste"
@@ -266,7 +266,7 @@ Partial Class Waste
     End Sub
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents cboMedication As ComboBox
     Friend WithEvents pnlRadioButtons As Panel
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents rbtnOther As RadioButton

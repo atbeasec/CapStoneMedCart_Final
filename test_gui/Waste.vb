@@ -24,8 +24,6 @@
             btnBack.Visible = False
         End If
 
-
-
         Inventory.PopulateWasteComboBoxMedication()
     End Sub
 
@@ -84,13 +82,12 @@
 
     Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
         Inventory.WasteMedication()
+        cboMedication.SelectedIndex = -1
+        rbtnDispenseDevice.Checked = True
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         frmPatientInfo.setPatientMrn(intPatientInformationMRN)
         frmMain.OpenChildForm(frmPatientInfo)
-
     End Sub
-
-
 End Class

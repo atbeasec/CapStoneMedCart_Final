@@ -134,7 +134,7 @@
         dsMedicationDataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
         'add medication name and RXCUI to listbox
         For Each dr As DataRow In dsMedicationDataSet.Tables(0).Rows
-            Waste.ComboBox1.Items.Add(dr(0) & "--" & dr(1))
+            Waste.cboMedication.Items.Add(dr(0) & "--" & dr(1))
         Next
 
     End Sub
@@ -167,10 +167,10 @@
     '/*  Alexander Beasecker  02/10/21	  Initial creation of the code    */
     '/*********************************************************************/
     Public Sub WasteMedication()
-        If Not IsNothing(Waste.ComboBox1.SelectedItem) Then
+        If Not IsNothing(Waste.cboMedication.SelectedItem) Then
             Dim strSqlCommand As String
             Dim strArray() As String
-            Dim strMedication As String = Waste.ComboBox1.SelectedItem
+            Dim strMedication As String = Waste.cboMedication.SelectedItem
             Dim intDrawerMedID As Integer
             Dim strWasteReason As String = " "
 
