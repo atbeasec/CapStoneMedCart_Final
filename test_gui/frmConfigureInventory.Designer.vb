@@ -706,11 +706,11 @@ Partial Class frmConfigureInventory
         Me.btnSave.ForeColor = System.Drawing.Color.White
         Me.btnSave.Image = Global.test_gui.My.Resources.Resources.resolve
         Me.btnSave.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnSave.Location = New System.Drawing.Point(928, 49)
+        Me.btnSave.Location = New System.Drawing.Point(834, 49)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(103, 32)
+        Me.btnSave.Size = New System.Drawing.Size(197, 32)
         Me.btnSave.TabIndex = 173
-        Me.btnSave.Text = "  SAVE"
+        Me.btnSave.Text = "  SAVE CHANGES"
         Me.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnSave.UseVisualStyleBackColor = False
         '
