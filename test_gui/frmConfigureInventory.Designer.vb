@@ -71,6 +71,7 @@ Partial Class frmConfigureInventory
         Me.btnIncrementCapacity = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.txtCapacity = New System.Windows.Forms.TextBox()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.pnlLayoutButtons.SuspendLayout()
         Me.pnlHeader.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -439,7 +440,7 @@ Partial Class frmConfigureInventory
         '
         Me.flpMedication.AutoScroll = True
         Me.flpMedication.BackColor = System.Drawing.Color.White
-        Me.flpMedication.Location = New System.Drawing.Point(350, 131)
+        Me.flpMedication.Location = New System.Drawing.Point(350, 137)
         Me.flpMedication.Name = "flpMedication"
         Me.flpMedication.Size = New System.Drawing.Size(681, 222)
         Me.flpMedication.TabIndex = 42
@@ -453,7 +454,7 @@ Partial Class frmConfigureInventory
         Me.pnlHeader.Controls.Add(Me.Label32)
         Me.pnlHeader.Controls.Add(Me.lblQuantity)
         Me.pnlHeader.Controls.Add(Me.lblStrength)
-        Me.pnlHeader.Location = New System.Drawing.Point(350, 78)
+        Me.pnlHeader.Location = New System.Drawing.Point(350, 84)
         Me.pnlHeader.Name = "pnlHeader"
         Me.pnlHeader.Size = New System.Drawing.Size(679, 47)
         Me.pnlHeader.TabIndex = 41
@@ -552,7 +553,7 @@ Partial Class frmConfigureInventory
         Me.btnAddToDrawer.ForeColor = System.Drawing.Color.White
         Me.btnAddToDrawer.Image = CType(resources.GetObject("btnAddToDrawer.Image"), System.Drawing.Image)
         Me.btnAddToDrawer.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnAddToDrawer.Location = New System.Drawing.Point(832, 40)
+        Me.btnAddToDrawer.Location = New System.Drawing.Point(834, 1)
         Me.btnAddToDrawer.Name = "btnAddToDrawer"
         Me.btnAddToDrawer.Size = New System.Drawing.Size(197, 32)
         Me.btnAddToDrawer.TabIndex = 32
@@ -565,7 +566,7 @@ Partial Class frmConfigureInventory
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label9.Location = New System.Drawing.Point(589, 45)
+        Me.Label9.Location = New System.Drawing.Point(568, 57)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(70, 21)
         Me.Label9.TabIndex = 168
@@ -586,7 +587,7 @@ Partial Class frmConfigureInventory
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label7.Location = New System.Drawing.Point(361, 42)
+        Me.Label7.Location = New System.Drawing.Point(349, 58)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(72, 21)
         Me.Label7.TabIndex = 172
@@ -600,7 +601,7 @@ Partial Class frmConfigureInventory
         Me.btnDecrementDividers.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDecrementDividers.ForeColor = System.Drawing.Color.White
         Me.btnDecrementDividers.Image = CType(resources.GetObject("btnDecrementDividers.Image"), System.Drawing.Image)
-        Me.btnDecrementDividers.Location = New System.Drawing.Point(768, 42)
+        Me.btnDecrementDividers.Location = New System.Drawing.Point(747, 54)
         Me.btnDecrementDividers.Name = "btnDecrementDividers"
         Me.btnDecrementDividers.Size = New System.Drawing.Size(28, 28)
         Me.btnDecrementDividers.TabIndex = 31
@@ -615,7 +616,7 @@ Partial Class frmConfigureInventory
         Me.btnIncrementDividers.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnIncrementDividers.ForeColor = System.Drawing.Color.White
         Me.btnIncrementDividers.Image = CType(resources.GetObject("btnIncrementDividers.Image"), System.Drawing.Image)
-        Me.btnIncrementDividers.Location = New System.Drawing.Point(734, 42)
+        Me.btnIncrementDividers.Location = New System.Drawing.Point(713, 54)
         Me.btnIncrementDividers.Name = "btnIncrementDividers"
         Me.btnIncrementDividers.Size = New System.Drawing.Size(28, 28)
         Me.btnIncrementDividers.TabIndex = 30
@@ -626,7 +627,7 @@ Partial Class frmConfigureInventory
         '
         Me.Panel2.BackColor = System.Drawing.Color.DarkGray
         Me.Panel2.Controls.Add(Me.txtDividers)
-        Me.Panel2.Location = New System.Drawing.Point(664, 42)
+        Me.Panel2.Location = New System.Drawing.Point(643, 54)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel2.Size = New System.Drawing.Size(64, 28)
@@ -652,7 +653,7 @@ Partial Class frmConfigureInventory
         Me.btnDecrementCapacity.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDecrementCapacity.ForeColor = System.Drawing.Color.White
         Me.btnDecrementCapacity.Image = CType(resources.GetObject("btnDecrementCapacity.Image"), System.Drawing.Image)
-        Me.btnDecrementCapacity.Location = New System.Drawing.Point(547, 42)
+        Me.btnDecrementCapacity.Location = New System.Drawing.Point(534, 53)
         Me.btnDecrementCapacity.Name = "btnDecrementCapacity"
         Me.btnDecrementCapacity.Size = New System.Drawing.Size(28, 28)
         Me.btnDecrementCapacity.TabIndex = 28
@@ -667,7 +668,7 @@ Partial Class frmConfigureInventory
         Me.btnIncrementCapacity.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnIncrementCapacity.ForeColor = System.Drawing.Color.White
         Me.btnIncrementCapacity.Image = CType(resources.GetObject("btnIncrementCapacity.Image"), System.Drawing.Image)
-        Me.btnIncrementCapacity.Location = New System.Drawing.Point(513, 42)
+        Me.btnIncrementCapacity.Location = New System.Drawing.Point(500, 53)
         Me.btnIncrementCapacity.Name = "btnIncrementCapacity"
         Me.btnIncrementCapacity.Size = New System.Drawing.Size(28, 28)
         Me.btnIncrementCapacity.TabIndex = 27
@@ -678,7 +679,7 @@ Partial Class frmConfigureInventory
         '
         Me.Panel1.BackColor = System.Drawing.Color.DarkGray
         Me.Panel1.Controls.Add(Me.txtCapacity)
-        Me.Panel1.Location = New System.Drawing.Point(439, 42)
+        Me.Panel1.Location = New System.Drawing.Point(426, 53)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel1.Size = New System.Drawing.Size(68, 28)
@@ -696,12 +697,30 @@ Partial Class frmConfigureInventory
         Me.txtCapacity.Size = New System.Drawing.Size(66, 26)
         Me.txtCapacity.TabIndex = 38
         '
+        'btnSave
+        '
+        Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnSave.FlatAppearance.BorderSize = 0
+        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSave.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSave.ForeColor = System.Drawing.Color.White
+        Me.btnSave.Image = Global.test_gui.My.Resources.Resources.resolve
+        Me.btnSave.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnSave.Location = New System.Drawing.Point(834, 49)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(197, 32)
+        Me.btnSave.TabIndex = 173
+        Me.btnSave.Text = "  SAVE CHANGES"
+        Me.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnSave.UseVisualStyleBackColor = False
+        '
         'frmConfigureInventory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1041, 500)
+        Me.ClientSize = New System.Drawing.Size(1077, 500)
+        Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnDecrementCapacity)
         Me.Controls.Add(Me.btnIncrementCapacity)
         Me.Controls.Add(Me.Panel1)
@@ -779,4 +798,5 @@ Partial Class frmConfigureInventory
     Friend WithEvents Panel1 As Panel
     Friend WithEvents txtCapacity As TextBox
     Friend WithEvents lblDivider As Label
+    Friend WithEvents btnSave As Button
 End Class
