@@ -68,6 +68,7 @@ Partial Class frmPatientRecords
         Me.lblDOB.Name = "lblDOB"
         Me.lblDOB.Size = New System.Drawing.Size(43, 21)
         Me.lblDOB.TabIndex = 6
+        Me.lblDOB.Tag = "4"
         Me.lblDOB.Text = "DOB"
         '
         'lblLastName
@@ -79,6 +80,7 @@ Partial Class frmPatientRecords
         Me.lblLastName.Name = "lblLastName"
         Me.lblLastName.Size = New System.Drawing.Size(86, 21)
         Me.lblLastName.TabIndex = 5
+        Me.lblLastName.Tag = "3"
         Me.lblLastName.Text = "Last Name"
         '
         'lblBed
@@ -90,6 +92,7 @@ Partial Class frmPatientRecords
         Me.lblBed.Name = "lblBed"
         Me.lblBed.Size = New System.Drawing.Size(39, 21)
         Me.lblBed.TabIndex = 3
+        Me.lblBed.Tag = "6"
         Me.lblBed.Text = "Bed"
         '
         'lblRoom
@@ -101,6 +104,7 @@ Partial Class frmPatientRecords
         Me.lblRoom.Name = "lblRoom"
         Me.lblRoom.Size = New System.Drawing.Size(54, 21)
         Me.lblRoom.TabIndex = 2
+        Me.lblRoom.Tag = "5"
         Me.lblRoom.Text = "Room"
         '
         'lblMRN
@@ -112,6 +116,7 @@ Partial Class frmPatientRecords
         Me.lblMRN.Name = "lblMRN"
         Me.lblMRN.Size = New System.Drawing.Size(47, 21)
         Me.lblMRN.TabIndex = 1
+        Me.lblMRN.Tag = "1"
         Me.lblMRN.Text = "MRN"
         '
         'lblFirstName
@@ -123,6 +128,7 @@ Partial Class frmPatientRecords
         Me.lblFirstName.Name = "lblFirstName"
         Me.lblFirstName.Size = New System.Drawing.Size(88, 21)
         Me.lblFirstName.TabIndex = 0
+        Me.lblFirstName.Tag = "2"
         Me.lblFirstName.Text = "First Name"
         '
         'pnlHeaderPatientRecords
