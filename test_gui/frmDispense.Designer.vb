@@ -49,7 +49,7 @@ Partial Class frmDispense
         Me.btnDispense = New System.Windows.Forms.Button()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Panel14 = New System.Windows.Forms.Panel()
-        Me.txtMRN = New System.Windows.Forms.TextBox()
+        Me.txtPatientID = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.txtDOB = New System.Windows.Forms.TextBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
@@ -300,9 +300,9 @@ Partial Class frmDispense
         Me.Label4.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.Location = New System.Drawing.Point(13, 81)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(49, 21)
+        Me.Label4.Size = New System.Drawing.Size(79, 21)
         Me.Label4.TabIndex = 187
-        Me.Label4.Text = "MRN:"
+        Me.Label4.Text = "Patient ID:"
         '
         'Label5
         '
@@ -342,25 +342,25 @@ Partial Class frmDispense
         'Panel14
         '
         Me.Panel14.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel14.Controls.Add(Me.txtMRN)
+        Me.Panel14.Controls.Add(Me.txtPatientID)
         Me.Panel14.Location = New System.Drawing.Point(17, 104)
         Me.Panel14.Name = "Panel14"
         Me.Panel14.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel14.Size = New System.Drawing.Size(241, 24)
         Me.Panel14.TabIndex = 198
         '
-        'txtMRN
+        'txtPatientID
         '
-        Me.txtMRN.BackColor = System.Drawing.Color.White
-        Me.txtMRN.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtMRN.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtMRN.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMRN.Location = New System.Drawing.Point(1, 1)
-        Me.txtMRN.Name = "txtMRN"
-        Me.txtMRN.ReadOnly = True
-        Me.txtMRN.Size = New System.Drawing.Size(239, 22)
-        Me.txtMRN.TabIndex = 6
-        Me.txtMRN.TabStop = False
+        Me.txtPatientID.BackColor = System.Drawing.Color.White
+        Me.txtPatientID.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtPatientID.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtPatientID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPatientID.Location = New System.Drawing.Point(1, 1)
+        Me.txtPatientID.Name = "txtPatientID"
+        Me.txtPatientID.ReadOnly = True
+        Me.txtPatientID.Size = New System.Drawing.Size(239, 22)
+        Me.txtPatientID.TabIndex = 6
+        Me.txtPatientID.TabStop = False
         '
         'Panel1
         '
@@ -587,7 +587,7 @@ Partial Class frmDispense
     Friend WithEvents btnDispense As Button
     Friend WithEvents Label13 As Label
     Friend WithEvents Panel14 As Panel
-    Friend WithEvents txtMRN As TextBox
+    Friend WithEvents txtPatientID As TextBox
     Friend WithEvents Panel1 As Panel
     Friend WithEvents txtDOB As TextBox
     Friend WithEvents Panel2 As Panel
