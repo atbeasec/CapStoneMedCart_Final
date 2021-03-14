@@ -361,6 +361,7 @@
     <Compile Include="SettingsChange.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UISortFunctionality.vb" />
     <Compile Include="UserClass.vb" />
     <Compile Include="Waste.Designer.vb">
       <DependentUpon>Waste.vb</DependentUpon>
