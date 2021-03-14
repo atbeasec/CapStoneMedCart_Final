@@ -972,4 +972,24 @@ Module GraphicalUserInterfaceReusableMethods
 
     End Sub
 
+    Public Function TruncateString(ByVal idealLength As Integer, ByVal wordToTruncate As String) As String
+
+        ' checking if the length of the word is longer than the ideal length. This needs to be done because
+        ' we cannot fix the length of all strings without getting an error. Consider the following:
+        ' strWord1 = "hello"
+        ' strWord1.Substring(0,10)  <- this would result in a run time error because the string is not 10 characters long
+
+        Dim actualWordLength As Integer = wordToTruncate.Length
+
+        If actualWordLength > idealLength Then
+            actualWordLength = idealLength
+        End If
+
+        Dim strTuncated As String = wordToTruncate.Substring(0, actualWordLength)
+
+        Return strTuncated
+
+    End Function
+
+
 End Module
