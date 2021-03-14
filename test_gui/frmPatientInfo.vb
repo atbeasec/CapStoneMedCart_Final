@@ -596,7 +596,13 @@
     '/*      frmPatientInfo_load                                          */         
     '/*********************************************************************/
     '/*  CALLS:										                      */                 
-    '/*                                                                   */  
+    '/*PatientInformation.PatinetInfoSortedByDrugName(intPatientID)
+    '/*PatientInformation.PatinetInfoSortedByStrength(intPatientID)
+    '/*PatientInformation.PatinetInfoSortedByType(intPatientID)
+    '/*PatientInformation.PatinetInfoSortedByQuantity(intPatientID)
+    '/*PatientInformation.PatinetInfoSortedByDate(intPatientID)
+    '/*PatientInformation.PatinetInfoSortedByDoctor(intPatientID)
+    '/*PatientInformation.PatinetInfoSortedByFrequency(intPatientID)      */  
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					          */         
     '/*	 field- an integer equal to the tag value of the selected label   */ 
@@ -616,24 +622,23 @@
     Private Sub PrescriptionsSelectedField(ByVal field As Integer)
 
         ' clear the controls as they will need to be rebuilt when sorting
-        ' flpMedications.Controls.Clear()
+        flpMedications.Controls.Clear()
 
         Select Case field
-
             Case PrescriptionsEnum.MedicationName
-
+                PatientInformation.PatinetInfoSortedByDrugName(intPatientID)
             Case PrescriptionsEnum.Strength
-
+                PatientInformation.PatinetInfoSortedByStrength(intPatientID)
             Case PrescriptionsEnum.Type
-
+                PatientInformation.PatinetInfoSortedByType(intPatientID)
             Case PrescriptionsEnum.Quantity
-
+                PatientInformation.PatinetInfoSortedByQuantity(intPatientID)
             Case PrescriptionsEnum.DatePrescribed
-
+                PatientInformation.PatinetInfoSortedByDate(intPatientID)
             Case PrescriptionsEnum.PrescribedBy
-
+                PatientInformation.PatinetInfoSortedByDoctor(intPatientID)
             Case PrescriptionsEnum.Frequency
-
+                PatientInformation.PatinetInfoSortedByFrequency(intPatientID)
         End Select
 
     End Sub
