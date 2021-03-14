@@ -22,6 +22,7 @@ Partial Class frmPatientRecords
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPatientRecords))
         Me.pnlHeader = New System.Windows.Forms.Panel()
         Me.lblDOB = New System.Windows.Forms.Label()
@@ -37,6 +38,7 @@ Partial Class frmPatientRecords
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.btnNewPatient = New System.Windows.Forms.Button()
         Me.flpPatientRecords = New System.Windows.Forms.FlowLayoutPanel()
+        Me.tpHeaderSort = New System.Windows.Forms.ToolTip(Me.components)
         Me.pnlHeader.SuspendLayout()
         Me.pnlHeaderPatientRecords.SuspendLayout()
         Me.Panel9.SuspendLayout()
@@ -247,4 +249,5 @@ Partial Class frmPatientRecords
     Friend WithEvents pnlSearch As Panel
     Friend WithEvents txtSearch As TextBox
     Friend WithEvents btnSearch As Button
+    Friend WithEvents tpHeaderSort As ToolTip
 End Class

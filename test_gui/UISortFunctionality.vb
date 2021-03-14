@@ -142,4 +142,7 @@
     End Sub
 
 
+    ' if we know the parent then we can determine if we need the prescription table
+    ' or if we need the dispense history tables
+
 End Module
