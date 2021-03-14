@@ -595,7 +595,13 @@
     '/*      frmPatientInfo_load                                          */         
     '/*********************************************************************/
     '/*  CALLS:										                      */                 
-    '/*                                                                   */  
+    '/*PatientInformation.PatinetInfoSortedByDrugName(intPatientID)
+    '/*PatientInformation.PatinetInfoSortedByStrength(intPatientID)
+    '/*PatientInformation.PatinetInfoSortedByType(intPatientID)
+    '/*PatientInformation.PatinetInfoSortedByQuantity(intPatientID)
+    '/*PatientInformation.PatinetInfoSortedByDate(intPatientID)
+    '/*PatientInformation.PatinetInfoSortedByDoctor(intPatientID)
+    '/*PatientInformation.PatinetInfoSortedByFrequency(intPatientID)      */  
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					          */         
     '/*	 field- an integer equal to the tag value of the selected label   */ 
