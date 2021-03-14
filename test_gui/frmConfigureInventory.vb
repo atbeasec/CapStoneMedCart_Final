@@ -3,6 +3,14 @@
     Dim ContactPanelsAddedCount As Integer = 0
     Dim CurrentContactPanelName As String = Nothing
 
+    Public Enum InventoryEnum
+
+        medication = 1
+        divider = 2
+        strength = 3
+        quantity = 4
+
+    End Enum
 
     Private Sub frmConfigureInventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -14,9 +22,113 @@
 
         btnDrawer1.PerformClick()
 
+        CreateToolTips(pnlHeader, tpSelectedLabelHover)
+        AddHandlerToLabelClick(pnlHeader, AddressOf SortBySelectedLabel)
+
         ' method is going to be needed to load the capacity from the database and the number of dividers in the selected drawer
         ' we will take that data and put it into the textbox for capacity and divider.
         ' Everytime we increment that data we will send and update statement to the database
+    End Sub
+
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: SortBySelectedLabel            */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/14/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to be called as the click event for any label the  */
+    '/*  user clicks on. Underline the label, and update the panel contents/
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      frmPatientInfo_load                                          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 field- an integer equal to the tag value of the selected label   */ 
+    '/*	 parent- a panel object that the label lives on                   */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 BoldLabelToSortBy(sender, parent)     							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/* field- an integer equal to the tag value of the selected label
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/14/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub SortBySelectedLabel(sender As Object, e As EventArgs)
+
+        Dim parent As Panel = sender.parent
+        Dim field As Integer = CInt(sender.tag)
+
+        BoldLabelToSortBy(sender, parent)
+
+        'check If the user Is selecting a dispense history field to sort by
+        If parent.Name = pnlHeader.Name Then
+
+            InventorySelectedFields(field)
+
+        End If
+
+
+    End Sub
+
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: InventorySelectedFields   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		  */   
+    '/*		         DATE CREATED: 		 2/14/2021                 */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to be called when a user selects a label to sort by*/
+    '/*  the logic to re-create the panels in the order will be caled here*/
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      frmPatientInfo_load                                          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 field- an integer equal to the tag value of the selected label   */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 InventorySelectedFields(Cint(Label1.Tag))   	              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/14/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub InventorySelectedFields(ByVal field As Integer)
+
+        ' clear the controls as they will need to be rebuilt when sorting
+        'flpPatientRecords.Controls.Clear()
+
+        Select Case field
+
+            Case InventoryEnum.medication
+
+            Case InventoryEnum.divider
+
+            Case InventoryEnum.strength
+
+            Case InventoryEnum.quantity
+
+        End Select
+
     End Sub
 
     Private Sub CreateDrawers(sender As Object, e As EventArgs)
