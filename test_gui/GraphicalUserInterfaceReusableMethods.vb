@@ -972,4 +972,61 @@ Module GraphicalUserInterfaceReusableMethods
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   Function NAME: TruncateString()                 */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:  Collin Krygier          		          */   
+    '/*		         DATE CREATED: 		 3/14/2021                        */                             
+    '/*********************************************************************/
+    '/*  Function PURPOSE:								                  */             
+    '/*	 This function simply takes a string and truncates it to a new    */
+    '/*  length if the string is longer than the specified length. If not,*/
+    '/*  it will be left alone and we return the original string passed in*/
+    '/*********************************************************************/
+    '/*  Function Return Value:					                          */         
+    '/*	 A string that is possibly shorter version of what was passed in  */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  CreatePanel()                                                    */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/* None                                                              */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	idealLength- integer representing the length we want to truncate at/ 
+    '/*	wordToTruncate- a string that will be truncated if its longer than /
+    '/* the ideal length in characters.                                   */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	TruncateString(15, "hello")                                		  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	None                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/14/2021    Initial creation                    */
+    '/*********************************************************************/
+    Public Function TruncateString(ByVal idealLength As Integer, ByVal wordToTruncate As String) As String
+
+        ' checking if the length of the word is longer than the ideal length. This needs to be done because
+        ' we cannot fix the length of all strings without getting an error. Consider the following:
+        ' strWord1 = "hello"
+        ' strWord1.Substring(0,10)  <- this would result in a run time error because the string is not 10 characters long
+
+        Dim actualWordLength As Integer = wordToTruncate.Length
+
+        If actualWordLength > idealLength Then
+            actualWordLength = idealLength
+        End If
+
+        Dim strTuncated As String = wordToTruncate.Substring(0, actualWordLength)
+
+        Return strTuncated
+
+    End Function
+
+
 End Module

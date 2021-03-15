@@ -22,6 +22,7 @@ Partial Class frmConfiguration
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmConfiguration))
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.txtUsername = New System.Windows.Forms.TextBox()
@@ -63,6 +64,7 @@ Partial Class frmConfiguration
         Me.pnlSearch = New System.Windows.Forms.Panel()
         Me.txtSearchBox = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
+        Me.tpLabelHover = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel5.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -348,6 +350,7 @@ Partial Class frmConfiguration
         Me.lblStatus.Name = "lblStatus"
         Me.lblStatus.Size = New System.Drawing.Size(56, 21)
         Me.lblStatus.TabIndex = 11
+        Me.lblStatus.Tag = "4"
         Me.lblStatus.Text = "Active"
         '
         'lblActions
@@ -370,6 +373,7 @@ Partial Class frmConfiguration
         Me.lblPermissions.Name = "lblPermissions"
         Me.lblPermissions.Size = New System.Drawing.Size(95, 21)
         Me.lblPermissions.TabIndex = 9
+        Me.lblPermissions.Tag = "3"
         Me.lblPermissions.Text = "Permissions"
         '
         'lblName
@@ -381,6 +385,7 @@ Partial Class frmConfiguration
         Me.lblName.Name = "lblName"
         Me.lblName.Size = New System.Drawing.Size(53, 21)
         Me.lblName.TabIndex = 8
+        Me.lblName.Tag = "1"
         Me.lblName.Text = "Name"
         '
         'lblUserName
@@ -392,6 +397,7 @@ Partial Class frmConfiguration
         Me.lblUserName.Name = "lblUserName"
         Me.lblUserName.Size = New System.Drawing.Size(83, 21)
         Me.lblUserName.TabIndex = 7
+        Me.lblUserName.Tag = "2"
         Me.lblUserName.Text = "Username"
         '
         'Label1
@@ -626,4 +632,5 @@ Partial Class frmConfiguration
     Friend WithEvents pnlSearch As Panel
     Friend WithEvents txtSearchBox As TextBox
     Friend WithEvents Label12 As Label
+    Friend WithEvents tpLabelHover As ToolTip
 End Class

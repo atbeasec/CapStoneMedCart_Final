@@ -95,13 +95,17 @@
         PatientInformation.GetPatientInformation(intPatientID)
         PatientInformation.getPrescriptions(intPatientID)
         PatientInformation.getRoom(intPatientID, cboRoom, cboBed)
+        DispenseHistory.DispenseHistorySpecificPatient(intPatientID)
         SetControlsToReadOnly(ctl)
 
         CreateToolTips(pnlPrescriptionsHeader, tpLabelDirections)
         CreateToolTips(pnlDispenseHistoryHeader, tpLabelDirections)
 
-        AddHandlerToLabelClick(pnlDispenseHistoryHeader)
-        AddHandlerToLabelClick(pnlPrescriptionsHeader)
+        ' AddHandlerToLabelClick(pnlDispenseHistoryHeader)
+        ' AddHandlerToLabelClick(pnlPrescriptionsHeader)
+
+        AddHandlerToLabelClick(pnlDispenseHistoryHeader, AddressOf SortBySelectedLabel)
+        AddHandlerToLabelClick(pnlPrescriptionsHeader, AddressOf SortBySelectedLabel)
 
 
         ' CreateDispenseHistoryPanels(flpDispenseHistory, "test", "test", "test", "test", "test", "test", "test")
@@ -203,18 +207,15 @@
         Dim lblID5 As New Label
         Dim lblID6 As New Label
 
-        ' anywhere we have quotes except for the label names, we can call our Database and get method
-        CreateIDLabel(pnlMainPanel, lblID, "lblMedicationName", lblMedication.Location.X, 20, strMedicationName, getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID, "lblMedicationName", lblMedication.Location.X, 20, strMedicationName, getPanelCount(flpPannel), tpToolTip, TruncateString(25, strMedicationName))
         CreateIDLabel(pnlMainPanel, lblID2, "lblStrength", lblStrength.Location.X, 20, strStrength, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID3, "lblType", lblType.Location.X, 20, strType, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID4, "lblQuantity", lblQuantity.Location.X, 20, strQuantity, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID5, "lblDispensedBy", lblDispensedBy.Location.X, 20, strDispenseBy, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID6, "lblDispenseTimeAndDate", lblDateTime.Location.X, 20, strDispenseDate, getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID5, "lblDispensedBy", lblDispensedBy.Location.X, 20, strDispenseBy, getPanelCount(flpPannel), tpToolTip, TruncateString(30, strDispenseBy))
+        CreateIDLabel(pnlMainPanel, lblID6, "lblDispenseTimeAndDate", lblDateTime.Location.X, 20, strDispenseDate.Substring(0, 10), getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
-
-        'currentContactPanel = pnl.Name
 
     End Sub
     '/*********************************************************************/
@@ -320,157 +321,22 @@
         ' anywhere we have quotes except for the label names, we can call our Database and get method
         ' to ensure all of the text being added to the panel is inline with the  headers, we will use the label location of the
         ' header as the reference point for the X axis when creating these labels at run time.
-        CreateIDLabel(pnlMainPanel, lblID, "lblMedicationPrescription", lblMedicationPrescription.Location.X, 20, strMedicationName, getPanelCount(flpPannel))
+
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID, "lblMedicationPrescription", lblMedicationPrescription.Location.X, 20, strMedicationName, getPanelCount(flpPannel), tpToolTip, TruncateString(25, strMedicationName))
+        ' CreateIDLabel(pnlMainPanel, lblID, "lblMedicationPrescription", lblMedicationPrescription.Location.X, 20, strMedicationName, getPanelCount(flpPannel))
+
         CreateIDLabel(pnlMainPanel, lblID2, "lblStrengthPrescription", lblStrengthPrescription.Location.X, 20, strStrength, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID3, "lblFrequencyPrescription", lblFrequencyPrescription.Location.X, 20, strFrequency, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID4, "lblTypePrescription", lblTypePrescription.Location.X, 20, strType, getPanelCount(flpPannel))
+
+
         CreateIDLabel(pnlMainPanel, lblID5, "lblQuantityPrescription", lblQuantityPrescription.Location.X, 20, strQuantity, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID6, "lblDatePrescribed", lblDatePrescribed.Location.X, 20, strDatePrescribed, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, strPrescribedBy, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID6, "lblDatePrescribed", lblDatePrescribed.Location.X, 20, strDatePrescribed.Substring(0, 10), getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, strPrescribedBy, getPanelCount(flpPannel), tpToolTip, TruncateString(20, strPrescribedBy))
+        ' CreateIDLabel(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, strPrescribedBy, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
-
-    End Sub
-
-    '/*********************************************************************/
-    '/*                   SubProgram NAME: CreateToolTips                 */         
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:  Collin Krygier   		          */   
-    '/*		         DATE CREATED: 		 2/14/2021                        */                             
-    '/*********************************************************************/
-    '/*  Subprogram PURPOSE:								              */             
-    '/*	 This is going to iterate over the  panel that contains labels and*/
-    '/*  assign each label a tooltip
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      						                      */           
-    '/*      frmPatientInfo_load      */         
-    '/*********************************************************************/
-    '/*  CALLS:										                      */                 
-    '/*                                           */  
-    '/*              
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					          */         
-    '/*	 PanelWithLabels- a panel which contains only labels              */ 
-    '/*	 tp- a tooltip control                                            */ 
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								                  */             
-    '/*	CreateToolTips(Panel1, ToolTip1)     							  */     
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*	directions- string to be appended                                 */
-    '/*	newDirections- result of the appending of strings                 */
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						                      */               
-    '/*											                          */                     
-    '/*  WHO   WHEN     WHAT								              */             
-    '/*  ---   ----     ------------------------------------------------  */
-    '/*  Collin Krygier  2/14/2021    Initial creation                    */
-    '/*********************************************************************/
-    Private Sub CreateToolTips(ByVal PanelWithLabels As Panel, ByVal tp As ToolTip)
-
-        'iterating over the header panel which will only contain labels within it
-        'each label needs to have a tooltip added to it.
-
-        Dim directions As String = "click to sort by "
-
-
-        For Each ctl In PanelWithLabels.Controls
-
-            Dim newDirections As String = Nothing
-            newDirections = directions & CStr(ctl.Text)
-            tp.SetToolTip(ctl, newDirections)
-
-        Next
-
-    End Sub
-
-    '/*********************************************************************/
-    '/*                   SubProgram NAME: AddHandlerToLabelClick         */         
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:  Collin Krygier   		          */   
-    '/*		         DATE CREATED: 		 2/14/2021                        */                             
-    '/*********************************************************************/
-    '/*  Subprogram PURPOSE:								              */             
-    '/*	 This is going to iterate over the  panel that contains labels and*/
-    '/*  assign each label a a click event handler                        */
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      						                      */           
-    '/*      frmPatientInfo_load                                          */         
-    '/*********************************************************************/
-    '/*  CALLS:										                      */                 
-    '/*                                                                   */  
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					          */         
-    '/*	 PanelWithLabels- a panel which contains only labels              */ 
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								                  */             
-    '/*	AddHandlerToLabelClick(Panel1)     							      */     
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*	lbl- label control*/
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						                      */               
-    '/*											                          */                     
-    '/*  WHO   WHEN     WHAT								              */             
-    '/*  ---   ----     ------------------------------------------------  */
-    '/*  Collin Krygier  2/14/2021    Initial creation                    */
-    '/*********************************************************************/
-    Private Sub AddHandlerToLabelClick(ByVal PanelWithLabels As Panel)
-
-        'assign a handler to each label in the header panels to allow for a reusable click event
-
-        Dim lbl As Label
-
-        For Each lbl In PanelWithLabels.Controls
-            AddHandler lbl.Click, AddressOf SortBySelectedLabel
-        Next
-
-    End Sub
-
-    '/*********************************************************************/
-    '/*                   SubProgram NAME: BoldLabelToSortBy              */         
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:  Collin Krygier   		          */   
-    '/*		         DATE CREATED: 		 2/14/2021                        */                             
-    '/*********************************************************************/
-    '/*  Subprogram PURPOSE:								              */             
-    '/*	 This is going to iterate over the  panel that contains labels and*/
-    '/*  check which one selected and change the font to be underlined    */
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      						                      */           
-    '/*      frmPatientInfo_load                                          */         
-    '/*********************************************************************/
-    '/*  CALLS:										                      */                 
-    '/*                                                                   */  
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					          */         
-    '/*	 clickedLabel- a label that was selected                          */ 
-    '/*	 parent- a panel object that the label lives on                   */ 
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								                  */             
-    '/*	 BoldLabelToSortBy(sender, parent)     							  */     
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*	lbl- label control*/
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						                      */               
-    '/*											                          */                     
-    '/*  WHO   WHEN     WHAT								              */             
-    '/*  ---   ----     ------------------------------------------------  */
-    '/*  Collin Krygier  2/14/2021    Initial creation                    */
-    '/*********************************************************************/
-    Private Sub BoldLabelToSortBy(ByVal clickedLabel As Label, ByVal parent As Panel)
-
-        Dim lbl As Label
-        ' remove underlined font from all labels
-        For Each lbl In parent.Controls
-            lbl.Font = New Font(New FontFamily("Segoe UI Semibold"), 12, FontStyle.Regular)
-
-        Next
-
-        ' underline just the selected label
-        clickedLabel.Font = New Font(New FontFamily("Segoe UI Semibold"), 12, FontStyle.Underline)
 
     End Sub
 
@@ -561,21 +427,22 @@
 
         ' clear the controls as they will need to be rebuilt when sorting
         ' flpDispenseHistory.Controls.Clear()
+        flpDispenseHistory.Controls.Clear()
 
         Select Case field
 
             Case DispenseHistoryEnum.MedicationName
-
+                DispenseHistory.DispenseHistoryByDrugName(intPatientID)
             Case DispenseHistoryEnum.Strength
-
+                DispenseHistory.DispenseHistoryByStrength(intPatientID)
             Case DispenseHistoryEnum.Type
-
+                DispenseHistory.DispenseHistoryByType(intPatientID)
             Case DispenseHistoryEnum.Quantity
-
+                DispenseHistory.DispenseHistoryByQuantity(intPatientID)
             Case DispenseHistoryEnum.DispensedBy
-
+                DispenseHistory.DispenseHistoryByDispensingUser(intPatientID)
             Case DispenseHistoryEnum.DispenseDateAndTime
-
+                DispenseHistory.DispenseHistoryByDispenseDateAndTime(intPatientID)
         End Select
 
 
@@ -596,7 +463,13 @@
     '/*      frmPatientInfo_load                                          */         
     '/*********************************************************************/
     '/*  CALLS:										                      */                 
-    '/*                                                                   */  
+    '/*PatientInformation.PatinetInfoSortedByDrugName(intPatientID)
+    '/*PatientInformation.PatinetInfoSortedByStrength(intPatientID)
+    '/*PatientInformation.PatinetInfoSortedByType(intPatientID)
+    '/*PatientInformation.PatinetInfoSortedByQuantity(intPatientID)
+    '/*PatientInformation.PatinetInfoSortedByDate(intPatientID)
+    '/*PatientInformation.PatinetInfoSortedByDoctor(intPatientID)
+    '/*PatientInformation.PatinetInfoSortedByFrequency(intPatientID)      */  
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					          */         
     '/*	 field- an integer equal to the tag value of the selected label   */ 
@@ -616,24 +489,23 @@
     Private Sub PrescriptionsSelectedField(ByVal field As Integer)
 
         ' clear the controls as they will need to be rebuilt when sorting
-        ' flpMedications.Controls.Clear()
+        flpMedications.Controls.Clear()
 
         Select Case field
-
             Case PrescriptionsEnum.MedicationName
-
+                PatientInformation.PatinetInfoSortedByDrugName(intPatientID)
             Case PrescriptionsEnum.Strength
-
+                PatientInformation.PatinetInfoSortedByStrength(intPatientID)
             Case PrescriptionsEnum.Type
-
+                PatientInformation.PatinetInfoSortedByType(intPatientID)
             Case PrescriptionsEnum.Quantity
-
+                PatientInformation.PatinetInfoSortedByQuantity(intPatientID)
             Case PrescriptionsEnum.DatePrescribed
-
+                PatientInformation.PatinetInfoSortedByDate(intPatientID)
             Case PrescriptionsEnum.PrescribedBy
-
+                PatientInformation.PatinetInfoSortedByDoctor(intPatientID)
             Case PrescriptionsEnum.Frequency
-
+                PatientInformation.PatinetInfoSortedByFrequency(intPatientID)
         End Select
 
     End Sub

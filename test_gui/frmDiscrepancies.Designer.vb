@@ -22,6 +22,7 @@ Partial Class frmDiscrepancies
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.flpDiscrepancies = New System.Windows.Forms.FlowLayoutPanel()
         Me.pnlHeader = New System.Windows.Forms.Panel()
         Me.lblDiscrepancyID = New System.Windows.Forms.Label()
@@ -32,6 +33,7 @@ Partial Class frmDiscrepancies
         Me.lblDrawer = New System.Windows.Forms.Label()
         Me.pnlHeaderPatientRecords = New System.Windows.Forms.Panel()
         Me.btnResolve = New System.Windows.Forms.Button()
+        Me.tpLabelHover = New System.Windows.Forms.ToolTip(Me.components)
         Me.pnlHeader.SuspendLayout()
         Me.pnlHeaderPatientRecords.SuspendLayout()
         Me.SuspendLayout()
@@ -68,6 +70,7 @@ Partial Class frmDiscrepancies
         Me.lblDiscrepancyID.Name = "lblDiscrepancyID"
         Me.lblDiscrepancyID.Size = New System.Drawing.Size(26, 21)
         Me.lblDiscrepancyID.TabIndex = 11
+        Me.lblDiscrepancyID.Tag = "1"
         Me.lblDiscrepancyID.Text = "ID"
         '
         'lblActualCount
@@ -79,6 +82,7 @@ Partial Class frmDiscrepancies
         Me.lblActualCount.Name = "lblActualCount"
         Me.lblActualCount.Size = New System.Drawing.Size(104, 21)
         Me.lblActualCount.TabIndex = 10
+        Me.lblActualCount.Tag = "5"
         Me.lblActualCount.Text = "Actual Count"
         '
         'lblDateTime
@@ -90,6 +94,7 @@ Partial Class frmDiscrepancies
         Me.lblDateTime.Name = "lblDateTime"
         Me.lblDateTime.Size = New System.Drawing.Size(179, 21)
         Me.lblDateTime.TabIndex = 5
+        Me.lblDateTime.Tag = "6"
         Me.lblDateTime.Text = "Discrepancy Date/Time"
         '
         'lblExpectedCount
@@ -101,6 +106,7 @@ Partial Class frmDiscrepancies
         Me.lblExpectedCount.Name = "lblExpectedCount"
         Me.lblExpectedCount.Size = New System.Drawing.Size(126, 21)
         Me.lblExpectedCount.TabIndex = 2
+        Me.lblExpectedCount.Tag = "4"
         Me.lblExpectedCount.Text = "Expected Count"
         '
         'lblMedication
@@ -112,6 +118,7 @@ Partial Class frmDiscrepancies
         Me.lblMedication.Name = "lblMedication"
         Me.lblMedication.Size = New System.Drawing.Size(93, 21)
         Me.lblMedication.TabIndex = 8
+        Me.lblMedication.Tag = "2"
         Me.lblMedication.Text = "Medication"
         '
         'lblDrawer
@@ -123,6 +130,7 @@ Partial Class frmDiscrepancies
         Me.lblDrawer.Name = "lblDrawer"
         Me.lblDrawer.Size = New System.Drawing.Size(62, 21)
         Me.lblDrawer.TabIndex = 9
+        Me.lblDrawer.Tag = "3"
         Me.lblDrawer.Text = "Drawer"
         '
         'pnlHeaderPatientRecords
@@ -180,4 +188,5 @@ Partial Class frmDiscrepancies
     Friend WithEvents lblActualCount As Label
     Friend WithEvents btnResolve As Button
     Friend WithEvents lblDiscrepancyID As Label
+    Friend WithEvents tpLabelHover As ToolTip
 End Class

@@ -128,11 +128,11 @@ Public Class frmInventory
     '/*  ---   ----     ------------------------------------------------  */
     '/*  Collin Krygier  2/16/2021    Initial creation                    */
     '/*********************************************************************/
-    Private Sub cmbPatientPersonalMedication_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPatientPersonalMedication.SelectedIndexChanged
+    Private Sub cmbPatientPersonalMedication_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPersonalMedication.SelectedIndexChanged
 
         Const YES As String = "Yes"
 
-        If cmbPatientPersonalMedication.SelectedItem.Contains(YES) Then
+        If cboPersonalMedication.SelectedItem.Contains(YES) Then
             MoveControlsIfPatientMedication()
         Else
             DefaultSaveButtonLocation()
@@ -735,4 +735,6 @@ Public Class frmInventory
         DataVaildationMethods.KeyPressCheck(e, "0123456789")
         GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
     End Sub
+
+
 End Class
