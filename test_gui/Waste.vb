@@ -88,7 +88,7 @@
     Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
         Inventory.WasteMedication()
         cboMedication.SelectedIndex = -1
-        rbtnDispenseDevice.Checked = True
+        RadioButton2.Checked = True
         cboWitness.SelectedIndex = -1
     End Sub
 
