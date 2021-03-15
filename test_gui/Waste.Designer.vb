@@ -28,6 +28,7 @@ Partial Class Waste
         Me.cboMedication = New System.Windows.Forms.ComboBox()
         Me.pnlRadioButtons = New System.Windows.Forms.Panel()
         Me.pnlSignOff = New System.Windows.Forms.Panel()
+        Me.cboWitness = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.btnWaste = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
@@ -36,10 +37,8 @@ Partial Class Waste
         Me.RadioButton4 = New System.Windows.Forms.RadioButton()
         Me.RadioButton3 = New System.Windows.Forms.RadioButton()
         Me.RadioButton2 = New System.Windows.Forms.RadioButton()
-        Me.rbtnDispenseDevice = New System.Windows.Forms.RadioButton()
         Me.pnlHeader = New System.Windows.Forms.Panel()
         Me.btnBack = New System.Windows.Forms.Button()
-        Me.cboWitness = New System.Windows.Forms.ComboBox()
         Me.pnlRadioButtons.SuspendLayout()
         Me.pnlSignOff.SuspendLayout()
         Me.pnlHeader.SuspendLayout()
@@ -83,10 +82,9 @@ Partial Class Waste
         Me.pnlRadioButtons.Controls.Add(Me.RadioButton4)
         Me.pnlRadioButtons.Controls.Add(Me.RadioButton3)
         Me.pnlRadioButtons.Controls.Add(Me.RadioButton2)
-        Me.pnlRadioButtons.Controls.Add(Me.rbtnDispenseDevice)
         Me.pnlRadioButtons.Location = New System.Drawing.Point(29, 183)
         Me.pnlRadioButtons.Name = "pnlRadioButtons"
-        Me.pnlRadioButtons.Size = New System.Drawing.Size(447, 482)
+        Me.pnlRadioButtons.Size = New System.Drawing.Size(447, 360)
         Me.pnlRadioButtons.TabIndex = 23
         '
         'pnlSignOff
@@ -94,10 +92,19 @@ Partial Class Waste
         Me.pnlSignOff.Controls.Add(Me.cboWitness)
         Me.pnlSignOff.Controls.Add(Me.Label3)
         Me.pnlSignOff.Controls.Add(Me.btnWaste)
-        Me.pnlSignOff.Location = New System.Drawing.Point(3, 248)
+        Me.pnlSignOff.Location = New System.Drawing.Point(3, 198)
         Me.pnlSignOff.Name = "pnlSignOff"
         Me.pnlSignOff.Size = New System.Drawing.Size(444, 135)
         Me.pnlSignOff.TabIndex = 24
+        '
+        'cboWitness
+        '
+        Me.cboWitness.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboWitness.FormattingEnabled = True
+        Me.cboWitness.Location = New System.Drawing.Point(3, 38)
+        Me.cboWitness.Name = "cboWitness"
+        Me.cboWitness.Size = New System.Drawing.Size(441, 29)
+        Me.cboWitness.TabIndex = 33
         '
         'Label3
         '
@@ -128,7 +135,7 @@ Partial Class Waste
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(39, 248)
+        Me.TextBox1.Location = New System.Drawing.Point(21, 198)
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(329, 124)
@@ -138,11 +145,10 @@ Partial Class Waste
         '
         Me.rbtnOther.AutoSize = True
         Me.rbtnOther.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnOther.Location = New System.Drawing.Point(14, 217)
+        Me.rbtnOther.Location = New System.Drawing.Point(3, 167)
         Me.rbtnOther.Name = "rbtnOther"
         Me.rbtnOther.Size = New System.Drawing.Size(219, 25)
         Me.rbtnOther.TabIndex = 5
-        Me.rbtnOther.TabStop = True
         Me.rbtnOther.Text = "Other (Provide Explanation)"
         Me.rbtnOther.UseVisualStyleBackColor = True
         '
@@ -150,11 +156,10 @@ Partial Class Waste
         '
         Me.rbtnPatientUnavilable.AutoSize = True
         Me.rbtnPatientUnavilable.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnPatientUnavilable.Location = New System.Drawing.Point(14, 176)
+        Me.rbtnPatientUnavilable.Location = New System.Drawing.Point(3, 126)
         Me.rbtnPatientUnavilable.Name = "rbtnPatientUnavilable"
         Me.rbtnPatientUnavilable.Size = New System.Drawing.Size(160, 25)
         Me.rbtnPatientUnavilable.TabIndex = 4
-        Me.rbtnPatientUnavilable.TabStop = True
         Me.rbtnPatientUnavilable.Text = "Patient Unavailable"
         Me.rbtnPatientUnavilable.UseVisualStyleBackColor = True
         '
@@ -162,11 +167,10 @@ Partial Class Waste
         '
         Me.RadioButton4.AutoSize = True
         Me.RadioButton4.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RadioButton4.Location = New System.Drawing.Point(14, 135)
+        Me.RadioButton4.Location = New System.Drawing.Point(3, 85)
         Me.RadioButton4.Name = "RadioButton4"
         Me.RadioButton4.Size = New System.Drawing.Size(135, 25)
         Me.RadioButton4.TabIndex = 3
-        Me.RadioButton4.TabStop = True
         Me.RadioButton4.Text = "Patient Refused"
         Me.RadioButton4.UseVisualStyleBackColor = True
         '
@@ -174,38 +178,25 @@ Partial Class Waste
         '
         Me.RadioButton3.AutoSize = True
         Me.RadioButton3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RadioButton3.Location = New System.Drawing.Point(14, 94)
+        Me.RadioButton3.Location = New System.Drawing.Point(3, 44)
         Me.RadioButton3.Name = "RadioButton3"
         Me.RadioButton3.Size = New System.Drawing.Size(208, 25)
         Me.RadioButton3.TabIndex = 2
-        Me.RadioButton3.TabStop = True
         Me.RadioButton3.Text = "Order Canceled / On Hold"
         Me.RadioButton3.UseVisualStyleBackColor = True
         '
         'RadioButton2
         '
         Me.RadioButton2.AutoSize = True
+        Me.RadioButton2.Checked = True
         Me.RadioButton2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RadioButton2.Location = New System.Drawing.Point(14, 53)
+        Me.RadioButton2.Location = New System.Drawing.Point(3, 3)
         Me.RadioButton2.Name = "RadioButton2"
         Me.RadioButton2.Size = New System.Drawing.Size(170, 25)
         Me.RadioButton2.TabIndex = 1
         Me.RadioButton2.TabStop = True
         Me.RadioButton2.Text = "Incorrect Medication"
         Me.RadioButton2.UseVisualStyleBackColor = True
-        '
-        'rbtnDispenseDevice
-        '
-        Me.rbtnDispenseDevice.AutoSize = True
-        Me.rbtnDispenseDevice.Checked = True
-        Me.rbtnDispenseDevice.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnDispenseDevice.Location = New System.Drawing.Point(14, 12)
-        Me.rbtnDispenseDevice.Name = "rbtnDispenseDevice"
-        Me.rbtnDispenseDevice.Size = New System.Drawing.Size(141, 25)
-        Me.rbtnDispenseDevice.TabIndex = 0
-        Me.rbtnDispenseDevice.TabStop = True
-        Me.rbtnDispenseDevice.Text = "Dispense Device"
-        Me.rbtnDispenseDevice.UseVisualStyleBackColor = True
         '
         'pnlHeader
         '
@@ -233,15 +224,6 @@ Partial Class Waste
         Me.btnBack.Text = "Back"
         Me.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnBack.UseVisualStyleBackColor = False
-        '
-        'cboWitness
-        '
-        Me.cboWitness.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboWitness.FormattingEnabled = True
-        Me.cboWitness.Location = New System.Drawing.Point(0, 38)
-        Me.cboWitness.Name = "cboWitness"
-        Me.cboWitness.Size = New System.Drawing.Size(441, 29)
-        Me.cboWitness.TabIndex = 33
         '
         'Waste
         '
@@ -275,7 +257,6 @@ Partial Class Waste
     Friend WithEvents RadioButton4 As RadioButton
     Friend WithEvents RadioButton3 As RadioButton
     Friend WithEvents RadioButton2 As RadioButton
-    Friend WithEvents rbtnDispenseDevice As RadioButton
     Friend WithEvents pnlSignOff As Panel
     Friend WithEvents Label3 As Label
     Friend WithEvents btnWaste As Button
