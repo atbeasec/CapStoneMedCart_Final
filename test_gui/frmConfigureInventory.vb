@@ -2,6 +2,7 @@
 
     Dim ContactPanelsAddedCount As Integer = 0
     Dim CurrentContactPanelName As String = Nothing
+    Private intCurrentDrawer As Integer
 
     Public Enum InventoryEnum
 
@@ -353,7 +354,7 @@
 
 
     Private Sub HighlightSelectedDrawer(sender As Object, e As EventArgs)
-
+        intCurrentDrawer = sender.TabIndex.ToString()
         Dim btn As Control
 
         For Each btn In pnlLayoutButtons.Controls
@@ -449,5 +450,7 @@
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
 
         ' call code here to update the database with the txtCapacity and txtDividers information about the drawer.
+        ExecuteScalarQuery("UPDATE Drawers SET Number_of_Dividers = " & CInt(txtDividers.Text) & ", Size = " & CInt(txtCapacity.Text) & "  WHERE Drawers_ID  = " & intCurrentDrawer & ";")
+        Me.Refresh()
     End Sub
 End Class
