@@ -1281,6 +1281,7 @@ Module CreateDatabase
 	                'Divider_Bin'	TEXT,
 	                'Expiration_Date'	TEXT NOT NULL,
 	                'Discrepancy_Flag'	INTEGER NOT NULL,
+					'Active_Flag'	INTEGER NOT NULL,
 	                PRIMARY KEY('DrawerMedication_ID' AUTOINCREMENT),
 	                FOREIGN KEY(" & "Medication_TUID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
 	                FOREIGN KEY(" & "Drawers_TUID" & ") REFERENCES " & "Drawers" & "(" & "Drawers_ID" & "));"

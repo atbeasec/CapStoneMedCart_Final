@@ -5,7 +5,9 @@ Public Class frmInventory
     End Sub
 
     Private Sub frmInventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        cmbDrawerNumber.SelectedIndex = 0
+        cmbDividerBin.SelectedIndex = 0
+        txtQuantity.Text = "1"
         ' setdefault text to the search box
         txtSearch.Text = txtSearch.Tag
         txtSearch.ForeColor = Color.Silver
@@ -126,11 +128,11 @@ Public Class frmInventory
     '/*  ---   ----     ------------------------------------------------  */
     '/*  Collin Krygier  2/16/2021    Initial creation                    */
     '/*********************************************************************/
-    Private Sub cmbPatientPersonalMedication_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPatientPersonalMedication.SelectedIndexChanged
+    Private Sub cmbPatientPersonalMedication_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPersonalMedication.SelectedIndexChanged
 
         Const YES As String = "Yes"
 
-        If cmbPatientPersonalMedication.Text.Contains(YES) Then
+        If cboPersonalMedication.SelectedItem.Contains(YES) Then
             MoveControlsIfPatientMedication()
         Else
             DefaultSaveButtonLocation()
@@ -139,6 +141,28 @@ Public Class frmInventory
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        Dim intControlled As Integer
+        Dim intNarcotic As Integer
+        Dim intDrawerMedication_ID As Integer = 0
+        Dim Drawers_Tuid As Integer = 0
+        Dim intMedicationTuid As Integer = 0
+        Dim intMedQuanitiy As Integer = 0
+        Dim intDividerBin As Integer = 0
+        Dim intDiscrepancies As Integer = 0
+        Dim strBarcode As String
+        Dim strMessage As String
+
+        If chkControlled.Checked Then
+            intControlled = 1
+        Else
+            intControlled = 0
+        End If
+
+        If chkNarcotic.Checked Then
+            intNarcotic = 1
+        Else
+            intNarcotic = 0
+        End If
         ' make sure the proper information is selected or entered
         'Dim strTrimmedString As String
         ' take the split of the combobox selected item
@@ -146,33 +170,121 @@ Public Class frmInventory
         ' then trim off everything that's not a number
         'strTrimmedString = Regex.Replace(strTrimmedString, "(", "")
 
+        'Check if all necessary textboxes for a new medication are full
+        'If yes, then compare the medications in the database and either insert
+        'the record or update records in the database
+        If txtSchedule.Text <> "" And txtType.Text <> "" And txtStrength.Text <> "" Then
+            'Check if a barcode is entered
+            'If no, generate a sample
+            'If yes, pass that to the barcode variable
+            If txtBarcode.Text = Nothing Then
+                strBarcode = generateSampleBarcode()
+            Else
+                strBarcode = txtBarcode.Text
+            End If
+            CompareMedications(strName.Substring(0, strName.Length), strRXCUI, intControlled, intNarcotic, strBarcode, txtType.Text, txtStrength.Text, CInt(txtSchedule.Text), 1)
+        ElseIf txtSchedule.Text = "" Then
+            MessageBox.Show("Please enter data in all fields before saving.")
+            Exit Sub
+        End If
+
+        Try
+            If CInt(cmbDrawerNumber.SelectedItem) > 25 Or CInt(cmbDrawerNumber.SelectedItem) < 0 Then
+                MessageBox.Show("Please select an appropriate drawer number")
+            Else
+
+                Drawers_Tuid = CInt(cmbDrawerNumber.SelectedItem)
+
+            End If
+
+        Catch ex As Exception
+            eprError.SetError(cmbDrawerNumber, "please enter an integer for drawer number between 1-25")
+
+        End Try
+
+        Try
+            intMedQuanitiy = CInt(txtQuantity.Text)
+        Catch ex As Exception
+            eprError.SetError(cmbDrawerNumber, "please enter an amount that is a positive whole number")
+        End Try
+
+
 
         ' search the information from the allproperties API call
         ' double-check if the drug is in the database already
         ' if yes, then update if there's differences
         ' if no, then save those items
         ' and pass it to the function to find interactions
+
         Dim myPropertyNameList As New List(Of String)({"severity", "description", "rxcui"})
         Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
-        outputList = getInteractionsByName("153008", myPropertyNameList)
-        ' double-check if the interactions with the matching pair of RXCUI's exist
-        ' if yes, then update if there's differences
-        ' or insert the new lines
-        ' and save those items
+        strMessage = "Retrieving drug interactions from the NIH website"
+        Dim thdThread1 As New Threading.Thread(AddressOf ThreadedMessageBox)
+        thdThread1.Name = strMessage
+        thdThread1.Start()
+        outputList = getInteractionsByName(strRXCUI, myPropertyNameList)
+
+        'Double-check if the interactions with the matching pair of RXCUI's exist
+        'If yes, Then update If there's differences
+        ' Or insert the New lines
+        ' And save those items
+
+        Try
+            strMessage = "Please wait while the interactions are saved to the database"
+            Dim thdThread2 As New Threading.Thread(AddressOf ThreadedMessageBox)
+            thdThread2.Name = strMessage
+            thdThread2.Start()
+            'There are four items returned from the API
+            'Therefore, we step over 4 items every time 
+            'we run the call
+            'For i = 0 To outputList.Count - 4 Step 4
+            'In the fourth item passed, we want to remove the ' character because it breaks SQL inserts
+            CompareDrugInteractions(CInt(strRXCUI), outputList) 'CInt(outputList.Item(i + 3).PropertyValue), outputList.Item(i).PropertyValue, outputList.Item(i + 1).PropertyValue.Replace("'", ""), 1)
+            'Next
+
+            strMessage = "All interaction records have been added"
+            Dim thdThread3 As New Threading.Thread(AddressOf ThreadedMessageBox)
+            thdThread3.Name = strMessage
+            thdThread3.Start()
+        Catch ex As Exception
+            MessageBox.Show("Interactions could not be recorded")
+        End Try
+
+        intDrawerMedication_ID = ExecuteScalarQuery("SELECT COUNT(DISTINCT DrawerMedication_ID) FROM DrawerMedication;")
+
+
+        intMedicationTuid = ExecuteScalarQuery("Select Medication_ID From Medication WHERE Drug_Name ='" & strName & "';")
+        'because we are adding a new drawermedication for now
+        intDrawerMedication_ID += 1
+
+
+        intDividerBin = CInt(cmbDividerBin.SelectedItem)
+
+        ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Divider_Bin,Expiration_Date,Discrepancy_Flag, Active_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & intDividerBin & " , '" & txtExpirationDate.Text & "'," & intDiscrepancies & ",1);")
+        MessageBox.Show("Medication has been added to the drawer")
+        Debug.WriteLine("")
+
+        eprError.Clear()
+
     End Sub
 
-    Private Sub btnSearch_Click(sender As Object, e As EventArgs)
+    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles pnlSearch.Click
         Dim myPropertyNameList As New List(Of String)({"rxcui"})
         Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
+        Dim suggestedList As New List(Of String)
 
         outputList = GetRxcuiByName(txtSearch.Text, myPropertyNameList)
+        ' check to see if anything comes back
         If outputList.Count = 0 Then
-            'outputList = GetSuggestionList(txtSearch.Text)
+            ' if nothing, then ask to suggest names
+            cboSuggestedNames.Visible = True
+            suggestedList = GetSuggestionList(txtSearch.Text)
             ' then populate the combobox
-            ' and if they click again on an item put it into the search box and search
-            ' recursion 'til the cows come home
+            cboSuggestedNames.DataSource = suggestedList
+        Else
+            ' otherwise populate the medication name comboBox
+            cmbMedicationName.DataSource = outputList
         End If
-        cmbMedicationName.DataSource = outputList
     End Sub
 
     Private Sub cmbMedicationName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMedicationName.SelectedIndexChanged
@@ -203,97 +315,44 @@ Public Class frmInventory
         ' add the original items to the lstResults
         lstResults.Add(("RXCUI", strSplitString(0)))
         lstResults.Add(("NAME", strSplitString(1)))
+
         ' first clear the fields
-        '  ComboBox3.Items.Clear()
-        ' ComboBox2.Items.Clear()
+        txtStrength.Text = ""
+        txtSchedule.Text = ""
+        txtType.Text = ""
+        chkControlled.Checked = False
+        chkNarcotic.Checked = False
+        cmbDrawerNumber.Text = ""
+        cmbBin.Items.Clear()
+        txtQuantity.Text = ""
+        txtExpirationDate.Text = ""
+        cmbPatientPersonalMedication.SelectedItem = ""
+
         ' then populate the form and pass the results on 
         For Each result In lstResults
             Select Case result.strPropertyName
                 Case "AVAILABLE_STRENGTH"
-                 '   ComboBox3.Items.Add(result.strPropertyValue)
+                    txtStrength.Text = result.strPropertyValue
                 Case "STRENGTH"
-                 '   ComboBox3.Items.Add(result.strPropertyValue)
+                    txtStrength.Text = result.strPropertyValue
                 Case "SCHEDULE"
                     If result.strPropertyValue Is Nothing Then
                         ' do nothing
-                    ElseIf result.strPropertyValue = "1" Or "2" Or "3" Then
-                        ' insert logic here to check the controlled and narcotic
-                    ElseIf result.strPropertyValue = "2N" Or "3N" Or "4" Or "5" Then
-                        ' insert logic here to check controlled only
+                    ElseIf result.strPropertyValue = "1" Or result.strPropertyValue = "2" Or result.strPropertyValue = "3" Then
+                        ' check the controlled and narcotic
+                        chkControlled.Checked = True
+                        chkNarcotic.Checked = True
+                    ElseIf result.strPropertyValue = "2N" Or result.strPropertyValue = "3N" Or result.strPropertyValue = "4" Or result.strPropertyValue = "5" Then
+                        ' check controlled only
+                        chkControlled.Checked = True
                     Else
                         ' if the value isn't in these then it must be 0 or invalid - do nothing
                     End If
-                    ' insert logic here to populate the schedule box.
+                    txtSchedule.Text = result.strPropertyValue
             End Select
         Next
-    End Sub
 
-    '/*********************************************************************/
-    '/*                   SUBROUTINE NAME: AddItemsToForm	              */         
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:  Eric LaVoie           		      */   
-    '/*		         DATE CREATED: 2/25/2021		                      */                             
-    '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE:								              */             
-    '/*	 This function will take the items returned by the API calls and  */                     
-    '/*  populate the form accoringly.                                    */
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      						                      */           
-    '/*                                         				   */         
-    '/*********************************************************************/
-    '/*  CALLS:										                      */                 
-    '/*             (NONE)								   */             
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					          */         
-    '/*											   */                     
-    '/*                                                                   */ 
-    '/*********************************************************************/
-    '/*  RETURNS:								                          */                   
-    '/*            (NOTHING)								              */             
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								                  */             
-    '/*											   */                     
-    '/*                                                                   */ 
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											                          */                     
-    '/*                                                                   */ 
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						                      */               
-    '/*											                          */                     
-    '/*  WHO   WHEN     WHAT								              */             
-    '/*  Eric LaVoie 2/25/2021  Initial creation                          */
-    '/*                                                                   */                                                                   
-    '/*********************************************************************/
-
-    Sub AddItemsToForm(lstItems As List(Of (ParameterName As String, ParameterValue As String)))
-        ' turn off the search group box, turn on the drug input group box and turn on the save/cancel buttons
-        ' take the items for the list and add them to the appropriate boxes
-        ' add the rxcui
-        ' add the description
-        ' add the type
-        ' add the checkboxes for schedule
-        ' Case 1 - this will be a narcotic and controlled
-        ' Case 2 - this will be a narcotic and controlled
-        ' Case 2N - this will controlled and non-narcotic
-        ' Case 3 - this will be a narcotic and controlled
-        ' Case 3N - this will controlled and non-narcotic
-        ' Case 4 - this will controlled and non-narcotic
-        ' Case 5 - this will controlled and non-narcotic
-        ' Case 0 - this is not controlled nor is it a narcotic
-        ' Case Else - anything else treat as non-controlled and non-narcotic
-        ' add the strengths
-        ' use an if statement for if strength is not nothing
-        ' add if else available_strength is not nothing
-        ' add an else which means neither has a value
-
-        'Dim strTrimmedString As String
-        ' take the split of the combobox selected item
-        ' strTrimmedString = (cmbMedicationName.Text.Split(","))(0)
-        ' then trim off everything that's not a number
-        ' strTrimmedString = Regex.Replace(strTrimmedString, "(", "")
-        'strTrimmedString = Regex.Replace(strTrimmedString, ")", "")
-        ' and pass it to the function to find better names
+        getDrugNameRxcui(lstResults)
     End Sub
 
     '/*********************************************************************/
@@ -443,13 +502,10 @@ Public Class frmInventory
             txtSearch.Select(txtSearch.Text.Length, 0)
 
 
-
-
-
             '*********************************
             'Call method here to do the search
             '*********************************
-            SearchResults()
+            btnSearch_Click(sender, e)
 
 
 
@@ -459,52 +515,6 @@ Public Class frmInventory
             cmbMedicationName.Select()
 
         End If
-
-    End Sub
-
-    '/*********************************************************************/
-    '/* SubProgram NAME:pnlSearchIcon_Click                               */         
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:  Collin Krygier   		          */   
-    '/*		         DATE CREATED: 		 2/26/2021                        */                             
-    '/*********************************************************************/
-    '/*  Subprogram PURPOSE:								              */             
-    '/*	 The user can select the search icon to search as an alternative  */
-    '/*  clicking enter                                                   */
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      						                      */           
-    '/*  None                                                             */
-    '/*********************************************************************/
-    '/*  CALLS:										                      */                 
-    '/*                          */
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					          */         
-    '/*	 sender- object representing a control                            */
-    '/*  e- eventargs indicating there is an event handle assigned        */
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								                  */             
-    '/*                                     */     
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*	 None                                                             */
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						                      */               
-    '/*											                          */                     
-    '/*  WHO   WHEN     WHAT								              */             
-    '/*  ---   ----     ------------------------------------------------  */
-    '/*  Collin Krygier  2/16/2021    Initial creation                    */
-    '/*********************************************************************/
-
-    Private Sub pnlSearchIcon_Click(sender As Object, e As EventArgs) Handles pnlSearch.Click
-
-        '*********************************
-        'Call method here to do the search
-        '*********************************
-        SearchResults()
-
-        'set the focus to the next control because it should be populated 
-        cmbMedicationName.Select()
-
 
     End Sub
 
@@ -522,5 +532,209 @@ Public Class frmInventory
         End If
         cmbMedicationName.DataSource = outputList
     End Sub
+
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME:  					   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Eric LaVoie           		         */   
+    '/*		         DATE CREATED: 		   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								   */             
+    '/*											   */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Private Sub cboSuggestedNames_SelectedItemChanged(sender As Object, e As EventArgs) Handles cboSuggestedNames.DropDownClosed
+        Dim strTrimmedSelection As String = cboSuggestedNames.SelectedItem.ToString
+        ' if we'd have to trim it the logic would be here
+
+        'send the item into the search box
+        txtSearch.Text = strTrimmedSelection
+        ' change the visibility of the comboboxes and clear them out
+        cboSuggestedNames.Visible = False
+        'cboSuggestedNames.Items.Clear()
+        'cmbMedicationName.Visible = True
+        'cmbMedicationName.Items.Clear()
+        btnSearch_Click(sender, e)
+    End Sub
+
+    Private Sub cmbDrawerNumber_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDrawerNumber.SelectedIndexChanged
+        cmbDividerBin.Items.Clear()
+        Dim intDrawerSize As Integer = 0
+        Dim intNumDividers As Integer = 0
+        Dim intDrawerNumber As Integer = CInt(cmbDrawerNumber.Text)
+        Try
+            intDrawerSize = ExecuteScalarQuery("SELECT Size FROM Drawers where Drawers_ID = " & intDrawerNumber.ToString & ";")
+            intNumDividers = ExecuteScalarQuery("SELECT Number_of_Dividers FROM Drawers where Drawers_ID = " & intDrawerNumber.ToString & ";")
+        Catch ex As Exception
+            ' do nothing because there are empty values in the database
+        End Try
+        'txtQuantity.Text = intDrawerSize.ToString
+        Dim dividerspopulation As New ArrayList(intNumDividers + 1)
+        Dim intCounter As Integer = 1
+        Do Until intCounter > (intNumDividers + 1)
+            cmbDividerBin.Items.Add(intCounter)
+            intCounter += 1
+        Loop
+        cmbDividerBin.SelectedIndex = 0
+    End Sub
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+
+        frmMain.OpenChildForm(frmConfigureInventory)
+
+    End Sub
+
+    '/*********************************************************************/
+    '/* SubProgram NAME:        txtStrength_KeyPress                      */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Breanna Howey       		          */   
+    '/*		         DATE CREATED: 		3/01/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This assess what key is pressed and restricts the keys to the string
+    '/* passed to the KeyPressCheck function.                             */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  None                                                             */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*  KeyPressCheck                                                    */
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 sender- object representing a control                            */
+    '/*  e- eventargs indicating there is an event handle assigned        */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*  txtStrength_KeyPress()                                           */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	 None                                                             */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  BRH  3/01/21    Initial creation                                 */
+    Private Sub txtStrength_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtStrength.KeyPress
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz1234567890/")
+    End Sub
+
+    '/*********************************************************************/
+    '/* SubProgram NAME:        txtType_KeyPress                          */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Breanna Howey       		          */   
+    '/*		         DATE CREATED: 		3/01/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This assess what key is pressed and restricts the keys to the string
+    '/* passed to the KeyPressCheck function.                             */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  None                                                             */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*  KeyPressCheck                                                    */
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 sender- object representing a control                            */
+    '/*  e- eventargs indicating there is an event handle assigned        */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*  txtType_KeyPress()                                               */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	 None                                                             */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  BRH  3/01/21    Initial creation                                 */
+    Private Sub txtType_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtType.KeyPress
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz1234567890/")
+    End Sub
+
+    '/*********************************************************************/
+    '/* SubProgram NAME:        txtBarcode_KeyPress                       */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Breanna Howey       		          */   
+    '/*		         DATE CREATED: 		3/01/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This assess what key is pressed and restricts the keys to the string
+    '/* passed to the KeyPressCheck function.                             */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  None                                                             */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*  KeyPressCheck                                                    */
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 sender- object representing a control                            */
+    '/*  e- eventargs indicating there is an event handle assigned        */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*  txtBarcode_KeyPress                                              */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	 None                                                             */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    Private Sub txtBarcode_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtBarcode.KeyPress
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz1234567890/")
+    End Sub
+
+    Private Sub btnDrawerUp_Click(sender As Object, e As EventArgs) Handles btnDrawerUp.Click
+        IndexButtonIncrement(cmbDrawerNumber.SelectedIndex, cmbDrawerNumber.Items.Count - 1, cmbDrawerNumber)
+    End Sub
+
+    Private Sub btnDrawerDown_Click(sender As Object, e As EventArgs) Handles btnDrawerDown.Click
+        IndexButtonDecrement(cmbDrawerNumber.SelectedIndex, cmbDrawerNumber)
+    End Sub
+    Private Sub btnQuantityUp_Click(sender As Object, e As EventArgs) Handles btnQuantityUp.Click
+        ButtonIncrement(1000, txtQuantity)
+    End Sub
+
+    Private Sub btnQuantityDown_Click(sender As Object, e As EventArgs) Handles btnQuantityDown.Click
+        ButtonDecrement(txtQuantity)
+    End Sub
+
+    Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantity.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789")
+        GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
+    End Sub
+
 
 End Class

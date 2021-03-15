@@ -4,192 +4,237 @@
 
     Dim dsPhysicians As DataSet
     Dim dsPatients As DataSet
+    Dim dsMedications As DataSet
+    Dim intPatientID As New ArrayList
+    Dim intMedID As New ArrayList
+    Dim intPhysicianID As New ArrayList
+    Dim intPatientIDfromArray As Integer = 0
+    Dim intMedIDfromArray As Integer = 0
+    Dim intPhysicianIDfromArray As Integer = 0
 
     Private Sub frmPharmacy_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        cmbPatientName.Items.Clear()
+        cmbOrderedBy.Items.Clear()
+        cmbMedication.Items.Clear()
+        cmbStrength.Items.Clear()
+        cmbFrequencyNumber.Items.Clear()
+        txtQuantity.Text = 1
+        PopulateFrequencyNumberComboBox()
+        Dim intCounter As Integer = 0
+        dsMedications = ExecuteSelectQuery("SELECT * From Medication Inner Join DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE DrawerMedication.Active_Flag = '1' ORDER BY Medication.Medication_ID")
+        dsPhysicians = ExecuteSelectQuery("Select * From Physician WHERE Active_Flag = '1' ORDER BY Physician_Last_Name, Physician_First_Name;")
+        dsPatients = ExecuteSelectQuery("Select * From Patient WHERE Active_Flag = '1' ORDER BY Patient_Last_Name, Patient_First_Name;")
 
-        txtQuantity.Text = 0
-        'Jonie Nicolas
-        'Mauricio Adkisson
-        dsPhysicians = ExecuteSelectQuery("Select * From Physician ORDER BY Physician_Last_Name, Physician_First_Name;")
-        dsPatients = ExecuteSelectQuery("Select * From Patient ORDER BY Patient_Last_Name, Patient_First_Name;")
-        populatePhysicianComboBox(cmbOrderedBy, dsPhysicians)
-        populatePatientNameComboBox(cmbPatientName, dsPatients)
+        For Each dr As DataRow In dsPatients.Tables(0).Rows
+            cmbPatientName.Items.Add(dr(EnumList.Patient.LastName) & ", " & dr(EnumList.Patient.FristName) &
+                                     "   MRN: " & dr(EnumList.Patient.MRN_Number))
+            intPatientID.Add(dr(EnumList.Patient.ID))
+        Next
 
+        For Each dr As DataRow In dsPhysicians.Tables(0).Rows
+            cmbOrderedBy.Items.Add(dr(EnumList.Physician.LastName) & ", " & dr(EnumList.Physician.FirstName))
+            intPhysicianID.Add(dr(EnumList.Physician.Id))
+        Next
 
-        Dim strID1 As String = "123456"
-        Dim strID2 As String = "123457"
-        Dim strID3 As String = "123458"
-        Dim strID4 As String = "123459"
-        Dim strID5 As String = "123460"
-        Dim strID6 As String = "123461"
-        Dim strID7 As String = "123462"
-        Dim strID8 As String = "123463"
-        Dim strID9 As String = "123464"
-
-        Dim strFirstName1 As String = "John"
-        Dim strFirstName2 As String = "Sally"
-        Dim strFirstName3 As String = "Abigail"
-        Dim strFirstName4 As String = "Oren"
-        Dim strFirstName5 As String = "Birgit"
-        Dim strFirstName6 As String = "Roslyn"
-        Dim strFirstName7 As String = "Hae"
-        Dim strFirstName8 As String = "Fairy"
-        Dim strFirstName9 As String = "Raymundo"
-
-        Dim strLastName1 As String = "Smith"
-        Dim strLastName2 As String = "Jones"
-        Dim strLastName3 As String = "Montilla"
-        Dim strLastName4 As String = "Herndon"
-        Dim strLastName5 As String = "Horner"
-        Dim strLastName6 As String = "Chiaramonte"
-        Dim strLastName7 As String = "Fix"
-        Dim strLastName8 As String = "Johnson"
-        Dim strLastName9 As String = "Yurick"
-
-        Dim strRoomNumber1 As String = "B-21"
-        Dim strRoomNumber2 As String = "B-22"
-        Dim strRoomNumber3 As String = "B-23"
-        Dim strRoomNumber4 As String = "B-24"
-        Dim strRoomNumber5 As String = "B-25"
-        Dim strRoomNumber6 As String = "B-26"
-        Dim strRoomNumber7 As String = "B-27"
-        Dim strRoomNumber8 As String = "B-28"
-        Dim strRoomNumber9 As String = "B-29"
-
-        Dim strStatus1 As String = "Admitted"
-        Dim strStatus2 As String = "Admitted"
-        Dim strStatus3 As String = "Admitted"
-        Dim strStatus4 As String = "Admitted"
-        Dim strStatus5 As String = "Admitted"
-        Dim strStatus6 As String = "Admitted"
-        Dim strStatus7 As String = "Admitted"
-        Dim strStatus8 As String = "Admitted"
-        Dim strStatus9 As String = "Admitted"
-
-        Dim strAdmitDate1 As String = "11/3/2020"
-        Dim strAdmitDate2 As String = "10/1/2020"
-        Dim strAdmitDate3 As String = "12/2/2020"
-        Dim strAdmitDate4 As String = "11/12/2020"
-        Dim strAdmitDate5 As String = "11/1/2020"
-        Dim strAdmitDate6 As String = "11/16/2020"
-        Dim strAdmitDate7 As String = "11/12/2020"
-        Dim strAdmitDate8 As String = "11/1/2020"
-        Dim strAdmitDate9 As String = "11/16/2020"
-
-        'CreatePanel(flpPatients, strID1, strFirstName1, strLastName1, strRoomNumber1, strStatus1, strAdmitDate1)
-        'CreatePanel(flpPatients, strID2, strFirstName2, strLastName2, strRoomNumber2, strStatus2, strAdmitDate2)
-        'CreatePanel(flpPatients, strID3, strFirstName3, strLastName3, strRoomNumber3, strStatus3, strAdmitDate3)
-        'CreatePanel(flpPatients, strID4, strFirstName4, strLastName4, strRoomNumber4, strStatus4, strAdmitDate4)
-        'CreatePanel(flpPatients, strID5, strFirstName5, strLastName5, strRoomNumber5, strStatus5, strAdmitDate5)
-        'CreatePanel(flpPatients, strID6, strFirstName6, strLastName6, strRoomNumber6, strStatus6, strAdmitDate6)
-        'CreatePanel(flpPatients, strID7, strFirstName7, strLastName7, strRoomNumber7, strStatus7, strAdmitDate7)
-        'CreatePanel(flpPatients, strID8, strFirstName8, strLastName8, strRoomNumber8, strStatus8, strAdmitDate8)
-        'CreatePanel(flpPatients, strID9, strFirstName9, strLastName9, strRoomNumber9, strStatus9, strAdmitDate9)
-
+        For Each dr As DataRow In dsMedications.Tables(0).Rows
+            cmbMedication.Items.Add(dr(EnumList.Medication.Name))
+            intMedID.Add(dr(EnumList.Medication.ID))
+        Next
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:       */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/11/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   						                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
+    '/*********************************************************************/
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnORder.Click
-        Dim dtmOrderTime As String = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
-
-
+        If cmbPatientName.SelectedIndex = -1 Or cmbMedication.SelectedIndex = -1 Or cmbOrderedBy.SelectedIndex = -1 Then
+            MessageBox.Show("Please select a patient, medication and physician before placing the order")
+        Else
+            Dim dtmOrderTime As String = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
+            PharmacyOrder.PharmacyOrder(intPatientIDfromArray, intMedIDfromArray, intPhysicianIDfromArray, txtQuantity.Text, txtType.Text, cmbFrequencyNumber.SelectedItem.ToString)
+        End If
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:       */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/11/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   						                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
+    '/*********************************************************************/
     Private Sub btnIncrement_Click(sender As Object, e As EventArgs) Handles btnIncrement.Click
-        ButtonIncrement(txtQuantity)
+        If Not IsNumeric(txtQuantity.Text) Then
+            txtQuantity.Text = 0
+        End If
+        ButtonIncrement(1000, txtQuantity)
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:       */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/11/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   						                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
+    '/*********************************************************************/
     Private Sub btnDecrement_Click(sender As Object, e As EventArgs) Handles btnDecrement.Click
+        If Not IsNumeric(txtQuantity.Text) Then
+            txtQuantity.Text = 2
+        End If
         ButtonDecrement(txtQuantity)
     End Sub
 
+    Private Sub cmbPatientName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPatientName.SelectedIndexChanged
+        intPatientIDfromArray = intPatientID(cmbPatientName.SelectedIndex)
+        txtPatientDOB.Text = ExecuteScalarQuery("select Date_of_Birth from Patient where Patient_ID = '" & intPatientIDfromArray & "'")
+    End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:       */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/11/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   						                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
+    '/*********************************************************************/
+    Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantity.KeyPress
+        KeyPressCheck(e, "0123456789")
+    End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:       */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/11/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   						                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
+    '/*********************************************************************/
+    Private Sub cmbMedication_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMedication.SelectedIndexChanged
+        cmbStrength.Items.Clear()
+        intMedIDfromArray = intMedID(cmbMedication.SelectedIndex)
+        Dim dsMedication As DataSet = ExecuteSelectQuery("select * from Medication where Medication_ID = '" & intMedIDfromArray & "'")
+        txtType.Text = dsMedication.Tables(0).Rows(0)(EnumList.Medication.Snyonym)
+        cmbStrength.Items.Add(dsMedication.Tables(0).Rows(0)(EnumList.Medication.type))
+        cmbStrength.SelectedIndex = 0
+    End Sub
 
-    'Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal strID As String, ByVal strFirstName As String, ByVal strLastName As String, ByVal strRoomNumber As String, ByVal strStatus As String, ByVal strAdmitDate As String)
-
-    '    Dim pnl As Panel
-    '    pnl = New Panel
-
-    '    Dim pnlMainPanel As Panel
-    '    pnlMainPanel = New Panel
-    '    ' call method here to get the count from the database and update the panel number so the next item is correct
-
-
-    '    'Set panel properties
-    '    With pnl
-    '        .BackColor = Color.Gainsboro
-    '        .Size = New Size(955, 47)
-    '        .Name = "pnlIndividualPatientRecordPadding" + getPanelCount(flpPatients).ToString
-    '        .Tag = getPanelCount(flpPatients).ToString
-    '        .Padding = New Padding(0, 0, 0, 3)
-    '        ' .Dock = System.Windows.Forms.DockStyle.Top
-    '    End With
-
-    '    With pnlMainPanel
-
-    '        .BackColor = Color.White
-    '        .Size = New Size(955, 45)
-    '        .Name = "pnlIndividualPatientRecord" + getPanelCount(flpPatients).ToString
-    '        .Tag = getPanelCount(flpPatients).ToString
-    '        .Dock = System.Windows.Forms.DockStyle.Top
-    '    End With
-
-    '    'put the boarder panel inside the main panel
-    '    pnl.Controls.Add(pnlMainPanel)
-
-
-    '    AddHandler pnlMainPanel.DoubleClick, AddressOf DynamicDoubleClickNewOrder
-    '    AddHandler pnlMainPanel.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
-    '    AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
-
-    '    ' add controls to this panel
-    '    CreateEditButton(pnlMainPanel, getPanelCount(flpPatients), 830, 5)
-    '    CreateDeleteBtn(pnlMainPanel, getPanelCount(flpPatients), 890, 5)
-
-    '    'CreateDeleteBtn(pnlMainPanel)
-    '    'CreateEditButton(pnlMainPanel)
-
-
-    '    ' call database info here to populate
-    '    Dim lblID As New Label
-    '    Dim lblID2 As New Label
-    '    Dim lblID3 As New Label
-    '    Dim lblID4 As New Label
-    '    Dim lblID5 As New Label
-    '    Dim lblID6 As New Label
-
-    '    Dim location As New Point(10, 20)
-    '    Dim location2 As New Point(100, 20)
-    '    Dim location3 As New Point(200, 20)
-    '    Dim location4 As New Point(300, 20)
-    '    Dim location5 As New Point(400, 20)
-    '    Dim location6 As New Point(500, 20)
-
-    '    ' anywhere we have quotes except for the label names, we can call our Database and get method
-    '    CreateIDLabel(pnlMainPanel, lblID, "lblID", 10, 20, strID, getPanelCount(flpPatients))
-    '    CreateIDLabel(pnlMainPanel, lblID2, "lblFirstName", 135, 20, strFirstName, getPanelCount(flpPatients))
-    '    CreateIDLabel(pnlMainPanel, lblID3, "lblLastName", 275, 20, strLastName, getPanelCount(flpPatients))
-    '    CreateIDLabel(pnlMainPanel, lblID4, "lblRoomLocation", 430, 20, strRoomNumber, getPanelCount(flpPatients))
-    '    CreateIDLabel(pnlMainPanel, lblID5, "lblStatus", 565, 20, strStatus, getPanelCount(flpPatients))
-    '    CreateIDLabel(pnlMainPanel, lblID6, "lblAdmitDate", 680, 20, strAdmitDate, getPanelCount(flpPatients))
-
-    '    'Add panel to flow layout panel
-    '    flpPannel.Controls.Add(pnl)
-    '    'flpCamera.Controls.Add(contactPanel)
-    '    'Update panel variables
-
-    '    currentContactPanel = pnl.Name
-
-
-    'End Sub
-
-    'Public Sub DynamicDoubleClickNewOrder(ByVal sender As Object, ByVal e As EventArgs)
-
-
-    '    frmNewOrder.Show()
-    '    'show the add new patient form filled in with the patients infromation
-    '    'frmUpdatePatient.Show()
-    '    ' frmPatientInfo.Show()
-    'End Sub
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:       */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/11/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   						                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
+    '/*********************************************************************/
+    Private Sub cmbOrderedBy_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbOrderedBy.SelectedIndexChanged
+        intPhysicianIDfromArray = intPhysicianID(cmbOrderedBy.SelectedIndex)
+    End Sub
 End Class

@@ -4,22 +4,25 @@
     Private frmPreviousChildForm As Form
 
     Public Enum SelectedForm As Integer
-        PatientRecords = 1
-        InventoryDropDown = 2
-        AdHocDispense = 3
-        EndOfShiftCount = 4
-        Inventory = 5
-        Waste = 6
-        Report = 7
-        Discrepancies = 8
-        Maintenance = 9
-        Pharmacy = 10
-        SettingsSubMenu = 11
-        ConfigureUserPermissions = 12
-        Discharge = 13
-        ConfigureRooms = 14
-        SerialPortSettings = 15
-        LogOut = 16
+        PatientRecordsDropDown = 1
+        AllPatients = 2
+        MyPatients = 3
+        InventoryDropDown = 4
+        AdHocDispense = 5
+        EndOfShiftCount = 6
+        Inventory = 7
+        Waste = 8
+        Report = 9
+        Discrepancies = 10
+        Maintenance = 11
+        Pharmacy = 12
+        SettingsDropDown = 13
+        ConfigureUserPermissions = 14
+        Discharge = 15
+        ConfigureRooms = 16
+        SerialPortSettings = 17
+        AssignNurse = 18
+        LogOut = 19
     End Enum
 
     '/*********************************************************************/
@@ -58,7 +61,9 @@
     '/*  ---   ----     ------------------------------------------------  */
     '/*  Collin Krygier  2/14/2021    Initial creation                    */
     '/*********************************************************************/
-    Private Sub btnMenu_Click(sender As Object, e As EventArgs) Handles btnPatientRecords.Click, btnInventory.Click, btnAdhockDispense.Click, btnEndOfShiftCount.Click, btnConfigureInventory.Click, btnReport.Click, btnDescrepancies.Click, btnMaintenance.Click, btnPharmacy.Click, btnSettings.Click, btnUsers.Click, btnDischargePatient.Click, btnEditRooms.Click, btnSerialPort.Click, btnWaste.Click
+    Private Sub btnMenu_Click(sender As Object, e As EventArgs) Handles btnAllPatients.Click, btnMyPatients.Click, btnAdhockDispense.Click, btnEndOfShiftCount.Click, btnConfigureInventory.Click, btnWaste.Click, btnReport.Click, btnDescrepancies.Click, btnMaintenance.Click, btnPharmacy.Click, btnUsers.Click, btnDischargePatient.Click, btnEditRooms.Click, btnSerialPort.Click, btnAssignNurse.Click
+
+
 
         ' ensure that the colors of the buttons change accordingly. We need to know which button is clicked,
         ' and then change the backgroud tot he correct blue color. When this happens we need to change the other buttons
@@ -127,6 +132,7 @@
         ' this is where we dock the form as a frmChild form onto the panel
         ' if there is currently a form here we need to close it
 
+
         If Not frmPreviousChildForm Is Nothing Then
             If Not frmPreviousChildForm Is frmChild Then
                 frmPreviousChildForm.Close()
@@ -141,11 +147,17 @@
         ' removes boarder on form which is where someone can close the form. We will close it on button clicks instead
         frmChild.FormBorderStyle = FormBorderStyle.None
 
+        frmChild.Parent = Me
+
         'add form to panel
         Me.pnlDockLocation.Controls.Add(frmChild)
 
         'make form visible
         frmChild.Show()
+
+        For Each ctl In frmChild.Controls
+            Debug.Print(ctl.name)
+        Next
 
     End Sub
 
@@ -186,7 +198,7 @@
     '/*  Collin Krygier  2/14/2021    Initial creation                    */
     '/*********************************************************************/
 
-    Private Sub DetermineFormToOpen(ByVal intTagNum As Integer)
+    Public Sub DetermineFormToOpen(ByVal intTagNum As Integer)
 
         ' based on the button that is clicked this is where we decide
         ' which form we need to open
@@ -195,16 +207,25 @@
 
         Select Case intValue
 
-            Case SelectedForm.PatientRecords
+            Case SelectedForm.PatientRecordsDropDown
+
+                'nothing will happen here because we have a submenu that needs to be displayed to show more buttons
+                'more buttons will be shown and we will take the tag num of those to determine which form to dock
+
+            Case SelectedForm.AllPatients
 
                 frmCurrentChildForm = frmPatientRecords
                 OpenChildForm(frmPatientRecords)
-                HideSettingsSubMenu()
-                HideInventorySubMenu()
+
+            Case SelectedForm.MyPatients
+
+                frmCurrentChildForm = frmMyPatients
+                OpenChildForm(frmMyPatients)
 
             Case SelectedForm.InventoryDropDown
-                ' this is the selection of form inventory
-                HideSettingsSubMenu()
+
+                'nothing will happen here because we have a submenu that needs to be displayed to show more buttons
+                'more buttons will be shown and we will take the tag num of those to determine which form to dock
 
             Case SelectedForm.AdHocDispense
 
@@ -230,37 +251,38 @@
 
                 frmCurrentChildForm = frmReport
                 OpenChildForm(frmReport)
-                HideSettingsSubMenu()
-                HideInventorySubMenu()
+                HideSubMenu(pnlSubMenuSettings)
+                HideSubMenu(pnlSubMenuPatientRecords)
+                HideSubMenu(pnlSubMenuInventory)
 
             Case SelectedForm.Discrepancies
 
                 frmCurrentChildForm = frmDiscrepancies
                 OpenChildForm(frmDiscrepancies)
-                HideSettingsSubMenu()
-                HideInventorySubMenu()
+                HideSubMenu(pnlSubMenuSettings)
+                HideSubMenu(pnlSubMenuPatientRecords)
+                HideSubMenu(pnlSubMenuInventory)
 
             Case SelectedForm.Maintenance
 
                 frmCurrentChildForm = frmMaintenance
                 OpenChildForm(frmMaintenance)
-                HideSettingsSubMenu()
-                HideInventorySubMenu()
+                HideSubMenu(pnlSubMenuSettings)
+                HideSubMenu(pnlSubMenuPatientRecords)
+                HideSubMenu(pnlSubMenuInventory)
 
             Case SelectedForm.Pharmacy
 
                 frmCurrentChildForm = frmPharmacy
                 OpenChildForm(frmPharmacy)
-                HideSettingsSubMenu()
-                HideInventorySubMenu()
+                HideSubMenu(pnlSubMenuSettings)
+                HideSubMenu(pnlSubMenuPatientRecords)
+                HideSubMenu(pnlSubMenuInventory)
 
-            Case SelectedForm.SettingsSubMenu
+            Case SelectedForm.SettingsDropDown
 
                 'nothing will happen here because we have a submenu that needs to be displayed to show more buttons
                 'more buttons will be shown and we will take the tag num of those to determine which form to dock
-                'frmCurrentChildForm = frmConfiguration
-                'OpenChildForm(frmConfiguration)
-                HideInventorySubMenu()
 
             Case SelectedForm.ConfigureUserPermissions
 
@@ -282,6 +304,11 @@
                 frmCurrentChildForm = frmSerialPort
                 OpenChildForm(frmSerialPort)
 
+            Case SelectedForm.AssignNurse
+
+                frmCurrentChildForm = frmAssignNurse
+                OpenChildForm(frmAssignNurse)
+
             Case SelectedForm.LogOut
 
                 'call method here to ask if we are sure that we really want to log out of the system
@@ -291,9 +318,6 @@
                 '      frmCurrentChildForm = frmAdminSettings
                 '     OpenChildForm(frmAdminSettings)
         End Select
-
-
-
 
     End Sub
 
@@ -331,21 +355,22 @@
     '/*********************************************************************/
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-
         'Runs the database creation module to determine if the database was created
         CreateDatabase.Main()
 
         'CheckUserPermissions()
 
-
         'set submenu to be invisible on form load
         pnlSubMenuSettings.Visible = False
         pnlSubMenuInventory.Visible = False
 
-        AssignHandlersToSubMenuItems()
+        AssignHandlersToSubMenuButtons(pnlSubMenuInventory)
+        AssignHandlersToSubMenuButtons(pnlSubMenuSettings)
+        AssignHandlersToSubMenuButtons(pnlSubMenuPatientRecords)
 
         'set the patient records form to be selected on default application startup
-        btnPatientRecords.PerformClick()
+        btnAllPatients.PerformClick()
+        Me.Text = "Medical Dispense"
 
     End Sub
 
@@ -362,7 +387,8 @@
     '/*          none                                                     */         
     '/*********************************************************************/
     '/*  CALLS:										                      */                 
-    '/*      ShowOrHideSettingsSubMenu                                    */  
+    '/*      ShowOrHideSubMenu                                            */ 
+    '/*      HideSubMenu                                                  */
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					          */         
     '/*	 sender- object representing a control                            */
@@ -381,7 +407,11 @@
     '/*  Collin Krygier  2/14/2021    Initial creation                    */
     '/*********************************************************************/
     Private Sub btnSettings_Click(sender As Object, e As EventArgs) Handles btnSettings.Click
-        ShowOrHideSettingsSubMenu()
+
+        HideSubMenu(pnlSubMenuInventory)
+        HideSubMenu(pnlSubMenuPatientRecords)
+        ShowOrHideSubMenu(pnlSubMenuSettings)
+
     End Sub
 
     '/*********************************************************************/
@@ -397,7 +427,8 @@
     '/*          none                                                     */         
     '/*********************************************************************/
     '/*  CALLS:										                      */                 
-    '/*      ShowOrHideInventorySubMenu                                   */  
+    '/*      ShowOrHideSubMenu                                            */ 
+    '/*      HideSubMenu                                                  */  
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					          */         
     '/*	 sender- object representing a control                            */
@@ -417,30 +448,36 @@
     '/*********************************************************************/
 
     Private Sub btnInventory_Click(sender As Object, e As EventArgs) Handles btnInventory.Click
-        ShowOrHideInventorySubMenu()
+
+        HideSubMenu(pnlSubMenuSettings)
+        HideSubMenu(pnlSubMenuPatientRecords)
+        ShowOrHideSubMenu(pnlSubMenuInventory)
+
     End Sub
 
-
     '/*********************************************************************/
-    '/*                   SubProgram NAME: ShowOrHideSettingsSubMenu      */         
+    '/*                   SubProgram NAME: btnPatientRecords_Click        */         
     '/*********************************************************************/
     '/*                   WRITTEN BY:  Collin Krygier   		          */   
     '/*		         DATE CREATED: 		 2/14/2021                        */                             
     '/*********************************************************************/
     '/*  Subprogram PURPOSE:								              */             
-    '/*	 This identifies whether the settings sub menu needs to be shown  */
+    '/*	 This identifies what to do when the patient records button is    */
+    '/*  clicked                                                          */
     '/*********************************************************************/
     '/*  CALLED BY:   	      						                      */           
-    '/*          btnSettings_Click                                        */         
+    '/*          none                                                     */         
     '/*********************************************************************/
     '/*  CALLS:										                      */                 
-    '/*      ResetButtonColorsAfterClosingTab                             */  
+    '/*      ShowOrHideSubMenu                                            */ 
+    '/*      HideSubMenu                                                  */  
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					          */         
-    '/*	none                                                              */
+    '/*	 sender- object representing a control                            */
+    '/*  e- eventargs indicating there is an event handle assigned        */
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                  */             
-    '/*	      ShowOrHideSettingsSubMenu                     			  */     
+    '/*	                                     							  */     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
     '/*	    none                                                          */
@@ -451,26 +488,22 @@
     '/*  ---   ----     ------------------------------------------------  */
     '/*  Collin Krygier  2/14/2021    Initial creation                    */
     '/*********************************************************************/
-    Private Sub ShowOrHideSettingsSubMenu()
+    Private Sub btnPatientRecords_Click(sender As Object, e As EventArgs) Handles btnPatientRecords.Click
 
-        If pnlSubMenuSettings.Visible = False Then
-
-            pnlSubMenuSettings.Visible = True
-        Else
-            pnlSubMenuSettings.Visible = False
-            ResetButtonColorsAfterClosingTab(pnlSubMenuSettings)
-        End If
+        HideSubMenu(pnlSubMenuSettings)
+        HideSubMenu(pnlSubMenuInventory)
+        ShowOrHideSubMenu(pnlSubMenuPatientRecords)
 
     End Sub
 
     '/*********************************************************************/
-    '/*                   SubProgram NAME: HideSettingsSubMenu            */         
+    '/*                   SubProgram NAME: HideSubMenu                    */         
     '/*********************************************************************/
     '/*                   WRITTEN BY:  Collin Krygier   		          */   
     '/*		         DATE CREATED: 		 2/14/2021                        */                             
     '/*********************************************************************/
     '/*  Subprogram PURPOSE:								              */             
-    '/*	 This forces the settings submenu to be hidden                    */
+    '/*	 This forces the submenu to be hidden                             */
     '/*********************************************************************/
     '/*  CALLED BY:   	      						                      */           
     '/*       determine form to open                                      */         
@@ -493,52 +526,11 @@
     '/*  ---   ----     ------------------------------------------------  */
     '/*  Collin Krygier  2/14/2021    Initial creation                    */
     '/*********************************************************************/
-    Private Sub HideSettingsSubMenu()
+    Public Sub HideSubMenu(ByVal PanelToHide As Panel)
 
-        If pnlSubMenuSettings.Visible = True Then
-            pnlSubMenuSettings.Visible = False
-            ResetButtonColorsAfterClosingTab(pnlSubMenuSettings)
-        End If
-
-
-    End Sub
-
-
-    '/*********************************************************************/
-    '/*                   SubProgram NAME: HideInventorySubMenu           */         
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:  Collin Krygier   		          */   
-    '/*		         DATE CREATED: 		 2/14/2021                        */                             
-    '/*********************************************************************/
-    '/*  Subprogram PURPOSE:								              */             
-    '/*	 This forces the inventory submenu to be hidden                   */
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      						                      */           
-    '/*       determine form to open                                      */         
-    '/*********************************************************************/
-    '/*  CALLS:										                      */                 
-    '/*      ResetButtonColorsAfterClosingTab                             */  
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					          */         
-    '/*	none                                                              */
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								                  */             
-    '/*	      HideInventorySubMenu                           			  */     
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*	    none                                                          */
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						                      */               
-    '/*											                          */                     
-    '/*  WHO   WHEN     WHAT								              */             
-    '/*  ---   ----     ------------------------------------------------  */
-    '/*  Collin Krygier  2/14/2021    Initial creation                    */
-    '/*********************************************************************/
-    Private Sub HideInventorySubMenu()
-
-        If pnlSubMenuInventory.Visible = True Then
-            pnlSubMenuInventory.Visible = False
-            ResetButtonColorsAfterClosingTab(pnlSubMenuInventory)
+        If PanelToHide.Visible = True Then
+            PanelToHide.Visible = False
+            ResetButtonColorsAfterClosingTab(PanelToHide)
         End If
 
     End Sub
@@ -550,10 +542,12 @@
     '/*		         DATE CREATED: 		 2/14/2021                        */                             
     '/*********************************************************************/
     '/*  Subprogram PURPOSE:								              */             
-    '/*	 This identifies whether the inventory sub menu needs to be shown */
+    '/*	 This identifies whether the sub menu needs to be shown           */
     '/*********************************************************************/
     '/*  CALLED BY:   	      						                      */           
-    '/*          btnInventory_Click                                       */         
+    '/*          btnInventory_Click                                       */  
+    '/*          btnPatientRecords_Click                                  */ 
+    '/*          btnSettings_Click                                        */ 
     '/*********************************************************************/
     '/*  CALLS:										                      */                 
     '/*      ResetButtonColorsAfterClosingTab                             */  
@@ -573,14 +567,14 @@
     '/*  ---   ----     ------------------------------------------------  */
     '/*  Collin Krygier  2/14/2021    Initial creation                    */
     '/*********************************************************************/
-    Private Sub ShowOrHideInventorySubMenu()
+    Private Sub ShowOrHideSubMenu(ByVal PanelToShowOrHide As Panel)
 
-        If pnlSubMenuInventory.Visible = False Then
+        If PanelToShowOrHide.Visible = False Then
 
-            pnlSubMenuInventory.Visible = True
+            PanelToShowOrHide.Visible = True
         Else
-            pnlSubMenuInventory.Visible = False
-            ResetButtonColorsAfterClosingTab(pnlSubMenuInventory)
+            PanelToShowOrHide.Visible = False
+            ResetButtonColorsAfterClosingTab(PanelToShowOrHide)
 
         End If
 
@@ -599,7 +593,7 @@
     End Sub
 
     '/*********************************************************************/
-    '/*                   SubProgram NAME: AssignHandlersToSubMenuItems   */         
+    '/*                   SubProgram NAME: AssignHandlersToSubMenuButtons */         
     '/*********************************************************************/
     '/*                   WRITTEN BY:  Collin Krygier   		          */   
     '/*		         DATE CREATED: 		 2/14/2021                        */                             
@@ -618,7 +612,7 @@
     '/*    none                                                           */  
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					          */         
-    '/*	none                                                              */
+    '/*	PanelSubMenu which is a panel object on the form                  */
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                  */             
     '/*	      AssignHandlersToSubMenuItems()                   			  */     
@@ -633,13 +627,13 @@
     '/*  ---   ----     ------------------------------------------------  */
     '/*  Collin Krygier  2/14/2021    Initial creation                    */
     '/*********************************************************************/
-    Private Sub AssignHandlersToSubMenuItems()
+    Private Sub AssignHandlersToSubMenuButtons(ByVal PanelSubMenu As Panel)
 
         Dim ctlControl As Control
         Dim btnButton As Button
 
         ' iterating over all of the submenu panels
-        For Each ctlControl In pnlSubMenuInventory.Controls
+        For Each ctlControl In PanelSubMenu.Controls
             If TypeName(ctlControl) = "Button" Then
 
                 'cast to a button allowing access to button properties
@@ -650,18 +644,6 @@
             End If
         Next
 
-        ' iterating over all of the submenu panels
-        For Each ctlControl In pnlSubMenuSettings.Controls
-            If TypeName(ctlControl) = "Button" Then
-
-                'cast to a button allowing access to button properties
-                btnButton = CType(ctlControl, Button)
-
-                AddHandler btnButton.Click, AddressOf SubMenu_Click
-
-            End If
-        Next
-        'btnAdhockDispense.Click, btnConfigureInventory.Click, btnEndOfShiftCount.Click, btnUsers.Click, btnDischargePatient.Click, btnEditRooms.Click, btnSerialPort.Click
     End Sub
 
 
@@ -702,58 +684,37 @@
 
         'changes the background color when the mouse clicks the submenu buttons
 
+        Dim arrPanels As Panel() = {pnlSubMenuSettings, pnlSubMenuPatientRecords, pnlSubMenuInventory}
+        ' arrPanels = 
+
         Dim ctlControl As Control
         Dim btnButton As Button
 
         ' iterating over all of the submenu panels
-        For Each ctlControl In pnlSubMenuInventory.Controls
+        For Each pnl In arrPanels
 
-            If TypeName(ctlControl) = "Button" Then
+            For Each ctlControl In pnl.Controls
+                If TypeName(ctlControl) = "Button" Then
 
-                ' cast to a button
-                btnButton = CType(ctlControl, Button)
+                    ' cast to a button
+                    btnButton = CType(ctlControl, Button)
 
-                ' set the backcolor of the control depending on the current back color of it
-                If sender.Name = ctlControl.Name Then
+                    ' set the backcolor of the control depending on the current back color of it
+                    If sender.Name = ctlControl.Name Then
 
-                    If sender.backColor = Color.FromArgb(60, 80, 150) Then
-                        sender.ForeColor = Color.Black
-                        sender.BackColor = Color.White
-                        sender.FlatAppearance.BorderSize = 0
+                        If sender.backColor = Color.FromArgb(60, 80, 150) Then
+                            sender.ForeColor = Color.Black
+                            sender.BackColor = Color.White
+                            sender.FlatAppearance.BorderSize = 0
+                        End If
+                    Else
+                        btnButton.BackColor = Color.FromArgb(60, 80, 150)
+                        btnButton.ForeColor = Color.White
+                        btnButton.FlatAppearance.BorderSize = 1
                     End If
-                Else
-                    btnButton.BackColor = Color.FromArgb(60, 80, 150)
-                    btnButton.ForeColor = Color.White
-                    btnButton.FlatAppearance.BorderSize = 1
+
                 End If
-
-            End If
-
-        Next
-
-        ' iterating over all of the submenu panels
-        For Each ctlControl In pnlSubMenuSettings.Controls
-
-            If TypeName(ctlControl) = "Button" Then
-
-                ' cast to a button
-                btnButton = CType(ctlControl, Button)
-
-                ' set the backcolor of the control depending on the current back color of it
-                If sender.Name = ctlControl.Name Then
-
-                    If sender.backColor = Color.FromArgb(60, 80, 150) Then
-                        sender.ForeColor = Color.Black
-                        sender.BackColor = Color.White
-                        sender.FlatAppearance.BorderSize = 0
-                    End If
-                Else
-                    btnButton.BackColor = Color.FromArgb(60, 80, 150)
-                    btnButton.ForeColor = Color.White
-                    btnButton.FlatAppearance.BorderSize = 1
-                End If
-
-            End If
+            Next
         Next
 
     End Sub
@@ -844,5 +805,6 @@
         frmLoginScan.Show()
 
     End Sub
+
 
 End Class

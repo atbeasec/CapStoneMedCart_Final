@@ -24,66 +24,81 @@ Partial Class frmMaintenance
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMaintenance))
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.RadioButton4 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.radUser = New System.Windows.Forms.RadioButton()
+        Me.radPhysician = New System.Windows.Forms.RadioButton()
+        Me.radRoom = New System.Windows.Forms.RadioButton()
+        Me.btnUpload = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
+        Me.radPatient = New System.Windows.Forms.RadioButton()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
         '
-        Me.Panel1.Controls.Add(Me.RadioButton4)
-        Me.Panel1.Controls.Add(Me.RadioButton3)
-        Me.Panel1.Controls.Add(Me.Button1)
+        Me.Panel1.Controls.Add(Me.radUser)
+        Me.Panel1.Controls.Add(Me.radPhysician)
+        Me.Panel1.Controls.Add(Me.radRoom)
+        Me.Panel1.Controls.Add(Me.btnUpload)
         Me.Panel1.Controls.Add(Me.Label1)
-        Me.Panel1.Controls.Add(Me.RadioButton1)
+        Me.Panel1.Controls.Add(Me.radPatient)
         Me.Panel1.Location = New System.Drawing.Point(12, 12)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(370, 295)
+        Me.Panel1.Size = New System.Drawing.Size(370, 409)
         Me.Panel1.TabIndex = 0
         '
-        'RadioButton4
+        'radUser
         '
-        Me.RadioButton4.AutoSize = True
-        Me.RadioButton4.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RadioButton4.Location = New System.Drawing.Point(107, 171)
-        Me.RadioButton4.Name = "RadioButton4"
-        Me.RadioButton4.Size = New System.Drawing.Size(162, 25)
-        Me.RadioButton4.TabIndex = 55
-        Me.RadioButton4.TabStop = True
-        Me.RadioButton4.Text = "Medication Order "
-        Me.RadioButton4.UseVisualStyleBackColor = True
+        Me.radUser.AutoSize = True
+        Me.radUser.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.radUser.Location = New System.Drawing.Point(107, 218)
+        Me.radUser.Name = "radUser"
+        Me.radUser.Size = New System.Drawing.Size(118, 25)
+        Me.radUser.TabIndex = 57
+        Me.radUser.TabStop = True
+        Me.radUser.Text = "User Record"
+        Me.radUser.UseVisualStyleBackColor = True
         '
-        'RadioButton3
+        'radPhysician
         '
-        Me.RadioButton3.AutoSize = True
-        Me.RadioButton3.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RadioButton3.Location = New System.Drawing.Point(107, 119)
-        Me.RadioButton3.Name = "RadioButton3"
-        Me.RadioButton3.Size = New System.Drawing.Size(163, 25)
-        Me.RadioButton3.TabIndex = 54
-        Me.RadioButton3.TabStop = True
-        Me.RadioButton3.Text = "Inventory Records"
-        Me.RadioButton3.UseVisualStyleBackColor = True
+        Me.radPhysician.AutoSize = True
+        Me.radPhysician.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.radPhysician.Location = New System.Drawing.Point(107, 123)
+        Me.radPhysician.Name = "radPhysician"
+        Me.radPhysician.Size = New System.Drawing.Size(151, 25)
+        Me.radPhysician.TabIndex = 56
+        Me.radPhysician.TabStop = True
+        Me.radPhysician.Text = "Physician Record"
+        Me.radPhysician.UseVisualStyleBackColor = True
         '
-        'Button1
+        'radRoom
         '
-        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.Button1.FlatAppearance.BorderSize = 0
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.ForeColor = System.Drawing.Color.White
-        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button1.Location = New System.Drawing.Point(107, 231)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(158, 39)
-        Me.Button1.TabIndex = 53
-        Me.Button1.Text = "   Select File"
-        Me.Button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button1.UseVisualStyleBackColor = False
+        Me.radRoom.AutoSize = True
+        Me.radRoom.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.radRoom.Location = New System.Drawing.Point(107, 171)
+        Me.radRoom.Name = "radRoom"
+        Me.radRoom.Size = New System.Drawing.Size(79, 25)
+        Me.radRoom.TabIndex = 55
+        Me.radRoom.TabStop = True
+        Me.radRoom.Text = "Rooms"
+        Me.radRoom.UseVisualStyleBackColor = True
+        '
+        'btnUpload
+        '
+        Me.btnUpload.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnUpload.FlatAppearance.BorderSize = 0
+        Me.btnUpload.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUpload.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUpload.ForeColor = System.Drawing.Color.White
+        Me.btnUpload.Image = CType(resources.GetObject("btnUpload.Image"), System.Drawing.Image)
+        Me.btnUpload.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnUpload.Location = New System.Drawing.Point(107, 269)
+        Me.btnUpload.Name = "btnUpload"
+        Me.btnUpload.Size = New System.Drawing.Size(158, 39)
+        Me.btnUpload.TabIndex = 53
+        Me.btnUpload.Text = "   Select File"
+        Me.btnUpload.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnUpload.UseVisualStyleBackColor = False
         '
         'Label1
         '
@@ -95,17 +110,21 @@ Partial Class frmMaintenance
         Me.Label1.TabIndex = 52
         Me.Label1.Text = "Select Type Of Record to Import"
         '
-        'RadioButton1
+        'radPatient
         '
-        Me.RadioButton1.AutoSize = True
-        Me.RadioButton1.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RadioButton1.Location = New System.Drawing.Point(107, 72)
-        Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(136, 25)
-        Me.RadioButton1.TabIndex = 51
-        Me.RadioButton1.TabStop = True
-        Me.RadioButton1.Text = "Patient Record"
-        Me.RadioButton1.UseVisualStyleBackColor = True
+        Me.radPatient.AutoSize = True
+        Me.radPatient.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.radPatient.Location = New System.Drawing.Point(107, 72)
+        Me.radPatient.Name = "radPatient"
+        Me.radPatient.Size = New System.Drawing.Size(136, 25)
+        Me.radPatient.TabIndex = 51
+        Me.radPatient.TabStop = True
+        Me.radPatient.Text = "Patient Record"
+        Me.radPatient.UseVisualStyleBackColor = True
+        '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
         'frmMaintenance
         '
@@ -123,9 +142,11 @@ Partial Class frmMaintenance
     End Sub
 
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents RadioButton4 As RadioButton
-    Friend WithEvents RadioButton3 As RadioButton
-    Friend WithEvents Button1 As Button
+    Friend WithEvents radRoom As RadioButton
+    Friend WithEvents btnUpload As Button
     Friend WithEvents Label1 As Label
-    Friend WithEvents RadioButton1 As RadioButton
+    Friend WithEvents radPatient As RadioButton
+    Friend WithEvents radUser As RadioButton
+    Friend WithEvents radPhysician As RadioButton
+    Friend WithEvents OpenFileDialog1 As OpenFileDialog
 End Class

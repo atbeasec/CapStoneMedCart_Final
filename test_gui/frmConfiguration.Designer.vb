@@ -22,12 +22,15 @@ Partial Class frmConfiguration
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmConfiguration))
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.txtUsername = New System.Windows.Forms.TextBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.btnConfirmEye = New System.Windows.Forms.Button()
         Me.txtConfirmPassword = New System.Windows.Forms.TextBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.btnPasswordEye = New System.Windows.Forms.Button()
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.btnSaveUser = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -49,7 +52,6 @@ Partial Class frmConfiguration
         Me.lblPermissions = New System.Windows.Forms.Label()
         Me.lblName = New System.Windows.Forms.Label()
         Me.lblUserName = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -58,8 +60,11 @@ Partial Class frmConfiguration
         Me.btnSaveChanges = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.txtID = New System.Windows.Forms.TextBox()
-        Me.btnPasswordEye = New System.Windows.Forms.Button()
-        Me.btnConfirmEye = New System.Windows.Forms.Button()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.pnlSearch = New System.Windows.Forms.Panel()
+        Me.txtSearchBox = New System.Windows.Forms.TextBox()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.tpLabelHover = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel5.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -67,13 +72,14 @@ Partial Class frmConfiguration
         Me.Panel9.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.pnlHeader.SuspendLayout()
+        Me.Panel6.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel5
         '
         Me.Panel5.BackColor = System.Drawing.Color.DarkGray
         Me.Panel5.Controls.Add(Me.txtUsername)
-        Me.Panel5.Location = New System.Drawing.Point(19, 226)
+        Me.Panel5.Location = New System.Drawing.Point(19, 208)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel5.Size = New System.Drawing.Size(227, 28)
@@ -95,11 +101,25 @@ Partial Class frmConfiguration
         Me.Panel4.BackColor = System.Drawing.Color.DarkGray
         Me.Panel4.Controls.Add(Me.btnConfirmEye)
         Me.Panel4.Controls.Add(Me.txtConfirmPassword)
-        Me.Panel4.Location = New System.Drawing.Point(19, 466)
+        Me.Panel4.Location = New System.Drawing.Point(19, 410)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel4.Size = New System.Drawing.Size(224, 28)
         Me.Panel4.TabIndex = 6
+        '
+        'btnConfirmEye
+        '
+        Me.btnConfirmEye.BackColor = System.Drawing.Color.White
+        Me.btnConfirmEye.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnConfirmEye.FlatAppearance.BorderSize = 0
+        Me.btnConfirmEye.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnConfirmEye.ForeColor = System.Drawing.Color.Transparent
+        Me.btnConfirmEye.Image = CType(resources.GetObject("btnConfirmEye.Image"), System.Drawing.Image)
+        Me.btnConfirmEye.Location = New System.Drawing.Point(193, 1)
+        Me.btnConfirmEye.Name = "btnConfirmEye"
+        Me.btnConfirmEye.Size = New System.Drawing.Size(30, 26)
+        Me.btnConfirmEye.TabIndex = 39
+        Me.btnConfirmEye.UseVisualStyleBackColor = False
         '
         'txtConfirmPassword
         '
@@ -118,11 +138,25 @@ Partial Class frmConfiguration
         Me.Panel3.BackColor = System.Drawing.Color.DarkGray
         Me.Panel3.Controls.Add(Me.btnPasswordEye)
         Me.Panel3.Controls.Add(Me.txtPassword)
-        Me.Panel3.Location = New System.Drawing.Point(19, 383)
+        Me.Panel3.Location = New System.Drawing.Point(19, 343)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel3.Size = New System.Drawing.Size(225, 28)
         Me.Panel3.TabIndex = 5
+        '
+        'btnPasswordEye
+        '
+        Me.btnPasswordEye.BackColor = System.Drawing.Color.White
+        Me.btnPasswordEye.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnPasswordEye.FlatAppearance.BorderSize = 0
+        Me.btnPasswordEye.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPasswordEye.ForeColor = System.Drawing.Color.Transparent
+        Me.btnPasswordEye.Image = CType(resources.GetObject("btnPasswordEye.Image"), System.Drawing.Image)
+        Me.btnPasswordEye.Location = New System.Drawing.Point(194, 1)
+        Me.btnPasswordEye.Name = "btnPasswordEye"
+        Me.btnPasswordEye.Size = New System.Drawing.Size(30, 26)
+        Me.btnPasswordEye.TabIndex = 39
+        Me.btnPasswordEye.UseVisualStyleBackColor = False
         '
         'txtPassword
         '
@@ -145,7 +179,7 @@ Partial Class frmConfiguration
         Me.btnSaveUser.ForeColor = System.Drawing.Color.White
         Me.btnSaveUser.Image = Global.test_gui.My.Resources.Resources.resolve
         Me.btnSaveUser.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnSaveUser.Location = New System.Drawing.Point(106, 660)
+        Me.btnSaveUser.Location = New System.Drawing.Point(106, 568)
         Me.btnSaveUser.Name = "btnSaveUser"
         Me.btnSaveUser.Size = New System.Drawing.Size(165, 37)
         Me.btnSaveUser.TabIndex = 10
@@ -169,7 +203,7 @@ Partial Class frmConfiguration
         Me.Label3.AutoSize = True
         Me.Label3.BackColor = System.Drawing.Color.White
         Me.Label3.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(11, 546)
+        Me.Label3.Location = New System.Drawing.Point(11, 460)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(116, 25)
         Me.Label3.TabIndex = 155
@@ -179,7 +213,7 @@ Partial Class frmConfiguration
         '
         Me.rbtnAdministrator.AutoSize = True
         Me.rbtnAdministrator.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnAdministrator.Location = New System.Drawing.Point(228, 588)
+        Me.rbtnAdministrator.Location = New System.Drawing.Point(228, 502)
         Me.rbtnAdministrator.Name = "rbtnAdministrator"
         Me.rbtnAdministrator.Size = New System.Drawing.Size(124, 25)
         Me.rbtnAdministrator.TabIndex = 9
@@ -191,7 +225,7 @@ Partial Class frmConfiguration
         '
         Me.rbtnSupervisor.AutoSize = True
         Me.rbtnSupervisor.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnSupervisor.Location = New System.Drawing.Point(108, 588)
+        Me.rbtnSupervisor.Location = New System.Drawing.Point(108, 502)
         Me.rbtnSupervisor.Name = "rbtnSupervisor"
         Me.rbtnSupervisor.Size = New System.Drawing.Size(103, 25)
         Me.rbtnSupervisor.TabIndex = 8
@@ -203,7 +237,7 @@ Partial Class frmConfiguration
         '
         Me.rbtnNurse.AutoSize = True
         Me.rbtnNurse.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnNurse.Location = New System.Drawing.Point(22, 588)
+        Me.rbtnNurse.Location = New System.Drawing.Point(22, 502)
         Me.rbtnNurse.Name = "rbtnNurse"
         Me.rbtnNurse.Size = New System.Drawing.Size(70, 25)
         Me.rbtnNurse.TabIndex = 7
@@ -215,7 +249,7 @@ Partial Class frmConfiguration
         '
         Me.Panel2.BackColor = System.Drawing.Color.DarkGray
         Me.Panel2.Controls.Add(Me.txtBarcode)
-        Me.Panel2.Location = New System.Drawing.Point(19, 300)
+        Me.Panel2.Location = New System.Drawing.Point(19, 275)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel2.Size = New System.Drawing.Size(226, 28)
@@ -247,7 +281,7 @@ Partial Class frmConfiguration
         '
         Me.Panel9.BackColor = System.Drawing.Color.DarkGray
         Me.Panel9.Controls.Add(Me.txtLastName)
-        Me.Panel9.Location = New System.Drawing.Point(19, 154)
+        Me.Panel9.Location = New System.Drawing.Point(19, 142)
         Me.Panel9.Name = "Panel9"
         Me.Panel9.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel9.Size = New System.Drawing.Size(286, 28)
@@ -291,7 +325,7 @@ Partial Class frmConfiguration
         Me.flpUserInfo.BackColor = System.Drawing.Color.White
         Me.flpUserInfo.Location = New System.Drawing.Point(361, 97)
         Me.flpUserInfo.Name = "flpUserInfo"
-        Me.flpUserInfo.Size = New System.Drawing.Size(756, 627)
+        Me.flpUserInfo.Size = New System.Drawing.Size(719, 563)
         Me.flpUserInfo.TabIndex = 140
         '
         'pnlHeader
@@ -302,9 +336,9 @@ Partial Class frmConfiguration
         Me.pnlHeader.Controls.Add(Me.lblPermissions)
         Me.pnlHeader.Controls.Add(Me.lblName)
         Me.pnlHeader.Controls.Add(Me.lblUserName)
-        Me.pnlHeader.Location = New System.Drawing.Point(361, 46)
+        Me.pnlHeader.Location = New System.Drawing.Point(361, 44)
         Me.pnlHeader.Name = "pnlHeader"
-        Me.pnlHeader.Size = New System.Drawing.Size(756, 47)
+        Me.pnlHeader.Size = New System.Drawing.Size(719, 47)
         Me.pnlHeader.TabIndex = 139
         '
         'lblStatus
@@ -312,10 +346,11 @@ Partial Class frmConfiguration
         Me.lblStatus.AutoSize = True
         Me.lblStatus.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblStatus.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblStatus.Location = New System.Drawing.Point(537, 15)
+        Me.lblStatus.Location = New System.Drawing.Point(521, 15)
         Me.lblStatus.Name = "lblStatus"
         Me.lblStatus.Size = New System.Drawing.Size(56, 21)
         Me.lblStatus.TabIndex = 11
+        Me.lblStatus.Tag = "4"
         Me.lblStatus.Text = "Active"
         '
         'lblActions
@@ -323,7 +358,7 @@ Partial Class frmConfiguration
         Me.lblActions.AutoSize = True
         Me.lblActions.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblActions.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblActions.Location = New System.Drawing.Point(667, 15)
+        Me.lblActions.Location = New System.Drawing.Point(624, 15)
         Me.lblActions.Name = "lblActions"
         Me.lblActions.Size = New System.Drawing.Size(65, 21)
         Me.lblActions.TabIndex = 10
@@ -334,10 +369,11 @@ Partial Class frmConfiguration
         Me.lblPermissions.AutoSize = True
         Me.lblPermissions.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblPermissions.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblPermissions.Location = New System.Drawing.Point(385, 16)
+        Me.lblPermissions.Location = New System.Drawing.Point(368, 16)
         Me.lblPermissions.Name = "lblPermissions"
         Me.lblPermissions.Size = New System.Drawing.Size(95, 21)
         Me.lblPermissions.TabIndex = 9
+        Me.lblPermissions.Tag = "3"
         Me.lblPermissions.Text = "Permissions"
         '
         'lblName
@@ -349,6 +385,7 @@ Partial Class frmConfiguration
         Me.lblName.Name = "lblName"
         Me.lblName.Size = New System.Drawing.Size(53, 21)
         Me.lblName.TabIndex = 8
+        Me.lblName.Tag = "1"
         Me.lblName.Text = "Name"
         '
         'lblUserName
@@ -356,27 +393,18 @@ Partial Class frmConfiguration
         Me.lblUserName.AutoSize = True
         Me.lblUserName.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblUserName.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblUserName.Location = New System.Drawing.Point(219, 15)
+        Me.lblUserName.Location = New System.Drawing.Point(210, 15)
         Me.lblUserName.Name = "lblUserName"
         Me.lblUserName.Size = New System.Drawing.Size(83, 21)
         Me.lblUserName.TabIndex = 7
+        Me.lblUserName.Tag = "2"
         Me.lblUserName.Text = "Username"
-        '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(14, 55)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(89, 21)
-        Me.Label12.TabIndex = 176
-        Me.Label12.Text = "First Name:"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(13, 130)
+        Me.Label1.Location = New System.Drawing.Point(13, 118)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(87, 21)
         Me.Label1.TabIndex = 177
@@ -386,7 +414,7 @@ Partial Class frmConfiguration
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(15, 202)
+        Me.Label5.Location = New System.Drawing.Point(15, 184)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(84, 21)
         Me.Label5.TabIndex = 178
@@ -396,7 +424,7 @@ Partial Class frmConfiguration
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(14, 276)
+        Me.Label6.Location = New System.Drawing.Point(14, 251)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(69, 21)
         Me.Label6.TabIndex = 179
@@ -406,7 +434,7 @@ Partial Class frmConfiguration
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(16, 359)
+        Me.Label7.Location = New System.Drawing.Point(16, 319)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(79, 21)
         Me.Label7.TabIndex = 180
@@ -416,7 +444,7 @@ Partial Class frmConfiguration
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(15, 442)
+        Me.Label8.Location = New System.Drawing.Point(15, 386)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(140, 21)
         Me.Label8.TabIndex = 181
@@ -430,7 +458,7 @@ Partial Class frmConfiguration
         Me.btnSaveChanges.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSaveChanges.ForeColor = System.Drawing.Color.White
         Me.btnSaveChanges.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnSaveChanges.Location = New System.Drawing.Point(22, 660)
+        Me.btnSaveChanges.Location = New System.Drawing.Point(22, 568)
         Me.btnSaveChanges.Name = "btnSaveChanges"
         Me.btnSaveChanges.Size = New System.Drawing.Size(131, 37)
         Me.btnSaveChanges.TabIndex = 182
@@ -447,7 +475,7 @@ Partial Class frmConfiguration
         Me.btnCancel.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCancel.ForeColor = System.Drawing.Color.White
         Me.btnCancel.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnCancel.Location = New System.Drawing.Point(192, 660)
+        Me.btnCancel.Location = New System.Drawing.Point(192, 568)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(135, 37)
         Me.btnCancel.TabIndex = 183
@@ -458,46 +486,65 @@ Partial Class frmConfiguration
         '
         'txtID
         '
-        Me.txtID.Location = New System.Drawing.Point(216, 274)
+        Me.txtID.Location = New System.Drawing.Point(252, 251)
         Me.txtID.Name = "txtID"
         Me.txtID.Size = New System.Drawing.Size(100, 20)
         Me.txtID.TabIndex = 184
         Me.txtID.Visible = False
         '
-        'btnPasswordEye
+        'Panel6
         '
-        Me.btnPasswordEye.BackColor = System.Drawing.Color.White
-        Me.btnPasswordEye.Dock = System.Windows.Forms.DockStyle.Right
-        Me.btnPasswordEye.FlatAppearance.BorderSize = 0
-        Me.btnPasswordEye.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnPasswordEye.ForeColor = System.Drawing.Color.Transparent
-        Me.btnPasswordEye.Image = CType(resources.GetObject("btnPasswordEye.Image"), System.Drawing.Image)
-        Me.btnPasswordEye.Location = New System.Drawing.Point(194, 1)
-        Me.btnPasswordEye.Name = "btnPasswordEye"
-        Me.btnPasswordEye.Size = New System.Drawing.Size(30, 26)
-        Me.btnPasswordEye.TabIndex = 39
-        Me.btnPasswordEye.UseVisualStyleBackColor = False
+        Me.Panel6.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel6.Controls.Add(Me.pnlSearch)
+        Me.Panel6.Controls.Add(Me.txtSearchBox)
+        Me.Panel6.Location = New System.Drawing.Point(613, 13)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel6.Size = New System.Drawing.Size(466, 31)
+        Me.Panel6.TabIndex = 187
         '
-        'btnConfirmEye
+        'pnlSearch
         '
-        Me.btnConfirmEye.BackColor = System.Drawing.Color.White
-        Me.btnConfirmEye.Dock = System.Windows.Forms.DockStyle.Right
-        Me.btnConfirmEye.FlatAppearance.BorderSize = 0
-        Me.btnConfirmEye.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnConfirmEye.ForeColor = System.Drawing.Color.Transparent
-        Me.btnConfirmEye.Image = CType(resources.GetObject("btnConfirmEye.Image"), System.Drawing.Image)
-        Me.btnConfirmEye.Location = New System.Drawing.Point(193, 1)
-        Me.btnConfirmEye.Name = "btnConfirmEye"
-        Me.btnConfirmEye.Size = New System.Drawing.Size(30, 26)
-        Me.btnConfirmEye.TabIndex = 39
-        Me.btnConfirmEye.UseVisualStyleBackColor = False
+        Me.pnlSearch.BackColor = System.Drawing.Color.White
+        Me.pnlSearch.BackgroundImage = CType(resources.GetObject("pnlSearch.BackgroundImage"), System.Drawing.Image)
+        Me.pnlSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.pnlSearch.Dock = System.Windows.Forms.DockStyle.Right
+        Me.pnlSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.pnlSearch.ForeColor = System.Drawing.Color.White
+        Me.pnlSearch.Location = New System.Drawing.Point(432, 1)
+        Me.pnlSearch.Name = "pnlSearch"
+        Me.pnlSearch.Size = New System.Drawing.Size(33, 29)
+        Me.pnlSearch.TabIndex = 2
+        '
+        'txtSearchBox
+        '
+        Me.txtSearchBox.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtSearchBox.Dock = System.Windows.Forms.DockStyle.Left
+        Me.txtSearchBox.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSearchBox.Location = New System.Drawing.Point(1, 1)
+        Me.txtSearchBox.Multiline = True
+        Me.txtSearchBox.Name = "txtSearchBox"
+        Me.txtSearchBox.Size = New System.Drawing.Size(431, 29)
+        Me.txtSearchBox.TabIndex = 1
+        Me.txtSearchBox.Tag = "Search Users"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Location = New System.Drawing.Point(14, 55)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(89, 21)
+        Me.Label12.TabIndex = 176
+        Me.Label12.Text = "First Name:"
         '
         'frmConfiguration
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1141, 822)
+        Me.ClientSize = New System.Drawing.Size(1091, 672)
+        Me.Controls.Add(Me.Panel6)
         Me.Controls.Add(Me.txtID)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSaveChanges)
@@ -523,6 +570,7 @@ Partial Class frmConfiguration
         Me.Controls.Add(Me.flpUserInfo)
         Me.Controls.Add(Me.pnlHeader)
         Me.Name = "frmConfiguration"
+        Me.Tag = ""
         Me.Text = "frmConfiguration"
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
@@ -538,6 +586,8 @@ Partial Class frmConfiguration
         Me.Panel1.PerformLayout()
         Me.pnlHeader.ResumeLayout(False)
         Me.pnlHeader.PerformLayout()
+        Me.Panel6.ResumeLayout(False)
+        Me.Panel6.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -567,7 +617,6 @@ Partial Class frmConfiguration
     Friend WithEvents lblPermissions As Label
     Friend WithEvents lblName As Label
     Friend WithEvents lblUserName As Label
-    Friend WithEvents Label12 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label6 As Label
@@ -579,4 +628,9 @@ Partial Class frmConfiguration
     Friend WithEvents lblStatus As Label
     Friend WithEvents btnConfirmEye As Button
     Friend WithEvents btnPasswordEye As Button
+    Friend WithEvents Panel6 As Panel
+    Friend WithEvents pnlSearch As Panel
+    Friend WithEvents txtSearchBox As TextBox
+    Friend WithEvents Label12 As Label
+    Friend WithEvents tpLabelHover As ToolTip
 End Class

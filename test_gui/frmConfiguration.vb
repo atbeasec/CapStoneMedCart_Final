@@ -3,6 +3,15 @@ Imports System.Text.RegularExpressions
 
 Public Class frmConfiguration
 
+    Public Enum AddAndRemoveUserEnum
+
+        name = 1
+        username = 2
+        permissions = 3
+        active = 4
+
+    End Enum
+
     '/*********************************************************************/
     '/*                   SubProgram NAME: frmConfiguration_Load          */         
     '/*********************************************************************/
@@ -38,49 +47,119 @@ Public Class frmConfiguration
     '/*  Dylan W    2/10/2021    Initial creation and pull data from DB   */
     '/*********************************************************************/
     Private Sub frmConfiguration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'pull  the dataset from the user table in sqlite
-        Dim dsUserInfo As DataSet = CreateDatabase.ExecuteSelectQuery("select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-                                                   "User.Supervisor_Flag, User.Active_Flag From User;")
-
-
-
-        For Each item As DataRow In dsUserInfo.Tables(0).Rows()
-            With dsUserInfo.Tables(0)
-                'grab first name and last name and merge into one string
-                Dim strFirst As String = item.Item(2)
-                Dim strLast As String = item.Item(3)
-                Dim strName = strFirst & " " & strLast
-                Dim strActive As String = ""
-
-                If (item.Item(6)) = 1 Then
-                    strActive = "Yes"
-                Else strActive = "No"
-                End If
-                'check what role the person has, if adminis 1 then it does not matter what Supervisor is 
-                'if admin is 0 then check supervisor. If both admin and supervidor are 0 then the 
-                'user is a nurse
-                Dim strRole As String
-                If (item.Item(4)) = 1 Then
-                    strRole = "Admin"
-                ElseIf (item.Item(5)) = 1 Then
-                    strRole = "Supervisor"
-                Else strRole = "Nurse"
-                End If
-
-                'populate data into panels
-                CreatePanel(flpUserInfo, item.Item(0), strName, item.Item(1),
-                           strRole, strActive)
-
-            End With
-        Next
+        Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
+                                                  "User.Supervisor_Flag, User.Active_Flag From User;"
+        Fill_Table(strFillSQL)
 
         'have new users assigned as Nurses by default
         rbtnNurse.Checked = True
         btnSaveChanges.Visible = False
         btnCancel.Visible = False
 
+        CreateToolTips(pnlHeader, tpLabelHover)
+        AddHandlerToLabelClick(pnlHeader, AddressOf SortBySelectedLabel)
 
     End Sub
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: SortBySelectedLabel            */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/14/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to be called as the click event for any label the  */
+    '/*  user clicks on. Underline the label, and update the panel contents/
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      frmPatientInfo_load                                          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 field- an integer equal to the tag value of the selected label   */ 
+    '/*	 parent- a panel object that the label lives on                   */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 BoldLabelToSortBy(sender, parent)     							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	field- an integer equal to the tag value of the selected label
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/14/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub SortBySelectedLabel(sender As Object, e As EventArgs)
+
+        Dim parent As Panel = sender.parent
+        Dim field As Integer = CInt(sender.tag)
+
+        BoldLabelToSortBy(sender, parent)
+
+        'check If the user Is selecting a dispense history field to sort by
+        If parent.Name = pnlHeader.Name Then
+
+            ConfigurationSelectedFields(field)
+
+        End If
+
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: ConfigurationSelectedFields   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		  */   
+    '/*		         DATE CREATED: 		 2/14/2021                 */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to be called when a user selects a label to sort by*/
+    '/*  the logic to re-create the panels in the order will be caled here*/
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      frmPatientInfo_load                                          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 field- an integer equal to the tag value of the selected label   */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 ConfigurationSelectedFields(Cint(Label1.Tag))   	              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/14/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub ConfigurationSelectedFields(ByVal field As Integer)
+
+        ' clear the controls as they will need to be rebuilt when sorting
+        'flpPatientRecords.Controls.Clear()
+
+        Select Case field
+
+            Case AddAndRemoveUserEnum.name
+
+            Case AddAndRemoveUserEnum.username
+
+            Case AddAndRemoveUserEnum.permissions
+
+            Case AddAndRemoveUserEnum.active
+
+        End Select
+
+    End Sub
+
 
     '/*********************************************************************/
     '/*                   SubProgram NAME: CreatePanel()                  */         
@@ -558,51 +637,103 @@ Public Class frmConfiguration
             intSupervisor = 1
         End If
 
-        'if it returns 2 then the username was changed to something already in the database 
-        If ExecuteScalarQuery(strStatement) = 2 Then
-            MsgBox("A User already has that Username")
-            'call CheckPassword Function to see if password mets security standards
-        ElseIf CheckPassword(strPassword) = False Then
-            MsgBox("Password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special characters !@#$%^&* ")
-            txtPassword.Focus()
-            ' make sure password and Confirm Password Match
-        ElseIf txtPassword.Text <> txtConfirmPassword.Text Then
-            MsgBox("Confirm Password must match Password")
-            txtConfirmPassword.Focus()
-            'Make Sure all fields are filled
-        ElseIf txtFirstName.Text = "" Or txtLastName.Text = "" Or txtUsername.Text = "" Or txtBarcode.Text = "" Then
-            MsgBox("All Fields must be filled")
-        Else
-            ' get the peppered hash of the password
-            strResults = LogIn.MakeSaltPepperAndHash(strPassword)
-            strPassword = strResults(0)
-            strSalt = strResults(1)
+        'check if the user is changing the password and ran if yes
 
-            If txtBarcode.Text = "" Then
-                'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
-                strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',Salt='" & strSalt & "',Password='" & strPassword & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "' WHERE User_ID='" & txtID.Text & "';"
-                ExecuteInsertQuery(strStatement)
+        If txtConfirmPassword.Text <> "" And txtPassword.Text <> "" Then
+            'if it returns 2 then the username was changed to something already in the database 
+            If ExecuteScalarQuery(strStatement) = 2 Then
+                MsgBox("A User already has that Username")
+                'call CheckPassword Function to see if password mets security standards
+            ElseIf CheckPassword(strPassword) = False Then
+                MsgBox("Password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special characters !@#$%^&* ")
+                txtPassword.Focus()
+                ' make sure password and Confirm Password Match
+            ElseIf txtPassword.Text <> txtConfirmPassword.Text Then
+                MsgBox("Confirm Password must match Password")
+                txtConfirmPassword.Focus()
+                'Make Sure all fields are filled
+            ElseIf txtFirstName.Text = "" Or txtLastName.Text = "" Or txtUsername.Text = "" Then
+                MsgBox("All Fields must be filled12")
             Else
-                ' Convert the barcode to the peppered hash
-                strHashedBarcode = ConvertBarcodePepperAndHash(txtBarcode.Text)
-                'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
-                strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',Salt='" & strSalt & "',Password='" & strPassword & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Barcode='" & strHashedBarcode & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "' WHERE User_ID='" & txtID.Text & "';"
-                ExecuteInsertQuery(strStatement)
+                ' get the peppered hash of the password
+                strResults = LogIn.MakeSaltPepperAndHash(strPassword)
+                strPassword = strResults(0)
+                strSalt = strResults(1)
+
+                If txtBarcode.Text = "" Then
+                    'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
+                    strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',Salt='" & strSalt & "',Password='" & strPassword & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "',Active_Flag=1 WHERE User_ID='" & txtID.Text & "';"
+                    ExecuteInsertQuery(strStatement)
+                Else
+                    ' Convert the barcode to the peppered hash
+                    strHashedBarcode = ConvertBarcodePepperAndHash(txtBarcode.Text)
+                    'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
+                    strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',Salt='" & strSalt & "',Password='" & strPassword & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Barcode='" & strHashedBarcode & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "',Active_Flag=1 WHERE User_ID='" & txtID.Text & "';"
+                    ExecuteInsertQuery(strStatement)
+                End If
+
+
+
+                'clear all text boxes and change button visibility back to default 
+                txtFirstName.Text = ""
+                txtLastName.Text = ""
+                txtUsername.Text = ""
+                txtBarcode.Text = ""
+                txtPassword.Text = ""
+                txtConfirmPassword.Text = ""
+                txtID.Text = ""
+                btnCancel.Visible = False
+                btnSaveChanges.Visible = False
+                btnSaveUser.Visible = True
             End If
-
-
-
-            'clear all text boxes and change button visibility back to default 
-            txtFirstName.Text = ""
-            txtLastName.Text = ""
-            txtUsername.Text = ""
-            txtBarcode.Text = ""
-            txtPassword.Text = ""
-            txtConfirmPassword.Text = ""
-            btnCancel.Visible = False
-            btnSaveChanges.Visible = False
-            btnSaveUser.Visible = True
         End If
+
+
+
+        'check if the user is changing the password and ran if no
+        If txtConfirmPassword.Text = "" And txtPassword.Text = "" And txtID.Text <> "" Then
+            'if it returns 2 then the username was changed to something already in the database 
+            If ExecuteScalarQuery(strStatement) = 2 Then
+                MsgBox("A User already has that Username")
+                'call CheckPassword Function to see if password mets security standards
+                ' make sure password and Confirm Password Match
+            ElseIf txtPassword.Text <> txtConfirmPassword.Text Then
+                MsgBox("Confirm Password must match Password")
+                txtConfirmPassword.Focus()
+                'Make Sure all fields are filled
+            ElseIf txtFirstName.Text = "" Or txtLastName.Text = "" Or txtUsername.Text = "" Then
+                MsgBox("All Fields must be filled56")
+            Else
+                If txtBarcode.Text = "" Then
+                    'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
+                    strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "',Active_Flag=1  WHERE User_ID='" & txtID.Text & "';"
+                    ExecuteInsertQuery(strStatement)
+                Else
+                    ' Convert the barcode to the peppered hash
+                    strHashedBarcode = ConvertBarcodePepperAndHash(txtBarcode.Text)
+                    'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
+                    strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Barcode='" & strHashedBarcode & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "',Active_Flag=1  WHERE User_ID='" & txtID.Text & "';"
+                    ExecuteInsertQuery(strStatement)
+                End If
+
+
+
+                'clear all text boxes and change button visibility back to default 
+                txtFirstName.Text = ""
+                txtLastName.Text = ""
+                txtUsername.Text = ""
+                txtBarcode.Text = ""
+                txtPassword.Text = ""
+                txtConfirmPassword.Text = ""
+                btnCancel.Visible = False
+                btnSaveChanges.Visible = False
+                btnSaveUser.Visible = True
+            End If
+        End If
+
+        Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
+                                      "User.Supervisor_Flag, User.Active_Flag From User;"
+        Fill_Table(strFillSQL)
     End Sub
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         'clear all text boxes and change button visibility back to default 
@@ -638,6 +769,76 @@ Public Class frmConfiguration
         Else
             txtConfirmPassword.UseSystemPasswordChar = False
 
+        End If
+    End Sub
+
+    Private Sub SearchIcon_Click(sender As Object, e As EventArgs) Handles pnlSearch.Click
+        Dim strFillSQL As String
+        strFillSQL = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
+                                                       "User.Supervisor_Flag, User.Active_Flag From User WHERE Username LIKE '" & txtSearchBox.Text & "%' Or User_First_Name LIKE '" & txtSearchBox.Text & "%' Or User_Last_Name LIKE '" & txtSearchBox.Text & "%';"
+        Fill_Table(strFillSQL)
+
+    End Sub
+
+    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearchBox.TextChanged
+        Dim strFillSQL As String
+
+        If txtSearchBox.Text = "" Then
+            strFillSQL = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
+                                                  "User.Supervisor_Flag, User.Active_Flag From User;"
+            Fill_Table(strFillSQL)
+
+        End If
+
+
+
+    End Sub
+
+    Public Sub Fill_Table(ByVal strFillSQL As String)
+        flpUserInfo.Controls.Clear()
+        Dim dsUserInfo As DataSet = CreateDatabase.ExecuteSelectQuery(strFillSQL)
+
+
+
+        For Each item As DataRow In dsUserInfo.Tables(0).Rows()
+            With dsUserInfo.Tables(0)
+                'grab first name and last name and merge into one string
+                Dim strFirst As String = item.Item(2)
+                Dim strLast As String = item.Item(3)
+                Dim strName = strFirst & " " & strLast
+                Dim strActive As String = ""
+
+                If (item.Item(6)) = 1 Then
+                    strActive = "Yes"
+                Else strActive = "No"
+                End If
+                'check what role the person has, if adminis 1 then it does not matter what Supervisor is 
+                'if admin is 0 then check supervisor. If both admin and supervidor are 0 then the 
+                'user is a nurse
+                Dim strRole As String
+                If (item.Item(4)) = 1 Then
+                    strRole = "Admin"
+                ElseIf (item.Item(5)) = 1 Then
+                    strRole = "Supervisor"
+                Else strRole = "Nurse"
+                End If
+
+                'populate data into panels
+                CreatePanel(flpUserInfo, item.Item(0), strName, item.Item(1),
+                               strRole, strActive)
+
+            End With
+        Next
+    End Sub
+
+
+    Private Sub Search_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearchBox.KeyPress
+        If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
+            e.KeyChar = ChrW(0)
+            e.Handled = True
+            Dim strFillSQL = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
+                                                       "User.Supervisor_Flag, User.Active_Flag From User WHERE Username LIKE '" & txtSearchBox.Text & "%' Or User_First_Name LIKE '" & txtSearchBox.Text & "%' Or User_Last_Name LIKE '" & txtSearchBox.Text & "%';"
+            Fill_Table(strFillSQL)
         End If
     End Sub
 

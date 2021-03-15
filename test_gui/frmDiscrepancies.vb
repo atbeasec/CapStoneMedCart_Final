@@ -1,51 +1,18 @@
 ﻿Public Class frmDiscrepancies
 
+    Public Enum DiscrepanciesEnum
+        ID = 1
+        medication = 2
+        drawer = 3
+        expectedCount = 4
+        actualCount = 5
+        dateAndTime = 6
+    End Enum
+
     Dim currentContactPanelName As String = Nothing
     Dim ContactPanelsAddedCount As Integer = 0
 
     Private Sub frmDiscrepancies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-        'Dim genName1 As String = "Benzhydrocodone "
-        'Dim genName2 As String = "hydrocodone bitartrate"
-        'Dim genName3 As String = "phenylephrine"
-        'Dim genName4 As String = "Morphine"
-        'Dim genName5 As String = "Codeine"
-
-        'Dim quantity1 As String = "1"
-        'Dim quantity2 As String = "1"
-        'Dim quantity3 As String = "2"
-        'Dim quantity4 As String = "1"
-        'Dim quantity5 As String = "3"
-
-        'Dim measure1 As String = "10 mg"
-        'Dim measure2 As String = "10 mg"
-        'Dim measure3 As String = "50 mg"
-        'Dim measure4 As String = "10 mg"
-        'Dim measure5 As String = "10 mg"
-
-        'Dim dispensedBy1 As String = "3"
-        'Dim dispensedBy2 As String = "5 "
-        'Dim dispensedBy3 As String = "6"
-        'Dim dispensedBy4 As String = "1"
-        'Dim dispensedBy5 As String = "2"
-
-        'Dim dispenseDate1 As String = "11/11/2020"
-        'Dim dispenseDate2 As String = "11/5/2020"
-        'Dim dispenseDate3 As String = "11/4/2020"
-        'Dim dispenseDate4 As String = "11/1/2020"
-        'Dim dispenseDate5 As String = "10/28/2020"
-
-        'Dim dispenseTime1 As String = "8:05 AM"
-        'Dim dispenseTime2 As String = "9:13 AM"
-        'Dim dispenseTime3 As String = "8:34 AM"
-        'Dim dispenseTime4 As String = "1:05 PM"
-        'Dim dispenseTime5 As String = "5:04 AM"
-
-        'Dim strID As Integer = 1
-        'Dim strID2 As Integer = 2
-        'Dim strID3 As Integer = 3
-        'Dim strID4 As Integer = 4
-
 
 
         '************************************************************************************
@@ -53,15 +20,115 @@
         ' to send the database table data to the UI. replace the mock data with your tabledata
         '************************************************************************************
 
-        'CreatePanel(flpDiscrepancies, strID, genName1, quantity2, dispensedBy5, quantity1, dispenseDate1, dispenseTime1)
-        'CreatePanel(flpDiscrepancies, strID2, genName1, quantity2, dispensedBy5, quantity1, dispenseDate1, dispenseTime1)
-        'CreatePanel(flpDiscrepancies, strID3, genName1, quantity2, dispensedBy5, quantity1, dispenseDate1, dispenseTime1)
-        'CreatePanel(flpDiscrepancies, strID3, genName1, quantity2, dispensedBy5, quantity1, dispenseDate1, dispenseTime1)
-        'PopulateDiscrepancies()
+        Discrepancies.PopulateDiscrepancies()
+        CreateToolTips(pnlHeader, tpLabelHover)
+        AddHandlerToLabelClick(pnlHeader, AddressOf SortBySelectedLabel)
 
     End Sub
 
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: SortBySelectedLabel            */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/14/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to be called as the click event for any label the  */
+    '/*  user clicks on. Underline the label, and update the panel contents/
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      frmPatientInfo_load                                          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 field- an integer equal to the tag value of the selected label   */ 
+    '/*	 parent- a panel object that the label lives on                   */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 BoldLabelToSortBy(sender, parent)     							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	field- integer equal to the tag of the selected label             */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/14/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub SortBySelectedLabel(sender As Object, e As EventArgs)
+
+        Dim parent As Panel = sender.parent
+        Dim field As Integer = CInt(sender.tag)
+
+        BoldLabelToSortBy(sender, parent)
+
+        'check If the user Is selecting a dispense history field to sort by
+        If parent.Name = pnlHeader.Name Then
+
+            DiscrepancySelectedField(field)
+
+        End If
+
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: DiscrepancySelectedField   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		  */   
+    '/*		         DATE CREATED: 		 2/14/2021                 */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to be called when a user selects a label to sort by*/
+    '/*  the logic to re-create the panels in the order will be caled here*/
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      frmPatientInfo_load                                          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 field- an integer equal to the tag value of the selected label   */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 DispenseHistorySelectedField(Cint(Label1.Tag))   	              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/14/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub DiscrepancySelectedField(ByVal field As Integer)
+
+        ' clear the controls as they will need to be rebuilt when sorting
+        'flpPatientRecords.Controls.Clear()
+
+        Select Case field
+
+            Case DiscrepanciesEnum.ID
+
+            Case DiscrepanciesEnum.medication
+
+            Case DiscrepanciesEnum.drawer
+
+            Case DiscrepanciesEnum.expectedCount
+
+            Case DiscrepanciesEnum.actualCount
+
+            Case DiscrepanciesEnum.dateAndTime
+
+        End Select
+
+    End Sub
     '/********************************************************************/
     '/*                   SUB NAME: CreatePanel            	             */         
     '/********************************************************************/
@@ -180,7 +247,10 @@
         If checkIfSelected = False Then
             MessageBox.Show("Please Select a discrepancy to resolve")
         Else
-            frmResolve.Show()
+
+            frmResolve.SetDiscrepancyID(CInt(getSelectedDiscrepancyLabel().Text))
+            frmMain.OpenChildForm(frmResolve)
+            ' frmResolve.Show()
         End If
 
 

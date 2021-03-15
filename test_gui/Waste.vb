@@ -1,4 +1,15 @@
 ﻿Public Class Waste
+
+    Private intPatientInformationMRN As Integer
+    Public intMedicationID As New ArrayList
+
+    'this function should set Patient MRN using PatientID
+    Public Sub SetPatientMRN(ByVal mrn As Integer)
+
+        intPatientInformationMRN = mrn
+
+    End Sub
+
     Private Sub RadioButton6_CheckedChanged(sender As Object, e As EventArgs) Handles rbtnOther.CheckedChanged
 
         MovePanelOnScreen()
@@ -7,7 +18,18 @@
 
     Private Sub Waste_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'TextBox1.Visible = False
+
+        ' if the patient mrn is nothing it means the waste form is being accessed
+        ' from the ad hoc menu, otherwise it would be pased a value.
+        If intPatientInformationMRN = Nothing Then
+            btnBack.Visible = False
+        End If
+
         Inventory.PopulateWasteComboBoxMedication()
+        Dim dsWitness As DataSet = CreateDatabase.ExecuteSelectQuery("Select * from User")
+        For Each dr As DataRow In dsWitness.Tables(0).Rows()
+            cboWitness.Items.Add(dr(EnumList.User.UserName))
+        Next
     End Sub
 
     '/********************************************************************/
@@ -64,6 +86,19 @@
     End Sub
 
     Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
-        Inventory.WasteMedication()
+        If Not cboWitness.SelectedIndex = -1 Then
+            Inventory.WasteMedication()
+            cboMedication.SelectedIndex = -1
+            RadioButton2.Checked = True
+            cboWitness.SelectedIndex = -1
+        Else
+            MessageBox.Show("Please select a user for the sign off")
+        End If
+
+    End Sub
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        frmPatientInfo.setPatientMrn(intPatientInformationMRN)
+        frmMain.OpenChildForm(frmPatientInfo)
     End Sub
 End Class

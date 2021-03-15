@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmPharmacy
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmPharmacy
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPharmacy))
         Me.Label10 = New System.Windows.Forms.Label()
@@ -34,7 +34,7 @@ Partial Class frmPharmacy
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
-        Me.cmbDosage = New System.Windows.Forms.ComboBox()
+        Me.cmbStrength = New System.Windows.Forms.ComboBox()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.txtPatientDOB = New System.Windows.Forms.TextBox()
@@ -44,8 +44,8 @@ Partial Class frmPharmacy
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.txtQuantity = New System.Windows.Forms.TextBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.cmbFrequency = New System.Windows.Forms.ComboBox()
+        Me.txtType = New System.Windows.Forms.TextBox()
+        Me.cmbFrequencyNumber = New System.Windows.Forms.ComboBox()
         Me.Panel5.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -55,7 +55,7 @@ Partial Class frmPharmacy
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(343, 285)
+        Me.Label10.Location = New System.Drawing.Point(393, 285)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(85, 21)
         Me.Label10.TabIndex = 175
@@ -73,7 +73,7 @@ Partial Class frmPharmacy
         Me.cmbOrderedBy.Location = New System.Drawing.Point(38, 311)
         Me.cmbOrderedBy.MaxDropDownItems = 25
         Me.cmbOrderedBy.Name = "cmbOrderedBy"
-        Me.cmbOrderedBy.Size = New System.Drawing.Size(241, 29)
+        Me.cmbOrderedBy.Size = New System.Drawing.Size(330, 29)
         Me.cmbOrderedBy.TabIndex = 7
         '
         'Label11
@@ -99,7 +99,7 @@ Partial Class frmPharmacy
         Me.cmbPatientName.Location = New System.Drawing.Point(38, 79)
         Me.cmbPatientName.MaxDropDownItems = 25
         Me.cmbPatientName.Name = "cmbPatientName"
-        Me.cmbPatientName.Size = New System.Drawing.Size(242, 29)
+        Me.cmbPatientName.Size = New System.Drawing.Size(330, 29)
         Me.cmbPatientName.TabIndex = 1
         '
         'Label12
@@ -123,14 +123,14 @@ Partial Class frmPharmacy
         Me.cmbMedication.Location = New System.Drawing.Point(38, 156)
         Me.cmbMedication.MaxDropDownItems = 25
         Me.cmbMedication.Name = "cmbMedication"
-        Me.cmbMedication.Size = New System.Drawing.Size(242, 29)
+        Me.cmbMedication.Size = New System.Drawing.Size(330, 29)
         Me.cmbMedication.TabIndex = 2
         '
         'Label13
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(343, 54)
+        Me.Label13.Location = New System.Drawing.Point(393, 54)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(96, 21)
         Me.Label13.TabIndex = 167
@@ -140,7 +140,7 @@ Partial Class frmPharmacy
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(342, 204)
+        Me.Label14.Location = New System.Drawing.Point(392, 204)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(72, 21)
         Me.Label14.TabIndex = 166
@@ -160,7 +160,7 @@ Partial Class frmPharmacy
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(342, 132)
+        Me.Label16.Location = New System.Drawing.Point(392, 132)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(73, 21)
         Me.Label16.TabIndex = 164
@@ -176,15 +176,15 @@ Partial Class frmPharmacy
         Me.Label17.TabIndex = 163
         Me.Label17.Text = "Medication:"
         '
-        'cmbDosage
+        'cmbStrength
         '
-        Me.cmbDosage.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbDosage.FormattingEnabled = True
-        Me.cmbDosage.Items.AddRange(New Object() {"Yes", "No"})
-        Me.cmbDosage.Location = New System.Drawing.Point(347, 230)
-        Me.cmbDosage.Name = "cmbDosage"
-        Me.cmbDosage.Size = New System.Drawing.Size(241, 29)
-        Me.cmbDosage.TabIndex = 6
+        Me.cmbStrength.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbStrength.FormattingEnabled = True
+        Me.cmbStrength.Items.AddRange(New Object() {"Yes", "No"})
+        Me.cmbStrength.Location = New System.Drawing.Point(397, 230)
+        Me.cmbStrength.Name = "cmbStrength"
+        Me.cmbStrength.Size = New System.Drawing.Size(241, 29)
+        Me.cmbStrength.TabIndex = 6
         '
         'Label18
         '
@@ -201,7 +201,7 @@ Partial Class frmPharmacy
         '
         Me.Panel5.BackColor = System.Drawing.Color.DarkGray
         Me.Panel5.Controls.Add(Me.txtPatientDOB)
-        Me.Panel5.Location = New System.Drawing.Point(346, 80)
+        Me.Panel5.Location = New System.Drawing.Point(396, 80)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel5.Size = New System.Drawing.Size(119, 28)
@@ -244,7 +244,7 @@ Partial Class frmPharmacy
         Me.btnDecrement.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDecrement.ForeColor = System.Drawing.Color.White
         Me.btnDecrement.Image = CType(resources.GetObject("btnDecrement.Image"), System.Drawing.Image)
-        Me.btnDecrement.Location = New System.Drawing.Point(439, 158)
+        Me.btnDecrement.Location = New System.Drawing.Point(489, 158)
         Me.btnDecrement.Name = "btnDecrement"
         Me.btnDecrement.Size = New System.Drawing.Size(28, 28)
         Me.btnDecrement.TabIndex = 5
@@ -259,7 +259,7 @@ Partial Class frmPharmacy
         Me.btnIncrement.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnIncrement.ForeColor = System.Drawing.Color.White
         Me.btnIncrement.Image = CType(resources.GetObject("btnIncrement.Image"), System.Drawing.Image)
-        Me.btnIncrement.Location = New System.Drawing.Point(405, 158)
+        Me.btnIncrement.Location = New System.Drawing.Point(455, 158)
         Me.btnIncrement.Name = "btnIncrement"
         Me.btnIncrement.Size = New System.Drawing.Size(28, 28)
         Me.btnIncrement.TabIndex = 4
@@ -270,7 +270,7 @@ Partial Class frmPharmacy
         '
         Me.Panel2.BackColor = System.Drawing.Color.DarkGray
         Me.Panel2.Controls.Add(Me.txtQuantity)
-        Me.Panel2.Location = New System.Drawing.Point(346, 158)
+        Me.Panel2.Location = New System.Drawing.Point(396, 158)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel2.Size = New System.Drawing.Size(53, 28)
@@ -286,47 +286,48 @@ Partial Class frmPharmacy
         Me.txtQuantity.Name = "txtQuantity"
         Me.txtQuantity.Size = New System.Drawing.Size(51, 26)
         Me.txtQuantity.TabIndex = 38
+        Me.txtQuantity.Text = "1"
         '
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel3.Controls.Add(Me.TextBox1)
+        Me.Panel3.Controls.Add(Me.txtType)
         Me.Panel3.Location = New System.Drawing.Point(38, 232)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel3.Size = New System.Drawing.Size(242, 28)
         Me.Panel3.TabIndex = 39
         '
-        'TextBox1
+        'txtType
         '
-        Me.TextBox1.BackColor = System.Drawing.Color.White
-        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(1, 1)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(240, 26)
-        Me.TextBox1.TabIndex = 38
-        Me.TextBox1.TabStop = False
+        Me.txtType.BackColor = System.Drawing.Color.White
+        Me.txtType.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtType.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtType.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtType.Location = New System.Drawing.Point(1, 1)
+        Me.txtType.Multiline = True
+        Me.txtType.Name = "txtType"
+        Me.txtType.ReadOnly = True
+        Me.txtType.Size = New System.Drawing.Size(240, 26)
+        Me.txtType.TabIndex = 38
+        Me.txtType.TabStop = False
         '
-        'cmbFrequency
+        'cmbFrequencyNumber
         '
-        Me.cmbFrequency.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cmbFrequency.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cmbFrequency.DropDownHeight = 250
-        Me.cmbFrequency.DropDownWidth = 100
-        Me.cmbFrequency.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbFrequency.FormattingEnabled = True
-        Me.cmbFrequency.IntegralHeight = False
-        Me.cmbFrequency.Items.AddRange(New Object() {"", "hs", "noct", "prn", "q 10am", "q 10pm", "q 11am", "q 11pm", "q 12pm", "q 1am", "q 1pm", "q 2am", "q 2pm", "q 3am", "q 3pm", "q 4am", "q 4pm", "q 5am", "q 5pm", "q 6am", "q 6pm", "q 7am", "q 7pm", "q 8am", "q 8pm", "q 9am", "q 9pm", "q am", "q12h", "q2-3h", "q2-4h", "q24h", "q4-6h", "q4h", "q6h", "qd", "qd pm", "qh", "qhs", "qid", "qod", "qpm", "qw", "tat", "tiw", "tud", "uat", "ud"})
-        Me.cmbFrequency.Location = New System.Drawing.Point(347, 311)
-        Me.cmbFrequency.MaxDropDownItems = 25
-        Me.cmbFrequency.Name = "cmbFrequency"
-        Me.cmbFrequency.Size = New System.Drawing.Size(241, 29)
-        Me.cmbFrequency.Sorted = True
-        Me.cmbFrequency.TabIndex = 8
+        Me.cmbFrequencyNumber.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbFrequencyNumber.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cmbFrequencyNumber.DropDownHeight = 250
+        Me.cmbFrequencyNumber.DropDownWidth = 100
+        Me.cmbFrequencyNumber.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbFrequencyNumber.FormattingEnabled = True
+        Me.cmbFrequencyNumber.IntegralHeight = False
+        Me.cmbFrequencyNumber.Items.AddRange(New Object() {"", "hs", "noct", "prn", "q 10am", "q 10pm", "q 11am", "q 11pm", "q 12pm", "q 1am", "q 1pm", "q 2am", "q 2pm", "q 3am", "q 3pm", "q 4am", "q 4pm", "q 5am", "q 5pm", "q 6am", "q 6pm", "q 7am", "q 7pm", "q 8am", "q 8pm", "q 9am", "q 9pm", "q am", "q12h", "q2-3h", "q2-4h", "q24h", "q4-6h", "q4h", "q6h", "qd", "qd pm", "qh", "qhs", "qid", "qod", "qpm", "qw", "tat", "tiw", "tud", "uat", "ud"})
+        Me.cmbFrequencyNumber.Location = New System.Drawing.Point(397, 311)
+        Me.cmbFrequencyNumber.MaxDropDownItems = 25
+        Me.cmbFrequencyNumber.Name = "cmbFrequencyNumber"
+        Me.cmbFrequencyNumber.Size = New System.Drawing.Size(121, 29)
+        Me.cmbFrequencyNumber.Sorted = True
+        Me.cmbFrequencyNumber.TabIndex = 8
         '
         'frmPharmacy
         '
@@ -335,7 +336,7 @@ Partial Class frmPharmacy
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(717, 494)
-        Me.Controls.Add(Me.cmbFrequency)
+        Me.Controls.Add(Me.cmbFrequencyNumber)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.btnDecrement)
         Me.Controls.Add(Me.btnIncrement)
@@ -351,7 +352,7 @@ Partial Class frmPharmacy
         Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Label16)
         Me.Controls.Add(Me.Label17)
-        Me.Controls.Add(Me.cmbDosage)
+        Me.Controls.Add(Me.cmbStrength)
         Me.Controls.Add(Me.Label18)
         Me.Controls.Add(Me.Panel5)
         Me.Controls.Add(Me.btnORder)
@@ -380,7 +381,7 @@ Partial Class frmPharmacy
     Friend WithEvents Label15 As Label
     Friend WithEvents Label16 As Label
     Friend WithEvents Label17 As Label
-    Friend WithEvents cmbDosage As ComboBox
+    Friend WithEvents cmbStrength As ComboBox
     Friend WithEvents Label18 As Label
     Friend WithEvents Panel5 As Panel
     Friend WithEvents txtPatientDOB As TextBox
@@ -391,6 +392,6 @@ Partial Class frmPharmacy
     Friend WithEvents Panel2 As Panel
     Friend WithEvents txtQuantity As TextBox
     Friend WithEvents Panel3 As Panel
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents cmbFrequency As ComboBox
+    Friend WithEvents txtType As TextBox
+    Friend WithEvents cmbFrequencyNumber As ComboBox
 End Class

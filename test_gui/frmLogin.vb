@@ -3,27 +3,35 @@
         'set textbox text to string variable strUsername and strPassword
         Dim strUsername = txtUserName.Text
         Dim strPassword = txtPassword.Text
-        'send strUsername and strPassword to LogIn Module and recive responce
-        If LogIn.UsernameLogIn(strUsername, strPassword) = "True" Then
+        If strUsername = "" Then
+            MsgBox("            WARNING" & vbCrLf & "User Name Field is Blank")
+            txtUserName.Focus()
+        ElseIf strPassword = "" Then
+            MsgBox("            WARNING" & vbCrLf & "Password Field is Blank")
+            txtPassword.Focus()
+            'send strUsername and strPassword to LogIn Module and recive responce
+        ElseIf LogIn.UsernameLogIn(strUsername, strPassword) = "True" Then
             'If users Username and Password is in the User table in the database then close current form and open frmMain
             Me.Close()
+            'call to set what sub form should be open
+            frmMain.DetermineFormToOpen(1)
+            'set the header for main to show who is logged in
+            frmMain.Text = "Medical Dispence - " & frmMain.Label2.Text
             frmMain.Show()
+            'make btnPatientRecords have focus
+            frmMain.btnPatientRecords.PerformClick()
         Else
             'If users Username and Password is not in the User table then inform the user
-            MsgBox("No User With That Username or Password")
+            MsgBox("No User With That Username and Password")
         End If
+
+
     End Sub
 
     Private Sub lblBadge_Click(sender As Object, e As EventArgs) Handles lblBadge.Click
         'close current form and open frmLoginScan to login with username and password
         Me.Close()
         frmLoginScan.Show()
-    End Sub
-
-
-
-    Private Sub chkShowPassword_CheckedChanged(sender As Object, e As EventArgs)
-
     End Sub
 
     Private Sub btnEye_Click(sender As Object, e As EventArgs) Handles btnEye.Click
@@ -54,5 +62,44 @@
     '    End If
 
     'End Sub
+    Private Sub Password_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress
+        'if the user hits enter in txtPassword then try to log them in
+        If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
+            e.KeyChar = ChrW(0)
+            e.Handled = True
+            'set textbox text to string variable strUsername and strPassword
+            Dim strUsername = txtUserName.Text
+            Dim strPassword = txtPassword.Text
+            If strUsername = "" Then
+                MsgBox("            WARNING" & vbCrLf & "Username Field is Blank")
+                txtUserName.Focus()
+            ElseIf strPassword = "" Then
+                MsgBox("            WARNING" & vbCrLf & "Password Field is Blank")
+                txtPassword.Focus()
+                'send strUsername and strPassword to LogIn Module and recive responce
+            ElseIf LogIn.UsernameLogIn(strUsername, strPassword) = "True" Then
+                'If users Username and Password is in the User table in the database then close current form and open frmMain
+                Me.Close()
+                'call to set what sub form should be open
+                frmMain.DetermineFormToOpen(1)
+                'set the header for main to show who is logged in
+                frmMain.Text = "Medical Dispense - " & frmMain.Label2.Text
+                frmMain.Show()
+                'make btnPatientRecords have focus
+                frmMain.btnPatientRecords.PerformClick()
+            Else
+                'If users Username and Password is not in the User table then inform the user
+                MsgBox("No User with that Username or Password")
+            End If
+        End If
+    End Sub
 
+    Private Sub Username_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtUserName.KeyPress
+        'if the user hits enter in txtusername then set focus to txtPassword
+        If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
+            e.KeyChar = ChrW(0)
+            e.Handled = True
+            txtPassword.Focus()
+        End If
+    End Sub
 End Class

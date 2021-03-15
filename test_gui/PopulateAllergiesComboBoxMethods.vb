@@ -102,6 +102,60 @@ Module PopulateAllergiesComboBoxMethods
         End With
     End Sub
     '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: populateGenericComboBox      */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Adam Kott   		                */   
+    '/*		         DATE CREATED: 	2/17/2021                        	   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								                 */             
+    '/*	 This is going to populate a combo box with generic values from select*/                     
+    '/*                                                              */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 cmbGenericBox - this is the combo box we are going to be populating */
+    '/*  dsGenericDataset - this is the data set of the medication we have in the */
+    '/*     database.                                                     */
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*	miscMethods.populateGenericComboBox(cmbMedication,dsMedication) */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	 strbTesting - this is a string builder that is used to make the  */                     
+    '/*     make the string that will be added to the combo box. It will be*/
+    '/*     The first and laste name.                                      */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  AK    2/28/2021created the function because allergies cmb method was used */
+    '/*                                                                     
+    '/*********************************************************************/
+    Sub populateGenericComboBox(cmbGenericBox As ComboBox, dsGenericDataset As DataSet)
+        Dim strbTesting As New StringBuilder
+        Dim dcAllergies As New AutoCompleteStringCollection
+        cmbGenericBox.Items.Clear()
+
+
+        For Each row As DataRow In dsGenericDataset.Tables(0).Rows
+            cmbGenericBox.Items.Add(row(0).ToString())
+        Next
+    End Sub
+
+    '/*********************************************************************/
     '/*                   SUBPROGRAM NAME: populateMedicationComboBox      */         
     '/*********************************************************************/
     '/*                   WRITTEN BY:  Adam Kott   		                */   

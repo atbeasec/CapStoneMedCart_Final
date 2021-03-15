@@ -1,4 +1,5 @@
-﻿Module GraphicalUserInterfaceReusableMethods
+﻿Imports System.Threading
+Module GraphicalUserInterfaceReusableMethods
 
     'Method that allows for highlighting when hovering over panels. has two parts
     'part 1
@@ -196,6 +197,29 @@
 
     End Sub
 
+    Public Sub CreateIDLabelWithToolTip(ByVal pnlName As Panel, lblName As Label, strLabelName As String, x As Integer, y As Integer, strLabelText As String, ByVal intPanelsAddedCount As Integer, ByVal toolTip As ToolTip, ByVal strTruncatedText As String)
+
+        'Set button properties
+        With lblName
+            .AutoSize = True
+            '.Size = New Size(30, 30)
+
+            .FlatStyle = FlatStyle.Flat
+            ' .FlatAppearance.BorderSize = 0
+            .ForeColor = Color.Black
+            .Font = New Font(New FontFamily("Segoe UI"), 11, FontStyle.Regular)
+            .Location = New Point(x, y) 'new Point(600, 5)
+            .Name = strLabelName + (intPanelsAddedCount).ToString
+            .Text = strTruncatedText
+            .Tag = intPanelsAddedCount + 1
+        End With
+
+        toolTip.SetToolTip(lblName, strLabelText)
+        pnlName.Controls.Add(lblName)
+
+
+    End Sub
+
     Public Sub DynamicRemoveHandlerFromSender(ByVal sender As Object, ByVal e As EventArgs)
 
         'the parent of the button will be the panel the control is located on.
@@ -227,23 +251,42 @@
         Dim btnDeleteButton As Button
         btnDeleteButton = New Button
         'declare our image and point at the resource
-        Dim mapImageTrash As New Bitmap(New Bitmap(My.Resources.icons8_delete_trash), 25, 25)
 
-        'Set button properties
-        With btnDeleteButton
-            .AutoSize = True
-            .Size = New Size(30, 30)
-            .FlatStyle = FlatStyle.Flat
-            .FlatAppearance.BorderSize = 0
-            .ForeColor = Color.Transparent
-            ' .Font = New Font(New FontFamily("Microsoft Sans Serif"), 11)
-            ' .Location = New Point(  )
-            .Location = New Point(intX, intY)
-            .Name = "btnDeletePatientRecord" + (intPanelsAddedCount).ToString
-            .Image = mapImageTrash
-            .ImageAlign = ContentAlignment.MiddleCenter
-            .Tag = intPanelsAddedCount + 1
-        End With
+        If getOpenedForm().GetType() Is frmConfiguration.GetType() Then
+            Dim mapImageTrash As New Bitmap(New Bitmap(My.Resources.plusminus), 25, 25)
+            'Set button properties
+            With btnDeleteButton
+                .AutoSize = True
+                .Size = New Size(30, 30)
+                .FlatStyle = FlatStyle.Flat
+                .FlatAppearance.BorderSize = 0
+                .ForeColor = Color.Transparent
+                ' .Font = New Font(New FontFamily("Microsoft Sans Serif"), 11)
+                ' .Location = New Point(  )
+                .Location = New Point(intX, intY)
+                .Name = "btnDeletePatientRecord" + (intPanelsAddedCount).ToString
+                .Image = mapImageTrash
+                .ImageAlign = ContentAlignment.MiddleCenter
+                .Tag = intPanelsAddedCount + 1
+            End With
+        Else
+            Dim mapImageTrash As New Bitmap(New Bitmap(My.Resources.icons8_delete_trash), 25, 25)
+            'Set button properties
+            With btnDeleteButton
+                .AutoSize = True
+                .Size = New Size(30, 30)
+                .FlatStyle = FlatStyle.Flat
+                .FlatAppearance.BorderSize = 0
+                .ForeColor = Color.Transparent
+                ' .Font = New Font(New FontFamily("Microsoft Sans Serif"), 11)
+                ' .Location = New Point(  )
+                .Location = New Point(intX, intY)
+                .Name = "btnDeletePatientRecord" + (intPanelsAddedCount).ToString
+                .Image = mapImageTrash
+                .ImageAlign = ContentAlignment.MiddleCenter
+                .Tag = intPanelsAddedCount + 1
+            End With
+        End If
 
         pnlPanelName.Controls.Add(btnDeleteButton)
 
@@ -287,35 +330,65 @@
     Public Sub DynamicFlagMedicationButton(sender As Object, ByVal e As EventArgs)
 
 
-        Dim pnlFlaggedPannel As Panel
-        Dim txtBoxOnFlaggedPanel As TextBox = Nothing
+        ' Dim pnlFlaggedPannel As Panel
+        ' Dim txtBoxOnFlaggedPanel As TextBox = Nothing
 
-        pnlFlaggedPannel = CType(sender.parent, Panel)
-        txtBoxOnFlaggedPanel = FindTextBoxOnPanel(pnlFlaggedPannel)
-        Debug.Print(pnlFlaggedPannel.Name)
+        Dim pnlFlaggedPannel As Panel = CType(sender.parent, Panel)
+        Dim txtBoxOnFlaggedPanel As TextBox = FindTextBoxOnPanel(pnlFlaggedPannel)
 
-        If Not pnlFlaggedPannel.BackColor = Color.Red Then
+        Dim systemCount As Integer = CInt(FindLabelOnPanel(pnlFlaggedPannel).Text)
 
-            'find the textbox and set the field to be read only
-            'txtBoxOnFlaggedPanel.ReadOnly = True
-            'txtBoxOnFlaggedPanel.AcceptsTab = False
 
-            txtBoxOnFlaggedPanel.Enabled = False
+        ' when using the flag, we need to check that the system count is not the same as the user count
+        ' if it is, then there is nothing to flag and we need to let the user know that incase they
+        ' typed something wrong. If the user tries to flag a medication without typing a value in, they should not
+        ' be able to flag anything so the button will not respond.
 
-            ' change the panel color to be red
-            pnlFlaggedPannel.BackColor = Color.Red
+        If String.IsNullOrEmpty(txtBoxOnFlaggedPanel.Text) Then
 
+            MessageBox.Show("A count has not been entered. Please type a number into the count field.")
         Else
 
-            'find the textbox and set the field to be editable
-            'txtBoxOnFlaggedPanel.ReadOnly = False
-            'txtBoxOnFlaggedPanel.AcceptsTab = True
-            txtBoxOnFlaggedPanel.Enabled = True
+            If systemCount = CInt(txtBoxOnFlaggedPanel.Text) Then
 
-            ' change the panel color to be white
-            pnlFlaggedPannel.BackColor = Color.White
+                MessageBox.Show("The system count matches the entered count. This will not be flagged as a discrepancy .")
+
+            Else
+
+                ' at this point there is a valid difference and we will want to lock the textbox and change
+                ' the color of the panel so it is clear a discrepancy is being marked.
+
+                If Not pnlFlaggedPannel.BackColor = Color.Red Then
+
+                    'find the textbox and set the field to be read only
+                    'txtBoxOnFlaggedPanel.ReadOnly = True
+                    'txtBoxOnFlaggedPanel.AcceptsTab = False
+
+                    txtBoxOnFlaggedPanel.Enabled = False
+
+                    ' change the panel color to be red
+                    pnlFlaggedPannel.BackColor = Color.Red
+
+                Else
+
+                    'find the textbox and set the field to be editable
+                    'txtBoxOnFlaggedPanel.ReadOnly = False
+                    'txtBoxOnFlaggedPanel.AcceptsTab = True
+                    txtBoxOnFlaggedPanel.Enabled = True
+
+                    ' change the panel color to be white
+                    pnlFlaggedPannel.BackColor = Color.White
+
+                End If
+
+            End If
+
 
         End If
+
+
+
+        ' Debug.Print(pnlFlaggedPannel.Name)
 
     End Sub
 
@@ -338,6 +411,27 @@
         Return txtBox
 
     End Function
+
+    Public Function FindLabelOnPanel(ByVal pnlFlagged As Panel) As Label
+
+        ' search for control with the name txtCount
+        ' this control will be the textbox on the selected panel
+        Const lblName As String = "lblSystemCount"
+        Dim ctlControl As Control
+        Dim lblLabel As Label = Nothing
+
+        ' looking at each control on the panel
+        For Each ctlControl In pnlFlagged.Controls
+            ' if the current control is the textbox, then asign the textbox variable to this 
+            If ctlControl.Name.Contains(lblName) Then
+                lblLabel = CType(ctlControl, Label)
+            End If
+        Next
+
+        Return lblLabel
+
+    End Function
+
 
     Public Sub CreateTextBox(ByVal pnlPanelName As Panel, ByVal intPanelsAddedCount As Integer, ByVal intX As Integer, ByVal intY As Integer)
 
@@ -520,6 +614,9 @@
                 strStatement = "UPDATE USER SET Active_Flag='1' WHERE User_ID='" & intID & "';"
                 ExecuteInsertQuery(strStatement)
             End If
+            Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
+                                                  "User.Supervisor_Flag, User.Active_Flag From User;"
+            frmConfiguration.Fill_Table(strFillSQL)
 
         ElseIf getOpenedForm().GetType() Is frmPatientRecords.GetType() Then
 
@@ -531,7 +628,8 @@
             ' call SQL method to remove the item from the list of currently stocked items in the med cart
             '  Debug.Print("removing this inventory piece")
 
-        ElseIf frmAllergies.Visible = True Then
+        ElseIf getOpenedForm().GetType() Is frmAllergies.GetType() Then
+
             Dim intPatientTUID As Integer = frmAllergies.GetPatientTuid()
             Dim strAllergyName As String = GetSelectedInformation(sender.parent, "lblAllergyName")
             Dim strSqlStatment As String = ("Select Active_Flag FROM PatientAllergy WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID= " & intPatientTUID & ";")
@@ -541,8 +639,12 @@
             Else
                 ExecuteScalarQuery("UPDATE PatientAllergy SET Active_Flag='1' WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTUID & ";")
             End If
-            frmPatientInfo.lstBoxAllergies.Items.Clear()
-            GetAllergies(CInt(frmPatientInfo.txtMRN.Text))
+
+            ' add the update to the patients table because the patient information form is not visible anymore. the update will be reflected
+            ' when the patient info form is loaded again
+            'frmPatientInfo.lstBoxAllergies.Items.Clear()
+
+            GetAllergies(frmAllergies.GetPatientMrn())
             Debug.Print("remove allergy assigned to patient")
 
         End If
@@ -633,30 +735,35 @@
             ' call SQL method to set edit functionality
             '  Debug.Print("removing this inventory piece")
 
-        ElseIf frmAllergies.btnAddAllergy.Visible = True Then
-            Dim selectedAllergyName = GetSelectedInformation(sender.parent, "lblAllergyName")
-            Dim selectedAllergySeverity = GetSelectedInformation(sender.parent, "lblSeverity")
-            Dim selectedAllergyType = GetSelectedInformation(sender.parent, "lblAllergyType")
-            Dim selectedMedication = GetSelectedInformation(sender.parent, "lblMedication")
+        ElseIf getOpenedForm().GetType() Is frmAllergies.GetType() Then
 
-            With frmAllergies
-                .cmbAllergies.Text = selectedAllergyName
-                .cmbAllergiesType.Text = selectedAllergyType
-                .cmbSeverity.Text = selectedAllergySeverity
-                .cmbMedicationName.Text = selectedMedication
-                .cmbAllergies.Enabled = False
-                .cmbAllergiesType.Enabled = False
-                .cmbMedicationName.Enabled = False
-                .btnAllergySave.Visible = True
-                .btnAllergyCancel.Visible = True
-                .btnAddAllergy.Visible = False
-            End With
+            If frmAllergies.btnAddAllergy.Visible = True Then
+                Dim selectedAllergyName = GetSelectedInformation(sender.parent, "lblAllergyName")
+                Dim selectedAllergySeverity = GetSelectedInformation(sender.parent, "lblSeverity")
+                Dim selectedAllergyType = GetSelectedInformation(sender.parent, "lblAllergyType")
+                Dim selectedMedication = GetSelectedInformation(sender.parent, "lblMedication")
+
+                With frmAllergies
+                    .cmbAllergies.Text = selectedAllergyName
+                    .cmbAllergiesType.Text = selectedAllergyType
+                    .cmbSeverity.Text = selectedAllergySeverity
+                    .cmbMedicationName.Text = selectedMedication
+                    .cmbAllergies.Enabled = False
+                    .cmbAllergiesType.Enabled = False
+                    .cmbMedicationName.Enabled = False
+                    .btnAllergySave.Visible = True
+                    .btnAllergyCancel.Visible = True
+                    .btnAddAllergy.Visible = False
+                End With
 
 
-            ' call SQL method to set edit functionality
-            ' Debug.Print("remove allergy assigned to patient")
-            Debug.WriteLine("")
+                ' call SQL method to set edit functionality
+                ' Debug.Print("remove allergy assigned to patient")
+                Debug.WriteLine("")
+            End If
+
         End If
+
 
     End Sub
 
@@ -826,19 +933,100 @@
         End If
     End Sub
 
-    Public Sub ButtonIncrement(ByVal txtBox As TextBox)
+    Public Sub ButtonIncrement(intMaxValue As Integer, ByVal txtBox As TextBox)
 
-        txtBox.Text = CInt(txtBox.Text) + 1
+        If Not CInt(txtBox.Text) = intMaxValue Then
+            txtBox.Text = Int(txtBox.Text) + 1
+        End If
 
     End Sub
 
     Public Sub ButtonDecrement(ByVal txtBox As TextBox)
 
-        If Not CInt(txtBox.Text) = 0 Then
+        If Not CInt(txtBox.Text) = 1 Then
             txtBox.Text = Int(txtBox.Text) - 1
         End If
 
     End Sub
+
+    Public Sub MaxValue(intValue As Integer, intTest As Integer, ByVal txtBox As TextBox)
+        If intValue > intTest Then
+            txtBox.Text = intTest
+            MessageBox.Show("Maximum value is " & intTest & ".")
+        End If
+    End Sub
+
+    Public Sub IndexButtonIncrement(intCurrent As Integer, intMax As Integer, ByVal cboBox As ComboBox)
+        If intCurrent <= intMax Then
+            cboBox.SelectedIndex = intCurrent + 1
+        End If
+    End Sub
+    Public Sub IndexButtonDecrement(intCurrent As Integer, ByVal cboBox As ComboBox)
+        If intCurrent > 0 Then
+            cboBox.SelectedIndex = intCurrent - 1
+        End If
+    End Sub
+
+    Public Sub ThreadedMessageBox()
+        MessageBox.Show(Thread.CurrentThread.Name())
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   Function NAME: TruncateString()                 */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:  Collin Krygier          		          */   
+    '/*		         DATE CREATED: 		 3/14/2021                        */                             
+    '/*********************************************************************/
+    '/*  Function PURPOSE:								                  */             
+    '/*	 This function simply takes a string and truncates it to a new    */
+    '/*  length if the string is longer than the specified length. If not,*/
+    '/*  it will be left alone and we return the original string passed in*/
+    '/*********************************************************************/
+    '/*  Function Return Value:					                          */         
+    '/*	 A string that is possibly shorter version of what was passed in  */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  CreatePanel()                                                    */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/* None                                                              */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	idealLength- integer representing the length we want to truncate at/ 
+    '/*	wordToTruncate- a string that will be truncated if its longer than /
+    '/* the ideal length in characters.                                   */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	TruncateString(15, "hello")                                		  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	None                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/14/2021    Initial creation                    */
+    '/*********************************************************************/
+    Public Function TruncateString(ByVal idealLength As Integer, ByVal wordToTruncate As String) As String
+
+        ' checking if the length of the word is longer than the ideal length. This needs to be done because
+        ' we cannot fix the length of all strings without getting an error. Consider the following:
+        ' strWord1 = "hello"
+        ' strWord1.Substring(0,10)  <- this would result in a run time error because the string is not 10 characters long
+
+        Dim actualWordLength As Integer = wordToTruncate.Length
+
+        If actualWordLength > idealLength Then
+            actualWordLength = idealLength
+        End If
+
+        Dim strTuncated As String = wordToTruncate.Substring(0, actualWordLength)
+
+        Return strTuncated
+
+    End Function
 
 
 End Module

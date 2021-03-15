@@ -1,75 +1,36 @@
 ﻿Public Class frmPatientInfo
 
-    Dim intPatientMRN As Integer
-    'Dim ContactPanelsAddedCount As Integer = 0
-    'Dim CurrentContactPanelName As String = Nothing
+    Private intPatientID As Integer
+    Private intPatientMRN As Integer
+    Public Enum DispenseHistoryEnum As Integer
+        MedicationName = 1
+        Strength = 2
+        Type = 3
+        Quantity = 4
+        DispensedBy = 5
+        DispenseDateAndTime = 6
+    End Enum
+    Public Enum PrescriptionsEnum As Integer
+        MedicationName = 1
+        Strength = 2
+        Type = 3
+        Quantity = 4
+        DatePrescribed = 5
+        PrescribedBy = 6
+        Frequency = 7
+    End Enum
 
+    Public Sub setPatientID(ByVal ID As Integer)
+        intPatientID = ID
+        intPatientMRN = ExecuteScalarQuery("SELECT MRN_Number from Patient WHERE Patient_ID =" & intPatientID & ";")
+        Debug.WriteLine("")
+    End Sub
+    Public Sub setPatientMrn(ByVal Mrn As Integer)
+        intPatientMRN = Mrn
+        intPatientID = ExecuteScalarQuery("SELECT Patient_ID from Patient WHERE MRN_Number =" & intPatientMRN & ";")
+        Debug.WriteLine("")
+    End Sub
 
-    'Dim CurrentChartPanelName As String = Nothing
-    'Dim ChartPanelsAddedCount As Integer = 0
-
-
-    'Public Sub DynamicButton_Click(ByVal sender As Object, ByVal e As EventArgs)
-
-    '    'the parent of the button will be the panel the control is located on.
-    '    'we want to get one step removed so we need to next take the parent of the control
-    '    ' to get the name of flowpanel which the button is laid out on
-    '    Dim control As Control = sender.Parent
-    '    Dim parents As Control = control.Parent
-
-
-
-    '    Dim parentFlowPanel As Control = control.Parent
-    '    'Dim strFlowPanelName As String = control.Parent.Name
-
-    '    ' Debug.Print(control.Parent.Name)
-
-    '    Dim parentPanelName As String
-
-    '    parentPanelName = Nothing
-
-    '    'Remove handler from sender
-    '    For Each controlObj As Control In parentFlowPanel.Controls
-    '        For Each childControlObj As Control In controlObj.Controls
-    '            If childControlObj.Name = sender.name Then
-
-    '                RemoveHandler childControlObj.Click, AddressOf DynamicButton_Click
-
-    '                parentPanelName = childControlObj.Parent.Name
-    '            End If
-    '        Next
-    '    Next
-
-
-
-    '    'Remove contact panel
-    '    For Each controlObj As Control In parentFlowPanel.Controls
-    '        If controlObj.Name = parentPanelName Then
-
-    '            ' prompt user if they are sure they want to delete the record
-
-
-    '            ' remove the record from the database
-
-    '            'remove the padding panel from the flow panel
-    '            '  flpMedications.Controls.Remove(controlObj.Parent)
-    '            controlObj.Parent.Dispose()
-
-    '            'remove the panel from the flow panel
-    '            '  flpMedications.Controls.Remove(controlObj)
-    '            controlObj.Dispose()
-
-
-    '        End If
-    '    Next
-
-    'parents.Name
-    ' Dim connn As Control = parentFlowPanel.Parent
-    'Debug.Print(connn.Name)
-    'Debug.Print(parentFlowPanel.Name)
-    'UpdateCamerasSubtotalLabel(parentFlowPanel)
-
-    'End Sub
 
     Public Sub DynamicButtonEditRecord_Click(ByVal sender As Object, ByVal e As EventArgs)
 
@@ -129,17 +90,81 @@
         'cboBed.Enabled = False 'this will stop the people from selecting a bed before they
         'select a room. 
 
-        intPatientMRN = txtMRN.Text
-        PatientInformation.GetAllergies(intPatientMRN)
-        PatientInformation.GetPatientInformation(intPatientMRN)
-        PatientInformation.getPrescriptions(intPatientMRN)
-        PatientInformation.getRoom(intPatientMRN, cboRoom, cboBed)
+        ' intPatientMRN = txtMRN.Text
+        PatientInformation.GetAllergies(intPatientID)
+        PatientInformation.GetPatientInformation(intPatientID)
+        PatientInformation.getPrescriptions(intPatientID)
+        PatientInformation.getRoom(intPatientID, cboRoom, cboBed)
+        DispenseHistory.DispenseHistorySpecificPatient(intPatientID)
         SetControlsToReadOnly(ctl)
+
+        CreateToolTips(pnlPrescriptionsHeader, tpLabelDirections)
+        CreateToolTips(pnlDispenseHistoryHeader, tpLabelDirections)
+
+        ' AddHandlerToLabelClick(pnlDispenseHistoryHeader)
+        ' AddHandlerToLabelClick(pnlPrescriptionsHeader)
+
+        AddHandlerToLabelClick(pnlDispenseHistoryHeader, AddressOf SortBySelectedLabel)
+        AddHandlerToLabelClick(pnlPrescriptionsHeader, AddressOf SortBySelectedLabel)
+
 
         ' CreateDispenseHistoryPanels(flpDispenseHistory, "test", "test", "test", "test", "test", "test", "test")
     End Sub
-
-    Public Sub CreateDispenseHistoryPanels(ByVal flpPannel As FlowLayoutPanel, ByVal medicationName As String, ByVal strength As String, ByVal type As String, ByVal quantity As String, ByVal dispenseBy As String, ByVal dispenseDate As String, ByVal dispenseTime As String)
+    '/*********************************************************************/
+    '/*            SubProgram NAME: CreateDispenseHistoryPanels()         */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/6/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is routine is dynamically creates panels that are placed    */ 
+    '/*	 inside of the flowpanel that is fixed on the form. The panels are*/
+    '/*	 created here, assigned handlers, and the contents of the panels  */
+    '/*	 are updated in this routine                                      */
+    '/*********************************************************************/
+    '/*  CALLED BY: frmConfiguration_Load  	      						  */           
+    '/*                                                                   */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 NONE                                                             */ 
+    '/* flpPannel- the flow panel which the user wants to create the      */
+    '/*     create the single panel.                                      */
+    '/* strMedicationName- medication name from the database we will display   
+    '/* strStrength- strength value from the the database                 */
+    '/* strType- type value from the database                             */
+    '/* strQuantity- quantity value from the database                     */
+    '/* strDispenseBy- dispensedby value from the database                */
+    '/* strDispenseDate- dispense date from the database                  */
+    '/* strDispenseTime=- dispense time from the database                 */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 CreateDispenseHistoryPanels(frmPatientInfo.flpDispenseHistory, dr(0), dr(1), dr(2), dr(3), dr(4) & " " & dr(5), dr(6), "")   
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	pnl- is the pnl which we are creating for padding purposes        */
+    '/* pnlMainPanel- is the pnl which we are going to add controls       */
+    '/* lblID1 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID2 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID3 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID4 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID5 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID6 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  Collin Krygier  2/6/2021    Initial creation                     */
+    '/*********************************************************************/
+    Public Sub CreateDispenseHistoryPanels(ByVal flpPannel As FlowLayoutPanel, ByVal strMedicationName As String, ByVal strStrength As String, ByVal strType As String, ByVal strQuantity As String, ByVal strDispenseBy As String, ByVal strDispenseDate As String, ByVal strDispenseTime As String)
 
         Dim pnl As Panel
         pnl = New Panel
@@ -182,29 +207,80 @@
         Dim lblID5 As New Label
         Dim lblID6 As New Label
 
-        ' anywhere we have quotes except for the label names, we can call our Database and get method
-        CreateIDLabel(pnlMainPanel, lblID, "lblMedicationName", lblMedication.Location.X, 20, medicationName, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID2, "lblStrength", lblStrength.Location.X, 20, strength, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID3, "lblType", lblType.Location.X, 20, type, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID4, "lblQuantity", lblQuantity.Location.X, 20, quantity, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID5, "lblDispensedBy", lblDispensedBy.Location.X, 20, dispenseBy, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID6, "lblDispenseTimeAndDate", lblDateTime.Location.X, 20, dispenseDate, getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID, "lblMedicationName", lblMedication.Location.X, 20, strMedicationName, getPanelCount(flpPannel), tpToolTip, TruncateString(25, strMedicationName))
+        CreateIDLabel(pnlMainPanel, lblID2, "lblStrength", lblStrength.Location.X, 20, strStrength, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID3, "lblType", lblType.Location.X, 20, strType, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID4, "lblQuantity", lblQuantity.Location.X, 20, strQuantity, getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID5, "lblDispensedBy", lblDispensedBy.Location.X, 20, strDispenseBy, getPanelCount(flpPannel), tpToolTip, TruncateString(30, strDispenseBy))
+        CreateIDLabel(pnlMainPanel, lblID6, "lblDispenseTimeAndDate", lblDateTime.Location.X, 20, strDispenseDate.Substring(0, 10), getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
 
-        'currentContactPanel = pnl.Name
-
     End Sub
-
-    Public Sub CreatePrescriptionsPanels(ByVal flpPannel As FlowLayoutPanel, ByVal medicationName As String, ByVal strength As String, ByVal frequency As String, ByVal type As String, ByVal quantity As String, ByVal datePrescribed As String, ByVal PrescribedBy As String)
+    '/*********************************************************************/
+    '/*            SubProgram NAME: CreateDispenseHistoryPanels()         */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/6/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is routine is dynamically creates panels that are placed    */ 
+    '/*	 inside of the flowpanel that is fixed on the form. The panels are*/
+    '/*	 created here, assigned handlers, and the contents of the panels  */
+    '/*	 are updated in this routine                                      */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						  */           
+    '/*                                                                   */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 NONE                                                             */ 
+    '/* flpPannel- the flow panel which the user wants to create the      */
+    '/*     create the single panel.                                      */
+    '/* strMedicationName- medication name from the database we will display   
+    '/* strStrength- strength value from the the database                 */
+    '/* strFrequency - type frequency from the database                   */
+    '/* strType- type value from the database                             */
+    '/* strQuantity- quantity value from the database                     */
+    '/* strDatePrescribed- dispense date from the database                */
+    '/* strPrescribedBy- dispensedby value from the database              */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 CreateDispenseHistoryPanels(frmPatientInfo.flpDispenseHistory, dr(0), dr(1), dr(2), dr(3), dr(4) & " " & dr(5), dr(6), "")   
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	pnl- is the pnl which we are creating for padding purposes        */
+    '/* pnlMainPanel- is the pnl which we are going to add controls       */
+    '/* lblID1 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID2 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID3 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID4 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID5 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID6 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID7 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  Collin Krygier  2/6/2021    Initial creation                     */
+    '/*********************************************************************/
+    Public Sub CreatePrescriptionsPanels(ByVal flpPannel As FlowLayoutPanel, ByVal strMedicationName As String, ByVal strStrength As String, ByVal strFrequency As String, ByVal strType As String, ByVal strQuantity As String, ByVal strDatePrescribed As String, ByVal strPrescribedBy As String)
         Dim pnl As Panel
         pnl = New Panel
 
         Dim pnlMainPanel As Panel
         pnlMainPanel = New Panel
         ' call method here to get the count from the database and update the panel number so the next item is correct
-
 
         'Set panel properties
         With pnl
@@ -227,7 +303,6 @@
 
         'put the boarder panel inside the main panel
         pnl.Controls.Add(pnlMainPanel)
-
 
         'AddHandler pnlMainPanel.DoubleClick, AddressOf DynamicDoubleClickNewOrder
         AddHandler pnlMainPanel.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
@@ -246,41 +321,195 @@
         ' anywhere we have quotes except for the label names, we can call our Database and get method
         ' to ensure all of the text being added to the panel is inline with the  headers, we will use the label location of the
         ' header as the reference point for the X axis when creating these labels at run time.
-        CreateIDLabel(pnlMainPanel, lblID, "lblMedicationPrescription", lblMedicationPrescription.Location.X, 20, medicationName, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID2, "lblStrengthPrescription", lblStrengthPrescription.Location.X, 20, strength, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID3, "lblFrequencyPrescription", lblFrequencyPrescription.Location.X, 20, frequency, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID4, "lblTypePrescription", lblTypePrescription.Location.X, 20, type, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID5, "lblQuantityPrescription", lblQuantityPrescription.Location.X, 20, quantity, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID6, "lblDatePrescribed", lblDatePrescribed.Location.X, 20, datePrescribed, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, PrescribedBy, getPanelCount(flpPannel))
+
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID, "lblMedicationPrescription", lblMedicationPrescription.Location.X, 20, strMedicationName, getPanelCount(flpPannel), tpToolTip, TruncateString(25, strMedicationName))
+        ' CreateIDLabel(pnlMainPanel, lblID, "lblMedicationPrescription", lblMedicationPrescription.Location.X, 20, strMedicationName, getPanelCount(flpPannel))
+
+        CreateIDLabel(pnlMainPanel, lblID2, "lblStrengthPrescription", lblStrengthPrescription.Location.X, 20, strStrength, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID3, "lblFrequencyPrescription", lblFrequencyPrescription.Location.X, 20, strFrequency, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID4, "lblTypePrescription", lblTypePrescription.Location.X, 20, strType, getPanelCount(flpPannel))
+
+
+        CreateIDLabel(pnlMainPanel, lblID5, "lblQuantityPrescription", lblQuantityPrescription.Location.X, 20, strQuantity, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID6, "lblDatePrescribed", lblDatePrescribed.Location.X, 20, strDatePrescribed.Substring(0, 10), getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, strPrescribedBy, getPanelCount(flpPannel), tpToolTip, TruncateString(20, strPrescribedBy))
+        ' CreateIDLabel(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, strPrescribedBy, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
 
-        'currentContactPanel = pnl.Name
-
-    End Sub
-    Private Sub PopulateNotes()
-
-        ' CreateNotesPanels(flpNotes, "Customer had an allergic reaction to the phenylephrine")
-        'CreateNotesPanels(flpNotes,)
-        'CreateNotesPanels(flpNotes,)
-
-
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: SortBySelectedLabel            */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/14/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to be called as the click event for any label the  */
+    '/*  user clicks on. Underline the label, and update the panel contents/
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      frmPatientInfo_load                                          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 field- an integer equal to the tag value of the selected label   */ 
+    '/*	 parent- a panel object that the label lives on                   */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 BoldLabelToSortBy(sender, parent)     							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	lbl- label control*/
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/14/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub SortBySelectedLabel(sender As Object, e As EventArgs)
 
+        ' if we know the parent then we can determine if we need the prescription table
+        ' or if we need the dispense history tables
 
+        Dim parent As Panel = sender.parent
+        Dim field As Integer = CInt(sender.tag)
 
-    Private Sub DynamicDownloadButton_Click(sender As Object, e As EventArgs)
+        BoldLabelToSortBy(sender, parent)
+
+        'check If the user Is selecting a dispense history field to sort by
+        If parent.Name = pnlDispenseHistoryHeader.Name Then
+
+            DispenseHistorySelectedField(field)
+        Else
+            PrescriptionsSelectedField(field)
+        End If
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: DispenseHistorySelectedField   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/14/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to be called when a user selects a label to sort by*/
+    '/*  the logic to re-create the panels in the order will be caled here*/
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      frmPatientInfo_load                                          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 field- an integer equal to the tag value of the selected label   */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 DispenseHistorySelectedField(Cint(Label1.Tag))   	              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/14/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub DispenseHistorySelectedField(ByVal field As Integer)
+
+        ' clear the controls as they will need to be rebuilt when sorting
+        ' flpDispenseHistory.Controls.Clear()
+        flpDispenseHistory.Controls.Clear()
+
+        Select Case field
+
+            Case DispenseHistoryEnum.MedicationName
+                DispenseHistory.DispenseHistoryByDrugName(intPatientID)
+            Case DispenseHistoryEnum.Strength
+                DispenseHistory.DispenseHistoryByStrength(intPatientID)
+            Case DispenseHistoryEnum.Type
+                DispenseHistory.DispenseHistoryByType(intPatientID)
+            Case DispenseHistoryEnum.Quantity
+                DispenseHistory.DispenseHistoryByQuantity(intPatientID)
+            Case DispenseHistoryEnum.DispensedBy
+                DispenseHistory.DispenseHistoryByDispensingUser(intPatientID)
+            Case DispenseHistoryEnum.DispenseDateAndTime
+                DispenseHistory.DispenseHistoryByDispenseDateAndTime(intPatientID)
+        End Select
 
 
     End Sub
 
-    Private Sub DynamicDocumentDeleteButton_Click(sender As Object, e As EventArgs)
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: PrescriptionsSelectedField     */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/14/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to be called when a user selects a label to sort by*/
+    '/*  the logic to re-create the panels in the order will be caled here*/
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      frmPatientInfo_load                                          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*PatientInformation.PatinetInfoSortedByDrugName(intPatientID)
+    '/*PatientInformation.PatinetInfoSortedByStrength(intPatientID)
+    '/*PatientInformation.PatinetInfoSortedByType(intPatientID)
+    '/*PatientInformation.PatinetInfoSortedByQuantity(intPatientID)
+    '/*PatientInformation.PatinetInfoSortedByDate(intPatientID)
+    '/*PatientInformation.PatinetInfoSortedByDoctor(intPatientID)
+    '/*PatientInformation.PatinetInfoSortedByFrequency(intPatientID)      */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 field- an integer equal to the tag value of the selected label   */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 PrescriptionsSelectedField(Cint(Label1.Tag))   				  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/14/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub PrescriptionsSelectedField(ByVal field As Integer)
+
+        ' clear the controls as they will need to be rebuilt when sorting
+        flpMedications.Controls.Clear()
+
+        Select Case field
+            Case PrescriptionsEnum.MedicationName
+                PatientInformation.PatinetInfoSortedByDrugName(intPatientID)
+            Case PrescriptionsEnum.Strength
+                PatientInformation.PatinetInfoSortedByStrength(intPatientID)
+            Case PrescriptionsEnum.Type
+                PatientInformation.PatinetInfoSortedByType(intPatientID)
+            Case PrescriptionsEnum.Quantity
+                PatientInformation.PatinetInfoSortedByQuantity(intPatientID)
+            Case PrescriptionsEnum.DatePrescribed
+                PatientInformation.PatinetInfoSortedByDate(intPatientID)
+            Case PrescriptionsEnum.PrescribedBy
+                PatientInformation.PatinetInfoSortedByDoctor(intPatientID)
+            Case PrescriptionsEnum.Frequency
+                PatientInformation.PatinetInfoSortedByFrequency(intPatientID)
+        End Select
 
     End Sub
+
 
     '/*********************************************************************/
     '/*                   FUNCTION NAME:  					   */         
@@ -339,12 +568,46 @@
         Else
             SetControlsToReadOnly(ctl)
             btnEditPatient.Text = "Edit Patient"
+        End If
 
-                End If
-                cboBed.Enabled = True
-        cboRoom.Enabled = True
     End Sub
-
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: CreatePrescriptionsPanels 	  */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		                          */   
+    '/*		              DATE CREATED: 	                              */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                         				          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*             (NONE)								                  */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  RETURNS:								                          */                   
+    '/*            (NOTHING)								              */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */ 
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                   */
+    '/*********************************************************************/
     Private Sub SetControlsToAllowEdit(ByVal ctl As Control)
 
         For Each ctl In pnlPersonalInformation.Controls
@@ -361,13 +624,49 @@
                 Dim cmbBox As ComboBox = CType(ctl, ComboBox)
                 cmbBox.Enabled = True
 
-                cboBed.Enabled = False
-                cboRoom.Enabled = False
+                'cboBed.Enabled = False
+                'cboRoom.Enabled = False
             End If
         Next
 
     End Sub
-
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: SetControlsToReadOnly     	  */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		                          */   
+    '/*		              DATE CREATED: 	                              */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                         				          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*             (NONE)								                  */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  RETURNS:								                          */                   
+    '/*            (NOTHING)								              */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */ 
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                   */
+    '/*********************************************************************/
     Private Sub SetControlsToReadOnly(ByVal ctl As Control)
 
         For Each ctl In pnlPersonalInformation.Controls
@@ -386,35 +685,194 @@
                 cmbBox.BackColor = Color.White
                 cmbBox.Enabled = False
 
-
             End If
         Next
-
+        cboBed.Enabled = False
+        cboRoom.Enabled = False
     End Sub
 
-
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: btnDispenseMedication_Click 	  */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		                          */   
+    '/*		              DATE CREATED: 	                              */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                         				          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*             (NONE)								                  */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  RETURNS:								                          */                   
+    '/*            (NOTHING)								              */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */ 
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                   */
+    '/*********************************************************************/
     Private Sub btnDispenseMedication_Click(sender As Object, e As EventArgs) Handles btnDispenseMedication.Click
-        Dispense.Show()
-        DispenseHistory.DispensemedicationPopulate(intPatientMRN)
-        PatientInformation.PopulatePatientDispenseInfo(intPatientMRN)
-        PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientMRN)
+
+        ' pass MRN to the dispense screen because it needs to be used to be sent back to the patient info screen if the user
+        ' decides to go back a screen.
+
+        frmDispense.SetPatientID(intPatientID)
+        frmMain.OpenChildForm(frmDispense)
+        DispenseHistory.DispensemedicationPopulate(intPatientID)
+        PatientInformation.PopulatePatientDispenseInfo(intPatientID)
+        PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientID)
+        PatientInformation.DisplayPatientPrescriptionsDispense(intPatientID)
+        '  Dim frmCurrentForm As Form = Me
+
+
     End Sub
 
     ' Private Sub Button1_Click(sender As Object, e As EventArgs)
     '     Returns.Show()
     '  End Sub
-
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: btnWaste_Click            	  */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		                          */   
+    '/*		              DATE CREATED: 	                              */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                         				          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*             (NONE)								                  */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  RETURNS:								                          */                   
+    '/*            (NOTHING)								              */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */ 
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                   */
+    '/*********************************************************************/
     Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
-        Waste.Show()
+
+        Waste.SetPatientMRN(intPatientID) 'this should set the patient MRN using the given patientID
+        frmMain.OpenChildForm(Waste)
+
     End Sub
 
-
-
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: btnAddAllergies_Click     	  */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		                          */   
+    '/*		              DATE CREATED: 	                              */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                         				          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*             (NONE)								                  */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  RETURNS:								                          */                   
+    '/*            (NOTHING)								              */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */ 
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                   */
+    '/*********************************************************************/
     Private Sub btnAddAllergies_Click(sender As Object, e As EventArgs) Handles btnAddAllergies.Click
-        'frmAllergies.Label5.Text = intPatientMRN
-        frmAllergies.Show()
-    End Sub
 
+        ' pass the MRN of the current patient to the next form
+        frmAllergies.SetPatientMrn(CInt(txtMRN.Text))
+
+        ' closing this form and making the main container open the allergies page
+        frmMain.OpenChildForm(frmAllergies)
+    End Sub
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: btnBack_Click            	  */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:     		                          */   
+    '/*		              DATE CREATED: 	                              */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                         				          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*             (NONE)								                  */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  RETURNS:								                          */                   
+    '/*            (NOTHING)								              */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*											                          */                     
+    '/*                                                                   */ 
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											                          */                     
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                   */
+    '/*********************************************************************/
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
 
         frmMain.OpenChildForm(frmPatientRecords)

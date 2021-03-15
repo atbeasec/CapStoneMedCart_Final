@@ -13,7 +13,7 @@
 
 
     Private Sub btnIncrementQuantity_Click(sender As Object, e As EventArgs) Handles btnIncrementQuantity.Click
-        ButtonIncrement(txtQuantity)
+        ButtonIncrement(1000, txtQuantity)
     End Sub
 
     Private Sub btnDecrementQuantity_Click(sender As Object, e As EventArgs) Handles btnDecrementQuantity.Click
@@ -49,6 +49,7 @@
             Interactions.GetInteractionsDispense(intMedRXCUI, intPatientMRN)
             AdHoc.InsertAdHoc(txtMRN.Text, "1", txtQuantity.Text)
             AdHoc.clearAdhocBoxes()
+            MessageBox.Show("Order Successfully placed")
         End If
     End Sub
 
@@ -95,11 +96,19 @@
 
     Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantity.KeyPress
         DataVaildationMethods.KeyPressCheck(e, "0123456789")
+        If IsNumeric(sender.Text) Then
+            GraphicalUserInterfaceReusableMethods.MaxValue(CInt(sender.Text), 1000, txtQuantity)
+        End If
+
     End Sub
 
-    Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantity.TextChanged
-
-
+    Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantity.Validated
+        If IsNumeric(sender.Text) Then
+            GraphicalUserInterfaceReusableMethods.MaxValue(CInt(sender.Text), 1000, txtQuantity)
+        Else
+            MessageBox.Show("Please make sure you enter a positive number 1-1000")
+            sender.Text = "1"
+        End If
         'LimitQuantityToQuantityStocked(SQLreturnValue, sender)
 
     End Sub

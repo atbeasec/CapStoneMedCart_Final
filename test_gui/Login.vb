@@ -74,6 +74,9 @@ Module LogIn
         'If there is a user with that Barcode in the user database then log them in and continue to Form1
         'If sqlite_cmd.ExecuteScalar <> 0 Then
         If ExecuteScalarQuery("SELECT COUNT(*) FROM User WHERE Barcode = '" & strHashedBarcode & "'") <> 0 Then
+            frmMain.Label1.Text = (ExecuteScalarQuery("SELECT Username FROM User WHERE Barcode = '" & strHashedBarcode & "'"))
+            frmMain.Label2.Text = (ExecuteScalarQuery("SELECT User_First_Name FROM User WHERE Barcode = '" & strHashedBarcode & "'") & " " &
+                                    ExecuteScalarQuery("SELECT User_Last_Name FROM User WHERE Barcode = '" & strHashedBarcode & "'"))
             Return "True"
         Else
             Return "False"
@@ -106,6 +109,9 @@ Module LogIn
         'sqlite_cmd.ExecuteNonQuery()
         'If there is a user with that Barcode in the user database then log them in and continue to Form1
         If ExecuteScalarQuery("SELECT COUNT(*) FROM User WHERE Username = '" & strUsername & "'" & " AND Password = '" & strPassword & "'") <> 0 Then
+            frmMain.Label1.Text = (ExecuteScalarQuery("SELECT Username FROM User WHERE Username = '" & strUsername & "'" & " AND Password = '" & strPassword & "'"))
+            frmMain.Label2.Text = (ExecuteScalarQuery("SELECT User_First_Name FROM User WHERE Username = '" & strUsername & "'") & " " &
+                                    ExecuteScalarQuery("SELECT User_Last_Name FROM User WHERE Username = '" & strUsername & "'"))
             Return "True"
         Else
             Return "False"
