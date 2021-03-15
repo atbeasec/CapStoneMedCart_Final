@@ -26,6 +26,10 @@
         End If
 
         Inventory.PopulateWasteComboBoxMedication()
+        Dim dsWitness As DataSet = CreateDatabase.ExecuteSelectQuery("Select * from User")
+        For Each dr As DataRow In dsWitness.Tables(0).Rows()
+            cboWitness.Items.Add(dr(EnumList.User.UserName))
+        Next
     End Sub
 
     '/********************************************************************/
