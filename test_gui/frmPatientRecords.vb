@@ -2,6 +2,17 @@
 
     Dim currentContactPanel As String = Nothing
 
+    Public Enum PatientRecordsEnum
+
+        MRN = 1
+        FirstName = 2
+        LastName = 3
+        DOB = 4
+        Room = 5
+        Bed = 6
+
+    End Enum
+
     Private Sub btnNewPatient_Click_1(sender As Object, e As EventArgs) Handles btnNewPatient.Click
 
         frmMain.OpenChildForm(frmNewPatient)
@@ -61,6 +72,11 @@
 
         txtSearch.Text = txtSearch.Tag
         txtSearch.ForeColor = Color.Silver
+
+
+        CreateToolTips(pnlHeader, tpHeaderSort)
+        AddHandlerToLabelClick(pnlHeader, AddressOf SortBySelectedLabel)
+
     End Sub
 
     '/*********************************************************************/
@@ -356,6 +372,80 @@
         SearchLogic.txtSearchLostFocusEvent(txtSearch)
 
     End Sub
+
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: SortBySelectedLabel            */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/14/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to be called as the click event for any label the  */
+    '/*  user clicks on. Underline the label, and update the panel contents/
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      frmPatientInfo_load                                          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 field- an integer equal to the tag value of the selected label   */ 
+    '/*	 parent- a panel object that the label lives on                   */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 BoldLabelToSortBy(sender, parent)     							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	field- integer equal to the tag value of the control*/
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/14/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub SortBySelectedLabel(sender As Object, e As EventArgs)
+
+        Dim parent As Panel = sender.parent
+        Dim field As Integer = CInt(sender.tag)
+
+        BoldLabelToSortBy(sender, parent)
+
+        'check If the user Is selecting a dispense history field to sort by
+        If parent.Name = pnlHeader.Name Then
+
+            PatientRecordsSelectedFields(field)
+
+        End If
+
+
+    End Sub
+
+    Private Sub PatientRecordsSelectedFields(ByVal field As Integer)
+
+        ' clear the controls as they will need to be rebuilt when sorting
+        'flpPatientRecords.Controls.Clear()
+
+        Select Case field
+
+            Case PatientRecordsEnum.MRN
+
+            Case PatientRecordsEnum.FirstName
+
+            Case PatientRecordsEnum.LastName
+
+            Case PatientRecordsEnum.DOB
+
+            Case PatientRecordsEnum.Room
+
+            Case PatientRecordsEnum.Bed
+
+        End Select
+
+    End Sub
+
 
     Private Sub Form1_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
         If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then

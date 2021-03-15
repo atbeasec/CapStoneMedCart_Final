@@ -22,6 +22,7 @@ Partial Class frmConfigureInventory
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmConfigureInventory))
         Me.btnDrawer24 = New System.Windows.Forms.Button()
         Me.pnlLayoutButtons = New System.Windows.Forms.Panel()
@@ -72,6 +73,7 @@ Partial Class frmConfigureInventory
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.txtCapacity = New System.Windows.Forms.TextBox()
         Me.btnSave = New System.Windows.Forms.Button()
+        Me.tpSelectedLabelHover = New System.Windows.Forms.ToolTip(Me.components)
         Me.pnlLayoutButtons.SuspendLayout()
         Me.pnlHeader.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -468,6 +470,7 @@ Partial Class frmConfigureInventory
         Me.lblDivider.Name = "lblDivider"
         Me.lblDivider.Size = New System.Drawing.Size(62, 21)
         Me.lblDivider.TabIndex = 9
+        Me.lblDivider.Tag = "2"
         Me.lblDivider.Text = "Divider"
         '
         'lblActions
@@ -479,6 +482,7 @@ Partial Class frmConfigureInventory
         Me.lblActions.Name = "lblActions"
         Me.lblActions.Size = New System.Drawing.Size(65, 21)
         Me.lblActions.TabIndex = 8
+        Me.lblActions.Tag = "5"
         Me.lblActions.Text = "Actions"
         '
         'lblDrugName
@@ -490,6 +494,7 @@ Partial Class frmConfigureInventory
         Me.lblDrugName.Name = "lblDrugName"
         Me.lblDrugName.Size = New System.Drawing.Size(93, 21)
         Me.lblDrugName.TabIndex = 1
+        Me.lblDrugName.Tag = "1"
         Me.lblDrugName.Text = "Drug Name"
         '
         'Label32
@@ -511,6 +516,7 @@ Partial Class frmConfigureInventory
         Me.lblQuantity.Name = "lblQuantity"
         Me.lblQuantity.Size = New System.Drawing.Size(72, 21)
         Me.lblQuantity.TabIndex = 2
+        Me.lblQuantity.Tag = "4"
         Me.lblQuantity.Text = "Quantity"
         '
         'lblStrength
@@ -522,6 +528,7 @@ Partial Class frmConfigureInventory
         Me.lblStrength.Name = "lblStrength"
         Me.lblStrength.Size = New System.Drawing.Size(74, 21)
         Me.lblStrength.TabIndex = 0
+        Me.lblStrength.Tag = "3"
         Me.lblStrength.Text = "Strength"
         '
         'Label2
@@ -799,4 +806,5 @@ Partial Class frmConfigureInventory
     Friend WithEvents txtCapacity As TextBox
     Friend WithEvents lblDivider As Label
     Friend WithEvents btnSave As Button
+    Friend WithEvents tpSelectedLabelHover As ToolTip
 End Class

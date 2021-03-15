@@ -3,6 +3,15 @@ Imports System.Text.RegularExpressions
 
 Public Class frmConfiguration
 
+    Public Enum AddAndRemoveUserEnum
+
+        name = 1
+        username = 2
+        permissions = 3
+        active = 4
+
+    End Enum
+
     '/*********************************************************************/
     '/*                   SubProgram NAME: frmConfiguration_Load          */         
     '/*********************************************************************/
@@ -47,7 +56,110 @@ Public Class frmConfiguration
         btnSaveChanges.Visible = False
         btnCancel.Visible = False
 
+        CreateToolTips(pnlHeader, tpLabelHover)
+        AddHandlerToLabelClick(pnlHeader, AddressOf SortBySelectedLabel)
+
     End Sub
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: SortBySelectedLabel            */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/14/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to be called as the click event for any label the  */
+    '/*  user clicks on. Underline the label, and update the panel contents/
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      frmPatientInfo_load                                          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 field- an integer equal to the tag value of the selected label   */ 
+    '/*	 parent- a panel object that the label lives on                   */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 BoldLabelToSortBy(sender, parent)     							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	field- an integer equal to the tag value of the selected label
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/14/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub SortBySelectedLabel(sender As Object, e As EventArgs)
+
+        Dim parent As Panel = sender.parent
+        Dim field As Integer = CInt(sender.tag)
+
+        BoldLabelToSortBy(sender, parent)
+
+        'check If the user Is selecting a dispense history field to sort by
+        If parent.Name = pnlHeader.Name Then
+
+            ConfigurationSelectedFields(field)
+
+        End If
+
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: ConfigurationSelectedFields   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		  */   
+    '/*		         DATE CREATED: 		 2/14/2021                 */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to be called when a user selects a label to sort by*/
+    '/*  the logic to re-create the panels in the order will be caled here*/
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      frmPatientInfo_load                                          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 field- an integer equal to the tag value of the selected label   */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 ConfigurationSelectedFields(Cint(Label1.Tag))   	              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/14/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub ConfigurationSelectedFields(ByVal field As Integer)
+
+        ' clear the controls as they will need to be rebuilt when sorting
+        'flpPatientRecords.Controls.Clear()
+
+        Select Case field
+
+            Case AddAndRemoveUserEnum.name
+
+            Case AddAndRemoveUserEnum.username
+
+            Case AddAndRemoveUserEnum.permissions
+
+            Case AddAndRemoveUserEnum.active
+
+        End Select
+
+    End Sub
+
 
     '/*********************************************************************/
     '/*                   SubProgram NAME: CreatePanel()                  */         
