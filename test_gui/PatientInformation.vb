@@ -200,7 +200,6 @@ Module PatientInformation
             End If
         Next
         'call dispense history to get dispensed history of the patient
-        DispenseHistory.DispenseHistorySpecificPatient(intPatient_ID)
     End Sub
 
     '/*********************************************************************/
@@ -428,8 +427,8 @@ Module PatientInformation
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
-    '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
+    '/*  ---   ----     ------------------------------------------------- *
+    '/*   AB    2/28/2021   Initial creation                                                                                                                      
     '/*********************************************************************/
 
 
@@ -940,6 +939,7 @@ Module PatientInformation
         For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
             frmPatientInfo.CreatePrescriptionsPanels(frmPatientInfo.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7))
         Next
-
     End Sub
+
+
 End Module
