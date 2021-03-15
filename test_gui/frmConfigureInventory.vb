@@ -188,8 +188,8 @@
 
         Dim intLength As Integer = strDrugName.Length
 
-        If intLength > 30 Then
-            intLength = 30
+        If intLength > 25 Then
+            intLength = 25
         End If
 
         Dim strTuncated As String = strDrugName.Substring(0, intLength)

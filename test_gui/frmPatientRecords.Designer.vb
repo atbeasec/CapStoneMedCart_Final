@@ -39,6 +39,7 @@ Partial Class frmPatientRecords
         Me.btnNewPatient = New System.Windows.Forms.Button()
         Me.flpPatientRecords = New System.Windows.Forms.FlowLayoutPanel()
         Me.tpHeaderSort = New System.Windows.Forms.ToolTip(Me.components)
+        Me.tpToolTip = New System.Windows.Forms.ToolTip(Me.components)
         Me.pnlHeader.SuspendLayout()
         Me.pnlHeaderPatientRecords.SuspendLayout()
         Me.Panel9.SuspendLayout()
@@ -256,4 +257,6 @@ Partial Class frmPatientRecords
     Friend WithEvents txtSearch As TextBox
     Friend WithEvents btnSearch As Button
     Friend WithEvents tpHeaderSort As ToolTip
+
+    Friend WithEvents tpToolTip As ToolTip
 End Class

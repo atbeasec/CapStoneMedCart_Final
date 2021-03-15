@@ -206,18 +206,15 @@
         Dim lblID5 As New Label
         Dim lblID6 As New Label
 
-        ' anywhere we have quotes except for the label names, we can call our Database and get method
-        CreateIDLabel(pnlMainPanel, lblID, "lblMedicationName", lblMedication.Location.X, 20, strMedicationName, getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID, "lblMedicationName", lblMedication.Location.X, 20, strMedicationName, getPanelCount(flpPannel), tpToolTip, TruncateString(25, strMedicationName))
         CreateIDLabel(pnlMainPanel, lblID2, "lblStrength", lblStrength.Location.X, 20, strStrength, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID3, "lblType", lblType.Location.X, 20, strType, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID4, "lblQuantity", lblQuantity.Location.X, 20, strQuantity, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID5, "lblDispensedBy", lblDispensedBy.Location.X, 20, strDispenseBy, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID6, "lblDispenseTimeAndDate", lblDateTime.Location.X, 20, strDispenseDate, getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID5, "lblDispensedBy", lblDispensedBy.Location.X, 20, strDispenseBy, getPanelCount(flpPannel), tpToolTip, TruncateString(30, strDispenseBy))
+        CreateIDLabel(pnlMainPanel, lblID6, "lblDispenseTimeAndDate", lblDateTime.Location.X, 20, strDispenseDate.Substring(0, 10), getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
-
-        'currentContactPanel = pnl.Name
 
     End Sub
     '/*********************************************************************/
@@ -323,13 +320,19 @@
         ' anywhere we have quotes except for the label names, we can call our Database and get method
         ' to ensure all of the text being added to the panel is inline with the  headers, we will use the label location of the
         ' header as the reference point for the X axis when creating these labels at run time.
-        CreateIDLabel(pnlMainPanel, lblID, "lblMedicationPrescription", lblMedicationPrescription.Location.X, 20, strMedicationName, getPanelCount(flpPannel))
+
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID, "lblMedicationPrescription", lblMedicationPrescription.Location.X, 20, strMedicationName, getPanelCount(flpPannel), tpToolTip, TruncateString(25, strMedicationName))
+        ' CreateIDLabel(pnlMainPanel, lblID, "lblMedicationPrescription", lblMedicationPrescription.Location.X, 20, strMedicationName, getPanelCount(flpPannel))
+
         CreateIDLabel(pnlMainPanel, lblID2, "lblStrengthPrescription", lblStrengthPrescription.Location.X, 20, strStrength, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID3, "lblFrequencyPrescription", lblFrequencyPrescription.Location.X, 20, strFrequency, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID4, "lblTypePrescription", lblTypePrescription.Location.X, 20, strType, getPanelCount(flpPannel))
+
+
         CreateIDLabel(pnlMainPanel, lblID5, "lblQuantityPrescription", lblQuantityPrescription.Location.X, 20, strQuantity, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID6, "lblDatePrescribed", lblDatePrescribed.Location.X, 20, strDatePrescribed, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, strPrescribedBy, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID6, "lblDatePrescribed", lblDatePrescribed.Location.X, 20, strDatePrescribed.Substring(0, 10), getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, strPrescribedBy, getPanelCount(flpPannel), tpToolTip, TruncateString(20, strPrescribedBy))
+        ' CreateIDLabel(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, strPrescribedBy, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
