@@ -86,10 +86,15 @@
     End Sub
 
     Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
-        Inventory.WasteMedication()
-        cboMedication.SelectedIndex = -1
-        RadioButton2.Checked = True
-        cboWitness.SelectedIndex = -1
+        If Not cboWitness.SelectedIndex = -1 Then
+            Inventory.WasteMedication()
+            cboMedication.SelectedIndex = -1
+            RadioButton2.Checked = True
+            cboWitness.SelectedIndex = -1
+        Else
+            MessageBox.Show("Please select a user for the sign off")
+        End If
+
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click

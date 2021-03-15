@@ -173,6 +173,7 @@
             Dim intDrawerMedID As Integer
             Dim strWasteReason As String = " "
             Dim intSelectedIndex As Integer = Waste.cboMedication.SelectedIndex
+            Dim userID As Integer
             intSelectedIndex = Waste.intMedicationID(intSelectedIndex)
 
             If Waste.rbtnOther.Checked Then
@@ -192,7 +193,9 @@
             strSqlCommand = "SELECT DrawerMedication_ID FROM DrawerMedication INNER JOIN Medication on Medication.Medication_ID = DrawerMedication.Medication_TUID WHERE Medication.Medication_ID = '" & intSelectedIndex & "'"
             intDrawerMedID = CreateDatabase.ExecuteScalarQuery(strSqlCommand)
 
-            strSqlCommand = "INSERT INTO Wastes(Primary_User_TUID,Secondary_User_TUID,DrawerMedication_TUID,DateTime,Reason) VALUES('1','1','" & intDrawerMedID & "','" & dtmAdhocTime & "','" & strWasteReason & "')"
+            strSqlCommand = "select User_ID from User where Username = '" & Waste.cboWitness.SelectedItem & "'"
+            userID = CreateDatabase.ExecuteScalarQuery(strSqlCommand)
+            strSqlCommand = "INSERT INTO Wastes(Primary_User_TUID,Secondary_User_TUID,DrawerMedication_TUID,DateTime,Reason) VALUES('1','" & userID & "','" & intDrawerMedID & "','" & dtmAdhocTime & "','" & strWasteReason & "')"
             CreateDatabase.ExecuteInsertQuery(strSqlCommand)
 
             'Debug message used to let you know it worked, will be removed
