@@ -175,8 +175,8 @@ Module DispenseHistory
     '/*  Alexander Beasecker  01/27/21  Initial creation of the code      */
     '/*********************************************************************/
 
-    Sub DispenseHistorySpecificPatient(ByRef intPatientMRN As Integer)
-        Dim Strdatacommand As String = "SELECT Drug_Name, Strength, PatientMedication.Type, Amount_Dispensed,User.User_Last_Name,User.User_First_Name, DateTime_Dispensed   
+    Sub DispenseHistorySpecificPatient(ByRef intPatientID As Integer)
+        Dim Strdatacommand As String = "SELECT trim(Drug_Name,' '), Strength, PatientMedication.Type, Amount_Dispensed,User.User_Last_Name,User.User_First_Name, DateTime_Dispensed   
           FROM Dispensing 
           INNER JOIN PatientMedication
           On PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID
@@ -186,7 +186,391 @@ Module DispenseHistory
           On Medication.Medication_ID = PatientMedication.Medication_TUID
           INNER JOIN User
 		  ON User.User_ID = Dispensing.Primary_User_TUID
-          WHERE Patient.Patient_ID = '" & intPatientMRN & "' ORDER BY DateTime_Dispensed DESC;"
+          WHERE Patient.Patient_ID = '" & intPatientID & "' ORDER BY DateTime_Dispensed ASC;"
+
+        Dim dsmydataset As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+
+        For Each dr As DataRow In dsmydataset.Tables(0).Rows
+            frmPatientInfo.CreateDispenseHistoryPanels(frmPatientInfo.flpDispenseHistory, dr(0), dr(1), dr(2), dr(3), dr(4) & " " & dr(5), dr(6), "")
+        Next
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:DispenseHistoryByDrugName  */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/14/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: The purpose of this subroutine is to gather
+    '/*     and display the entire dispense history of a single patient
+    '/*     sorted by the medication name
+    '/*     It takes in the patient ID, runs the sql command to retreieve 
+    '/*     the patient dispense history and then calls the cratedispenseHistory
+    '/*     module from frmPatientInfo to display them to the GUI
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*  CreateDispenseHistoryPanels()
+    '/*  DBadapter.Fill()
+    '/*  DBConn.Open()
+    '/*  
+    '/*
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   
+    '/*											   
+    '/*  ***PATIENT ID***			   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*											                           
+    '/*   DispenseHistorySpecificPatient()
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*	
+    '/* DBadapter
+    '/* Strdatacommand
+    '/* mydataset
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/14/21	  Initial creation of the code      */
+    '/*********************************************************************/
+    Public Sub DispenseHistoryByDrugName(ByRef intPatientID As Integer)
+        Dim Strdatacommand As String = "SELECT trim(Drug_Name,' '), Strength, PatientMedication.Type, Amount_Dispensed,User.User_Last_Name,User.User_First_Name, DateTime_Dispensed   
+          FROM Dispensing 
+          INNER JOIN PatientMedication
+          On PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID
+          INNER JOIN Patient
+          On PatientMedication.Patient_TUID = Patient.Patient_ID
+          INNER JOIN Medication
+          On Medication.Medication_ID = PatientMedication.Medication_TUID
+          INNER JOIN User
+		  ON User.User_ID = Dispensing.Primary_User_TUID
+          WHERE Patient.Patient_ID = '" & intPatientID & "' ORDER BY Trim(Drug_Name,' ') ASC;"
+
+        Dim dsmydataset As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+
+        For Each dr As DataRow In dsmydataset.Tables(0).Rows
+            frmPatientInfo.CreateDispenseHistoryPanels(frmPatientInfo.flpDispenseHistory, dr(0), dr(1), dr(2), dr(3), dr(4) & " " & dr(5), dr(6), "")
+        Next
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:DispenseHistoryByStrength  */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/14/21								  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: The purpose of this subroutine is to gather
+    '/*     and display the entire dispense history of a single patient
+    '/*     sorted by the medication strength
+    '/*     It takes in the patient ID, runs the sql command to retreieve 
+    '/*     the patient dispense history and then calls the cratedispenseHistory
+    '/*     module from frmPatientInfo to display them to the GUI
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*  CreateDispenseHistoryPanels()
+    '/*  DBadapter.Fill()
+    '/*  DBConn.Open()
+    '/*  
+    '/*
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   
+    '/*											   
+    '/*  ***PATIENT ID***			   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*											                           
+    '/*   DispenseHistorySpecificPatient()
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*	
+    '/* DBadapter
+    '/* Strdatacommand
+    '/* mydataset
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/14/21	  Initial creation of the code      */
+    '/*********************************************************************/
+    Public Sub DispenseHistoryByStrength(ByRef intPatientID As Integer)
+        Dim Strdatacommand As String = "SELECT trim(Drug_Name,' '), Strength, PatientMedication.Type, Amount_Dispensed,User.User_Last_Name,User.User_First_Name, DateTime_Dispensed   
+          FROM Dispensing 
+          INNER JOIN PatientMedication
+          On PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID
+          INNER JOIN Patient
+          On PatientMedication.Patient_TUID = Patient.Patient_ID
+          INNER JOIN Medication
+          On Medication.Medication_ID = PatientMedication.Medication_TUID
+          INNER JOIN User
+		  ON User.User_ID = Dispensing.Primary_User_TUID
+          WHERE Patient.Patient_ID = '" & intPatientID & "' ORDER BY CAST(Strength as INTEGER);"
+
+        Dim dsmydataset As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+
+        For Each dr As DataRow In dsmydataset.Tables(0).Rows
+            frmPatientInfo.CreateDispenseHistoryPanels(frmPatientInfo.flpDispenseHistory, dr(0), dr(1), dr(2), dr(3), dr(4) & " " & dr(5), dr(6), "")
+        Next
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:DispenseHistoryByType  */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/14/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: The purpose of this subroutine is to gather
+    '/*     and display the entire dispense history of a single patient
+    '/*     sorted by the type of the dispensed med
+    '/*     It takes in the patient ID, runs the sql command to retreieve 
+    '/*     the patient dispense history and then calls the cratedispenseHistory
+    '/*     module from frmPatientInfo to display them to the GUI
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*  CreateDispenseHistoryPanels()
+    '/*  DBadapter.Fill()
+    '/*  DBConn.Open()
+    '/*  
+    '/*
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   
+    '/*											   
+    '/*  ***PATIENT ID***			   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*											                           
+    '/*   DispenseHistorySpecificPatient()
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*	
+    '/* DBadapter
+    '/* Strdatacommand
+    '/* mydataset
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/14/21	 Initial creation of the code      */
+    '/*********************************************************************/
+    Public Sub DispenseHistoryByType(ByRef intPatientID As Integer)
+        Dim Strdatacommand As String = "SELECT trim(Drug_Name,' '), Strength, PatientMedication.Type, Amount_Dispensed,User.User_Last_Name,User.User_First_Name, DateTime_Dispensed   
+          FROM Dispensing 
+          INNER JOIN PatientMedication
+          On PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID
+          INNER JOIN Patient
+          On PatientMedication.Patient_TUID = Patient.Patient_ID
+          INNER JOIN Medication
+          On Medication.Medication_ID = PatientMedication.Medication_TUID
+          INNER JOIN User
+		  ON User.User_ID = Dispensing.Primary_User_TUID
+          WHERE Patient.Patient_ID = '" & intPatientID & "' ORDER BY PatientMedication.Type;"
+
+        Dim dsmydataset As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+
+        For Each dr As DataRow In dsmydataset.Tables(0).Rows
+            frmPatientInfo.CreateDispenseHistoryPanels(frmPatientInfo.flpDispenseHistory, dr(0), dr(1), dr(2), dr(3), dr(4) & " " & dr(5), dr(6), "")
+        Next
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:DispenseHistoryByQuantity  */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	  03/14/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: The purpose of this subroutine is to gather
+    '/*     and display the entire dispense history of a single patient
+    '/*     sorted by the quantity that was dispensed 
+    '/*     It takes in the patient ID, runs the sql command to retreieve 
+    '/*     the patient dispense history and then calls the cratedispenseHistory
+    '/*     module from frmPatientInfo to display them to the GUI
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*  CreateDispenseHistoryPanels()
+    '/*  DBadapter.Fill()
+    '/*  DBConn.Open()
+    '/*  
+    '/*
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   
+    '/*											   
+    '/*  ***PATIENT ID***			   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*											                           
+    '/*   DispenseHistorySpecificPatient()
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*	
+    '/* DBadapter
+    '/* Strdatacommand
+    '/* mydataset
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/14/21	 Initial creation of the code      */
+    '/*********************************************************************/
+    Public Sub DispenseHistoryByQuantity(ByRef intPatientID As Integer)
+        Dim Strdatacommand As String = "SELECT trim(Drug_Name,' '), Strength, PatientMedication.Type, Amount_Dispensed,User.User_Last_Name,User.User_First_Name, DateTime_Dispensed   
+          FROM Dispensing 
+          INNER JOIN PatientMedication
+          On PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID
+          INNER JOIN Patient
+          On PatientMedication.Patient_TUID = Patient.Patient_ID
+          INNER JOIN Medication
+          On Medication.Medication_ID = PatientMedication.Medication_TUID
+          INNER JOIN User
+		  ON User.User_ID = Dispensing.Primary_User_TUID
+          WHERE Patient.Patient_ID = '" & intPatientID & "' ORDER BY CAST(Amount_Dispensed as INTEGER);"
+
+        Dim dsmydataset As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+
+        For Each dr As DataRow In dsmydataset.Tables(0).Rows
+            frmPatientInfo.CreateDispenseHistoryPanels(frmPatientInfo.flpDispenseHistory, dr(0), dr(1), dr(2), dr(3), dr(4) & " " & dr(5), dr(6), "")
+        Next
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:DispenseHistoryByDispensingUser  */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	 03/14/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: The purpose of this subroutine is to gather
+    '/*     and display the entire dispense history of a single patient
+    '/*     sorted by the user who dispensed the medication by last name
+    '/*     It takes in the patient ID, runs the sql command to retreieve 
+    '/*     the patient dispense history and then calls the cratedispenseHistory
+    '/*     module from frmPatientInfo to display them to the GUI
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*  CreateDispenseHistoryPanels()
+    '/*  DBadapter.Fill()
+    '/*  DBConn.Open()
+    '/*  
+    '/*
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   
+    '/*											   
+    '/*  ***PATIENT ID***			   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*											                           
+    '/*   DispenseHistorySpecificPatient()
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*	
+    '/* DBadapter
+    '/* Strdatacommand
+    '/* mydataset
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/14/21	 Initial creation of the code      */
+    '/*********************************************************************/
+    Public Sub DispenseHistoryByDispensingUser(ByRef intPatientID As Integer)
+        Dim Strdatacommand As String = "SELECT trim(Drug_Name,' '), Strength, PatientMedication.Type, Amount_Dispensed,User.User_Last_Name,User.User_First_Name, DateTime_Dispensed   
+          FROM Dispensing 
+          INNER JOIN PatientMedication
+          On PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID
+          INNER JOIN Patient
+          On PatientMedication.Patient_TUID = Patient.Patient_ID
+          INNER JOIN Medication
+          On Medication.Medication_ID = PatientMedication.Medication_TUID
+          INNER JOIN User
+		  ON User.User_ID = Dispensing.Primary_User_TUID
+          WHERE Patient.Patient_ID = '" & intPatientID & "' ORDER BY User.User_Last_Name, User.User_First_Name;"
+
+        Dim dsmydataset As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+
+        For Each dr As DataRow In dsmydataset.Tables(0).Rows
+            frmPatientInfo.CreateDispenseHistoryPanels(frmPatientInfo.flpDispenseHistory, dr(0), dr(1), dr(2), dr(3), dr(4) & " " & dr(5), dr(6), "")
+        Next
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:DispenseHistoryByDispenseDateAndTime  */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	  03/14/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: The purpose of this subroutine is to gather
+    '/*     and display the entire dispense history of a single patient 
+    '/*     sorted by date and time
+    '/*     It takes in the patient ID, runs the sql command to retreieve 
+    '/*     the patient dispense history and then calls the cratedispenseHistory
+    '/*     module from frmPatientInfo to display them to the GUI
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*  CreateDispenseHistoryPanels()
+    '/*  DBadapter.Fill()
+    '/*  DBConn.Open()
+    '/*  
+    '/*
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   
+    '/*											   
+    '/*  ***PATIENT ID***			   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*											                           
+    '/*   DispenseHistorySpecificPatient()
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*	
+    '/* DBadapter
+    '/* Strdatacommand
+    '/* mydataset
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker 03/14/21	  Initial creation of the code      */
+    '/*********************************************************************/
+    Public Sub DispenseHistoryByDispenseDateAndTime(ByRef intPatientID As Integer)
+        Dim Strdatacommand As String = "SELECT trim(Drug_Name,' '), Strength, PatientMedication.Type, Amount_Dispensed,User.User_Last_Name,User.User_First_Name, DateTime_Dispensed   
+          FROM Dispensing 
+          INNER JOIN PatientMedication
+          On PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID
+          INNER JOIN Patient
+          On PatientMedication.Patient_TUID = Patient.Patient_ID
+          INNER JOIN Medication
+          On Medication.Medication_ID = PatientMedication.Medication_TUID
+          INNER JOIN User
+		  ON User.User_ID = Dispensing.Primary_User_TUID
+          WHERE Patient.Patient_ID = '" & intPatientID & "' ORDER BY DateTime_Dispensed DESC;"
 
         Dim dsmydataset As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
 

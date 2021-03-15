@@ -95,6 +95,7 @@
         PatientInformation.GetPatientInformation(intPatientID)
         PatientInformation.getPrescriptions(intPatientID)
         PatientInformation.getRoom(intPatientID, cboRoom, cboBed)
+        DispenseHistory.DispenseHistorySpecificPatient(intPatientID)
         SetControlsToReadOnly(ctl)
 
         CreateToolTips(pnlPrescriptionsHeader, tpLabelDirections)
@@ -426,21 +427,22 @@
 
         ' clear the controls as they will need to be rebuilt when sorting
         ' flpDispenseHistory.Controls.Clear()
+        flpDispenseHistory.Controls.Clear()
 
         Select Case field
 
             Case DispenseHistoryEnum.MedicationName
-
+                DispenseHistory.DispenseHistoryByDrugName(intPatientID)
             Case DispenseHistoryEnum.Strength
-
+                DispenseHistory.DispenseHistoryByStrength(intPatientID)
             Case DispenseHistoryEnum.Type
-
+                DispenseHistory.DispenseHistoryByType(intPatientID)
             Case DispenseHistoryEnum.Quantity
-
+                DispenseHistory.DispenseHistoryByQuantity(intPatientID)
             Case DispenseHistoryEnum.DispensedBy
-
+                DispenseHistory.DispenseHistoryByDispensingUser(intPatientID)
             Case DispenseHistoryEnum.DispenseDateAndTime
-
+                DispenseHistory.DispenseHistoryByDispenseDateAndTime(intPatientID)
         End Select
 
 
