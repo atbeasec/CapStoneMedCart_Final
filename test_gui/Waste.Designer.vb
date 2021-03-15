@@ -84,7 +84,7 @@ Partial Class Waste
         Me.pnlRadioButtons.Controls.Add(Me.RadioButton2)
         Me.pnlRadioButtons.Location = New System.Drawing.Point(29, 183)
         Me.pnlRadioButtons.Name = "pnlRadioButtons"
-        Me.pnlRadioButtons.Size = New System.Drawing.Size(447, 360)
+        Me.pnlRadioButtons.Size = New System.Drawing.Size(464, 360)
         Me.pnlRadioButtons.TabIndex = 23
         '
         'pnlSignOff

@@ -177,8 +177,6 @@
 
             If Waste.rbtnOther.Checked Then
                 strWasteReason = Waste.TextBox1.Text
-            ElseIf Waste.rbtnDispenseDevice.Checked Then
-                strWasteReason = Waste.rbtnDispenseDevice.Text
             ElseIf Waste.RadioButton2.Checked Then
                 strWasteReason = Waste.RadioButton2.Text
             ElseIf Waste.RadioButton3.Checked Then
