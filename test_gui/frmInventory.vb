@@ -519,7 +519,7 @@ Public Class frmInventory
     End Sub
 
     Private Sub SearchResults()
-
+        frmProgressBar.Show()
         Dim myPropertyNameList As New List(Of String)({"rxcui"})
         Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
 
