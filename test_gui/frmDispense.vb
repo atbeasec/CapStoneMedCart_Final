@@ -9,13 +9,10 @@
     Public Sub SetPatientID(ByVal ID As Integer)
         intPatientID = ID
         intPatientMRN = ExecuteScalarQuery("SELECT MRN_Number from Patient WHERE Patient_ID =" & intPatientID & ";")
-        Debug.WriteLine("")
     End Sub
 
     Public Sub SetPatientMrn(ByVal mrn As Integer)
         intPatientMRN = mrn
-        intPatientID = ExecuteScalarQuery("SELECT Patient_ID from Patient WHERE MRN_Number =" & intPatientMRN & ";")
-        Debug.WriteLine("")
     End Sub
 
     Private Sub btnDispense_Click(sender As Object, e As EventArgs)
@@ -107,7 +104,7 @@
 
     Private Sub btnDispense_Click_1(sender As Object, e As EventArgs) Handles btnDispense.Click
         If Not IsNothing(cmbMedications.SelectedItem) Then
-            DispenseHistory.DispenseMedication(DispenseHistory.SplitMedicationString(cmbMedications.SelectedItem), txtPatientID.Text)
+            DispenseHistory.DispenseMedication(DispenseHistory.SplitMedicationString(cmbMedications.SelectedItem), intPatientID)
         End If
 
     End Sub

@@ -751,10 +751,7 @@ Module DispenseHistory
         strbSQLcommand.Append("SELECT Medication_ID FROM Medication WHERE RXCUI_ID = '" & strMedicationID & "'")
         intMedID = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
 
-        'clear string builder and using MRN get database patient ID
-        strbSQLcommand.Clear()
-        strbSQLcommand.Append("SELECT Patient_ID FROM Patient WHERE MRN_Number = '" & intPatientMRN & "'")
-        intPatientID = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
+        intPatientID = intPatientMRN
 
         'clear string builder using medID and PatientID get the quantity of the prescribed medication
         strbSQLcommand.Clear()
