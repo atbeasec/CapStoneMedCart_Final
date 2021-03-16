@@ -531,6 +531,18 @@
   <ItemGroup>
     <None Include="Resources\Search.PNG" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Authentication\" />
+    <Folder Include="Cart Interface\" />
+    <Folder Include="Discrepancies\" />
+    <Folder Include="Inventory\" />
+    <Folder Include="Maintenance\" />
+    <Folder Include="Patient Records\" />
+    <Folder Include="Pharmacy\" />
+    <Folder Include="Reports\" />
+    <Folder Include="Settings\" />
+    <Folder Include="UI Enhancements\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
