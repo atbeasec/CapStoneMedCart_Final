@@ -56,7 +56,7 @@ Module PatientInformation
     '/*                                     connect the room combo box  */
     '/*                                     to the database.            */
     '/*******************************************************************/
-
+    Dim intMRNInitalValue As Integer
 
     '/*********************************************************************/
     '/*                   SUBROUTINE NAME:GetPatientInformation           */
@@ -115,6 +115,7 @@ Module PatientInformation
             Else
                 frmPatientInfo.txtMRN.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.MRN_Number)
                 frmPatientInfo.txtMRN.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.MRN_Number)
+                intMRNInitalValue = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.MRN_Number)
             End If
 
             If IsDBNull(dr(4)) Then
@@ -163,6 +164,7 @@ Module PatientInformation
                 frmPatientInfo.cboState.SelectedItem = "N/A"
             Else
                 frmPatientInfo.cboState.SelectedItem = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.state)
+                frmPatientInfo.cboState.Tag = frmPatientInfo.cboState.SelectedIndex
             End If
 
             If IsDBNull(dr(8)) Then
@@ -214,26 +216,51 @@ Module PatientInformation
 
     Public Sub SavePatientEdits()
         'check if MRN is changed
+        Dim intMRNCurrentValue As Integer = frmPatientInfo.txtMRN.Text
 
+        If Not intMRNCurrentValue.Equals(intMRNInitalValue) Then
+            MessageBox.Show("MRN changed")
+        End If
         'check if date of birth is changed
-
+        If Not frmPatientInfo.txtBirthday.Text.Equals(frmPatientInfo.txtBirthday.Tag) Then
+            MessageBox.Show("DOB changed")
+        End If
         'check if sex is changed
-
+        If Not frmPatientInfo.txtGender.Text.Equals(frmPatientInfo.txtGender.Tag) Then
+            MessageBox.Show("gender changed")
+        End If
         'check if height is changed
-
+        If Not frmPatientInfo.txtHeight.Text.Equals(frmPatientInfo.txtHeight.Tag) Then
+            MessageBox.Show("height changed")
+        End If
         'check if weight is changed
-
+        If Not frmPatientInfo.txtWeight.Text.Equals(frmPatientInfo.txtWeight.Tag) Then
+            MessageBox.Show("weight changed")
+        End If
         'check if email is changed
-
+        If Not frmPatientInfo.txtEmail.Text.Equals(frmPatientInfo.txtEmail.Tag) Then
+            MessageBox.Show("email changed")
+        End If
         'check if phone is changed
-
+        If Not frmPatientInfo.txtPhone.Text.Equals(frmPatientInfo.txtPhone.Tag) Then
+            MessageBox.Show("phone changed")
+        End If
         'check if street address is changed
-
+        If Not frmPatientInfo.txtAddress.Text.Equals(frmPatientInfo.txtAddress.Tag) Then
+            MessageBox.Show("address changed")
+        End If
         'check if city is changed
-
+        If Not frmPatientInfo.txtCity.Text.Equals(frmPatientInfo.txtCity.Tag) Then
+            MessageBox.Show("city changed")
+        End If
         'check if state is changed
-
+        If Not frmPatientInfo.cboState.SelectedIndex.Equals(frmPatientInfo.cboState.Tag) Then
+            MessageBox.Show("state changed")
+        End If
         'check if zip code is changed
+        If Not frmPatientInfo.txtZipCode.Text.Equals(frmPatientInfo.txtZipCode.Tag) Then
+            MessageBox.Show("zip changed")
+        End If
     End Sub
 
     '/*********************************************************************/
