@@ -244,8 +244,8 @@
 
             Case SelectedForm.Waste
 
-                frmCurrentChildForm = Waste
-                OpenChildForm(Waste)
+                frmCurrentChildForm = frmWaste
+                OpenChildForm(frmWaste)
 
             Case SelectedForm.Report
 

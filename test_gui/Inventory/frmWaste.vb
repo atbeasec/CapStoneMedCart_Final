@@ -1,4 +1,4 @@
-﻿Public Class Waste
+﻿Public Class frmWaste
 
     Private intPatientInformationMRN As Integer
     Public intMedicationID As New ArrayList

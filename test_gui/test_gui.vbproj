@@ -125,36 +125,36 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdHoc.vb" />
-    <Compile Include="APIDatabaseSelection.vb" />
-    <Compile Include="AdminActions.vb" />
-    <Compile Include="BulkImportMethods.vb" />
-    <Compile Include="CartInterfaceCode.vb" />
-    <Compile Include="CheckComboBoxForDuplicateMethods.vb" />
-    <Compile Include="ConfigureRoomsBeds.vb" />
-    <Compile Include="CreateDatabase.vb" />
-    <Compile Include="DataVaildationMethods.vb" />
-    <Compile Include="Discrepancies.vb" />
-    <Compile Include="frmProgressBar.Designer.vb">
+    <Compile Include="Inventory\AdHoc.vb" />
+    <Compile Include="Inventory\API\APIDatabaseSelection.vb" />
+    <Compile Include="Settings\AdminActions.vb" />
+    <Compile Include="Patient Records\BulkImportMethods.vb" />
+    <Compile Include="Cart Interface\CartInterfaceCode.vb" />
+    <Compile Include="UI Enhancements\CheckComboBoxForDuplicateMethods.vb" />
+    <Compile Include="Settings\ConfigureRoomsBeds.vb" />
+    <Compile Include="Settings\CreateDatabase.vb" />
+    <Compile Include="UI Enhancements\DataVaildationMethods.vb" />
+    <Compile Include="Discrepancies\Discrepancies.vb" />
+    <Compile Include="UI Enhancements\frmProgressBar.Designer.vb">
       <DependentUpon>frmProgressBar.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmProgressBar.vb">
+    <Compile Include="UI Enhancements\frmProgressBar.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmAssignNurse.Designer.vb">
+    <Compile Include="Settings\frmAssignNurse.Designer.vb">
       <DependentUpon>frmAssignNurse.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmAssignNurse.vb">
+    <Compile Include="Settings\frmAssignNurse.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmDispense.Designer.vb">
+    <Compile Include="Inventory\frmDispense.Designer.vb">
       <DependentUpon>frmDispense.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmDispense.vb">
+    <Compile Include="Inventory\frmDispense.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DispenseHistory.vb" />
-    <Compile Include="EnumList.vb" />
+    <Compile Include="Inventory\DispenseHistory.vb" />
+    <Compile Include="Cart Interface\EnumList.vb" />
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -162,181 +162,169 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmAdminSettings.Designer.vb">
-      <DependentUpon>frmAdminSettings.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmAdminSettings.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmAdHockDispense.Designer.vb">
+    <Compile Include="Inventory\frmAdHockDispense.Designer.vb">
       <DependentUpon>frmAdHockDispense.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmAdHockDispense.vb">
+    <Compile Include="Inventory\frmAdHockDispense.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmAlert.Designer.vb">
+    <Compile Include="UI Enhancements\frmAlert.Designer.vb">
       <DependentUpon>frmAlert.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmAlert.vb">
+    <Compile Include="UI Enhancements\frmAlert.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmAllergies.Designer.vb">
+    <Compile Include="Patient Records\frmAllergies.Designer.vb">
       <DependentUpon>frmAllergies.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmAllergies.vb">
+    <Compile Include="Patient Records\frmAllergies.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmChangePassword.Designer.vb">
-      <DependentUpon>frmChangePassword.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmChangePassword.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmConfiguration.Designer.vb">
+    <Compile Include="Authentication\frmConfiguration.Designer.vb">
       <DependentUpon>frmConfiguration.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmConfiguration.vb">
+    <Compile Include="Authentication\frmConfiguration.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmConfigureInventory.Designer.vb">
+    <Compile Include="Inventory\frmConfigureInventory.Designer.vb">
       <DependentUpon>frmConfigureInventory.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmConfigureInventory.vb">
+    <Compile Include="Inventory\frmConfigureInventory.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmConfigureRooms.Designer.vb">
+    <Compile Include="Settings\frmConfigureRooms.Designer.vb">
       <DependentUpon>frmConfigureRooms.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmConfigureRooms.vb">
+    <Compile Include="Settings\frmConfigureRooms.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmDischarge.Designer.vb">
+    <Compile Include="Settings\frmDischarge.Designer.vb">
       <DependentUpon>frmDischarge.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmDischarge.vb">
+    <Compile Include="Settings\frmDischarge.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmDiscrepancies.Designer.vb">
+    <Compile Include="Discrepancies\frmDiscrepancies.Designer.vb">
       <DependentUpon>frmDiscrepancies.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmDiscrepancies.vb">
+    <Compile Include="Discrepancies\frmDiscrepancies.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmEndOfShift.Designer.vb">
+    <Compile Include="Inventory\frmEndOfShift.Designer.vb">
       <DependentUpon>frmEndOfShift.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmEndOfShift.vb">
+    <Compile Include="Inventory\frmEndOfShift.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmInventory.Designer.vb">
+    <Compile Include="Inventory\frmInventory.Designer.vb">
       <DependentUpon>frmInventory.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmInventory.vb">
+    <Compile Include="Inventory\frmInventory.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLogin.Designer.vb">
+    <Compile Include="Authentication\frmLogin.Designer.vb">
       <DependentUpon>frmLogin.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmLogin.vb">
+    <Compile Include="Authentication\frmLogin.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLoginScan.Designer.vb">
+    <Compile Include="Authentication\frmLoginScan.Designer.vb">
       <DependentUpon>frmLoginScan.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmLoginScan.vb">
+    <Compile Include="Authentication\frmLoginScan.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMaintenance.Designer.vb">
+    <Compile Include="Maintenance\frmMaintenance.Designer.vb">
       <DependentUpon>frmMaintenance.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmMaintenance.vb">
+    <Compile Include="Maintenance\frmMaintenance.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMyPatients.Designer.vb">
+    <Compile Include="Patient Records\frmMyPatients.Designer.vb">
       <DependentUpon>frmMyPatients.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmMyPatients.vb">
+    <Compile Include="Patient Records\frmMyPatients.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmNewPatient.Designer.vb">
+    <Compile Include="Patient Records\frmNewPatient.Designer.vb">
       <DependentUpon>frmNewPatient.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmNewPatient.vb">
+    <Compile Include="Patient Records\frmNewPatient.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmOpenedDrawer.Designer.vb">
+    <Compile Include="Cart Interface\frmOpenedDrawer.Designer.vb">
       <DependentUpon>frmOpenedDrawer.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmOpenedDrawer.vb">
+    <Compile Include="Cart Interface\frmOpenedDrawer.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPatientInfo.Designer.vb">
+    <Compile Include="Patient Records\frmPatientInfo.Designer.vb">
       <DependentUpon>frmPatientInfo.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmPatientInfo.vb">
+    <Compile Include="Patient Records\frmPatientInfo.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPatientRecords.Designer.vb">
+    <Compile Include="Patient Records\frmPatientRecords.Designer.vb">
       <DependentUpon>frmPatientRecords.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmPatientRecords.vb">
+    <Compile Include="Patient Records\frmPatientRecords.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPharmacy.Designer.vb">
+    <Compile Include="Pharmacy\frmPharmacy.Designer.vb">
       <DependentUpon>frmPharmacy.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmPharmacy.vb">
+    <Compile Include="Pharmacy\frmPharmacy.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmReport.Designer.vb">
+    <Compile Include="Reports\frmReport.Designer.vb">
       <DependentUpon>frmReport.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmReport.vb">
+    <Compile Include="Reports\frmReport.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmResolve.Designer.vb">
+    <Compile Include="Discrepancies\frmResolve.Designer.vb">
       <DependentUpon>frmResolve.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmResolve.vb">
+    <Compile Include="Discrepancies\frmResolve.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmSerialPort.Designer.vb">
+    <Compile Include="Cart Interface\frmSerialPort.Designer.vb">
       <DependentUpon>frmSerialPort.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmSerialPort.vb">
+    <Compile Include="Cart Interface\frmSerialPort.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmWitnessSignOff.Designer.vb">
+    <Compile Include="Inventory\frmWitnessSignOff.Designer.vb">
       <DependentUpon>frmWitnessSignOff.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmWitnessSignOff.vb">
+    <Compile Include="Inventory\frmWitnessSignOff.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FullCart.Designer.vb">
-      <DependentUpon>FullCart.vb</DependentUpon>
+    <Compile Include="Cart Interface\frmFullCart.Designer.vb">
+      <DependentUpon>frmFullCart.vb</DependentUpon>
     </Compile>
-    <Compile Include="FullCart.vb">
+    <Compile Include="Cart Interface\frmFullCart.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GenerateRandom.vb" />
-    <Compile Include="GraphicalUserInterfaceReusableMethods.vb" />
-    <Compile Include="ImportExportDatabase.vb" />
-    <Compile Include="Interactions.vb" />
-    <Compile Include="Inventory.vb" />
-    <Compile Include="Login.vb" />
-    <Compile Include="Medications.vb" />
-    <Compile Include="PatientClass.vb" />
-    <Compile Include="PatientInformation.vb" />
-    <Compile Include="PersonClass.vb" />
-    <Compile Include="PharmacyOrder.vb" />
-    <Compile Include="PhysicianClass.vb" />
-    <Compile Include="PopulateAllergiesComboBoxMethods.vb" />
-    <Compile Include="PopulatePatientComboBoxMethods.vb" />
-    <Compile Include="PopulatePhysicanComboBoxesMethods.vb" />
-    <Compile Include="PopulateRoomsCombBoxesMethods.vb" />
-    <Compile Include="PopulateStateComboBoxesMethod.vb" />
-    <Compile Include="Print.vb" />
-    <Compile Include="Reports.vb" />
+    <Compile Include="Authentication\GenerateRandom.vb" />
+    <Compile Include="UI Enhancements\GraphicalUserInterfaceReusableMethods.vb" />
+    <Compile Include="Settings\ImportExportDatabase.vb" />
+    <Compile Include="Inventory\API\Interactions.vb" />
+    <Compile Include="Inventory\Inventory.vb" />
+    <Compile Include="Authentication\Login.vb" />
+    <Compile Include="Inventory\Medications.vb" />
+    <Compile Include="Patient Records\PatientClass.vb" />
+    <Compile Include="Patient Records\PatientInformation.vb" />
+    <Compile Include="Patient Records\PersonClass.vb" />
+    <Compile Include="Pharmacy\PharmacyOrder.vb" />
+    <Compile Include="Patient Records\PhysicianClass.vb" />
+    <Compile Include="UI Enhancements\PopulateAllergiesComboBoxMethods.vb" />
+    <Compile Include="UI Enhancements\PopulatePatientComboBoxMethods.vb" />
+    <Compile Include="UI Enhancements\PopulatePhysicanComboBoxesMethods.vb" />
+    <Compile Include="UI Enhancements\PopulateRoomsCombBoxesMethods.vb" />
+    <Compile Include="UI Enhancements\PopulateStateComboBoxesMethod.vb" />
+    <Compile Include="UI Enhancements\Print.vb" />
+    <Compile Include="Reports\Reports.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -352,120 +340,114 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="NewNurse.Designer.vb">
-      <DependentUpon>NewNurse.vb</DependentUpon>
+    <Compile Include="Settings\frmNewNurse.Designer.vb">
+      <DependentUpon>frmNewNurse.vb</DependentUpon>
     </Compile>
-    <Compile Include="NewNurse.vb">
+    <Compile Include="Settings\frmNewNurse.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RoomClass.vb" />
-    <Compile Include="rxNorm.vb" />
-    <Compile Include="SearchLogic.vb" />
-    <Compile Include="SettingsChange.Designer.vb">
-      <DependentUpon>SettingsChange.vb</DependentUpon>
+    <Compile Include="Patient Records\RoomClass.vb" />
+    <Compile Include="Inventory\API\rxNorm.vb" />
+    <Compile Include="UI Enhancements\SearchLogic.vb" />
+    <Compile Include="Settings\frmSettingsChange.Designer.vb">
+      <DependentUpon>frmSettingsChange.vb</DependentUpon>
     </Compile>
-    <Compile Include="SettingsChange.vb">
+    <Compile Include="Settings\frmSettingsChange.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UISortFunctionality.vb" />
-    <Compile Include="UserClass.vb" />
-    <Compile Include="Waste.Designer.vb">
-      <DependentUpon>Waste.vb</DependentUpon>
+    <Compile Include="UI Enhancements\UISortFunctionality.vb" />
+    <Compile Include="Patient Records\UserClass.vb" />
+    <Compile Include="Inventory\frmWaste.Designer.vb">
+      <DependentUpon>frmWaste.vb</DependentUpon>
     </Compile>
-    <Compile Include="Waste.vb">
+    <Compile Include="Inventory\frmWaste.vb">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="frmProgressBar.resx">
+    <EmbeddedResource Include="UI Enhancements\frmProgressBar.resx">
       <DependentUpon>frmProgressBar.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmAssignNurse.resx">
+    <EmbeddedResource Include="Settings\frmAssignNurse.resx">
       <DependentUpon>frmAssignNurse.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmDispense.resx">
+    <EmbeddedResource Include="Inventory\frmDispense.resx">
       <DependentUpon>frmDispense.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmAdminSettings.resx">
-      <DependentUpon>frmAdminSettings.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmAdHockDispense.resx">
+    <EmbeddedResource Include="Inventory\frmAdHockDispense.resx">
       <DependentUpon>frmAdHockDispense.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmAlert.resx">
+    <EmbeddedResource Include="UI Enhancements\frmAlert.resx">
       <DependentUpon>frmAlert.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmAllergies.resx">
+    <EmbeddedResource Include="Patient Records\frmAllergies.resx">
       <DependentUpon>frmAllergies.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmChangePassword.resx">
-      <DependentUpon>frmChangePassword.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmConfiguration.resx">
+    <EmbeddedResource Include="Authentication\frmConfiguration.resx">
       <DependentUpon>frmConfiguration.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmConfigureInventory.resx">
+    <EmbeddedResource Include="Inventory\frmConfigureInventory.resx">
       <DependentUpon>frmConfigureInventory.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmConfigureRooms.resx">
+    <EmbeddedResource Include="Settings\frmConfigureRooms.resx">
       <DependentUpon>frmConfigureRooms.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmDischarge.resx">
+    <EmbeddedResource Include="Settings\frmDischarge.resx">
       <DependentUpon>frmDischarge.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmDiscrepancies.resx">
+    <EmbeddedResource Include="Discrepancies\frmDiscrepancies.resx">
       <DependentUpon>frmDiscrepancies.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmEndOfShift.resx">
+    <EmbeddedResource Include="Inventory\frmEndOfShift.resx">
       <DependentUpon>frmEndOfShift.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmInventory.resx">
+    <EmbeddedResource Include="Inventory\frmInventory.resx">
       <DependentUpon>frmInventory.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLogin.resx">
+    <EmbeddedResource Include="Authentication\frmLogin.resx">
       <DependentUpon>frmLogin.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLoginScan.resx">
+    <EmbeddedResource Include="Authentication\frmLoginScan.resx">
       <DependentUpon>frmLoginScan.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMaintenance.resx">
+    <EmbeddedResource Include="Maintenance\frmMaintenance.resx">
       <DependentUpon>frmMaintenance.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMyPatients.resx">
+    <EmbeddedResource Include="Patient Records\frmMyPatients.resx">
       <DependentUpon>frmMyPatients.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmNewPatient.resx">
+    <EmbeddedResource Include="Patient Records\frmNewPatient.resx">
       <DependentUpon>frmNewPatient.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmOpenedDrawer.resx">
+    <EmbeddedResource Include="Cart Interface\frmOpenedDrawer.resx">
       <DependentUpon>frmOpenedDrawer.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPatientInfo.resx">
+    <EmbeddedResource Include="Patient Records\frmPatientInfo.resx">
       <DependentUpon>frmPatientInfo.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPatientRecords.resx">
+    <EmbeddedResource Include="Patient Records\frmPatientRecords.resx">
       <DependentUpon>frmPatientRecords.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPharmacy.resx">
+    <EmbeddedResource Include="Pharmacy\frmPharmacy.resx">
       <DependentUpon>frmPharmacy.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmReport.resx">
+    <EmbeddedResource Include="Reports\frmReport.resx">
       <DependentUpon>frmReport.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmResolve.resx">
+    <EmbeddedResource Include="Discrepancies\frmResolve.resx">
       <DependentUpon>frmResolve.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmSerialPort.resx">
+    <EmbeddedResource Include="Cart Interface\frmSerialPort.resx">
       <DependentUpon>frmSerialPort.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmWitnessSignOff.resx">
+    <EmbeddedResource Include="Inventory\frmWitnessSignOff.resx">
       <DependentUpon>frmWitnessSignOff.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FullCart.resx">
-      <DependentUpon>FullCart.vb</DependentUpon>
+    <EmbeddedResource Include="Cart Interface\frmFullCart.resx">
+      <DependentUpon>frmFullCart.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -473,14 +455,14 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NewNurse.resx">
-      <DependentUpon>NewNurse.vb</DependentUpon>
+    <EmbeddedResource Include="Settings\frmNewNurse.resx">
+      <DependentUpon>frmNewNurse.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsChange.resx">
-      <DependentUpon>SettingsChange.vb</DependentUpon>
+    <EmbeddedResource Include="Settings\frmSettingsChange.resx">
+      <DependentUpon>frmSettingsChange.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Waste.resx">
-      <DependentUpon>Waste.vb</DependentUpon>
+    <EmbeddedResource Include="Inventory\frmWaste.resx">
+      <DependentUpon>frmWaste.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -567,6 +549,7 @@
   <ItemGroup>
     <None Include="Resources\Search.PNG" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
