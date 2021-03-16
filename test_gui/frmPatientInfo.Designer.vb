@@ -236,6 +236,7 @@ Partial Class frmPatientInfo
         Me.txtZipCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtZipCode.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtZipCode.Location = New System.Drawing.Point(751, 150)
+        Me.txtZipCode.MaxLength = 9
         Me.txtZipCode.Name = "txtZipCode"
         Me.txtZipCode.ReadOnly = True
         Me.txtZipCode.Size = New System.Drawing.Size(151, 25)
@@ -309,6 +310,7 @@ Partial Class frmPatientInfo
         Me.txtPhone.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtPhone.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPhone.Location = New System.Drawing.Point(753, 90)
+        Me.txtPhone.MaxLength = 11
         Me.txtPhone.Name = "txtPhone"
         Me.txtPhone.ReadOnly = True
         Me.txtPhone.Size = New System.Drawing.Size(149, 25)
@@ -353,6 +355,7 @@ Partial Class frmPatientInfo
         Me.txtMRN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtMRN.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtMRN.Location = New System.Drawing.Point(13, 30)
+        Me.txtMRN.MaxLength = 9
         Me.txtMRN.Name = "txtMRN"
         Me.txtMRN.ReadOnly = True
         Me.txtMRN.Size = New System.Drawing.Size(150, 25)
@@ -408,6 +411,7 @@ Partial Class frmPatientInfo
         Me.txtWeight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtWeight.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtWeight.Location = New System.Drawing.Point(754, 31)
+        Me.txtWeight.MaxLength = 5
         Me.txtWeight.Name = "txtWeight"
         Me.txtWeight.ReadOnly = True
         Me.txtWeight.Size = New System.Drawing.Size(148, 25)
@@ -430,6 +434,7 @@ Partial Class frmPatientInfo
         Me.txtHeight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtHeight.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtHeight.Location = New System.Drawing.Point(568, 30)
+        Me.txtHeight.MaxLength = 5
         Me.txtHeight.Name = "txtHeight"
         Me.txtHeight.ReadOnly = True
         Me.txtHeight.Size = New System.Drawing.Size(150, 25)

@@ -568,6 +568,7 @@
         Else
             SetControlsToReadOnly(ctl)
             btnEditPatient.Text = "Edit Patient"
+            PatientInformation.SavePatientEdits(intPatientID)
         End If
 
     End Sub
@@ -938,5 +939,21 @@
 
     End Sub
 
+    Private Sub txtMRN_TextChanged(sender As Object, e As EventArgs) Handles txtMRN.KeyPress, txtPhone.KeyPress, txtZipCode.KeyPress
 
+        DataVaildationMethods.KeyPressCheck(e, "0123456789")
+
+    End Sub
+
+    Private Sub txtHeight_TextChanged(sender As Object, e As EventArgs) Handles txtHeight.KeyPress, txtWeight.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789.")
+    End Sub
+
+    Private Sub txtAddress_TextChanged(sender As Object, e As EventArgs) Handles txtAddress.KeyPress, txtCity.KeyPress, txtEmail.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789abcdefghijklmnopqrstuvwxyz-/@.")
+    End Sub
+
+    Private Sub txtBirthday_TextChanged(sender As Object, e As EventArgs) Handles txtBirthday.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789/-")
+    End Sub
 End Class

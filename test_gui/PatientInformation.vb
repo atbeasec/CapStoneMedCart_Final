@@ -56,7 +56,7 @@ Module PatientInformation
     '/*                                     connect the room combo box  */
     '/*                                     to the database.            */
     '/*******************************************************************/
-
+    Dim intMRNInitalValue As Integer
 
     '/*********************************************************************/
     '/*                   SUBROUTINE NAME:GetPatientInformation           */
@@ -114,66 +114,78 @@ Module PatientInformation
                 frmPatientInfo.txtMRN.Text = "N/A"
             Else
                 frmPatientInfo.txtMRN.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.MRN_Number)
+                frmPatientInfo.txtMRN.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.MRN_Number)
+                intMRNInitalValue = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.MRN_Number)
             End If
 
             If IsDBNull(dr(4)) Then
                 frmPatientInfo.txtBirthday.Text = "N/A"
             Else
                 frmPatientInfo.txtBirthday.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.DoB)
+                frmPatientInfo.txtBirthday.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.DoB)
             End If
 
             If IsDBNull(dr(5)) Then
                 frmPatientInfo.txtGender.Text = "N/A"
             Else
                 frmPatientInfo.txtGender.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Sex)
+                frmPatientInfo.txtGender.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Sex)
             End If
 
             If IsDBNull(dr(6)) Then
                 frmPatientInfo.txtHeight.Text = "N/A"
             Else
                 frmPatientInfo.txtHeight.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Height)
+                frmPatientInfo.txtHeight.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Height)
             End If
 
             If IsDBNull(dr(7)) Then
                 frmPatientInfo.txtWeight.Text = "N/A"
             Else
                 frmPatientInfo.txtWeight.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Weight)
+                frmPatientInfo.txtWeight.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Weight)
             End If
 
             If IsDBNull(dr(8)) Then
                 frmPatientInfo.txtAddress.Text = "N/A"
             Else
                 frmPatientInfo.txtAddress.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.address)
+                frmPatientInfo.txtAddress.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.address)
             End If
 
             If IsDBNull(dr(8)) Then
                 frmPatientInfo.txtCity.Text = "N/A"
             Else
                 frmPatientInfo.txtCity.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.City)
+                frmPatientInfo.txtCity.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.City)
             End If
 
             If IsDBNull(dr(8)) Then
                 frmPatientInfo.cboState.SelectedItem = "N/A"
             Else
                 frmPatientInfo.cboState.SelectedItem = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.state)
+                frmPatientInfo.cboState.Tag = frmPatientInfo.cboState.SelectedIndex
             End If
 
             If IsDBNull(dr(8)) Then
                 frmPatientInfo.txtZipCode.Text = "N/A"
             Else
                 frmPatientInfo.txtZipCode.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.zip)
+                frmPatientInfo.txtZipCode.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.zip)
             End If
 
             If IsDBNull(dr(11)) Then
                 frmPatientInfo.txtEmail.Text = "N/A"
             Else
                 frmPatientInfo.txtEmail.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Email)
+                frmPatientInfo.txtEmail.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Email)
             End If
 
             If IsDBNull(dr(12)) Then
                 frmPatientInfo.txtPhone.Text = "N/A"
             Else
                 frmPatientInfo.txtPhone.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Phone)
+                frmPatientInfo.txtPhone.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Phone)
             End If
 
             If IsDBNull(dr(1)) Then
@@ -200,6 +212,212 @@ Module PatientInformation
             End If
         Next
         'call dispense history to get dispensed history of the patient
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:SavePatientEdits           */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/15/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE: The purpose of this subroutine is to check and
+    '/* update each value in the patient information screen that was changed
+    '/* to a new value when the save button is clicked
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   
+    '/*											   
+    '/*  intPatientID			   
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   
+    '/*											                           
+    '/*   SavePatientEdits("23")
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*	
+    '/* intCountChanged
+    '/* strbItemsChanged
+    '/* intMRNCurrentValue
+    '/* strbSqlCommand
+    '/*
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/15/21  Initial creation of the code      */
+    '/*********************************************************************/
+    Public Sub SavePatientEdits(ByRef intPatientID As Integer)
+        'check if MRN is changed
+        Dim intMRNCurrentValue As Double = frmPatientInfo.txtMRN.Text
+        Dim strbItemsChanged As StringBuilder = New StringBuilder
+        Dim intCountChanged As Integer = 0
+        Dim strbSqlCommand As StringBuilder = New StringBuilder
+
+        If Not intMRNCurrentValue.Equals(intMRNInitalValue) Then
+            'build sql update command
+            strbSqlCommand.Append("UPDATE Patient SET MRN_Number = '" & intMRNCurrentValue & "' Where Patient_ID = '" & intPatientID & "'")
+            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+            'add item that was changed too string that is tracking all changed items
+            strbItemsChanged.AppendLine(" MRN")
+            'increase changed item count
+            intCountChanged = intCountChanged + 1
+            'clear string bulder
+            strbSqlCommand.Clear()
+            'update tag to new item
+            intMRNInitalValue = intMRNCurrentValue
+        End If
+        'check if date of birth is changed
+        If Not frmPatientInfo.txtBirthday.Text.Equals(frmPatientInfo.txtBirthday.Tag) Then
+            'build sql update command
+            strbSqlCommand.Append("UPDATE Patient SET Date_of_Birth = '" & frmPatientInfo.txtBirthday.Text & "' Where Patient_ID = '" & intPatientID & "'")
+            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+            'add item that was changed too string that is tracking all changed items
+            strbItemsChanged.Append(" Date of birth")
+            'increase changed item count
+            intCountChanged = intCountChanged + 1
+            'clear string bulder
+            strbSqlCommand.Clear()
+            'update tag to new item
+            frmPatientInfo.txtBirthday.Tag = frmPatientInfo.txtBirthday.Text
+        End If
+        'check if sex is changed
+        If Not frmPatientInfo.txtGender.Text.Equals(frmPatientInfo.txtGender.Tag) Then
+            'build sql update command
+            strbSqlCommand.Append("UPDATE Patient SET Sex = '" & frmPatientInfo.txtGender.Text & "' Where Patient_ID = '" & intPatientID & "'")
+            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+            'add item that was changed too string that is tracking all changed items
+            strbItemsChanged.Append(" Gender")
+            'increase changed item count
+            intCountChanged = intCountChanged + 1
+            'clear string bulder
+            strbSqlCommand.Clear()
+            'update tag to new item
+            frmPatientInfo.txtGender.Tag = frmPatientInfo.txtGender.Text
+        End If
+        'check if height is changed
+        If Not frmPatientInfo.txtHeight.Text.Equals(frmPatientInfo.txtHeight.Tag) Then
+            'build sql update command
+            strbSqlCommand.Append("UPDATE Patient SET Height = '" & frmPatientInfo.txtHeight.Text & "' Where Patient_ID = '" & intPatientID & "'")
+            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+            'add item that was changed too string that is tracking all changed items
+            strbItemsChanged.Append(" Height")
+            'increase changed item count
+            intCountChanged = intCountChanged + 1
+            'clear string bulder
+            strbSqlCommand.Clear()
+            'update tag to new item
+            frmPatientInfo.txtHeight.Tag = frmPatientInfo.txtHeight.Text
+        End If
+        'check if weight is changed
+        If Not frmPatientInfo.txtWeight.Text.Equals(frmPatientInfo.txtWeight.Tag) Then
+            'build sql update command
+            strbSqlCommand.Append("UPDATE Patient SET Weight = '" & frmPatientInfo.txtWeight.Text & "' Where Patient_ID = '" & intPatientID & "'")
+            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+            'add item that was changed too string that is tracking all changed items
+            strbItemsChanged.Append(" Weight")
+            'increase changed item count
+            intCountChanged = intCountChanged + 1
+            'clear string bulder
+            strbSqlCommand.Clear()
+            'update tag to new item
+            frmPatientInfo.txtWeight.Tag = frmPatientInfo.txtWeight.Text
+        End If
+        'check if email is changed
+        If Not frmPatientInfo.txtEmail.Text.Equals(frmPatientInfo.txtEmail.Tag) Then
+            'build sql update command
+            strbSqlCommand.Append("UPDATE Patient SET Email_address = '" & frmPatientInfo.txtEmail.Text & "' Where Patient_ID = '" & intPatientID & "'")
+            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+            'add item that was changed too string that is tracking all changed items
+            strbItemsChanged.Append(" Email")
+            'increase changed item count
+            intCountChanged = intCountChanged + 1
+            'clear string bulder
+            strbSqlCommand.Clear()
+            'update tag to new item
+            frmPatientInfo.txtEmail.Tag = frmPatientInfo.txtEmail.Text
+        End If
+        'check if phone is changed
+        If Not frmPatientInfo.txtPhone.Text.Equals(frmPatientInfo.txtPhone.Tag) Then
+            'build sql update command
+            strbSqlCommand.Append("UPDATE Patient SET Phone_Number = '" & frmPatientInfo.txtPhone.Text & "' Where Patient_ID = '" & intPatientID & "'")
+            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+            'add item that was changed too string that is tracking all changed items
+            strbItemsChanged.Append(" Phone Number")
+            'increase changed item count
+            intCountChanged = intCountChanged + 1
+            'clear string bulder
+            strbSqlCommand.Clear()
+            'update tag to new item
+            frmPatientInfo.txtPhone.Tag = frmPatientInfo.txtPhone.Text
+        End If
+        'check if street address is changed
+        If Not frmPatientInfo.txtAddress.Text.Equals(frmPatientInfo.txtAddress.Tag) Then
+            'build sql update command
+            strbSqlCommand.Append("UPDATE Patient SET Address = '" & frmPatientInfo.txtAddress.Text & "' Where Patient_ID = '" & intPatientID & "'")
+            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+            'add item that was changed too string that is tracking all changed items
+            strbItemsChanged.Append(" Street Address")
+            'increase changed item count
+            intCountChanged = intCountChanged + 1
+            'clear string bulder
+            strbSqlCommand.Clear()
+            'update tag to new item
+            frmPatientInfo.txtAddress.Tag = frmPatientInfo.txtAddress.Text
+        End If
+        'check if city is changed
+        If Not frmPatientInfo.txtCity.Text.Equals(frmPatientInfo.txtCity.Tag) Then
+            'build sql update command
+            strbSqlCommand.Append("UPDATE Patient SET City = '" & frmPatientInfo.txtCity.Text & "' Where Patient_ID = '" & intPatientID & "'")
+            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+            'add item that was changed too string that is tracking all changed items
+            strbItemsChanged.Append(" City")
+            'increase changed item count
+            intCountChanged = intCountChanged + 1
+            'clear string bulder
+            strbSqlCommand.Clear()
+            'update tag to new item
+            frmPatientInfo.txtCity.Tag = frmPatientInfo.txtCity.Text
+        End If
+        'check if state is changed
+        If Not frmPatientInfo.cboState.SelectedIndex.Equals(frmPatientInfo.cboState.Tag) Then
+            'build sql update command
+            strbSqlCommand.Append("UPDATE Patient SET State = '" & frmPatientInfo.cboState.SelectedItem & "' Where Patient_ID = '" & intPatientID & "'")
+            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+            'add item that was changed too string that is tracking all changed items
+            strbItemsChanged.Append(" State")
+            'increase changed item count
+            intCountChanged = intCountChanged + 1
+            'clear string bulder
+            strbSqlCommand.Clear()
+            'update tag to new item
+            frmPatientInfo.cboState.Tag = frmPatientInfo.cboState.SelectedIndex
+        End If
+        'check if zip code is changed
+        If Not frmPatientInfo.txtZipCode.Text.Equals(frmPatientInfo.txtZipCode.Tag) Then
+            'build sql update command
+            strbSqlCommand.Append("UPDATE Patient SET Zip_Code = '" & frmPatientInfo.txtZipCode.Text & "' Where Patient_ID = '" & intPatientID & "'")
+            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+            'add item that was changed too string that is tracking all changed items
+            strbItemsChanged.Append("ZipCode")
+            'increase changed item count
+            intCountChanged = intCountChanged + 1
+            'clear string bulder
+            strbSqlCommand.Clear()
+            'update tag to new item
+            frmPatientInfo.txtZipCode.Tag = frmPatientInfo.txtZipCode.Text
+        End If
+
+        If intCountChanged = 1 Then
+            MessageBox.Show("Updated " & intCountChanged & " Item " & strbItemsChanged.ToString)
+        Else
+            MessageBox.Show("Updated " & intCountChanged & " Items " & strbItemsChanged.ToString)
+        End If
+
     End Sub
 
     '/*********************************************************************/
