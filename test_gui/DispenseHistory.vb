@@ -735,7 +735,7 @@ Module DispenseHistory
     '/*  ---                   ----     ----------------------------------*/
     '/*  Alexander Beasecker  02/15/21  Initial creation of the code      */
     '/*********************************************************************/
-    Public Sub DispenseMedication(ByRef strMedicationID As String, ByRef intPatientMRN As Integer)
+    Public Sub DispenseMedication(ByRef strMedicationID As String, ByRef intPatient_ID As Integer)
         'create variables
         Dim strbSQLcommand As New StringBuilder()
         Dim intMedID As Integer
@@ -751,10 +751,7 @@ Module DispenseHistory
         strbSQLcommand.Append("SELECT Medication_ID FROM Medication WHERE RXCUI_ID = '" & strMedicationID & "'")
         intMedID = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
 
-        'clear string builder and using MRN get database patient ID
-        strbSQLcommand.Clear()
-        strbSQLcommand.Append("SELECT Patient_ID FROM Patient WHERE MRN_Number = '" & intPatientMRN & "'")
-        intPatientID = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
+        intPatientID = intPatient_ID
 
         'clear string builder using medID and PatientID get the quantity of the prescribed medication
         strbSQLcommand.Clear()
