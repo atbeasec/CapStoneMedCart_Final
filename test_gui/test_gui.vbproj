@@ -135,6 +135,12 @@
     <Compile Include="CreateDatabase.vb" />
     <Compile Include="DataVaildationMethods.vb" />
     <Compile Include="Discrepancies.vb" />
+    <Compile Include="frmProgressBar.Designer.vb">
+      <DependentUpon>frmProgressBar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmProgressBar.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmAssignNurse.Designer.vb">
       <DependentUpon>frmAssignNurse.vb</DependentUpon>
     </Compile>
@@ -371,6 +377,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmProgressBar.resx">
+      <DependentUpon>frmProgressBar.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAssignNurse.resx">
       <DependentUpon>frmAssignNurse.vb</DependentUpon>
     </EmbeddedResource>
