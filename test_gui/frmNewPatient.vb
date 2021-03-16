@@ -60,9 +60,7 @@ Public Class frmNewPatient
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-
-        Me.Close()
-
+        frmMain.OpenChildForm(frmPatientRecords)
     End Sub
 
     '/*********************************************************************/
