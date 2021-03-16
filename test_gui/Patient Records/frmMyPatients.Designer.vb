@@ -23,8 +23,11 @@ Partial Class frmMyPatients
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMyPatients))
-        Me.flpPatientRecords = New System.Windows.Forms.FlowLayoutPanel()
+        Me.flpMyPatientRecords = New System.Windows.Forms.FlowLayoutPanel()
         Me.pnlHeaderPatientRecords = New System.Windows.Forms.Panel()
+        Me.rdbOnlyActive = New System.Windows.Forms.RadioButton()
+        Me.rdbShowAll = New System.Windows.Forms.RadioButton()
+        Me.txtPhysician = New System.Windows.Forms.TextBox()
         Me.Panel9 = New System.Windows.Forms.Panel()
         Me.pnlSearch = New System.Windows.Forms.Panel()
         Me.btnSearch = New System.Windows.Forms.Button()
@@ -43,18 +46,21 @@ Partial Class frmMyPatients
         Me.pnlHeader.SuspendLayout()
         Me.SuspendLayout()
         '
-        'flpPatientRecords
+        'flpMyPatientRecords
         '
-        Me.flpPatientRecords.AutoScroll = True
-        Me.flpPatientRecords.BackColor = System.Drawing.Color.White
-        Me.flpPatientRecords.Location = New System.Drawing.Point(15, 120)
-        Me.flpPatientRecords.Name = "flpPatientRecords"
-        Me.flpPatientRecords.Size = New System.Drawing.Size(950, 543)
-        Me.flpPatientRecords.TabIndex = 20
+        Me.flpMyPatientRecords.AutoScroll = True
+        Me.flpMyPatientRecords.BackColor = System.Drawing.Color.White
+        Me.flpMyPatientRecords.Location = New System.Drawing.Point(15, 120)
+        Me.flpMyPatientRecords.Name = "flpMyPatientRecords"
+        Me.flpMyPatientRecords.Size = New System.Drawing.Size(950, 543)
+        Me.flpMyPatientRecords.TabIndex = 20
         '
         'pnlHeaderPatientRecords
         '
         Me.pnlHeaderPatientRecords.BackColor = System.Drawing.Color.White
+        Me.pnlHeaderPatientRecords.Controls.Add(Me.rdbOnlyActive)
+        Me.pnlHeaderPatientRecords.Controls.Add(Me.rdbShowAll)
+        Me.pnlHeaderPatientRecords.Controls.Add(Me.txtPhysician)
         Me.pnlHeaderPatientRecords.Controls.Add(Me.Panel9)
         Me.pnlHeaderPatientRecords.Controls.Add(Me.btnNewPatient)
         Me.pnlHeaderPatientRecords.Dock = System.Windows.Forms.DockStyle.Top
@@ -62,6 +68,37 @@ Partial Class frmMyPatients
         Me.pnlHeaderPatientRecords.Name = "pnlHeaderPatientRecords"
         Me.pnlHeaderPatientRecords.Size = New System.Drawing.Size(976, 61)
         Me.pnlHeaderPatientRecords.TabIndex = 19
+        '
+        'rdbOnlyActive
+        '
+        Me.rdbOnlyActive.AutoSize = True
+        Me.rdbOnlyActive.Location = New System.Drawing.Point(630, 38)
+        Me.rdbOnlyActive.Name = "rdbOnlyActive"
+        Me.rdbOnlyActive.Size = New System.Drawing.Size(79, 17)
+        Me.rdbOnlyActive.TabIndex = 23
+        Me.rdbOnlyActive.TabStop = True
+        Me.rdbOnlyActive.Text = "Only Active"
+        Me.rdbOnlyActive.UseVisualStyleBackColor = True
+        '
+        'rdbShowAll
+        '
+        Me.rdbShowAll.AutoSize = True
+        Me.rdbShowAll.Checked = True
+        Me.rdbShowAll.Location = New System.Drawing.Point(515, 38)
+        Me.rdbShowAll.Name = "rdbShowAll"
+        Me.rdbShowAll.Size = New System.Drawing.Size(66, 17)
+        Me.rdbShowAll.TabIndex = 22
+        Me.rdbShowAll.TabStop = True
+        Me.rdbShowAll.Text = "Show All"
+        Me.rdbShowAll.UseVisualStyleBackColor = True
+        '
+        'txtPhysician
+        '
+        Me.txtPhysician.Enabled = False
+        Me.txtPhysician.Location = New System.Drawing.Point(505, 12)
+        Me.txtPhysician.Name = "txtPhysician"
+        Me.txtPhysician.Size = New System.Drawing.Size(244, 20)
+        Me.txtPhysician.TabIndex = 21
         '
         'Panel9
         '
@@ -217,12 +254,13 @@ Partial Class frmMyPatients
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(976, 672)
-        Me.Controls.Add(Me.flpPatientRecords)
+        Me.Controls.Add(Me.flpMyPatientRecords)
         Me.Controls.Add(Me.pnlHeaderPatientRecords)
         Me.Controls.Add(Me.pnlHeader)
         Me.Name = "frmMyPatients"
         Me.Text = "frmMyPatients"
         Me.pnlHeaderPatientRecords.ResumeLayout(False)
+        Me.pnlHeaderPatientRecords.PerformLayout()
         Me.Panel9.ResumeLayout(False)
         Me.Panel9.PerformLayout()
         Me.pnlSearch.ResumeLayout(False)
@@ -232,7 +270,7 @@ Partial Class frmMyPatients
 
     End Sub
 
-    Friend WithEvents flpPatientRecords As FlowLayoutPanel
+    Friend WithEvents flpMyPatientRecords As FlowLayoutPanel
     Friend WithEvents pnlHeaderPatientRecords As Panel
     Friend WithEvents Panel9 As Panel
     Friend WithEvents pnlSearch As Panel
@@ -246,4 +284,7 @@ Partial Class frmMyPatients
     Friend WithEvents lblRoom As Label
     Friend WithEvents lblMRN As Label
     Friend WithEvents lblFirstName As Label
+    Friend WithEvents txtPhysician As TextBox
+    Friend WithEvents rdbOnlyActive As RadioButton
+    Friend WithEvents rdbShowAll As RadioButton
 End Class
