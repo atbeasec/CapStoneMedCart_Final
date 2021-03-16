@@ -79,6 +79,9 @@ Public Class frmConfigureRooms
     Private Sub frmConfigureRooms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ShowRoomsBeds()
         SetControlVisibility(False, False)
+        lblAddMoreBeds.Visible = False
+        rdoYes.Visible = False
+        rdoNo.Visible = False
     End Sub
 
     '/*******************************************************************/
@@ -115,12 +118,27 @@ Public Class frmConfigureRooms
     '/* WHO   WHEN     WHAT											    */
     '/*  ---   ----     ------------------------------------------------*/
     '/*  BRH        02/17/21   Initial creation of the code-------------*/
+    '/*  BRH        03/16/21   Allow for easy addition of multiple beds-*/
+    '/*                         to the recent room added----------------*/
     '/*******************************************************************/
     Private Sub btnAddBed_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         AddRoomsBeds(txtRoom.Text, txtBed.Text, 1)
-        txtRoom.Clear()
-        txtBed.Clear()
         ShowRoomsBeds()
+
+        'Show the radio buttons asking the user if they want to add
+        'more beds to the entered room.
+        lblAddMoreBeds.Text = "Would you like to add more beds to " & txtRoom.Text & "?"
+        lblAddMoreBeds.Visible = True
+        rdoYes.Visible = True
+        rdoNo.Visible = True
+        rdoYes.Checked = False
+        rdoNo.Checked = False
+        'Make the text boxes read only until the user chooses
+        'whether they want to add another bed to the recently
+        'entered room
+        txtRoom.ReadOnly = True
+        txtBed.ReadOnly = True
+
     End Sub
 
 
@@ -477,5 +495,84 @@ Public Class frmConfigureRooms
         DataVaildationMethods.KeyPressCheck(e, strAllowedNameCharacters)
     End Sub
 
+    '/*******************************************************************/
+    '/*         SUBROUTINE NAME:     rdoYes_CheckedChanged            	*/
+    '/*******************************************************************/
+    '/*                   WRITTEN BY:  	Breanna Howey					*/
+    '/*					DATE CREATED: 	   03/16/21						*/
+    '/*******************************************************************/
+    '/*  SUBROUTINE PURPOSE:											*/
+    '/*	The purpose of this subroutine is to only clear the bed name text/
+    '/* box when the user selects the "Yes" radio button.               */
+    '/*******************************************************************/
+    '/*  CALLS:															*/
+    '/*   None()                                 						*/
+    '/*******************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):							*/
+    '/*																	*/
+    '/* sender - Holds the object the program is sending to the routine */
+    '/* e   - Stores what key was pressed                               */
+    '/*******************************************************************/
+    '/* SAMPLE INVOCATION:												*/
+    '/*																	*/
+    '/*	rdoYes_CheckedChanged              								*/
+    '/*******************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+    '/*																	*/
+    '/* (None)                                                          */
+    '/*******************************************************************/
+    '/* MODIFICATION HISTORY:											*/
+    '/*																	*/
+    '/* WHO   WHEN     WHAT											    */
+    '/*  ---   ----     ------------------------------------------------*/
+    '/*  BRH        03/16/21   Initial creation of the code-------------*/
+    '/*******************************************************************/
+    Private Sub rdoYes_CheckedChanged(sender As Object, e As EventArgs) Handles rdoYes.CheckedChanged
+        txtBed.Clear()
+        'Make the text boxes editable
+        txtRoom.ReadOnly = False
+        txtBed.ReadOnly = False
+    End Sub
+
+    '/*******************************************************************/
+    '/*         SUBROUTINE NAME:     rdoNo_CheckedChanged            	*/
+    '/*******************************************************************/
+    '/*                   WRITTEN BY:  	Breanna Howey					*/
+    '/*					DATE CREATED: 	   03/16/21						*/
+    '/*******************************************************************/
+    '/*  SUBROUTINE PURPOSE:											*/
+    '/*	The purpose of this subroutine is to only clear the bed name text/
+    '/* box and the room name text box when the user selects the "No"   */
+    '/* radio button.                                                   */
+    '/*******************************************************************/
+    '/*  CALLS:															*/
+    '/*   None()                                 						*/
+    '/*******************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):							*/
+    '/*																	*/
+    '/* sender - Holds the object the program is sending to the routine */
+    '/* e   - Stores what key was pressed                               */
+    '/*******************************************************************/
+    '/* SAMPLE INVOCATION:												*/
+    '/*																	*/
+    '/*	rdoNo_CheckedChanged              								*/
+    '/*******************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+    '/*																	*/
+    '/* (None)                                                          */
+    '/*******************************************************************/
+    '/* MODIFICATION HISTORY:											*/
+    '/*																	*/
+    '/* WHO   WHEN     WHAT											    */
+    '/*  ---   ----     ------------------------------------------------*/
+    '/*  BRH        03/16/21   Initial creation of the code-------------*/
+    '/*******************************************************************/
+    Private Sub rdoNo_CheckedChanged(sender As Object, e As EventArgs) Handles rdoNo.CheckedChanged
+        txtRoom.Clear()
+        txtBed.Clear()
+        'Make the text boxes editable
+        txtRoom.ReadOnly = False
+        txtBed.ReadOnly = False
+    End Sub
 
 End Class
