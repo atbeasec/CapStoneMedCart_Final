@@ -84,7 +84,7 @@ Partial Class Waste
         Me.pnlRadioButtons.Controls.Add(Me.RadioButton2)
         Me.pnlRadioButtons.Location = New System.Drawing.Point(29, 183)
         Me.pnlRadioButtons.Name = "pnlRadioButtons"
-        Me.pnlRadioButtons.Size = New System.Drawing.Size(464, 360)
+        Me.pnlRadioButtons.Size = New System.Drawing.Size(464, 477)
         Me.pnlRadioButtons.TabIndex = 23
         '
         'pnlSignOff
@@ -92,9 +92,9 @@ Partial Class Waste
         Me.pnlSignOff.Controls.Add(Me.cboWitness)
         Me.pnlSignOff.Controls.Add(Me.Label3)
         Me.pnlSignOff.Controls.Add(Me.btnWaste)
-        Me.pnlSignOff.Location = New System.Drawing.Point(3, 198)
+        Me.pnlSignOff.Location = New System.Drawing.Point(6, 198)
         Me.pnlSignOff.Name = "pnlSignOff"
-        Me.pnlSignOff.Size = New System.Drawing.Size(444, 135)
+        Me.pnlSignOff.Size = New System.Drawing.Size(458, 135)
         Me.pnlSignOff.TabIndex = 24
         '
         'cboWitness
