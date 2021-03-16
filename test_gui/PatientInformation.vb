@@ -213,7 +213,27 @@ Module PatientInformation
     End Sub
 
     Public Sub SavePatientEdits()
+        'check if MRN is changed
 
+        'check if date of birth is changed
+
+        'check if sex is changed
+
+        'check if height is changed
+
+        'check if weight is changed
+
+        'check if email is changed
+
+        'check if phone is changed
+
+        'check if street address is changed
+
+        'check if city is changed
+
+        'check if state is changed
+
+        'check if zip code is changed
     End Sub
 
     '/*********************************************************************/
