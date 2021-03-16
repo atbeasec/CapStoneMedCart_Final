@@ -114,42 +114,49 @@ Module PatientInformation
                 frmPatientInfo.txtMRN.Text = "N/A"
             Else
                 frmPatientInfo.txtMRN.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.MRN_Number)
+                frmPatientInfo.txtMRN.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.MRN_Number)
             End If
 
             If IsDBNull(dr(4)) Then
                 frmPatientInfo.txtBirthday.Text = "N/A"
             Else
                 frmPatientInfo.txtBirthday.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.DoB)
+                frmPatientInfo.txtBirthday.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.DoB)
             End If
 
             If IsDBNull(dr(5)) Then
                 frmPatientInfo.txtGender.Text = "N/A"
             Else
                 frmPatientInfo.txtGender.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Sex)
+                frmPatientInfo.txtGender.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Sex)
             End If
 
             If IsDBNull(dr(6)) Then
                 frmPatientInfo.txtHeight.Text = "N/A"
             Else
                 frmPatientInfo.txtHeight.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Height)
+                frmPatientInfo.txtHeight.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Height)
             End If
 
             If IsDBNull(dr(7)) Then
                 frmPatientInfo.txtWeight.Text = "N/A"
             Else
                 frmPatientInfo.txtWeight.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Weight)
+                frmPatientInfo.txtWeight.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Weight)
             End If
 
             If IsDBNull(dr(8)) Then
                 frmPatientInfo.txtAddress.Text = "N/A"
             Else
                 frmPatientInfo.txtAddress.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.address)
+                frmPatientInfo.txtAddress.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.address)
             End If
 
             If IsDBNull(dr(8)) Then
                 frmPatientInfo.txtCity.Text = "N/A"
             Else
                 frmPatientInfo.txtCity.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.City)
+                frmPatientInfo.txtCity.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.City)
             End If
 
             If IsDBNull(dr(8)) Then
@@ -162,18 +169,21 @@ Module PatientInformation
                 frmPatientInfo.txtZipCode.Text = "N/A"
             Else
                 frmPatientInfo.txtZipCode.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.zip)
+                frmPatientInfo.txtZipCode.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.zip)
             End If
 
             If IsDBNull(dr(11)) Then
                 frmPatientInfo.txtEmail.Text = "N/A"
             Else
                 frmPatientInfo.txtEmail.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Email)
+                frmPatientInfo.txtEmail.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Email)
             End If
 
             If IsDBNull(dr(12)) Then
                 frmPatientInfo.txtPhone.Text = "N/A"
             Else
                 frmPatientInfo.txtPhone.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Phone)
+                frmPatientInfo.txtPhone.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.Phone)
             End If
 
             If IsDBNull(dr(1)) Then
@@ -200,6 +210,10 @@ Module PatientInformation
             End If
         Next
         'call dispense history to get dispensed history of the patient
+    End Sub
+
+    Public Sub SavePatientEdits()
+
     End Sub
 
     '/*********************************************************************/

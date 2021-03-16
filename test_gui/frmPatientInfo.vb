@@ -568,6 +568,7 @@
         Else
             SetControlsToReadOnly(ctl)
             btnEditPatient.Text = "Edit Patient"
+            PatientInformation.SavePatientEdits()
         End If
 
     End Sub
