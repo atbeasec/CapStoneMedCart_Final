@@ -1,4 +1,4 @@
-﻿Public Class SettingsChange
+﻿Public Class frmSettingsChange
     Private Sub SettingsChange_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub

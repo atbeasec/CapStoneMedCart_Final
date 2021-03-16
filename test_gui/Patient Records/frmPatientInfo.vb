@@ -787,8 +787,8 @@
     '/*********************************************************************/
     Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
 
-        Waste.SetPatientMRN(intPatientID) 'this should set the patient MRN using the given patientID
-        frmMain.OpenChildForm(Waste)
+        frmWaste.SetPatientMRN(intPatientID) 'this should set the patient MRN using the given patientID
+        frmMain.OpenChildForm(frmWaste)
 
     End Sub
 

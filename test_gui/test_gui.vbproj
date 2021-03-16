@@ -135,12 +135,12 @@
     <Compile Include="Settings\CreateDatabase.vb" />
     <Compile Include="UI Enhancements\DataVaildationMethods.vb" />
     <Compile Include="Discrepancies\Discrepancies.vb" />
-	<Compile Include="frmProgressBar.Designer.vb">
-		<DependentUpon>frmProgressBar.vb</DependentUpon>
-	</Compile>
-	<Compile Include="frmProgressBar.vb">
-		<SubType>Form</SubType>
-	</Compile>
+    <Compile Include="UI Enhancements\frmProgressBar.Designer.vb">
+      <DependentUpon>frmProgressBar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI Enhancements\frmProgressBar.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Settings\frmAssignNurse.Designer.vb">
       <DependentUpon>frmAssignNurse.vb</DependentUpon>
     </Compile>
@@ -300,10 +300,10 @@
     <Compile Include="Inventory\frmWitnessSignOff.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Cart Interface\FullCart.Designer.vb">
-      <DependentUpon>FullCart.vb</DependentUpon>
+    <Compile Include="Cart Interface\frmFullCart.Designer.vb">
+      <DependentUpon>frmFullCart.vb</DependentUpon>
     </Compile>
-    <Compile Include="Cart Interface\FullCart.vb">
+    <Compile Include="Cart Interface\frmFullCart.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Authentication\GenerateRandom.vb" />
@@ -349,25 +349,25 @@
     <Compile Include="Patient Records\RoomClass.vb" />
     <Compile Include="Inventory\API\rxNorm.vb" />
     <Compile Include="UI Enhancements\SearchLogic.vb" />
-    <Compile Include="Settings\SettingsChange.Designer.vb">
-      <DependentUpon>SettingsChange.vb</DependentUpon>
+    <Compile Include="Settings\frmSettingsChange.Designer.vb">
+      <DependentUpon>frmSettingsChange.vb</DependentUpon>
     </Compile>
-    <Compile Include="Settings\SettingsChange.vb">
+    <Compile Include="Settings\frmSettingsChange.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI Enhancements\UISortFunctionality.vb" />
     <Compile Include="Patient Records\UserClass.vb" />
-    <Compile Include="Inventory\Waste.Designer.vb">
-      <DependentUpon>Waste.vb</DependentUpon>
+    <Compile Include="Inventory\frmWaste.Designer.vb">
+      <DependentUpon>frmWaste.vb</DependentUpon>
     </Compile>
-    <Compile Include="Inventory\Waste.vb">
+    <Compile Include="Inventory\frmWaste.vb">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-	  <EmbeddedResource Include="frmProgressBar.resx">
-		  <DependentUpon>frmProgressBar.vb</DependentUpon>
-	  </EmbeddedResource>
+    <EmbeddedResource Include="UI Enhancements\frmProgressBar.resx">
+      <DependentUpon>frmProgressBar.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Settings\frmAssignNurse.resx">
       <DependentUpon>frmAssignNurse.vb</DependentUpon>
     </EmbeddedResource>
@@ -446,8 +446,8 @@
     <EmbeddedResource Include="Inventory\frmWitnessSignOff.resx">
       <DependentUpon>frmWitnessSignOff.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Cart Interface\FullCart.resx">
-      <DependentUpon>FullCart.vb</DependentUpon>
+    <EmbeddedResource Include="Cart Interface\frmFullCart.resx">
+      <DependentUpon>frmFullCart.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -458,11 +458,11 @@
     <EmbeddedResource Include="Settings\frmNewNurse.resx">
       <DependentUpon>frmNewNurse.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Settings\SettingsChange.resx">
-      <DependentUpon>SettingsChange.vb</DependentUpon>
+    <EmbeddedResource Include="Settings\frmSettingsChange.resx">
+      <DependentUpon>frmSettingsChange.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Inventory\Waste.resx">
-      <DependentUpon>Waste.vb</DependentUpon>
+    <EmbeddedResource Include="Inventory\frmWaste.resx">
+      <DependentUpon>frmWaste.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
