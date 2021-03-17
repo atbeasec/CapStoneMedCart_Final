@@ -39,6 +39,9 @@ Partial Class frmConfigureRooms
         Me.lblDeleteInstructions = New System.Windows.Forms.Label()
         Me.lblDetailedInstructions = New System.Windows.Forms.Label()
         Me.pnlAdd = New System.Windows.Forms.Panel()
+        Me.rdoNo = New System.Windows.Forms.RadioButton()
+        Me.rdoYes = New System.Windows.Forms.RadioButton()
+        Me.lblAddMoreBeds = New System.Windows.Forms.Label()
         Me.lblDetailAddInstruc = New System.Windows.Forms.Label()
         Me.lblDeleteIns = New System.Windows.Forms.Label()
         Me.lblAddBed = New System.Windows.Forms.Label()
@@ -229,6 +232,9 @@ Partial Class frmConfigureRooms
         '
         'pnlAdd
         '
+        Me.pnlAdd.Controls.Add(Me.rdoNo)
+        Me.pnlAdd.Controls.Add(Me.rdoYes)
+        Me.pnlAdd.Controls.Add(Me.lblAddMoreBeds)
         Me.pnlAdd.Controls.Add(Me.lblDetailAddInstruc)
         Me.pnlAdd.Controls.Add(Me.lblDeleteIns)
         Me.pnlAdd.Controls.Add(Me.lblAddBed)
@@ -238,8 +244,42 @@ Partial Class frmConfigureRooms
         Me.pnlAdd.Controls.Add(Me.Panel5)
         Me.pnlAdd.Location = New System.Drawing.Point(12, 65)
         Me.pnlAdd.Name = "pnlAdd"
-        Me.pnlAdd.Size = New System.Drawing.Size(715, 248)
+        Me.pnlAdd.Size = New System.Drawing.Size(717, 248)
         Me.pnlAdd.TabIndex = 188
+        '
+        'rdoNo
+        '
+        Me.rdoNo.AutoSize = True
+        Me.rdoNo.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.rdoNo.Location = New System.Drawing.Point(80, 112)
+        Me.rdoNo.Name = "rdoNo"
+        Me.rdoNo.Size = New System.Drawing.Size(49, 25)
+        Me.rdoNo.TabIndex = 202
+        Me.rdoNo.TabStop = True
+        Me.rdoNo.Text = "No"
+        Me.rdoNo.UseVisualStyleBackColor = True
+        '
+        'rdoYes
+        '
+        Me.rdoYes.AutoSize = True
+        Me.rdoYes.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.rdoYes.Location = New System.Drawing.Point(10, 111)
+        Me.rdoYes.Name = "rdoYes"
+        Me.rdoYes.Size = New System.Drawing.Size(51, 25)
+        Me.rdoYes.TabIndex = 201
+        Me.rdoYes.TabStop = True
+        Me.rdoYes.Text = "Yes"
+        Me.rdoYes.UseVisualStyleBackColor = True
+        '
+        'lblAddMoreBeds
+        '
+        Me.lblAddMoreBeds.AutoSize = True
+        Me.lblAddMoreBeds.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.lblAddMoreBeds.Location = New System.Drawing.Point(6, 87)
+        Me.lblAddMoreBeds.Name = "lblAddMoreBeds"
+        Me.lblAddMoreBeds.Size = New System.Drawing.Size(125, 21)
+        Me.lblAddMoreBeds.TabIndex = 200
+        Me.lblAddMoreBeds.Text = "lblAddMoreBeds"
         '
         'lblDetailAddInstruc
         '
@@ -344,7 +384,7 @@ Partial Class frmConfigureRooms
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(741, 534)
+        Me.ClientSize = New System.Drawing.Size(760, 545)
         Me.Controls.Add(Me.pnlAdd)
         Me.Controls.Add(Me.pnlDelete)
         Me.Controls.Add(Me.rdoDeleteRoomBed)
@@ -391,4 +431,7 @@ Partial Class frmConfigureRooms
     Friend WithEvents txtBed As TextBox
     Friend WithEvents Panel5 As Panel
     Friend WithEvents txtRoom As TextBox
+    Friend WithEvents rdoNo As RadioButton
+    Friend WithEvents rdoYes As RadioButton
+    Friend WithEvents lblAddMoreBeds As Label
 End Class
