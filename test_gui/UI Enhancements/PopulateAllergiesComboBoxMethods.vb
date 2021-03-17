@@ -145,13 +145,20 @@ Module PopulateAllergiesComboBoxMethods
     '/*                                                                     
     '/*********************************************************************/
     Sub populateGenericComboBox(cmbGenericBox As ComboBox, dsGenericDataset As DataSet)
-        Dim strbTesting As New StringBuilder
+        Dim strPatientInfo As New StringBuilder
+        Dim strDOB As String = ""
         Dim dcAllergies As New AutoCompleteStringCollection
         cmbGenericBox.Items.Clear()
 
 
         For Each row As DataRow In dsGenericDataset.Tables(0).Rows
-            cmbGenericBox.Items.Add(row(0).ToString())
+            strPatientInfo.Clear()
+            strPatientInfo.Append(row(0) + " ")
+            strPatientInfo.Append(row(1) + ", ")
+            strDOB = row(2)
+            strPatientInfo.Append(strDOB.Substring(0, 10) + ", ")
+            strPatientInfo.Append(row(3))
+            cmbGenericBox.Items.Add(strPatientInfo)
         Next
     End Sub
 
