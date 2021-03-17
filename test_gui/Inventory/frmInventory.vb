@@ -353,6 +353,10 @@ Public Class frmInventory
         Next
 
         getDrugNameRxcui(lstResults)
+
+        ' if the combo box text exceeds the box, there will be a tooltip that is provided on hover over the box with the full medication
+        ' name 
+        tpSelectedItem.SetToolTip(cmbMedicationName, cmbMedicationName.SelectedItem.ToString)
     End Sub
 
     '/*********************************************************************/

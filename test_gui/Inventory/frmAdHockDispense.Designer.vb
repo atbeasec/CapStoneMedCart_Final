@@ -199,6 +199,7 @@ Partial Class frmAdHockDispense
         Me.txtDateOfBirth.Enabled = False
         Me.txtDateOfBirth.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtDateOfBirth.Location = New System.Drawing.Point(1, 1)
+        Me.txtDateOfBirth.MaxLength = 10
         Me.txtDateOfBirth.Name = "txtDateOfBirth"
         Me.txtDateOfBirth.ReadOnly = True
         Me.txtDateOfBirth.Size = New System.Drawing.Size(319, 22)

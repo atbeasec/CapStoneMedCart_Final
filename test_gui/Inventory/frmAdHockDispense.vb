@@ -10,8 +10,6 @@
         AdHoc.PopulatePatientsAdhoc()
     End Sub
 
-
-
     Private Sub btnIncrementQuantity_Click(sender As Object, e As EventArgs) Handles btnIncrementQuantity.Click
         ButtonIncrement(1000, txtQuantity)
     End Sub
@@ -110,6 +108,52 @@
             sender.Text = "1"
         End If
         'LimitQuantityToQuantityStocked(SQLreturnValue, sender)
+
+    End Sub
+
+
+    '/*********************************************************************/
+    '/*                   Function NAME: txtDateOfBirth_TextChanged()     */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:  Collin Krygier          		          */   
+    '/*		         DATE CREATED: 		 3/17/2021                        */                             
+    '/*********************************************************************/
+    '/*  SUB PURPOSE:	    							                  */             
+    '/*	 This function simply takes a string and truncates it to a new    */
+    '/*  length if the string is longer than the specified length. If not,*/
+    '/*  it will be left alone and we return the original string passed in*/
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/* None                                                              */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	sender As Object                                                  */ 
+    '/*	e As EventArgs                                                    */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	None                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/17/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub txtDateOfBirth_TextChanged(sender As Object, e As EventArgs) Handles txtDateOfBirth.TextChanged
+
+        Dim truncatedDate As String = Nothing
+
+        If txtDateOfBirth.Text.Length > 10 Then
+
+            truncatedDate = CStr(txtDateOfBirth.Text.Substring(0, 10))
+        Else
+            truncatedDate = CStr(txtDateOfBirth.Text)
+        End If
+
+        txtDateOfBirth.Text = truncatedDate
 
     End Sub
 End Class

@@ -78,6 +78,7 @@ Partial Class frmInventory
         Me.eprError = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.pnlHeader = New System.Windows.Forms.Panel()
         Me.btnBack = New System.Windows.Forms.Button()
+        Me.tpSelectedItem = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel14.SuspendLayout()
@@ -173,7 +174,7 @@ Partial Class frmInventory
         Me.Panel3.Location = New System.Drawing.Point(9, 83)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel3.Size = New System.Drawing.Size(423, 31)
+        Me.Panel3.Size = New System.Drawing.Size(652, 31)
         Me.Panel3.TabIndex = 3
         '
         'cmbMedicationName
@@ -185,7 +186,7 @@ Partial Class frmInventory
         Me.cmbMedicationName.FormattingEnabled = True
         Me.cmbMedicationName.Location = New System.Drawing.Point(1, 1)
         Me.cmbMedicationName.Name = "cmbMedicationName"
-        Me.cmbMedicationName.Size = New System.Drawing.Size(421, 29)
+        Me.cmbMedicationName.Size = New System.Drawing.Size(650, 29)
         Me.cmbMedicationName.TabIndex = 10
         '
         'Panel14
@@ -214,7 +215,7 @@ Partial Class frmInventory
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(324, 321)
+        Me.Label2.Location = New System.Drawing.Point(315, 321)
         Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(73, 21)
@@ -226,7 +227,7 @@ Partial Class frmInventory
         Me.Label17.AutoSize = True
         Me.Label17.BackColor = System.Drawing.Color.White
         Me.Label17.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(9, 40)
+        Me.Label17.Location = New System.Drawing.Point(18, 48)
         Me.Label17.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(208, 25)
@@ -254,7 +255,7 @@ Partial Class frmInventory
         Me.Panel1.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel1.Size = New System.Drawing.Size(147, 31)
+        Me.Panel1.Size = New System.Drawing.Size(200, 31)
         Me.Panel1.TabIndex = 17
         '
         'cboPersonalMedication
@@ -266,7 +267,7 @@ Partial Class frmInventory
         Me.cboPersonalMedication.Items.AddRange(New Object() {"Yes", "No"})
         Me.cboPersonalMedication.Location = New System.Drawing.Point(1, 1)
         Me.cboPersonalMedication.Name = "cboPersonalMedication"
-        Me.cboPersonalMedication.Size = New System.Drawing.Size(145, 29)
+        Me.cboPersonalMedication.Size = New System.Drawing.Size(198, 29)
         Me.cboPersonalMedication.TabIndex = 61
         '
         'cmbPatientPersonalMedication
@@ -278,7 +279,7 @@ Partial Class frmInventory
         Me.cmbPatientPersonalMedication.Items.AddRange(New Object() {"Yes", "No"})
         Me.cmbPatientPersonalMedication.Location = New System.Drawing.Point(1, 1)
         Me.cmbPatientPersonalMedication.Name = "cmbPatientPersonalMedication"
-        Me.cmbPatientPersonalMedication.Size = New System.Drawing.Size(145, 29)
+        Me.cmbPatientPersonalMedication.Size = New System.Drawing.Size(198, 29)
         Me.cmbPatientPersonalMedication.TabIndex = 60
         '
         'btnSave
@@ -411,10 +412,10 @@ Partial Class frmInventory
         Me.pnlMainLocation.Controls.Add(Me.pnlMainFormFields)
         Me.pnlMainLocation.Controls.Add(Me.Panel11)
         Me.pnlMainLocation.Controls.Add(Me.pnlPatientName)
-        Me.pnlMainLocation.Location = New System.Drawing.Point(13, 63)
+        Me.pnlMainLocation.Location = New System.Drawing.Point(25, 72)
         Me.pnlMainLocation.Margin = New System.Windows.Forms.Padding(2)
         Me.pnlMainLocation.Name = "pnlMainLocation"
-        Me.pnlMainLocation.Size = New System.Drawing.Size(570, 601)
+        Me.pnlMainLocation.Size = New System.Drawing.Size(726, 601)
         Me.pnlMainLocation.TabIndex = 189
         '
         'pnlMainFormFields
@@ -451,7 +452,7 @@ Partial Class frmInventory
         Me.pnlMainFormFields.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlMainFormFields.Location = New System.Drawing.Point(0, 0)
         Me.pnlMainFormFields.Name = "pnlMainFormFields"
-        Me.pnlMainFormFields.Size = New System.Drawing.Size(570, 458)
+        Me.pnlMainFormFields.Size = New System.Drawing.Size(726, 458)
         Me.pnlMainFormFields.TabIndex = 189
         '
         'cmbDrawerNumber
@@ -507,7 +508,7 @@ Partial Class frmInventory
         Me.cboSuggestedNames.FormattingEnabled = True
         Me.cboSuggestedNames.Location = New System.Drawing.Point(137, 48)
         Me.cboSuggestedNames.Name = "cboSuggestedNames"
-        Me.cboSuggestedNames.Size = New System.Drawing.Size(294, 29)
+        Me.cboSuggestedNames.Size = New System.Drawing.Size(524, 29)
         Me.cboSuggestedNames.TabIndex = 5
         Me.cboSuggestedNames.Visible = False
         '
@@ -598,7 +599,7 @@ Partial Class frmInventory
         Me.Panel9.Location = New System.Drawing.Point(9, 14)
         Me.Panel9.Name = "Panel9"
         Me.Panel9.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel9.Size = New System.Drawing.Size(423, 25)
+        Me.Panel9.Size = New System.Drawing.Size(653, 25)
         Me.Panel9.TabIndex = 1
         '
         'pnlSearch
@@ -609,7 +610,7 @@ Partial Class frmInventory
         Me.pnlSearch.Dock = System.Windows.Forms.DockStyle.Right
         Me.pnlSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.pnlSearch.ForeColor = System.Drawing.Color.White
-        Me.pnlSearch.Location = New System.Drawing.Point(380, 1)
+        Me.pnlSearch.Location = New System.Drawing.Point(610, 1)
         Me.pnlSearch.Name = "pnlSearch"
         Me.pnlSearch.Size = New System.Drawing.Size(42, 23)
         Me.pnlSearch.TabIndex = 2
@@ -622,7 +623,7 @@ Partial Class frmInventory
         Me.txtSearch.Location = New System.Drawing.Point(1, 1)
         Me.txtSearch.Multiline = True
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(381, 23)
+        Me.txtSearch.Size = New System.Drawing.Size(612, 23)
         Me.txtSearch.TabIndex = 1
         Me.txtSearch.Tag = "Search Medication by Name"
         '
@@ -689,7 +690,7 @@ Partial Class frmInventory
         Me.pnlPatientName.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.pnlPatientName.Location = New System.Drawing.Point(0, 461)
         Me.pnlPatientName.Name = "pnlPatientName"
-        Me.pnlPatientName.Size = New System.Drawing.Size(570, 140)
+        Me.pnlPatientName.Size = New System.Drawing.Size(726, 140)
         Me.pnlPatientName.TabIndex = 191
         '
         'lblPatientName
@@ -735,7 +736,7 @@ Partial Class frmInventory
         Me.pnlHeader.Location = New System.Drawing.Point(0, 0)
         Me.pnlHeader.Margin = New System.Windows.Forms.Padding(2)
         Me.pnlHeader.Name = "pnlHeader"
-        Me.pnlHeader.Size = New System.Drawing.Size(639, 37)
+        Me.pnlHeader.Size = New System.Drawing.Size(976, 42)
         Me.pnlHeader.TabIndex = 203
         '
         'btnBack
@@ -747,7 +748,7 @@ Partial Class frmInventory
         Me.btnBack.ForeColor = System.Drawing.Color.White
         Me.btnBack.Image = CType(resources.GetObject("btnBack.Image"), System.Drawing.Image)
         Me.btnBack.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnBack.Location = New System.Drawing.Point(13, 0)
+        Me.btnBack.Location = New System.Drawing.Point(23, 6)
         Me.btnBack.Margin = New System.Windows.Forms.Padding(2)
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(105, 35)
@@ -761,7 +762,7 @@ Partial Class frmInventory
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(639, 689)
+        Me.ClientSize = New System.Drawing.Size(976, 694)
         Me.Controls.Add(Me.pnlHeader)
         Me.Controls.Add(Me.pnlMainLocation)
         Me.Controls.Add(Me.Label17)
@@ -850,4 +851,5 @@ Partial Class frmInventory
     Friend WithEvents Panel8 As Panel
     Friend WithEvents txtBarcode As TextBox
     Friend WithEvents lblBarcode As Label
+    Friend WithEvents tpSelectedItem As ToolTip
 End Class
