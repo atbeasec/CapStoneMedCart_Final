@@ -1,8 +1,18 @@
 ﻿Imports System.Text.RegularExpressions
 Public Class frmInventory
+
+    Private btnSelectedDrawer As Button
+
+    Public Sub SetSelectedDrawer(ByVal btnDrawer As Button)
+
+        btnSelectedDrawer = btnDrawer
+
+    End Sub
+
     Private Sub NumericUpDown1_ValueChanged(sender As Object, e As EventArgs)
 
     End Sub
+
 
     Private Sub frmInventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         cmbDrawerNumber.SelectedIndex = 0
@@ -17,6 +27,7 @@ Public Class frmInventory
 
         DefaultSaveButtonLocation()
         txtQuantity.Text = 1
+        'MessageBox.Show(btnSelectedDrawer.Name)
 
     End Sub
 
@@ -260,7 +271,7 @@ Public Class frmInventory
 
         intDividerBin = CInt(cmbDividerBin.SelectedItem)
 
-        ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Divider_Bin,Expiration_Date,Discrepancy_Flag, Active_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & intDividerBin & " , '" & txtExpirationDate.Text & "'," & intDiscrepancies & ",1);")
+        ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Divider_Bin,Expiration_Date,Discrepancy_Flag, Active_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & intDividerBin & " , '" & mtbExpirationDate.Text & "'," & intDiscrepancies & ",1);")
         MessageBox.Show("Medication has been added to the drawer")
         Debug.WriteLine("")
 
@@ -325,7 +336,7 @@ Public Class frmInventory
         cmbDrawerNumber.Text = ""
         cmbBin.Items.Clear()
         txtQuantity.Text = ""
-        txtExpirationDate.Text = ""
+        mtbExpirationDate.Text = ""
         cmbPatientPersonalMedication.SelectedItem = ""
 
         ' then populate the form and pass the results on 
@@ -612,6 +623,7 @@ Public Class frmInventory
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
 
+        frmConfigureInventory.PreviouslySelectedDrawer(btnSelectedDrawer)
         frmMain.OpenChildForm(frmConfigureInventory)
 
     End Sub
