@@ -4,6 +4,8 @@
     Dim CurrentContactPanelName As String = Nothing
     Private intCurrentDrawer As Integer
 
+    Private btnDrawerToSelectOnLoad As Button
+
     Public Enum InventoryEnum
 
         medication = 1
@@ -21,7 +23,8 @@
         UpdateButtonsOnScreen()
         AddHandlerToDrawerButtons()
 
-        btnDrawer1.PerformClick()
+        SelectDrawer(btnDrawerToSelectOnLoad)
+        'btnDrawer1.PerformClick()
 
         CreateToolTips(pnlHeader, tpSelectedLabelHover)
         AddHandlerToLabelClick(pnlHeader, AddressOf SortBySelectedLabel)
@@ -378,6 +381,32 @@
 
     End Sub
 
+    Private Function GetSelectedDrawer() As Button
+
+        Dim btnSelectedDrawer As Button = Nothing
+        Dim ctl As Control = Nothing
+
+        For Each ctl In pnlLayoutButtons.Controls
+
+            If ctl.BackColor = Color.FromArgb(71, 103, 216) Then
+
+                btnSelectedDrawer = CType(ctl, Button)
+
+            End If
+
+        Next
+
+        Return btnSelectedDrawer
+
+    End Function
+
+    Public Sub PreviouslySelectedDrawer(ByVal btnUserSelectedDrawer As Button)
+
+        btnDrawerToSelectOnLoad = btnUserSelectedDrawer
+
+    End Sub
+
+
     Private Sub UpdateScreenWithMedicationsInSelectedDrawer(sender As Button, e As EventArgs) Handles btnDrawer1.Click
         flpMedication.Controls.Clear()
         Dim strDrugName As String = ""
@@ -413,13 +442,39 @@
     End Sub
     Private Sub btnAddtoDrawer_Click(sender As Object, e As EventArgs) Handles btnAddToDrawer.Click
 
-        'call new form to show inventory. already coded somewhere
-        frmMain.OpenChildForm(frmInventory)
-        'frmInventory.Show()
-        ' NewNurse.Show()
-        'frmImport.Show()
-        'frmChangePassword.Show()
+        ' pass the name of thecurrently selected drawer the user is looking at
+        frmInventory.SetSelectedDrawer(GetSelectedDrawer)
 
+        ' open the inventory form
+        frmMain.OpenChildForm(frmInventory)
+
+
+    End Sub
+
+    Private Sub SelectDrawer(ByVal btnDrawerToSelect As Button)
+
+
+        'check if there is an object to pass. If its null, then we know this is the first time the page is being loaded
+        'there wouldnt be a previous button in that case
+        If IsDBNull(btnDrawerToSelect) Or btnDrawerToSelect Is Nothing Then
+            ' set Drawer 1 as the default Drawer to Select
+            btnDrawer1.PerformClick()
+        Else
+
+            Dim ctl As Control
+            Dim btnSelect As Button
+
+            ' select the drawer that was previously selected by checking which button as that name,
+            ' the performing a click event. Cant simply call btnDrawerToSelect.PerformClick() because the reference to this
+            ' button was deleted when frmConfigureInventory was originally closed.
+
+            For Each ctl In pnlLayoutButtons.Controls
+                If ctl.Name = btnDrawerToSelect.Name Then
+                    btnSelect = CType(ctl, Button)
+                    btnSelect.PerformClick()
+                End If
+            Next
+        End If
 
     End Sub
 
