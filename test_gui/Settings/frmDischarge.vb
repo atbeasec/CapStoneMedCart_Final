@@ -23,13 +23,9 @@
 
     End Sub
 
-    Private Sub cmbAdmitPatients_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbAdmitPatients.SelectedIndexChanged
-
-    End Sub
-
     Private Sub Loadcmb()
-        Dim dsInactivePatients = CreateDatabase.ExecuteSelectQuery("Select MRN_Number From Patient WHERE Active_Flag = 0 ;")
-        Dim dsactivePatients = CreateDatabase.ExecuteSelectQuery("Select MRN_Number From Patient WHERE Active_Flag = 1 ;")
+        Dim dsInactivePatients = CreateDatabase.ExecuteSelectQuery("Select Patient_Last_Name, Patient_First_Name, Date_of_Birth, MRN_Number From Patient WHERE Active_Flag = 0 ;")
+        Dim dsactivePatients = CreateDatabase.ExecuteSelectQuery("Select Patient_Last_Name, Patient_First_Name, Date_of_Birth, MRN_Number From Patient WHERE Active_Flag = 1 ;")
         populateGenericComboBox(cmbAdmitPatients, dsInactivePatients)
         populateGenericComboBox(cmbDischargePatients, dsactivePatients)
     End Sub
