@@ -30,8 +30,6 @@
         Const INTBAUDRATENINE As Integer = 38400
         Const INTBAUDRATETEN As Integer = 57600
         Const INTBAUDRATEELEVEN As Integer = 115200
-        Const INTBAUDRATETWELVE As Integer = 230400
-        Const INTBAUDRATETHIRTEEN As Integer = 460800
 
         cmbBaudrate.Items.Add(INTBAUDRATEONE)
         cmbBaudrate.Items.Add(INTBAUDRATETWO)
@@ -44,8 +42,7 @@
         cmbBaudrate.Items.Add(INTBAUDRATENINE)
         cmbBaudrate.Items.Add(INTBAUDRATETEN)
         cmbBaudrate.Items.Add(INTBAUDRATEELEVEN)
-        cmbBaudrate.Items.Add(INTBAUDRATETWELVE)
-        cmbBaudrate.Items.Add(INTBAUDRATETHIRTEEN)
+
 
 
         '
