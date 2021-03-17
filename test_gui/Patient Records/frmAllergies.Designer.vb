@@ -122,9 +122,9 @@ Partial Class frmAllergies
         Me.lblSeverity.ForeColor = System.Drawing.SystemColors.ControlDarkDark
         Me.lblSeverity.Location = New System.Drawing.Point(175, 16)
         Me.lblSeverity.Name = "lblSeverity"
-        Me.lblSeverity.Size = New System.Drawing.Size(69, 21)
+        Me.lblSeverity.Size = New System.Drawing.Size(109, 21)
         Me.lblSeverity.TabIndex = 0
-        Me.lblSeverity.Text = "Severity"
+        Me.lblSeverity.Text = "Severity KU/L"
         '
         'cmbSeverity
         '
@@ -132,7 +132,7 @@ Partial Class frmAllergies
         Me.cmbSeverity.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbSeverity.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbSeverity.FormattingEnabled = True
-        Me.cmbSeverity.Items.AddRange(New Object() {"Class 1", "Class 2", "Class 3", "Class 4", "Class 5"})
+        Me.cmbSeverity.Items.AddRange(New Object() {"Class 1 (0.35-0.7)", "Class 2 (0.71-3.5)", "Class 3 (3.51-17.5)", "Class 4 (17.51-50)", "Class 5 (50.01-100)"})
         Me.cmbSeverity.Location = New System.Drawing.Point(10, 186)
         Me.cmbSeverity.Name = "cmbSeverity"
         Me.cmbSeverity.Size = New System.Drawing.Size(286, 29)
@@ -144,9 +144,9 @@ Partial Class frmAllergies
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(7, 165)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(119, 21)
+        Me.Label1.Size = New System.Drawing.Size(157, 21)
         Me.Label1.TabIndex = 181
-        Me.Label1.Text = "Allergy Severity"
+        Me.Label1.Text = "Allergy Severity KU/L"
         '
         'Label12
         '
