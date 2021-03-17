@@ -573,6 +573,14 @@ Public Class frmConfigureRooms
         'Make the text boxes editable
         txtRoom.ReadOnly = False
         txtBed.ReadOnly = False
+
+        'Clear the message for adding new beds to the same room
+        lblAddMoreBeds.Visible = False
+        rdoYes.Visible = False
+        rdoNo.Visible = False
+
+        'Necessary to allow for the label and radio buttons to repopulate
+        rdoNo.Checked = False
     End Sub
 
 End Class
