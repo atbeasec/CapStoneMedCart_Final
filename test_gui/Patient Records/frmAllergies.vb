@@ -156,7 +156,7 @@
 
         frmPatientInfo.setPatientMrn(intPatientInformationMRN)
         frmMain.OpenChildForm(frmPatientInfo)
-        GetAllergies(intPatientInformationMRN)
+        GetAllergies(GetPatientTuid())
 
 
     End Sub
