@@ -364,11 +364,11 @@ Partial Class frmInventory
         '
         Me.Panel5.BackColor = System.Drawing.Color.DarkGray
         Me.Panel5.Controls.Add(Me.txtQuantity)
-        Me.Panel5.Location = New System.Drawing.Point(327, 346)
+        Me.Panel5.Location = New System.Drawing.Point(318, 346)
         Me.Panel5.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel5.Size = New System.Drawing.Size(40, 27)
+        Me.Panel5.Size = New System.Drawing.Size(49, 27)
         Me.Panel5.TabIndex = 12
         '
         'txtQuantity
@@ -380,7 +380,7 @@ Partial Class frmInventory
         Me.txtQuantity.MaxLength = 4
         Me.txtQuantity.Multiline = True
         Me.txtQuantity.Name = "txtQuantity"
-        Me.txtQuantity.Size = New System.Drawing.Size(38, 25)
+        Me.txtQuantity.Size = New System.Drawing.Size(47, 25)
         Me.txtQuantity.TabIndex = 45
         Me.txtQuantity.Text = "1"
         '
