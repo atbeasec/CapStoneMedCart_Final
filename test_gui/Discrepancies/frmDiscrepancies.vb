@@ -215,7 +215,7 @@
 
         'anywhere we have quotes except for the label names, we can call our Database and get method
         CreateIDLabel(pnlMainPanel, lblID7, "lblDiscrepancyID", lblDiscrepancyID.Location.X, Y, strID, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID, "lblMedication", lblMedication.Location.X, Y, strMedication, getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID, "lblMedication", lblMedication.Location.X, Y, strMedication, getPanelCount(flpPannel), tpLabelHover, TruncateString(18, strMedication))
         CreateIDLabel(pnlMainPanel, lblID2, "lblDrawer", lblDrawer.Location.X, Y, strDrawerNumber, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID3, "lblExpectedCount", lblExpectedCount.Location.X, Y, strExpectedCount, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID4, "lblActualCount", lblActualCount.Location.X, Y, strActualCount, getPanelCount(flpPannel))
