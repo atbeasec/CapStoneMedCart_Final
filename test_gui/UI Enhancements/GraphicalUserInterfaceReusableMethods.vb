@@ -937,6 +937,8 @@ Module GraphicalUserInterfaceReusableMethods
 
         If Not CInt(txtBox.Text) = intMaxValue Then
             txtBox.Text = Int(txtBox.Text) + 1
+        Else
+            MessageBox.Show("The maximum allowed value is " & intMaxValue)
         End If
 
     End Sub
@@ -945,6 +947,8 @@ Module GraphicalUserInterfaceReusableMethods
 
         If Not CInt(txtBox.Text) = 1 Then
             txtBox.Text = Int(txtBox.Text) - 1
+        Else
+            MessageBox.Show("You cannot reduce the value below the displayed number")
         End If
 
     End Sub
@@ -959,11 +963,15 @@ Module GraphicalUserInterfaceReusableMethods
     Public Sub IndexButtonIncrement(intCurrent As Integer, intMax As Integer, ByVal cboBox As ComboBox)
         If intCurrent <= intMax Then
             cboBox.SelectedIndex = intCurrent + 1
+        Else
+            MessageBox.Show("The maximum allowed value is " & intMax)
         End If
     End Sub
     Public Sub IndexButtonDecrement(intCurrent As Integer, ByVal cboBox As ComboBox)
         If intCurrent > 0 Then
             cboBox.SelectedIndex = intCurrent - 1
+        Else
+            MessageBox.Show("You cannot reduce the value below the displayed number")
         End If
     End Sub
 
