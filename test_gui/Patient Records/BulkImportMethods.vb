@@ -98,10 +98,14 @@ Module BulkImportMethods
                     addPhysicianToDatabase(PhysicianArray)
                 End If
             Case "room"
-                importRoom(srReader)
+                Dim RoomArray As ArrayList = ParseRoomFile(srReader)
+                If Not IsNothing(RoomArray) Then
+                    addRoomToDatabase(RoomArray)
+                End If
             Case "user"
                 importUser(srReader)
         End Select
+        srReader.Close()
 
 
     End Sub
@@ -114,8 +118,10 @@ Module BulkImportMethods
     '/*                   WRITTEN BY:  Nathan Premo   		               */   
     '/*		         DATE CREATED: 3/8/2021                     		   */                             
     '/*********************************************************************/
-    '/*  FUNCTION PURPOSE:								   */             
-    '/*											   */                     
+    '/*  FUNCTION PURPOSE:					                			   */             
+    '/*	 This method just checcks to if a string contains a ;. It is the  */
+    '/*  only character not allowed. If the text contains a ; it returns true*/
+    '/*  otherwise it returns false.                                      */
     '/*                                                                   */
     '/*********************************************************************/
     '/*  CALLED BY:   	      						         */           
@@ -124,12 +130,12 @@ Module BulkImportMethods
     '/*  CALLS:										   */                 
     '/*             (NONE)								   */             
     '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					   */         
-    '/*											   */                     
+    '/*  PARAMETER LIST (In Parameter Order):					            */         
+    '/*	 strTestStringText - this it the text that it is checking   	   */                     
     '/*                                                                     
     '/*********************************************************************/
     '/*  RETURNS:								         */                   
-    '/*            (NOTHING)								   */             
+    '/*            blnIssue								   */             
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								   */             
     '/*											   */                     
@@ -143,7 +149,7 @@ Module BulkImportMethods
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
+    '/*  NP   3/17/2021 Filled out the comment block                      */                                                                   
     '/*********************************************************************/
 
 
@@ -177,11 +183,12 @@ Module BulkImportMethods
     '/*             (NONE)								   */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					   */         
-    '/*											   */                     
+    '/*	 srReader - this is the stream reader that is being used to read in*/
+    '/*             the file.                                              */
     '/*                                                                     
     '/*********************************************************************/
     '/*  RETURNS:								         */                   
-    '/*            (NOTHING)								   */             
+    '/*            PatientArray								   */             
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								   */             
     '/*											   */                     
@@ -340,7 +347,8 @@ Module BulkImportMethods
     '/*             (NONE)								   */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					   */         
-    '/*	 										   */                     
+    '/*	 PatientArray - this is the array list that is being added to the */
+    '/*                 database.                                         */
     '/*                                                                     
     '/*********************************************************************/
     '/*  RETURNS:								         */                   
@@ -384,12 +392,12 @@ Module BulkImportMethods
     End Sub
 
     '/*********************************************************************/
-    '/*                   SUBPROGRAM NAME:  ParsePhysicianFile 		      */         
+    '/*                   FUNCTION NAME:  ParsePhysicianFile 		      */         
     '/*********************************************************************/
-    '/*                   WRITTEN BY:  Nathan Premo   		         */   
+    '/*                   WRITTEN BY:  Nathan Premo   		               */   
     '/*		         DATE CREATED: 	3/8/2021	                           */   
     '/*********************************************************************/
-    '/*  SUBPROGRAM PURPOSE:								   */             
+    '/*  FUNCTION PURPOSE:						                		   */             
     '/*	 This is going to parse the physician file the user is trying to  */  
     '/*  import and will check it for errors. If there are errors it will */
     '/*  show an error message of everything wrong with file and return   */
@@ -404,8 +412,8 @@ Module BulkImportMethods
     '/*             (NONE)								   */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					   */         
-    '/*											   */                     
-    '/*                                                                     
+    '/*	 srReader - this is the stream reader that is being used to read in*/
+    '/*             the file.                                              */
     '/*********************************************************************/
     '/*  RETURNS:								                           */                   
     '/*            PhysicianArray								           */             
@@ -518,7 +526,8 @@ Module BulkImportMethods
     '/*		         DATE CREATED:  3/12/2021                   		   */                             
     '/*********************************************************************/
     '/*  SUBPROGRAM PURPOSE:								   */             
-    '/*											   */                     
+    '/*	 This is going to loop through the array list and make a large SQL*/
+    '/*  statement that it is going to push to the database.              */
     '/*                                                                   */
     '/*********************************************************************/
     '/*  CALLED BY:   	      						         */           
@@ -528,7 +537,8 @@ Module BulkImportMethods
     '/*             (NONE)								   */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					   */         
-    '/*											   */                     
+    '/*	PhysicianArray - this is the arraylist that is going to be added to*/
+    '/*                  The database.                                     */
     '/*                                                                     
     '/*********************************************************************/
     '/*  RETURNS:								         */                   
@@ -539,14 +549,14 @@ Module BulkImportMethods
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
-    '/*                                                                     
+    '/*	 strbSQLStatement - this is the SQL statement that will be sent   */                     
+    '/*                     to the database.                              */                                                                    
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
+    '/*  NP    3/17/2021 Filled out the comment section.                  */                                                                   
     '/*********************************************************************/
 
 
@@ -614,13 +624,17 @@ Module BulkImportMethods
     End Sub
 
     '/*********************************************************************/
-    '/*                   SUBPROGRAM NAME: importRoom					  */         
+    '/*                   Function NAME: ParseRoomFile					  */         
     '/*********************************************************************/
     '/*                   WRITTEN BY:  Nathan Premo   		         */   
     '/*		         DATE CREATED: 	3/8/2021	                           */   
     '/*********************************************************************/
-    '/*  SUBPROGRAM PURPOSE:								   */             
-    '/*											   */                     
+    '/*  Function PURPOSE:								   */             
+    '/*	 This is going to parse the Room file the user is trying to      */  
+    '/*  import and will check it for errors. If there are errors it will */
+    '/*  show an error message of everything wrong with file and return   */
+    '/*  nothing. Other wise it will return an array list of all the      */
+    '/*  records in RoomClass objects.                                    */                    
     '/*                                                                   */
     '/*********************************************************************/
     '/*  CALLED BY:   	      						         */           
@@ -630,18 +644,29 @@ Module BulkImportMethods
     '/*             (NONE)								   */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					   */         
-    '/*											   */                     
-    '/*                                                                     
+    '/*	 srReader - this is the stream reader that is being used to read in*/
+    '/*             the file.                                              */
     '/*********************************************************************/
-    '/*  RETURNS:								         */                   
-    '/*            (NOTHING)								   */             
+    '/*  RETURNS:								                            */                   
+    '/*         roomArray                  								   */             
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								   */             
     '/*											   */                     
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
+    '/*	strbErrorMessage - this is the message that is going to be built    */
+    '/*                     that contains all issues with the file.       */
+    '/* blnIssue - this is the boolean that tells us if there was an issue*/
+    '/*            with the file and we should block the import.          */
+    '/* strLine - this is the array that the text from the file is sent to*/
+    '/* intLineNum - this is keeping track of what line number we are on  */
+    '/*              in the file so we can tell the user where the error is*/
+    '/* roomArray - this is the array list of rooms that will be added to  */
+    '/*             the database if there is no issue. If there is an issue*/
+    '/*             it will be nothing.                                    */
+    '/* strbSQLPull - this is going to be the SQL statement that pulls back*/
+    '/*               if the physician exists in the datbaase.             */                   
     '/*                                                                     
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
@@ -652,8 +677,95 @@ Module BulkImportMethods
     '/*********************************************************************/
 
 
-    Sub importRoom(srReader As StreamReader)
+    Function ParseRoomFile(srReader As StreamReader)
+        Dim roomArray = New ArrayList
+        Dim strLine As String()
+        Dim intLineNum As Integer = 1
+        Dim blnIssue = False
+        Dim strbErrorMessage As StringBuilder = New StringBuilder
+        Dim strbSQLPull As StringBuilder = New StringBuilder
 
+        Do
+            strLine = srReader.ReadLine.Split(vbTab)
+            For i As Integer = 0 To 1
+                If TextCheck(strLine(i)) Then
+                    Select Case i
+                        Case 0
+                            strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Room_ID can not contain a ;")
+                            blnIssue = True
+                        Case 1
+                            strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Bed_Name can not contain a ;")
+                            blnIssue = True
+                    End Select
+                End If
+            Next
+            If Not blnIssue Then
+                roomArray.Add(New RoomClass(strLine(0), strLine(1)))
+            End If
+            intLineNum += 1
+        Loop While (Not srReader.EndOfStream)
+
+        If blnIssue Then
+            MessageBox.Show(strbErrorMessage.ToString)
+            roomArray.Clear()
+            roomArray = Nothing
+        End If
+
+        Return roomArray
+    End Function
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: addRoomToDatabase		   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		                 */   
+    '/*		         DATE CREATED: 	3/17/2021                       	   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								   */             
+    '/*	 This is going to create a large SQL statement that is going to   */
+    '/*  push all the rooms to the database in one shot.                  */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 roomArray - this is the array list that is being added to the database*/                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	 strbSQLStatement - this is the SQL statement that will be sent   */                     
+    '/*                     to the database.                              */           
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+
+    Sub addRoomToDatabase(roomArray As ArrayList)
+        Dim strbSQLStatement As StringBuilder = New StringBuilder
+        strbSQLStatement.Append("Insert Into Rooms ('Room_ID', 'Bed_Name', 'Active_Flag') Values ")
+        For Each room As RoomClass In roomArray
+            With room
+                strbSQLStatement.Append("(' " & checkSQLInjection(.RoomID) & "', '" & checkSQLInjection(.BedName) & "',' ")
+                strbSQLStatement.Append(1 & "'),")
+            End With
+        Next
+        strbSQLStatement.Remove(strbSQLStatement.Length - 1, 1) 'remove the last comma
+        strbSQLStatement.Append(";")
+        CreateDatabase.ExecuteInsertQuery(strbSQLStatement.ToString)
+        MessageBox.Show("import Finished")
     End Sub
-
 End Module
