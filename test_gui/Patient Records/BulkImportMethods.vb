@@ -557,9 +557,9 @@ Module BulkImportMethods
                                 'Physician_Address','Physician_City','Physician_State','Physician_Zip_Code','Active_Flag') Values")
         For Each Physician As PhysicianClass In PhysicianArray
             With Physician
-                strbSQLStatement.Append(" ('" & .FirstName & "', '" & .MiddleName & "', '" & .LastName & "', '")
-                strbSQLStatement.Append(.Credentials & "', '" & .PhoneNumber & "', '" & .FaxNumber & "', '")
-                strbSQLStatement.Append(.Address & "', '" & .city & "', '" & .State & "', '" & .ZipCode & "', '")
+                strbSQLStatement.Append(" ('" & checkSQLInjection(.FirstName) & "', '" & checkSQLInjection(.MiddleName) & "', '" & checkSQLInjection(.LastName) & "', '")
+                strbSQLStatement.Append(checkSQLInjection(.Credentials) & "', '" & .PhoneNumber & "', '" & .FaxNumber & "', '")
+                strbSQLStatement.Append(checkSQLInjection(.Address) & "', '" & checkSQLInjection(.city) & "', '" & .State & "', '" & .ZipCode & "', '")
                 strbSQLStatement.Append(1 & "'),")
             End With
         Next

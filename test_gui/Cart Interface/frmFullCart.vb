@@ -257,6 +257,8 @@ Public Class frmFullCart
     '/*********************************************************************/
     Sub populateButtonDictionary(ByRef dicButtonDictionary As Dictionary(Of String, Control))
         With dicButtonDictionary
+            .Clear() 'this is for the off chance the dictionary
+            'is already populated.
             .Add("1", btn1)
             .Add("3", btn3)
             .Add("4", btn4)

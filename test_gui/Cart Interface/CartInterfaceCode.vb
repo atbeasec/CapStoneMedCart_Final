@@ -416,6 +416,8 @@ Module CartInterfaceCode
 
     Sub populationDictionary(ByRef dicHexDictioanry As Dictionary(Of String, System.Int32))
         With dicHexDictioanry
+            .Clear() 'this is for the remote chance the dictionary
+            'is already populated
             .Add("0", &H30)
             .Add("1", &H31)
             .Add("2", &H32)
