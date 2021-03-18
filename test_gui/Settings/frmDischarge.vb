@@ -319,6 +319,8 @@
         txtState.Text = ""
         txtPhone.Text = ""
         txtZipCode.Text = ""
+        txtRoom.Text = ""
+        txtBed.Text = ""
     End Sub
 
     '/*********************************************************************/
@@ -394,5 +396,10 @@
         For Each dr As DataRow In dsRoomsandBeds.Tables(0).Rows
             cboRoomandBed.Items.Add(dr(0) & " " & dr(1))
         Next
+    End Sub
+
+    Private Sub PopulateRoomBedDischarge(ByRef strRoom As String, ByRef strBed As String)
+        txtRoom.Text = strRoom
+        txtBed.Text = strBed
     End Sub
 End Class

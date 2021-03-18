@@ -66,8 +66,8 @@ Partial Class frmDischarge
         Me.pnlDischargeRoomBed = New System.Windows.Forms.Panel()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.txtBed = New System.Windows.Forms.TextBox()
+        Me.txtRoom = New System.Windows.Forms.TextBox()
         Me.Panel3.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.pnlDischarge.SuspendLayout()
@@ -557,15 +557,15 @@ Partial Class frmDischarge
         '
         Me.pnlAdmitRoomBed.Controls.Add(Me.Label17)
         Me.pnlAdmitRoomBed.Controls.Add(Me.cboRoomandBed)
-        Me.pnlAdmitRoomBed.Location = New System.Drawing.Point(7, 74)
+        Me.pnlAdmitRoomBed.Location = New System.Drawing.Point(6, 77)
         Me.pnlAdmitRoomBed.Name = "pnlAdmitRoomBed"
         Me.pnlAdmitRoomBed.Size = New System.Drawing.Size(352, 66)
         Me.pnlAdmitRoomBed.TabIndex = 119
         '
         'pnlDischargeRoomBed
         '
-        Me.pnlDischargeRoomBed.Controls.Add(Me.TextBox2)
-        Me.pnlDischargeRoomBed.Controls.Add(Me.TextBox1)
+        Me.pnlDischargeRoomBed.Controls.Add(Me.txtRoom)
+        Me.pnlDischargeRoomBed.Controls.Add(Me.txtBed)
         Me.pnlDischargeRoomBed.Controls.Add(Me.Label7)
         Me.pnlDischargeRoomBed.Controls.Add(Me.Label6)
         Me.pnlDischargeRoomBed.Location = New System.Drawing.Point(8, 77)
@@ -596,29 +596,29 @@ Partial Class frmDischarge
         Me.Label7.TabIndex = 83
         Me.Label7.Text = "Bed:"
         '
-        'TextBox1
+        'txtBed
         '
-        Me.TextBox1.BackColor = System.Drawing.Color.White
-        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(187, 24)
-        Me.TextBox1.MaxLength = 9
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(150, 25)
-        Me.TextBox1.TabIndex = 84
+        Me.txtBed.BackColor = System.Drawing.Color.White
+        Me.txtBed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtBed.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtBed.Location = New System.Drawing.Point(187, 24)
+        Me.txtBed.MaxLength = 9
+        Me.txtBed.Name = "txtBed"
+        Me.txtBed.ReadOnly = True
+        Me.txtBed.Size = New System.Drawing.Size(150, 25)
+        Me.txtBed.TabIndex = 84
         '
-        'TextBox2
+        'txtRoom
         '
-        Me.TextBox2.BackColor = System.Drawing.Color.White
-        Me.TextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TextBox2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(3, 24)
-        Me.TextBox2.MaxLength = 9
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.ReadOnly = True
-        Me.TextBox2.Size = New System.Drawing.Size(150, 25)
-        Me.TextBox2.TabIndex = 85
+        Me.txtRoom.BackColor = System.Drawing.Color.White
+        Me.txtRoom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtRoom.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRoom.Location = New System.Drawing.Point(3, 24)
+        Me.txtRoom.MaxLength = 9
+        Me.txtRoom.Name = "txtRoom"
+        Me.txtRoom.ReadOnly = True
+        Me.txtRoom.Size = New System.Drawing.Size(150, 25)
+        Me.txtRoom.TabIndex = 85
         '
         'frmDischarge
         '
@@ -692,8 +692,8 @@ Partial Class frmDischarge
     Friend WithEvents cboRoomandBed As ComboBox
     Friend WithEvents pnlAdmitRoomBed As Panel
     Friend WithEvents pnlDischargeRoomBed As Panel
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtRoom As TextBox
+    Friend WithEvents txtBed As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents Label6 As Label
 End Class
