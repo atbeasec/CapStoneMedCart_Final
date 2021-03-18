@@ -66,7 +66,7 @@
     '/*********************************************************************/
     Private Sub frmPatientRecords_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim strFillSQL As String = ("select Patient.MRN_Number, Patient.Patient_First_Name, " &
-                                           "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name from Patient LEFT JOIN " &
+                                           "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
                                            "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1 ORDER BY Patient.Patient_Last_Name ASC;")
         Fill_Patient_Table(strFillSQL)
 
@@ -132,7 +132,7 @@
     '/*  WHO   WHEN     WHAT								              */             
     '/*  Collin Krygier  2/6/2021    Initial creation                     */
     '/*********************************************************************/
-    Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal strMRN As String, ByVal strFirstName As String, ByVal strLastName As String, ByVal strBirthday As String, ByVal strRoom As String, ByVal strBed As String)
+    Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal strMRN As String, ByVal strFirstName As String, ByVal strLastName As String, ByVal strBirthday As String, ByVal strRoom As String, ByVal strBed As String, ByRef intPatientID As Integer)
 
         Dim pnl As Panel
         pnl = New Panel
@@ -186,7 +186,7 @@
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
-
+        pnlMainPanel.Tag = intPatientID
         currentContactPanel = pnl.Name
     End Sub
 
@@ -226,8 +226,7 @@
     '/********************************************************************/ 
     Private Sub DynamicSingleClickOpenPatient(sender As Object, e As EventArgs)
 
-        ' frmPatientInfo.txtMRN.Text = GetSelectedPatientMRN(sender)
-        frmPatientInfo.setPatientID(GetSelectedPatientMRN(sender))
+        frmPatientInfo.setPatientID(sender.tag)
         ' open the patient record form of the matching patient
         frmMain.OpenChildForm(frmPatientInfo)
 
@@ -487,7 +486,7 @@
 
                 End If
                 CreatePanel(flpPatientRecords, item.Item(0), item.Item(1),
-                           item.Item(2), item.Item(3), strRoom, strBed)
+                           item.Item(2), item.Item(3), strRoom, strBed, item.Item(6))
 
             End With
         Next
