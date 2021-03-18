@@ -273,10 +273,11 @@
             Dim dsPatientDischarge As DataSet = CreateDatabase.ExecuteSelectQuery("Select * From Patient WHERE Patient_ID = '" & intPatientID & "'")
             Dim dsPrimaryDoctor As DataSet = CreateDatabase.ExecuteSelectQuery("Select * from Physician where Physician_ID = '" & dsPatientDischarge.Tables(0).Rows(0)(EnumList.Patient.PhysicianID) & "'")
             Dim strPrimaryDoctor As String = "Dr " & dsPrimaryDoctor.Tables(0).Rows(0)(EnumList.Physician.FirstName) & " " & dsPrimaryDoctor.Tables(0).Rows(0)(EnumList.Physician.LastName)
-            Dim dsPatientRoom As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT * FROM PatientRoom where Patient_TUID = '" & intPatientID & "'")
+            Dim dsPatientRoom As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT * FROM PatientRoom where Patient_TUID = '" & intPatientID & "' AND Active_Flag = '1'")
 
             For Each dr As DataRow In dsPatientDischarge.Tables(0).Rows
                 populatePatientTextBoxes(dr(1), dr(6), dr(7), dr(8), dr(9), strPrimaryDoctor, dr(15), dr(10), dr(11), dr(12), dr(14), dr(13))
+                PopulateRoomBedDischarge(dsPatientRoom.Tables(0).Rows(0)(1), dsPatientRoom.Tables(0).Rows(0)(2))
             Next
         End If
     End Sub
