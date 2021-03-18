@@ -231,6 +231,8 @@ Partial Class frmDischarge
         '
         'pnlInformation
         '
+        Me.pnlInformation.Controls.Add(Me.pnlAdmitRoomBed)
+        Me.pnlInformation.Controls.Add(Me.pnlDischargeRoomBed)
         Me.pnlInformation.Controls.Add(Me.txtState)
         Me.pnlInformation.Controls.Add(Me.Label2)
         Me.pnlInformation.Controls.Add(Me.txtZipCode)
@@ -548,14 +550,14 @@ Partial Class frmDischarge
         Me.cboRoomandBed.FormattingEnabled = True
         Me.cboRoomandBed.Location = New System.Drawing.Point(5, 31)
         Me.cboRoomandBed.Name = "cboRoomandBed"
-        Me.cboRoomandBed.Size = New System.Drawing.Size(338, 25)
+        Me.cboRoomandBed.Size = New System.Drawing.Size(333, 25)
         Me.cboRoomandBed.TabIndex = 118
         '
         'pnlAdmitRoomBed
         '
         Me.pnlAdmitRoomBed.Controls.Add(Me.Label17)
         Me.pnlAdmitRoomBed.Controls.Add(Me.cboRoomandBed)
-        Me.pnlAdmitRoomBed.Location = New System.Drawing.Point(501, 61)
+        Me.pnlAdmitRoomBed.Location = New System.Drawing.Point(7, 74)
         Me.pnlAdmitRoomBed.Name = "pnlAdmitRoomBed"
         Me.pnlAdmitRoomBed.Size = New System.Drawing.Size(352, 66)
         Me.pnlAdmitRoomBed.TabIndex = 119
@@ -566,7 +568,7 @@ Partial Class frmDischarge
         Me.pnlDischargeRoomBed.Controls.Add(Me.TextBox1)
         Me.pnlDischargeRoomBed.Controls.Add(Me.Label7)
         Me.pnlDischargeRoomBed.Controls.Add(Me.Label6)
-        Me.pnlDischargeRoomBed.Location = New System.Drawing.Point(501, 133)
+        Me.pnlDischargeRoomBed.Location = New System.Drawing.Point(8, 77)
         Me.pnlDischargeRoomBed.Name = "pnlDischargeRoomBed"
         Me.pnlDischargeRoomBed.Size = New System.Drawing.Size(352, 66)
         Me.pnlDischargeRoomBed.TabIndex = 120
@@ -588,7 +590,7 @@ Partial Class frmDischarge
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label7.Location = New System.Drawing.Point(169, 0)
+        Me.Label7.Location = New System.Drawing.Point(183, 0)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(43, 21)
         Me.Label7.TabIndex = 83
@@ -599,7 +601,7 @@ Partial Class frmDischarge
         Me.TextBox1.BackColor = System.Drawing.Color.White
         Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(173, 24)
+        Me.TextBox1.Location = New System.Drawing.Point(187, 24)
         Me.TextBox1.MaxLength = 9
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
@@ -624,8 +626,6 @@ Partial Class frmDischarge
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(982, 580)
-        Me.Controls.Add(Me.pnlDischargeRoomBed)
-        Me.Controls.Add(Me.pnlAdmitRoomBed)
         Me.Controls.Add(Me.pnlInformation)
         Me.Controls.Add(Me.pnlRadioButtons)
         Me.Controls.Add(Me.pnlAdmit)
