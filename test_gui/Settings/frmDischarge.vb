@@ -29,11 +29,15 @@
     '/*  Alexander Beasecker  03/18/21  Initial creation of the code    */
     '/*********************************************************************/
     Private Sub btnAdmit_Click(sender As Object, e As EventArgs) Handles btnAdmit.Click
-        Dim intPatientID As Integer = intAdmitPatientID(cmbAdmitPatients.SelectedIndex)
-        CreateDatabase.ExecuteInsertQuery("Update Patient SET Active_Flag = 1 WHERE Patient_ID = '" & intPatientID & "'")
-        Loadcmb()
-        clearPatientTextBoxes()
-
+        If Not cboRoomandBed.SelectedIndex = -1 Then
+            Dim strRoomandBed As String = cboRoomandBed.SelectedItem
+            Dim strArraySplit() As String
+            strArraySplit = strRoomandBed.Split(" ")
+            Dim intPatientID As Integer = intAdmitPatientID(cmbAdmitPatients.SelectedIndex)
+            CreateDatabase.ExecuteInsertQuery("Update Patient SET Active_Flag = 1 WHERE Patient_ID = '" & intPatientID & "'")
+            Loadcmb()
+            clearPatientTextBoxes()
+        End If
     End Sub
     '/*********************************************************************/
     '/*                   SUBROUTINE NAME:       */
