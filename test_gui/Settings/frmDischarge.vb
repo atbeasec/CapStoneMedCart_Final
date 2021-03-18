@@ -2,6 +2,32 @@
 
     Dim intDischargePatientID As New ArrayList
     Dim intAdmitPatientID As New ArrayList
+
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:       */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/18/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   						                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/18/21  Initial creation of the code    */
+    '/*********************************************************************/
     Private Sub btnAdmit_Click(sender As Object, e As EventArgs) Handles btnAdmit.Click
         Dim intPatientID As Integer = intAdmitPatientID(cmbAdmitPatients.SelectedIndex)
         CreateDatabase.ExecuteInsertQuery("Update Patient SET Active_Flag = 1 WHERE Patient_ID = '" & intPatientID & "'")
@@ -9,7 +35,31 @@
         clearPatientTextBoxes()
 
     End Sub
-
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:       */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/18/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   						                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/18/21  Initial creation of the code    */
+    '/*********************************************************************/
     Private Sub btnDischarge_Click(sender As Object, e As EventArgs) Handles btnDischarge.Click
         If Not cmbDischargePatients.SelectedIndex = -1 Then
             Dim intPatientID As Integer = intDischargePatientID(cmbDischargePatients.SelectedIndex)
@@ -22,6 +72,31 @@
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:       */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/18/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   						                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/18/21  Initial creation of the code    */
+    '/*********************************************************************/
     Private Sub Loadcmb()
         intDischargePatientID.Clear()
         intAdmitPatientID.Clear()
@@ -41,11 +116,61 @@
         Next
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:       */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/18/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   						                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/18/21  Initial creation of the code    */
+    '/*********************************************************************/
     Private Sub frmDischarge_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Loadcmb()
         PopulateAdmitRooms()
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:       */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/18/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   						                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/18/21  Initial creation of the code    */
+    '/*********************************************************************/
     Private Sub radAdmitPatient_CheckedChanged(sender As Object, e As EventArgs) Handles radAdmitPatient.CheckedChanged, radDischarge.CheckedChanged
         pnlAdmit.Visible = False
         pnlDischarge.Visible = False
@@ -75,6 +200,31 @@
         End If
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:       */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/18/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   						                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/18/21  Initial creation of the code    */
+    '/*********************************************************************/
     Private Sub cmbAdmitPatients_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbAdmitPatients.SelectedIndexChanged
         If Not cmbAdmitPatients.SelectedIndex = -1 Then
             clearPatientTextBoxes()
@@ -89,6 +239,31 @@
         End If
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:       */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/18/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   						                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/18/21  Initial creation of the code    */
+    '/*********************************************************************/
     Private Sub cmbDischargePatients_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDischargePatients.SelectedIndexChanged
         If Not cmbDischargePatients.SelectedIndex = -1 Then
             clearPatientTextBoxes()
@@ -104,6 +279,31 @@
         End If
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:       */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/18/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   						                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/18/21  Initial creation of the code    */
+    '/*********************************************************************/
     Private Sub clearPatientTextBoxes()
         txtMRN.Text = ""
         txtBirthday.Text = ""
@@ -119,6 +319,31 @@
         txtZipCode.Text = ""
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:       */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/18/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   						                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/18/21  Initial creation of the code    */
+    '/*********************************************************************/
     Private Sub populatePatientTextBoxes(ByRef intMRN As String, ByRef strDOB As String, ByRef strGender As String, ByRef intHeight As Integer, ByRef intWeight As Integer,
                                          ByRef strPhysician As String, ByRef strEmail As String, ByRef strAddress As String, ByRef strCity As String, ByRef strState As String, ByRef intPhone As String, ByRef intZip As Integer)
         txtMRN.Text = intMRN
@@ -136,6 +361,31 @@
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:       */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/18/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   						                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/18/21  Initial creation of the code    */
+    '/*********************************************************************/
     Private Sub PopulateAdmitRooms()
         cboRoomandBed.Items.Clear()
         Dim dsRoomsandBeds As DataSet = CreateDatabase.ExecuteSelectQuery("Select Room_ID,Bed_Name from Rooms WHERE Active_Flag = '1' EXCEPT Select Room_TUID,Bed_Name from PatientRoom where PatientRoom.Active_Flag = '1'")
