@@ -97,6 +97,7 @@ Partial Class frmDischarge
         'cmbAdmitPatients
         '
         Me.cmbAdmitPatients.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cmbAdmitPatients.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbAdmitPatients.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cmbAdmitPatients.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbAdmitPatients.FormattingEnabled = True
@@ -145,6 +146,7 @@ Partial Class frmDischarge
         'cmbDischargePatients
         '
         Me.cmbDischargePatients.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cmbDischargePatients.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbDischargePatients.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cmbDischargePatients.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbDischargePatients.FormattingEnabled = True

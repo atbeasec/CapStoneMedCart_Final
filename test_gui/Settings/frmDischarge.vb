@@ -3,32 +3,30 @@
     Dim intDischargePatientID As New ArrayList
     Dim intAdmitPatientID As New ArrayList
     Private Sub btnAdmit_Click(sender As Object, e As EventArgs) Handles btnAdmit.Click
-        CreateDatabase.ExecuteInsertQuery("Update Patient SET Active_Flag = 1 WHERE MRN_Number = " & CInt(cmbAdmitPatients.Text) & ";")
+        Dim intPatientID As Integer = intAdmitPatientID(cmbAdmitPatients.SelectedIndex)
+        CreateDatabase.ExecuteInsertQuery("Update Patient SET Active_Flag = 1 WHERE Patient_ID = '" & intPatientID & "'")
         Loadcmb()
-        cmbAdmitPatients.Text = ""
-        ' the admit combo box will show all patients in the database that are saved
-        ' these patiens wil be added to the patient records tab/ section of th UI 
-        ' and there status in the database will be changed
-
-
+        clearPatientTextBoxes()
 
     End Sub
 
     Private Sub btnDischarge_Click(sender As Object, e As EventArgs) Handles btnDischarge.Click
-        CreateDatabase.ExecuteInsertQuery("Update Patient SET Active_Flag = 0 WHERE MRN_Number = " & CInt(cmbDischargePatients.Text) & ";")
-        Loadcmb()
-        cmbDischargePatients.Text = ""
-        ' the discharge button will show all patients that are currently admitted in our system
-        ' these patiens wil be added to the patient records tab/ section of th UI 
-        ' and there status in the database will be changed
-        ' any room assignments regarding these patients will be deleted and they will not be occupying a room anymore
-
+        If Not cmbDischargePatients.SelectedIndex = -1 Then
+            Dim intPatientID As Integer = intDischargePatientID(cmbDischargePatients.SelectedIndex)
+            CreateDatabase.ExecuteInsertQuery("Update Patient SET Active_Flag = 0 WHERE Patient_ID = '" & intPatientID & "'")
+            Loadcmb()
+            clearPatientTextBoxes()
+        Else
+            MessageBox.Show("Please select a patient to discharge")
+        End If
 
     End Sub
 
     Private Sub Loadcmb()
         intDischargePatientID.Clear()
         intAdmitPatientID.Clear()
+        cmbAdmitPatients.Items.Clear()
+        cmbDischargePatients.Items.Clear()
         Dim dsInactivePatients As DataSet = CreateDatabase.ExecuteSelectQuery("Select * From Patient WHERE Active_Flag = 0 ;")
 
         For Each dr As DataRow In dsInactivePatients.Tables(0).Rows
@@ -74,8 +72,12 @@
             clearPatientTextBoxes()
             Dim intPatientID As Integer = intAdmitPatientID(cmbAdmitPatients.SelectedIndex)
             Dim dsPatientAdmit As DataSet = CreateDatabase.ExecuteSelectQuery("Select * From Patient WHERE Patient_ID = '" & intPatientID & "'")
+            Dim dsPrimaryDoctor As DataSet = CreateDatabase.ExecuteSelectQuery("Select * from Physician where Physician_ID = '" & dsPatientAdmit.Tables(0).Rows(0)(EnumList.Patient.PhysicianID) & "'")
+            Dim strPrimaryDoctor As String = "Dr " & dsPrimaryDoctor.Tables(0).Rows(0)(EnumList.Physician.FirstName) & " " & dsPrimaryDoctor.Tables(0).Rows(0)(EnumList.Physician.LastName)
 
-
+            For Each dr As DataRow In dsPatientAdmit.Tables(0).Rows
+                populatePatientTextBoxes(dr(1), dr(6), dr(7), dr(8), dr(9), "N/A", "N/A", strPrimaryDoctor, dr(15), dr(10), dr(11), dr(12), dr(14), dr(13))
+            Next
         End If
     End Sub
 
@@ -84,9 +86,13 @@
             clearPatientTextBoxes()
             Dim intPatientID As Integer = intDischargePatientID(cmbDischargePatients.SelectedIndex)
             Dim dsPatientDischarge As DataSet = CreateDatabase.ExecuteSelectQuery("Select * From Patient WHERE Patient_ID = '" & intPatientID & "'")
-            populatePatientTextBoxes(dsPatientDischarge.Tables(0).Rows(0)(EnumList.Patient.MRN_Number), dsPatientDischarge.Tables(0).Rows(0)(EnumList.Patient.DoB), dsPatientDischarge.Tables(0).Rows(0)(EnumList.Patient.Sex), dsPatientDischarge.Tables(0).Rows(0)(EnumList.Patient.Height),
-                                     dsPatientDischarge.Tables(0).Rows(0)(EnumList.Patient.Weight), "", "", "", dsPatientDischarge.Tables(0).Rows(0)(EnumList.Patient.Email), dsPatientDischarge.Tables(0).Rows(0)(EnumList.Patient.address),
-                                        dsPatientDischarge.Tables(0).Rows(0)(EnumList.Patient.City), dsPatientDischarge.Tables(0).Rows(0)(EnumList.Patient.state), dsPatientDischarge.Tables(0).Rows(0)(EnumList.Patient.Phone), dsPatientDischarge.Tables(0).Rows(0)(EnumList.Patient.zip))
+            Dim dsPrimaryDoctor As DataSet = CreateDatabase.ExecuteSelectQuery("Select * from Physician where Physician_ID = '" & dsPatientDischarge.Tables(0).Rows(0)(EnumList.Patient.PhysicianID) & "'")
+            Dim strPrimaryDoctor As String = "Dr " & dsPrimaryDoctor.Tables(0).Rows(0)(EnumList.Physician.FirstName) & " " & dsPrimaryDoctor.Tables(0).Rows(0)(EnumList.Physician.LastName)
+            Dim dsPatientRoom As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT * FROM PatientRoom where Patient_TUID = '" & intPatientID & "'")
+
+            For Each dr As DataRow In dsPatientDischarge.Tables(0).Rows
+                populatePatientTextBoxes(dr(1), dr(6), dr(7), dr(8), dr(9), dsPatientRoom.Tables(0).Rows(0)(1), dsPatientRoom.Tables(0).Rows(0)(2), strPrimaryDoctor, dr(15), dr(10), dr(11), dr(12), dr(14), dr(13))
+            Next
         End If
     End Sub
 
@@ -107,8 +113,8 @@
         txtZipCode.Text = ""
     End Sub
 
-    Private Sub populatePatientTextBoxes(ByRef intMRN As Integer, ByRef strDOB As String, ByRef strGender As String, ByRef intHeight As Integer, ByRef intWeight As Integer, ByRef strRoom As String, ByRef strBed As String,
-                                         ByRef strPhysician As String, ByRef strEmail As String, ByRef strAddress As String, ByRef strCity As String, ByRef strState As String, ByRef intPhone As Integer, ByRef intZip As Integer)
+    Private Sub populatePatientTextBoxes(ByRef intMRN As String, ByRef strDOB As String, ByRef strGender As String, ByRef intHeight As Integer, ByRef intWeight As Integer, ByRef strRoom As String, ByRef strBed As String,
+                                         ByRef strPhysician As String, ByRef strEmail As String, ByRef strAddress As String, ByRef strCity As String, ByRef strState As String, ByRef intPhone As String, ByRef intZip As Integer)
         txtMRN.Text = intMRN
         txtBirthday.Text = strDOB
         txtGender.Text = strGender
