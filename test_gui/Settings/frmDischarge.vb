@@ -29,30 +29,39 @@
     '/*  Alexander Beasecker  03/18/21  Initial creation of the code    */
     '/*********************************************************************/
     Private Sub btnAdmit_Click(sender As Object, e As EventArgs) Handles btnAdmit.Click
-        If Not cboRoomandBed.SelectedIndex = -1 Then
-            Dim strRoomandBed As String = cboRoomandBed.SelectedItem
-            Dim strArraySplit() As String
-            strArraySplit = strRoomandBed.Split(" ")
-            Dim intPatientID As Integer = intAdmitPatientID(cmbAdmitPatients.SelectedIndex)
-            CreateDatabase.ExecuteInsertQuery("Update Patient SET Active_Flag = 1 WHERE Patient_ID = '" & intPatientID & "'")
+        If Not cmbAdmitPatients.SelectedIndex = -1 Then
+            If Not cboRoomandBed.SelectedIndex = -1 Then
+                Dim strRoomandBed As String = cboRoomandBed.SelectedItem
+                Dim strArraySplit() As String
+                strArraySplit = strRoomandBed.Split(" ")
+                Dim intPatientID As Integer = intAdmitPatientID(cmbAdmitPatients.SelectedIndex)
+                CreateDatabase.ExecuteInsertQuery("Update Patient SET Active_Flag = 1 WHERE Patient_ID = '" & intPatientID & "'")
 
-            ''check if patient was already in that room before
-            '' if the room record is already in database reactivate
-            Dim strCheck As String = CreateDatabase.ExecuteScalarQuery("SELECT Room_TUID FROM PatientRoom where Patient_TUID = '" & intPatientID & "' AND Room_TUID = '" & strArraySplit(0) & "' AND Bed_Name = '" & strArraySplit(1) & "' AND Active_Flag = '0'")
-            'check if the sql statement returned anything
-            If IsNothing(strCheck) Then
-                'if nothing is returned that record is not in the database so insert
-                CreateDatabase.ExecuteInsertQuery("INSERT INTO PatientRoom(Patient_TUID,Room_TUID,Bed_Name,Active_Flag) VALUES('" & intPatientID & "', '" & strArraySplit(0) & "', '" & strArraySplit(1) & "','1')")
-                Loadcmb()
-                clearPatientTextBoxes()
-                PopulateAdmitRooms()
+                ''check if patient was already in that room before
+                '' if the room record is already in database reactivate
+                Dim strCheck As String = CreateDatabase.ExecuteScalarQuery("SELECT Room_TUID FROM PatientRoom where Patient_TUID = '" & intPatientID & "' AND Room_TUID = '" & strArraySplit(0) & "' AND Bed_Name = '" & strArraySplit(1) & "' AND Active_Flag = '0'")
+                'check if the sql statement returned anything
+                If IsNothing(strCheck) Then
+                    'if nothing is returned that record is not in the database so insert
+                    CreateDatabase.ExecuteInsertQuery("INSERT INTO PatientRoom(Patient_TUID,Room_TUID,Bed_Name,Active_Flag) VALUES('" & intPatientID & "', '" & strArraySplit(0) & "', '" & strArraySplit(1) & "','1')")
+                    Loadcmb()
+                    clearPatientTextBoxes()
+                    PopulateAdmitRooms()
+                Else
+                    'if it was in the database reactivate it
+                    CreateDatabase.ExecuteInsertQuery("Update PatientRoom SET Active_Flag = '1' where Patient_TUID = '" & intPatientID & "' AND Room_TUID = '" & strArraySplit(0) & "' AND Bed_Name = '" & strArraySplit(1) & "'")
+                    Loadcmb()
+                    clearPatientTextBoxes()
+                    PopulateAdmitRooms()
+                End If
+
+                MessageBox.Show("Patient Admitted")
+
             Else
-                'if it was in the database reactivate it
-                Loadcmb()
-                clearPatientTextBoxes()
-                PopulateAdmitRooms()
+                MessageBox.Show("Please select a room for the patient")
             End If
-
+        Else
+            MessageBox.Show("Please select a patient")
         End If
     End Sub
     '/*********************************************************************/
@@ -91,7 +100,7 @@
         Else
             MessageBox.Show("Please select a patient to discharge")
         End If
-
+        MessageBox.Show("Patient discharged")
     End Sub
 
     '/*********************************************************************/
