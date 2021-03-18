@@ -37,8 +37,6 @@ Partial Class frmDischarge
         Me.radAdmitPatient = New System.Windows.Forms.RadioButton()
         Me.pnlInformation = New System.Windows.Forms.Panel()
         Me.txtState = New System.Windows.Forms.TextBox()
-        Me.txtBed = New System.Windows.Forms.TextBox()
-        Me.txtroom = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtZipCode = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -64,6 +62,8 @@ Partial Class frmDischarge
         Me.txtPhysician = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
+        Me.cboRoom = New System.Windows.Forms.ComboBox()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Panel3.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.pnlDischarge.SuspendLayout()
@@ -225,9 +225,9 @@ Partial Class frmDischarge
         '
         'pnlInformation
         '
+        Me.pnlInformation.Controls.Add(Me.cboRoom)
+        Me.pnlInformation.Controls.Add(Me.ComboBox1)
         Me.pnlInformation.Controls.Add(Me.txtState)
-        Me.pnlInformation.Controls.Add(Me.txtBed)
-        Me.pnlInformation.Controls.Add(Me.txtroom)
         Me.pnlInformation.Controls.Add(Me.Label2)
         Me.pnlInformation.Controls.Add(Me.txtZipCode)
         Me.pnlInformation.Controls.Add(Me.Label3)
@@ -268,28 +268,6 @@ Partial Class frmDischarge
         Me.txtState.Name = "txtState"
         Me.txtState.Size = New System.Drawing.Size(151, 25)
         Me.txtState.TabIndex = 92
-        '
-        'txtBed
-        '
-        Me.txtBed.BackColor = System.Drawing.Color.White
-        Me.txtBed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtBed.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBed.Location = New System.Drawing.Point(193, 108)
-        Me.txtBed.MaxLength = 9
-        Me.txtBed.Name = "txtBed"
-        Me.txtBed.Size = New System.Drawing.Size(151, 25)
-        Me.txtBed.TabIndex = 91
-        '
-        'txtroom
-        '
-        Me.txtroom.BackColor = System.Drawing.Color.White
-        Me.txtroom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtroom.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtroom.Location = New System.Drawing.Point(9, 108)
-        Me.txtroom.MaxLength = 9
-        Me.txtroom.Name = "txtroom"
-        Me.txtroom.Size = New System.Drawing.Size(151, 25)
-        Me.txtroom.TabIndex = 90
         '
         'Label2
         '
@@ -560,6 +538,24 @@ Partial Class frmDischarge
         Me.Label11.TabIndex = 68
         Me.Label11.Text = "DOB:"
         '
+        'cboRoom
+        '
+        Me.cboRoom.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboRoom.FormattingEnabled = True
+        Me.cboRoom.Location = New System.Drawing.Point(193, 115)
+        Me.cboRoom.Name = "cboRoom"
+        Me.cboRoom.Size = New System.Drawing.Size(151, 25)
+        Me.cboRoom.TabIndex = 117
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(7, 115)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(151, 25)
+        Me.ComboBox1.TabIndex = 118
+        '
         'frmDischarge
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -626,6 +622,6 @@ Partial Class frmDischarge
     Friend WithEvents Label16 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents txtState As TextBox
-    Friend WithEvents txtBed As TextBox
-    Friend WithEvents txtroom As TextBox
+    Friend WithEvents cboRoom As ComboBox
+    Friend WithEvents ComboBox1 As ComboBox
 End Class

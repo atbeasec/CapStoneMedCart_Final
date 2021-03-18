@@ -102,8 +102,6 @@
         txtGender.Text = ""
         txtHeight.Text = ""
         txtWeight.Text = ""
-        txtroom.Text = ""
-        txtBed.Text = ""
         txtPhysician.Text = ""
         txtEmail.Text = ""
         txtAddress.Text = ""
@@ -120,8 +118,6 @@
         txtGender.Text = strGender
         txtHeight.Text = intHeight
         txtWeight.Text = intWeight
-        txtroom.Text = strRoom
-        txtBed.Text = strBed
         txtPhysician.Text = strPhysician
         txtEmail.Text = strEmail
         txtAddress.Text = strAddress
