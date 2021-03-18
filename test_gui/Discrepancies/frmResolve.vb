@@ -24,7 +24,8 @@
         'call method to remove the selected discrepancy from the panel and list
         'RemoveItemFromFlowPanel(frmDiscrepancies.getSelectedDiscrepancyLabel())
         If Not String.IsNullOrEmpty(txtResolved.Text) Then
-            Discrepancies.ResolveDiscrepancies(discrepancyID, txtResolved.Text)
+            Dim strResolve As String = txtResolved.Text
+            Discrepancies.ResolveDiscrepancies(discrepancyID, strResolve)
             'close the resolve form 
             'Me.Close()
             MessageBox.Show("Reason recorded, System medication count updated and discrepancy resolved")
@@ -146,6 +147,7 @@
     '/*  ---   ----     ------------------------------------------------  */
 
     Private Sub txtResolved_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtResolved.KeyPress
-        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz1234567890/-")
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+= {}[]|:,.<>?`~")
     End Sub
+
 End Class
