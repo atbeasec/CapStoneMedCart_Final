@@ -56,7 +56,7 @@ Module PatientInformation
     '/*                                     connect the room combo box  */
     '/*                                     to the database.            */
     '/*******************************************************************/
-    Dim intMRNInitalValue As Integer
+    Dim intMRNInitalValue As Double
 
     '/*********************************************************************/
     '/*                   SUBROUTINE NAME:GetPatientInformation           */
