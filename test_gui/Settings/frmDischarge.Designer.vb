@@ -49,7 +49,6 @@ Partial Class frmDischarge
         Me.txtAddress = New System.Windows.Forms.TextBox()
         Me.txtMRN = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label21 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.txtWeight = New System.Windows.Forms.TextBox()
@@ -62,14 +61,21 @@ Partial Class frmDischarge
         Me.txtPhysician = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.cboRoom = New System.Windows.Forms.ComboBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.cboRoomandBed = New System.Windows.Forms.ComboBox()
+        Me.pnlAdmitRoomBed = New System.Windows.Forms.Panel()
+        Me.pnlDischargeRoomBed = New System.Windows.Forms.Panel()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Panel3.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.pnlDischarge.SuspendLayout()
         Me.pnlAdmit.SuspendLayout()
         Me.pnlRadioButtons.SuspendLayout()
         Me.pnlInformation.SuspendLayout()
+        Me.pnlAdmitRoomBed.SuspendLayout()
+        Me.pnlDischargeRoomBed.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label8
@@ -225,8 +231,6 @@ Partial Class frmDischarge
         '
         'pnlInformation
         '
-        Me.pnlInformation.Controls.Add(Me.cboRoom)
-        Me.pnlInformation.Controls.Add(Me.ComboBox1)
         Me.pnlInformation.Controls.Add(Me.txtState)
         Me.pnlInformation.Controls.Add(Me.Label2)
         Me.pnlInformation.Controls.Add(Me.txtZipCode)
@@ -240,8 +244,6 @@ Partial Class frmDischarge
         Me.pnlInformation.Controls.Add(Me.txtAddress)
         Me.pnlInformation.Controls.Add(Me.txtMRN)
         Me.pnlInformation.Controls.Add(Me.Label12)
-        Me.pnlInformation.Controls.Add(Me.Label21)
-        Me.pnlInformation.Controls.Add(Me.Label17)
         Me.pnlInformation.Controls.Add(Me.Label10)
         Me.pnlInformation.Controls.Add(Me.txtWeight)
         Me.pnlInformation.Controls.Add(Me.Label4)
@@ -266,6 +268,7 @@ Partial Class frmDischarge
         Me.txtState.Location = New System.Drawing.Point(561, 167)
         Me.txtState.MaxLength = 9
         Me.txtState.Name = "txtState"
+        Me.txtState.ReadOnly = True
         Me.txtState.Size = New System.Drawing.Size(151, 25)
         Me.txtState.TabIndex = 92
         '
@@ -288,6 +291,7 @@ Partial Class frmDischarge
         Me.txtZipCode.Location = New System.Drawing.Point(746, 166)
         Me.txtZipCode.MaxLength = 9
         Me.txtZipCode.Name = "txtZipCode"
+        Me.txtZipCode.ReadOnly = True
         Me.txtZipCode.Size = New System.Drawing.Size(151, 25)
         Me.txtZipCode.TabIndex = 77
         '
@@ -309,6 +313,7 @@ Partial Class frmDischarge
         Me.txtCity.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCity.Location = New System.Drawing.Point(378, 166)
         Me.txtCity.Name = "txtCity"
+        Me.txtCity.ReadOnly = True
         Me.txtCity.Size = New System.Drawing.Size(151, 25)
         Me.txtCity.TabIndex = 75
         '
@@ -342,6 +347,7 @@ Partial Class frmDischarge
         Me.txtPhone.Location = New System.Drawing.Point(748, 106)
         Me.txtPhone.MaxLength = 11
         Me.txtPhone.Name = "txtPhone"
+        Me.txtPhone.ReadOnly = True
         Me.txtPhone.Size = New System.Drawing.Size(149, 25)
         Me.txtPhone.TabIndex = 72
         '
@@ -363,6 +369,7 @@ Partial Class frmDischarge
         Me.txtEmail.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtEmail.Location = New System.Drawing.Point(562, 105)
         Me.txtEmail.Name = "txtEmail"
+        Me.txtEmail.ReadOnly = True
         Me.txtEmail.Size = New System.Drawing.Size(151, 25)
         Me.txtEmail.TabIndex = 71
         '
@@ -373,6 +380,7 @@ Partial Class frmDischarge
         Me.txtAddress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAddress.Location = New System.Drawing.Point(8, 166)
         Me.txtAddress.Name = "txtAddress"
+        Me.txtAddress.ReadOnly = True
         Me.txtAddress.Size = New System.Drawing.Size(337, 25)
         Me.txtAddress.TabIndex = 73
         '
@@ -384,6 +392,7 @@ Partial Class frmDischarge
         Me.txtMRN.Location = New System.Drawing.Point(8, 46)
         Me.txtMRN.MaxLength = 9
         Me.txtMRN.Name = "txtMRN"
+        Me.txtMRN.ReadOnly = True
         Me.txtMRN.Size = New System.Drawing.Size(150, 25)
         Me.txtMRN.TabIndex = 62
         '
@@ -398,27 +407,16 @@ Partial Class frmDischarge
         Me.Label12.TabIndex = 84
         Me.Label12.Text = "MRN:"
         '
-        'Label21
-        '
-        Me.Label21.AutoSize = True
-        Me.Label21.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label21.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label21.Location = New System.Drawing.Point(190, 83)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(43, 21)
-        Me.Label21.TabIndex = 83
-        Me.Label21.Text = "Bed:"
-        '
         'Label17
         '
         Me.Label17.AutoSize = True
         Me.Label17.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label17.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label17.Location = New System.Drawing.Point(5, 84)
+        Me.Label17.Location = New System.Drawing.Point(3, 0)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(58, 21)
+        Me.Label17.Size = New System.Drawing.Size(122, 21)
         Me.Label17.TabIndex = 82
-        Me.Label17.Text = "Room:"
+        Me.Label17.Text = "Room and Bed:"
         '
         'Label10
         '
@@ -439,6 +437,7 @@ Partial Class frmDischarge
         Me.txtWeight.Location = New System.Drawing.Point(749, 47)
         Me.txtWeight.MaxLength = 5
         Me.txtWeight.Name = "txtWeight"
+        Me.txtWeight.ReadOnly = True
         Me.txtWeight.Size = New System.Drawing.Size(148, 25)
         Me.txtWeight.TabIndex = 66
         '
@@ -461,6 +460,7 @@ Partial Class frmDischarge
         Me.txtHeight.Location = New System.Drawing.Point(563, 46)
         Me.txtHeight.MaxLength = 5
         Me.txtHeight.Name = "txtHeight"
+        Me.txtHeight.ReadOnly = True
         Me.txtHeight.Size = New System.Drawing.Size(150, 25)
         Me.txtHeight.TabIndex = 65
         '
@@ -482,6 +482,7 @@ Partial Class frmDischarge
         Me.txtGender.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtGender.Location = New System.Drawing.Point(378, 46)
         Me.txtGender.Name = "txtGender"
+        Me.txtGender.ReadOnly = True
         Me.txtGender.Size = New System.Drawing.Size(151, 25)
         Me.txtGender.TabIndex = 64
         '
@@ -503,6 +504,7 @@ Partial Class frmDischarge
         Me.txtBirthday.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtBirthday.Location = New System.Drawing.Point(193, 46)
         Me.txtBirthday.Name = "txtBirthday"
+        Me.txtBirthday.ReadOnly = True
         Me.txtBirthday.Size = New System.Drawing.Size(152, 25)
         Me.txtBirthday.TabIndex = 63
         '
@@ -513,6 +515,7 @@ Partial Class frmDischarge
         Me.txtPhysician.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPhysician.Location = New System.Drawing.Point(378, 107)
         Me.txtPhysician.Name = "txtPhysician"
+        Me.txtPhysician.ReadOnly = True
         Me.txtPhysician.Size = New System.Drawing.Size(151, 25)
         Me.txtPhysician.TabIndex = 70
         '
@@ -538,23 +541,82 @@ Partial Class frmDischarge
         Me.Label11.TabIndex = 68
         Me.Label11.Text = "DOB:"
         '
-        'cboRoom
+        'cboRoomandBed
         '
-        Me.cboRoom.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboRoom.FormattingEnabled = True
-        Me.cboRoom.Location = New System.Drawing.Point(193, 115)
-        Me.cboRoom.Name = "cboRoom"
-        Me.cboRoom.Size = New System.Drawing.Size(151, 25)
-        Me.cboRoom.TabIndex = 117
+        Me.cboRoomandBed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboRoomandBed.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboRoomandBed.FormattingEnabled = True
+        Me.cboRoomandBed.Location = New System.Drawing.Point(5, 31)
+        Me.cboRoomandBed.Name = "cboRoomandBed"
+        Me.cboRoomandBed.Size = New System.Drawing.Size(338, 25)
+        Me.cboRoomandBed.TabIndex = 118
         '
-        'ComboBox1
+        'pnlAdmitRoomBed
         '
-        Me.ComboBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(7, 115)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(151, 25)
-        Me.ComboBox1.TabIndex = 118
+        Me.pnlAdmitRoomBed.Controls.Add(Me.Label17)
+        Me.pnlAdmitRoomBed.Controls.Add(Me.cboRoomandBed)
+        Me.pnlAdmitRoomBed.Location = New System.Drawing.Point(501, 61)
+        Me.pnlAdmitRoomBed.Name = "pnlAdmitRoomBed"
+        Me.pnlAdmitRoomBed.Size = New System.Drawing.Size(352, 66)
+        Me.pnlAdmitRoomBed.TabIndex = 119
+        '
+        'pnlDischargeRoomBed
+        '
+        Me.pnlDischargeRoomBed.Controls.Add(Me.TextBox2)
+        Me.pnlDischargeRoomBed.Controls.Add(Me.TextBox1)
+        Me.pnlDischargeRoomBed.Controls.Add(Me.Label7)
+        Me.pnlDischargeRoomBed.Controls.Add(Me.Label6)
+        Me.pnlDischargeRoomBed.Location = New System.Drawing.Point(501, 133)
+        Me.pnlDischargeRoomBed.Name = "pnlDischargeRoomBed"
+        Me.pnlDischargeRoomBed.Size = New System.Drawing.Size(352, 66)
+        Me.pnlDischargeRoomBed.TabIndex = 120
+        Me.pnlDischargeRoomBed.Visible = False
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label6.Location = New System.Drawing.Point(3, 0)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(58, 21)
+        Me.Label6.TabIndex = 82
+        Me.Label6.Text = "Room:"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label7.Location = New System.Drawing.Point(169, 0)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(43, 21)
+        Me.Label7.TabIndex = 83
+        Me.Label7.Text = "Bed:"
+        '
+        'TextBox1
+        '
+        Me.TextBox1.BackColor = System.Drawing.Color.White
+        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(173, 24)
+        Me.TextBox1.MaxLength = 9
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.ReadOnly = True
+        Me.TextBox1.Size = New System.Drawing.Size(150, 25)
+        Me.TextBox1.TabIndex = 84
+        '
+        'TextBox2
+        '
+        Me.TextBox2.BackColor = System.Drawing.Color.White
+        Me.TextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox2.Location = New System.Drawing.Point(3, 24)
+        Me.TextBox2.MaxLength = 9
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.ReadOnly = True
+        Me.TextBox2.Size = New System.Drawing.Size(150, 25)
+        Me.TextBox2.TabIndex = 85
         '
         'frmDischarge
         '
@@ -562,6 +624,8 @@ Partial Class frmDischarge
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(982, 580)
+        Me.Controls.Add(Me.pnlDischargeRoomBed)
+        Me.Controls.Add(Me.pnlAdmitRoomBed)
         Me.Controls.Add(Me.pnlInformation)
         Me.Controls.Add(Me.pnlRadioButtons)
         Me.Controls.Add(Me.pnlAdmit)
@@ -578,6 +642,10 @@ Partial Class frmDischarge
         Me.pnlRadioButtons.PerformLayout()
         Me.pnlInformation.ResumeLayout(False)
         Me.pnlInformation.PerformLayout()
+        Me.pnlAdmitRoomBed.ResumeLayout(False)
+        Me.pnlAdmitRoomBed.PerformLayout()
+        Me.pnlDischargeRoomBed.ResumeLayout(False)
+        Me.pnlDischargeRoomBed.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -608,7 +676,6 @@ Partial Class frmDischarge
     Friend WithEvents txtAddress As TextBox
     Friend WithEvents txtMRN As TextBox
     Friend WithEvents Label12 As Label
-    Friend WithEvents Label21 As Label
     Friend WithEvents Label17 As Label
     Friend WithEvents Label10 As Label
     Friend WithEvents txtWeight As TextBox
@@ -622,6 +689,11 @@ Partial Class frmDischarge
     Friend WithEvents Label16 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents txtState As TextBox
-    Friend WithEvents cboRoom As ComboBox
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents cboRoomandBed As ComboBox
+    Friend WithEvents pnlAdmitRoomBed As Panel
+    Friend WithEvents pnlDischargeRoomBed As Panel
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label6 As Label
 End Class

@@ -43,6 +43,7 @@
 
     Private Sub frmDischarge_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Loadcmb()
+        PopulateAdmitRooms()
     End Sub
 
     Private Sub radAdmitPatient_CheckedChanged(sender As Object, e As EventArgs) Handles radAdmitPatient.CheckedChanged, radDischarge.CheckedChanged
@@ -57,6 +58,8 @@
             cmbAdmitPatients.SelectedIndex = -1
             cmbDischargePatients.SelectedIndex = -1
             clearPatientTextBoxes()
+            cboRoomandBed.Items.Clear()
+            PopulateAdmitRooms()
         ElseIf radDischarge.Checked = True Then
             pnlAdmit.Visible = False
             pnlDischarge.Visible = True
@@ -64,6 +67,7 @@
             cmbAdmitPatients.SelectedIndex = -1
             cmbDischargePatients.SelectedIndex = -1
             clearPatientTextBoxes()
+            cboRoomandBed.Items.Clear()
         End If
     End Sub
 
@@ -76,7 +80,7 @@
             Dim strPrimaryDoctor As String = "Dr " & dsPrimaryDoctor.Tables(0).Rows(0)(EnumList.Physician.FirstName) & " " & dsPrimaryDoctor.Tables(0).Rows(0)(EnumList.Physician.LastName)
 
             For Each dr As DataRow In dsPatientAdmit.Tables(0).Rows
-                populatePatientTextBoxes(dr(1), dr(6), dr(7), dr(8), dr(9), "N/A", "N/A", strPrimaryDoctor, dr(15), dr(10), dr(11), dr(12), dr(14), dr(13))
+                populatePatientTextBoxes(dr(1), dr(6), dr(7), dr(8), dr(9), strPrimaryDoctor, dr(15), dr(10), dr(11), dr(12), dr(14), dr(13))
             Next
         End If
     End Sub
@@ -91,7 +95,7 @@
             Dim dsPatientRoom As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT * FROM PatientRoom where Patient_TUID = '" & intPatientID & "'")
 
             For Each dr As DataRow In dsPatientDischarge.Tables(0).Rows
-                populatePatientTextBoxes(dr(1), dr(6), dr(7), dr(8), dr(9), dsPatientRoom.Tables(0).Rows(0)(1), dsPatientRoom.Tables(0).Rows(0)(2), strPrimaryDoctor, dr(15), dr(10), dr(11), dr(12), dr(14), dr(13))
+                populatePatientTextBoxes(dr(1), dr(6), dr(7), dr(8), dr(9), strPrimaryDoctor, dr(15), dr(10), dr(11), dr(12), dr(14), dr(13))
             Next
         End If
     End Sub
@@ -111,7 +115,7 @@
         txtZipCode.Text = ""
     End Sub
 
-    Private Sub populatePatientTextBoxes(ByRef intMRN As String, ByRef strDOB As String, ByRef strGender As String, ByRef intHeight As Integer, ByRef intWeight As Integer, ByRef strRoom As String, ByRef strBed As String,
+    Private Sub populatePatientTextBoxes(ByRef intMRN As String, ByRef strDOB As String, ByRef strGender As String, ByRef intHeight As Integer, ByRef intWeight As Integer,
                                          ByRef strPhysician As String, ByRef strEmail As String, ByRef strAddress As String, ByRef strCity As String, ByRef strState As String, ByRef intPhone As String, ByRef intZip As Integer)
         txtMRN.Text = intMRN
         txtBirthday.Text = strDOB
@@ -126,5 +130,13 @@
         txtPhone.Text = intPhone
         txtZipCode.Text = intZip
 
+    End Sub
+
+    Private Sub PopulateAdmitRooms()
+        cboRoomandBed.Items.Clear()
+        Dim dsRoomsandBeds As DataSet = CreateDatabase.ExecuteSelectQuery("Select Room_ID,Bed_Name from Rooms WHERE Active_Flag = '1' EXCEPT Select Room_TUID,Bed_Name from PatientRoom where PatientRoom.Active_Flag = '1'")
+        For Each dr As DataRow In dsRoomsandBeds.Tables(0).Rows
+            cboRoomandBed.Items.Add(dr(0) & " " & dr(1))
+        Next
     End Sub
 End Class
