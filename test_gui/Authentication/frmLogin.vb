@@ -16,7 +16,7 @@
             'call to set what sub form should be open
             frmMain.DetermineFormToOpen(1)
             'set the header for main to show who is logged in
-            frmMain.Text = "Medical Dispence - " & frmMain.Label2.Text
+            frmMain.Text = "Medical Dispence - " & LogIn.LoggedInFullName
             frmMain.Show()
             'make btnPatientRecords have focus
             frmMain.btnPatientRecords.PerformClick()
@@ -83,7 +83,8 @@
                 'call to set what sub form should be open
                 frmMain.DetermineFormToOpen(1)
                 'set the header for main to show who is logged in
-                frmMain.Text = "Medical Dispense - " & frmMain.Label2.Text
+                frmMain.Text = "Medical Dispense - " & LogIn.LoggedInFullName
+
                 frmMain.Show()
                 'make btnPatientRecords have focus
                 frmMain.btnPatientRecords.PerformClick()

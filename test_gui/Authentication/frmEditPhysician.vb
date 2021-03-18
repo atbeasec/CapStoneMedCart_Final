@@ -459,7 +459,6 @@ Public Class frmEditPhysician
         Dim strMiddleName As String = txtMiddleName.Text
         Dim strSalt As String = Nothing
         Dim strResults() As String = Nothing ' this will hold the salted, peppered, hashed password and the salt
-        Dim strHashedBarcode As String ' this will hold the peppered, hashed barcode
         strFirstName = Regex.Replace(strFirstName, "'", "''")
         strLastName = Regex.Replace(strLastName, "'", "''")
         strMiddleName = Regex.Replace(strMiddleName, "'", "''")
