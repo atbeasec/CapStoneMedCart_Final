@@ -55,6 +55,8 @@
             pnlAdmit.Visible = True
             pnlDischarge.Visible = False
             pnlInformation.Visible = True
+            pnlAdmitRoomBed.Visible = True
+            pnlDischargeRoomBed.Visible = False
             cmbAdmitPatients.SelectedIndex = -1
             cmbDischargePatients.SelectedIndex = -1
             clearPatientTextBoxes()
@@ -64,6 +66,8 @@
             pnlAdmit.Visible = False
             pnlDischarge.Visible = True
             pnlInformation.Visible = True
+            pnlAdmitRoomBed.Visible = False
+            pnlDischargeRoomBed.Visible = True
             cmbAdmitPatients.SelectedIndex = -1
             cmbDischargePatients.SelectedIndex = -1
             clearPatientTextBoxes()
