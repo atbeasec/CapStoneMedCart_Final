@@ -27,7 +27,7 @@
             Discrepancies.ResolveDiscrepancies(discrepancyID, txtResolved.Text)
             'close the resolve form 
             'Me.Close()
-            MessageBox.Show("Reason recorded and discrepancy resolved")
+            MessageBox.Show("Reason recorded, System medication count updated and discrepancy resolved")
             frmMain.OpenChildForm(frmDiscrepancies)
         Else
             MessageBox.Show("Please enter a reason to resolve the discrepancy")
