@@ -125,6 +125,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication\frmEditPhysician.Designer.vb">
+      <DependentUpon>frmEditPhysician.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Authentication\frmEditPhysician.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Inventory\AdHoc.vb" />
     <Compile Include="Inventory\API\APIDatabaseSelection.vb" />
     <Compile Include="Settings\AdminActions.vb" />
@@ -365,6 +371,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Authentication\frmEditPhysician.resx">
+      <DependentUpon>frmEditPhysician.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI Enhancements\frmProgressBar.resx">
       <DependentUpon>frmProgressBar.vb</DependentUpon>
     </EmbeddedResource>

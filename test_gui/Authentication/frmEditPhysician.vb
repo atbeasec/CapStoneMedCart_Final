@@ -1,9 +1,9 @@
 ﻿Imports System.Text
 Imports System.Text.RegularExpressions
 
-Public Class frmConfiguration
+Public Class frmEditPhysician
 
-    Public Enum AddAndRemoveUserEnum
+    Public Enum AddAndRemovePhysicianEnum
 
         name = 1
         username = 2
@@ -13,13 +13,13 @@ Public Class frmConfiguration
     End Enum
 
     '/*********************************************************************/
-    '/*                   SubProgram NAME: frmConfiguration_Load          */         
+    '/*                   SubProgram NAME: frmEditPhysician_Load          */         
     '/*********************************************************************/
     '/*                   WRITTEN BY:  Dylan Walter        		          */   
     '/*		         DATE CREATED: 		 2/10/2021                        */                             
     '/*********************************************************************/
     '/*  Subprogram PURPOSE:								              */             
-    '/*	 This  sub program is used to populate the flpUserInfo Flow       */
+    '/*	 This  sub program is used to populate the flpPhysicianInfo Flow       */
     '/* Layout Panel from the User Table and set the default radio button */ 
     '/*********************************************************************/
     '/*  CALLED BY:   	      						                      */                 
@@ -46,18 +46,19 @@ Public Class frmConfiguration
     '/*  WHO        WHEN            WHAT					               */             
     '/*  Dylan W    2/10/2021    Initial creation and pull data from DB   */
     '/*********************************************************************/
-    Private Sub frmConfiguration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-                                                  "User.Supervisor_Flag, User.Active_Flag From User;"
+    Private Sub frmEditPhysician_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim strFillSQL As String = "select Physician.Physician_ID, Physician.Physician_First_Name, Physician.Physician_Middle_Name," &
+                                    "Physician.Physician_Last_Name, Physician.Physician_Credentials, Physician.Physician_Phone_Number," &
+                                    "Physician.Physician_Fax_Number, Physician.Physician_Address, Physician.Physician_City," &
+                                    "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician;"
         Fill_Table(strFillSQL)
 
-        'have new users assigned as Nurses by default
-        rbtnNurse.Checked = True
-        btnSaveChanges.Visible = False
+        cmbCredentials.Items.AddRange({"Advisor", "Diagnose", "Prescribe"})
+        'btnSaveChanges.Visible = False
         btnCancel.Visible = False
 
-        CreateToolTips(pnlHeader, tpLabelHover)
-        AddHandlerToLabelClick(pnlHeader, AddressOf SortBySelectedLabel)
+        'CreateToolTips(pnlPhysicianHeader, tpLabelHover)
+        AddHandlerToLabelClick(pnlPhysicianHeader, AddressOf SortBySelectedLabel)
 
     End Sub
 
@@ -101,9 +102,9 @@ Public Class frmConfiguration
         BoldLabelToSortBy(sender, parent)
 
         'check If the user Is selecting a dispense history field to sort by
-        If parent.Name = pnlHeader.Name Then
+        If parent.Name = pnlPhysicianHeader.Name Then
 
-            ConfigurationSelectedFields(field)
+            EditPhysicianSelectedFields(field)
 
         End If
 
@@ -111,7 +112,7 @@ Public Class frmConfiguration
     End Sub
 
     '/*********************************************************************/
-    '/*                   SubProgram NAME: ConfigurationSelectedFields   */         
+    '/*                   SubProgram NAME: EditPhysicianSelectedFields   */         
     '/*********************************************************************/
     '/*                   WRITTEN BY:  Collin Krygier   		  */   
     '/*		         DATE CREATED: 		 2/14/2021                 */                             
@@ -130,7 +131,7 @@ Public Class frmConfiguration
     '/*	 field- an integer equal to the tag value of the selected label   */ 
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                  */             
-    '/*	 ConfigurationSelectedFields(Cint(Label1.Tag))   	              */
+    '/*	 EditPhysicianSelectedFields(Cint(Label1.Tag))   	              */
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
     '/*	none                                                              */
@@ -141,20 +142,20 @@ Public Class frmConfiguration
     '/*  ---   ----     ------------------------------------------------  */
     '/*  Collin Krygier  3/14/2021    Initial creation                    */
     '/*********************************************************************/
-    Private Sub ConfigurationSelectedFields(ByVal field As Integer)
+    Private Sub EditPhysicianSelectedFields(ByVal field As Integer)
 
         ' clear the controls as they will need to be rebuilt when sorting
         'flpPatientRecords.Controls.Clear()
 
         Select Case field
 
-            Case AddAndRemoveUserEnum.name
+            Case AddAndRemovePhysicianEnum.name
 
-            Case AddAndRemoveUserEnum.username
+            Case AddAndRemovePhysicianEnum.username
 
-            Case AddAndRemoveUserEnum.permissions
+            Case AddAndRemovePhysicianEnum.permissions
 
-            Case AddAndRemoveUserEnum.active
+            Case AddAndRemovePhysicianEnum.active
 
         End Select
 
@@ -173,7 +174,7 @@ Public Class frmConfiguration
     '/*	 created here, assigned handlers, and the contents of the panels  */
     '/*	 are updated in this routine                                      */
     '/*********************************************************************/
-    '/*  CALLED BY: frmConfiguration_Load  	      						  */           
+    '/*  CALLED BY: frmEditPhysician_Load  	      						  */           
     '/*                                                                     */         
     '/*********************************************************************/
     '/*  CALLS:										                      */                 
@@ -187,7 +188,7 @@ Public Class frmConfiguration
     '/* strName- Name of the user in the database                         */
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                  */             
-    '/*	   CreatePanel(flpUserInfo, strID9, strFirstName9, strAccess9)    */
+    '/*	   CreatePanel(flpPhysicianInfo, strID9, strFirstName9, strAccess9)    */
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
     '/*	pnl- is the pnl which we are creating for padding purposes        */
@@ -204,7 +205,7 @@ Public Class frmConfiguration
     '/*  WHO   WHEN     WHAT								              */             
     '/*  Collin Krygier  2/6/2021    Initial creation                     */
     '/*********************************************************************/
-    Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal strID As String, ByVal strName As String, ByVal strUsername As String, ByVal strAccess As String, ByVal strActive As String)
+    Public Sub CreatePanel_Physician(ByVal flpPannel As FlowLayoutPanel, ByVal strID As String, ByVal strName As String, ByVal strAccess As String, ByVal strActive As String)
 
         Dim pnl As Panel
         pnl = New Panel
@@ -216,7 +217,7 @@ Public Class frmConfiguration
         'Set panel properties
         With pnl
             .BackColor = Color.Gainsboro
-            .Size = New Size(flpUserInfo.Size.Width - 25, 47)
+            .Size = New Size(flpPhysicianInfo.Size.Width - 25, 47)
             .Name = "pnlIndividualPatientRecordPadding" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Padding = New Padding(0, 0, 0, 3)
@@ -226,7 +227,7 @@ Public Class frmConfiguration
         With pnlMainPanel
 
             .BackColor = Color.White
-            .Size = New Size(flpUserInfo.Size.Width - 25, 45)
+            .Size = New Size(flpPhysicianInfo.Size.Width - 25, 45)
             .Name = "pnlIndividualPatientRecord" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Dock = System.Windows.Forms.DockStyle.Top
@@ -254,7 +255,6 @@ Public Class frmConfiguration
         ' anywhere we have quotes except for the label names, we can call our Database and get method
         CreateIDLabel(pnlMainPanel, lblID, "lblID", lblName.Location.X - 15, INTTWENTY, strID, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID2, "lblNames", lblName.Location.X, INTTWENTY, strName, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID3, "lblUsername", lblUserName.Location.X, INTTWENTY, strUsername, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID4, "lblPermissions", lblPermissions.Location.X, INTTWENTY, strAccess, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID5, "lblStatus", lblStatus.Location.X, INTTWENTY, strActive, getPanelCount(flpPannel))
 
@@ -288,7 +288,7 @@ Public Class frmConfiguration
     '/*	 NONE                                                             */ 
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                  */             
-    '/*	   CreatePanel(flpUserInfo, strID9, strFirstName9, strAccess9)    */
+    '/*	   CreatePanel(flpPhysicianInfo, strID9, strFirstName9, strAccess9)    */
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
     '/*	strPrivilege- a string which will be returned by the function that*/
@@ -352,13 +352,13 @@ Public Class frmConfiguration
     '/*  WHO        WHEN            WHAT					               */             
     '/*  Dylan W    2/10/2021    Initial creation and check data in DB   */
     '/*********************************************************************/
-    Private Sub txtUsername_LostFocus(sender As Object, e As EventArgs) Handles txtUsername.LostFocus
+    Private Sub mtbPhone_LostFocus(sender As Object, e As EventArgs) Handles mtbPhone.LostFocus
         'String to be sent to CreateDatabase Module to exicute search to check if Username is already in the User Table
-        Dim strStatement = "SELECT COUNT(*) FROM User WHERE Username = '" & txtUsername.Text & "'"
+        Dim strStatement = "SELECT COUNT(*) FROM Physician WHERE Physician_Phone_Number = '" & mtbPhone.Text & "'"
         If ExecuteScalarQuery(strStatement) <> 0 Then
             MsgBox("A User already has that Username")
-            txtUsername.Focus()
-            txtUsername.Text = ""
+            mtbPhone.Focus()
+            'txtUsername.Text = ""
         End If
     End Sub
 
@@ -393,15 +393,13 @@ Public Class frmConfiguration
     '/*  WHO        WHEN            WHAT					               */             
     '/*  Dylan W    2/10/2021    Initial creation and check data in DB   */
     '/*********************************************************************/
-    Private Sub txtBarcode_LostFocus(sender As Object, e As EventArgs) Handles txtBarcode.LostFocus
+    Private Sub txtBarcode_LostFocus(sender As Object, e As EventArgs) Handles mtbFax.LostFocus
         ' Convert the barcode to the peppered hash
-        Dim strHashedBarcode = ConvertBarcodePepperAndHash(txtBarcode.Text)
+        Dim strStatement = "SELECT COUNT(*) FROM Physician WHERE Physician_Fax_Number = '" & mtbFax.Text & "'"
         'String to be sent to CreateDatabase Module to exicute search to check if Barcode is already in the User Table
-        Dim strStatement = "SELECT COUNT(*) FROM User WHERE Barcode = '" & strHashedBarcode & "'"
         If ExecuteScalarQuery(strStatement) <> 0 Then
             MsgBox("A User already has that Barcode")
-            txtBarcode.Focus()
-            txtBarcode.Text = ""
+            mtbFax.Focus()
         End If
     End Sub
 
@@ -451,51 +449,33 @@ Public Class frmConfiguration
     '/*********************************************************************/
 
 
-    Private Sub btnSaveUser_Click(sender As Object, e As EventArgs) Handles btnSaveUser.Click
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
 
         Dim intSupervisor As Integer = 0
         Dim intAdmin As Integer = 0
         Dim intActiveFlag As Integer = 1
-        Dim strPassword As String = txtPassword.Text
         Dim strLastName As String = txtLastName.Text
         Dim strFirstName As String = txtFirstName.Text
+        Dim strMiddleName As String = txtMiddleName.Text
         Dim strSalt As String = Nothing
         Dim strResults() As String = Nothing ' this will hold the salted, peppered, hashed password and the salt
         Dim strHashedBarcode As String ' this will hold the peppered, hashed barcode
         strFirstName = Regex.Replace(strFirstName, "'", "''")
         strLastName = Regex.Replace(strLastName, "'", "''")
+        strMiddleName = Regex.Replace(strMiddleName, "'", "''")
 
-        'check what Role the user will have
-        If rbtnAdministrator.Checked = True Then
-            intAdmin = 1
-        ElseIf rbtnSupervisor.Checked = True Then
-            intSupervisor = 1
-        End If
+
 
         'call CheckPassword Function to see if password mets security standards
-        If CheckPassword(strPassword) = False Then
-            MsgBox("Password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special characters !@#$%^&* ")
-            txtPassword.Focus()
-            ' make sure password and Confirm Password Match
-        ElseIf txtPassword.Text <> txtConfirmPassword.Text Then
-            MsgBox("Confirm Password must match Password")
-            txtConfirmPassword.Focus()
-            'Make Sure all fields are filled
-        ElseIf txtFirstName.Text = "" Or txtLastName.Text = "" Or txtUsername.Text = "" Or txtBarcode.Text = "" Then
+        'Make Sure all fields are filled
+        If txtFirstName.Text = "" Or txtLastName.Text = "" Or txtMiddleName.Text = "" Or mtbPhone.Text = "" Or mtbFax.Text = "" Then
             MsgBox("All Fields must be filled")
         Else
-            ' get the peppered hash of the password
-            strResults = LogIn.MakeSaltPepperAndHash(strPassword)
-            strPassword = strResults(0)
-            strSalt = strResults(1)
-
-            ' Convert the barcode to the peppered hash
-            strHashedBarcode = ConvertBarcodePepperAndHash(txtBarcode.Text)
 
             'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
 
-            Dim strStatement = "INSERT INTO USER(Username,Salt,Password,User_First_Name, User_Last_Name, Barcode, Admin_Flag, Supervisor_Flag, Active_Flag)" &
-            "VALUES('" & txtUsername.Text & "','" & strSalt & "','" & strPassword & "','" & strFirstName & "','" & strLastName & "','" & strHashedBarcode & "','" & intAdmin & "','" & intSupervisor & "','" & intActiveFlag & "')"
+            Dim strStatement = "INSERT INTO Physician(Physician_First_Name, Physician_Middle_Name, Physician_Last_Name, Physician_Credentials, Physician_Phone_Number, Physician_Fax_Number, Physician_Address, Physician_City, Physician_State, Physician_Zip_Code, Active_Flag)" &
+            "VALUES('" & strFirstName & "','" & strMiddleName & "','" & strLastName & "','" & cmbCredentials.SelectedItem & "','" & mtbPhone.Text & "','" & mtbFax.Text & "','" & txtAddress.Text & "','" & txtCity.Text & "','" & cmbState.SelectedItem & "','" & txtZipCode.Text & "','" & intActiveFlag & "')"
             ExecuteInsertQuery(strStatement)
 
 
@@ -504,17 +484,8 @@ Public Class frmConfiguration
             Dim strNewID As String = ExecuteScalarQuery(strStatement)
             Dim strFullName As String = strFirstName & " " & strLastName
 
-            Dim strRole As String
-            'check what Role the user will have
-            If rbtnAdministrator.Checked = True Then
-                strRole = "Admin"
-            ElseIf rbtnSupervisor.Checked = True Then
-                strRole = "Supervisor"
-            Else strRole = "Nurse"
-            End If
-
             ' do query to return the record that was just created and return the result into the create panel method below
-            CreatePanel(flpUserInfo, strNewID, strFullName, txtUsername.Text, strRole, "Yes")
+            CreatePanel_Physician(flpPhysicianInfo, strNewID, strFullName, cmbCredentials.SelectedItem, "Yes")
 
 
 
@@ -522,12 +493,9 @@ Public Class frmConfiguration
 
             'clear all text boxes
             txtFirstName.Text = ""
-                txtLastName.Text = ""
-                txtUsername.Text = ""
-                txtBarcode.Text = ""
-                txtPassword.Text = ""
-                txtConfirmPassword.Text = ""
-            End If
+            txtLastName.Text = ""
+            txtMiddleName.Text = ""
+        End If
 
 
     End Sub
@@ -608,223 +576,167 @@ Public Class frmConfiguration
         Return bolSecure
     End Function
 
-    Private Sub txtFirst_Last_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFirstName.KeyPress, txtLastName.KeyPress
+    Private Sub txtFirst_Last_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtMiddleName.KeyPress, txtLastName.KeyPress, txtFirstName.KeyPress
         KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*()/.,<>=+")
     End Sub
 
-    Private Sub txtPasswordKeypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress, txtConfirmPassword.KeyPress, txtBarcode.KeyPress, txtUsername.KeyPress
-        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()/.,<>=+")
-    End Sub
+    'Private Sub btnSaveChanges_Click(sender As Object, e As EventArgs) Handles btnSaveChanges.Click
+    '    Dim intID As Integer = txtID.Text
+    '    Dim strStatement = "SELECT COUNT(*) FROM User WHERE Username = '" & txtUsername.Text & "'" & " OR User_ID = '" & intID & "'"
+    '    Dim intSupervisor As Integer = 0
+    '    Dim intAdmin As Integer = 0
+    '    Dim strPassword As String = txtPassword.Text
+    '    Dim strLastName As String = txtLastName.Text
+    '    Dim strFirstName As String = txtFirstName.Text
+    '    Dim strSalt As String = Nothing
+    '    Dim strResults() As String = Nothing ' this will hold the salted, peppered, hashed password and the salt
+    '    Dim strHashedBarcode As String
+    '    strFirstName = Regex.Replace(strFirstName, "'", "''")
+    '    strLastName = Regex.Replace(strLastName, "'", "''")
 
-    Private Sub btnSaveChanges_Click(sender As Object, e As EventArgs) Handles btnSaveChanges.Click
-        Dim intID As Integer = txtID.Text
-        Dim strStatement = "SELECT COUNT(*) FROM User WHERE Username = '" & txtUsername.Text & "'" & " OR User_ID = '" & intID & "'"
-        Dim intSupervisor As Integer = 0
-        Dim intAdmin As Integer = 0
-        Dim strPassword As String = txtPassword.Text
-        Dim strLastName As String = txtLastName.Text
-        Dim strFirstName As String = txtFirstName.Text
-        Dim strSalt As String = Nothing
-        Dim strResults() As String = Nothing ' this will hold the salted, peppered, hashed password and the salt
-        Dim strHashedBarcode As String
-        strFirstName = Regex.Replace(strFirstName, "'", "''")
-        strLastName = Regex.Replace(strLastName, "'", "''")
+    '    'check what Role the user will have
+    '    If rbtnAdministrator.Checked = True Then
+    '        intAdmin = 1
+    '    ElseIf rbtnSupervisor.Checked = True Then
+    '        intSupervisor = 1
+    '    End If
 
-        'check what Role the user will have
-        If rbtnAdministrator.Checked = True Then
-            intAdmin = 1
-        ElseIf rbtnSupervisor.Checked = True Then
-            intSupervisor = 1
-        End If
+    '    'check if the user is changing the password and ran if yes
 
-        'check if the user is changing the password and ran if yes
+    '    If txtConfirmPassword.Text <> "" And txtPassword.Text <> "" Then
+    '        'if it returns 2 then the username was changed to something already in the database 
+    '        If ExecuteScalarQuery(strStatement) = 2 Then
+    '            MsgBox("A User already has that Username")
+    '            'call CheckPassword Function to see if password mets security standards
+    '        ElseIf CheckPassword(strPassword) = False Then
+    '            MsgBox("Password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special characters !@#$%^&* ")
+    '            txtPassword.Focus()
+    '            ' make sure password and Confirm Password Match
+    '        ElseIf txtPassword.Text <> txtConfirmPassword.Text Then
+    '            MsgBox("Confirm Password must match Password")
+    '            txtConfirmPassword.Focus()
+    '            'Make Sure all fields are filled
+    '        ElseIf txtFirstName.Text = "" Or txtLastName.Text = "" Or txtUsername.Text = "" Then
+    '            MsgBox("All Fields must be filled12")
+    '        Else
+    '            ' get the peppered hash of the password
+    '            strResults = LogIn.MakeSaltPepperAndHash(strPassword)
+    '            strPassword = strResults(0)
+    '            strSalt = strResults(1)
 
-        If txtConfirmPassword.Text <> "" And txtPassword.Text <> "" Then
-            'if it returns 2 then the username was changed to something already in the database 
-            If ExecuteScalarQuery(strStatement) = 2 Then
-                MsgBox("A User already has that Username")
-                'call CheckPassword Function to see if password mets security standards
-            ElseIf CheckPassword(strPassword) = False Then
-                MsgBox("Password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special characters !@#$%^&* ")
-                txtPassword.Focus()
-                ' make sure password and Confirm Password Match
-            ElseIf txtPassword.Text <> txtConfirmPassword.Text Then
-                MsgBox("Confirm Password must match Password")
-                txtConfirmPassword.Focus()
-                'Make Sure all fields are filled
-            ElseIf txtFirstName.Text = "" Or txtLastName.Text = "" Or txtUsername.Text = "" Then
-                MsgBox("All Fields must be filled12")
-            Else
-                ' get the peppered hash of the password
-                strResults = LogIn.MakeSaltPepperAndHash(strPassword)
-                strPassword = strResults(0)
-                strSalt = strResults(1)
-
-                If txtBarcode.Text = "" Then
-                    'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
-                    strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',Salt='" & strSalt & "',Password='" & strPassword & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "',Active_Flag=1 WHERE User_ID='" & txtID.Text & "';"
-                    ExecuteInsertQuery(strStatement)
-                Else
-                    ' Convert the barcode to the peppered hash
-                    strHashedBarcode = ConvertBarcodePepperAndHash(txtBarcode.Text)
-                    'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
-                    strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',Salt='" & strSalt & "',Password='" & strPassword & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Barcode='" & strHashedBarcode & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "',Active_Flag=1 WHERE User_ID='" & txtID.Text & "';"
-                    ExecuteInsertQuery(strStatement)
-                End If
+    '            If txtBarcode.Text = "" Then
+    '                'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
+    '                strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',Salt='" & strSalt & "',Password='" & strPassword & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "',Active_Flag=1 WHERE User_ID='" & txtID.Text & "';"
+    '                ExecuteInsertQuery(strStatement)
+    '            Else
+    '                ' Convert the barcode to the peppered hash
+    '                strHashedBarcode = ConvertBarcodePepperAndHash(txtBarcode.Text)
+    '                'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
+    '                strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',Salt='" & strSalt & "',Password='" & strPassword & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Barcode='" & strHashedBarcode & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "',Active_Flag=1 WHERE User_ID='" & txtID.Text & "';"
+    '                ExecuteInsertQuery(strStatement)
+    '            End If
 
 
 
-                'clear all text boxes and change button visibility back to default 
-                txtFirstName.Text = ""
-                txtLastName.Text = ""
-                txtUsername.Text = ""
-                txtBarcode.Text = ""
-                txtPassword.Text = ""
-                txtConfirmPassword.Text = ""
-                txtID.Text = ""
-                btnCancel.Visible = False
-                btnSaveChanges.Visible = False
-                btnSaveUser.Visible = True
-            End If
-        End If
+    '            'clear all text boxes and change button visibility back to default 
+    '            txtFirstName.Text = ""
+    '            txtLastName.Text = ""
+    '            txtUsername.Text = ""
+    '            txtBarcode.Text = ""
+    '            txtPassword.Text = ""
+    '            txtConfirmPassword.Text = ""
+    '            txtID.Text = ""
+    '            btnCancel.Visible = False
+    '            btnSaveChanges.Visible = False
+    '            btnSaveUser.Visible = True
+    '        End If
+    '    End If
 
 
 
-        'check if the user is changing the password and ran if no
-        If txtConfirmPassword.Text = "" And txtPassword.Text = "" And txtID.Text <> "" Then
-            'if it returns 2 then the username was changed to something already in the database 
-            If ExecuteScalarQuery(strStatement) = 2 Then
-                MsgBox("A User already has that Username")
-                'call CheckPassword Function to see if password mets security standards
-                ' make sure password and Confirm Password Match
-            ElseIf txtPassword.Text <> txtConfirmPassword.Text Then
-                MsgBox("Confirm Password must match Password")
-                txtConfirmPassword.Focus()
-                'Make Sure all fields are filled
-            ElseIf txtFirstName.Text = "" Or txtLastName.Text = "" Or txtUsername.Text = "" Then
-                MsgBox("All Fields must be filled56")
-            Else
-                If txtBarcode.Text = "" Then
-                    'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
-                    strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "',Active_Flag=1  WHERE User_ID='" & txtID.Text & "';"
-                    ExecuteInsertQuery(strStatement)
-                Else
-                    ' Convert the barcode to the peppered hash
-                    strHashedBarcode = ConvertBarcodePepperAndHash(txtBarcode.Text)
-                    'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
-                    strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Barcode='" & strHashedBarcode & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "',Active_Flag=1  WHERE User_ID='" & txtID.Text & "';"
-                    ExecuteInsertQuery(strStatement)
-                End If
+    '    'check if the user is changing the password and ran if no
+    '    If txtConfirmPassword.Text = "" And txtPassword.Text = "" And txtID.Text <> "" Then
+    '        'if it returns 2 then the username was changed to something already in the database 
+    '        If ExecuteScalarQuery(strStatement) = 2 Then
+    '            MsgBox("A User already has that Username")
+    '            'call CheckPassword Function to see if password mets security standards
+    '            ' make sure password and Confirm Password Match
+    '        ElseIf txtPassword.Text <> txtConfirmPassword.Text Then
+    '            MsgBox("Confirm Password must match Password")
+    '            txtConfirmPassword.Focus()
+    '            'Make Sure all fields are filled
+    '        ElseIf txtFirstName.Text = "" Or txtLastName.Text = "" Or txtUsername.Text = "" Then
+    '            MsgBox("All Fields must be filled56")
+    '        Else
+    '            If txtBarcode.Text = "" Then
+    '                'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
+    '                strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "',Active_Flag=1  WHERE User_ID='" & txtID.Text & "';"
+    '                ExecuteInsertQuery(strStatement)
+    '            Else
+    '                ' Convert the barcode to the peppered hash
+    '                strHashedBarcode = ConvertBarcodePepperAndHash(txtBarcode.Text)
+    '                'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
+    '                strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Barcode='" & strHashedBarcode & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "',Active_Flag=1  WHERE User_ID='" & txtID.Text & "';"
+    '                ExecuteInsertQuery(strStatement)
+    '            End If
 
 
 
-                'clear all text boxes and change button visibility back to default 
-                txtFirstName.Text = ""
-                txtLastName.Text = ""
-                txtUsername.Text = ""
-                txtBarcode.Text = ""
-                txtPassword.Text = ""
-                txtConfirmPassword.Text = ""
-                btnCancel.Visible = False
-                btnSaveChanges.Visible = False
-                btnSaveUser.Visible = True
-            End If
-        End If
+    '            'clear all text boxes and change button visibility back to default 
+    '            txtFirstName.Text = ""
+    '            txtLastName.Text = ""
+    '            txtUsername.Text = ""
+    '            txtBarcode.Text = ""
+    '            txtPassword.Text = ""
+    '            txtConfirmPassword.Text = ""
+    '            btnCancel.Visible = False
+    '            btnSaveChanges.Visible = False
+    '            btnSaveUser.Visible = True
+    '        End If
+    '    End If
 
-        Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-                                      "User.Supervisor_Flag, User.Active_Flag From User;"
-        Fill_Table(strFillSQL)
-    End Sub
+    '    Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
+    '                                  "User.Supervisor_Flag, User.Active_Flag From User;"
+    '    Fill_Table(strFillSQL)
+    'End Sub
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        'clear all text boxes and change button visibility back to default 
-        txtFirstName.Text = ""
-        txtLastName.Text = ""
-        txtUsername.Text = ""
-        txtBarcode.Text = ""
-        txtPassword.Text = ""
-        txtConfirmPassword.Text = ""
-        btnCancel.Visible = False
-        btnSaveChanges.Visible = False
-        btnSaveUser.Visible = True
-    End Sub
-
-    Private Sub btnPasswordEye_Click(sender As Object, e As EventArgs) Handles btnPasswordEye.Click
-        'If checked then password is visible as plain text
-        If txtPassword.UseSystemPasswordChar = False Then
-
-            txtPassword.UseSystemPasswordChar = True
-            'If unchecked then password is visible as *
-        Else
-            txtPassword.UseSystemPasswordChar = False
-
-        End If
-    End Sub
-
-    Private Sub btnConfirmEye_Click(sender As Object, e As EventArgs) Handles btnConfirmEye.Click
-        'If checked then password is visible as plain text
-        If txtConfirmPassword.UseSystemPasswordChar = False Then
-
-            txtConfirmPassword.UseSystemPasswordChar = True
-            'If unchecked then password is visible as *
-        Else
-            txtConfirmPassword.UseSystemPasswordChar = False
-
-        End If
-    End Sub
-
-    Private Sub SearchIcon_Click(sender As Object, e As EventArgs) Handles pnlSearch.Click
-        Dim strFillSQL As String
-        strFillSQL = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-                                                       "User.Supervisor_Flag, User.Active_Flag From User WHERE Username LIKE '" & txtSearchBox.Text & "%' Or User_First_Name LIKE '" & txtSearchBox.Text & "%' Or User_Last_Name LIKE '" & txtSearchBox.Text & "%';"
-        Fill_Table(strFillSQL)
 
     End Sub
 
-    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearchBox.TextChanged
-        Dim strFillSQL As String
+    'Private Sub SearchIcon_Click(sender As Object, e As EventArgs) Handles pnlSearch.Click
+    '    Dim strFillSQL As String
+    '    strFillSQL = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
+    '                                                   "User.Supervisor_Flag, User.Active_Flag From User WHERE Username LIKE '" & txtSearchBox.Text & "%' Or User_First_Name LIKE '" & txtSearchBox.Text & "%' Or User_Last_Name LIKE '" & txtSearchBox.Text & "%';"
+    '    Fill_Table(strFillSQL)
 
-        If txtSearchBox.Text = "" Then
-            strFillSQL = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-                                                  "User.Supervisor_Flag, User.Active_Flag From User;"
-            Fill_Table(strFillSQL)
-
-        End If
-
-
-
-    End Sub
+    'End Sub
+    'End Sub
 
     Public Sub Fill_Table(ByVal strFillSQL As String)
-        flpUserInfo.Controls.Clear()
-        Dim dsUserInfo As DataSet = CreateDatabase.ExecuteSelectQuery(strFillSQL)
+        flpPhysicianInfo.Controls.Clear()
+        Dim dsPhysicianInfo As DataSet = CreateDatabase.ExecuteSelectQuery(strFillSQL)
 
 
 
-        For Each item As DataRow In dsUserInfo.Tables(0).Rows()
-            With dsUserInfo.Tables(0)
+        For Each item As DataRow In dsPhysicianInfo.Tables(0).Rows()
+            With dsPhysicianInfo.Tables(0)
                 'grab first name and last name and merge into one string
-                Dim strFirst As String = item.Item(2)
+                Dim strFirst As String = item.Item(1)
                 Dim strLast As String = item.Item(3)
                 Dim strName = strFirst & " " & strLast
                 Dim strActive As String = ""
 
-                If (item.Item(6)) = 1 Then
+                If (item.Item(11)) = 1 Then
                     strActive = "Yes"
                 Else strActive = "No"
                 End If
                 'check what role the person has, if adminis 1 then it does not matter what Supervisor is 
                 'if admin is 0 then check supervisor. If both admin and supervidor are 0 then the 
                 'user is a nurse
-                Dim strRole As String
-                If (item.Item(4)) = 1 Then
-                    strRole = "Admin"
-                ElseIf (item.Item(5)) = 1 Then
-                    strRole = "Supervisor"
-                Else strRole = "Nurse"
-                End If
+                Dim strRole As String = item.Item(4)
 
                 'populate data into panels
-                CreatePanel(flpUserInfo, item.Item(0), strName, item.Item(1),
+                CreatePanel_Physician(flpPhysicianInfo, item.Item(0), strName,
                                strRole, strActive)
 
             End With
@@ -832,17 +744,14 @@ Public Class frmConfiguration
     End Sub
 
 
-    Private Sub Search_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearchBox.KeyPress
-        If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
-            e.KeyChar = ChrW(0)
-            e.Handled = True
-            Dim strFillSQL = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-                                                       "User.Supervisor_Flag, User.Active_Flag From User WHERE Username LIKE '" & txtSearchBox.Text & "%' Or User_First_Name LIKE '" & txtSearchBox.Text & "%' Or User_Last_Name LIKE '" & txtSearchBox.Text & "%';"
-            Fill_Table(strFillSQL)
-        End If
-    End Sub
+    'Private Sub Search_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearchBox.KeyPress
+    '    If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
+    '        e.KeyChar = ChrW(0)
+    '        e.Handled = True
+    '        Dim strFillSQL = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
+    '                                                   "User.Supervisor_Flag, User.Active_Flag From User WHERE Username LIKE '" & txtSearchBox.Text & "%' Or User_First_Name LIKE '" & txtSearchBox.Text & "%' Or User_Last_Name LIKE '" & txtSearchBox.Text & "%';"
+    '        Fill_Table(strFillSQL)
+    '    End If
+    'End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        frmEditPhysician.Show()
-    End Sub
 End Class

@@ -65,6 +65,7 @@ Partial Class frmConfiguration
         Me.txtSearchBox = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.tpLabelHover = New System.Windows.Forms.ToolTip(Me.components)
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel5.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -538,12 +539,22 @@ Partial Class frmConfiguration
         Me.Label12.TabIndex = 176
         Me.Label12.Text = "First Name:"
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(182, 637)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 188
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'frmConfiguration
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1091, 672)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Panel6)
         Me.Controls.Add(Me.txtID)
         Me.Controls.Add(Me.btnCancel)
@@ -633,4 +644,5 @@ Partial Class frmConfiguration
     Friend WithEvents txtSearchBox As TextBox
     Friend WithEvents Label12 As Label
     Friend WithEvents tpLabelHover As ToolTip
+    Friend WithEvents Button1 As Button
 End Class
