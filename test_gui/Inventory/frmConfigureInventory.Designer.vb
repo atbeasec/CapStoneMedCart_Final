@@ -58,11 +58,9 @@ Partial Class frmConfigureInventory
         Me.Label32 = New System.Windows.Forms.Label()
         Me.lblQuantity = New System.Windows.Forms.Label()
         Me.lblStrength = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.lblDrawerNumber = New System.Windows.Forms.Label()
+        Me.lblDrawerNum = New System.Windows.Forms.Label()
         Me.btnAddToDrawer = New System.Windows.Forms.Button()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.btnDecrementDividers = New System.Windows.Forms.Button()
         Me.btnIncrementDividers = New System.Windows.Forms.Button()
@@ -531,25 +529,15 @@ Partial Class frmConfigureInventory
         Me.lblStrength.Tag = "3"
         Me.lblStrength.Text = "Strength"
         '
-        'Label2
+        'lblDrawerNum
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(12, 37)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(74, 25)
-        Me.Label2.TabIndex = 44
-        Me.Label2.Text = "Drawer"
-        '
-        'lblDrawerNumber
-        '
-        Me.lblDrawerNumber.AutoSize = True
-        Me.lblDrawerNumber.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDrawerNumber.Location = New System.Drawing.Point(80, 37)
-        Me.lblDrawerNumber.Name = "lblDrawerNumber"
-        Me.lblDrawerNumber.Size = New System.Drawing.Size(27, 25)
-        Me.lblDrawerNumber.TabIndex = 45
-        Me.lblDrawerNumber.Text = "N"
+        Me.lblDrawerNum.AutoSize = True
+        Me.lblDrawerNum.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDrawerNum.Location = New System.Drawing.Point(12, 37)
+        Me.lblDrawerNum.Name = "lblDrawerNum"
+        Me.lblDrawerNum.Size = New System.Drawing.Size(74, 25)
+        Me.lblDrawerNum.TabIndex = 44
+        Me.lblDrawerNum.Text = "Drawer"
         '
         'btnAddToDrawer
         '
@@ -560,7 +548,7 @@ Partial Class frmConfigureInventory
         Me.btnAddToDrawer.ForeColor = System.Drawing.Color.White
         Me.btnAddToDrawer.Image = CType(resources.GetObject("btnAddToDrawer.Image"), System.Drawing.Image)
         Me.btnAddToDrawer.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnAddToDrawer.Location = New System.Drawing.Point(834, 1)
+        Me.btnAddToDrawer.Location = New System.Drawing.Point(834, 6)
         Me.btnAddToDrawer.Name = "btnAddToDrawer"
         Me.btnAddToDrawer.Size = New System.Drawing.Size(197, 32)
         Me.btnAddToDrawer.TabIndex = 32
@@ -578,16 +566,6 @@ Partial Class frmConfigureInventory
         Me.Label9.Size = New System.Drawing.Size(70, 21)
         Me.Label9.TabIndex = 168
         Me.Label9.Text = "Dividers:"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(107, 37)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(115, 25)
-        Me.Label4.TabIndex = 170
-        Me.Label4.Text = "Information"
         '
         'Label7
         '
@@ -735,11 +713,9 @@ Partial Class frmConfigureInventory
         Me.Controls.Add(Me.btnIncrementDividers)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.btnAddToDrawer)
-        Me.Controls.Add(Me.lblDrawerNumber)
-        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.lblDrawerNum)
         Me.Controls.Add(Me.flpMedication)
         Me.Controls.Add(Me.pnlHeader)
         Me.Controls.Add(Me.pnlLayoutButtons)
@@ -789,12 +765,10 @@ Partial Class frmConfigureInventory
     Friend WithEvents Label32 As Label
     Friend WithEvents lblQuantity As Label
     Friend WithEvents lblStrength As Label
-    Friend WithEvents Label2 As Label
-    Friend WithEvents lblDrawerNumber As Label
+    Friend WithEvents lblDrawerNum As Label
     Friend WithEvents btnAddToDrawer As Button
     Friend WithEvents lblActions As Label
     Friend WithEvents Label9 As Label
-    Friend WithEvents Label4 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents btnDecrementDividers As Button
     Friend WithEvents btnIncrementDividers As Button

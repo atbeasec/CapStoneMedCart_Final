@@ -219,7 +219,7 @@
 
     Private Sub UpdateDrawerLabel(sender As Object, e As EventArgs)
 
-        lblDrawerNumber.Text = CStr(sender.tabIndex)
+        lblDrawerNum.Text = "Drawer " & CStr(sender.tabIndex) & " Information"
 
     End Sub
 
