@@ -64,6 +64,8 @@
         If Not cmbDischargePatients.SelectedIndex = -1 Then
             Dim intPatientID As Integer = intDischargePatientID(cmbDischargePatients.SelectedIndex)
             CreateDatabase.ExecuteInsertQuery("Update Patient SET Active_Flag = 0 WHERE Patient_ID = '" & intPatientID & "'")
+            Dim dsRoomandBed As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT Room_TUID,Bed_Name from PatientRoom where Patient_TUID = '" & intPatientID & "' AND Active_Flag = '1'")
+            CreateDatabase.ExecuteInsertQuery("UPDATE PatientRoom SET Active_Flag = '0' WHERE Patient_TUID = '" & intPatientID & "' AND Room_TUID = '" & dsRoomandBed.Tables(0).Rows(0)(0) & "' AND Bed_Name = '" & dsRoomandBed.Tables(0).Rows(0)(1) & "'")
             Loadcmb()
             clearPatientTextBoxes()
         Else
