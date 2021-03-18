@@ -35,8 +35,24 @@
             strArraySplit = strRoomandBed.Split(" ")
             Dim intPatientID As Integer = intAdmitPatientID(cmbAdmitPatients.SelectedIndex)
             CreateDatabase.ExecuteInsertQuery("Update Patient SET Active_Flag = 1 WHERE Patient_ID = '" & intPatientID & "'")
-            Loadcmb()
-            clearPatientTextBoxes()
+
+            ''check if patient was already in that room before
+            '' if the room record is already in database reactivate
+            Dim strCheck As String = CreateDatabase.ExecuteScalarQuery("SELECT Room_TUID FROM PatientRoom where Patient_TUID = '" & intPatientID & "' AND Room_TUID = '" & strArraySplit(0) & "' AND Bed_Name = '" & strArraySplit(1) & "' AND Active_Flag = '0'")
+            'check if the sql statement returned anything
+            If IsNothing(strCheck) Then
+                'if nothing is returned that record is not in the database so insert
+                CreateDatabase.ExecuteInsertQuery("INSERT INTO PatientRoom(Patient_TUID,Room_TUID,Bed_Name,Active_Flag) VALUES('" & intPatientID & "', '" & strArraySplit(0) & "', '" & strArraySplit(1) & "','1')")
+                Loadcmb()
+                clearPatientTextBoxes()
+                PopulateAdmitRooms()
+            Else
+                'if it was in the database reactivate it
+                Loadcmb()
+                clearPatientTextBoxes()
+                PopulateAdmitRooms()
+            End If
+
         End If
     End Sub
     '/*********************************************************************/
