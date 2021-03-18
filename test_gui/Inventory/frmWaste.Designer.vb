@@ -66,6 +66,7 @@ Partial Class frmWaste
         '
         'cboMedication
         '
+        Me.cboMedication.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboMedication.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboMedication.FormattingEnabled = True
         Me.cboMedication.Location = New System.Drawing.Point(29, 102)
@@ -99,6 +100,7 @@ Partial Class frmWaste
         '
         'cboWitness
         '
+        Me.cboWitness.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboWitness.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboWitness.FormattingEnabled = True
         Me.cboWitness.Location = New System.Drawing.Point(3, 38)
@@ -225,7 +227,7 @@ Partial Class frmWaste
         Me.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnBack.UseVisualStyleBackColor = False
         '
-        'Waste
+        'frmWaste
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -236,7 +238,7 @@ Partial Class frmWaste
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.cboMedication)
         Me.Controls.Add(Me.pnlRadioButtons)
-        Me.Name = "Waste"
+        Me.Name = "frmWaste"
         Me.Text = "Waste"
         Me.pnlRadioButtons.ResumeLayout(False)
         Me.pnlRadioButtons.PerformLayout()
