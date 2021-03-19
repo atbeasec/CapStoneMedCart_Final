@@ -28,7 +28,16 @@ Module AdHoc
     '/* database table.
     '/*******************************************************************/
     '/*  GLOBAL VARIABLE LIST (Alphabetically):			                */
-    '/*						  	 (NONE)			                        */
+    '/*	intMedID -- arraylist that sits parallel to the comboBox for the medications
+    '/*             this array will have the Medication ID inserted in it in the 
+    '/*             same order that the medications are added to the combo box so that
+    '/*             you can reference the index of the combo box in this array and get the
+    '/*             medication ID*/
+    '/*	intPatientID  arraylist that sits parallel to the comboBox for the Patients
+    '/*             this array will have the Patients ID inserted in it in the 
+    '/*             same order that the Patients are added to the combo box so that
+    '/*             you can reference the index of the combo box in this array and get the
+    '/*             Patients ID*/
     '/*******************************************************************/
     '/* COMPILATION NOTES:								                */
     '/* 											                    */
@@ -43,6 +52,9 @@ Module AdHoc
     '/*  WHO                     WHEN        WHAT						*/
     '/*  Alexander Beasecker    1/25/2021   Initial creation            */
     '/*******************************************************************/
+    Dim intPatientID As New ArrayList
+    Dim intMedID As New ArrayList
+
 
     '/*********************************************************************/
     '/*                   SUBROUTINE NAME:InsertAdHoc                     */
@@ -181,15 +193,17 @@ Module AdHoc
     '/*********************************************************************/
     Public Sub GetAllMedicationsForListbox()
         Dim Strdatacommand As String
+        intMedID.Clear()
         ' Currently the medication display is appending the RXCUI Number on too the medication
         ' name, as searching by name alone could cause problems if medication names can repeat
-        Strdatacommand = "Select Drug_Name, RXCUI_ID FROM Medication INNER JOIN DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE DrawerMedication.Active_Flag = 1"
+        Strdatacommand = "Select Drug_Name, RXCUI_ID, Medication_ID FROM Medication INNER JOIN DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE DrawerMedication.Active_Flag = 1"
 
         Dim dsMedicationDataSet As DataSet = New DataSet
         dsMedicationDataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
         'add medication name and RXCUI to listbox
         For Each dr As DataRow In dsMedicationDataSet.Tables(0).Rows
             frmAdHockDispense.cmbMedications.Items.Add(dr(0) & "--" & dr(1))
+            intMedID.Add(dr(2))
         Next
     End Sub
 
@@ -299,11 +313,12 @@ Module AdHoc
     Public Sub PopulatePatientsAdhoc()
         'clear patientname listbox
         frmAdHockDispense.cmbPatientName.Items.Clear()
+        intPatientID.Clear()
         'get patient name, first, last, and MRN number
         'MRN is appended on too the end currently because search just based on name will not work
         ' if system has multiple patients with the same name
         Dim Strdatacommand As String
-        Strdatacommand = "SELECT Patient_First_Name, Patient_Last_Name, MRN_Number FROM Patient WHERE Active_Flag = 1 Order By Patient_Last_Name, Patient_First_Name"
+        Strdatacommand = "SELECT Patient_First_Name, Patient_Last_Name, MRN_Number, Patient_ID FROM Patient WHERE Active_Flag = 1 Order By Patient_Last_Name, Patient_First_Name"
 
         'call sql method
         Dim dsPatientRecords As DataSet = New DataSet
@@ -312,9 +327,10 @@ Module AdHoc
         'place all patients into list box
         For Each dr As DataRow In dsPatientRecords.Tables(0).Rows
             If IsDBNull(dr(0)) Then
-                frmAdHockDispense.cmbPatientName.Items.Add("No Patients active")
+
             Else
                 frmAdHockDispense.cmbPatientName.Items.Add(dr(1) & ", " & dr(0) & "--" & dr(2))
+                intPatientID.Add(dr(2))
             End If
 
         Next
@@ -431,8 +447,9 @@ Module AdHoc
         frmAdHockDispense.txtDateOfBirth.Text = ""
         frmAdHockDispense.txtMRN.Text = ""
         frmAdHockDispense.txtQuantity.Text = 1
-        frmAdHockDispense.cmbDosage.SelectedIndex = -1
-        frmAdHockDispense.cmbMethod.SelectedIndex = -1
+        frmAdHockDispense.txtStrength.Text = ""
+        frmAdHockDispense.txtType.Text = ""
+        frmAdHockDispense.txtDrawerBin.Text = ""
         frmAdHockDispense.lstboxAllergies.Items.Clear()
     End Sub
 
