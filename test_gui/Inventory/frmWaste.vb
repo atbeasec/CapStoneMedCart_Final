@@ -101,4 +101,14 @@
         frmPatientInfo.setPatientMrn(intPatientInformationMRN)
         frmMain.OpenChildForm(frmPatientInfo)
     End Sub
+
+    Private Sub cboMedication_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboMedication.SelectedIndexChanged
+        If Not cboMedication.SelectedIndex = -1 Then
+            Dim intMedID As Integer = intMedicationID(cboMedication.SelectedIndex)
+            Dim dsDrawerBin As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT * FROM DrawerMedication where Medication_TUID = '" & intMedID & "'")
+            For Each dr As DataRow In dsDrawerBin.Tables(0).Rows
+                cboDrawers.Items.Add(dr(0))
+            Next
+        End If
+    End Sub
 End Class
