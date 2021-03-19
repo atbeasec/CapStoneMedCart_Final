@@ -84,7 +84,7 @@
                              ByRef intAmount As Integer, ByRef strType As String, ByRef strFrequency As String)
 
         'get current time and date
-        Dim dtmOrderTime As String = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
+        Dim dtmOrderTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         'set active flag
         Dim intActiveFlag As Integer = 1
         'create sql statement command
