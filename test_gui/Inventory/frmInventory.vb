@@ -27,7 +27,9 @@ Public Class frmInventory
 
         DefaultSaveButtonLocation()
         txtQuantity.Text = 1
-        'MessageBox.Show(btnSelectedDrawer.Name)
+
+        ' the button's tab index from the previous screen will allow us to know what drawer that is
+        cmbDrawerNumber.SelectedIndex = btnSelectedDrawer.TabIndex - 1
 
     End Sub
 

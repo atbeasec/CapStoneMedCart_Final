@@ -1,7 +1,7 @@
 ﻿Public Class frmPatientInfo
 
     Private intPatientID As Integer
-    Private intPatientMRN As Integer
+    Private intPatientMRN As Double
     Public Enum DispenseHistoryEnum As Integer
         MedicationName = 1
         Strength = 2
@@ -25,7 +25,7 @@
         intPatientMRN = ExecuteScalarQuery("SELECT MRN_Number from Patient WHERE Patient_ID =" & intPatientID & ";")
         Debug.WriteLine("")
     End Sub
-    Public Sub setPatientMrn(ByVal Mrn As Integer)
+    Public Sub setPatientMrn(ByVal Mrn As Double)
         intPatientMRN = Mrn
         intPatientID = ExecuteScalarQuery("SELECT Patient_ID from Patient WHERE MRN_Number =" & intPatientMRN & ";")
         Debug.WriteLine("")

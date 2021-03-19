@@ -302,15 +302,19 @@ Module Discrepancies
         Dim dtmAdhocTime As String = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")
         Dim strbSQL As StringBuilder = New StringBuilder
         Dim intMedicationTUID As Integer
+        Dim intDiscrepancyCount As Integer
         'create sql update statement and call generic sql subroutine
         strbSQL.Append("UPDATE Discrepancies SET DateTime_Cleared ='" & dtmAdhocTime & "', Reason = '" & strReasonString & "' WHERE Discrepancies_ID = '" & intDiscrepID & "';")
         CreateDatabase.ExecuteInsertQuery(strbSQL.ToString)
+        strbSQL.Clear()
+        strbSQL.Append("Select Actual_Count from Discrepancies where Discrepancies_ID = '" & intDiscrepID & "'")
+        intDiscrepancyCount = CreateDatabase.ExecuteScalarQuery(strbSQL.ToString)
         strbSQL.Clear()
         strbSQL.Append("SELECT Medication_TUID FROM Discrepancies WHERE Discrepancies_ID = '" & intDiscrepID & "'")
         intMedicationTUID = CreateDatabase.ExecuteScalarQuery(strbSQL.ToString)
 
         strbSQL.Clear()
-        strbSQL.Append("UPDATE DrawerMedication SET Discrepancy_Flag = '0' WHERE Medication_TUID = '" & intMedicationTUID & "' AND Active_Flag = '1'")
+        strbSQL.Append("UPDATE DrawerMedication SET Discrepancy_Flag = '0', Quantity = '" & intDiscrepancyCount & "' WHERE Medication_TUID = '" & intMedicationTUID & "' AND Active_Flag = '1'")
         CreateDatabase.ExecuteSelectQuery(strbSQL.ToString)
     End Sub
 

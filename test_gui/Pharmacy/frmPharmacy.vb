@@ -68,11 +68,17 @@
     '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
     '/*********************************************************************/
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnORder.Click
-        If cmbPatientName.SelectedIndex = -1 Or cmbMedication.SelectedIndex = -1 Or cmbOrderedBy.SelectedIndex = -1 Then
-            MessageBox.Show("Please select a patient, medication and physician before placing the order")
+        If cmbPatientName.SelectedIndex = -1 Or cmbMedication.SelectedIndex = -1 Or cmbOrderedBy.SelectedIndex = -1 Or cmbFrequencyNumber.SelectedIndex = -1 Then
+            MessageBox.Show("Please select a patient, medication, physician and frequency before placing the order")
         Else
             Dim dtmOrderTime As String = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
             PharmacyOrder.PharmacyOrder(intPatientIDfromArray, intMedIDfromArray, intPhysicianIDfromArray, txtQuantity.Text, txtType.Text, cmbFrequencyNumber.SelectedItem.ToString)
+            MessageBox.Show("Medication order placed")
+            cmbPatientName.SelectedIndex = -1
+            cmbMedication.SelectedIndex = -1
+            cmbOrderedBy.SelectedIndex = -1
+            cmbFrequencyNumber.SelectedIndex = -1
+            txtQuantity.Text = 1
         End If
     End Sub
 
@@ -142,8 +148,12 @@
     End Sub
 
     Private Sub cmbPatientName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPatientName.SelectedIndexChanged
-        intPatientIDfromArray = intPatientID(cmbPatientName.SelectedIndex)
-        txtPatientDOB.Text = ExecuteScalarQuery("select Date_of_Birth from Patient where Patient_ID = '" & intPatientIDfromArray & "'")
+        If Not cmbPatientName.SelectedIndex = -1 Then
+            intPatientIDfromArray = intPatientID(cmbPatientName.SelectedIndex)
+            txtPatientDOB.Text = ExecuteScalarQuery("select Date_of_Birth from Patient where Patient_ID = '" & intPatientIDfromArray & "'")
+        Else
+            txtPatientDOB.Text = ""
+        End If
     End Sub
 
     '/*********************************************************************/
@@ -201,12 +211,17 @@
     '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
     '/*********************************************************************/
     Private Sub cmbMedication_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMedication.SelectedIndexChanged
-        cmbStrength.Items.Clear()
-        intMedIDfromArray = intMedID(cmbMedication.SelectedIndex)
-        Dim dsMedication As DataSet = ExecuteSelectQuery("select * from Medication where Medication_ID = '" & intMedIDfromArray & "'")
-        txtType.Text = dsMedication.Tables(0).Rows(0)(EnumList.Medication.Snyonym)
-        cmbStrength.Items.Add(dsMedication.Tables(0).Rows(0)(EnumList.Medication.type))
-        cmbStrength.SelectedIndex = 0
+        If Not cmbMedication.SelectedIndex = -1 Then
+            cmbStrength.Items.Clear()
+            intMedIDfromArray = intMedID(cmbMedication.SelectedIndex)
+            Dim dsMedication As DataSet = ExecuteSelectQuery("select * from Medication where Medication_ID = '" & intMedIDfromArray & "'")
+            txtType.Text = dsMedication.Tables(0).Rows(0)(EnumList.Medication.Snyonym)
+            cmbStrength.Items.Add(dsMedication.Tables(0).Rows(0)(EnumList.Medication.type))
+            cmbStrength.SelectedIndex = 0
+        Else
+            cmbStrength.SelectedIndex = -1
+            txtType.Text = ""
+        End If
     End Sub
 
     '/*********************************************************************/
@@ -235,6 +250,8 @@
     '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
     '/*********************************************************************/
     Private Sub cmbOrderedBy_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbOrderedBy.SelectedIndexChanged
-        intPhysicianIDfromArray = intPhysicianID(cmbOrderedBy.SelectedIndex)
+        If Not cmbOrderedBy.SelectedIndex = -1 Then
+            intPhysicianIDfromArray = intPhysicianID(cmbOrderedBy.SelectedIndex)
+        End If
     End Sub
 End Class

@@ -344,7 +344,7 @@ Module GraphicalUserInterfaceReusableMethods
         ' typed something wrong. If the user tries to flag a medication without typing a value in, they should not
         ' be able to flag anything so the button will not respond.
 
-        If String.IsNullOrEmpty(txtBoxOnFlaggedPanel.Text) Then
+        If String.IsNullOrEmpty(txtBoxOnFlaggedPanel.Text) Or Not IsNumeric(txtBoxOnFlaggedPanel.Text) Then
 
             MessageBox.Show("A count has not been entered. Please type a number into the count field.")
         Else
@@ -449,7 +449,7 @@ Module GraphicalUserInterfaceReusableMethods
             .Location = New Point(intX, intY)
             .Name = "txtCount" + (intPanelsAddedCount).ToString
             .Tag = intPanelsAddedCount + 1
-            .MaxLength = 2
+            .MaxLength = 4
             ' .Dock = DockStyle.Fill
 
         End With

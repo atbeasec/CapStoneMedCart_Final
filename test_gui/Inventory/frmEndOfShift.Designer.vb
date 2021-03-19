@@ -143,6 +143,7 @@ Partial Class frmEndOfShift
         '
         'cmbFilter
         '
+        Me.cmbFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbFilter.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbFilter.FormattingEnabled = True
         Me.cmbFilter.Items.AddRange(New Object() {"All Medication", "Controlled", "Controlled Non-Narcotic ", "Narcotic", "Non-Controlled"})

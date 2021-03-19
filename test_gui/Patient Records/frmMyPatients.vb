@@ -45,7 +45,7 @@
                     strBed = Patient(8)
                     'StrDOB = StrDOB.Substring(0, 9)
                     Debug.WriteLine("")
-                    frmPatientRecords.CreatePanel(flpMyPatientRecords, intPatientMRN.ToString, strPatientFirst, strPatientLast, StrDOB, strRoom, strBed)
+                    frmPatientRecords.CreatePanel(flpMyPatientRecords, intPatientMRN.ToString, strPatientFirst, strPatientLast, StrDOB, strRoom, strBed, intPatientID)
                 Next
 
                 Debug.WriteLine("")
@@ -67,7 +67,7 @@
                     strBed = Patient(8)
                     'StrDOB = StrDOB.Substring(0, 9)
                     Debug.WriteLine("")
-                    frmPatientRecords.CreatePanel(flpMyPatientRecords, intPatientMRN.ToString, strPatientFirst, strPatientLast, StrDOB, strRoom, strBed)
+                    frmPatientRecords.CreatePanel(flpMyPatientRecords, intPatientMRN.ToString, strPatientFirst, strPatientLast, StrDOB, strRoom, strBed, intPatientID)
                 Next
 
                 Debug.WriteLine("")
