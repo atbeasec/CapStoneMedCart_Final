@@ -49,69 +49,97 @@
     End Enum
 
     '/*********************************************************************/
-    '/*                   FUNCTION NAME:  					   */         
+    '/*                   FUNCTION NAME:  		getSelectedReport   	  */         
     '/*********************************************************************/
-    '/*                   WRITTEN BY:  Eric LaVoie           		         */   
-    '/*		         DATE CREATED: 		   */                             
+    '/*                   WRITTEN BY:  Eric LaVoie           		      */   
+    '/*		         DATE CREATED: 		 03/16/21                         */                             
     '/*********************************************************************/
-    '/*  FUNCTION PURPOSE:								   */             
-    '/*											   */                     
-    '/*                                                                   */
+    '/*  FUNCTION PURPOSE:								                  */             
+    '/*											                          */                     
+    '/*  The purpose of this function is to get data from the database,   */
+    '/*  depending on which report is selected from the drop down. When a */
+    '/*  report is selected, a different SQL command will be saved in the */
+    '/*  strSQLCmd commmand. Then it will call the corresponding function */
+    '/*  to get the data from the database and pass a list to save the values
+    '/*  returned. Finally, the list will be passed to the routine that   */
+    '/*  called this function.                                            */
     '/*********************************************************************/
-    '/*  CALLED BY:   	      						         */           
-    '/*                                         				   */         
+    '/*  CALLED BY:   	      						                      */           
+    '/*  btnGenerateReport_Click                           				  */         
     '/*********************************************************************/
-    '/*  CALLS:										   */                 
-    '/*             (NONE)								   */             
+    '/*  CALLS:										                      */                 
+    '/*  GatherDataFromDatabaseTable							          */             
     '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					   */         
-    '/*											   */                     
-    '/*                                                                     
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*											                          */                     
+    '/*  intSelectedIndex - Stores the index of the selected report from  */
+    '/*                     drop down list.                               */
     '/*********************************************************************/
-    '/*  RETURNS:								         */                   
-    '/*            (NOTHING)								   */             
+    '/*  RETURNS:								                          */                   
+    '/*  lstOfDataValues As a List(Of String)                             */             
     '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								   */             
-    '/*											   */                     
-    '/*                                                                     
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*											                          */                     
+    '/* getSelectedReport(intSelectedIndex)                               */                                                                    
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
     '/*											   */                     
-    '/*                                                                     
+    '/*  lstOfDataValues - Created to store values grabbed from the database
+    '/*   strSQLCmd - Stores the SQL command depending on what report is desired
     '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						         */               
-    '/*											   */                     
-    '/*  WHO   WHEN     WHAT								   */             
-    '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO        WHEN        WHAT								      */             
+    '/*  ---        ----        ------------------------------------------*/
+    '/*  Eric L.    3/16/2021   Initial creation of code                  */ 
+    '/*  BRH        3/18/2021   Created functionality for dispensed narcotic
+    '/*                         reports.                                  */
     '/*********************************************************************/
     Function getSelectedReport(intSelectedIndex As Integer) As List(Of String)
-        Dim arrData As ArrayList = New ArrayList
+        'Dim arrData As ArrayList = New ArrayList
         Dim lstOfDataValues As List(Of String) = New List(Of String)
+        ' Dim intColumnCount As Integer = 0
+        ' Dim intRowCount As Integer = 0
+        Dim strSQLCmd As String = ""
+
         'Determine which combo box index was selected
-        Dim strReport As String = ""
+        'Dim strReport As String = ""
+
         'select statement that evaluates the selected index with the report that 
         'the user requested to be generated
         'this select case will be updated in the future to provide more
         'assignments, (e.g. strReport may be changed to strSQLCommand and assign
         'the necessary sql statement to query the needed table)
         Select Case intSelectedIndex
-            Case Reports.Adhoc : strReport = "Ad hoc Orders"
+            Case Reports.Adhoc  'strReport = "Ad hoc Orders"
 
-            Case Reports.Discrepancies : strReport = "Discrepancies"
+            Case Reports.Discrepancies  'strReport = "Discrepancies"
 
-            Case Reports.DispensedMeds : strReport = "Dispensed Meds"
+            Case Reports.DispensedMeds ' strReport = "Dispensed Meds"
 
-            Case Reports.DispensedNarc : strReport = "Dispensed Narcotics"
+            'If the dispensed narcotics report is selected
+            Case Reports.DispensedNarc  'strReport = "Dispensed Narcotics"
+                'Select the narcotic drugs and store their dispensing information
+                strSQLCmd = "SELECT Drug_Name, Type, Strength, Amount_Dispensed, (DrawerMedication.Quantity - Amount_Dispensed), DateTime_Dispensed, Expiration_Date FROM DrawerMedication INNER JOIN 
+                            Medication INNER JOIN Dispensing WHERE DrawerMedication.Medication_TUID = Medication_ID AND 
+                            NarcoticControlled_Flag = 1 AND DrawerMedication_TUID = DrawerMedication_ID"
 
-            Case Reports.Override : strReport = "Overrides"
+                'call the execute scalar query function with a sql command that determines the number of records in the table
+                'intRowCount = ExecuteScalarQuery("Select Count(*) FROM DrawerMedication INNER JOIN 
+                 '           Medication INNER JOIN Dispensing WHERE DrawerMedication.Medication_TUID = Medication_ID AND 
+                  '          NarcoticControlled_Flag = 1 AND DrawerMedication_TUID = DrawerMedication_ID;")
+               ' intColumnCount = ExecuteScalarQuery("Select Count(name) from PRAGMA_TABLE_INFO('Dispensing INNER JOIN ');")
+
+            Case Reports.Override  'strReport = "Overrides"
 
         End Select
-        Dim intColumnCount As Integer = 0
-        Dim intRowCount As Integer = 0
-        GatherDataFromDatabaseTable(intColumnCount, intRowCount, lstOfDataValues)
+        'Dim intColumnCount As Integer = 0
+        'Dim intRowCount As Integer = 0
+
+        GatherDataFromDatabaseTable(lstOfDataValues, strSQLCmd) 'intColumnCount, intRowCount, lstOfDataValues, strSQLCmd)
         Return lstOfDataValues
-        ' this is used only if the user wants to save the report
+
+        'this Is used only if the user wants to save the report
         'GenerateReportToWord(strReport, intColumnCount, intRowCount, lstOfDataValues)
         'Return arrData
     End Function
@@ -153,14 +181,17 @@
     '/*  ---   ----     ------------------------------------------------- */
     '/*                                                                     
     '/*********************************************************************/
-    Sub GatherDataFromDatabaseTable(ByRef intColumnCount As Integer, ByRef intRowCount As Integer, ByRef lstOfDataValues As List(Of String))
+    Sub GatherDataFromDatabaseTable(ByRef lstOfDataValues As List(Of String), ByRef strSQLCmd As String) 'ByRef intColumnCount As Integer, ByRef intRowCount As Integer, ByRef lstOfDataValues As List(Of String), ByRef strSQLCmd As String)
         'call the execute scalar query function with a sql command that determines the number of fields in the table
-        intColumnCount = CreateDatabase.ExecuteScalarQuery("Select Count(name) from PRAGMA_TABLE_INFO('Rooms');")
-        'call the execute scalar query function with a sql command that determines the number of records in the table
-        intRowCount = CreateDatabase.ExecuteScalarQuery("Select Count(*) From Rooms;")
+        'intColumnCount = ExecuteScalarQuery("Select Count(*) FROM (SELECT Drug_Name, Type, Strength, (DrawerMedication.Quantity - Amount_Dispensed), DateTime_Dispensed, Expiration_Date FROM DrawerMedication INNER JOIN 
+        '                    Medication INNER JOIN Dispensing WHERE DrawerMedication.Medication_TUID = Medication_ID AND 
+        '                    NarcoticControlled_Flag = 1 AND DrawerMedication_TUID = DrawerMedication_ID);")
+
+
 
         Dim dsDataset As DataSet
-        dsDataset = CreateDatabase.ExecuteSelectQuery("Select * from Rooms;")
+        'dsDataset = CreateDatabase.ExecuteSelectQuery("Select * from Rooms;")
+        dsDataset = ExecuteSelectQuery(strSQLCmd)
         For Each row As DataRow In dsDataset.Tables(0).Rows
             For Each item As Object In row.ItemArray
                 If IsDBNull(item) Then
@@ -172,6 +203,64 @@
             Next
         Next
         ' here we have to add in the data to a datagridview
+    End Sub
+
+    '/*******************************************************************/
+    '/*                   SUBROUTINE NAME:      PrintItemsToDataGrid    */
+    '/*******************************************************************/
+    '/*                   WRITTEN BY:  	Breanna Howey					*/
+    '/*					DATE CREATED: 	   03/18/21						*/
+    '/*******************************************************************/
+    '/*  SUBROUTINE PURPOSE:											*/
+    '/*	The purpose of this subroutine is to print items to the data grid/
+    '/* on the form depending on what report the user determines they want
+    '/* to view.                                                        */
+    '/*******************************************************************/
+    '/*  CALLED BY:   	      											*/
+    '/*	btnGenerateReport_Click											*/
+    '/*******************************************************************/
+    '/*  CALLS:															*/
+    '/*  (None)															*/
+    '/*******************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):							*/
+    '/*																	*/
+    '/*  lstOfDataValues - Stores the values brought back from the database
+    '/*******************************************************************/
+    '/* SAMPLE INVOCATION:												*/
+    '/*																	*/
+    '/*	PrintItemsToDataGrid(lstOfDataValues)   						*/
+    '/*******************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+    '/*																	*/
+    '/*  (None)															*/
+    '/*******************************************************************/
+    '/* MODIFICATION HISTORY:											*/
+    '/*																	*/
+    '/* WHO   WHEN     WHAT											    */
+    '/*  ---   ----     ------------------------------------------------*/
+    '/*	BRH	 03/18/21	Initial creation of code                        */
+    '/*******************************************************************/
+    Sub PrintItemsToDataGrid(ByRef lstOfDataValues As List(Of String))
+
+        'If the user selects the Narcotics Dispensed report,
+        If frmReport.cmbReports.SelectedItem.Equals("Narcotics Dispensed") Then
+            'Add the following column names
+            frmReport.dgvReport.Columns.Add(1, "Drug Name")
+            frmReport.dgvReport.Columns.Add(2, "Drug Type")
+            frmReport.dgvReport.Columns.Add(3, "Drug Strength")
+            frmReport.dgvReport.Columns.Add(4, "Amount Dispensed")
+            frmReport.dgvReport.Columns.Add(5, "Amount Remaining in Drawer")
+            frmReport.dgvReport.Columns.Add(6, "Date / Time Dispensed")
+            frmReport.dgvReport.Columns.Add(7, "Expiration Date")
+
+            'Add the following data into data grid on the form
+            For i As Integer = 0 To lstOfDataValues.Count - 7 Step 7
+                frmReport.dgvReport.Rows.Add(lstOfDataValues.Item(i), lstOfDataValues.Item(i + 1), lstOfDataValues.Item(i + 2),
+                                             lstOfDataValues.Item(i + 3), lstOfDataValues.Item(i + 4), lstOfDataValues.Item(i + 5),
+                                             lstOfDataValues.Item(i + 6))
+            Next
+        End If
+
     End Sub
 
 End Module
