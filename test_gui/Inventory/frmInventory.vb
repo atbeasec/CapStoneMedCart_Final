@@ -30,6 +30,11 @@ Public Class frmInventory
 
         ' the button's tab index from the previous screen will allow us to know what drawer that is
         cmbDrawerNumber.SelectedIndex = btnSelectedDrawer.TabIndex - 1
+        cmbPatientNames.Items.Clear()
+        Dim dsactivePatients As DataSet = CreateDatabase.ExecuteSelectQuery("Select * From Patient WHERE Active_Flag = 1 ;")
+        For Each dr As DataRow In dsactivePatients.Tables(0).Rows
+            cmbPatientNames.Items.Add(dr(EnumList.Patient.LastName) & ", " & dr(EnumList.Patient.FristName) & "   MRN: " & dr(EnumList.Patient.MRN_Number))
+        Next
 
     End Sub
 
