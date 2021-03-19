@@ -745,7 +745,7 @@ Module DispenseHistory
         Dim intDrawerMedicationID As Integer
         Dim intDrawerNumber As Integer
         Dim intDrawerTUID As Integer
-        Dim dtmAdhocTime As String = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")
+        Dim dtmAdhocTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
 
         'using RXCUI get database ID for medication
         strbSQLcommand.Append("SELECT Medication_ID FROM Medication WHERE RXCUI_ID = '" & strMedicationID & "'")
