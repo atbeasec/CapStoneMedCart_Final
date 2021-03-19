@@ -372,12 +372,12 @@ Module DispenseHistory
                                         Inner Join PatientMedication ON PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID
                                         INNER JOIN Medication ON Medication.Medication_ID = PatientMedication.Medication_TUID
                                         INNER JOIN User ON User.User_ID = Dispensing.Primary_User_TUID
-                                        where PatientMedication.Patient_TUID = '32'
+                                        where PatientMedication.Patient_TUID = '" & intPatientID & "'
                                         UNION
                                         Select trim(Medication.Drug_Name,' '), Medication.Strength, Medication.Type, AdHocOrder.Amount, AdHocOrder.DateTime, User_Last_Name,User_First_Name, Upper(Medication.Type) as TypeUP  from AdHocOrder
                                         Inner Join Medication on Medication.Medication_ID = AdHocOrder.Medication_TUID
                                         INNER JOIN User ON user.User_ID = AdHocOrder.User_TUID
-                                        where AdHocOrder.Patient_TUID = '32'
+                                        where AdHocOrder.Patient_TUID = '" & intPatientID & "'
                                         ORDER BY TypeUP;"
 
         Dim dsmydataset As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
@@ -432,17 +432,17 @@ Module DispenseHistory
     '/*  Alexander Beasecker  03/14/21	 Initial creation of the code      */
     '/*********************************************************************/
     Public Sub DispenseHistoryByQuantity(ByRef intPatientID As Integer)
-        Dim Strdatacommand As String = "SELECT trim(Drug_Name,' '), Strength, PatientMedication.Type, Amount_Dispensed,User.User_Last_Name,User.User_First_Name, DateTime_Dispensed   
-          FROM Dispensing 
-          INNER JOIN PatientMedication
-          On PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID
-          INNER JOIN Patient
-          On PatientMedication.Patient_TUID = Patient.Patient_ID
-          INNER JOIN Medication
-          On Medication.Medication_ID = PatientMedication.Medication_TUID
-          INNER JOIN User
-		  ON User.User_ID = Dispensing.Primary_User_TUID
-          WHERE Patient.Patient_ID = '" & intPatientID & "' ORDER BY CAST(Amount_Dispensed as INTEGER);"
+        Dim Strdatacommand As String = "Select trim(Medication.Drug_Name,' '), Medication.Strength as Dosage, Medication.Type, Cast(Dispensing.Amount_Dispensed as INTEGER) as TotalDispensed,Dispensing.DateTime_Dispensed, User.User_Last_Name, User.User_First_Name from Dispensing 
+                                        Inner Join PatientMedication ON PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID
+                                        INNER JOIN Medication ON Medication.Medication_ID = PatientMedication.Medication_TUID
+                                        INNER JOIN User ON User.User_ID = Dispensing.Primary_User_TUID
+                                        where PatientMedication.Patient_TUID = '" & intPatientID & "'
+                                        UNION
+                                        Select trim(Medication.Drug_Name,' '), Medication.Strength as Dosage, Medication.Type, Cast(AdHocOrder.Amount as INTEGER) as TotalDispensed, AdHocOrder.DateTime, User_Last_Name,User_First_Name from AdHocOrder
+                                        Inner Join Medication on Medication.Medication_ID = AdHocOrder.Medication_TUID
+                                        INNER JOIN User ON user.User_ID = AdHocOrder.User_TUID
+                                        where AdHocOrder.Patient_TUID = '" & intPatientID & "'
+                                        ORDER BY TotalDispensed ASC"
 
         Dim dsmydataset As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
 
