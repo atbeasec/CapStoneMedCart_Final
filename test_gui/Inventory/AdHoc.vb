@@ -234,8 +234,9 @@ Module AdHoc
     Public Sub SetMedicationProperties()
         If Not frmAdHockDispense.cmbMedications.SelectedIndex = -1 Then
             'clear the textboxes
-            frmAdHockDispense.cmbMethod.Items.Clear()
-            frmAdHockDispense.cmbDosage.Items.Clear()
+            frmAdHockDispense.txtStrength.Clear()
+            frmAdHockDispense.txtType.Clear()
+            frmAdHockDispense.txtDrawerBin.Clear()
 
             'get selected medication
             Dim strMedicationRXCUI As String = frmAdHockDispense.cmbMedications.SelectedItem
@@ -251,12 +252,11 @@ Module AdHoc
             Dim dsMedicationInformation As DataSet = New DataSet
             dsMedicationInformation = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
 
-            'insert the method and dosage into comboboxes
-            frmAdHockDispense.cmbMethod.Items.Add(dsMedicationInformation.Tables(0).Rows(0)(0))
-            frmAdHockDispense.cmbMethod.SelectedItem = dsMedicationInformation.Tables(0).Rows(0)(0)
+            'insert the method and dosage into textboxes
+            frmAdHockDispense.txtType.Text = (dsMedicationInformation.Tables(0).Rows(0)(0))
 
-            frmAdHockDispense.cmbDosage.Items.Add(dsMedicationInformation.Tables(0).Rows(0)(1))
-            frmAdHockDispense.cmbDosage.SelectedItem = dsMedicationInformation.Tables(0).Rows(0)(1)
+            frmAdHockDispense.txtStrength.Text = (dsMedicationInformation.Tables(0).Rows(0)(1))
+
         End If
 
 
