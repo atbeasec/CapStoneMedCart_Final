@@ -447,6 +447,8 @@ Module AdHoc
         frmAdHockDispense.txtType.Text = ""
         frmAdHockDispense.txtDrawerBin.Text = ""
         frmAdHockDispense.lstboxAllergies.Items.Clear()
+        frmAdHockDispense.txtRoomBed.Text = ""
+        frmAdHockDispense.txtDrawerBin.Text = ""
     End Sub
 
 End Module
