@@ -447,7 +447,7 @@ Module DispenseHistory
         Dim dsmydataset As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
 
         For Each dr As DataRow In dsmydataset.Tables(0).Rows
-            frmPatientInfo.CreateDispenseHistoryPanels(frmPatientInfo.flpDispenseHistory, dr(0), dr(1), dr(2), dr(3), dr(4) & " " & dr(5), dr(6), "")
+            frmPatientInfo.CreateDispenseHistoryPanels(frmPatientInfo.flpDispenseHistory, dr(0), dr(1), dr(2), dr(3), dr(5) & " " & dr(6), dr(4), "")
         Next
 
     End Sub
@@ -496,22 +496,22 @@ Module DispenseHistory
     '/*  Alexander Beasecker  03/14/21	 Initial creation of the code      */
     '/*********************************************************************/
     Public Sub DispenseHistoryByDispensingUser(ByRef intPatientID As Integer)
-        Dim Strdatacommand As String = "SELECT trim(Drug_Name,' '), Strength, PatientMedication.Type, Amount_Dispensed,User.User_Last_Name,User.User_First_Name, DateTime_Dispensed   
-          FROM Dispensing 
-          INNER JOIN PatientMedication
-          On PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID
-          INNER JOIN Patient
-          On PatientMedication.Patient_TUID = Patient.Patient_ID
-          INNER JOIN Medication
-          On Medication.Medication_ID = PatientMedication.Medication_TUID
-          INNER JOIN User
-		  ON User.User_ID = Dispensing.Primary_User_TUID
-          WHERE Patient.Patient_ID = '" & intPatientID & "' ORDER BY User.User_Last_Name, User.User_First_Name;"
+        Dim Strdatacommand As String = "Select trim(Medication.Drug_Name,' '), Medication.Strength as Dosage, Medication.Type, Cast(Dispensing.Amount_Dispensed as INTEGER) as TotalDispensed,Dispensing.DateTime_Dispensed, User.User_Last_Name, User.User_First_Name from Dispensing 
+                                        Inner Join PatientMedication ON PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID
+                                        INNER JOIN Medication ON Medication.Medication_ID = PatientMedication.Medication_TUID
+                                        INNER JOIN User ON User.User_ID = Dispensing.Primary_User_TUID
+                                        where PatientMedication.Patient_TUID = '" & intPatientID & "'
+                                        UNION
+                                        Select trim(Medication.Drug_Name,' '), Medication.Strength as Dosage, Medication.Type, Cast(AdHocOrder.Amount as INTEGER) as TotalDispensed, AdHocOrder.DateTime, User_Last_Name,User_First_Name from AdHocOrder
+                                        Inner Join Medication on Medication.Medication_ID = AdHocOrder.Medication_TUID
+                                        INNER JOIN User ON user.User_ID = AdHocOrder.User_TUID
+                                        where AdHocOrder.Patient_TUID = '" & intPatientID & "'
+                                        ORDER BY User_Last_Name,User_First_Name"
 
         Dim dsmydataset As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
 
         For Each dr As DataRow In dsmydataset.Tables(0).Rows
-            frmPatientInfo.CreateDispenseHistoryPanels(frmPatientInfo.flpDispenseHistory, dr(0), dr(1), dr(2), dr(3), dr(4) & " " & dr(5), dr(6), "")
+            frmPatientInfo.CreateDispenseHistoryPanels(frmPatientInfo.flpDispenseHistory, dr(0), dr(1), dr(2), dr(3), dr(5) & " " & dr(6), dr(4), "")
         Next
 
     End Sub
@@ -560,22 +560,22 @@ Module DispenseHistory
     '/*  Alexander Beasecker 03/14/21	  Initial creation of the code      */
     '/*********************************************************************/
     Public Sub DispenseHistoryByDispenseDateAndTime(ByRef intPatientID As Integer)
-        Dim Strdatacommand As String = "SELECT trim(Drug_Name,' '), Strength, PatientMedication.Type, Amount_Dispensed,User.User_Last_Name,User.User_First_Name, DateTime_Dispensed   
-          FROM Dispensing 
-          INNER JOIN PatientMedication
-          On PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID
-          INNER JOIN Patient
-          On PatientMedication.Patient_TUID = Patient.Patient_ID
-          INNER JOIN Medication
-          On Medication.Medication_ID = PatientMedication.Medication_TUID
-          INNER JOIN User
-		  ON User.User_ID = Dispensing.Primary_User_TUID
-          WHERE Patient.Patient_ID = '" & intPatientID & "' ORDER BY DateTime_Dispensed ASC;"
+        Dim Strdatacommand As String = "Select trim(Medication.Drug_Name,' '), Medication.Strength, Medication.Type, Dispensing.Amount_Dispensed,Dispensing.DateTime_Dispensed, User.User_Last_Name, User.User_First_Name from Dispensing 
+                                        Inner Join PatientMedication ON PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID
+                                        INNER JOIN Medication ON Medication.Medication_ID = PatientMedication.Medication_TUID
+                                        INNER JOIN User ON User.User_ID = Dispensing.Primary_User_TUID
+                                        where PatientMedication.Patient_TUID = '" & intPatientID & "'
+                                        UNION
+                                        Select trim(Medication.Drug_Name,' '), Medication.Strength, Medication.Type, AdHocOrder.Amount, AdHocOrder.DateTime, User_Last_Name,User_First_Name  from AdHocOrder
+                                        Inner Join Medication on Medication.Medication_ID = AdHocOrder.Medication_TUID
+                                        INNER JOIN User ON user.User_ID = AdHocOrder.User_TUID
+                                        where AdHocOrder.Patient_TUID = '" & intPatientID & "'
+                                        Order by Dispensing.DateTime_Dispensed DESC"
 
         Dim dsmydataset As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
 
         For Each dr As DataRow In dsmydataset.Tables(0).Rows
-            frmPatientInfo.CreateDispenseHistoryPanels(frmPatientInfo.flpDispenseHistory, dr(0), dr(1), dr(2), dr(3), dr(4) & " " & dr(5), dr(6), "")
+            frmPatientInfo.CreateDispenseHistoryPanels(frmPatientInfo.flpDispenseHistory, dr(0), dr(1), dr(2), dr(3), dr(5) & " " & dr(6), dr(4), "")
         Next
 
     End Sub
