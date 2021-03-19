@@ -1324,6 +1324,7 @@ Module CreateDatabase
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  BRH  01/23/21  Initial creation of the code					*/
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
+	'/*	 BRH  03/19/21	Added the "Quantity" field						*/
 	'/*******************************************************************/
 	Public Sub CreateWastesTable()
 		strCreateTable = "CREATE TABLE 'Wastes' (
@@ -1333,6 +1334,7 @@ Module CreateDatabase
 	                    'DrawerMedication_TUID'	INTEGER NOT NULL,
 	                    'DateTime'	TEXT NOT NULL,
 						'Reason' TEXT,
+						'Quantity' INTEGER,
 	                    PRIMARY KEY('Wastes_ID' AUTOINCREMENT),
 	                    FOREIGN KEY(" & "Primary_User_TUID" & ") REFERENCES " & "User" & "(" & "User_ID" & "),
 	                    FOREIGN KEY(" & "Secondary_User_TUID" & ") REFERENCES " & "User" & "(" & "User_ID" & "),
