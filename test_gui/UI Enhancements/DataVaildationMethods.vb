@@ -175,12 +175,15 @@ Module DataVaildationMethods
     '/*											                           */                     
     '/*  WHO         WHEN           WHAT								   */             
     '/*  dillen      3/1/21        Creation                                */
+    '/*  NP          3/19/2021     Commented out line 186 as it is erroring*/
+    '/*                            out and I needed to make sure that my   */
+    '/*                            coded worked before I tried to fix it.  */
     '/*********************************************************************/
 
     Function checkSQLInjection(TextToCheck As String) As String
         TextToCheck = Regex.Replace(TextToCheck, "'", "''") ' check for '
         TextToCheck = Regex.Replace(TextToCheck, Chr(34), "''") 'check for "
-        ' TextToCheck = Regex.Replace(TextToCheck, Chr(92), "''") ' check for \
+        ' TextToCheck = Regex.Replace(TextToCheck, Chr(92), "''") ' check for \ this line was causing crashes.
         TextToCheck = Regex.Replace(TextToCheck, Chr(47), "''") ' check for /
 
         Return TextToCheck

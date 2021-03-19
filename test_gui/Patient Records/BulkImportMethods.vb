@@ -667,11 +667,11 @@ Module BulkImportMethods
 
     Public Sub addUsersToDatabase(UserArray As ArrayList)
         Dim strbSQLStatement As StringBuilder = New StringBuilder
-        strbSQLStatement.Append("INSERT INTO Physician ('Username','Salt','Password','User_First_Name',
-                                'User_Last_Name','Barcode','Admin_Flag','Supervisor_Flag') Values")
+        strbSQLStatement.Append("INSERT INTO User ('Username','Salt','Password','User_First_Name'," &
+                                "'User_Last_Name','Barcode','Admin_Flag','Supervisor_Flag','Active_Flag') Values")
         For Each user As UserClass In UserArray
             With user
-                strbSQLStatement.Append(" ('" & .UserName & "','" & .salt & "','" & .Password & "',")
+                strbSQLStatement.Append(" ('" & .UserName & "','" & .salt & "','" & .Password & "','")
                 strbSQLStatement.Append(.FirstName & "','" & .LastName & "','" & .Barcode & "','")
                 strbSQLStatement.Append(.AdminFlag & "','" & .SuperVisorFlag & "','" & 1 & "'),")
             End With
@@ -754,7 +754,7 @@ Module BulkImportMethods
             strbSQLPull.Clear()
             strbSQLPull.AppendLine("Select count(*) from User where username = '" & checkSQLInjection(strLine(0)) & "'")
             If TextCheck(strLine(0)) Then
-                strbErrorMessage.Append("Issue on line " & intLineNum & " Username cannot contain a ;")
+                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Username cannot contain a ;")
                 blnIssue = True
             ElseIf ExecuteScalarQuery(strbSQLPull.ToString) <> 0 Then
                 strbErrorMessage.AppendLine("Issue on line " & intLineNum & " username must be unqiue")
@@ -764,7 +764,7 @@ Module BulkImportMethods
             If TextCheck(strLine(1)) Then
                 strbErrorMessage.AppendLine("Issue on line " & intLineNum & " password cannot have a ;")
                 blnIssue = True
-            ElseIf frmConfiguration.CheckPassword(strLine(1)) Then
+            ElseIf Not frmConfiguration.CheckPassword(strLine(1)) Then
                 strbErrorMessage.AppendLine("Issue on line " & intLineNum & " password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special characters !@#$%^&* ")
                 blnIssue = True
             End If
@@ -798,7 +798,7 @@ Module BulkImportMethods
             If Not IsNumeric(strLine(6)) Then
                 strbErrorMessage.AppendLine("Issue on line " & intLineNum & " supervisor flag must be either 1 if they are an supervisor or 0 if they are not a supervisor")
                 blnIssue = True
-            ElseIf strLine(5) <> 0 And strLine(5) <> 1 Then
+            ElseIf strLine(6) <> 0 And strLine(6) <> 1 Then
                 strbErrorMessage.AppendLine("Issue on line " & intLineNum & " supervisor flag must be a 1 if they are an supervisor or a 0 if they are not a supervisor")
                 blnIssue = True
             End If

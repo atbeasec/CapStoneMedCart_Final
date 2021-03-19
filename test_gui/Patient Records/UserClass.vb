@@ -101,12 +101,13 @@
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
+    '/*  NP    3/19/2021 Fixed a bug where username was being given first */
+    '/*                   name.
     '/*********************************************************************/
 
 
     Public Sub New(StrUserName As String, strPassword As String, strsalt As String, strUserFirstName As String, strUserLastName As String, strBarcode As String, intAdminflag As Integer, intSuperVisorflag As Integer)
-        Me.UserName = strUserFirstName
+        Me.UserName = StrUserName
         Me.salt = strsalt
         Me.Password = strPassword
         Me.FirstName = strUserFirstName
