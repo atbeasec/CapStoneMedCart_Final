@@ -50,11 +50,12 @@ Partial Class frmFullCart
         Me.btn21 = New System.Windows.Forms.Button()
         Me.btnColor = New System.Windows.Forms.Button()
         Me.SerialPort1 = New System.IO.Ports.SerialPort(Me.components)
+        Me.lblInstructions = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'btn1
         '
-        Me.btn1.Location = New System.Drawing.Point(12, 12)
+        Me.btn1.Location = New System.Drawing.Point(15, 81)
         Me.btn1.Name = "btn1"
         Me.btn1.Size = New System.Drawing.Size(68, 27)
         Me.btn1.TabIndex = 0
@@ -63,7 +64,7 @@ Partial Class frmFullCart
         '
         'btn3
         '
-        Me.btn3.Location = New System.Drawing.Point(86, 12)
+        Me.btn3.Location = New System.Drawing.Point(89, 81)
         Me.btn3.Name = "btn3"
         Me.btn3.Size = New System.Drawing.Size(31, 27)
         Me.btn3.TabIndex = 3
@@ -72,7 +73,7 @@ Partial Class frmFullCart
         '
         'btn4
         '
-        Me.btn4.Location = New System.Drawing.Point(123, 12)
+        Me.btn4.Location = New System.Drawing.Point(126, 81)
         Me.btn4.Name = "btn4"
         Me.btn4.Size = New System.Drawing.Size(31, 27)
         Me.btn4.TabIndex = 3
@@ -81,7 +82,7 @@ Partial Class frmFullCart
         '
         'btn5
         '
-        Me.btn5.Location = New System.Drawing.Point(160, 12)
+        Me.btn5.Location = New System.Drawing.Point(163, 81)
         Me.btn5.Name = "btn5"
         Me.btn5.Size = New System.Drawing.Size(31, 27)
         Me.btn5.TabIndex = 4
@@ -90,7 +91,7 @@ Partial Class frmFullCart
         '
         'btn6
         '
-        Me.btn6.Location = New System.Drawing.Point(12, 45)
+        Me.btn6.Location = New System.Drawing.Point(15, 114)
         Me.btn6.Name = "btn6"
         Me.btn6.Size = New System.Drawing.Size(31, 27)
         Me.btn6.TabIndex = 6
@@ -99,7 +100,7 @@ Partial Class frmFullCart
         '
         'btn7
         '
-        Me.btn7.Location = New System.Drawing.Point(49, 45)
+        Me.btn7.Location = New System.Drawing.Point(52, 114)
         Me.btn7.Name = "btn7"
         Me.btn7.Size = New System.Drawing.Size(31, 27)
         Me.btn7.TabIndex = 7
@@ -108,7 +109,7 @@ Partial Class frmFullCart
         '
         'btn8
         '
-        Me.btn8.Location = New System.Drawing.Point(86, 45)
+        Me.btn8.Location = New System.Drawing.Point(89, 114)
         Me.btn8.Name = "btn8"
         Me.btn8.Size = New System.Drawing.Size(31, 27)
         Me.btn8.TabIndex = 8
@@ -117,7 +118,7 @@ Partial Class frmFullCart
         '
         'btn9
         '
-        Me.btn9.Location = New System.Drawing.Point(123, 45)
+        Me.btn9.Location = New System.Drawing.Point(126, 114)
         Me.btn9.Name = "btn9"
         Me.btn9.Size = New System.Drawing.Size(31, 27)
         Me.btn9.TabIndex = 9
@@ -126,7 +127,7 @@ Partial Class frmFullCart
         '
         'btn10
         '
-        Me.btn10.Location = New System.Drawing.Point(160, 45)
+        Me.btn10.Location = New System.Drawing.Point(163, 114)
         Me.btn10.Name = "btn10"
         Me.btn10.Size = New System.Drawing.Size(31, 27)
         Me.btn10.TabIndex = 10
@@ -135,7 +136,7 @@ Partial Class frmFullCart
         '
         'btn26
         '
-        Me.btn26.Location = New System.Drawing.Point(12, 177)
+        Me.btn26.Location = New System.Drawing.Point(15, 246)
         Me.btn26.Name = "btn26"
         Me.btn26.Size = New System.Drawing.Size(179, 78)
         Me.btn26.TabIndex = 26
@@ -144,7 +145,7 @@ Partial Class frmFullCart
         '
         'btn11
         '
-        Me.btn11.Location = New System.Drawing.Point(12, 78)
+        Me.btn11.Location = New System.Drawing.Point(15, 147)
         Me.btn11.Name = "btn11"
         Me.btn11.Size = New System.Drawing.Size(31, 27)
         Me.btn11.TabIndex = 27
@@ -153,7 +154,7 @@ Partial Class frmFullCart
         '
         'btn12
         '
-        Me.btn12.Location = New System.Drawing.Point(49, 78)
+        Me.btn12.Location = New System.Drawing.Point(52, 147)
         Me.btn12.Name = "btn12"
         Me.btn12.Size = New System.Drawing.Size(31, 27)
         Me.btn12.TabIndex = 28
@@ -162,7 +163,7 @@ Partial Class frmFullCart
         '
         'btn13
         '
-        Me.btn13.Location = New System.Drawing.Point(86, 78)
+        Me.btn13.Location = New System.Drawing.Point(89, 147)
         Me.btn13.Name = "btn13"
         Me.btn13.Size = New System.Drawing.Size(31, 27)
         Me.btn13.TabIndex = 29
@@ -171,7 +172,7 @@ Partial Class frmFullCart
         '
         'btn14
         '
-        Me.btn14.Location = New System.Drawing.Point(123, 78)
+        Me.btn14.Location = New System.Drawing.Point(126, 147)
         Me.btn14.Name = "btn14"
         Me.btn14.Size = New System.Drawing.Size(31, 27)
         Me.btn14.TabIndex = 30
@@ -180,7 +181,7 @@ Partial Class frmFullCart
         '
         'btn15
         '
-        Me.btn15.Location = New System.Drawing.Point(160, 78)
+        Me.btn15.Location = New System.Drawing.Point(163, 147)
         Me.btn15.Name = "btn15"
         Me.btn15.Size = New System.Drawing.Size(31, 27)
         Me.btn15.TabIndex = 31
@@ -189,7 +190,7 @@ Partial Class frmFullCart
         '
         'btn16
         '
-        Me.btn16.Location = New System.Drawing.Point(12, 111)
+        Me.btn16.Location = New System.Drawing.Point(15, 180)
         Me.btn16.Name = "btn16"
         Me.btn16.Size = New System.Drawing.Size(31, 27)
         Me.btn16.TabIndex = 32
@@ -198,7 +199,7 @@ Partial Class frmFullCart
         '
         'btn17
         '
-        Me.btn17.Location = New System.Drawing.Point(49, 111)
+        Me.btn17.Location = New System.Drawing.Point(52, 180)
         Me.btn17.Name = "btn17"
         Me.btn17.Size = New System.Drawing.Size(31, 27)
         Me.btn17.TabIndex = 33
@@ -207,7 +208,7 @@ Partial Class frmFullCart
         '
         'btn18
         '
-        Me.btn18.Location = New System.Drawing.Point(86, 111)
+        Me.btn18.Location = New System.Drawing.Point(89, 180)
         Me.btn18.Name = "btn18"
         Me.btn18.Size = New System.Drawing.Size(31, 27)
         Me.btn18.TabIndex = 34
@@ -216,7 +217,7 @@ Partial Class frmFullCart
         '
         'btn19
         '
-        Me.btn19.Location = New System.Drawing.Point(123, 111)
+        Me.btn19.Location = New System.Drawing.Point(126, 180)
         Me.btn19.Name = "btn19"
         Me.btn19.Size = New System.Drawing.Size(31, 27)
         Me.btn19.TabIndex = 35
@@ -225,7 +226,7 @@ Partial Class frmFullCart
         '
         'btn20
         '
-        Me.btn20.Location = New System.Drawing.Point(160, 111)
+        Me.btn20.Location = New System.Drawing.Point(163, 180)
         Me.btn20.Name = "btn20"
         Me.btn20.Size = New System.Drawing.Size(31, 27)
         Me.btn20.TabIndex = 36
@@ -234,7 +235,7 @@ Partial Class frmFullCart
         '
         'btn25
         '
-        Me.btn25.Location = New System.Drawing.Point(160, 144)
+        Me.btn25.Location = New System.Drawing.Point(163, 213)
         Me.btn25.Name = "btn25"
         Me.btn25.Size = New System.Drawing.Size(31, 27)
         Me.btn25.TabIndex = 41
@@ -243,7 +244,7 @@ Partial Class frmFullCart
         '
         'btn24
         '
-        Me.btn24.Location = New System.Drawing.Point(123, 144)
+        Me.btn24.Location = New System.Drawing.Point(126, 213)
         Me.btn24.Name = "btn24"
         Me.btn24.Size = New System.Drawing.Size(31, 27)
         Me.btn24.TabIndex = 40
@@ -252,7 +253,7 @@ Partial Class frmFullCart
         '
         'btn23
         '
-        Me.btn23.Location = New System.Drawing.Point(86, 144)
+        Me.btn23.Location = New System.Drawing.Point(89, 213)
         Me.btn23.Name = "btn23"
         Me.btn23.Size = New System.Drawing.Size(31, 27)
         Me.btn23.TabIndex = 39
@@ -261,7 +262,7 @@ Partial Class frmFullCart
         '
         'btn22
         '
-        Me.btn22.Location = New System.Drawing.Point(49, 144)
+        Me.btn22.Location = New System.Drawing.Point(52, 213)
         Me.btn22.Name = "btn22"
         Me.btn22.Size = New System.Drawing.Size(31, 27)
         Me.btn22.TabIndex = 38
@@ -270,7 +271,7 @@ Partial Class frmFullCart
         '
         'btn21
         '
-        Me.btn21.Location = New System.Drawing.Point(12, 144)
+        Me.btn21.Location = New System.Drawing.Point(15, 213)
         Me.btn21.Name = "btn21"
         Me.btn21.Size = New System.Drawing.Size(31, 27)
         Me.btn21.TabIndex = 37
@@ -291,11 +292,23 @@ Partial Class frmFullCart
         '
         Me.SerialPort1.PortName = "SerialPort1"
         '
+        'lblInstructions
+        '
+        Me.lblInstructions.AutoSize = True
+        Me.lblInstructions.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblInstructions.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblInstructions.Location = New System.Drawing.Point(8, 9)
+        Me.lblInstructions.Name = "lblInstructions"
+        Me.lblInstructions.Size = New System.Drawing.Size(199, 63)
+        Me.lblInstructions.TabIndex = 43
+        Me.lblInstructions.Text = "Please Click the red boxes" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " to close the " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "simulated drawers"
+        '
         'frmFullCart
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(204, 304)
+        Me.ClientSize = New System.Drawing.Size(210, 336)
+        Me.Controls.Add(Me.lblInstructions)
         Me.Controls.Add(Me.btnColor)
         Me.Controls.Add(Me.btn25)
         Me.Controls.Add(Me.btn24)
@@ -325,6 +338,7 @@ Partial Class frmFullCart
         Me.Name = "frmFullCart"
         Me.Text = "FullCart"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -355,4 +369,5 @@ Partial Class frmFullCart
     Friend WithEvents btn21 As Button
     Friend WithEvents btnColor As Button
     Friend WithEvents SerialPort1 As IO.Ports.SerialPort
+    Friend WithEvents lblInstructions As Label
 End Class

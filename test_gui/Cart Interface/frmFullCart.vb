@@ -198,7 +198,8 @@ Public Class frmFullCart
 
         Dim blnClosing As Boolean = True
         sender.BackColor = btnColor.BackColor
-        For Each item As Button In Controls 'this gets all the contorls on the form. There should only be buttons. 
+        For Each item As Button In Me.Controls.OfType(Of Button) 'this gets all the contorls on the form. There should only be buttons. 
+
             If Not item.BackColor = btnColor.BackColor Then 'an open drawer will be red so if it is the standard 
                 'control color that means the drawer is closed. 
                 blnClosing = False
@@ -206,8 +207,8 @@ Public Class frmFullCart
         Next
 
         If blnClosing Then
-            Me.Close()
-        End If
+                Me.Close()
+            End If
 
     End Sub
 
