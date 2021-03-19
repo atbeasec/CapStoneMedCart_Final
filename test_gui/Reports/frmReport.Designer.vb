@@ -73,6 +73,7 @@ Partial Class frmReport
         Me.dgvReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvReport.Location = New System.Drawing.Point(13, 65)
         Me.dgvReport.Name = "dgvReport"
+        Me.dgvReport.ReadOnly = True
         Me.dgvReport.Size = New System.Drawing.Size(965, 458)
         Me.dgvReport.TabIndex = 168
         Me.dgvReport.Visible = False
