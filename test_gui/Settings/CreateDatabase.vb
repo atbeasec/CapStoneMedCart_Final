@@ -1325,19 +1325,22 @@ Module CreateDatabase
 	'/*  BRH  01/23/21  Initial creation of the code					*/
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
 	'/*	 BRH  03/19/21	Added the "Quantity" field						*/
+	'/*	 BRH  03/19/21	Added the "Medication_TUID" field				*/
 	'/*******************************************************************/
 	Public Sub CreateWastesTable()
 		strCreateTable = "CREATE TABLE 'Wastes' (
 	                    'Wastes_ID'	INTEGER NOT NULL UNIQUE,
 	                    'Primary_User_TUID'	INTEGER NOT NULL,
 	                    'Secondary_User_TUID'	INTEGER NOT NULL,
-	                    'DrawerMedication_TUID'	INTEGER NOT NULL,
+	                    'DrawerMedication_TUID'	INTEGER,
+						'Medication_TUID'	INTEGER,
 	                    'DateTime'	TEXT NOT NULL,
 						'Reason' TEXT,
 						'Quantity' INTEGER,
 	                    PRIMARY KEY('Wastes_ID' AUTOINCREMENT),
 	                    FOREIGN KEY(" & "Primary_User_TUID" & ") REFERENCES " & "User" & "(" & "User_ID" & "),
 	                    FOREIGN KEY(" & "Secondary_User_TUID" & ") REFERENCES " & "User" & "(" & "User_ID" & "),
+						FOREIGN KEY(" & "Medication_TUID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
 	                    FOREIGN KEY(" & "DrawerMedication_TUID" & ") REFERENCES " & "DrawerMedication" & "(" & "DrawerMedication_ID" & "));"
 		ExecuteQuery("Wastes")
 	End Sub
