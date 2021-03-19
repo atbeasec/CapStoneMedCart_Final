@@ -82,9 +82,9 @@ Partial Class frmPharmacy
         Me.Label11.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label11.Location = New System.Drawing.Point(34, 283)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(84, 21)
+        Me.Label11.Size = New System.Drawing.Size(92, 21)
         Me.Label11.TabIndex = 172
-        Me.Label11.Text = "Orderd By:"
+        Me.Label11.Text = "Ordered By:"
         '
         'cmbPatientName
         '

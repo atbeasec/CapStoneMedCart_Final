@@ -1278,7 +1278,7 @@ Module CreateDatabase
 	                'Drawers_TUID'	INTEGER NOT NULL,
 	                'Medication_TUID'	INTEGER NOT NULL,
 	                'Quantity'	INTEGER NOT NULL,
-	                'Divider_Bin'	TEXT,
+	                'Divider_Bin'	INTEGER,
 	                'Expiration_Date'	TEXT NOT NULL,
 	                'Discrepancy_Flag'	INTEGER NOT NULL,
 					'Active_Flag'	INTEGER NOT NULL,
