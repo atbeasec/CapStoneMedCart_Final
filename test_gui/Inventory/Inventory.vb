@@ -188,7 +188,7 @@
                 strWasteReason = frmWaste.rbtnPatientUnavilable.Text
             End If
 
-            Dim dtmAdhocTime As String = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")
+            Dim dtmAdhocTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
 
             strSqlCommand = "SELECT DrawerMedication_ID FROM DrawerMedication INNER JOIN Medication on Medication.Medication_ID = DrawerMedication.Medication_TUID WHERE Medication.Medication_ID = '" & intSelectedIndex & "'"
             intDrawerMedID = CreateDatabase.ExecuteScalarQuery(strSqlCommand)
