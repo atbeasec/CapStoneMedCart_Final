@@ -103,7 +103,10 @@ Module BulkImportMethods
                     addRoomToDatabase(RoomArray)
                 End If
             Case "user"
-                importUser(srReader)
+                Dim userArray As ArrayList = pareseUserFile(srReader)
+                If Not IsNothing(userArray) Then
+                    addUsersToDatabase(userArray)
+                End If
         End Select
         srReader.Close()
 
@@ -161,6 +164,56 @@ Module BulkImportMethods
         End If
         Return blnIssue
     End Function
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: finishingUpImport    		   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		              */   
+    '/*		         DATE CREATED: 	3/18/2021                       	   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								   */             
+    '/*	 The last four lines of the SQL statement creation are always the */
+    '/*  same so I put them in a function. All it does it removes the last */
+    '/*  comma on the string bulder, adds a ; to the end of the string     */
+    '/*  builder, and then sends the insert statement to the database.     */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 strbSQLStatement - this is the string builder that is being used  */
+    '/*                     make the sql statments.                        */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+
+    Sub finishingUpImport(ByRef strbSQLStatement As StringBuilder)
+        strbSQLStatement.Remove(strbSQLStatement.Length - 1, 1) 'remove the last comma
+        strbSQLStatement.Append(";")
+        CreateDatabase.ExecuteInsertQuery(strbSQLStatement.ToString)
+        MessageBox.Show("import Finished")
+    End Sub
 
     '/*********************************************************************/
     '/*                   FUNCTION NAME:  ParsePatientFile   			  */         
@@ -385,10 +438,7 @@ Module BulkImportMethods
             End With
 
         Next
-        strbSQLStatement.Remove(strbSQLStatement.Length - 1, 1) 'remove the last comma
-        strbSQLStatement.Append(";")
-        CreateDatabase.ExecuteInsertQuery(strbSQLStatement.ToString)
-        MessageBox.Show("import Finished")
+        finishingUpImport(strbSQLStatement)
     End Sub
 
     '/*********************************************************************/
@@ -573,22 +623,18 @@ Module BulkImportMethods
                 strbSQLStatement.Append(1 & "'),")
             End With
         Next
-        strbSQLStatement.Remove(strbSQLStatement.Length - 1, 1) 'remove the last comma
-        strbSQLStatement.Append(";")
-        CreateDatabase.ExecuteInsertQuery(strbSQLStatement.ToString)
-        MessageBox.Show("import Finished")
+        finishingUpImport(strbSQLStatement)
     End Sub
 
-
     '/*********************************************************************/
-    '/*                   SUBPROGRAM NAME:  importUser  				  */         
+    '/*                   SUBPROGRAM NAME:  addUsersToDatabase  		   */         
     '/*********************************************************************/
-    '/*                   WRITTEN BY:  Nathan Premo   		         */   
-    '/*		         DATE CREATED: 	3/8/2021	                           */   
+    '/*                   WRITTEN BY:  Nathan Premo   		               */   
+    '/*		         DATE CREATED: 	3/18/2021                       	   */                             
     '/*********************************************************************/
     '/*  SUBPROGRAM PURPOSE:								   */             
-    '/*											   */                     
-    '/*                                                                   */
+    '/*	 This is going to loop through the array list and make a large SQL*/
+    '/*  statement that it is going to push to the database.              */
     '/*********************************************************************/
     '/*  CALLED BY:   	      						         */           
     '/*                                         				   */         
@@ -597,8 +643,8 @@ Module BulkImportMethods
     '/*             (NONE)								   */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					   */         
-    '/*											   */                     
-    '/*                                                                     
+    '/*	UserArray - this is the arraylist that is going to be added to*/
+    '/*                  The database.                                     */
     '/*********************************************************************/
     '/*  RETURNS:								         */                   
     '/*            (NOTHING)								   */             
@@ -608,8 +654,8 @@ Module BulkImportMethods
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
-    '/*                                                                     
+    '/*	 strbSQLStatement - this is the SQL statement that will be sent   */                     
+    '/*                     to the database.                              */  
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
@@ -619,9 +665,164 @@ Module BulkImportMethods
     '/*********************************************************************/
 
 
-    Sub importUser(srReader As StreamReader)
-
+    Public Sub addUsersToDatabase(UserArray As ArrayList)
+        Dim strbSQLStatement As StringBuilder = New StringBuilder
+        strbSQLStatement.Append("INSERT INTO Physician ('Username','Salt','Password','User_First_Name',
+                                'User_Last_Name','Barcode','Admin_Flag','Supervisor_Flag') Values")
+        For Each user As UserClass In UserArray
+            With user
+                strbSQLStatement.Append(" ('" & .UserName & "','" & .salt & "','" & .Password & "',")
+                strbSQLStatement.Append(.FirstName & "','" & .LastName & "','" & .Barcode & "','")
+                strbSQLStatement.Append(.AdminFlag & "','" & .SuperVisorFlag & "','" & 1 & "'),")
+            End With
+        Next
+        finishingUpImport(strbSQLStatement)
     End Sub
+
+
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME:  pareseUserFile  				  */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		         */   
+    '/*		         DATE CREATED: 	3/8/2021	                           */   
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:				                				   */             
+    '/*	 This is going to parse the user file the user is trying to      */  
+    '/*  import and will check it for errors. If there are errors it will */
+    '/*  show an error message of everything wrong with file and return   */
+    '/*  nothing. Other wise it will return an array list of all the      */
+    '/*  records in UserClass objects.                                    */   
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 srReader - this is the stream reader that is being used to read in*/
+    '/*             the file.                                              */
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            userArray								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/* strBarcodeHash - this is going to hold the hashed barcode.         */
+    '/*	strbErrorMessage - this is the message that is going to be built    */
+    '/*                     that contains all issues with the file.       */
+    '/* strHashedPassword - this is going to store the hased password     */
+    '/* strhold - this is going to hold the results of the                */
+    '/*           MakeSaltPepperAndHash method call.                      */
+    '/* blnIssue - this is the boolean that tells us if there was an issue*/
+    '/*            with the file and we should block the import.          */
+    '/* strLine - this is the array that the text from the file is sent to*/
+    '/* intLineNum - this is keeping track of what line number we are on  */
+    '/*              in the file so we can tell the user where the error is*/
+    '/* strSalt - this is going to store the salt for the hashed password */
+    '/* strbSQLPull - this is going to be the SQL statement that pulls back*/
+    '/*               if the physician exists in the datbaase.             */ 
+    '/* userArray - this is the array list of users that will be added to  */
+    '/*             the database if there is no issue. If there is an issue*/
+    '/*             it will be nothing.                                    */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+
+    Function pareseUserFile(srReader As StreamReader)
+        Dim UserArray As ArrayList = New ArrayList()
+        Dim strLine As String()
+        Dim intLineNum As Integer = 1
+        Dim blnIssue = False
+        Dim strbErrorMessage As StringBuilder = New StringBuilder
+        Dim strbSQLPull As StringBuilder = New StringBuilder
+        Dim strBarcodeHash As String = Nothing
+        Dim strSalt As String
+        Dim strHashedPassword As String
+        Dim strhold As String()
+
+        Do
+            strLine = srReader.ReadLine.Split(vbTab)
+            strbSQLPull.Clear()
+            strbSQLPull.AppendLine("Select count(*) from User where username = '" & checkSQLInjection(strLine(0)) & "'")
+            If TextCheck(strLine(0)) Then
+                strbErrorMessage.Append("Issue on line " & intLineNum & " Username cannot contain a ;")
+                blnIssue = True
+            ElseIf ExecuteScalarQuery(strbSQLPull.ToString) <> 0 Then
+                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " username must be unqiue")
+                blnIssue = True
+            End If
+            strbSQLPull.Clear()
+            If TextCheck(strLine(1)) Then
+                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " password cannot have a ;")
+                blnIssue = True
+            ElseIf frmConfiguration.CheckPassword(strLine(1)) Then
+                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special characters !@#$%^&* ")
+                blnIssue = True
+            End If
+            If TextCheck(strLine(2)) Then
+                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " frist name cannot have a ;")
+                blnIssue = True
+            End If
+            If TextCheck(strLine(3)) Then
+                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " last name cannot have a ;")
+                blnIssue = True
+            End If
+
+            If TextCheck(strLine(4)) Then
+                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " barcode cannot contain a ;")
+                blnIssue = True
+            Else
+                strBarcodeHash = ConvertBarcodePepperAndHash(strLine(4))
+                strbSQLPull.AppendLine("SELECT COUNT(*) FROM User WHERE Barcode = '" & strBarcodeHash & "'")
+                If ExecuteScalarQuery(strbSQLPull.ToString) <> 0 Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " barcode for user must be unique")
+                    blnIssue = True
+                End If
+            End If
+            If Not IsNumeric(strLine(5)) Then
+                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " admin flag must be either 1 if they are an admin or 0 if they are an admin")
+                blnIssue = True
+            ElseIf strLine(5) <> 0 And strLine(5) <> 1 Then
+                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " admin flag must be a 1 if they are an admin or a 0 if they are not an admin")
+                blnIssue = True
+            End If
+            If Not IsNumeric(strLine(6)) Then
+                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " supervisor flag must be either 1 if they are an supervisor or 0 if they are not a supervisor")
+                blnIssue = True
+            ElseIf strLine(5) <> 0 And strLine(5) <> 1 Then
+                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " supervisor flag must be a 1 if they are an supervisor or a 0 if they are not a supervisor")
+                blnIssue = True
+            End If
+
+            If Not blnIssue Then
+                strhold = LogIn.MakeSaltPepperAndHash(strLine(1))
+                strHashedPassword = strhold(0)
+                strSalt = strhold(1)
+                UserArray.Add(New UserClass(checkSQLInjection(strLine(0)), strHashedPassword, strSalt, checkSQLInjection(strLine(2)), checkSQLInjection(strLine(3)),
+                                strBarcodeHash, strLine(5), strLine(6)))
+            End If
+            intLineNum += 1
+        Loop While (Not srReader.EndOfStream)
+
+
+
+        If blnIssue Then
+            MessageBox.Show(strbErrorMessage.ToString)
+            UserArray.Clear()
+            UserArray = Nothing
+        End If
+
+        Return UserArray
+    End Function
 
     '/*********************************************************************/
     '/*                   Function NAME: ParseRoomFile					  */         
@@ -731,7 +932,7 @@ Module BulkImportMethods
     '/*  CALLS:										   */                 
     '/*             (NONE)								   */             
     '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
     '/*	 roomArray - this is the array list that is being added to the database*/                     
     '/*                                                                     
     '/*********************************************************************/
@@ -757,15 +958,12 @@ Module BulkImportMethods
     Sub addRoomToDatabase(roomArray As ArrayList)
         Dim strbSQLStatement As StringBuilder = New StringBuilder
         strbSQLStatement.Append("Insert Into Rooms ('Room_ID', 'Bed_Name', 'Active_Flag') Values ")
-        For Each room As RoomClass In roomArray
+                For Each room As RoomClass In roomArray
             With room
                 strbSQLStatement.Append("(' " & checkSQLInjection(.RoomID) & "', '" & checkSQLInjection(.BedName) & "',' ")
                 strbSQLStatement.Append(1 & "'),")
             End With
         Next
-        strbSQLStatement.Remove(strbSQLStatement.Length - 1, 1) 'remove the last comma
-        strbSQLStatement.Append(";")
-        CreateDatabase.ExecuteInsertQuery(strbSQLStatement.ToString)
-        MessageBox.Show("import Finished")
+        finishingUpImport(strbSQLStatement)
     End Sub
 End Module

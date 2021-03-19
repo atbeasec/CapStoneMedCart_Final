@@ -43,6 +43,7 @@
     '/*											   */					  
     '/*  WHO   WHEN     WHAT								   */			  
     '/*  ---   ----     ------------------------------------------------- */
+    '/*  NP    3/18/2021 Added the salt to the object because I forgot it */
     '/*********************************************************************/
 
     Private strUserName As String
@@ -52,6 +53,7 @@
     Private strBarcode As String
     Private intAdminFlag As Integer
     Private intSuperVisorFlag As Integer
+    Private strSalt As String
 
 
     '/*********************************************************************/
@@ -74,6 +76,7 @@
     '/*	StrUserName - this is the username the user will use to login with */ 
     '/* strPassword - this is the password for the user it will be hashed  */
     '/*               before the constructor is called.                    */ 
+    '/* strsalt - this is the salt that is used to hash the password.      */
     '/* strUserFirstName - this is the user first name.                    */
     '/* strUserLastName - this is the users last name.                    */ 
     '/* strBarcode - this is the bar code for the user. It will be hashed  */
@@ -102,8 +105,9 @@
     '/*********************************************************************/
 
 
-    Public Sub New(StrUserName As String, strPassword As String, strUserFirstName As String, strUserLastName As String, strBarcode As String, intAdminflag As Integer, intSuperVisorflag As Integer)
+    Public Sub New(StrUserName As String, strPassword As String, strsalt As String, strUserFirstName As String, strUserLastName As String, strBarcode As String, intAdminflag As Integer, intSuperVisorflag As Integer)
         Me.UserName = strUserFirstName
+        Me.salt = strsalt
         Me.Password = strPassword
         Me.FirstName = strUserFirstName
         Me.LastName = strUserLastName
@@ -453,6 +457,54 @@
             If value = 0 Or value = 1 Then
                 intSuperVisorFlag = value
             End If
+        End Set
+    End Property
+
+
+    '/*********************************************************************/
+    '/*                   Property NAME:  salt      					   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		         */   
+    '/*		         DATE CREATED: 	3/18/2021	   */                             
+    '/*********************************************************************/
+    '/*  Property PURPOSE:								                    */             
+    '/*	 This acts as the getter and setter for the salt.   			   */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 value - this is the value that is going to be assigned to the salt*/                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								                            */                   
+    '/*            strSalt              								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Public Property salt As String
+        Get
+            Return strSalt
+        End Get
+        Set(value As String)
+            strSalt = value
         End Set
     End Property
 End Class
