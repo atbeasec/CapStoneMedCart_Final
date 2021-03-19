@@ -48,6 +48,8 @@
             AdHoc.InsertAdHoc(txtMRN.Text, "1", txtQuantity.Text)
             AdHoc.clearAdhocBoxes()
             MessageBox.Show("Order Successfully placed")
+        Else
+            MessageBox.Show("Please select a Drug and patient to dispense the medication too")
         End If
     End Sub
 

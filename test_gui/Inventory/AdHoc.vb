@@ -252,15 +252,15 @@ Module AdHoc
             frmAdHockDispense.txtType.Clear()
             frmAdHockDispense.txtDrawerBin.Clear()
 
-            'get selected medication
-            Dim strMedicationRXCUI As String = frmAdHockDispense.cmbMedications.SelectedItem
-            'split out the RXCUI and name
-            Dim strArray() As String
-            strArray = strMedicationRXCUI.Split("--")
-            strMedicationRXCUI = strArray(2)
-            'select medication type and strength for the selected medication using rxcui 
+            'get selected medication ID using the selected index and get the same index from medID array
+            Dim intMedID As Integer = intMedIDArray(frmAdHockDispense.cmbMedications.SelectedIndex)
+
+            'select medication type and strength for the selected medication using MEDid 
             Dim Strdatacommand As String
-            Strdatacommand = "SELECT Type, Strength From Medication WHERE RXCUI_ID = '" & strMedicationRXCUI & "'"
+            Strdatacommand = "SELECT Medication.Type,Medication.Strength,Drawers.Drawer_Number,DrawerMedication.Divider_Bin From Medication
+                                Inner Join DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID
+                                INNER JOIN Drawers ON Drawers.Drawers_ID = DrawerMedication.Drawers_TUID
+                                WHERE Medication.Medication_ID = '" & intMedID & "'"
 
             'make dataset and call the sql method
             Dim dsMedicationInformation As DataSet = New DataSet
@@ -270,6 +270,7 @@ Module AdHoc
             frmAdHockDispense.txtType.Text = (dsMedicationInformation.Tables(0).Rows(0)(0))
 
             frmAdHockDispense.txtStrength.Text = (dsMedicationInformation.Tables(0).Rows(0)(1))
+            frmAdHockDispense.txtDrawerBin.Text = "Drawer number: " & (dsMedicationInformation.Tables(0).Rows(0)(2)) & " Bin number: " & (dsMedicationInformation.Tables(0).Rows(0)(3))
 
         End If
 
