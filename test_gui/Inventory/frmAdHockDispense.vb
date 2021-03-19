@@ -142,7 +142,7 @@
     '/*  ---   ----     ------------------------------------------------  */
     '/*  Collin Krygier  3/17/2021    Initial creation                    */
     '/*********************************************************************/
-    Private Sub txtDateOfBirth_TextChanged(sender As Object, e As EventArgs) Handles txtDateOfBirth.TextChanged
+    Private Sub txtDateOfBirth_TextChanged(sender As Object, e As EventArgs)
 
         Dim truncatedDate As String = Nothing
 

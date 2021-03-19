@@ -33,11 +33,7 @@ Partial Class frmAdHockDispense
         Me.lstboxAllergies = New System.Windows.Forms.ListBox()
         Me.cmbPatientName = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Panel14 = New System.Windows.Forms.Panel()
-        Me.txtDateOfBirth = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.txtMRN = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnDispense = New System.Windows.Forms.Button()
         Me.btnDecrementQuantity = New System.Windows.Forms.Button()
@@ -48,8 +44,10 @@ Partial Class frmAdHockDispense
         Me.txtType = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtDrawerBin = New System.Windows.Forms.TextBox()
-        Me.Panel14.SuspendLayout()
-        Me.Panel2.SuspendLayout()
+        Me.txtMRN = New System.Windows.Forms.TextBox()
+        Me.txtDateOfBirth = New System.Windows.Forms.TextBox()
+        Me.txtRoomBed = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.Panel5.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -159,31 +157,6 @@ Partial Class frmAdHockDispense
         Me.Label1.TabIndex = 212
         Me.Label1.Text = "Select Patient:"
         '
-        'Panel14
-        '
-        Me.Panel14.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel14.Controls.Add(Me.txtDateOfBirth)
-        Me.Panel14.Location = New System.Drawing.Point(542, 216)
-        Me.Panel14.Name = "Panel14"
-        Me.Panel14.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel14.Size = New System.Drawing.Size(321, 24)
-        Me.Panel14.TabIndex = 6
-        '
-        'txtDateOfBirth
-        '
-        Me.txtDateOfBirth.BackColor = System.Drawing.Color.White
-        Me.txtDateOfBirth.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtDateOfBirth.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtDateOfBirth.Enabled = False
-        Me.txtDateOfBirth.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDateOfBirth.Location = New System.Drawing.Point(1, 1)
-        Me.txtDateOfBirth.MaxLength = 10
-        Me.txtDateOfBirth.Name = "txtDateOfBirth"
-        Me.txtDateOfBirth.ReadOnly = True
-        Me.txtDateOfBirth.Size = New System.Drawing.Size(319, 22)
-        Me.txtDateOfBirth.TabIndex = 6
-        Me.txtDateOfBirth.TabStop = False
-        '
         'Label8
         '
         Me.Label8.AutoSize = True
@@ -193,30 +166,6 @@ Partial Class frmAdHockDispense
         Me.Label8.Size = New System.Drawing.Size(96, 21)
         Me.Label8.TabIndex = 214
         Me.Label8.Text = "Patient DOB:"
-        '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel2.Controls.Add(Me.txtMRN)
-        Me.Panel2.Location = New System.Drawing.Point(35, 368)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel2.Size = New System.Drawing.Size(294, 24)
-        Me.Panel2.TabIndex = 6
-        '
-        'txtMRN
-        '
-        Me.txtMRN.BackColor = System.Drawing.Color.White
-        Me.txtMRN.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtMRN.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtMRN.Enabled = False
-        Me.txtMRN.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMRN.Location = New System.Drawing.Point(1, 1)
-        Me.txtMRN.Name = "txtMRN"
-        Me.txtMRN.ReadOnly = True
-        Me.txtMRN.Size = New System.Drawing.Size(292, 22)
-        Me.txtMRN.TabIndex = 6
-        Me.txtMRN.TabStop = False
         '
         'Label2
         '
@@ -235,7 +184,7 @@ Partial Class frmAdHockDispense
         Me.btnDispense.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDispense.ForeColor = System.Drawing.Color.White
         Me.btnDispense.Image = CType(resources.GetObject("btnDispense.Image"), System.Drawing.Image)
-        Me.btnDispense.Location = New System.Drawing.Point(353, 433)
+        Me.btnDispense.Location = New System.Drawing.Point(353, 530)
         Me.btnDispense.Name = "btnDispense"
         Me.btnDispense.Size = New System.Drawing.Size(229, 38)
         Me.btnDispense.TabIndex = 7
@@ -342,13 +291,63 @@ Partial Class frmAdHockDispense
         Me.txtDrawerBin.Size = New System.Drawing.Size(293, 25)
         Me.txtDrawerBin.TabIndex = 221
         '
+        'txtMRN
+        '
+        Me.txtMRN.BackColor = System.Drawing.Color.White
+        Me.txtMRN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtMRN.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMRN.Location = New System.Drawing.Point(34, 372)
+        Me.txtMRN.MaxLength = 9
+        Me.txtMRN.Name = "txtMRN"
+        Me.txtMRN.ReadOnly = True
+        Me.txtMRN.Size = New System.Drawing.Size(294, 25)
+        Me.txtMRN.TabIndex = 222
+        '
+        'txtDateOfBirth
+        '
+        Me.txtDateOfBirth.BackColor = System.Drawing.Color.White
+        Me.txtDateOfBirth.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtDateOfBirth.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDateOfBirth.Location = New System.Drawing.Point(540, 216)
+        Me.txtDateOfBirth.MaxLength = 9
+        Me.txtDateOfBirth.Name = "txtDateOfBirth"
+        Me.txtDateOfBirth.ReadOnly = True
+        Me.txtDateOfBirth.Size = New System.Drawing.Size(322, 25)
+        Me.txtDateOfBirth.TabIndex = 223
+        '
+        'txtRoomBed
+        '
+        Me.txtRoomBed.BackColor = System.Drawing.Color.White
+        Me.txtRoomBed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtRoomBed.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRoomBed.Location = New System.Drawing.Point(33, 443)
+        Me.txtRoomBed.MaxLength = 9
+        Me.txtRoomBed.Name = "txtRoomBed"
+        Me.txtRoomBed.ReadOnly = True
+        Me.txtRoomBed.Size = New System.Drawing.Size(294, 25)
+        Me.txtRoomBed.TabIndex = 225
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(31, 415)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(166, 21)
+        Me.Label6.TabIndex = 224
+        Me.Label6.Text = "Patient Room and Bed:"
+        '
         'frmAdHockDispense
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(919, 519)
+        Me.ClientSize = New System.Drawing.Size(919, 593)
         Me.ControlBox = False
+        Me.Controls.Add(Me.txtRoomBed)
+        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.txtDateOfBirth)
+        Me.Controls.Add(Me.txtMRN)
         Me.Controls.Add(Me.txtDrawerBin)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.txtType)
@@ -356,9 +355,7 @@ Partial Class frmAdHockDispense
         Me.Controls.Add(Me.btnDecrementQuantity)
         Me.Controls.Add(Me.btnIncrementQuantity)
         Me.Controls.Add(Me.Panel5)
-        Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.Panel14)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.cmbPatientName)
         Me.Controls.Add(Me.Label1)
@@ -374,10 +371,6 @@ Partial Class frmAdHockDispense
         Me.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Name = "frmAdHockDispense"
         Me.Text = "frmAdHockDispense"
-        Me.Panel14.ResumeLayout(False)
-        Me.Panel14.PerformLayout()
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
         Me.ResumeLayout(False)
@@ -395,11 +388,7 @@ Partial Class frmAdHockDispense
     Friend WithEvents lstboxAllergies As ListBox
     Friend WithEvents cmbPatientName As ComboBox
     Friend WithEvents Label1 As Label
-    Friend WithEvents Panel14 As Panel
-    Friend WithEvents txtDateOfBirth As TextBox
     Friend WithEvents Label8 As Label
-    Friend WithEvents Panel2 As Panel
-    Friend WithEvents txtMRN As TextBox
     Friend WithEvents Label2 As Label
     Friend WithEvents btnDecrementQuantity As Button
     Friend WithEvents btnIncrementQuantity As Button
@@ -409,4 +398,8 @@ Partial Class frmAdHockDispense
     Friend WithEvents txtType As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents txtDrawerBin As TextBox
+    Friend WithEvents txtMRN As TextBox
+    Friend WithEvents txtDateOfBirth As TextBox
+    Friend WithEvents txtRoomBed As TextBox
+    Friend WithEvents Label6 As Label
 End Class

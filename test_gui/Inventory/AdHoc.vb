@@ -52,8 +52,8 @@ Module AdHoc
     '/*  WHO                     WHEN        WHAT						*/
     '/*  Alexander Beasecker    1/25/2021   Initial creation            */
     '/*******************************************************************/
-    Dim intPatientID As New ArrayList
-    Dim intMedID As New ArrayList
+    Dim intPatientIDArray As New ArrayList
+    Dim intMedIDArray As New ArrayList
 
 
     '/*********************************************************************/
@@ -193,7 +193,7 @@ Module AdHoc
     '/*********************************************************************/
     Public Sub GetAllMedicationsForListbox()
         Dim Strdatacommand As String
-        intMedID.Clear()
+        intMedIDArray.Clear()
         ' Currently the medication display is appending the RXCUI Number on too the medication
         ' name, as searching by name alone could cause problems if medication names can repeat
         Strdatacommand = "Select Drug_Name, RXCUI_ID, Medication_ID FROM Medication INNER JOIN DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE DrawerMedication.Active_Flag = 1"
@@ -203,7 +203,7 @@ Module AdHoc
         'add medication name and RXCUI to listbox
         For Each dr As DataRow In dsMedicationDataSet.Tables(0).Rows
             frmAdHockDispense.cmbMedications.Items.Add(dr(0) & "--" & dr(1))
-            intMedID.Add(dr(2))
+            intMedIDArray.Add(dr(2))
         Next
     End Sub
 
@@ -313,7 +313,7 @@ Module AdHoc
     Public Sub PopulatePatientsAdhoc()
         'clear patientname listbox
         frmAdHockDispense.cmbPatientName.Items.Clear()
-        intPatientID.Clear()
+        intPatientIDArray.Clear()
         'get patient name, first, last, and MRN number
         'MRN is appended on too the end currently because search just based on name will not work
         ' if system has multiple patients with the same name
@@ -330,7 +330,7 @@ Module AdHoc
 
             Else
                 frmAdHockDispense.cmbPatientName.Items.Add(dr(1) & ", " & dr(0) & "--" & dr(2))
-                intPatientID.Add(dr(2))
+                intPatientIDArray.Add(dr(3))
             End If
 
         Next
@@ -378,7 +378,6 @@ Module AdHoc
     Public Sub PopulatePatientInformation()
         If Not frmAdHockDispense.cmbPatientName.SelectedIndex = -1 Then
             'local variables for splitting array and holding patient ID
-            Dim strArray() As String
             Dim intPatientID As Integer
 
             'clear textboxes so no overlapping data
@@ -386,22 +385,17 @@ Module AdHoc
             frmAdHockDispense.txtMRN.Clear()
             frmAdHockDispense.lstboxAllergies.Items.Clear()
 
-            'get selected patient and split
-            Dim strPatientSelected As String = frmAdHockDispense.cmbPatientName.SelectedItem
-            strArray = strPatientSelected.Split("--")
-
+            intPatientID = intPatientIDArray(frmAdHockDispense.cmbPatientName.SelectedIndex)
             'create sql command string
             Dim Strdatacommand As String
-            frmAdHockDispense.txtMRN.Text = strArray(2)
-            Strdatacommand = "SELECT Date_of_Birth, Patient_ID from Patient Where MRN_Number = '" & frmAdHockDispense.txtMRN.Text & "'"
+            Strdatacommand = "SELECT Date_of_Birth, MRN_Number from Patient Where Patient_ID = '" & intPatientID & "'"
 
             'create dataset and call sql method
             Dim dsPatientRecords As DataSet = New DataSet
             dsPatientRecords = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
             'set patient properties in textboxes
             frmAdHockDispense.txtDateOfBirth.Text = dsPatientRecords.Tables(0).Rows(0)(0)
-            intPatientID = dsPatientRecords.Tables(0).Rows(0)(1)
-
+            frmAdHockDispense.txtMRN.Text = dsPatientRecords.Tables(0).Rows(0)(1)
             'get patient allergies
             Strdatacommand = "SELECT Allergy_Name From PatientAllergy Where Patient_TUID = '" & intPatientID & "'"
             dsPatientRecords = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
@@ -410,6 +404,8 @@ Module AdHoc
             For Each dr As DataRow In dsPatientRecords.Tables(0).Rows
                 frmAdHockDispense.lstboxAllergies.Items.Add(dr(0))
             Next
+            Dim dsRoomBed As DataSet = CreateDatabase.ExecuteSelectQuery("Select * from PatientRoom where Patient_TUID = '" & intPatientID & "'")
+            frmAdHockDispense.txtRoomBed.Text = "Room: " & dsRoomBed.Tables(0).Rows(0)(1) & "  Bed: " & dsRoomBed.Tables(0).Rows(0)(2)
         End If
     End Sub
 
