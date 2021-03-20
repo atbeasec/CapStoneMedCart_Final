@@ -88,15 +88,21 @@
     End Sub
 
     Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
-        If radAllMed.Checked = True Then
+        Dim intWasteAmount As Integer
 
-        End If
         ErrorProvider1.Clear()
         If Not IsNumeric(txtQuantity.Text) Then
             ErrorProvider1.SetError(pnlQuantity, "Please enter a numeric value")
         Else
+
+            If radAllMed.Checked = True Then
+                intWasteAmount = CreateDatabase.ExecuteScalarQuery("SELECT Quantity from DrawerMedication where DrawerMedication_ID = '" & intDrawerMedTUID & "'")
+            Else
+                intWasteAmount = txtQuantity.Text
+            End If
+
             If Not cboWitness.SelectedIndex = -1 And Not cboMedication.SelectedIndex = -1 And Not cboDrawers.SelectedIndex = -1 Then
-                Inventory.WasteMedication(intDrawerMedTUID, txtQuantity.Text)
+                Inventory.WasteMedication(intDrawerMedTUID, intWasteAmount)
                 cboMedication.SelectedIndex = -1
                 RadioButton2.Checked = True
                 cboWitness.SelectedIndex = -1
