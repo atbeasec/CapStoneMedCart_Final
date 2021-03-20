@@ -21,7 +21,7 @@
         txtQuantity.Text = 1
         PopulateFrequencyNumberComboBox()
         Dim intCounter As Integer = 0
-        dsMedications = ExecuteSelectQuery("SELECT * From Medication Inner Join DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE DrawerMedication.Active_Flag = '1' ORDER BY Medication.Medication_ID")
+        dsMedications = ExecuteSelectQuery("SELECT *,Trim(Drug_Name,' ') From Medication Inner Join DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE DrawerMedication.Active_Flag = '1' ORDER BY Medication.Medication_ID")
         dsPhysicians = ExecuteSelectQuery("Select * From Physician WHERE Active_Flag = '1' ORDER BY Physician_Last_Name, Physician_First_Name;")
         dsPatients = ExecuteSelectQuery("Select * From Patient WHERE Active_Flag = '1' ORDER BY Patient_Last_Name, Patient_First_Name;")
 
@@ -37,7 +37,7 @@
         Next
 
         For Each dr As DataRow In dsMedications.Tables(0).Rows
-            cmbMedication.Items.Add(dr(EnumList.Medication.Name))
+            cmbMedication.Items.Add(dr(18))
             intMedID.Add(dr(EnumList.Medication.ID))
         Next
     End Sub
@@ -267,6 +267,12 @@
 
     Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantity.KeyPress
         DataVaildationMethods.KeyPressCheck(e, "0123456789")
+        If txtQuantity.Text IsNot "" Then
+            GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
+        Else
+        End If
+    End Sub
+    Private Sub txtQuantity_Validated(sender As Object, e As EventArgs) Handles txtQuantity.Validated
         If txtQuantity.Text IsNot "" Then
             GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
         Else
