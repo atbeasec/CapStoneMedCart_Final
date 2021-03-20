@@ -373,31 +373,22 @@
     '/*                   WRITTEN BY: Alexander Beasecker  		             */   
     '/*		         DATE CREATED: 	3/20/21			                     */                             
     '/********************************************************************/
-    '/*  SUBROUTINE PURPOSE:This handles the beginning of the wasting logic
-    '/*         it has the validation checks to make sure all the data is selected
-    '/*         and valid. it will then pass along to the waste sub
-    '/*
-    '/*
+    '/*  SUBROUTINE PURPOSE:This when the increment button is clicked
     '/********************************************************************/
     '/*  CALLED BY: btnwaste.click                    	      		 */				            
-    '/*                                        				             */         
+    '/*  btnIncrementQuantity.Click                                      				             */         
     '/********************************************************************/
-    '/*  CALLS:								                             */		                  
-    '/*  		Inventory.WasteMedication				                         */	
-    '/*  		Inventory.PopulateWasteComboBoxMedication()				                         */		               
+    '/*  CALLS:								                             */
+    '/* ButtonIncrement(txtQuantity)
     '/********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):				             */	           
     '/*sender As Object, 
     '/*e As EventArgs    							                        							             
     '/********************************************************************/
     '/* SAMPLE INVOCATION:						                         */		             
-    '/*	btnWaste_Click()				                                 */					                       
+    '/*	btnIncrementQuantity_Click()				                                 */					                       
     '/********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
-    '/*	 intWasteAmount
-    '/*  intMedID
-    '/*
-    '/*
     '/********************************************************************/
     '/* MODIFICATION HISTORY:						                     */		                 
     '/*									 */		                         */
@@ -407,6 +398,12 @@
     '/********************************************************************/ 
     Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantity.KeyPress
         DataVaildationMethods.KeyPressCheck(e, "0123456789")
+        If txtQuantity.Text IsNot "" Then
+            GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
+        End If
+    End Sub
+
+    Private Sub txtQuantity_Validated(sender As Object, e As EventArgs) Handles txtQuantity.Validated
         If txtQuantity.Text IsNot "" Then
             GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
         End If
