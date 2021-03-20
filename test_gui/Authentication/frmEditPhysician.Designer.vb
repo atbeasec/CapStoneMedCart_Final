@@ -192,7 +192,7 @@ Partial Class frmEditPhysician
         Me.btnSaveChanges.Location = New System.Drawing.Point(311, 413)
         Me.btnSaveChanges.Name = "btnSaveChanges"
         Me.btnSaveChanges.Size = New System.Drawing.Size(120, 38)
-        Me.btnSaveChanges.TabIndex = 189
+        Me.btnSaveChanges.TabIndex = 12
         Me.btnSaveChanges.Text = "   SAVE "
         Me.btnSaveChanges.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnSaveChanges.UseVisualStyleBackColor = False
@@ -249,7 +249,7 @@ Partial Class frmEditPhysician
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel2.Size = New System.Drawing.Size(80, 31)
-        Me.Panel2.TabIndex = 183
+        Me.Panel2.TabIndex = 9
         '
         'cboState
         '
@@ -273,7 +273,7 @@ Partial Class frmEditPhysician
         Me.Panel17.Name = "Panel17"
         Me.Panel17.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel17.Size = New System.Drawing.Size(108, 31)
-        Me.Panel17.TabIndex = 184
+        Me.Panel17.TabIndex = 10
         '
         'txtZipCode
         '
@@ -295,7 +295,7 @@ Partial Class frmEditPhysician
         Me.Panel16.Name = "Panel16"
         Me.Panel16.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel16.Size = New System.Drawing.Size(251, 31)
-        Me.Panel16.TabIndex = 182
+        Me.Panel16.TabIndex = 8
         '
         'txtCity
         '
@@ -316,7 +316,7 @@ Partial Class frmEditPhysician
         Me.Panel10.Name = "Panel10"
         Me.Panel10.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel10.Size = New System.Drawing.Size(562, 31)
-        Me.Panel10.TabIndex = 181
+        Me.Panel10.TabIndex = 7
         '
         'txtAddress
         '
@@ -348,7 +348,7 @@ Partial Class frmEditPhysician
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel3.Size = New System.Drawing.Size(124, 31)
-        Me.Panel3.TabIndex = 179
+        Me.Panel3.TabIndex = 4
         '
         'cboCredentials
         '
@@ -371,7 +371,7 @@ Partial Class frmEditPhysician
         Me.btnCancel.Location = New System.Drawing.Point(141, 413)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(120, 38)
-        Me.btnCancel.TabIndex = 177
+        Me.btnCancel.TabIndex = 11
         Me.btnCancel.Text = "   CANCEL"
         Me.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnCancel.UseVisualStyleBackColor = False
@@ -411,7 +411,7 @@ Partial Class frmEditPhysician
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel1.Size = New System.Drawing.Size(252, 31)
-        Me.Panel1.TabIndex = 175
+        Me.Panel1.TabIndex = 6
         '
         'mtbFax
         '
@@ -445,7 +445,7 @@ Partial Class frmEditPhysician
         Me.Panel15.Name = "Panel15"
         Me.Panel15.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel15.Size = New System.Drawing.Size(252, 31)
-        Me.Panel15.TabIndex = 173
+        Me.Panel15.TabIndex = 5
         '
         'mtbPhone
         '
@@ -499,7 +499,7 @@ Partial Class frmEditPhysician
         Me.Panel11.Name = "Panel11"
         Me.Panel11.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel11.Size = New System.Drawing.Size(224, 28)
-        Me.Panel11.TabIndex = 169
+        Me.Panel11.TabIndex = 2
         '
         'txtLastName
         '
@@ -520,7 +520,7 @@ Partial Class frmEditPhysician
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel4.Size = New System.Drawing.Size(226, 28)
-        Me.Panel4.TabIndex = 168
+        Me.Panel4.TabIndex = 1
         '
         'txtFirstName
         '
@@ -541,7 +541,7 @@ Partial Class frmEditPhysician
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel5.Size = New System.Drawing.Size(224, 28)
-        Me.Panel5.TabIndex = 170
+        Me.Panel5.TabIndex = 3
         '
         'txtMiddleName
         '
