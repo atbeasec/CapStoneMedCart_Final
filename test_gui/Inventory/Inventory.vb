@@ -102,20 +102,28 @@
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
     '/*		         DATE CREATED: 	   02/10/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE: 
+    '/*  SUBROUTINE PURPOSE: this subroutine populates the medication combobox
+    '/* on frmWaste. it also populates the parallel ID array at the same time
+    '/*
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
-    '/*  (None)								           					  
+    '/*  FrmWaste.btnWaste_Click
+    '/*  FrmWaste.load
     '/*********************************************************************/
     '/*  CALLS:														    	
-    '/*  
+    '/*  CreateDatabase.ExecuteSelectQuery
     '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):			   		   
+    '/*  PARAMETER LIST (In Parameter Order):	
+    '/*  none
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                   
-    '/*	 									                           
+    '/*	 		PopulateWasteComboBoxMedication()							                           
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/* Strdatacommand -- sql string
+    '/* dsMedicationDataSet - dataset that holds returned sql medications
+    '/*
+    '/*
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						                      */
     '/*											                          */
@@ -147,20 +155,41 @@
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
     '/*		         DATE CREATED: 	   02/10/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE: 
+    '/*  SUBROUTINE PURPOSE: this subroutine handles the logic for wasting
+    '/*  a medication. It will insert the waste record into the database
+    '/* it will update the amount left of the medication after the waste
+    '/* if the quantity left is zero it will deactivate the medication
+    '/* and finally it calls the open drawer method so they can remove the medication
+    '/*
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
-    '/*  (None)								           					  
+    '/*  FrmWaste.btnWaste_Click								           					  
     '/*********************************************************************/
     '/*  CALLS:														    	
-    '/*  
+    '/*  CartInterfaceCode.OpenOneDrawer(intDrawerNumber)
     '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):			   		   
+    '/*  PARAMETER LIST (In Parameter Order):	
+    '/* intdrawerID -- hold the TUID for the drawer the medication being wasted 
+    '/*                 is held in
+    '/* Quantity -- the quantity that the user wants wasted
+    '/* intMedID -- the database TUID for the medication being wasted
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                   
-    '/*	 									                           
+    '/*	 		WasteMedication('1','100','2')							                           
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/* intDrawerNumber -- hold the TUID for the drawer the medication being wasted 
+    '/*                 is held in
+    '/* strWasteReason -- the string that holds the reason for the waste
+    '/* dtmAdhocTime -- the current time 
+    '/* intDrawerAmount -- the amount that is currently in the drawer before wasting
+    '/* intDrawerMedID -- the database TUID for the medication being wasted
+    '/* intDrawerTUID -- the Database TUID for the drawer
+    '/* intQuantityLeft -- the amount left after wasting, used to see if zero for removing the medication
+    '/* intSelectedIndex -- the selected index in the medication combo box, used to get the item in the same index
+    '/*                      from the parallel array 
+    '/* strSqlCommand -- holds the sql command
+    '/* userID -- the user id of the user who is logged in
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						                      */
     '/*											                          */
