@@ -228,9 +228,11 @@
     '/*  AB		        3/20/21		    initial creation                 */
     '/********************************************************************/ 
     Private Sub cboMedication_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboMedication.SelectedIndexChanged
+        'clear drawer combobox and drawerID array
         cboDrawers.Items.Clear()
         intDrawerID.Clear()
-
+        'when the medication  selection is changed, get the drawers the medication is in and populate drawer
+        ' combobox and the parallel array with the drawer IDs
         If Not cboMedication.SelectedIndex = -1 Then
             Dim intMedID As Integer = intMedicationID(cboMedication.SelectedIndex)
             Dim dsDrawerBin As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT * FROM DrawerMedication where Medication_TUID = '" & intMedID & "' AND Active_Flag = 1")
