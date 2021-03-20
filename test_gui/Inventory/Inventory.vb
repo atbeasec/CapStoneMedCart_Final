@@ -197,8 +197,18 @@
             strSqlCommand = "INSERT INTO Wastes(Primary_User_TUID,Secondary_User_TUID,DrawerMedication_TUID,Medication_TUID,DateTime,Reason,Quantity) VALUES('1','" & userID & "','" & intDrawerMedID & "','" & intMedID & "','" & dtmAdhocTime & "','" & strWasteReason & "','" & Quantity & "')"
             CreateDatabase.ExecuteInsertQuery(strSqlCommand)
 
+            'Update medication amount in drawer
+
+
+            'if amount left after waste is zero then update record to be inactive
+            Dim intQuantityLeft As Integer = CreateDatabase.ExecuteScalarQuery("SELECT Quantity from DrawerMedication where DrawerMedication_ID = '" & intDrawerMedID & "'")
+            If intQuantityLeft <= 0 Then
+                MessageBox.Show("Waste recorded, Medication quantity is now zero")
+            Else
+                MessageBox.Show("Waste recorded and quantity updated")
+            End If
             'Debug message used to let you know it worked, will be removed
-            MessageBox.Show("Waste recorded")
+
         End If
 
     End Sub
