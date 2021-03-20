@@ -54,6 +54,7 @@ Public Class frmEditPhysician
         Fill_Table(strFillSQL)
 
         cmbCredentials.Items.AddRange({"Advisor", "Diagnose", "Prescribe"})
+        PopulateStateComboBox(cmbState)
         'btnSaveChanges.Visible = False
         btnCancel.Visible = False
 
@@ -265,64 +266,6 @@ Public Class frmEditPhysician
     End Sub
 
     '/*********************************************************************/
-    '/*                   Function NAME: RadioButtonSelection()           */         
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:  Collin Krygier   		          */   
-    '/*		         DATE CREATED: 		 2/6/2021                         */                             
-    '/*********************************************************************/
-    '/*  Function   PURPOSE:								              */             
-    '/*	 This is function is intended to take the selected radio button   */
-    '/*  and return a string representation of the selection.             */
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      						                      */           
-    '/*             */         
-    '/*********************************************************************/
-    '/*  CALLS:										                      */                 
-    '/*                                             				      */             
-    '/*********************************************************************/
-    '/*  RETURNS ():					                                  */         
-    '/*	 function returns a string that will be sent to the database    - */
-    '/*  representing the user permission.                                */
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					          */         
-    '/*	 NONE                                                             */ 
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								                  */             
-    '/*	   CreatePanel(flpPhysicianInfo, strID9, strFirstName9, strAccess9)    */
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*	strPrivilege- a string which will be returned by the function that*/
-    '/* contains the selected radio button string.                        */
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						                      */               
-    '/*											                          */                     
-    '/*  WHO   WHEN     WHAT								              */             
-    '/*  Collin Krygier  2/6/2021    Initial creation                     */
-    '/*  Dylan Walter    2/7/2021    commented out, using flags in DB now */
-    '/*********************************************************************/
-    'Function RadioButtonSelection() As String
-
-    '    Dim strPrivilege As String = Nothing
-
-    '    Const NURSE As String = "nurse"
-    '    Const ADMIN As String = "administrator"
-    '    Const SUPERVISOR As String = "supervisor"
-
-    '    If rbtnNurse.Checked = True Then
-
-    '        strPrivilege = NURSE
-    '    ElseIf rbtnAdministrator.Checked = True Then
-
-    '        strPrivilege = ADMIN
-    '    ElseIf rbtnSupervisor.Checked = True Then
-    '        strPrivilege = SUPERVISOR
-    '    End If
-
-    '    Return strPrivilege
-    'End Function
-
-
-    '/*********************************************************************/
     '/*                   SubProgram NAME: txtUsername_LostFocus          */         
     '/*********************************************************************/
     '/*                   WRITTEN BY:  Dylan Walter        		          */   
@@ -352,53 +295,15 @@ Public Class frmEditPhysician
     '/*  WHO        WHEN            WHAT					               */             
     '/*  Dylan W    2/10/2021    Initial creation and check data in DB   */
     '/*********************************************************************/
-    Private Sub mtbPhone_LostFocus(sender As Object, e As EventArgs) Handles mtbPhone.LostFocus
+    Private Sub mtbPhone_and_mtbFax_LostFocus(sender As Object, e As EventArgs) Handles mtbPhone.LostFocus, mtbFax.LostFocus
         'String to be sent to CreateDatabase Module to exicute search to check if Username is already in the User Table
         Dim strStatement = "SELECT COUNT(*) FROM Physician WHERE Physician_Phone_Number = '" & mtbPhone.Text & "'"
+        Dim strStatementFax = "SELECT COUNT(*) FROM Physician WHERE Physician_Fax_Number = '" & mtbFax.Text & "'"
         If ExecuteScalarQuery(strStatement) <> 0 Then
-            MsgBox("A User already has that Username")
+            MsgBox("A Physician already has that Phone number")
             mtbPhone.Focus()
-            'txtUsername.Text = ""
-        End If
-    End Sub
-
-
-    '/*********************************************************************/
-    '/*                   SubProgram NAME: txtBarcode_LostFocus          */         
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:  Dylan Walter        		          */   
-    '/*		         DATE CREATED: 		 2/10/2021                        */                             
-    '/*********************************************************************/
-    '/*  Subprogram PURPOSE:								              */             
-    '/*	 This  sub program is used to check if the Barcode already exist */ 
-    '/*  in the User table when you leave txtBarcode  				      */   
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      						                      */                 
-    '/*********************************************************************/
-    '/*  CALLS:	CreateDatabase.ExecuteScalarQuery                        */            
-    '/*                                             				      */             
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					          */         
-    '/*	     sender                                                      */ 
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								                  */             
-    '/*	  "6gGMRK7bIKlWkNEp4mT71hAU"                                       */
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */   
-    '/*strStatement- SQL String passed to ExecuteScalarQuery to check     */
-    '/* User table for a duplicate Bqarcode                              */
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						                      */               
-    '/*											                          */                     
-    '/*  WHO        WHEN            WHAT					               */             
-    '/*  Dylan W    2/10/2021    Initial creation and check data in DB   */
-    '/*********************************************************************/
-    Private Sub txtBarcode_LostFocus(sender As Object, e As EventArgs) Handles mtbFax.LostFocus
-        ' Convert the barcode to the peppered hash
-        Dim strStatement = "SELECT COUNT(*) FROM Physician WHERE Physician_Fax_Number = '" & mtbFax.Text & "'"
-        'String to be sent to CreateDatabase Module to exicute search to check if Barcode is already in the User Table
-        If ExecuteScalarQuery(strStatement) <> 0 Then
-            MsgBox("A User already has that Barcode")
+        ElseIf ExecuteScalarQuery(strStatementFax) <> 0 Then
+            MsgBox("A Physician already has that Fax number")
             mtbFax.Focus()
         End If
     End Sub
@@ -451,23 +356,15 @@ Public Class frmEditPhysician
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
 
-        Dim intSupervisor As Integer = 0
-        Dim intAdmin As Integer = 0
         Dim intActiveFlag As Integer = 1
         Dim strLastName As String = txtLastName.Text
         Dim strFirstName As String = txtFirstName.Text
         Dim strMiddleName As String = txtMiddleName.Text
-        Dim strSalt As String = Nothing
-        Dim strResults() As String = Nothing ' this will hold the salted, peppered, hashed password and the salt
         strFirstName = Regex.Replace(strFirstName, "'", "''")
         strLastName = Regex.Replace(strLastName, "'", "''")
         strMiddleName = Regex.Replace(strMiddleName, "'", "''")
-
-
-
-        'call CheckPassword Function to see if password mets security standards
         'Make Sure all fields are filled
-        If txtFirstName.Text = "" Or txtLastName.Text = "" Or txtMiddleName.Text = "" Or mtbPhone.Text = "" Or mtbFax.Text = "" Then
+        If txtFirstName.Text = "" Or txtLastName.Text = "" Or txtMiddleName.Text = "" Or txtAddress.Text = "" Or txtCity.Text = "" Or txtZipCode.Text = "" Or mtbPhone.Text = "" Or mtbFax.Text = "" Then
             MsgBox("All Fields must be filled")
         Else
 
@@ -494,88 +391,17 @@ Public Class frmEditPhysician
             txtFirstName.Text = ""
             txtLastName.Text = ""
             txtMiddleName.Text = ""
+            txtAddress.Text = ""
+            txtCity.Text = ""
+            txtZipCode.Text = ""
+            mtbFax.Text = ""
+            mtbPhone.Text = ""
         End If
 
 
     End Sub
 
-    '/*********************************************************************/
-    '/*                   SUBPROGRAM NAME:  CheckPassword			   */         
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:  Dylan Walter   						 */   
-    '/*		         DATE CREATED: 	2/7/2021							   */                             
-    '/*********************************************************************/
-    '/*  SUBPROGRAM PURPOSE:											   */             
-    '/*  Will check if the password being entered meets security          */
-    '/*  requierments                                                     */
-    '/*********************************************************************/
-    '/*  CALLED BY: Button1_Click        	      						  */           
-    '/*                                         				   */         
-    '/*********************************************************************/
-    '/*  CALLS:										   */                 
-    '/*             (NONE)								   */             
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):								*/         
-    '/*	 strPassword - this is the password being tested                  */ 
-    '/*					    `   										  */
-    '/*                                                                     
-    '/*********************************************************************/
-    '/*  RETURNS:								         */                   
-    '/*            Secure								   */             
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								   */             
-    '/*											   */                     
-    '/*
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*		regLower- Regex of all lowercase letters						*/                     
-    '/*		intMinLength- number of needed characters					*/ 
-    '/*		regNumber- Regex of all numbers 								*/ 
-    '/*		intNumLower- number of needed lowercase letters 				*/ 
-    '/*		intNumNumbers- number of needed numbers							*/ 
-    '/*		intNumUpper- number of needed uppercase letters					*/ 
-    '/*		intNumSpecial- number of needed special characters 				*/ 
-    '/*		bolSecure- returned boolean, true if requirements are met	    */    
-    '/*     regSpecial- Regex of all other characters                       */
-    '/*     regUpper- Regex of all uppercase letters                        */
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						                        */               
-    '/*											                            */                     
-    '/*  WHO            WHEN        WHAT								   */             
-    '/*  ---            ----        ------------------------------------- */
-    '/*  Dylan Walter   2/7/2021    Initial Creation                      */
-    '/*  Nathan Premo   2/10/2021   adding the ability for first and last */
-    '/*                             name to have ' - @                    */
-    '/*********************************************************************/
-    Function CheckPassword(strPassword)
-        'Security Requierments 
-        Dim intMinLength As Integer = 8
-        Dim intNumUpper As Integer = 1
-        Dim intNumLower As Integer = 1
-        Dim intNumNumbers As Integer = 1
-        Dim intNumSpecial As Integer = 1
-        Dim bolSecure As Boolean = True
-
-        ' Replace [A-Z] with \p{Lu}, to allow for Unicode uppercase letters.
-        Dim regUpper As New System.Text.RegularExpressions.Regex("[A-Z]")
-        Dim regLower As New System.Text.RegularExpressions.Regex("[a-z]")
-        Dim regNumber As New System.Text.RegularExpressions.Regex("[0-9]")
-        ' Special is "none of the above".
-        Dim regSpecial As New System.Text.RegularExpressions.Regex("[^a-zA-Z0-9]")
-
-        ' Check the length.
-        If Len(strPassword) < intMinLength Then bolSecure = False
-        ' Check for minimum number of occurrences.
-        If regUpper.Matches(strPassword).Count < intNumUpper Then bolSecure = False
-        If regLower.Matches(strPassword).Count < intNumLower Then bolSecure = False
-        If regNumber.Matches(strPassword).Count < intNumNumbers Then bolSecure = False
-        If regSpecial.Matches(strPassword).Count < intNumSpecial Then bolSecure = False
-
-        ' Passed all checks.
-        Return bolSecure
-    End Function
-
-    Private Sub txtFirst_Last_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtMiddleName.KeyPress, txtLastName.KeyPress, txtFirstName.KeyPress
+    Private Sub txtFirst_Last_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtMiddleName.KeyPress, txtLastName.KeyPress, txtFirstName.KeyPress, txtAddress.KeyPress, txtCity.KeyPress, txtZipCode.KeyPress
         KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*()/.,<>=+")
     End Sub
 

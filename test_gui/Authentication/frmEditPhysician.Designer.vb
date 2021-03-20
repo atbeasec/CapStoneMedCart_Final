@@ -58,6 +58,8 @@ Partial Class frmEditPhysician
         Me.txtCity = New System.Windows.Forms.TextBox()
         Me.Panel10 = New System.Windows.Forms.Panel()
         Me.txtAddress = New System.Windows.Forms.TextBox()
+        Me.txtID = New System.Windows.Forms.TextBox()
+        Me.btnSaveChanges = New System.Windows.Forms.Button()
         Me.pnlPhysicianHeader.SuspendLayout()
         Me.Panel15.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -454,11 +456,34 @@ Partial Class frmEditPhysician
         Me.txtAddress.Size = New System.Drawing.Size(560, 29)
         Me.txtAddress.TabIndex = 11
         '
+        'txtID
+        '
+        Me.txtID.Location = New System.Drawing.Point(493, 527)
+        Me.txtID.Name = "txtID"
+        Me.txtID.Size = New System.Drawing.Size(100, 20)
+        Me.txtID.TabIndex = 165
+        '
+        'btnSaveChanges
+        '
+        Me.btnSaveChanges.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnSaveChanges.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSaveChanges.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSaveChanges.ForeColor = System.Drawing.Color.White
+        Me.btnSaveChanges.Location = New System.Drawing.Point(332, 408)
+        Me.btnSaveChanges.Name = "btnSaveChanges"
+        Me.btnSaveChanges.Size = New System.Drawing.Size(120, 38)
+        Me.btnSaveChanges.TabIndex = 166
+        Me.btnSaveChanges.Text = "   SAVE "
+        Me.btnSaveChanges.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnSaveChanges.UseVisualStyleBackColor = False
+        '
         'frmEditPhysician
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1127, 649)
+        Me.Controls.Add(Me.btnSaveChanges)
+        Me.Controls.Add(Me.txtID)
         Me.Controls.Add(Me.Label14)
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Label12)
@@ -538,4 +563,6 @@ Partial Class frmEditPhysician
     Friend WithEvents txtCity As TextBox
     Friend WithEvents Panel10 As Panel
     Friend WithEvents txtAddress As TextBox
+    Friend WithEvents txtID As TextBox
+    Friend WithEvents btnSaveChanges As Button
 End Class

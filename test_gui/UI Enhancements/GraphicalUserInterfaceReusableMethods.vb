@@ -623,6 +623,23 @@ Module GraphicalUserInterfaceReusableMethods
             ' call SQL method to set the Patient Record flag to inactive or delete the user from the DB
             '    Debug.Print("patient records")
 
+        ElseIf getOpenedForm().GetType() Is frmEditPhysician.GetType() Then
+
+            Dim intID As Integer = GetSelectedInformation(sender.parent, "lblID")
+            Dim strStatement As String = "SELECT Active_Flag FROM Physician WHERE Physician_ID = '" & intID & "'"
+            If ExecuteScalarQuery(strStatement) = 1 Then
+                strStatement = "UPDATE Physician SET Active_Flag='0' WHERE Physician_ID='" & intID & "';"
+                ExecuteInsertQuery(strStatement)
+            Else
+                strStatement = "UPDATE Physician SET Active_Flag='1' WHERE Physician_ID='" & intID & "';"
+                ExecuteInsertQuery(strStatement)
+            End If
+            Dim strFillSQL As String = "select Physician.Physician_ID, Physician.Physician_First_Name, Physician.Physician_Middle_Name," &
+                                    "Physician.Physician_Last_Name, Physician.Physician_Credentials, Physician.Physician_Phone_Number," &
+                                    "Physician.Physician_Fax_Number, Physician.Physician_Address, Physician.Physician_City," &
+                                    "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician;"
+            frmEditPhysician.Fill_Table(strFillSQL)
+
         ElseIf getOpenedForm().GetType() Is frmConfigureInventory.GetType() Then
 
             ' call SQL method to remove the item from the list of currently stocked items in the med cart
@@ -734,7 +751,37 @@ Module GraphicalUserInterfaceReusableMethods
 
             ' call SQL method to set edit functionality
             '  Debug.Print("removing this inventory piece")
+        ElseIf getOpenedForm().GetType() Is frmEditPhysician.GetType() Then
+            'call GetSelectedInformation to get the selected username and ID
+            frmEditPhysician.txtID.Text = GetSelectedInformation(sender.parent, "lblID")
+            Dim IDNumber As Integer = GetSelectedInformation(sender.parent, "lblID")
 
+            'calls to fill the other textboxes for editing the user
+            Dim strStatement = "SELECT Physician_First_Name FROM Physician WHERE Physician_ID = '" & IDNumber & "';"
+            frmEditPhysician.txtFirstName.Text = ExecuteScalarQuery(strStatement)
+            strStatement = "SELECT Physician_Last_Name FROM Physician WHERE Physician_ID = '" & IDNumber & "';"
+            frmEditPhysician.txtLastName.Text = ExecuteScalarQuery(strStatement)
+            strStatement = "SELECT Physician_Middle_Name FROM Physician WHERE Physician_ID = '" & IDNumber & "';"
+            frmEditPhysician.txtMiddleName.Text = ExecuteScalarQuery(strStatement)
+            strStatement = "SELECT Physician_Phone_Number FROM Physician WHERE Physician_ID = '" & IDNumber & "';"
+            frmEditPhysician.mtbPhone.Text = ExecuteScalarQuery(strStatement)
+            strStatement = "SELECT Physician_Fax_Number FROM Physician WHERE Physician_ID = '" & IDNumber & "';"
+            frmEditPhysician.mtbPhone.Text = ExecuteScalarQuery(strStatement)
+            strStatement = "SELECT Physician_Address FROM Physician WHERE Physician_ID = '" & IDNumber & "';"
+            frmEditPhysician.txtAddress.Text = ExecuteScalarQuery(strStatement)
+            strStatement = "SELECT Physician_City FROM Physician WHERE Physician_ID = '" & IDNumber & "';"
+            frmEditPhysician.txtCity.Text = ExecuteScalarQuery(strStatement)
+            strStatement = "SELECT Physician_Zip_Code FROM Physician WHERE Physician_ID = '" & IDNumber & "';"
+            frmEditPhysician.txtZipCode.Text = ExecuteScalarQuery(strStatement)
+            strStatement = "SELECT Physician_State FROM Physician WHERE Physician_ID = '" & IDNumber & "';"
+            frmEditPhysician.cmbState.SelectedItem = ExecuteScalarQuery(strStatement)
+            strStatement = "SELECT Physician_Credentials FROM Physician WHERE Physician_ID = '" & IDNumber & "';"
+            frmEditPhysician.cmbCredentials.SelectedItem = ExecuteScalarQuery(strStatement)
+
+            'make the save and cancel button visible and hide button1
+            frmEditPhysician.btnSaveChanges.Visible = True
+            frmEditPhysician.btnCancel.Visible = True
+            frmEditPhysician.btnSave.Visible = False
         ElseIf getOpenedForm().GetType() Is frmAllergies.GetType() Then
 
             If frmAllergies.btnAddAllergy.Visible = True Then
