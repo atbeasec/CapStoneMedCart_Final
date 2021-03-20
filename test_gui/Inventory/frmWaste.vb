@@ -103,7 +103,8 @@
             End If
 
             If Not cboWitness.SelectedIndex = -1 And Not cboMedication.SelectedIndex = -1 And Not cboDrawers.SelectedIndex = -1 Then
-                Inventory.WasteMedication(intDrawerMedTUID, intWasteAmount)
+                Dim intMedID As Integer = intMedicationID(cboMedication.SelectedIndex)
+                Inventory.WasteMedication(intDrawerMedTUID, intWasteAmount, intMedID)
                 cboMedication.SelectedIndex = -1
                 RadioButton2.Checked = True
                 cboWitness.SelectedIndex = -1

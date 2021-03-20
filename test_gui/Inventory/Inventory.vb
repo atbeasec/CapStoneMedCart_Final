@@ -167,7 +167,7 @@
     '/*  ---                   ----     ----------------------------------*/
     '/*  Alexander Beasecker  02/10/21	  Initial creation of the code    */
     '/*********************************************************************/
-    Public Sub WasteMedication(ByRef intdrawerID As Integer, ByRef Quantity As Integer)
+    Public Sub WasteMedication(ByRef intdrawerID As Integer, ByRef Quantity As Integer, ByRef intMedID As Integer)
         If Not IsNothing(frmWaste.cboMedication.SelectedItem) Then
             Dim strSqlCommand As String
             Dim intDrawerMedID As Integer
@@ -194,7 +194,7 @@
 
             strSqlCommand = "select User_ID from User where Username = '" & frmWaste.cboWitness.SelectedItem & "'"
             userID = CreateDatabase.ExecuteScalarQuery(strSqlCommand)
-            strSqlCommand = "INSERT INTO Wastes(Primary_User_TUID,Secondary_User_TUID,DrawerMedication_TUID,DateTime,Reason) VALUES('1','" & userID & "','" & intDrawerMedID & "','" & dtmAdhocTime & "','" & strWasteReason & "')"
+            strSqlCommand = "INSERT INTO Wastes(Primary_User_TUID,Secondary_User_TUID,DrawerMedication_TUID,Medication_TUID,DateTime,Reason,Quantity) VALUES('1','" & userID & "','" & intDrawerMedID & "','" & intMedID & "','" & dtmAdhocTime & "','" & strWasteReason & "','" & Quantity & "')"
             CreateDatabase.ExecuteInsertQuery(strSqlCommand)
 
             'Debug message used to let you know it worked, will be removed
