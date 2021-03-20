@@ -108,6 +108,7 @@
                 cboMedication.SelectedIndex = -1
                 RadioButton2.Checked = True
                 cboWitness.SelectedIndex = -1
+                Inventory.PopulateWasteComboBoxMedication()
             Else
                 MessageBox.Show("Please select a Medication, Drawer, and User for the sign off")
             End If
