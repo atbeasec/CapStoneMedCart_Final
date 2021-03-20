@@ -124,7 +124,7 @@
     '/*  Alexander Beasecker  02/10/21	  Initial creation of the code    */
     '/*********************************************************************/
     Public Sub PopulateWasteComboBoxMedication()
-
+        frmWaste.cboMedication.Items.Clear()
         Dim Strdatacommand As String
         ' Currently the medication display is appending the RXCUI Number on too the medication
         ' name, as searching by name alone could cause problems if medication names can repeat
