@@ -774,9 +774,9 @@ Module GraphicalUserInterfaceReusableMethods
             strStatement = "SELECT Physician_Zip_Code FROM Physician WHERE Physician_ID = '" & IDNumber & "';"
             frmEditPhysician.txtZipCode.Text = ExecuteScalarQuery(strStatement)
             strStatement = "SELECT Physician_State FROM Physician WHERE Physician_ID = '" & IDNumber & "';"
-            frmEditPhysician.cmbState.SelectedItem = ExecuteScalarQuery(strStatement)
+            frmEditPhysician.cboState.SelectedItem = ExecuteScalarQuery(strStatement)
             strStatement = "SELECT Physician_Credentials FROM Physician WHERE Physician_ID = '" & IDNumber & "';"
-            frmEditPhysician.cmbCredentials.SelectedItem = ExecuteScalarQuery(strStatement)
+            frmEditPhysician.cboCredentials.SelectedItem = ExecuteScalarQuery(strStatement)
 
             'make the save and cancel button visible and hide button1
             frmEditPhysician.btnSaveChanges.Visible = True
