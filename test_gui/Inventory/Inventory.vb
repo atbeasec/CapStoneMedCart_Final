@@ -198,14 +198,22 @@
             CreateDatabase.ExecuteInsertQuery(strSqlCommand)
 
             'Update medication amount in drawer
-
+            Dim intDrawerAmount As Integer = CreateDatabase.ExecuteScalarQuery("SELECT Quantity from DrawerMedication where DrawerMedication_ID = '" & intDrawerMedID & "'")
+            intDrawerAmount = intDrawerAmount - Quantity
+            CreateDatabase.ExecuteInsertQuery("UPDATE DrawerMedication SET Quantity = '" & intDrawerAmount & "' WHere DrawerMedication_ID = '" & intDrawerMedID & "'")
 
             'if amount left after waste is zero then update record to be inactive
+            Dim intDrawerTUID As Integer = CreateDatabase.ExecuteScalarQuery("Select Drawers_TUID from DrawerMedication where DrawerMedication_ID = '" & intDrawerMedID & "'")
+            Dim intDrawerNumber As Integer = CreateDatabase.ExecuteScalarQuery("Select Drawer_Number from Drawers where Drawers_ID = '" & intDrawerTUID & "'")
             Dim intQuantityLeft As Integer = CreateDatabase.ExecuteScalarQuery("SELECT Quantity from DrawerMedication where DrawerMedication_ID = '" & intDrawerMedID & "'")
             If intQuantityLeft <= 0 Then
-                MessageBox.Show("Waste recorded, Medication quantity is now zero")
+                MessageBox.Show("Waste recorded, Medication quantity is now zero, Please remove medication from the drawer")
+                CreateDatabase.ExecuteInsertQuery("UPDATE DrawerMedication SET Active_Flag = '0' WHere DrawerMedication_ID = '" & intDrawerMedID & "'")
+                CartInterfaceCode.OpenOneDrawer(intDrawerNumber)
             Else
                 MessageBox.Show("Waste recorded and quantity updated")
+                CartInterfaceCode.OpenOneDrawer(intDrawerNumber)
+
             End If
             'Debug message used to let you know it worked, will be removed
 
