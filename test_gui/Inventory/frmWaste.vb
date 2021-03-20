@@ -368,25 +368,24 @@
         End If
     End Sub
     '/********************************************************************/
-    '/*                   FUNCTION NAME: btnWaste_Click	             */         
+    '/*                   FUNCTION NAME: txtQuantity_KeyPress	             */         
     '/********************************************************************/
     '/*                   WRITTEN BY: Alexander Beasecker  		             */   
     '/*		         DATE CREATED: 	3/20/21			                     */                             
     '/********************************************************************/
-    '/*  SUBROUTINE PURPOSE:This when the increment button is clicked
+    '/*  SUBROUTINE PURPOSE:This handles the keypress event for the txtquantity textbox
     '/********************************************************************/
-    '/*  CALLED BY: btnwaste.click                    	      		 */				            
-    '/*  btnIncrementQuantity.Click                                      				             */         
+    '/*  CALLED BY: txtQuantity.KeyPress                                     				             */         
     '/********************************************************************/
     '/*  CALLS:								                             */
-    '/* ButtonIncrement(txtQuantity)
+    '/* GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
     '/********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):				             */	           
     '/*sender As Object, 
     '/*e As EventArgs    							                        							             
     '/********************************************************************/
     '/* SAMPLE INVOCATION:						                         */		             
-    '/*	btnIncrementQuantity_Click()				                                 */					                       
+    '/*	txtQuantity_KeyPress(sender, e)				         				                       
     '/********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
     '/********************************************************************/
@@ -421,7 +420,7 @@
     '/*e As EventArgs    							                        							             
     '/********************************************************************/
     '/* SAMPLE INVOCATION:						                         */		             
-    '/*	btnIncrementQuantity_Click()				                                 */					                       
+    '/*	txtQuantity_Validated(sender, e)				         				                       
     '/********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
     '/********************************************************************/
