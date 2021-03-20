@@ -418,31 +418,22 @@
     '/*                   WRITTEN BY: Alexander Beasecker  		             */   
     '/*		         DATE CREATED: 	3/20/21			                     */                             
     '/********************************************************************/
-    '/*  SUBROUTINE PURPOSE:This handles the beginning of the wasting logic
-    '/*         it has the validation checks to make sure all the data is selected
-    '/*         and valid. it will then pass along to the waste sub
-    '/*
-    '/*
+    '/*  SUBROUTINE PURPOSE:This when the increment button is clicked
     '/********************************************************************/
     '/*  CALLED BY: btnwaste.click                    	      		 */				            
-    '/*                                        				             */         
+    '/*  btnIncrementQuantity.Click                                      				             */         
     '/********************************************************************/
-    '/*  CALLS:								                             */		                  
-    '/*  		Inventory.WasteMedication				                         */	
-    '/*  		Inventory.PopulateWasteComboBoxMedication()				                         */		               
+    '/*  CALLS:								                             */
+    '/* ButtonIncrement(txtQuantity)
     '/********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):				             */	           
     '/*sender As Object, 
     '/*e As EventArgs    							                        							             
     '/********************************************************************/
     '/* SAMPLE INVOCATION:						                         */		             
-    '/*	btnWaste_Click()				                                 */					                       
+    '/*	btnIncrementQuantity_Click()				                                 */					                       
     '/********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
-    '/*	 intWasteAmount
-    '/*  intMedID
-    '/*
-    '/*
     '/********************************************************************/
     '/* MODIFICATION HISTORY:						                     */		                 
     '/*									 */		                         */
@@ -463,11 +454,7 @@
     '/*                   WRITTEN BY: Alexander Beasecker  		             */   
     '/*		         DATE CREATED: 	3/20/21			                     */                             
     '/********************************************************************/
-    '/*  SUBROUTINE PURPOSE:This handles the beginning of the wasting logic
-    '/*         it has the validation checks to make sure all the data is selected
-    '/*         and valid. it will then pass along to the waste sub
-    '/*
-    '/*
+    '/*  SUBROUTINE PURPOSE:This when the decrement button is clicked
     '/********************************************************************/
     '/*  CALLED BY: btnwaste.click                    	      		 */				            
     '/*  btnDecrementQuantity.Click                                      				             */         
