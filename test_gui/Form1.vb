@@ -21,7 +21,8 @@
         Discharge = 15
         ConfigureRooms = 16
         SerialPortSettings = 17
-        LogOut = 18
+        EditPhysician = 18
+        LogOut = 19
     End Enum
 
     '/*********************************************************************/
@@ -60,7 +61,7 @@
     '/*  ---   ----     ------------------------------------------------  */
     '/*  Collin Krygier  2/14/2021    Initial creation                    */
     '/*********************************************************************/
-    Private Sub btnMenu_Click(sender As Object, e As EventArgs) Handles btnAllPatients.Click, btnMyPatients.Click, btnAdhockDispense.Click, btnEndOfShiftCount.Click, btnConfigureInventory.Click, btnWaste.Click, btnReport.Click, btnDescrepancies.Click, btnMaintenance.Click, btnPharmacy.Click, btnUsers.Click, btnDischargePatient.Click, btnEditRooms.Click, btnSerialPort.Click
+    Private Sub btnMenu_Click(sender As Object, e As EventArgs) Handles btnAllPatients.Click, btnMyPatients.Click, btnAdhockDispense.Click, btnEndOfShiftCount.Click, btnConfigureInventory.Click, btnWaste.Click, btnReport.Click, btnDescrepancies.Click, btnMaintenance.Click, btnPharmacy.Click, btnUsers.Click, btnDischargePatient.Click, btnEditRooms.Click, btnSerialPort.Click, btnEditPhysician.Click
 
 
 
@@ -302,6 +303,11 @@
 
                 frmCurrentChildForm = frmSerialPort
                 OpenChildForm(frmSerialPort)
+
+            Case SelectedForm.EditPhysician
+
+                frmCurrentChildForm = frmEditPhysician
+                OpenChildForm(frmEditPhysician)
 
             Case SelectedForm.LogOut
 
