@@ -342,7 +342,7 @@ Public Class frmInventory
         chkNarcotic.Checked = False
         cmbDrawerNumber.Text = ""
         cmbBin.Items.Clear()
-        txtQuantity.Text = ""
+        txtQuantity.Text = "1"
         mtbExpirationDate.Text = ""
         cmbPatientPersonalMedication.SelectedItem = ""
 
