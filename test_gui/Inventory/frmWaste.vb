@@ -88,9 +88,10 @@
     End Sub
 
     Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
-        Dim intWasteAmount As Integer
 
+        Dim intWasteAmount As Integer
         ErrorProvider1.Clear()
+
         If Not IsNumeric(txtQuantity.Text) Then
             ErrorProvider1.SetError(pnlQuantity, "Please enter a numeric value")
         Else
