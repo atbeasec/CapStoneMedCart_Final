@@ -254,4 +254,12 @@
             intPhysicianIDfromArray = intPhysicianID(cmbOrderedBy.SelectedIndex)
         End If
     End Sub
+
+    Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantity.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789")
+        If txtQuantity.Text IsNot "" Then
+            GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
+        Else
+        End If
+    End Sub
 End Class
