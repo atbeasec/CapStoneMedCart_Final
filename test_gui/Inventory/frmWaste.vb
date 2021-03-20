@@ -2,6 +2,8 @@
 
     Private intPatientInformationMRN As Integer
     Public intMedicationID As New ArrayList
+    Private intDrawerID As New ArrayList
+    Private intDrawerMedTUID As Integer
 
     'this function should set Patient MRN using PatientID
     Public Sub SetPatientMRN(ByVal mrn As Integer)
@@ -86,13 +88,13 @@
     End Sub
 
     Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
-        If Not cboWitness.SelectedIndex = -1 Then
+        If Not cboWitness.SelectedIndex = -1 And Not cboMedication.SelectedIndex = -1 And Not cboDrawers.SelectedIndex = -1 Then
             Inventory.WasteMedication()
             cboMedication.SelectedIndex = -1
             RadioButton2.Checked = True
             cboWitness.SelectedIndex = -1
         Else
-            MessageBox.Show("Please select a user for the sign off")
+            MessageBox.Show("Please select a Medication, Drawer, and User for the sign off")
         End If
 
     End Sub
@@ -104,11 +106,14 @@
 
     Private Sub cboMedication_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboMedication.SelectedIndexChanged
         cboDrawers.Items.Clear()
+        intDrawerID.Clear()
+
         If Not cboMedication.SelectedIndex = -1 Then
             Dim intMedID As Integer = intMedicationID(cboMedication.SelectedIndex)
             Dim dsDrawerBin As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT * FROM DrawerMedication where Medication_TUID = '" & intMedID & "' AND Active_Flag = 1")
             For Each dr As DataRow In dsDrawerBin.Tables(0).Rows
                 cboDrawers.Items.Add("Drawer Number: " & dr(1) & " Bin Number: " & dr(4))
+                intDrawerID.Add(dr(0))
             Next
         End If
     End Sub
@@ -118,6 +123,12 @@
             pnlQuantity.Visible = True
         Else
             pnlQuantity.Visible = False
+        End If
+    End Sub
+
+    Private Sub cboDrawers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDrawers.SelectedIndexChanged
+        If Not cboDrawers.SelectedIndex = -1 Then
+            intDrawerMedTUID = intDrawerID(cboDrawers.SelectedIndex)
         End If
     End Sub
 End Class
