@@ -21,7 +21,7 @@ Public Class frmLoginScan
             'If users barcode is in the User table in the database then close current form and open frmMain
             Me.Close()
             frmMain.DetermineFormToOpen(1)
-            frmMain.Text = "Medical Dispence - " & frmMain.Label2.Text
+            frmMain.Text = "Medical Dispence - " & LogIn.LoggedInFullName
             frmMain.Show()
             frmMain.btnPatientRecords.PerformClick()
 
@@ -47,7 +47,7 @@ Public Class frmLoginScan
                 'If users barcode is in the User table in the database then close current form and open frmMain
                 Me.Close()
                 frmMain.DetermineFormToOpen(1)
-                frmMain.Text = "Medical Dispence - " & frmMain.Label2.Text
+                frmMain.Text = "Medical Dispence - " & LogIn.LoggedInFullName
                 frmMain.Show()
                 frmMain.btnPatientRecords.PerformClick()
             Else

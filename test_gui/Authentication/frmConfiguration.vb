@@ -842,4 +842,9 @@ Public Class frmConfiguration
         End If
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs)
+
+        frmEditPhysician.Show()
+        Me.Close()
+    End Sub
 End Class
