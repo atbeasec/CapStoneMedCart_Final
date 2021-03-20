@@ -403,6 +403,34 @@
         End If
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: txtQuantity_Validated	             */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Alexander Beasecker  		             */   
+    '/*		         DATE CREATED: 	3/20/21			                     */                             
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:This handles the validation event for the txtquantity textbox
+    '/********************************************************************/
+    '/*  CALLED BY: txtQuantity.Validated                                     				             */         
+    '/********************************************************************/
+    '/*  CALLS:								                             */
+    '/* GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*sender As Object, 
+    '/*e As EventArgs    							                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             
+    '/*	btnIncrementQuantity_Click()				                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  AB		        3/20/21		    initial creation                 */
+    '/********************************************************************/ 
     Private Sub txtQuantity_Validated(sender As Object, e As EventArgs) Handles txtQuantity.Validated
         If txtQuantity.Text IsNot "" Then
             GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
@@ -417,7 +445,7 @@
     '/********************************************************************/
     '/*  SUBROUTINE PURPOSE:This when the increment button is clicked
     '/********************************************************************/
-    '/*  CALLED BY: btnwaste.click                    	      		 */				            
+    '/*  CALLED BY:                    	      		 */				            
     '/*  btnIncrementQuantity.Click                                      				             */         
     '/********************************************************************/
     '/*  CALLS:								                             */
@@ -453,7 +481,7 @@
     '/********************************************************************/
     '/*  SUBROUTINE PURPOSE:This when the decrement button is clicked
     '/********************************************************************/
-    '/*  CALLED BY: btnwaste.click                    	      		 */				            
+    '/*  CALLED BY:                    	      		 */				            
     '/*  btnDecrementQuantity.Click                                      				             */         
     '/********************************************************************/
     '/*  CALLS:								                             */
