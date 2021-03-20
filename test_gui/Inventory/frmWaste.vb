@@ -183,44 +183,6 @@
         End If
     End Sub
 
-    '/********************************************************************/
-    '/*                   FUNCTION NAME: btnWaste_Click	             */         
-    '/********************************************************************/
-    '/*                   WRITTEN BY: Alexander Beasecker  		             */   
-    '/*		         DATE CREATED: 	2/10/21			                     */                             
-    '/********************************************************************/
-    '/*  SUBROUTINE PURPOSE:This handles the beginning of the wasting logic
-    '/*         it has the validation checks to make sure all the data is selected
-    '/*         and valid. it will then pass along to the waste sub
-    '/*
-    '/*
-    '/********************************************************************/
-    '/*  CALLED BY: btnwaste.click                    	      		 */				            
-    '/*                                        				             */         
-    '/********************************************************************/
-    '/*  CALLS:								                             */		                  
-    '/*  		Inventory.WasteMedication				                         */	
-    '/*  		Inventory.PopulateWasteComboBoxMedication()				                         */		               
-    '/********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):				             */	           
-    '/*sender As Object, 
-    '/*e As EventArgs    							                        							             
-    '/********************************************************************/
-    '/* SAMPLE INVOCATION:						                         */		             
-    '/*	btnWaste_Click()				                                 */					                       
-    '/********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
-    '/*	 intWasteAmount
-    '/*  intMedID
-    '/*
-    '/*
-    '/********************************************************************/
-    '/* MODIFICATION HISTORY:						                     */		                 
-    '/*									 */		                         */
-    '/*  WHO            WHEN             WHAT				             */		            
-    '/*  ---            ----             ----				             */
-    '/*  AB		        2/10/21		    initial creation                 */
-    '/********************************************************************/ 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         frmPatientInfo.setPatientMrn(intPatientInformationMRN)
         frmMain.OpenChildForm(frmPatientInfo)
@@ -232,28 +194,23 @@
     '/*                   WRITTEN BY: Alexander Beasecker  		             */   
     '/*		         DATE CREATED: 	3/20/21			                     */                             
     '/********************************************************************/
-    '/*  SUBROUTINE PURPOSE:This handles the beginning of the wasting logic
-    '/*         it has the validation checks to make sure all the data is selected
-    '/*         and valid. it will then pass along to the waste sub
-    '/*
-    '/*
+    '/*  SUBROUTINE PURPOSE:This sub is used to populate the drawers comboBox
+    '/*  to list all the drawers the drug that was selected is in
     '/********************************************************************/
-    '/*  CALLED BY: btnwaste.click                    	      		 */				            
+    '/*  CALLED BY: cboMedication.SelectedIndexChanged                   	      		 */				            
     '/*                                        				             */         
     '/********************************************************************/
-    '/*  CALLS:								                             */		                  
-    '/*  		Inventory.WasteMedication				                         */	
-    '/*  		Inventory.PopulateWasteComboBoxMedication()				                         */		               
+    '/*  CALLS:	CreateDatabase.ExecuteSelectQuery(							                             */		                  			                         */		               
     '/********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):				             */	           
     '/*sender As Object, 
     '/*e As EventArgs    							                        							             
     '/********************************************************************/
     '/* SAMPLE INVOCATION:						                         */		             
-    '/*	btnWaste_Click()				                                 */					                       
+    '/*	cboMedication_SelectedIndexChanged()				                                 */					                       
     '/********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
-    '/*	 intWasteAmount
+    '/*	 dsDrawerBin
     '/*  intMedID
     '/*
     '/*
@@ -279,36 +236,27 @@
     End Sub
 
     '/********************************************************************/
-    '/*                   FUNCTION NAME: btnWaste_Click	             */         
+    '/*                   FUNCTION NAME: cboDrawers_SelectedIndexChanged	             */         
     '/********************************************************************/
     '/*                   WRITTEN BY: Alexander Beasecker  		             */   
     '/*		         DATE CREATED: 	3/20/21			                     */                             
     '/********************************************************************/
-    '/*  SUBROUTINE PURPOSE:This handles the beginning of the wasting logic
-    '/*         it has the validation checks to make sure all the data is selected
-    '/*         and valid. it will then pass along to the waste sub
-    '/*
-    '/*
+    '/*  SUBROUTINE PURPOSE:This method is called when the radio buttons change
+    '/* it is used to hide or unhide the quantity selector
     '/********************************************************************/
-    '/*  CALLED BY: btnwaste.click                    	      		 */				            
-    '/*                                        				             */         
+    '/*  CALLED BY:                     				             
+    '/*    radWasteSpecific.CheckedChanged, radAllMed.CheckedChanged   
     '/********************************************************************/
-    '/*  CALLS:								                             */		                  
-    '/*  		Inventory.WasteMedication				                         */	
-    '/*  		Inventory.PopulateWasteComboBoxMedication()				                         */		               
+    '/*  CALLS:								                             */		                  	               
     '/********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):				             */	           
     '/*sender As Object, 
     '/*e As EventArgs    							                        							             
     '/********************************************************************/
     '/* SAMPLE INVOCATION:						                         */		             
-    '/*	btnWaste_Click()				                                 */					                       
+    '/*	radWasteSpecific_CheckedChanged()				                                 */					                       
     '/********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
-    '/*	 intWasteAmount
-    '/*  intMedID
-    '/*
-    '/*
     '/********************************************************************/
     '/* MODIFICATION HISTORY:						                     */		                 
     '/*									 */		                         */
@@ -325,36 +273,27 @@
     End Sub
 
     '/********************************************************************/
-    '/*                   FUNCTION NAME: btnWaste_Click	             */         
+    '/*                   FUNCTION NAME: cboDrawers_SelectedIndexChanged     
     '/********************************************************************/
-    '/*                   WRITTEN BY: Alexander Beasecker  		             */   
+    '/*                   WRITTEN BY: Alexander Beasecker  		            
     '/*		         DATE CREATED: 	3/20/21			                     */                             
     '/********************************************************************/
-    '/*  SUBROUTINE PURPOSE:This handles the beginning of the wasting logic
-    '/*         it has the validation checks to make sure all the data is selected
-    '/*         and valid. it will then pass along to the waste sub
-    '/*
-    '/*
+    '/*  SUBROUTINE PURPOSE:This method is used to update the drawerID array
     '/********************************************************************/
-    '/*  CALLED BY: btnwaste.click                    	      		 */				            
-    '/*                                        				             */         
+    '/*  CALLED BY:                     				             
+    '/*     cboDrawers.SelectedIndexChanged    
     '/********************************************************************/
     '/*  CALLS:								                             */		                  
-    '/*  		Inventory.WasteMedication				                         */	
-    '/*  		Inventory.PopulateWasteComboBoxMedication()				                         */		               
+    '/*  					                         */		               
     '/********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):				             */	           
     '/*sender As Object, 
     '/*e As EventArgs    							                        							             
     '/********************************************************************/
     '/* SAMPLE INVOCATION:						                         */		             
-    '/*	btnWaste_Click()				                                 */					                       
+    '/*	cboDrawers_SelectedIndexChanged()				                                 */					                       
     '/********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
-    '/*	 intWasteAmount
-    '/*  intMedID
-    '/*
-    '/*
     '/********************************************************************/
     '/* MODIFICATION HISTORY:						                     */		                 
     '/*									 */		                         */
