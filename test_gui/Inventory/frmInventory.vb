@@ -747,10 +747,16 @@ Public Class frmInventory
         IndexButtonDecrement(cmbDrawerNumber.SelectedIndex, cmbDrawerNumber)
     End Sub
     Private Sub btnQuantityUp_Click(sender As Object, e As EventArgs) Handles btnQuantityUp.Click
+        If Not IsNumeric(txtQuantity.Text) Then
+            txtQuantity.Text = 0
+        End If
         ButtonIncrement(1000, txtQuantity)
     End Sub
 
     Private Sub btnQuantityDown_Click(sender As Object, e As EventArgs) Handles btnQuantityDown.Click
+        If Not IsNumeric(txtQuantity.Text) Then
+            txtQuantity.Text = 2
+        End If
         ButtonDecrement(txtQuantity)
     End Sub
 
@@ -759,8 +765,6 @@ Public Class frmInventory
         If txtQuantity.Text IsNot "" Then
             GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
         Else
-            MessageBox.Show("The quantity must be at least 1")
-            txtQuantity.Text = "1"
         End If
     End Sub
 
@@ -768,8 +772,6 @@ Public Class frmInventory
         If txtQuantity.Text IsNot "" Then
             GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
         Else
-            MessageBox.Show("The quantity must be at least 1")
-            txtQuantity.Text = "1"
         End If
     End Sub
 

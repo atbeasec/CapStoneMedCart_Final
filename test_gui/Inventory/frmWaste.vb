@@ -131,4 +131,25 @@
             intDrawerMedTUID = intDrawerID(cboDrawers.SelectedIndex)
         End If
     End Sub
+
+    Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantity.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789")
+        If txtQuantity.Text IsNot "" Then
+            GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
+        End If
+    End Sub
+
+    Private Sub btnIncrementQuantity_Click(sender As Object, e As EventArgs) Handles btnIncrementQuantity.Click
+        If Not IsNumeric(txtQuantity.Text) Then
+            txtQuantity.Text = 0
+        End If
+        ButtonIncrement(1000, txtQuantity)
+    End Sub
+
+    Private Sub btnDecrementQuantity_Click(sender As Object, e As EventArgs) Handles btnDecrementQuantity.Click
+        If Not IsNumeric(txtQuantity.Text) Then
+            txtQuantity.Text = 2
+        End If
+        ButtonDecrement(txtQuantity)
+    End Sub
 End Class
