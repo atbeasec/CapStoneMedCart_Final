@@ -155,29 +155,35 @@
     '/*  AB		        2/10/21		    initial creation                 */
     '/********************************************************************/ 
     Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
-
+        'create variables and clear error
         Dim intWasteAmount As Integer
         ErrorProvider1.Clear()
 
+        'check to see if the quantity input is numeric, if it is not then set an error on the 
+        'txtquantity and dont continue method
         If Not IsNumeric(txtQuantity.Text) Then
             ErrorProvider1.SetError(pnlQuantity, "Please enter a numeric value")
         Else
-
+            'check what radio button is checked
+            'if the all meds radio button is checked then get the entire quantity from the drawer
             If radAllMed.Checked = True Then
                 intWasteAmount = CreateDatabase.ExecuteScalarQuery("SELECT Quantity from DrawerMedication where DrawerMedication_ID = '" & intDrawerMedTUID & "'")
             Else
+                'if specific amount is clicked then get the quantity text
                 intWasteAmount = txtQuantity.Text
             End If
-
+            'check to make sure all combo boxes were selected
             If Not cboWitness.SelectedIndex = -1 And Not cboMedication.SelectedIndex = -1 And Not cboDrawers.SelectedIndex = -1 Then
                 Dim intMedID As Integer = intMedicationID(cboMedication.SelectedIndex)
+                'call main waste logic method
                 Inventory.WasteMedication(intDrawerMedTUID, intWasteAmount, intMedID)
                 cboMedication.SelectedIndex = -1
                 RadioButton2.Checked = True
                 cboWitness.SelectedIndex = -1
-
+                'repopulate med comboboxes incase one medication dropped to zero and was deactivated
                 Inventory.PopulateWasteComboBoxMedication()
             Else
+                'if validation had an error show message
                 MessageBox.Show("Please select a Medication, Drawer, and User for the sign off")
             End If
         End If
