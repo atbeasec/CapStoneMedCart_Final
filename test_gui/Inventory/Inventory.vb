@@ -167,7 +167,7 @@
     '/*  ---                   ----     ----------------------------------*/
     '/*  Alexander Beasecker  02/10/21	  Initial creation of the code    */
     '/*********************************************************************/
-    Public Sub WasteMedication()
+    Public Sub WasteMedication(ByRef intdrawerID As Integer, ByRef Quantity As Integer)
         If Not IsNothing(frmWaste.cboMedication.SelectedItem) Then
             Dim strSqlCommand As String
             Dim intDrawerMedID As Integer
@@ -190,8 +190,7 @@
 
             Dim dtmAdhocTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
 
-            strSqlCommand = "SELECT DrawerMedication_ID FROM DrawerMedication INNER JOIN Medication on Medication.Medication_ID = DrawerMedication.Medication_TUID WHERE Medication.Medication_ID = '" & intSelectedIndex & "'"
-            intDrawerMedID = CreateDatabase.ExecuteScalarQuery(strSqlCommand)
+            intDrawerMedID = intdrawerID
 
             strSqlCommand = "select User_ID from User where Username = '" & frmWaste.cboWitness.SelectedItem & "'"
             userID = CreateDatabase.ExecuteScalarQuery(strSqlCommand)

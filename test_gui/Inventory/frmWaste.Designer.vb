@@ -22,6 +22,7 @@ Partial Class frmWaste
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmWaste))
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -50,12 +51,14 @@ Partial Class frmWaste
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.radWasteSpecific = New System.Windows.Forms.RadioButton()
         Me.radAllMed = New System.Windows.Forms.RadioButton()
+        Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.pnlRadioButtons.SuspendLayout()
         Me.pnlSignOff.SuspendLayout()
         Me.pnlHeader.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.pnlQuantity.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label2
@@ -368,6 +371,10 @@ Partial Class frmWaste
         Me.radAllMed.Text = "Waste all medication in drawer"
         Me.radAllMed.UseVisualStyleBackColor = True
         '
+        'ErrorProvider1
+        '
+        Me.ErrorProvider1.ContainerControl = Me
+        '
         'frmWaste
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -396,6 +403,7 @@ Partial Class frmWaste
         Me.pnlQuantity.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -427,4 +435,5 @@ Partial Class frmWaste
     Friend WithEvents Panel2 As Panel
     Friend WithEvents radWasteSpecific As RadioButton
     Friend WithEvents radAllMed As RadioButton
+    Friend WithEvents ErrorProvider1 As ErrorProvider
 End Class
