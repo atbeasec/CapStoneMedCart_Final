@@ -108,6 +108,7 @@
     '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
     '/*********************************************************************/
     Private Sub btnIncrement_Click(sender As Object, e As EventArgs) Handles btnIncrement.Click
+
         If Not IsNumeric(txtQuantity.Text) Then
             txtQuantity.Text = 0
         End If
