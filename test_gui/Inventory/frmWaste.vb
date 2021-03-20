@@ -26,7 +26,7 @@
         End If
 
         Inventory.PopulateWasteComboBoxMedication()
-        Dim dsWitness As DataSet = CreateDatabase.ExecuteSelectQuery("Select * from User")
+        Dim dsWitness As DataSet = CreateDatabase.ExecuteSelectQuery("Select * from User WHERE Active_Flag = '1'")
         For Each dr As DataRow In dsWitness.Tables(0).Rows()
             cboWitness.Items.Add(dr(EnumList.User.UserName))
         Next
@@ -103,12 +103,21 @@
     End Sub
 
     Private Sub cboMedication_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboMedication.SelectedIndexChanged
+        cboDrawers.Items.Clear()
         If Not cboMedication.SelectedIndex = -1 Then
             Dim intMedID As Integer = intMedicationID(cboMedication.SelectedIndex)
-            Dim dsDrawerBin As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT * FROM DrawerMedication where Medication_TUID = '" & intMedID & "'")
+            Dim dsDrawerBin As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT * FROM DrawerMedication where Medication_TUID = '" & intMedID & "' AND Active_Flag = 1")
             For Each dr As DataRow In dsDrawerBin.Tables(0).Rows
-                cboDrawers.Items.Add(dr(0))
+                cboDrawers.Items.Add("Drawer Number: " & dr(1) & " Bin Number: " & dr(4))
             Next
+        End If
+    End Sub
+
+    Private Sub radWasteSpecific_CheckedChanged(sender As Object, e As EventArgs) Handles radWasteSpecific.CheckedChanged, radAllMed.CheckedChanged
+        If radWasteSpecific.Checked = True Then
+            pnlQuantity.Visible = True
+        Else
+            pnlQuantity.Visible = False
         End If
     End Sub
 End Class
