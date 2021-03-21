@@ -39,13 +39,15 @@
     '/*											                        */
     '/*  WHO            WHEN        WHAT								*/
     '/*  Eric LaVoie    1/25/2021   Initial creation                    */
+    '/*  BRH            03/21/21    Add narcotics wasted,
     '/*******************************************************************/
     Enum Reports
         Adhoc = 0
         Discrepancies = 1
         DispensedMeds = 2
         DispensedNarc = 3
-        Override = 4
+        WastedNarc = 4
+        Override = 5
     End Enum
 
     '/*********************************************************************/
@@ -94,6 +96,8 @@
     '/*  Eric L.    3/16/2021   Initial creation of code                  */ 
     '/*  BRH        3/18/2021   Created functionality for dispensed narcotic
     '/*                         reports.                                  */
+    '/*	 BRH	    03/21/21	Fixed to remove an unnecessary column, added
+    '/*                         narcotics wasted,
     '/*********************************************************************/
     Function getSelectedReport(intSelectedIndex As Integer) As List(Of String)
         'Dim arrData As ArrayList = New ArrayList
@@ -120,7 +124,7 @@
             'If the dispensed narcotics report is selected
             Case Reports.DispensedNarc  'strReport = "Dispensed Narcotics"
                 'Select the narcotic drugs and store their dispensing information
-                strSQLCmd = "SELECT Drug_Name, Type, Strength, Amount_Dispensed, (DrawerMedication.Quantity - Amount_Dispensed), DateTime_Dispensed, Expiration_Date FROM DrawerMedication INNER JOIN 
+                strSQLCmd = "SELECT Drug_Name, Type, Strength, Amount_Dispensed, DateTime_Dispensed, Expiration_Date FROM DrawerMedication INNER JOIN 
                             Medication INNER JOIN Dispensing WHERE DrawerMedication.Medication_TUID = Medication_ID AND 
                             NarcoticControlled_Flag = 1 AND DrawerMedication_TUID = DrawerMedication_ID"
 
@@ -129,6 +133,14 @@
                  '           Medication INNER JOIN Dispensing WHERE DrawerMedication.Medication_TUID = Medication_ID AND 
                   '          NarcoticControlled_Flag = 1 AND DrawerMedication_TUID = DrawerMedication_ID;")
                ' intColumnCount = ExecuteScalarQuery("Select Count(name) from PRAGMA_TABLE_INFO('Dispensing INNER JOIN ');")
+
+            Case Reports.WastedNarc
+                strSQLCmd = "SELECT u1.User_First_Name, u1.User_Last_Name, u2.User_First_Name, u2.User_Last_Name, Medication.Drug_Name, Drawers.Drawer_Number, 
+                            DrawerMedication.Divider_Bin, Wastes.DateTime, Wastes.Reason, Wastes.Quantity From User As u1, User As u2 
+                            INNER JOIN Wastes ON u1.User_ID = Wastes.Primary_User_TUID AND  u2.User_ID = Wastes.Secondary_User_TUID 
+                            INNER JOIN Medication ON Wastes.Medication_TUID = Medication_ID 
+                            INNER JOIN DrawerMedication ON Wastes.DrawerMedication_TUID = DrawerMedication_ID 
+                            INNER JOIN Drawers ON DrawerMedication.Drawers_TUID = Drawers_ID WHERE Medication.NarcoticControlled_Flag = 1"
 
             Case Reports.Override  'strReport = "Overrides"
 
@@ -239,6 +251,8 @@
     '/* WHO   WHEN     WHAT											    */
     '/*  ---   ----     ------------------------------------------------*/
     '/*	BRH	 03/18/21	Initial creation of code                        */
+    '/*	BRH	 03/21/21	Fixed to remove an unnecessary column, added    */
+    '/*                 narcotics wasted, 
     '/*******************************************************************/
     Sub PrintItemsToDataGrid(ByRef lstOfDataValues As List(Of String))
 
@@ -249,15 +263,29 @@
             frmReport.dgvReport.Columns.Add(2, "Drug Type")
             frmReport.dgvReport.Columns.Add(3, "Drug Strength")
             frmReport.dgvReport.Columns.Add(4, "Amount Dispensed")
-            frmReport.dgvReport.Columns.Add(5, "Amount Remaining in Drawer")
-            frmReport.dgvReport.Columns.Add(6, "Date / Time Dispensed")
-            frmReport.dgvReport.Columns.Add(7, "Expiration Date")
+            frmReport.dgvReport.Columns.Add(5, "Date / Time Dispensed")
+            frmReport.dgvReport.Columns.Add(6, "Expiration Date")
 
             'Add the following data into data grid on the form
-            For i As Integer = 0 To lstOfDataValues.Count - 7 Step 7
+            For i As Integer = 0 To lstOfDataValues.Count - 6 Step 6
                 frmReport.dgvReport.Rows.Add(lstOfDataValues.Item(i), lstOfDataValues.Item(i + 1), lstOfDataValues.Item(i + 2),
-                                             lstOfDataValues.Item(i + 3), lstOfDataValues.Item(i + 4), lstOfDataValues.Item(i + 5),
-                                             lstOfDataValues.Item(i + 6))
+                                             lstOfDataValues.Item(i + 3), lstOfDataValues.Item(i + 4), lstOfDataValues.Item(i + 5))
+            Next
+        ElseIf frmReport.cmbReports.SelectedItem.Equals("Narcotics Wasted") Then
+            'Add the following column names
+            frmReport.dgvReport.Columns.Add(1, "Primary User's Name")
+            frmReport.dgvReport.Columns.Add(2, "Sign-off User's Name")
+            frmReport.dgvReport.Columns.Add(3, "Drug Name")
+            frmReport.dgvReport.Columns.Add(4, "Drawer Number")
+            frmReport.dgvReport.Columns.Add(5, "Drawer Bin")
+            frmReport.dgvReport.Columns.Add(6, "Date / Time Dispensed")
+            frmReport.dgvReport.Columns.Add(7, "Reason for Wasting")
+            frmReport.dgvReport.Columns.Add(8, "Amount Wasted")
+
+            'Add the following data into data grid on the form
+            For i As Integer = 0 To lstOfDataValues.Count - 10 Step 10
+                frmReport.dgvReport.Rows.Add(lstOfDataValues.Item(i + 1) & ", " & lstOfDataValues.Item(i), lstOfDataValues.Item(i + 3) & ", " & lstOfDataValues.Item(i + 2), lstOfDataValues.Item(i + 4),
+                                             lstOfDataValues.Item(i + 5), lstOfDataValues.Item(i + 6), lstOfDataValues.Item(i + 7), lstOfDataValues.Item(i + 8), lstOfDataValues.Item(i + 9))
             Next
         End If
 
