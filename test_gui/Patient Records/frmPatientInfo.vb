@@ -639,7 +639,7 @@
                 'cboRoom.Enabled = False
             End If
         Next
-
+        mtbBirthday.ReadOnly = False
     End Sub
     '/*********************************************************************/
     '/*                   SUBPROGRAM NAME: SetControlsToReadOnly     	  */         
@@ -700,6 +700,7 @@
         Next
         cboBed.Enabled = False
         cboRoom.Enabled = False
+        mtbBirthday.ReadOnly = True
     End Sub
 
     '/*********************************************************************/
@@ -967,7 +968,11 @@
         DataVaildationMethods.KeyPressCheck(e, "0123456789abcdefghijklmnopqrstuvwxyz-/@.")
     End Sub
 
-    Private Sub txtBirthday_TextChanged(sender As Object, e As EventArgs) Handles txtBirthday.KeyPress
-        DataVaildationMethods.KeyPressCheck(e, "0123456789/-")
+    Private Sub txtBirthday_TextChanged(sender As Object, e As EventArgs) Handles mtbBirthday.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789")
+    End Sub
+
+    Private Sub txtBirthday_TextChanged(sender As Object, e As KeyPressEventArgs) Handles mtbBirthday.KeyPress
+
     End Sub
 End Class
