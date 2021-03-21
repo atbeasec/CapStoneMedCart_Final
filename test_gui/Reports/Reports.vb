@@ -94,6 +94,7 @@
     '/*  Eric L.    3/16/2021   Initial creation of code                  */ 
     '/*  BRH        3/18/2021   Created functionality for dispensed narcotic
     '/*                         reports.                                  */
+    '/*	 BRH	    03/21/21	Fixed to remove an unnecessary column     */
     '/*********************************************************************/
     Function getSelectedReport(intSelectedIndex As Integer) As List(Of String)
         'Dim arrData As ArrayList = New ArrayList
@@ -120,7 +121,7 @@
             'If the dispensed narcotics report is selected
             Case Reports.DispensedNarc  'strReport = "Dispensed Narcotics"
                 'Select the narcotic drugs and store their dispensing information
-                strSQLCmd = "SELECT Drug_Name, Type, Strength, Amount_Dispensed, (DrawerMedication.Quantity - Amount_Dispensed), DateTime_Dispensed, Expiration_Date FROM DrawerMedication INNER JOIN 
+                strSQLCmd = "SELECT Drug_Name, Type, Strength, Amount_Dispensed, DateTime_Dispensed, Expiration_Date FROM DrawerMedication INNER JOIN 
                             Medication INNER JOIN Dispensing WHERE DrawerMedication.Medication_TUID = Medication_ID AND 
                             NarcoticControlled_Flag = 1 AND DrawerMedication_TUID = DrawerMedication_ID"
 
@@ -239,6 +240,7 @@
     '/* WHO   WHEN     WHAT											    */
     '/*  ---   ----     ------------------------------------------------*/
     '/*	BRH	 03/18/21	Initial creation of code                        */
+    '/*	BRH	 03/21/21	Fixed to remove an unnecessary column           */
     '/*******************************************************************/
     Sub PrintItemsToDataGrid(ByRef lstOfDataValues As List(Of String))
 
@@ -249,15 +251,13 @@
             frmReport.dgvReport.Columns.Add(2, "Drug Type")
             frmReport.dgvReport.Columns.Add(3, "Drug Strength")
             frmReport.dgvReport.Columns.Add(4, "Amount Dispensed")
-            frmReport.dgvReport.Columns.Add(5, "Amount Remaining in Drawer")
-            frmReport.dgvReport.Columns.Add(6, "Date / Time Dispensed")
-            frmReport.dgvReport.Columns.Add(7, "Expiration Date")
+            frmReport.dgvReport.Columns.Add(5, "Date / Time Dispensed")
+            frmReport.dgvReport.Columns.Add(6, "Expiration Date")
 
             'Add the following data into data grid on the form
-            For i As Integer = 0 To lstOfDataValues.Count - 7 Step 7
+            For i As Integer = 0 To lstOfDataValues.Count - 6 Step 6
                 frmReport.dgvReport.Rows.Add(lstOfDataValues.Item(i), lstOfDataValues.Item(i + 1), lstOfDataValues.Item(i + 2),
-                                             lstOfDataValues.Item(i + 3), lstOfDataValues.Item(i + 4), lstOfDataValues.Item(i + 5),
-                                             lstOfDataValues.Item(i + 6))
+                                             lstOfDataValues.Item(i + 3), lstOfDataValues.Item(i + 4), lstOfDataValues.Item(i + 5))
             Next
         End If
 
