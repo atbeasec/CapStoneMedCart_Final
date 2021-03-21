@@ -80,7 +80,7 @@
     '/*  WHO        WHEN        WHAT								      */             
     '/*  ---        ----        ------------------------------------------*/
     '/*  Eric L.    03/16/21    Initial creation of code                  */  
-    '/*  BRH        03/21/21    Add narcotics wasted, 
+    '/*  BRH        03/21/21    Add narcotics wasted, add all wasted meds,
     '/*********************************************************************/
     Private Sub PopulateReportsList()
 
@@ -90,6 +90,7 @@
         Const STRNARCOTICSDISPENSED As String = "Narcotics Dispensed"
         Const STRNARCOTICSWASTED As String = "Narcotics Wasted"
         Const STROVERRIDES As String = "Overrides"
+        Const STRWASTES As String = "Wasted Medication"
 
         cmbReports.Items.Add(STRDISCREPANCIES)
         cmbReports.Items.Add(STRDISPENSINGHISTORY)
@@ -97,6 +98,7 @@
         cmbReports.Items.Add(STRNARCOTICSDISPENSED)
         cmbReports.Items.Add(STRNARCOTICSWASTED)
         cmbReports.Items.Add(STROVERRIDES)
+        cmbReports.Items.Add(STRWASTES)
 
     End Sub
     '/*******************************************************************/
