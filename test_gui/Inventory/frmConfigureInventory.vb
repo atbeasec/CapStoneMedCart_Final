@@ -511,10 +511,44 @@
         Me.Refresh()
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: RemoveDrugFromDrawer   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker  		  */   
+    '/*		         DATE CREATED: 		 3/21/2021                 */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to handle the set up and gathering of variables 
+    '/*  to remove the drug from the drawermedication database
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      DetermineQueryDelete_Click                                   */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/* Inventory.RemoveDrugfromDrawer(intDrawerTUID, intDividerNumber, intMedicationTUID)  */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */          
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 RemoveDrugFromDrawer(Sender)  	                  */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  AB  3/21/2021    Initial creation                    */
+    '/*********************************************************************/
     Public Sub RemoveDrugFromDrawer(sender As Object)
+        'get the divider number from the panel
         Dim intDividerNumber As Integer = GetSelectedInformation(sender.parent, "lblDivider")
+        'get the medication from the panel .tag field
         Dim intMedicationTUID As Integer = sender.parent.tag
+        'get the drawer number from the global variable
         Dim intSelectedDrawer As Integer = intCurrentDrawer
+        ''get drawer TUID from database using selected drawer
         Dim intDrawerTUID As Integer = CreateDatabase.ExecuteScalarQuery("Select Drawers_ID from Drawers where Drawer_Number = '" & intSelectedDrawer & "'")
         Inventory.RemoveDrugfromDrawer(intDrawerTUID, intDividerNumber, intMedicationTUID)
         CartInterfaceCode.OpenOneDrawer(intSelectedDrawer)
