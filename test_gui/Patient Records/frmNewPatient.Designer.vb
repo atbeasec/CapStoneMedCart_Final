@@ -74,7 +74,6 @@ Partial Class frmNewPatient
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
-        Me.btnCancel = New System.Windows.Forms.Button()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.Panel13 = New System.Windows.Forms.Panel()
         Me.btnBack = New System.Windows.Forms.Button()
@@ -402,7 +401,7 @@ Partial Class frmNewPatient
         Me.btnSave.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.ForeColor = System.Drawing.Color.White
         Me.btnSave.Image = Global.test_gui.My.Resources.Resources.resolve
-        Me.btnSave.Location = New System.Drawing.Point(348, 592)
+        Me.btnSave.Location = New System.Drawing.Point(262, 587)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(120, 38)
         Me.btnSave.TabIndex = 18
@@ -653,21 +652,6 @@ Partial Class frmNewPatient
         Me.Label16.TabIndex = 83
         Me.Label16.Text = "Primary Physician"
         '
-        'btnCancel
-        '
-        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancel.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.ForeColor = System.Drawing.Color.White
-        Me.btnCancel.Image = CType(resources.GetObject("btnCancel.Image"), System.Drawing.Image)
-        Me.btnCancel.Location = New System.Drawing.Point(178, 592)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(120, 38)
-        Me.btnCancel.TabIndex = 17
-        Me.btnCancel.Text = "   CANCEL"
-        Me.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnCancel.UseVisualStyleBackColor = False
-        '
         'ErrorProvider1
         '
         Me.ErrorProvider1.ContainerControl = Me
@@ -706,7 +690,6 @@ Partial Class frmNewPatient
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(667, 648)
         Me.Controls.Add(Me.Panel13)
-        Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.Label16)
         Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Label14)
@@ -823,7 +806,6 @@ Partial Class frmNewPatient
     Friend WithEvents Label14 As Label
     Friend WithEvents Label15 As Label
     Friend WithEvents Label16 As Label
-    Friend WithEvents btnCancel As Button
     Friend WithEvents cmbPhysician As ComboBox
     Friend WithEvents mtbDoB As MaskedTextBox
     Friend WithEvents mtbPhone As MaskedTextBox
