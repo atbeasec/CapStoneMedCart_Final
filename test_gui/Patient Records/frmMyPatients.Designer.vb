@@ -22,6 +22,7 @@ Partial Class frmMyPatients
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMyPatients))
         Me.flpMyPatientRecords = New System.Windows.Forms.FlowLayoutPanel()
         Me.pnlHeaderPatientRecords = New System.Windows.Forms.Panel()
@@ -39,7 +40,8 @@ Partial Class frmMyPatients
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.cmbFilter = New System.Windows.Forms.ComboBox()
         Me.lblFilter = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblAssignment = New System.Windows.Forms.Label()
+        Me.tpToolTip = New System.Windows.Forms.ToolTip(Me.components)
         Me.pnlHeaderPatientRecords.SuspendLayout()
         Me.Panel9.SuspendLayout()
         Me.pnlSearch.SuspendLayout()
@@ -122,7 +124,7 @@ Partial Class frmMyPatients
         'pnlHeader
         '
         Me.pnlHeader.BackColor = System.Drawing.Color.White
-        Me.pnlHeader.Controls.Add(Me.Label1)
+        Me.pnlHeader.Controls.Add(Me.lblAssignment)
         Me.pnlHeader.Controls.Add(Me.lblDOB)
         Me.pnlHeader.Controls.Add(Me.lblLastName)
         Me.pnlHeader.Controls.Add(Me.lblBed)
@@ -235,16 +237,16 @@ Partial Class frmMyPatients
         Me.lblFilter.TabIndex = 7
         Me.lblFilter.Text = "Filter:"
         '
-        'Label1
+        'lblAssignment
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label1.Location = New System.Drawing.Point(916, 19)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(125, 21)
-        Me.Label1.TabIndex = 7
-        Me.Label1.Text = "Assign/Remove"
+        Me.lblAssignment.AutoSize = True
+        Me.lblAssignment.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblAssignment.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblAssignment.Location = New System.Drawing.Point(916, 19)
+        Me.lblAssignment.Name = "lblAssignment"
+        Me.lblAssignment.Size = New System.Drawing.Size(125, 21)
+        Me.lblAssignment.TabIndex = 7
+        Me.lblAssignment.Text = "Assign/Remove"
         '
         'frmMyPatients
         '
@@ -285,5 +287,6 @@ Partial Class frmMyPatients
     Friend WithEvents lblFilter As Label
     Friend WithEvents Panel4 As Panel
     Friend WithEvents cmbFilter As ComboBox
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblAssignment As Label
+    Friend WithEvents tpToolTip As ToolTip
 End Class
