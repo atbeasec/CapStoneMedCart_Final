@@ -23,6 +23,7 @@ Partial Class frmMain
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
+        Me.panelTopBar = New System.Windows.Forms.Panel()
         Me.pnlSideMenu = New System.Windows.Forms.Panel()
         Me.pnlSubMenuSettings = New System.Windows.Forms.Panel()
         Me.btnEditPhysician = New System.Windows.Forms.Button()
@@ -57,6 +58,15 @@ Partial Class frmMain
         Me.pnlLogo.SuspendLayout()
         Me.SuspendLayout()
         '
+        'panelTopBar
+        '
+        Me.panelTopBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.panelTopBar.Dock = System.Windows.Forms.DockStyle.Top
+        Me.panelTopBar.Location = New System.Drawing.Point(0, 0)
+        Me.panelTopBar.Name = "panelTopBar"
+        Me.panelTopBar.Size = New System.Drawing.Size(1334, 28)
+        Me.panelTopBar.TabIndex = 13
+        '
         'pnlSideMenu
         '
         Me.pnlSideMenu.AutoScroll = True
@@ -74,11 +84,11 @@ Partial Class frmMain
         Me.pnlSideMenu.Controls.Add(Me.btnPatientRecords)
         Me.pnlSideMenu.Controls.Add(Me.pnlLogo)
         Me.pnlSideMenu.Dock = System.Windows.Forms.DockStyle.Left
-        Me.pnlSideMenu.Location = New System.Drawing.Point(0, 0)
+        Me.pnlSideMenu.Location = New System.Drawing.Point(0, 28)
         Me.pnlSideMenu.Margin = New System.Windows.Forms.Padding(2)
         Me.pnlSideMenu.Name = "pnlSideMenu"
-        Me.pnlSideMenu.Size = New System.Drawing.Size(227, 711)
-        Me.pnlSideMenu.TabIndex = 0
+        Me.pnlSideMenu.Size = New System.Drawing.Size(227, 683)
+        Me.pnlSideMenu.TabIndex = 14
         '
         'pnlSubMenuSettings
         '
@@ -89,7 +99,7 @@ Partial Class frmMain
         Me.pnlSubMenuSettings.Controls.Add(Me.btnDischargePatient)
         Me.pnlSubMenuSettings.Controls.Add(Me.btnUsers)
         Me.pnlSubMenuSettings.Dock = System.Windows.Forms.DockStyle.Top
-        Me.pnlSubMenuSettings.Location = New System.Drawing.Point(0, 701)
+        Me.pnlSubMenuSettings.Location = New System.Drawing.Point(0, 683)
         Me.pnlSubMenuSettings.Name = "pnlSubMenuSettings"
         Me.pnlSubMenuSettings.Size = New System.Drawing.Size(210, 214)
         Me.pnlSubMenuSettings.TabIndex = 70
@@ -209,7 +219,7 @@ Partial Class frmMain
         Me.btnSettings.ForeColor = System.Drawing.Color.White
         Me.btnSettings.Image = CType(resources.GetObject("btnSettings.Image"), System.Drawing.Image)
         Me.btnSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSettings.Location = New System.Drawing.Point(0, 643)
+        Me.btnSettings.Location = New System.Drawing.Point(0, 625)
         Me.btnSettings.Margin = New System.Windows.Forms.Padding(2)
         Me.btnSettings.Name = "btnSettings"
         Me.btnSettings.Padding = New System.Windows.Forms.Padding(10, 5, 5, 5)
@@ -230,7 +240,7 @@ Partial Class frmMain
         Me.btnPharmacy.ForeColor = System.Drawing.Color.White
         Me.btnPharmacy.Image = Global.test_gui.My.Resources.Resources.pharmacy
         Me.btnPharmacy.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnPharmacy.Location = New System.Drawing.Point(0, 585)
+        Me.btnPharmacy.Location = New System.Drawing.Point(0, 567)
         Me.btnPharmacy.Margin = New System.Windows.Forms.Padding(2)
         Me.btnPharmacy.Name = "btnPharmacy"
         Me.btnPharmacy.Padding = New System.Windows.Forms.Padding(10, 5, 5, 5)
@@ -251,7 +261,7 @@ Partial Class frmMain
         Me.btnMaintenance.ForeColor = System.Drawing.Color.White
         Me.btnMaintenance.Image = CType(resources.GetObject("btnMaintenance.Image"), System.Drawing.Image)
         Me.btnMaintenance.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnMaintenance.Location = New System.Drawing.Point(0, 535)
+        Me.btnMaintenance.Location = New System.Drawing.Point(0, 517)
         Me.btnMaintenance.Margin = New System.Windows.Forms.Padding(2)
         Me.btnMaintenance.Name = "btnMaintenance"
         Me.btnMaintenance.Padding = New System.Windows.Forms.Padding(10, 5, 5, 5)
@@ -272,7 +282,7 @@ Partial Class frmMain
         Me.btnDescrepancies.ForeColor = System.Drawing.Color.White
         Me.btnDescrepancies.Image = CType(resources.GetObject("btnDescrepancies.Image"), System.Drawing.Image)
         Me.btnDescrepancies.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDescrepancies.Location = New System.Drawing.Point(0, 485)
+        Me.btnDescrepancies.Location = New System.Drawing.Point(0, 467)
         Me.btnDescrepancies.Margin = New System.Windows.Forms.Padding(2)
         Me.btnDescrepancies.Name = "btnDescrepancies"
         Me.btnDescrepancies.Padding = New System.Windows.Forms.Padding(10, 5, 5, 5)
@@ -293,7 +303,7 @@ Partial Class frmMain
         Me.btnReport.ForeColor = System.Drawing.Color.White
         Me.btnReport.Image = CType(resources.GetObject("btnReport.Image"), System.Drawing.Image)
         Me.btnReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReport.Location = New System.Drawing.Point(0, 435)
+        Me.btnReport.Location = New System.Drawing.Point(0, 417)
         Me.btnReport.Margin = New System.Windows.Forms.Padding(2)
         Me.btnReport.Name = "btnReport"
         Me.btnReport.Padding = New System.Windows.Forms.Padding(10, 5, 5, 5)
@@ -312,7 +322,7 @@ Partial Class frmMain
         Me.pnlSubMenuInventory.Controls.Add(Me.btnEndOfShiftCount)
         Me.pnlSubMenuInventory.Controls.Add(Me.btnAdhockDispense)
         Me.pnlSubMenuInventory.Dock = System.Windows.Forms.DockStyle.Top
-        Me.pnlSubMenuInventory.Location = New System.Drawing.Point(0, 256)
+        Me.pnlSubMenuInventory.Location = New System.Drawing.Point(0, 238)
         Me.pnlSubMenuInventory.Name = "pnlSubMenuInventory"
         Me.pnlSubMenuInventory.Size = New System.Drawing.Size(210, 179)
         Me.pnlSubMenuInventory.TabIndex = 62
@@ -411,7 +421,7 @@ Partial Class frmMain
         Me.btnInventory.ForeColor = System.Drawing.Color.White
         Me.btnInventory.Image = CType(resources.GetObject("btnInventory.Image"), System.Drawing.Image)
         Me.btnInventory.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnInventory.Location = New System.Drawing.Point(0, 206)
+        Me.btnInventory.Location = New System.Drawing.Point(0, 188)
         Me.btnInventory.Margin = New System.Windows.Forms.Padding(2)
         Me.btnInventory.Name = "btnInventory"
         Me.btnInventory.Padding = New System.Windows.Forms.Padding(10, 5, 5, 5)
@@ -428,7 +438,7 @@ Partial Class frmMain
         Me.pnlSubMenuPatientRecords.Controls.Add(Me.btnMyPatients)
         Me.pnlSubMenuPatientRecords.Controls.Add(Me.btnAllPatients)
         Me.pnlSubMenuPatientRecords.Dock = System.Windows.Forms.DockStyle.Top
-        Me.pnlSubMenuPatientRecords.Location = New System.Drawing.Point(0, 114)
+        Me.pnlSubMenuPatientRecords.Location = New System.Drawing.Point(0, 96)
         Me.pnlSubMenuPatientRecords.Name = "pnlSubMenuPatientRecords"
         Me.pnlSubMenuPatientRecords.Size = New System.Drawing.Size(210, 92)
         Me.pnlSubMenuPatientRecords.TabIndex = 26
@@ -485,7 +495,7 @@ Partial Class frmMain
         Me.btnLogout.ForeColor = System.Drawing.Color.White
         Me.btnLogout.Image = CType(resources.GetObject("btnLogout.Image"), System.Drawing.Image)
         Me.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnLogout.Location = New System.Drawing.Point(0, 915)
+        Me.btnLogout.Location = New System.Drawing.Point(0, 897)
         Me.btnLogout.Margin = New System.Windows.Forms.Padding(2)
         Me.btnLogout.Name = "btnLogout"
         Me.btnLogout.Padding = New System.Windows.Forms.Padding(10, 5, 5, 5)
@@ -508,7 +518,7 @@ Partial Class frmMain
         Me.btnPatientRecords.ForeColor = System.Drawing.Color.White
         Me.btnPatientRecords.Image = CType(resources.GetObject("btnPatientRecords.Image"), System.Drawing.Image)
         Me.btnPatientRecords.ImageAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.btnPatientRecords.Location = New System.Drawing.Point(0, 64)
+        Me.btnPatientRecords.Location = New System.Drawing.Point(0, 46)
         Me.btnPatientRecords.Margin = New System.Windows.Forms.Padding(2)
         Me.btnPatientRecords.Name = "btnPatientRecords"
         Me.btnPatientRecords.Padding = New System.Windows.Forms.Padding(10, 5, 5, 5)
@@ -529,7 +539,7 @@ Partial Class frmMain
         Me.pnlLogo.Location = New System.Drawing.Point(0, 0)
         Me.pnlLogo.Margin = New System.Windows.Forms.Padding(2)
         Me.pnlLogo.Name = "pnlLogo"
-        Me.pnlLogo.Size = New System.Drawing.Size(210, 64)
+        Me.pnlLogo.Size = New System.Drawing.Size(210, 46)
         Me.pnlLogo.TabIndex = 8
         '
         'Label2
@@ -555,10 +565,10 @@ Partial Class frmMain
         'pnlDockLocation
         '
         Me.pnlDockLocation.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlDockLocation.Location = New System.Drawing.Point(227, 0)
+        Me.pnlDockLocation.Location = New System.Drawing.Point(227, 28)
         Me.pnlDockLocation.Name = "pnlDockLocation"
-        Me.pnlDockLocation.Size = New System.Drawing.Size(1107, 711)
-        Me.pnlDockLocation.TabIndex = 1
+        Me.pnlDockLocation.Size = New System.Drawing.Size(1107, 683)
+        Me.pnlDockLocation.TabIndex = 16
         '
         'frmMain
         '
@@ -568,8 +578,11 @@ Partial Class frmMain
         Me.ClientSize = New System.Drawing.Size(1334, 711)
         Me.Controls.Add(Me.pnlDockLocation)
         Me.Controls.Add(Me.pnlSideMenu)
+        Me.Controls.Add(Me.panelTopBar)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "frmMain"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Medical Dispense"
         Me.pnlSideMenu.ResumeLayout(False)
         Me.pnlSubMenuSettings.ResumeLayout(False)
@@ -581,14 +594,10 @@ Partial Class frmMain
 
     End Sub
 
+    Friend WithEvents panelTopBar As Panel
     Friend WithEvents pnlSideMenu As Panel
-    Friend WithEvents btnLogout As Button
-    Friend WithEvents btnPatientRecords As Button
-    Friend WithEvents pnlLogo As Panel
-    Friend WithEvents pnlDockLocation As Panel
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label1 As Label
     Friend WithEvents pnlSubMenuSettings As Panel
+    Friend WithEvents btnEditPhysician As Button
     Friend WithEvents btnSerialPort As Button
     Friend WithEvents btnEditRooms As Button
     Friend WithEvents btnDischargePatient As Button
@@ -607,5 +616,10 @@ Partial Class frmMain
     Friend WithEvents pnlSubMenuPatientRecords As Panel
     Friend WithEvents btnMyPatients As Button
     Friend WithEvents btnAllPatients As Button
-    Friend WithEvents btnEditPhysician As Button
+    Friend WithEvents btnLogout As Button
+    Friend WithEvents btnPatientRecords As Button
+    Friend WithEvents pnlLogo As Panel
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents pnlDockLocation As Panel
 End Class

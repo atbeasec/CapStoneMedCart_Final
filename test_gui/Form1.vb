@@ -61,7 +61,7 @@
     '/*  ---   ----     ------------------------------------------------  */
     '/*  Collin Krygier  2/14/2021    Initial creation                    */
     '/*********************************************************************/
-    Private Sub btnMenu_Click(sender As Object, e As EventArgs) Handles btnAllPatients.Click, btnMyPatients.Click, btnAdhockDispense.Click, btnEndOfShiftCount.Click, btnConfigureInventory.Click, btnWaste.Click, btnReport.Click, btnDescrepancies.Click, btnMaintenance.Click, btnPharmacy.Click, btnUsers.Click, btnDischargePatient.Click, btnEditRooms.Click, btnSerialPort.Click, btnEditPhysician.Click
+    Private Sub btnMenu_Click(sender As Object, e As EventArgs) Handles btnWaste.Click, btnUsers.Click, btnSerialPort.Click, btnReport.Click, btnPharmacy.Click, btnMyPatients.Click, btnMaintenance.Click, btnEndOfShiftCount.Click, btnEditRooms.Click, btnEditPhysician.Click, btnDischargePatient.Click, btnDescrepancies.Click, btnConfigureInventory.Click, btnAllPatients.Click, btnAdhockDispense.Click
 
 
 
