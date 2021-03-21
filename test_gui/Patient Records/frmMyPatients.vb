@@ -78,7 +78,7 @@
 
     End Sub
 
-    Private Sub rdbOnlyActive_CheckedChanged(sender As Object, e As EventArgs) Handles rdbOnlyActive.CheckedChanged
+    Private Sub rdbOnlyActive_CheckedChanged(sender As Object, e As EventArgs)
         flpMyPatientRecords.Controls.Clear()
         LoadPanel()
     End Sub

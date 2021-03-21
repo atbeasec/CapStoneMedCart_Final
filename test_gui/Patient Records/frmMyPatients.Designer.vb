@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmMyPatients
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,19 +20,15 @@ Partial Class frmMyPatients
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMyPatients))
         Me.flpMyPatientRecords = New System.Windows.Forms.FlowLayoutPanel()
         Me.pnlHeaderPatientRecords = New System.Windows.Forms.Panel()
-        Me.rdbOnlyActive = New System.Windows.Forms.RadioButton()
-        Me.rdbShowAll = New System.Windows.Forms.RadioButton()
-        Me.txtPhysician = New System.Windows.Forms.TextBox()
         Me.Panel9 = New System.Windows.Forms.Panel()
         Me.pnlSearch = New System.Windows.Forms.Panel()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
-        Me.btnNewPatient = New System.Windows.Forms.Button()
         Me.pnlHeader = New System.Windows.Forms.Panel()
         Me.lblDOB = New System.Windows.Forms.Label()
         Me.lblLastName = New System.Windows.Forms.Label()
@@ -40,10 +36,14 @@ Partial Class frmMyPatients
         Me.lblRoom = New System.Windows.Forms.Label()
         Me.lblMRN = New System.Windows.Forms.Label()
         Me.lblFirstName = New System.Windows.Forms.Label()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.cmbFilter = New System.Windows.Forms.ComboBox()
+        Me.lblFilter = New System.Windows.Forms.Label()
         Me.pnlHeaderPatientRecords.SuspendLayout()
         Me.Panel9.SuspendLayout()
         Me.pnlSearch.SuspendLayout()
         Me.pnlHeader.SuspendLayout()
+        Me.Panel4.SuspendLayout()
         Me.SuspendLayout()
         '
         'flpMyPatientRecords
@@ -58,47 +58,14 @@ Partial Class frmMyPatients
         'pnlHeaderPatientRecords
         '
         Me.pnlHeaderPatientRecords.BackColor = System.Drawing.Color.White
-        Me.pnlHeaderPatientRecords.Controls.Add(Me.rdbOnlyActive)
-        Me.pnlHeaderPatientRecords.Controls.Add(Me.rdbShowAll)
-        Me.pnlHeaderPatientRecords.Controls.Add(Me.txtPhysician)
+        Me.pnlHeaderPatientRecords.Controls.Add(Me.lblFilter)
+        Me.pnlHeaderPatientRecords.Controls.Add(Me.Panel4)
         Me.pnlHeaderPatientRecords.Controls.Add(Me.Panel9)
-        Me.pnlHeaderPatientRecords.Controls.Add(Me.btnNewPatient)
         Me.pnlHeaderPatientRecords.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlHeaderPatientRecords.Location = New System.Drawing.Point(0, 0)
         Me.pnlHeaderPatientRecords.Name = "pnlHeaderPatientRecords"
         Me.pnlHeaderPatientRecords.Size = New System.Drawing.Size(976, 61)
         Me.pnlHeaderPatientRecords.TabIndex = 19
-        '
-        'rdbOnlyActive
-        '
-        Me.rdbOnlyActive.AutoSize = True
-        Me.rdbOnlyActive.Location = New System.Drawing.Point(630, 38)
-        Me.rdbOnlyActive.Name = "rdbOnlyActive"
-        Me.rdbOnlyActive.Size = New System.Drawing.Size(79, 17)
-        Me.rdbOnlyActive.TabIndex = 23
-        Me.rdbOnlyActive.TabStop = True
-        Me.rdbOnlyActive.Text = "Only Active"
-        Me.rdbOnlyActive.UseVisualStyleBackColor = True
-        '
-        'rdbShowAll
-        '
-        Me.rdbShowAll.AutoSize = True
-        Me.rdbShowAll.Checked = True
-        Me.rdbShowAll.Location = New System.Drawing.Point(515, 38)
-        Me.rdbShowAll.Name = "rdbShowAll"
-        Me.rdbShowAll.Size = New System.Drawing.Size(66, 17)
-        Me.rdbShowAll.TabIndex = 22
-        Me.rdbShowAll.TabStop = True
-        Me.rdbShowAll.Text = "Show All"
-        Me.rdbShowAll.UseVisualStyleBackColor = True
-        '
-        'txtPhysician
-        '
-        Me.txtPhysician.Enabled = False
-        Me.txtPhysician.Location = New System.Drawing.Point(505, 12)
-        Me.txtPhysician.Name = "txtPhysician"
-        Me.txtPhysician.Size = New System.Drawing.Size(244, 20)
-        Me.txtPhysician.TabIndex = 21
         '
         'Panel9
         '
@@ -150,23 +117,6 @@ Partial Class frmMyPatients
         Me.txtSearch.Size = New System.Drawing.Size(431, 29)
         Me.txtSearch.TabIndex = 1
         Me.txtSearch.Tag = "Search Patients"
-        '
-        'btnNewPatient
-        '
-        Me.btnNewPatient.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnNewPatient.FlatAppearance.BorderSize = 0
-        Me.btnNewPatient.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNewPatient.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNewPatient.ForeColor = System.Drawing.Color.White
-        Me.btnNewPatient.Image = CType(resources.GetObject("btnNewPatient.Image"), System.Drawing.Image)
-        Me.btnNewPatient.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnNewPatient.Location = New System.Drawing.Point(796, 15)
-        Me.btnNewPatient.Name = "btnNewPatient"
-        Me.btnNewPatient.Size = New System.Drawing.Size(166, 37)
-        Me.btnNewPatient.TabIndex = 18
-        Me.btnNewPatient.Text = "ADD PATIENT"
-        Me.btnNewPatient.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnNewPatient.UseVisualStyleBackColor = False
         '
         'pnlHeader
         '
@@ -248,6 +198,41 @@ Partial Class frmMyPatients
         Me.lblFirstName.TabIndex = 0
         Me.lblFirstName.Text = "First Name"
         '
+        'Panel4
+        '
+        Me.Panel4.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel4.Controls.Add(Me.cmbFilter)
+        Me.Panel4.Location = New System.Drawing.Point(786, 14)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel4.Size = New System.Drawing.Size(179, 31)
+        Me.Panel4.TabIndex = 21
+        '
+        'cmbFilter
+        '
+        Me.cmbFilter.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbFilter.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cmbFilter.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cmbFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cmbFilter.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbFilter.FormattingEnabled = True
+        Me.cmbFilter.Items.AddRange(New Object() {"My Patients", "All Patients", "Assigned Patients", "Active Patients"})
+        Me.cmbFilter.Location = New System.Drawing.Point(1, 1)
+        Me.cmbFilter.Name = "cmbFilter"
+        Me.cmbFilter.Size = New System.Drawing.Size(177, 29)
+        Me.cmbFilter.TabIndex = 10
+        '
+        'lblFilter
+        '
+        Me.lblFilter.AutoSize = True
+        Me.lblFilter.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFilter.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblFilter.Location = New System.Drawing.Point(728, 19)
+        Me.lblFilter.Name = "lblFilter"
+        Me.lblFilter.Size = New System.Drawing.Size(52, 21)
+        Me.lblFilter.TabIndex = 7
+        Me.lblFilter.Text = "Filter:"
+        '
         'frmMyPatients
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -266,6 +251,7 @@ Partial Class frmMyPatients
         Me.pnlSearch.ResumeLayout(False)
         Me.pnlHeader.ResumeLayout(False)
         Me.pnlHeader.PerformLayout()
+        Me.Panel4.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -276,7 +262,6 @@ Partial Class frmMyPatients
     Friend WithEvents pnlSearch As Panel
     Friend WithEvents btnSearch As Button
     Friend WithEvents txtSearch As TextBox
-    Friend WithEvents btnNewPatient As Button
     Friend WithEvents pnlHeader As Panel
     Friend WithEvents lblDOB As Label
     Friend WithEvents lblLastName As Label
@@ -284,7 +269,7 @@ Partial Class frmMyPatients
     Friend WithEvents lblRoom As Label
     Friend WithEvents lblMRN As Label
     Friend WithEvents lblFirstName As Label
-    Friend WithEvents txtPhysician As TextBox
-    Friend WithEvents rdbOnlyActive As RadioButton
-    Friend WithEvents rdbShowAll As RadioButton
+    Friend WithEvents lblFilter As Label
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents cmbFilter As ComboBox
 End Class
