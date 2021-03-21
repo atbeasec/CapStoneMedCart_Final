@@ -41,6 +41,7 @@
 
         PopulateReportsList()
 
+
     End Sub
 
     '/*********************************************************************/
@@ -76,9 +77,10 @@
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
-    '/*  WHO   WHEN     WHAT								   */             
-    '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
+    '/*  WHO        WHEN        WHAT								      */             
+    '/*  ---        ----        ------------------------------------------*/
+    '/*  Eric L.    03/16/21    Initial creation of code                  */  
+    '/*  BRH        03/21/21    Add narcotics wasted, 
     '/*********************************************************************/
     Private Sub PopulateReportsList()
 
@@ -86,12 +88,14 @@
         Const STRDISPENSINGHISTORY As String = "Dispensed Medications"
         Const STRADHOCORDERS As String = "Ad Hoc Orders"
         Const STRNARCOTICSDISPENSED As String = "Narcotics Dispensed"
+        Const STRNARCOTICSWASTED As String = "Narcotics Wasted"
         Const STROVERRIDES As String = "Overrides"
 
         cmbReports.Items.Add(STRDISCREPANCIES)
         cmbReports.Items.Add(STRDISPENSINGHISTORY)
         cmbReports.Items.Add(STRADHOCORDERS)
         cmbReports.Items.Add(STRNARCOTICSDISPENSED)
+        cmbReports.Items.Add(STRNARCOTICSWASTED)
         cmbReports.Items.Add(STROVERRIDES)
 
     End Sub
@@ -142,13 +146,20 @@
     Private Sub btnGenerateReport_Click(sender As Object, e As EventArgs) Handles btnGenerateReport.Click
         Dim lstOfDataValues As List(Of String) = New List(Of String)
 
+        dgvReport.Columns.Clear()
+        dgvReport.Rows.Clear()
+
         If cmbReports.SelectedIndex < 0 Then
             MessageBox.Show("Please select a report from the drop down menu", "No Selected Item", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         Else
 
             lstOfDataValues = getSelectedReport(cmbReports.SelectedIndex)
 
-            PrintItemsToDataGrid(lstOfDataValues)
+            If lstOfDataValues.Count = 0 Then
+                MessageBox.Show("There is nothing to report.")
+            Else
+                PrintItemsToDataGrid(lstOfDataValues)
+            End If
 
             'dgvReport.Columns.Count.Equals(2)
 
