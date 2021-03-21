@@ -517,6 +517,7 @@
         Dim intSelectedDrawer As Integer = intCurrentDrawer
         Dim intDrawerTUID As Integer = CreateDatabase.ExecuteScalarQuery("Select Drawers_ID from Drawers where Drawer_Number = '" & intSelectedDrawer & "'")
         Inventory.RemoveDrugfromDrawer(intDrawerTUID, intDividerNumber, intMedicationTUID)
-
+        CartInterfaceCode.OpenOneDrawer(intSelectedDrawer)
+        MessageBox.Show("Drug removed from drawer number: " & intSelectedDrawer)
     End Sub
 End Class

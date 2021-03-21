@@ -456,6 +456,7 @@
     End Sub
 
     Public Sub RemoveDrugfromDrawer(ByRef intDrawerID As Integer, ByRef intDivider As Integer, ByRef intMedTUID As Integer)
+        CreateDatabase.ExecuteInsertQuery("UPDATE DrawerMedication SET Active_Flag = '0' WHERE Drawers_TUID = '" & intDrawerID & "'  AND Divider_Bin = '" & intDivider & "' AND Medication_TUID = '" & intMedTUID & "' AND Active_Flag = '1'")
 
     End Sub
 End Module
