@@ -2,7 +2,13 @@
 
 Public Class frmLoginScan
 
+    Private blnFlagToClose As Boolean = False
 
+    Public Sub setBlnFlagToClose(ByVal flag As Boolean)
+
+        blnFlagToClose = flag
+
+    End Sub
     Private Sub lblBadge_Click(sender As Object, e As EventArgs) Handles lblBadge.Click
         'close current form and open frmLogin to login with username and password
         Me.Close()
@@ -51,9 +57,29 @@ Public Class frmLoginScan
                 frmMain.Show()
                 frmMain.btnPatientRecords.PerformClick()
             Else
-                    'If users barcode is not in the User table then inform the user
-                    MsgBox("No User With That Barcode")
-                End If
+                'If users barcode is not in the User table then inform the user
+                MsgBox("No User With That Barcode")
             End If
+        End If
+    End Sub
+
+    Public Sub CloseForm()
+
+        If blnFlagToClose = True Then
+            Me.Close()
+        End If
+
+
+    End Sub
+
+    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+        MessageBox.Show("closing the main login screen")
+        Me.Close()
+    End Sub
+
+    Private Sub frmLoginScan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        CloseForm()
+
     End Sub
 End Class

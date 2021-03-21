@@ -30,8 +30,11 @@ Partial Class frmLoginScan
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.txtBarcode = New System.Windows.Forms.TextBox()
+        Me.panelTopBar = New System.Windows.Forms.Panel()
+        Me.btnClose = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
+        Me.panelTopBar.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -128,15 +131,40 @@ Partial Class frmLoginScan
         Me.txtBarcode.TabIndex = 2
         Me.txtBarcode.Tag = "SVSU ID"
         '
+        'panelTopBar
+        '
+        Me.panelTopBar.Controls.Add(Me.btnClose)
+        Me.panelTopBar.Dock = System.Windows.Forms.DockStyle.Top
+        Me.panelTopBar.Location = New System.Drawing.Point(0, 0)
+        Me.panelTopBar.Name = "panelTopBar"
+        Me.panelTopBar.Size = New System.Drawing.Size(664, 28)
+        Me.panelTopBar.TabIndex = 12
+        '
+        'btnClose
+        '
+        Me.btnClose.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnClose.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnClose.FlatAppearance.BorderSize = 0
+        Me.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnClose.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClose.ForeColor = System.Drawing.Color.White
+        Me.btnClose.Location = New System.Drawing.Point(624, 0)
+        Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(40, 28)
+        Me.btnClose.TabIndex = 0
+        Me.btnClose.Text = "X"
+        Me.btnClose.UseVisualStyleBackColor = False
+        '
         'frmLoginScan
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(664, 496)
+        Me.Controls.Add(Me.panelTopBar)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Panel1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmLoginScan"
@@ -147,6 +175,7 @@ Partial Class frmLoginScan
         Me.Panel1.PerformLayout()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
+        Me.panelTopBar.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -159,4 +188,6 @@ Partial Class frmLoginScan
     Friend WithEvents txtBarcode As TextBox
     Friend WithEvents btnLogin As Button
     Friend WithEvents lblBadge As Label
+    Friend WithEvents panelTopBar As Panel
+    Friend WithEvents btnClose As Button
 End Class
