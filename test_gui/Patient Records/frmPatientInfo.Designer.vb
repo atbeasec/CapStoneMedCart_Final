@@ -110,6 +110,7 @@ Partial Class frmPatientInfo
         Me.txtGender.Location = New System.Drawing.Point(383, 30)
         Me.txtGender.Name = "txtGender"
         Me.txtGender.ReadOnly = True
+        Me.txtGender.ShortcutsEnabled = False
         Me.txtGender.Size = New System.Drawing.Size(151, 25)
         Me.txtGender.TabIndex = 3
         '
@@ -132,6 +133,7 @@ Partial Class frmPatientInfo
         Me.txtPhysician.Location = New System.Drawing.Point(383, 91)
         Me.txtPhysician.Name = "txtPhysician"
         Me.txtPhysician.ReadOnly = True
+        Me.txtPhysician.ShortcutsEnabled = False
         Me.txtPhysician.Size = New System.Drawing.Size(151, 25)
         Me.txtPhysician.TabIndex = 8
         '
@@ -205,6 +207,7 @@ Partial Class frmPatientInfo
         Me.txtPhone.Location = New System.Drawing.Point(1, 1)
         Me.txtPhone.Mask = "(999) 000-0000"
         Me.txtPhone.Name = "txtPhone"
+        Me.txtPhone.ShortcutsEnabled = False
         Me.txtPhone.Size = New System.Drawing.Size(144, 22)
         Me.txtPhone.TabIndex = 15
         '
@@ -264,6 +267,7 @@ Partial Class frmPatientInfo
         Me.txtZipCode.MaxLength = 9
         Me.txtZipCode.Name = "txtZipCode"
         Me.txtZipCode.ReadOnly = True
+        Me.txtZipCode.ShortcutsEnabled = False
         Me.txtZipCode.Size = New System.Drawing.Size(151, 25)
         Me.txtZipCode.TabIndex = 14
         '
@@ -286,6 +290,7 @@ Partial Class frmPatientInfo
         Me.txtCity.Location = New System.Drawing.Point(383, 150)
         Me.txtCity.Name = "txtCity"
         Me.txtCity.ReadOnly = True
+        Me.txtCity.ShortcutsEnabled = False
         Me.txtCity.Size = New System.Drawing.Size(151, 25)
         Me.txtCity.TabIndex = 12
         '
@@ -348,6 +353,7 @@ Partial Class frmPatientInfo
         Me.txtEmail.Location = New System.Drawing.Point(567, 89)
         Me.txtEmail.Name = "txtEmail"
         Me.txtEmail.ReadOnly = True
+        Me.txtEmail.ShortcutsEnabled = False
         Me.txtEmail.Size = New System.Drawing.Size(151, 25)
         Me.txtEmail.TabIndex = 9
         '
@@ -359,6 +365,7 @@ Partial Class frmPatientInfo
         Me.txtAddress.Location = New System.Drawing.Point(13, 150)
         Me.txtAddress.Name = "txtAddress"
         Me.txtAddress.ReadOnly = True
+        Me.txtAddress.ShortcutsEnabled = False
         Me.txtAddress.Size = New System.Drawing.Size(337, 25)
         Me.txtAddress.TabIndex = 11
         '
@@ -371,6 +378,7 @@ Partial Class frmPatientInfo
         Me.txtMRN.MaxLength = 9
         Me.txtMRN.Name = "txtMRN"
         Me.txtMRN.ReadOnly = True
+        Me.txtMRN.ShortcutsEnabled = False
         Me.txtMRN.Size = New System.Drawing.Size(150, 25)
         Me.txtMRN.TabIndex = 1
         '
@@ -422,6 +430,7 @@ Partial Class frmPatientInfo
         '
         Me.txtWeight.BackColor = System.Drawing.Color.White
         Me.txtWeight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtWeight.CausesValidation = False
         Me.txtWeight.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtWeight.Location = New System.Drawing.Point(754, 31)
         Me.txtWeight.MaxLength = 5
@@ -450,6 +459,7 @@ Partial Class frmPatientInfo
         Me.txtHeight.MaxLength = 5
         Me.txtHeight.Name = "txtHeight"
         Me.txtHeight.ReadOnly = True
+        Me.txtHeight.ShortcutsEnabled = False
         Me.txtHeight.Size = New System.Drawing.Size(150, 25)
         Me.txtHeight.TabIndex = 4
         '
@@ -472,6 +482,7 @@ Partial Class frmPatientInfo
         Me.txtBirthday.Location = New System.Drawing.Point(198, 30)
         Me.txtBirthday.Name = "txtBirthday"
         Me.txtBirthday.ReadOnly = True
+        Me.txtBirthday.ShortcutsEnabled = False
         Me.txtBirthday.Size = New System.Drawing.Size(152, 25)
         Me.txtBirthday.TabIndex = 2
         '
