@@ -509,4 +509,12 @@
         ExecuteScalarQuery("UPDATE Drawers SET Number_of_Dividers = " & CInt(txtDividers.Text) & ", Size = " & CInt(txtCapacity.Text) & "  WHERE Drawers_ID  = " & intCurrentDrawer & ";")
         Me.Refresh()
     End Sub
+
+    Public Sub RemoveDrugFromDrawer(sender As Object)
+        Dim intDividerNumber As Integer = GetSelectedInformation(sender.parent, "lblDivider")
+        Dim intSelectedDrawer As Integer = intCurrentDrawer
+        Dim intDrawerTUID As Integer = CreateDatabase.ExecuteScalarQuery("Select Drawers_ID from Drawers where Drawer_Number = '" & intSelectedDrawer & "'")
+
+
+    End Sub
 End Class

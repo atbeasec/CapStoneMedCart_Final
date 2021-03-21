@@ -86,7 +86,7 @@
         'create dataset to hold selected values
         Dim dsDataset As New DataSet
         'create select to send to select function
-        Dim Strdatacommand As String = ("SELECT Drug_Name, Strength, Quantity, Divider_Bin FROM DrawerMedication " &
+        Dim Strdatacommand As String = ("SELECT Drug_Name, Strength, Quantity, Divider_Bin, Medication_TUID FROM DrawerMedication " &
             "INNER JOIN Medication ON Medication.Medication_ID = DrawerMedication.Medication_TUID " &
             "WHERE DrawerMedication.Drawers_TUID =" & intDrawerID & " AND DrawerMedication.Active_Flag = '1';")
 
@@ -452,6 +452,10 @@
     End Sub
 
     Public Sub GetAmountInsideDrawer()
+
+    End Sub
+
+    Public Sub RemoveDrugfromDrawer(ByRef intDrawerID As Integer)
 
     End Sub
 End Module
