@@ -421,17 +421,18 @@
             intDrugQuantity = CInt(dr(2))
             intDividerBin = dr(3)
 
+            If intDrugQuantity = 0 Then
+                ' the drawer is empty. Do nothing
+            Else
+                'based on the selected drawer we will need to call the database to see what medications are in the drawers
+                CreatePanel(flpMedication, strDrugName, intDividerBin, intStrength.ToString(), intDrugQuantity.ToString())
+            End If
         Next
         Dim size As Integer = CreateDatabase.ExecuteScalarQuery("SELECT Size FROM Drawers where Drawers_ID = " & sender.TabIndex.ToString() & ";")
         txtCapacity.Text = size
         Dim dividers As Integer = CreateDatabase.ExecuteScalarQuery("SELECT Number_of_Dividers FROM Drawers where Drawers_ID = " & sender.TabIndex.ToString() & ";")
         txtDividers.Text = dividers
-        If intDrugQuantity = 0 Then
-            ' the drawer is empty. Do nothing
-        Else
-            'based on the selected drawer we will need to call the database to see what medications are in the drawers
-            CreatePanel(flpMedication, strDrugName, intDividerBin, intStrength.ToString(), intDrugQuantity.ToString())
-        End If
+
         'MessageBox.Show(strDrugName + " " + intStrength.ToString() + "   " + intDividerBin.ToString() + " In drawer number: " + sender.TabIndex.ToString())
 
 
