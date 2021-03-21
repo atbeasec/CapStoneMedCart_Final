@@ -71,6 +71,12 @@ Public Class frmLoginScan
             Dim result As DialogResult = MessageBox.Show("Are you sure you want to quit?", "", MessageBoxButtons.YesNo)
 
             If result = DialogResult.Yes Then
+
+                ' code in **'s is temporary until the start up form is changed.
+                '****************************************
+                frmMain.Visible = True
+                frmMain.Close()
+                '****************************************
                 Me.Close()
             End If
 
