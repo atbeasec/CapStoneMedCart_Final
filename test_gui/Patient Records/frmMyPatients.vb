@@ -8,6 +8,9 @@
         CreatePanelMyPatients(flpMyPatientRecords, "test", "test", "test", "11/11/1998", "test", "test", 12)
 
 
+        ' select the my patients item from the cbobox by default
+        cboFilter.SelectedIndex = 0
+        lblAssignment.Visible = False
 
     End Sub
     Private Sub LoadPanel()
@@ -178,7 +181,7 @@
         pnlPanelName.Controls.Add(btnAddButton)
         ' MessageBox.Show("again")
         'Add handler for click events
-        ' AddHandler btnAddButton.Click, AddressOf DynamicButtonEditRecord_Click
+        AddHandler btnAddButton.Click, AddressOf btnAddAssignment_Click
 
     End Sub
 
@@ -210,7 +213,7 @@
         pnlPanelName.Controls.Add(btnRemove)
         ' MessageBox.Show("again")
         'Add handler for click events
-        ' AddHandler btnEditButton.Click, AddressOf DynamicButtonEditRecord_Click
+        AddHandler btnRemove.Click, AddressOf RemoveAssignment_Click
 
     End Sub
 
@@ -242,6 +245,29 @@
         AddHandler chkSelectedPatient.CheckedChanged, AddressOf CheckBox_Checked
 
     End Sub
+
+    Private Sub ShowOrHideAddAndRemoveIcons(ByVal ctlParent As Control)
+
+        Dim ctl As Control
+
+        For Each ctl In ctlParent.Controls
+
+            If ctl.Name.Contains("btnRemove") Or ctl.Name.Contains("btnAdd") Then
+
+                If ctl.Visible = False Then
+                    ctl.Visible = True
+                    lblAssignment.Visible = True
+                Else
+                    ctl.Visible = False
+                    lblAssignment.Visible = False
+                End If
+            End If
+
+        Next
+
+    End Sub
+
+
     Private Sub CheckBox_Checked(ByVal sender As Object, e As EventArgs)
 
         If sender.checked = True Then
@@ -254,23 +280,33 @@
 
     End Sub
 
-    Private Sub ShowOrHideAddAndRemoveIcons(ByVal ctlParent As Control)
+    Private Sub RemoveAssignment_Click(ByVal sender As Object, e As EventArgs)
 
-        Dim ctl As Control
+        Dim patientIDFromSelectedRecord As Integer = CInt(sender.parent.tag)
 
-        For Each ctl In ctlParent.Controls
+        '*******************
+        ' ADAM create and call a method here to update tables using the patient ID above
 
-            If ctl.Name.Contains("btnRemove") Or ctl.Name.Contains("btnAdd") Then
 
-                If ctl.Visible = False Then
-                    ctl.Visible = True
-                Else
-                    ctl.Visible = False
-                End If
-            End If
 
-        Next
+        '*******************
+        ' ADAM recall the create panel method if necessary. For example, if the patient was removed from my patients, we should remove that patient on the screen.
+
+
 
     End Sub
 
+    Private Sub btnAddAssignment_Click(ByVal sender As Object, e As EventArgs)
+
+        Dim patientIDFromSelectedRecord As Integer = CInt(sender.parent.tag)
+
+
+
+
+
+    End Sub
+
+    Private Sub cboFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboFilter.SelectedIndexChanged
+
+    End Sub
 End Class
