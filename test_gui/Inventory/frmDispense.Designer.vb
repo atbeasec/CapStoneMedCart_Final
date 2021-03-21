@@ -196,6 +196,7 @@ Partial Class frmDispense
         '
         'cmbMedications
         '
+        Me.cmbMedications.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbMedications.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbMedications.FormattingEnabled = True
         Me.cmbMedications.Items.AddRange(New Object() {"Yes", "No"})
@@ -226,6 +227,7 @@ Partial Class frmDispense
         '
         'cmbDosage
         '
+        Me.cmbDosage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbDosage.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbDosage.FormattingEnabled = True
         Me.cmbDosage.Items.AddRange(New Object() {"Yes", "No"})
@@ -246,6 +248,7 @@ Partial Class frmDispense
         '
         'cmbMethod
         '
+        Me.cmbMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbMethod.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbMethod.FormattingEnabled = True
         Me.cmbMethod.Items.AddRange(New Object() {"Yes", "No"})
