@@ -193,7 +193,8 @@
         Dim lblID4 As New Label
 
         ' anywhere we have quotes except for the label names, we can call our Database and get method
-        CreateIDLabel(pnlMainPanel, lblID1, "lblMedication", lblMedication.Location.X, 20, strMedicationName, getPanelCount(flpPannel))
+        'CreateIDLabel(pnlMainPanel, lblID1, "lblMedication", lblMedication.Location.X, 20, strMedicationName, getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID1, "lblMedication", lblMedication.Location.X, 20, strMedicationName, getPanelCount(flpPannel), tpToolTip, TruncateString(20, strMedicationName))
         CreateIDLabel(pnlMainPanel, lblID2, "lblDrawerNumber", lblDrawerNum.Location.X, 20, strDrawerNumber, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID3, "lblSection", lblSection.Location.X, 20, strSection, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID4, "lblSystemCount", lblSystemCount.Location.X, 20, strSystemCount, getPanelCount(flpPannel))
