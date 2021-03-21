@@ -31,7 +31,13 @@ Partial Class frmEditPhysician
         Me.lblName = New System.Windows.Forms.Label()
         Me.txtID = New System.Windows.Forms.TextBox()
         Me.pnlAllTextboxes = New System.Windows.Forms.Panel()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.txtMiddleName = New System.Windows.Forms.TextBox()
+        Me.Panel11 = New System.Windows.Forms.Panel()
+        Me.txtLastName = New System.Windows.Forms.TextBox()
         Me.btnSaveChanges = New System.Windows.Forms.Button()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.txtFirstName = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
@@ -58,14 +64,11 @@ Partial Class frmEditPhysician
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblFirstName = New System.Windows.Forms.Label()
-        Me.Panel11 = New System.Windows.Forms.Panel()
-        Me.txtLastName = New System.Windows.Forms.TextBox()
-        Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.txtFirstName = New System.Windows.Forms.TextBox()
-        Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.txtMiddleName = New System.Windows.Forms.TextBox()
         Me.pnlPhysicianHeader.SuspendLayout()
         Me.pnlAllTextboxes.SuspendLayout()
+        Me.Panel5.SuspendLayout()
+        Me.Panel11.SuspendLayout()
+        Me.Panel4.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel17.SuspendLayout()
         Me.Panel16.SuspendLayout()
@@ -73,9 +76,6 @@ Partial Class frmEditPhysician
         Me.Panel3.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel15.SuspendLayout()
-        Me.Panel11.SuspendLayout()
-        Me.Panel4.SuspendLayout()
-        Me.Panel5.SuspendLayout()
         Me.SuspendLayout()
         '
         'flpPhysicianInfo
@@ -183,6 +183,48 @@ Partial Class frmEditPhysician
         Me.pnlAllTextboxes.Size = New System.Drawing.Size(581, 497)
         Me.pnlAllTextboxes.TabIndex = 167
         '
+        'Panel5
+        '
+        Me.Panel5.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel5.Controls.Add(Me.txtMiddleName)
+        Me.Panel5.Location = New System.Drawing.Point(13, 140)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel5.Size = New System.Drawing.Size(224, 28)
+        Me.Panel5.TabIndex = 3
+        '
+        'txtMiddleName
+        '
+        Me.txtMiddleName.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtMiddleName.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtMiddleName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMiddleName.Location = New System.Drawing.Point(1, 1)
+        Me.txtMiddleName.Multiline = True
+        Me.txtMiddleName.Name = "txtMiddleName"
+        Me.txtMiddleName.Size = New System.Drawing.Size(222, 26)
+        Me.txtMiddleName.TabIndex = 2
+        '
+        'Panel11
+        '
+        Me.Panel11.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel11.Controls.Add(Me.txtLastName)
+        Me.Panel11.Location = New System.Drawing.Point(285, 71)
+        Me.Panel11.Name = "Panel11"
+        Me.Panel11.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel11.Size = New System.Drawing.Size(224, 28)
+        Me.Panel11.TabIndex = 2
+        '
+        'txtLastName
+        '
+        Me.txtLastName.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtLastName.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtLastName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtLastName.Location = New System.Drawing.Point(1, 1)
+        Me.txtLastName.Multiline = True
+        Me.txtLastName.Name = "txtLastName"
+        Me.txtLastName.Size = New System.Drawing.Size(222, 26)
+        Me.txtLastName.TabIndex = 2
+        '
         'btnSaveChanges
         '
         Me.btnSaveChanges.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
@@ -196,6 +238,27 @@ Partial Class frmEditPhysician
         Me.btnSaveChanges.Text = "   SAVE "
         Me.btnSaveChanges.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnSaveChanges.UseVisualStyleBackColor = False
+        '
+        'Panel4
+        '
+        Me.Panel4.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel4.Controls.Add(Me.txtFirstName)
+        Me.Panel4.Location = New System.Drawing.Point(13, 70)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel4.Size = New System.Drawing.Size(226, 28)
+        Me.Panel4.TabIndex = 1
+        '
+        'txtFirstName
+        '
+        Me.txtFirstName.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtFirstName.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtFirstName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFirstName.Location = New System.Drawing.Point(1, 1)
+        Me.txtFirstName.Multiline = True
+        Me.txtFirstName.Name = "txtFirstName"
+        Me.txtFirstName.Size = New System.Drawing.Size(224, 26)
+        Me.txtFirstName.TabIndex = 1
         '
         'Label14
         '
@@ -491,69 +554,6 @@ Partial Class frmEditPhysician
         Me.lblFirstName.TabIndex = 167
         Me.lblFirstName.Text = "First Name:"
         '
-        'Panel11
-        '
-        Me.Panel11.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel11.Controls.Add(Me.txtLastName)
-        Me.Panel11.Location = New System.Drawing.Point(285, 71)
-        Me.Panel11.Name = "Panel11"
-        Me.Panel11.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel11.Size = New System.Drawing.Size(224, 28)
-        Me.Panel11.TabIndex = 2
-        '
-        'txtLastName
-        '
-        Me.txtLastName.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtLastName.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtLastName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLastName.Location = New System.Drawing.Point(1, 1)
-        Me.txtLastName.Multiline = True
-        Me.txtLastName.Name = "txtLastName"
-        Me.txtLastName.Size = New System.Drawing.Size(222, 26)
-        Me.txtLastName.TabIndex = 2
-        '
-        'Panel4
-        '
-        Me.Panel4.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel4.Controls.Add(Me.txtFirstName)
-        Me.Panel4.Location = New System.Drawing.Point(13, 70)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel4.Size = New System.Drawing.Size(226, 28)
-        Me.Panel4.TabIndex = 1
-        '
-        'txtFirstName
-        '
-        Me.txtFirstName.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtFirstName.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtFirstName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFirstName.Location = New System.Drawing.Point(1, 1)
-        Me.txtFirstName.Multiline = True
-        Me.txtFirstName.Name = "txtFirstName"
-        Me.txtFirstName.Size = New System.Drawing.Size(224, 26)
-        Me.txtFirstName.TabIndex = 1
-        '
-        'Panel5
-        '
-        Me.Panel5.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel5.Controls.Add(Me.txtMiddleName)
-        Me.Panel5.Location = New System.Drawing.Point(13, 140)
-        Me.Panel5.Name = "Panel5"
-        Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel5.Size = New System.Drawing.Size(224, 28)
-        Me.Panel5.TabIndex = 3
-        '
-        'txtMiddleName
-        '
-        Me.txtMiddleName.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtMiddleName.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtMiddleName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMiddleName.Location = New System.Drawing.Point(1, 1)
-        Me.txtMiddleName.Multiline = True
-        Me.txtMiddleName.Name = "txtMiddleName"
-        Me.txtMiddleName.Size = New System.Drawing.Size(222, 26)
-        Me.txtMiddleName.TabIndex = 2
-        '
         'frmEditPhysician
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -570,6 +570,12 @@ Partial Class frmEditPhysician
         Me.pnlPhysicianHeader.PerformLayout()
         Me.pnlAllTextboxes.ResumeLayout(False)
         Me.pnlAllTextboxes.PerformLayout()
+        Me.Panel5.ResumeLayout(False)
+        Me.Panel5.PerformLayout()
+        Me.Panel11.ResumeLayout(False)
+        Me.Panel11.PerformLayout()
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel17.ResumeLayout(False)
         Me.Panel17.PerformLayout()
@@ -582,12 +588,6 @@ Partial Class frmEditPhysician
         Me.Panel1.PerformLayout()
         Me.Panel15.ResumeLayout(False)
         Me.Panel15.PerformLayout()
-        Me.Panel11.ResumeLayout(False)
-        Me.Panel11.PerformLayout()
-        Me.Panel4.ResumeLayout(False)
-        Me.Panel4.PerformLayout()
-        Me.Panel5.ResumeLayout(False)
-        Me.Panel5.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -34,10 +34,12 @@ Partial Class frmLogin
         Me.txtUserName = New System.Windows.Forms.TextBox()
         Me.lblBadge = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.panelTopBar = New System.Windows.Forms.Panel()
+        Me.btnClose = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel5.SuspendLayout()
+        Me.panelTopBar.SuspendLayout()
         Me.SuspendLayout()
         '
         'Button1
@@ -51,7 +53,7 @@ Partial Class frmLogin
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(238, 36)
         Me.Button1.TabIndex = 3
-        Me.Button1.Text = "Log in"
+        Me.Button1.Text = "Login"
         Me.Button1.UseVisualStyleBackColor = False
         '
         'Panel1
@@ -124,9 +126,9 @@ Partial Class frmLogin
         Me.lblFirstName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
         Me.lblFirstName.Location = New System.Drawing.Point(48, 23)
         Me.lblFirstName.Name = "lblFirstName"
-        Me.lblFirstName.Size = New System.Drawing.Size(88, 21)
+        Me.lblFirstName.Size = New System.Drawing.Size(81, 21)
         Me.lblFirstName.TabIndex = 69
-        Me.lblFirstName.Text = "User Name"
+        Me.lblFirstName.Text = "Username"
         '
         'Panel5
         '
@@ -154,11 +156,11 @@ Partial Class frmLogin
         Me.lblBadge.AutoSize = True
         Me.lblBadge.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblBadge.ForeColor = System.Drawing.Color.Black
-        Me.lblBadge.Location = New System.Drawing.Point(108, 192)
+        Me.lblBadge.Location = New System.Drawing.Point(126, 189)
         Me.lblBadge.Name = "lblBadge"
-        Me.lblBadge.Size = New System.Drawing.Size(109, 17)
+        Me.lblBadge.Size = New System.Drawing.Size(83, 17)
         Me.lblBadge.TabIndex = 17
-        Me.lblBadge.Text = "Login with badge"
+        Me.lblBadge.Text = "Scan ID Card"
         '
         'Label1
         '
@@ -171,14 +173,29 @@ Partial Class frmLogin
         Me.Label1.TabIndex = 8
         Me.Label1.Text = "Welcome back!"
         '
-        'Panel4
+        'panelTopBar
         '
-        Me.Panel4.BackgroundImage = CType(resources.GetObject("Panel4.BackgroundImage"), System.Drawing.Image)
-        Me.Panel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Panel4.Location = New System.Drawing.Point(305, 21)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(50, 48)
-        Me.Panel4.TabIndex = 9
+        Me.panelTopBar.Controls.Add(Me.btnClose)
+        Me.panelTopBar.Dock = System.Windows.Forms.DockStyle.Top
+        Me.panelTopBar.Location = New System.Drawing.Point(0, 0)
+        Me.panelTopBar.Name = "panelTopBar"
+        Me.panelTopBar.Size = New System.Drawing.Size(664, 28)
+        Me.panelTopBar.TabIndex = 9
+        '
+        'btnClose
+        '
+        Me.btnClose.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnClose.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnClose.FlatAppearance.BorderSize = 0
+        Me.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnClose.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClose.ForeColor = System.Drawing.Color.White
+        Me.btnClose.Location = New System.Drawing.Point(624, 0)
+        Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(40, 28)
+        Me.btnClose.TabIndex = 0
+        Me.btnClose.Text = "X"
+        Me.btnClose.UseVisualStyleBackColor = False
         '
         'frmLogin
         '
@@ -186,10 +203,10 @@ Partial Class frmLogin
         Me.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(664, 496)
-        Me.Controls.Add(Me.Panel4)
+        Me.Controls.Add(Me.panelTopBar)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Panel1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -203,6 +220,7 @@ Partial Class frmLogin
         Me.Panel2.PerformLayout()
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
+        Me.panelTopBar.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -210,7 +228,6 @@ Partial Class frmLogin
     Friend WithEvents Button1 As Button
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Label1 As Label
-    Friend WithEvents Panel4 As Panel
     Friend WithEvents lblBadge As Label
     Friend WithEvents btnEye As Button
     Friend WithEvents Panel5 As Panel
@@ -219,4 +236,6 @@ Partial Class frmLogin
     Friend WithEvents Panel2 As Panel
     Friend WithEvents txtPassword As TextBox
     Friend WithEvents lblFirstName As Label
+    Friend WithEvents panelTopBar As Panel
+    Friend WithEvents btnClose As Button
 End Class
