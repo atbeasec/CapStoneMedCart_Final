@@ -53,7 +53,7 @@ Partial Class frmLogin
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(238, 36)
         Me.Button1.TabIndex = 3
-        Me.Button1.Text = "Log in"
+        Me.Button1.Text = "Login"
         Me.Button1.UseVisualStyleBackColor = False
         '
         'Panel1
@@ -126,9 +126,9 @@ Partial Class frmLogin
         Me.lblFirstName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
         Me.lblFirstName.Location = New System.Drawing.Point(48, 23)
         Me.lblFirstName.Name = "lblFirstName"
-        Me.lblFirstName.Size = New System.Drawing.Size(88, 21)
+        Me.lblFirstName.Size = New System.Drawing.Size(81, 21)
         Me.lblFirstName.TabIndex = 69
-        Me.lblFirstName.Text = "User Name"
+        Me.lblFirstName.Text = "Username"
         '
         'Panel5
         '
@@ -156,11 +156,11 @@ Partial Class frmLogin
         Me.lblBadge.AutoSize = True
         Me.lblBadge.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblBadge.ForeColor = System.Drawing.Color.Black
-        Me.lblBadge.Location = New System.Drawing.Point(108, 192)
+        Me.lblBadge.Location = New System.Drawing.Point(126, 189)
         Me.lblBadge.Name = "lblBadge"
-        Me.lblBadge.Size = New System.Drawing.Size(109, 17)
+        Me.lblBadge.Size = New System.Drawing.Size(83, 17)
         Me.lblBadge.TabIndex = 17
-        Me.lblBadge.Text = "Login with badge"
+        Me.lblBadge.Text = "Scan ID Card"
         '
         'Label1
         '
