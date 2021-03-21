@@ -664,6 +664,10 @@ Module GraphicalUserInterfaceReusableMethods
             GetAllergies(frmAllergies.GetPatientMrn())
             Debug.Print("remove allergy assigned to patient")
 
+        ElseIf getOpenedForm().GetType() Is frmMyPatients.GetType() Then
+
+            MessageBox.Show(sender.name)
+
         End If
 
     End Sub
