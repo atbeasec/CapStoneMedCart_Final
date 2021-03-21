@@ -614,11 +614,20 @@
         For Each ctl In pnlPersonalInformation.Controls
 
             If TypeName(ctl) = "TextBox" Then
-                Dim txtbox As TextBox = CType(ctl, TextBox)
 
-                txtbox.ReadOnly = False
-                txtbox.BorderStyle = BorderStyle.FixedSingle
-                txtbox.BackColor = Color.White
+                If ctl.Name.Contains("txtMRN") Then
+
+                ElseIf ctl.Name.Contains("txtBirthday") Then
+
+                Else
+
+                    Dim txtbox As TextBox = CType(ctl, TextBox)
+
+                    txtbox.ReadOnly = False
+                    txtbox.BorderStyle = BorderStyle.FixedSingle
+                    txtbox.BackColor = Color.White
+                End If
+
 
             ElseIf TypeName(ctl) = "ComboBox" Then
 
