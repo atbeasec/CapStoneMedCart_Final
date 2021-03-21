@@ -284,6 +284,7 @@ Partial Class frmDischarge
         Me.txtPhone.Location = New System.Drawing.Point(1, 1)
         Me.txtPhone.Mask = "(999) 000-0000"
         Me.txtPhone.Name = "txtPhone"
+        Me.txtPhone.ReadOnly = True
         Me.txtPhone.Size = New System.Drawing.Size(144, 22)
         Me.txtPhone.TabIndex = 15
         '
