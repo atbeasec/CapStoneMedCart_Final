@@ -30,6 +30,7 @@ Partial Class frmPatientInfo
         Me.txtPhysician = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.pnlPersonalInformation = New System.Windows.Forms.Panel()
+        Me.mtbBirthday = New System.Windows.Forms.MaskedTextBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.txtPhone = New System.Windows.Forms.MaskedTextBox()
         Me.cboState = New System.Windows.Forms.ComboBox()
@@ -55,7 +56,6 @@ Partial Class frmPatientInfo
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txtHeight = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.txtBirthday = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.flpMedications = New System.Windows.Forms.FlowLayoutPanel()
         Me.Label20 = New System.Windows.Forms.Label()
@@ -151,6 +151,7 @@ Partial Class frmPatientInfo
         'pnlPersonalInformation
         '
         Me.pnlPersonalInformation.BackColor = System.Drawing.Color.White
+        Me.pnlPersonalInformation.Controls.Add(Me.mtbBirthday)
         Me.pnlPersonalInformation.Controls.Add(Me.Panel2)
         Me.pnlPersonalInformation.Controls.Add(Me.cboState)
         Me.pnlPersonalInformation.Controls.Add(Me.btnAddAllergies)
@@ -177,7 +178,6 @@ Partial Class frmPatientInfo
         Me.pnlPersonalInformation.Controls.Add(Me.Label3)
         Me.pnlPersonalInformation.Controls.Add(Me.txtGender)
         Me.pnlPersonalInformation.Controls.Add(Me.Label19)
-        Me.pnlPersonalInformation.Controls.Add(Me.txtBirthday)
         Me.pnlPersonalInformation.Controls.Add(Me.txtPhysician)
         Me.pnlPersonalInformation.Controls.Add(Me.Label16)
         Me.pnlPersonalInformation.Controls.Add(Me.Label11)
@@ -186,6 +186,16 @@ Partial Class frmPatientInfo
         Me.pnlPersonalInformation.Name = "pnlPersonalInformation"
         Me.pnlPersonalInformation.Size = New System.Drawing.Size(1092, 184)
         Me.pnlPersonalInformation.TabIndex = 17
+        '
+        'mtbBirthday
+        '
+        Me.mtbBirthday.Location = New System.Drawing.Point(199, 33)
+        Me.mtbBirthday.Mask = "00/00/0000"
+        Me.mtbBirthday.Name = "mtbBirthday"
+        Me.mtbBirthday.ReadOnly = True
+        Me.mtbBirthday.Size = New System.Drawing.Size(151, 20)
+        Me.mtbBirthday.TabIndex = 65
+        Me.mtbBirthday.ValidatingType = GetType(Date)
         '
         'Panel2
         '
@@ -477,18 +487,6 @@ Partial Class frmPatientInfo
         Me.Label3.Size = New System.Drawing.Size(64, 21)
         Me.Label3.TabIndex = 37
         Me.Label3.Text = "Height:"
-        '
-        'txtBirthday
-        '
-        Me.txtBirthday.BackColor = System.Drawing.Color.White
-        Me.txtBirthday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtBirthday.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBirthday.Location = New System.Drawing.Point(198, 30)
-        Me.txtBirthday.Name = "txtBirthday"
-        Me.txtBirthday.ReadOnly = True
-        Me.txtBirthday.ShortcutsEnabled = False
-        Me.txtBirthday.Size = New System.Drawing.Size(152, 25)
-        Me.txtBirthday.TabIndex = 2
         '
         'Label11
         '
@@ -854,7 +852,6 @@ Partial Class frmPatientInfo
     Friend WithEvents txtPhysician As TextBox
     Friend WithEvents txtGender As TextBox
     Friend WithEvents Label19 As Label
-    Friend WithEvents txtBirthday As TextBox
     Friend WithEvents Label21 As Label
     Friend WithEvents Label17 As Label
     Friend WithEvents Label10 As Label
@@ -906,4 +903,5 @@ Partial Class frmPatientInfo
     Friend WithEvents tpToolTip As ToolTip
     Friend WithEvents Panel2 As Panel
     Friend WithEvents txtPhone As MaskedTextBox
+    Friend WithEvents mtbBirthday As MaskedTextBox
 End Class

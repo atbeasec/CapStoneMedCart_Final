@@ -119,10 +119,10 @@ Module PatientInformation
             End If
 
             If IsDBNull(dr(4)) Then
-                frmPatientInfo.txtBirthday.Text = "N/A"
+                frmPatientInfo.mtbBirthday.Text = Nothing
             Else
-                frmPatientInfo.txtBirthday.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.DoB)
-                frmPatientInfo.txtBirthday.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.DoB)
+                frmPatientInfo.mtbBirthday.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.DoB)
+                frmPatientInfo.mtbBirthday.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.DoB)
             End If
 
             If IsDBNull(dr(5)) Then
@@ -272,9 +272,9 @@ Module PatientInformation
             intMRNInitalValue = intMRNCurrentValue
         End If
         'check if date of birth is changed
-        If Not frmPatientInfo.txtBirthday.Text.Equals(frmPatientInfo.txtBirthday.Tag) Then
+        If Not frmPatientInfo.mtbBirthday.Text.Equals(frmPatientInfo.mtbBirthday.Tag) Then
             'build sql update command
-            strbSqlCommand.Append("UPDATE Patient SET Date_of_Birth = '" & frmPatientInfo.txtBirthday.Text & "' Where Patient_ID = '" & intPatientID & "'")
+            strbSqlCommand.Append("UPDATE Patient SET Date_of_Birth = '" & frmPatientInfo.mtbBirthday.Text & "' Where Patient_ID = '" & intPatientID & "'")
             CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
             'add item that was changed too string that is tracking all changed items
             strbItemsChanged.Append(" Date of birth")
@@ -283,7 +283,7 @@ Module PatientInformation
             'clear string bulder
             strbSqlCommand.Clear()
             'update tag to new item
-            frmPatientInfo.txtBirthday.Tag = frmPatientInfo.txtBirthday.Text
+            frmPatientInfo.mtbBirthday.Tag = frmPatientInfo.mtbBirthday.Text
         End If
         'check if sex is changed
         If Not frmPatientInfo.txtGender.Text.Equals(frmPatientInfo.txtGender.Tag) Then
@@ -727,7 +727,7 @@ Module PatientInformation
         ' this is done to get the drug name, strength, type and frequency of the medication the specific patient
         ' is prescribed, it then joins the patient medicaiton table to get the quantity, date prescribed and 
         ' the physician ID who prescribed it, inner joining the physician table with the ID to get the name of the physician
-        strbSqlCommand.Append("SELECT trim(Drug_Name,' '), Strength, Frequency, PatientMedication.Type, PatientMedication.Quantity, ")
+        strbSqlCommand.Append("SELECT trim(Drug_Name,' '), Strength, Frequency, Medication.Type, PatientMedication.Quantity, ")
         strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name ")
         strbSqlCommand.Append("FROM Medication Inner Join PatientMedication ON PatientMedication.Medication_TUID = Medication.Medication_ID ")
         strbSqlCommand.Append("Inner Join Physician ON Physician.Physician_ID = PatientMedication.Ordering_Physician_ID ")
@@ -787,7 +787,7 @@ Module PatientInformation
         ' this is done to get the drug name, strength, type and frequency of the medication the specific patient
         ' is prescribed, it then joins the patient medicaiton table to get the quantity, date prescribed and 
         ' the physician ID who prescribed it, inner joining the physician table with the ID to get the name of the physician
-        strbSqlCommand.Append("SELECT trim(Drug_Name,' '), Strength, Frequency, PatientMedication.Type, PatientMedication.Quantity, ")
+        strbSqlCommand.Append("SELECT trim(Drug_Name,' '), Strength, Frequency, Medication.Type, PatientMedication.Quantity, ")
         strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name ")
         strbSqlCommand.Append("FROM Medication Inner Join PatientMedication ON PatientMedication.Medication_TUID = Medication.Medication_ID ")
         strbSqlCommand.Append("Inner Join Physician ON Physician.Physician_ID = PatientMedication.Ordering_Physician_ID ")
@@ -847,7 +847,7 @@ Module PatientInformation
         ' this is done to get the drug name, strength, type and frequency of the medication the specific patient
         ' is prescribed, it then joins the patient medicaiton table to get the quantity, date prescribed and 
         ' the physician ID who prescribed it, inner joining the physician table with the ID to get the name of the physician
-        strbSqlCommand.Append("SELECT trim(Drug_Name,' '), Strength, Frequency, PatientMedication.Type, PatientMedication.Quantity, ")
+        strbSqlCommand.Append("SELECT trim(Drug_Name,' '), Strength, Frequency, Medication.Type, PatientMedication.Quantity, ")
         strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name ")
         strbSqlCommand.Append("FROM Medication Inner Join PatientMedication ON PatientMedication.Medication_TUID = Medication.Medication_ID ")
         strbSqlCommand.Append("Inner Join Physician ON Physician.Physician_ID = PatientMedication.Ordering_Physician_ID ")
@@ -907,7 +907,7 @@ Module PatientInformation
         ' this is done to get the drug name, strength, type and frequency of the medication the specific patient
         ' is prescribed, it then joins the patient medicaiton table to get the quantity, date prescribed and 
         ' the physician ID who prescribed it, inner joining the physician table with the ID to get the name of the physician
-        strbSqlCommand.Append("SELECT trim(Drug_Name,' '), Strength, Frequency, PatientMedication.Type, PatientMedication.Quantity, ")
+        strbSqlCommand.Append("SELECT trim(Drug_Name,' '), Strength, Frequency, Medication.Type, PatientMedication.Quantity, ")
         strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name ")
         strbSqlCommand.Append("FROM Medication Inner Join PatientMedication ON PatientMedication.Medication_TUID = Medication.Medication_ID ")
         strbSqlCommand.Append("Inner Join Physician ON Physician.Physician_ID = PatientMedication.Ordering_Physician_ID ")
@@ -967,7 +967,7 @@ Module PatientInformation
         ' this is done to get the drug name, strength, type and frequency of the medication the specific patient
         ' is prescribed, it then joins the patient medicaiton table to get the quantity, date prescribed and 
         ' the physician ID who prescribed it, inner joining the physician table with the ID to get the name of the physician
-        strbSqlCommand.Append("SELECT trim(Drug_Name,' '), Strength, Frequency, PatientMedication.Type, PatientMedication.Quantity, ")
+        strbSqlCommand.Append("SELECT trim(Drug_Name,' '), Strength, Frequency, Medication.Type, PatientMedication.Quantity, ")
         strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name ")
         strbSqlCommand.Append("FROM Medication Inner Join PatientMedication ON PatientMedication.Medication_TUID = Medication.Medication_ID ")
         strbSqlCommand.Append("Inner Join Physician ON Physician.Physician_ID = PatientMedication.Ordering_Physician_ID ")
@@ -1027,7 +1027,7 @@ Module PatientInformation
         ' this is done to get the drug name, strength, type and frequency of the medication the specific patient
         ' is prescribed, it then joins the patient medicaiton table to get the quantity, date prescribed and 
         ' the physician ID who prescribed it, inner joining the physician table with the ID to get the name of the physician
-        strbSqlCommand.Append("SELECT trim(Drug_Name,' '), Strength, Frequency, PatientMedication.Type, PatientMedication.Quantity, ")
+        strbSqlCommand.Append("SELECT trim(Drug_Name,' '), Strength, Frequency, Medication.Type, PatientMedication.Quantity, ")
         strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name ")
         strbSqlCommand.Append("FROM Medication Inner Join PatientMedication ON PatientMedication.Medication_TUID = Medication.Medication_ID ")
         strbSqlCommand.Append("Inner Join Physician ON Physician.Physician_ID = PatientMedication.Ordering_Physician_ID ")
@@ -1087,7 +1087,7 @@ Module PatientInformation
         ' this is done to get the drug name, strength, type and frequency of the medication the specific patient
         ' is prescribed, it then joins the patient medicaiton table to get the quantity, date prescribed and 
         ' the physician ID who prescribed it, inner joining the physician table with the ID to get the name of the physician
-        strbSqlCommand.Append("SELECT trim(Drug_Name,' '), Strength, Frequency, PatientMedication.Type, PatientMedication.Quantity, ")
+        strbSqlCommand.Append("SELECT trim(Drug_Name,' '), Strength, Frequency, Medication.Type, PatientMedication.Quantity, ")
         strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name ")
         strbSqlCommand.Append("FROM Medication Inner Join PatientMedication ON PatientMedication.Medication_TUID = Medication.Medication_ID ")
         strbSqlCommand.Append("Inner Join Physician ON Physician.Physician_ID = PatientMedication.Ordering_Physician_ID ")
@@ -1147,7 +1147,7 @@ Module PatientInformation
         ' this is done to get the drug name, strength, type and frequency of the medication the specific patient
         ' is prescribed, it then joins the patient medicaiton table to get the quantity, date prescribed and 
         ' the physician ID who prescribed it, inner joining the physician table with the ID to get the name of the physician
-        strbSqlCommand.Append("SELECT trim(Drug_Name,' '), Strength, Frequency, PatientMedication.Type, PatientMedication.Quantity, ")
+        strbSqlCommand.Append("SELECT trim(Drug_Name,' '), Strength, Frequency, Medication.Type, PatientMedication.Quantity, ")
         strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name ")
         strbSqlCommand.Append("FROM Medication Inner Join PatientMedication ON PatientMedication.Medication_TUID = Medication.Medication_ID ")
         strbSqlCommand.Append("Inner Join Physician ON Physician.Physician_ID = PatientMedication.Ordering_Physician_ID ")
