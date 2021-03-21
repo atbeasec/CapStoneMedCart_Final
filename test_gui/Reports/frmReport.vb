@@ -41,6 +41,7 @@
 
         PopulateReportsList()
 
+
     End Sub
 
     '/*********************************************************************/
@@ -145,13 +146,20 @@
     Private Sub btnGenerateReport_Click(sender As Object, e As EventArgs) Handles btnGenerateReport.Click
         Dim lstOfDataValues As List(Of String) = New List(Of String)
 
+        dgvReport.Columns.Clear()
+        dgvReport.Rows.Clear()
+
         If cmbReports.SelectedIndex < 0 Then
             MessageBox.Show("Please select a report from the drop down menu", "No Selected Item", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         Else
 
             lstOfDataValues = getSelectedReport(cmbReports.SelectedIndex)
 
-            PrintItemsToDataGrid(lstOfDataValues)
+            If lstOfDataValues.Count = 0 Then
+                MessageBox.Show("There is nothing to report.")
+            Else
+                PrintItemsToDataGrid(lstOfDataValues)
+            End If
 
             'dgvReport.Columns.Count.Equals(2)
 
