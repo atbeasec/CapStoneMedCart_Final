@@ -99,7 +99,7 @@
     '/*                         reports.                                  */
     '/*	 BRH	    03/21/21	Fixed to remove an unnecessary column, added
     '/*                         narcotics wasted, all dispensed medication,
-    '/*                         all wasted medication, 
+    '/*                         all wasted medication, all ad hoc orders,
     '/*********************************************************************/
     Function getSelectedReport(intSelectedIndex As Integer) As List(Of String)
         'Dim arrData As ArrayList = New ArrayList
@@ -118,6 +118,13 @@
         'the necessary sql statement to query the needed table)
         Select Case intSelectedIndex
             Case Reports.Adhoc  'strReport = "Ad hoc Orders"
+                strSQLCmd = "SELECT Medication.Drug_Name, Drawers.Drawer_Number, DrawerMedication.Divider_Bin, Patient.Patient_First_Name, Patient.Patient_Middle_Name, 
+                            Patient.Patient_Last_Name, User.Username, AdHocOrder.Amount FROM AdHocOrder 
+                            INNER JOIN Medication ON AdHocOrder.Medication_TUID = Medication_ID
+                            INNER JOIN Patient ON Patient_TUID = Patient_ID
+                            INNER JOIN User ON User_TUID = User_ID
+                            INNER JOIN DrawerMedication ON DrawerMedication_TUID = DrawerMedication_ID
+                            INNER JOIN Drawers ON DrawerMedication.Drawers_TUID = Drawers.Drawers_ID"
 
             Case Reports.Discrepancies  'strReport = "Discrepancies"
 
@@ -267,7 +274,7 @@
     '/*	BRH	 03/18/21	Initial creation of code                        */
     '/*	BRH	 03/21/21	Fixed to remove an unnecessary column, added    */
     '/*                 narcotics wasted, all dispensed medication,
-    '/*                 all wasted medication,
+    '/*                 all wasted medication, all ad hoc orders, 
     '/*******************************************************************/
     Sub PrintItemsToDataGrid(ByRef lstOfDataValues As List(Of String))
 
@@ -301,6 +308,19 @@
             For i As Integer = 0 To lstOfDataValues.Count - 8 Step 8
                 frmReport.dgvReport.Rows.Add(lstOfDataValues.Item(i), lstOfDataValues.Item(i + 1), lstOfDataValues.Item(i + 2), lstOfDataValues.Item(i + 3),
                                              lstOfDataValues.Item(i + 4), lstOfDataValues.Item(i + 5), lstOfDataValues.Item(i + 6), lstOfDataValues.Item(i + 7))
+            Next
+        ElseIf frmReport.cmbReports.SelectedItem.Equals("Ad Hoc Orders") Then
+            frmReport.dgvReport.Columns.Add(1, "Drug Name")
+            frmReport.dgvReport.Columns.Add(2, "Drawer Number")
+            frmReport.dgvReport.Columns.Add(3, "Drawer Bin")
+            frmReport.dgvReport.Columns.Add(4, "Patient's Name")
+            frmReport.dgvReport.Columns.Add(5, "Username of Ordering User")
+            frmReport.dgvReport.Columns.Add(6, "Amount Dispensed")
+
+            'Add the following data into data grid on the form
+            For i As Integer = 0 To lstOfDataValues.Count - 8 Step 8
+                frmReport.dgvReport.Rows.Add(lstOfDataValues.Item(i), lstOfDataValues.Item(i + 1), lstOfDataValues.Item(i + 2), lstOfDataValues.Item(i + 3) & " " &
+                                             lstOfDataValues.Item(i + 4) & " " & lstOfDataValues.Item(i + 5), lstOfDataValues.Item(i + 6), lstOfDataValues.Item(i + 7))
             Next
         End If
 
