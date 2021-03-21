@@ -25,6 +25,7 @@ Partial Class frmMain
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.pnlSideMenu = New System.Windows.Forms.Panel()
         Me.pnlSubMenuSettings = New System.Windows.Forms.Panel()
+        Me.btnEditPhysician = New System.Windows.Forms.Button()
         Me.btnSerialPort = New System.Windows.Forms.Button()
         Me.btnEditRooms = New System.Windows.Forms.Button()
         Me.btnDischargePatient = New System.Windows.Forms.Button()
@@ -82,6 +83,7 @@ Partial Class frmMain
         'pnlSubMenuSettings
         '
         Me.pnlSubMenuSettings.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.pnlSubMenuSettings.Controls.Add(Me.btnEditPhysician)
         Me.pnlSubMenuSettings.Controls.Add(Me.btnSerialPort)
         Me.pnlSubMenuSettings.Controls.Add(Me.btnEditRooms)
         Me.pnlSubMenuSettings.Controls.Add(Me.btnDischargePatient)
@@ -91,6 +93,27 @@ Partial Class frmMain
         Me.pnlSubMenuSettings.Name = "pnlSubMenuSettings"
         Me.pnlSubMenuSettings.Size = New System.Drawing.Size(210, 214)
         Me.pnlSubMenuSettings.TabIndex = 70
+        '
+        'btnEditPhysician
+        '
+        Me.btnEditPhysician.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(80, Byte), Integer), CType(CType(150, Byte), Integer))
+        Me.btnEditPhysician.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnEditPhysician.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnEditPhysician.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEditPhysician.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEditPhysician.ForeColor = System.Drawing.Color.White
+        Me.btnEditPhysician.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnEditPhysician.Location = New System.Drawing.Point(0, 168)
+        Me.btnEditPhysician.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnEditPhysician.Name = "btnEditPhysician"
+        Me.btnEditPhysician.Padding = New System.Windows.Forms.Padding(35, 5, 5, 5)
+        Me.btnEditPhysician.Size = New System.Drawing.Size(210, 42)
+        Me.btnEditPhysician.TabIndex = 29
+        Me.btnEditPhysician.Tag = "18"
+        Me.btnEditPhysician.Text = "Edit Physician"
+        Me.btnEditPhysician.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnEditPhysician.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnEditPhysician.UseVisualStyleBackColor = False
         '
         'btnSerialPort
         '
@@ -584,4 +607,5 @@ Partial Class frmMain
     Friend WithEvents pnlSubMenuPatientRecords As Panel
     Friend WithEvents btnMyPatients As Button
     Friend WithEvents btnAllPatients As Button
+    Friend WithEvents btnEditPhysician As Button
 End Class

@@ -53,13 +53,15 @@ Public Class frmEditPhysician
                                     "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician;"
         Fill_Table(strFillSQL)
 
-        cmbCredentials.Items.AddRange({"Advisor", "Diagnose", "Prescribe"})
-        PopulateStateComboBox(cmbState)
+        cboCredentials.Items.AddRange({"Advisor", "Diagnose", "Prescribe"})
+        PopulateStateComboBox(cboState)
         'btnSaveChanges.Visible = False
         btnCancel.Visible = False
 
         'CreateToolTips(pnlPhysicianHeader, tpLabelHover)
         AddHandlerToLabelClick(pnlPhysicianHeader, AddressOf SortBySelectedLabel)
+
+        txtID.Visible = False
 
     End Sub
 
@@ -295,7 +297,7 @@ Public Class frmEditPhysician
     '/*  WHO        WHEN            WHAT					               */             
     '/*  Dylan W    2/10/2021    Initial creation and check data in DB   */
     '/*********************************************************************/
-    Private Sub mtbPhone_and_mtbFax_LostFocus(sender As Object, e As EventArgs) Handles mtbPhone.LostFocus, mtbFax.LostFocus
+    Private Sub mtbPhone_and_mtbFax_LostFocus(sender As Object, e As EventArgs)
         'String to be sent to CreateDatabase Module to exicute search to check if Username is already in the User Table
         Dim strStatement = "SELECT COUNT(*) FROM Physician WHERE Physician_Phone_Number = '" & mtbPhone.Text & "'"
         Dim strStatementFax = "SELECT COUNT(*) FROM Physician WHERE Physician_Fax_Number = '" & mtbFax.Text & "'"
@@ -354,7 +356,7 @@ Public Class frmEditPhysician
     '/*********************************************************************/
 
 
-    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+    Private Sub btnSave_Click(sender As Object, e As EventArgs)
 
         Dim intActiveFlag As Integer = 1
         Dim strLastName As String = txtLastName.Text
@@ -371,7 +373,7 @@ Public Class frmEditPhysician
             'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
 
             Dim strStatement = "INSERT INTO Physician(Physician_First_Name, Physician_Middle_Name, Physician_Last_Name, Physician_Credentials, Physician_Phone_Number, Physician_Fax_Number, Physician_Address, Physician_City, Physician_State, Physician_Zip_Code, Active_Flag)" &
-            "VALUES('" & strFirstName & "','" & strMiddleName & "','" & strLastName & "','" & cmbCredentials.SelectedItem & "','" & mtbPhone.Text & "','" & mtbFax.Text & "','" & txtAddress.Text & "','" & txtCity.Text & "','" & cmbState.SelectedItem & "','" & txtZipCode.Text & "','" & intActiveFlag & "')"
+            "VALUES('" & strFirstName & "','" & strMiddleName & "','" & strLastName & "','" & cboCredentials.SelectedItem & "','" & mtbPhone.Text & "','" & mtbFax.Text & "','" & txtAddress.Text & "','" & txtCity.Text & "','" & cboState.SelectedItem & "','" & txtZipCode.Text & "','" & intActiveFlag & "')"
             ExecuteInsertQuery(strStatement)
 
 
@@ -381,7 +383,7 @@ Public Class frmEditPhysician
             Dim strFullName As String = strFirstName & " " & strLastName
 
             ' do query to return the record that was just created and return the result into the create panel method below
-            CreatePanel_Physician(flpPhysicianInfo, strNewID, strFullName, cmbCredentials.SelectedItem, "Yes")
+            CreatePanel_Physician(flpPhysicianInfo, strNewID, strFullName, cboCredentials.SelectedItem, "Yes")
 
 
 
@@ -401,7 +403,7 @@ Public Class frmEditPhysician
 
     End Sub
 
-    Private Sub txtFirst_Last_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtMiddleName.KeyPress, txtLastName.KeyPress, txtFirstName.KeyPress, txtAddress.KeyPress, txtCity.KeyPress, txtZipCode.KeyPress
+    Private Sub txtFirst_Last_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
         KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*()/.,<>=+")
     End Sub
 
@@ -524,7 +526,10 @@ Public Class frmEditPhysician
     '                                  "User.Supervisor_Flag, User.Active_Flag From User;"
     '    Fill_Table(strFillSQL)
     'End Sub
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs)
+
+
+
 
     End Sub
 
@@ -566,6 +571,27 @@ Public Class frmEditPhysician
 
             End With
         Next
+    End Sub
+
+    Private Sub btnSaveChanges_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub btnCancel_Click_1(sender As Object, e As EventArgs) Handles btnCancel.Click
+
+        txtFirstName.Text = Nothing
+        txtLastName.Text = Nothing
+        txtMiddleName.Text = Nothing
+        mtbPhone.Text = Nothing
+        mtbFax.Text = Nothing
+        txtAddress.Text = Nothing
+        txtCity.Text = Nothing
+        txtZipCode.Text = Nothing
+        txtID.Text = Nothing
+        cboCredentials.SelectedIndex = -1
+        cboState.SelectedIndex = -1
+        btnCancel.Visible = False
+
     End Sub
 
 
