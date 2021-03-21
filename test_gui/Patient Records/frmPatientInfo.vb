@@ -885,8 +885,12 @@
     '/*                                                                   */
     '/*********************************************************************/
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        If frmMain.btnAllPatients.BackColor = Color.White Then
+            frmMain.OpenChildForm(frmPatientRecords)
+        Else
+            frmMain.OpenChildForm(frmMyPatients)
+        End If
 
-        frmMain.OpenChildForm(frmPatientRecords)
 
     End Sub
 

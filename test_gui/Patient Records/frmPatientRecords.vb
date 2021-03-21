@@ -224,7 +224,7 @@
     '/*  ---            ----             ----				             */
     '/*  CK		2/6/21		 initial creation                            */
     '/********************************************************************/ 
-    Private Sub DynamicSingleClickOpenPatient(sender As Object, e As EventArgs)
+    Public Sub DynamicSingleClickOpenPatient(sender As Object, e As EventArgs)
 
         frmPatientInfo.setPatientID(sender.tag)
         ' open the patient record form of the matching patient
