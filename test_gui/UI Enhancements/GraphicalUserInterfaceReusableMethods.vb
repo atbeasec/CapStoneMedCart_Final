@@ -644,6 +644,7 @@ Module GraphicalUserInterfaceReusableMethods
 
             ' call SQL method to remove the item from the list of currently stocked items in the med cart
             '  Debug.Print("removing this inventory piece")
+            frmConfigureInventory.RemoveDrugFromDrawer(sender)
 
         ElseIf getOpenedForm().GetType() Is frmAllergies.GetType() Then
 

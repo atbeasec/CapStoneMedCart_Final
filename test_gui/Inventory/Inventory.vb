@@ -86,7 +86,7 @@
         'create dataset to hold selected values
         Dim dsDataset As New DataSet
         'create select to send to select function
-        Dim Strdatacommand As String = ("SELECT Drug_Name, Strength, Quantity, Divider_Bin FROM DrawerMedication " &
+        Dim Strdatacommand As String = ("SELECT Drug_Name, Strength, Quantity, Divider_Bin, Medication_TUID FROM DrawerMedication " &
             "INNER JOIN Medication ON Medication.Medication_ID = DrawerMedication.Medication_TUID " &
             "WHERE DrawerMedication.Drawers_TUID =" & intDrawerID & " AND DrawerMedication.Active_Flag = '1';")
 
@@ -453,6 +453,42 @@
 
     Public Sub GetAmountInsideDrawer()
 
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: RemoveDrugfromDrawer   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker  		  */   
+    '/*		         DATE CREATED: 		 3/21/2021                 */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This will update the drawerMedication active flag
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      DetermineQueryDelete_Click                                   */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*     CreateDatabase.ExecuteInsertQuery()
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */ 
+    '/* intDrawerID
+    '/* intDivider
+    '/* intMedTUID
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 RemoveDrugFromDrawer("1","1","1")  	                                  */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  AB  3/21/2021    Initial creation                    */
+    '/*********************************************************************/
+    Public Sub RemoveDrugfromDrawer(ByRef intDrawerID As Integer, ByRef intDivider As Integer, ByRef intMedTUID As Integer)
+        CreateDatabase.ExecuteInsertQuery("UPDATE DrawerMedication SET Active_Flag = '0' WHERE Drawers_TUID = '" & intDrawerID & "'  AND Divider_Bin = '" & intDivider & "' AND Medication_TUID = '" & intMedTUID & "' AND Active_Flag = '1'")
     End Sub
 End Module
 

@@ -140,7 +140,7 @@
     End Sub
 
 
-    Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal strDrugName As String, ByVal strDividerBin As String, ByVal strStrength As String, ByVal strQuantity As String)
+    Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal strDrugName As String, ByVal strDividerBin As String, ByVal strStrength As String, ByVal strQuantity As String, ByRef intMedicationTUID As Integer)
 
         Dim pnl As Panel
         pnl = New Panel
@@ -207,7 +207,7 @@
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
-
+        pnlMainPanel.Tag = intMedicationTUID
     End Sub
 
 
@@ -414,18 +414,19 @@
         Dim intDividerBin As Integer = 0
         Dim intDrawerSize As Integer = 0
         Dim intDrugQuantity As Integer = 0
+        Dim intMedicationTUID As Integer = 0
         Dim dsDrawerContents As DataSet = GetDrawerDrugs(sender.TabIndex)
         For Each dr As DataRow In dsDrawerContents.Tables(0).Rows
             strDrugName = dr(0)
             intStrength = dr(1)
             intDrugQuantity = CInt(dr(2))
             intDividerBin = dr(3)
-
+            intMedicationTUID = dr(4)
             If intDrugQuantity = 0 Then
                 ' the drawer is empty. Do nothing
             Else
                 'based on the selected drawer we will need to call the database to see what medications are in the drawers
-                CreatePanel(flpMedication, strDrugName, intDividerBin, intStrength.ToString(), intDrugQuantity.ToString())
+                CreatePanel(flpMedication, strDrugName, intDividerBin, intStrength.ToString(), intDrugQuantity.ToString(), intMedicationTUID)
             End If
         Next
         Dim size As Integer = CreateDatabase.ExecuteScalarQuery("SELECT Size FROM Drawers where Drawers_ID = " & sender.TabIndex.ToString() & ";")
@@ -508,5 +509,49 @@
         ' call code here to update the database with the txtCapacity and txtDividers information about the drawer.
         ExecuteScalarQuery("UPDATE Drawers SET Number_of_Dividers = " & CInt(txtDividers.Text) & ", Size = " & CInt(txtCapacity.Text) & "  WHERE Drawers_ID  = " & intCurrentDrawer & ";")
         Me.Refresh()
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: RemoveDrugFromDrawer   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker  		  */   
+    '/*		         DATE CREATED: 		 3/21/2021                 */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to handle the set up and gathering of variables 
+    '/*  to remove the drug from the drawermedication database
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      DetermineQueryDelete_Click                                   */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/* Inventory.RemoveDrugfromDrawer(intDrawerTUID, intDividerNumber, intMedicationTUID)  */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */          
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 RemoveDrugFromDrawer(Sender)  	                  */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  AB  3/21/2021    Initial creation                    */
+    '/*********************************************************************/
+    Public Sub RemoveDrugFromDrawer(sender As Object)
+        'get the divider number from the panel
+        Dim intDividerNumber As Integer = GetSelectedInformation(sender.parent, "lblDivider")
+        'get the medication from the panel .tag field
+        Dim intMedicationTUID As Integer = sender.parent.tag
+        'get the drawer number from the global variable
+        Dim intSelectedDrawer As Integer = intCurrentDrawer
+        ''get drawer TUID from database using selected drawer
+        Dim intDrawerTUID As Integer = CreateDatabase.ExecuteScalarQuery("Select Drawers_ID from Drawers where Drawer_Number = '" & intSelectedDrawer & "'")
+        Inventory.RemoveDrugfromDrawer(intDrawerTUID, intDividerNumber, intMedicationTUID)
+        CartInterfaceCode.OpenOneDrawer(intSelectedDrawer)
+        MessageBox.Show("Drug removed from drawer number: " & intSelectedDrawer)
     End Sub
 End Class
