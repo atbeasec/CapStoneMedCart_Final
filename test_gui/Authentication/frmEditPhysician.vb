@@ -588,9 +588,9 @@ Public Class frmEditPhysician
         txtCity.Text = Nothing
         txtZipCode.Text = Nothing
         txtID.Text = Nothing
-        cboCredentials.SelectedIndex = -1
-        cboState.SelectedIndex = -1
         btnCancel.Visible = False
+        cboCredentials.ResetText()
+        cboState.ResetText()
 
     End Sub
 
