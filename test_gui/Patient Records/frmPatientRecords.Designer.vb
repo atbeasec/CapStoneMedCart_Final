@@ -190,6 +190,7 @@ Partial Class frmPatientRecords
         Me.txtSearch.Location = New System.Drawing.Point(1, 1)
         Me.txtSearch.Multiline = True
         Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.ShortcutsEnabled = False
         Me.txtSearch.Size = New System.Drawing.Size(431, 29)
         Me.txtSearch.TabIndex = 1
         Me.txtSearch.Tag = "Search Patients"

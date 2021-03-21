@@ -241,6 +241,7 @@ Partial Class frmAdHockDispense
         Me.txtQuantity.MaxLength = 4
         Me.txtQuantity.Multiline = True
         Me.txtQuantity.Name = "txtQuantity"
+        Me.txtQuantity.ShortcutsEnabled = False
         Me.txtQuantity.Size = New System.Drawing.Size(65, 26)
         Me.txtQuantity.TabIndex = 38
         Me.txtQuantity.Text = "1"
@@ -254,6 +255,7 @@ Partial Class frmAdHockDispense
         Me.txtStrength.MaxLength = 9
         Me.txtStrength.Name = "txtStrength"
         Me.txtStrength.ReadOnly = True
+        Me.txtStrength.ShortcutsEnabled = False
         Me.txtStrength.Size = New System.Drawing.Size(293, 25)
         Me.txtStrength.TabIndex = 218
         '
@@ -266,6 +268,7 @@ Partial Class frmAdHockDispense
         Me.txtType.MaxLength = 9
         Me.txtType.Name = "txtType"
         Me.txtType.ReadOnly = True
+        Me.txtType.ShortcutsEnabled = False
         Me.txtType.Size = New System.Drawing.Size(321, 25)
         Me.txtType.TabIndex = 219
         '
@@ -288,6 +291,7 @@ Partial Class frmAdHockDispense
         Me.txtDrawerBin.MaxLength = 9
         Me.txtDrawerBin.Name = "txtDrawerBin"
         Me.txtDrawerBin.ReadOnly = True
+        Me.txtDrawerBin.ShortcutsEnabled = False
         Me.txtDrawerBin.Size = New System.Drawing.Size(293, 25)
         Me.txtDrawerBin.TabIndex = 221
         '
@@ -300,6 +304,7 @@ Partial Class frmAdHockDispense
         Me.txtMRN.MaxLength = 9
         Me.txtMRN.Name = "txtMRN"
         Me.txtMRN.ReadOnly = True
+        Me.txtMRN.ShortcutsEnabled = False
         Me.txtMRN.Size = New System.Drawing.Size(294, 25)
         Me.txtMRN.TabIndex = 222
         '
@@ -312,6 +317,7 @@ Partial Class frmAdHockDispense
         Me.txtDateOfBirth.MaxLength = 9
         Me.txtDateOfBirth.Name = "txtDateOfBirth"
         Me.txtDateOfBirth.ReadOnly = True
+        Me.txtDateOfBirth.ShortcutsEnabled = False
         Me.txtDateOfBirth.Size = New System.Drawing.Size(322, 25)
         Me.txtDateOfBirth.TabIndex = 223
         '
@@ -324,6 +330,7 @@ Partial Class frmAdHockDispense
         Me.txtRoomBed.MaxLength = 9
         Me.txtRoomBed.Name = "txtRoomBed"
         Me.txtRoomBed.ReadOnly = True
+        Me.txtRoomBed.ShortcutsEnabled = False
         Me.txtRoomBed.Size = New System.Drawing.Size(294, 25)
         Me.txtRoomBed.TabIndex = 225
         '

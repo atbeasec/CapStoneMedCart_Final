@@ -37,6 +37,7 @@ Partial Class frmResolve
         Me.txtResolved.Location = New System.Drawing.Point(11, 85)
         Me.txtResolved.Multiline = True
         Me.txtResolved.Name = "txtResolved"
+        Me.txtResolved.ShortcutsEnabled = False
         Me.txtResolved.Size = New System.Drawing.Size(358, 119)
         Me.txtResolved.TabIndex = 0
         '

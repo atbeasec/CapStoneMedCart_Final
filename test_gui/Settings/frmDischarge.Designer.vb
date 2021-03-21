@@ -36,6 +36,8 @@ Partial Class frmDischarge
         Me.radDischarge = New System.Windows.Forms.RadioButton()
         Me.radAdmitPatient = New System.Windows.Forms.RadioButton()
         Me.pnlInformation = New System.Windows.Forms.Panel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.txtPhone = New System.Windows.Forms.MaskedTextBox()
         Me.pnlAdmitRoomBed = New System.Windows.Forms.Panel()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.cboRoomandBed = New System.Windows.Forms.ComboBox()
@@ -67,17 +69,15 @@ Partial Class frmDischarge
         Me.txtPhysician = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.txtPhone = New System.Windows.Forms.MaskedTextBox()
         Me.Panel3.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.pnlDischarge.SuspendLayout()
         Me.pnlAdmit.SuspendLayout()
         Me.pnlRadioButtons.SuspendLayout()
         Me.pnlInformation.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.pnlAdmitRoomBed.SuspendLayout()
         Me.pnlDischargeRoomBed.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label8
@@ -263,6 +263,29 @@ Partial Class frmDischarge
         Me.pnlInformation.Name = "pnlInformation"
         Me.pnlInformation.Size = New System.Drawing.Size(907, 259)
         Me.pnlInformation.TabIndex = 116
+        '
+        'Panel2
+        '
+        Me.Panel2.BackColor = System.Drawing.Color.White
+        Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.txtPhone)
+        Me.Panel2.ForeColor = System.Drawing.Color.DarkGray
+        Me.Panel2.Location = New System.Drawing.Point(749, 103)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel2.Size = New System.Drawing.Size(148, 27)
+        Me.Panel2.TabIndex = 121
+        '
+        'txtPhone
+        '
+        Me.txtPhone.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtPhone.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtPhone.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.txtPhone.Location = New System.Drawing.Point(1, 1)
+        Me.txtPhone.Mask = "(999) 000-0000"
+        Me.txtPhone.Name = "txtPhone"
+        Me.txtPhone.Size = New System.Drawing.Size(144, 22)
+        Me.txtPhone.TabIndex = 15
         '
         'pnlAdmitRoomBed
         '
@@ -610,29 +633,6 @@ Partial Class frmDischarge
         Me.Label11.TabIndex = 68
         Me.Label11.Text = "DOB:"
         '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.Color.White
-        Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel2.Controls.Add(Me.txtPhone)
-        Me.Panel2.ForeColor = System.Drawing.Color.DarkGray
-        Me.Panel2.Location = New System.Drawing.Point(749, 103)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel2.Size = New System.Drawing.Size(148, 27)
-        Me.Panel2.TabIndex = 121
-        '
-        'txtPhone
-        '
-        Me.txtPhone.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtPhone.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtPhone.Font = New System.Drawing.Font("Segoe UI", 12.0!)
-        Me.txtPhone.Location = New System.Drawing.Point(1, 1)
-        Me.txtPhone.Mask = "(999) 000-0000"
-        Me.txtPhone.Name = "txtPhone"
-        Me.txtPhone.Size = New System.Drawing.Size(144, 22)
-        Me.txtPhone.TabIndex = 15
-        '
         'frmDischarge
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -655,12 +655,12 @@ Partial Class frmDischarge
         Me.pnlRadioButtons.PerformLayout()
         Me.pnlInformation.ResumeLayout(False)
         Me.pnlInformation.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.pnlAdmitRoomBed.ResumeLayout(False)
         Me.pnlAdmitRoomBed.PerformLayout()
         Me.pnlDischargeRoomBed.ResumeLayout(False)
         Me.pnlDischargeRoomBed.PerformLayout()
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub

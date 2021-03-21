@@ -157,4 +157,8 @@
 
         txtDateOfBirth.Text = truncatedDate
     End Sub
+
+    Private Sub txtStrength_TextChanged(sender As Object, e As EventArgs) Handles txtStrength.TextChanged
+
+    End Sub
 End Class

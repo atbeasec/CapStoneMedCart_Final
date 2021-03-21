@@ -93,6 +93,7 @@ Partial Class frmConfiguration
         Me.txtUsername.Location = New System.Drawing.Point(1, 1)
         Me.txtUsername.Multiline = True
         Me.txtUsername.Name = "txtUsername"
+        Me.txtUsername.ShortcutsEnabled = False
         Me.txtUsername.Size = New System.Drawing.Size(225, 26)
         Me.txtUsername.TabIndex = 38
         '
@@ -130,6 +131,7 @@ Partial Class frmConfiguration
         Me.txtConfirmPassword.Multiline = True
         Me.txtConfirmPassword.Name = "txtConfirmPassword"
         Me.txtConfirmPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
+        Me.txtConfirmPassword.ShortcutsEnabled = False
         Me.txtConfirmPassword.Size = New System.Drawing.Size(222, 26)
         Me.txtConfirmPassword.TabIndex = 38
         '
@@ -167,6 +169,7 @@ Partial Class frmConfiguration
         Me.txtPassword.Multiline = True
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
+        Me.txtPassword.ShortcutsEnabled = False
         Me.txtPassword.Size = New System.Drawing.Size(223, 26)
         Me.txtPassword.TabIndex = 38
         '
@@ -263,6 +266,7 @@ Partial Class frmConfiguration
         Me.txtBarcode.Location = New System.Drawing.Point(1, 1)
         Me.txtBarcode.Multiline = True
         Me.txtBarcode.Name = "txtBarcode"
+        Me.txtBarcode.ShortcutsEnabled = False
         Me.txtBarcode.Size = New System.Drawing.Size(224, 26)
         Me.txtBarcode.TabIndex = 38
         '
@@ -295,6 +299,7 @@ Partial Class frmConfiguration
         Me.txtLastName.Location = New System.Drawing.Point(1, 1)
         Me.txtLastName.Multiline = True
         Me.txtLastName.Name = "txtLastName"
+        Me.txtLastName.ShortcutsEnabled = False
         Me.txtLastName.Size = New System.Drawing.Size(284, 26)
         Me.txtLastName.TabIndex = 38
         '
@@ -316,6 +321,7 @@ Partial Class frmConfiguration
         Me.txtFirstName.Location = New System.Drawing.Point(1, 1)
         Me.txtFirstName.Multiline = True
         Me.txtFirstName.Name = "txtFirstName"
+        Me.txtFirstName.ShortcutsEnabled = False
         Me.txtFirstName.Size = New System.Drawing.Size(284, 26)
         Me.txtFirstName.TabIndex = 38
         '
@@ -524,6 +530,7 @@ Partial Class frmConfiguration
         Me.txtSearchBox.Location = New System.Drawing.Point(1, 1)
         Me.txtSearchBox.Multiline = True
         Me.txtSearchBox.Name = "txtSearchBox"
+        Me.txtSearchBox.ShortcutsEnabled = False
         Me.txtSearchBox.Size = New System.Drawing.Size(431, 29)
         Me.txtSearchBox.TabIndex = 1
         Me.txtSearchBox.Tag = "Search Users"

@@ -222,6 +222,7 @@ Partial Class frmPharmacy
         Me.txtPatientDOB.Multiline = True
         Me.txtPatientDOB.Name = "txtPatientDOB"
         Me.txtPatientDOB.ReadOnly = True
+        Me.txtPatientDOB.ShortcutsEnabled = False
         Me.txtPatientDOB.Size = New System.Drawing.Size(117, 26)
         Me.txtPatientDOB.TabIndex = 38
         Me.txtPatientDOB.TabStop = False
@@ -313,6 +314,7 @@ Partial Class frmPharmacy
         Me.txtType.Multiline = True
         Me.txtType.Name = "txtType"
         Me.txtType.ReadOnly = True
+        Me.txtType.ShortcutsEnabled = False
         Me.txtType.Size = New System.Drawing.Size(240, 26)
         Me.txtType.TabIndex = 38
         Me.txtType.TabStop = False

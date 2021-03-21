@@ -196,6 +196,7 @@ Partial Class frmDispense
         '
         'cmbMedications
         '
+        Me.cmbMedications.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbMedications.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbMedications.FormattingEnabled = True
         Me.cmbMedications.Items.AddRange(New Object() {"Yes", "No"})
@@ -226,6 +227,7 @@ Partial Class frmDispense
         '
         'cmbDosage
         '
+        Me.cmbDosage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbDosage.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbDosage.FormattingEnabled = True
         Me.cmbDosage.Items.AddRange(New Object() {"Yes", "No"})
@@ -246,6 +248,7 @@ Partial Class frmDispense
         '
         'cmbMethod
         '
+        Me.cmbMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbMethod.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbMethod.FormattingEnabled = True
         Me.cmbMethod.Items.AddRange(New Object() {"Yes", "No"})
@@ -358,6 +361,7 @@ Partial Class frmDispense
         Me.txtPatientMRN.Location = New System.Drawing.Point(1, 1)
         Me.txtPatientMRN.Name = "txtPatientMRN"
         Me.txtPatientMRN.ReadOnly = True
+        Me.txtPatientMRN.ShortcutsEnabled = False
         Me.txtPatientMRN.Size = New System.Drawing.Size(239, 22)
         Me.txtPatientMRN.TabIndex = 6
         Me.txtPatientMRN.TabStop = False
@@ -382,6 +386,7 @@ Partial Class frmDispense
         Me.txtDOB.MaxLength = 10
         Me.txtDOB.Name = "txtDOB"
         Me.txtDOB.ReadOnly = True
+        Me.txtDOB.ShortcutsEnabled = False
         Me.txtDOB.Size = New System.Drawing.Size(227, 22)
         Me.txtDOB.TabIndex = 6
         Me.txtDOB.TabStop = False
@@ -405,6 +410,7 @@ Partial Class frmDispense
         Me.txtPatientLastName.Location = New System.Drawing.Point(1, 1)
         Me.txtPatientLastName.Name = "txtPatientLastName"
         Me.txtPatientLastName.ReadOnly = True
+        Me.txtPatientLastName.ShortcutsEnabled = False
         Me.txtPatientLastName.Size = New System.Drawing.Size(188, 22)
         Me.txtPatientLastName.TabIndex = 6
         Me.txtPatientLastName.TabStop = False
@@ -428,6 +434,7 @@ Partial Class frmDispense
         Me.txtPatientFirstName.Location = New System.Drawing.Point(1, 1)
         Me.txtPatientFirstName.Name = "txtPatientFirstName"
         Me.txtPatientFirstName.ReadOnly = True
+        Me.txtPatientFirstName.ShortcutsEnabled = False
         Me.txtPatientFirstName.Size = New System.Drawing.Size(192, 22)
         Me.txtPatientFirstName.TabIndex = 6
         Me.txtPatientFirstName.TabStop = False
@@ -480,6 +487,7 @@ Partial Class frmDispense
         Me.txtQuantity.Location = New System.Drawing.Point(1, 1)
         Me.txtQuantity.Multiline = True
         Me.txtQuantity.Name = "txtQuantity"
+        Me.txtQuantity.ShortcutsEnabled = False
         Me.txtQuantity.Size = New System.Drawing.Size(51, 26)
         Me.txtQuantity.TabIndex = 38
         Me.txtQuantity.Text = "1"

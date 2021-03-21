@@ -355,6 +355,7 @@ Partial Class frmConfigureRooms
         Me.txtBed.Location = New System.Drawing.Point(1, 1)
         Me.txtBed.Multiline = True
         Me.txtBed.Name = "txtBed"
+        Me.txtBed.ShortcutsEnabled = False
         Me.txtBed.Size = New System.Drawing.Size(173, 26)
         Me.txtBed.TabIndex = 38
         '
@@ -376,6 +377,7 @@ Partial Class frmConfigureRooms
         Me.txtRoom.Location = New System.Drawing.Point(1, 1)
         Me.txtRoom.Multiline = True
         Me.txtRoom.Name = "txtRoom"
+        Me.txtRoom.ShortcutsEnabled = False
         Me.txtRoom.Size = New System.Drawing.Size(173, 26)
         Me.txtRoom.TabIndex = 1
         '
