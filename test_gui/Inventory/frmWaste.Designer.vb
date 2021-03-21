@@ -236,7 +236,7 @@ Partial Class frmWaste
         Me.btnBack.ForeColor = System.Drawing.Color.White
         Me.btnBack.Image = CType(resources.GetObject("btnBack.Image"), System.Drawing.Image)
         Me.btnBack.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnBack.Location = New System.Drawing.Point(17, 0)
+        Me.btnBack.Location = New System.Drawing.Point(14, 6)
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(89, 37)
         Me.btnBack.TabIndex = 61
