@@ -49,6 +49,7 @@ Partial Class frmWitnessSignOff
         Me.TextBox2.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox2.Location = New System.Drawing.Point(38, 48)
         Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.ShortcutsEnabled = False
         Me.TextBox2.Size = New System.Drawing.Size(285, 27)
         Me.TextBox2.TabIndex = 30
         '

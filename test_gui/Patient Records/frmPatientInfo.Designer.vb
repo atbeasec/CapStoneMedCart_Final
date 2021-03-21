@@ -213,6 +213,7 @@ Partial Class frmPatientInfo
         '
         'cboState
         '
+        Me.cboState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboState.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboState.FormattingEnabled = True
         Me.cboState.Location = New System.Drawing.Point(567, 150)
@@ -296,6 +297,7 @@ Partial Class frmPatientInfo
         '
         'cboBed
         '
+        Me.cboBed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboBed.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboBed.FormattingEnabled = True
         Me.cboBed.Location = New System.Drawing.Point(198, 91)
@@ -305,6 +307,7 @@ Partial Class frmPatientInfo
         '
         'cboRoom
         '
+        Me.cboRoom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboRoom.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboRoom.FormattingEnabled = True
         Me.cboRoom.Location = New System.Drawing.Point(14, 91)
@@ -436,6 +439,7 @@ Partial Class frmPatientInfo
         Me.txtWeight.MaxLength = 5
         Me.txtWeight.Name = "txtWeight"
         Me.txtWeight.ReadOnly = True
+        Me.txtWeight.ShortcutsEnabled = False
         Me.txtWeight.Size = New System.Drawing.Size(148, 25)
         Me.txtWeight.TabIndex = 5
         '

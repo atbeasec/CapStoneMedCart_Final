@@ -86,6 +86,7 @@ Partial Class frmNewNurse
         Me.TextBox23.Location = New System.Drawing.Point(1, 1)
         Me.TextBox23.Multiline = True
         Me.TextBox23.Name = "TextBox23"
+        Me.TextBox23.ShortcutsEnabled = False
         Me.TextBox23.Size = New System.Drawing.Size(197, 26)
         Me.TextBox23.TabIndex = 38
         '
@@ -131,6 +132,7 @@ Partial Class frmNewNurse
         Me.TextBox7.Location = New System.Drawing.Point(1, 1)
         Me.TextBox7.Multiline = True
         Me.TextBox7.Name = "TextBox7"
+        Me.TextBox7.ShortcutsEnabled = False
         Me.TextBox7.Size = New System.Drawing.Size(197, 26)
         Me.TextBox7.TabIndex = 38
         '
@@ -152,6 +154,7 @@ Partial Class frmNewNurse
         Me.TextBox1.Location = New System.Drawing.Point(1, 1)
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.ShortcutsEnabled = False
         Me.TextBox1.Size = New System.Drawing.Size(197, 26)
         Me.TextBox1.TabIndex = 38
         '
@@ -395,7 +398,7 @@ Partial Class frmNewNurse
         Me.CheckBox8.Text = "Edit Medications"
         Me.CheckBox8.UseVisualStyleBackColor = True
         '
-        'NewNurse
+        'frmNewNurse
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -428,7 +431,7 @@ Partial Class frmNewNurse
         Me.Controls.Add(Me.TextBox15)
         Me.Controls.Add(Me.TextBox12)
         Me.Controls.Add(Me.Panel1)
-        Me.Name = "NewNurse"
+        Me.Name = "frmNewNurse"
         Me.Text = "NewNurse"
         Me.Panel9.ResumeLayout(False)
         Me.Panel9.PerformLayout()

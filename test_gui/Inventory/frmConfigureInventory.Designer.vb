@@ -627,6 +627,7 @@ Partial Class frmConfigureInventory
         Me.txtDividers.MaxLength = 2
         Me.txtDividers.Multiline = True
         Me.txtDividers.Name = "txtDividers"
+        Me.txtDividers.ShortcutsEnabled = False
         Me.txtDividers.Size = New System.Drawing.Size(62, 26)
         Me.txtDividers.TabIndex = 38
         '
@@ -679,6 +680,7 @@ Partial Class frmConfigureInventory
         Me.txtCapacity.MaxLength = 2
         Me.txtCapacity.Multiline = True
         Me.txtCapacity.Name = "txtCapacity"
+        Me.txtCapacity.ShortcutsEnabled = False
         Me.txtCapacity.Size = New System.Drawing.Size(66, 26)
         Me.txtCapacity.TabIndex = 38
         '

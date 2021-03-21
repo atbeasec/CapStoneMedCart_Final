@@ -49,6 +49,8 @@ Partial Class frmInventory
         Me.Label3 = New System.Windows.Forms.Label()
         Me.pnlMainLocation = New System.Windows.Forms.Panel()
         Me.pnlMainFormFields = New System.Windows.Forms.Panel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.mtbExpirationDate = New System.Windows.Forms.MaskedTextBox()
         Me.cmbDrawerNumber = New System.Windows.Forms.ComboBox()
         Me.Panel8 = New System.Windows.Forms.Panel()
         Me.txtBarcode = New System.Windows.Forms.TextBox()
@@ -77,14 +79,13 @@ Partial Class frmInventory
         Me.pnlHeader = New System.Windows.Forms.Panel()
         Me.btnBack = New System.Windows.Forms.Button()
         Me.tpSelectedItem = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.mtbExpirationDate = New System.Windows.Forms.MaskedTextBox()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.pnlMainLocation.SuspendLayout()
         Me.pnlMainFormFields.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.Panel8.SuspendLayout()
         Me.Panel7.SuspendLayout()
         Me.Panel6.SuspendLayout()
@@ -94,7 +95,6 @@ Partial Class frmInventory
         Me.pnlPatientNamePadding.SuspendLayout()
         CType(Me.eprError, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlHeader.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label10
@@ -239,6 +239,7 @@ Partial Class frmInventory
         'cboPersonalMedication
         '
         Me.cboPersonalMedication.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cboPersonalMedication.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboPersonalMedication.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cboPersonalMedication.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboPersonalMedication.FormattingEnabled = True
@@ -359,6 +360,7 @@ Partial Class frmInventory
         Me.txtQuantity.MaxLength = 4
         Me.txtQuantity.Multiline = True
         Me.txtQuantity.Name = "txtQuantity"
+        Me.txtQuantity.ShortcutsEnabled = False
         Me.txtQuantity.Size = New System.Drawing.Size(47, 25)
         Me.txtQuantity.TabIndex = 15
         Me.txtQuantity.Text = "1"
@@ -433,6 +435,30 @@ Partial Class frmInventory
         Me.pnlMainFormFields.Size = New System.Drawing.Size(726, 411)
         Me.pnlMainFormFields.TabIndex = 189
         '
+        'Panel2
+        '
+        Me.Panel2.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel2.Controls.Add(Me.mtbExpirationDate)
+        Me.Panel2.ForeColor = System.Drawing.Color.DarkGray
+        Me.Panel2.Location = New System.Drawing.Point(493, 220)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel2.Size = New System.Drawing.Size(92, 24)
+        Me.Panel2.TabIndex = 10
+        '
+        'mtbExpirationDate
+        '
+        Me.mtbExpirationDate.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.mtbExpirationDate.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.mtbExpirationDate.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.mtbExpirationDate.Location = New System.Drawing.Point(1, 1)
+        Me.mtbExpirationDate.Mask = "00/00/0000"
+        Me.mtbExpirationDate.Name = "mtbExpirationDate"
+        Me.mtbExpirationDate.ShortcutsEnabled = False
+        Me.mtbExpirationDate.Size = New System.Drawing.Size(90, 22)
+        Me.mtbExpirationDate.TabIndex = 10
+        Me.mtbExpirationDate.ValidatingType = GetType(Date)
+        '
         'cmbDrawerNumber
         '
         Me.cmbDrawerNumber.BackColor = System.Drawing.SystemColors.Window
@@ -466,6 +492,7 @@ Partial Class frmInventory
         Me.txtBarcode.Margin = New System.Windows.Forms.Padding(2)
         Me.txtBarcode.Multiline = True
         Me.txtBarcode.Name = "txtBarcode"
+        Me.txtBarcode.ShortcutsEnabled = False
         Me.txtBarcode.Size = New System.Drawing.Size(173, 23)
         Me.txtBarcode.TabIndex = 9
         '
@@ -509,6 +536,7 @@ Partial Class frmInventory
         Me.txtType.Location = New System.Drawing.Point(1, 1)
         Me.txtType.Multiline = True
         Me.txtType.Name = "txtType"
+        Me.txtType.ShortcutsEnabled = False
         Me.txtType.Size = New System.Drawing.Size(173, 23)
         Me.txtType.TabIndex = 8
         '
@@ -544,6 +572,7 @@ Partial Class frmInventory
         Me.txtSchedule.Location = New System.Drawing.Point(1, 1)
         Me.txtSchedule.Multiline = True
         Me.txtSchedule.Name = "txtSchedule"
+        Me.txtSchedule.ShortcutsEnabled = False
         Me.txtSchedule.Size = New System.Drawing.Size(174, 21)
         Me.txtSchedule.TabIndex = 6
         '
@@ -566,6 +595,7 @@ Partial Class frmInventory
         Me.txtStrength.Location = New System.Drawing.Point(1, 1)
         Me.txtStrength.Multiline = True
         Me.txtStrength.Name = "txtStrength"
+        Me.txtStrength.ShortcutsEnabled = False
         Me.txtStrength.Size = New System.Drawing.Size(165, 23)
         Me.txtStrength.TabIndex = 7
         '
@@ -601,6 +631,7 @@ Partial Class frmInventory
         Me.txtSearch.Location = New System.Drawing.Point(1, 1)
         Me.txtSearch.Multiline = True
         Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.ShortcutsEnabled = False
         Me.txtSearch.Size = New System.Drawing.Size(612, 23)
         Me.txtSearch.TabIndex = 1
         Me.txtSearch.Tag = "Search Medication by Name"
@@ -694,6 +725,7 @@ Partial Class frmInventory
         'cmbPatientNames
         '
         Me.cmbPatientNames.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cmbPatientNames.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbPatientNames.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cmbPatientNames.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbPatientNames.FormattingEnabled = True
@@ -735,29 +767,6 @@ Partial Class frmInventory
         Me.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnBack.UseVisualStyleBackColor = False
         '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel2.Controls.Add(Me.mtbExpirationDate)
-        Me.Panel2.ForeColor = System.Drawing.Color.DarkGray
-        Me.Panel2.Location = New System.Drawing.Point(493, 220)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel2.Size = New System.Drawing.Size(92, 24)
-        Me.Panel2.TabIndex = 10
-        '
-        'mtbExpirationDate
-        '
-        Me.mtbExpirationDate.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.mtbExpirationDate.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.mtbExpirationDate.Font = New System.Drawing.Font("Segoe UI", 12.0!)
-        Me.mtbExpirationDate.Location = New System.Drawing.Point(1, 1)
-        Me.mtbExpirationDate.Mask = "00/00/0000"
-        Me.mtbExpirationDate.Name = "mtbExpirationDate"
-        Me.mtbExpirationDate.Size = New System.Drawing.Size(90, 22)
-        Me.mtbExpirationDate.TabIndex = 10
-        Me.mtbExpirationDate.ValidatingType = GetType(Date)
-        '
         'frmInventory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -777,6 +786,8 @@ Partial Class frmInventory
         Me.pnlMainLocation.ResumeLayout(False)
         Me.pnlMainFormFields.ResumeLayout(False)
         Me.pnlMainFormFields.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.Panel8.ResumeLayout(False)
         Me.Panel8.PerformLayout()
         Me.Panel7.ResumeLayout(False)
@@ -792,8 +803,6 @@ Partial Class frmInventory
         Me.pnlPatientNamePadding.ResumeLayout(False)
         CType(Me.eprError, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlHeader.ResumeLayout(False)
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
