@@ -76,9 +76,10 @@
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
-    '/*  WHO   WHEN     WHAT								   */             
-    '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
+    '/*  WHO        WHEN        WHAT								      */             
+    '/*  ---        ----        ------------------------------------------*/
+    '/*  Eric L.    03/16/21    Initial creation of code                  */  
+    '/*  BRH        03/21/21    Add narcotics wasted, 
     '/*********************************************************************/
     Private Sub PopulateReportsList()
 
@@ -86,12 +87,14 @@
         Const STRDISPENSINGHISTORY As String = "Dispensed Medications"
         Const STRADHOCORDERS As String = "Ad Hoc Orders"
         Const STRNARCOTICSDISPENSED As String = "Narcotics Dispensed"
+        Const STRNARCOTICSWASTED As String = "Narcotics Wasted"
         Const STROVERRIDES As String = "Overrides"
 
         cmbReports.Items.Add(STRDISCREPANCIES)
         cmbReports.Items.Add(STRDISPENSINGHISTORY)
         cmbReports.Items.Add(STRADHOCORDERS)
         cmbReports.Items.Add(STRNARCOTICSDISPENSED)
+        cmbReports.Items.Add(STRNARCOTICSWASTED)
         cmbReports.Items.Add(STROVERRIDES)
 
     End Sub
