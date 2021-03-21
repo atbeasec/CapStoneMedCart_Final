@@ -451,7 +451,7 @@
             e.KeyChar = ChrW(0)
             e.Handled = True
             Dim strFillSQL As String = "select Patient.MRN_Number, Patient.Patient_First_Name, " &
-                                   "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name from Patient LEFT JOIN " &
+                                   "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
                                    "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1 AND " &
                                    "(Patient_First_Name Like '" & txtSearch.Text & "%' OR Patient_Last_Name Like '" & txtSearch.Text & "%'" &
                                    "OR MRN_Number like '" & txtSearch.Text & "%') ORDER BY Patient.Patient_Last_Name ASC;"
@@ -496,7 +496,7 @@
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
         Dim strFillSQL As String = "select Patient.MRN_Number, Patient.Patient_First_Name, " &
-                                           "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name from Patient LEFT JOIN " &
+                                           "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
                                            "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1 AND " &
                                            "(Patient_First_Name Like '" & txtSearch.Text & "%' OR Patient_Last_Name Like '" & txtSearch.Text & "%'" &
                                            "OR MRN_Number like '" & txtSearch.Text & "%') ORDER BY Patient.Patient_Last_Name ASC;"
