@@ -45,10 +45,11 @@
         Adhoc = 0
         Discrepancies = 1
         DispensedMeds = 2
-        DispensedNarc = 3
-        WastedNarc = 4
-        Override = 5
-        Wastes = 6
+        NarcAdhoc = 3
+        DispensedNarc = 4
+        WastedNarc = 5
+        Override = 6
+        Wastes = 7
     End Enum
 
     '/*********************************************************************/
@@ -126,13 +127,25 @@
                             INNER JOIN DrawerMedication ON DrawerMedication_TUID = DrawerMedication_ID
                             INNER JOIN Drawers ON DrawerMedication.Drawers_TUID = Drawers.Drawers_ID"
 
+
             Case Reports.Discrepancies  'strReport = "Discrepancies"
+                strSQLCmd = "SELECT * FROM Discrepancies"
 
             'If the dispensed medication report is selected
             Case Reports.DispensedMeds ' strReport = "Dispensed Meds"
                 'Select all drugs and store their dispensing information
                 strSQLCmd = "SELECT Drug_Name, Type, Strength, Amount_Dispensed, DateTime_Dispensed, Expiration_Date FROM DrawerMedication INNER JOIN 
                             Medication INNER JOIN Dispensing WHERE DrawerMedication.Medication_TUID = Medication_ID AND DrawerMedication_TUID = DrawerMedication_ID"
+
+            Case Reports.NarcAdhoc
+                strSQLCmd = "SELECT Medication.Drug_Name, Drawers.Drawer_Number, DrawerMedication.Divider_Bin, Patient.Patient_First_Name, Patient.Patient_Middle_Name, 
+                            Patient.Patient_Last_Name, User.Username, AdHocOrder.Amount FROM AdHocOrder 
+                            INNER JOIN Medication ON AdHocOrder.Medication_TUID = Medication_ID
+                            INNER JOIN Patient ON Patient_TUID = Patient_ID
+                            INNER JOIN User ON User_TUID = User_ID
+                            INNER JOIN DrawerMedication ON DrawerMedication_TUID = DrawerMedication_ID
+                            INNER JOIN Drawers ON DrawerMedication.Drawers_TUID = Drawers.Drawers_ID
+                            WHERE NarcoticControlled_Flag = 1"
 
             'If the dispensed narcotics report is selected
             Case Reports.DispensedNarc  'strReport = "Dispensed Narcotics"
@@ -156,6 +169,8 @@
                             INNER JOIN Drawers ON DrawerMedication.Drawers_TUID = Drawers_ID WHERE Medication.NarcoticControlled_Flag = 1"
 
             Case Reports.Override  'strReport = "Overrides"
+                'Placeholder SQL so selecting Override won't break the program
+                strSQLCmd = "SELECT * FROM AllergyOverride"
 
             Case Reports.Wastes
                 strSQLCmd = "SELECT u1.Username, u2.Username, Medication.Drug_Name, Drawers.Drawer_Number, 
@@ -309,7 +324,7 @@
                 frmReport.dgvReport.Rows.Add(lstOfDataValues.Item(i), lstOfDataValues.Item(i + 1), lstOfDataValues.Item(i + 2), lstOfDataValues.Item(i + 3),
                                              lstOfDataValues.Item(i + 4), lstOfDataValues.Item(i + 5), lstOfDataValues.Item(i + 6), lstOfDataValues.Item(i + 7))
             Next
-        ElseIf frmReport.cmbReports.SelectedItem.Equals("Ad Hoc Orders") Then
+        ElseIf frmReport.cmbReports.SelectedItem.Equals("Ad Hoc Orders") Or frmReport.cmbReports.SelectedItem.Equals("Narcotic Ad Hoc Orders") Then
             frmReport.dgvReport.Columns.Add(1, "Drug Name")
             frmReport.dgvReport.Columns.Add(2, "Drawer Number")
             frmReport.dgvReport.Columns.Add(3, "Drawer Bin")
