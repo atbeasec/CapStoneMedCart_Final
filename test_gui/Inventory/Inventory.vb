@@ -455,7 +455,7 @@
 
     End Sub
 
-    Public Sub RemoveDrugfromDrawer(ByRef intDrawerID As Integer)
+    Public Sub RemoveDrugfromDrawer(ByRef intDrawerID As Integer, ByRef intDivider As Integer, ByRef intMedTUID As Integer)
 
     End Sub
 End Module
