@@ -1,6 +1,6 @@
 ﻿Public Class frmMyPatients
     Private Sub frmMyPatients_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        rdbShowAll.Checked = True
+        'rdbShowAll.Checked = True
         LoadPanel()
 
     End Sub
@@ -28,9 +28,9 @@
 
             strUserLast = row(1)
             Next
-            txtPhysician.Text = (strUserFirst + " " + strUserLast + ", " + UserID.ToString())
-        If rdbShowAll.Checked = True Then
-            dsPatientUser = CreateDatabase.ExecuteSelectQuery("Select * From PatientUser Where User_TUID =" & UserID.ToString & ";")
+        '  txtPhysician.Text = (strUserFirst + " " + strUserLast + ", " + UserID.ToString())
+        '  If rdbShowAll.Checked = True Then
+        dsPatientUser = CreateDatabase.ExecuteSelectQuery("Select * From PatientUser Where User_TUID =" & UserID.ToString & ";")
             For Each row As DataRow In dsPatientUser.Tables(0).Rows
                 intPatientID = row(0)
                 strVisitDate = row(2)
@@ -51,7 +51,7 @@
                 Debug.WriteLine("")
 
             Next
-        ElseIf rdbOnlyActive.Checked = True Then
+            '  ElseIf rdbOnlyActive.Checked = True Then
             dsPatientUser = CreateDatabase.ExecuteSelectQuery("Select * From PatientUser Where User_TUID =" & UserID.ToString & " AND Active_Flag = 1 ;")
             For Each row As DataRow In dsPatientUser.Tables(0).Rows
                 intPatientID = row(0)
@@ -73,13 +73,15 @@
                 Debug.WriteLine("")
 
             Next
-        End If
+        '  End If
 
 
     End Sub
 
     Private Sub rdbOnlyActive_CheckedChanged(sender As Object, e As EventArgs)
         flpMyPatientRecords.Controls.Clear()
-        LoadPanel()
+        '  LoadPanel()
     End Sub
+
+
 End Class

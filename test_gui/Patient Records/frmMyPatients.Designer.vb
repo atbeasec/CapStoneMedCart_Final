@@ -39,6 +39,7 @@ Partial Class frmMyPatients
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.cmbFilter = New System.Windows.Forms.ComboBox()
         Me.lblFilter = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.pnlHeaderPatientRecords.SuspendLayout()
         Me.Panel9.SuspendLayout()
         Me.pnlSearch.SuspendLayout()
@@ -52,7 +53,7 @@ Partial Class frmMyPatients
         Me.flpMyPatientRecords.BackColor = System.Drawing.Color.White
         Me.flpMyPatientRecords.Location = New System.Drawing.Point(15, 120)
         Me.flpMyPatientRecords.Name = "flpMyPatientRecords"
-        Me.flpMyPatientRecords.Size = New System.Drawing.Size(950, 543)
+        Me.flpMyPatientRecords.Size = New System.Drawing.Size(1064, 543)
         Me.flpMyPatientRecords.TabIndex = 20
         '
         'pnlHeaderPatientRecords
@@ -64,7 +65,7 @@ Partial Class frmMyPatients
         Me.pnlHeaderPatientRecords.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlHeaderPatientRecords.Location = New System.Drawing.Point(0, 0)
         Me.pnlHeaderPatientRecords.Name = "pnlHeaderPatientRecords"
-        Me.pnlHeaderPatientRecords.Size = New System.Drawing.Size(976, 61)
+        Me.pnlHeaderPatientRecords.Size = New System.Drawing.Size(1091, 61)
         Me.pnlHeaderPatientRecords.TabIndex = 19
         '
         'Panel9
@@ -121,6 +122,7 @@ Partial Class frmMyPatients
         'pnlHeader
         '
         Me.pnlHeader.BackColor = System.Drawing.Color.White
+        Me.pnlHeader.Controls.Add(Me.Label1)
         Me.pnlHeader.Controls.Add(Me.lblDOB)
         Me.pnlHeader.Controls.Add(Me.lblLastName)
         Me.pnlHeader.Controls.Add(Me.lblBed)
@@ -129,7 +131,7 @@ Partial Class frmMyPatients
         Me.pnlHeader.Controls.Add(Me.lblFirstName)
         Me.pnlHeader.Location = New System.Drawing.Point(15, 69)
         Me.pnlHeader.Name = "pnlHeader"
-        Me.pnlHeader.Size = New System.Drawing.Size(950, 47)
+        Me.pnlHeader.Size = New System.Drawing.Size(1064, 47)
         Me.pnlHeader.TabIndex = 18
         '
         'lblDOB
@@ -137,7 +139,7 @@ Partial Class frmMyPatients
         Me.lblDOB.AutoSize = True
         Me.lblDOB.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDOB.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblDOB.Location = New System.Drawing.Point(496, 19)
+        Me.lblDOB.Location = New System.Drawing.Point(553, 19)
         Me.lblDOB.Name = "lblDOB"
         Me.lblDOB.Size = New System.Drawing.Size(43, 21)
         Me.lblDOB.TabIndex = 6
@@ -148,7 +150,7 @@ Partial Class frmMyPatients
         Me.lblLastName.AutoSize = True
         Me.lblLastName.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblLastName.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblLastName.Location = New System.Drawing.Point(329, 19)
+        Me.lblLastName.Location = New System.Drawing.Point(386, 19)
         Me.lblLastName.Name = "lblLastName"
         Me.lblLastName.Size = New System.Drawing.Size(86, 21)
         Me.lblLastName.TabIndex = 5
@@ -159,7 +161,7 @@ Partial Class frmMyPatients
         Me.lblBed.AutoSize = True
         Me.lblBed.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblBed.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblBed.Location = New System.Drawing.Point(748, 19)
+        Me.lblBed.Location = New System.Drawing.Point(805, 19)
         Me.lblBed.Name = "lblBed"
         Me.lblBed.Size = New System.Drawing.Size(39, 21)
         Me.lblBed.TabIndex = 3
@@ -170,7 +172,7 @@ Partial Class frmMyPatients
         Me.lblRoom.AutoSize = True
         Me.lblRoom.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblRoom.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblRoom.Location = New System.Drawing.Point(625, 19)
+        Me.lblRoom.Location = New System.Drawing.Point(682, 19)
         Me.lblRoom.Name = "lblRoom"
         Me.lblRoom.Size = New System.Drawing.Size(54, 21)
         Me.lblRoom.TabIndex = 2
@@ -181,7 +183,7 @@ Partial Class frmMyPatients
         Me.lblMRN.AutoSize = True
         Me.lblMRN.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblMRN.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblMRN.Location = New System.Drawing.Point(10, 19)
+        Me.lblMRN.Location = New System.Drawing.Point(67, 19)
         Me.lblMRN.Name = "lblMRN"
         Me.lblMRN.Size = New System.Drawing.Size(47, 21)
         Me.lblMRN.TabIndex = 1
@@ -192,7 +194,7 @@ Partial Class frmMyPatients
         Me.lblFirstName.AutoSize = True
         Me.lblFirstName.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblFirstName.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblFirstName.Location = New System.Drawing.Point(152, 19)
+        Me.lblFirstName.Location = New System.Drawing.Point(209, 19)
         Me.lblFirstName.Name = "lblFirstName"
         Me.lblFirstName.Size = New System.Drawing.Size(88, 21)
         Me.lblFirstName.TabIndex = 0
@@ -202,7 +204,7 @@ Partial Class frmMyPatients
         '
         Me.Panel4.BackColor = System.Drawing.Color.DarkGray
         Me.Panel4.Controls.Add(Me.cmbFilter)
-        Me.Panel4.Location = New System.Drawing.Point(786, 14)
+        Me.Panel4.Location = New System.Drawing.Point(900, 16)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel4.Size = New System.Drawing.Size(179, 31)
@@ -227,18 +229,29 @@ Partial Class frmMyPatients
         Me.lblFilter.AutoSize = True
         Me.lblFilter.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblFilter.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblFilter.Location = New System.Drawing.Point(728, 19)
+        Me.lblFilter.Location = New System.Drawing.Point(832, 21)
         Me.lblFilter.Name = "lblFilter"
         Me.lblFilter.Size = New System.Drawing.Size(52, 21)
         Me.lblFilter.TabIndex = 7
         Me.lblFilter.Text = "Filter:"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label1.Location = New System.Drawing.Point(916, 19)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(125, 21)
+        Me.Label1.TabIndex = 7
+        Me.Label1.Text = "Assign/Remove"
         '
         'frmMyPatients
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(976, 672)
+        Me.ClientSize = New System.Drawing.Size(1091, 644)
         Me.Controls.Add(Me.flpMyPatientRecords)
         Me.Controls.Add(Me.pnlHeaderPatientRecords)
         Me.Controls.Add(Me.pnlHeader)
@@ -272,4 +285,5 @@ Partial Class frmMyPatients
     Friend WithEvents lblFilter As Label
     Friend WithEvents Panel4 As Panel
     Friend WithEvents cmbFilter As ComboBox
+    Friend WithEvents Label1 As Label
 End Class
