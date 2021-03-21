@@ -30,6 +30,8 @@ Partial Class frmPatientInfo
         Me.txtPhysician = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.pnlPersonalInformation = New System.Windows.Forms.Panel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.txtPhone = New System.Windows.Forms.MaskedTextBox()
         Me.cboState = New System.Windows.Forms.ComboBox()
         Me.btnAddAllergies = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -41,7 +43,6 @@ Partial Class frmPatientInfo
         Me.cboRoom = New System.Windows.Forms.ComboBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
-        Me.txtPhone = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.txtEmail = New System.Windows.Forms.TextBox()
         Me.txtAddress = New System.Windows.Forms.TextBox()
@@ -84,6 +85,7 @@ Partial Class frmPatientInfo
         Me.tpLabelDirections = New System.Windows.Forms.ToolTip(Me.components)
         Me.tpToolTip = New System.Windows.Forms.ToolTip(Me.components)
         Me.pnlPersonalInformation.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.pnlPrescriptionsHeader.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.pnlDispenseHistoryHeader.SuspendLayout()
@@ -147,6 +149,7 @@ Partial Class frmPatientInfo
         'pnlPersonalInformation
         '
         Me.pnlPersonalInformation.BackColor = System.Drawing.Color.White
+        Me.pnlPersonalInformation.Controls.Add(Me.Panel2)
         Me.pnlPersonalInformation.Controls.Add(Me.cboState)
         Me.pnlPersonalInformation.Controls.Add(Me.btnAddAllergies)
         Me.pnlPersonalInformation.Controls.Add(Me.Label2)
@@ -158,7 +161,6 @@ Partial Class frmPatientInfo
         Me.pnlPersonalInformation.Controls.Add(Me.cboRoom)
         Me.pnlPersonalInformation.Controls.Add(Me.Label15)
         Me.pnlPersonalInformation.Controls.Add(Me.Label14)
-        Me.pnlPersonalInformation.Controls.Add(Me.txtPhone)
         Me.pnlPersonalInformation.Controls.Add(Me.Label13)
         Me.pnlPersonalInformation.Controls.Add(Me.txtEmail)
         Me.pnlPersonalInformation.Controls.Add(Me.txtAddress)
@@ -182,6 +184,29 @@ Partial Class frmPatientInfo
         Me.pnlPersonalInformation.Name = "pnlPersonalInformation"
         Me.pnlPersonalInformation.Size = New System.Drawing.Size(1092, 184)
         Me.pnlPersonalInformation.TabIndex = 17
+        '
+        'Panel2
+        '
+        Me.Panel2.BackColor = System.Drawing.Color.White
+        Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.txtPhone)
+        Me.Panel2.ForeColor = System.Drawing.Color.DarkGray
+        Me.Panel2.Location = New System.Drawing.Point(754, 89)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel2.Size = New System.Drawing.Size(148, 25)
+        Me.Panel2.TabIndex = 64
+        '
+        'txtPhone
+        '
+        Me.txtPhone.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtPhone.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtPhone.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.txtPhone.Location = New System.Drawing.Point(1, 1)
+        Me.txtPhone.Mask = "(999) 000-0000"
+        Me.txtPhone.Name = "txtPhone"
+        Me.txtPhone.Size = New System.Drawing.Size(144, 22)
+        Me.txtPhone.TabIndex = 15
         '
         'cboState
         '
@@ -303,18 +328,6 @@ Partial Class frmPatientInfo
         Me.Label14.Size = New System.Drawing.Size(52, 21)
         Me.Label14.TabIndex = 54
         Me.Label14.Text = "Email:"
-        '
-        'txtPhone
-        '
-        Me.txtPhone.BackColor = System.Drawing.Color.White
-        Me.txtPhone.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtPhone.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPhone.Location = New System.Drawing.Point(753, 90)
-        Me.txtPhone.MaxLength = 11
-        Me.txtPhone.Name = "txtPhone"
-        Me.txtPhone.ReadOnly = True
-        Me.txtPhone.Size = New System.Drawing.Size(149, 25)
-        Me.txtPhone.TabIndex = 10
         '
         'Label13
         '
@@ -806,6 +819,8 @@ Partial Class frmPatientInfo
         Me.Text = "frmPatientInfo"
         Me.pnlPersonalInformation.ResumeLayout(False)
         Me.pnlPersonalInformation.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.pnlPrescriptionsHeader.ResumeLayout(False)
         Me.pnlPrescriptionsHeader.PerformLayout()
         Me.Panel1.ResumeLayout(False)
@@ -842,7 +857,6 @@ Partial Class frmPatientInfo
     Friend WithEvents Label12 As Label
     Friend WithEvents Label15 As Label
     Friend WithEvents Label14 As Label
-    Friend WithEvents txtPhone As TextBox
     Friend WithEvents Label13 As Label
     Friend WithEvents txtEmail As TextBox
     Friend WithEvents txtAddress As TextBox
@@ -875,4 +889,6 @@ Partial Class frmPatientInfo
     Friend WithEvents flpDispenseHistory As FlowLayoutPanel
     Friend WithEvents tpLabelDirections As ToolTip
     Friend WithEvents tpToolTip As ToolTip
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents txtPhone As MaskedTextBox
 End Class
