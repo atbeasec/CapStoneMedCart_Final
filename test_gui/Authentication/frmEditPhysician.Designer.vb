@@ -319,6 +319,7 @@ Partial Class frmEditPhysician
         Me.cboState.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cboState.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cboState.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cboState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboState.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cboState.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboState.FormattingEnabled = True
@@ -416,6 +417,7 @@ Partial Class frmEditPhysician
         'cboCredentials
         '
         Me.cboCredentials.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cboCredentials.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboCredentials.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cboCredentials.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboCredentials.FormattingEnabled = True
