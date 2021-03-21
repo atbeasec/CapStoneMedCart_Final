@@ -806,5 +806,38 @@
 
     End Sub
 
+    Private Sub panelTopBar_Paint(sender As Object, e As PaintEventArgs) Handles pnlTopBar.Paint
 
+    End Sub
+
+    Public IsDragging As Boolean = False, IsClick As Boolean = False
+    Public StartPoint, FirstPoint, LastPoint As Point
+
+    Private Sub TopBar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles pnlTopBar.Click
+
+        If IsClick = True Then MsgBox("CLick")
+
+    End Sub
+
+    Private Sub TopBar_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlTopBar.MouseDown
+        StartPoint = pnlTopBar.PointToScreen(New Point(e.X, e.Y))
+        FirstPoint = StartPoint
+        IsDragging = True
+    End Sub
+
+    Private Sub TopBar_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlTopBar.MouseMove
+        If IsDragging Then
+            Dim EndPoint As Point = pnlTopBar.PointToScreen(New Point(e.X, e.Y))
+            IsClick = False
+            Me.Left += (EndPoint.X - StartPoint.X)
+            Me.Top += (EndPoint.Y - StartPoint.Y)
+            StartPoint = EndPoint
+            LastPoint = EndPoint
+        End If
+    End Sub
+
+    Private Sub TopBar_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlTopBar.MouseUp
+        IsDragging = False
+        If LastPoint = StartPoint Then IsClick = True Else IsClick = False
+    End Sub
 End Class

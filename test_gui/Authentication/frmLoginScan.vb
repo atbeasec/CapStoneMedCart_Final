@@ -66,15 +66,24 @@ Public Class frmLoginScan
     Public Sub CloseForm()
 
         If blnFlagToClose = True Then
-            Me.Close()
+
+            ' If MessageBox.Show("Are you sure you want to quit?", "", MessageBoxButtons.YesNo) = DialogResult.No Then
+            Dim result As DialogResult = MessageBox.Show("Are you sure you want to quit?", "", MessageBoxButtons.YesNo)
+
+            If result = DialogResult.Yes Then
+                Me.Close()
+            End If
+
         End If
 
 
     End Sub
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
-        MessageBox.Show("closing the main login screen")
-        Me.Close()
+        ' MessageBox.Show("closing the main login screen")
+        blnFlagToClose = True
+        CloseForm()
+
     End Sub
 
     Private Sub frmLoginScan_Load(sender As Object, e As EventArgs) Handles MyBase.Load

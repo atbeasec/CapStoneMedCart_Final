@@ -23,7 +23,7 @@ Partial Class frmMain
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
-        Me.panelTopBar = New System.Windows.Forms.Panel()
+        Me.pnlTopBar = New System.Windows.Forms.Panel()
         Me.pnlSideMenu = New System.Windows.Forms.Panel()
         Me.pnlSubMenuSettings = New System.Windows.Forms.Panel()
         Me.btnEditPhysician = New System.Windows.Forms.Button()
@@ -58,14 +58,14 @@ Partial Class frmMain
         Me.pnlLogo.SuspendLayout()
         Me.SuspendLayout()
         '
-        'panelTopBar
+        'pnlTopBar
         '
-        Me.panelTopBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.panelTopBar.Dock = System.Windows.Forms.DockStyle.Top
-        Me.panelTopBar.Location = New System.Drawing.Point(0, 0)
-        Me.panelTopBar.Name = "panelTopBar"
-        Me.panelTopBar.Size = New System.Drawing.Size(1334, 28)
-        Me.panelTopBar.TabIndex = 13
+        Me.pnlTopBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.pnlTopBar.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnlTopBar.Location = New System.Drawing.Point(0, 0)
+        Me.pnlTopBar.Name = "pnlTopBar"
+        Me.pnlTopBar.Size = New System.Drawing.Size(1334, 28)
+        Me.pnlTopBar.TabIndex = 13
         '
         'pnlSideMenu
         '
@@ -578,7 +578,7 @@ Partial Class frmMain
         Me.ClientSize = New System.Drawing.Size(1334, 711)
         Me.Controls.Add(Me.pnlDockLocation)
         Me.Controls.Add(Me.pnlSideMenu)
-        Me.Controls.Add(Me.panelTopBar)
+        Me.Controls.Add(Me.pnlTopBar)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "frmMain"
@@ -594,7 +594,7 @@ Partial Class frmMain
 
     End Sub
 
-    Friend WithEvents panelTopBar As Panel
+    Friend WithEvents pnlTopBar As Panel
     Friend WithEvents pnlSideMenu As Panel
     Friend WithEvents pnlSubMenuSettings As Panel
     Friend WithEvents btnEditPhysician As Button
