@@ -22,6 +22,7 @@ Partial Class frmEndOfShift
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.flpEndOfShiftCount = New System.Windows.Forms.FlowLayoutPanel()
         Me.pnlHeader = New System.Windows.Forms.Panel()
         Me.lblSection = New System.Windows.Forms.Label()
@@ -33,6 +34,7 @@ Partial Class frmEndOfShift
         Me.btnSave = New System.Windows.Forms.Button()
         Me.cmbFilter = New System.Windows.Forms.ComboBox()
         Me.Label15 = New System.Windows.Forms.Label()
+        Me.tpToolTip = New System.Windows.Forms.ToolTip(Me.components)
         Me.pnlHeader.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -194,4 +196,5 @@ Partial Class frmEndOfShift
     Friend WithEvents lblSystemCount As Label
     Friend WithEvents cmbFilter As ComboBox
     Friend WithEvents Label15 As Label
+    Friend WithEvents tpToolTip As ToolTip
 End Class
