@@ -1,14 +1,14 @@
 ﻿Public Class frmWaste
 
-    Private intPatientInformationMRN As Integer
+    Private intPatientID As Integer
     Public intMedicationID As New ArrayList
     Private intDrawerID As New ArrayList
     Private intDrawerMedTUID As Integer
 
     'this function should set Patient MRN using PatientID
-    Public Sub SetPatientMRN(ByVal mrn As Integer)
+    Public Sub SetPatientID(ByVal id As Integer)
 
-        intPatientInformationMRN = mrn
+        intPatientID = id
 
     End Sub
 
@@ -52,7 +52,7 @@
 
         ' if the patient mrn is nothing it means the waste form is being accessed
         ' from the ad hoc menu, otherwise it would be pased a value.
-        If intPatientInformationMRN = Nothing Then
+        If intPatientID = Nothing Then
             btnBack.Visible = False
         End If
 
@@ -190,7 +190,8 @@
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        frmPatientInfo.setPatientMrn(intPatientInformationMRN)
+        frmPatientInfo.setPatientID(intPatientID)
+        ' frmPatientInfo.setPatientMrn(intPatientInformationMRN)
         frmMain.OpenChildForm(frmPatientInfo)
     End Sub
 
