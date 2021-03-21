@@ -51,7 +51,6 @@ Partial Class frmDischarge
         Me.txtCity = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
-        Me.txtPhone = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.txtEmail = New System.Windows.Forms.TextBox()
         Me.txtAddress = New System.Windows.Forms.TextBox()
@@ -68,6 +67,8 @@ Partial Class frmDischarge
         Me.txtPhysician = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.txtPhone = New System.Windows.Forms.MaskedTextBox()
         Me.Panel3.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.pnlDischarge.SuspendLayout()
@@ -76,6 +77,7 @@ Partial Class frmDischarge
         Me.pnlInformation.SuspendLayout()
         Me.pnlAdmitRoomBed.SuspendLayout()
         Me.pnlDischargeRoomBed.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label8
@@ -231,6 +233,7 @@ Partial Class frmDischarge
         '
         'pnlInformation
         '
+        Me.pnlInformation.Controls.Add(Me.Panel2)
         Me.pnlInformation.Controls.Add(Me.pnlAdmitRoomBed)
         Me.pnlInformation.Controls.Add(Me.pnlDischargeRoomBed)
         Me.pnlInformation.Controls.Add(Me.txtState)
@@ -240,7 +243,6 @@ Partial Class frmDischarge
         Me.pnlInformation.Controls.Add(Me.txtCity)
         Me.pnlInformation.Controls.Add(Me.Label15)
         Me.pnlInformation.Controls.Add(Me.Label14)
-        Me.pnlInformation.Controls.Add(Me.txtPhone)
         Me.pnlInformation.Controls.Add(Me.Label13)
         Me.pnlInformation.Controls.Add(Me.txtEmail)
         Me.pnlInformation.Controls.Add(Me.txtAddress)
@@ -429,18 +431,6 @@ Partial Class frmDischarge
         Me.Label14.TabIndex = 86
         Me.Label14.Text = "Email:"
         '
-        'txtPhone
-        '
-        Me.txtPhone.BackColor = System.Drawing.Color.White
-        Me.txtPhone.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtPhone.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPhone.Location = New System.Drawing.Point(748, 106)
-        Me.txtPhone.MaxLength = 11
-        Me.txtPhone.Name = "txtPhone"
-        Me.txtPhone.ReadOnly = True
-        Me.txtPhone.Size = New System.Drawing.Size(149, 25)
-        Me.txtPhone.TabIndex = 72
-        '
         'Label13
         '
         Me.Label13.AutoSize = True
@@ -620,6 +610,29 @@ Partial Class frmDischarge
         Me.Label11.TabIndex = 68
         Me.Label11.Text = "DOB:"
         '
+        'Panel2
+        '
+        Me.Panel2.BackColor = System.Drawing.Color.White
+        Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.txtPhone)
+        Me.Panel2.ForeColor = System.Drawing.Color.DarkGray
+        Me.Panel2.Location = New System.Drawing.Point(749, 103)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel2.Size = New System.Drawing.Size(148, 27)
+        Me.Panel2.TabIndex = 121
+        '
+        'txtPhone
+        '
+        Me.txtPhone.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtPhone.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtPhone.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.txtPhone.Location = New System.Drawing.Point(1, 1)
+        Me.txtPhone.Mask = "(999) 000-0000"
+        Me.txtPhone.Name = "txtPhone"
+        Me.txtPhone.Size = New System.Drawing.Size(144, 22)
+        Me.txtPhone.TabIndex = 15
+        '
         'frmDischarge
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -646,6 +659,8 @@ Partial Class frmDischarge
         Me.pnlAdmitRoomBed.PerformLayout()
         Me.pnlDischargeRoomBed.ResumeLayout(False)
         Me.pnlDischargeRoomBed.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -670,7 +685,6 @@ Partial Class frmDischarge
     Friend WithEvents txtCity As TextBox
     Friend WithEvents Label15 As Label
     Friend WithEvents Label14 As Label
-    Friend WithEvents txtPhone As TextBox
     Friend WithEvents Label13 As Label
     Friend WithEvents txtEmail As TextBox
     Friend WithEvents txtAddress As TextBox
@@ -696,4 +710,6 @@ Partial Class frmDischarge
     Friend WithEvents txtBed As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents Label6 As Label
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents txtPhone As MaskedTextBox
 End Class
