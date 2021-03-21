@@ -150,6 +150,7 @@ Partial Class frmEditPhysician
         '
         Me.txtID.Location = New System.Drawing.Point(493, 527)
         Me.txtID.Name = "txtID"
+        Me.txtID.ShortcutsEnabled = False
         Me.txtID.Size = New System.Drawing.Size(100, 20)
         Me.txtID.TabIndex = 165
         '
@@ -201,6 +202,7 @@ Partial Class frmEditPhysician
         Me.txtMiddleName.Location = New System.Drawing.Point(1, 1)
         Me.txtMiddleName.Multiline = True
         Me.txtMiddleName.Name = "txtMiddleName"
+        Me.txtMiddleName.ShortcutsEnabled = False
         Me.txtMiddleName.Size = New System.Drawing.Size(222, 26)
         Me.txtMiddleName.TabIndex = 2
         '
@@ -222,6 +224,7 @@ Partial Class frmEditPhysician
         Me.txtLastName.Location = New System.Drawing.Point(1, 1)
         Me.txtLastName.Multiline = True
         Me.txtLastName.Name = "txtLastName"
+        Me.txtLastName.ShortcutsEnabled = False
         Me.txtLastName.Size = New System.Drawing.Size(222, 26)
         Me.txtLastName.TabIndex = 2
         '
@@ -257,6 +260,7 @@ Partial Class frmEditPhysician
         Me.txtFirstName.Location = New System.Drawing.Point(1, 1)
         Me.txtFirstName.Multiline = True
         Me.txtFirstName.Name = "txtFirstName"
+        Me.txtFirstName.ShortcutsEnabled = False
         Me.txtFirstName.Size = New System.Drawing.Size(224, 26)
         Me.txtFirstName.TabIndex = 1
         '
@@ -348,6 +352,7 @@ Partial Class frmEditPhysician
         Me.txtZipCode.MaxLength = 5
         Me.txtZipCode.Multiline = True
         Me.txtZipCode.Name = "txtZipCode"
+        Me.txtZipCode.ShortcutsEnabled = False
         Me.txtZipCode.Size = New System.Drawing.Size(106, 29)
         Me.txtZipCode.TabIndex = 14
         '
@@ -369,6 +374,7 @@ Partial Class frmEditPhysician
         Me.txtCity.Location = New System.Drawing.Point(1, 1)
         Me.txtCity.Multiline = True
         Me.txtCity.Name = "txtCity"
+        Me.txtCity.ShortcutsEnabled = False
         Me.txtCity.Size = New System.Drawing.Size(249, 29)
         Me.txtCity.TabIndex = 12
         '
@@ -390,6 +396,7 @@ Partial Class frmEditPhysician
         Me.txtAddress.Location = New System.Drawing.Point(1, 1)
         Me.txtAddress.Multiline = True
         Me.txtAddress.Name = "txtAddress"
+        Me.txtAddress.ShortcutsEnabled = False
         Me.txtAddress.Size = New System.Drawing.Size(560, 29)
         Me.txtAddress.TabIndex = 11
         '
@@ -486,6 +493,7 @@ Partial Class frmEditPhysician
         Me.mtbFax.Location = New System.Drawing.Point(1, 1)
         Me.mtbFax.Mask = "(999) 000-0000"
         Me.mtbFax.Name = "mtbFax"
+        Me.mtbFax.ShortcutsEnabled = False
         Me.mtbFax.Size = New System.Drawing.Size(248, 22)
         Me.mtbFax.TabIndex = 15
         '
@@ -520,6 +528,7 @@ Partial Class frmEditPhysician
         Me.mtbPhone.Location = New System.Drawing.Point(1, 1)
         Me.mtbPhone.Mask = "(999) 000-0000"
         Me.mtbPhone.Name = "mtbPhone"
+        Me.mtbPhone.ShortcutsEnabled = False
         Me.mtbPhone.Size = New System.Drawing.Size(248, 22)
         Me.mtbPhone.TabIndex = 15
         '
