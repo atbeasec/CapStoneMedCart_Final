@@ -97,7 +97,7 @@
     '/*  BRH        3/18/2021   Created functionality for dispensed narcotic
     '/*                         reports.                                  */
     '/*	 BRH	    03/21/21	Fixed to remove an unnecessary column, added
-    '/*                         narcotics wasted,
+    '/*                         narcotics wasted, all dispensed medication,
     '/*********************************************************************/
     Function getSelectedReport(intSelectedIndex As Integer) As List(Of String)
         'Dim arrData As ArrayList = New ArrayList
@@ -119,7 +119,11 @@
 
             Case Reports.Discrepancies  'strReport = "Discrepancies"
 
+            'If the dispensed medication report is selected
             Case Reports.DispensedMeds ' strReport = "Dispensed Meds"
+                'Select all drugs and store their dispensing information
+                strSQLCmd = "SELECT Drug_Name, Type, Strength, Amount_Dispensed, DateTime_Dispensed, Expiration_Date FROM DrawerMedication INNER JOIN 
+                            Medication INNER JOIN Dispensing WHERE DrawerMedication.Medication_TUID = Medication_ID AND DrawerMedication_TUID = DrawerMedication_ID"
 
             'If the dispensed narcotics report is selected
             Case Reports.DispensedNarc  'strReport = "Dispensed Narcotics"
@@ -252,7 +256,7 @@
     '/*  ---   ----     ------------------------------------------------*/
     '/*	BRH	 03/18/21	Initial creation of code                        */
     '/*	BRH	 03/21/21	Fixed to remove an unnecessary column, added    */
-    '/*                 narcotics wasted, 
+    '/*                 narcotics wasted, all dispensed medication,
     '/*******************************************************************/
     Sub PrintItemsToDataGrid(ByRef lstOfDataValues As List(Of String))
 
@@ -286,6 +290,20 @@
             For i As Integer = 0 To lstOfDataValues.Count - 10 Step 10
                 frmReport.dgvReport.Rows.Add(lstOfDataValues.Item(i + 1) & ", " & lstOfDataValues.Item(i), lstOfDataValues.Item(i + 3) & ", " & lstOfDataValues.Item(i + 2), lstOfDataValues.Item(i + 4),
                                              lstOfDataValues.Item(i + 5), lstOfDataValues.Item(i + 6), lstOfDataValues.Item(i + 7), lstOfDataValues.Item(i + 8), lstOfDataValues.Item(i + 9))
+            Next
+        ElseIf frmReport.cmbReports.SelectedItem.Equals("Dispensed Medications") Then
+            'Add the following column names
+            frmReport.dgvReport.Columns.Add(1, "Drug Name")
+            frmReport.dgvReport.Columns.Add(2, "Drug Type")
+            frmReport.dgvReport.Columns.Add(3, "Drug Strength")
+            frmReport.dgvReport.Columns.Add(4, "Amount Dispensed")
+            frmReport.dgvReport.Columns.Add(5, "Date / Time Dispensed")
+            frmReport.dgvReport.Columns.Add(6, "Expiration Date")
+
+            'Add the following data into data grid on the form
+            For i As Integer = 0 To lstOfDataValues.Count - 6 Step 6
+                frmReport.dgvReport.Rows.Add(lstOfDataValues.Item(i), lstOfDataValues.Item(i + 1), lstOfDataValues.Item(i + 2),
+                                             lstOfDataValues.Item(i + 3), lstOfDataValues.Item(i + 4), lstOfDataValues.Item(i + 5))
             Next
         End If
 
