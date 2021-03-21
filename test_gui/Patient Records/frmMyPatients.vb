@@ -10,7 +10,7 @@
 
         ' select the my patients item from the cbobox by default
         cboFilter.SelectedIndex = 0
-        lblAssignment.Visible = False
+        'HideButtonOnPanels()
 
     End Sub
     Private Sub LoadPanel()
@@ -103,7 +103,7 @@
         'Set panel properties
         With pnl
             .BackColor = Color.Gainsboro
-            .Size = New Size(1050, 47)
+            .Size = New Size(1030, 47)
             .Name = "pnlIndividualPatientRecordPadding" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Padding = New Padding(0, 0, 0, 3)
@@ -136,9 +136,9 @@
         Dim lblID6 As New Label
 
         Const YCOORDINATE As Integer = 20
-        CreateCheckBox(pnlMainPanel, getPanelCount(flpPannel), lblMRN.Location.X - 45, 5)
+        ' CreateCheckBox(pnlMainPanel, getPanelCount(flpPannel), lblMRN.Location.X - 45, 5)
         CreateAddButton(pnlMainPanel, getPanelCount(flpPannel), lblAssignment.Location.X + 15, 5)
-        CreateRemoveButton(pnlMainPanel, getPanelCount(flpPannel), lblAssignment.Location.X + 60, 5)
+        CreateRemoveButton(pnlMainPanel, getPanelCount(flpPannel), lblAssignment.Location.X + 15, 5)
         CreateIDLabelWithToolTip(pnlMainPanel, lblID1, "lblMRN", lblMRN.Location.X, YCOORDINATE, strMRN, getPanelCount(flpPannel), tpToolTip, TruncateString(15, strMRN))
         CreateIDLabelWithToolTip(pnlMainPanel, lblID2, "lblFirstName", lblFirstName.Location.X, YCOORDINATE, strFirstName, getPanelCount(flpPannel), tpToolTip, TruncateString(25, strFirstName))
         CreateIDLabelWithToolTip(pnlMainPanel, lblID3, "lblLastName", lblLastName.Location.X, YCOORDINATE, strLastName, getPanelCount(flpPannel), tpToolTip, TruncateString(25, strLastName))
@@ -173,7 +173,7 @@
             .Image = mapImagePencil
             .ImageAlign = ContentAlignment.MiddleCenter
             .Tag = pnlPanelsAddedCount + 1
-            .Visible = False
+            '   .Visible = False
 
         End With
 
@@ -206,7 +206,7 @@
             .Image = mapImagePencil
             .ImageAlign = ContentAlignment.MiddleCenter
             .Tag = pnlPanelsAddedCount + 1
-            .Visible = False
+            '  .Visible = False
         End With
 
         Debug.Print(pnlPanelName.Name)
@@ -217,75 +217,79 @@
 
     End Sub
 
-    Private Sub CreateCheckBox(ByVal pnlPanelName As Panel, ByVal pnlPanelsAddedCount As Integer, ByVal intX As Integer, ByVal intY As Integer)
+    'Private Sub CreateCheckBox(ByVal pnlPanelName As Panel, ByVal pnlPanelsAddedCount As Integer, ByVal intX As Integer, ByVal intY As Integer)
 
-        Dim chkSelectedPatient As CheckBox
-        chkSelectedPatient = New CheckBox
-        'declare our image and point at the resource
-        ' Dim mapImagePencil As New Bitmap(New Bitmap(My.Resources.add_icon1), 20, 20)
+    '    Dim chkSelectedPatient As CheckBox
+    '    chkSelectedPatient = New CheckBox
+    '    'declare our image and point at the resource
+    '    ' Dim mapImagePencil As New Bitmap(New Bitmap(My.Resources.add_icon1), 20, 20)
 
-        'Set button properties
-        With chkSelectedPatient
-            .AutoSize = False
-            .Size = New Size(50, 50)
-            .FlatStyle = FlatStyle.Flat
-            .FlatAppearance.BorderSize = 0
-            .ForeColor = Color.Black
-            .Font = New Font(New FontFamily("Microsoft Sans Serif"), 15)
-            '.Location = New Point(825, 5)
-            .Location = New Point(intX, intY)
-            .Name = "chkSelectedPatient" + (pnlPanelsAddedCount).ToString
-            .Tag = pnlPanelsAddedCount + 1
-        End With
+    '    'Set button properties
+    '    With chkSelectedPatient
+    '        .AutoSize = False
+    '        .Size = New Size(50, 50)
+    '        .FlatStyle = FlatStyle.Flat
+    '        .FlatAppearance.BorderSize = 0
+    '        .ForeColor = Color.Black
+    '        .Font = New Font(New FontFamily("Microsoft Sans Serif"), 15)
+    '        '.Location = New Point(825, 5)
+    '        .Location = New Point(intX, intY)
+    '        .Name = "chkSelectedPatient" + (pnlPanelsAddedCount).ToString
+    '        .Tag = pnlPanelsAddedCount + 1
+    '    End With
 
-        Debug.Print(pnlPanelName.Name)
-        pnlPanelName.Controls.Add(chkSelectedPatient)
-        ' MessageBox.Show("again")
-        'Add handler for click events
-        AddHandler chkSelectedPatient.CheckedChanged, AddressOf CheckBox_Checked
+    '    Debug.Print(pnlPanelName.Name)
+    '    pnlPanelName.Controls.Add(chkSelectedPatient)
+    '    ' MessageBox.Show("again")
+    '    'Add handler for click events
+    '    AddHandler chkSelectedPatient.CheckedChanged, AddressOf CheckBox_Checked
 
-    End Sub
+    'End Sub
 
-    Private Sub ShowOrHideAddAndRemoveIcons(ByVal ctlParent As Control)
+    'Private Sub ShowOrHideAddAndRemoveIcons(ByVal ctlParent As Control)
 
-        Dim ctl As Control
+    '    Dim ctl As Control
 
-        For Each ctl In ctlParent.Controls
+    '    For Each ctl In ctlParent.Controls
 
-            If ctl.Name.Contains("btnRemove") Or ctl.Name.Contains("btnAdd") Then
+    '        If ctl.Name.Contains("btnRemove") Or ctl.Name.Contains("btnAdd") Then
 
-                If ctl.Visible = False Then
-                    ctl.Visible = True
-                    lblAssignment.Visible = True
-                Else
-                    ctl.Visible = False
-                    lblAssignment.Visible = False
-                End If
-            End If
+    '            If ctl.Visible = False Then
+    '                ctl.Visible = True
+    '                lblAssignment.Visible = True
+    '            Else
+    '                ctl.Visible = False
+    '                lblAssignment.Visible = False
+    '            End If
+    '        End If
 
-        Next
+    '    Next
 
-    End Sub
+    'End Sub
 
 
-    Private Sub CheckBox_Checked(ByVal sender As Object, e As EventArgs)
+    'Private Sub CheckBox_Checked(ByVal sender As Object, e As EventArgs)
 
-        If sender.checked = True Then
+    '    If sender.checked = True Then
 
-            ShowOrHideAddAndRemoveIcons(sender.parent)
-        Else
-            ShowOrHideAddAndRemoveIcons(sender.parent)
+    '        ShowOrHideAddAndRemoveIcons(sender.parent)
+    '    Else
+    '        ShowOrHideAddAndRemoveIcons(sender.parent)
 
-        End If
+    '    End If
 
-    End Sub
+    'End Sub
 
     Private Sub RemoveAssignment_Click(ByVal sender As Object, e As EventArgs)
 
         Dim patientIDFromSelectedRecord As Integer = CInt(sender.parent.tag)
+        RemoveOnScreenPanel(sender)
+        MessageBox.Show("Patient unassigned to you")
+
+
 
         '*******************
-        ' ADAM create and call a method here to update tables using the patient ID above
+        ' ADAM if a patient was removed from the assingment, take the patient ID and indicate in the DB they are no longer assiged to the logged in user.
 
 
 
@@ -299,8 +303,9 @@
     Private Sub btnAddAssignment_Click(ByVal sender As Object, e As EventArgs)
 
         Dim patientIDFromSelectedRecord As Integer = CInt(sender.parent.tag)
+        RemoveOnScreenPanel(sender)
 
-
+        MessageBox.Show("Patient assigned to you")
 
 
 
@@ -308,5 +313,145 @@
 
     Private Sub cboFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboFilter.SelectedIndexChanged
 
+        'my patients
+        If cboFilter.SelectedIndex = 0 Then
+            '******************* 
+            ' flpMyPatientRecords.Controls.Clear()
+            ' ADAM call this before calling a create panel method to show the new items
+
+
+
+            ShowAllControlsOnPanels()
+            HideControlOnPanels("btnAdd")
+            lblAssignment.Text = "Remove Assignment"
+
+        ElseIf cboFilter.SelectedIndex = 1 Then
+            '******************* 
+            ' flpMyPatientRecords.Controls.Clear()
+            ' ADAM call this before calling a create panel method to show the new items
+
+
+            ShowAllControlsOnPanels()
+            HideControlOnPanels("btnRemove")
+            lblAssignment.Text = "Assign Patient To Me"
+
+        ElseIf cboFilter.SelectedIndex = 2 Then
+
+
+            '******************* 
+            ' flpMyPatientRecords.Controls.Clear()
+            ' ADAM call this before calling a create panel method to show the new items
+
+
+            ShowAllControlsOnPanels()
+            HideControlOnPanels("btnRemove")
+            lblAssignment.Text = "Assign Patient To Me"
+
+        ElseIf cboFilter.SelectedIndex = 3 Then
+            '******************* 
+            ' flpMyPatientRecords.Controls.Clear()
+            ' ADAM call this before calling a create panel method to show the new items
+
+
+            ShowAllControlsOnPanels()
+            HideControlOnPanels("btnRemove")
+            lblAssignment.Text = "Assign Patient To Me"
+
+            'ElseIf cboFilter.SelectedIndex = 2 Then
+
+        End If
+
     End Sub
+
+    Private Sub HideControlOnPanels(ByVal nameOfControlToHide As String)
+
+        Dim paddingPanel As Control
+        Dim panelWithControls As Control
+        Dim controlOnPanel As Control
+        ' Dim control As Control
+
+        For Each paddingPanel In flpMyPatientRecords.Controls
+            For Each panelWithControls In paddingPanel.Controls
+                For Each controlOnPanel In panelWithControls.Controls
+
+                    ' hide the specific control we need to
+                    If controlOnPanel.Name.Contains(nameOfControlToHide) Then
+
+                        controlOnPanel.Visible = False
+
+                    End If
+                    ' Debug.Print(controlOnPanel.Name)
+                Next
+            Next
+        Next
+
+    End Sub
+
+    Private Sub ShowAllControlsOnPanels()
+
+        Dim paddingPanel As Control
+        Dim panelWithControls As Control
+        Dim controlOnPanel As Control
+        ' Dim control As Control
+
+        For Each paddingPanel In flpMyPatientRecords.Controls
+            For Each panelWithControls In paddingPanel.Controls
+                For Each controlOnPanel In panelWithControls.Controls
+
+                    ' hide the specific control we need to
+
+                    controlOnPanel.Visible = True
+
+
+                    ' Debug.Print(controlOnPanel.Name)
+
+
+                Next
+            Next
+        Next
+
+    End Sub
+
+    Public Sub RemoveOnScreenPanel(ByVal sender As Object)
+        Dim ctlControl As Control = sender.Parent
+        Dim ctlParents As Control = ctlControl.Parent
+
+
+
+        Dim ctlParentFlowPanel As Control = ctlControl.Parent
+        Dim strParentPanelName As String
+        strParentPanelName = Nothing
+
+        'Remove handler from sender
+        For Each ctlObject As Control In ctlParentFlowPanel.Controls
+            For Each ctlChildControlObj As Control In ctlObject.Controls
+                If ctlChildControlObj.Name = sender.name Then
+
+                    RemoveHandler ctlChildControlObj.Click, AddressOf DynamicButton_Click
+
+                    strParentPanelName = ctlChildControlObj.Parent.Name
+                End If
+            Next
+        Next
+
+
+
+        'Remove  panel
+        For Each ctlObject As Control In ctlParentFlowPanel.Controls
+            If ctlObject.Name = strParentPanelName Then
+
+                ' prompt user if they are sure they want to delete the record
+                ' remove the record from the database
+                'remove the padding panel from the flow panel
+                ctlParentFlowPanel.Controls.Remove(ctlObject.Parent)
+                ctlObject.Parent.Dispose()
+
+                'remove the panel from the flow panel
+                ctlParentFlowPanel.Controls.Remove(ctlObject)
+                ctlObject.Dispose()
+
+            End If
+        Next
+    End Sub
+
 End Class

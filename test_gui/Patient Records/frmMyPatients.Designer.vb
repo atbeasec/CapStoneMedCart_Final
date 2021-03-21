@@ -113,7 +113,7 @@ Partial Class frmMyPatients
         Me.lblDOB.AutoSize = True
         Me.lblDOB.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDOB.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblDOB.Location = New System.Drawing.Point(553, 19)
+        Me.lblDOB.Location = New System.Drawing.Point(499, 19)
         Me.lblDOB.Name = "lblDOB"
         Me.lblDOB.Size = New System.Drawing.Size(43, 21)
         Me.lblDOB.TabIndex = 6
@@ -124,7 +124,7 @@ Partial Class frmMyPatients
         Me.lblLastName.AutoSize = True
         Me.lblLastName.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblLastName.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblLastName.Location = New System.Drawing.Point(386, 19)
+        Me.lblLastName.Location = New System.Drawing.Point(332, 19)
         Me.lblLastName.Name = "lblLastName"
         Me.lblLastName.Size = New System.Drawing.Size(86, 21)
         Me.lblLastName.TabIndex = 5
@@ -135,7 +135,7 @@ Partial Class frmMyPatients
         Me.lblBed.AutoSize = True
         Me.lblBed.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblBed.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblBed.Location = New System.Drawing.Point(805, 19)
+        Me.lblBed.Location = New System.Drawing.Point(751, 19)
         Me.lblBed.Name = "lblBed"
         Me.lblBed.Size = New System.Drawing.Size(39, 21)
         Me.lblBed.TabIndex = 3
@@ -146,7 +146,7 @@ Partial Class frmMyPatients
         Me.lblRoom.AutoSize = True
         Me.lblRoom.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblRoom.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblRoom.Location = New System.Drawing.Point(682, 19)
+        Me.lblRoom.Location = New System.Drawing.Point(628, 19)
         Me.lblRoom.Name = "lblRoom"
         Me.lblRoom.Size = New System.Drawing.Size(54, 21)
         Me.lblRoom.TabIndex = 2
@@ -157,7 +157,7 @@ Partial Class frmMyPatients
         Me.lblMRN.AutoSize = True
         Me.lblMRN.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblMRN.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblMRN.Location = New System.Drawing.Point(67, 19)
+        Me.lblMRN.Location = New System.Drawing.Point(13, 19)
         Me.lblMRN.Name = "lblMRN"
         Me.lblMRN.Size = New System.Drawing.Size(47, 21)
         Me.lblMRN.TabIndex = 1
@@ -168,7 +168,7 @@ Partial Class frmMyPatients
         Me.lblFirstName.AutoSize = True
         Me.lblFirstName.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblFirstName.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblFirstName.Location = New System.Drawing.Point(209, 19)
+        Me.lblFirstName.Location = New System.Drawing.Point(155, 19)
         Me.lblFirstName.Name = "lblFirstName"
         Me.lblFirstName.Size = New System.Drawing.Size(88, 21)
         Me.lblFirstName.TabIndex = 0
@@ -214,7 +214,7 @@ Partial Class frmMyPatients
         Me.lblAssignment.AutoSize = True
         Me.lblAssignment.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblAssignment.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblAssignment.Location = New System.Drawing.Point(916, 19)
+        Me.lblAssignment.Location = New System.Drawing.Point(862, 19)
         Me.lblAssignment.Name = "lblAssignment"
         Me.lblAssignment.Size = New System.Drawing.Size(125, 21)
         Me.lblAssignment.TabIndex = 7
