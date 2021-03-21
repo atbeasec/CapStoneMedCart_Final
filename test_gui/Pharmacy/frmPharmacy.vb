@@ -21,7 +21,7 @@
         txtQuantity.Text = 1
         PopulateFrequencyNumberComboBox()
         Dim intCounter As Integer = 0
-        dsMedications = ExecuteSelectQuery("SELECT * From Medication Inner Join DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE DrawerMedication.Active_Flag = '1' ORDER BY Medication.Medication_ID")
+        dsMedications = ExecuteSelectQuery("SELECT *,Trim(Drug_Name,' ') From Medication Inner Join DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE DrawerMedication.Active_Flag = '1' ORDER BY Medication.Medication_ID")
         dsPhysicians = ExecuteSelectQuery("Select * From Physician WHERE Active_Flag = '1' ORDER BY Physician_Last_Name, Physician_First_Name;")
         dsPatients = ExecuteSelectQuery("Select * From Patient WHERE Active_Flag = '1' ORDER BY Patient_Last_Name, Patient_First_Name;")
 
@@ -37,7 +37,7 @@
         Next
 
         For Each dr As DataRow In dsMedications.Tables(0).Rows
-            cmbMedication.Items.Add(dr(EnumList.Medication.Name))
+            cmbMedication.Items.Add(dr(18))
             intMedID.Add(dr(EnumList.Medication.ID))
         Next
     End Sub
@@ -68,18 +68,27 @@
     '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
     '/*********************************************************************/
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnORder.Click
-        If cmbPatientName.SelectedIndex = -1 Or cmbMedication.SelectedIndex = -1 Or cmbOrderedBy.SelectedIndex = -1 Or cmbFrequencyNumber.SelectedIndex = -1 Then
-            MessageBox.Show("Please select a patient, medication, physician and frequency before placing the order")
+        ErrorProvider1.Clear()
+
+        If Not IsNumeric(txtQuantity.Text) Then
+            MessageBox.Show("Please select a numeric quantity")
+            ErrorProvider1.SetError(btnDecrement, "Please select a numeric quantity")
         Else
-            Dim dtmOrderTime As String = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
-            PharmacyOrder.PharmacyOrder(intPatientIDfromArray, intMedIDfromArray, intPhysicianIDfromArray, txtQuantity.Text, txtType.Text, cmbFrequencyNumber.SelectedItem.ToString)
-            MessageBox.Show("Medication order placed")
-            cmbPatientName.SelectedIndex = -1
-            cmbMedication.SelectedIndex = -1
-            cmbOrderedBy.SelectedIndex = -1
-            cmbFrequencyNumber.SelectedIndex = -1
-            txtQuantity.Text = 1
+            If cmbPatientName.SelectedIndex = -1 Or cmbMedication.SelectedIndex = -1 Or cmbOrderedBy.SelectedIndex = -1 Or cmbFrequencyNumber.SelectedIndex = -1 Then
+                MessageBox.Show("Please select a patient, medication, physician and frequency before placing the order")
+            Else
+                Dim dtmOrderTime As String = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
+                PharmacyOrder.PharmacyOrder(intPatientIDfromArray, intMedIDfromArray, intPhysicianIDfromArray, txtQuantity.Text, txtType.Text, cmbFrequencyNumber.SelectedItem.ToString)
+                MessageBox.Show("Medication order placed")
+                cmbPatientName.SelectedIndex = -1
+                cmbMedication.SelectedIndex = -1
+                cmbOrderedBy.SelectedIndex = -1
+                cmbFrequencyNumber.SelectedIndex = -1
+                txtQuantity.Text = 1
+            End If
         End If
+
+
     End Sub
 
     '/*********************************************************************/
@@ -108,6 +117,7 @@
     '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
     '/*********************************************************************/
     Private Sub btnIncrement_Click(sender As Object, e As EventArgs) Handles btnIncrement.Click
+
         If Not IsNumeric(txtQuantity.Text) Then
             txtQuantity.Text = 0
         End If
@@ -252,6 +262,20 @@
     Private Sub cmbOrderedBy_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbOrderedBy.SelectedIndexChanged
         If Not cmbOrderedBy.SelectedIndex = -1 Then
             intPhysicianIDfromArray = intPhysicianID(cmbOrderedBy.SelectedIndex)
+        End If
+    End Sub
+
+    Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantity.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789")
+        If txtQuantity.Text IsNot "" Then
+            GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
+        Else
+        End If
+    End Sub
+    Private Sub txtQuantity_Validated(sender As Object, e As EventArgs) Handles txtQuantity.Validated
+        If txtQuantity.Text IsNot "" Then
+            GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
+        Else
         End If
     End Sub
 End Class

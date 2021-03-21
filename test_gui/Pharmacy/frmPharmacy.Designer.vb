@@ -22,6 +22,7 @@ Partial Class frmPharmacy
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPharmacy))
         Me.Label10 = New System.Windows.Forms.Label()
         Me.cmbOrderedBy = New System.Windows.Forms.ComboBox()
@@ -46,9 +47,11 @@ Partial Class frmPharmacy
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.txtType = New System.Windows.Forms.TextBox()
         Me.cmbFrequencyNumber = New System.Windows.Forms.ComboBox()
+        Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.Panel5.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label10
@@ -63,7 +66,6 @@ Partial Class frmPharmacy
         '
         'cmbOrderedBy
         '
-        Me.cmbOrderedBy.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbOrderedBy.DropDownHeight = 250
         Me.cmbOrderedBy.DropDownWidth = 100
         Me.cmbOrderedBy.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -114,6 +116,8 @@ Partial Class frmPharmacy
         '
         'cmbMedication
         '
+        Me.cmbMedication.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbMedication.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbMedication.DropDownHeight = 250
         Me.cmbMedication.DropDownWidth = 100
         Me.cmbMedication.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -178,6 +182,7 @@ Partial Class frmPharmacy
         '
         'cmbStrength
         '
+        Me.cmbStrength.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbStrength.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbStrength.FormattingEnabled = True
         Me.cmbStrength.Items.AddRange(New Object() {"Yes", "No"})
@@ -317,6 +322,7 @@ Partial Class frmPharmacy
         Me.cmbFrequencyNumber.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbFrequencyNumber.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbFrequencyNumber.DropDownHeight = 250
+        Me.cmbFrequencyNumber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbFrequencyNumber.DropDownWidth = 100
         Me.cmbFrequencyNumber.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbFrequencyNumber.FormattingEnabled = True
@@ -328,6 +334,10 @@ Partial Class frmPharmacy
         Me.cmbFrequencyNumber.Size = New System.Drawing.Size(121, 29)
         Me.cmbFrequencyNumber.Sorted = True
         Me.cmbFrequencyNumber.TabIndex = 8
+        '
+        'ErrorProvider1
+        '
+        Me.ErrorProvider1.ContainerControl = Me
         '
         'frmPharmacy
         '
@@ -365,6 +375,7 @@ Partial Class frmPharmacy
         Me.Panel2.PerformLayout()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -394,4 +405,5 @@ Partial Class frmPharmacy
     Friend WithEvents Panel3 As Panel
     Friend WithEvents txtType As TextBox
     Friend WithEvents cmbFrequencyNumber As ComboBox
+    Friend WithEvents ErrorProvider1 As ErrorProvider
 End Class
