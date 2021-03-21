@@ -3,9 +3,9 @@
         'rdbShowAll.Checked = True
         ' LoadPanel()
 
-        CreatePanelMyPatients(flpMyPatientRecords, "test", "test", "test", "11/11/1998", "test", "test", 12)
-        CreatePanelMyPatients(flpMyPatientRecords, "test", "test", "test", "11/11/1998", "test", "test", 12)
-        CreatePanelMyPatients(flpMyPatientRecords, "test", "test", "test", "11/11/1998", "test", "test", 12)
+        'CreatePanelMyPatients(flpMyPatientRecords, "test", "test", "test", "11/11/1998", "test", "test", 12)
+        'CreatePanelMyPatients(flpMyPatientRecords, "test", "test", "test", "11/11/1998", "test", "test", 12)
+        'CreatePanelMyPatients(flpMyPatientRecords, "test", "test", "test", "11/11/1998", "test", "test", 12)
 
 
         ' select the my patients item from the cbobox by default
@@ -92,6 +92,60 @@
         '  LoadPanel()
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: CreatePanel()                  */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/6/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is routine is dynamically creates panels that are placed    */ 
+    '/*	 inside of the flowpanel that is fixed on the form. The panels are*/
+    '/*	 created here, assigned handlers, and the contents of the panels  */
+    '/*	 are updated in this routine                                      */
+    '/*********************************************************************/
+    '/*  CALLED BY: frmConfiguration_Load  	      						  */           
+    '/*                                                                   */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 NONE                                                             */ 
+    '/* flpPannel- the flow panel which the user wants to create the      */
+    '/*     create the single panel.                                      */
+    '/* strMRN- value from the database we will display                   */
+    '/* strFirstName- Name of the user in the database                    */
+    '/* strLastName- Last Name of the user in the database                */
+    '/* strBirthday- DOB of the user in the database                      */
+    '/* strRoom- room of the user in the database                         */
+    '/* strBed- bed of the user in the database                           */
+    '/* intPatietnID- the ID of the patient that is being added           */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	   CreatePanel(flpUserInfo, strID9, strFirstName9, strAccess9)    */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	pnl- is the pnl which we are creating for padding purposes        */
+    '/* pnlMainPanel- is the pnl which we are going to add controls       */
+    '/* lblID1 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID2 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID3 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID4 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID5 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID6 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  Collin Krygier  2/6/2021    Initial creation                     */
+    '/*********************************************************************/
     Public Sub CreatePanelMyPatients(ByVal flpPannel As FlowLayoutPanel, ByVal strMRN As String, ByVal strFirstName As String, ByVal strLastName As String, ByVal strBirthday As String, ByVal strRoom As String, ByVal strBed As String, ByRef intPatientID As Integer)
 
         Dim pnl As Panel
@@ -152,7 +206,43 @@
 
     End Sub
 
-    Private Sub CreateAddButton(ByVal pnlPanelName As Panel, ByVal pnlPanelsAddedCount As Integer, ByVal intX As Integer, ByVal intY As Integer)
+
+    '/********************************************************************/
+    '/*                   SUB NAME: CreateAddButton             	     */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Collin Krygier  		             */   
+    '/*		         DATE CREATED: 	2/6/21			                     */                             
+    '/********************************************************************/
+    '/*  SUB Purpose:This sub creates a button at run time to be aded to  /
+    '/*  the form.                                                       */
+    '/*                                                                  */
+    '/********************************************************************/
+    '/*  CALLED BY: (none)                             	      		     */				            
+    '/*                                        				             */         
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/*             (NONE)						                         */		               
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	 pnlpanelName- name of the panel to add the control to           */	 
+    '/*  intPanelsAddedCount- current number of panels added on the form */	 
+    '/*  intX- x coordinate of where to place the control                */	 
+    '/*  intY- Y coordinate of where to place the control                */	 
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             
+    '/*	DynamicSingleClickOpenPatient()					                 */					                       
+    '/*                                                                  */   
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/*	 none                           				                 */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                                 
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  CK		2/6/21		 initial creation                            */
+    '/********************************************************************/ 
+
+    Private Sub CreateAddButton(ByVal pnlPanelName As Panel, ByVal intPanelsAddedCount As Integer, ByVal intX As Integer, ByVal intY As Integer)
 
         Dim btnAddButton As Button
         btnAddButton = New Button
@@ -169,10 +259,10 @@
             ' .Font = New Font(New FontFamily("Microsoft Sans Serif"), 11)
             '.Location = New Point(825, 5)
             .Location = New Point(intX, intY)
-            .Name = "btnAddButton" + (pnlPanelsAddedCount).ToString
+            .Name = "btnAddButton" + (intPanelsAddedCount).ToString
             .Image = mapImagePencil
             .ImageAlign = ContentAlignment.MiddleCenter
-            .Tag = pnlPanelsAddedCount + 1
+            .Tag = intPanelsAddedCount + 1
             '   .Visible = False
 
         End With
@@ -185,6 +275,40 @@
 
     End Sub
 
+    '/********************************************************************/
+    '/*                   SUB NAME: CreateRemoveButton             	     */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Collin Krygier  		             */   
+    '/*		         DATE CREATED: 	2/6/21			                     */                             
+    '/********************************************************************/
+    '/*  SUB Purpose:This sub creates a button at run time to be aded to  /
+    '/*  the form.                                                       */
+    '/*                                                                  */
+    '/********************************************************************/
+    '/*  CALLED BY: (none)                             	      		     */				            
+    '/*                                        				             */         
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/*             (NONE)						                         */		               
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	 pnlpanelName- name of the panel to add the control to           */	 
+    '/*  intPanelsAddedCount- current number of panels added on the form */	 
+    '/*  intX- x coordinate of where to place the control                */	 
+    '/*  intY- Y coordinate of where to place the control                */	 
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             
+    '/*	DynamicSingleClickOpenPatient()					                 */					                       
+    '/*                                                                  */   
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/*	 none                           				                 */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                                 
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  CK		2/6/21		 initial creation                            */
+    '/********************************************************************/ 
     Private Sub CreateRemoveButton(ByVal pnlPanelName As Panel, ByVal pnlPanelsAddedCount As Integer, ByVal intX As Integer, ByVal intY As Integer)
 
         Dim btnRemove As Button
@@ -217,69 +341,38 @@
 
     End Sub
 
-    'Private Sub CreateCheckBox(ByVal pnlPanelName As Panel, ByVal pnlPanelsAddedCount As Integer, ByVal intX As Integer, ByVal intY As Integer)
-
-    '    Dim chkSelectedPatient As CheckBox
-    '    chkSelectedPatient = New CheckBox
-    '    'declare our image and point at the resource
-    '    ' Dim mapImagePencil As New Bitmap(New Bitmap(My.Resources.add_icon1), 20, 20)
-
-    '    'Set button properties
-    '    With chkSelectedPatient
-    '        .AutoSize = False
-    '        .Size = New Size(50, 50)
-    '        .FlatStyle = FlatStyle.Flat
-    '        .FlatAppearance.BorderSize = 0
-    '        .ForeColor = Color.Black
-    '        .Font = New Font(New FontFamily("Microsoft Sans Serif"), 15)
-    '        '.Location = New Point(825, 5)
-    '        .Location = New Point(intX, intY)
-    '        .Name = "chkSelectedPatient" + (pnlPanelsAddedCount).ToString
-    '        .Tag = pnlPanelsAddedCount + 1
-    '    End With
-
-    '    Debug.Print(pnlPanelName.Name)
-    '    pnlPanelName.Controls.Add(chkSelectedPatient)
-    '    ' MessageBox.Show("again")
-    '    'Add handler for click events
-    '    AddHandler chkSelectedPatient.CheckedChanged, AddressOf CheckBox_Checked
-
-    'End Sub
-
-    'Private Sub ShowOrHideAddAndRemoveIcons(ByVal ctlParent As Control)
-
-    '    Dim ctl As Control
-
-    '    For Each ctl In ctlParent.Controls
-
-    '        If ctl.Name.Contains("btnRemove") Or ctl.Name.Contains("btnAdd") Then
-
-    '            If ctl.Visible = False Then
-    '                ctl.Visible = True
-    '                lblAssignment.Visible = True
-    '            Else
-    '                ctl.Visible = False
-    '                lblAssignment.Visible = False
-    '            End If
-    '        End If
-
-    '    Next
-
-    'End Sub
-
-
-    'Private Sub CheckBox_Checked(ByVal sender As Object, e As EventArgs)
-
-    '    If sender.checked = True Then
-
-    '        ShowOrHideAddAndRemoveIcons(sender.parent)
-    '    Else
-    '        ShowOrHideAddAndRemoveIcons(sender.parent)
-
-    '    End If
-
-    'End Sub
-
+    '/********************************************************************/
+    '/*                   SUB NAME: RemoveAssignment_Click      	     */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Collin Krygier  		             */   
+    '/*		         DATE CREATED: 	2/6/21			                     */                             
+    '/********************************************************************/
+    '/*  SUB Purpose:This sub is the handler that is called when the remove
+    '/*  button is clicked                                               */
+    '/*                                                                  */
+    '/********************************************************************/
+    '/*  CALLED BY:    	      		     */				            
+    '/*                                        				             */         
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/*             (NONE)						                         */		               
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	 sender- object representing a control                           */
+    '/*  e- eventargs indicating there is an event handle assigned       */
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             
+    '/*				                 */					                       
+    '/*                                                                  */   
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/*	 none                           				                 */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                                 
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  CK		2/6/21		 initial creation                            */
+    '/********************************************************************/ 
     Private Sub RemoveAssignment_Click(ByVal sender As Object, e As EventArgs)
 
         Dim patientIDFromSelectedRecord As Integer = CInt(sender.parent.tag)
@@ -300,6 +393,38 @@
 
     End Sub
 
+    '/********************************************************************/
+    '/*                   SUB NAME: btnAddAssignment_Click      	     */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Collin Krygier  		             */   
+    '/*		         DATE CREATED: 	2/6/21			                     */                             
+    '/********************************************************************/
+    '/*  SUB Purpose:This sub is the handler that is called when the remove
+    '/*  button is clicked                                               */
+    '/*                                                                  */
+    '/********************************************************************/
+    '/*  CALLED BY:    	      		     */				            
+    '/*                                        				             */         
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/*             (NONE)						                         */		               
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	 sender- object representing a control                           */
+    '/*  e- eventargs indicating there is an event handle assigned       */
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             
+    '/*				                 */					                       
+    '/*                                                                  */   
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/*	 none                           				                 */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                                 
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  CK		2/6/21		 initial creation                            */
+    '/********************************************************************/ 
     Private Sub btnAddAssignment_Click(ByVal sender As Object, e As EventArgs)
 
         Dim patientIDFromSelectedRecord As Integer = CInt(sender.parent.tag)
@@ -311,6 +436,38 @@
 
     End Sub
 
+    '/********************************************************************/
+    '/*                   SUB NAME: cboFilter_SelectedIndexChanged       */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Collin Krygier  		             */   
+    '/*		         DATE CREATED: 	2/6/21			                     */                             
+    '/********************************************************************/
+    '/*  SUB Purpose:This sub determines the current item selected       */
+    '/* in the combobox and then calls the necessary method accordingly. */
+    '/*                                                                  */
+    '/********************************************************************/
+    '/*  CALLED BY:    	      		     */				            
+    '/*                                        				             */         
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/*             (NONE)						                         */		               
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	 sender- object representing a control                           */
+    '/*  e- eventargs indicating there is an event handle assigned       */
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             
+    '/*				                                                      */					                       
+    '/*                                                                  */   
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/*	 none                           				                 */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                                 
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  CK		2/6/21		 initial creation                            */
+    '/********************************************************************/ 
     Private Sub cboFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboFilter.SelectedIndexChanged
 
         'my patients
@@ -363,6 +520,39 @@
 
     End Sub
 
+    '/********************************************************************/
+    '/*                   SUB NAME: HideControlOnPanels                  */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Collin Krygier  		             */   
+    '/*		         DATE CREATED: 	2/6/21			                     */                             
+    '/********************************************************************/
+    '/*  SUB Purpose:This sub iterates over the flow panel and modifies  */
+    '/*  controls within. It hides the button containing the name passed in
+    '/*                                                                  */
+    '/********************************************************************/
+    '/*  CALLED BY:    	      		     */				            
+    '/*                                        				             */         
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/*             (NONE)						                         */		               
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	 nameOfControlToHide- string of the control name we want to hide.*/
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             
+    '/*				                                                      */					                       
+    '/*                                                                  */   
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/*	 paddingPanel- represents the padding panel                      */
+    '/*	 panelWithControls- represents the panel containing the buttons  */
+    '/*	 controlOnPanel- represents the single control on the panel      */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                                 
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  CK		2/6/21		 initial creation                            */
+    '/********************************************************************/ 
     Private Sub HideControlOnPanels(ByVal nameOfControlToHide As String)
 
         Dim paddingPanel As Control
@@ -387,6 +577,39 @@
 
     End Sub
 
+    '/********************************************************************/
+    '/*                   SUB NAME: ShowAllControlsOnPanels              */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Collin Krygier  		             */   
+    '/*		         DATE CREATED: 	2/6/21			                     */                             
+    '/********************************************************************/
+    '/*  SUB Purpose:This sub iterates over the flow panel and modifies  */
+    '/*  controls within. It hides the button containing the name passed in
+    '/*                                                                  */
+    '/********************************************************************/
+    '/*  CALLED BY:    	      		     */				            
+    '/*                                        				             */         
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/*             (NONE)						                         */		               
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	 (NONE)                                                          */
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             
+    '/*				                                                      */					                       
+    '/*                                                                  */   
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/*	 paddingPanel- represents the padding panel                      */
+    '/*	 panelWithControls- represents the panel containing the buttons  */
+    '/*	 controlOnPanel- represents the single control on the panel      */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                                 
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  CK		2/6/21		 initial creation                            */
+    '/********************************************************************/ 
     Private Sub ShowAllControlsOnPanels()
 
         Dim paddingPanel As Control
@@ -412,11 +635,40 @@
 
     End Sub
 
+
+    '/********************************************************************/
+    '/*                   SUB NAME: RemoveOnScreenPanel                  */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Collin Krygier  		             */   
+    '/*		         DATE CREATED: 	2/6/21			                     */                             
+    '/********************************************************************/
+    '/*  SUB Purpose:This destroys the panel that sender (a control) lives
+    '/*  within                                                          */
+    '/********************************************************************/
+    '/*  CALLED BY:    	      		     */				            
+    '/*                                        				             */         
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/*             (NONE)						                         */		               
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	 (NONE)                                                          */
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             
+    '/*				                                                      */					                       
+    '/*                                                                  */   
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                                 
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  CK		2/6/21		 initial creation                            */
+    '/********************************************************************/ 
     Public Sub RemoveOnScreenPanel(ByVal sender As Object)
         Dim ctlControl As Control = sender.Parent
         Dim ctlParents As Control = ctlControl.Parent
-
-
 
         Dim ctlParentFlowPanel As Control = ctlControl.Parent
         Dim strParentPanelName As String
@@ -433,8 +685,6 @@
                 End If
             Next
         Next
-
-
 
         'Remove  panel
         For Each ctlObject As Control In ctlParentFlowPanel.Controls
