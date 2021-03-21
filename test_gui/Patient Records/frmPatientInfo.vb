@@ -621,6 +621,7 @@
 
                 Else
 
+
                     Dim txtbox As TextBox = CType(ctl, TextBox)
 
                     txtbox.ReadOnly = False
