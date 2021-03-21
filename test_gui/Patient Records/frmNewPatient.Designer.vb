@@ -105,6 +105,7 @@ Partial Class frmNewPatient
         Me.txtFirstName.Location = New System.Drawing.Point(1, 1)
         Me.txtFirstName.Multiline = True
         Me.txtFirstName.Name = "txtFirstName"
+        Me.txtFirstName.ShortcutsEnabled = False
         Me.txtFirstName.Size = New System.Drawing.Size(250, 26)
         Me.txtFirstName.TabIndex = 1
         '
@@ -147,6 +148,7 @@ Partial Class frmNewPatient
         Me.txtMiddleName.Location = New System.Drawing.Point(1, 1)
         Me.txtMiddleName.Multiline = True
         Me.txtMiddleName.Name = "txtMiddleName"
+        Me.txtMiddleName.ShortcutsEnabled = False
         Me.txtMiddleName.Size = New System.Drawing.Size(250, 26)
         Me.txtMiddleName.TabIndex = 3
         '
@@ -168,6 +170,7 @@ Partial Class frmNewPatient
         Me.txtAddress.Location = New System.Drawing.Point(1, 1)
         Me.txtAddress.Multiline = True
         Me.txtAddress.Name = "txtAddress"
+        Me.txtAddress.ShortcutsEnabled = False
         Me.txtAddress.Size = New System.Drawing.Size(560, 29)
         Me.txtAddress.TabIndex = 11
         '
@@ -189,6 +192,7 @@ Partial Class frmNewPatient
         Me.txtLastName.Location = New System.Drawing.Point(1, 1)
         Me.txtLastName.Multiline = True
         Me.txtLastName.Name = "txtLastName"
+        Me.txtLastName.ShortcutsEnabled = False
         Me.txtLastName.Size = New System.Drawing.Size(257, 26)
         Me.txtLastName.TabIndex = 2
         '
@@ -210,6 +214,7 @@ Partial Class frmNewPatient
         Me.txtEmail.Location = New System.Drawing.Point(1, 1)
         Me.txtEmail.Multiline = True
         Me.txtEmail.Name = "txtEmail"
+        Me.txtEmail.ShortcutsEnabled = False
         Me.txtEmail.Size = New System.Drawing.Size(256, 26)
         Me.txtEmail.TabIndex = 4
         '
@@ -233,6 +238,7 @@ Partial Class frmNewPatient
         Me.mtbDoB.Location = New System.Drawing.Point(1, 1)
         Me.mtbDoB.Mask = "00/00/0000"
         Me.mtbDoB.Name = "mtbDoB"
+        Me.mtbDoB.ShortcutsEnabled = False
         Me.mtbDoB.Size = New System.Drawing.Size(88, 22)
         Me.mtbDoB.TabIndex = 6
         Me.mtbDoB.ValidatingType = GetType(Date)
@@ -257,6 +263,7 @@ Partial Class frmNewPatient
         Me.mtbPhone.Location = New System.Drawing.Point(1, 1)
         Me.mtbPhone.Mask = "(999) 000-0000"
         Me.mtbPhone.Name = "mtbPhone"
+        Me.mtbPhone.ShortcutsEnabled = False
         Me.mtbPhone.Size = New System.Drawing.Size(248, 22)
         Me.mtbPhone.TabIndex = 15
         '
@@ -278,6 +285,7 @@ Partial Class frmNewPatient
         Me.txtCity.Location = New System.Drawing.Point(1, 1)
         Me.txtCity.Multiline = True
         Me.txtCity.Name = "txtCity"
+        Me.txtCity.ShortcutsEnabled = False
         Me.txtCity.Size = New System.Drawing.Size(249, 29)
         Me.txtCity.TabIndex = 12
         '
@@ -300,6 +308,7 @@ Partial Class frmNewPatient
         Me.txtZipCode.MaxLength = 5
         Me.txtZipCode.Multiline = True
         Me.txtZipCode.Name = "txtZipCode"
+        Me.txtZipCode.ShortcutsEnabled = False
         Me.txtZipCode.Size = New System.Drawing.Size(106, 29)
         Me.txtZipCode.TabIndex = 14
         '
@@ -308,6 +317,7 @@ Partial Class frmNewPatient
         Me.cmbState.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbState.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbState.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cmbState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbState.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cmbState.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbState.FormattingEnabled = True
@@ -340,6 +350,7 @@ Partial Class frmNewPatient
         'cmbSex
         '
         Me.cmbSex.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cmbSex.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbSex.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cmbSex.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbSex.FormattingEnabled = True
@@ -363,6 +374,7 @@ Partial Class frmNewPatient
         Me.cmbBed.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbBed.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbBed.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cmbBed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbBed.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cmbBed.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbBed.FormattingEnabled = True
@@ -386,6 +398,7 @@ Partial Class frmNewPatient
         Me.cmbRoom.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbRoom.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbRoom.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cmbRoom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbRoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cmbRoom.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbRoom.FormattingEnabled = True
@@ -428,6 +441,7 @@ Partial Class frmNewPatient
         Me.txtHeight.MaxLength = 4
         Me.txtHeight.Multiline = True
         Me.txtHeight.Name = "txtHeight"
+        Me.txtHeight.ShortcutsEnabled = False
         Me.txtHeight.Size = New System.Drawing.Size(101, 30)
         Me.txtHeight.TabIndex = 7
         '
@@ -450,6 +464,7 @@ Partial Class frmNewPatient
         Me.txtWeight.MaxLength = 4
         Me.txtWeight.Multiline = True
         Me.txtWeight.Name = "txtWeight"
+        Me.txtWeight.ShortcutsEnabled = False
         Me.txtWeight.Size = New System.Drawing.Size(110, 30)
         Me.txtWeight.TabIndex = 8
         '
@@ -468,6 +483,7 @@ Partial Class frmNewPatient
         Me.cmbPhysician.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbPhysician.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbPhysician.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cmbPhysician.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbPhysician.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cmbPhysician.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbPhysician.FormattingEnabled = True
