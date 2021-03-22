@@ -53,15 +53,30 @@ Public Class frmNewPatient
 
         If Not hasError() Then
             SavePatientDataToDatabase()
-            frmMain.OpenChildForm(frmPatientRecords)
+            clearInformationBoxes()
         End If
-
-
-
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs)
         frmMain.OpenChildForm(frmPatientRecords)
+    End Sub
+
+    Private Sub clearInformationBoxes()
+        txtFirstName.Text = Nothing
+        txtMiddleName.Text = Nothing
+        txtAddress.Text = Nothing
+        txtCity.Text = Nothing
+        txtHeight.Text = Nothing
+        txtEmail.Text = Nothing
+        txtLastName.Text = Nothing
+        txtWeight.Text = Nothing
+        txtZipCode.Text = Nothing
+        mtbDoB.Text = Nothing
+        mtbPhone.Text = Nothing
+        cmbSex.SelectedIndex = -1
+        cboRoom.SelectedIndex = -1
+        cmbPhysician.SelectedIndex = -1
+        cmbState.SelectedIndex = -1
     End Sub
 
     '/*********************************************************************/
@@ -851,10 +866,12 @@ Public Class frmNewPatient
 
     Private Sub cboRoom_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboRoom.SelectedIndexChanged
         cboBed.Items.Clear()
-        Dim strSelectedRoom As String = cboRoom.SelectedItem
-        Dim dsBeds As DataSet = CreateDatabase.ExecuteSelectQuery("Select Room_ID,Bed_Name from Rooms WHERE Active_Flag = '1' AND Room_ID = '" & strSelectedRoom & "' EXCEPT Select Room_TUID,Bed_Name from PatientRoom where PatientRoom.Active_Flag = '1'")
-        For Each dr As DataRow In dsBeds.Tables(0).Rows
-            cboBed.Items.Add(dr(1))
-        Next
+        If Not cboRoom.SelectedIndex = -1 Then
+            Dim strSelectedRoom As String = cboRoom.SelectedItem
+            Dim dsBeds As DataSet = CreateDatabase.ExecuteSelectQuery("Select Room_ID,Bed_Name from Rooms WHERE Active_Flag = '1' AND Room_ID = '" & strSelectedRoom & "' EXCEPT Select Room_TUID,Bed_Name from PatientRoom where PatientRoom.Active_Flag = '1'")
+            For Each dr As DataRow In dsBeds.Tables(0).Rows
+                cboBed.Items.Add(dr(1))
+            Next
+        End If
     End Sub
 End Class
