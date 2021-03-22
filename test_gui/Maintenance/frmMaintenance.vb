@@ -114,5 +114,29 @@
 
     Private Sub frmMaintenance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         radPatient.Checked = True
+        radDatabse.Checked = True
     End Sub
+
+    Private Sub btnExportDatabase_Click(sender As Object, e As EventArgs) Handles btnExportDatabase.Click
+        ExportDatabase()
+    End Sub
+
+    Private Sub btnImportDatabase_Click(sender As Object, e As EventArgs) Handles btnImportDatabase.Click
+        ImportDatabase()
+    End Sub
+
+    Private Sub btnImportAsCopy_Click(sender As Object, e As EventArgs) Handles btnImportAsCopy.Click
+        ImportDatabaseAsCopy()
+    End Sub
+
+    Private Sub radDatabse_CheckedChanged(sender As Object, e As EventArgs) Handles radDatabse.CheckedChanged, radRecords.CheckedChanged
+        If radDatabse.Checked = True Then
+            pnlRecords.Visible = False
+            pnlDatabase.Visible = True
+        Else
+            pnlRecords.Visible = True
+            pnlDatabase.Visible = False
+        End If
+    End Sub
+
 End Class
