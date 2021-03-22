@@ -180,7 +180,7 @@ Public Class frmNewPatient
             strMRN = GenerateRandom.generateRandomAlphanumeric(10, "1234567890")
         End While
 
-        strbSQL.Append(strMRN)
+        strbSQL.Append(strMRN & "', '")
         strbSQL.Append(GenerateRandom.generateRandomAlphanumeric(20, strCharactersForRandomGeneration) & "',")
         '^this is going to genereate a random Bar code. 
         strbSQL.Append("'" & strFirstName & "' , '" & strMiddleName & "',")
@@ -193,7 +193,8 @@ Public Class frmNewPatient
         strbSQL.Append("'" & 1 & "');")
 
         CreateDatabase.ExecuteInsertQuery(strbSQL.ToString)
-        Dim intPatientID As Integer = CreateDatabase.ExecuteScalarQuery("Select * from Patient WHERE MRN_Number = '" & strMRN & "'")
+        Dim intPatientID As Integer = CreateDatabase.ExecuteScalarQuery("Select Patient_ID from Patient WHERE MRN_Number = '" & strMRN & "'")
+        CreateDatabase.ExecuteInsertQuery("INSERT INTO PatientRoom(Patient_TUID,Room_TUID,Bed_Name,Active_Flag) VALUES('" & intPatientID & "', '" & cboRoom.SelectedItem & "', '" & cboBed.SelectedItem & "','1')")
         'send message saying it was a success or error
 
         'if error say what the error was and return to the form with the filled out info
