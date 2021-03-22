@@ -85,31 +85,34 @@ Module BulkImportMethods
 
     Public Sub importStart(strFileName As String, strFileType As String)
 
-        Dim srReader As StreamReader = New StreamReader(strFileName)
-        Select Case strFileType
-            Case "patient"
-                Dim PatientArray As ArrayList = ParsePatientFile(srReader)
-                If Not IsNothing(PatientArray) Then
-                    addPatientToDatabase(PatientArray)
-                End If
-            Case "physician"
-                Dim PhysicianArray As ArrayList = ParsePhysicianFile(srReader)
-                If Not IsNothing(PhysicianArray) Then
-                    addPhysicianToDatabase(PhysicianArray)
-                End If
-            Case "room"
-                Dim RoomArray As ArrayList = ParseRoomFile(srReader)
-                If Not IsNothing(RoomArray) Then
-                    addRoomToDatabase(RoomArray)
-                End If
-            Case "user"
-                Dim userArray As ArrayList = pareseUserFile(srReader)
-                If Not IsNothing(userArray) Then
-                    addUsersToDatabase(userArray)
-                End If
-        End Select
-        srReader.Close()
-
+        Try
+            Dim srReader As StreamReader = New StreamReader(strFileName)
+            Select Case strFileType
+                Case "patient"
+                    Dim PatientArray As ArrayList = ParsePatientFile(srReader)
+                    If Not IsNothing(PatientArray) Then
+                        addPatientToDatabase(PatientArray)
+                    End If
+                Case "physician"
+                    Dim PhysicianArray As ArrayList = ParsePhysicianFile(srReader)
+                    If Not IsNothing(PhysicianArray) Then
+                        addPhysicianToDatabase(PhysicianArray)
+                    End If
+                Case "room"
+                    Dim RoomArray As ArrayList = ParseRoomFile(srReader)
+                    If Not IsNothing(RoomArray) Then
+                        addRoomToDatabase(RoomArray)
+                    End If
+                Case "user"
+                    Dim userArray As ArrayList = pareseUserFile(srReader)
+                    If Not IsNothing(userArray) Then
+                        addUsersToDatabase(userArray)
+                    End If
+            End Select
+            srReader.Close()
+        Catch
+            MessageBox.Show("Error opening file " & strFileName & " file is opened by another application")
+        End Try
 
     End Sub
 
@@ -259,6 +262,10 @@ Module BulkImportMethods
     '/*                 objects.                                           */
     '/* strbSQLPull - this is going to be the SQL statement that pulls back*/
     '/*               if the physician exists in the datbaase.             */
+    '/* UsedBarCodesArray - this is going to hold all the bar codes that   */
+    '/*                     been used in the import so far. To make sure   */
+    '/*                     that two active patients will not share the same*/
+    '/*                     barcode.                                        */
     '/*                                                                     
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
@@ -276,6 +283,7 @@ Module BulkImportMethods
         Dim strbErrorMessage As StringBuilder = New StringBuilder
         Dim strbSQLPull As StringBuilder = New StringBuilder
         Dim PatientArray As ArrayList = New ArrayList()
+        Dim UsedBarCodesArray As ArrayList = New ArrayList()
         Do
             strLine = srReader.ReadLine.Split(vbTab)
             If strLine.Length < 16 Then
@@ -302,6 +310,18 @@ Module BulkImportMethods
 
                     End If
                 Next
+
+                strbSQLPull.Clear()
+                strbSQLPull.AppendLine("Select count(*) from patient where barcode = '" & checkSQLInjection(strLine(1)) & "';")
+                If CreateDatabase.ExecuteScalarQuery(strbSQLPull.ToString) <> 0 Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " two patients cannot share a barcode. " &
+                                                "A patient in the database already has this barcode in use")
+                    blnIssue = True
+                ElseIf UsedBarCodesArray.Contains(checkSQLInjection(strLine(1))) Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " two patients cannot share a barcode. " &
+                                                "A patient being imported in already using this barcode.")
+                    blnIssue = True
+                End If
                 If Not IsDate(strLine(5)) Then
                     strbErrorMessage.AppendLine("Issue on line " & intLineNum & " date of birth must be a valid date")
                     blnIssue = True
@@ -331,7 +351,7 @@ Module BulkImportMethods
                     strbErrorMessage.AppendLine("Issue on line " & intLineNum & " city can not contain a ;")
                     blnIssue = True
                 End If
-                If Not PopulateStateComboBoxesMethod.states.Contains(strLine(11)) Then
+                If Not PopulateStateComboBoxesMethod.states.Contains(strLine(11), StringComparer.OrdinalIgnoreCase) Then
                     strbErrorMessage.AppendLine("Issue on line " & intLineNum & " state has to be a valid state")
                     blnIssue = True
                 End If
@@ -370,6 +390,7 @@ Module BulkImportMethods
                     End If
                 End If
                 If Not blnIssue Then
+                    UsedBarCodesArray.Add(strLine(1))
                     PatientArray.Add(New PatientClass(strLine(0), strLine(1), strLine(2), strLine(3), strLine(4), strLine(5),
                                 strLine(6), strLine(7), strLine(8), strLine(9), strLine(10), strLine(11), strLine(12), strLine(13),
                                 strLine(14), strLine(15)))
