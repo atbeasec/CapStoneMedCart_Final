@@ -187,6 +187,7 @@
                         cboMedication.SelectedIndex = -1
                         RadioButton2.Checked = True
                         cboWitness.SelectedIndex = -1
+                        txtQuantity.Text = 1
                         'repopulate med comboboxes incase one medication dropped to zero and was deactivated
                         Inventory.PopulateWasteComboBoxMedication()
                     Else
