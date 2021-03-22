@@ -164,24 +164,24 @@ Public Class frmNewPatient
             "'Patient_Middle_Name', 'Patient_Last_Name', 'Date_of_Birth', 'Sex', 'Height', 'Weight', " &
             "'Address', 'City', 'State', 'Zip_Code', 'Phone_Number', 'Email_address', 'Primary_Physician_ID', " &
             "'Active_Flag') Values ('")
-
-        'strbSQL.Append(CInt(Rnd() * 20) & "','")
-        'strbSQL.Append(CInt(Rnd() * 20) & "',") 'this is going to make a random barcode this is temporary
-        strbSQL.Append(GenerateRandom.generateRandomAlphanumeric(10, "1234567890") & "','")
-        '^this is going to generate a random MRN number
-        Dim strMRN As String = GenerateRandom.generateRandomAlphanumeric(20, strCharactersForRandomGeneration)
         Dim blnUsedMRN As Boolean = False
         Dim dsCheckforRecord As DataSet
-        'check if MRN is in use, if it is currently being used, generate a new one
+        'strbSQL.Append(CInt(Rnd() * 20) & "','")
+        'strbSQL.Append(CInt(Rnd() * 20) & "',") 'this is going to make a random barcode this is temporary
+
+
+        Dim strMRN As String = GenerateRandom.generateRandomAlphanumeric(10, "1234567890")
+        '^this Is going to generate a random MRN number
         While blnUsedMRN = False
             dsCheckforRecord = CreateDatabase.ExecuteSelectQuery("Select * from Patient WHERE MRN_Number = '" & strMRN & "'")
             If dsCheckforRecord.Tables.Count > 0 Then
                 blnUsedMRN = True
-                MessageBox.Show("Unused")
             End If
-            strMRN = GenerateRandom.generateRandomAlphanumeric(20, strCharactersForRandomGeneration)
+            strMRN = GenerateRandom.generateRandomAlphanumeric(10, "1234567890")
         End While
-        strbSQL.Append(strMRN & "',")
+
+        strbSQL.Append(strMRN)
+        strbSQL.Append(GenerateRandom.generateRandomAlphanumeric(20, strCharactersForRandomGeneration) & "',")
         '^this is going to genereate a random Bar code. 
         strbSQL.Append("'" & strFirstName & "' , '" & strMiddleName & "',")
         strbSQL.Append("'" & strLastName & "','" & mtbDoB.Text & "',")
@@ -193,7 +193,7 @@ Public Class frmNewPatient
         strbSQL.Append("'" & 1 & "');")
 
         CreateDatabase.ExecuteInsertQuery(strbSQL.ToString)
-        CreateDatabase.ExecuteInsertQuery("")
+        Dim intPatientID As Integer = CreateDatabase.ExecuteScalarQuery("Select * from Patient WHERE MRN_Number = '" & strMRN & "'")
         'send message saying it was a success or error
 
         'if error say what the error was and return to the form with the filled out info
