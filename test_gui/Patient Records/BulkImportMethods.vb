@@ -85,31 +85,34 @@ Module BulkImportMethods
 
     Public Sub importStart(strFileName As String, strFileType As String)
 
-        Dim srReader As StreamReader = New StreamReader(strFileName)
-        Select Case strFileType
-            Case "patient"
-                Dim PatientArray As ArrayList = ParsePatientFile(srReader)
-                If Not IsNothing(PatientArray) Then
-                    addPatientToDatabase(PatientArray)
-                End If
-            Case "physician"
-                Dim PhysicianArray As ArrayList = ParsePhysicianFile(srReader)
-                If Not IsNothing(PhysicianArray) Then
-                    addPhysicianToDatabase(PhysicianArray)
-                End If
-            Case "room"
-                Dim RoomArray As ArrayList = ParseRoomFile(srReader)
-                If Not IsNothing(RoomArray) Then
-                    addRoomToDatabase(RoomArray)
-                End If
-            Case "user"
-                Dim userArray As ArrayList = pareseUserFile(srReader)
-                If Not IsNothing(userArray) Then
-                    addUsersToDatabase(userArray)
-                End If
-        End Select
-        srReader.Close()
-
+        Try
+            Dim srReader As StreamReader = New StreamReader(strFileName)
+            Select Case strFileType
+                Case "patient"
+                    Dim PatientArray As ArrayList = ParsePatientFile(srReader)
+                    If Not IsNothing(PatientArray) Then
+                        addPatientToDatabase(PatientArray)
+                    End If
+                Case "physician"
+                    Dim PhysicianArray As ArrayList = ParsePhysicianFile(srReader)
+                    If Not IsNothing(PhysicianArray) Then
+                        addPhysicianToDatabase(PhysicianArray)
+                    End If
+                Case "room"
+                    Dim RoomArray As ArrayList = ParseRoomFile(srReader)
+                    If Not IsNothing(RoomArray) Then
+                        addRoomToDatabase(RoomArray)
+                    End If
+                Case "user"
+                    Dim userArray As ArrayList = pareseUserFile(srReader)
+                    If Not IsNothing(userArray) Then
+                        addUsersToDatabase(userArray)
+                    End If
+            End Select
+            srReader.Close()
+        Catch
+            MessageBox.Show("Error opening file " & strFileName & " file is opened by another application")
+        End Try
 
     End Sub
 
@@ -259,6 +262,10 @@ Module BulkImportMethods
     '/*                 objects.                                           */
     '/* strbSQLPull - this is going to be the SQL statement that pulls back*/
     '/*               if the physician exists in the datbaase.             */
+    '/* UsedBarCodesArray - this is going to hold all the bar codes that   */
+    '/*                     been used in the import so far. To make sure   */
+    '/*                     that two active patients will not share the same*/
+    '/*                     barcode.                                        */
     '/*                                                                     
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
@@ -276,99 +283,118 @@ Module BulkImportMethods
         Dim strbErrorMessage As StringBuilder = New StringBuilder
         Dim strbSQLPull As StringBuilder = New StringBuilder
         Dim PatientArray As ArrayList = New ArrayList()
+        Dim UsedBarCodesArray As ArrayList = New ArrayList()
         Do
             strLine = srReader.ReadLine.Split(vbTab)
-            If Not IsNumeric(strLine(0)) Then
+            If strLine.Length < 16 Then
+                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " record is missing information")
                 blnIssue = True
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " MRN Number must be numeric")
-            End If
-            For i As Integer = 1 To 4
-                If TextCheck(strLine(i)) Then
-                    Select Case i
-                        Case 1
-                            strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Barcode can not contain a ;")
-                        Case 2
-                            strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Patient First Name can not contain a ;")
-                        Case 3
-                            strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Patient Middle Name can not contain a ;")
-                        Case 4
-                            strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Patient last name can not contain a ;")
-                    End Select
+            Else
+                If Not IsNumeric(strLine(0)) Then
                     blnIssue = True
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " MRN Number must be numeric")
+                End If
+                For i As Integer = 1 To 4
+                    If TextCheck(strLine(i)) Then
+                        Select Case i
+                            Case 1
+                                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Barcode can not contain a ;")
+                            Case 2
+                                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Patient First Name can not contain a ;")
+                            Case 3
+                                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Patient Middle Name can not contain a ;")
+                            Case 4
+                                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Patient last name can not contain a ;")
+                        End Select
+                        blnIssue = True
 
-                End If
-            Next
-            If Not IsDate(strLine(5)) Then
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " date of birth must be a valid date")
-                blnIssue = True
-            Else
-                If Convert.ToDateTime(strLine(5)) > DateTime.Now Then
-                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " date of birth can not be a future date")
-                    blnIssue = True
-                End If
-            End If
-            If Not strLine(6).ToLower.Equals("male") And Not strLine(6).ToLower.Equals("female") Then
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Sex must be male or female")
-                blnIssue = True
-            End If
-            If Not IsNumeric(strLine(7)) Then
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " height must be numeric")
-                blnIssue = True
-            End If
-            If Not IsNumeric(strLine(8)) Then
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " weight must be numeric")
-                blnIssue = True
-            End If
-            If TextCheck(strLine(9)) Then
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Address can not contain a ;")
-                blnIssue = True
-            End If
-            If TextCheck(strLine(10)) Then
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " city can not contain a ;")
-                blnIssue = True
-            End If
-            If Not PopulateStateComboBoxesMethod.states.Contains(strLine(11)) Then
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " state has to be a valid state")
-                blnIssue = True
-            End If
-            Try
+                    End If
+                Next
 
-                Dim email = New MailAddress(strLine(12)) 'this allows .net to check
-                'to see if the email is vaild. 
-            Catch ex As Exception
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " email must follow a vaild email format")
-                blnIssue = True
-            End Try
-            If IsNumeric(strLine(13)) Then
-                If strLine(13).Length > 5 Or strLine(13) < 5 Then
-                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " zip code must be 5 digits long")
-                    blnIssue = True
-                End If
-            Else
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " zip code must be numeric")
-                blnIssue = True
-            End If
-            If Not RegularExpressions.Regex.IsMatch(strLine(14), strPhonePattern) Then
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " phone number must follow the following format xxx-xxx-xxxx with an optional 1- at the front")
-                blnIssue = True
-            End If
-            If Not IsNumeric(strLine(15)) Then
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Physician ID must be numeric and be a physciain in the system")
-                blnIssue = True
-            Else
                 strbSQLPull.Clear()
-                strbSQLPull.Append("Select count(Physician_ID) from Physician where Physician_ID = " & strLine(15))
-                If CreateDatabase.ExecuteScalarQuery(strbSQLPull.ToString) < 1 Then
-                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Physician ID of " & strLine(15) &
-                                                    " found in the system. Please use a " &
-                                                    "Physician ID that is in the system.")
+                strbSQLPull.AppendLine("Select count(*) from patient where barcode = '" & checkSQLInjection(strLine(1)) & "';")
+                If CreateDatabase.ExecuteScalarQuery(strbSQLPull.ToString) <> 0 Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " two patients cannot share a barcode. " &
+                                                "A patient in the database already has this barcode in use")
+                    blnIssue = True
+                ElseIf UsedBarCodesArray.Contains(checkSQLInjection(strLine(1))) Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " two patients cannot share a barcode. " &
+                                                "A patient being imported in already using this barcode.")
                     blnIssue = True
                 End If
-            End If
-            If Not blnIssue Then
-                PatientArray.Add(New PatientClass(strLine(0), strLine(1), strLine(2), strLine(3), strLine(4), strLine(5),
+                If Not IsDate(strLine(5)) Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " date of birth must be a valid date")
+                    blnIssue = True
+                Else
+                    If Convert.ToDateTime(strLine(5)) > DateTime.Now Then
+                        strbErrorMessage.AppendLine("Issue on line " & intLineNum & " date of birth can not be a future date")
+                        blnIssue = True
+                    End If
+                End If
+                If Not strLine(6).ToLower.Equals("male") And Not strLine(6).ToLower.Equals("female") Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Sex must be male or female")
+                    blnIssue = True
+                End If
+                If Not IsNumeric(strLine(7)) Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " height must be numeric")
+                    blnIssue = True
+                End If
+                If Not IsNumeric(strLine(8)) Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " weight must be numeric")
+                    blnIssue = True
+                End If
+                If TextCheck(strLine(9)) Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Address can not contain a ;")
+                    blnIssue = True
+                End If
+                If TextCheck(strLine(10)) Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " city can not contain a ;")
+                    blnIssue = True
+                End If
+                If Not PopulateStateComboBoxesMethod.states.Contains(strLine(11), StringComparer.OrdinalIgnoreCase) Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " state has to be a valid state")
+                    blnIssue = True
+                End If
+                Try
+
+                    Dim email = New MailAddress(strLine(12)) 'this allows .net to check
+                    'to see if the email is vaild. 
+                Catch ex As Exception
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " email must follow a vaild email format")
+                    blnIssue = True
+                End Try
+                If IsNumeric(strLine(13)) Then
+                    If strLine(13).Length > 5 Or strLine(13) < 5 Then
+                        strbErrorMessage.AppendLine("Issue on line " & intLineNum & " zip code must be 5 digits long")
+                        blnIssue = True
+                    End If
+                Else
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " zip code must be numeric")
+                    blnIssue = True
+                End If
+                If Not RegularExpressions.Regex.IsMatch(strLine(14), strPhonePattern) Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " phone number must follow the following format xxx-xxx-xxxx with an optional 1- at the front")
+                    blnIssue = True
+                End If
+                If Not IsNumeric(strLine(15)) Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Physician ID must be numeric and be a physciain in the system")
+                    blnIssue = True
+                Else
+                    strbSQLPull.Clear()
+                    strbSQLPull.Append("Select count(Physician_ID) from Physician where Physician_ID = " & strLine(15))
+                    If CreateDatabase.ExecuteScalarQuery(strbSQLPull.ToString) < 1 Then
+                        strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Physician ID of " & strLine(15) &
+                                                        " found in the system. Please use a " &
+                                                        "Physician ID that is in the system.")
+                        blnIssue = True
+                    End If
+                End If
+                If Not blnIssue Then
+                    UsedBarCodesArray.Add(strLine(1))
+                    PatientArray.Add(New PatientClass(strLine(0), strLine(1), strLine(2), strLine(3), strLine(4), strLine(5),
                                 strLine(6), strLine(7), strLine(8), strLine(9), strLine(10), strLine(11), strLine(12), strLine(13),
                                 strLine(14), strLine(15)))
+                End If
             End If
             intLineNum += 1
         Loop While (Not srReader.EndOfStream)
@@ -503,57 +529,61 @@ Module BulkImportMethods
 
         Do
             strLine = srReader.ReadLine.Split(vbTab)
-
-            For i As Integer = 0 To 3
-                If TextCheck(strLine(i)) Then
-                    Select Case i
-                        Case 0
-                            strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Physician First Name can not contain a ;")
-                            blnIssue = True
-                        Case 1
-                            strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Physician Middle Name can not contain a ;")
-                            blnIssue = True
-                        Case 2
-                            strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Physician Last Name can not contain a ;")
-                            blnIssue = True
-                        Case 3
-                            strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Physician credentials can not contain a ;")
-                            blnIssue = True
-                    End Select
-                End If
-            Next
-            If Not RegularExpressions.Regex.IsMatch(strLine(4), strPhonePattern) Then
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " phone number must follow the following format xxx-xxx-xxxx with an optional 1- at the front")
+            If strLine.Length < 10 Then
+                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " record is missing information")
                 blnIssue = True
-            End If
-            If Not RegularExpressions.Regex.IsMatch(strLine(5), strPhonePattern) Then
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " fax number must follow the following format xxx-xxx-xxxx with an optional 1- at the front")
-                blnIssue = True
-            End If
-            If TextCheck(strLine(6)) Then
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Address can not contain a ;")
-                blnIssue = True
-            End If
-            If TextCheck(strLine(7)) Then
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " city can not contain a ;")
-                blnIssue = True
-            End If
-            If Not PopulateStateComboBoxesMethod.states.Contains(strLine(8)) Then
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " state has to be a valid state")
-                blnIssue = True
-            End If
-            If IsNumeric(strLine(9)) Then
-                If strLine(9).Length > 5 Or strLine(9) < 5 Then
-                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " zip code must be 5 digits long")
+            Else
+                For i As Integer = 0 To 3
+                    If TextCheck(strLine(i)) Then
+                        Select Case i
+                            Case 0
+                                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Physician First Name can not contain a ;")
+                                blnIssue = True
+                            Case 1
+                                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Physician Middle Name can not contain a ;")
+                                blnIssue = True
+                            Case 2
+                                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Physician Last Name can not contain a ;")
+                                blnIssue = True
+                            Case 3
+                                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Physician credentials can not contain a ;")
+                                blnIssue = True
+                        End Select
+                    End If
+                Next
+                If Not RegularExpressions.Regex.IsMatch(strLine(4), strPhonePattern) Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " phone number must follow the following format xxx-xxx-xxxx with an optional 1- at the front")
                     blnIssue = True
                 End If
-            Else
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " zip code must be numeric")
-                blnIssue = True
-            End If
-            If Not blnIssue Then
-                PhysicianArray.Add(New PhysicianClass(strLine(0), strLine(1), strLine(2), strLine(3), strLine(4),
+                If Not RegularExpressions.Regex.IsMatch(strLine(5), strPhonePattern) Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " fax number must follow the following format xxx-xxx-xxxx with an optional 1- at the front")
+                    blnIssue = True
+                End If
+                If TextCheck(strLine(6)) Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Address can not contain a ;")
+                    blnIssue = True
+                End If
+                If TextCheck(strLine(7)) Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " city can not contain a ;")
+                    blnIssue = True
+                End If
+                If Not PopulateStateComboBoxesMethod.states.Contains(strLine(8)) Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " state has to be a valid state")
+                    blnIssue = True
+                End If
+                If IsNumeric(strLine(9)) Then
+                    If strLine(9).Length > 5 Or strLine(9) < 5 Then
+                        strbErrorMessage.AppendLine("Issue on line " & intLineNum & " zip code must be 5 digits long")
+                        blnIssue = True
+                    End If
+                Else
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " zip code must be numeric")
+                    blnIssue = True
+                End If
+                If Not blnIssue Then
+                    PhysicianArray.Add(New PhysicianClass(strLine(0), strLine(1), strLine(2), strLine(3), strLine(4),
                                         strLine(5), strLine(6), strLine(7), strLine(8), strLine(9)))
+                End If
             End If
             intLineNum += 1
         Loop While (Not srReader.EndOfStream)
@@ -728,6 +758,10 @@ Module BulkImportMethods
     '/* userArray - this is the array list of users that will be added to  */
     '/*             the database if there is no issue. If there is an issue*/
     '/*             it will be nothing.                                    */
+    '/* UsedBarCodesArray - this is going to hold all the bar codes that   */
+    '/*                     been used in the import so far. To make sure   */
+    '/*                     that two active patients will not share the same*/
+    '/*                     barcode.                                        */
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
@@ -748,67 +782,80 @@ Module BulkImportMethods
         Dim strSalt As String
         Dim strHashedPassword As String
         Dim strhold As String()
+        Dim UsedBarCodesArray As ArrayList = New ArrayList()
 
         Do
             strLine = srReader.ReadLine.Split(vbTab)
-            strbSQLPull.Clear()
-            strbSQLPull.AppendLine("Select count(*) from User where username = '" & checkSQLInjection(strLine(0)) & "'")
-            If TextCheck(strLine(0)) Then
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Username cannot contain a ;")
-                blnIssue = True
-            ElseIf ExecuteScalarQuery(strbSQLPull.ToString) <> 0 Then
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " username must be unqiue")
-                blnIssue = True
-            End If
-            strbSQLPull.Clear()
-            If TextCheck(strLine(1)) Then
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " password cannot have a ;")
-                blnIssue = True
-            ElseIf Not frmConfiguration.CheckPassword(strLine(1)) Then
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special characters !@#$%^&* ")
-                blnIssue = True
-            End If
-            If TextCheck(strLine(2)) Then
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " frist name cannot have a ;")
-                blnIssue = True
-            End If
-            If TextCheck(strLine(3)) Then
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " last name cannot have a ;")
-                blnIssue = True
-            End If
-
-            If TextCheck(strLine(4)) Then
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " barcode cannot contain a ;")
+            If strLine.Length < 7 Then
+                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " record is missing information")
                 blnIssue = True
             Else
-                strBarcodeHash = ConvertBarcodePepperAndHash(strLine(4))
-                strbSQLPull.AppendLine("SELECT COUNT(*) FROM User WHERE Barcode = '" & strBarcodeHash & "'")
-                If ExecuteScalarQuery(strbSQLPull.ToString) <> 0 Then
-                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " barcode for user must be unique")
+                strbSQLPull.Clear()
+                strbSQLPull.AppendLine("Select count(*) from User where username = '" & checkSQLInjection(strLine(0)) & "'")
+                If TextCheck(strLine(0)) Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Username cannot contain a ;")
+                    blnIssue = True
+                ElseIf ExecuteScalarQuery(strbSQLPull.ToString) <> 0 Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " username must be unqiue")
                     blnIssue = True
                 End If
-            End If
-            If Not IsNumeric(strLine(5)) Then
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " admin flag must be either 1 if they are an admin or 0 if they are an admin")
-                blnIssue = True
-            ElseIf strLine(5) <> 0 And strLine(5) <> 1 Then
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " admin flag must be a 1 if they are an admin or a 0 if they are not an admin")
-                blnIssue = True
-            End If
-            If Not IsNumeric(strLine(6)) Then
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " supervisor flag must be either 1 if they are an supervisor or 0 if they are not a supervisor")
-                blnIssue = True
-            ElseIf strLine(6) <> 0 And strLine(6) <> 1 Then
-                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " supervisor flag must be a 1 if they are an supervisor or a 0 if they are not a supervisor")
-                blnIssue = True
-            End If
 
-            If Not blnIssue Then
-                strhold = LogIn.MakeSaltPepperAndHash(strLine(1))
-                strHashedPassword = strhold(0)
-                strSalt = strhold(1)
-                UserArray.Add(New UserClass(checkSQLInjection(strLine(0)), strHashedPassword, strSalt, checkSQLInjection(strLine(2)), checkSQLInjection(strLine(3)),
+                If TextCheck(strLine(1)) Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " password cannot have a ;")
+                    blnIssue = True
+                ElseIf Not frmConfiguration.CheckPassword(strLine(1)) Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special characters !@#$%^&* ")
+                    blnIssue = True
+                End If
+                If TextCheck(strLine(2)) Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " frist name cannot have a ;")
+                    blnIssue = True
+                End If
+                If TextCheck(strLine(3)) Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " last name cannot have a ;")
+                    blnIssue = True
+                End If
+
+                If TextCheck(strLine(4)) Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " barcode cannot contain a ;")
+                    blnIssue = True
+                Else
+                    strbSQLPull.Clear()
+                    strBarcodeHash = ConvertBarcodePepperAndHash(strLine(4))
+                    strbSQLPull.AppendLine("SELECT COUNT(*) FROM User WHERE Barcode = '" & strBarcodeHash & "'")
+                    If ExecuteScalarQuery(strbSQLPull.ToString) <> 0 Then
+                        strbErrorMessage.AppendLine("Issue on line " & intLineNum & " barcode for user must be unique" &
+                                                    " a user in the database is already using this barcode")
+                        blnIssue = True
+                    ElseIf UsedBarCodesArray.Contains(strBarcodeHash) Then
+                        strbErrorMessage.AppendLine("Issue on line " & intLineNum & " barcode for user must be unique" &
+                                                    " a user being imported is already using this barcode")
+                        blnIssue = True
+                    End If
+                End If
+                If Not IsNumeric(strLine(5)) Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " admin flag must be either 1 if they are an admin or 0 if they are an admin")
+                    blnIssue = True
+                ElseIf strLine(5) <> 0 And strLine(5) <> 1 Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " admin flag must be a 1 if they are an admin or a 0 if they are not an admin")
+                    blnIssue = True
+                End If
+                If Not IsNumeric(strLine(6)) Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " supervisor flag must be either 1 if they are an supervisor or 0 if they are not a supervisor")
+                    blnIssue = True
+                ElseIf strLine(6) <> 0 And strLine(6) <> 1 Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " supervisor flag must be a 1 if they are an supervisor or a 0 if they are not a supervisor")
+                    blnIssue = True
+                End If
+
+                If Not blnIssue Then
+                    strhold = LogIn.MakeSaltPepperAndHash(strLine(1))
+                    strHashedPassword = strhold(0)
+                    UsedBarCodesArray.Add(strBarcodeHash)
+                    strSalt = strhold(1)
+                    UserArray.Add(New UserClass(checkSQLInjection(strLine(0)), strHashedPassword, strSalt, checkSQLInjection(strLine(2)), checkSQLInjection(strLine(3)),
                                 strBarcodeHash, strLine(5), strLine(6)))
+                End If
             End If
             intLineNum += 1
         Loop While (Not srReader.EndOfStream)
@@ -888,20 +935,25 @@ Module BulkImportMethods
 
         Do
             strLine = srReader.ReadLine.Split(vbTab)
-            For i As Integer = 0 To 1
-                If TextCheck(strLine(i)) Then
-                    Select Case i
-                        Case 0
-                            strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Room_ID can not contain a ;")
-                            blnIssue = True
-                        Case 1
-                            strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Bed_Name can not contain a ;")
-                            blnIssue = True
-                    End Select
+            If strLine.Length < 2 Then
+                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " record is missing information")
+                blnIssue = True
+            Else
+                For i As Integer = 0 To 1
+                    If TextCheck(strLine(i)) Then
+                        Select Case i
+                            Case 0
+                                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Room_ID can not contain a ;")
+                                blnIssue = True
+                            Case 1
+                                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Bed_Name can not contain a ;")
+                                blnIssue = True
+                        End Select
+                    End If
+                Next
+                If Not blnIssue Then
+                    roomArray.Add(New RoomClass(strLine(0), strLine(1)))
                 End If
-            Next
-            If Not blnIssue Then
-                roomArray.Add(New RoomClass(strLine(0), strLine(1)))
             End If
             intLineNum += 1
         Loop While (Not srReader.EndOfStream)
