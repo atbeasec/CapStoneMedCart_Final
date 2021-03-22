@@ -84,11 +84,21 @@ Partial Class frmPatientInfo
         Me.flpDispenseHistory = New System.Windows.Forms.FlowLayoutPanel()
         Me.tpLabelDirections = New System.Windows.Forms.ToolTip(Me.components)
         Me.tpToolTip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.pnlNameBarcode = New System.Windows.Forms.Panel()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.pnlPersonalInformation.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.pnlPrescriptionsHeader.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.pnlDispenseHistoryHeader.SuspendLayout()
+        Me.pnlNameBarcode.SuspendLayout()
         Me.SuspendLayout()
         '
         'LblPatientName
@@ -626,7 +636,7 @@ Partial Class frmPatientInfo
         Me.btnWaste.ForeColor = System.Drawing.Color.White
         Me.btnWaste.Image = CType(resources.GetObject("btnWaste.Image"), System.Drawing.Image)
         Me.btnWaste.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnWaste.Location = New System.Drawing.Point(502, 6)
+        Me.btnWaste.Location = New System.Drawing.Point(561, 6)
         Me.btnWaste.Name = "btnWaste"
         Me.btnWaste.Size = New System.Drawing.Size(107, 37)
         Me.btnWaste.TabIndex = 2
@@ -642,9 +652,9 @@ Partial Class frmPatientInfo
         Me.btnDispenseMedication.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDispenseMedication.ForeColor = System.Drawing.Color.White
         Me.btnDispenseMedication.Image = CType(resources.GetObject("btnDispenseMedication.Image"), System.Drawing.Image)
-        Me.btnDispenseMedication.Location = New System.Drawing.Point(638, 6)
+        Me.btnDispenseMedication.Location = New System.Drawing.Point(677, 6)
         Me.btnDispenseMedication.Name = "btnDispenseMedication"
-        Me.btnDispenseMedication.Size = New System.Drawing.Size(236, 37)
+        Me.btnDispenseMedication.Size = New System.Drawing.Size(235, 37)
         Me.btnDispenseMedication.TabIndex = 3
         Me.btnDispenseMedication.Text = "  Dispense Medication"
         Me.btnDispenseMedication.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -658,9 +668,9 @@ Partial Class frmPatientInfo
         Me.btnEditPatient.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnEditPatient.ForeColor = System.Drawing.Color.White
         Me.btnEditPatient.Image = CType(resources.GetObject("btnEditPatient.Image"), System.Drawing.Image)
-        Me.btnEditPatient.Location = New System.Drawing.Point(903, 6)
+        Me.btnEditPatient.Location = New System.Drawing.Point(918, 6)
         Me.btnEditPatient.Name = "btnEditPatient"
-        Me.btnEditPatient.Size = New System.Drawing.Size(176, 37)
+        Me.btnEditPatient.Size = New System.Drawing.Size(170, 37)
         Me.btnEditPatient.TabIndex = 4
         Me.btnEditPatient.Text = "  Edit Patient"
         Me.btnEditPatient.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -680,6 +690,7 @@ Partial Class frmPatientInfo
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.White
+        Me.Panel1.Controls.Add(Me.pnlNameBarcode)
         Me.Panel1.Controls.Add(Me.btnBack)
         Me.Panel1.Controls.Add(Me.btnWaste)
         Me.Panel1.Controls.Add(Me.btnEditPatient)
@@ -813,6 +824,123 @@ Partial Class frmPatientInfo
         Me.flpDispenseHistory.Size = New System.Drawing.Size(1067, 140)
         Me.flpDispenseHistory.TabIndex = 1
         '
+        'pnlNameBarcode
+        '
+        Me.pnlNameBarcode.BackColor = System.Drawing.Color.White
+        Me.pnlNameBarcode.Controls.Add(Me.TextBox4)
+        Me.pnlNameBarcode.Controls.Add(Me.TextBox3)
+        Me.pnlNameBarcode.Controls.Add(Me.TextBox2)
+        Me.pnlNameBarcode.Controls.Add(Me.TextBox1)
+        Me.pnlNameBarcode.Controls.Add(Me.Label7)
+        Me.pnlNameBarcode.Controls.Add(Me.Label6)
+        Me.pnlNameBarcode.Controls.Add(Me.Label5)
+        Me.pnlNameBarcode.Controls.Add(Me.Label4)
+        Me.pnlNameBarcode.Location = New System.Drawing.Point(-1, 0)
+        Me.pnlNameBarcode.Name = "pnlNameBarcode"
+        Me.pnlNameBarcode.Size = New System.Drawing.Size(914, 48)
+        Me.pnlNameBarcode.TabIndex = 64
+        Me.pnlNameBarcode.Visible = False
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label4.Location = New System.Drawing.Point(12, 12)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(45, 21)
+        Me.Label4.TabIndex = 23
+        Me.Label4.Text = "First:"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label5.Location = New System.Drawing.Point(206, 12)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(66, 21)
+        Me.Label5.TabIndex = 24
+        Me.Label5.Text = "Middle:"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label6.Location = New System.Drawing.Point(427, 15)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(43, 21)
+        Me.Label6.TabIndex = 25
+        Me.Label6.Text = "Last:"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label7.Location = New System.Drawing.Point(620, 15)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(79, 21)
+        Me.Label7.TabIndex = 26
+        Me.Label7.Text = "Barcode: "
+        '
+        'TextBox1
+        '
+        Me.TextBox1.BackColor = System.Drawing.Color.White
+        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox1.CausesValidation = False
+        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(52, 11)
+        Me.TextBox1.MaxLength = 5
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.ReadOnly = True
+        Me.TextBox1.ShortcutsEnabled = False
+        Me.TextBox1.Size = New System.Drawing.Size(148, 25)
+        Me.TextBox1.TabIndex = 27
+        '
+        'TextBox2
+        '
+        Me.TextBox2.BackColor = System.Drawing.Color.White
+        Me.TextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox2.CausesValidation = False
+        Me.TextBox2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox2.Location = New System.Drawing.Point(273, 11)
+        Me.TextBox2.MaxLength = 5
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.ReadOnly = True
+        Me.TextBox2.ShortcutsEnabled = False
+        Me.TextBox2.Size = New System.Drawing.Size(148, 25)
+        Me.TextBox2.TabIndex = 28
+        '
+        'TextBox3
+        '
+        Me.TextBox3.BackColor = System.Drawing.Color.White
+        Me.TextBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox3.CausesValidation = False
+        Me.TextBox3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox3.Location = New System.Drawing.Point(466, 13)
+        Me.TextBox3.MaxLength = 5
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.ReadOnly = True
+        Me.TextBox3.ShortcutsEnabled = False
+        Me.TextBox3.Size = New System.Drawing.Size(148, 25)
+        Me.TextBox3.TabIndex = 29
+        '
+        'TextBox4
+        '
+        Me.TextBox4.BackColor = System.Drawing.Color.White
+        Me.TextBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox4.CausesValidation = False
+        Me.TextBox4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox4.Location = New System.Drawing.Point(693, 12)
+        Me.TextBox4.MaxLength = 5
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.ReadOnly = True
+        Me.TextBox4.ShortcutsEnabled = False
+        Me.TextBox4.Size = New System.Drawing.Size(207, 25)
+        Me.TextBox4.TabIndex = 30
+        '
         'frmPatientInfo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -840,6 +968,8 @@ Partial Class frmPatientInfo
         Me.Panel1.PerformLayout()
         Me.pnlDispenseHistoryHeader.ResumeLayout(False)
         Me.pnlDispenseHistoryHeader.PerformLayout()
+        Me.pnlNameBarcode.ResumeLayout(False)
+        Me.pnlNameBarcode.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -904,4 +1034,13 @@ Partial Class frmPatientInfo
     Friend WithEvents Panel2 As Panel
     Friend WithEvents txtPhone As MaskedTextBox
     Friend WithEvents mtbBirthday As MaskedTextBox
+    Friend WithEvents pnlNameBarcode As Panel
+    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label4 As Label
 End Class
