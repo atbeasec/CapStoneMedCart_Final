@@ -667,7 +667,7 @@ Public Class frmInventory
     '/*  ---   ----     ------------------------------------------------  */
     '/*  BRH  3/01/21    Initial creation                                 */
     Private Sub txtStrength_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtStrength.KeyPress
-        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz1234567890/")
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz1234567890/ ")
     End Sub
 
     '/*********************************************************************/
@@ -702,7 +702,7 @@ Public Class frmInventory
     '/*  ---   ----     ------------------------------------------------  */
     '/*  BRH  3/01/21    Initial creation                                 */
     Private Sub txtType_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtType.KeyPress
-        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz1234567890/")
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz1234567890/ ")
     End Sub
 
     '/*********************************************************************/
