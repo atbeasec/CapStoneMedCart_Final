@@ -15,7 +15,10 @@
     End Sub
 
     Private Sub btnDecrementQuantity_Click(sender As Object, e As EventArgs) Handles btnDecrementQuantity.Click
-        ButtonDecrement(txtQuantity)
+        If Not txtQuantity.Text = 0 Then
+            ButtonDecrement(txtQuantity)
+        End If
+
     End Sub
 
     Private Sub cmbMedications_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMedications.SelectedIndexChanged
