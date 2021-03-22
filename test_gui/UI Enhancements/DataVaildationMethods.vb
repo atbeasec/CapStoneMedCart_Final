@@ -178,13 +178,15 @@ Module DataVaildationMethods
     '/*  NP          3/19/2021     Commented out line 186 as it is erroring*/
     '/*                            out and I needed to make sure that my   */
     '/*                            coded worked before I tried to fix it.  */
+    '/* dillen      3/22/2021      Fixed \ to work with regex              */
     '/*********************************************************************/
 
     Function checkSQLInjection(TextToCheck As String) As String
-        TextToCheck = Regex.Replace(TextToCheck, "'", "''") ' check for '
-        TextToCheck = Regex.Replace(TextToCheck, Chr(34), "''") 'check for "
-        ' TextToCheck = Regex.Replace(TextToCheck, Chr(92), "''") ' check for \ this line was causing crashes.
-        TextToCheck = Regex.Replace(TextToCheck, Chr(47), "''") ' check for /
+        TextToCheck = Regex.Replace(TextToCheck, Chr(39), "") ' check for '
+        TextToCheck = Regex.Replace(TextToCheck, Chr(34), "") 'check for "
+        TextToCheck = Regex.Replace(TextToCheck, Chr(92), "") ' check for \
+        TextToCheck = Regex.Replace(TextToCheck, "//", "") ' check for /  *backslash character is interpreted as the escape character, each backslash must be escaped with another backslash.*
+        TextToCheck = Regex.Replace(TextToCheck, Chr(59), "") ' check for ;        
 
         Return TextToCheck
     End Function
