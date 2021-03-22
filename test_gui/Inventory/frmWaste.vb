@@ -158,6 +158,9 @@
         If Not cboMedication.SelectedIndex = -1 Then
             Dim intSelectedMEDID As Integer = intMedicationID(cboMedication.SelectedIndex)
             Dim intMaxValue As Integer = CreateDatabase.ExecuteScalarQuery("Select Quantity from DrawerMedication where Medication_TUID = '" & intSelectedMEDID & "'")
+            If radAllMed.Checked = True Then
+                txtQuantity.Text = intMaxValue
+            End If
             If txtQuantity.Text > intMaxValue Then
                 txtQuantity.Text = intMaxValue
                 MessageBox.Show("Maximum value of selected medication available is " & intMaxValue & ".")
