@@ -59,7 +59,7 @@ Partial Class frmFullCart
         Me.btn1.Name = "btn1"
         Me.btn1.Size = New System.Drawing.Size(68, 27)
         Me.btn1.TabIndex = 0
-        Me.btn1.Text = "1"
+        Me.btn1.Text = "#1"
         Me.btn1.UseVisualStyleBackColor = True
         '
         'btn3
