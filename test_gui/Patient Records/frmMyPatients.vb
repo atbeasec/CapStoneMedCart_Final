@@ -216,10 +216,10 @@
             ' .Font = New Font(New FontFamily("Microsoft Sans Serif"), 11)
             '.Location = New Point(825, 5)
             .Location = New Point(intX, intY)
-            .Name = (intPatientID).ToString
+            .Name = "btnAddbutton" + intPanelsAddedCount.ToString
             .Image = mapImagePencil
             .ImageAlign = ContentAlignment.MiddleCenter
-            .Tag = intPanelsAddedCount + 1
+            .Tag = intPatientID
             '   .Visible = False
 
         End With
@@ -388,7 +388,7 @@
         Dim strVisitDate As String = "10/10/2021"
 
 
-        Dim patientIDFromSelectedRecord As Integer = CInt(sender.name)
+        Dim patientIDFromSelectedRecord As Integer = CInt(sender.tag)
         ExecuteInsertQuery("INSERT INTO PatientUser ('Patient_TUID','User_TUID','Visit_Date','Active_Flag') VALUES ('" & patientIDFromSelectedRecord.ToString & "','" & UserID.ToString & "','" & strVisitDate & "','" & intActive_Flag.ToString & "' );")
 
 
