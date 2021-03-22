@@ -149,7 +149,7 @@
         Const YCOORDINATE As Integer = 20
         ' CreateCheckBox(pnlMainPanel, getPanelCount(flpPannel), lblMRN.Location.X - 45, 5)
         CreateAddButton(pnlMainPanel, getPanelCount(flpPannel), lblAssignment.Location.X + 15, 5, intPatientID)
-        CreateRemoveButton(pnlMainPanel, getPanelCount(flpPannel), lblAssignment.Location.X + 15, 5)
+        CreateRemoveButton(pnlMainPanel, getPanelCount(flpPannel), lblAssignment.Location.X + 15, 5, intPatientID)
         CreateIDLabelWithToolTip(pnlMainPanel, lblID1, "lblMRN", lblMRN.Location.X, YCOORDINATE, strMRN, getPanelCount(flpPannel), tpToolTip, TruncateString(15, strMRN))
         CreateIDLabelWithToolTip(pnlMainPanel, lblID2, "lblFirstName", lblFirstName.Location.X, YCOORDINATE, strFirstName, getPanelCount(flpPannel), tpToolTip, TruncateString(25, strFirstName))
         CreateIDLabelWithToolTip(pnlMainPanel, lblID3, "lblLastName", lblLastName.Location.X, YCOORDINATE, strLastName, getPanelCount(flpPannel), tpToolTip, TruncateString(25, strLastName))
@@ -265,7 +265,7 @@
     '/*  ---            ----             ----				             */
     '/*  CK		2/6/21		 initial creation                            */
     '/********************************************************************/ 
-    Private Sub CreateRemoveButton(ByVal pnlPanelName As Panel, ByVal pnlPanelsAddedCount As Integer, ByVal intX As Integer, ByVal intY As Integer)
+    Private Sub CreateRemoveButton(ByVal pnlPanelName As Panel, ByVal pnlPanelsAddedCount As Integer, ByVal intX As Integer, ByVal intY As Integer, ByVal intPatientID As Integer)
 
         Dim btnRemove As Button
         btnRemove = New Button
@@ -285,7 +285,7 @@
             .Name = "btnRemove" + (pnlPanelsAddedCount).ToString
             .Image = mapImagePencil
             .ImageAlign = ContentAlignment.MiddleCenter
-            .Tag = pnlPanelsAddedCount + 1
+            .Tag = intPatientID
             '  .Visible = False
         End With
 
@@ -332,18 +332,11 @@
     Private Sub RemoveAssignment_Click(ByVal sender As Object, e As EventArgs)
         Dim User_ID As Integer = 9
 
-        Dim patientIDFromSelectedRecord As Integer = CInt(sender.name)
+        Dim patientIDFromSelectedRecord As Integer = CInt(sender.tag)
         MessageBox.Show("Patient unassigned to you")
 
 
-        ExecuteInsertQuery("UPDATE PatientUser SET Active_Flag = 0 WHERE Patient_TUID =" & patientIDFromSelectedRecord.ToString & "AND User_ID =" & User_ID.ToString & ";)")
-        '*******************
-        ' ADAM if a patient was removed from the assingment, take the patient ID and indicate in the DB they are no longer assiged to the logged in user.
-        'CreateDatabase.ExecuteInsertQuery("UP")
-
-
-        '*******************
-        ' ADAM recall the create panel method if necessary. For example, if the patient was removed from my patients, we should remove that patient on the screen.
+        ExecuteInsertQuery("UPDATE PatientUser SET Active_Flag = 0 WHERE Patient_TUID =" & patientIDFromSelectedRecord.ToString & " AND User_TUID =" & User_ID.ToString & " ;")
 
         RemoveOnScreenPanel(sender)
 
@@ -386,13 +379,21 @@
         Dim UserID As Integer = 9
         Dim intActive_Flag As String = "1"
         Dim strVisitDate As String = "10/10/2021"
-
-
         Dim patientIDFromSelectedRecord As Integer = CInt(sender.tag)
-        ExecuteInsertQuery("INSERT INTO PatientUser ('Patient_TUID','User_TUID','Visit_Date','Active_Flag') VALUES ('" & patientIDFromSelectedRecord.ToString & "','" & UserID.ToString & "','" & strVisitDate & "','" & intActive_Flag.ToString & "' );")
+        Dim dsPatientUser As DataSet
+        dsPatientUser = ExecuteSelectQuery("Select * From PatientUser")
+        Dim intActiveFlag As Integer = 1
+        For Each row As DataRow In dsPatientUser.Tables(0).Rows
+            If CInt(row(0)) = patientIDFromSelectedRecord And CInt(row(1)) = UserID Then
+                intActiveFlag = CInt(row(3))
+            End If
+        Next
+        If intActiveFlag = 0 Then
+            ExecuteInsertQuery("UPDATE PatientUser SET Active_Flag = 1 WHERE Patient_TUID =" & patientIDFromSelectedRecord.ToString & " AND User_TUID =" & UserID.ToString & " ;")
+        Else
+            ExecuteInsertQuery("INSERT INTO PatientUser ('Patient_TUID','User_TUID','Visit_Date','Active_Flag') VALUES ('" & patientIDFromSelectedRecord.ToString & "','" & UserID.ToString & "','" & strVisitDate & "','" & intActive_Flag.ToString & "' );")
 
-
-
+        End If
 
 
         MessageBox.Show("Patient assigned to you")
@@ -497,6 +498,38 @@
         End If
 
     End Sub
+    '/********************************************************************/
+    '/*                   SUB NAME: cboFilter_SelectedIndexChanged       */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Collin Krygier  		             */   
+    '/*		         DATE CREATED: 	2/6/21			                     */                             
+    '/********************************************************************/
+    '/*  SUB Purpose:This sub determines the current item selected       */
+    '/* in the combobox and then calls the necessary method accordingly. */
+    '/*                                                                  */
+    '/********************************************************************/
+    '/*  CALLED BY:    	      		     */				            
+    '/*                                        				             */         
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/*             (NONE)						                         */		               
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	 sender- object representing a control                           */
+    '/*  e- eventargs indicating there is an event handle assigned       */
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             
+    '/*				                                                      */					                       
+    '/*                                                                  */   
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/*	 none                           				                 */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                                 
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  CK		2/6/21		 initial creation                            */
+    '/********************************************************************/ 
     Private Sub LoadAllActivePatients()
         Dim dsPatient As DataSet
         Dim UserID As Integer = 9
@@ -529,6 +562,38 @@
         Next
 
     End Sub
+    '/********************************************************************/
+    '/*                   SUB NAME: cboFilter_SelectedIndexChanged       */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Collin Krygier  		             */   
+    '/*		         DATE CREATED: 	2/6/21			                     */                             
+    '/********************************************************************/
+    '/*  SUB Purpose:This sub determines the current item selected       */
+    '/* in the combobox and then calls the necessary method accordingly. */
+    '/*                                                                  */
+    '/********************************************************************/
+    '/*  CALLED BY:    	      		     */				            
+    '/*                                        				             */         
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/*             (NONE)						                         */		               
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	 sender- object representing a control                           */
+    '/*  e- eventargs indicating there is an event handle assigned       */
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             
+    '/*				                                                      */					                       
+    '/*                                                                  */   
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/*	 none                           				                 */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                                 
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  CK		2/6/21		 initial creation                            */
+    '/********************************************************************/ 
     Private Sub LoadAllPatients()
         Dim dsPatient As DataSet
         Dim UserID As Integer = 9
@@ -561,6 +626,38 @@
         Next
 
     End Sub
+    '/********************************************************************/
+    '/*                   SUB NAME: cboFilter_SelectedIndexChanged       */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Collin Krygier  		             */   
+    '/*		         DATE CREATED: 	2/6/21			                     */                             
+    '/********************************************************************/
+    '/*  SUB Purpose:This sub determines the current item selected       */
+    '/* in the combobox and then calls the necessary method accordingly. */
+    '/*                                                                  */
+    '/********************************************************************/
+    '/*  CALLED BY:    	      		     */				            
+    '/*                                        				             */         
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/*             (NONE)						                         */		               
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	 sender- object representing a control                           */
+    '/*  e- eventargs indicating there is an event handle assigned       */
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             
+    '/*				                                                      */					                       
+    '/*                                                                  */   
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/*	 none                           				                 */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                                 
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  CK		2/6/21		 initial creation                            */
+    '/********************************************************************/ 
     Private Sub LoadMyPatients()
         Dim dsPatientUser As DataSet
         'Dim dsPatientUserAssigned As DataSet
@@ -591,7 +688,6 @@
                 strPatientLast = Patient(2)
                 StrDOB = Patient(3)
                 intPhysicianID = Patient(4)
-                intPatientID = Patient(5)
                 strRoom = Patient(7)
                 strBed = Patient(8)
                 'StrDOB = StrDOB.Substring(0, 9)
@@ -603,7 +699,38 @@
 
         Next
     End Sub
-
+    '/********************************************************************/
+    '/*                   SUB NAME: cboFilter_SelectedIndexChanged       */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Collin Krygier  		             */   
+    '/*		         DATE CREATED: 	2/6/21			                     */                             
+    '/********************************************************************/
+    '/*  SUB Purpose:This sub determines the current item selected       */
+    '/* in the combobox and then calls the necessary method accordingly. */
+    '/*                                                                  */
+    '/********************************************************************/
+    '/*  CALLED BY:    	      		     */				            
+    '/*                                        				             */         
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/*             (NONE)						                         */		               
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	 sender- object representing a control                           */
+    '/*  e- eventargs indicating there is an event handle assigned       */
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             
+    '/*				                                                      */					                       
+    '/*                                                                  */   
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/*	 none                           				                 */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                                 
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  CK		2/6/21		 initial creation                            */
+    '/********************************************************************/ 
     Private Sub LoadAllPatientUser()
         Dim dsPatientUser As DataSet
         Dim dsPatientUserAssigned As DataSet
