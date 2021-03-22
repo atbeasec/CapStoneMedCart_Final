@@ -170,6 +170,17 @@ Public Class frmNewPatient
         strbSQL.Append(GenerateRandom.generateRandomAlphanumeric(10, "1234567890") & "','")
         '^this is going to generate a random MRN number
         Dim strMRN As String = GenerateRandom.generateRandomAlphanumeric(20, strCharactersForRandomGeneration)
+        Dim blnUsedMRN As Boolean = False
+        Dim dsCheckforRecord As DataSet
+        'check if MRN is in use, if it is currently being used, generate a new one
+        While blnUsedMRN = False
+            dsCheckforRecord = CreateDatabase.ExecuteSelectQuery("Select * from Patient WHERE MRN_Number = '" & strMRN & "'")
+            If dsCheckforRecord.Tables.Count > 0 Then
+                blnUsedMRN = True
+                MessageBox.Show("Unused")
+            End If
+            strMRN = GenerateRandom.generateRandomAlphanumeric(20, strCharactersForRandomGeneration)
+        End While
         strbSQL.Append(strMRN & "',")
         '^this is going to genereate a random Bar code. 
         strbSQL.Append("'" & strFirstName & "' , '" & strMiddleName & "',")
@@ -733,7 +744,9 @@ Public Class frmNewPatient
         DataVaildationMethods.KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz 0123456789.'-#@%&/")
     End Sub
 
-
+    Private Sub mtbDOB_KeyPress(sender As Object, e As KeyPressEventArgs) Handles mtbDoB.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789")
+    End Sub
 
     '/*********************************************************************/
     '/*                   FUNCTION NAME:  hasError  					   */         
@@ -806,7 +819,7 @@ Public Class frmNewPatient
             hasError = True
             strbErrorMessage.Append("Please select male or female for the patient sex." & vbCrLf)
         End If
-        If Not IsDate(DateTime.Parse(mtbDoB.Text)) Then
+        If Not IsDate(mtbDoB.Text) Then
             hasError = True
             strbErrorMessage.Append("Please enter a valid date of birth." & vbCrLf)
         End If
