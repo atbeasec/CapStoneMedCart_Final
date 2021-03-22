@@ -49,7 +49,7 @@
             AdHoc.clearAdhocBoxes()
             MessageBox.Show("Order Successfully placed")
         Else
-            MessageBox.Show("Please select a Drug and patient to dispense the medication too")
+            MessageBox.Show("Please select both a patient and a medication to dispense")
         End If
     End Sub
 
