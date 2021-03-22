@@ -169,7 +169,8 @@ Public Class frmNewPatient
         'strbSQL.Append(CInt(Rnd() * 20) & "',") 'this is going to make a random barcode this is temporary
         strbSQL.Append(GenerateRandom.generateRandomAlphanumeric(10, "1234567890") & "','")
         '^this is going to generate a random MRN number
-        strbSQL.Append(GenerateRandom.generateRandomAlphanumeric(20, strCharactersForRandomGeneration) & "',")
+        Dim strMRN As String = GenerateRandom.generateRandomAlphanumeric(20, strCharactersForRandomGeneration)
+        strbSQL.Append(strMRN & "',")
         '^this is going to genereate a random Bar code. 
         strbSQL.Append("'" & strFirstName & "' , '" & strMiddleName & "',")
         strbSQL.Append("'" & strLastName & "','" & mtbDoB.Text & "',")
@@ -181,6 +182,7 @@ Public Class frmNewPatient
         strbSQL.Append("'" & 1 & "');")
 
         CreateDatabase.ExecuteInsertQuery(strbSQL.ToString)
+        CreateDatabase.ExecuteInsertQuery("")
         'send message saying it was a success or error
 
         'if error say what the error was and return to the form with the filled out info
@@ -470,7 +472,7 @@ Public Class frmNewPatient
     '/*********************************************************************/
 
     Private Sub txtWeight_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtWeight.KeyPress
-        DataVaildationMethods.KeyPressCheck(e, "0123456789")
+        DataVaildationMethods.KeyPressCheck(e, "0123456789.")
     End Sub
 
     '/*********************************************************************/
@@ -688,9 +690,6 @@ Public Class frmNewPatient
 
     Private Sub cmbState_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cmbState.KeyPress
         DataVaildationMethods.KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz")
-
-
-
     End Sub
     '/*********************************************************************/
     '/*                   SUBPROGRAM NAME: txtCity_KeyPress 	           */         
@@ -807,7 +806,7 @@ Public Class frmNewPatient
             hasError = True
             strbErrorMessage.Append("Please select male or female for the patient sex." & vbCrLf)
         End If
-        If Not IsDate(mtbDoB.Text) Then
+        If Not IsDate(DateTime.Parse(mtbDoB.Text)) Then
             hasError = True
             strbErrorMessage.Append("Please enter a valid date of birth." & vbCrLf)
         End If
