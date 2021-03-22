@@ -99,7 +99,7 @@ Partial Class frmPatientInfo
         Me.LblPatientName.Location = New System.Drawing.Point(213, 12)
         Me.LblPatientName.Name = "LblPatientName"
         Me.LblPatientName.Size = New System.Drawing.Size(140, 25)
-        Me.LblPatientName.TabIndex = 0
+        Me.LblPatientName.TabIndex = 1
         Me.LblPatientName.Text = "Fill Name Here"
         '
         'txtGender
@@ -112,7 +112,7 @@ Partial Class frmPatientInfo
         Me.txtGender.ReadOnly = True
         Me.txtGender.ShortcutsEnabled = False
         Me.txtGender.Size = New System.Drawing.Size(151, 25)
-        Me.txtGender.TabIndex = 3
+        Me.txtGender.TabIndex = 2
         '
         'Label19
         '
@@ -135,7 +135,7 @@ Partial Class frmPatientInfo
         Me.txtPhysician.ReadOnly = True
         Me.txtPhysician.ShortcutsEnabled = False
         Me.txtPhysician.Size = New System.Drawing.Size(151, 25)
-        Me.txtPhysician.TabIndex = 8
+        Me.txtPhysician.TabIndex = 7
         '
         'Label16
         '
@@ -194,7 +194,7 @@ Partial Class frmPatientInfo
         Me.mtbBirthday.Name = "mtbBirthday"
         Me.mtbBirthday.ReadOnly = True
         Me.mtbBirthday.Size = New System.Drawing.Size(151, 20)
-        Me.mtbBirthday.TabIndex = 65
+        Me.mtbBirthday.TabIndex = 1
         Me.mtbBirthday.ValidatingType = GetType(Date)
         '
         'Panel2
@@ -207,7 +207,7 @@ Partial Class frmPatientInfo
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel2.Size = New System.Drawing.Size(148, 25)
-        Me.Panel2.TabIndex = 64
+        Me.Panel2.TabIndex = 9
         '
         'txtPhone
         '
@@ -219,7 +219,7 @@ Partial Class frmPatientInfo
         Me.txtPhone.Name = "txtPhone"
         Me.txtPhone.ShortcutsEnabled = False
         Me.txtPhone.Size = New System.Drawing.Size(144, 22)
-        Me.txtPhone.TabIndex = 15
+        Me.txtPhone.TabIndex = 0
         '
         'cboState
         '
@@ -229,7 +229,7 @@ Partial Class frmPatientInfo
         Me.cboState.Location = New System.Drawing.Point(567, 150)
         Me.cboState.Name = "cboState"
         Me.cboState.Size = New System.Drawing.Size(151, 25)
-        Me.cboState.TabIndex = 13
+        Me.cboState.TabIndex = 14
         '
         'btnAddAllergies
         '
@@ -242,7 +242,7 @@ Partial Class frmPatientInfo
         Me.btnAddAllergies.Location = New System.Drawing.Point(919, 8)
         Me.btnAddAllergies.Name = "btnAddAllergies"
         Me.btnAddAllergies.Size = New System.Drawing.Size(161, 37)
-        Me.btnAddAllergies.TabIndex = 15
+        Me.btnAddAllergies.TabIndex = 10
         Me.btnAddAllergies.Text = "  Add Allergies"
         Me.btnAddAllergies.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnAddAllergies.UseVisualStyleBackColor = False
@@ -267,7 +267,7 @@ Partial Class frmPatientInfo
         Me.lstBoxAllergies.Location = New System.Drawing.Point(919, 51)
         Me.lstBoxAllergies.Name = "lstBoxAllergies"
         Me.lstBoxAllergies.Size = New System.Drawing.Size(161, 122)
-        Me.lstBoxAllergies.TabIndex = 58
+        Me.lstBoxAllergies.TabIndex = 11
         '
         'txtZipCode
         '
@@ -280,7 +280,7 @@ Partial Class frmPatientInfo
         Me.txtZipCode.ReadOnly = True
         Me.txtZipCode.ShortcutsEnabled = False
         Me.txtZipCode.Size = New System.Drawing.Size(151, 25)
-        Me.txtZipCode.TabIndex = 14
+        Me.txtZipCode.TabIndex = 15
         '
         'Label1
         '
@@ -303,7 +303,7 @@ Partial Class frmPatientInfo
         Me.txtCity.ReadOnly = True
         Me.txtCity.ShortcutsEnabled = False
         Me.txtCity.Size = New System.Drawing.Size(151, 25)
-        Me.txtCity.TabIndex = 12
+        Me.txtCity.TabIndex = 13
         '
         'cboBed
         '
@@ -313,7 +313,7 @@ Partial Class frmPatientInfo
         Me.cboBed.Location = New System.Drawing.Point(198, 91)
         Me.cboBed.Name = "cboBed"
         Me.cboBed.Size = New System.Drawing.Size(152, 25)
-        Me.cboBed.TabIndex = 7
+        Me.cboBed.TabIndex = 6
         '
         'cboRoom
         '
@@ -323,7 +323,7 @@ Partial Class frmPatientInfo
         Me.cboRoom.Location = New System.Drawing.Point(14, 91)
         Me.cboRoom.Name = "cboRoom"
         Me.cboRoom.Size = New System.Drawing.Size(151, 25)
-        Me.cboRoom.TabIndex = 6
+        Me.cboRoom.TabIndex = 5
         '
         'Label15
         '
@@ -368,7 +368,7 @@ Partial Class frmPatientInfo
         Me.txtEmail.ReadOnly = True
         Me.txtEmail.ShortcutsEnabled = False
         Me.txtEmail.Size = New System.Drawing.Size(151, 25)
-        Me.txtEmail.TabIndex = 9
+        Me.txtEmail.TabIndex = 8
         '
         'txtAddress
         '
@@ -380,7 +380,7 @@ Partial Class frmPatientInfo
         Me.txtAddress.ReadOnly = True
         Me.txtAddress.ShortcutsEnabled = False
         Me.txtAddress.Size = New System.Drawing.Size(337, 25)
-        Me.txtAddress.TabIndex = 11
+        Me.txtAddress.TabIndex = 12
         '
         'txtMRN
         '
@@ -393,7 +393,7 @@ Partial Class frmPatientInfo
         Me.txtMRN.ReadOnly = True
         Me.txtMRN.ShortcutsEnabled = False
         Me.txtMRN.Size = New System.Drawing.Size(150, 25)
-        Me.txtMRN.TabIndex = 1
+        Me.txtMRN.TabIndex = 0
         '
         'Label12
         '
@@ -451,7 +451,7 @@ Partial Class frmPatientInfo
         Me.txtWeight.ReadOnly = True
         Me.txtWeight.ShortcutsEnabled = False
         Me.txtWeight.Size = New System.Drawing.Size(148, 25)
-        Me.txtWeight.TabIndex = 5
+        Me.txtWeight.TabIndex = 4
         '
         'Label8
         '
@@ -475,7 +475,7 @@ Partial Class frmPatientInfo
         Me.txtHeight.ReadOnly = True
         Me.txtHeight.ShortcutsEnabled = False
         Me.txtHeight.Size = New System.Drawing.Size(150, 25)
-        Me.txtHeight.TabIndex = 4
+        Me.txtHeight.TabIndex = 3
         '
         'Label3
         '
@@ -541,7 +541,7 @@ Partial Class frmPatientInfo
         Me.lblFrequencyPrescription.Location = New System.Drawing.Point(917, 16)
         Me.lblFrequencyPrescription.Name = "lblFrequencyPrescription"
         Me.lblFrequencyPrescription.Size = New System.Drawing.Size(86, 21)
-        Me.lblFrequencyPrescription.TabIndex = 16
+        Me.lblFrequencyPrescription.TabIndex = 6
         Me.lblFrequencyPrescription.Tag = "7"
         Me.lblFrequencyPrescription.Text = "Frequency"
         '
@@ -553,7 +553,7 @@ Partial Class frmPatientInfo
         Me.lblPrescribedBy.Location = New System.Drawing.Point(741, 16)
         Me.lblPrescribedBy.Name = "lblPrescribedBy"
         Me.lblPrescribedBy.Size = New System.Drawing.Size(110, 21)
-        Me.lblPrescribedBy.TabIndex = 15
+        Me.lblPrescribedBy.TabIndex = 5
         Me.lblPrescribedBy.Tag = "6"
         Me.lblPrescribedBy.Text = "Prescribed By"
         '
@@ -565,7 +565,7 @@ Partial Class frmPatientInfo
         Me.lblDatePrescribed.Location = New System.Drawing.Point(545, 16)
         Me.lblDatePrescribed.Name = "lblDatePrescribed"
         Me.lblDatePrescribed.Size = New System.Drawing.Size(126, 21)
-        Me.lblDatePrescribed.TabIndex = 14
+        Me.lblDatePrescribed.TabIndex = 4
         Me.lblDatePrescribed.Tag = "5"
         Me.lblDatePrescribed.Text = "Date Prescribed"
         '
@@ -577,7 +577,7 @@ Partial Class frmPatientInfo
         Me.lblQuantityPrescription.Location = New System.Drawing.Point(453, 16)
         Me.lblQuantityPrescription.Name = "lblQuantityPrescription"
         Me.lblQuantityPrescription.Size = New System.Drawing.Size(72, 21)
-        Me.lblQuantityPrescription.TabIndex = 12
+        Me.lblQuantityPrescription.TabIndex = 3
         Me.lblQuantityPrescription.Tag = "4"
         Me.lblQuantityPrescription.Text = "Quantity"
         '
@@ -589,7 +589,7 @@ Partial Class frmPatientInfo
         Me.lblMedicationPrescription.Location = New System.Drawing.Point(5, 16)
         Me.lblMedicationPrescription.Name = "lblMedicationPrescription"
         Me.lblMedicationPrescription.Size = New System.Drawing.Size(140, 21)
-        Me.lblMedicationPrescription.TabIndex = 11
+        Me.lblMedicationPrescription.TabIndex = 0
         Me.lblMedicationPrescription.Tag = "1"
         Me.lblMedicationPrescription.Text = "Medication Name"
         '
@@ -601,7 +601,7 @@ Partial Class frmPatientInfo
         Me.lblTypePrescription.Location = New System.Drawing.Point(332, 16)
         Me.lblTypePrescription.Name = "lblTypePrescription"
         Me.lblTypePrescription.Size = New System.Drawing.Size(45, 21)
-        Me.lblTypePrescription.TabIndex = 13
+        Me.lblTypePrescription.TabIndex = 2
         Me.lblTypePrescription.Tag = "3"
         Me.lblTypePrescription.Text = "Type"
         '
@@ -613,7 +613,7 @@ Partial Class frmPatientInfo
         Me.lblStrengthPrescription.Location = New System.Drawing.Point(202, 16)
         Me.lblStrengthPrescription.Name = "lblStrengthPrescription"
         Me.lblStrengthPrescription.Size = New System.Drawing.Size(74, 21)
-        Me.lblStrengthPrescription.TabIndex = 10
+        Me.lblStrengthPrescription.TabIndex = 1
         Me.lblStrengthPrescription.Tag = "2"
         Me.lblStrengthPrescription.Text = "Strength"
         '
@@ -629,7 +629,7 @@ Partial Class frmPatientInfo
         Me.btnWaste.Location = New System.Drawing.Point(502, 6)
         Me.btnWaste.Name = "btnWaste"
         Me.btnWaste.Size = New System.Drawing.Size(107, 37)
-        Me.btnWaste.TabIndex = 11
+        Me.btnWaste.TabIndex = 2
         Me.btnWaste.Text = "  Waste"
         Me.btnWaste.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnWaste.UseVisualStyleBackColor = False
@@ -645,7 +645,7 @@ Partial Class frmPatientInfo
         Me.btnDispenseMedication.Location = New System.Drawing.Point(638, 6)
         Me.btnDispenseMedication.Name = "btnDispenseMedication"
         Me.btnDispenseMedication.Size = New System.Drawing.Size(236, 37)
-        Me.btnDispenseMedication.TabIndex = 12
+        Me.btnDispenseMedication.TabIndex = 3
         Me.btnDispenseMedication.Text = "  Dispense Medication"
         Me.btnDispenseMedication.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnDispenseMedication.UseVisualStyleBackColor = False
@@ -661,7 +661,7 @@ Partial Class frmPatientInfo
         Me.btnEditPatient.Location = New System.Drawing.Point(903, 6)
         Me.btnEditPatient.Name = "btnEditPatient"
         Me.btnEditPatient.Size = New System.Drawing.Size(176, 37)
-        Me.btnEditPatient.TabIndex = 13
+        Me.btnEditPatient.TabIndex = 4
         Me.btnEditPatient.Text = "  Edit Patient"
         Me.btnEditPatient.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnEditPatient.UseVisualStyleBackColor = False
@@ -703,7 +703,7 @@ Partial Class frmPatientInfo
         Me.btnBack.Location = New System.Drawing.Point(23, 6)
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(89, 37)
-        Me.btnBack.TabIndex = 61
+        Me.btnBack.TabIndex = 0
         Me.btnBack.Text = "Back"
         Me.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnBack.UseVisualStyleBackColor = False
@@ -720,7 +720,7 @@ Partial Class frmPatientInfo
         Me.pnlDispenseHistoryHeader.Location = New System.Drawing.Point(12, 476)
         Me.pnlDispenseHistoryHeader.Name = "pnlDispenseHistoryHeader"
         Me.pnlDispenseHistoryHeader.Size = New System.Drawing.Size(1067, 47)
-        Me.pnlDispenseHistoryHeader.TabIndex = 61
+        Me.pnlDispenseHistoryHeader.TabIndex = 0
         '
         'lblDateTime
         '
@@ -730,7 +730,7 @@ Partial Class frmPatientInfo
         Me.lblDateTime.Location = New System.Drawing.Point(578, 16)
         Me.lblDateTime.Name = "lblDateTime"
         Me.lblDateTime.Size = New System.Drawing.Size(157, 21)
-        Me.lblDateTime.TabIndex = 15
+        Me.lblDateTime.TabIndex = 4
         Me.lblDateTime.Tag = "6"
         Me.lblDateTime.Text = "Dispense Date/Time"
         '
@@ -742,7 +742,7 @@ Partial Class frmPatientInfo
         Me.lblDispensedBy.Location = New System.Drawing.Point(809, 16)
         Me.lblDispensedBy.Name = "lblDispensedBy"
         Me.lblDispensedBy.Size = New System.Drawing.Size(108, 21)
-        Me.lblDispensedBy.TabIndex = 14
+        Me.lblDispensedBy.TabIndex = 5
         Me.lblDispensedBy.Tag = "5"
         Me.lblDispensedBy.Text = "Dispensed By"
         '
@@ -754,7 +754,7 @@ Partial Class frmPatientInfo
         Me.lblQuantity.Location = New System.Drawing.Point(453, 16)
         Me.lblQuantity.Name = "lblQuantity"
         Me.lblQuantity.Size = New System.Drawing.Size(72, 21)
-        Me.lblQuantity.TabIndex = 12
+        Me.lblQuantity.TabIndex = 3
         Me.lblQuantity.Tag = "4"
         Me.lblQuantity.Text = "Quantity"
         '
@@ -766,7 +766,7 @@ Partial Class frmPatientInfo
         Me.lblMedication.Location = New System.Drawing.Point(5, 16)
         Me.lblMedication.Name = "lblMedication"
         Me.lblMedication.Size = New System.Drawing.Size(140, 21)
-        Me.lblMedication.TabIndex = 11
+        Me.lblMedication.TabIndex = 0
         Me.lblMedication.Tag = "1"
         Me.lblMedication.Text = "Medication Name"
         '
@@ -778,7 +778,7 @@ Partial Class frmPatientInfo
         Me.lblType.Location = New System.Drawing.Point(332, 16)
         Me.lblType.Name = "lblType"
         Me.lblType.Size = New System.Drawing.Size(45, 21)
-        Me.lblType.TabIndex = 13
+        Me.lblType.TabIndex = 2
         Me.lblType.Tag = "3"
         Me.lblType.Text = "Type"
         '
@@ -790,7 +790,7 @@ Partial Class frmPatientInfo
         Me.lblStrength.Location = New System.Drawing.Point(202, 16)
         Me.lblStrength.Name = "lblStrength"
         Me.lblStrength.Size = New System.Drawing.Size(74, 21)
-        Me.lblStrength.TabIndex = 10
+        Me.lblStrength.TabIndex = 1
         Me.lblStrength.Tag = "2"
         Me.lblStrength.Text = "Strength"
         '
@@ -811,7 +811,7 @@ Partial Class frmPatientInfo
         Me.flpDispenseHistory.Location = New System.Drawing.Point(12, 523)
         Me.flpDispenseHistory.Name = "flpDispenseHistory"
         Me.flpDispenseHistory.Size = New System.Drawing.Size(1067, 140)
-        Me.flpDispenseHistory.TabIndex = 62
+        Me.flpDispenseHistory.TabIndex = 1
         '
         'frmPatientInfo
         '
