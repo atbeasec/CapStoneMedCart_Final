@@ -41,8 +41,6 @@ Partial Class frmNewPatient
         Me.mtbPhone = New System.Windows.Forms.MaskedTextBox()
         Me.Panel16 = New System.Windows.Forms.Panel()
         Me.txtCity = New System.Windows.Forms.TextBox()
-        Me.Panel17 = New System.Windows.Forms.Panel()
-        Me.txtZipCode = New System.Windows.Forms.TextBox()
         Me.cmbState = New System.Windows.Forms.ComboBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
@@ -75,6 +73,8 @@ Partial Class frmNewPatient
         Me.cboRoom = New System.Windows.Forms.ComboBox()
         Me.cboBed = New System.Windows.Forms.ComboBox()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.mtbZipCode = New System.Windows.Forms.MaskedTextBox()
         Me.Panel1.SuspendLayout()
         Me.Panel9.SuspendLayout()
         Me.Panel10.SuspendLayout()
@@ -83,7 +83,6 @@ Partial Class frmNewPatient
         Me.Panel14.SuspendLayout()
         Me.Panel15.SuspendLayout()
         Me.Panel16.SuspendLayout()
-        Me.Panel17.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel6.SuspendLayout()
@@ -91,6 +90,7 @@ Partial Class frmNewPatient
         Me.Panel8.SuspendLayout()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel13.SuspendLayout()
+        Me.Panel4.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtFirstName
@@ -284,29 +284,6 @@ Partial Class frmNewPatient
         Me.txtCity.ShortcutsEnabled = False
         Me.txtCity.Size = New System.Drawing.Size(249, 29)
         Me.txtCity.TabIndex = 12
-        '
-        'Panel17
-        '
-        Me.Panel17.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel17.Controls.Add(Me.txtZipCode)
-        Me.Panel17.Location = New System.Drawing.Point(500, 461)
-        Me.Panel17.Name = "Panel17"
-        Me.Panel17.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel17.Size = New System.Drawing.Size(108, 31)
-        Me.Panel17.TabIndex = 14
-        '
-        'txtZipCode
-        '
-        Me.txtZipCode.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtZipCode.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtZipCode.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtZipCode.Location = New System.Drawing.Point(1, 1)
-        Me.txtZipCode.MaxLength = 5
-        Me.txtZipCode.Multiline = True
-        Me.txtZipCode.Name = "txtZipCode"
-        Me.txtZipCode.ShortcutsEnabled = False
-        Me.txtZipCode.Size = New System.Drawing.Size(106, 29)
-        Me.txtZipCode.TabIndex = 14
         '
         'cmbState
         '
@@ -667,12 +644,37 @@ Partial Class frmNewPatient
         Me.Label10.TabIndex = 206
         Me.Label10.Text = "Beds:"
         '
+        'Panel4
+        '
+        Me.Panel4.BackColor = System.Drawing.Color.White
+        Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel4.Controls.Add(Me.mtbZipCode)
+        Me.Panel4.ForeColor = System.Drawing.Color.DarkGray
+        Me.Panel4.Location = New System.Drawing.Point(501, 462)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel4.Size = New System.Drawing.Size(107, 31)
+        Me.Panel4.TabIndex = 16
+        '
+        'mtbZipCode
+        '
+        Me.mtbZipCode.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.mtbZipCode.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.mtbZipCode.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.mtbZipCode.Location = New System.Drawing.Point(1, 1)
+        Me.mtbZipCode.Mask = "00000"
+        Me.mtbZipCode.Name = "mtbZipCode"
+        Me.mtbZipCode.ShortcutsEnabled = False
+        Me.mtbZipCode.Size = New System.Drawing.Size(103, 22)
+        Me.mtbZipCode.TabIndex = 15
+        '
         'frmNewPatient
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(667, 648)
+        Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.cboBed)
         Me.Controls.Add(Me.cboRoom)
@@ -698,7 +700,6 @@ Partial Class frmNewPatient
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel2)
-        Me.Controls.Add(Me.Panel17)
         Me.Controls.Add(Me.Panel16)
         Me.Controls.Add(Me.Panel15)
         Me.Controls.Add(Me.Panel14)
@@ -726,8 +727,6 @@ Partial Class frmNewPatient
         Me.Panel15.PerformLayout()
         Me.Panel16.ResumeLayout(False)
         Me.Panel16.PerformLayout()
-        Me.Panel17.ResumeLayout(False)
-        Me.Panel17.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         Me.Panel6.ResumeLayout(False)
@@ -737,6 +736,8 @@ Partial Class frmNewPatient
         Me.Panel8.ResumeLayout(False)
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel13.ResumeLayout(False)
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -757,8 +758,6 @@ Partial Class frmNewPatient
     Friend WithEvents Panel15 As Panel
     Friend WithEvents Panel16 As Panel
     Friend WithEvents txtCity As TextBox
-    Friend WithEvents Panel17 As Panel
-    Friend WithEvents txtZipCode As TextBox
     Friend WithEvents cmbState As ComboBox
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Panel3 As Panel
@@ -792,4 +791,6 @@ Partial Class frmNewPatient
     Friend WithEvents cboRoom As ComboBox
     Friend WithEvents cboBed As ComboBox
     Friend WithEvents Label10 As Label
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents mtbZipCode As MaskedTextBox
 End Class

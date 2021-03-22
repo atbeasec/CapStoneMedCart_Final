@@ -70,7 +70,7 @@ Public Class frmNewPatient
         txtEmail.Text = Nothing
         txtLastName.Text = Nothing
         txtWeight.Text = Nothing
-        txtZipCode.Text = Nothing
+        mtbZipCode.Text = Nothing
         mtbDoB.Text = Nothing
         mtbPhone.Text = Nothing
         cmbSex.SelectedIndex = -1
@@ -188,7 +188,7 @@ Public Class frmNewPatient
         strbSQL.Append("'" & cmbSex.SelectedItem & "','" & txtHeight.Text & "',")
         strbSQL.Append("'" & txtWeight.Text & "','" & strAddress & "',")
         strbSQL.Append("'" & strCity & "','" & cmbState.SelectedItem & "',")
-        strbSQL.Append("'" & txtZipCode.Text & "','" & mtbPhone.Text & "',")
+        strbSQL.Append("'" & mtbZipCode.Text & "','" & mtbPhone.Text & "',")
         strbSQL.Append("'" & strEmail & "','" & dsPhysicians.Tables(0).Rows(0)(EnumList.Physician.Id) & "',")
         strbSQL.Append("'" & 1 & "');")
 
@@ -341,7 +341,7 @@ Public Class frmNewPatient
     '/*                                                                     
     '/*********************************************************************/
 
-    Private Sub txtZipCode_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtZipCode.KeyPress
+    Private Sub txtZipCode_KeyPress(sender As Object, e As KeyPressEventArgs)
         DataVaildationMethods.KeyPressCheck(e, "0123456789")
     End Sub
 
@@ -848,11 +848,11 @@ Public Class frmNewPatient
             hasError = True
             strbErrorMessage.Append("Please enter a valid state." & vbCrLf)
         End If
-        If txtZipCode.Text = String.Empty Then
+        If Not mtbZipCode.MaskCompleted Then
             hasError = True
             strbErrorMessage.Append("Please enter a valid zip code" & vbCrLf)
         End If
-        If mtbPhone.Text = String.Empty Then
+        If Not mtbPhone.MaskCompleted Then
             hasError = True
             strbErrorMessage.Append("Please enter a valid phone number." & vbCrLf)
         End If
