@@ -248,6 +248,7 @@
         'clear drawer combobox and drawerID array
         cboDrawers.Items.Clear()
         intDrawerID.Clear()
+        txtQuantity.Text = 1
         'when the medication  selection is changed, get the drawers the medication is in and populate drawer
         ' combobox and the parallel array with the drawer IDs
         If Not cboMedication.SelectedIndex = -1 Then
@@ -360,10 +361,10 @@
     '/*  AB		        3/20/21		    initial creation                 */
     '/********************************************************************/ 
     Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantity.KeyPress
-        DataVaildationMethods.KeyPressCheck(e, "0123456789")
-        If txtQuantity.Text IsNot "" Then
-            GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
-        End If
+        'DataVaildationMethods.KeyPressCheck(e, "0123456789")
+        'If txtQuantity.Text IsNot "" Then
+        '    GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
+        'End If
     End Sub
 
     '/********************************************************************/
@@ -395,9 +396,9 @@
     '/*  AB		        3/20/21		    initial creation                 */
     '/********************************************************************/ 
     Private Sub txtQuantity_Validated(sender As Object, e As EventArgs) Handles txtQuantity.Validated
-        If txtQuantity.Text IsNot "" Then
-            GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
-        End If
+        'If txtQuantity.Text IsNot "" Then
+        '    GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
+        'End If
     End Sub
 
     '/********************************************************************/
@@ -433,7 +434,7 @@
         If Not IsNumeric(txtQuantity.Text) Then
             txtQuantity.Text = 0
         End If
-        ButtonIncrement(1000, txtQuantity)
+        ButtonIncrement(9999, txtQuantity)
     End Sub
 
     '/********************************************************************/
