@@ -758,6 +758,10 @@ Module BulkImportMethods
     '/* userArray - this is the array list of users that will be added to  */
     '/*             the database if there is no issue. If there is an issue*/
     '/*             it will be nothing.                                    */
+    '/* UsedBarCodesArray - this is going to hold all the bar codes that   */
+    '/*                     been used in the import so far. To make sure   */
+    '/*                     that two active patients will not share the same*/
+    '/*                     barcode.                                        */
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
@@ -778,6 +782,7 @@ Module BulkImportMethods
         Dim strSalt As String
         Dim strHashedPassword As String
         Dim strhold As String()
+        Dim UsedBarCodesArray As ArrayList = New ArrayList()
 
         Do
             strLine = srReader.ReadLine.Split(vbTab)
@@ -794,7 +799,7 @@ Module BulkImportMethods
                     strbErrorMessage.AppendLine("Issue on line " & intLineNum & " username must be unqiue")
                     blnIssue = True
                 End If
-                strbSQLPull.Clear()
+
                 If TextCheck(strLine(1)) Then
                     strbErrorMessage.AppendLine("Issue on line " & intLineNum & " password cannot have a ;")
                     blnIssue = True
@@ -815,10 +820,16 @@ Module BulkImportMethods
                     strbErrorMessage.AppendLine("Issue on line " & intLineNum & " barcode cannot contain a ;")
                     blnIssue = True
                 Else
+                    strbSQLPull.Clear()
                     strBarcodeHash = ConvertBarcodePepperAndHash(strLine(4))
                     strbSQLPull.AppendLine("SELECT COUNT(*) FROM User WHERE Barcode = '" & strBarcodeHash & "'")
                     If ExecuteScalarQuery(strbSQLPull.ToString) <> 0 Then
-                        strbErrorMessage.AppendLine("Issue on line " & intLineNum & " barcode for user must be unique")
+                        strbErrorMessage.AppendLine("Issue on line " & intLineNum & " barcode for user must be unique" &
+                                                    " a user in the database is already using this barcode")
+                        blnIssue = True
+                    ElseIf UsedBarCodesArray.Contains(strBarcodeHash) Then
+                        strbErrorMessage.AppendLine("Issue on line " & intLineNum & " barcode for user must be unique" &
+                                                    " a user being imported is already using this barcode")
                         blnIssue = True
                     End If
                 End If
@@ -840,6 +851,7 @@ Module BulkImportMethods
                 If Not blnIssue Then
                     strhold = LogIn.MakeSaltPepperAndHash(strLine(1))
                     strHashedPassword = strhold(0)
+                    UsedBarCodesArray.Add(strBarcodeHash)
                     strSalt = strhold(1)
                     UserArray.Add(New UserClass(checkSQLInjection(strLine(0)), strHashedPassword, strSalt, checkSQLInjection(strLine(2)), checkSQLInjection(strLine(3)),
                                 strBarcodeHash, strLine(5), strLine(6)))
