@@ -197,11 +197,15 @@ Module PatientInformation
                 frmPatientInfo.txtFirstName.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.FristName)
                 frmPatientInfo.txtMiddle.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.MiddleName)
                 frmPatientInfo.txtLast.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.LastName)
+                frmPatientInfo.txtFirstName.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.FristName)
+                frmPatientInfo.txtMiddle.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.MiddleName)
+                frmPatientInfo.txtLast.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.LastName)
             End If
             If IsDBNull(dr(2)) Then
 
             Else
                 frmPatientInfo.txtBarcode.Text = dr(2)
+                frmPatientInfo.txtBarcode.Tag = dr(2)
             End If
 
             intPhysicianID = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.PhysicianID)
