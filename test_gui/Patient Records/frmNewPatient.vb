@@ -53,15 +53,30 @@ Public Class frmNewPatient
 
         If Not hasError() Then
             SavePatientDataToDatabase()
-            frmMain.OpenChildForm(frmPatientRecords)
+            clearInformationBoxes()
         End If
-
-
-
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs)
         frmMain.OpenChildForm(frmPatientRecords)
+    End Sub
+
+    Private Sub clearInformationBoxes()
+        txtFirstName.Text = Nothing
+        txtMiddleName.Text = Nothing
+        txtAddress.Text = Nothing
+        txtCity.Text = Nothing
+        txtHeight.Text = Nothing
+        txtEmail.Text = Nothing
+        txtLastName.Text = Nothing
+        txtWeight.Text = Nothing
+        mtbZipCode.Text = Nothing
+        mtbDoB.Text = Nothing
+        mtbPhone.Text = Nothing
+        cmbSex.SelectedIndex = -1
+        cboRoom.SelectedIndex = -1
+        cmbPhysician.SelectedIndex = -1
+        cmbState.SelectedIndex = -1
     End Sub
 
     '/*********************************************************************/
@@ -149,11 +164,23 @@ Public Class frmNewPatient
             "'Patient_Middle_Name', 'Patient_Last_Name', 'Date_of_Birth', 'Sex', 'Height', 'Weight', " &
             "'Address', 'City', 'State', 'Zip_Code', 'Phone_Number', 'Email_address', 'Primary_Physician_ID', " &
             "'Active_Flag') Values ('")
-
+        Dim blnUsedMRN As Boolean = False
+        Dim dsCheckforRecord As DataSet
         'strbSQL.Append(CInt(Rnd() * 20) & "','")
         'strbSQL.Append(CInt(Rnd() * 20) & "',") 'this is going to make a random barcode this is temporary
-        strbSQL.Append(GenerateRandom.generateRandomAlphanumeric(10, "1234567890") & "','")
-        '^this is going to generate a random MRN number
+
+
+        Dim strMRN As String = GenerateRandom.generateRandomAlphanumeric(10, "1234567890")
+        '^this Is going to generate a random MRN number
+        While blnUsedMRN = False
+            dsCheckforRecord = CreateDatabase.ExecuteSelectQuery("Select * from Patient WHERE MRN_Number = '" & strMRN & "'")
+            If dsCheckforRecord.Tables.Count > 0 Then
+                blnUsedMRN = True
+            End If
+            strMRN = GenerateRandom.generateRandomAlphanumeric(10, "1234567890")
+        End While
+
+        strbSQL.Append(strMRN & "', '")
         strbSQL.Append(GenerateRandom.generateRandomAlphanumeric(20, strCharactersForRandomGeneration) & "',")
         '^this is going to genereate a random Bar code. 
         strbSQL.Append("'" & strFirstName & "' , '" & strMiddleName & "',")
@@ -161,11 +188,13 @@ Public Class frmNewPatient
         strbSQL.Append("'" & cmbSex.SelectedItem & "','" & txtHeight.Text & "',")
         strbSQL.Append("'" & txtWeight.Text & "','" & strAddress & "',")
         strbSQL.Append("'" & strCity & "','" & cmbState.SelectedItem & "',")
-        strbSQL.Append("'" & txtZipCode.Text & "','" & mtbPhone.Text & "',")
+        strbSQL.Append("'" & mtbZipCode.Text & "','" & mtbPhone.Text & "',")
         strbSQL.Append("'" & strEmail & "','" & dsPhysicians.Tables(0).Rows(0)(EnumList.Physician.Id) & "',")
         strbSQL.Append("'" & 1 & "');")
 
         CreateDatabase.ExecuteInsertQuery(strbSQL.ToString)
+        Dim intPatientID As Integer = CreateDatabase.ExecuteScalarQuery("Select Patient_ID from Patient WHERE MRN_Number = '" & strMRN & "'")
+        CreateDatabase.ExecuteInsertQuery("INSERT INTO PatientRoom(Patient_TUID,Room_TUID,Bed_Name,Active_Flag) VALUES('" & intPatientID & "', '" & cboRoom.SelectedItem & "', '" & cboBed.SelectedItem & "','1')")
         'send message saying it was a success or error
 
         'if error say what the error was and return to the form with the filled out info
@@ -216,15 +245,12 @@ Public Class frmNewPatient
     '/*********************************************************************/
 
     Private Sub frmNewPatient_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        dsrooms = CreateDatabase.ExecuteSelectQuery("Select * From Rooms where Active_flag = '" & 1 & "' ORDER BY Room_ID, Bed_Name;")
+        dsrooms = CreateDatabase.ExecuteSelectQuery("Select Room_ID,Bed_Name from Rooms WHERE Active_Flag = '1' EXCEPT Select Room_TUID,Bed_Name from PatientRoom where PatientRoom.Active_Flag = '1'")
         dsPhysicians = CreateDatabase.ExecuteSelectQuery("Select * from Physician where Active_flag = '" & 1 & "' ORDER BY Physician_Last_Name, Physician_First_Name ;")
         cmbSex.Items.AddRange({"Male", "Female"})
         PopulateStateComboBox(cmbState)
-        PopulateRoomComboBox(cmbRoom, dsrooms)
-        populateBedComboBox(cmbBed, dsrooms)
+        PopulateRoomComboBox(cboRoom, dsrooms)
         populatePhysicianComboBox(cmbPhysician, dsPhysicians)
-
-        cmbBed.Enabled = False
     End Sub
 
     '/*********************************************************************/
@@ -268,10 +294,10 @@ Public Class frmNewPatient
     '/*********************************************************************/
 
 
-    Private Sub cmbRoom_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbRoom.SelectedIndexChanged
+    Private Sub cmbRoom_SelectedIndexChanged(sender As Object, e As EventArgs)
 
-        PopulateRoomsCombBoxesMethods.UpdateBedComboBox(cmbBed, cmbRoom)
-        cmbBed.Enabled = True
+        'PopulateRoomsCombBoxesMethods.UpdateBedComboBox(cmbBed, cmbRoom)
+        'cmbBed.Enabled = True
     End Sub
 
 
@@ -315,7 +341,7 @@ Public Class frmNewPatient
     '/*                                                                     
     '/*********************************************************************/
 
-    Private Sub txtZipCode_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtZipCode.KeyPress
+    Private Sub txtZipCode_KeyPress(sender As Object, e As KeyPressEventArgs)
         DataVaildationMethods.KeyPressCheck(e, "0123456789")
     End Sub
 
@@ -458,7 +484,7 @@ Public Class frmNewPatient
     '/*********************************************************************/
 
     Private Sub txtWeight_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtWeight.KeyPress
-        DataVaildationMethods.KeyPressCheck(e, "0123456789")
+        DataVaildationMethods.KeyPressCheck(e, "0123456789.")
     End Sub
 
     '/*********************************************************************/
@@ -676,9 +702,6 @@ Public Class frmNewPatient
 
     Private Sub cmbState_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cmbState.KeyPress
         DataVaildationMethods.KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz")
-
-
-
     End Sub
     '/*********************************************************************/
     '/*                   SUBPROGRAM NAME: txtCity_KeyPress 	           */         
@@ -722,7 +745,9 @@ Public Class frmNewPatient
         DataVaildationMethods.KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz 0123456789.'-#@%&/")
     End Sub
 
-
+    Private Sub mtbDOB_KeyPress(sender As Object, e As KeyPressEventArgs) Handles mtbDoB.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789")
+    End Sub
 
     '/*********************************************************************/
     '/*                   FUNCTION NAME:  hasError  					   */         
@@ -807,13 +832,9 @@ Public Class frmNewPatient
             hasError = True
             strbErrorMessage.Append("Please enter a valid weight." & vbCrLf)
         End If
-        If cmbRoom.Text = String.Empty Then
+        If cboRoom.SelectedIndex = -1 Then
             hasError = True
-            strbErrorMessage.Append("Please enter a valid room." & vbCrLf)
-        End If
-        If cmbBed.Text = String.Empty Then
-            hasError = True
-            strbErrorMessage.Append("Please enter a valid bed name." & vbCrLf)
+            strbErrorMessage.Append("Please enter a room for the patient." & vbCrLf)
         End If
         If txtAddress.Text = String.Empty Then
             hasError = True
@@ -827,17 +848,21 @@ Public Class frmNewPatient
             hasError = True
             strbErrorMessage.Append("Please enter a valid state." & vbCrLf)
         End If
-        If txtZipCode.Text = String.Empty Then
+        If Not mtbZipCode.MaskCompleted Then
             hasError = True
             strbErrorMessage.Append("Please enter a valid zip code" & vbCrLf)
         End If
-        If mtbPhone.Text = String.Empty Then
+        If Not mtbPhone.MaskCompleted Then
             hasError = True
             strbErrorMessage.Append("Please enter a valid phone number." & vbCrLf)
         End If
         If cmbPhysician.SelectedIndex = -1 Then
             hasError = True
             strbErrorMessage.Append("Please enter a valid physician name." & vbCrLf)
+        End If
+        If cboBed.SelectedIndex = -1 Then
+            hasError = True
+            strbErrorMessage.Append("Please select a bed for the patient" & vbCrLf)
         End If
         If hasError Then
             MessageBox.Show(strbErrorMessage.ToString)
@@ -850,5 +875,16 @@ Public Class frmNewPatient
 
         frmMain.OpenChildForm(frmPatientRecords)
 
+    End Sub
+
+    Private Sub cboRoom_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboRoom.SelectedIndexChanged
+        cboBed.Items.Clear()
+        If Not cboRoom.SelectedIndex = -1 Then
+            Dim strSelectedRoom As String = cboRoom.SelectedItem
+            Dim dsBeds As DataSet = CreateDatabase.ExecuteSelectQuery("Select Room_ID,Bed_Name from Rooms WHERE Active_Flag = '1' AND Room_ID = '" & strSelectedRoom & "' EXCEPT Select Room_TUID,Bed_Name from PatientRoom where PatientRoom.Active_Flag = '1'")
+            For Each dr As DataRow In dsBeds.Tables(0).Rows
+                cboBed.Items.Add(dr(1))
+            Next
+        End If
     End Sub
 End Class

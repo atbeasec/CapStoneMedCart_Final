@@ -155,38 +155,54 @@
     '/*  AB		        2/10/21		    initial creation                 */
     '/********************************************************************/ 
     Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
-        'create variables and clear error
-        Dim intWasteAmount As Integer
-        ErrorProvider1.Clear()
-
-        'check to see if the quantity input is numeric, if it is not then set an error on the 
-        'txtquantity and dont continue method
-        If Not IsNumeric(txtQuantity.Text) Then
-            ErrorProvider1.SetError(pnlQuantity, "Please enter a numeric value")
-        Else
-            'check what radio button is checked
-            'if the all meds radio button is checked then get the entire quantity from the drawer
+        If Not cboMedication.SelectedIndex = -1 Then
+            Dim intSelectedMEDID As Integer = intMedicationID(cboMedication.SelectedIndex)
+            Dim intMaxValue As Integer = CreateDatabase.ExecuteScalarQuery("Select Quantity from DrawerMedication where Medication_TUID = '" & intSelectedMEDID & "'")
             If radAllMed.Checked = True Then
-                intWasteAmount = CreateDatabase.ExecuteScalarQuery("SELECT Quantity from DrawerMedication where DrawerMedication_ID = '" & intDrawerMedTUID & "'")
-            Else
-                'if specific amount is clicked then get the quantity text
-                intWasteAmount = txtQuantity.Text
+                txtQuantity.Text = intMaxValue
             End If
-            'check to make sure all combo boxes were selected
-            If Not cboWitness.SelectedIndex = -1 And Not cboMedication.SelectedIndex = -1 And Not cboDrawers.SelectedIndex = -1 Then
-                Dim intMedID As Integer = intMedicationID(cboMedication.SelectedIndex)
-                'call main waste logic method
-                Inventory.WasteMedication(intDrawerMedTUID, intWasteAmount, intMedID)
-                cboMedication.SelectedIndex = -1
-                RadioButton2.Checked = True
-                cboWitness.SelectedIndex = -1
-                'repopulate med comboboxes incase one medication dropped to zero and was deactivated
-                Inventory.PopulateWasteComboBoxMedication()
+            If txtQuantity.Text > intMaxValue Then
+                txtQuantity.Text = intMaxValue
+                MessageBox.Show("Maximum value of selected medication available is " & intMaxValue & ".")
             Else
-                'if validation had an error show message
-                MessageBox.Show("Please select a Medication, Drawer, and User for the sign off")
+                'create variables and clear error
+                Dim intWasteAmount As Integer
+                ErrorProvider1.Clear()
+
+                'check to see if the quantity input is numeric, if it is not then set an error on the 
+                'txtquantity and dont continue method
+                If Not IsNumeric(txtQuantity.Text) Then
+                    ErrorProvider1.SetError(pnlQuantity, "Please enter a numeric value")
+                Else
+                    'check what radio button is checked
+                    'if the all meds radio button is checked then get the entire quantity from the drawer
+                    If radAllMed.Checked = True Then
+                        intWasteAmount = CreateDatabase.ExecuteScalarQuery("SELECT Quantity from DrawerMedication where DrawerMedication_ID = '" & intDrawerMedTUID & "'")
+                    Else
+                        'if specific amount is clicked then get the quantity text
+                        intWasteAmount = txtQuantity.Text
+                    End If
+                    'check to make sure all combo boxes were selected
+                    If Not cboWitness.SelectedIndex = -1 And Not cboDrawers.SelectedIndex = -1 Then
+                        Dim intMedID As Integer = intMedicationID(cboMedication.SelectedIndex)
+                        'call main waste logic method
+                        Inventory.WasteMedication(intDrawerMedTUID, intWasteAmount, intMedID)
+                        cboMedication.SelectedIndex = -1
+                        RadioButton2.Checked = True
+                        cboWitness.SelectedIndex = -1
+                        txtQuantity.Text = 1
+                        'repopulate med comboboxes incase one medication dropped to zero and was deactivated
+                        Inventory.PopulateWasteComboBoxMedication()
+                    Else
+                        'if validation had an error show message
+                        MessageBox.Show("Please select a Medication, Drawer, and User for the sign off")
+                    End If
+                End If
             End If
+        Else
+            MessageBox.Show("Please select a medication")
         End If
+
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
@@ -232,6 +248,7 @@
         'clear drawer combobox and drawerID array
         cboDrawers.Items.Clear()
         intDrawerID.Clear()
+        txtQuantity.Text = 1
         'when the medication  selection is changed, get the drawers the medication is in and populate drawer
         ' combobox and the parallel array with the drawer IDs
         If Not cboMedication.SelectedIndex = -1 Then
@@ -344,10 +361,10 @@
     '/*  AB		        3/20/21		    initial creation                 */
     '/********************************************************************/ 
     Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantity.KeyPress
-        DataVaildationMethods.KeyPressCheck(e, "0123456789")
-        If txtQuantity.Text IsNot "" Then
-            GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
-        End If
+        'DataVaildationMethods.KeyPressCheck(e, "0123456789")
+        'If txtQuantity.Text IsNot "" Then
+        '    GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
+        'End If
     End Sub
 
     '/********************************************************************/
@@ -379,9 +396,9 @@
     '/*  AB		        3/20/21		    initial creation                 */
     '/********************************************************************/ 
     Private Sub txtQuantity_Validated(sender As Object, e As EventArgs) Handles txtQuantity.Validated
-        If txtQuantity.Text IsNot "" Then
-            GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
-        End If
+        'If txtQuantity.Text IsNot "" Then
+        '    GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
+        'End If
     End Sub
 
     '/********************************************************************/
@@ -417,7 +434,7 @@
         If Not IsNumeric(txtQuantity.Text) Then
             txtQuantity.Text = 0
         End If
-        ButtonIncrement(1000, txtQuantity)
+        ButtonIncrement(9999, txtQuantity)
     End Sub
 
     '/********************************************************************/

@@ -551,7 +551,7 @@
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
 
         ExtractFormDataForDatabase()
-        MessageBox.Show("All flagged discrepancies have been saved.")
+        MessageBox.Show("Counts have been updated")
     End Sub
 
 End Class

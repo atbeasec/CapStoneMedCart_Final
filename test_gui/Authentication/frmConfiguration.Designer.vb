@@ -27,8 +27,10 @@ Partial Class frmConfiguration
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.txtUsername = New System.Windows.Forms.TextBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.btnConfirmEye = New System.Windows.Forms.Button()
         Me.txtConfirmPassword = New System.Windows.Forms.TextBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.btnPasswordEye = New System.Windows.Forms.Button()
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -58,15 +60,13 @@ Partial Class frmConfiguration
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.txtID = New System.Windows.Forms.TextBox()
         Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.pnlSearch = New System.Windows.Forms.Panel()
         Me.txtSearchBox = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.tpLabelHover = New System.Windows.Forms.ToolTip(Me.components)
-        Me.pnlSearch = New System.Windows.Forms.Panel()
-        Me.btnConfirmEye = New System.Windows.Forms.Button()
-        Me.btnPasswordEye = New System.Windows.Forms.Button()
-        Me.btnSaveUser = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.btnSaveUser = New System.Windows.Forms.Button()
         Me.Panel5.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -112,6 +112,20 @@ Partial Class frmConfiguration
         Me.Panel4.Size = New System.Drawing.Size(224, 28)
         Me.Panel4.TabIndex = 6
         '
+        'btnConfirmEye
+        '
+        Me.btnConfirmEye.BackColor = System.Drawing.Color.White
+        Me.btnConfirmEye.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnConfirmEye.FlatAppearance.BorderSize = 0
+        Me.btnConfirmEye.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnConfirmEye.ForeColor = System.Drawing.Color.Transparent
+        Me.btnConfirmEye.Image = CType(resources.GetObject("btnConfirmEye.Image"), System.Drawing.Image)
+        Me.btnConfirmEye.Location = New System.Drawing.Point(193, 1)
+        Me.btnConfirmEye.Name = "btnConfirmEye"
+        Me.btnConfirmEye.Size = New System.Drawing.Size(30, 26)
+        Me.btnConfirmEye.TabIndex = 39
+        Me.btnConfirmEye.UseVisualStyleBackColor = False
+        '
         'txtConfirmPassword
         '
         Me.txtConfirmPassword.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -121,7 +135,6 @@ Partial Class frmConfiguration
         Me.txtConfirmPassword.Multiline = True
         Me.txtConfirmPassword.Name = "txtConfirmPassword"
         Me.txtConfirmPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.txtConfirmPassword.ShortcutsEnabled = False
         Me.txtConfirmPassword.Size = New System.Drawing.Size(222, 26)
         Me.txtConfirmPassword.TabIndex = 38
         '
@@ -136,6 +149,20 @@ Partial Class frmConfiguration
         Me.Panel3.Size = New System.Drawing.Size(225, 28)
         Me.Panel3.TabIndex = 5
         '
+        'btnPasswordEye
+        '
+        Me.btnPasswordEye.BackColor = System.Drawing.Color.White
+        Me.btnPasswordEye.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnPasswordEye.FlatAppearance.BorderSize = 0
+        Me.btnPasswordEye.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPasswordEye.ForeColor = System.Drawing.Color.Transparent
+        Me.btnPasswordEye.Image = CType(resources.GetObject("btnPasswordEye.Image"), System.Drawing.Image)
+        Me.btnPasswordEye.Location = New System.Drawing.Point(194, 1)
+        Me.btnPasswordEye.Name = "btnPasswordEye"
+        Me.btnPasswordEye.Size = New System.Drawing.Size(30, 26)
+        Me.btnPasswordEye.TabIndex = 39
+        Me.btnPasswordEye.UseVisualStyleBackColor = False
+        '
         'txtPassword
         '
         Me.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -145,7 +172,6 @@ Partial Class frmConfiguration
         Me.txtPassword.Multiline = True
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.txtPassword.ShortcutsEnabled = False
         Me.txtPassword.Size = New System.Drawing.Size(223, 26)
         Me.txtPassword.TabIndex = 38
         '
@@ -225,7 +251,6 @@ Partial Class frmConfiguration
         Me.txtBarcode.Location = New System.Drawing.Point(1, 1)
         Me.txtBarcode.Multiline = True
         Me.txtBarcode.Name = "txtBarcode"
-        Me.txtBarcode.ShortcutsEnabled = False
         Me.txtBarcode.Size = New System.Drawing.Size(224, 26)
         Me.txtBarcode.TabIndex = 38
         '
@@ -468,6 +493,19 @@ Partial Class frmConfiguration
         Me.Panel6.Size = New System.Drawing.Size(466, 31)
         Me.Panel6.TabIndex = 187
         '
+        'pnlSearch
+        '
+        Me.pnlSearch.BackColor = System.Drawing.Color.White
+        Me.pnlSearch.BackgroundImage = CType(resources.GetObject("pnlSearch.BackgroundImage"), System.Drawing.Image)
+        Me.pnlSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.pnlSearch.Dock = System.Windows.Forms.DockStyle.Right
+        Me.pnlSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.pnlSearch.ForeColor = System.Drawing.Color.White
+        Me.pnlSearch.Location = New System.Drawing.Point(432, 1)
+        Me.pnlSearch.Name = "pnlSearch"
+        Me.pnlSearch.Size = New System.Drawing.Size(33, 29)
+        Me.pnlSearch.TabIndex = 2
+        '
         'txtSearchBox
         '
         Me.txtSearchBox.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -490,64 +528,6 @@ Partial Class frmConfiguration
         Me.Label12.Size = New System.Drawing.Size(89, 21)
         Me.Label12.TabIndex = 176
         Me.Label12.Text = "First Name:"
-        '
-        'pnlSearch
-        '
-        Me.pnlSearch.BackColor = System.Drawing.Color.White
-        Me.pnlSearch.BackgroundImage = CType(resources.GetObject("pnlSearch.BackgroundImage"), System.Drawing.Image)
-        Me.pnlSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.pnlSearch.Dock = System.Windows.Forms.DockStyle.Right
-        Me.pnlSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.pnlSearch.ForeColor = System.Drawing.Color.White
-        Me.pnlSearch.Location = New System.Drawing.Point(432, 1)
-        Me.pnlSearch.Name = "pnlSearch"
-        Me.pnlSearch.Size = New System.Drawing.Size(33, 29)
-        Me.pnlSearch.TabIndex = 2
-        '
-        'btnConfirmEye
-        '
-        Me.btnConfirmEye.BackColor = System.Drawing.Color.White
-        Me.btnConfirmEye.Dock = System.Windows.Forms.DockStyle.Right
-        Me.btnConfirmEye.FlatAppearance.BorderSize = 0
-        Me.btnConfirmEye.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnConfirmEye.ForeColor = System.Drawing.Color.Transparent
-        Me.btnConfirmEye.Image = CType(resources.GetObject("btnConfirmEye.Image"), System.Drawing.Image)
-        Me.btnConfirmEye.Location = New System.Drawing.Point(193, 1)
-        Me.btnConfirmEye.Name = "btnConfirmEye"
-        Me.btnConfirmEye.Size = New System.Drawing.Size(30, 26)
-        Me.btnConfirmEye.TabIndex = 39
-        Me.btnConfirmEye.UseVisualStyleBackColor = False
-        '
-        'btnPasswordEye
-        '
-        Me.btnPasswordEye.BackColor = System.Drawing.Color.White
-        Me.btnPasswordEye.Dock = System.Windows.Forms.DockStyle.Right
-        Me.btnPasswordEye.FlatAppearance.BorderSize = 0
-        Me.btnPasswordEye.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnPasswordEye.ForeColor = System.Drawing.Color.Transparent
-        Me.btnPasswordEye.Image = CType(resources.GetObject("btnPasswordEye.Image"), System.Drawing.Image)
-        Me.btnPasswordEye.Location = New System.Drawing.Point(194, 1)
-        Me.btnPasswordEye.Name = "btnPasswordEye"
-        Me.btnPasswordEye.Size = New System.Drawing.Size(30, 26)
-        Me.btnPasswordEye.TabIndex = 39
-        Me.btnPasswordEye.UseVisualStyleBackColor = False
-        '
-        'btnSaveUser
-        '
-        Me.btnSaveUser.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnSaveUser.FlatAppearance.BorderSize = 0
-        Me.btnSaveUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSaveUser.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSaveUser.ForeColor = System.Drawing.Color.White
-        Me.btnSaveUser.Image = Global.test_gui.My.Resources.Resources.resolve
-        Me.btnSaveUser.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnSaveUser.Location = New System.Drawing.Point(106, 568)
-        Me.btnSaveUser.Name = "btnSaveUser"
-        Me.btnSaveUser.Size = New System.Drawing.Size(165, 37)
-        Me.btnSaveUser.TabIndex = 10
-        Me.btnSaveUser.Text = "   Save User"
-        Me.btnSaveUser.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnSaveUser.UseVisualStyleBackColor = False
         '
         'PictureBox1
         '
@@ -573,6 +553,23 @@ Partial Class frmConfiguration
         Me.PictureBox2.TabStop = False
         Me.tpLabelHover.SetToolTip(Me.PictureBox2, "It is advised to scan the barcode with the barcode reader." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Barcodes must be 12" &
         "-24 characters long and contain " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "alphanumeric and symbols")
+        '
+        'btnSaveUser
+        '
+        Me.btnSaveUser.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnSaveUser.FlatAppearance.BorderSize = 0
+        Me.btnSaveUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSaveUser.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSaveUser.ForeColor = System.Drawing.Color.White
+        Me.btnSaveUser.Image = Global.test_gui.My.Resources.Resources.resolve
+        Me.btnSaveUser.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnSaveUser.Location = New System.Drawing.Point(106, 568)
+        Me.btnSaveUser.Name = "btnSaveUser"
+        Me.btnSaveUser.Size = New System.Drawing.Size(165, 37)
+        Me.btnSaveUser.TabIndex = 10
+        Me.btnSaveUser.Text = "   Save User"
+        Me.btnSaveUser.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnSaveUser.UseVisualStyleBackColor = False
         '
         'frmConfiguration
         '

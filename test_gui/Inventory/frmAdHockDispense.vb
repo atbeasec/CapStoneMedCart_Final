@@ -15,7 +15,10 @@
     End Sub
 
     Private Sub btnDecrementQuantity_Click(sender As Object, e As EventArgs) Handles btnDecrementQuantity.Click
-        ButtonDecrement(txtQuantity)
+        If Not txtQuantity.Text = 0 Then
+            ButtonDecrement(txtQuantity)
+        End If
+
     End Sub
 
     Private Sub cmbMedications_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMedications.SelectedIndexChanged
@@ -29,28 +32,35 @@
     Private Sub btnDispense_Click(sender As Object, e As EventArgs) Handles btnDispense.Click
 
         'make sure that both patient and medication is selected before ordering the AdHoc
-
-        If Not IsNothing(cmbMedications.SelectedItem) And Not IsNothing(cmbPatientName.SelectedItem) And txtQuantity.Text > 0 Then
-
-            Dim intMedRXCUI As Integer
-            Dim StrSelectedMedication As String
-            Dim intPatientMRN As Integer
-            Dim StrSelectedPatient As String
-
-            StrSelectedMedication = cmbMedications.SelectedItem
-            Dim strArray() As String = StrSelectedMedication.Split("--")
-            intMedRXCUI = strArray(2)
-            StrSelectedPatient = cmbPatientName.SelectedItem
-            strArray = StrSelectedPatient.Split("--")
-            intPatientMRN = strArray(2)
-
-            Interactions.GetInteractionsDispense(intMedRXCUI, intPatientMRN)
-            AdHoc.InsertAdHoc(txtMRN.Text, "1", txtQuantity.Text)
-            AdHoc.clearAdhocBoxes()
-            MessageBox.Show("Order Successfully placed")
+        If IsNothing(cmbMedications.SelectedItem) And IsNothing(cmbPatientName.SelectedItem) Then
+            MessageBox.Show("Please select a medication and patient")
         Else
-            MessageBox.Show("Please select a Drug and patient to dispense the medication too")
+            If Not IsNothing(cmbMedications.SelectedItem) And txtQuantity.Text > 0 Then
+                If Not IsNothing(cmbPatientName.SelectedItem) Then
+                    Dim intMedRXCUI As Integer
+                    Dim StrSelectedMedication As String
+                    Dim intPatientMRN As Double
+                    Dim StrSelectedPatient As String
+
+                    StrSelectedMedication = cmbMedications.SelectedItem
+                    Dim strArray() As String = StrSelectedMedication.Split("--")
+                    intMedRXCUI = strArray(2)
+                    StrSelectedPatient = cmbPatientName.SelectedItem
+                    strArray = StrSelectedPatient.Split("--")
+                    intPatientMRN = CDbl(strArray(2))
+
+                    Interactions.GetInteractionsDispense(intMedRXCUI, intPatientMRN)
+                    AdHoc.InsertAdHoc(txtMRN.Text, "1", txtQuantity.Text)
+                    AdHoc.clearAdhocBoxes()
+                    MessageBox.Show("Order Successfully placed")
+                Else
+                    MessageBox.Show("Please select a patient")
+                End If
+            Else
+                MessageBox.Show("Please select a medication")
+            End If
         End If
+
     End Sub
 
 
