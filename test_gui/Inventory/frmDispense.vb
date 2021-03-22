@@ -78,7 +78,7 @@
         CreateIDLabel(pnlMainPanel, lblID3, "lblFrequencyPrescription", lblFrequency.Location.X, 20, frequency, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID4, "lblTypePrescription", lblType.Location.X, 20, type, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID5, "lblQuantityPrescription", lblQuantity.Location.X, 20, quantity, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID6, "lblDatePrescribed", lblDatePrescribed.Location.X, 20, datePrescribed, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID6, "lblDatePrescribed", lblDatePrescribed.Location.X, 20, datePrescribed.Substring(0, 10), getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, PrescribedBy, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
