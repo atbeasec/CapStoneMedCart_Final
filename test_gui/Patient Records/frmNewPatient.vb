@@ -216,15 +216,12 @@ Public Class frmNewPatient
     '/*********************************************************************/
 
     Private Sub frmNewPatient_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        dsrooms = CreateDatabase.ExecuteSelectQuery("Select * From Rooms where Active_flag = '" & 1 & "' ORDER BY Room_ID, Bed_Name;")
+        dsrooms = CreateDatabase.ExecuteSelectQuery("Select Room_ID,Bed_Name from Rooms WHERE Active_Flag = '1' EXCEPT Select Room_TUID,Bed_Name from PatientRoom where PatientRoom.Active_Flag = '1'")
         dsPhysicians = CreateDatabase.ExecuteSelectQuery("Select * from Physician where Active_flag = '" & 1 & "' ORDER BY Physician_Last_Name, Physician_First_Name ;")
         cmbSex.Items.AddRange({"Male", "Female"})
         PopulateStateComboBox(cmbState)
-        PopulateRoomComboBox(cmbRoom, dsrooms)
-        populateBedComboBox(cmbBed, dsrooms)
+        PopulateRoomComboBox(cboRoom, dsrooms)
         populatePhysicianComboBox(cmbPhysician, dsPhysicians)
-
-        cmbBed.Enabled = False
     End Sub
 
     '/*********************************************************************/
@@ -268,10 +265,10 @@ Public Class frmNewPatient
     '/*********************************************************************/
 
 
-    Private Sub cmbRoom_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbRoom.SelectedIndexChanged
+    Private Sub cmbRoom_SelectedIndexChanged(sender As Object, e As EventArgs)
 
-        PopulateRoomsCombBoxesMethods.UpdateBedComboBox(cmbBed, cmbRoom)
-        cmbBed.Enabled = True
+        'PopulateRoomsCombBoxesMethods.UpdateBedComboBox(cmbBed, cmbRoom)
+        'cmbBed.Enabled = True
     End Sub
 
 
@@ -807,13 +804,9 @@ Public Class frmNewPatient
             hasError = True
             strbErrorMessage.Append("Please enter a valid weight." & vbCrLf)
         End If
-        If cmbRoom.Text = String.Empty Then
+        If cboRoom.SelectedIndex = -1 Then
             hasError = True
-            strbErrorMessage.Append("Please enter a valid room." & vbCrLf)
-        End If
-        If cmbBed.Text = String.Empty Then
-            hasError = True
-            strbErrorMessage.Append("Please enter a valid bed name." & vbCrLf)
+            strbErrorMessage.Append("Please enter a room for the patient." & vbCrLf)
         End If
         If txtAddress.Text = String.Empty Then
             hasError = True
@@ -839,6 +832,10 @@ Public Class frmNewPatient
             hasError = True
             strbErrorMessage.Append("Please enter a valid physician name." & vbCrLf)
         End If
+        If cboBed.SelectedIndex = -1 Then
+            hasError = True
+            strbErrorMessage.Append("Please select a bed for the patient" & vbCrLf)
+        End If
         If hasError Then
             MessageBox.Show(strbErrorMessage.ToString)
         End If
@@ -850,5 +847,14 @@ Public Class frmNewPatient
 
         frmMain.OpenChildForm(frmPatientRecords)
 
+    End Sub
+
+    Private Sub cboRoom_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboRoom.SelectedIndexChanged
+        cboBed.Items.Clear()
+        Dim strSelectedRoom As String = cboRoom.SelectedItem
+        Dim dsBeds As DataSet = CreateDatabase.ExecuteSelectQuery("Select Room_ID,Bed_Name from Rooms WHERE Active_Flag = '1' AND Room_ID = '" & strSelectedRoom & "' EXCEPT Select Room_TUID,Bed_Name from PatientRoom where PatientRoom.Active_Flag = '1'")
+        For Each dr As DataRow In dsBeds.Tables(0).Rows
+            cboBed.Items.Add(dr(1))
+        Next
     End Sub
 End Class

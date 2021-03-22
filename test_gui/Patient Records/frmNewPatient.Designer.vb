@@ -47,10 +47,6 @@ Partial Class frmNewPatient
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.cmbSex = New System.Windows.Forms.ComboBox()
-        Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.cmbBed = New System.Windows.Forms.ComboBox()
-        Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.cmbRoom = New System.Windows.Forms.ComboBox()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.txtHeight = New System.Windows.Forms.TextBox()
@@ -67,7 +63,6 @@ Partial Class frmNewPatient
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -77,6 +72,9 @@ Partial Class frmNewPatient
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.Panel13 = New System.Windows.Forms.Panel()
         Me.btnBack = New System.Windows.Forms.Button()
+        Me.cboRoom = New System.Windows.Forms.ComboBox()
+        Me.cboBed = New System.Windows.Forms.ComboBox()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel9.SuspendLayout()
         Me.Panel10.SuspendLayout()
@@ -88,8 +86,6 @@ Partial Class frmNewPatient
         Me.Panel17.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
-        Me.Panel4.SuspendLayout()
-        Me.Panel5.SuspendLayout()
         Me.Panel6.SuspendLayout()
         Me.Panel7.SuspendLayout()
         Me.Panel8.SuspendLayout()
@@ -227,7 +223,7 @@ Partial Class frmNewPatient
         Me.Panel14.Location = New System.Drawing.Point(206, 252)
         Me.Panel14.Name = "Panel14"
         Me.Panel14.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel14.Size = New System.Drawing.Size(92, 32)
+        Me.Panel14.Size = New System.Drawing.Size(111, 32)
         Me.Panel14.TabIndex = 6
         '
         'mtbDoB
@@ -236,10 +232,10 @@ Partial Class frmNewPatient
         Me.mtbDoB.Dock = System.Windows.Forms.DockStyle.Fill
         Me.mtbDoB.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.mtbDoB.Location = New System.Drawing.Point(1, 1)
-        Me.mtbDoB.Mask = "00/00/0000"
+        Me.mtbDoB.Mask = "0000-00-00"
         Me.mtbDoB.Name = "mtbDoB"
         Me.mtbDoB.ShortcutsEnabled = False
-        Me.mtbDoB.Size = New System.Drawing.Size(88, 22)
+        Me.mtbDoB.Size = New System.Drawing.Size(107, 22)
         Me.mtbDoB.TabIndex = 6
         Me.mtbDoB.ValidatingType = GetType(Date)
         '
@@ -359,54 +355,6 @@ Partial Class frmNewPatient
         Me.cmbSex.Size = New System.Drawing.Size(122, 29)
         Me.cmbSex.TabIndex = 5
         '
-        'Panel4
-        '
-        Me.Panel4.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel4.Controls.Add(Me.cmbBed)
-        Me.Panel4.Location = New System.Drawing.Point(401, 321)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel4.Size = New System.Drawing.Size(207, 31)
-        Me.Panel4.TabIndex = 10
-        '
-        'cmbBed
-        '
-        Me.cmbBed.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cmbBed.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cmbBed.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.cmbBed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbBed.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.cmbBed.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbBed.FormattingEnabled = True
-        Me.cmbBed.Location = New System.Drawing.Point(1, 1)
-        Me.cmbBed.Name = "cmbBed"
-        Me.cmbBed.Size = New System.Drawing.Size(205, 29)
-        Me.cmbBed.TabIndex = 10
-        '
-        'Panel5
-        '
-        Me.Panel5.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel5.Controls.Add(Me.cmbRoom)
-        Me.Panel5.Location = New System.Drawing.Point(46, 321)
-        Me.Panel5.Name = "Panel5"
-        Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel5.Size = New System.Drawing.Size(202, 31)
-        Me.Panel5.TabIndex = 9
-        '
-        'cmbRoom
-        '
-        Me.cmbRoom.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cmbRoom.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cmbRoom.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.cmbRoom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbRoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.cmbRoom.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbRoom.FormattingEnabled = True
-        Me.cmbRoom.Location = New System.Drawing.Point(1, 1)
-        Me.cmbRoom.Name = "cmbRoom"
-        Me.cmbRoom.Size = New System.Drawing.Size(200, 29)
-        Me.cmbRoom.TabIndex = 9
-        '
         'btnSave
         '
         Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
@@ -426,7 +374,7 @@ Partial Class frmNewPatient
         '
         Me.Panel6.BackColor = System.Drawing.Color.DarkGray
         Me.Panel6.Controls.Add(Me.txtHeight)
-        Me.Panel6.Location = New System.Drawing.Point(350, 252)
+        Me.Panel6.Location = New System.Drawing.Point(389, 252)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel6.Size = New System.Drawing.Size(103, 32)
@@ -449,7 +397,7 @@ Partial Class frmNewPatient
         '
         Me.Panel7.BackColor = System.Drawing.Color.DarkGray
         Me.Panel7.Controls.Add(Me.txtWeight)
-        Me.Panel7.Location = New System.Drawing.Point(495, 252)
+        Me.Panel7.Location = New System.Drawing.Point(515, 252)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel7.Size = New System.Drawing.Size(112, 32)
@@ -552,18 +500,18 @@ Partial Class frmNewPatient
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label6.Location = New System.Drawing.Point(202, 224)
+        Me.Label6.Location = New System.Drawing.Point(184, 224)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(45, 21)
+        Me.Label6.Size = New System.Drawing.Size(179, 21)
         Me.Label6.TabIndex = 73
-        Me.Label6.Text = "DOB:"
+        Me.Label6.Text = "DOB (Year-Month-Date):"
         '
         'Label7
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label7.Location = New System.Drawing.Point(347, 224)
+        Me.Label7.Location = New System.Drawing.Point(385, 224)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(59, 21)
         Me.Label7.TabIndex = 74
@@ -574,7 +522,7 @@ Partial Class frmNewPatient
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label8.Location = New System.Drawing.Point(492, 224)
+        Me.Label8.Location = New System.Drawing.Point(512, 224)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(62, 21)
         Me.Label8.TabIndex = 75
@@ -587,20 +535,9 @@ Partial Class frmNewPatient
         Me.Label9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
         Me.Label9.Location = New System.Drawing.Point(44, 296)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(55, 21)
+        Me.Label9.Size = New System.Drawing.Size(62, 21)
         Me.Label9.TabIndex = 76
-        Me.Label9.Text = "Room:"
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label10.Location = New System.Drawing.Point(398, 296)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(39, 21)
-        Me.Label10.TabIndex = 77
-        Me.Label10.Text = "Bed:"
+        Me.Label9.Text = "Rooms:"
         '
         'Label11
         '
@@ -699,12 +636,46 @@ Partial Class frmNewPatient
         Me.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnBack.UseVisualStyleBackColor = False
         '
+        'cboRoom
+        '
+        Me.cboRoom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboRoom.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboRoom.FormattingEnabled = True
+        Me.cboRoom.Location = New System.Drawing.Point(48, 320)
+        Me.cboRoom.Name = "cboRoom"
+        Me.cboRoom.Size = New System.Drawing.Size(181, 29)
+        Me.cboRoom.TabIndex = 204
+        '
+        'cboBed
+        '
+        Me.cboBed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboBed.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboBed.FormattingEnabled = True
+        Me.cboBed.Location = New System.Drawing.Point(351, 320)
+        Me.cboBed.Name = "cboBed"
+        Me.cboBed.Size = New System.Drawing.Size(181, 29)
+        Me.cboBed.TabIndex = 205
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
+        Me.Label10.Location = New System.Drawing.Point(347, 296)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(46, 21)
+        Me.Label10.TabIndex = 206
+        Me.Label10.Text = "Beds:"
+        '
         'frmNewPatient
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(667, 648)
+        Me.Controls.Add(Me.Label10)
+        Me.Controls.Add(Me.cboBed)
+        Me.Controls.Add(Me.cboRoom)
         Me.Controls.Add(Me.Panel13)
         Me.Controls.Add(Me.Label16)
         Me.Controls.Add(Me.Label15)
@@ -712,7 +683,6 @@ Partial Class frmNewPatient
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.Label11)
-        Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label7)
@@ -726,8 +696,6 @@ Partial Class frmNewPatient
         Me.Controls.Add(Me.Panel7)
         Me.Controls.Add(Me.Panel6)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.Panel5)
-        Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel17)
@@ -762,8 +730,6 @@ Partial Class frmNewPatient
         Me.Panel17.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
-        Me.Panel4.ResumeLayout(False)
-        Me.Panel5.ResumeLayout(False)
         Me.Panel6.ResumeLayout(False)
         Me.Panel6.PerformLayout()
         Me.Panel7.ResumeLayout(False)
@@ -797,10 +763,6 @@ Partial Class frmNewPatient
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Panel3 As Panel
     Friend WithEvents cmbSex As ComboBox
-    Friend WithEvents Panel4 As Panel
-    Friend WithEvents cmbBed As ComboBox
-    Friend WithEvents Panel5 As Panel
-    Friend WithEvents cmbRoom As ComboBox
     Friend WithEvents Panel6 As Panel
     Friend WithEvents txtHeight As TextBox
     Friend WithEvents Panel7 As Panel
@@ -815,7 +777,6 @@ Partial Class frmNewPatient
     Friend WithEvents Label7 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents Label9 As Label
-    Friend WithEvents Label10 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents Label12 As Label
     Friend WithEvents Label13 As Label
@@ -828,4 +789,7 @@ Partial Class frmNewPatient
     Friend WithEvents ErrorProvider1 As ErrorProvider
     Friend WithEvents Panel13 As Panel
     Friend WithEvents btnBack As Button
+    Friend WithEvents cboRoom As ComboBox
+    Friend WithEvents cboBed As ComboBox
+    Friend WithEvents Label10 As Label
 End Class
