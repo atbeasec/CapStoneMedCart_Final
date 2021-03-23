@@ -714,7 +714,7 @@ Module PatientInformation
         Dim strroom As String = ""
 
         dsPatient = CreateDatabase.ExecuteSelectQuery("Select * from Patient where Patient_ID = '" & intPatient_ID & "';")
-        strbSQL.Append("Select * from Rooms;")
+        strbSQL.Append("Select Room_ID,Bed_Name from Rooms WHERE Active_Flag = '1' EXCEPT Select Room_TUID,Bed_Name from PatientRoom where PatientRoom.Active_Flag = '1'")
         PopulateRoomsCombBoxesMethods.PopulateRoomComboBox(cboRoom, CreateDatabase.ExecuteSelectQuery(strbSQL.ToString))
         'calling that function will populate the room combobox for us. 
 
@@ -729,6 +729,10 @@ Module PatientInformation
             Debug.WriteLine(" ")
         Next
         PopulateRoomsCombBoxesMethods.UpdateBedComboBox(cboBed, cboRoom)
+        cboRoom.Items.Add(strroom)
+        cboBed.Items.Add(strbed)
+        cboRoom.Tag = strroom
+        cboBed.Tag = strbed
         cboRoom.SelectedItem = strroom
         cboBed.SelectedItem = strbed
     End Sub
