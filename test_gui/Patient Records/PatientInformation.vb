@@ -450,12 +450,28 @@ Module PatientInformation
             frmPatientInfo.txtZipCode.Tag = frmPatientInfo.txtZipCode.Text
         End If
 
+        If Not frmPatientInfo.txtBarcode.Text.Equals(frmPatientInfo.txtBarcode.Tag) Then
+            'build sql update command
+            strbSqlCommand.Append("UPDATE Patient SET Barcode = '" & frmPatientInfo.txtBarcode.Text & "' Where Patient_ID = '" & intPatientID & "'")
+            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+            'add item that was changed too string that is tracking all changed items
+            strbItemsChanged.Append(" Barcode")
+            'increase changed item count
+            intCountChanged = intCountChanged + 1
+            'clear string bulder
+            strbSqlCommand.Clear()
+            'update tag to new item
+            frmPatientInfo.txtBarcode.Tag = frmPatientInfo.txtBarcode.Text
+        End If
+
         If intCountChanged = 1 Then
             MessageBox.Show("Updated " & intCountChanged & " Item " & strbItemsChanged.ToString)
         Else
             MessageBox.Show("Updated " & intCountChanged & " Items " & strbItemsChanged.ToString)
         End If
-
+        frmPatientInfo.LblPatientName.Text = Nothing
+        Dim dsPatientName As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT Patient_First_Name, Patient_Middle_Name, Patient_Last_Name from Patient where Patient_ID = '" & intPatientID & "'")
+        frmPatientInfo.LblPatientName.Text = dsPatientName.Tables(0).Rows(0)(0) & " " & dsPatientName.Tables(0).Rows(0)(1) & " " & dsPatientName.Tables(0).Rows(0)(2)
     End Sub
 
     '/*********************************************************************/
