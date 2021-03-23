@@ -279,6 +279,7 @@ Public Class frmInventory
         intDividerBin = CInt(cmbDividerBin.SelectedItem)
 
         ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Divider_Bin,Expiration_Date,Discrepancy_Flag, Active_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & intDividerBin & " , '" & mtbExpirationDate.Text & "'," & intDiscrepancies & ",1);")
+        CartInterfaceCode.OpenOneDrawer(CInt(cmbDrawerNumber.SelectedItem))
         MessageBox.Show("Medication has been added to the drawer")
         Debug.WriteLine("")
 
