@@ -269,6 +269,32 @@ Module PatientInformation
         Dim strbItemsChanged As StringBuilder = New StringBuilder
         Dim intCountChanged As Integer = 0
         Dim strbSqlCommand As StringBuilder = New StringBuilder
+        If Not frmPatientInfo.txtFirstName.Text.Equals(frmPatientInfo.txtFirstName.Tag) Then
+            strbSqlCommand.Append("UPDATE Patient SET Patient_First_Name = '" & frmPatientInfo.txtFirstName.Text & "' Where Patient_ID = '" & intPatientID & "'")
+            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+            strbItemsChanged.AppendLine(" First Name")
+            intCountChanged = intCountChanged + 1
+            strbSqlCommand.Clear()
+            frmPatientInfo.txtFirstName.Tag = frmPatientInfo.txtFirstName.Text
+        End If
+
+        If Not frmPatientInfo.txtMiddle.Text.Equals(frmPatientInfo.txtMiddle.Tag) Then
+            strbSqlCommand.Append("UPDATE Patient SET Patient_Middle_Name = '" & frmPatientInfo.txtMiddle.Text & "' Where Patient_ID = '" & intPatientID & "'")
+            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+            strbItemsChanged.AppendLine(" Middle Name")
+            intCountChanged = intCountChanged + 1
+            strbSqlCommand.Clear()
+            frmPatientInfo.txtMiddle.Tag = frmPatientInfo.txtMiddle.Text
+        End If
+
+        If Not frmPatientInfo.txtLast.Text.Equals(frmPatientInfo.txtLast.Tag) Then
+            strbSqlCommand.Append("UPDATE Patient SET Patient_Last_Name = '" & frmPatientInfo.txtLast.Text & "' Where Patient_ID = '" & intPatientID & "'")
+            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+            strbItemsChanged.AppendLine(" Last Name")
+            intCountChanged = intCountChanged + 1
+            strbSqlCommand.Clear()
+            frmPatientInfo.txtLast.Tag = frmPatientInfo.txtLast.Text
+        End If
 
         If Not intMRNCurrentValue.Equals(intMRNInitalValue) Then
             'build sql update command

@@ -728,7 +728,6 @@ Partial Class frmPatientInfo
         Me.txtBarcode.Location = New System.Drawing.Point(693, 12)
         Me.txtBarcode.MaxLength = 5
         Me.txtBarcode.Name = "txtBarcode"
-        Me.txtBarcode.ReadOnly = True
         Me.txtBarcode.ShortcutsEnabled = False
         Me.txtBarcode.Size = New System.Drawing.Size(207, 25)
         Me.txtBarcode.TabIndex = 30
@@ -742,7 +741,6 @@ Partial Class frmPatientInfo
         Me.txtLast.Location = New System.Drawing.Point(466, 11)
         Me.txtLast.MaxLength = 5
         Me.txtLast.Name = "txtLast"
-        Me.txtLast.ReadOnly = True
         Me.txtLast.ShortcutsEnabled = False
         Me.txtLast.Size = New System.Drawing.Size(148, 25)
         Me.txtLast.TabIndex = 29
@@ -756,7 +754,6 @@ Partial Class frmPatientInfo
         Me.txtMiddle.Location = New System.Drawing.Point(273, 11)
         Me.txtMiddle.MaxLength = 5
         Me.txtMiddle.Name = "txtMiddle"
-        Me.txtMiddle.ReadOnly = True
         Me.txtMiddle.ShortcutsEnabled = False
         Me.txtMiddle.Size = New System.Drawing.Size(148, 25)
         Me.txtMiddle.TabIndex = 28
@@ -770,7 +767,6 @@ Partial Class frmPatientInfo
         Me.txtFirstName.Location = New System.Drawing.Point(52, 11)
         Me.txtFirstName.MaxLength = 5
         Me.txtFirstName.Name = "txtFirstName"
-        Me.txtFirstName.ReadOnly = True
         Me.txtFirstName.ShortcutsEnabled = False
         Me.txtFirstName.Size = New System.Drawing.Size(148, 25)
         Me.txtFirstName.TabIndex = 27
