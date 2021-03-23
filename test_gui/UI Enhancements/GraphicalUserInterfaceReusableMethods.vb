@@ -269,7 +269,24 @@ Module GraphicalUserInterfaceReusableMethods
                 .ImageAlign = ContentAlignment.MiddleCenter
                 .Tag = intPanelsAddedCount + 1
             End With
-        Else
+        ElseIf getOpenedForm().GetType() Is frmEditPhysician.GetType() Then
+            Dim mapImageTrash As New Bitmap(New Bitmap(My.Resources.plusminus), 25, 25)
+                'Set button properties
+                With btnDeleteButton
+                    .AutoSize = True
+                    .Size = New Size(30, 30)
+                    .FlatStyle = FlatStyle.Flat
+                    .FlatAppearance.BorderSize = 0
+                    .ForeColor = Color.Transparent
+                    ' .Font = New Font(New FontFamily("Microsoft Sans Serif"), 11)
+                    ' .Location = New Point(  )
+                    .Location = New Point(intX, intY)
+                    .Name = "btnDeletePatientRecord" + (intPanelsAddedCount).ToString
+                    .Image = mapImageTrash
+                    .ImageAlign = ContentAlignment.MiddleCenter
+                    .Tag = intPanelsAddedCount + 1
+                End With
+            Else
             Dim mapImageTrash As New Bitmap(New Bitmap(My.Resources.icons8_delete_trash), 25, 25)
             'Set button properties
             With btnDeleteButton
