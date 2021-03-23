@@ -24,6 +24,7 @@ Partial Class frmMain
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.pnlTopBar = New System.Windows.Forms.Panel()
+        Me.pnlTopBarContrast = New System.Windows.Forms.Panel()
         Me.pnlSideMenu = New System.Windows.Forms.Panel()
         Me.pnlSubMenuSettings = New System.Windows.Forms.Panel()
         Me.btnEditPhysician = New System.Windows.Forms.Button()
@@ -51,6 +52,7 @@ Partial Class frmMain
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.pnlDockLocation = New System.Windows.Forms.Panel()
+        Me.pnlTopBar.SuspendLayout()
         Me.pnlSideMenu.SuspendLayout()
         Me.pnlSubMenuSettings.SuspendLayout()
         Me.pnlSubMenuInventory.SuspendLayout()
@@ -60,12 +62,22 @@ Partial Class frmMain
         '
         'pnlTopBar
         '
-        Me.pnlTopBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.pnlTopBar.BackColor = System.Drawing.Color.White
+        Me.pnlTopBar.Controls.Add(Me.pnlTopBarContrast)
         Me.pnlTopBar.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlTopBar.Location = New System.Drawing.Point(0, 0)
         Me.pnlTopBar.Name = "pnlTopBar"
-        Me.pnlTopBar.Size = New System.Drawing.Size(1334, 28)
+        Me.pnlTopBar.Size = New System.Drawing.Size(1334, 27)
         Me.pnlTopBar.TabIndex = 13
+        '
+        'pnlTopBarContrast
+        '
+        Me.pnlTopBarContrast.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.pnlTopBarContrast.Dock = System.Windows.Forms.DockStyle.Left
+        Me.pnlTopBarContrast.Location = New System.Drawing.Point(0, 0)
+        Me.pnlTopBarContrast.Name = "pnlTopBarContrast"
+        Me.pnlTopBarContrast.Size = New System.Drawing.Size(227, 27)
+        Me.pnlTopBarContrast.TabIndex = 0
         '
         'pnlSideMenu
         '
@@ -84,10 +96,10 @@ Partial Class frmMain
         Me.pnlSideMenu.Controls.Add(Me.btnPatientRecords)
         Me.pnlSideMenu.Controls.Add(Me.pnlLogo)
         Me.pnlSideMenu.Dock = System.Windows.Forms.DockStyle.Left
-        Me.pnlSideMenu.Location = New System.Drawing.Point(0, 28)
+        Me.pnlSideMenu.Location = New System.Drawing.Point(0, 27)
         Me.pnlSideMenu.Margin = New System.Windows.Forms.Padding(2)
         Me.pnlSideMenu.Name = "pnlSideMenu"
-        Me.pnlSideMenu.Size = New System.Drawing.Size(227, 683)
+        Me.pnlSideMenu.Size = New System.Drawing.Size(227, 684)
         Me.pnlSideMenu.TabIndex = 14
         '
         'pnlSubMenuSettings
@@ -565,9 +577,9 @@ Partial Class frmMain
         'pnlDockLocation
         '
         Me.pnlDockLocation.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlDockLocation.Location = New System.Drawing.Point(227, 28)
+        Me.pnlDockLocation.Location = New System.Drawing.Point(227, 27)
         Me.pnlDockLocation.Name = "pnlDockLocation"
-        Me.pnlDockLocation.Size = New System.Drawing.Size(1107, 683)
+        Me.pnlDockLocation.Size = New System.Drawing.Size(1107, 684)
         Me.pnlDockLocation.TabIndex = 16
         '
         'frmMain
@@ -584,6 +596,7 @@ Partial Class frmMain
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Medical Dispense"
+        Me.pnlTopBar.ResumeLayout(False)
         Me.pnlSideMenu.ResumeLayout(False)
         Me.pnlSubMenuSettings.ResumeLayout(False)
         Me.pnlSubMenuInventory.ResumeLayout(False)
@@ -622,4 +635,5 @@ Partial Class frmMain
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents pnlDockLocation As Panel
+    Friend WithEvents pnlTopBarContrast As Panel
 End Class
