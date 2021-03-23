@@ -459,7 +459,7 @@ Module GraphicalUserInterfaceReusableMethods
         ' MessageBox.Show("again")
         'Add handler for click events
         'assing functionality here
-
+        AddHandler txtCount.TextChanged, AddressOf TextBoxErrorHandling_TextChanged
         'AddHandler btnFlagMedication.Click, AddressOf DynamicFlagMedicationButton
 
     End Sub
@@ -1088,5 +1088,96 @@ Module GraphicalUserInterfaceReusableMethods
 
     End Function
 
+    '/*********************************************************************/
+    '/*              Sub NAME: TextBoxErrorHandling_TextChanged()    */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:  Collin Krygier          		          */   
+    '/*		         DATE CREATED: 		 3/22/2021                        */                             
+    '/*********************************************************************/
+    '/*  SUB PURPOSE:								                      */             
+    '/*	 This Subroutine is called whenever text changes in a run time made/
+    '/*  textbox.                                                         */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*  None                                                             */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	sender                                                            */
+    '/* e                                                                 */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	RemoveCharacters("1hello")                                		  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/* None                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/22/2021    Initial creation                    */
+    '/*********************************************************************/
+    Public Sub TextBoxErrorHandling_TextChanged(ByVal sender As Object, e As EventArgs)
+
+        sender.text = RemoveCharacters(sender.text)
+
+        'set the cursor position to the last item 
+        sender.Select(sender.Text.Length, 0)
+
+    End Sub
+
+
+
+    '/*********************************************************************/
+    '/*                   Function NAME: RemoveCharacters()               */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:  Collin Krygier          		          */   
+    '/*		         DATE CREATED: 		 3/22/2021                        */                             
+    '/*********************************************************************/
+    '/*  Function PURPOSE:								                  */             
+    '/*	 This function simply takes a string , checks if it is numberic,if*/
+    '/*  if not, it removes everything that is not numeric.               */
+    '/*********************************************************************/
+    '/*  Function Return Value:					                          */         
+    '/*	 A string that is contains only valid text for the textbox        */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  TextBoxErrorHandling_TextChanged()                               */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*  None                                                             */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	strTextboxValue- string that is the value from the count textbox  */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	RemoveCharacters("1hello")                                		  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	newString- a string equal to the original textbox value           */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/22/2021    Initial creation                    */
+    '/*********************************************************************/
+    Public Function RemoveCharacters(ByVal strTextboxValue As String) As String
+
+        Dim newString As String = strTextboxValue
+
+        For Each character In strTextboxValue
+            If Not Char.IsNumber(character) Then
+
+                newString = Replace(strTextboxValue, character, "")
+
+            End If
+        Next
+
+        Return newString
+    End Function
 
 End Module
