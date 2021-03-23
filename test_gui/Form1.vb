@@ -845,7 +845,7 @@
     '/*  ---   ----     ------------------------------------------------  */
     '/*  Collin Krygier 3/20/2021    Initial creation                    */
     '/*********************************************************************/
-    Private Sub TopBar_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlTopBar.MouseDown
+    Private Sub TopBar_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlTopBar.MouseDown, pnlTopBarContrast.MouseDown
 
         startPoint = pnlTopBar.PointToScreen(New Point(e.X, e.Y))
         firstPoint = startPoint
@@ -886,7 +886,7 @@
     '/*  ---   ----     ------------------------------------------------  */
     '/*  Collin Krygier  3/20/2021    Initial creation                    */
     '/*********************************************************************/
-    Private Sub TopBar_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlTopBar.MouseMove
+    Private Sub TopBar_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlTopBar.MouseMove, pnlTopBarContrast.MouseMove
 
         If isDragging Then
             Dim endPoint As Point = pnlTopBar.PointToScreen(New Point(e.X, e.Y))
@@ -930,7 +930,7 @@
     '/*  ---   ----     ------------------------------------------------  */
     '/*  Collin Krygier  3/20/2021    Initial creation                    */
     '/*********************************************************************/
-    Private Sub TopBar_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlTopBar.MouseUp
+    Private Sub TopBar_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlTopBar.MouseUp, pnlTopBarContrast.MouseUp
 
         isDragging = False
         If lastPoint = startPoint Then isClick = True Else isClick = False
