@@ -463,14 +463,25 @@ Module PatientInformation
             'update tag to new item
             frmPatientInfo.txtBarcode.Tag = frmPatientInfo.txtBarcode.Text
         End If
+        If Not frmPatientInfo.cboBed.SelectedIndex = -1 Then
 
-        If Not frmPatientInfo.cboBed.Text.Equals(frmPatientInfo.cboBed.Tag) Then
-            strbSqlCommand.Clear()
-            strbSqlCommand.Append("UPDATE PatientRoom SET PatientRoom.Active_Flag = '0' Where Patient_ID = '" & intPatientID & "' AND Active_Flag = '1'")
-            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
-            strbSqlCommand.Clear()
-            Dim strCheck As String = CreateDatabase.ExecuteScalarQuery("SELECT Room_TUID FROM PatientRoom where Patient_TUID = '" & intPatientID & "' AND Room_TUID = '" & frmPatientInfo.cboRoom.Text & "' AND Bed_Name = '" & frmPatientInfo.cboBed.Text & "' AND Active_Flag = '0'")
+            If Not frmPatientInfo.cboBed.Text.Equals(frmPatientInfo.cboBed.Tag) Then
+                strbSqlCommand.Clear()
+                strbSqlCommand.Append("UPDATE PatientRoom SET PatientRoom.Active_Flag = '0' Where Patient_TUID = '" & intPatientID & "' AND Active_Flag = '1'")
+                CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+                strbSqlCommand.Clear()
+                Dim strCheck As String = CreateDatabase.ExecuteScalarQuery("SELECT Room_TUID FROM PatientRoom where Patient_TUID = '" & intPatientID & "' AND Room_TUID = '" & frmPatientInfo.cboRoom.Text & "' AND Bed_Name = '" & frmPatientInfo.cboBed.Text & "' AND Active_Flag = '0'")
+                If IsNothing(strCheck) Then
+                    'if nothing is returned that record is not in the database so insert
+                    CreateDatabase.ExecuteInsertQuery("INSERT INTO PatientRoom(Patient_TUID,Room_TUID,Bed_Name,Active_Flag) VALUES('" & intPatientID & "', '" & frmPatientInfo.cboRoom.Text & "', '" & frmPatientInfo.cboBed.Text & "','1')")
 
+                Else
+                    'if it was in the database reactivate it
+                    CreateDatabase.ExecuteInsertQuery("Update PatientRoom SET Active_Flag = '1' where Patient_TUID = '" & intPatientID & "' AND Room_TUID = '" & frmPatientInfo.cboRoom.Text & "' AND Bed_Name = '" & frmPatientInfo.cboBed.Text & "'")
+
+                End If
+
+            End If
         End If
 
         If intCountChanged = 1 Then
@@ -724,28 +735,40 @@ Module PatientInformation
 
         dsPatient = CreateDatabase.ExecuteSelectQuery("Select * from Patient where Patient_ID = '" & intPatient_ID & "';")
         strbSQL.Append("Select Room_ID,Bed_Name from Rooms WHERE Active_Flag = '1' EXCEPT Select Room_TUID,Bed_Name from PatientRoom where PatientRoom.Active_Flag = '1'")
-        PopulateRoomsCombBoxesMethods.PopulateRoomComboBox(cboRoom, CreateDatabase.ExecuteSelectQuery(strbSQL.ToString))
+        Dim dsOpenrooms As DataSet = CreateDatabase.ExecuteSelectQuery(strbSQL.ToString)
+        PopulateRoomsCombBoxesMethods.PopulateRoomComboBox(cboRoom, dsOpenrooms)
         'calling that function will populate the room combobox for us. 
 
         strbSQL.Clear()
+
+
         For Each row As DataRow In dsPatient.Tables(0).Rows
             intPatient_TUID = row(0)
         Next
-        dsPatientRoom = CreateDatabase.ExecuteSelectQuery("Select * from PatientRoom where Patient_TUID ='" & intPatient_TUID & "';")
+
+        dsPatientRoom = CreateDatabase.ExecuteSelectQuery("Select * from PatientRoom where Patient_TUID ='" & intPatient_TUID & "' AND Active_Flag = '1';")
         For Each row As DataRow In dsPatientRoom.Tables(0).Rows
             strbed = row(2)
             strroom = row(1)
-            Debug.WriteLine(" ")
         Next
-        PopulateRoomsCombBoxesMethods.UpdateBedComboBox(cboBed, cboRoom)
-        cboRoom.Items.Add(strroom)
-        cboBed.Items.Add(strbed)
+        Dim strcheckroom As String = dsPatientRoom.Tables(0).Rows(0)(1)
+        If checkComboForDup(frmPatientInfo.cboRoom, strcheckroom) = True Then
+            cboRoom.Items.Add(strroom)
+        End If
+
+
+        'PopulateRoomsCombBoxesMethods.UpdateBedComboBox(cboBed, cboRoom)
         cboRoom.Tag = strroom
         cboBed.Tag = strbed
         cboRoom.SelectedItem = strroom
         cboBed.SelectedItem = strbed
     End Sub
 
+    Private Sub populatebedsforpatient()
+        Dim strRoom As String = frmPatientInfo.cboRoom.SelectedItem
+        Dim strRoomTag As String = frmPatientInfo.cboRoom.Tag
+
+    End Sub
 
     '/*********************************************************************/
     '/*                   SUBPROGRAM NAME: DisplayPatientPrescriptionsDispense    */         
