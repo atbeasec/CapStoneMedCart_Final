@@ -14,32 +14,7 @@
 
     End Sub
     Private Sub LoadPanel()
-        Dim UserID As Integer = 9
-        Dim strUserFirst As String = ""
-        Dim strUserLast As String = ""
-        Dim strVisitDate As String = ""
-        Dim intPhysicianID As Integer = 0
-        Dim intPatientID As Integer = 0
-        Dim intPatientMRN As Integer = 0
-        Dim strPatientFirst As String = ""
-        Dim strPatientLast As String = ""
-        Dim StrDOB As String = ""
-        Dim strRoom As String = ""
-        Dim strBed As String = ""
-        Dim intActive_Flag As String = ""
 
-        'dsUser = CreateDatabase.ExecuteSelectQuery("Select User_First_Name, User_Last_Name From User Where User_ID =" & UserID.ToString & " ;")
-        'For Each row As DataRow In dsUser.Tables(0).Rows
-        '    strUserFirst = row(0)
-
-        '    strUserLast = row(1)
-        '    Next
-        '  txtPhysician.Text = (strUserFirst + " " + strUserLast + ", " + UserID.ToString())
-        '  If rdbShowAll.Checked = True Then
-
-        '  ElseIf rdbOnlyActive.Checked = True Then
-
-        '  End If
 
 
     End Sub
@@ -390,7 +365,11 @@
         Next
         If intActiveFlag = 0 Then
             ExecuteInsertQuery("UPDATE PatientUser SET Active_Flag = 1 WHERE Patient_TUID =" & patientIDFromSelectedRecord.ToString & " AND User_TUID =" & UserID.ToString & " ;")
+        ElseIf intActiveFlag = 1 Then 'if they get to here they are already assigned to someone else so i will just change the user_ID
+
+
         Else
+
             ExecuteInsertQuery("INSERT INTO PatientUser ('Patient_TUID','User_TUID','Visit_Date','Active_Flag') VALUES ('" & patientIDFromSelectedRecord.ToString & "','" & UserID.ToString & "','" & strVisitDate & "','" & intActive_Flag.ToString & "' );")
 
         End If
