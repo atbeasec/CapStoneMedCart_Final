@@ -1167,7 +1167,7 @@ Module GraphicalUserInterfaceReusableMethods
     '/*********************************************************************/
     Public Function RemoveCharacters(ByVal strTextboxValue As String) As String
 
-        Dim newString As String = Nothing
+        Dim newString As String = strTextboxValue
 
         For Each character In strTextboxValue
             If Not Char.IsNumber(character) Then
