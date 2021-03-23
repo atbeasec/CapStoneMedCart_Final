@@ -490,5 +490,56 @@
     Public Sub RemoveDrugfromDrawer(ByRef intDrawerID As Integer, ByRef intDivider As Integer, ByRef intMedTUID As Integer)
         CreateDatabase.ExecuteInsertQuery("UPDATE DrawerMedication SET Active_Flag = '0' WHERE Drawers_TUID = '" & intDrawerID & "'  AND Divider_Bin = '" & intDivider & "' AND Medication_TUID = '" & intMedTUID & "' AND Active_Flag = '1'")
     End Sub
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: ClearInventoryForm()           */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Breanna Howey 		              */   
+    '/*		         DATE CREATED: 		 03/22/2021                       */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This will clear the inventory form after all fields are entered in
+    '/*  the database.                                                    */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  btnSave_Click                                                    */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*  None                                                             */
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */ 
+    '/* None                                                              */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	ClearInventoryForm                                                */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	outputList - Stores the items to be saved in the Medication Name combo box
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN          WHAT								          */             
+    '/*  ---   ----          ---------------------------------------------*/
+    '/*  BRH   03/22/2021    Initial creation                             */
+    '/*********************************************************************/
+    Public Sub ClearInventoryForm()
+        Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
+        frmInventory.txtSearch.Clear()
+        frmInventory.chkNarcotic.Checked = False
+        frmInventory.chkControlled.Checked = False
+        frmInventory.txtSchedule.Clear()
+        frmInventory.txtStrength.Clear()
+        frmInventory.txtType.Clear()
+        frmInventory.txtBarcode.Clear()
+        frmInventory.mtbExpirationDate.Clear()
+
+        frmInventory.cmbDrawerNumber.SelectedIndex = 0
+        frmInventory.cmbDividerBin.SelectedIndex = 0
+        frmInventory.txtQuantity.Text = "1"
+
+        frmInventory.cboPersonalMedication.SelectedIndex = 1
+
+        frmInventory.cmbMedicationName.DataSource = outputList
+    End Sub
 End Module
 
