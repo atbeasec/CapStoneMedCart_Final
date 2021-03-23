@@ -62,6 +62,8 @@ Public Class frmEditPhysician
         AddHandlerToLabelClick(pnlPhysicianHeader, AddressOf SortBySelectedLabel)
 
         txtID.Visible = False
+        btnSaveChanges.Visible = False
+        btnCancel.Visible = False
 
     End Sub
 
@@ -297,7 +299,7 @@ Public Class frmEditPhysician
     '/*  WHO        WHEN            WHAT					               */             
     '/*  Dylan W    2/10/2021    Initial creation and check data in DB   */
     '/*********************************************************************/
-    Private Sub mtbPhone_and_mtbFax_LostFocus(sender As Object, e As EventArgs)
+    Private Sub mtbPhone_and_mtbFax_LostFocus(sender As Object, e As EventArgs) Handles mtbPhone.LostFocus, mtbFax.LostFocus
         'String to be sent to CreateDatabase Module to exicute search to check if Username is already in the User Table
         Dim strStatement = "SELECT COUNT(*) FROM Physician WHERE Physician_Phone_Number = '" & mtbPhone.Text & "'"
         Dim strStatementFax = "SELECT COUNT(*) FROM Physician WHERE Physician_Fax_Number = '" & mtbFax.Text & "'"
@@ -356,7 +358,7 @@ Public Class frmEditPhysician
     '/*********************************************************************/
 
 
-    Private Sub btnSave_Click(sender As Object, e As EventArgs)
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
 
         Dim intActiveFlag As Integer = 1
         Dim strLastName As String = txtLastName.Text
@@ -526,12 +528,7 @@ Public Class frmEditPhysician
     '                                  "User.Supervisor_Flag, User.Active_Flag From User;"
     '    Fill_Table(strFillSQL)
     'End Sub
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs)
 
-
-
-
-    End Sub
 
     'Private Sub SearchIcon_Click(sender As Object, e As EventArgs) Handles pnlSearch.Click
     '    Dim strFillSQL As String
@@ -573,10 +570,6 @@ Public Class frmEditPhysician
         Next
     End Sub
 
-    Private Sub btnSaveChanges_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
     Private Sub btnCancel_Click_1(sender As Object, e As EventArgs) Handles btnCancel.Click
 
         txtFirstName.Text = Nothing
@@ -593,6 +586,9 @@ Public Class frmEditPhysician
         cboState.ResetText()
 
     End Sub
+
+
+
 
 
     'Private Sub Search_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearchBox.KeyPress

@@ -743,6 +743,7 @@ Module GraphicalUserInterfaceReusableMethods
             frmConfiguration.btnSaveChanges.Visible = True
             frmConfiguration.btnCancel.Visible = True
             frmConfiguration.btnSaveUser.Visible = False
+            frmConfiguration.Label2.Text = "Editing User"
 
         ElseIf getOpenedForm().GetType() Is frmPatientRecords.GetType() Then
             'this will set up the functions for the editing pencil. 
@@ -771,7 +772,7 @@ Module GraphicalUserInterfaceReusableMethods
             strStatement = "SELECT Physician_Phone_Number FROM Physician WHERE Physician_ID = '" & IDNumber & "';"
             frmEditPhysician.mtbPhone.Text = ExecuteScalarQuery(strStatement)
             strStatement = "SELECT Physician_Fax_Number FROM Physician WHERE Physician_ID = '" & IDNumber & "';"
-            frmEditPhysician.mtbPhone.Text = ExecuteScalarQuery(strStatement)
+            frmEditPhysician.mtbFax.Text = ExecuteScalarQuery(strStatement)
             strStatement = "SELECT Physician_Address FROM Physician WHERE Physician_ID = '" & IDNumber & "';"
             frmEditPhysician.txtAddress.Text = ExecuteScalarQuery(strStatement)
             strStatement = "SELECT Physician_City FROM Physician WHERE Physician_ID = '" & IDNumber & "';"

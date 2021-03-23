@@ -132,7 +132,7 @@ Partial Class frmMain
         Me.btnEditPhysician.Size = New System.Drawing.Size(210, 42)
         Me.btnEditPhysician.TabIndex = 29
         Me.btnEditPhysician.Tag = "18"
-        Me.btnEditPhysician.Text = "Edit Physician"
+        Me.btnEditPhysician.Text = "Physician Settings"
         Me.btnEditPhysician.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnEditPhysician.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnEditPhysician.UseVisualStyleBackColor = False
@@ -216,7 +216,7 @@ Partial Class frmMain
         Me.btnUsers.Size = New System.Drawing.Size(210, 42)
         Me.btnUsers.TabIndex = 25
         Me.btnUsers.Tag = "14"
-        Me.btnUsers.Text = "Add / Remove User"
+        Me.btnUsers.Text = "User Settings"
         Me.btnUsers.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnUsers.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnUsers.UseVisualStyleBackColor = False
