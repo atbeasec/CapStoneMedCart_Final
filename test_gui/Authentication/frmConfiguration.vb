@@ -685,6 +685,7 @@ Public Class frmConfiguration
                 btnCancel.Visible = False
                 btnSaveChanges.Visible = False
                 btnSaveUser.Visible = True
+                Label2.Text = "Create New User"
             End If
         End If
 
@@ -728,6 +729,7 @@ Public Class frmConfiguration
                 btnCancel.Visible = False
                 btnSaveChanges.Visible = False
                 btnSaveUser.Visible = True
+                Label2.Text = "Create New User"
             End If
         End If
 
@@ -746,6 +748,7 @@ Public Class frmConfiguration
         btnCancel.Visible = False
         btnSaveChanges.Visible = False
         btnSaveUser.Visible = True
+        Label2.Text = "Create New User"
     End Sub
 
     Private Sub btnPasswordEye_Click(sender As Object, e As EventArgs) Handles btnPasswordEye.Click
