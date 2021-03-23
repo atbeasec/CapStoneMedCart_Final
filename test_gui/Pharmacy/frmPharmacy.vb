@@ -73,6 +73,9 @@
         If Not IsNumeric(txtQuantity.Text) Then
             MessageBox.Show("Please select a numeric quantity")
             ErrorProvider1.SetError(btnDecrement, "Please select a numeric quantity")
+        ElseIf txtQuantity.Text = 0 Then
+            MessageBox.Show("Please select a quantity greater than zero")
+            ErrorProvider1.SetError(btnDecrement, "Please select a quantity greater than zero")
         Else
             If cmbPatientName.SelectedIndex = -1 Or cmbMedication.SelectedIndex = -1 Or cmbOrderedBy.SelectedIndex = -1 Or cmbFrequencyNumber.SelectedIndex = -1 Then
                 MessageBox.Show("Please select a patient, medication, physician and frequency before placing the order")
@@ -151,7 +154,7 @@
     '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
     '/*********************************************************************/
     Private Sub btnDecrement_Click(sender As Object, e As EventArgs) Handles btnDecrement.Click
-        If Not IsNumeric(txtQuantity.Text) Then
+        If Not IsNumeric(txtQuantity.Text) Or txtQuantity.Text = 0 Then
             txtQuantity.Text = 2
         End If
         ButtonDecrement(txtQuantity)

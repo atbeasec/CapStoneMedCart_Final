@@ -194,6 +194,18 @@ Module PatientInformation
                 frmPatientInfo.LblPatientName.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.FristName) &
                     " " & dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.MiddleName) &
                     " " & dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.LastName)
+                frmPatientInfo.txtFirstName.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.FristName)
+                frmPatientInfo.txtMiddle.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.MiddleName)
+                frmPatientInfo.txtLast.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.LastName)
+                frmPatientInfo.txtFirstName.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.FristName)
+                frmPatientInfo.txtMiddle.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.MiddleName)
+                frmPatientInfo.txtLast.Tag = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.LastName)
+            End If
+            If IsDBNull(dr(2)) Then
+
+            Else
+                frmPatientInfo.txtBarcode.Text = dr(2)
+                frmPatientInfo.txtBarcode.Tag = dr(2)
             End If
 
             intPhysicianID = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.PhysicianID)
@@ -257,6 +269,32 @@ Module PatientInformation
         Dim strbItemsChanged As StringBuilder = New StringBuilder
         Dim intCountChanged As Integer = 0
         Dim strbSqlCommand As StringBuilder = New StringBuilder
+        If Not frmPatientInfo.txtFirstName.Text.Equals(frmPatientInfo.txtFirstName.Tag) Then
+            strbSqlCommand.Append("UPDATE Patient SET Patient_First_Name = '" & frmPatientInfo.txtFirstName.Text & "' Where Patient_ID = '" & intPatientID & "'")
+            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+            strbItemsChanged.AppendLine(" First Name")
+            intCountChanged = intCountChanged + 1
+            strbSqlCommand.Clear()
+            frmPatientInfo.txtFirstName.Tag = frmPatientInfo.txtFirstName.Text
+        End If
+
+        If Not frmPatientInfo.txtMiddle.Text.Equals(frmPatientInfo.txtMiddle.Tag) Then
+            strbSqlCommand.Append("UPDATE Patient SET Patient_Middle_Name = '" & frmPatientInfo.txtMiddle.Text & "' Where Patient_ID = '" & intPatientID & "'")
+            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+            strbItemsChanged.AppendLine(" Middle Name")
+            intCountChanged = intCountChanged + 1
+            strbSqlCommand.Clear()
+            frmPatientInfo.txtMiddle.Tag = frmPatientInfo.txtMiddle.Text
+        End If
+
+        If Not frmPatientInfo.txtLast.Text.Equals(frmPatientInfo.txtLast.Tag) Then
+            strbSqlCommand.Append("UPDATE Patient SET Patient_Last_Name = '" & frmPatientInfo.txtLast.Text & "' Where Patient_ID = '" & intPatientID & "'")
+            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+            strbItemsChanged.AppendLine(" Last Name")
+            intCountChanged = intCountChanged + 1
+            strbSqlCommand.Clear()
+            frmPatientInfo.txtLast.Tag = frmPatientInfo.txtLast.Text
+        End If
 
         If Not intMRNCurrentValue.Equals(intMRNInitalValue) Then
             'build sql update command
@@ -412,12 +450,28 @@ Module PatientInformation
             frmPatientInfo.txtZipCode.Tag = frmPatientInfo.txtZipCode.Text
         End If
 
+        If Not frmPatientInfo.txtBarcode.Text.Equals(frmPatientInfo.txtBarcode.Tag) Then
+            'build sql update command
+            strbSqlCommand.Append("UPDATE Patient SET Barcode = '" & frmPatientInfo.txtBarcode.Text & "' Where Patient_ID = '" & intPatientID & "'")
+            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+            'add item that was changed too string that is tracking all changed items
+            strbItemsChanged.Append(" Barcode")
+            'increase changed item count
+            intCountChanged = intCountChanged + 1
+            'clear string bulder
+            strbSqlCommand.Clear()
+            'update tag to new item
+            frmPatientInfo.txtBarcode.Tag = frmPatientInfo.txtBarcode.Text
+        End If
+
         If intCountChanged = 1 Then
             MessageBox.Show("Updated " & intCountChanged & " Item " & strbItemsChanged.ToString)
         Else
             MessageBox.Show("Updated " & intCountChanged & " Items " & strbItemsChanged.ToString)
         End If
-
+        frmPatientInfo.LblPatientName.Text = Nothing
+        Dim dsPatientName As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT Patient_First_Name, Patient_Middle_Name, Patient_Last_Name from Patient where Patient_ID = '" & intPatientID & "'")
+        frmPatientInfo.LblPatientName.Text = dsPatientName.Tables(0).Rows(0)(0) & " " & dsPatientName.Tables(0).Rows(0)(1) & " " & dsPatientName.Tables(0).Rows(0)(2)
     End Sub
 
     '/*********************************************************************/

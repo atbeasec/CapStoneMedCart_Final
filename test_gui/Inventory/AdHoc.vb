@@ -52,8 +52,8 @@ Module AdHoc
     '/*  WHO                     WHEN        WHAT						*/
     '/*  Alexander Beasecker    1/25/2021   Initial creation            */
     '/*******************************************************************/
-    Dim intPatientIDArray As New ArrayList
-    Dim intMedIDArray As New ArrayList
+    Public intPatientIDArray As New ArrayList
+    Public intMedIDArray As New ArrayList
 
 
     '/*********************************************************************/
@@ -100,13 +100,10 @@ Module AdHoc
     '/*  Alexander Beasecker  02/01/2021  Initial creation of the code    */
     '/*********************************************************************/
 
-    Public Sub InsertAdHoc(ByRef intPatientMRN As Integer, ByRef intUserID As Integer,
-                           ByRef intAmount As Integer)
+    Public Sub InsertAdHoc(ByRef intPatientID As Integer, ByRef intUserID As Integer,
+                           ByRef intAmount As Integer, ByRef intMEDID As Integer)
         'create variables used for insert order
-        Dim intMedicationID As Integer
-        Dim intPatientID As Integer
         Dim Strdatacommand As String
-        Dim intMedRXCUI As Integer
         Dim intMedicationDrawerID As Integer
         Dim StrSelectedMedication As String
         Dim intMedicationCount As Integer
@@ -115,23 +112,13 @@ Module AdHoc
 
         StrSelectedMedication = frmAdHockDispense.cmbMedications.SelectedItem
 
-        'Split selected medication to get RXCUI number
-        Dim strArray() As String = StrSelectedMedication.Split("--")
-        intMedRXCUI = strArray(2)
 
-        'Get medication TUID
-        Strdatacommand = "SELECT Medication_ID FROM Medication WHERE RXCUI_ID = '" & intMedRXCUI & "'"
-        intMedicationID = ExecuteScalarQuery(Strdatacommand)
 
         'Get Drawer Medication TUID
-        Strdatacommand = "SELECT DrawerMedication_ID FROM DrawerMedication WHERE Medication_TUID = '" & intMedicationID & "'"
+        Strdatacommand = "SELECT DrawerMedication_ID FROM DrawerMedication WHERE Medication_TUID = '" & intMEDID & "' AND Active_Flag = '1'"
         intMedicationDrawerID = ExecuteScalarQuery(Strdatacommand)
 
-        'Get patient TUID
-        Strdatacommand = "SELECT Patient_ID FROM Patient WHERE MRN_Number = '" & intPatientMRN & "'"
-        intPatientID = ExecuteScalarQuery(Strdatacommand)
-
-        Strdatacommand = "SELECT Quantity FROM DrawerMedication WHERE Medication_TUID  = '" & intMedicationID & "'"
+        Strdatacommand = "SELECT Quantity FROM DrawerMedication WHERE Medication_TUID  = '" & intMEDID & "' AND Active_Flag = '1'"
         intMedicationCount = CreateDatabase.ExecuteScalarQuery(Strdatacommand)
         intMedicationCount = intMedicationCount - intAmount
 
@@ -140,13 +127,13 @@ Module AdHoc
             'get current time for dateTime in table
             Dim dtmAdhocTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
             Strdatacommand = "INSERT INTO AdHocOrder(Medication_TUID,Patient_TUID,User_TUID,Amount,DrawerMedication_TUID,DateTime) " &
-                "VALUES('" & intMedicationID & "', '" & intPatientID & "', '" & intUserID & "', '" & intAmount & "', '" & intMedicationDrawerID & "', '" & dtmAdhocTime & "')"
+                "VALUES('" & intMEDID & "', '" & intPatientID & "', '" & intUserID & "', '" & intAmount & "', '" & intMedicationDrawerID & "', '" & dtmAdhocTime & "')"
 
             'insert AdHoc
             CreateDatabase.ExecuteInsertQuery(Strdatacommand)
 
             'send update command to the database to update the amount in the drawer minus the amount that was dispensed
-            Strdatacommand = "UPDATE DrawerMedication SET Quantity = '" & intMedicationCount & "' WHERE Medication_TUID = '" & intMedicationID & "'"
+            Strdatacommand = "UPDATE DrawerMedication SET Quantity = '" & intMedicationCount & "' WHERE Medication_TUID = '" & intMEDID & "'"
             CreateDatabase.ExecuteInsertQuery(Strdatacommand)
             clearAdhocBoxes()
 

@@ -1,4 +1,5 @@
 ﻿Public Class frmAdHockDispense
+    Dim intPatientID As New ArrayList
     Private Sub frmAdHockDispense_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         'set ad efault quantity to the quantity textbox
@@ -37,20 +38,8 @@
         Else
             If Not IsNothing(cmbMedications.SelectedItem) And txtQuantity.Text > 0 Then
                 If Not IsNothing(cmbPatientName.SelectedItem) Then
-                    Dim intMedRXCUI As Integer
-                    Dim StrSelectedMedication As String
-                    Dim intPatientMRN As Double
-                    Dim StrSelectedPatient As String
 
-                    StrSelectedMedication = cmbMedications.SelectedItem
-                    Dim strArray() As String = StrSelectedMedication.Split("--")
-                    intMedRXCUI = strArray(2)
-                    StrSelectedPatient = cmbPatientName.SelectedItem
-                    strArray = StrSelectedPatient.Split("--")
-                    intPatientMRN = CDbl(strArray(2))
-
-                    Interactions.GetInteractionsDispense(intMedRXCUI, intPatientMRN)
-                    AdHoc.InsertAdHoc(txtMRN.Text, "1", txtQuantity.Text)
+                    AdHoc.InsertAdHoc(AdHoc.intPatientIDArray(cmbPatientName.SelectedIndex), "1", txtQuantity.Text, AdHoc.intMedIDArray(cmbMedications.SelectedIndex))
                     AdHoc.clearAdhocBoxes()
                     MessageBox.Show("Order Successfully placed")
                 Else
