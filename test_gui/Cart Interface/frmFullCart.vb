@@ -462,7 +462,132 @@ Public Class frmFullCart
         End Try
     End Sub
 
-    Private Sub frmFullCart_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Public isDragging As Boolean = False, isClick As Boolean = False
+    Public startPoint, firstPoint, lastPoint As Point
+
+
+    '/*********************************************************************/
+    '/*           SubProgram NAME: TopBar_MouseDown                        */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/20/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 When the mouse down event occurs on the menu bar, the program will/
+    '/*  record the starting location and set the isDragging bln as true to/
+    '/*  to indicate that an item is being moused down and dragged        */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '*/  
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*    none                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 sender- object representing a control                            */
+    '/*  e- mouseeventargs indicating there is a mouse event handle       */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                      			  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*        */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier 3/20/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub TopBar_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlCart.MouseDown
+
+        startPoint = pnlCart.PointToScreen(New Point(e.X, e.Y))
+        firstPoint = startPoint
+        isDragging = True
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*           SubProgram NAME: TopBar_MouseMove                       */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/20/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 If the user is dragging the mouse after clicking the menu bar,then/
+    '/*  the end point will be where the user lets go of the mouse. Me, will
+    '/*  move the form to the specified location.                          /
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '*/  
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*    none                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 sender- object representing a control                            */
+    '/*  e- mouseeventargs indicating there is a mouse event handle       */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                      			  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*  endPoint- a point variable to hold coordinates of controls       */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/20/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub TopBar_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlCart.MouseMove
+
+        If isDragging Then
+            Dim endPoint As Point = pnlCart.PointToScreen(New Point(e.X, e.Y))
+            isClick = False
+            Me.Left += (endPoint.X - startPoint.X)
+            Me.Top += (endPoint.Y - startPoint.Y)
+            startPoint = endPoint
+            lastPoint = endPoint
+        End If
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*           SubProgram NAME: TopBar_MouseUp                         */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/20/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 When the user is no longer clicking and dragging this gets called*/
+    '/*  dragging becomes false and we check if the lastPoint is the start*/
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '*/  
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*    none                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                      			  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*        */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/20/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub TopBar_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pnlCart.MouseUp
+
+        isDragging = False
+        If lastPoint = startPoint Then isClick = True Else isClick = False
 
     End Sub
 End Class

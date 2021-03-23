@@ -251,6 +251,10 @@ Module CartInterfaceCode
     '/*********************************************************************/
 
     Sub OpenOneDrawer(Number As String)
+        If Number > 1 Then
+            'the cart doesn't have a drawer 2 so if it is 2 or higher we add one
+            Number += 1
+        End If
         Dim blnissue = errorChecking(Number)
         Dim comSerialPort1 = FrmCart.serialSetup()
         intDrawerCount = 0 'reset the drawer count just in case. 
@@ -622,13 +626,18 @@ Module CartInterfaceCode
     '/*********************************************************************/
 
     Sub OpenMutliDrawer(Drawers() As String)
+
         Dim blnIssue As Boolean = False
         Dim comSerialPort1 = FrmCart.serialSetup()
         Dim bytFinal As Byte()
 
         intDrawerCount = 0 'reset the drawer count
         For Each item As String In Drawers
-            If errorChecking(item) Then
+            If CInt(item) > 1 Then
+                item = (CInt(item) + 1).ToString
+            End If
+            If errorChecking(item).Then Then
+                'the cart doesn't have a drawer 2 so if it is 2 or higher we add one
                 blnIssue = True
             End If
         Next
@@ -639,7 +648,7 @@ Module CartInterfaceCode
                 '  FrmCart.LblDrawer.Text = "Drawer Number " + Number + " is Open"
                 '   FrmCart.ShowDialog()
                 For Each number As String In Drawers
-                    dicButtonDictionary.Item(Number).BackColor = Color.Red 'changes the color of the button to red
+                    dicButtonDictionary.Item(number).BackColor = Color.Red 'changes the color of the button to red
                     'to make it looks like it is red. 
                 Next
                 FrmCart.showdialog()
