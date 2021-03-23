@@ -269,7 +269,24 @@ Module GraphicalUserInterfaceReusableMethods
                 .ImageAlign = ContentAlignment.MiddleCenter
                 .Tag = intPanelsAddedCount + 1
             End With
-        Else
+        ElseIf getOpenedForm().GetType() Is frmEditPhysician.GetType() Then
+            Dim mapImageTrash As New Bitmap(New Bitmap(My.Resources.plusminus), 25, 25)
+                'Set button properties
+                With btnDeleteButton
+                    .AutoSize = True
+                    .Size = New Size(30, 30)
+                    .FlatStyle = FlatStyle.Flat
+                    .FlatAppearance.BorderSize = 0
+                    .ForeColor = Color.Transparent
+                    ' .Font = New Font(New FontFamily("Microsoft Sans Serif"), 11)
+                    ' .Location = New Point(  )
+                    .Location = New Point(intX, intY)
+                    .Name = "btnDeletePatientRecord" + (intPanelsAddedCount).ToString
+                    .Image = mapImageTrash
+                    .ImageAlign = ContentAlignment.MiddleCenter
+                    .Tag = intPanelsAddedCount + 1
+                End With
+            Else
             Dim mapImageTrash As New Bitmap(New Bitmap(My.Resources.icons8_delete_trash), 25, 25)
             'Set button properties
             With btnDeleteButton
@@ -743,6 +760,7 @@ Module GraphicalUserInterfaceReusableMethods
             frmConfiguration.btnSaveChanges.Visible = True
             frmConfiguration.btnCancel.Visible = True
             frmConfiguration.btnSaveUser.Visible = False
+            frmConfiguration.Label2.Text = "Editing User"
 
         ElseIf getOpenedForm().GetType() Is frmPatientRecords.GetType() Then
             'this will set up the functions for the editing pencil. 
@@ -771,7 +789,7 @@ Module GraphicalUserInterfaceReusableMethods
             strStatement = "SELECT Physician_Phone_Number FROM Physician WHERE Physician_ID = '" & IDNumber & "';"
             frmEditPhysician.mtbPhone.Text = ExecuteScalarQuery(strStatement)
             strStatement = "SELECT Physician_Fax_Number FROM Physician WHERE Physician_ID = '" & IDNumber & "';"
-            frmEditPhysician.mtbPhone.Text = ExecuteScalarQuery(strStatement)
+            frmEditPhysician.mtbFax.Text = ExecuteScalarQuery(strStatement)
             strStatement = "SELECT Physician_Address FROM Physician WHERE Physician_ID = '" & IDNumber & "';"
             frmEditPhysician.txtAddress.Text = ExecuteScalarQuery(strStatement)
             strStatement = "SELECT Physician_City FROM Physician WHERE Physician_ID = '" & IDNumber & "';"
