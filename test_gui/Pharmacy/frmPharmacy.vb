@@ -151,7 +151,7 @@
     '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
     '/*********************************************************************/
     Private Sub btnDecrement_Click(sender As Object, e As EventArgs) Handles btnDecrement.Click
-        If Not IsNumeric(txtQuantity.Text) Then
+        If Not IsNumeric(txtQuantity.Text) Or txtQuantity.Text = 0 Then
             txtQuantity.Text = 2
         End If
         ButtonDecrement(txtQuantity)
