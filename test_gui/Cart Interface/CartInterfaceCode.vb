@@ -183,7 +183,7 @@ Module CartInterfaceCode
 
     Sub main()
         'ChangeSettings("115200", "COM4", True)
-        OpenOneDrawer("16")
+        OpenOneDrawer("24")
 
 
 
