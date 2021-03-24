@@ -138,8 +138,10 @@
        textboxes
         • Please note: A 
            room name and 
-           bed name must be 
-           entered in order to 
-           add to the system.</value>
+           bed name must
+           be less than 12
+           characters to be 
+           added to the 
+           system.</value>
   </data>
 </root>

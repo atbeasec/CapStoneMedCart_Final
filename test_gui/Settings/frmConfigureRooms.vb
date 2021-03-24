@@ -74,6 +74,7 @@ Public Class frmConfigureRooms
     '/* WHO   WHEN     WHAT											    */
     '/*  ---   ----     ------------------------------------------------*/
     '/*  BRH        02/17/21   Initial creation of the code-------------*/
+    '/*  BRH        03/23/21   Changed text boxes to only allow 12 characters
     '/*******************************************************************/
 
     Private Sub frmConfigureRooms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -82,6 +83,8 @@ Public Class frmConfigureRooms
         lblAddMoreBeds.Visible = False
         rdoYes.Visible = False
         rdoNo.Visible = False
+        txtRoom.MaxLength = 12
+        txtBed.MaxLength = 12
     End Sub
 
     '/*******************************************************************/
