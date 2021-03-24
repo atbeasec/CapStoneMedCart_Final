@@ -274,6 +274,7 @@ Module CartInterfaceCode
         Else
 
             If Not blnissue Then
+                Dim thread As New Thread(AddressOf OpenDrawerFormOpener)
                 FrmCart.gettingConnectionSettings() 'get the settings in the database for the cart
                 intDrawerCount = 0 'reset the drawer count
                 'this will compiple and run if the cart is not in simulation mode. 
@@ -286,12 +287,14 @@ Module CartInterfaceCode
                 comSerialPort1.Open()
                 comSerialPort1.Write(bytFinal, 0, bytFinal.Length)
                 intDrawerCount += 1
+                thread.Start()
+
                 Do
                     'this is going to keep looping until the drawer count reached zero. 
 
                 Loop While (intDrawerCount > 0)
                 comSerialPort1.Close()
-
+                thread.Abort()
             End If
 
 
@@ -300,7 +303,51 @@ Module CartInterfaceCode
     End Sub
 
 
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME:  OpenDrawerFormOpener    	   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		              */   
+    '/*		         DATE CREATED: 	3/24/2021                       	  */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:	            							  */             
+    '/*	 This form exist so that we can open up the Open Drawer form on   */
+    '/*  a different thread than the  main application.                   */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 number - this is the drawer number that is being opened.          */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	OpenDrawerFormOpener(25)										  */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	 DrawerForm - this is the instance of frmOpenDrawer that we are   */
+    '/*               going to be using.                                  */
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
 
+    Sub OpenDrawerFormOpener(number As Integer)
+        Dim DrawerForm = New frmOpenedDrawer
+        DrawerForm.lblDrawersOpen.Text = "Drawer " & number & " is open. If the drawer will not close simple reopen drawer. "
+        DrawerForm.ShowDialog()
+    End Sub
 
 
 
