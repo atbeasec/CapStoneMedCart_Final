@@ -89,12 +89,54 @@
 
 
 
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME:  btnReOpen_Click				   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		                  */   
+    '/*		         DATE CREATED: 	3/24/2021                       	   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								   */             
+    '/*	 This runs if the user needs to reopen the drawer. It just calls   */
+    '/*  the reopenDrawer method in the CartInterfaceCode.vb file.         */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
 
 
-
+    Private Sub btnReOpen_Click(sender As Object, e As EventArgs) Handles btnReOpen.Click
+        reopenDrawer()
+    End Sub
 
     Public isDragging As Boolean = False, isClick As Boolean = False
     Public startPoint, firstPoint, lastPoint As Point
+
+
 
 
     '/*********************************************************************/
