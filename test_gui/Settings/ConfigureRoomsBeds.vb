@@ -241,6 +241,8 @@ Module ConfigureRoomsBeds
     '/* WHO   WHEN     WHAT											    */
     '/*  ---   ----     ------------------------------------------------*/
     '/*  BRH        02/17/21   Initial creation of the code-------------*/
+    '/*  BRH        03/23/21    Updated functionality to only clear selection
+    '/*                         if a bed was deleted                    */
     '/*******************************************************************/
     Public Sub DeleteBed(ByVal strBed As String)
         If strBed <> Nothing Then
@@ -254,6 +256,10 @@ Module ConfigureRoomsBeds
 
                 MessageBox.Show("All beds with specified name were deleted")
             End If
+
+            frmConfigureRooms.lstRooms.Items.Clear()
+            frmConfigureRooms.lstBeds.Items.Clear()
+            frmConfigureRooms.ShowRoomsBeds()
         Else
             MessageBox.Show("Please select a Bed before proceeding to delete")
         End If

@@ -217,12 +217,11 @@ Public Class frmConfigureRooms
     '/* WHO   WHEN     WHAT											    */
     '/*  ---   ----     ------------------------------------------------*/
     '/*  BRH        02/17/21   Initial creation of the code-------------*/
+    '/*  BRH        03/23/21    Updated functionality to only clear selection
+    '/*                         if a bed was deleted                    */
     '/*******************************************************************/
     Private Sub btnDeleteBed_Click_1(sender As Object, e As EventArgs) Handles btnDeleteBed.Click
         DeleteBed(lstBeds.SelectedItem)
-        lstRooms.Items.Clear()
-        lstBeds.Items.Clear()
-        ShowRoomsBeds()
     End Sub
 
     '/*******************************************************************/
