@@ -93,6 +93,8 @@ Module ConfigureRoomsBeds
     '/* WHO   WHEN     WHAT											    */
     '/*  ---   ----     ------------------------------------------------*/
     '/*  BRH        02/17/21   Initial creation of the code-------------*/
+    '/*  BRH        03/23/21   Fixed to only show persistent beds added */
+    '/*                        to rooms if a room and bed were entered  */
     '/*******************************************************************/
 
     Public Sub AddRoomsBeds(ByVal strRoom As String, ByVal strBed As String, ByVal intActiveFlag As Integer)
@@ -143,6 +145,20 @@ Module ConfigureRoomsBeds
 
                 MessageBox.Show("The room and bed has been inserted")
             End If
+
+            'Show the radio buttons asking the user if they want to add
+            'more beds to the entered room.
+            frmConfigureRooms.lblAddMoreBeds.Text = "Would you like to add more beds to " & frmConfigureRooms.txtRoom.Text & "?"
+            frmConfigureRooms.lblAddMoreBeds.Visible = True
+            frmConfigureRooms.rdoYes.Visible = True
+            frmConfigureRooms.rdoNo.Visible = True
+            frmConfigureRooms.rdoYes.Checked = False
+            frmConfigureRooms.rdoNo.Checked = False
+            'Make the text boxes read only until the user chooses
+            'whether they want to add another bed to the recently
+            'entered room
+            frmConfigureRooms.txtRoom.ReadOnly = True
+            frmConfigureRooms.txtBed.ReadOnly = True
 
         Else
             MessageBox.Show("Please make sure a room and a bed are entered before adding")
@@ -356,6 +372,50 @@ Module ConfigureRoomsBeds
         For Each value As DataRow In dsValues.Tables(0).Rows
             frmConfigureRooms.lstBeds.Items.Add(value(0))
         Next
+    End Sub
+
+    '/*******************************************************************/
+    '/*                   SUBROUTINE NAME:         SetButtonVisibility  */
+    '/*******************************************************************/
+    '/*                   WRITTEN BY:  	Breanna Howey					*/
+    '/*					DATE CREATED: 	   03/23/21						*/
+    '/*******************************************************************/
+    '/*  SUBROUTINE PURPOSE:											*/
+    '/*	The purpose of this subroutine is to set the visibility of the Add
+    '/* button to be enabled only after a room and bed are entered.     */
+    '/*******************************************************************/
+    '/*  CALLED BY:   	      											*/
+    '/*	txtRoom_TextChanged								                */
+    '/* txtBed_TextChanged                                              */
+    '/*******************************************************************/
+    '/*  CALLS:															*/
+    '/* None											                */
+    '/*******************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):							*/
+    '/*																	*/
+    '/*  None                                                           */
+    '/*******************************************************************/
+    '/* SAMPLE INVOCATION:												*/
+    '/*																	*/
+    '/*	SetButtonVisibility()										    */
+    '/*******************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+    '/*																	*/
+    '/* (None)                                                          */
+    '/*******************************************************************/
+    '/* MODIFICATION HISTORY:											*/
+    '/*																	*/
+    '/* WHO   WHEN     WHAT											    */
+    '/*  ---   ----     ------------------------------------------------*/
+    '/*  BRH        03/23/21   Initial creation of the code-------------*/
+    '/*******************************************************************/
+    Public Sub SetButtonVisibility()
+
+        If frmConfigureRooms.txtRoom.Text IsNot "" And frmConfigureRooms.txtBed.Text IsNot "" Then
+            frmConfigureRooms.btnAdd.Enabled = True
+        Else
+            frmConfigureRooms.btnAdd.Enabled = False
+        End If
     End Sub
 
 End Module

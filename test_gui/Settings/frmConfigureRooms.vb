@@ -85,6 +85,7 @@ Public Class frmConfigureRooms
         rdoNo.Visible = False
         txtRoom.MaxLength = 12
         txtBed.MaxLength = 12
+        btnAdd.Enabled = False
     End Sub
 
     '/*******************************************************************/
@@ -123,24 +124,12 @@ Public Class frmConfigureRooms
     '/*  BRH        02/17/21   Initial creation of the code-------------*/
     '/*  BRH        03/16/21   Allow for easy addition of multiple beds-*/
     '/*                         to the recent room added----------------*/
+    '/*  BRH        03/23/21   Fixed to only show persistent beds added */
+    '/*                        to rooms if a room and bed were entered  */
     '/*******************************************************************/
     Private Sub btnAddBed_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         AddRoomsBeds(txtRoom.Text, txtBed.Text, 1)
         ShowRoomsBeds()
-
-        'Show the radio buttons asking the user if they want to add
-        'more beds to the entered room.
-        lblAddMoreBeds.Text = "Would you like to add more beds to " & txtRoom.Text & "?"
-        lblAddMoreBeds.Visible = True
-        rdoYes.Visible = True
-        rdoNo.Visible = True
-        rdoYes.Checked = False
-        rdoNo.Checked = False
-        'Make the text boxes read only until the user chooses
-        'whether they want to add another bed to the recently
-        'entered room
-        txtRoom.ReadOnly = True
-        txtBed.ReadOnly = True
 
     End Sub
 
@@ -585,4 +574,75 @@ Public Class frmConfigureRooms
         rdoNo.Checked = False
     End Sub
 
+    '/*******************************************************************/
+    '/*         SUBROUTINE NAME:     txtRoom_TextChanged            	*/
+    '/*******************************************************************/
+    '/*                   WRITTEN BY:  	Breanna Howey					*/
+    '/*					DATE CREATED: 	   03/23/21						*/
+    '/*******************************************************************/
+    '/*  SUBROUTINE PURPOSE:											*/
+    '/*	The purpose of this subroutine is to call the SetButtonVisibility
+    '/* subroutine to determine if the Add button needs to be visible.  */
+    '/*******************************************************************/
+    '/*  CALLS:															*/
+    '/*   SetButtonVisibility()                                 	    */
+    '/*******************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):							*/
+    '/*																	*/
+    '/* sender - Holds the object the program is sending to the routine */
+    '/* e   - Stores what key was pressed                               */
+    '/*******************************************************************/
+    '/* SAMPLE INVOCATION:												*/
+    '/*																	*/
+    '/*	txtRoom_TextChanged              								*/
+    '/*******************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+    '/*																	*/
+    '/* (None)                                                          */
+    '/*******************************************************************/
+    '/* MODIFICATION HISTORY:											*/
+    '/*																	*/
+    '/* WHO   WHEN     WHAT											    */
+    '/*  ---   ----     ------------------------------------------------*/
+    '/*  BRH        03/23/21   Initial creation of the code-------------*/
+    '/*******************************************************************/
+    Private Sub txtRoom_TextChanged(sender As Object, e As EventArgs) Handles txtRoom.TextChanged
+        SetButtonVisibility()
+    End Sub
+
+    '/*******************************************************************/
+    '/*         SUBROUTINE NAME:     txtBed_TextChanged            	    */
+    '/*******************************************************************/
+    '/*                   WRITTEN BY:  	Breanna Howey					*/
+    '/*					DATE CREATED: 	   03/23/21						*/
+    '/*******************************************************************/
+    '/*  SUBROUTINE PURPOSE:											*/
+    '/*	The purpose of this subroutine is to call the SetButtonVisibility
+    '/* subroutine to determine if the Add button needs to be visible.  */
+    '/*******************************************************************/
+    '/*  CALLS:															*/
+    '/*   SetButtonVisibility()                                 	    */
+    '/*******************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):							*/
+    '/*																	*/
+    '/* sender - Holds the object the program is sending to the routine */
+    '/* e   - Stores what key was pressed                               */
+    '/*******************************************************************/
+    '/* SAMPLE INVOCATION:												*/
+    '/*																	*/
+    '/*	txtBed_TextChanged              								*/
+    '/*******************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+    '/*																	*/
+    '/* (None)                                                          */
+    '/*******************************************************************/
+    '/* MODIFICATION HISTORY:											*/
+    '/*																	*/
+    '/* WHO   WHEN     WHAT											    */
+    '/*  ---   ----     ------------------------------------------------*/
+    '/*  BRH        03/23/21   Initial creation of the code-------------*/
+    '/*******************************************************************/
+    Private Sub txtBed_TextChanged(sender As Object, e As EventArgs) Handles txtBed.TextChanged
+        SetButtonVisibility()
+    End Sub
 End Class
