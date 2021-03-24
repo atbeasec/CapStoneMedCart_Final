@@ -280,7 +280,7 @@ Partial Class frmMain
         Me.btnMaintenance.Size = New System.Drawing.Size(210, 50)
         Me.btnMaintenance.TabIndex = 67
         Me.btnMaintenance.Tag = "11"
-        Me.btnMaintenance.Text = "   Maintenance"
+        Me.btnMaintenance.Text = "   Import/Export"
         Me.btnMaintenance.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnMaintenance.UseVisualStyleBackColor = False
         '

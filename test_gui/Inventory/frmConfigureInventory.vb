@@ -554,4 +554,5 @@
         CartInterfaceCode.OpenOneDrawer(intSelectedDrawer)
         MessageBox.Show("Drug removed from drawer number: " & intSelectedDrawer)
     End Sub
+
 End Class
