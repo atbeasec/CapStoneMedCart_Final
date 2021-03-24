@@ -562,13 +562,14 @@
         If Not btnEditPatient.Text = "Save Changes" Then
 
             SetControlsToAllowEdit(ctl)
-
+            pnlNameBarcode.Visible = True
             btnEditPatient.Text = "Save Changes"
 
         Else
             SetControlsToReadOnly(ctl)
             btnEditPatient.Text = "Edit Patient"
             PatientInformation.SavePatientEdits(intPatientID)
+            pnlNameBarcode.Visible = False
         End If
 
     End Sub
@@ -973,6 +974,10 @@
     End Sub
 
     Private Sub txtBirthday_TextChanged(sender As Object, e As KeyPressEventArgs) Handles mtbBirthday.KeyPress
+
+    End Sub
+
+    Private Sub txtHeight_TextChanged(sender As Object, e As KeyPressEventArgs) Handles txtWeight.KeyPress, txtHeight.KeyPress
 
     End Sub
 End Class

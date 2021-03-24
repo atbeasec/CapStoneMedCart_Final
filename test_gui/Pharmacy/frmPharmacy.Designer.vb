@@ -288,6 +288,7 @@ Partial Class frmPharmacy
         Me.txtQuantity.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtQuantity.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtQuantity.Location = New System.Drawing.Point(1, 1)
+        Me.txtQuantity.MaxLength = 4
         Me.txtQuantity.Multiline = True
         Me.txtQuantity.Name = "txtQuantity"
         Me.txtQuantity.Size = New System.Drawing.Size(51, 26)

@@ -169,6 +169,7 @@ Public Class frmInventory
         Dim intDiscrepancies As Integer = 0
         Dim strBarcode As String
         Dim strMessage As String
+        Dim intSchedule As Integer
 
         If chkControlled.Checked Then
             intControlled = 1
@@ -181,109 +182,106 @@ Public Class frmInventory
         Else
             intNarcotic = 0
         End If
-        ' make sure the proper information is selected or entered
-        'Dim strTrimmedString As String
-        ' take the split of the combobox selected item
-        'strTrimmedString = (cmbMedicationName.Text.Split(","))(0)
-        ' then trim off everything that's not a number
-        'strTrimmedString = Regex.Replace(strTrimmedString, "(", "")
 
-        'Check if all necessary textboxes for a new medication are full
-        'If yes, then compare the medications in the database and either insert
-        'the record or update records in the database
-        If txtSchedule.Text <> "" And txtType.Text <> "" And txtStrength.Text <> "" Then
-            'Check if a barcode is entered
-            'If no, generate a sample
-            'If yes, pass that to the barcode variable
+        'If the API doesn't bring back a schedule, substitue it for 0
+        If txtSchedule.Text.Equals("") Then
+            intSchedule = 0
+        Else
+            intSchedule = CInt(txtSchedule.Text)
+        End If
+
+        If txtStrength.Text.Equals("") Or txtType.Text.Equals("") Or mtbExpirationDate.MaskFull = False Or cboPersonalMedication.SelectedIndex.Equals(-1) Then
+            MessageBox.Show("Please enter data in all fields before saving.")
+            Exit Sub
+        Else
             If txtBarcode.Text = Nothing Then
                 strBarcode = generateSampleBarcode()
             Else
                 strBarcode = txtBarcode.Text
             End If
-            CompareMedications(strName.Substring(0, strName.Length), strRXCUI, intControlled, intNarcotic, strBarcode, txtType.Text, txtStrength.Text, CInt(txtSchedule.Text), 1)
-        ElseIf txtSchedule.Text = "" Then
-            MessageBox.Show("Please enter data in all fields before saving.")
-            Exit Sub
-        End If
+            CompareMedications(strName.Substring(0, strName.Length), strRXCUI, intControlled, intNarcotic, strBarcode, txtType.Text, txtStrength.Text, intSchedule, 1)
 
-        Try
-            If CInt(cmbDrawerNumber.SelectedItem) > 25 Or CInt(cmbDrawerNumber.SelectedItem) < 0 Then
-                MessageBox.Show("Please select an appropriate drawer number")
-            Else
+            Try
+                If CInt(cmbDrawerNumber.SelectedItem) > 25 Or CInt(cmbDrawerNumber.SelectedItem) < 0 Then
+                    MessageBox.Show("Please select an appropriate drawer number")
+                Else
 
-                Drawers_Tuid = CInt(cmbDrawerNumber.SelectedItem)
+                    Drawers_Tuid = CInt(cmbDrawerNumber.SelectedItem)
 
-            End If
+                End If
 
-        Catch ex As Exception
-            eprError.SetError(cmbDrawerNumber, "please enter an integer for drawer number between 1-25")
+            Catch ex As Exception
+                eprError.SetError(cmbDrawerNumber, "please enter an integer for drawer number between 1-25")
 
-        End Try
+            End Try
 
-        Try
-            intMedQuanitiy = CInt(txtQuantity.Text)
-        Catch ex As Exception
-            eprError.SetError(cmbDrawerNumber, "please enter an amount that is a positive whole number")
-        End Try
+            Try
+                intMedQuanitiy = CInt(txtQuantity.Text)
+            Catch ex As Exception
+                eprError.SetError(cmbDrawerNumber, "please enter an amount that is a positive whole number")
+            End Try
 
 
 
-        ' search the information from the allproperties API call
-        ' double-check if the drug is in the database already
-        ' if yes, then update if there's differences
-        ' if no, then save those items
-        ' and pass it to the function to find interactions
+            ' search the information from the allproperties API call
+            ' double-check if the drug is in the database already
+            ' if yes, then update if there's differences
+            ' if no, then save those items
+            ' and pass it to the function to find interactions
 
-        Dim myPropertyNameList As New List(Of String)({"severity", "description", "rxcui"})
-        Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
-        strMessage = "Retrieving drug interactions from the NIH website"
-        Dim thdThread1 As New Threading.Thread(AddressOf ThreadedMessageBox)
-        thdThread1.Name = strMessage
-        thdThread1.Start()
-        outputList = getInteractionsByName(strRXCUI, myPropertyNameList)
+            Dim myPropertyNameList As New List(Of String)({"severity", "description", "rxcui"})
+            Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
+            strMessage = "Retrieving drug interactions from the NIH website"
+            Dim thdThread1 As New Threading.Thread(AddressOf ThreadedMessageBox)
+            thdThread1.Name = strMessage
+            thdThread1.Start()
+            outputList = getInteractionsByName(strRXCUI, myPropertyNameList)
 
-        'Double-check if the interactions with the matching pair of RXCUI's exist
-        'If yes, Then update If there's differences
-        ' Or insert the New lines
-        ' And save those items
+            'Double-check if the interactions with the matching pair of RXCUI's exist
+            'If yes, Then update If there's differences
+            ' Or insert the New lines
+            ' And save those items
 
-        Try
-            strMessage = "Please wait while the interactions are saved to the database"
-            Dim thdThread2 As New Threading.Thread(AddressOf ThreadedMessageBox)
-            thdThread2.Name = strMessage
-            thdThread2.Start()
-            'There are four items returned from the API
-            'Therefore, we step over 4 items every time 
-            'we run the call
-            'For i = 0 To outputList.Count - 4 Step 4
-            'In the fourth item passed, we want to remove the ' character because it breaks SQL inserts
-            CompareDrugInteractions(CInt(strRXCUI), outputList) 'CInt(outputList.Item(i + 3).PropertyValue), outputList.Item(i).PropertyValue, outputList.Item(i + 1).PropertyValue.Replace("'", ""), 1)
-            'Next
+            Try
+                strMessage = "Please wait while the interactions are saved to the database"
+                Dim thdThread2 As New Threading.Thread(AddressOf ThreadedMessageBox)
+                thdThread2.Name = strMessage
+                thdThread2.Start()
+                'There are four items returned from the API
+                'Therefore, we step over 4 items every time 
+                'we run the call
+                'For i = 0 To outputList.Count - 4 Step 4
+                'In the fourth item passed, we want to remove the ' character because it breaks SQL inserts
+                CompareDrugInteractions(CInt(strRXCUI), outputList) 'CInt(outputList.Item(i + 3).PropertyValue), outputList.Item(i).PropertyValue, outputList.Item(i + 1).PropertyValue.Replace("'", ""), 1)
+                'Next
 
-            strMessage = "All interaction records have been added"
-            Dim thdThread3 As New Threading.Thread(AddressOf ThreadedMessageBox)
-            thdThread3.Name = strMessage
-            thdThread3.Start()
-        Catch ex As Exception
-            MessageBox.Show("Interactions could not be recorded")
-        End Try
+                strMessage = "All interaction records have been added"
+                Dim thdThread3 As New Threading.Thread(AddressOf ThreadedMessageBox)
+                thdThread3.Name = strMessage
+                thdThread3.Start()
+            Catch ex As Exception
+                MessageBox.Show("Interactions could not be recorded")
+            End Try
 
-        intDrawerMedication_ID = ExecuteScalarQuery("SELECT COUNT(DISTINCT DrawerMedication_ID) FROM DrawerMedication;")
-
-
-        intMedicationTuid = ExecuteScalarQuery("Select Medication_ID From Medication WHERE Drug_Name ='" & strName & "';")
-        'because we are adding a new drawermedication for now
-        intDrawerMedication_ID += 1
+            intDrawerMedication_ID = ExecuteScalarQuery("SELECT COUNT(DISTINCT DrawerMedication_ID) FROM DrawerMedication;")
 
 
-        intDividerBin = CInt(cmbDividerBin.SelectedItem)
+            intMedicationTuid = ExecuteScalarQuery("Select Medication_ID From Medication WHERE Drug_Name ='" & strName & "';")
+            'because we are adding a new drawermedication for now
+            intDrawerMedication_ID += 1
+
+
 
         ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Divider_Bin,Expiration_Date,Discrepancy_Flag, Active_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & intDividerBin & " , '" & mtbExpirationDate.Text & "'," & intDiscrepancies & ",1);")
         OpenOneDrawer(Drawers_Tuid)
         MessageBox.Show("Medication has been added to the drawer")
         Debug.WriteLine("")
+            intDividerBin = CInt(cmbDividerBin.SelectedItem)
+         
+            eprError.Clear()
 
-        eprError.Clear()
+            ClearInventoryForm()
+        End If
 
     End Sub
 

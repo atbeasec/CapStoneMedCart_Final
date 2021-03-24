@@ -171,7 +171,9 @@ Public Class frmNewPatient
 
 
         Dim strMRN As String = GenerateRandom.generateRandomAlphanumeric(10, "1234567890")
+        Dim strBarcode As String = GenerateRandom.generateRandomAlphanumeric(20, strCharactersForRandomGeneration)
         '^this Is going to generate a random MRN number
+        'check duplicate MRN
         While blnUsedMRN = False
             dsCheckforRecord = CreateDatabase.ExecuteSelectQuery("Select * from Patient WHERE MRN_Number = '" & strMRN & "'")
             If dsCheckforRecord.Tables.Count > 0 Then
@@ -179,9 +181,19 @@ Public Class frmNewPatient
             End If
             strMRN = GenerateRandom.generateRandomAlphanumeric(10, "1234567890")
         End While
+        'check for duplicate barcode
+        blnUsedMRN = False
+
+        While blnUsedMRN = False
+            dsCheckforRecord = CreateDatabase.ExecuteSelectQuery("Select * from Patient WHERE Barcode = '" & strBarcode & "'")
+            If dsCheckforRecord.Tables.Count > 0 Then
+                blnUsedMRN = True
+            End If
+            strBarcode = GenerateRandom.generateRandomAlphanumeric(20, strCharactersForRandomGeneration)
+        End While
 
         strbSQL.Append(strMRN & "', '")
-        strbSQL.Append(GenerateRandom.generateRandomAlphanumeric(20, strCharactersForRandomGeneration) & "',")
+        strbSQL.Append(strBarcode & "',")
         '^this is going to genereate a random Bar code. 
         strbSQL.Append("'" & strFirstName & "' , '" & strMiddleName & "',")
         strbSQL.Append("'" & strLastName & "','" & mtbDoB.Text & "',")

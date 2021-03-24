@@ -269,7 +269,24 @@ Module GraphicalUserInterfaceReusableMethods
                 .ImageAlign = ContentAlignment.MiddleCenter
                 .Tag = intPanelsAddedCount + 1
             End With
-        Else
+        ElseIf getOpenedForm().GetType() Is frmEditPhysician.GetType() Then
+            Dim mapImageTrash As New Bitmap(New Bitmap(My.Resources.plusminus), 25, 25)
+                'Set button properties
+                With btnDeleteButton
+                    .AutoSize = True
+                    .Size = New Size(30, 30)
+                    .FlatStyle = FlatStyle.Flat
+                    .FlatAppearance.BorderSize = 0
+                    .ForeColor = Color.Transparent
+                    ' .Font = New Font(New FontFamily("Microsoft Sans Serif"), 11)
+                    ' .Location = New Point(  )
+                    .Location = New Point(intX, intY)
+                    .Name = "btnDeletePatientRecord" + (intPanelsAddedCount).ToString
+                    .Image = mapImageTrash
+                    .ImageAlign = ContentAlignment.MiddleCenter
+                    .Tag = intPanelsAddedCount + 1
+                End With
+            Else
             Dim mapImageTrash As New Bitmap(New Bitmap(My.Resources.icons8_delete_trash), 25, 25)
             'Set button properties
             With btnDeleteButton
@@ -459,7 +476,7 @@ Module GraphicalUserInterfaceReusableMethods
         ' MessageBox.Show("again")
         'Add handler for click events
         'assing functionality here
-
+        AddHandler txtCount.TextChanged, AddressOf TextBoxErrorHandling_TextChanged
         'AddHandler btnFlagMedication.Click, AddressOf DynamicFlagMedicationButton
 
     End Sub
@@ -743,6 +760,7 @@ Module GraphicalUserInterfaceReusableMethods
             frmConfiguration.btnSaveChanges.Visible = True
             frmConfiguration.btnCancel.Visible = True
             frmConfiguration.btnSaveUser.Visible = False
+            frmConfiguration.Label2.Text = "Editing User"
 
         ElseIf getOpenedForm().GetType() Is frmPatientRecords.GetType() Then
             'this will set up the functions for the editing pencil. 
@@ -771,7 +789,7 @@ Module GraphicalUserInterfaceReusableMethods
             strStatement = "SELECT Physician_Phone_Number FROM Physician WHERE Physician_ID = '" & IDNumber & "';"
             frmEditPhysician.mtbPhone.Text = ExecuteScalarQuery(strStatement)
             strStatement = "SELECT Physician_Fax_Number FROM Physician WHERE Physician_ID = '" & IDNumber & "';"
-            frmEditPhysician.mtbPhone.Text = ExecuteScalarQuery(strStatement)
+            frmEditPhysician.mtbFax.Text = ExecuteScalarQuery(strStatement)
             strStatement = "SELECT Physician_Address FROM Physician WHERE Physician_ID = '" & IDNumber & "';"
             frmEditPhysician.txtAddress.Text = ExecuteScalarQuery(strStatement)
             strStatement = "SELECT Physician_City FROM Physician WHERE Physician_ID = '" & IDNumber & "';"
@@ -1088,5 +1106,96 @@ Module GraphicalUserInterfaceReusableMethods
 
     End Function
 
+    '/*********************************************************************/
+    '/*              Sub NAME: TextBoxErrorHandling_TextChanged()    */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:  Collin Krygier          		          */   
+    '/*		         DATE CREATED: 		 3/22/2021                        */                             
+    '/*********************************************************************/
+    '/*  SUB PURPOSE:								                      */             
+    '/*	 This Subroutine is called whenever text changes in a run time made/
+    '/*  textbox.                                                         */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*  None                                                             */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	sender                                                            */
+    '/* e                                                                 */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	RemoveCharacters("1hello")                                		  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/* None                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/22/2021    Initial creation                    */
+    '/*********************************************************************/
+    Public Sub TextBoxErrorHandling_TextChanged(ByVal sender As Object, e As EventArgs)
+
+        sender.text = RemoveCharacters(sender.text)
+
+        'set the cursor position to the last item 
+        sender.Select(sender.Text.Length, 0)
+
+    End Sub
+
+
+
+    '/*********************************************************************/
+    '/*                   Function NAME: RemoveCharacters()               */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:  Collin Krygier          		          */   
+    '/*		         DATE CREATED: 		 3/22/2021                        */                             
+    '/*********************************************************************/
+    '/*  Function PURPOSE:								                  */             
+    '/*	 This function simply takes a string , checks if it is numberic,if*/
+    '/*  if not, it removes everything that is not numeric.               */
+    '/*********************************************************************/
+    '/*  Function Return Value:					                          */         
+    '/*	 A string that is contains only valid text for the textbox        */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  TextBoxErrorHandling_TextChanged()                               */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*  None                                                             */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	strTextboxValue- string that is the value from the count textbox  */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	RemoveCharacters("1hello")                                		  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	newString- a string equal to the original textbox value           */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/22/2021    Initial creation                    */
+    '/*********************************************************************/
+    Public Function RemoveCharacters(ByVal strTextboxValue As String) As String
+
+        Dim newString As String = strTextboxValue
+
+        For Each character In strTextboxValue
+            If Not Char.IsNumber(character) Then
+
+                newString = Replace(strTextboxValue, character, "")
+
+            End If
+        Next
+
+        Return newString
+    End Function
 
 End Module
