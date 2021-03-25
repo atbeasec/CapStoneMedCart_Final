@@ -17,9 +17,10 @@
 
     Private Sub frmConfigureInventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        txtCapacity.Enabled = False
+        'txtCapacity.Enabled = False
         txtDividers.Enabled = False
 
+        SetDrawerPropertiesToAdd()
         UpdateButtonsOnScreen()
         AddHandlerToDrawerButtons()
 
@@ -29,11 +30,7 @@
         CreateToolTips(pnlHeader, tpSelectedLabelHover)
         AddHandlerToLabelClick(pnlHeader, AddressOf SortBySelectedLabel)
 
-        ' method is going to be needed to load the capacity from the database and the number of dividers in the selected drawer
-        ' we will take that data and put it into the textbox for capacity and divider.
-        ' Everytime we increment that data we will send and update statement to the database
     End Sub
-
 
     '/*********************************************************************/
     '/*                   SubProgram NAME: SortBySelectedLabel            */         
@@ -80,7 +77,6 @@
             InventorySelectedFields(field)
 
         End If
-
 
     End Sub
 
@@ -135,11 +131,6 @@
 
     End Sub
 
-    Private Sub CreateDrawers(sender As Object, e As EventArgs)
-
-    End Sub
-
-
     Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal strDrugName As String, ByVal strDividerBin As String, ByVal strStrength As String, ByVal strQuantity As String, ByRef intMedicationTUID As Integer)
 
         Dim pnl As Panel
@@ -172,8 +163,6 @@
         'put the boarder panel inside the main panel
         pnl.Controls.Add(pnlMainPanel)
 
-
-        'AddHandler pnlMainPanel.DoubleClick, AddressOf DynamicDoubleClickNewOrder
         AddHandler pnlMainPanel.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
         AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
 
@@ -181,8 +170,6 @@
         CreateEditButton(pnlMainPanel, getPanelCount(flpPannel), lblActions.Location.X, 5)
         CreateDeleteBtn(pnlMainPanel, getPanelCount(flpPannel), lblActions.Location.X + 40, 5)
 
-        ' add controls to this panel
-        ' call database info here to populate
         Dim lblID As New Label
         Dim lblID2 As New Label
         Dim lblID3 As New Label
@@ -210,12 +197,6 @@
         pnlMainPanel.Tag = intMedicationTUID
     End Sub
 
-
-    ' Private Sub btnMedications_Click(sender As Object, e As EventArgs) Handles btnMedications.Click
-    '   frmNewInventory.Show()
-    'CreatePanel(flpMedication)
-
-    ' End Sub
 
     Private Sub UpdateDrawerLabel(sender As Object, e As EventArgs)
 
@@ -352,11 +333,11 @@
             End If
         Next
 
-
     End Sub
 
 
     Private Sub HighlightSelectedDrawer(sender As Object, e As EventArgs)
+
         intCurrentDrawer = sender.TabIndex.ToString()
         Dim btn As Control
 
@@ -370,13 +351,13 @@
                     sender.backColor = Color.FromArgb(71, 103, 216)
 
                 End If
+
             Else
 
                 btn.BackColor = Color.Gainsboro
                 btn.ForeColor = Color.Black
 
             End If
-
         Next
 
     End Sub
@@ -429,8 +410,8 @@
                 CreatePanel(flpMedication, strDrugName, intDividerBin, intStrength.ToString(), intDrugQuantity.ToString(), intMedicationTUID)
             End If
         Next
-        Dim size As Integer = CreateDatabase.ExecuteScalarQuery("SELECT Size FROM Drawers where Drawers_ID = " & sender.TabIndex.ToString() & ";")
-        txtCapacity.Text = size
+        '  Dim size As Integer = CreateDatabase.ExecuteScalarQuery("SELECT Size FROM Drawers where Drawers_ID = " & sender.TabIndex.ToString() & ";")
+        'txtCapacity.Text = size
         Dim dividers As Integer = CreateDatabase.ExecuteScalarQuery("SELECT Number_of_Dividers FROM Drawers where Drawers_ID = " & sender.TabIndex.ToString() & ";")
         txtDividers.Text = dividers
 
@@ -442,14 +423,13 @@
 
 
     End Sub
-    Private Sub btnAddtoDrawer_Click(sender As Object, e As EventArgs) Handles btnAddToDrawer.Click
+    Private Sub btnAddtoDrawer_Click(sender As Object, e As EventArgs)
 
         ' pass the name of thecurrently selected drawer the user is looking at
         frmInventory.SetSelectedDrawer(GetSelectedDrawer)
 
         ' open the inventory form
         frmMain.OpenChildForm(frmInventory)
-
 
     End Sub
 
@@ -480,35 +460,34 @@
 
     End Sub
 
-    Private Sub btnIncrementCapacity_Click(sender As Object, e As EventArgs) Handles btnIncrementCapacity.Click
-
-        ButtonIncrement(8, txtCapacity)
-
-    End Sub
-
     Private Sub btnIncrementDividers_Click(sender As Object, e As EventArgs) Handles btnIncrementDividers.Click
 
         ButtonIncrement(5, txtDividers)
-
-    End Sub
-
-    Private Sub btnDecrementCapacity_Click(sender As Object, e As EventArgs) Handles btnDecrementCapacity.Click
-
-        ButtonDecrement(txtCapacity)
-
+        SetDrawerPropertiesToSave()
     End Sub
 
     Private Sub btnDecrementDividers_Click(sender As Object, e As EventArgs) Handles btnDecrementDividers.Click
 
         ButtonDecrement(txtDividers)
+        SetDrawerPropertiesToSave()
+
 
     End Sub
 
-    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+    Private Sub SetDrawerPropertiesToSave()
 
-        ' call code here to update the database with the txtCapacity and txtDividers information about the drawer.
-        ExecuteScalarQuery("UPDATE Drawers SET Number_of_Dividers = " & CInt(txtDividers.Text) & ", Size = " & CInt(txtCapacity.Text) & "  WHERE Drawers_ID  = " & intCurrentDrawer & ";")
-        Me.Refresh()
+        If btnSaveOrAdd.Text = "ADD TO DRAWER" Then
+
+            With btnSaveOrAdd
+                .Text = "SAVE CHANGES"
+                .Image = My.Resources.resolve
+                .ImageAlign = ContentAlignment.MiddleCenter
+                .TextImageRelation = TextImageRelation.ImageBeforeText
+
+            End With
+
+        End If
+
     End Sub
 
     '/*********************************************************************/
@@ -555,4 +534,69 @@
         MessageBox.Show("Drug removed from drawer number: " & intSelectedDrawer)
     End Sub
 
+    Private Sub btnSaveOrAdd_Click(sender As Object, e As EventArgs) Handles btnSaveOrAdd.Click
+
+        If btnSaveOrAdd.Text = "SAVE CHANGES" Then
+
+            SaveButtonFunctionality()
+            SetDrawerPropertiesToAdd()
+            UpdateUser()
+        Else
+
+            AddToDrawerFunctionality()
+
+        End If
+
+    End Sub
+
+    Private Sub SetDrawerPropertiesToAdd()
+
+        With btnSaveOrAdd
+            .Text = "ADD TO DRAWER"
+            .Image = My.Resources.add_24px
+            .ImageAlign = ContentAlignment.MiddleCenter
+            .TextImageRelation = TextImageRelation.ImageBeforeText
+        End With
+
+    End Sub
+
+    Private Sub UpdateUser()
+
+        MessageBox.Show("Drawer updated to contain " & txtDividers.Text & " divider(s)")
+
+    End Sub
+
+    Private Sub SaveButtonFunctionality()
+
+        ' call code here to update the database with the txtCapacity and txtDividers information about the drawer.
+        ' ExecuteScalarQuery("UPDATE Drawers SET Number_of_Dividers = " & CInt(txtDividers.Text) & ", Size = " & CInt(txtCapacity.Text) & "  WHERE Drawers_ID  = " & intCurrentDrawer & ";")
+        ExecuteScalarQuery("UPDATE Drawers SET Number_of_Dividers = " & CInt(txtDividers.Text) & " WHERE Drawers_ID  = " & intCurrentDrawer & ";")
+        Me.Refresh()
+
+    End Sub
+
+    Private Sub AddToDrawerFunctionality()
+
+
+        ' pass the name of thecurrently selected drawer the user is looking at
+        frmInventory.SetSelectedDrawer(GetSelectedDrawer)
+
+        ' open the inventory form
+        frmMain.OpenChildForm(frmInventory)
+
+    End Sub
+
+    '  Private Sub btnIncrementCapacity_Click(sender As Object, e As EventArgs) Handles btnIncrementCapacity.Click
+
+    '       ButtonIncrement(8, txtCapacity)
+
+    '   End Sub
+
+
+
+    '  Private Sub btnDecrementCapacity_Click(sender As Object, e As EventArgs) Handles btnDecrementCapacity.Click
+
+    '     ButtonDecrement(txtCapacity)
+
+    '  End Sub
 End Class
