@@ -6,6 +6,7 @@
 
     Private btnDrawerToSelectOnLoad As Button
 
+
     Public Enum InventoryEnum
 
         medication = 1
@@ -822,6 +823,10 @@
 
         ButtonIncrement(5, txtDividers)
         SetDrawerPropertiesToSave()
+
+
+
+
     End Sub
 
     '/*********************************************************************/
@@ -858,7 +863,6 @@
 
         ButtonDecrement(txtDividers)
         SetDrawerPropertiesToSave()
-
     End Sub
 
     '/*********************************************************************/
@@ -1156,6 +1160,8 @@
         frmMain.OpenChildForm(frmInventory)
 
     End Sub
+
+
 
     '  Private Sub btnIncrementCapacity_Click(sender As Object, e As EventArgs) Handles btnIncrementCapacity.Click
 
