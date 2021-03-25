@@ -269,6 +269,13 @@ Module PatientInformation
         Dim strbItemsChanged As StringBuilder = New StringBuilder
         Dim intCountChanged As Integer = 0
         Dim strbSqlCommand As StringBuilder = New StringBuilder
+        'this is for checking if first name was changed
+        'there is a if not call for each piece of patient information
+        'it checks if the .tag value is the same as what is in the box, if they are the same
+        'it was not changed
+        'if it is not the same then the value was changed, update the value
+        'i have a count that increases after each change to track the number of items that was changed
+        'and i add on to a string builder to let the user know all the items that were changed after is saves everything
         If Not frmPatientInfo.txtFirstName.Text.Equals(frmPatientInfo.txtFirstName.Tag) Then
             strbSqlCommand.Append("UPDATE Patient SET Patient_First_Name = '" & frmPatientInfo.txtFirstName.Text & "' Where Patient_ID = '" & intPatientID & "'")
             CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
@@ -278,6 +285,7 @@ Module PatientInformation
             frmPatientInfo.txtFirstName.Tag = frmPatientInfo.txtFirstName.Text
         End If
 
+        'this is for checking if middle name was changed
         If Not frmPatientInfo.txtMiddle.Text.Equals(frmPatientInfo.txtMiddle.Tag) Then
             strbSqlCommand.Append("UPDATE Patient SET Patient_Middle_Name = '" & frmPatientInfo.txtMiddle.Text & "' Where Patient_ID = '" & intPatientID & "'")
             CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
@@ -287,6 +295,7 @@ Module PatientInformation
             frmPatientInfo.txtMiddle.Tag = frmPatientInfo.txtMiddle.Text
         End If
 
+        'this is for checking if last name was changed
         If Not frmPatientInfo.txtLast.Text.Equals(frmPatientInfo.txtLast.Tag) Then
             strbSqlCommand.Append("UPDATE Patient SET Patient_Last_Name = '" & frmPatientInfo.txtLast.Text & "' Where Patient_ID = '" & intPatientID & "'")
             CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)

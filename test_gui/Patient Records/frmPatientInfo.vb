@@ -900,16 +900,12 @@
     '/*********************************************************************/
     '/*                   SUBPROGRAM NAME:  cboRoom_SelectedIndexChanged  */         
     '/*********************************************************************/
-    '/*                   WRITTEN BY:  Nathan Premo   		               */   
-    '/*		         DATE CREATED: 	2/16/2021                       	   */                             
+    '/*                   WRITTEN BY:  Alexander Beasecker  		               */   
+    '/*		         DATE CREATED: 	3/25/2021                       	   */                             
     '/*********************************************************************/
     '/*  SUBPROGRAM PURPOSE:								   */             
     '/*	 This is going to update the cboBed list based on the selection in */
-    '/*  cboRoom. It will also try to save the selection made in the bed if*/
-    '/*  one is already made and try to re assign that. If it can't reassign*/
-    '/*  the old value it will just leave the cboBed selectItem blank. This*/
-    '/*  so when the form is first loaded if a person has a bed they won't */
-    '/*  lose it when the form is loaded.                                  */
+    '/*  cboRoom.                                  */
     '/*                                                                   */
     '/*********************************************************************/
     '/*  CALLED BY:   	      						         */           
@@ -930,14 +926,16 @@
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*  strTemp - this is going to hold the old value that was selected in*/                     
-    '/*            cboBed and try to reassign it later.                    */
+    '/*  dsRoomBedsOpen -- this is used to hold all the beds that are not being
+    '/*             used
+    '/*  dsRoomBedPatientUsing -- this holds the room and bed the patient is currently in
+    '/*                 this is used if the user selects the room the patient is in
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
+    '/*  AB      3/25/2021   initial creation                                                          
     '/*********************************************************************/
 
     Private Sub cboRoom_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboRoom.SelectedIndexChanged
