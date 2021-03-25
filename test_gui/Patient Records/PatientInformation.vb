@@ -473,8 +473,10 @@ Module PatientInformation
             frmPatientInfo.txtBarcode.Tag = frmPatientInfo.txtBarcode.Text
         End If
         If Not frmPatientInfo.cboBed.SelectedIndex = -1 Then
+            Dim strRoomBed As String = frmPatientInfo.cboRoom.Text & frmPatientInfo.cboBed.Text
+            Dim strTagRoomBed As String = frmPatientInfo.cboRoom.Tag & frmPatientInfo.cboBed.Tag
 
-            If Not frmPatientInfo.cboBed.Text.Equals(frmPatientInfo.cboBed.Tag) Then
+            If Not strTagRoomBed.Equals(strRoomBed) Then
                 strbSqlCommand.Clear()
                 strbSqlCommand.Append("UPDATE PatientRoom SET Active_Flag = '0' Where Patient_TUID = '" & intPatientID & "' AND Active_Flag = '1'")
                 CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)

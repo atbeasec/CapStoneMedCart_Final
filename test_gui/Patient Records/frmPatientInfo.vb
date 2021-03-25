@@ -952,7 +952,6 @@
                 For Each dr As DataRow In dsRoomBedPatientUsing.Tables(0).Rows
                     cboBed.Items.Add(dr(2))
                 Next
-                cboBed.SelectedItem = (cboBed.Tag)
             Else
                 Dim dsRoomBedsOpen As DataSet = CreateDatabase.ExecuteSelectQuery("Select Room_ID,Bed_Name from Rooms WHERE Active_Flag = '1' AND Room_ID = '" & cboRoom.Text & "' EXCEPT Select Room_TUID,Bed_Name from PatientRoom where PatientRoom.Active_Flag = '1'")
                 For Each dr As DataRow In dsRoomBedsOpen.Tables(0).Rows
