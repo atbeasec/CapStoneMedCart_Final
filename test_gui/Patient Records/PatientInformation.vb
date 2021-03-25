@@ -476,6 +476,10 @@ Module PatientInformation
             Dim strRoomBed As String = frmPatientInfo.cboRoom.Text & frmPatientInfo.cboBed.Text
             Dim strTagRoomBed As String = frmPatientInfo.cboRoom.Tag & frmPatientInfo.cboBed.Tag
 
+            'get the tag room and bed, the tag room and bed are the room and bed the patient is currently in.
+            'check to see if the room and bed changed by checking if they are equal.
+            'if they are equal then it didnt change
+            'if they are not equal then they did change and update the room
             If Not strTagRoomBed.Equals(strRoomBed) Then
                 strbSqlCommand.Clear()
                 strbSqlCommand.Append("UPDATE PatientRoom SET Active_Flag = '0' Where Patient_TUID = '" & intPatientID & "' AND Active_Flag = '1'")
