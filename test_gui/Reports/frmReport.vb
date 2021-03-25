@@ -1,4 +1,7 @@
-﻿Public Class frmReport
+﻿
+
+
+Public Class frmReport
 
     '/*********************************************************************/
     '/*                   FUNCTION NAME:  					   */         
@@ -151,6 +154,8 @@
     Private Sub btnGenerateReport_Click(sender As Object, e As EventArgs) Handles btnGenerateReport.Click
         Dim lstOfDataValues As List(Of String) = New List(Of String)
 
+
+
         dgvReport.Columns.Clear()
         dgvReport.Rows.Clear()
 
@@ -165,6 +170,9 @@
             Else
                 PrintItemsToDataGrid(lstOfDataValues)
             End If
+
+            'this Is used only if the user wants to save the report
+            'GenerateReportToWord(strReport, intColumnCount, intRowCount, lstOfDataValues)
 
             'dgvReport.Columns.Count.Equals(2)
 
@@ -209,5 +217,46 @@
 
         End If
 
+    End Sub
+
+    '/*******************************************************************/
+    '/*          SUBROUTINE NAME:     btnExportToExcel_Click		    */
+    '/*******************************************************************/
+    '/*                   WRITTEN BY:  	Eric Lavoie					    */
+    '/*		         DATE CREATED: 	   03/24/21							*/
+    '/*******************************************************************/
+    '/*  SUBROUTINE PURPOSE:											*/
+    '/*	 The purpose of this subroutine is to generate the data for the */
+    '/*  selected report into Excel. Once the user generates the report */
+    '/*  on the form, the user can click the Export Report To Excel     */
+    '/*  button, opening the data in Excel.                             */
+    '/*******************************************************************/
+    '/*  CALLED BY:   	      											*/
+    '/*  (None)								           					*/
+    '/*******************************************************************/
+    '/*  CALLS:															*/
+    '/*  ExportToExcel()										        */
+    '/*******************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):							*/
+    '/*																	*/
+    '/*	 sender- object representing a control                          */
+    '/*  e- eventargs indicating there is an event handle assigned      */
+    '/*******************************************************************/
+    '/* SAMPLE INVOCATION:												*/
+    '/*																	*/
+    '/*  btnExporttoExcel_Click										    */
+    '/*******************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+    '/*																	*/
+    '/*  (None)                                                         */
+    '/*******************************************************************/
+    '/* MODIFICATION HISTORY:											*/
+    '/*																	*/
+    '/*  WHO	    WHEN        WHAT									*/
+    '/*  ---        ----        ----------------------------------------*/
+    '/*  BRH        03/23/21    Initial creation of code                */
+    '/*******************************************************************/
+    Private Sub btnExportToExcel_Click(sender As Object, e As EventArgs) Handles btnExportToExcel.Click
+        ExportToExcel(strReport)
     End Sub
 End Class

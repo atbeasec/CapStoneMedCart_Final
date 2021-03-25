@@ -51,231 +51,266 @@ Partial Class frmFullCart
         Me.btnColor = New System.Windows.Forms.Button()
         Me.SerialPort1 = New System.IO.Ports.SerialPort(Me.components)
         Me.lblInstructions = New System.Windows.Forms.Label()
+        Me.pnlCart = New System.Windows.Forms.Panel()
         Me.SuspendLayout()
         '
         'btn1
         '
-        Me.btn1.Location = New System.Drawing.Point(15, 81)
+        Me.btn1.Location = New System.Drawing.Point(22, 79)
         Me.btn1.Name = "btn1"
-        Me.btn1.Size = New System.Drawing.Size(68, 27)
+        Me.btn1.Size = New System.Drawing.Size(90, 27)
         Me.btn1.TabIndex = 0
-        Me.btn1.Text = "1"
+        Me.btn1.Text = "#1"
+        Me.btn1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btn1.UseVisualStyleBackColor = True
         '
         'btn3
         '
-        Me.btn3.Location = New System.Drawing.Point(89, 81)
+        Me.btn3.Location = New System.Drawing.Point(120, 79)
         Me.btn3.Name = "btn3"
-        Me.btn3.Size = New System.Drawing.Size(31, 27)
+        Me.btn3.Size = New System.Drawing.Size(42, 27)
         Me.btn3.TabIndex = 3
-        Me.btn3.Text = "3"
+        Me.btn3.Text = "#2"
+        Me.btn3.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btn3.UseVisualStyleBackColor = True
         '
         'btn4
         '
-        Me.btn4.Location = New System.Drawing.Point(126, 81)
+        Me.btn4.Location = New System.Drawing.Point(167, 79)
         Me.btn4.Name = "btn4"
-        Me.btn4.Size = New System.Drawing.Size(31, 27)
+        Me.btn4.Size = New System.Drawing.Size(42, 27)
         Me.btn4.TabIndex = 3
-        Me.btn4.Text = "4"
+        Me.btn4.Text = "#3"
+        Me.btn4.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btn4.UseVisualStyleBackColor = True
         '
         'btn5
         '
-        Me.btn5.Location = New System.Drawing.Point(163, 81)
+        Me.btn5.Location = New System.Drawing.Point(216, 79)
         Me.btn5.Name = "btn5"
-        Me.btn5.Size = New System.Drawing.Size(31, 27)
+        Me.btn5.Size = New System.Drawing.Size(42, 27)
         Me.btn5.TabIndex = 4
-        Me.btn5.Text = "5"
+        Me.btn5.Text = "#4" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.btn5.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btn5.UseVisualStyleBackColor = True
         '
         'btn6
         '
-        Me.btn6.Location = New System.Drawing.Point(15, 114)
+        Me.btn6.Location = New System.Drawing.Point(22, 112)
         Me.btn6.Name = "btn6"
-        Me.btn6.Size = New System.Drawing.Size(31, 27)
+        Me.btn6.Size = New System.Drawing.Size(42, 27)
         Me.btn6.TabIndex = 6
-        Me.btn6.Text = "6"
+        Me.btn6.Text = "#5"
+        Me.btn6.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btn6.UseVisualStyleBackColor = True
         '
         'btn7
         '
-        Me.btn7.Location = New System.Drawing.Point(52, 114)
+        Me.btn7.Location = New System.Drawing.Point(70, 112)
         Me.btn7.Name = "btn7"
-        Me.btn7.Size = New System.Drawing.Size(31, 27)
+        Me.btn7.Size = New System.Drawing.Size(42, 27)
         Me.btn7.TabIndex = 7
-        Me.btn7.Text = "7"
+        Me.btn7.Text = "#6"
+        Me.btn7.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btn7.UseVisualStyleBackColor = True
         '
         'btn8
         '
-        Me.btn8.Location = New System.Drawing.Point(89, 114)
+        Me.btn8.Location = New System.Drawing.Point(120, 112)
         Me.btn8.Name = "btn8"
-        Me.btn8.Size = New System.Drawing.Size(31, 27)
+        Me.btn8.Size = New System.Drawing.Size(42, 27)
         Me.btn8.TabIndex = 8
-        Me.btn8.Text = "8"
+        Me.btn8.Text = "#7"
+        Me.btn8.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btn8.UseVisualStyleBackColor = True
         '
         'btn9
         '
-        Me.btn9.Location = New System.Drawing.Point(126, 114)
+        Me.btn9.Location = New System.Drawing.Point(167, 112)
         Me.btn9.Name = "btn9"
-        Me.btn9.Size = New System.Drawing.Size(31, 27)
+        Me.btn9.Size = New System.Drawing.Size(42, 27)
         Me.btn9.TabIndex = 9
-        Me.btn9.Text = "9"
+        Me.btn9.Text = "#8"
+        Me.btn9.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btn9.UseVisualStyleBackColor = True
         '
         'btn10
         '
-        Me.btn10.Location = New System.Drawing.Point(163, 114)
+        Me.btn10.Location = New System.Drawing.Point(216, 112)
         Me.btn10.Name = "btn10"
-        Me.btn10.Size = New System.Drawing.Size(31, 27)
+        Me.btn10.Size = New System.Drawing.Size(42, 27)
         Me.btn10.TabIndex = 10
-        Me.btn10.Text = "10"
+        Me.btn10.Text = "#9"
+        Me.btn10.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btn10.UseVisualStyleBackColor = True
         '
         'btn26
         '
-        Me.btn26.Location = New System.Drawing.Point(15, 246)
+        Me.btn26.Location = New System.Drawing.Point(22, 244)
         Me.btn26.Name = "btn26"
-        Me.btn26.Size = New System.Drawing.Size(179, 78)
+        Me.btn26.Size = New System.Drawing.Size(236, 30)
         Me.btn26.TabIndex = 26
-        Me.btn26.Text = "26"
+        Me.btn26.Text = "#25"
+        Me.btn26.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btn26.UseVisualStyleBackColor = True
         '
         'btn11
         '
-        Me.btn11.Location = New System.Drawing.Point(15, 147)
+        Me.btn11.Location = New System.Drawing.Point(22, 145)
         Me.btn11.Name = "btn11"
-        Me.btn11.Size = New System.Drawing.Size(31, 27)
+        Me.btn11.Size = New System.Drawing.Size(42, 27)
         Me.btn11.TabIndex = 27
-        Me.btn11.Text = "11"
+        Me.btn11.Text = "#10"
+        Me.btn11.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btn11.UseVisualStyleBackColor = True
         '
         'btn12
         '
-        Me.btn12.Location = New System.Drawing.Point(52, 147)
+        Me.btn12.Location = New System.Drawing.Point(70, 145)
         Me.btn12.Name = "btn12"
-        Me.btn12.Size = New System.Drawing.Size(31, 27)
+        Me.btn12.Size = New System.Drawing.Size(42, 27)
         Me.btn12.TabIndex = 28
-        Me.btn12.Text = "12"
+        Me.btn12.Text = "#11"
+        Me.btn12.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btn12.UseVisualStyleBackColor = True
         '
         'btn13
         '
-        Me.btn13.Location = New System.Drawing.Point(89, 147)
+        Me.btn13.Location = New System.Drawing.Point(120, 145)
         Me.btn13.Name = "btn13"
-        Me.btn13.Size = New System.Drawing.Size(31, 27)
+        Me.btn13.Size = New System.Drawing.Size(42, 27)
         Me.btn13.TabIndex = 29
-        Me.btn13.Text = "13"
+        Me.btn13.Text = "#12"
+        Me.btn13.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btn13.UseVisualStyleBackColor = True
         '
         'btn14
         '
-        Me.btn14.Location = New System.Drawing.Point(126, 147)
+        Me.btn14.Location = New System.Drawing.Point(167, 145)
         Me.btn14.Name = "btn14"
-        Me.btn14.Size = New System.Drawing.Size(31, 27)
+        Me.btn14.Size = New System.Drawing.Size(42, 27)
         Me.btn14.TabIndex = 30
-        Me.btn14.Text = "14"
+        Me.btn14.Text = "#13"
+        Me.btn14.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btn14.UseVisualStyleBackColor = True
         '
         'btn15
         '
-        Me.btn15.Location = New System.Drawing.Point(163, 147)
+        Me.btn15.Location = New System.Drawing.Point(216, 145)
         Me.btn15.Name = "btn15"
-        Me.btn15.Size = New System.Drawing.Size(31, 27)
+        Me.btn15.Size = New System.Drawing.Size(42, 27)
         Me.btn15.TabIndex = 31
-        Me.btn15.Text = "15"
+        Me.btn15.Text = "#14"
         Me.btn15.UseVisualStyleBackColor = True
         '
         'btn16
         '
-        Me.btn16.Location = New System.Drawing.Point(15, 180)
+        Me.btn16.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btn16.Location = New System.Drawing.Point(22, 178)
         Me.btn16.Name = "btn16"
-        Me.btn16.Size = New System.Drawing.Size(31, 27)
+        Me.btn16.Size = New System.Drawing.Size(42, 27)
         Me.btn16.TabIndex = 32
-        Me.btn16.Text = "16"
+        Me.btn16.Text = "#15"
+        Me.btn16.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btn16.UseVisualStyleBackColor = True
         '
         'btn17
         '
-        Me.btn17.Location = New System.Drawing.Point(52, 180)
+        Me.btn17.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btn17.Location = New System.Drawing.Point(70, 178)
         Me.btn17.Name = "btn17"
-        Me.btn17.Size = New System.Drawing.Size(31, 27)
+        Me.btn17.Size = New System.Drawing.Size(42, 27)
         Me.btn17.TabIndex = 33
-        Me.btn17.Text = "17"
+        Me.btn17.Text = "#16"
+        Me.btn17.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btn17.UseVisualStyleBackColor = True
         '
         'btn18
         '
-        Me.btn18.Location = New System.Drawing.Point(89, 180)
+        Me.btn18.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btn18.Location = New System.Drawing.Point(120, 178)
         Me.btn18.Name = "btn18"
-        Me.btn18.Size = New System.Drawing.Size(31, 27)
+        Me.btn18.Size = New System.Drawing.Size(42, 27)
         Me.btn18.TabIndex = 34
-        Me.btn18.Text = "18"
+        Me.btn18.Text = "#17"
+        Me.btn18.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btn18.UseVisualStyleBackColor = True
         '
         'btn19
         '
-        Me.btn19.Location = New System.Drawing.Point(126, 180)
+        Me.btn19.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btn19.Location = New System.Drawing.Point(167, 178)
         Me.btn19.Name = "btn19"
-        Me.btn19.Size = New System.Drawing.Size(31, 27)
+        Me.btn19.Size = New System.Drawing.Size(42, 27)
         Me.btn19.TabIndex = 35
-        Me.btn19.Text = "19"
+        Me.btn19.Text = "#18"
+        Me.btn19.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btn19.UseVisualStyleBackColor = True
         '
         'btn20
         '
-        Me.btn20.Location = New System.Drawing.Point(163, 180)
+        Me.btn20.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btn20.Location = New System.Drawing.Point(216, 178)
         Me.btn20.Name = "btn20"
-        Me.btn20.Size = New System.Drawing.Size(31, 27)
+        Me.btn20.Size = New System.Drawing.Size(42, 27)
         Me.btn20.TabIndex = 36
-        Me.btn20.Text = "20"
+        Me.btn20.Text = "#19"
+        Me.btn20.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btn20.UseVisualStyleBackColor = True
         '
         'btn25
         '
-        Me.btn25.Location = New System.Drawing.Point(163, 213)
+        Me.btn25.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btn25.Location = New System.Drawing.Point(216, 211)
         Me.btn25.Name = "btn25"
-        Me.btn25.Size = New System.Drawing.Size(31, 27)
+        Me.btn25.Size = New System.Drawing.Size(42, 27)
         Me.btn25.TabIndex = 41
-        Me.btn25.Text = "25"
+        Me.btn25.Text = "#24"
+        Me.btn25.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btn25.UseVisualStyleBackColor = True
         '
         'btn24
         '
-        Me.btn24.Location = New System.Drawing.Point(126, 213)
+        Me.btn24.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btn24.Location = New System.Drawing.Point(167, 211)
         Me.btn24.Name = "btn24"
-        Me.btn24.Size = New System.Drawing.Size(31, 27)
+        Me.btn24.Size = New System.Drawing.Size(42, 27)
         Me.btn24.TabIndex = 40
-        Me.btn24.Text = "24"
+        Me.btn24.Text = "#23"
+        Me.btn24.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btn24.UseVisualStyleBackColor = True
         '
         'btn23
         '
-        Me.btn23.Location = New System.Drawing.Point(89, 213)
+        Me.btn23.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btn23.Location = New System.Drawing.Point(120, 211)
         Me.btn23.Name = "btn23"
-        Me.btn23.Size = New System.Drawing.Size(31, 27)
+        Me.btn23.Size = New System.Drawing.Size(42, 27)
         Me.btn23.TabIndex = 39
-        Me.btn23.Text = "23"
+        Me.btn23.Text = "#22"
+        Me.btn23.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btn23.UseVisualStyleBackColor = True
         '
         'btn22
         '
-        Me.btn22.Location = New System.Drawing.Point(52, 213)
+        Me.btn22.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btn22.Location = New System.Drawing.Point(70, 211)
         Me.btn22.Name = "btn22"
-        Me.btn22.Size = New System.Drawing.Size(31, 27)
+        Me.btn22.Size = New System.Drawing.Size(42, 27)
         Me.btn22.TabIndex = 38
-        Me.btn22.Text = "22"
+        Me.btn22.Text = "#21"
+        Me.btn22.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btn22.UseVisualStyleBackColor = True
         '
         'btn21
         '
-        Me.btn21.Location = New System.Drawing.Point(15, 213)
+        Me.btn21.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btn21.Location = New System.Drawing.Point(22, 211)
         Me.btn21.Name = "btn21"
-        Me.btn21.Size = New System.Drawing.Size(31, 27)
+        Me.btn21.Size = New System.Drawing.Size(42, 27)
         Me.btn21.TabIndex = 37
-        Me.btn21.Text = "21"
+        Me.btn21.Text = "#20"
+        Me.btn21.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btn21.UseVisualStyleBackColor = True
         '
         'btnColor
@@ -297,17 +332,27 @@ Partial Class frmFullCart
         Me.lblInstructions.AutoSize = True
         Me.lblInstructions.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblInstructions.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblInstructions.Location = New System.Drawing.Point(8, 9)
+        Me.lblInstructions.Location = New System.Drawing.Point(12, 29)
         Me.lblInstructions.Name = "lblInstructions"
-        Me.lblInstructions.Size = New System.Drawing.Size(199, 63)
+        Me.lblInstructions.Size = New System.Drawing.Size(264, 42)
         Me.lblInstructions.TabIndex = 43
-        Me.lblInstructions.Text = "Please Click the red boxes" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " to close the " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "simulated drawers"
+        Me.lblInstructions.Text = "please click the red boxes to close " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "the simulated drawers"
+        '
+        'pnlCart
+        '
+        Me.pnlCart.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnlCart.Location = New System.Drawing.Point(0, 0)
+        Me.pnlCart.Name = "pnlCart"
+        Me.pnlCart.Size = New System.Drawing.Size(286, 26)
+        Me.pnlCart.TabIndex = 44
         '
         'frmFullCart
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(210, 336)
+        Me.BackColor = System.Drawing.Color.White
+        Me.ClientSize = New System.Drawing.Size(286, 300)
+        Me.Controls.Add(Me.pnlCart)
         Me.Controls.Add(Me.lblInstructions)
         Me.Controls.Add(Me.btnColor)
         Me.Controls.Add(Me.btn25)
@@ -335,6 +380,7 @@ Partial Class frmFullCart
         Me.Controls.Add(Me.btn4)
         Me.Controls.Add(Me.btn3)
         Me.Controls.Add(Me.btn1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmFullCart"
         Me.Text = "FullCart"
         Me.ResumeLayout(False)
@@ -370,4 +416,5 @@ Partial Class frmFullCart
     Friend WithEvents btnColor As Button
     Friend WithEvents SerialPort1 As IO.Ports.SerialPort
     Friend WithEvents lblInstructions As Label
+    Friend WithEvents pnlCart As Panel
 End Class
