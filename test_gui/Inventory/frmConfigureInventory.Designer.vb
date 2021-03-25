@@ -459,10 +459,10 @@ Partial Class frmConfigureInventory
         Me.lblDivider.ForeColor = System.Drawing.SystemColors.ControlDarkDark
         Me.lblDivider.Location = New System.Drawing.Point(222, 19)
         Me.lblDivider.Name = "lblDivider"
-        Me.lblDivider.Size = New System.Drawing.Size(65, 21)
+        Me.lblDivider.Size = New System.Drawing.Size(33, 21)
         Me.lblDivider.TabIndex = 9
         Me.lblDivider.Tag = "2"
-        Me.lblDivider.Text = "Section"
+        Me.lblDivider.Text = "Bin"
         '
         'lblActions
         '

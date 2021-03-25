@@ -313,7 +313,7 @@
     '/*********************************************************************/
     Private Sub UpdateDrawerLabel(sender As Object, e As EventArgs)
 
-        lblDrawerNum.Text = "Drawer " & CStr(sender.tabIndex) & " Information"
+        lblDrawerNum.Text = "Drawer " & CStr(sender.tabIndex) & " Information:"
 
     End Sub
 
