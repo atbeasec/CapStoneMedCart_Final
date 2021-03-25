@@ -41,6 +41,11 @@
     '/*  Eric LaVoie    1/25/2021   Initial creation                    */
     '/*  BRH            03/21/21    Add narcotics wasted,
     '/*******************************************************************/
+    Public intColumnCount As Integer = 0
+    Public intRowCount As Integer = 0
+    'Determine which combo box index was selected
+    Public strReport As String = ""
+
     Enum Reports
         Adhoc = 0
         Discrepancies = 1
@@ -101,16 +106,14 @@
     '/*	 BRH	    03/21/21	Fixed to remove an unnecessary column, added
     '/*                         narcotics wasted, all dispensed medication,
     '/*                         all wasted medication, all ad hoc orders,
+    '/*  BRH        03/24/21    Add column counts to each section         */
     '/*********************************************************************/
     Function getSelectedReport(intSelectedIndex As Integer) As List(Of String)
         'Dim arrData As ArrayList = New ArrayList
         Dim lstOfDataValues As List(Of String) = New List(Of String)
-        ' Dim intColumnCount As Integer = 0
-        ' Dim intRowCount As Integer = 0
         Dim strSQLCmd As String = ""
 
-        'Determine which combo box index was selected
-        'Dim strReport As String = ""
+
 
         'select statement that evaluates the selected index with the report that 
         'the user requested to be generated
@@ -118,7 +121,8 @@
         'assignments, (e.g. strReport may be changed to strSQLCommand and assign
         'the necessary sql statement to query the needed table)
         Select Case intSelectedIndex
-            Case Reports.Adhoc  'strReport = "Ad hoc Orders"
+            Case Reports.Adhoc
+                strReport = "Ad Hoc Orders"
                 strSQLCmd = "SELECT Medication.Drug_Name, Drawers.Drawer_Number, DrawerMedication.Divider_Bin, Patient.Patient_First_Name, Patient.Patient_Middle_Name, 
                             Patient.Patient_Last_Name, User.Username, AdHocOrder.Amount FROM AdHocOrder 
                             INNER JOIN Medication ON AdHocOrder.Medication_TUID = Medication_ID
@@ -126,18 +130,28 @@
                             INNER JOIN User ON User_TUID = User_ID
                             INNER JOIN DrawerMedication ON DrawerMedication_TUID = DrawerMedication_ID
                             INNER JOIN Drawers ON DrawerMedication.Drawers_TUID = Drawers.Drawers_ID"
+                'intRowCount = ExecuteScalarQuery("Select Count(Medication.Drug_Name) FROM AdHocOrder 
+                '            INNER JOIN Medication ON AdHocOrder.Medication_TUID = Medication_ID
+                '            INNER JOIN Patient ON Patient_TUID = Patient_ID
+                '            INNER JOIN User ON User_TUID = User_ID
+                '            INNER JOIN DrawerMedication ON DrawerMedication_TUID = DrawerMedication_ID
+                '            INNER JOIN Drawers ON DrawerMedication.Drawers_TUID = Drawers.Drawers_ID")
 
 
-            Case Reports.Discrepancies  'strReport = "Discrepancies"
+
+            Case Reports.Discrepancies
+                strReport = "Discrepancies"
                 strSQLCmd = "SELECT * FROM Discrepancies"
 
             'If the dispensed medication report is selected
-            Case Reports.DispensedMeds ' strReport = "Dispensed Meds"
+            Case Reports.DispensedMeds ' 
+                strReport = "Dispensed Meds"
                 'Select all drugs and store their dispensing information
                 strSQLCmd = "SELECT Drug_Name, Type, Strength, Amount_Dispensed, DateTime_Dispensed, Expiration_Date FROM DrawerMedication INNER JOIN 
                             Medication INNER JOIN Dispensing WHERE DrawerMedication.Medication_TUID = Medication_ID AND DrawerMedication_TUID = DrawerMedication_ID"
 
             Case Reports.NarcAdhoc
+                strReport = "Narcotic Ad Hoc Orders"
                 strSQLCmd = "SELECT Medication.Drug_Name, Drawers.Drawer_Number, DrawerMedication.Divider_Bin, Patient.Patient_First_Name, Patient.Patient_Middle_Name, 
                             Patient.Patient_Last_Name, User.Username, AdHocOrder.Amount FROM AdHocOrder 
                             INNER JOIN Medication ON AdHocOrder.Medication_TUID = Medication_ID
@@ -148,7 +162,8 @@
                             WHERE NarcoticControlled_Flag = 1"
 
             'If the dispensed narcotics report is selected
-            Case Reports.DispensedNarc  'strReport = "Dispensed Narcotics"
+            Case Reports.DispensedNarc  '
+                strReport = "Dispensed Narcotics"
                 'Select the narcotic drugs and store their dispensing information
                 strSQLCmd = "SELECT Drug_Name, Type, Strength, Amount_Dispensed, DateTime_Dispensed, Expiration_Date FROM DrawerMedication INNER JOIN 
                             Medication INNER JOIN Dispensing WHERE DrawerMedication.Medication_TUID = Medication_ID AND 
@@ -161,6 +176,7 @@
                ' intColumnCount = ExecuteScalarQuery("Select Count(name) from PRAGMA_TABLE_INFO('Dispensing INNER JOIN ');")
 
             Case Reports.WastedNarc
+                strReport = "Narcotics Wasted"
                 strSQLCmd = "SELECT u1.Username, u2.Username, Medication.Drug_Name, Drawers.Drawer_Number, 
                             DrawerMedication.Divider_Bin, Wastes.DateTime, Wastes.Reason, Wastes.Quantity From User As u1, User As u2 
                             INNER JOIN Wastes ON u1.User_ID = Wastes.Primary_User_TUID AND  u2.User_ID = Wastes.Secondary_User_TUID 
@@ -168,11 +184,13 @@
                             INNER JOIN DrawerMedication ON Wastes.DrawerMedication_TUID = DrawerMedication_ID 
                             INNER JOIN Drawers ON DrawerMedication.Drawers_TUID = Drawers_ID WHERE Medication.NarcoticControlled_Flag = 1"
 
-            Case Reports.Override  'strReport = "Overrides"
+            Case Reports.Override
+                strReport = "Overrides"
                 'Placeholder SQL so selecting Override won't break the program
                 strSQLCmd = "SELECT * FROM AllergyOverride"
 
             Case Reports.Wastes
+                strReport = "Wasted Medication"
                 strSQLCmd = "SELECT u1.Username, u2.Username, Medication.Drug_Name, Drawers.Drawer_Number, 
                             DrawerMedication.Divider_Bin, Wastes.DateTime, Wastes.Reason, Wastes.Quantity From User As u1, User As u2 
                             INNER JOIN Wastes ON u1.User_ID = Wastes.Primary_User_TUID AND  u2.User_ID = Wastes.Secondary_User_TUID 
@@ -181,8 +199,7 @@
                             INNER JOIN Drawers ON DrawerMedication.Drawers_TUID = Drawers_ID"
 
         End Select
-        'Dim intColumnCount As Integer = 0
-        'Dim intRowCount As Integer = 0
+
 
         GatherDataFromDatabaseTable(lstOfDataValues, strSQLCmd) 'intColumnCount, intRowCount, lstOfDataValues, strSQLCmd)
         Return lstOfDataValues
@@ -290,6 +307,7 @@
     '/*	BRH	 03/21/21	Fixed to remove an unnecessary column, added    */
     '/*                 narcotics wasted, all dispensed medication,
     '/*                 all wasted medication, all ad hoc orders, 
+    '/*  BRH        03/24/21    Add column counts to each section         */
     '/*******************************************************************/
     Sub PrintItemsToDataGrid(ByRef lstOfDataValues As List(Of String))
 
@@ -308,6 +326,8 @@
                 frmReport.dgvReport.Rows.Add(lstOfDataValues.Item(i), lstOfDataValues.Item(i + 1), lstOfDataValues.Item(i + 2),
                                              lstOfDataValues.Item(i + 3), lstOfDataValues.Item(i + 4), lstOfDataValues.Item(i + 5))
             Next
+
+            intColumnCount = 6
         ElseIf frmReport.cmbReports.SelectedItem.Equals("Narcotics Wasted") Or frmReport.cmbReports.SelectedItem.Equals("Wasted Medication") Then
             'Add the following column names
             frmReport.dgvReport.Columns.Add(1, "Primary User's Username")
@@ -324,6 +344,8 @@
                 frmReport.dgvReport.Rows.Add(lstOfDataValues.Item(i), lstOfDataValues.Item(i + 1), lstOfDataValues.Item(i + 2), lstOfDataValues.Item(i + 3),
                                              lstOfDataValues.Item(i + 4), lstOfDataValues.Item(i + 5), lstOfDataValues.Item(i + 6), lstOfDataValues.Item(i + 7))
             Next
+
+            intColumnCount = 8
         ElseIf frmReport.cmbReports.SelectedItem.Equals("Ad Hoc Orders") Or frmReport.cmbReports.SelectedItem.Equals("Narcotic Ad Hoc Orders") Then
             frmReport.dgvReport.Columns.Add(1, "Drug Name")
             frmReport.dgvReport.Columns.Add(2, "Drawer Number")
@@ -337,6 +359,8 @@
                 frmReport.dgvReport.Rows.Add(lstOfDataValues.Item(i), lstOfDataValues.Item(i + 1), lstOfDataValues.Item(i + 2), lstOfDataValues.Item(i + 3) & " " &
                                              lstOfDataValues.Item(i + 4) & " " & lstOfDataValues.Item(i + 5), lstOfDataValues.Item(i + 6), lstOfDataValues.Item(i + 7))
             Next
+
+            intColumnCount = 6
         End If
 
     End Sub

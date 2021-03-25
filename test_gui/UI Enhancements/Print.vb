@@ -1,4 +1,5 @@
 ﻿Imports Microsoft.Office.Interop
+Imports Excel = Microsoft.Office.Interop.Excel
 Module Print
     '/*******************************************************************/
     '/*                   FILE NAME:  Print.vb                          */
@@ -160,5 +161,82 @@ Module Print
                 .OutsideLineStyle = Word.WdLineStyle.wdLineStyleNone
             End With
         End With
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:  		ExportToExcel   	  */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Breanna Howey           		      */   
+    '/*		         DATE CREATED: 		 03/23/21                         */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:								                  */             
+    '/*											                          */                     
+    '/*  The purpose of this subroutine is to get data from the report and*/
+    '/*  export the data to excel. The subroutine will open Excel, allowing
+    '/*  the user to save or print the report.                            */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  btnExportToExcel_Click                           				  */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*  (None)							                                  */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*											                          */                     
+    '/*  (None)                                                           */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*											                          */                     
+    '/* ExportToExcel()                                                   */                                                                    
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungary notation):   */
+    '/*											                          */                     
+    '/*  xlApp - Stores an instance of the Excel application              */
+    '/*  xlWorkBook - Stores an instance of the Excel Workbook            */
+    '/*  xlWorkSheet - Stores an instance of the Excel Worksheet          */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO        WHEN        WHAT								      */             
+    '/*  ---        ----        ------------------------------------------*/
+    '/*  BRH        03/23/21    Initial creation of code                  */
+    '/*********************************************************************/
+    Sub ExportToExcel(strReport As String)
+        Dim xlApp As Excel.Application
+        Dim xlWorkBook As Excel.Workbook
+        Dim xlWorkSheet As Excel.Worksheet
+
+
+        If frmReport.dgvReport.Rows.Count > 0 Then
+            xlApp = New Excel.Application
+            'Open 1 sheet in the workbook
+            xlWorkBook = xlApp.Workbooks.Add(1)
+            xlWorkSheet = xlWorkBook.Sheets("sheet1")
+
+            'Format the cells with an easy-to-read format
+            xlWorkSheet.Cells.Font.Size = 12
+            xlWorkSheet.Cells.Font.Name = "Calibri"
+
+            'Insert the headers for the data
+            For i As Integer = 0 To intColumnCount - 1
+                xlWorkSheet.Cells(1, i + 1) = frmReport.dgvReport.Columns(i).HeaderText
+            Next
+
+            'For each row in the data grid view
+            For i As Integer = 0 To frmReport.dgvReport.RowCount - 2
+                'For each column in the data grid view
+                For j As Integer = 0 To frmReport.dgvReport.ColumnCount - 1
+                    'Add the cells information from the data grid view to the
+                    'Excel worksheet
+                    xlWorkSheet.Cells(i + 2, j + 1) =
+                    frmReport.dgvReport(j, i).Value.ToString()
+                Next
+            Next
+
+            'Make the Excel document visible
+            xlApp.Visible = True
+        Else
+            MessageBox.Show("There is no data to export to Excel.")
+        End If
     End Sub
 End Module
