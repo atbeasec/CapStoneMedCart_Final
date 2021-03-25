@@ -480,7 +480,8 @@ Module PatientInformation
                     CreateDatabase.ExecuteInsertQuery("Update PatientRoom SET Active_Flag = '1' where Patient_TUID = '" & intPatientID & "' AND Room_TUID = '" & frmPatientInfo.cboRoom.Text & "' AND Bed_Name = '" & frmPatientInfo.cboBed.Text & "'")
 
                 End If
-
+                frmPatientInfo.cboRoom.Tag = frmPatientInfo.cboRoom.Text
+                frmPatientInfo.cboBed.Tag = frmPatientInfo.cboBed.Text
             End If
         End If
 

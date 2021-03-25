@@ -942,17 +942,26 @@
 
     Private Sub cboRoom_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboRoom.SelectedIndexChanged
         cboBed.Enabled = True
-        Dim strTemp As String = ""
+        cboBed.Items.Clear()
 
-        If Not cboBed.SelectedIndex = -1 Then
-            strTemp = cboBed.SelectedItem
+        If Not cboRoom.SelectedIndex = -1 Then
+            If cboRoom.Text.Equals(cboRoom.Tag) Then
+                Dim dsRoomBedsOpen As DataSet = CreateDatabase.ExecuteSelectQuery("Select Room_ID,Bed_Name from Rooms WHERE Active_Flag = '1' AND Room_ID = '" & cboRoom.Text & "' EXCEPT Select Room_TUID,Bed_Name from PatientRoom where PatientRoom.Active_Flag = '1'")
+                For Each dr As DataRow In dsRoomBedsOpen.Tables(0).Rows
+                    cboBed.Items.Add(dr(1))
+                Next
+                Dim dsRoomBedPatientUsing As DataSet = CreateDatabase.ExecuteSelectQuery("Select * from PatientRoom where Patient_TUID = '" & intPatientID & "' AND Active_Flag = '1'")
+                For Each dr As DataRow In dsRoomBedPatientUsing.Tables(0).Rows
+                    cboBed.Items.Add(dr(2))
+                Next
+                cboBed.SelectedItem = (cboBed.Tag)
+            Else
+                Dim dsRoomBedsOpen As DataSet = CreateDatabase.ExecuteSelectQuery("Select Room_ID,Bed_Name from Rooms WHERE Active_Flag = '1' AND Room_ID = '" & cboRoom.Text & "' EXCEPT Select Room_TUID,Bed_Name from PatientRoom where PatientRoom.Active_Flag = '1'")
+                For Each dr As DataRow In dsRoomBedsOpen.Tables(0).Rows
+                    cboBed.Items.Add(dr(1))
+                Next
+            End If
         End If
-        cboBed.SelectedIndex = -1
-        PopulateRoomsCombBoxesMethods.UpdateBedComboBox(cboBed, cboRoom)
-        If cboBed.Items.Contains(strTemp) Then
-            cboBed.SelectedItem = strTemp
-        End If
-
     End Sub
 
     Private Sub txtMRN_TextChanged(sender As Object, e As EventArgs) Handles txtMRN.KeyPress, txtPhone.KeyPress, txtZipCode.KeyPress
