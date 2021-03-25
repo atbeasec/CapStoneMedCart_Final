@@ -474,14 +474,19 @@ Module PatientInformation
                 If IsNothing(strCheck) Then
                     'if nothing is returned that record is not in the database so insert
                     CreateDatabase.ExecuteInsertQuery("INSERT INTO PatientRoom(Patient_TUID,Room_TUID,Bed_Name,Active_Flag) VALUES('" & intPatientID & "', '" & frmPatientInfo.cboRoom.Text & "', '" & frmPatientInfo.cboBed.Text & "','1')")
-
+                    frmPatientInfo.cboRoom.Tag = frmPatientInfo.cboRoom.Text
+                    frmPatientInfo.cboBed.Tag = frmPatientInfo.cboBed.Text
+                    intCountChanged = intCountChanged + 1
+                    strbItemsChanged.Append(" Room and bed")
                 Else
                     'if it was in the database reactivate it
                     CreateDatabase.ExecuteInsertQuery("Update PatientRoom SET Active_Flag = '1' where Patient_TUID = '" & intPatientID & "' AND Room_TUID = '" & frmPatientInfo.cboRoom.Text & "' AND Bed_Name = '" & frmPatientInfo.cboBed.Text & "'")
-
+                    frmPatientInfo.cboRoom.Tag = frmPatientInfo.cboRoom.Text
+                    frmPatientInfo.cboBed.Tag = frmPatientInfo.cboBed.Text
+                    intCountChanged = intCountChanged + 1
+                    strbItemsChanged.Append(" Room and bed")
                 End If
-                frmPatientInfo.cboRoom.Tag = frmPatientInfo.cboRoom.Text
-                frmPatientInfo.cboBed.Tag = frmPatientInfo.cboBed.Text
+
             End If
         End If
 
