@@ -27,6 +27,7 @@ Partial Class frmReport
         Me.cmbReports = New System.Windows.Forms.ComboBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.dgvReport = New System.Windows.Forms.DataGridView()
+        Me.btnExportToExcel = New System.Windows.Forms.Button()
         CType(Me.dgvReport, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -39,7 +40,7 @@ Partial Class frmReport
         Me.btnGenerateReport.ForeColor = System.Drawing.Color.White
         Me.btnGenerateReport.Image = CType(resources.GetObject("btnGenerateReport.Image"), System.Drawing.Image)
         Me.btnGenerateReport.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnGenerateReport.Location = New System.Drawing.Point(790, 11)
+        Me.btnGenerateReport.Location = New System.Drawing.Point(566, 12)
         Me.btnGenerateReport.Name = "btnGenerateReport"
         Me.btnGenerateReport.Size = New System.Drawing.Size(188, 35)
         Me.btnGenerateReport.TabIndex = 47
@@ -79,12 +80,30 @@ Partial Class frmReport
         Me.dgvReport.TabIndex = 168
         Me.dgvReport.Visible = False
         '
+        'btnExportToExcel
+        '
+        Me.btnExportToExcel.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnExportToExcel.FlatAppearance.BorderSize = 0
+        Me.btnExportToExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnExportToExcel.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExportToExcel.ForeColor = System.Drawing.Color.White
+        Me.btnExportToExcel.Image = CType(resources.GetObject("btnExportToExcel.Image"), System.Drawing.Image)
+        Me.btnExportToExcel.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnExportToExcel.Location = New System.Drawing.Point(790, 12)
+        Me.btnExportToExcel.Name = "btnExportToExcel"
+        Me.btnExportToExcel.Size = New System.Drawing.Size(188, 35)
+        Me.btnExportToExcel.TabIndex = 169
+        Me.btnExportToExcel.Text = "Export To Excel"
+        Me.btnExportToExcel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnExportToExcel.UseVisualStyleBackColor = False
+        '
         'frmReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(990, 535)
+        Me.Controls.Add(Me.btnExportToExcel)
         Me.Controls.Add(Me.dgvReport)
         Me.Controls.Add(Me.cmbReports)
         Me.Controls.Add(Me.Label15)
@@ -100,4 +119,5 @@ Partial Class frmReport
     Friend WithEvents cmbReports As ComboBox
     Friend WithEvents Label15 As Label
     Friend WithEvents dgvReport As DataGridView
+    Friend WithEvents btnExportToExcel As Button
 End Class
