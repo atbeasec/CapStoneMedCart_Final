@@ -755,7 +755,9 @@ Module PatientInformation
         If checkComboForDup(frmPatientInfo.cboRoom, strcheckroom) = True Then
             cboRoom.Items.Add(strroom)
         End If
-
+        If cboRoom.FindString(strroom.ToString) <= -1 Then
+            cboRoom.Items.Add(strroom)
+        End If
 
         'PopulateRoomsCombBoxesMethods.UpdateBedComboBox(cboBed, cboRoom)
         cboRoom.Tag = strroom
