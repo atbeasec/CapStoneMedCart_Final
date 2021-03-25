@@ -467,7 +467,7 @@ Module PatientInformation
 
             If Not frmPatientInfo.cboBed.Text.Equals(frmPatientInfo.cboBed.Tag) Then
                 strbSqlCommand.Clear()
-                strbSqlCommand.Append("UPDATE PatientRoom SET PatientRoom.Active_Flag = '0' Where Patient_TUID = '" & intPatientID & "' AND Active_Flag = '1'")
+                strbSqlCommand.Append("UPDATE PatientRoom SET Active_Flag = '0' Where Patient_TUID = '" & intPatientID & "' AND Active_Flag = '1'")
                 CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
                 strbSqlCommand.Clear()
                 Dim strCheck As String = CreateDatabase.ExecuteScalarQuery("SELECT Room_TUID FROM PatientRoom where Patient_TUID = '" & intPatientID & "' AND Room_TUID = '" & frmPatientInfo.cboRoom.Text & "' AND Bed_Name = '" & frmPatientInfo.cboBed.Text & "' AND Active_Flag = '0'")
