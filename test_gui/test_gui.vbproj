@@ -571,6 +571,13 @@
   <ItemGroup>
     <None Include="Resources\Info.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\circleLoading.gif" />
+    <Content Include="Resources\loading.gif" />
+    <None Include="Resources\pillLoading.gif" />
+    <None Include="Resources\Loading1.gif" />
+    <None Include="Resources\Loading_2.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

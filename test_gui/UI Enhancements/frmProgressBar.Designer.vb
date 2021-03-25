@@ -23,17 +23,12 @@ Partial Class frmProgressBar
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.pbrProbgressBar = New System.Windows.Forms.ProgressBar()
         Me.tmTimer = New System.Windows.Forms.Timer(Me.components)
         Me.lblMessageUpdate = New System.Windows.Forms.Label()
+        Me.lblPleaseWait = New System.Windows.Forms.Label()
+        Me.pbLoading = New System.Windows.Forms.PictureBox()
+        CType(Me.pbLoading, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'pbrProbgressBar
-        '
-        Me.pbrProbgressBar.Location = New System.Drawing.Point(12, 87)
-        Me.pbrProbgressBar.Name = "pbrProbgressBar"
-        Me.pbrProbgressBar.Size = New System.Drawing.Size(482, 23)
-        Me.pbrProbgressBar.TabIndex = 0
         '
         'tmTimer
         '
@@ -42,26 +37,53 @@ Partial Class frmProgressBar
         'lblMessageUpdate
         '
         Me.lblMessageUpdate.AutoSize = True
-        Me.lblMessageUpdate.Location = New System.Drawing.Point(92, 43)
+        Me.lblMessageUpdate.Location = New System.Drawing.Point(88, 40)
         Me.lblMessageUpdate.Name = "lblMessageUpdate"
-        Me.lblMessageUpdate.Size = New System.Drawing.Size(78, 13)
+        Me.lblMessageUpdate.Size = New System.Drawing.Size(94, 13)
         Me.lblMessageUpdate.TabIndex = 1
-        Me.lblMessageUpdate.Text = "Waiting to start"
+        Me.lblMessageUpdate.Text = "Message updates:"
+        '
+        'lblPleaseWait
+        '
+        Me.lblPleaseWait.AutoSize = True
+        Me.lblPleaseWait.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPleaseWait.Location = New System.Drawing.Point(87, 12)
+        Me.lblPleaseWait.Name = "lblPleaseWait"
+        Me.lblPleaseWait.Size = New System.Drawing.Size(186, 24)
+        Me.lblPleaseWait.TabIndex = 3
+        Me.lblPleaseWait.Text = "Loading, Please Wait"
+        '
+        'pbLoading
+        '
+        Me.pbLoading.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.pbLoading.Image = Global.test_gui.My.Resources.Resources.pillLoading
+        Me.pbLoading.InitialImage = Nothing
+        Me.pbLoading.Location = New System.Drawing.Point(12, 12)
+        Me.pbLoading.Name = "pbLoading"
+        Me.pbLoading.Size = New System.Drawing.Size(69, 63)
+        Me.pbLoading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.pbLoading.TabIndex = 2
+        Me.pbLoading.TabStop = False
         '
         'frmProgressBar
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(506, 150)
+        Me.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.ClientSize = New System.Drawing.Size(300, 87)
+        Me.ControlBox = False
+        Me.Controls.Add(Me.lblPleaseWait)
+        Me.Controls.Add(Me.pbLoading)
         Me.Controls.Add(Me.lblMessageUpdate)
-        Me.Controls.Add(Me.pbrProbgressBar)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Name = "frmProgressBar"
+        CType(Me.pbLoading, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents pbrProbgressBar As Windows.Forms.ProgressBar
     Friend WithEvents tmTimer As Timer
     Friend WithEvents lblMessageUpdate As Label
+    Friend WithEvents pbLoading As PictureBox
+    Friend WithEvents lblPleaseWait As Label
 End Class
