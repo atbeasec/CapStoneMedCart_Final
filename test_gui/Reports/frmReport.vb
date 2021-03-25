@@ -85,10 +85,11 @@ Public Class frmReport
     '/*  Eric L.    03/16/21    Initial creation of code                  */  
     '/*  BRH        03/21/21    Add narcotics wasted, add all wasted meds,
     '/*                         narcotic ad hoc orders, 
+    '/*  BRH  03/25/21   Added Active and Resolved Discrepancy code       */
     '/*********************************************************************/
     Private Sub PopulateReportsList()
 
-        Const STRDISCREPANCIES As String = "Discrepancies"
+        Const STRACTIVEDISCREPANCIES As String = "Active Discrepancies"
         Const STRDISPENSINGHISTORY As String = "Dispensed Medications"
         Const STRADHOCORDERS As String = "Ad Hoc Orders"
         Const STRNARCADHOCORDERS As String = "Narcotic Ad Hoc Orders"
@@ -96,8 +97,9 @@ Public Class frmReport
         Const STRNARCOTICSWASTED As String = "Narcotics Wasted"
         Const STROVERRIDES As String = "Overrides"
         Const STRWASTES As String = "Wasted Medication"
+        Const STRRESOLVEDDISCREPANCIES As String = "Resolved Discrepancies"
 
-        cmbReports.Items.Add(STRDISCREPANCIES)
+        cmbReports.Items.Add(STRACTIVEDISCREPANCIES)
         cmbReports.Items.Add(STRDISPENSINGHISTORY)
         cmbReports.Items.Add(STRADHOCORDERS)
         cmbReports.Items.Add(STRNARCADHOCORDERS)
@@ -105,6 +107,7 @@ Public Class frmReport
         cmbReports.Items.Add(STRNARCOTICSWASTED)
         cmbReports.Items.Add(STROVERRIDES)
         cmbReports.Items.Add(STRWASTES)
+        cmbReports.Items.Add(STRRESOLVEDDISCREPANCIES)
 
     End Sub
     '/*******************************************************************/
@@ -170,48 +173,6 @@ Public Class frmReport
             Else
                 PrintItemsToDataGrid(lstOfDataValues)
             End If
-
-            'this Is used only if the user wants to save the report
-            'GenerateReportToWord(strReport, intColumnCount, intRowCount, lstOfDataValues)
-
-            'dgvReport.Columns.Count.Equals(2)
-
-
-
-            ' dgvReport.DataSource = lstOfDataValues
-
-            ' Select Case cmbReports.SelectedItem
-            'Case Reports.Adhoc : strReport = "Ad hoc Orders"
-
-            'Case Reports.Discrepancies : strReport = "Discrepancies"
-
-            'Case Reports.DispensedMeds : strReport = "Dispensed Meds"
-
-            'Case cmbReports.SelectedItem.Equals("Narcotics Dispensed") 'Reports.DispensedNarc : strReport = "Dispensed Narcotics"
-            'If cmbReports.SelectedItem.Equals("Narcotics Dispensed") Then
-            '    dgvReport.Columns.Add(1, "Drug Name")
-            '    dgvReport.Columns.Add(2, "Drug Type")
-            '    dgvReport.Columns.Add(3, "Drug Strength")
-            '    dgvReport.Columns.Add(4, "Amount Dispensed")
-            '    dgvReport.Columns.Add(5, "Amount Remaining in Drawer")
-            '    dgvReport.Columns.Add(6, "Date / Time Dispensed")
-            '    dgvReport.Columns.Add(7, "Expiration Date")
-
-            '    For i As Integer = 0 To lstOfDataValues.Count - 7 Step 7
-            '        dgvReport.Rows.Add(lstOfDataValues.Item(i), lstOfDataValues.Item(i + 1), lstOfDataValues.Item(i + 2), lstOfDataValues.Item(i + 3), lstOfDataValues.Item(i + 4), lstOfDataValues.Item(i + 5), lstOfDataValues.Item(i + 6))
-            '    Next
-            'End If
-
-
-            ' intColumnCount = ExecuteScalarQuery("Select Count(name) from PRAGMA_TABLE_INFO('Dispensing INNER JOIN ');")
-
-            ' Case Reports.Override : strReport = "Overrides"
-
-            ' End Select
-
-            'For i As Integer = 0 To lstOfDataValues.Count - 3 Step 3
-            '    dgvReport.Rows.Add(lstOfDataValues.Item(i), lstOfDataValues.Item(i + 1))
-            'Next
 
             dgvReport.Visible = True
 

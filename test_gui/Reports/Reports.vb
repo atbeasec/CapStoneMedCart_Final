@@ -47,14 +47,15 @@
     Public strReport As String = ""
 
     Enum Reports
-        Adhoc = 0
-        Discrepancies = 1
+        ActiveDiscrepancies = 0
+        Adhoc = 1
         DispensedMeds = 2
         NarcAdhoc = 3
         DispensedNarc = 4
         WastedNarc = 5
         Override = 6
-        Wastes = 7
+        ResolvedDiscrepancies = 7
+        Wastes = 8
     End Enum
 
     '/*********************************************************************/
@@ -107,6 +108,7 @@
     '/*                         narcotics wasted, all dispensed medication,
     '/*                         all wasted medication, all ad hoc orders,
     '/*  BRH        03/24/21    Add column counts to each section         */
+    '/*  BRH        03/25/21   Added Active and Resolved Discrepancy code */
     '/*********************************************************************/
     Function getSelectedReport(intSelectedIndex As Integer) As List(Of String)
         'Dim arrData As ArrayList = New ArrayList
@@ -121,6 +123,15 @@
         'assignments, (e.g. strReport may be changed to strSQLCommand and assign
         'the necessary sql statement to query the needed table)
         Select Case intSelectedIndex
+            Case Reports.ActiveDiscrepancies
+                strReport = "Active Discrepancies"
+                strSQLCmd = "Select Medication.Drug_Name, Drawers.Drawer_Number, DrawerMedication.Divider_Bin, Expected_Count, Actual_Count, DateTime_Entered FROM Discrepancies
+                            INNER Join Medication ON Discrepancies.Medication_TUID = Medication_ID
+                            INNER Join DrawerMedication ON Discrepancies.Medication_TUID = DrawerMedication.Medication_TUID
+                            INNER Join Drawers ON DrawerMedication.Drawers_TUID = Drawers.Drawers_ID
+                            WHERE Reason Is ' '"
+
+
             Case Reports.Adhoc
                 strReport = "Ad Hoc Orders"
                 strSQLCmd = "SELECT Medication.Drug_Name, Drawers.Drawer_Number, DrawerMedication.Divider_Bin, Patient.Patient_First_Name, Patient.Patient_Middle_Name, 
@@ -130,18 +141,7 @@
                             INNER JOIN User ON User_TUID = User_ID
                             INNER JOIN DrawerMedication ON DrawerMedication_TUID = DrawerMedication_ID
                             INNER JOIN Drawers ON DrawerMedication.Drawers_TUID = Drawers.Drawers_ID"
-                'intRowCount = ExecuteScalarQuery("Select Count(Medication.Drug_Name) FROM AdHocOrder 
-                '            INNER JOIN Medication ON AdHocOrder.Medication_TUID = Medication_ID
-                '            INNER JOIN Patient ON Patient_TUID = Patient_ID
-                '            INNER JOIN User ON User_TUID = User_ID
-                '            INNER JOIN DrawerMedication ON DrawerMedication_TUID = DrawerMedication_ID
-                '            INNER JOIN Drawers ON DrawerMedication.Drawers_TUID = Drawers.Drawers_ID")
 
-
-
-            Case Reports.Discrepancies
-                strReport = "Discrepancies"
-                strSQLCmd = "SELECT * FROM Discrepancies"
 
             'If the dispensed medication report is selected
             Case Reports.DispensedMeds ' 
@@ -169,12 +169,6 @@
                             Medication INNER JOIN Dispensing WHERE DrawerMedication.Medication_TUID = Medication_ID AND 
                             NarcoticControlled_Flag = 1 AND DrawerMedication_TUID = DrawerMedication_ID"
 
-                'call the execute scalar query function with a sql command that determines the number of records in the table
-                'intRowCount = ExecuteScalarQuery("Select Count(*) FROM DrawerMedication INNER JOIN 
-                 '           Medication INNER JOIN Dispensing WHERE DrawerMedication.Medication_TUID = Medication_ID AND 
-                  '          NarcoticControlled_Flag = 1 AND DrawerMedication_TUID = DrawerMedication_ID;")
-               ' intColumnCount = ExecuteScalarQuery("Select Count(name) from PRAGMA_TABLE_INFO('Dispensing INNER JOIN ');")
-
             Case Reports.WastedNarc
                 strReport = "Narcotics Wasted"
                 strSQLCmd = "SELECT u1.Username, u2.Username, Medication.Drug_Name, Drawers.Drawer_Number, 
@@ -188,6 +182,14 @@
                 strReport = "Overrides"
                 'Placeholder SQL so selecting Override won't break the program
                 strSQLCmd = "SELECT * FROM AllergyOverride"
+
+            Case Reports.ResolvedDiscrepancies
+                strReport = "Resolved Discrepancies"
+                strSQLCmd = "SELECT Medication.Drug_Name, Drawers.Drawer_Number, DrawerMedication.Divider_Bin, Expected_Count, Actual_Count, DateTime_Entered, DateTime_Cleared, Reason FROM Discrepancies
+                            INNER Join Medication ON Discrepancies.Medication_TUID = Medication_ID
+                            INNER Join DrawerMedication ON Discrepancies.Medication_TUID = DrawerMedication.Medication_TUID
+                            INNER Join Drawers ON DrawerMedication.Drawers_TUID = Drawers.Drawers_ID
+                            WHERE Reason Is Not ' '"
 
             Case Reports.Wastes
                 strReport = "Wasted Medication"
@@ -307,7 +309,8 @@
     '/*	BRH	 03/21/21	Fixed to remove an unnecessary column, added    */
     '/*                 narcotics wasted, all dispensed medication,
     '/*                 all wasted medication, all ad hoc orders, 
-    '/*  BRH        03/24/21    Add column counts to each section         */
+    '/* BRH  03/24/21   Add column counts to each section               */
+    '/* BRH  03/25/21   Added Active and Resolved Discrepancy code      */
     '/*******************************************************************/
     Sub PrintItemsToDataGrid(ByRef lstOfDataValues As List(Of String))
 
@@ -361,7 +364,41 @@
             Next
 
             intColumnCount = 6
+        ElseIf frmReport.cmbReports.SelectedItem.Equals("Active Discrepancies") Then
+            frmReport.dgvReport.Columns.Add(1, "Medication Name")
+            frmReport.dgvReport.Columns.Add(2, "Drawer Number")
+            frmReport.dgvReport.Columns.Add(3, "Drawer Bin")
+            frmReport.dgvReport.Columns.Add(4, "Expected Count")
+            frmReport.dgvReport.Columns.Add(5, "Actual Count")
+            frmReport.dgvReport.Columns.Add(6, "Date / Time Entered")
+
+            'Add the following data into data grid on the form
+            For i As Integer = 0 To lstOfDataValues.Count - 6 Step 6
+                frmReport.dgvReport.Rows.Add(lstOfDataValues.Item(i), lstOfDataValues.Item(i + 1), lstOfDataValues.Item(i + 2),
+                                             lstOfDataValues.Item(i + 3), lstOfDataValues.Item(i + 4), lstOfDataValues.Item(i + 5))
+            Next
+
+            intColumnCount = 6
+        ElseIf frmReport.cmbReports.SelectedItem.Equals("Resolved Discrepancies") Then
+            frmReport.dgvReport.Columns.Add(1, "Medication Name")
+            frmReport.dgvReport.Columns.Add(2, "Drawer Number")
+            frmReport.dgvReport.Columns.Add(3, "Drawer Bin")
+            frmReport.dgvReport.Columns.Add(4, "Expected Count")
+            frmReport.dgvReport.Columns.Add(5, "Actual Count")
+            frmReport.dgvReport.Columns.Add(6, "Date / Time Entered")
+            frmReport.dgvReport.Columns.Add(7, "Date / Time Cleared")
+            frmReport.dgvReport.Columns.Add(8, "Reason for Resolving")
+
+            'Add the following data into data grid on the form
+            For i As Integer = 0 To lstOfDataValues.Count - 8 Step 8
+                frmReport.dgvReport.Rows.Add(lstOfDataValues.Item(i), lstOfDataValues.Item(i + 1), lstOfDataValues.Item(i + 2),
+                                             lstOfDataValues.Item(i + 3), lstOfDataValues.Item(i + 4), lstOfDataValues.Item(i + 5),
+                                             lstOfDataValues.Item(i + 6), lstOfDataValues.Item(i + 7))
+            Next
+
+            intColumnCount = 8
         End If
+
 
     End Sub
 
