@@ -15,6 +15,38 @@
 
     End Enum
 
+    '/*********************************************************************/
+    '/*             SubProgram NAME: frmConfigureInventory_Load             */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/24/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This method is called when the form loads. preliminary actions like   
+    '/*  selecting the drawer, drawing buttons, and assigning handlers takes
+    '/*  place at this time.                                              */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*          btnSaveOrAdd_Click                          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	                       */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                 	              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/24/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Sub frmConfigureInventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         'txtCapacity.Enabled = False
@@ -131,6 +163,57 @@
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: CreatePanel()                  */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/24/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is routine is dynamically creates panels that are placed    */ 
+    '/*	 inside of the flowpanel that is fixed on the form. The panels are*/
+    '/*	 created here, assigned handlers, and the contents of the panels  */
+    '/*	 are updated in this routine                                      */
+    '/*********************************************************************/
+    '/*  CALLED BY: frmConfiguration_Load  	      						  */           
+    '/*                                                                   */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 NONE                                                             */ 
+    '/* flpPannel- the flow panel which the user wants to create the      */
+    '/*     create the single panel.                                      */
+    '/* strMRN- value from the database we will display                   */
+    '/* strFirstName- Name of the user in the database                    */
+    '/* strLastName- Last Name of the user in the database                */
+    '/* strBirthday- DOB of the user in the database                      */
+    '/* strRoom- room of the user in the database                         */
+    '/* strBed- bed of the user in the database                           */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	   CreatePanel(flpUserInfo, strID9, strFirstName9, strAccess9)    */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	pnl- is the pnl which we are creating for padding purposes        */
+    '/* pnlMainPanel- is the pnl which we are going to add controls       */
+    '/* lblID1 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID2 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID3 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID4 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID5 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  Collin Krygier  3/24/2021    Initial creation                    */
+    '/*********************************************************************/
     Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal strDrugName As String, ByVal strDividerBin As String, ByVal strStrength As String, ByVal strQuantity As String, ByRef intMedicationTUID As Integer)
 
         Dim pnl As Panel
@@ -184,7 +267,6 @@
         End If
 
         Dim strTuncated As String = strDrugName.Substring(0, intLength)
-        ' anywhere we have quotes except for the label names, we can call our Database and get method
         'CreateIDLabel(pnlMainPanel, lblID, "lblDrugName", lblDrugName.Location.X, 20, strDrugName, getPanelCount(flpPannel))
         CreateIDLabelWithToolTip(pnlMainPanel, lblID, "lblDrugName", lblDrugName.Location.X, 20, strDrugName, getPanelCount(flpPannel), tpToolTip, strTuncated)
         CreateIDLabel(pnlMainPanel, lblID5, "lblDivider", lblDivider.Location.X, 20, strDividerBin, getPanelCount(flpPannel))
@@ -197,23 +279,81 @@
         pnlMainPanel.Tag = intMedicationTUID
     End Sub
 
-
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: UpdateDrawerLabel              */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/24/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is an event handler assigned to all of the buttons that will*/
+    '/*  update the label text on the form indicating which drawer is click/
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      btnClick                                                     */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 field- an integer equal to the tag value of the selected label   */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                 	              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/14/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Sub UpdateDrawerLabel(sender As Object, e As EventArgs)
 
         lblDrawerNum.Text = "Drawer " & CStr(sender.tabIndex) & " Information"
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: UpdateButtonsOnScreen          */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/24/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is called to set the properties of each drawer button at run*/
+    '/*  time. Items such as tool tip and special information like the if */
+    '/*  the drawer is full can be noted here and the button can be updated/
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      frmConfiguration_Load                                        */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 field- an integer equal to the tag value of the selected label   */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                 	              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/14/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Sub UpdateButtonsOnScreen()
 
         'aray used to throw temporary data here for dumping. only for prototype purposes
         Dim arrQuantity As Integer() = {6, 7, 5, 78, 7, 8, 8, 9, 12, 144, 34, 55, 23, 67, 8, 67, 12, 34, 5, 65, 87, 43, 65, 21, 59}
-
         Dim tp As New ToolTip
-
         Dim count As Integer = 0
-
-
 
         For Each ctl In pnlLayoutButtons.Controls
 
@@ -229,7 +369,6 @@
             'With lblItemQuantity
             '    .Name = "lblItemQuantity" & count
             'End With
-
 
             If TypeName(ctl) = "Button" Then
 
@@ -318,6 +457,37 @@
         Next
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: UpdateButtonsOnScreen          */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/24/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is called to add functionality to the buttons at run time   */
+    '/*  this is specifically impacting the buttons depicting the drawers */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      frmConfiguration_Load                                        */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 field- an integer equal to the tag value of the selected label   */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                 	              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/14/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Sub AddHandlerToDrawerButtons()
 
         Dim btnSingle As Button
@@ -335,7 +505,37 @@
 
     End Sub
 
-
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: AddHandlerToDrawerButtons      */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/24/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is a handler that will determine if a button is clicked what*/
+    '/*  color that button should become and the color of all other buttons/
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      frmConfiguration_Load                                        */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 field- an integer equal to the tag value of the selected label   */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                 	              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/14/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Sub HighlightSelectedDrawer(sender As Object, e As EventArgs)
 
         intCurrentDrawer = sender.TabIndex.ToString()
@@ -362,6 +562,40 @@
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   FUNCTION NAME: GetSelectedDrawer                */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/24/2021                        */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:		    						              */             
+    '/*	 This looks at all of the drawers, takes the selected one, and then/
+    '/*  returns the selected button.
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      SetSelectedDrawer()                                          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  RETURNS:			                            		          */         
+    '/*	 Button object                                                    */ 
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 NONE                                                             */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	GetSelectedDrawer()                                               */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/24/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Function GetSelectedDrawer() As Button
 
         Dim btnSelectedDrawer As Button = Nothing
@@ -381,14 +615,77 @@
 
     End Function
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: PreviouslySelectedDrawer       */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/24/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This receives the drawer that was previous visited before changing/
+    '/*  screens.                                                          /
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      frmConfiguration_Load                                        */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 btnUserSelectedDrawer- a button control object   */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                 	              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/14/2021    Initial creation                    */
+    '/*********************************************************************/
     Public Sub PreviouslySelectedDrawer(ByVal btnUserSelectedDrawer As Button)
 
         btnDrawerToSelectOnLoad = btnUserSelectedDrawer
 
     End Sub
 
-
+    '/*********************************************************************/
+    '/*   SubProgram NAME: UpdateScreenWithMedicationsInSelectedDrawer    */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/24/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is a handler assigned to all of the buttons depicting the drawer
+    '/*  When the drawer is selected, this method determines what medications
+    '/*  are associated with that drawer and adds them to the screen.      /
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*     UpdateButtonsOnScreen                                         */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	NONE                                                              */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                 	              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/14/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Sub UpdateScreenWithMedicationsInSelectedDrawer(sender As Button, e As EventArgs) Handles btnDrawer1.Click
+
         flpMedication.Controls.Clear()
         Dim strDrugName As String = ""
         Dim intStrength As String = ""
@@ -397,12 +694,14 @@
         Dim intDrugQuantity As Integer = 0
         Dim intMedicationTUID As Integer = 0
         Dim dsDrawerContents As DataSet = GetDrawerDrugs(sender.TabIndex)
+
         For Each dr As DataRow In dsDrawerContents.Tables(0).Rows
             strDrugName = dr(0)
             intStrength = dr(1)
             intDrugQuantity = CInt(dr(2))
             intDividerBin = dr(3)
             intMedicationTUID = dr(4)
+
             If intDrugQuantity = 0 Then
                 ' the drawer is empty. Do nothing
             Else
@@ -410,31 +709,60 @@
                 CreatePanel(flpMedication, strDrugName, intDividerBin, intStrength.ToString(), intDrugQuantity.ToString(), intMedicationTUID)
             End If
         Next
+
         '  Dim size As Integer = CreateDatabase.ExecuteScalarQuery("SELECT Size FROM Drawers where Drawers_ID = " & sender.TabIndex.ToString() & ";")
         'txtCapacity.Text = size
         Dim dividers As Integer = CreateDatabase.ExecuteScalarQuery("SELECT Number_of_Dividers FROM Drawers where Drawers_ID = " & sender.TabIndex.ToString() & ";")
         txtDividers.Text = dividers
 
         'MessageBox.Show(strDrugName + " " + intStrength.ToString() + "   " + intDividerBin.ToString() + " In drawer number: " + sender.TabIndex.ToString())
-
-
-        ' We will next need to use the method to create a panel and populate the labels with text from the database returned items
-
-
-
-    End Sub
-    Private Sub btnAddtoDrawer_Click(sender As Object, e As EventArgs)
-
-        ' pass the name of thecurrently selected drawer the user is looking at
-        frmInventory.SetSelectedDrawer(GetSelectedDrawer)
-
-        ' open the inventory form
-        frmMain.OpenChildForm(frmInventory)
-
     End Sub
 
+
+    'Private Sub btnAddtoDrawer_Click(sender As Object, e As EventArgs)
+
+    '    ' pass the name of thecurrently selected drawer the user is looking at
+    '    frmInventory.SetSelectedDrawer(GetSelectedDrawer)
+
+    '    ' open the inventory form
+    '    frmMain.OpenChildForm(frmInventory)
+
+    'End Sub
+
+
+    '/*********************************************************************/
+    '/*                      SubProgram NAME: SelectDrawer                */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/24/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This method decides which drawer to select when the form laods. If/
+    '/*  the user previously selected a drawer and added to it, when the  */
+    '/*  add to the drawer and leave, then come back, this drawer is selected
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*     frmConfigureInventory_Load                                    */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	btnDrawerToSelect- a button control object                        */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                 	              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/24/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Sub SelectDrawer(ByVal btnDrawerToSelect As Button)
-
 
         'check if there is an object to pass. If its null, then we know this is the first time the page is being loaded
         'there wouldnt be a previous button in that case
@@ -460,20 +788,110 @@
 
     End Sub
 
+    '/*********************************************************************/
+    '/*             SubProgram NAME: btnIncrementDividers_Click           */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/24/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This method decides what to do when the increment button is clicked
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                    */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	                       */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                 	              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/24/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Sub btnIncrementDividers_Click(sender As Object, e As EventArgs) Handles btnIncrementDividers.Click
 
         ButtonIncrement(5, txtDividers)
         SetDrawerPropertiesToSave()
     End Sub
 
+    '/*********************************************************************/
+    '/*             SubProgram NAME: btnDecrementDividers_Click           */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/24/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This method decides what to do when the decrement button is clicked
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                    */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	                       */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                 	              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/24/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Sub btnDecrementDividers_Click(sender As Object, e As EventArgs) Handles btnDecrementDividers.Click
 
         ButtonDecrement(txtDividers)
         SetDrawerPropertiesToSave()
 
-
     End Sub
 
+    '/*********************************************************************/
+    '/*             SubProgram NAME: SetDrawerPropertiesToSave            */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/24/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This method updates the button properties to indicate the user can/
+    '/*  click this button to save the changes.                            /
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                    */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	                       */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                 	              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/24/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Sub SetDrawerPropertiesToSave()
 
         If btnSaveOrAdd.Text = "ADD TO DRAWER" Then
@@ -534,6 +952,37 @@
         MessageBox.Show("Drug removed from drawer number: " & intSelectedDrawer)
     End Sub
 
+    '/*********************************************************************/
+    '/*             SubProgram NAME: btnSaveOrAdd_Click                   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/24/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This method checks if the user is trying to save or add and then */
+    '/*  the function of the button changes based on the .text of the btn */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                    */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	                       */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                 	              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/24/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Sub btnSaveOrAdd_Click(sender As Object, e As EventArgs) Handles btnSaveOrAdd.Click
 
         If btnSaveOrAdd.Text = "SAVE CHANGES" Then
@@ -541,6 +990,7 @@
             SaveButtonFunctionality()
             SetDrawerPropertiesToAdd()
             UpdateUser()
+
         Else
 
             AddToDrawerFunctionality()
@@ -549,6 +999,37 @@
 
     End Sub
 
+    '/*********************************************************************/
+    '/*             SubProgram NAME: SetDrawerPropertiesToAdd             */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/24/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This method updates the button properties to indicate the user can/
+    '/*  click this button to add more items to the drawer                 /
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*       btnSaveOrAdd_Click                             */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	                       */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                 	              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/24/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Sub SetDrawerPropertiesToAdd()
 
         With btnSaveOrAdd
@@ -560,12 +1041,72 @@
 
     End Sub
 
+    '/*********************************************************************/
+    '/*             SubProgram NAME: UpdateUser                           */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/24/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This method updates the user so they know changes were saved      /
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*         btnSaveOrAdd_Click                           */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	                       */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                 	              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/24/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Sub UpdateUser()
 
         MessageBox.Show("Drawer updated to contain " & txtDividers.Text & " divider(s)")
 
     End Sub
 
+    '/*********************************************************************/
+    '/*             SubProgram NAME: SaveButtonFunctionality              */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/24/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This method updates the database with changes the user made      */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*          btnSaveOrAdd_Click                          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	                       */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                 	              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/24/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Sub SaveButtonFunctionality()
 
         ' call code here to update the database with the txtCapacity and txtDividers information about the drawer.
@@ -575,8 +1116,38 @@
 
     End Sub
 
+    '/*********************************************************************/
+    '/*             SubProgram NAME: AddToDrawerFunctionality             */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/24/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This method documents the currently selected drawer, then opensthe/
+    '/*  add to inventory form.                                            /
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*          btnSaveOrAdd_Click                          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	                       */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                 	              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/24/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Sub AddToDrawerFunctionality()
-
 
         ' pass the name of thecurrently selected drawer the user is looking at
         frmInventory.SetSelectedDrawer(GetSelectedDrawer)
