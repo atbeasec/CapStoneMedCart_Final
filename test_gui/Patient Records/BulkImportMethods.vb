@@ -407,6 +407,13 @@ Module BulkImportMethods
                         End Select
                     End If
                 Next
+                strbSQLPull.Clear()
+                strbSQLPull.Append("select count(Patient_TUID) From PatientRoom where Room_TUID = '" & strLine(16))
+                strbSQLPull.Append("' and Bed_Name = '" & strLine(17) & "' and Active_Flag ='1';")
+                If ExecuteScalarQuery(strbSQLPull.ToString) <> 0 Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " room and bed already assigned to a patient")
+                    blnIssue = True
+                End If
                 If Not blnIssue Then
                     UsedBarCodesArray.Add(strLine(1))
                     PatientArray.Add(New PatientClass(strLine(0), strLine(1), strLine(2), strLine(3), strLine(4), strLine(5),
@@ -468,24 +475,72 @@ Module BulkImportMethods
 
 
     Sub addPatientToDatabase(PatientArray As ArrayList)
+        Dim intRecordCount As Integer
         Dim strbSQLPatientStatement As StringBuilder = New StringBuilder
+        Dim strbSQLGetRoom As StringBuilder = New StringBuilder
+        Dim addRoomArray As ArrayList = New ArrayList
+        Dim editRoomArray As ArrayList = New ArrayList
+
+        strbSQLPatientStatement.Append("select count (Patient_ID) from Patient")
+        intRecordCount = ExecuteScalarQuery(strbSQLPatientStatement.ToString)
+        strbSQLPatientStatement.Clear()
         strbSQLPatientStatement.Append("INSERT INTO Patient ('MRN_Number', 'Barcode', 'Patient_First_Name'," &
             "'Patient_Middle_Name', 'Patient_Last_Name', 'Date_of_Birth', 'Sex', 'Height', 'Weight', " &
             "'Address', 'City', 'State', 'Zip_Code', 'Phone_Number', 'Email_address', 'Primary_Physician_ID', " &
             "'Active_Flag') Values")
+
         For Each Patient As PatientClass In PatientArray
+            'inputing patients
+            intRecordCount += 1
             With Patient
+                .ID = intRecordCount
+                strbSQLGetRoom.Clear()
+                strbSQLGetRoom.Append("select count(Room_ID) From Rooms where Room_TUID = '" & .roomData.RoomID)
+                strbSQLGetRoom.Append("' and Bed_Name = '" & .roomData.BedName & "';")
+                'finding already exisiting rooms
+                If ExecuteScalarQuery(strbSQLGetRoom.ToString) <> 0 Then
+                    editRoomArray.Add(.roomData)
+                Else
+                    addRoomArray.Add(.roomData)
+                End If
                 strbSQLPatientStatement.Append(" ('" & .MRN_Number & "', '" & checkSQLInjection(.barcode) & "', '" & checkSQLInjection(.FirstName) & "', '" & checkSQLInjection(.MiddleName) & "', '")
                 strbSQLPatientStatement.Append(checkSQLInjection(.LastName) & "', '" & .DoB & "' , '" & .sex & "', '" & .Height & "', '" & .weight & "', '")
                 strbSQLPatientStatement.Append(.Address & "', '" & .city & "', '" & .State & "', '" & .ZipCode & "', '" & .PhoneNumber & "', '")
                 strbSQLPatientStatement.Append(.email & "', '" & .PrimaryPhysicianID & "', '1'),")
             End With
         Next
+        'adding patients
         finishingUpImport(strbSQLPatientStatement, False)
+        'editing already exisitng rooms
+        For Each room As RoomClass In editRoomArray
+            With room
+                strbSQLPatientStatement.Clear()
+                strbSQLPatientStatement.Append("Update Rooms set Active_Flag = 1 where")
+                strbSQLPatientStatement.Append(" Room_ID ='" & .RoomID & "and Bed_Name ='")
+                strbSQLPatientStatement.Append(.BedName & "';")
+                ExecuteInsertQuery(strbSQLPatientStatement.ToString)
+            End With
+        Next
+        'adding new rooms
+        addRoomToDatabase(addRoomArray, False)
+        'making records in PatientRoom table
+        strbSQLPatientStatement.Clear()
+        strbSQLPatientStatement.Append("Insert into PatientRoom ('Patient_TUID', 'Room_TUID', 'Bed_Name', 'Active_Flag)")
+        strbSQLPatientStatement.Append("values ")
+        For Each patient As PatientClass In PatientArray
+            With patient
+                strbSQLPatientStatement.Append("('" & .ID & "', '" & .roomData.RoomID)
+                strbSQLPatientStatement.Append(" ','" & .roomData.BedName & "','1'),")
+            End With
+        Next
+        finishingUpImport(strbSQLPatientStatement)
+
 
 
 
     End Sub
+
+
 
     '/*********************************************************************/
     '/*                   FUNCTION NAME:  ParsePhysicianFile 		      */         
@@ -663,9 +718,9 @@ Module BulkImportMethods
     Public Sub addPhysicianToDatabase(PhysicianArray As ArrayList)
         Dim strbSQLStatement As StringBuilder = New StringBuilder
         strbSQLStatement.Append("INSERT INTO Physician ('Physician_First_Name','Physician_Middle_Name',
-                                'Physician_Last_Name','Physician_Credentials','Physician_Phone_Number','Physician_Fax_Number',
-                                'Physician_Address','Physician_City','Physician_State','Physician_Zip_Code','Active_Flag') Values")
-        For Each Physician As PhysicianClass In PhysicianArray
+                'Physician_Last_Name','Physician_Credentials','Physician_Phone_Number','Physician_Fax_Number',
+                'Physician_Address','Physician_City','Physician_State','Physician_Zip_Code','Active_Flag') Values")
+                For Each Physician As PhysicianClass In PhysicianArray
             With Physician
                 strbSQLStatement.Append(" ('" & checkSQLInjection(.FirstName) & "', '" & checkSQLInjection(.MiddleName) & "', '" & checkSQLInjection(.LastName) & "', '")
                 strbSQLStatement.Append(checkSQLInjection(.Credentials) & "', '" & .PhoneNumber & "', '" & .FaxNumber & "', '")
@@ -1027,15 +1082,15 @@ Module BulkImportMethods
     '/*********************************************************************/
 
 
-    Sub addRoomToDatabase(roomArray As ArrayList)
+    Sub addRoomToDatabase(roomArray As ArrayList, Optional showEnd As Boolean = True)
         Dim strbSQLStatement As StringBuilder = New StringBuilder
         strbSQLStatement.Append("Insert Into Rooms ('Room_ID', 'Bed_Name', 'Active_Flag') Values ")
-                For Each room As RoomClass In roomArray
+        For Each room As RoomClass In roomArray
             With room
                 strbSQLStatement.Append("(' " & checkSQLInjection(.RoomID) & "', '" & checkSQLInjection(.BedName) & "',' ")
                 strbSQLStatement.Append(1 & "'),")
             End With
         Next
-        finishingUpImport(strbSQLStatement)
+        finishingUpImport(strbSQLStatement, showEnd)
     End Sub
 End Module

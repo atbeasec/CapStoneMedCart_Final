@@ -39,10 +39,13 @@
     '/*											   */					  
     '/*  WHO   WHEN     WHAT								   */			  
     '/*  ---   ----     ------------------------------------------------- */
+    '/*  NP    3/25/2021  Added an ID field here because I needed one for */
+    '/*                   patient class and if I needed it for physican   */
+    '/*                   later I could use it from here.                 */
     '/*********************************************************************/
 
 
-
+    Private strID As String
     Private strFirstName As String
     Private strMIddleName As String
     Private strLastName As String
@@ -453,7 +456,7 @@
     '/*                   Property NAME:  ZipCode   					   */         
     '/*********************************************************************/
     '/*                   WRITTEN BY:  Nathan Premo   		         */   
-    '/*		         DATE CREATED: 		   */                             
+    '/*		         DATE CREATED: 	3/3/2021                        	   */                             
     '/*********************************************************************/
     '/*  Property PURPOSE:								                   */             
     '/*	 This is the getter and setter for strZip   					   */                     
@@ -493,6 +496,53 @@
         End Get
         Set(value As String)
             strZip = value
+        End Set
+    End Property
+
+    '/*********************************************************************/
+    '/*                   Property NAME:  ID   					   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		         */   
+    '/*		         DATE CREATED: 	3/25/2021                       	   */                             
+    '/*********************************************************************/
+    '/*  Property PURPOSE:								                   */             
+    '/*	 This is the getter and setter for ID   					   */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					            */         
+    '/*	 value - this is the value that will be assigned to ID.     	   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:						                   		         */                   
+    '/*            strID                								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Public Property ID As String
+        Get
+            Return strID
+        End Get
+        Set(value As String)
+            strID = value
         End Set
     End Property
 End Class
