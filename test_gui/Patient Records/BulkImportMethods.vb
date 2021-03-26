@@ -463,8 +463,8 @@ Module BulkImportMethods
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
-    '/*                                                                     
+    '/*	 strbSQLStatement - this is the SQL statement that will be sent   */                     
+    '/*                     to the database.                              */  
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
@@ -495,7 +495,7 @@ Module BulkImportMethods
             With Patient
                 .ID = intRecordCount
                 strbSQLGetRoom.Clear()
-                strbSQLGetRoom.Append("select count(Room_ID) From Rooms where Room_TUID = '" & .roomData.RoomID)
+                strbSQLGetRoom.Append("select count(Room_ID) From Rooms where Room_ID = '" & .roomData.RoomID)
                 strbSQLGetRoom.Append("' and Bed_Name = '" & .roomData.BedName & "';")
                 'finding already exisiting rooms
                 If ExecuteScalarQuery(strbSQLGetRoom.ToString) <> 0 Then
@@ -512,21 +512,25 @@ Module BulkImportMethods
         'adding patients
         finishingUpImport(strbSQLPatientStatement, False)
         'editing already exisitng rooms
-        For Each room As RoomClass In editRoomArray
-            With room
-                strbSQLPatientStatement.Clear()
-                strbSQLPatientStatement.Append("Update Rooms set Active_Flag = 1 where")
-                strbSQLPatientStatement.Append(" Room_ID ='" & .RoomID & "and Bed_Name ='")
-                strbSQLPatientStatement.Append(.BedName & "';")
-                ExecuteInsertQuery(strbSQLPatientStatement.ToString)
-            End With
-        Next
+        If editRoomArray.Count > 0 Then
+            For Each room As RoomClass In editRoomArray
+                With room
+                    strbSQLPatientStatement.Clear()
+                    strbSQLPatientStatement.Append("Update Rooms set Active_Flag = 1 where")
+                    strbSQLPatientStatement.Append(" Room_ID ='" & .RoomID & "' and Bed_Name ='")
+                    strbSQLPatientStatement.Append(.BedName & "';")
+                    ExecuteInsertQuery(strbSQLPatientStatement.ToString)
+                End With
+            Next
+        End If
         'adding new rooms
-        addRoomToDatabase(addRoomArray, False)
+        If addRoomArray.Count > 0 Then
+            addRoomToDatabase(addRoomArray, False)
+        End If
         'making records in PatientRoom table
         strbSQLPatientStatement.Clear()
-        strbSQLPatientStatement.Append("Insert into PatientRoom ('Patient_TUID', 'Room_TUID', 'Bed_Name', 'Active_Flag)")
-        strbSQLPatientStatement.Append("values ")
+        strbSQLPatientStatement.Append("Insert into PatientRoom ('Patient_TUID', 'Room_TUID', 'Bed_Name', 'Active_Flag')")
+        strbSQLPatientStatement.Append(" values ")
         For Each patient As PatientClass In PatientArray
             With patient
                 strbSQLPatientStatement.Append("('" & .ID & "', '" & .roomData.RoomID)
@@ -1087,7 +1091,7 @@ Module BulkImportMethods
         strbSQLStatement.Append("Insert Into Rooms ('Room_ID', 'Bed_Name', 'Active_Flag') Values ")
         For Each room As RoomClass In roomArray
             With room
-                strbSQLStatement.Append("(' " & checkSQLInjection(.RoomID) & "', '" & checkSQLInjection(.BedName) & "',' ")
+                strbSQLStatement.Append("('" & checkSQLInjection(.RoomID) & "', '" & checkSQLInjection(.BedName) & "','")
                 strbSQLStatement.Append(1 & "'),")
             End With
         Next

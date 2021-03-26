@@ -29,6 +29,8 @@
     '/* strMiddleName - This is going to the the person middle name.       */
     '/* strPhoneNumber - this is going to the persons phone number.        */
     '/* strState - this is the persons state                               */
+    '/* intID - This is the ID of the patient or the physician. It is      */
+    '/*         really only used for patients but it can be used for physicians*/
     '/* strZip - this is going to be zip code. 
     '/*********************************************************************/
     '/* COMPILATION NOTES(will include version notes including libraries):*/
@@ -45,7 +47,7 @@
     '/*********************************************************************/
 
 
-    Private strID As String
+    Private intID As Integer
     Private strFirstName As String
     Private strMIddleName As String
     Private strLastName As String
@@ -539,10 +541,10 @@
 
     Public Property ID As String
         Get
-            Return strID
+            Return intID
         End Get
         Set(value As String)
-            strID = value
+            intID = value
         End Set
     End Property
 End Class
