@@ -861,8 +861,18 @@
     '/*********************************************************************/
     Private Sub btnDecrementDividers_Click(sender As Object, e As EventArgs) Handles btnDecrementDividers.Click
 
-        ButtonDecrement(txtDividers)
-        SetDrawerPropertiesToSave()
+        If txtDividers.Text = 1 Then
+            'ignore the decrement method because it does not handle 0
+            txtDividers.Text = 0
+        ElseIf txtDividers.Text = 0 Then
+            txtDividers.Text = 0
+            MessageBox.Show("The minimum allowed value is zero")
+        Else
+
+            ButtonDecrement(txtDividers)
+            SetDrawerPropertiesToSave()
+        End If
+
     End Sub
 
     '/*********************************************************************/
