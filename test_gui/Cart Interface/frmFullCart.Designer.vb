@@ -332,11 +332,12 @@ Partial Class frmFullCart
         Me.lblInstructions.AutoSize = True
         Me.lblInstructions.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblInstructions.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblInstructions.Location = New System.Drawing.Point(12, 29)
+        Me.lblInstructions.Location = New System.Drawing.Point(25, 34)
         Me.lblInstructions.Name = "lblInstructions"
-        Me.lblInstructions.Size = New System.Drawing.Size(264, 42)
+        Me.lblInstructions.Size = New System.Drawing.Size(233, 42)
         Me.lblInstructions.TabIndex = 43
-        Me.lblInstructions.Text = "please click the red boxes to close " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "the simulated drawers"
+        Me.lblInstructions.Text = "please click the red boxes " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "to close the simulated drawers"
+        Me.lblInstructions.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'pnlCart
         '

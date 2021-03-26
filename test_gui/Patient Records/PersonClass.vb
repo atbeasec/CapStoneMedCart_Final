@@ -29,6 +29,8 @@
     '/* strMiddleName - This is going to the the person middle name.       */
     '/* strPhoneNumber - this is going to the persons phone number.        */
     '/* strState - this is the persons state                               */
+    '/* intID - This is the ID of the patient or the physician. It is      */
+    '/*         really only used for patients but it can be used for physicians*/
     '/* strZip - this is going to be zip code. 
     '/*********************************************************************/
     '/* COMPILATION NOTES(will include version notes including libraries):*/
@@ -39,10 +41,13 @@
     '/*											   */					  
     '/*  WHO   WHEN     WHAT								   */			  
     '/*  ---   ----     ------------------------------------------------- */
+    '/*  NP    3/25/2021  Added an ID field here because I needed one for */
+    '/*                   patient class and if I needed it for physican   */
+    '/*                   later I could use it from here.                 */
     '/*********************************************************************/
 
 
-
+    Private intID As Integer
     Private strFirstName As String
     Private strMIddleName As String
     Private strLastName As String
@@ -453,7 +458,7 @@
     '/*                   Property NAME:  ZipCode   					   */         
     '/*********************************************************************/
     '/*                   WRITTEN BY:  Nathan Premo   		         */   
-    '/*		         DATE CREATED: 		   */                             
+    '/*		         DATE CREATED: 	3/3/2021                        	   */                             
     '/*********************************************************************/
     '/*  Property PURPOSE:								                   */             
     '/*	 This is the getter and setter for strZip   					   */                     
@@ -493,6 +498,53 @@
         End Get
         Set(value As String)
             strZip = value
+        End Set
+    End Property
+
+    '/*********************************************************************/
+    '/*                   Property NAME:  ID   					   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		         */   
+    '/*		         DATE CREATED: 	3/25/2021                       	   */                             
+    '/*********************************************************************/
+    '/*  Property PURPOSE:								                   */             
+    '/*	 This is the getter and setter for ID   					   */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					            */         
+    '/*	 value - this is the value that will be assigned to ID.     	   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:						                   		         */                   
+    '/*            strID                								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Public Property ID As String
+        Get
+            Return intID
+        End Get
+        Set(value As String)
+            intID = value
         End Set
     End Property
 End Class

@@ -1,5 +1,6 @@
 ﻿Public Class PatientClass
     Inherits PersonClass
+
     '/*********************************************************************/
     '/*                   FILE NAME:  PatientClass                        */									  
     '/*********************************************************************/
@@ -35,7 +36,10 @@
     '/*                 how long the IDs will be.                          */
     '/* strSex - this is the sex of the patient. It will either be male or */
     '/*          Female.                                                   */
-    '/* intWeight - this is the weight of the patient.   				   */					  
+    '/* intWeight - this is the weight of the patient.   				   */	
+    '/* roomDataValue - this is going to be an object of the RoomClass and */
+    '/*                 is going to hold the room and bed information for  */
+    '/*                 the patient.                                       */
     '/*********************************************************************/
     '/* COMPILATION NOTES(will include version notes including libraries):*/
     '/* 											   */					  
@@ -47,7 +51,7 @@
     '/*  ---   ----     ------------------------------------------------- */
     '/*********************************************************************/
 
-
+    Private idValue As String
     Private lngMRN_Number As Long
     Private strBarcode As String
     Private strDob As String
@@ -56,7 +60,7 @@
     Private intWeight As Integer
     Private lngPrimaryPhysicianID As Long
     Private strEmail_Address As String
-
+    Private roomDataValue As RoomClass
 
     '/*********************************************************************/
     '/*                   SUBPROGRAM NAME:  New					          */         
@@ -113,7 +117,7 @@
 
     Public Sub New(lngMRN_Number As Long, strBarcode As String, strFirstName As String, strMiddleName As String, strLastName As String, strDoB As String,
                    strSex As String, intHeight As Integer, intWeight As Integer, strAddress As String, strCity As String, strState As String, strEmail_address As String, strZip As String,
-                   strPhoneNumber As String, lngPrimaryPhysicianID As Long)
+                   strPhoneNumber As String, lngPrimaryPhysicianID As Long, roomName As String, bedName As String)
         MyBase.New(strFirstName, strMiddleName, strLastName, strPhoneNumber, strCity, strAddress, strState, strZip)
         Me.MRN_Number = lngMRN_Number
         Me.email = strEmail_address
@@ -123,6 +127,7 @@
         Me.Height = intHeight
         Me.weight = intWeight
         Me.PrimaryPhysicianID = lngPrimaryPhysicianID
+        Me.roomData = New RoomClass(roomName, bedName)
     End Sub
 
 
@@ -507,6 +512,66 @@
         End Get
         Set(value As Long)
             lngPrimaryPhysicianID = value
+        End Set
+    End Property
+
+
+    '/*********************************************************************/
+    '/*                   Property NAME:  roomData					   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   	       	         */   
+    '/*		         DATE CREATED: 3/24/2021                    		   */                             
+    '/*********************************************************************/
+    '/*  Property PURPOSE:								   */             
+    '/*  This is the getter and setter for roomdata. 					   */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	value - this is the value that is going to be assigned to roomDataValue*/                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*           roomDataValue 								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+
+    Public Property roomData As RoomClass
+        Get
+            Return roomDataValue
+        End Get
+        Set(value As RoomClass)
+            roomDataValue = value
+        End Set
+    End Property
+
+
+
+    Public Property ID As String
+        Get
+            Return idValue
+        End Get
+        Set(value As String)
+            idValue = value
         End Set
     End Property
 End Class
