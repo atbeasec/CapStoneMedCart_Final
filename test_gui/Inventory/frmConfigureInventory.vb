@@ -377,7 +377,7 @@
 
 
                 ' this would be concated with a search on the database looking at the drawer number
-                btn.Text = CStr("#" & ctl.tabIndex)
+                btn.Text = CStr(ctl.tabIndex)
 
                 ' here we need to check if any of the medications in the drawer are close to being empty.
                 ' if so, then we will make the drawer appear red. Remember that each drawer can hold
