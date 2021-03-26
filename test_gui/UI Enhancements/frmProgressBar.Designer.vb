@@ -55,7 +55,7 @@ Partial Class frmProgressBar
         '
         'pbLoading
         '
-        Me.pbLoading.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.pbLoading.BackColor = System.Drawing.Color.Transparent
         Me.pbLoading.Image = Global.test_gui.My.Resources.Resources.pillLoading
         Me.pbLoading.InitialImage = Nothing
         Me.pbLoading.Location = New System.Drawing.Point(12, 12)
@@ -69,7 +69,7 @@ Partial Class frmProgressBar
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.BackColor = System.Drawing.Color.DeepSkyBlue
         Me.ClientSize = New System.Drawing.Size(300, 87)
         Me.ControlBox = False
         Me.Controls.Add(Me.lblPleaseWait)
