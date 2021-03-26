@@ -900,16 +900,12 @@
     '/*********************************************************************/
     '/*                   SUBPROGRAM NAME:  cboRoom_SelectedIndexChanged  */         
     '/*********************************************************************/
-    '/*                   WRITTEN BY:  Nathan Premo   		               */   
-    '/*		         DATE CREATED: 	2/16/2021                       	   */                             
+    '/*                   WRITTEN BY:  Alexander Beasecker  		               */   
+    '/*		         DATE CREATED: 	3/25/2021                       	   */                             
     '/*********************************************************************/
     '/*  SUBPROGRAM PURPOSE:								   */             
     '/*	 This is going to update the cboBed list based on the selection in */
-    '/*  cboRoom. It will also try to save the selection made in the bed if*/
-    '/*  one is already made and try to re assign that. If it can't reassign*/
-    '/*  the old value it will just leave the cboBed selectItem blank. This*/
-    '/*  so when the form is first loaded if a person has a bed they won't */
-    '/*  lose it when the form is loaded.                                  */
+    '/*  cboRoom.                                  */
     '/*                                                                   */
     '/*********************************************************************/
     '/*  CALLED BY:   	      						         */           
@@ -930,29 +926,39 @@
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*  strTemp - this is going to hold the old value that was selected in*/                     
-    '/*            cboBed and try to reassign it later.                    */
+    '/*  dsRoomBedsOpen -- this is used to hold all the beds that are not being
+    '/*             used
+    '/*  dsRoomBedPatientUsing -- this holds the room and bed the patient is currently in
+    '/*                 this is used if the user selects the room the patient is in
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
+    '/*  AB      3/25/2021   initial creation                                                          
     '/*********************************************************************/
 
     Private Sub cboRoom_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboRoom.SelectedIndexChanged
         cboBed.Enabled = True
-        Dim strTemp As String = ""
+        cboBed.Items.Clear()
 
-        If Not cboBed.SelectedIndex = -1 Then
-            strTemp = cboBed.SelectedItem
+        If Not cboRoom.SelectedIndex = -1 Then
+            If cboRoom.Text.Equals(cboRoom.Tag) Then
+                Dim dsRoomBedsOpen As DataSet = CreateDatabase.ExecuteSelectQuery("Select Room_ID,Bed_Name from Rooms WHERE Active_Flag = '1' AND Room_ID = '" & cboRoom.Text & "' EXCEPT Select Room_TUID,Bed_Name from PatientRoom where PatientRoom.Active_Flag = '1'")
+                For Each dr As DataRow In dsRoomBedsOpen.Tables(0).Rows
+                    cboBed.Items.Add(dr(1))
+                Next
+                Dim dsRoomBedPatientUsing As DataSet = CreateDatabase.ExecuteSelectQuery("Select * from PatientRoom where Patient_TUID = '" & intPatientID & "' AND Active_Flag = '1'")
+                For Each dr As DataRow In dsRoomBedPatientUsing.Tables(0).Rows
+                    cboBed.Items.Add(dr(2))
+                Next
+            Else
+                Dim dsRoomBedsOpen As DataSet = CreateDatabase.ExecuteSelectQuery("Select Room_ID,Bed_Name from Rooms WHERE Active_Flag = '1' AND Room_ID = '" & cboRoom.Text & "' EXCEPT Select Room_TUID,Bed_Name from PatientRoom where PatientRoom.Active_Flag = '1'")
+                For Each dr As DataRow In dsRoomBedsOpen.Tables(0).Rows
+                    cboBed.Items.Add(dr(1))
+                Next
+            End If
         End If
-        cboBed.SelectedIndex = -1
-        PopulateRoomsCombBoxesMethods.UpdateBedComboBox(cboBed, cboRoom)
-        If cboBed.Items.Contains(strTemp) Then
-            cboBed.SelectedItem = strTemp
-        End If
-
     End Sub
 
     Private Sub txtMRN_TextChanged(sender As Object, e As EventArgs) Handles txtMRN.KeyPress, txtPhone.KeyPress, txtZipCode.KeyPress
