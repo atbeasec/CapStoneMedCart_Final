@@ -85,7 +85,12 @@
     '/*********************************************************************/
     Private Sub frmEndOfShift_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        If Not cmbFilter.SelectedIndex = -1 Then
+            btnSave.Visible = True
+        Else
+            btnSave.Visible = False
 
+        End If
         'Remove these once the SQL statements are corrected and updated.
 
 
@@ -330,6 +335,14 @@
     '/*********************************************************************/
     Private Sub cmbFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFilter.SelectedIndexChanged
 
+
+        If Not cmbFilter.SelectedIndex = -1 Then
+            btnSave.Visible = True
+        Else
+            btnSave.Visible = False
+
+        End If
+
         ' remove all controls and the handlers of those controls before generating new panels
         RemoveHandlersAndAssociations(GetListOfAllControls(flpEndOfShiftCount), flpEndOfShiftCount)
 
@@ -550,8 +563,27 @@
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
 
-        ExtractFormDataForDatabase()
-        MessageBox.Show("Counts have been updated")
+        Dim flag As Boolean = False
+
+        For Each ctlPanelPadding In flpEndOfShiftCount.Controls
+            ' retreiving the pannels for padding
+            For Each pnlPanel In ctlPanelPadding.Controls
+                ' retreiving list of all panels within the padding
+
+                'check if the panel is marked as red
+                If pnlPanel.BackColor = Color.Red Then
+                    flag = True
+                End If
+            Next
+        Next
+
+        If flag = True Then
+            ExtractFormDataForDatabase()
+            MessageBox.Show("Counts have been updated")
+        Else
+            MessageBox.Show("A medication is not flagged")
+        End If
+
     End Sub
 
 End Class
