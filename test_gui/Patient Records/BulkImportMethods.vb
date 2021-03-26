@@ -463,8 +463,24 @@ Module BulkImportMethods
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*	 strbSQLStatement - this is the SQL statement that will be sent   */                     
-    '/*                     to the database.                              */  
+    '/* intFirstRecord - this is the id of the first record so we don't   */
+    '/*                  insert the record twice.                         */
+    '/* strPatientInsert - this is the start of the patient insert.       */
+    '/* editRoomArray - this is an array list of the rooms that we have to*/
+    '/*                 edit. The rooms already exist in the database so  */
+    '/*                 we only need to make sure they are active. 
+    '/* strbSQLPatientStatement - this is going to be used for a number of*/
+    '/*              SQL statements, It was only used for Patient insert  */
+    '/*              but it was repurposes to also get information from the*/
+    '/*              database and update rooms and insert into patientRooms*/
+    '/*              table                                                 */
+    '/* strbSQLGetRoom - this is the string builder that is used for get   */
+    '/*                  room inforamtion from the database.               */
+    '/* intRecordCount - this is the records that the patient record is    */
+    '/*                  be when it gets added to the database so we can   */
+    '/*                  use it later.                                     */
+    '/* addRoomArray - this is an array list of all the rooms that need to */
+    '/*                added to the database.                              */
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
@@ -476,37 +492,52 @@ Module BulkImportMethods
 
     Sub addPatientToDatabase(PatientArray As ArrayList)
         Dim intRecordCount As Integer
+        Dim intFirstRecord As Integer
         Dim strbSQLPatientStatement As StringBuilder = New StringBuilder
         Dim strbSQLGetRoom As StringBuilder = New StringBuilder
         Dim addRoomArray As ArrayList = New ArrayList
         Dim editRoomArray As ArrayList = New ArrayList
-
-        strbSQLPatientStatement.Append("select count (Patient_ID) from Patient")
-        intRecordCount = ExecuteScalarQuery(strbSQLPatientStatement.ToString)
-        strbSQLPatientStatement.Clear()
-        strbSQLPatientStatement.Append("INSERT INTO Patient ('MRN_Number', 'Barcode', 'Patient_First_Name'," &
+        Dim strPatientInsert As String = "INSERT INTO Patient ('MRN_Number', 'Barcode', 'Patient_First_Name'," &
             "'Patient_Middle_Name', 'Patient_Last_Name', 'Date_of_Birth', 'Sex', 'Height', 'Weight', " &
             "'Address', 'City', 'State', 'Zip_Code', 'Phone_Number', 'Email_address', 'Primary_Physician_ID', " &
-            "'Active_Flag') Values")
+            "'Active_Flag') Values"
+
+        strbSQLPatientStatement.Clear()
+        strbSQLPatientStatement.Append(strPatientInsert)
+
+        With PatientArray.Item(0)
+            addingPatientInformationToSQL(strbSQLPatientStatement, PatientArray.Item(0))
+            strbSQLPatientStatement.Append(";")
+            ExecuteInsertQuery(strbSQLPatientStatement.ToString)
+            strbSQLPatientStatement.Clear()
+            strbSQLPatientStatement.Append("select Patient_ID from Patient where patient_ID = (Select Max(Patient_ID) from Patient);")
+            .id = ExecuteScalarQuery(strbSQLPatientStatement.ToString)
+            intFirstRecord = .id
+        End With
+        intRecordCount = intFirstRecord
+
+
+        strbSQLPatientStatement.Clear()
+        strbSQLPatientStatement.Append(strPatientInsert)
 
         For Each Patient As PatientClass In PatientArray
             'inputing patients
-            intRecordCount += 1
             With Patient
-                .ID = intRecordCount
-                strbSQLGetRoom.Clear()
-                strbSQLGetRoom.Append("select count(Room_ID) From Rooms where Room_ID = '" & .roomData.RoomID)
-                strbSQLGetRoom.Append("' and Bed_Name = '" & .roomData.BedName & "';")
-                'finding already exisiting rooms
-                If ExecuteScalarQuery(strbSQLGetRoom.ToString) <> 0 Then
-                    editRoomArray.Add(.roomData)
-                Else
-                    addRoomArray.Add(.roomData)
+                If Not .ID = intFirstRecord Then
+                    intRecordCount += 1
+                    .ID = intRecordCount
+                    strbSQLGetRoom.Clear()
+                    strbSQLGetRoom.Append("select count(Room_ID) From Rooms where Room_ID = '" & checkSQLInjection(.roomData.RoomID))
+                    strbSQLGetRoom.Append("' and Bed_Name = '" & checkSQLInjection(.roomData.BedName) & "';")
+                    'finding already exisiting rooms
+                    If ExecuteScalarQuery(strbSQLGetRoom.ToString) <> 0 Then
+                        editRoomArray.Add(.roomData)
+                    Else
+                        addRoomArray.Add(.roomData)
+                    End If
+                    addingPatientInformationToSQL(strbSQLPatientStatement, Patient)
+                    strbSQLPatientStatement.Append(",")
                 End If
-                strbSQLPatientStatement.Append(" ('" & .MRN_Number & "', '" & checkSQLInjection(.barcode) & "', '" & checkSQLInjection(.FirstName) & "', '" & checkSQLInjection(.MiddleName) & "', '")
-                strbSQLPatientStatement.Append(checkSQLInjection(.LastName) & "', '" & .DoB & "' , '" & .sex & "', '" & .Height & "', '" & .weight & "', '")
-                strbSQLPatientStatement.Append(.Address & "', '" & .city & "', '" & .State & "', '" & .ZipCode & "', '" & .PhoneNumber & "', '")
-                strbSQLPatientStatement.Append(.email & "', '" & .PrimaryPhysicianID & "', '1'),")
             End With
         Next
         'adding patients
@@ -517,8 +548,8 @@ Module BulkImportMethods
                 With room
                     strbSQLPatientStatement.Clear()
                     strbSQLPatientStatement.Append("Update Rooms set Active_Flag = 1 where")
-                    strbSQLPatientStatement.Append(" Room_ID ='" & .RoomID & "' and Bed_Name ='")
-                    strbSQLPatientStatement.Append(.BedName & "';")
+                    strbSQLPatientStatement.Append(" Room_ID ='" & checkSQLInjection(.RoomID) & "' and Bed_Name ='")
+                    strbSQLPatientStatement.Append(checkSQLInjection(.BedName) & "';")
                     ExecuteInsertQuery(strbSQLPatientStatement.ToString)
                 End With
             Next
@@ -533,17 +564,64 @@ Module BulkImportMethods
         strbSQLPatientStatement.Append(" values ")
         For Each patient As PatientClass In PatientArray
             With patient
-                strbSQLPatientStatement.Append("('" & .ID & "', '" & .roomData.RoomID)
-                strbSQLPatientStatement.Append(" ','" & .roomData.BedName & "','1'),")
+                strbSQLPatientStatement.Append("('" & .ID & "', '" & checkSQLInjection(.roomData.RoomID))
+                strbSQLPatientStatement.Append(" ','" & checkSQLInjection(.roomData.BedName) & "','1'),")
             End With
         Next
         finishingUpImport(strbSQLPatientStatement)
-
-
-
-
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME:  addingPatientInformationToSQL  */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		               */   
+    '/*		         DATE CREATED: 	3/25/2021                       	   */                             
+    '/*********************************************************************/
+    '/*  addingPatientInformationToSQL PURPOSE:							   */             
+    '/*	 This method exists just to add information to the string builder */
+    '/*  It was made to reduce duplicated code.                           */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*  strbSQLPatientStatement - this is the string builder we will be  */
+    '/*                         editing.                                  */
+    '/*  Patient - this is the patient object that will getting information*/
+    '/*             from.                                                  */
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+
+    Sub addingPatientInformationToSQL(ByRef strbSQLPatientStatement As StringBuilder, Patient As PatientClass)
+        With Patient
+            strbSQLPatientStatement.Append(" ('" & .MRN_Number & "', '" & checkSQLInjection(.barcode) & "', '" & checkSQLInjection(.FirstName) & "', '" & checkSQLInjection(.MiddleName) & "', '")
+            strbSQLPatientStatement.Append(checkSQLInjection(.LastName) & "', '" & .DoB & "' , '" & .sex & "', '" & .Height & "', '" & .weight & "', '")
+            strbSQLPatientStatement.Append(.Address & "', '" & .city & "', '" & .State & "', '" & .ZipCode & "', '" & .PhoneNumber & "', '")
+            strbSQLPatientStatement.Append(.email & "', '" & .PrimaryPhysicianID & "', '1')")
+        End With
+    End Sub
 
 
     '/*********************************************************************/
