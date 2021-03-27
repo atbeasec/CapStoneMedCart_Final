@@ -37,19 +37,22 @@ Partial Class frmProgressBar
         'lblMessageUpdate
         '
         Me.lblMessageUpdate.AutoSize = True
-        Me.lblMessageUpdate.Location = New System.Drawing.Point(88, 40)
+        Me.lblMessageUpdate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblMessageUpdate.ForeColor = System.Drawing.Color.White
+        Me.lblMessageUpdate.Location = New System.Drawing.Point(95, 39)
         Me.lblMessageUpdate.Name = "lblMessageUpdate"
-        Me.lblMessageUpdate.Size = New System.Drawing.Size(94, 13)
+        Me.lblMessageUpdate.Size = New System.Drawing.Size(115, 17)
         Me.lblMessageUpdate.TabIndex = 1
         Me.lblMessageUpdate.Text = "Message updates:"
         '
         'lblPleaseWait
         '
         Me.lblPleaseWait.AutoSize = True
-        Me.lblPleaseWait.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPleaseWait.Location = New System.Drawing.Point(87, 12)
+        Me.lblPleaseWait.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPleaseWait.ForeColor = System.Drawing.Color.White
+        Me.lblPleaseWait.Location = New System.Drawing.Point(91, 12)
         Me.lblPleaseWait.Name = "lblPleaseWait"
-        Me.lblPleaseWait.Size = New System.Drawing.Size(186, 24)
+        Me.lblPleaseWait.Size = New System.Drawing.Size(186, 25)
         Me.lblPleaseWait.TabIndex = 3
         Me.lblPleaseWait.Text = "Loading, Please Wait"
         '
@@ -69,13 +72,13 @@ Partial Class frmProgressBar
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.DeepSkyBlue
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(300, 87)
         Me.ControlBox = False
         Me.Controls.Add(Me.lblPleaseWait)
         Me.Controls.Add(Me.pbLoading)
         Me.Controls.Add(Me.lblMessageUpdate)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmProgressBar"
         CType(Me.pbLoading, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)

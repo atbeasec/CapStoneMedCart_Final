@@ -26,6 +26,7 @@ Public Class frmInventory
     End Sub
 
     Private Sub frmInventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         cmbDrawerNumber.SelectedIndex = 0
         cmbDividerBin.SelectedIndex = 0
         txtQuantity.Text = "1"
