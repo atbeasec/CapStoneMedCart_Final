@@ -1,6 +1,9 @@
 ﻿Imports System.Text.RegularExpressions
 Public Class frmInventory
 
+    'create event for updating loading form 
+    Public Event UpdateLoadScreen(txt As String)
+
     Private btnSelectedDrawer As Button
 
     Public Sub SetSelectedDrawer(ByVal btnDrawer As Button)
@@ -9,12 +12,8 @@ Public Class frmInventory
 
     End Sub
 
-    Private Sub NumericUpDown1_ValueChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
-
     Private Sub frmInventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         cmbDrawerNumber.SelectedIndex = 0
         cmbDividerBin.SelectedIndex = 0
         txtQuantity.Text = "1"
@@ -159,6 +158,12 @@ Public Class frmInventory
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        'create an instance of the progress bar form
+        Dim LoadingScreen As New frmProgressBar
+        AddHandler UpdateLoadScreen, AddressOf LoadingScreen.UpdateLabel
+        'LoadingScreen.StartTask()
+
+
         Dim intControlled As Integer
         Dim intNarcotic As Integer
         Dim intDrawerMedication_ID As Integer = 0
@@ -190,10 +195,19 @@ Public Class frmInventory
             intSchedule = CInt(txtSchedule.Text)
         End If
 
+
+
         If txtStrength.Text.Equals("") Or txtType.Text.Equals("") Or mtbExpirationDate.MaskFull = False Or cboPersonalMedication.SelectedIndex.Equals(-1) Then
             MessageBox.Show("Please enter data in all fields before saving.")
+
+
+            RaiseEvent UpdateLoadScreen("")
+            LoadingScreen.Close()
+
             Exit Sub
         Else
+            LoadingScreen.Show(Me)
+            RaiseEvent UpdateLoadScreen("This could take up to 3 minutes")
             If txtBarcode.Text = Nothing Then
                 strBarcode = generateSampleBarcode()
             Else
@@ -228,7 +242,7 @@ Public Class frmInventory
             ' if yes, then update if there's differences
             ' if no, then save those items
             ' and pass it to the function to find interactions
-
+            RaiseEvent UpdateLoadScreen("Retrieving drug interactions from the NIH website")
             Dim myPropertyNameList As New List(Of String)({"severity", "description", "rxcui"})
             Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
             strMessage = "Retrieving drug interactions from the NIH website"
@@ -243,18 +257,19 @@ Public Class frmInventory
             ' And save those items
 
             Try
+                RaiseEvent UpdateLoadScreen("Saving interaction to the database")
+
                 strMessage = "Please wait while the interactions are saved to the database"
+
+                'old code look to delete later?
                 Dim thdThread2 As New Threading.Thread(AddressOf ThreadedMessageBox)
                 thdThread2.Name = strMessage
                 thdThread2.Start()
-                'There are four items returned from the API
-                'Therefore, we step over 4 items every time 
-                'we run the call
-                'For i = 0 To outputList.Count - 4 Step 4
-                'In the fourth item passed, we want to remove the ' character because it breaks SQL inserts
+
+
                 CompareDrugInteractions(CInt(strRXCUI), outputList) 'CInt(outputList.Item(i + 3).PropertyValue), outputList.Item(i).PropertyValue, outputList.Item(i + 1).PropertyValue.Replace("'", ""), 1)
                 'Next
-
+                RaiseEvent UpdateLoadScreen("Interactions records have been added")
                 strMessage = "All interaction records have been added"
                 Dim thdThread3 As New Threading.Thread(AddressOf ThreadedMessageBox)
                 thdThread3.Name = strMessage
@@ -272,17 +287,22 @@ Public Class frmInventory
 
 
 
-        ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Divider_Bin,Expiration_Date,Discrepancy_Flag, Active_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & intDividerBin & " , '" & mtbExpirationDate.Text & "'," & intDiscrepancies & ",1);")
-        OpenOneDrawer(Drawers_Tuid)
-        MessageBox.Show("Medication has been added to the drawer")
-        Debug.WriteLine("")
+            ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Divider_Bin,Expiration_Date,Discrepancy_Flag, Active_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & intDividerBin & " , '" & mtbExpirationDate.Text & "'," & intDiscrepancies & ",1);")
+            OpenOneDrawer(Drawers_Tuid)
+
+            RaiseEvent UpdateLoadScreen("Medication has been added to the drawer")
+            'MessageBox.Show("Medication has been added to the drawer")
+            Debug.WriteLine("")
+
+
             intDividerBin = CInt(cmbDividerBin.SelectedItem)
-         
+
             eprError.Clear()
 
             ClearInventoryForm()
         End If
 
+        LoadingScreen.Close()
     End Sub
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles pnlSearch.Click
