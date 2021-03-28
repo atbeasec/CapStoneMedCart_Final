@@ -50,14 +50,9 @@ Public Class frmNewPatient
     Dim dsPhysicians As DataSet
     Dim strAllowedNameCharacters = "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*()/.,<>=+"
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        If txtFirstName.Text.Length < 1 Then
-            MessageBox.Show("Please enter a first name")
-        Else
-            If Not hasError() Then
-                SavePatientDataToDatabase()
-                clearInformationBoxes()
-            End If
-
+        If Not hasError() Then
+            SavePatientDataToDatabase()
+            clearInformationBoxes()
         End If
     End Sub
 
@@ -852,9 +847,9 @@ Public Class frmNewPatient
                 hasError = True
                 strbErrorMessage.Append("Please enter a valid date of birth." & vbCrLf)
             End If
-
         End If
-            If txtHeight.Text = String.Empty Then
+
+        If txtHeight.Text = String.Empty Then
             hasError = True
             strbErrorMessage.Append("Please enter a valid height." & vbCrLf)
         End If
