@@ -78,8 +78,9 @@
     '/*  WHO   WHEN     WHAT								              */             
     '/*  Collin Krygier  2/6/2021    Initial creation                     */
     '/*********************************************************************/
-    Public Sub CreatePanelMyPatients(ByVal flpPannel As FlowLayoutPanel, ByVal strMRN As String, ByVal strFirstName As String, ByVal strLastName As String, ByVal strBirthday As String, ByVal strRoom As String, ByVal strBed As String, ByRef intPatientID As Integer)
-
+    Public Sub CreatePanelActivePatients(ByVal flpPannel As FlowLayoutPanel, ByVal strMRN As String, ByVal strFirstName As String, ByVal strLastName As String, ByVal strBirthday As String, ByVal strRoom As String, ByVal strBed As String, ByRef intPatientID As Integer)
+        Dim dsPatientUserAssigned As DataSet
+        Dim userID = 9
         Dim pnl As Panel
         pnl = New Panel
 
@@ -123,7 +124,124 @@
 
         Const YCOORDINATE As Integer = 20
         ' CreateCheckBox(pnlMainPanel, getPanelCount(flpPannel), lblMRN.Location.X - 45, 5)
+
+
+
         CreateAddButton(pnlMainPanel, getPanelCount(flpPannel), lblAssignment.Location.X + 15, 5, intPatientID)
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID1, "lblMRN", lblMRN.Location.X, YCOORDINATE, strMRN, getPanelCount(flpPannel), tpToolTip, TruncateString(15, strMRN))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID2, "lblFirstName", lblFirstName.Location.X, YCOORDINATE, strFirstName, getPanelCount(flpPannel), tpToolTip, TruncateString(25, strFirstName))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID3, "lblLastName", lblLastName.Location.X, YCOORDINATE, strLastName, getPanelCount(flpPannel), tpToolTip, TruncateString(25, strLastName))
+        CreateIDLabel(pnlMainPanel, lblID4, "lblBirthday", lblDOB.Location.X, YCOORDINATE, strBirthday, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID5, "lblRoom", lblRoom.Location.X, YCOORDINATE, strRoom, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID6, "lblBed", lblBed.Location.X, YCOORDINATE, strBed, getPanelCount(flpPannel))
+
+        'Add panel to flow layout panel
+        'pnlMainPanel.Tag = intPatientID
+        flpPannel.Controls.Add(pnl)
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: CreatePanel()                  */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/6/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is routine is dynamically creates panels that are placed    */ 
+    '/*	 inside of the flowpanel that is fixed on the form. The panels are*/
+    '/*	 created here, assigned handlers, and the contents of the panels  */
+    '/*	 are updated in this routine                                      */
+    '/*********************************************************************/
+    '/*  CALLED BY: frmConfiguration_Load  	      						  */           
+    '/*                                                                   */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 NONE                                                             */ 
+    '/* flpPannel- the flow panel which the user wants to create the      */
+    '/*     create the single panel.                                      */
+    '/* strMRN- value from the database we will display                   */
+    '/* strFirstName- Name of the user in the database                    */
+    '/* strLastName- Last Name of the user in the database                */
+    '/* strBirthday- DOB of the user in the database                      */
+    '/* strRoom- room of the user in the database                         */
+    '/* strBed- bed of the user in the database                           */
+    '/* intPatietnID- the ID of the patient that is being added           */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	   CreatePanel(flpUserInfo, strID9, strFirstName9, strAccess9)    */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	pnl- is the pnl which we are creating for padding purposes        */
+    '/* pnlMainPanel- is the pnl which we are going to add controls       */
+    '/* lblID1 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID2 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID3 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID4 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID5 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID6 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  Collin Krygier  2/6/2021    Initial creation                     */
+    '/*********************************************************************/
+    Public Sub CreatePanelMyPatients(ByVal flpPannel As FlowLayoutPanel, ByVal strMRN As String, ByVal strFirstName As String, ByVal strLastName As String, ByVal strBirthday As String, ByVal strRoom As String, ByVal strBed As String, ByRef intPatientID As Integer)
+        Dim pnl As Panel
+        pnl = New Panel
+
+        Dim pnlMainPanel As Panel
+        pnlMainPanel = New Panel
+
+        'Set panel properties
+        With pnl
+            .BackColor = Color.Gainsboro
+            .Size = New Size(1030, 47)
+            .Name = "pnlIndividualPatientRecordPadding" + getPanelCount(flpPannel).ToString
+            .Tag = getPanelCount(flpPannel).ToString
+            .Padding = New Padding(0, 0, 0, 3)
+            ' .Dock = System.Windows.Forms.DockStyle.Top
+        End With
+
+        With pnlMainPanel
+
+            .BackColor = Color.White
+            .Size = New Size(1050, 45)
+            .Name = "pnlIndividualPatientRecord" + getPanelCount(flpPannel).ToString
+            .Tag = getPanelCount(flpPannel).ToString
+            .Dock = System.Windows.Forms.DockStyle.Top
+        End With
+
+        'put the boarder panel inside the main panel
+        pnl.Controls.Add(pnlMainPanel)
+
+        AddHandler pnlMainPanel.Click, AddressOf frmPatientRecords.DynamicSingleClickOpenPatient
+        AddHandler pnlMainPanel.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
+        AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
+
+        ' add controls to this panel
+
+        Dim lblID1 As New Label
+        Dim lblID2 As New Label
+        Dim lblID3 As New Label
+        Dim lblID4 As New Label
+        Dim lblID5 As New Label
+        Dim lblID6 As New Label
+
+        Const YCOORDINATE As Integer = 20
+        ' CreateCheckBox(pnlMainPanel, getPanelCount(flpPannel), lblMRN.Location.X - 45, 5)
+
+
+
         CreateRemoveButton(pnlMainPanel, getPanelCount(flpPannel), lblAssignment.Location.X + 15, 5, intPatientID)
         CreateIDLabelWithToolTip(pnlMainPanel, lblID1, "lblMRN", lblMRN.Location.X, YCOORDINATE, strMRN, getPanelCount(flpPannel), tpToolTip, TruncateString(15, strMRN))
         CreateIDLabelWithToolTip(pnlMainPanel, lblID2, "lblFirstName", lblFirstName.Location.X, YCOORDINATE, strFirstName, getPanelCount(flpPannel), tpToolTip, TruncateString(25, strFirstName))
@@ -352,9 +470,10 @@
     '/********************************************************************/ 
     Private Sub btnAddAssignment_Click(ByVal sender As Object, e As EventArgs)
         Dim UserID As Integer = 9
+        'default values to populate the table with
         Dim intActive_Flag As String = "1"
-        Dim strVisitDate As String = "10/10/2021"
-        Dim patientIDFromSelectedRecord As Integer = CInt(sender.tag)
+        Dim strVisitDate As String = "10/10/2021" 'might need to be system time
+        Dim patientIDFromSelectedRecord As Integer = CInt(sender.tag) 'patient id from the user they clickec on, should be the tag of the add button
         Dim dsPatientUser As DataSet
         dsPatientUser = ExecuteSelectQuery("Select * From PatientUser")
         Dim intActiveFlag As Integer = 1
@@ -365,7 +484,7 @@
         Next
         If intActiveFlag = 0 Then
             ExecuteInsertQuery("UPDATE PatientUser SET Active_Flag = 1 WHERE Patient_TUID =" & patientIDFromSelectedRecord.ToString & " AND User_TUID =" & UserID.ToString & " ;")
-        ElseIf intActiveFlag = 1 Then 'if they get to here they are already assigned to someone else so i will just change the user_ID
+            'ElseIf intActiveFlag = 1 Then 'if they get to here they are already assigned to someone else so i will just change the user_ID
 
 
         Else
@@ -538,30 +657,15 @@
             strBed = Patient(8)
             'StrDOB = StrDOB.Substring(0, 9)
             Debug.WriteLine("")
-            CreatePanelMyPatients(flpMyPatientRecords, intPatientMRN.ToString, strPatientFirst, strPatientLast, StrDOB, strRoom, strBed, intPatientID)
+
+
+            'if userpatient contains patient then 
+            'CreatePanelMyPatients(flpMyPatientRecords, intPatientMRN.ToString, strPatientFirst, strPatientLast, StrDOB, strRoom, strBed, intPatientID)
+            'else
+            CreatePanelActivePatients(flpMyPatientRecords, intPatientMRN.ToString, strPatientFirst, strPatientLast, StrDOB, strRoom, strBed, intPatientID)
         Next
 
         dsPatientUserAssigned = CreateDatabase.ExecuteSelectQuery("Select * From PatientUser Where User_TUID=" & UserID & ";")
-        For Each Patient As DataRow In dsPatientUserAssigned.Tables(0).Rows
-            intPatientID = Patient(0)
-
-            For Each paddingPanel In flpMyPatientRecords.Controls
-                For Each panelWithControls In paddingPanel.Controls
-                    For Each controlOnPanel In panelWithControls.Controls
-
-                        ' hide the specific control we need to
-                        If controlOnPanel.tag = (intPatientID.ToString()) Then
-
-                            controlOnPanel.Visible = False
-
-                        End If
-                        ' Debug.Print(controlOnPanel.Name)
-                    Next
-                Next
-            Next
-
-
-        Next
 
     End Sub
     '/********************************************************************/
