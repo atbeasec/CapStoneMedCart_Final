@@ -1,27 +1,14 @@
 ﻿Imports System.Text.RegularExpressions
 Public Class frmInventory
-    'create an instance of the progress bar form
-    Dim LoadingScreen As New frmProgressBar
+
     'create event for updating loading form 
-    Private Event UpdateLoadScreen(txt As String)
+    Public Event UpdateLoadScreen(txt As String)
 
     Private btnSelectedDrawer As Button
 
     Public Sub SetSelectedDrawer(ByVal btnDrawer As Button)
 
         btnSelectedDrawer = btnDrawer
-
-    End Sub
-
-    Public Sub New()
-
-        ' This call is required by the designer.
-        InitializeComponent()
-
-        ' Add any initialization after the InitializeComponent() call.
-
-        'here we add the handler so that when the form is shown it can take updates. this handler will handle those updates.
-        AddHandler UpdateLoadScreen, AddressOf LoadingScreen.UpdateLabel
 
     End Sub
 
@@ -171,9 +158,11 @@ Public Class frmInventory
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        LoadingScreen.StartThread()
-        LoadingScreen.Show(Me)
-        RaiseEvent UpdateLoadScreen("Staring. . .")
+        'create an instance of the progress bar form
+        Dim LoadingScreen As New frmProgressBar
+        AddHandler UpdateLoadScreen, AddressOf LoadingScreen.UpdateLabel
+        'LoadingScreen.StartTask()
+
 
         Dim intControlled As Integer
         Dim intNarcotic As Integer
@@ -206,15 +195,19 @@ Public Class frmInventory
             intSchedule = CInt(txtSchedule.Text)
         End If
 
+
+
         If txtStrength.Text.Equals("") Or txtType.Text.Equals("") Or mtbExpirationDate.MaskFull = False Or cboPersonalMedication.SelectedIndex.Equals(-1) Then
             MessageBox.Show("Please enter data in all fields before saving.")
 
 
             RaiseEvent UpdateLoadScreen("")
-            LoadingScreen.Hide()
+            LoadingScreen.Close()
 
             Exit Sub
         Else
+            LoadingScreen.Show(Me)
+            RaiseEvent UpdateLoadScreen("This could take up to 3 minutes")
             If txtBarcode.Text = Nothing Then
                 strBarcode = generateSampleBarcode()
             Else
@@ -249,7 +242,7 @@ Public Class frmInventory
             ' if yes, then update if there's differences
             ' if no, then save those items
             ' and pass it to the function to find interactions
-
+            RaiseEvent UpdateLoadScreen("Retrieving drug interactions from the NIH website")
             Dim myPropertyNameList As New List(Of String)({"severity", "description", "rxcui"})
             Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
             strMessage = "Retrieving drug interactions from the NIH website"
@@ -264,7 +257,7 @@ Public Class frmInventory
             ' And save those items
 
             Try
-                RaiseEvent UpdateLoadScreen("Saving Interaction")
+                RaiseEvent UpdateLoadScreen("Saving interaction to the database")
 
                 strMessage = "Please wait while the interactions are saved to the database"
 
@@ -309,7 +302,7 @@ Public Class frmInventory
             ClearInventoryForm()
         End If
 
-        LoadingScreen.Hide()
+        LoadingScreen.Close()
     End Sub
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles pnlSearch.Click

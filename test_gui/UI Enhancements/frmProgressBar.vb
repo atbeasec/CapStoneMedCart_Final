@@ -1,10 +1,17 @@
 ﻿Imports System.Threading
 
 Public Class frmProgressBar
-    Dim myThread As New Threading.Thread(AddressOf UpdateLabel)
+    Dim myTask As Task
 
-    'this will allow us to pause or run the thread
-    Dim myThreadState As ThreadState
+
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        myTask = New Task(New Action(Sub() UpdateLabel(Nothing)))
+    End Sub
 
     '/*********************************************************************/
     '/* SubProgram NAME:        frmProgressBar_Load                       */         
@@ -27,7 +34,7 @@ Public Class frmProgressBar
     '/*  e- eventargs indicating there is an event handle assigned        */
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                  */             
-    '/*  UpdateLabel(lbltext)                                          */     
+    '/*                                                                   */     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
     '/*	 None                                                             */
@@ -47,9 +54,6 @@ Public Class frmProgressBar
         Dim pt As New Point((frmMain.Width - Me.Width) + frmMain.DesktopLocation.X, (frmMain.Height - Me.Height) + frmMain.DesktopLocation.Y)
         Me.Location = pt
 
-
-
-
     End Sub
     '/*********************************************************************/
     '/* SubProgram NAME:        UpdateLabel                               */         
@@ -65,7 +69,7 @@ Public Class frmProgressBar
     '/*  None                                                             */
     '/*********************************************************************/
     '/*  CALLS:										                      */                 
-    '/*  KeyPressCheck                                                    */
+    '/*                                                                   */
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					          */         
     '/*	 sender- object representing a control                            */
@@ -86,29 +90,19 @@ Public Class frmProgressBar
     '/*********************************************************************/
     'Method to update the label 
     Public Sub UpdateLabel(lbltext As String)
-        While True
-            While myThreadState = ThreadState.Running
-                Debug.WriteLine($"i am here {Now}: {lbltext}")
+
+        Debug.WriteLine($"i am here {Now}: {lbltext}")
                 If lblMessageUpdate.InvokeRequired Then
                     lblMessageUpdate.Invoke(Sub() UpdateLabel(lbltext))
                 Else
                     lblMessageUpdate.Text = lbltext
                     Application.DoEvents()
                 End If
-            End While
-        End While
 
     End Sub
 
-    Public Sub StartThread()
-        myThreadState = ThreadState.Running
+    Public Sub StartTask()
+        myTask.Start()
     End Sub
-
-    'Set the threadState To Standby
-    Public Sub StopThread()
-        myThreadState = ThreadState.Suspended
-    End Sub
-
-
 
 End Class

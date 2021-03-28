@@ -41,9 +41,8 @@ Partial Class frmProgressBar
         Me.lblMessageUpdate.ForeColor = System.Drawing.Color.White
         Me.lblMessageUpdate.Location = New System.Drawing.Point(95, 39)
         Me.lblMessageUpdate.Name = "lblMessageUpdate"
-        Me.lblMessageUpdate.Size = New System.Drawing.Size(115, 17)
+        Me.lblMessageUpdate.Size = New System.Drawing.Size(0, 17)
         Me.lblMessageUpdate.TabIndex = 1
-        Me.lblMessageUpdate.Text = "Message updates:"
         '
         'lblPleaseWait
         '
