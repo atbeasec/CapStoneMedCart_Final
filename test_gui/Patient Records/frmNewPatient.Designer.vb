@@ -104,7 +104,7 @@ Partial Class frmNewPatient
         Me.txtFirstName.Name = "txtFirstName"
         Me.txtFirstName.ShortcutsEnabled = False
         Me.txtFirstName.Size = New System.Drawing.Size(250, 26)
-        Me.txtFirstName.TabIndex = 1
+        Me.txtFirstName.TabIndex = 0
         '
         'Panel1
         '
@@ -148,7 +148,7 @@ Partial Class frmNewPatient
         Me.txtMiddleName.Name = "txtMiddleName"
         Me.txtMiddleName.ShortcutsEnabled = False
         Me.txtMiddleName.Size = New System.Drawing.Size(250, 26)
-        Me.txtMiddleName.TabIndex = 3
+        Me.txtMiddleName.TabIndex = 0
         '
         'Panel10
         '
@@ -171,7 +171,7 @@ Partial Class frmNewPatient
         Me.txtAddress.Name = "txtAddress"
         Me.txtAddress.ShortcutsEnabled = False
         Me.txtAddress.Size = New System.Drawing.Size(560, 29)
-        Me.txtAddress.TabIndex = 11
+        Me.txtAddress.TabIndex = 0
         '
         'Panel11
         '
@@ -194,7 +194,7 @@ Partial Class frmNewPatient
         Me.txtLastName.Name = "txtLastName"
         Me.txtLastName.ShortcutsEnabled = False
         Me.txtLastName.Size = New System.Drawing.Size(257, 26)
-        Me.txtLastName.TabIndex = 2
+        Me.txtLastName.TabIndex = 0
         '
         'Panel12
         '
@@ -217,7 +217,7 @@ Partial Class frmNewPatient
         Me.txtEmail.Name = "txtEmail"
         Me.txtEmail.ShortcutsEnabled = False
         Me.txtEmail.Size = New System.Drawing.Size(256, 26)
-        Me.txtEmail.TabIndex = 4
+        Me.txtEmail.TabIndex = 0
         '
         'Panel14
         '
@@ -241,7 +241,7 @@ Partial Class frmNewPatient
         Me.mtbDoB.Name = "mtbDoB"
         Me.mtbDoB.ShortcutsEnabled = False
         Me.mtbDoB.Size = New System.Drawing.Size(107, 22)
-        Me.mtbDoB.TabIndex = 6
+        Me.mtbDoB.TabIndex = 0
         Me.mtbDoB.ValidatingType = GetType(Date)
         '
         'Panel15
@@ -266,7 +266,7 @@ Partial Class frmNewPatient
         Me.mtbPhone.Name = "mtbPhone"
         Me.mtbPhone.ShortcutsEnabled = False
         Me.mtbPhone.Size = New System.Drawing.Size(248, 22)
-        Me.mtbPhone.TabIndex = 15
+        Me.mtbPhone.TabIndex = 0
         '
         'Panel16
         '
@@ -289,7 +289,7 @@ Partial Class frmNewPatient
         Me.txtCity.Name = "txtCity"
         Me.txtCity.ShortcutsEnabled = False
         Me.txtCity.Size = New System.Drawing.Size(249, 29)
-        Me.txtCity.TabIndex = 12
+        Me.txtCity.TabIndex = 0
         '
         'cmbState
         '
@@ -304,7 +304,7 @@ Partial Class frmNewPatient
         Me.cmbState.MaxLength = 2
         Me.cmbState.Name = "cmbState"
         Me.cmbState.Size = New System.Drawing.Size(78, 29)
-        Me.cmbState.TabIndex = 13
+        Me.cmbState.TabIndex = 0
         '
         'Panel2
         '
@@ -336,7 +336,7 @@ Partial Class frmNewPatient
         Me.cmbSex.Location = New System.Drawing.Point(1, 1)
         Me.cmbSex.Name = "cmbSex"
         Me.cmbSex.Size = New System.Drawing.Size(122, 29)
-        Me.cmbSex.TabIndex = 5
+        Me.cmbSex.TabIndex = 0
         '
         'btnSave
         '
@@ -374,7 +374,7 @@ Partial Class frmNewPatient
         Me.txtHeight.Name = "txtHeight"
         Me.txtHeight.ShortcutsEnabled = False
         Me.txtHeight.Size = New System.Drawing.Size(101, 30)
-        Me.txtHeight.TabIndex = 7
+        Me.txtHeight.TabIndex = 0
         '
         'Panel7
         '
@@ -397,7 +397,7 @@ Partial Class frmNewPatient
         Me.txtWeight.Name = "txtWeight"
         Me.txtWeight.ShortcutsEnabled = False
         Me.txtWeight.Size = New System.Drawing.Size(110, 30)
-        Me.txtWeight.TabIndex = 8
+        Me.txtWeight.TabIndex = 0
         '
         'Panel8
         '
@@ -421,7 +421,7 @@ Partial Class frmNewPatient
         Me.cmbPhysician.Location = New System.Drawing.Point(1, 1)
         Me.cmbPhysician.Name = "cmbPhysician"
         Me.cmbPhysician.Size = New System.Drawing.Size(277, 29)
-        Me.cmbPhysician.TabIndex = 16
+        Me.cmbPhysician.TabIndex = 0
         '
         'lblFirstName
         '
@@ -600,7 +600,7 @@ Partial Class frmNewPatient
         Me.Panel13.Location = New System.Drawing.Point(0, 0)
         Me.Panel13.Name = "Panel13"
         Me.Panel13.Size = New System.Drawing.Size(667, 46)
-        Me.Panel13.TabIndex = 84
+        Me.Panel13.TabIndex = 0
         '
         'btnBack
         '
@@ -614,7 +614,7 @@ Partial Class frmNewPatient
         Me.btnBack.Location = New System.Drawing.Point(23, 6)
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(89, 37)
-        Me.btnBack.TabIndex = 61
+        Me.btnBack.TabIndex = 0
         Me.btnBack.Text = "Back"
         Me.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnBack.UseVisualStyleBackColor = False
@@ -627,7 +627,7 @@ Partial Class frmNewPatient
         Me.cboRoom.Location = New System.Drawing.Point(48, 320)
         Me.cboRoom.Name = "cboRoom"
         Me.cboRoom.Size = New System.Drawing.Size(181, 29)
-        Me.cboRoom.TabIndex = 204
+        Me.cboRoom.TabIndex = 9
         '
         'cboBed
         '
@@ -637,7 +637,7 @@ Partial Class frmNewPatient
         Me.cboBed.Location = New System.Drawing.Point(351, 320)
         Me.cboBed.Name = "cboBed"
         Me.cboBed.Size = New System.Drawing.Size(181, 29)
-        Me.cboBed.TabIndex = 205
+        Me.cboBed.TabIndex = 10
         '
         'Label10
         '
@@ -660,7 +660,7 @@ Partial Class frmNewPatient
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel4.Size = New System.Drawing.Size(107, 31)
-        Me.Panel4.TabIndex = 16
+        Me.Panel4.TabIndex = 14
         '
         'mtbZipCode
         '
@@ -672,7 +672,7 @@ Partial Class frmNewPatient
         Me.mtbZipCode.Name = "mtbZipCode"
         Me.mtbZipCode.ShortcutsEnabled = False
         Me.mtbZipCode.Size = New System.Drawing.Size(103, 22)
-        Me.mtbZipCode.TabIndex = 15
+        Me.mtbZipCode.TabIndex = 0
         '
         'frmNewPatient
         '
