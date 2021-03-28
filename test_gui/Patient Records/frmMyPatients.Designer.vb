@@ -26,27 +26,27 @@ Partial Class frmMyPatients
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMyPatients))
         Me.flpMyPatientRecords = New System.Windows.Forms.FlowLayoutPanel()
         Me.pnlHeaderPatientRecords = New System.Windows.Forms.Panel()
+        Me.lblFilter = New System.Windows.Forms.Label()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.cboFilter = New System.Windows.Forms.ComboBox()
         Me.Panel9 = New System.Windows.Forms.Panel()
+        Me.pnlSearch = New System.Windows.Forms.Panel()
+        Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.pnlHeader = New System.Windows.Forms.Panel()
+        Me.lblAssignment = New System.Windows.Forms.Label()
         Me.lblDOB = New System.Windows.Forms.Label()
         Me.lblLastName = New System.Windows.Forms.Label()
         Me.lblBed = New System.Windows.Forms.Label()
         Me.lblRoom = New System.Windows.Forms.Label()
         Me.lblMRN = New System.Windows.Forms.Label()
         Me.lblFirstName = New System.Windows.Forms.Label()
-        Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.cboFilter = New System.Windows.Forms.ComboBox()
-        Me.lblFilter = New System.Windows.Forms.Label()
-        Me.lblAssignment = New System.Windows.Forms.Label()
         Me.tpToolTip = New System.Windows.Forms.ToolTip(Me.components)
-        Me.pnlSearch = New System.Windows.Forms.Panel()
-        Me.btnSearch = New System.Windows.Forms.Button()
         Me.pnlHeaderPatientRecords.SuspendLayout()
-        Me.Panel9.SuspendLayout()
-        Me.pnlHeader.SuspendLayout()
         Me.Panel4.SuspendLayout()
+        Me.Panel9.SuspendLayout()
         Me.pnlSearch.SuspendLayout()
+        Me.pnlHeader.SuspendLayout()
         Me.SuspendLayout()
         '
         'flpMyPatientRecords
@@ -70,6 +70,41 @@ Partial Class frmMyPatients
         Me.pnlHeaderPatientRecords.Size = New System.Drawing.Size(1091, 61)
         Me.pnlHeaderPatientRecords.TabIndex = 19
         '
+        'lblFilter
+        '
+        Me.lblFilter.AutoSize = True
+        Me.lblFilter.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFilter.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblFilter.Location = New System.Drawing.Point(832, 21)
+        Me.lblFilter.Name = "lblFilter"
+        Me.lblFilter.Size = New System.Drawing.Size(52, 21)
+        Me.lblFilter.TabIndex = 7
+        Me.lblFilter.Text = "Filter:"
+        '
+        'Panel4
+        '
+        Me.Panel4.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel4.Controls.Add(Me.cboFilter)
+        Me.Panel4.Location = New System.Drawing.Point(900, 16)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel4.Size = New System.Drawing.Size(179, 31)
+        Me.Panel4.TabIndex = 21
+        '
+        'cboFilter
+        '
+        Me.cboFilter.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cboFilter.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cboFilter.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cboFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cboFilter.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboFilter.FormattingEnabled = True
+        Me.cboFilter.Items.AddRange(New Object() {"My Patients", "Active Patients"})
+        Me.cboFilter.Location = New System.Drawing.Point(1, 1)
+        Me.cboFilter.Name = "cboFilter"
+        Me.cboFilter.Size = New System.Drawing.Size(177, 29)
+        Me.cboFilter.TabIndex = 10
+        '
         'Panel9
         '
         Me.Panel9.BackColor = System.Drawing.Color.DarkGray
@@ -80,6 +115,34 @@ Partial Class frmMyPatients
         Me.Panel9.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel9.Size = New System.Drawing.Size(466, 31)
         Me.Panel9.TabIndex = 20
+        '
+        'pnlSearch
+        '
+        Me.pnlSearch.BackColor = System.Drawing.Color.White
+        Me.pnlSearch.BackgroundImage = CType(resources.GetObject("pnlSearch.BackgroundImage"), System.Drawing.Image)
+        Me.pnlSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.pnlSearch.Controls.Add(Me.btnSearch)
+        Me.pnlSearch.Dock = System.Windows.Forms.DockStyle.Right
+        Me.pnlSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.pnlSearch.ForeColor = System.Drawing.Color.White
+        Me.pnlSearch.Location = New System.Drawing.Point(432, 1)
+        Me.pnlSearch.Name = "pnlSearch"
+        Me.pnlSearch.Size = New System.Drawing.Size(33, 29)
+        Me.pnlSearch.TabIndex = 2
+        '
+        'btnSearch
+        '
+        Me.btnSearch.BackColor = System.Drawing.Color.White
+        Me.btnSearch.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnSearch.FlatAppearance.BorderSize = 0
+        Me.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSearch.ForeColor = System.Drawing.Color.Transparent
+        Me.btnSearch.Image = Global.test_gui.My.Resources.Resources.Search
+        Me.btnSearch.Location = New System.Drawing.Point(3, 0)
+        Me.btnSearch.Name = "btnSearch"
+        Me.btnSearch.Size = New System.Drawing.Size(30, 29)
+        Me.btnSearch.TabIndex = 40
+        Me.btnSearch.UseVisualStyleBackColor = False
         '
         'txtSearch
         '
@@ -108,6 +171,17 @@ Partial Class frmMyPatients
         Me.pnlHeader.Name = "pnlHeader"
         Me.pnlHeader.Size = New System.Drawing.Size(1064, 47)
         Me.pnlHeader.TabIndex = 18
+        '
+        'lblAssignment
+        '
+        Me.lblAssignment.AutoSize = True
+        Me.lblAssignment.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblAssignment.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblAssignment.Location = New System.Drawing.Point(862, 19)
+        Me.lblAssignment.Name = "lblAssignment"
+        Me.lblAssignment.Size = New System.Drawing.Size(125, 21)
+        Me.lblAssignment.TabIndex = 7
+        Me.lblAssignment.Text = "Assign/Remove"
         '
         'lblDOB
         '
@@ -175,80 +249,6 @@ Partial Class frmMyPatients
         Me.lblFirstName.TabIndex = 0
         Me.lblFirstName.Text = "First Name"
         '
-        'Panel4
-        '
-        Me.Panel4.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel4.Controls.Add(Me.cboFilter)
-        Me.Panel4.Location = New System.Drawing.Point(900, 16)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel4.Size = New System.Drawing.Size(179, 31)
-        Me.Panel4.TabIndex = 21
-        '
-        'cboFilter
-        '
-        Me.cboFilter.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cboFilter.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cboFilter.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.cboFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.cboFilter.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboFilter.FormattingEnabled = True
-        Me.cboFilter.Items.AddRange(New Object() {"My Patients", "All Patients", "Assigned Patients", "Active Patients"})
-        Me.cboFilter.Location = New System.Drawing.Point(1, 1)
-        Me.cboFilter.Name = "cboFilter"
-        Me.cboFilter.Size = New System.Drawing.Size(177, 29)
-        Me.cboFilter.TabIndex = 10
-        '
-        'lblFilter
-        '
-        Me.lblFilter.AutoSize = True
-        Me.lblFilter.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFilter.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblFilter.Location = New System.Drawing.Point(832, 21)
-        Me.lblFilter.Name = "lblFilter"
-        Me.lblFilter.Size = New System.Drawing.Size(52, 21)
-        Me.lblFilter.TabIndex = 7
-        Me.lblFilter.Text = "Filter:"
-        '
-        'lblAssignment
-        '
-        Me.lblAssignment.AutoSize = True
-        Me.lblAssignment.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAssignment.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblAssignment.Location = New System.Drawing.Point(862, 19)
-        Me.lblAssignment.Name = "lblAssignment"
-        Me.lblAssignment.Size = New System.Drawing.Size(125, 21)
-        Me.lblAssignment.TabIndex = 7
-        Me.lblAssignment.Text = "Assign/Remove"
-        '
-        'pnlSearch
-        '
-        Me.pnlSearch.BackColor = System.Drawing.Color.White
-        Me.pnlSearch.BackgroundImage = CType(resources.GetObject("pnlSearch.BackgroundImage"), System.Drawing.Image)
-        Me.pnlSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.pnlSearch.Controls.Add(Me.btnSearch)
-        Me.pnlSearch.Dock = System.Windows.Forms.DockStyle.Right
-        Me.pnlSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.pnlSearch.ForeColor = System.Drawing.Color.White
-        Me.pnlSearch.Location = New System.Drawing.Point(432, 1)
-        Me.pnlSearch.Name = "pnlSearch"
-        Me.pnlSearch.Size = New System.Drawing.Size(33, 29)
-        Me.pnlSearch.TabIndex = 2
-        '
-        'btnSearch
-        '
-        Me.btnSearch.BackColor = System.Drawing.Color.White
-        Me.btnSearch.Dock = System.Windows.Forms.DockStyle.Right
-        Me.btnSearch.FlatAppearance.BorderSize = 0
-        Me.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSearch.ForeColor = System.Drawing.Color.Transparent
-        Me.btnSearch.Image = Global.test_gui.My.Resources.Resources.Search
-        Me.btnSearch.Location = New System.Drawing.Point(3, 0)
-        Me.btnSearch.Name = "btnSearch"
-        Me.btnSearch.Size = New System.Drawing.Size(30, 29)
-        Me.btnSearch.TabIndex = 40
-        Me.btnSearch.UseVisualStyleBackColor = False
-        '
         'frmMyPatients
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -262,12 +262,12 @@ Partial Class frmMyPatients
         Me.Text = "frmMyPatients"
         Me.pnlHeaderPatientRecords.ResumeLayout(False)
         Me.pnlHeaderPatientRecords.PerformLayout()
+        Me.Panel4.ResumeLayout(False)
         Me.Panel9.ResumeLayout(False)
         Me.Panel9.PerformLayout()
+        Me.pnlSearch.ResumeLayout(False)
         Me.pnlHeader.ResumeLayout(False)
         Me.pnlHeader.PerformLayout()
-        Me.Panel4.ResumeLayout(False)
-        Me.pnlSearch.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub

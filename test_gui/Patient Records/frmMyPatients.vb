@@ -440,29 +440,29 @@
             HideControlOnPanels("btnAdd")
             lblAssignment.Text = "Remove Assignment"
 
+            'ElseIf cboFilter.SelectedIndex = 1 Then
+            '    '******************* 
+            '    flpMyPatientRecords.Controls.Clear()
+            '    ' ADAM call this before calling a create panel method to show the new items
+
+            '    LoadAllPatients()
+            '    ShowAllControlsOnPanels()
+            '    HideControlOnPanels("btnRemove")
+            '    lblAssignment.Text = "Assign Patient To Me"
+
+            'ElseIf cboFilter.SelectedIndex = 2 Then
+
+
+            '    '******************* 
+            '    flpMyPatientRecords.Controls.Clear()
+            '    ' ADAM call this before calling a create panel method to show the new items
+            '    LoadAllPatientUser()
+
+            '    ShowAllControlsOnPanels()
+            '    HideControlOnPanels("btnRemove")
+            '    lblAssignment.Text = "Assign Patient To Me"
+
         ElseIf cboFilter.SelectedIndex = 1 Then
-            '******************* 
-            flpMyPatientRecords.Controls.Clear()
-            ' ADAM call this before calling a create panel method to show the new items
-
-            LoadAllPatients()
-            ShowAllControlsOnPanels()
-            HideControlOnPanels("btnRemove")
-            lblAssignment.Text = "Assign Patient To Me"
-
-        ElseIf cboFilter.SelectedIndex = 2 Then
-
-
-            '******************* 
-            flpMyPatientRecords.Controls.Clear()
-            ' ADAM call this before calling a create panel method to show the new items
-            LoadAllPatientUser()
-
-            ShowAllControlsOnPanels()
-            HideControlOnPanels("btnRemove")
-            lblAssignment.Text = "Assign Patient To Me"
-
-        ElseIf cboFilter.SelectedIndex = 3 Then
             '******************* 
             flpMyPatientRecords.Controls.Clear()
             ' ADAM call this before calling a create panel method to show the new items
@@ -573,38 +573,38 @@
     '/*  ---            ----             ----				             */
     '/*  CK		2/6/21		 initial creation                            */
     '/********************************************************************/ 
-    Private Sub LoadAllPatients()
-        Dim dsPatient As DataSet
-        Dim UserID As Integer = 9
-        Dim strUserFirst As String = ""
-        Dim strUserLast As String = ""
-        Dim strVisitDate As String = ""
-        Dim intPhysicianID As Integer = 0
-        Dim intPatientID As Integer = 0
-        Dim intPatientMRN As Long = 0
-        Dim strPatientFirst As String = ""
-        Dim strPatientLast As String = ""
-        Dim StrDOB As String = ""
-        Dim strRoom As String = ""
-        Dim strBed As String = ""
-        Dim intActive_Flag As String = ""
+    'Private Sub LoadAllPatients()
+    '    Dim dsPatient As DataSet
+    '    Dim UserID As Integer = 9
+    '    Dim strUserFirst As String = ""
+    '    Dim strUserLast As String = ""
+    '    Dim strVisitDate As String = ""
+    '    Dim intPhysicianID As Integer = 0
+    '    Dim intPatientID As Integer = 0
+    '    Dim intPatientMRN As Long = 0
+    '    Dim strPatientFirst As String = ""
+    '    Dim strPatientLast As String = ""
+    '    Dim StrDOB As String = ""
+    '    Dim strRoom As String = ""
+    '    Dim strBed As String = ""
+    '    Dim intActive_Flag As String = ""
 
-        dsPatient = CreateDatabase.ExecuteSelectQuery("Select MRN_Number, Patient_First_Name, Patient_Last_Name, Date_of_Birth, Primary_Physician_ID, Patient.Patient_ID, PatientRoom.Patient_TUID, Room_TUID, Bed_Name FROM Patient LEFT JOIN PatientRoom ON PatientRoom.Patient_TUID = Patient.Patient_ID ;")
-        For Each Patient As DataRow In dsPatient.Tables(0).Rows
-            intPatientMRN = Patient(0)
-            strPatientFirst = Patient(1)
-            strPatientLast = Patient(2)
-            StrDOB = Patient(3)
-            intPhysicianID = Patient(4)
-            intPatientID = Patient(5)
-            strRoom = Patient(7)
-            strBed = Patient(8)
-            'StrDOB = StrDOB.Substring(0, 9)
-            Debug.WriteLine("")
-            CreatePanelMyPatients(flpMyPatientRecords, intPatientMRN.ToString, strPatientFirst, strPatientLast, StrDOB, strRoom, strBed, intPatientID)
-        Next
+    '    dsPatient = CreateDatabase.ExecuteSelectQuery("Select MRN_Number, Patient_First_Name, Patient_Last_Name, Date_of_Birth, Primary_Physician_ID, Patient.Patient_ID, PatientRoom.Patient_TUID, Room_TUID, Bed_Name FROM Patient LEFT JOIN PatientRoom ON PatientRoom.Patient_TUID = Patient.Patient_ID ;")
+    '    For Each Patient As DataRow In dsPatient.Tables(0).Rows
+    '        intPatientMRN = Patient(0)
+    '        strPatientFirst = Patient(1)
+    '        strPatientLast = Patient(2)
+    '        StrDOB = Patient(3)
+    '        intPhysicianID = Patient(4)
+    '        intPatientID = Patient(5)
+    '        strRoom = Patient(7)
+    '        strBed = Patient(8)
+    '        'StrDOB = StrDOB.Substring(0, 9)
+    '        Debug.WriteLine("")
+    '        CreatePanelMyPatients(flpMyPatientRecords, intPatientMRN.ToString, strPatientFirst, strPatientLast, StrDOB, strRoom, strBed, intPatientID)
+    '    Next
 
-    End Sub
+    'End Sub
     '/********************************************************************/
     '/*                   SUB NAME: cboFilter_SelectedIndexChanged       */         
     '/********************************************************************/
@@ -710,48 +710,48 @@
     '/*  ---            ----             ----				             */
     '/*  CK		2/6/21		 initial creation                            */
     '/********************************************************************/ 
-    Private Sub LoadAllPatientUser()
-        Dim dsPatientUser As DataSet
-        Dim dsPatientUserAssigned As DataSet
-        Dim dsPatient As DataSet
-        Dim UserID As Integer = 9
-        Dim strUserFirst As String = ""
-        Dim strUserLast As String = ""
-        Dim strVisitDate As String = ""
-        Dim intPhysicianID As Integer = 0
-        Dim intPatientID As Integer = 0
-        Dim intPatientMRN As Integer = 0
-        Dim strPatientFirst As String = ""
-        Dim strPatientLast As String = ""
-        Dim StrDOB As String = ""
-        Dim strRoom As String = ""
-        Dim strBed As String = ""
-        Dim intActive_Flag As String = ""
-        dsPatientUser = CreateDatabase.ExecuteSelectQuery("Select * From PatientUser ;")
-        dsPatientUserAssigned = CreateDatabase.ExecuteSelectQuery("Select * From PatientUser Where User_TUID=" & UserID & ";")
-        For Each row As DataRow In dsPatientUser.Tables(0).Rows
-            intPatientID = row(0)
-            strVisitDate = row(2)
-            dsPatient = CreateDatabase.ExecuteSelectQuery("Select MRN_Number, Patient_First_Name, Patient_Last_Name, Date_of_Birth, Primary_Physician_ID, Patient.Patient_ID, PatientRoom.Patient_TUID, Room_TUID, Bed_Name FROM Patient LEFT JOIN PatientRoom ON PatientRoom.Patient_TUID = Patient.Patient_ID Where Patient_ID =" & intPatientID.ToString() & ";")
-            For Each Patient As DataRow In dsPatient.Tables(0).Rows
-                intPatientMRN = Patient(0)
-                strPatientFirst = Patient(1)
-                strPatientLast = Patient(2)
-                StrDOB = Patient(3)
-                intPhysicianID = Patient(4)
-                intPatientID = Patient(5)
-                strRoom = Patient(7)
-                strBed = Patient(8)
-                'StrDOB = StrDOB.Substring(0, 9)
-                Debug.WriteLine("")
-                CreatePanelMyPatients(flpMyPatientRecords, intPatientMRN.ToString, strPatientFirst, strPatientLast, StrDOB, strRoom, strBed, intPatientID)
-            Next
+    'Private Sub LoadAllPatientUser()
+    '    Dim dsPatientUser As DataSet
+    '    Dim dsPatientUserAssigned As DataSet
+    '    Dim dsPatient As DataSet
+    '    Dim UserID As Integer = 9
+    '    Dim strUserFirst As String = ""
+    '    Dim strUserLast As String = ""
+    '    Dim strVisitDate As String = ""
+    '    Dim intPhysicianID As Integer = 0
+    '    Dim intPatientID As Integer = 0
+    '    Dim intPatientMRN As Integer = 0
+    '    Dim strPatientFirst As String = ""
+    '    Dim strPatientLast As String = ""
+    '    Dim StrDOB As String = ""
+    '    Dim strRoom As String = ""
+    '    Dim strBed As String = ""
+    '    Dim intActive_Flag As String = ""
+    '    dsPatientUser = CreateDatabase.ExecuteSelectQuery("Select * From PatientUser ;")
+    '    dsPatientUserAssigned = CreateDatabase.ExecuteSelectQuery("Select * From PatientUser Where User_TUID=" & UserID & ";")
+    '    For Each row As DataRow In dsPatientUser.Tables(0).Rows
+    '        intPatientID = row(0)
+    '        strVisitDate = row(2)
+    '        dsPatient = CreateDatabase.ExecuteSelectQuery("Select MRN_Number, Patient_First_Name, Patient_Last_Name, Date_of_Birth, Primary_Physician_ID, Patient.Patient_ID, PatientRoom.Patient_TUID, Room_TUID, Bed_Name FROM Patient LEFT JOIN PatientRoom ON PatientRoom.Patient_TUID = Patient.Patient_ID Where Patient_ID =" & intPatientID.ToString() & ";")
+    '        For Each Patient As DataRow In dsPatient.Tables(0).Rows
+    '            intPatientMRN = Patient(0)
+    '            strPatientFirst = Patient(1)
+    '            strPatientLast = Patient(2)
+    '            StrDOB = Patient(3)
+    '            intPhysicianID = Patient(4)
+    '            intPatientID = Patient(5)
+    '            strRoom = Patient(7)
+    '            strBed = Patient(8)
+    '            'StrDOB = StrDOB.Substring(0, 9)
+    '            Debug.WriteLine("")
+    '            CreatePanelMyPatients(flpMyPatientRecords, intPatientMRN.ToString, strPatientFirst, strPatientLast, StrDOB, strRoom, strBed, intPatientID)
+    '        Next
 
-            Debug.WriteLine("")
+    '        Debug.WriteLine("")
 
-        Next
+    '    Next
 
-    End Sub
+    'End Sub
 
     '/********************************************************************/
     '/*                   SUB NAME: HideControlOnPanels                  */         
