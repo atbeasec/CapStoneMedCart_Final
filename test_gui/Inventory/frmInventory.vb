@@ -171,6 +171,7 @@ Public Class frmInventory
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        LoadingScreen.StartThread()
         LoadingScreen.Show(Me)
         RaiseEvent UpdateLoadScreen("Staring. . .")
 
@@ -208,7 +209,7 @@ Public Class frmInventory
         If txtStrength.Text.Equals("") Or txtType.Text.Equals("") Or mtbExpirationDate.MaskFull = False Or cboPersonalMedication.SelectedIndex.Equals(-1) Then
             MessageBox.Show("Please enter data in all fields before saving.")
 
-            'if you use .Close you will actually kill the form and it would need to get re-instantiated with New so we just hide it.
+
             RaiseEvent UpdateLoadScreen("")
             LoadingScreen.Hide()
 

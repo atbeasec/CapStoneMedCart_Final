@@ -73,7 +73,7 @@ Partial Class frmProgressBar
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(300, 87)
+        Me.ClientSize = New System.Drawing.Size(416, 87)
         Me.ControlBox = False
         Me.Controls.Add(Me.lblPleaseWait)
         Me.Controls.Add(Me.pbLoading)
