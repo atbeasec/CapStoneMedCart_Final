@@ -511,6 +511,7 @@
     '/********************************************************************/ 
     Private Sub LoadAllActivePatients()
         Dim dsPatient As DataSet
+        Dim dsPatientUserAssigned As DataSet
         Dim UserID As Integer = 9
         Dim strUserFirst As String = ""
         Dim strUserLast As String = ""
@@ -538,6 +539,28 @@
             'StrDOB = StrDOB.Substring(0, 9)
             Debug.WriteLine("")
             CreatePanelMyPatients(flpMyPatientRecords, intPatientMRN.ToString, strPatientFirst, strPatientLast, StrDOB, strRoom, strBed, intPatientID)
+        Next
+
+        dsPatientUserAssigned = CreateDatabase.ExecuteSelectQuery("Select * From PatientUser Where User_TUID=" & UserID & ";")
+        For Each Patient As DataRow In dsPatientUserAssigned.Tables(0).Rows
+            intPatientID = Patient(0)
+
+            For Each paddingPanel In flpMyPatientRecords.Controls
+                For Each panelWithControls In paddingPanel.Controls
+                    For Each controlOnPanel In panelWithControls.Controls
+
+                        ' hide the specific control we need to
+                        If controlOnPanel.tag = (intPatientID.ToString()) Then
+
+                            controlOnPanel.Visible = False
+
+                        End If
+                        ' Debug.Print(controlOnPanel.Name)
+                    Next
+                Next
+            Next
+
+
         Next
 
     End Sub
