@@ -372,6 +372,7 @@
         btnAllPatients.PerformClick()
         Me.Text = "Medical Dispense"
 
+        '  frmSplash.Show()
     End Sub
 
     '/*********************************************************************/

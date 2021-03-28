@@ -37,6 +37,8 @@ Module BulkImportMethods
     '/*											   */					  
     '/*  WHO   WHEN     WHAT								   */			  
     '/*  ---   ----     ------------------------------------------------- */
+    '/*  NP    3/24/2021 Made changes to allow the adding of rooms with   */
+    '/*                  when importing patient.                          */
     '/*********************************************************************/
 
     Const strPhonePattern As String = "^(1-)?\d{3}-\d{3}-\d{4}$"
@@ -207,15 +209,18 @@ Module BulkImportMethods
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
+    '/*  NP    3/24/2021 made an optional paramter for is the program wants*/
+    '/*                  the finished popup to show.                       */
     '/*********************************************************************/
 
 
-    Sub finishingUpImport(ByRef strbSQLStatement As StringBuilder)
+    Sub finishingUpImport(ByRef strbSQLStatement As StringBuilder, Optional showEnd As Boolean = True)
         strbSQLStatement.Remove(strbSQLStatement.Length - 1, 1) 'remove the last comma
         strbSQLStatement.Append(";")
         CreateDatabase.ExecuteInsertQuery(strbSQLStatement.ToString)
-        MessageBox.Show("import Finished")
+        If showEnd Then
+            MessageBox.Show("import Finished")
+        End If
     End Sub
 
     '/*********************************************************************/
@@ -272,7 +277,7 @@ Module BulkImportMethods
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
+    '/*  NP    3/24/2021 Added a check for the room and beds.              */                                                                   
     '/*********************************************************************/
 
 
@@ -388,12 +393,32 @@ Module BulkImportMethods
                                                         "Physician ID that is in the system.")
                         blnIssue = True
                     End If
+
+                End If
+                For i As Integer = 16 To 17
+                    If TextCheck(strLine(i)) Then
+                        Select Case i
+                            Case 0
+                                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Room_ID can not contain a ;")
+                                blnIssue = True
+                            Case 1
+                                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Bed_Name can not contain a ;")
+                                blnIssue = True
+                        End Select
+                    End If
+                Next
+                strbSQLPull.Clear()
+                strbSQLPull.Append("select count(Patient_TUID) From PatientRoom where Room_TUID = '" & strLine(16))
+                strbSQLPull.Append("' and Bed_Name = '" & strLine(17) & "' and Active_Flag ='1';")
+                If ExecuteScalarQuery(strbSQLPull.ToString) <> 0 Then
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " room and bed already assigned to a patient")
+                    blnIssue = True
                 End If
                 If Not blnIssue Then
                     UsedBarCodesArray.Add(strLine(1))
                     PatientArray.Add(New PatientClass(strLine(0), strLine(1), strLine(2), strLine(3), strLine(4), strLine(5),
                                 strLine(6), strLine(7), strLine(8), strLine(9), strLine(10), strLine(11), strLine(12), strLine(13),
-                                strLine(14), strLine(15)))
+                                strLine(14), strLine(15), strLine(16), strLine(17)))
                 End If
             End If
             intLineNum += 1
@@ -438,6 +463,146 @@ Module BulkImportMethods
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/* intFirstRecord - this is the id of the first record so we don't   */
+    '/*                  insert the record twice.                         */
+    '/* strPatientInsert - this is the start of the patient insert.       */
+    '/* editRoomArray - this is an array list of the rooms that we have to*/
+    '/*                 edit. The rooms already exist in the database so  */
+    '/*                 we only need to make sure they are active. 
+    '/* strbSQLPatientStatement - this is going to be used for a number of*/
+    '/*              SQL statements, It was only used for Patient insert  */
+    '/*              but it was repurposes to also get information from the*/
+    '/*              database and update rooms and insert into patientRooms*/
+    '/*              table                                                 */
+    '/* strbSQLGetRoom - this is the string builder that is used for get   */
+    '/*                  room inforamtion from the database.               */
+    '/* intRecordCount - this is the records that the patient record is    */
+    '/*                  be when it gets added to the database so we can   */
+    '/*                  use it later.                                     */
+    '/* addRoomArray - this is an array list of all the rooms that need to */
+    '/*                added to the database.                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  NP    3/24/2021 Added functionality to add rooms and beds.       */                                                                   
+    '/*********************************************************************/
+
+
+    Sub addPatientToDatabase(PatientArray As ArrayList)
+        Dim intRecordCount As Integer
+        Dim intFirstRecord As Integer
+        Dim strbSQLPatientStatement As StringBuilder = New StringBuilder
+        Dim strbSQLGetRoom As StringBuilder = New StringBuilder
+        Dim addRoomArray As ArrayList = New ArrayList
+        Dim editRoomArray As ArrayList = New ArrayList
+        Dim strPatientInsert As String = "INSERT INTO Patient ('MRN_Number', 'Barcode', 'Patient_First_Name'," &
+            "'Patient_Middle_Name', 'Patient_Last_Name', 'Date_of_Birth', 'Sex', 'Height', 'Weight', " &
+            "'Address', 'City', 'State', 'Zip_Code', 'Phone_Number', 'Email_address', 'Primary_Physician_ID', " &
+            "'Active_Flag') Values"
+
+        strbSQLPatientStatement.Clear()
+        strbSQLPatientStatement.Append(strPatientInsert)
+
+        With PatientArray.Item(0)
+            addingPatientInformationToSQL(strbSQLPatientStatement, PatientArray.Item(0))
+            strbSQLPatientStatement.Append(";")
+            ExecuteInsertQuery(strbSQLPatientStatement.ToString)
+            strbSQLPatientStatement.Clear()
+            strbSQLPatientStatement.Append("select Patient_ID from Patient where patient_ID = (Select Max(Patient_ID) from Patient);")
+            .id = ExecuteScalarQuery(strbSQLPatientStatement.ToString)
+            intFirstRecord = .id
+        End With
+        intRecordCount = intFirstRecord
+
+
+        strbSQLPatientStatement.Clear()
+        strbSQLPatientStatement.Append(strPatientInsert)
+
+        For Each Patient As PatientClass In PatientArray
+            'inputing patients
+            With Patient
+                If Not .ID = intFirstRecord Then
+                    intRecordCount += 1
+                    .ID = intRecordCount
+                    strbSQLGetRoom.Clear()
+                    strbSQLGetRoom.Append("select count(Room_ID) From Rooms where Room_ID = '" & checkSQLInjection(.roomData.RoomID))
+                    strbSQLGetRoom.Append("' and Bed_Name = '" & checkSQLInjection(.roomData.BedName) & "';")
+                    'finding already exisiting rooms
+                    If ExecuteScalarQuery(strbSQLGetRoom.ToString) <> 0 Then
+                        editRoomArray.Add(.roomData)
+                    Else
+                        addRoomArray.Add(.roomData)
+                    End If
+                    addingPatientInformationToSQL(strbSQLPatientStatement, Patient)
+                    strbSQLPatientStatement.Append(",")
+                End If
+            End With
+        Next
+        'adding patients
+        finishingUpImport(strbSQLPatientStatement, False)
+        'editing already exisitng rooms
+        If editRoomArray.Count > 0 Then
+            For Each room As RoomClass In editRoomArray
+                With room
+                    strbSQLPatientStatement.Clear()
+                    strbSQLPatientStatement.Append("Update Rooms set Active_Flag = 1 where")
+                    strbSQLPatientStatement.Append(" Room_ID ='" & checkSQLInjection(.RoomID) & "' and Bed_Name ='")
+                    strbSQLPatientStatement.Append(checkSQLInjection(.BedName) & "';")
+                    ExecuteInsertQuery(strbSQLPatientStatement.ToString)
+                End With
+            Next
+        End If
+        'adding new rooms
+        If addRoomArray.Count > 0 Then
+            addRoomToDatabase(addRoomArray, False)
+        End If
+        'making records in PatientRoom table
+        strbSQLPatientStatement.Clear()
+        strbSQLPatientStatement.Append("Insert into PatientRoom ('Patient_TUID', 'Room_TUID', 'Bed_Name', 'Active_Flag')")
+        strbSQLPatientStatement.Append(" values ")
+        For Each patient As PatientClass In PatientArray
+            With patient
+                strbSQLPatientStatement.Append("('" & .ID & "', '" & checkSQLInjection(.roomData.RoomID))
+                strbSQLPatientStatement.Append(" ','" & checkSQLInjection(.roomData.BedName) & "','1'),")
+            End With
+        Next
+        finishingUpImport(strbSQLPatientStatement)
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME:  addingPatientInformationToSQL  */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		               */   
+    '/*		         DATE CREATED: 	3/25/2021                       	   */                             
+    '/*********************************************************************/
+    '/*  addingPatientInformationToSQL PURPOSE:							   */             
+    '/*	 This method exists just to add information to the string builder */
+    '/*  It was made to reduce duplicated code.                           */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*  strbSQLPatientStatement - this is the string builder we will be  */
+    '/*                         editing.                                  */
+    '/*  Patient - this is the patient object that will getting information*/
+    '/*             from.                                                  */
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
     '/*											   */                     
     '/*                                                                     
     '/*********************************************************************/
@@ -449,23 +614,15 @@ Module BulkImportMethods
     '/*********************************************************************/
 
 
-    Sub addPatientToDatabase(PatientArray As ArrayList)
-        Dim strbSQLStatement As StringBuilder = New StringBuilder
-        strbSQLStatement.Append("INSERT INTO Patient ('MRN_Number', 'Barcode', 'Patient_First_Name'," &
-            "'Patient_Middle_Name', 'Patient_Last_Name', 'Date_of_Birth', 'Sex', 'Height', 'Weight', " &
-            "'Address', 'City', 'State', 'Zip_Code', 'Phone_Number', 'Email_address', 'Primary_Physician_ID', " &
-            "'Active_Flag') Values")
-        For Each Patient As PatientClass In PatientArray
-            With Patient
-                strbSQLStatement.Append(" ('" & .MRN_Number & "', '" & checkSQLInjection(.barcode) & "', '" & checkSQLInjection(.FirstName) & "', '" & checkSQLInjection(.MiddleName) & "', '")
-                strbSQLStatement.Append(checkSQLInjection(.LastName) & "', '" & .DoB & "' , '" & .sex & "', '" & .Height & "', '" & .weight & "', '")
-                strbSQLStatement.Append(.Address & "', '" & .city & "', '" & .State & "', '" & .ZipCode & "', '" & .PhoneNumber & "', '")
-                strbSQLStatement.Append(.email & "', '" & .PrimaryPhysicianID & "', '1'),")
-            End With
-
-        Next
-        finishingUpImport(strbSQLStatement)
+    Sub addingPatientInformationToSQL(ByRef strbSQLPatientStatement As StringBuilder, Patient As PatientClass)
+        With Patient
+            strbSQLPatientStatement.Append(" ('" & .MRN_Number & "', '" & checkSQLInjection(.barcode) & "', '" & checkSQLInjection(.FirstName) & "', '" & checkSQLInjection(.MiddleName) & "', '")
+            strbSQLPatientStatement.Append(checkSQLInjection(.LastName) & "', '" & .DoB & "' , '" & .sex & "', '" & .Height & "', '" & .weight & "', '")
+            strbSQLPatientStatement.Append(.Address & "', '" & .city & "', '" & .State & "', '" & .ZipCode & "', '" & .PhoneNumber & "', '")
+            strbSQLPatientStatement.Append(.email & "', '" & .PrimaryPhysicianID & "', '1')")
+        End With
     End Sub
+
 
     '/*********************************************************************/
     '/*                   FUNCTION NAME:  ParsePhysicianFile 		      */         
@@ -643,9 +800,9 @@ Module BulkImportMethods
     Public Sub addPhysicianToDatabase(PhysicianArray As ArrayList)
         Dim strbSQLStatement As StringBuilder = New StringBuilder
         strbSQLStatement.Append("INSERT INTO Physician ('Physician_First_Name','Physician_Middle_Name',
-                                'Physician_Last_Name','Physician_Credentials','Physician_Phone_Number','Physician_Fax_Number',
-                                'Physician_Address','Physician_City','Physician_State','Physician_Zip_Code','Active_Flag') Values")
-        For Each Physician As PhysicianClass In PhysicianArray
+                'Physician_Last_Name','Physician_Credentials','Physician_Phone_Number','Physician_Fax_Number',
+                'Physician_Address','Physician_City','Physician_State','Physician_Zip_Code','Active_Flag') Values")
+                For Each Physician As PhysicianClass In PhysicianArray
             With Physician
                 strbSQLStatement.Append(" ('" & checkSQLInjection(.FirstName) & "', '" & checkSQLInjection(.MiddleName) & "', '" & checkSQLInjection(.LastName) & "', '")
                 strbSQLStatement.Append(checkSQLInjection(.Credentials) & "', '" & .PhoneNumber & "', '" & .FaxNumber & "', '")
@@ -1007,15 +1164,15 @@ Module BulkImportMethods
     '/*********************************************************************/
 
 
-    Sub addRoomToDatabase(roomArray As ArrayList)
+    Sub addRoomToDatabase(roomArray As ArrayList, Optional showEnd As Boolean = True)
         Dim strbSQLStatement As StringBuilder = New StringBuilder
         strbSQLStatement.Append("Insert Into Rooms ('Room_ID', 'Bed_Name', 'Active_Flag') Values ")
-                For Each room As RoomClass In roomArray
+        For Each room As RoomClass In roomArray
             With room
-                strbSQLStatement.Append("(' " & checkSQLInjection(.RoomID) & "', '" & checkSQLInjection(.BedName) & "',' ")
+                strbSQLStatement.Append("('" & checkSQLInjection(.RoomID) & "', '" & checkSQLInjection(.BedName) & "','")
                 strbSQLStatement.Append(1 & "'),")
             End With
         Next
-        finishingUpImport(strbSQLStatement)
+        finishingUpImport(strbSQLStatement, showEnd)
     End Sub
 End Module

@@ -129,10 +129,17 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Authentication\frmEditPhysician.Designer.vb">
       <DependentUpon>frmEditPhysician.vb</DependentUpon>
     </Compile>
     <Compile Include="Authentication\frmEditPhysician.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI Enhancements\frmSplash.Designer.vb">
+      <DependentUpon>frmSplash.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI Enhancements\frmSplash.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Inventory\AdHoc.vb" />
@@ -378,6 +385,9 @@
     <EmbeddedResource Include="Authentication\frmEditPhysician.resx">
       <DependentUpon>frmEditPhysician.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI Enhancements\frmSplash.resx">
+      <DependentUpon>frmSplash.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI Enhancements\frmProgressBar.resx">
       <DependentUpon>frmProgressBar.vb</DependentUpon>
     </EmbeddedResource>
@@ -577,6 +587,7 @@
     <None Include="Resources\pillLoading.gif" />
     <None Include="Resources\Loading1.gif" />
     <None Include="Resources\Loading_2.gif" />
+    <None Include="Resources\add_24px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

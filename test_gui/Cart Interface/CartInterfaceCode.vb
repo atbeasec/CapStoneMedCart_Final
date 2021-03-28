@@ -43,15 +43,22 @@ Module CartInterfaceCode
     '/*     statement that will tell us if we are simulating the cart.     */
     '/*     If we are simulating the cart then the code that works with the */
     '/*     cart will not compile.  */
+    '/*  bytFinal - this is the byte array that the drawer number is going to */
+    '/*     be added into and sent to the cart itself. Most of the array is   */
+    '/*     is static and doesn't need to change. The only part that needs to */
+    '/*     is the drawer number.                                             */
+    '/*  comSerialPort1 - this is the port that is used to talk to the cart */
+    '/*     It will be set up using the serialSetup function and then used  */
+    '/*     to send information to the cart.                                */
     '/*     
     '/*********************************************************************/
     '/* COMPILATION NOTES(will include version notes including libraries):*/
     '/* 											   */					  
     '/* 																	  
     '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						         */				  
-    '/*											   */					  
-    '/*  WHO   WHEN     WHAT								   */			  
+    '/* MODIFICATION HISTORY:						                       */				  
+    '/*											                           */					  
+    '/*  WHO   WHEN     WHAT								               */			  
     '/*  ---   ----     ------------------------------------------------- */
     '/* Nathan 2/2/2021 Changes the SimulationMode to be an actual veriable */
     '/*                 and not a compiler option.                          */
@@ -63,6 +70,8 @@ Module CartInterfaceCode
     '/* NP     2/12/2021 added defaultCartSettings to set up the default   */
     '/*                  settings for our cart so the software will always */
     '/*                  be able to work for our cart out of the box.      */
+    '/* NP     3/24/2021 Moved some variables around to allow access from  */
+    '/*                  Other methods. 
     '/*********************************************************************/
 
     '26
@@ -70,6 +79,9 @@ Module CartInterfaceCode
     Private FrmCart = New frmFullCart()
     Dim SerialPort1 = FrmCart.serialSetup()
     Dim intDrawerCount As Integer
+    Private bytFinal As Byte()
+    Private comSerialPort1
+    Private strDrawerNumer As String
 
     'TODO
     'set up a way to change the COM port. (by default it looks like it is COM3
@@ -183,13 +195,63 @@ Module CartInterfaceCode
 
     Sub main()
         'ChangeSettings("115200", "COM4", True)
-        OpenOneDrawer("24")
+        OpenOneDrawer("10")
 
 
 
     End Sub
 
 
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME:  reopenDrawer    			   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		              */   
+    '/*		         DATE CREATED: 		3/24/2021                          */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								   */             
+    '/*	 This is set up to recall the open drawer command in case there is*/
+    '/*  an issue closing the drawer. In order for this fucntion to work  */
+    '/*  a drawer must first be opened. If this function is called anywhere*/
+    '/*  else it will cause an error. The try catch only exists to stop the*/
+    '/*  program from blowing up if someone calls this method and isn't    */
+    '/*  supposed to.                                                      */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	 reOpenDrawer()         										   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+
+    Sub reopenDrawer()
+        Try
+            comSerialPort1.Write(bytFinal, 0, bytFinal.Length)
+        Catch
+        End Try
+    End Sub
 
 
 
@@ -232,22 +294,17 @@ Module CartInterfaceCode
     '/*     A dictionary was used because I could not figure out how to get  */
     '/*     visual basic to convert a string over to a hex correctly. So I just */
     '/*     made a dictionary that would do it. 
-    '/*  bytFinal - this is the byte array that the drawer number is going to */
-    '/*     be added into and sent to the cart itself. Most of the array is   */
-    '/*     is static and doesn't need to change. The only part that needs to */
-    '/*     is the drawer number. 
     '/*  blnIssue - this is going to let the rest of the program know */
     '/*     if there is an issue with the import and the subprogram needs to */
     '/*     be stopped. 
-    '/*  comSerialPort1 - this is the port that is used to talk to the cart */
-    '/*     It will be set up using the serialSetup function and then used  */
-    '/*     to send information to the cart.                                */
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                     
+    '/*  NP    3/24/2021  Moved comport and the bytFinal to be global vars */
+    '/*                   so they can be used in other methods. Also added */
+    '/*                   another form on another thread to this method.   */
     '/*********************************************************************/
 
     Sub OpenOneDrawer(Number As String)
@@ -256,7 +313,7 @@ Module CartInterfaceCode
             Number += 1
         End If
         Dim blnissue = errorChecking(Number)
-        Dim comSerialPort1 = FrmCart.serialSetup()
+        comSerialPort1 = FrmCart.serialSetup()
         intDrawerCount = 0 'reset the drawer count just in case. 
 
         If blnSimulationMode Then
@@ -274,11 +331,15 @@ Module CartInterfaceCode
         Else
 
             If Not blnissue Then
+                Dim thread As New Thread(AddressOf OpenDrawerFormOpener)
+                strDrawerNumer = (CInt(Number) - 1).ToString 'nurses see the cart as having 25 drawers
+                'but the cart doesn't have a drawer number 2 so we have to change how it is seen
+                'in the gui. 
                 FrmCart.gettingConnectionSettings() 'get the settings in the database for the cart
                 intDrawerCount = 0 'reset the drawer count
                 'this will compiple and run if the cart is not in simulation mode. 
 
-                Dim bytFinal As Byte()
+
                 bytFinal = getSerialString(Number) 'this is going to get the string we need
                 'to send to the cart. 
 
@@ -286,12 +347,14 @@ Module CartInterfaceCode
                 comSerialPort1.Open()
                 comSerialPort1.Write(bytFinal, 0, bytFinal.Length)
                 intDrawerCount += 1
+                thread.Start()
+
                 Do
                     'this is going to keep looping until the drawer count reached zero. 
 
                 Loop While (intDrawerCount > 0)
                 comSerialPort1.Close()
-
+                thread.Abort()
             End If
 
 
@@ -300,7 +363,52 @@ Module CartInterfaceCode
     End Sub
 
 
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME:  OpenDrawerFormOpener    	   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		              */   
+    '/*		         DATE CREATED: 	3/24/2021                       	  */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:	            							  */             
+    '/*	 This form exist so that we can open up the Open Drawer form on   */
+    '/*  a different thread than the  main application.                   */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 number - this is the drawer number that is being opened.          */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	OpenDrawerFormOpener(25)										  */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	 DrawerForm - this is the instance of frmOpenDrawer that we are   */
+    '/*               going to be using.                                  */
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
 
+    Sub OpenDrawerFormOpener()
+        Dim DrawerForm = New frmOpenedDrawer
+        DrawerForm.lblDrawerNumber.Text = "Drawer " & strDrawerNumer & " is open."
+
+        DrawerForm.ShowDialog()
+    End Sub
 
 
 

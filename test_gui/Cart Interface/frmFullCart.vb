@@ -590,4 +590,6 @@ Public Class frmFullCart
         If lastPoint = startPoint Then isClick = True Else isClick = False
 
     End Sub
+
+
 End Class
