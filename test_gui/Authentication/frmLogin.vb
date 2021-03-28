@@ -14,7 +14,7 @@
             'If users Username and Password is in the User table in the database then close current form and open frmMain
             Me.Close()
             'call to set what sub form should be open
-            frmMain.DetermineFormToOpen(1)
+            frmMain.DetermineFormToOpen(2)
             'set the header for main to show who is logged in
             frmMain.Text = "Medical Dispence - " & LogIn.LoggedInFullName
             frmMain.Show()
@@ -81,7 +81,7 @@
                 'If users Username and Password is in the User table in the database then close current form and open frmMain
                 Me.Close()
                 'call to set what sub form should be open
-                frmMain.DetermineFormToOpen(1)
+                frmMain.DetermineFormToOpen(2)
                 'set the header for main to show who is logged in
                 frmMain.Text = "Medical Dispense - " & LogIn.LoggedInFullName
 
@@ -110,5 +110,7 @@
         Me.Close()
     End Sub
 
-
+    Private Sub txtFirst_Last_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress, txtUserName.KeyPress
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*/.,<>=+")
+    End Sub
 End Class

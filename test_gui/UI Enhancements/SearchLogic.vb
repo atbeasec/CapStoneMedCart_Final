@@ -84,8 +84,9 @@
         ' when the search box loses focus, we will check and see if they put any text in it
         ' if they didnt, we will reset it to the default text.
         If txtSearchBox.Text = "" Then
+
             'reset the text to the default and set the font color to be black
-            txtSearchBox.Text = txtSearchBox.Tag
+            'txtSearchBox.Text = txtSearchBox.Tag
             txtSearchBox.ForeColor = Color.Silver
         End If
 

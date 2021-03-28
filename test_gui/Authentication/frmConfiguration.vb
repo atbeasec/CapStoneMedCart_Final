@@ -608,12 +608,12 @@ Public Class frmConfiguration
         Return bolSecure
     End Function
 
-    Private Sub txtFirst_Last_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFirstName.KeyPress, txtLastName.KeyPress
-        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*()/.,<>=+")
+    Private Sub txtFirst_Last_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFirstName.KeyPress, txtLastName.KeyPress, txtSearchBox.KeyPress
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*/.,<>=+")
     End Sub
 
     Private Sub txtPasswordKeypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress, txtConfirmPassword.KeyPress, txtBarcode.KeyPress, txtUsername.KeyPress
-        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()/.,<>=+")
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*/.,<>=+")
     End Sub
 
     Private Sub btnSaveChanges_Click(sender As Object, e As EventArgs) Handles btnSaveChanges.Click
@@ -686,6 +686,7 @@ Public Class frmConfiguration
                 btnSaveChanges.Visible = False
                 btnSaveUser.Visible = True
                 Label2.Text = "Create New User"
+                rbtnNurse.Checked = True
             End If
         End If
 
@@ -730,6 +731,7 @@ Public Class frmConfiguration
                 btnSaveChanges.Visible = False
                 btnSaveUser.Visible = True
                 Label2.Text = "Create New User"
+                rbtnNurse.Checked = True
             End If
         End If
 
@@ -749,6 +751,7 @@ Public Class frmConfiguration
         btnSaveChanges.Visible = False
         btnSaveUser.Visible = True
         Label2.Text = "Create New User"
+        rbtnNurse.Checked = True
     End Sub
 
     Private Sub btnPasswordEye_Click(sender As Object, e As EventArgs) Handles btnPasswordEye.Click
@@ -777,6 +780,9 @@ Public Class frmConfiguration
 
     Private Sub SearchIcon_Click(sender As Object, e As EventArgs) Handles pnlSearch.Click
         Dim strFillSQL As String
+        Dim strSearch = txtSearchBox.Text
+        strSearch = Regex.Replace(strSearch, "'", "''")
+        strSearch = Regex.Replace(strSearch, """", "")
         strFillSQL = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
                                                        "User.Supervisor_Flag, User.Active_Flag From User WHERE Username LIKE '" & txtSearchBox.Text & "%' Or User_First_Name LIKE '" & txtSearchBox.Text & "%' Or User_Last_Name LIKE '" & txtSearchBox.Text & "%';"
         Fill_Table(strFillSQL)
@@ -785,7 +791,9 @@ Public Class frmConfiguration
 
     Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearchBox.TextChanged
         Dim strFillSQL As String
-
+        Dim strSearch = txtSearchBox.Text
+        strSearch = Regex.Replace(strSearch, "'", "''")
+        strSearch = Regex.Replace(strSearch, """", "")
         If txtSearchBox.Text = "" Then
             strFillSQL = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
                                                   "User.Supervisor_Flag, User.Active_Flag From User;"
@@ -843,11 +851,5 @@ Public Class frmConfiguration
                                                        "User.Supervisor_Flag, User.Active_Flag From User WHERE Username LIKE '" & txtSearchBox.Text & "%' Or User_First_Name LIKE '" & txtSearchBox.Text & "%' Or User_Last_Name LIKE '" & txtSearchBox.Text & "%';"
             Fill_Table(strFillSQL)
         End If
-    End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs)
-
-        frmEditPhysician.Show()
-        Me.Close()
     End Sub
 End Class

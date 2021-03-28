@@ -95,6 +95,7 @@ Partial Class frmConfiguration
         Me.txtUsername.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtUsername.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtUsername.Location = New System.Drawing.Point(1, 1)
+        Me.txtUsername.MaxLength = 20
         Me.txtUsername.Multiline = True
         Me.txtUsername.Name = "txtUsername"
         Me.txtUsername.ShortcutsEnabled = False
@@ -281,6 +282,7 @@ Partial Class frmConfiguration
         Me.txtLastName.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtLastName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtLastName.Location = New System.Drawing.Point(1, 1)
+        Me.txtLastName.MaxLength = 24
         Me.txtLastName.Multiline = True
         Me.txtLastName.Name = "txtLastName"
         Me.txtLastName.ShortcutsEnabled = False
@@ -303,6 +305,7 @@ Partial Class frmConfiguration
         Me.txtFirstName.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtFirstName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtFirstName.Location = New System.Drawing.Point(1, 1)
+        Me.txtFirstName.MaxLength = 24
         Me.txtFirstName.Multiline = True
         Me.txtFirstName.Name = "txtFirstName"
         Me.txtFirstName.ShortcutsEnabled = False
@@ -539,8 +542,8 @@ Partial Class frmConfiguration
         Me.PictureBox1.TabIndex = 188
         Me.PictureBox1.TabStop = False
         Me.tpLabelHover.SetToolTip(Me.PictureBox1, "Password must contain at least 8 characters, 1 uppercase, 1 lowercase, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "1 number" &
-        ", 1 special characters !@#$%^&*()/.,<>=+-_" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Password can not contain single qu" &
-        "otation, double quotation, spaces")
+        ", 1 special characters !@#$%^&*/.,<>=+-_" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Password can not contain single quot" &
+        "ation, double quotation, spaces")
         '
         'PictureBox2
         '
