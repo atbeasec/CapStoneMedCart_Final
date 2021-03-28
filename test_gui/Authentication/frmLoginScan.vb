@@ -26,7 +26,7 @@ Public Class frmLoginScan
         ElseIf LogIn.ScanLogIn(strBarcode) = "True" Then
             'If users barcode is in the User table in the database then close current form and open frmMain
             Me.Close()
-            frmMain.DetermineFormToOpen(1)
+            frmMain.DetermineFormToOpen(2)
             frmMain.Text = "Medical Dispence - " & LogIn.LoggedInFullName
             frmMain.Show()
             frmMain.btnPatientRecords.PerformClick()
@@ -52,7 +52,7 @@ Public Class frmLoginScan
             ElseIf LogIn.ScanLogIn(strBarcode) = "True" Then
                 'If users barcode is in the User table in the database then close current form and open frmMain
                 Me.Close()
-                frmMain.DetermineFormToOpen(1)
+                frmMain.DetermineFormToOpen(2)
                 frmMain.Text = "Medical Dispence - " & LogIn.LoggedInFullName
                 frmMain.Show()
                 frmMain.btnPatientRecords.PerformClick()
@@ -96,5 +96,8 @@ Public Class frmLoginScan
 
         CloseForm()
 
+    End Sub
+    Private Sub txtFirst_Last_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBarcode.KeyPress
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*/.,<>=+")
     End Sub
 End Class
