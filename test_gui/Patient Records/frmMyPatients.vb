@@ -125,9 +125,16 @@
         Const YCOORDINATE As Integer = 20
         ' CreateCheckBox(pnlMainPanel, getPanelCount(flpPannel), lblMRN.Location.X - 45, 5)
 
+        Dim strSQL As String = "SELECT COUNT() FROM PatientUser WHERE Patient_TUID= '" & intPatientID & "'" & " AND  User_TUID= '" & userID & "'"
+
+        If ExecuteScalarQuery(strSQL) = 0 Then
+            CreateAddButton(pnlMainPanel, getPanelCount(flpPannel), lblAssignment.Location.X + 15, 5, intPatientID)
+        Else
+            CreateRemoveButton(pnlMainPanel, getPanelCount(flpPannel), lblAssignment.Location.X + 15, 5, intPatientID)
+        End If
 
 
-        CreateAddButton(pnlMainPanel, getPanelCount(flpPannel), lblAssignment.Location.X + 15, 5, intPatientID)
+        'CreateAddButton(pnlMainPanel, getPanelCount(flpPannel), lblAssignment.Location.X + 15, 5, intPatientID)
         CreateIDLabelWithToolTip(pnlMainPanel, lblID1, "lblMRN", lblMRN.Location.X, YCOORDINATE, strMRN, getPanelCount(flpPannel), tpToolTip, TruncateString(15, strMRN))
         CreateIDLabelWithToolTip(pnlMainPanel, lblID2, "lblFirstName", lblFirstName.Location.X, YCOORDINATE, strFirstName, getPanelCount(flpPannel), tpToolTip, TruncateString(25, strFirstName))
         CreateIDLabelWithToolTip(pnlMainPanel, lblID3, "lblLastName", lblLastName.Location.X, YCOORDINATE, strLastName, getPanelCount(flpPannel), tpToolTip, TruncateString(25, strLastName))
@@ -588,7 +595,7 @@
 
             LoadAllActivePatients()
             ShowAllControlsOnPanels()
-            HideControlOnPanels("btnRemove")
+            'HideControlOnPanels("btnRemove")
             lblAssignment.Text = "Assign Patient To Me"
 
             'ElseIf cboFilter.SelectedIndex = 2 Then
@@ -665,7 +672,7 @@
             CreatePanelActivePatients(flpMyPatientRecords, intPatientMRN.ToString, strPatientFirst, strPatientLast, StrDOB, strRoom, strBed, intPatientID)
         Next
 
-        dsPatientUserAssigned = CreateDatabase.ExecuteSelectQuery("Select * From PatientUser Where User_TUID=" & UserID & ";")
+        'dsPatientUserAssigned = CreateDatabase.ExecuteSelectQuery("Select * From PatientUser Where User_TUID=" & UserID & ";")
 
     End Sub
     '/********************************************************************/
