@@ -2,6 +2,7 @@
 
     Private intPatientID As Integer
     Private intPatientMRN As Double
+    Private strSelectedLabel As String
     Public Enum DispenseHistoryEnum As Integer
         MedicationName = 1
         Strength = 2
@@ -984,6 +985,71 @@
     End Sub
 
     Private Sub txtHeight_TextChanged(sender As Object, e As KeyPressEventArgs) Handles txtWeight.KeyPress, txtHeight.KeyPress
+
+    End Sub
+
+    Private Sub lblPrescriptions_Click(sender As Object, e As EventArgs) Handles lblPrescriptions.Click
+
+        lblPrescriptions.Font = New Font(New FontFamily("Segoe UI Semibold"), 14.25, FontStyle.Underline)
+        lblDispenseHistory.Font = New Font(New FontFamily("Segoe UI Semibold"), 14.25, FontStyle.Bold)
+        strSelectedLabel = lblPrescriptions.Name
+        moveAndResizePanels()
+    End Sub
+
+    Private Sub lblDispenseHistory_Click(sender As Object, e As EventArgs) Handles lblDispenseHistory.Click
+
+        lblDispenseHistory.Font = New Font(New FontFamily("Segoe UI Semibold"), 14.25, FontStyle.Underline)
+        lblPrescriptions.Font = New Font(New FontFamily("Segoe UI Semibold"), 14.25, FontStyle.Bold)
+        strSelectedLabel = lblDispenseHistory.Name
+        moveAndResizePanels()
+    End Sub
+
+    Private Sub moveAndResizePanels()
+
+        ' this is the location that all of the header panels will be mounted to
+        Dim mountLocationHeaderPanel As New Point(12, 271)
+        Dim mountLocationFlowPanel As New Point(12, 318)
+        Dim flowPanelSize As New Size(1067, 320)
+
+        If strSelectedLabel = lblDispenseHistory.Name Then
+
+            ' hide all the other controls from the other panel
+            pnlPrescriptionsHeader.Visible = False
+            flpMedications.Visible = False
+
+            ' make the other ones visible
+            pnlDispenseHistoryHeader.Visible = True
+            flpDispenseHistory.Visible = True
+
+            ' move the dispense history panels because they are lower
+            pnlDispenseHistoryHeader.Location = mountLocationHeaderPanel
+            flpDispenseHistory.Location = mountLocationFlowPanel
+
+
+            ' make the size of the flow panels larger
+            flpDispenseHistory.Size = flowPanelSize
+        Else
+
+
+            ' hide all the other controls from the other panel
+            pnlDispenseHistoryHeader.Visible = False
+            flpDispenseHistory.Visible = False
+
+            ' make the other ones visible
+            pnlPrescriptionsHeader.Visible = True
+            flpMedications.Visible = True
+
+            'this is the size that all flow panels will be set to
+            flpMedications.Size = flowPanelSize
+
+        End If
+
+
+
+
+
+
+
 
     End Sub
 End Class

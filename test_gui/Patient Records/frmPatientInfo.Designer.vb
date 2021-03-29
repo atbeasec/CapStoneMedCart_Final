@@ -58,7 +58,7 @@ Partial Class frmPatientInfo
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.flpMedications = New System.Windows.Forms.FlowLayoutPanel()
-        Me.Label20 = New System.Windows.Forms.Label()
+        Me.lblPrescriptions = New System.Windows.Forms.Label()
         Me.pnlPrescriptionsHeader = New System.Windows.Forms.Panel()
         Me.lblFrequencyPrescription = New System.Windows.Forms.Label()
         Me.lblPrescribedBy = New System.Windows.Forms.Label()
@@ -89,7 +89,7 @@ Partial Class frmPatientInfo
         Me.lblMedication = New System.Windows.Forms.Label()
         Me.lblType = New System.Windows.Forms.Label()
         Me.lblStrength = New System.Windows.Forms.Label()
-        Me.Label24 = New System.Windows.Forms.Label()
+        Me.lblDispenseHistory = New System.Windows.Forms.Label()
         Me.flpDispenseHistory = New System.Windows.Forms.FlowLayoutPanel()
         Me.tpLabelDirections = New System.Windows.Forms.ToolTip(Me.components)
         Me.tpToolTip = New System.Windows.Forms.ToolTip(Me.components)
@@ -251,7 +251,7 @@ Partial Class frmPatientInfo
         Me.btnAddAllergies.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btnAddAllergies.Location = New System.Drawing.Point(919, 8)
         Me.btnAddAllergies.Name = "btnAddAllergies"
-        Me.btnAddAllergies.Size = New System.Drawing.Size(161, 37)
+        Me.btnAddAllergies.Size = New System.Drawing.Size(170, 37)
         Me.btnAddAllergies.TabIndex = 10
         Me.btnAddAllergies.Text = "  Add Allergies"
         Me.btnAddAllergies.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -276,7 +276,7 @@ Partial Class frmPatientInfo
         Me.lstBoxAllergies.ItemHeight = 20
         Me.lstBoxAllergies.Location = New System.Drawing.Point(919, 51)
         Me.lstBoxAllergies.Name = "lstBoxAllergies"
-        Me.lstBoxAllergies.Size = New System.Drawing.Size(161, 122)
+        Me.lstBoxAllergies.Size = New System.Drawing.Size(170, 122)
         Me.lstBoxAllergies.TabIndex = 11
         '
         'txtZipCode
@@ -513,20 +513,20 @@ Partial Class frmPatientInfo
         '
         Me.flpMedications.AutoScroll = True
         Me.flpMedications.BackColor = System.Drawing.Color.White
-        Me.flpMedications.Location = New System.Drawing.Point(12, 307)
+        Me.flpMedications.Location = New System.Drawing.Point(12, 318)
         Me.flpMedications.Name = "flpMedications"
         Me.flpMedications.Size = New System.Drawing.Size(1067, 140)
         Me.flpMedications.TabIndex = 51
         '
-        'Label20
+        'lblPrescriptions
         '
-        Me.Label20.AutoSize = True
-        Me.Label20.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(7, 231)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(127, 25)
-        Me.Label20.TabIndex = 55
-        Me.Label20.Text = "Prescriptions:"
+        Me.lblPrescriptions.AutoSize = True
+        Me.lblPrescriptions.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPrescriptions.Location = New System.Drawing.Point(7, 242)
+        Me.lblPrescriptions.Name = "lblPrescriptions"
+        Me.lblPrescriptions.Size = New System.Drawing.Size(122, 25)
+        Me.lblPrescriptions.TabIndex = 55
+        Me.lblPrescriptions.Text = "Prescriptions"
         '
         'pnlPrescriptionsHeader
         '
@@ -538,7 +538,7 @@ Partial Class frmPatientInfo
         Me.pnlPrescriptionsHeader.Controls.Add(Me.lblMedicationPrescription)
         Me.pnlPrescriptionsHeader.Controls.Add(Me.lblTypePrescription)
         Me.pnlPrescriptionsHeader.Controls.Add(Me.lblStrengthPrescription)
-        Me.pnlPrescriptionsHeader.Location = New System.Drawing.Point(12, 260)
+        Me.pnlPrescriptionsHeader.Location = New System.Drawing.Point(12, 271)
         Me.pnlPrescriptionsHeader.Name = "pnlPrescriptionsHeader"
         Me.pnlPrescriptionsHeader.Size = New System.Drawing.Size(1067, 47)
         Me.pnlPrescriptionsHeader.TabIndex = 48
@@ -918,15 +918,15 @@ Partial Class frmPatientInfo
         Me.lblStrength.Tag = "2"
         Me.lblStrength.Text = "Strength"
         '
-        'Label24
+        'lblDispenseHistory
         '
-        Me.Label24.AutoSize = True
-        Me.Label24.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label24.Location = New System.Drawing.Point(7, 448)
-        Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(162, 25)
-        Me.Label24.TabIndex = 63
-        Me.Label24.Text = "Dispense History:"
+        Me.lblDispenseHistory.AutoSize = True
+        Me.lblDispenseHistory.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDispenseHistory.Location = New System.Drawing.Point(150, 241)
+        Me.lblDispenseHistory.Name = "lblDispenseHistory"
+        Me.lblDispenseHistory.Size = New System.Drawing.Size(157, 25)
+        Me.lblDispenseHistory.TabIndex = 63
+        Me.lblDispenseHistory.Text = "Dispense History"
         '
         'flpDispenseHistory
         '
@@ -944,11 +944,11 @@ Partial Class frmPatientInfo
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1091, 672)
         Me.Controls.Add(Me.pnlDispenseHistoryHeader)
-        Me.Controls.Add(Me.Label24)
+        Me.Controls.Add(Me.lblDispenseHistory)
         Me.Controls.Add(Me.flpDispenseHistory)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.pnlPrescriptionsHeader)
-        Me.Controls.Add(Me.Label20)
+        Me.Controls.Add(Me.lblPrescriptions)
         Me.Controls.Add(Me.flpMedications)
         Me.Controls.Add(Me.pnlPersonalInformation)
         Me.Controls.Add(Me.Label18)
@@ -988,7 +988,7 @@ Partial Class frmPatientInfo
     Friend WithEvents btnDispenseMedication As Button
     Friend WithEvents btnWaste As Button
     Friend WithEvents flpMedications As FlowLayoutPanel
-    Friend WithEvents Label20 As Label
+    Friend WithEvents lblPrescriptions As Label
     Friend WithEvents pnlPrescriptionsHeader As Panel
     Friend WithEvents lstBoxAllergies As ListBox
     Friend WithEvents txtMRN As TextBox
@@ -1023,7 +1023,7 @@ Partial Class frmPatientInfo
     Friend WithEvents lblMedication As Label
     Friend WithEvents lblType As Label
     Friend WithEvents lblStrength As Label
-    Friend WithEvents Label24 As Label
+    Friend WithEvents lblDispenseHistory As Label
     Friend WithEvents flpDispenseHistory As FlowLayoutPanel
     Friend WithEvents tpLabelDirections As ToolTip
     Friend WithEvents tpToolTip As ToolTip
