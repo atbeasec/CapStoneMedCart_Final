@@ -691,7 +691,7 @@ Module PatientInformation
     Public Sub getPrescriptions(ByRef intPatient_ID As Integer)
         Dim strSQLiteCommand As String
         Dim dsPatientPrescription As DataSet
-        strSQLiteCommand = "SELECT trim(Drug_Name,' '), Strength, Frequency, PatientMedication.Type, Quantity ,Date_Presrcibed, Physician_First_Name, Physician_Last_Name FROM PatientMedication " &
+        strSQLiteCommand = "SELECT trim(Drug_Name,' '), Strength, Frequency, Medication.Type, Quantity ,Date_Presrcibed, Physician_First_Name, Physician_Last_Name FROM PatientMedication " &
             "INNER JOIN Medication on Medication.Medication_ID = PatientMedication.Medication_TUID " &
             "INNER JOIN Patient ON Patient.Patient_ID = PatientMedication.Patient_TUID " &
             "INNER JOIN Physician on Physician.Physician_ID = PatientMedication.Ordering_Physician_ID " &
