@@ -37,7 +37,7 @@
         Next
 
         For Each dr As DataRow In dsMedications.Tables(0).Rows
-            cmbMedication.Items.Add(dr(18))
+            cmbMedication.Items.Add(dr(20))
             intMedID.Add(dr(EnumList.Medication.ID))
         Next
     End Sub
