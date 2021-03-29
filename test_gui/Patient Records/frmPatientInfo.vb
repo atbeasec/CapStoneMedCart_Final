@@ -114,8 +114,8 @@
         strSelectedLabel = lblPrescriptions.Name
 
         ' move labels to default position just to ensure they are in the correct position to start off
-        lblDispenseHistory.Location = New Point(153, 217)
-        lblPrescriptions.Location = New Point(10, 217)
+        lblDispenseHistory.Location = New Point(153, 190)
+        lblPrescriptions.Location = New Point(10, 190)
         moveAndResizePanels()
 
 
@@ -1030,7 +1030,7 @@
 
         ' this is the location that all of the header panels will be mounted to
         Dim mountLocationHeaderPanel As New Point(lblPrescriptions.Location.X, lblPrescriptions.Location.Y + 50)
-        Dim mountLocationFlowPanel As New Point(lblPrescriptions.Location.X, lblPrescriptions.Location.Y + 50)
+        Dim mountLocationFlowPanel As New Point(lblPrescriptions.Location.X, lblPrescriptions.Location.Y + 100)
         Dim flowPanelSize As New Size(1067, 320)
 
         If strSelectedLabel = lblDispenseHistory.Name Then
@@ -1082,36 +1082,11 @@
 
         If lblMoreDetails.Text = "Show More..." Then
             moveControlsDown(expandedSize)
-            '' expand the patient info. 
-            'pnlPersonalInformation.Size = expandedSize
-
-            '' show the necessary controls
-            'pnlNameBarcode.Visible = True
-
-            ''move labels down up
-            'lblDispenseHistory.Location = New Point(153, 288)
-            'lblPrescriptions.Location = New Point(10, 288)
-
-            ''move panels down
-            'moveAndResizePanels()
-
             ' change the text 
             lblMoreDetails.Text = "Show Less..."
 
         Else
             moveControlsUp(shrinkSize)
-            '' expand the patient info. 
-            'pnlPersonalInformation.Size = shrinkSize
-
-            '' show the necessary controls
-            'pnlNameBarcode.Visible = False
-
-            '' move labels back to default position
-            'lblDispenseHistory.Location = New Point(153, 217)
-            'lblPrescriptions.Location = New Point(10, 217)
-
-            '' move panels down
-            'moveAndResizePanels()
 
             ' change the text 
             lblMoreDetails.Text = "Show More..."
@@ -1129,8 +1104,8 @@
         pnlNameBarcode.Visible = True
 
         'move labels down up
-        lblDispenseHistory.Location = New Point(153, 288)
-        lblPrescriptions.Location = New Point(10, 288)
+        lblDispenseHistory.Location = New Point(153, 300)
+        lblPrescriptions.Location = New Point(10, 300)
 
         'move panels down
         moveAndResizePanels()
@@ -1146,8 +1121,8 @@
         pnlNameBarcode.Visible = False
 
         ' move labels back to default position
-        lblDispenseHistory.Location = New Point(153, 217)
-        lblPrescriptions.Location = New Point(10, 217)
+        lblDispenseHistory.Location = New Point(153, 190)
+        lblPrescriptions.Location = New Point(10, 190)
 
         ' move panels down
         moveAndResizePanels()

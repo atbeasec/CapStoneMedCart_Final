@@ -30,33 +30,44 @@ Partial Class frmPatientInfo
         Me.txtPhysician = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.pnlPersonalInformation = New System.Windows.Forms.Panel()
+        Me.lblMoreDetails = New System.Windows.Forms.Label()
+        Me.pnlNameBarcode = New System.Windows.Forms.Panel()
+        Me.txtBarcode = New System.Windows.Forms.TextBox()
+        Me.txtLast = New System.Windows.Forms.TextBox()
+        Me.txtMiddle = New System.Windows.Forms.TextBox()
+        Me.txtFirstName = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.cboState = New System.Windows.Forms.ComboBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtZipCode = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.txtCity = New System.Windows.Forms.TextBox()
+        Me.txtAddress = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.mtbBirthday = New System.Windows.Forms.MaskedTextBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.txtPhone = New System.Windows.Forms.MaskedTextBox()
-        Me.cboState = New System.Windows.Forms.ComboBox()
-        Me.btnAddAllergies = New System.Windows.Forms.Button()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.lstBoxAllergies = New System.Windows.Forms.ListBox()
-        Me.txtZipCode = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.txtCity = New System.Windows.Forms.TextBox()
         Me.cboBed = New System.Windows.Forms.ComboBox()
         Me.cboRoom = New System.Windows.Forms.ComboBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
-        Me.Label13 = New System.Windows.Forms.Label()
         Me.txtEmail = New System.Windows.Forms.TextBox()
-        Me.txtAddress = New System.Windows.Forms.TextBox()
         Me.txtMRN = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
         Me.txtWeight = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txtHeight = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
+        Me.btnAddAllergies = New System.Windows.Forms.Button()
         Me.flpMedications = New System.Windows.Forms.FlowLayoutPanel()
         Me.lblPrescriptions = New System.Windows.Forms.Label()
         Me.pnlPrescriptionsHeader = New System.Windows.Forms.Panel()
@@ -71,15 +82,6 @@ Partial Class frmPatientInfo
         Me.btnEditPatient = New System.Windows.Forms.Button()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.pnlNameBarcode = New System.Windows.Forms.Panel()
-        Me.txtBarcode = New System.Windows.Forms.TextBox()
-        Me.txtLast = New System.Windows.Forms.TextBox()
-        Me.txtMiddle = New System.Windows.Forms.TextBox()
-        Me.txtFirstName = New System.Windows.Forms.TextBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.btnBack = New System.Windows.Forms.Button()
         Me.pnlDispenseHistoryHeader = New System.Windows.Forms.Panel()
         Me.lblDateTime = New System.Windows.Forms.Label()
@@ -92,13 +94,11 @@ Partial Class frmPatientInfo
         Me.flpDispenseHistory = New System.Windows.Forms.FlowLayoutPanel()
         Me.tpLabelDirections = New System.Windows.Forms.ToolTip(Me.components)
         Me.tpToolTip = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.lblMoreDetails = New System.Windows.Forms.Label()
         Me.pnlPersonalInformation.SuspendLayout()
+        Me.pnlNameBarcode.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.pnlPrescriptionsHeader.SuspendLayout()
         Me.Panel1.SuspendLayout()
-        Me.pnlNameBarcode.SuspendLayout()
         Me.pnlDispenseHistoryHeader.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -189,8 +189,242 @@ Partial Class frmPatientInfo
         Me.pnlPersonalInformation.ForeColor = System.Drawing.Color.Gainsboro
         Me.pnlPersonalInformation.Location = New System.Drawing.Point(-1, 49)
         Me.pnlPersonalInformation.Name = "pnlPersonalInformation"
-        Me.pnlPersonalInformation.Size = New System.Drawing.Size(1092, 140)
+        Me.pnlPersonalInformation.Size = New System.Drawing.Size(1092, 146)
         Me.pnlPersonalInformation.TabIndex = 17
+        '
+        'lblMoreDetails
+        '
+        Me.lblMoreDetails.AutoSize = True
+        Me.lblMoreDetails.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblMoreDetails.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblMoreDetails.Location = New System.Drawing.Point(925, 115)
+        Me.lblMoreDetails.Name = "lblMoreDetails"
+        Me.lblMoreDetails.Size = New System.Drawing.Size(106, 21)
+        Me.lblMoreDetails.TabIndex = 65
+        Me.lblMoreDetails.Text = "Show More..."
+        '
+        'pnlNameBarcode
+        '
+        Me.pnlNameBarcode.BackColor = System.Drawing.Color.White
+        Me.pnlNameBarcode.Controls.Add(Me.txtBarcode)
+        Me.pnlNameBarcode.Controls.Add(Me.txtLast)
+        Me.pnlNameBarcode.Controls.Add(Me.txtMiddle)
+        Me.pnlNameBarcode.Controls.Add(Me.txtFirstName)
+        Me.pnlNameBarcode.Controls.Add(Me.Label7)
+        Me.pnlNameBarcode.Controls.Add(Me.cboState)
+        Me.pnlNameBarcode.Controls.Add(Me.Label6)
+        Me.pnlNameBarcode.Controls.Add(Me.Label2)
+        Me.pnlNameBarcode.Controls.Add(Me.Label5)
+        Me.pnlNameBarcode.Controls.Add(Me.Label4)
+        Me.pnlNameBarcode.Controls.Add(Me.txtZipCode)
+        Me.pnlNameBarcode.Controls.Add(Me.Label13)
+        Me.pnlNameBarcode.Controls.Add(Me.Label1)
+        Me.pnlNameBarcode.Controls.Add(Me.Label10)
+        Me.pnlNameBarcode.Controls.Add(Me.txtCity)
+        Me.pnlNameBarcode.Controls.Add(Me.txtAddress)
+        Me.pnlNameBarcode.Location = New System.Drawing.Point(4, 122)
+        Me.pnlNameBarcode.Name = "pnlNameBarcode"
+        Me.pnlNameBarcode.Size = New System.Drawing.Size(914, 115)
+        Me.pnlNameBarcode.TabIndex = 64
+        Me.pnlNameBarcode.Visible = False
+        '
+        'txtBarcode
+        '
+        Me.txtBarcode.BackColor = System.Drawing.Color.White
+        Me.txtBarcode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtBarcode.CausesValidation = False
+        Me.txtBarcode.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtBarcode.Location = New System.Drawing.Point(567, 83)
+        Me.txtBarcode.MaxLength = 100
+        Me.txtBarcode.Name = "txtBarcode"
+        Me.txtBarcode.ShortcutsEnabled = False
+        Me.txtBarcode.Size = New System.Drawing.Size(334, 25)
+        Me.txtBarcode.TabIndex = 30
+        '
+        'txtLast
+        '
+        Me.txtLast.BackColor = System.Drawing.Color.White
+        Me.txtLast.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtLast.CausesValidation = False
+        Me.txtLast.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtLast.Location = New System.Drawing.Point(380, 82)
+        Me.txtLast.MaxLength = 20
+        Me.txtLast.Name = "txtLast"
+        Me.txtLast.ShortcutsEnabled = False
+        Me.txtLast.Size = New System.Drawing.Size(154, 25)
+        Me.txtLast.TabIndex = 29
+        '
+        'txtMiddle
+        '
+        Me.txtMiddle.BackColor = System.Drawing.Color.White
+        Me.txtMiddle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtMiddle.CausesValidation = False
+        Me.txtMiddle.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMiddle.Location = New System.Drawing.Point(197, 82)
+        Me.txtMiddle.MaxLength = 15
+        Me.txtMiddle.Name = "txtMiddle"
+        Me.txtMiddle.ShortcutsEnabled = False
+        Me.txtMiddle.Size = New System.Drawing.Size(152, 25)
+        Me.txtMiddle.TabIndex = 28
+        '
+        'txtFirstName
+        '
+        Me.txtFirstName.BackColor = System.Drawing.Color.White
+        Me.txtFirstName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtFirstName.CausesValidation = False
+        Me.txtFirstName.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFirstName.Location = New System.Drawing.Point(12, 82)
+        Me.txtFirstName.MaxLength = 20
+        Me.txtFirstName.Name = "txtFirstName"
+        Me.txtFirstName.ShortcutsEnabled = False
+        Me.txtFirstName.Size = New System.Drawing.Size(150, 25)
+        Me.txtFirstName.TabIndex = 27
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label7.Location = New System.Drawing.Point(562, 62)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(79, 21)
+        Me.Label7.TabIndex = 26
+        Me.Label7.Text = "Barcode: "
+        '
+        'cboState
+        '
+        Me.cboState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboState.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboState.FormattingEnabled = True
+        Me.cboState.Location = New System.Drawing.Point(566, 23)
+        Me.cboState.Name = "cboState"
+        Me.cboState.Size = New System.Drawing.Size(151, 25)
+        Me.cboState.TabIndex = 14
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label6.Location = New System.Drawing.Point(376, 57)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(43, 21)
+        Me.Label6.TabIndex = 25
+        Me.Label6.Text = "Last:"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label2.Location = New System.Drawing.Point(562, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(52, 21)
+        Me.Label2.TabIndex = 61
+        Me.Label2.Text = "State:"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label5.Location = New System.Drawing.Point(194, 58)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(66, 21)
+        Me.Label5.TabIndex = 24
+        Me.Label5.Text = "Middle:"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label4.Location = New System.Drawing.Point(9, 58)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(45, 21)
+        Me.Label4.TabIndex = 23
+        Me.Label4.Text = "First:"
+        '
+        'txtZipCode
+        '
+        Me.txtZipCode.BackColor = System.Drawing.Color.White
+        Me.txtZipCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtZipCode.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtZipCode.Location = New System.Drawing.Point(750, 23)
+        Me.txtZipCode.MaxLength = 9
+        Me.txtZipCode.Name = "txtZipCode"
+        Me.txtZipCode.ReadOnly = True
+        Me.txtZipCode.ShortcutsEnabled = False
+        Me.txtZipCode.Size = New System.Drawing.Size(151, 25)
+        Me.txtZipCode.TabIndex = 15
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label13.Location = New System.Drawing.Point(8, 0)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(123, 21)
+        Me.Label13.TabIndex = 52
+        Me.Label13.Text = "Street Address:"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label1.Location = New System.Drawing.Point(375, 0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(42, 21)
+        Me.Label1.TabIndex = 59
+        Me.Label1.Text = "City:"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label10.Location = New System.Drawing.Point(746, 0)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(80, 21)
+        Me.Label10.TabIndex = 43
+        Me.Label10.Text = "Zip Code:"
+        '
+        'txtCity
+        '
+        Me.txtCity.BackColor = System.Drawing.Color.White
+        Me.txtCity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtCity.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCity.Location = New System.Drawing.Point(379, 23)
+        Me.txtCity.Name = "txtCity"
+        Me.txtCity.ReadOnly = True
+        Me.txtCity.ShortcutsEnabled = False
+        Me.txtCity.Size = New System.Drawing.Size(154, 25)
+        Me.txtCity.TabIndex = 13
+        '
+        'txtAddress
+        '
+        Me.txtAddress.BackColor = System.Drawing.Color.White
+        Me.txtAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtAddress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAddress.Location = New System.Drawing.Point(12, 23)
+        Me.txtAddress.Name = "txtAddress"
+        Me.txtAddress.ReadOnly = True
+        Me.txtAddress.ShortcutsEnabled = False
+        Me.txtAddress.Size = New System.Drawing.Size(337, 25)
+        Me.txtAddress.TabIndex = 12
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label9.Location = New System.Drawing.Point(923, 5)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(78, 21)
+        Me.Label9.TabIndex = 62
+        Me.Label9.Text = "Allergies:"
         '
         'mtbBirthday
         '
@@ -226,43 +460,6 @@ Partial Class frmPatientInfo
         Me.txtPhone.Size = New System.Drawing.Size(144, 22)
         Me.txtPhone.TabIndex = 0
         '
-        'cboState
-        '
-        Me.cboState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboState.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboState.FormattingEnabled = True
-        Me.cboState.Location = New System.Drawing.Point(566, 23)
-        Me.cboState.Name = "cboState"
-        Me.cboState.Size = New System.Drawing.Size(151, 25)
-        Me.cboState.TabIndex = 14
-        '
-        'btnAddAllergies
-        '
-        Me.btnAddAllergies.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnAddAllergies.FlatAppearance.BorderSize = 0
-        Me.btnAddAllergies.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAddAllergies.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddAllergies.ForeColor = System.Drawing.Color.White
-        Me.btnAddAllergies.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnAddAllergies.Location = New System.Drawing.Point(926, 6)
-        Me.btnAddAllergies.Name = "btnAddAllergies"
-        Me.btnAddAllergies.Size = New System.Drawing.Size(156, 37)
-        Me.btnAddAllergies.TabIndex = 10
-        Me.btnAddAllergies.Text = "  Add Allergies"
-        Me.btnAddAllergies.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnAddAllergies.UseVisualStyleBackColor = False
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label2.Location = New System.Drawing.Point(562, 0)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(52, 21)
-        Me.Label2.TabIndex = 61
-        Me.Label2.Text = "State:"
-        '
         'lstBoxAllergies
         '
         Me.lstBoxAllergies.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -273,42 +470,6 @@ Partial Class frmPatientInfo
         Me.lstBoxAllergies.Name = "lstBoxAllergies"
         Me.lstBoxAllergies.Size = New System.Drawing.Size(156, 82)
         Me.lstBoxAllergies.TabIndex = 11
-        '
-        'txtZipCode
-        '
-        Me.txtZipCode.BackColor = System.Drawing.Color.White
-        Me.txtZipCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtZipCode.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtZipCode.Location = New System.Drawing.Point(750, 23)
-        Me.txtZipCode.MaxLength = 9
-        Me.txtZipCode.Name = "txtZipCode"
-        Me.txtZipCode.ReadOnly = True
-        Me.txtZipCode.ShortcutsEnabled = False
-        Me.txtZipCode.Size = New System.Drawing.Size(151, 25)
-        Me.txtZipCode.TabIndex = 15
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label1.Location = New System.Drawing.Point(375, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(42, 21)
-        Me.Label1.TabIndex = 59
-        Me.Label1.Text = "City:"
-        '
-        'txtCity
-        '
-        Me.txtCity.BackColor = System.Drawing.Color.White
-        Me.txtCity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtCity.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCity.Location = New System.Drawing.Point(379, 23)
-        Me.txtCity.Name = "txtCity"
-        Me.txtCity.ReadOnly = True
-        Me.txtCity.ShortcutsEnabled = False
-        Me.txtCity.Size = New System.Drawing.Size(154, 25)
-        Me.txtCity.TabIndex = 13
         '
         'cboBed
         '
@@ -352,17 +513,6 @@ Partial Class frmPatientInfo
         Me.Label14.TabIndex = 54
         Me.Label14.Text = "Email:"
         '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label13.Location = New System.Drawing.Point(8, 0)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(123, 21)
-        Me.Label13.TabIndex = 52
-        Me.Label13.Text = "Street Address:"
-        '
         'txtEmail
         '
         Me.txtEmail.BackColor = System.Drawing.Color.White
@@ -374,18 +524,6 @@ Partial Class frmPatientInfo
         Me.txtEmail.ShortcutsEnabled = False
         Me.txtEmail.Size = New System.Drawing.Size(151, 25)
         Me.txtEmail.TabIndex = 8
-        '
-        'txtAddress
-        '
-        Me.txtAddress.BackColor = System.Drawing.Color.White
-        Me.txtAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtAddress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAddress.Location = New System.Drawing.Point(12, 23)
-        Me.txtAddress.Name = "txtAddress"
-        Me.txtAddress.ReadOnly = True
-        Me.txtAddress.ShortcutsEnabled = False
-        Me.txtAddress.Size = New System.Drawing.Size(337, 25)
-        Me.txtAddress.TabIndex = 12
         '
         'txtMRN
         '
@@ -432,17 +570,6 @@ Partial Class frmPatientInfo
         Me.Label17.Size = New System.Drawing.Size(58, 21)
         Me.Label17.TabIndex = 45
         Me.Label17.Text = "Room:"
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label10.Location = New System.Drawing.Point(746, 0)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(80, 21)
-        Me.Label10.TabIndex = 43
-        Me.Label10.Text = "Zip Code:"
         '
         'txtWeight
         '
@@ -503,6 +630,22 @@ Partial Class frmPatientInfo
         Me.Label11.Size = New System.Drawing.Size(47, 21)
         Me.Label11.TabIndex = 6
         Me.Label11.Text = "DOB:"
+        '
+        'btnAddAllergies
+        '
+        Me.btnAddAllergies.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnAddAllergies.FlatAppearance.BorderSize = 0
+        Me.btnAddAllergies.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAddAllergies.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAddAllergies.ForeColor = System.Drawing.Color.White
+        Me.btnAddAllergies.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnAddAllergies.Location = New System.Drawing.Point(926, 6)
+        Me.btnAddAllergies.Name = "btnAddAllergies"
+        Me.btnAddAllergies.Size = New System.Drawing.Size(156, 37)
+        Me.btnAddAllergies.TabIndex = 10
+        Me.btnAddAllergies.Text = "  Add Allergies"
+        Me.btnAddAllergies.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnAddAllergies.UseVisualStyleBackColor = False
         '
         'flpMedications
         '
@@ -679,127 +822,6 @@ Partial Class frmPatientInfo
         Me.Panel1.Size = New System.Drawing.Size(1091, 46)
         Me.Panel1.TabIndex = 60
         '
-        'pnlNameBarcode
-        '
-        Me.pnlNameBarcode.BackColor = System.Drawing.Color.White
-        Me.pnlNameBarcode.Controls.Add(Me.txtBarcode)
-        Me.pnlNameBarcode.Controls.Add(Me.txtLast)
-        Me.pnlNameBarcode.Controls.Add(Me.txtMiddle)
-        Me.pnlNameBarcode.Controls.Add(Me.txtFirstName)
-        Me.pnlNameBarcode.Controls.Add(Me.Label7)
-        Me.pnlNameBarcode.Controls.Add(Me.cboState)
-        Me.pnlNameBarcode.Controls.Add(Me.Label6)
-        Me.pnlNameBarcode.Controls.Add(Me.Label2)
-        Me.pnlNameBarcode.Controls.Add(Me.Label5)
-        Me.pnlNameBarcode.Controls.Add(Me.Label4)
-        Me.pnlNameBarcode.Controls.Add(Me.txtZipCode)
-        Me.pnlNameBarcode.Controls.Add(Me.Label13)
-        Me.pnlNameBarcode.Controls.Add(Me.Label1)
-        Me.pnlNameBarcode.Controls.Add(Me.Label10)
-        Me.pnlNameBarcode.Controls.Add(Me.txtCity)
-        Me.pnlNameBarcode.Controls.Add(Me.txtAddress)
-        Me.pnlNameBarcode.Location = New System.Drawing.Point(4, 122)
-        Me.pnlNameBarcode.Name = "pnlNameBarcode"
-        Me.pnlNameBarcode.Size = New System.Drawing.Size(914, 115)
-        Me.pnlNameBarcode.TabIndex = 64
-        Me.pnlNameBarcode.Visible = False
-        '
-        'txtBarcode
-        '
-        Me.txtBarcode.BackColor = System.Drawing.Color.White
-        Me.txtBarcode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtBarcode.CausesValidation = False
-        Me.txtBarcode.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBarcode.Location = New System.Drawing.Point(567, 83)
-        Me.txtBarcode.MaxLength = 100
-        Me.txtBarcode.Name = "txtBarcode"
-        Me.txtBarcode.ShortcutsEnabled = False
-        Me.txtBarcode.Size = New System.Drawing.Size(334, 25)
-        Me.txtBarcode.TabIndex = 30
-        '
-        'txtLast
-        '
-        Me.txtLast.BackColor = System.Drawing.Color.White
-        Me.txtLast.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtLast.CausesValidation = False
-        Me.txtLast.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLast.Location = New System.Drawing.Point(380, 82)
-        Me.txtLast.MaxLength = 20
-        Me.txtLast.Name = "txtLast"
-        Me.txtLast.ShortcutsEnabled = False
-        Me.txtLast.Size = New System.Drawing.Size(154, 25)
-        Me.txtLast.TabIndex = 29
-        '
-        'txtMiddle
-        '
-        Me.txtMiddle.BackColor = System.Drawing.Color.White
-        Me.txtMiddle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtMiddle.CausesValidation = False
-        Me.txtMiddle.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMiddle.Location = New System.Drawing.Point(197, 82)
-        Me.txtMiddle.MaxLength = 15
-        Me.txtMiddle.Name = "txtMiddle"
-        Me.txtMiddle.ShortcutsEnabled = False
-        Me.txtMiddle.Size = New System.Drawing.Size(152, 25)
-        Me.txtMiddle.TabIndex = 28
-        '
-        'txtFirstName
-        '
-        Me.txtFirstName.BackColor = System.Drawing.Color.White
-        Me.txtFirstName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtFirstName.CausesValidation = False
-        Me.txtFirstName.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFirstName.Location = New System.Drawing.Point(12, 82)
-        Me.txtFirstName.MaxLength = 20
-        Me.txtFirstName.Name = "txtFirstName"
-        Me.txtFirstName.ShortcutsEnabled = False
-        Me.txtFirstName.Size = New System.Drawing.Size(150, 25)
-        Me.txtFirstName.TabIndex = 27
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label7.Location = New System.Drawing.Point(562, 62)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(79, 21)
-        Me.Label7.TabIndex = 26
-        Me.Label7.Text = "Barcode: "
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label6.Location = New System.Drawing.Point(379, 57)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(43, 21)
-        Me.Label6.TabIndex = 25
-        Me.Label6.Text = "Last:"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label5.Location = New System.Drawing.Point(198, 58)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(66, 21)
-        Me.Label5.TabIndex = 24
-        Me.Label5.Text = "Middle:"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label4.Location = New System.Drawing.Point(12, 58)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(45, 21)
-        Me.Label4.TabIndex = 23
-        Me.Label4.Text = "First:"
-        '
         'btnBack
         '
         Me.btnBack.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
@@ -922,28 +944,6 @@ Partial Class frmPatientInfo
         Me.flpDispenseHistory.Size = New System.Drawing.Size(1067, 64)
         Me.flpDispenseHistory.TabIndex = 1
         '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label9.Location = New System.Drawing.Point(923, 5)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(78, 21)
-        Me.Label9.TabIndex = 62
-        Me.Label9.Text = "Allergies:"
-        '
-        'lblMoreDetails
-        '
-        Me.lblMoreDetails.AutoSize = True
-        Me.lblMoreDetails.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblMoreDetails.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblMoreDetails.Location = New System.Drawing.Point(925, 115)
-        Me.lblMoreDetails.Name = "lblMoreDetails"
-        Me.lblMoreDetails.Size = New System.Drawing.Size(106, 21)
-        Me.lblMoreDetails.TabIndex = 65
-        Me.lblMoreDetails.Text = "Show More..."
-        '
         'frmPatientInfo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -963,14 +963,14 @@ Partial Class frmPatientInfo
         Me.Text = "frmPatientInfo"
         Me.pnlPersonalInformation.ResumeLayout(False)
         Me.pnlPersonalInformation.PerformLayout()
+        Me.pnlNameBarcode.ResumeLayout(False)
+        Me.pnlNameBarcode.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.pnlPrescriptionsHeader.ResumeLayout(False)
         Me.pnlPrescriptionsHeader.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
-        Me.pnlNameBarcode.ResumeLayout(False)
-        Me.pnlNameBarcode.PerformLayout()
         Me.pnlDispenseHistoryHeader.ResumeLayout(False)
         Me.pnlDispenseHistoryHeader.PerformLayout()
         Me.ResumeLayout(False)
