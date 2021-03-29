@@ -145,7 +145,7 @@
         'Add panel to flow layout panel
         'pnlMainPanel.Tag = intPatientID
         flpPannel.Controls.Add(pnl)
-
+        pnlMainPanel.Tag = intPatientID
     End Sub
     '/********************************************************************/
     '/*                   SUB NAME: CreateAddButton             	     */         
