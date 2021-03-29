@@ -21,7 +21,7 @@
         txtQuantity.Text = 1
         PopulateFrequencyNumberComboBox()
         Dim intCounter As Integer = 0
-        dsMedications = ExecuteSelectQuery("SELECT *,Trim(Drug_Name,' ') From Medication Inner Join DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE DrawerMedication.Active_Flag = '1' ORDER BY Medication.Medication_ID")
+        dsMedications = ExecuteSelectQuery("SELECT *,Trim(Drug_Name,' ') From Medication Inner Join DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE DrawerMedication.Active_Flag = '1' ORDER BY Medication.Drug_Name COLLATE NOCASE")
         dsPhysicians = ExecuteSelectQuery("Select * From Physician WHERE Active_Flag = '1' ORDER BY Physician_Last_Name COLLATE NOCASE, Physician_First_Name COLLATE NOCASE;")
         dsPatients = ExecuteSelectQuery("Select * From Patient WHERE Active_Flag = '1' ORDER BY Patient_Last_Name COLLATE NOCASE, Patient_First_Name COLLATE NOCASE;")
 
