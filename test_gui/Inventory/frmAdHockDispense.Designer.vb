@@ -96,8 +96,10 @@ Partial Class frmAdHockDispense
         Me.cmbMedications.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbMedications.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbMedications.BackColor = System.Drawing.Color.White
+        Me.cmbMedications.DropDownHeight = 300
         Me.cmbMedications.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbMedications.FormattingEnabled = True
+        Me.cmbMedications.IntegralHeight = False
         Me.cmbMedications.Items.AddRange(New Object() {"Yes", "No"})
         Me.cmbMedications.Location = New System.Drawing.Point(35, 64)
         Me.cmbMedications.Name = "cmbMedications"
@@ -141,8 +143,10 @@ Partial Class frmAdHockDispense
         Me.cmbPatientName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbPatientName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbPatientName.BackColor = System.Drawing.Color.White
+        Me.cmbPatientName.DropDownHeight = 300
         Me.cmbPatientName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbPatientName.FormattingEnabled = True
+        Me.cmbPatientName.IntegralHeight = False
         Me.cmbPatientName.Items.AddRange(New Object() {"Yes", "No"})
         Me.cmbPatientName.Location = New System.Drawing.Point(35, 292)
         Me.cmbPatientName.Name = "cmbPatientName"

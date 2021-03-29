@@ -66,7 +66,7 @@ Partial Class frmPharmacy
         '
         'cmbOrderedBy
         '
-        Me.cmbOrderedBy.DropDownHeight = 250
+        Me.cmbOrderedBy.DropDownHeight = 300
         Me.cmbOrderedBy.DropDownWidth = 100
         Me.cmbOrderedBy.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbOrderedBy.FormattingEnabled = True
@@ -92,7 +92,7 @@ Partial Class frmPharmacy
         '
         Me.cmbPatientName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbPatientName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cmbPatientName.DropDownHeight = 250
+        Me.cmbPatientName.DropDownHeight = 300
         Me.cmbPatientName.DropDownWidth = 100
         Me.cmbPatientName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbPatientName.FormattingEnabled = True
