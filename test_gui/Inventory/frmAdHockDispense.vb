@@ -36,17 +36,29 @@
         If IsNothing(cmbMedications.SelectedItem) And IsNothing(cmbPatientName.SelectedItem) Then
             MessageBox.Show("Please select a medication and patient")
         Else
-            If Not IsNothing(cmbMedications.SelectedItem) And txtQuantity.Text > 0 Then
-                If Not IsNothing(cmbPatientName.SelectedItem) Then
-
-                    AdHoc.InsertAdHoc(AdHoc.intPatientIDArray(cmbPatientName.SelectedIndex), "1", txtQuantity.Text, AdHoc.intMedIDArray(cmbMedications.SelectedIndex))
-                    AdHoc.clearAdhocBoxes()
-                    MessageBox.Show("Order Successfully placed")
-                Else
-                    MessageBox.Show("Please select a patient")
-                End If
+            If cmbMedications.SelectedItem = lstboxAllergies.SelectedItem Then
+                'show witness sign off
+                frmWitnessSignOff.Label1.Text = cmbMedications.SelectedItem.ToString
+                'if authentication from witness sign off form comes back then
+                'If Not IsNothing(cmbMedications.SelectedItem) Then
+                '    DispenseHistory.DispenseMedication(DispenseHistory.SplitMedicationString(cmbMedications.SelectedItem), intPatientID)
+                'else
+                'End If
+                MessageBox.Show("Patient is allergic to this Medication")
             Else
-                MessageBox.Show("Please select a medication")
+
+                If Not IsNothing(cmbMedications.SelectedItem) And txtQuantity.Text > 0 Then
+                    If Not IsNothing(cmbPatientName.SelectedItem) Then
+
+                        AdHoc.InsertAdHoc(AdHoc.intPatientIDArray(cmbPatientName.SelectedIndex), "1", txtQuantity.Text, AdHoc.intMedIDArray(cmbMedications.SelectedIndex))
+                        AdHoc.clearAdhocBoxes()
+                        MessageBox.Show("Order Successfully placed")
+                    Else
+                        MessageBox.Show("Please select a patient")
+                    End If
+                Else
+                    MessageBox.Show("Please select a medication")
+                End If
             End If
         End If
 
