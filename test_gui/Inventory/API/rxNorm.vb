@@ -447,6 +447,7 @@ Module rxNorm
         For Each item In JsonJArray
             For Each subItem As JProperty In item
                 If subItem.Value = "SCHEDULE" Then
+                    frmInventory.txtSchedule.Enabled = False
                     Return DirectCast(subItem.Next, JProperty).Value
                 End If
             Next

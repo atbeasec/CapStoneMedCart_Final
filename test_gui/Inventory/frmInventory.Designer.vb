@@ -79,6 +79,8 @@ Partial Class frmInventory
         Me.pnlHeader = New System.Windows.Forms.Panel()
         Me.btnBack = New System.Windows.Forms.Button()
         Me.tpSelectedItem = New System.Windows.Forms.ToolTip(Me.components)
+        Me.txtStatus = New System.Windows.Forms.TextBox()
+        Me.lblStatus = New System.Windows.Forms.Label()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -105,21 +107,21 @@ Partial Class frmInventory
         Me.Label10.Location = New System.Drawing.Point(252, 261)
         Me.Label10.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(89, 21)
+        Me.Label10.Size = New System.Drawing.Size(90, 21)
         Me.Label10.TabIndex = 111
-        Me.Label10.Text = "Divider Bin:"
+        Me.Label10.Text = "Drawer Bin:"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label6.Location = New System.Drawing.Point(490, 197)
+        Me.Label6.Location = New System.Drawing.Point(490, 183)
         Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(118, 21)
+        Me.Label6.Size = New System.Drawing.Size(140, 42)
         Me.Label6.TabIndex = 107
-        Me.Label6.Text = "Expiration Date:"
+        Me.Label6.Text = "Expiration Date:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Year-Month-Date)"
         '
         'Label5
         '
@@ -440,7 +442,7 @@ Partial Class frmInventory
         Me.Panel2.BackColor = System.Drawing.Color.DarkGray
         Me.Panel2.Controls.Add(Me.mtbExpirationDate)
         Me.Panel2.ForeColor = System.Drawing.Color.DarkGray
-        Me.Panel2.Location = New System.Drawing.Point(493, 220)
+        Me.Panel2.Location = New System.Drawing.Point(493, 228)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel2.Size = New System.Drawing.Size(92, 24)
@@ -452,7 +454,7 @@ Partial Class frmInventory
         Me.mtbExpirationDate.Dock = System.Windows.Forms.DockStyle.Fill
         Me.mtbExpirationDate.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.mtbExpirationDate.Location = New System.Drawing.Point(1, 1)
-        Me.mtbExpirationDate.Mask = "00/00/0000"
+        Me.mtbExpirationDate.Mask = "0000/00/00"
         Me.mtbExpirationDate.Name = "mtbExpirationDate"
         Me.mtbExpirationDate.ShortcutsEnabled = False
         Me.mtbExpirationDate.Size = New System.Drawing.Size(90, 22)
@@ -567,7 +569,6 @@ Partial Class frmInventory
         '
         Me.txtSchedule.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtSchedule.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtSchedule.Enabled = False
         Me.txtSchedule.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtSchedule.Location = New System.Drawing.Point(1, 1)
         Me.txtSchedule.Multiline = True
@@ -693,6 +694,8 @@ Partial Class frmInventory
         '
         'pnlPatientName
         '
+        Me.pnlPatientName.Controls.Add(Me.lblStatus)
+        Me.pnlPatientName.Controls.Add(Me.txtStatus)
         Me.pnlPatientName.Controls.Add(Me.lblPatientName)
         Me.pnlPatientName.Controls.Add(Me.btnSave)
         Me.pnlPatientName.Controls.Add(Me.pnlPatientNamePadding)
@@ -766,6 +769,26 @@ Partial Class frmInventory
         Me.btnBack.Text = "Back"
         Me.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnBack.UseVisualStyleBackColor = False
+        '
+        'txtStatus
+        '
+        Me.txtStatus.HideSelection = False
+        Me.txtStatus.Location = New System.Drawing.Point(331, 90)
+        Me.txtStatus.Name = "txtStatus"
+        Me.txtStatus.Size = New System.Drawing.Size(299, 20)
+        Me.txtStatus.TabIndex = 192
+        Me.txtStatus.Text = "System Status"
+        '
+        'lblStatus
+        '
+        Me.lblStatus.AutoSize = True
+        Me.lblStatus.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblStatus.Location = New System.Drawing.Point(327, 66)
+        Me.lblStatus.Name = "lblStatus"
+        Me.lblStatus.Size = New System.Drawing.Size(55, 21)
+        Me.lblStatus.TabIndex = 193
+        Me.lblStatus.Text = "Status:"
+        Me.lblStatus.Visible = False
         '
         'frmInventory
         '
@@ -862,4 +885,6 @@ Partial Class frmInventory
     Friend WithEvents tpSelectedItem As ToolTip
     Friend WithEvents Panel2 As Panel
     Friend WithEvents mtbExpirationDate As MaskedTextBox
+    Friend WithEvents txtStatus As TextBox
+    Friend WithEvents lblStatus As Label
 End Class

@@ -326,10 +326,12 @@ Partial Class frmEditPhysician
         Me.cboState.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cboState.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cboState.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cboState.DropDownHeight = 250
         Me.cboState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboState.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cboState.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboState.FormattingEnabled = True
+        Me.cboState.IntegralHeight = False
         Me.cboState.Location = New System.Drawing.Point(1, 1)
         Me.cboState.MaxLength = 2
         Me.cboState.Name = "cboState"

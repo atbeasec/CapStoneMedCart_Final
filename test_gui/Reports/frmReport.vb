@@ -85,7 +85,9 @@ Public Class frmReport
     '/*  Eric L.    03/16/21    Initial creation of code                  */  
     '/*  BRH        03/21/21    Add narcotics wasted, add all wasted meds,
     '/*                         narcotic ad hoc orders, 
-    '/*  BRH  03/25/21   Added Active and Resolved Discrepancy code       */
+    '/*  BRH        03/25/21    Added Active and Resolved Discrepancy code*/
+    '/*  BRH        03/28/21    Added Allergy and Drug Interaction overrides
+    '/*                         and all and narcotic end of shift counts  */
     '/*********************************************************************/
     Private Sub PopulateReportsList()
 
@@ -95,9 +97,12 @@ Public Class frmReport
         Const STRNARCADHOCORDERS As String = "Narcotic Ad Hoc Orders"
         Const STRNARCOTICSDISPENSED As String = "Narcotics Dispensed"
         Const STRNARCOTICSWASTED As String = "Narcotics Wasted"
-        Const STROVERRIDES As String = "Overrides"
+        Const STRALLERGYOVERRIDES As String = "Allergy Overrides"
         Const STRWASTES As String = "Wasted Medication"
         Const STRRESOLVEDDISCREPANCIES As String = "Resolved Discrepancies"
+        Const STRDRUGINTERACTIONOVERRIDES As String = "Drug Interaction Overrides"
+        Const STRNARCENDOFSHIFTCOUNT As String = "Narcotics End of Shift Count"
+        Const STRENDOFSHIFTCOUNT As String = "End of Shift Count"
 
         cmbReports.Items.Add(STRACTIVEDISCREPANCIES)
         cmbReports.Items.Add(STRDISPENSINGHISTORY)
@@ -105,9 +110,12 @@ Public Class frmReport
         cmbReports.Items.Add(STRNARCADHOCORDERS)
         cmbReports.Items.Add(STRNARCOTICSDISPENSED)
         cmbReports.Items.Add(STRNARCOTICSWASTED)
-        cmbReports.Items.Add(STROVERRIDES)
+        cmbReports.Items.Add(STRALLERGYOVERRIDES)
         cmbReports.Items.Add(STRWASTES)
         cmbReports.Items.Add(STRRESOLVEDDISCREPANCIES)
+        cmbReports.Items.Add(STRDRUGINTERACTIONOVERRIDES)
+        cmbReports.Items.Add(STRNARCENDOFSHIFTCOUNT)
+        cmbReports.Items.Add(STRENDOFSHIFTCOUNT)
 
     End Sub
     '/*******************************************************************/

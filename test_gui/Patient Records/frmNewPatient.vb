@@ -50,10 +50,10 @@ Public Class frmNewPatient
     Dim dsPhysicians As DataSet
     Dim strAllowedNameCharacters = "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*()/.,<>=+"
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-
         If Not hasError() Then
             SavePatientDataToDatabase()
             clearInformationBoxes()
+            MessageBox.Show("new patient has been added to the system")
         End If
     End Sub
 
@@ -666,13 +666,12 @@ Public Class frmNewPatient
     '/*  ---   ----     ------------------------------------------------- */
     '/*                                                                     
     '/*********************************************************************/
-
-
-
-
     Private Sub txtAddress_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtAddress.KeyPress
         DataVaildationMethods.KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz 0123456789.'-#@%&/")
     End Sub
+
+
+
     '/*********************************************************************/
     '/*                   SUBPROGRAM NAME: cmbState_KeyPress 	           */         
     '/*********************************************************************/
@@ -808,15 +807,15 @@ Public Class frmNewPatient
         Dim strbErrorMessage As New StringBuilder
         Dim email As MailAddress
         hasError = False
-        If txtFirstName.Text = String.Empty Then
+        If txtFirstName.Text = String.Empty Or txtFirstName.Text.Length <= 1 Then
             hasError = True
             strbErrorMessage.Append("Please enter a valid first name." & vbCrLf)
         End If
-        If txtMiddleName.Text = String.Empty Then
+        If txtMiddleName.Text = String.Empty Or txtMiddleName.Text.Length <= 1 Then
             hasError = True
             strbErrorMessage.Append("Please enter a valid middle name." & vbCrLf)
         End If
-        If txtLastName.Text = String.Empty Then
+        If txtLastName.Text = String.Empty Or txtLastName.Text.Length <= 1 Then
             hasError = True
             strbErrorMessage.Append("Please enter a valid last name." & vbCrLf)
         End If
@@ -836,6 +835,21 @@ Public Class frmNewPatient
             hasError = True
             strbErrorMessage.Append("Please enter a valid date of birth." & vbCrLf)
         End If
+
+        If IsDate(mtbDoB.Text) Then
+            Dim intyear As Integer = Date.Today.Year
+            Dim dtmDOByear As Date = CDate(mtbDoB.Text)
+            Dim intDOByear As Integer = dtmDOByear.Year
+            If dtmDOByear > Date.Today Then
+                hasError = True
+                strbErrorMessage.Append("Please enter a valid date of birth." & vbCrLf)
+            End If
+            If (intyear - intDOByear) > 125 Then
+                hasError = True
+                strbErrorMessage.Append("Please enter a valid date of birth." & vbCrLf)
+            End If
+        End If
+
         If txtHeight.Text = String.Empty Then
             hasError = True
             strbErrorMessage.Append("Please enter a valid height." & vbCrLf)

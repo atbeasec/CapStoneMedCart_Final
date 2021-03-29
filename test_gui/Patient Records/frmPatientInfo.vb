@@ -2,6 +2,7 @@
 
     Private intPatientID As Integer
     Private intPatientMRN As Double
+    Private strSelectedLabel As String
     Public Enum DispenseHistoryEnum As Integer
         MedicationName = 1
         Strength = 2
@@ -101,11 +102,21 @@
         CreateToolTips(pnlPrescriptionsHeader, tpLabelDirections)
         CreateToolTips(pnlDispenseHistoryHeader, tpLabelDirections)
 
+        'btnWaste.Visible = False
         ' AddHandlerToLabelClick(pnlDispenseHistoryHeader)
         ' AddHandlerToLabelClick(pnlPrescriptionsHeader)
 
         AddHandlerToLabelClick(pnlDispenseHistoryHeader, AddressOf SortBySelectedLabel)
         AddHandlerToLabelClick(pnlPrescriptionsHeader, AddressOf SortBySelectedLabel)
+
+        lblDispenseHistory.ForeColor = Color.DarkGray
+        lblPrescriptions.Font = New Font(New FontFamily("Segoe UI Semibold"), 14.25, FontStyle.Underline)
+        strSelectedLabel = lblPrescriptions.Name
+
+        ' move labels to default position just to ensure they are in the correct position to start off
+        lblDispenseHistory.Location = New Point(153, 190)
+        lblPrescriptions.Location = New Point(10, 190)
+        moveAndResizePanels()
 
 
         ' CreateDispenseHistoryPanels(flpDispenseHistory, "test", "test", "test", "test", "test", "test", "test")
@@ -555,6 +566,8 @@
 
     Private Sub btnEditPatient_Click(sender As Object, e As EventArgs) Handles btnEditPatient.Click
 
+        Dim expandedSize As New Size(1092, 251)
+        Dim shrinkSize As New Size(1092, 139)
         Dim ctl As Control = Nothing
 
         Dim arrPnl As Panel() = {pnlPersonalInformation}
@@ -564,12 +577,18 @@
             SetControlsToAllowEdit(ctl)
             pnlNameBarcode.Visible = True
             btnEditPatient.Text = "Save Changes"
+            moveControlsDown(expandedSize)
+            lblMoreDetails.Visible = False
+
 
         Else
+
             SetControlsToReadOnly(ctl)
             btnEditPatient.Text = "Edit Patient"
             PatientInformation.SavePatientEdits(intPatientID)
             pnlNameBarcode.Visible = False
+            moveControlsUp(shrinkSize)
+            lblMoreDetails.Visible = True
         End If
 
     End Sub
@@ -641,6 +660,7 @@
             End If
         Next
         mtbBirthday.ReadOnly = False
+        cboState.Enabled = True
     End Sub
     '/*********************************************************************/
     '/*                   SUBPROGRAM NAME: SetControlsToReadOnly     	  */         
@@ -701,6 +721,7 @@
         Next
         cboBed.Enabled = False
         cboRoom.Enabled = False
+        cboState.Enabled = False
         mtbBirthday.ReadOnly = True
     End Sub
 
@@ -797,7 +818,7 @@
     '/*  ---   ----     ------------------------------------------------- */
     '/*                                                                   */
     '/*********************************************************************/
-    Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
+    Private Sub btnWaste_Click(sender As Object, e As EventArgs)
 
         frmWaste.SetPatientID(intPatientID) 'this should set the patient MRN using the given patientID
         frmMain.OpenChildForm(frmWaste)
@@ -984,6 +1005,326 @@
     End Sub
 
     Private Sub txtHeight_TextChanged(sender As Object, e As KeyPressEventArgs) Handles txtWeight.KeyPress, txtHeight.KeyPress
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: lblPrescriptions_Click         */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/29/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to be called when a user clicks on the label. This is
+    '/*  used instead of a radio button for the clean look but functions  */
+    '/*  the button font is changed to indicate it is selected.            /
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                         */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	  */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*		              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/29/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub lblPrescriptions_Click(sender As Object, e As EventArgs) Handles lblPrescriptions.Click
+
+        lblPrescriptions.ForeColor = Color.Black
+        lblPrescriptions.Font = New Font(New FontFamily("Segoe UI Semibold"), 14.25, FontStyle.Underline)
+        lblDispenseHistory.Font = New Font(New FontFamily("Segoe UI Semibold"), 14.25, FontStyle.Bold)
+        lblDispenseHistory.ForeColor = Color.DarkGray
+        strSelectedLabel = lblPrescriptions.Name
+        moveAndResizePanels()
+    End Sub
+
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: lblDispenseHistory_click       */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/29/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to be called when a user clicks on the label. This is
+    '/*  used instead of a radio button for the clean look but functions  */
+    '/*  the button font is changed to indicate it is selected.            /
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                         */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	  */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*		              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/29/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub lblDispenseHistory_Click(sender As Object, e As EventArgs) Handles lblDispenseHistory.Click
+
+        lblDispenseHistory.ForeColor = Color.Black
+        lblDispenseHistory.Font = New Font(New FontFamily("Segoe UI Semibold"), 14.25, FontStyle.Underline)
+        lblPrescriptions.Font = New Font(New FontFamily("Segoe UI Semibold"), 14.25, FontStyle.Bold)
+        lblPrescriptions.ForeColor = Color.DarkGray
+        strSelectedLabel = lblDispenseHistory.Name
+        moveAndResizePanels()
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: moveAndResizePanels()          */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/29/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 at run time the flow panels containing dispense history and pres-*/
+    '/*  criptions is is moved and the other one is hidden because only 1  /
+    '/* should be visible at a time. This method handles that.             /
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                         */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	  */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*		              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/29/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub moveAndResizePanels()
+
+        ' this is the location that all of the header panels will be mounted to
+        ' It is all relative to the location of the prescription labels which makes it easy to move one control
+        ' and then have the rest of the controls follow
+        Dim mountLocationHeaderPanel As New Point(lblPrescriptions.Location.X, lblPrescriptions.Location.Y + 50)
+        Dim mountLocationFlowPanel As New Point(lblPrescriptions.Location.X, lblPrescriptions.Location.Y + 100)
+        Dim flowPanelSize As New Size(1067, 320)
+
+        If strSelectedLabel = lblDispenseHistory.Name Then
+
+            ' hide all the other controls from the other panel
+            pnlPrescriptionsHeader.Visible = False
+            flpMedications.Visible = False
+
+            ' make the other ones visible
+            pnlDispenseHistoryHeader.Visible = True
+            flpDispenseHistory.Visible = True
+
+            ' move the dispense history panels because they are lower
+            pnlDispenseHistoryHeader.Location = mountLocationHeaderPanel
+            flpDispenseHistory.Location = mountLocationFlowPanel
+
+            ' make the size of the flow panels larger
+            flpDispenseHistory.Size = flowPanelSize
+
+        Else
+
+            ' hide all the other controls from the other panel
+            pnlDispenseHistoryHeader.Visible = False
+            flpDispenseHistory.Visible = False
+
+            ' make the other ones visible
+            pnlPrescriptionsHeader.Visible = True
+            flpMedications.Visible = True
+
+            ' move the prescriptions panels as necessary
+            pnlPrescriptionsHeader.Location = mountLocationHeaderPanel
+            flpMedications.Location = mountLocationFlowPanel
+
+            'this is the size that all flow panels will be set to
+            flpMedications.Size = flowPanelSize
+
+        End If
+
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: lblMoreDetails_Click()         */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/29/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 if the user clicks the label to show less or more the form has to /
+    '/* not only show the fields, but adjust the fields below to make sure /
+    '/* they are in the correct positon                                    /
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                         */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	  */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*		              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/29/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub lblMoreDetails_Click(sender As Object, e As EventArgs) Handles lblMoreDetails.Click
+
+        Dim expandedSize As New Size(1092, 251)
+        Dim shrinkSize As New Size(1092, 139)
+
+
+        If lblMoreDetails.Text = "Show More..." Then
+            moveControlsDown(expandedSize)
+            ' change the text 
+            lblMoreDetails.Text = "Show Less..."
+
+        Else
+            moveControlsUp(shrinkSize)
+
+            ' change the text 
+            lblMoreDetails.Text = "Show More..."
+
+        End If
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: moveControlsDown()         */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/29/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 The controls need to ne moved to a specific positoin and this method
+    '/* handles that. The size fo the controls will also vary and that is  /
+    '/* determined by the parameter being passed in.
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                         */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*     moveAndResizePanels                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 expandedSize */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*		              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/29/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub moveControlsDown(ByVal expandedSize As Size)
+
+        ' expand the patient info. 
+        pnlPersonalInformation.Size = expandedSize
+
+        ' show the necessary controls
+        pnlNameBarcode.Visible = True
+
+        'move labels down up
+        lblDispenseHistory.Location = New Point(153, 300)
+        lblPrescriptions.Location = New Point(10, 300)
+
+        'move panels down
+        moveAndResizePanels()
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: moveControlsUp()               */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/29/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 The controls need to ne moved to a specific positoin and this method
+    '/* handles that. The size fo the controls will also vary and that is  /
+    '/* determined by the parameter being passed in.
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                         */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*     moveAndResizePanels                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 shrinkSize */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*		              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/29/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub moveControlsUp(ByVal shrinkSize As Size)
+
+        ' expand the patient info. 
+        pnlPersonalInformation.Size = shrinkSize
+
+        ' show the necessary controls
+        pnlNameBarcode.Visible = False
+
+        ' move labels back to default position
+        lblDispenseHistory.Location = New Point(153, 190)
+        lblPrescriptions.Location = New Point(10, 190)
+
+        ' move panels down
+        moveAndResizePanels()
+
+    End Sub
+
+    Private Sub txtMRN_TextChanged(sender As Object, e As KeyPressEventArgs) Handles txtZipCode.KeyPress, txtPhone.KeyPress, txtMRN.KeyPress
 
     End Sub
 End Class

@@ -78,8 +78,9 @@
     '/*  WHO   WHEN     WHAT								              */             
     '/*  Collin Krygier  2/6/2021    Initial creation                     */
     '/*********************************************************************/
-    Public Sub CreatePanelMyPatients(ByVal flpPannel As FlowLayoutPanel, ByVal strMRN As String, ByVal strFirstName As String, ByVal strLastName As String, ByVal strBirthday As String, ByVal strRoom As String, ByVal strBed As String, ByRef intPatientID As Integer)
-
+    Public Sub CreatePanelActivePatients(ByVal flpPannel As FlowLayoutPanel, ByVal strMRN As String, ByVal strFirstName As String, ByVal strLastName As String, ByVal strBirthday As String, ByVal strRoom As String, ByVal strBed As String, ByRef intPatientID As Integer)
+        Dim dsPatientUserAssigned As DataSet
+        Dim userID = LoggedInID
         Dim pnl As Panel
         pnl = New Panel
 
@@ -123,8 +124,17 @@
 
         Const YCOORDINATE As Integer = 20
         ' CreateCheckBox(pnlMainPanel, getPanelCount(flpPannel), lblMRN.Location.X - 45, 5)
-        CreateAddButton(pnlMainPanel, getPanelCount(flpPannel), lblAssignment.Location.X + 15, 5, intPatientID)
-        CreateRemoveButton(pnlMainPanel, getPanelCount(flpPannel), lblAssignment.Location.X + 15, 5, intPatientID)
+
+        Dim strSQL As String = "SELECT COUNT() FROM PatientUser WHERE Patient_TUID= '" & intPatientID & "'" & " AND  User_TUID= '" & userID & "' AND  Active_Flag = '1'"
+
+        If ExecuteScalarQuery(strSQL) = 0 Then
+            CreateAddButton(pnlMainPanel, getPanelCount(flpPannel), lblAssignment.Location.X + 15, 5, intPatientID)
+        Else
+            CreateRemoveButton(pnlMainPanel, getPanelCount(flpPannel), lblAssignment.Location.X + 15, 5, intPatientID)
+        End If
+
+
+        'CreateAddButton(pnlMainPanel, getPanelCount(flpPannel), lblAssignment.Location.X + 15, 5, intPatientID)
         CreateIDLabelWithToolTip(pnlMainPanel, lblID1, "lblMRN", lblMRN.Location.X, YCOORDINATE, strMRN, getPanelCount(flpPannel), tpToolTip, TruncateString(15, strMRN))
         CreateIDLabelWithToolTip(pnlMainPanel, lblID2, "lblFirstName", lblFirstName.Location.X, YCOORDINATE, strFirstName, getPanelCount(flpPannel), tpToolTip, TruncateString(25, strFirstName))
         CreateIDLabelWithToolTip(pnlMainPanel, lblID3, "lblLastName", lblLastName.Location.X, YCOORDINATE, strLastName, getPanelCount(flpPannel), tpToolTip, TruncateString(25, strLastName))
@@ -135,10 +145,8 @@
         'Add panel to flow layout panel
         'pnlMainPanel.Tag = intPatientID
         flpPannel.Controls.Add(pnl)
-
+        pnlMainPanel.Tag = intPatientID
     End Sub
-
-
     '/********************************************************************/
     '/*                   SUB NAME: CreateAddButton             	     */         
     '/********************************************************************/
@@ -305,16 +313,20 @@
     '/*  CK		2/6/21		 initial creation                            */
     '/********************************************************************/ 
     Private Sub RemoveAssignment_Click(ByVal sender As Object, e As EventArgs)
-        Dim User_ID As Integer = 9
+        Dim User_ID As Integer = LoggedInID
 
         Dim patientIDFromSelectedRecord As Integer = CInt(sender.tag)
         MessageBox.Show("Patient unassigned to you")
 
 
         ExecuteInsertQuery("UPDATE PatientUser SET Active_Flag = 0 WHERE Patient_TUID =" & patientIDFromSelectedRecord.ToString & " AND User_TUID =" & User_ID.ToString & " ;")
+        If cboFilter.SelectedIndex = 0 Then
 
-        RemoveOnScreenPanel(sender)
 
+            RemoveOnScreenPanel(sender)
+        Else
+            LoadAllActivePatients()
+        End If
 
     End Sub
 
@@ -351,10 +363,11 @@
     '/*  CK		2/6/21		 initial creation                            */
     '/********************************************************************/ 
     Private Sub btnAddAssignment_Click(ByVal sender As Object, e As EventArgs)
-        Dim UserID As Integer = 9
+        Dim UserID As Integer = LoggedInID
+        'default values to populate the table with
         Dim intActive_Flag As String = "1"
-        Dim strVisitDate As String = "10/10/2021"
-        Dim patientIDFromSelectedRecord As Integer = CInt(sender.tag)
+        Dim strVisitDate As String = "10/10/2021" 'might need to be system time
+        Dim patientIDFromSelectedRecord As Integer = CInt(sender.tag) 'patient id from the user they clickec on, should be the tag of the add button
         Dim dsPatientUser As DataSet
         dsPatientUser = ExecuteSelectQuery("Select * From PatientUser")
         Dim intActiveFlag As Integer = 1
@@ -365,7 +378,7 @@
         Next
         If intActiveFlag = 0 Then
             ExecuteInsertQuery("UPDATE PatientUser SET Active_Flag = 1 WHERE Patient_TUID =" & patientIDFromSelectedRecord.ToString & " AND User_TUID =" & UserID.ToString & " ;")
-        ElseIf intActiveFlag = 1 Then 'if they get to here they are already assigned to someone else so i will just change the user_ID
+            'ElseIf intActiveFlag = 1 Then 'if they get to here they are already assigned to someone else so i will just change the user_ID
 
 
         Else
@@ -376,10 +389,13 @@
 
 
         MessageBox.Show("Patient assigned to you")
+        If cboFilter.SelectedIndex = 0 Then
 
-        RemoveOnScreenPanel(sender)
 
-
+            RemoveOnScreenPanel(sender)
+        Else
+            LoadAllActivePatients()
+        End If
     End Sub
 
     '/********************************************************************/
@@ -415,7 +431,7 @@
     '/*  CK		2/6/21		 initial creation                            */
     '/********************************************************************/ 
     Private Sub cboFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboFilter.SelectedIndexChanged
-        Dim UserID As Integer = 9
+        Dim UserID As Integer = LoggedInID
         Dim strUserFirst As String = ""
         Dim strUserLast As String = ""
         Dim strVisitDate As String = ""
@@ -469,7 +485,7 @@
 
             LoadAllActivePatients()
             ShowAllControlsOnPanels()
-            HideControlOnPanels("btnRemove")
+            'HideControlOnPanels("btnRemove")
             lblAssignment.Text = "Assign Patient To Me"
 
             'ElseIf cboFilter.SelectedIndex = 2 Then
@@ -510,8 +526,10 @@
     '/*  CK		2/6/21		 initial creation                            */
     '/********************************************************************/ 
     Private Sub LoadAllActivePatients()
+        flpMyPatientRecords.Controls.Clear()
         Dim dsPatient As DataSet
-        Dim UserID As Integer = 9
+        Dim dsPatientUserAssigned As DataSet
+        Dim UserID As Integer = LoggedInID
         Dim strUserFirst As String = ""
         Dim strUserLast As String = ""
         Dim strVisitDate As String = ""
@@ -537,8 +555,15 @@
             strBed = Patient(8)
             'StrDOB = StrDOB.Substring(0, 9)
             Debug.WriteLine("")
-            CreatePanelMyPatients(flpMyPatientRecords, intPatientMRN.ToString, strPatientFirst, strPatientLast, StrDOB, strRoom, strBed, intPatientID)
+
+
+            'if userpatient contains patient then 
+            'CreatePanelMyPatients(flpMyPatientRecords, intPatientMRN.ToString, strPatientFirst, strPatientLast, StrDOB, strRoom, strBed, intPatientID)
+            'else
+            CreatePanelActivePatients(flpMyPatientRecords, intPatientMRN.ToString, strPatientFirst, strPatientLast, StrDOB, strRoom, strBed, intPatientID)
         Next
+
+        'dsPatientUserAssigned = CreateDatabase.ExecuteSelectQuery("Select * From PatientUser Where User_TUID=" & UserID & ";")
 
     End Sub
     '/********************************************************************/
@@ -641,7 +666,7 @@
         Dim dsPatientUser As DataSet
         'Dim dsPatientUserAssigned As DataSet
         Dim dsPatient As DataSet
-        Dim UserID As Integer = 9
+        Dim UserID As Integer = LoggedInID
         Dim strUserFirst As String = ""
         Dim strUserLast As String = ""
         Dim strVisitDate As String = ""
@@ -655,28 +680,24 @@
         Dim strBed As String = ""
         Dim intActive_Flag As String = ""
 
+        dsPatientUser = CreateDatabase.ExecuteSelectQuery("Select * from Patient
+                Inner JOIN PatientUser on PatientUser.Patient_TUID = Patient.Patient_ID
+                Inner Join PatientRoom on PatientRoom.Patient_TUID = Patient.Patient_ID
+                Where PatientUser.User_TUID = '" & UserID.ToString & "' AND PatientUser.Active_Flag = '1' AND Patient.Active_Flag = '1' AND PatientRoom.Active_Flag = '1' ORDER BY Patient.Patient_Last_Name")
 
-        dsPatientUser = CreateDatabase.ExecuteSelectQuery("Select * From PatientUser Where User_TUID =" & UserID.ToString & " AND Active_Flag = 1 ;")
-        For Each row As DataRow In dsPatientUser.Tables(0).Rows
-            intPatientID = row(0)
-            strVisitDate = row(2)
-            dsPatient = CreateDatabase.ExecuteSelectQuery("Select MRN_Number, Patient_First_Name, Patient_Last_Name, Date_of_Birth, Primary_Physician_ID, Patient.Patient_ID, PatientRoom.Patient_TUID, Room_TUID, Bed_Name FROM Patient LEFT JOIN PatientRoom ON PatientRoom.Patient_TUID = Patient.Patient_ID Where Patient_ID =" & intPatientID.ToString() & ";")
-            For Each Patient As DataRow In dsPatient.Tables(0).Rows
-                intPatientMRN = Patient(0)
-                strPatientFirst = Patient(1)
-                strPatientLast = Patient(2)
-                StrDOB = Patient(3)
-                intPhysicianID = Patient(4)
-                strRoom = Patient(7)
-                strBed = Patient(8)
-                'StrDOB = StrDOB.Substring(0, 9)
-                Debug.WriteLine("")
-                CreatePanelMyPatients(flpMyPatientRecords, intPatientMRN.ToString, strPatientFirst, strPatientLast, StrDOB, strRoom, strBed, intPatientID)
-            Next
-
-            Debug.WriteLine("")
-
+        For Each dr As DataRow In dsPatientUser.Tables(0).Rows
+            intPatientID = dr(0)
+            strVisitDate = dr(20)
+            intPatientMRN = dr(1)
+            strPatientFirst = dr(3)
+            strPatientLast = dr(5)
+            StrDOB = dr(6)
+            intPhysicianID = dr(16)
+            strRoom = dr(23)
+            strBed = dr(24)
+            CreatePanelActivePatients(flpMyPatientRecords, intPatientMRN.ToString, strPatientFirst, strPatientLast, StrDOB, strRoom, strBed, intPatientID)
         Next
+
     End Sub
     '/********************************************************************/
     '/*                   SUB NAME: cboFilter_SelectedIndexChanged       */         
