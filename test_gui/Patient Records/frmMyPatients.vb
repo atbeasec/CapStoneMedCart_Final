@@ -680,28 +680,24 @@
         Dim strBed As String = ""
         Dim intActive_Flag As String = ""
 
+        dsPatientUser = CreateDatabase.ExecuteSelectQuery("Select * from Patient
+                Inner JOIN PatientUser on PatientUser.Patient_TUID = Patient.Patient_ID
+                Inner Join PatientRoom on PatientRoom.Patient_TUID = Patient.Patient_ID
+                Where PatientUser.User_TUID = '" & UserID.ToString & "' AND PatientUser.Active_Flag = '1' AND Patient.Active_Flag = '1' AND PatientRoom.Active_Flag = '1' ORDER BY Patient.Patient_Last_Name")
 
-        dsPatientUser = CreateDatabase.ExecuteSelectQuery("Select * From PatientUser Where User_TUID =" & UserID.ToString & " AND Active_Flag = 1 ;")
-        For Each row As DataRow In dsPatientUser.Tables(0).Rows
-            intPatientID = row(0)
-            strVisitDate = row(2)
-            dsPatient = CreateDatabase.ExecuteSelectQuery("Select MRN_Number, Patient_First_Name, Patient_Last_Name, Date_of_Birth, Primary_Physician_ID, Patient.Patient_ID, PatientRoom.Patient_TUID, Room_TUID, Bed_Name FROM Patient LEFT JOIN PatientRoom ON PatientRoom.Patient_TUID = Patient.Patient_ID Where Patient_ID =" & intPatientID.ToString() & ";")
-            For Each Patient As DataRow In dsPatient.Tables(0).Rows
-                intPatientMRN = Patient(0)
-                strPatientFirst = Patient(1)
-                strPatientLast = Patient(2)
-                StrDOB = Patient(3)
-                intPhysicianID = Patient(4)
-                strRoom = Patient(7)
-                strBed = Patient(8)
-                'StrDOB = StrDOB.Substring(0, 9)
-                Debug.WriteLine("")
-                CreatePanelActivePatients(flpMyPatientRecords, intPatientMRN.ToString, strPatientFirst, strPatientLast, StrDOB, strRoom, strBed, intPatientID)
-            Next
-
-            Debug.WriteLine("")
-
+        For Each dr As DataRow In dsPatientUser.Tables(0).Rows
+            intPatientID = dr(0)
+            strVisitDate = dr(20)
+            intPatientMRN = dr(1)
+            strPatientFirst = dr(3)
+            strPatientLast = dr(5)
+            StrDOB = dr(6)
+            intPhysicianID = dr(16)
+            strRoom = dr(23)
+            strBed = dr(24)
+            CreatePanelActivePatients(flpMyPatientRecords, intPatientMRN.ToString, strPatientFirst, strPatientLast, StrDOB, strRoom, strBed, intPatientID)
         Next
+
     End Sub
     '/********************************************************************/
     '/*                   SUB NAME: cboFilter_SelectedIndexChanged       */         
