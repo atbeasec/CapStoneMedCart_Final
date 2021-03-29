@@ -22,6 +22,7 @@ Partial Class frmDispense
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDispense))
         Me.lstboxAllergies = New System.Windows.Forms.ListBox()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -62,6 +63,7 @@ Partial Class frmDispense
         Me.txtQuantity = New System.Windows.Forms.TextBox()
         Me.pnlHeader = New System.Windows.Forms.Panel()
         Me.btnBack = New System.Windows.Forms.Button()
+        Me.tpToolTip = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel3.SuspendLayout()
         Me.Panel14.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -609,4 +611,5 @@ Partial Class frmDispense
     Friend WithEvents txtQuantity As TextBox
     Friend WithEvents pnlHeader As Panel
     Friend WithEvents btnBack As Button
+    Friend WithEvents tpToolTip As ToolTip
 End Class
