@@ -55,7 +55,7 @@ Partial Class frmAdHockDispense
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(537, 269)
+        Me.Label13.Location = New System.Drawing.Point(707, 269)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(124, 21)
         Me.Label13.TabIndex = 210
@@ -65,7 +65,7 @@ Partial Class frmAdHockDispense
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(537, 113)
+        Me.Label5.Location = New System.Drawing.Point(707, 113)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(73, 21)
         Me.Label5.TabIndex = 209
@@ -75,7 +75,7 @@ Partial Class frmAdHockDispense
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(537, 40)
+        Me.Label15.Location = New System.Drawing.Point(707, 40)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(45, 21)
         Me.Label15.TabIndex = 208
@@ -101,7 +101,7 @@ Partial Class frmAdHockDispense
         Me.cmbMedications.Items.AddRange(New Object() {"Yes", "No"})
         Me.cmbMedications.Location = New System.Drawing.Point(35, 64)
         Me.cmbMedications.Name = "cmbMedications"
-        Me.cmbMedications.Size = New System.Drawing.Size(449, 29)
+        Me.cmbMedications.Size = New System.Drawing.Size(579, 29)
         Me.cmbMedications.TabIndex = 1
         '
         'Label14
@@ -129,10 +129,10 @@ Partial Class frmAdHockDispense
         Me.lstboxAllergies.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lstboxAllergies.FormattingEnabled = True
         Me.lstboxAllergies.ItemHeight = 20
-        Me.lstboxAllergies.Location = New System.Drawing.Point(541, 293)
+        Me.lstboxAllergies.Location = New System.Drawing.Point(711, 293)
         Me.lstboxAllergies.Name = "lstboxAllergies"
         Me.lstboxAllergies.SelectionMode = System.Windows.Forms.SelectionMode.None
-        Me.lstboxAllergies.Size = New System.Drawing.Size(321, 104)
+        Me.lstboxAllergies.Size = New System.Drawing.Size(321, 204)
         Me.lstboxAllergies.TabIndex = 203
         Me.lstboxAllergies.TabStop = False
         '
@@ -146,7 +146,7 @@ Partial Class frmAdHockDispense
         Me.cmbPatientName.Items.AddRange(New Object() {"Yes", "No"})
         Me.cmbPatientName.Location = New System.Drawing.Point(35, 292)
         Me.cmbPatientName.Name = "cmbPatientName"
-        Me.cmbPatientName.Size = New System.Drawing.Size(449, 29)
+        Me.cmbPatientName.Size = New System.Drawing.Size(579, 29)
         Me.cmbPatientName.TabIndex = 7
         '
         'Label1
@@ -163,7 +163,7 @@ Partial Class frmAdHockDispense
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(537, 192)
+        Me.Label8.Location = New System.Drawing.Point(707, 192)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(96, 21)
         Me.Label8.TabIndex = 214
@@ -202,7 +202,7 @@ Partial Class frmAdHockDispense
         Me.btnDecrementQuantity.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDecrementQuantity.ForeColor = System.Drawing.Color.White
         Me.btnDecrementQuantity.Image = CType(resources.GetObject("btnDecrementQuantity.Image"), System.Drawing.Image)
-        Me.btnDecrementQuantity.Location = New System.Drawing.Point(649, 140)
+        Me.btnDecrementQuantity.Location = New System.Drawing.Point(819, 140)
         Me.btnDecrementQuantity.Name = "btnDecrementQuantity"
         Me.btnDecrementQuantity.Size = New System.Drawing.Size(28, 28)
         Me.btnDecrementQuantity.TabIndex = 6
@@ -217,7 +217,7 @@ Partial Class frmAdHockDispense
         Me.btnIncrementQuantity.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnIncrementQuantity.ForeColor = System.Drawing.Color.White
         Me.btnIncrementQuantity.Image = CType(resources.GetObject("btnIncrementQuantity.Image"), System.Drawing.Image)
-        Me.btnIncrementQuantity.Location = New System.Drawing.Point(615, 140)
+        Me.btnIncrementQuantity.Location = New System.Drawing.Point(785, 140)
         Me.btnIncrementQuantity.Name = "btnIncrementQuantity"
         Me.btnIncrementQuantity.Size = New System.Drawing.Size(28, 28)
         Me.btnIncrementQuantity.TabIndex = 5
@@ -228,7 +228,7 @@ Partial Class frmAdHockDispense
         '
         Me.Panel5.BackColor = System.Drawing.Color.DarkGray
         Me.Panel5.Controls.Add(Me.txtQuantity)
-        Me.Panel5.Location = New System.Drawing.Point(542, 140)
+        Me.Panel5.Location = New System.Drawing.Point(712, 140)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel5.Size = New System.Drawing.Size(67, 28)
@@ -266,7 +266,7 @@ Partial Class frmAdHockDispense
         Me.txtType.BackColor = System.Drawing.Color.White
         Me.txtType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtType.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtType.Location = New System.Drawing.Point(541, 68)
+        Me.txtType.Location = New System.Drawing.Point(711, 68)
         Me.txtType.MaxLength = 9
         Me.txtType.Name = "txtType"
         Me.txtType.ReadOnly = True
@@ -315,7 +315,7 @@ Partial Class frmAdHockDispense
         Me.txtDateOfBirth.BackColor = System.Drawing.Color.White
         Me.txtDateOfBirth.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtDateOfBirth.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDateOfBirth.Location = New System.Drawing.Point(540, 216)
+        Me.txtDateOfBirth.Location = New System.Drawing.Point(710, 216)
         Me.txtDateOfBirth.MaxLength = 9
         Me.txtDateOfBirth.Name = "txtDateOfBirth"
         Me.txtDateOfBirth.ReadOnly = True
@@ -351,7 +351,7 @@ Partial Class frmAdHockDispense
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(919, 593)
+        Me.ClientSize = New System.Drawing.Size(1203, 593)
         Me.ControlBox = False
         Me.Controls.Add(Me.txtRoomBed)
         Me.Controls.Add(Me.Label6)
