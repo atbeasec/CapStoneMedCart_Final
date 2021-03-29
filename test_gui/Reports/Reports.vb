@@ -39,7 +39,9 @@
     '/*											                        */
     '/*  WHO            WHEN        WHAT								*/
     '/*  Eric LaVoie    1/25/2021   Initial creation                    */
-    '/*  BRH            03/21/21    Add narcotics wasted,
+    '/*  BRH            03/21/21    Add narcotics wasted                */
+    '/*  BRH        03/28/21    Added Allergy and Drug Interaction overrides
+    '/*                         and all and narcotic end of shift counts  */
     '/*******************************************************************/
     Public intColumnCount As Integer = 0
     Public intRowCount As Integer = 0
@@ -49,13 +51,16 @@
     Enum Reports
         ActiveDiscrepancies = 0
         Adhoc = 1
-        DispensedMeds = 2
-        NarcAdhoc = 3
-        DispensedNarc = 4
-        WastedNarc = 5
-        Override = 6
-        ResolvedDiscrepancies = 7
-        Wastes = 8
+        AllergyOverride = 2
+        DispensedMeds = 3
+        DrugInteractionOverride = 4
+        EndOfShiftCount = 5
+        NarcAdhoc = 6
+        DispensedNarc = 7
+        NarcEndOfShiftCount = 8
+        WastedNarc = 9
+        ResolvedDiscrepancies = 10
+        Wastes = 11
     End Enum
 
     '/*********************************************************************/
@@ -109,6 +114,8 @@
     '/*                         all wasted medication, all ad hoc orders,
     '/*  BRH        03/24/21    Add column counts to each section         */
     '/*  BRH        03/25/21   Added Active and Resolved Discrepancy code */
+    '/*  BRH        03/28/21    Added Allergy and Drug Interaction overrides
+    '/*                         and all and narcotic end of shift counts  */
     '/*********************************************************************/
     Function getSelectedReport(intSelectedIndex As Integer) As List(Of String)
         'Dim arrData As ArrayList = New ArrayList
@@ -142,6 +149,12 @@
                             INNER JOIN DrawerMedication ON DrawerMedication_TUID = DrawerMedication_ID
                             INNER JOIN Drawers ON DrawerMedication.Drawers_TUID = Drawers.Drawers_ID"
 
+            Case Reports.AllergyOverride
+                strReport = "Allergy Overrides"
+                strSQLCmd = "SELECT Patient_First_Name, Patient_Middle_Name, Patient_Last_Name, Username, Allergy_Name, DateTime FROM AllergyOverride
+                            INNER JOIN Patient ON Patient_TUID = Patient_ID
+                            INNER JOIN User ON User_TUID = User_ID;"
+
 
             'If the dispensed medication report is selected
             Case Reports.DispensedMeds ' 
@@ -149,6 +162,27 @@
                 'Select all drugs and store their dispensing information
                 strSQLCmd = "SELECT Drug_Name, Type, Strength, Amount_Dispensed, DateTime_Dispensed, Expiration_Date FROM DrawerMedication INNER JOIN 
                             Medication INNER JOIN Dispensing WHERE DrawerMedication.Medication_TUID = Medication_ID AND DrawerMedication_TUID = DrawerMedication_ID"
+
+            Case Reports.DrugInteractionOverride
+                strReport = "Drug Interaction Overrides"
+                strSQLCmd = "SELECT Patient_First_Name, Patient_Middle_Name, Patient_Last_Name, Username, Description, DateTime FROM Drug_InteractionsOverride
+                             INNER JOIN Patient ON Patient_TUID = Patient_ID
+                             INNER JOIN User ON User_TUID = User_ID
+                             INNER JOIN Drug_Interactions ON Drug_Interactions_TUID = Drug_Interactions_ID;"
+
+            Case Reports.EndOfShiftCount
+                strReport = "End of Shift Count"
+                strSQLCmd = "SELECT Drug_Name, Drawer_Number, Divider_Bin, Quantity FROM DrawerMedication " &
+                               "INNER JOIN Medication on Medication.Medication_ID = DrawerMedication.Medication_TUID " &
+                               "INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID 
+                                WHERE DrawerMedication.Active_Flag = '1'"
+
+            Case Reports.NarcEndOfShiftCount
+                strReport = "Narcotics End of Shift Count"
+                strSQLCmd = "SELECT Drug_Name, Drawer_Number, Divider_Bin, Quantity FROM DrawerMedication " &
+                               "INNER JOIN Medication on Medication.Medication_ID = DrawerMedication.Medication_TUID " &
+                               "INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID 
+                                WHERE DrawerMedication.Active_Flag = '1' AND NarcoticControlled_Flag = 1"
 
             Case Reports.NarcAdhoc
                 strReport = "Narcotic Ad Hoc Orders"
@@ -178,10 +212,6 @@
                             INNER JOIN DrawerMedication ON Wastes.DrawerMedication_TUID = DrawerMedication_ID 
                             INNER JOIN Drawers ON DrawerMedication.Drawers_TUID = Drawers_ID WHERE Medication.NarcoticControlled_Flag = 1"
 
-            Case Reports.Override
-                strReport = "Overrides"
-                'Placeholder SQL so selecting Override won't break the program
-                strSQLCmd = "SELECT * FROM AllergyOverride"
 
             Case Reports.ResolvedDiscrepancies
                 strReport = "Resolved Discrepancies"
@@ -311,6 +341,8 @@
     '/*                 all wasted medication, all ad hoc orders, 
     '/* BRH  03/24/21   Add column counts to each section               */
     '/* BRH  03/25/21   Added Active and Resolved Discrepancy code      */
+    '/* BRH  03/28/21   Added Allergy and Drug Interaction overrides    */
+    '/*                 and all and narcotic end of shift counts        */
     '/*******************************************************************/
     Sub PrintItemsToDataGrid(ByRef lstOfDataValues As List(Of String))
 
@@ -331,6 +363,21 @@
             Next
 
             intColumnCount = 6
+
+        ElseIf frmReport.cmbReports.SelectedItem.Equals("End of Shift Count") Or frmReport.cmbReports.SelectedItem.Equals("Narcotics End of Shift Count") Then
+            frmReport.dgvReport.Columns.Add(1, "Drug Name")
+            frmReport.dgvReport.Columns.Add(2, "Drawer")
+            frmReport.dgvReport.Columns.Add(3, "Drawer Bin")
+            frmReport.dgvReport.Columns.Add(4, "System Count")
+
+            'Add the following data into data grid on the form
+            For i As Integer = 0 To lstOfDataValues.Count - 4 Step 4
+                frmReport.dgvReport.Rows.Add(lstOfDataValues.Item(i), lstOfDataValues.Item(i + 1),
+                                             lstOfDataValues.Item(i + 2), lstOfDataValues(i + 3))
+            Next
+
+            intColumnCount = 4
+
         ElseIf frmReport.cmbReports.SelectedItem.Equals("Narcotics Wasted") Or frmReport.cmbReports.SelectedItem.Equals("Wasted Medication") Then
             'Add the following column names
             frmReport.dgvReport.Columns.Add(1, "Primary User's Username")
@@ -349,6 +396,7 @@
             Next
 
             intColumnCount = 8
+
         ElseIf frmReport.cmbReports.SelectedItem.Equals("Ad Hoc Orders") Or frmReport.cmbReports.SelectedItem.Equals("Narcotic Ad Hoc Orders") Then
             frmReport.dgvReport.Columns.Add(1, "Drug Name")
             frmReport.dgvReport.Columns.Add(2, "Drawer Number")
@@ -364,6 +412,35 @@
             Next
 
             intColumnCount = 6
+
+        ElseIf frmReport.cmbReports.SelectedItem.Equals("Allergy Overrides") Then
+            frmReport.dgvReport.Columns.Add(1, "Patient's Name")
+            frmReport.dgvReport.Columns.Add(2, "Username of Overriding User")
+            frmReport.dgvReport.Columns.Add(3, "Allergy Name")
+            frmReport.dgvReport.Columns.Add(4, "Date / Time Overriden")
+
+            'Add the following data into data grid on the form
+            For i As Integer = 0 To lstOfDataValues.Count - 6 Step 6
+                frmReport.dgvReport.Rows.Add(lstOfDataValues.Item(i) & " " & lstOfDataValues.Item(i + 1) & " " & lstOfDataValues.Item(i + 2),
+                                             lstOfDataValues.Item(i + 3), lstOfDataValues.Item(i + 4), lstOfDataValues(i + 5))
+            Next
+
+            intColumnCount = 4
+
+        ElseIf frmReport.cmbReports.SelectedItem.Equals("Drug Interaction Overrides") Then
+            frmReport.dgvReport.Columns.Add(1, "Patient's Name")
+            frmReport.dgvReport.Columns.Add(2, "Username of Overriding User")
+            frmReport.dgvReport.Columns.Add(3, "Reason for Drugs Interacting")
+            frmReport.dgvReport.Columns.Add(4, "Date / Time Overriden")
+
+            'Add the following data into data grid on the form
+            For i As Integer = 0 To lstOfDataValues.Count - 6 Step 6
+                frmReport.dgvReport.Rows.Add(lstOfDataValues.Item(i) & " " & lstOfDataValues.Item(i + 1) & " " & lstOfDataValues.Item(i + 2),
+                                             lstOfDataValues.Item(i + 3), lstOfDataValues.Item(i + 4), lstOfDataValues(i + 5))
+            Next
+
+            intColumnCount = 4
+
         ElseIf frmReport.cmbReports.SelectedItem.Equals("Active Discrepancies") Then
             frmReport.dgvReport.Columns.Add(1, "Medication Name")
             frmReport.dgvReport.Columns.Add(2, "Drawer Number")
@@ -379,6 +456,7 @@
             Next
 
             intColumnCount = 6
+
         ElseIf frmReport.cmbReports.SelectedItem.Equals("Resolved Discrepancies") Then
             frmReport.dgvReport.Columns.Add(1, "Medication Name")
             frmReport.dgvReport.Columns.Add(2, "Drawer Number")
@@ -397,6 +475,7 @@
             Next
 
             intColumnCount = 8
+
         End If
 
 
