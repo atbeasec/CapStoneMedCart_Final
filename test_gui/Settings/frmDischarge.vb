@@ -133,14 +133,14 @@
         intAdmitPatientID.Clear()
         cmbAdmitPatients.Items.Clear()
         cmbDischargePatients.Items.Clear()
-        Dim dsInactivePatients As DataSet = CreateDatabase.ExecuteSelectQuery("Select * From Patient WHERE Active_Flag = 0 ORDER BY Patient_Last_Name, Patient_First_Name, MRN_Number;")
+        Dim dsInactivePatients As DataSet = CreateDatabase.ExecuteSelectQuery("Select * From Patient WHERE Active_Flag = 0 ORDER BY Patient_Last_Name COLLATE NOCASE, Patient_First_Name COLLATE NOCASE, MRN_Number;")
 
         For Each dr As DataRow In dsInactivePatients.Tables(0).Rows
             cmbAdmitPatients.Items.Add(dr(EnumList.Patient.LastName) & ", " & dr(EnumList.Patient.FristName) & "   MRN: " & dr(EnumList.Patient.MRN_Number))
             intAdmitPatientID.Add(dr(EnumList.Patient.ID))
         Next
 
-        Dim dsactivePatients As DataSet = CreateDatabase.ExecuteSelectQuery("Select * From Patient WHERE Active_Flag = 1 ORDER BY Patient_Last_Name, Patient_First_Name, MRN_Number;")
+        Dim dsactivePatients As DataSet = CreateDatabase.ExecuteSelectQuery("Select * From Patient WHERE Active_Flag = 1 ORDER BY Patient_Last_Name COLLATE NOCASE, Patient_First_Name COLLATE NOCASE, MRN_Number;")
         For Each dr As DataRow In dsactivePatients.Tables(0).Rows
             cmbDischargePatients.Items.Add(dr(EnumList.Patient.LastName) & ", " & dr(EnumList.Patient.FristName) & "   MRN: " & dr(EnumList.Patient.MRN_Number))
             intDischargePatientID.Add(dr(EnumList.Patient.ID))
