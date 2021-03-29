@@ -32,7 +32,7 @@
         Next
 
         For Each dr As DataRow In dsPhysicians.Tables(0).Rows
-            cmbOrderedBy.Items.Add(dr(EnumList.Physician.LastName) & ", " & dr(EnumList.Physician.FirstName))
+            cmbOrderedBy.Items.Add(dr(EnumList.Physician.LastName) & ", " & dr(EnumList.Physician.FirstName) & " " & dr(EnumList.Physician.PhysicianCredentials))
             intPhysicianID.Add(dr(EnumList.Physician.Id))
         Next
 
