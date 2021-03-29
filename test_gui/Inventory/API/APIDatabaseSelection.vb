@@ -277,11 +277,14 @@ Module APIDatabaseSelection
 			End If
 			'Clear the dataset after it is sent to the database
 			'dtCompareDrugInteractions.Clear()
+			frmProgressBar.UpdateLabel("Inserting record " & i & " of " & outputList.Count)
+			frmInventory.txtStatus.Text = ("Inserting record " & i & " of " & outputList.Count)
 		Next
 		' close the db connection
 		DBConn.Close()
 		' clear the outputList
 		outputList.Clear()
+		frmInventory.txtStatus.Text = ("I")
 	End Sub
 
 	'/*******************************************************************/
@@ -332,6 +335,7 @@ Module APIDatabaseSelection
 
 		'Create a dataset to hold database data for that
 		Dim dsMedications As DataSet
+		frmInventory.txtStatus.Text = "Saving medication to database."
 
 		'Select the specific table and the data in each column, filling a dataset through the different parameters
 		'Searching by RXCUI because they are never reused or deleted
@@ -348,7 +352,7 @@ Module APIDatabaseSelection
 			                          Strength, Schedule, Active_Flag) VALUES('" & DrugName & "','" & RXCUID & "','" & ControlledFlag & "','" & NarcoticFlag &
 								"','" & Barcode & "','" & Type & "','" & Strength & "','" & Schedule & "','" & ActiveFlag & "')")
 
-			MessageBox.Show("Saved basic medication information to the system. Please wait...")
+			'MessageBox.Show("Saved basic medication information to the system. Please wait...")
 
 		Else
 
@@ -390,7 +394,7 @@ Module APIDatabaseSelection
 					ExecuteScalarQuery("UPDATE Medication SET Active_Flag = '" & "' WHERE RXCUI_ID = '" & RXCUID & "';")
 				End If
 
-				MessageBox.Show("Basic Medication was updated on the system. Please wait...")
+				'MessageBox.Show("Basic Medication was updated on the system. Please wait...")
 
 			Next
 

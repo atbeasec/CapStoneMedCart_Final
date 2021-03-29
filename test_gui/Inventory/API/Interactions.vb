@@ -162,6 +162,11 @@ Module Interactions
     '/*  Dillen  02/25/21  Added functionality to return                  */
     '/*********************************************************************/
     Function getInteractionsByName(rxcuiNum As String, propertyNames As List(Of String)) As List(Of (PropertyName As String, PropertyValue As String))
+        frmInventory.txtStatus.Text = "Checking network connectivity"
+        ' Insert functionality to check the network connectivity
+        Dim strSite As String ' insert functionality to return the site string
+
+        frmInventory.txtStatus.Text = "Retrieving interactions via web API."
         'URL for finding interactions 
         Dim url As String = $"https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui={rxcuiNum}"
         'location in json of properties
@@ -176,7 +181,7 @@ Module Interactions
         Dim strName As String
         Dim strValue As String
 
-
+        Dim intCounter As Integer = 0
         'Pulls out the data at our specified trawlPointer to retrieve severity, description, and rxcui
         For Each propertyName As String In propertyNames
             For Each item As JObject In JsonJArray
@@ -204,8 +209,11 @@ Module Interactions
                             End If
                         Next
                     Next
-                    Next
+                Next
+                intCounter += 1
             Next
+            frmProgressBar.UpdateLabel("Retrieving Interactions" & intCounter & " of " & propertyNames.Count)
+            frmInventory.txtStatus.Text = ("Retrieving Interactions" & intCounter & " of " & propertyNames.Count)
         Next
 
         Return myReturnList
@@ -297,6 +305,7 @@ Module Interactions
             strbInteractionsString.AppendLine("Severity: " & dr(2))
             strbInteractionsString.AppendLine("Descriptions: " & dr(3))
             strbInteractionsString.AppendLine("")
+            frmProgressBar.UpdateLabel("Checking interaction records")
         Next
 
         If (strbInteractionsString.Length > 0) Then
