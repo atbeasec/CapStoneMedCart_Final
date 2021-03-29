@@ -724,7 +724,7 @@ Module BulkImportMethods
                     strbErrorMessage.AppendLine("Issue on line " & intLineNum & " city can not contain a ;")
                     blnIssue = True
                 End If
-                If Not PopulateStateComboBoxesMethod.states.Contains(strLine(8)) Then
+                If Not PopulateStateComboBoxesMethod.states.Contains(strLine(8), StringComparer.OrdinalIgnoreCase) Then
                     strbErrorMessage.AppendLine("Issue on line " & intLineNum & " state has to be a valid state")
                     blnIssue = True
                 End If
