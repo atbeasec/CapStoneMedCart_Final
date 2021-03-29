@@ -105,9 +105,9 @@ Partial Class frmInventory
         Me.Label10.Location = New System.Drawing.Point(252, 261)
         Me.Label10.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(35, 21)
+        Me.Label10.Size = New System.Drawing.Size(90, 21)
         Me.Label10.TabIndex = 111
-        Me.Label10.Text = "Bin:"
+        Me.Label10.Text = "Drawer Bin:"
         '
         'Label6
         '
