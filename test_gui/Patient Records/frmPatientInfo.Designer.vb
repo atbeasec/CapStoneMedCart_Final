@@ -200,9 +200,10 @@ Partial Class frmPatientInfo
         'mtbBirthday
         '
         Me.mtbBirthday.Location = New System.Drawing.Point(199, 33)
-        Me.mtbBirthday.Mask = "00/00/0000"
+        Me.mtbBirthday.Mask = "0000/00/00"
         Me.mtbBirthday.Name = "mtbBirthday"
         Me.mtbBirthday.ReadOnly = True
+        Me.mtbBirthday.ShortcutsEnabled = False
         Me.mtbBirthday.Size = New System.Drawing.Size(151, 20)
         Me.mtbBirthday.TabIndex = 1
         Me.mtbBirthday.ValidatingType = GetType(Date)
