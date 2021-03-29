@@ -53,6 +53,7 @@ Public Class frmNewPatient
         If Not hasError() Then
             SavePatientDataToDatabase()
             clearInformationBoxes()
+            MessageBox.Show("new patient has been added to the system")
         End If
     End Sub
 
