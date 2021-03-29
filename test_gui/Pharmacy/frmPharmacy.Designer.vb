@@ -291,6 +291,7 @@ Partial Class frmPharmacy
         Me.txtQuantity.MaxLength = 4
         Me.txtQuantity.Multiline = True
         Me.txtQuantity.Name = "txtQuantity"
+        Me.txtQuantity.ShortcutsEnabled = False
         Me.txtQuantity.Size = New System.Drawing.Size(51, 26)
         Me.txtQuantity.TabIndex = 38
         Me.txtQuantity.Text = "1"
