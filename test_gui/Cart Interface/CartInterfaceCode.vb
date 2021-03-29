@@ -345,6 +345,7 @@ Module CartInterfaceCode
 
 
                 comSerialPort1.Open()
+                getDrawerArray()
                 comSerialPort1.Write(bytFinal, 0, bytFinal.Length)
                 intDrawerCount += 1
                 thread.Start()
@@ -411,7 +412,60 @@ Module CartInterfaceCode
     End Sub
 
 
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME:  getDrawerArray    			   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		               */   
+    '/*		         DATE CREATED: 	3/29/2021                       	   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								   */             
+    '/*	 This Sub just sends a code to the cart to get the drawer array.  */
+    '/*  For some reason when the cart loses power it has to be asked for */
+    '/*  the drawer array before it will allow you to open a drawer. So   */
+    '/*  I am just going to make a method and get the array every time    */
+    '/*  so the drawers will always work. For some reason the cart needs  */
+    '/*  both of them to work.                                            */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	 arrByte4 - this is the array of hex codes that is   */
+    '/*                     is used to get the drawer array from the cart.*/ 
+    '/*  arrByte3 - this is the other message that gets the array.        */ 
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
 
+
+    Sub getDrawerArray()
+        Dim arrByte4 As Byte() = {&H35, &H34, &H32, &H36, &H36, &H37, &H32, &H2C, &H49, &H2C, &H39, &H2C, &H30, &H2C, &H32, &H36, &H2C, &H36, &H2C, &H35, &H2C, &H31, &H2C, &H30, &H2C, &H30, &H2C, &H30, &H2C, &H32, &H2C, &H30, &H2C, &H30, &H2C, &H30, &H2C, &H33, &H2C, &H30, &H2C, &H30, &H2C, &H30, &H2C, &H34, &H2C, &H30, &H2C, &H30, &H2C, &H30, &H2C, &H35, &H2C, &H30, &H2C, &H30, &H2C, &H30, &H2C, &H36, &H2C, &H30, &H2C, &H30, &H2C, &H30, &H2C, &H37, &H2C, &H30, &H2C, &H30, &H2C, &H30, &H2C, &H38, &H2C, &H30, &H2C, &H30, &H2C, &H30, &H0}
+        SerialPort1.Write(arrByte4, 0, arrByte4.Length)
+
+
+        Dim arrByte3 As Byte() = {&H31, &H38, &H34, &H37, &H37, &H35, &H38, &H2C, &H53, &H2C, &H30, &H2C, &H31, &H30, &H30, &H30, &H0}
+        SerialPort1.Write(arrByte4, 0, arrByte4.Length)
+    End Sub
 
 
     '/*********************************************************************/
@@ -765,7 +819,7 @@ Module CartInterfaceCode
             If Not blnIssue Then
                 FrmCart.gettingConnectionSettings() 'get the settings in the database for the cart
                 comSerialPort1.open
-
+                getDrawerArray()
                 For Each item As String In Drawers
                     bytFinal = getSerialString(item) 'gets the byte your array
                     comSerialPort1.Write(bytFinal, 0, bytFinal.Length) 'sends the byte array
