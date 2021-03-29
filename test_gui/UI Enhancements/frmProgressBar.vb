@@ -92,12 +92,12 @@ Public Class frmProgressBar
     Public Sub UpdateLabel(lbltext As String)
 
         Debug.WriteLine($"i am here {Now}: {lbltext}")
-                If lblMessageUpdate.InvokeRequired Then
-                    lblMessageUpdate.Invoke(Sub() UpdateLabel(lbltext))
-                Else
-                    lblMessageUpdate.Text = lbltext
-                    Application.DoEvents()
-                End If
+        If lblMessageUpdate.InvokeRequired Then
+            lblMessageUpdate.Invoke(Sub() UpdateLabel(lbltext))
+        Else
+            Me.lblMessageUpdate.Text = lbltext
+            Application.DoEvents()
+        End If
 
     End Sub
 

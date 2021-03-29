@@ -79,6 +79,8 @@ Partial Class frmInventory
         Me.pnlHeader = New System.Windows.Forms.Panel()
         Me.btnBack = New System.Windows.Forms.Button()
         Me.tpSelectedItem = New System.Windows.Forms.ToolTip(Me.components)
+        Me.txtStatus = New System.Windows.Forms.TextBox()
+        Me.lblStatus = New System.Windows.Forms.Label()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -567,7 +569,6 @@ Partial Class frmInventory
         '
         Me.txtSchedule.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtSchedule.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtSchedule.Enabled = False
         Me.txtSchedule.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtSchedule.Location = New System.Drawing.Point(1, 1)
         Me.txtSchedule.Multiline = True
@@ -693,6 +694,8 @@ Partial Class frmInventory
         '
         'pnlPatientName
         '
+        Me.pnlPatientName.Controls.Add(Me.lblStatus)
+        Me.pnlPatientName.Controls.Add(Me.txtStatus)
         Me.pnlPatientName.Controls.Add(Me.lblPatientName)
         Me.pnlPatientName.Controls.Add(Me.btnSave)
         Me.pnlPatientName.Controls.Add(Me.pnlPatientNamePadding)
@@ -766,6 +769,26 @@ Partial Class frmInventory
         Me.btnBack.Text = "Back"
         Me.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnBack.UseVisualStyleBackColor = False
+        '
+        'txtStatus
+        '
+        Me.txtStatus.HideSelection = False
+        Me.txtStatus.Location = New System.Drawing.Point(331, 90)
+        Me.txtStatus.Name = "txtStatus"
+        Me.txtStatus.Size = New System.Drawing.Size(299, 20)
+        Me.txtStatus.TabIndex = 192
+        Me.txtStatus.Text = "System Status"
+        '
+        'lblStatus
+        '
+        Me.lblStatus.AutoSize = True
+        Me.lblStatus.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblStatus.Location = New System.Drawing.Point(327, 66)
+        Me.lblStatus.Name = "lblStatus"
+        Me.lblStatus.Size = New System.Drawing.Size(55, 21)
+        Me.lblStatus.TabIndex = 193
+        Me.lblStatus.Text = "Status:"
+        Me.lblStatus.Visible = False
         '
         'frmInventory
         '
@@ -862,4 +885,6 @@ Partial Class frmInventory
     Friend WithEvents tpSelectedItem As ToolTip
     Friend WithEvents Panel2 As Panel
     Friend WithEvents mtbExpirationDate As MaskedTextBox
+    Friend WithEvents txtStatus As TextBox
+    Friend WithEvents lblStatus As Label
 End Class
