@@ -114,12 +114,12 @@ Partial Class frmInventory
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label6.Location = New System.Drawing.Point(490, 197)
+        Me.Label6.Location = New System.Drawing.Point(490, 183)
         Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(118, 21)
+        Me.Label6.Size = New System.Drawing.Size(140, 42)
         Me.Label6.TabIndex = 107
-        Me.Label6.Text = "Expiration Date:"
+        Me.Label6.Text = "Expiration Date:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Year-Month-Date)"
         '
         'Label5
         '
@@ -440,7 +440,7 @@ Partial Class frmInventory
         Me.Panel2.BackColor = System.Drawing.Color.DarkGray
         Me.Panel2.Controls.Add(Me.mtbExpirationDate)
         Me.Panel2.ForeColor = System.Drawing.Color.DarkGray
-        Me.Panel2.Location = New System.Drawing.Point(493, 220)
+        Me.Panel2.Location = New System.Drawing.Point(493, 228)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel2.Size = New System.Drawing.Size(92, 24)
@@ -452,7 +452,7 @@ Partial Class frmInventory
         Me.mtbExpirationDate.Dock = System.Windows.Forms.DockStyle.Fill
         Me.mtbExpirationDate.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.mtbExpirationDate.Location = New System.Drawing.Point(1, 1)
-        Me.mtbExpirationDate.Mask = "00/00/0000"
+        Me.mtbExpirationDate.Mask = "0000/00/00"
         Me.mtbExpirationDate.Name = "mtbExpirationDate"
         Me.mtbExpirationDate.ShortcutsEnabled = False
         Me.mtbExpirationDate.Size = New System.Drawing.Size(90, 22)

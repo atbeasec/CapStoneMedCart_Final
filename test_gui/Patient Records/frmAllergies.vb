@@ -46,10 +46,10 @@
                 'do nothing for now but combo box should not contain the values
             Else
                 If cmbAllergies.FindStringExact(cmbAllergies.Text) = -1 Then
-                    CreateDatabase.ExecuteInsertQuery("INSERT INTO Allergy(Allergy_Name,Medication_TUID,Allergy_Type) VALUES('" & strAllergyName & "'," & intMedicationTUID & ",'" & cmbAllergiesType.Text & "');")
+                    CreateDatabase.ExecuteInsertQuery("INSERT INTO Allergy(Allergy_Name,Allergy_Type) VALUES('" & strAllergyName & "','" & cmbAllergiesType.Text & "');")
                 End If
                 ' insert into database statement/method goes here
-                CreateDatabase.ExecuteInsertQuery("INSERT INTO PatientAllergy (Patient_TUID, Allergy_Name, Allergy_Severity, Active_Flag) VALUES (" & intPatientTuid & ",'" & strAllergyName & "','" & cmbAllergiesType.Text & "',1);")
+                CreateDatabase.ExecuteInsertQuery("INSERT INTO PatientAllergy (Patient_TUID, Allergy_Name, Allergy_Severity, Active_Flag) VALUES (" & intPatientTuid & ",'" & strAllergyName & "','" & cmbAllergiesType.SelectedIndex & "',1);")
                 ' populate the screen from a manually added allergy.
                 'probably going to need a select query to get the medication name from the TUID
                 Debug.WriteLine("Value must already be in the table")
@@ -379,9 +379,9 @@
             cmbAllergiesType.Enabled = False
             If cmbAllergies.SelectedIndex = 0 Then
 
-                Dim strMedTUID = CreateDatabase.ExecuteScalarQuery("Select Medication_TUID from Allergy WHERE Allergy_Name='" & cmbAllergies.Text & "';")
-                Dim MedAllergies = CreateDatabase.ExecuteScalarQuery("Select Drug_Name from Medication WHERE Medication_ID=" & CInt(strMedTUID) & ";")
-                cmbMedicationName.Text = MedAllergies.ToString()
+                'Dim strMedTUID = CreateDatabase.ExecuteScalarQuery("Select Medication_ID from Medication WHERE Drug_Name='" & cmbAllergies.Text & "';")
+                'Dim MedAllergies = CreateDatabase.ExecuteScalarQuery("Select Drug_Name from Medication WHERE Medication_ID=" & CInt(strMedTUID) & ";")
+                'cmbMedicationName.Text = MedAllergies.ToString()
             Else
                 cmbMedicationName.Text = cmbAllergies.Text
 
@@ -650,7 +650,7 @@
         'get the allergy information from the patient allergy tables
         Dim allergy As String = ""
         Dim dtsPatientAllergy As DataSet = CreateDatabase.ExecuteSelectQuery("Select Allergy.Allergy_Name, PatientAllergy.Allergy_Severity," &
-                                                                             "Allergy.Allergy_Type, Allergy.Medication_TUID From PatientAllergy " &
+                                                                             "Allergy.Allergy_Type From PatientAllergy " &
                                                                              "INNER JOIN Allergy on PatientAllergy.Allergy_Name=Allergy.Allergy_Name" &
                             " Where Active_Flag =1 And Patient_TUID =" & (intPatientTuid).ToString & ";")
         ' insert the select statement here and send the results to the createAllergiesPanel
@@ -736,4 +736,5 @@
         intPatientInformationMRN = mrn
 
     End Sub
+
 End Class

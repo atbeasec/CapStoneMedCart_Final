@@ -812,6 +812,10 @@
     Public isDragging As Boolean = False, isClick As Boolean = False
     Public startPoint, firstPoint, lastPoint As Point
 
+    Private Sub pnlTopBarContrast_Paint(sender As Object, e As PaintEventArgs) Handles pnlTopBarContrast.Paint
+
+    End Sub
+
 
     '/*********************************************************************/
     '/*           SubProgram NAME: TopBar_MouseDown                        */         
