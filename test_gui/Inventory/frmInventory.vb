@@ -197,7 +197,7 @@ Public Class frmInventory
 
 
 
-        If txtStrength.Text.Equals("") Or txtType.Text.Equals("") Or mtbExpirationDate.MaskFull = False Or cboPersonalMedication.SelectedIndex.Equals(-1) Then
+        If txtStrength.Text.Equals("") Or txtType.Text.Equals("") Or mtbExpirationDate.MaskFull = False Or cboPersonalMedication.SelectedIndex.Equals(-1) Or mtbExpirationDate.MaskCompleted = False Then
             MessageBox.Show("Please enter data in all fields before saving.")
 
 
@@ -793,5 +793,10 @@ Public Class frmInventory
         Else
         End If
     End Sub
+
+    Private Sub mtbExpirationDate_Validated(sender As Object, e As EventArgs) Handles mtbExpirationDate.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789")
+    End Sub
+
 
 End Class
