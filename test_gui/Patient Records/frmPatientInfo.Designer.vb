@@ -841,7 +841,7 @@ Partial Class frmPatientInfo
         Me.pnlDispenseHistoryHeader.Controls.Add(Me.lblMedication)
         Me.pnlDispenseHistoryHeader.Controls.Add(Me.lblType)
         Me.pnlDispenseHistoryHeader.Controls.Add(Me.lblStrength)
-        Me.pnlDispenseHistoryHeader.Location = New System.Drawing.Point(12, 476)
+        Me.pnlDispenseHistoryHeader.Location = New System.Drawing.Point(12, 520)
         Me.pnlDispenseHistoryHeader.Name = "pnlDispenseHistoryHeader"
         Me.pnlDispenseHistoryHeader.Size = New System.Drawing.Size(1067, 47)
         Me.pnlDispenseHistoryHeader.TabIndex = 0
@@ -932,9 +932,9 @@ Partial Class frmPatientInfo
         '
         Me.flpDispenseHistory.AutoScroll = True
         Me.flpDispenseHistory.BackColor = System.Drawing.Color.White
-        Me.flpDispenseHistory.Location = New System.Drawing.Point(12, 523)
+        Me.flpDispenseHistory.Location = New System.Drawing.Point(12, 567)
         Me.flpDispenseHistory.Name = "flpDispenseHistory"
-        Me.flpDispenseHistory.Size = New System.Drawing.Size(1067, 140)
+        Me.flpDispenseHistory.Size = New System.Drawing.Size(1067, 99)
         Me.flpDispenseHistory.TabIndex = 1
         '
         'frmPatientInfo

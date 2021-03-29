@@ -102,11 +102,17 @@
         CreateToolTips(pnlPrescriptionsHeader, tpLabelDirections)
         CreateToolTips(pnlDispenseHistoryHeader, tpLabelDirections)
 
+        btnWaste.Visible = False
         ' AddHandlerToLabelClick(pnlDispenseHistoryHeader)
         ' AddHandlerToLabelClick(pnlPrescriptionsHeader)
 
         AddHandlerToLabelClick(pnlDispenseHistoryHeader, AddressOf SortBySelectedLabel)
         AddHandlerToLabelClick(pnlPrescriptionsHeader, AddressOf SortBySelectedLabel)
+
+        lblDispenseHistory.ForeColor = Color.DarkGray
+        lblPrescriptions.Font = New Font(New FontFamily("Segoe UI Semibold"), 14.25, FontStyle.Underline)
+        strSelectedLabel = lblPrescriptions.Name
+        moveAndResizePanels()
 
 
         ' CreateDispenseHistoryPanels(flpDispenseHistory, "test", "test", "test", "test", "test", "test", "test")
@@ -990,16 +996,20 @@
 
     Private Sub lblPrescriptions_Click(sender As Object, e As EventArgs) Handles lblPrescriptions.Click
 
+        lblPrescriptions.ForeColor = Color.Black
         lblPrescriptions.Font = New Font(New FontFamily("Segoe UI Semibold"), 14.25, FontStyle.Underline)
         lblDispenseHistory.Font = New Font(New FontFamily("Segoe UI Semibold"), 14.25, FontStyle.Bold)
+        lblDispenseHistory.ForeColor = Color.DarkGray
         strSelectedLabel = lblPrescriptions.Name
         moveAndResizePanels()
     End Sub
 
     Private Sub lblDispenseHistory_Click(sender As Object, e As EventArgs) Handles lblDispenseHistory.Click
 
+        lblDispenseHistory.ForeColor = Color.Black
         lblDispenseHistory.Font = New Font(New FontFamily("Segoe UI Semibold"), 14.25, FontStyle.Underline)
         lblPrescriptions.Font = New Font(New FontFamily("Segoe UI Semibold"), 14.25, FontStyle.Bold)
+        lblPrescriptions.ForeColor = Color.DarkGray
         strSelectedLabel = lblDispenseHistory.Name
         moveAndResizePanels()
     End Sub
