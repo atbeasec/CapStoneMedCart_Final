@@ -45,7 +45,7 @@
         "SC", "GA", "FL", "DE", "NJ", "OH", "MI", "IL", "IN", "IA", "KS", "NE", "OK",
         "TX", "AL", "TN", "MO", "ND", "SD", "WY", "MT", "ID", "NV", "WA", "OR", "CO",
         "NM", "AZ", "WV", "PA", "CA", "AR", "HI", "MN", "WI", "MD", "MS", "AK", "LA",
-        "UT", "KY"}
+        "UT", "KY", "DC"}
 
     '/*********************************************************************/
     '/*                   SUBPROGRAM NAME:  	PopulateStateComboBox  	   */         
