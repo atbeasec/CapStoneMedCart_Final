@@ -103,9 +103,22 @@
     End Sub
 
     Private Sub btnDispense_Click_1(sender As Object, e As EventArgs) Handles btnDispense.Click
-        If Not IsNothing(cmbMedications.SelectedItem) Then
-            DispenseHistory.DispenseMedication(DispenseHistory.SplitMedicationString(cmbMedications.SelectedItem), intPatientID)
+        If cmbMedications.SelectedItem = lstboxAllergies.SelectedItem Then
+            'show witness sign off
+            frmWitnessSignOff.Label1.Text = cmbMedications.SelectedItem.ToString
+            'if authentication from witness sign off form comes back then
+            'If Not IsNothing(cmbMedications.SelectedItem) Then
+            '    DispenseHistory.DispenseMedication(DispenseHistory.SplitMedicationString(cmbMedications.SelectedItem), intPatientID)
+            'else
+            'End If
+            MessageBox.Show("Patient is allergic to this Medication")
+        Else
+
+            If Not IsNothing(cmbMedications.SelectedItem) Then
+                DispenseHistory.DispenseMedication(DispenseHistory.SplitMedicationString(cmbMedications.SelectedItem), intPatientID)
+            End If
         End If
+
 
     End Sub
 
