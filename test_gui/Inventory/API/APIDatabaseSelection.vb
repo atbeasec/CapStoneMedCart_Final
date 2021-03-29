@@ -1,6 +1,7 @@
 'Import necessary libraries to connect to the SQLite database
 Imports System.Data.SQLite
 Imports System.IO
+Imports System.Net
 'Import necessary to use StringBuilder class
 Imports System.Text
 '/*******************************************************************/
@@ -502,4 +503,22 @@ Module APIDatabaseSelection
 		Return strStringBuilder.ToString()
 	End Function
 
+	Function checkConnections() As String
+		Dim strWebSite As String = "https://rxnav.nlm.nih.gov/REST/"
+		Try
+			Using client = New WebClient()
+				Using Stream = client.OpenRead(strWebSite)
+					Return strWebSite
+				End Using
+				Using stream = client.OpenRead("https:/10.8.30.33/REST/")
+					strWebSite = "https:/10.8.30.33/REST/"
+					Return strWebSite
+				End Using
+			End Using
+			strWebSite = "ERROR"
+			Return strWebSite
+		Catch
+		End Try
+		Return "ERROR"
+	End Function
 End Module

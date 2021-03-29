@@ -164,59 +164,62 @@ Module Interactions
     Function getInteractionsByName(rxcuiNum As String, propertyNames As List(Of String)) As List(Of (PropertyName As String, PropertyValue As String))
         frmInventory.txtStatus.Text = "Checking network connectivity"
         ' Insert functionality to check the network connectivity
-        Dim strSite As String ' insert functionality to return the site string
+        Dim strSite As String = checkConnections() ' insert functionality to return the site string
+        If strSite IsNot "ERROR" Then
+            frmInventory.txtStatus.Text = "Retrieving interactions via web API."
+            'URL for finding interactions 
+            Dim url As String = (strSite & "interaction/interaction.json?rxcui=" & rxcuiNum)
+            'location in json of properties
+            Dim trawlPointer As String = "$.interactionTypeGroup[0].interactionType[0].interactionPair"
+            'inputJSON
+            Dim inputJSON As JToken = rxNorm.GetJSON(url)
+            'set Jtoken into array to pull data from json
+            Dim JsonJArray As JArray = inputJSON.SelectToken(trawlPointer)
+            Dim JsonJArrayRxcui As JArray = New JArray
+            'Stores our List of properties selected 
+            Dim myReturnList As New List(Of (PropertyName As String, PropertyValue As String))
+            Dim strName As String
+            Dim strValue As String
 
-        frmInventory.txtStatus.Text = "Retrieving interactions via web API."
-        'URL for finding interactions 
-        Dim url As String = $"https://rxnav.nlm.nih.gov/REST/interaction/interaction.json?rxcui={rxcuiNum}"
-        'location in json of properties
-        Dim trawlPointer As String = "$.interactionTypeGroup[0].interactionType[0].interactionPair"
-        'inputJSON
-        Dim inputJSON As JToken = rxNorm.GetJSON(url)
-        'set Jtoken into array to pull data from json
-        Dim JsonJArray As JArray = inputJSON.SelectToken(trawlPointer)
-        Dim JsonJArrayRxcui As JArray = New JArray
-        'Stores our List of properties selected 
-        Dim myReturnList As New List(Of (PropertyName As String, PropertyValue As String))
-        Dim strName As String
-        Dim strValue As String
-
-        Dim intCounter As Integer = 0
-        'Pulls out the data at our specified trawlPointer to retrieve severity, description, and rxcui
-        For Each propertyName As String In propertyNames
-            For Each item As JObject In JsonJArray
-                For Each subItem As JProperty In item.Children
-                    'this should return the property names severity and description
-                    For Each propertyIdentifier In propertyNames
-                        If subItem.Name.ToString.ToUpper = propertyIdentifier.ToUpper Then
-                            strName = subItem.Name
-                            strValue = subItem.Value
-                            myReturnList.Add((strName, strValue))
-                        End If
-                    Next
-                Next
-                'parses json for rxcui this will return both what drug is searched and what drug it interacts with
-                JsonJArrayRxcui = item("interactionConcept")
-                For Each interactionConcept In JsonJArrayRxcui
-                    For Each minConceptItem In interactionConcept
-                        For Each values In minConceptItem
-                            If values("rxcui") IsNot Nothing Then
-                                If values("rxcui").ToString <> rxcuiNum Then
-                                    strName = "rxcui" ' subItem.First.Value.Last.First.First.First.Name
-                                    strValue = values("rxcui") 'subItem.First.Value.Last.First.First.First.Value
-                                    myReturnList.Add((strName, strValue))
-                                End If
+            Dim intCounter As Integer = 0
+            'Pulls out the data at our specified trawlPointer to retrieve severity, description, and rxcui
+            For Each propertyName As String In propertyNames
+                For Each item As JObject In JsonJArray
+                    For Each subItem As JProperty In item.Children
+                        'this should return the property names severity and description
+                        For Each propertyIdentifier In propertyNames
+                            If subItem.Name.ToString.ToUpper = propertyIdentifier.ToUpper Then
+                                strName = subItem.Name
+                                strValue = subItem.Value
+                                myReturnList.Add((strName, strValue))
                             End If
                         Next
                     Next
+                    'parses json for rxcui this will return both what drug is searched and what drug it interacts with
+                    JsonJArrayRxcui = item("interactionConcept")
+                    For Each interactionConcept In JsonJArrayRxcui
+                        For Each minConceptItem In interactionConcept
+                            For Each values In minConceptItem
+                                If values("rxcui") IsNot Nothing Then
+                                    If values("rxcui").ToString <> rxcuiNum Then
+                                        strName = "rxcui" ' subItem.First.Value.Last.First.First.First.Name
+                                        strValue = values("rxcui") 'subItem.First.Value.Last.First.First.First.Value
+                                        myReturnList.Add((strName, strValue))
+                                    End If
+                                End If
+                            Next
+                        Next
+                    Next
+                    intCounter += 1
                 Next
-                intCounter += 1
+                frmProgressBar.UpdateLabel("Retrieving Interactions" & intCounter & " of " & propertyNames.Count)
+                frmInventory.txtStatus.Text = ("Retrieving Interactions" & intCounter & " of " & propertyNames.Count)
             Next
-            frmProgressBar.UpdateLabel("Retrieving Interactions" & intCounter & " of " & propertyNames.Count)
-            frmInventory.txtStatus.Text = ("Retrieving Interactions" & intCounter & " of " & propertyNames.Count)
-        Next
 
-        Return myReturnList
+            Return myReturnList
+        Else
+            ' this is where we handle the error
+        End If
     End Function
 
 
