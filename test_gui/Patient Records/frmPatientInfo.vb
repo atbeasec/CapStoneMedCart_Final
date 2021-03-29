@@ -2,6 +2,7 @@
 
     Private intPatientID As Integer
     Private intPatientMRN As Double
+    Private strSelectedLabel As String
     Public Enum DispenseHistoryEnum As Integer
         MedicationName = 1
         Strength = 2
@@ -101,11 +102,21 @@
         CreateToolTips(pnlPrescriptionsHeader, tpLabelDirections)
         CreateToolTips(pnlDispenseHistoryHeader, tpLabelDirections)
 
+        'btnWaste.Visible = False
         ' AddHandlerToLabelClick(pnlDispenseHistoryHeader)
         ' AddHandlerToLabelClick(pnlPrescriptionsHeader)
 
         AddHandlerToLabelClick(pnlDispenseHistoryHeader, AddressOf SortBySelectedLabel)
         AddHandlerToLabelClick(pnlPrescriptionsHeader, AddressOf SortBySelectedLabel)
+
+        lblDispenseHistory.ForeColor = Color.DarkGray
+        lblPrescriptions.Font = New Font(New FontFamily("Segoe UI Semibold"), 14.25, FontStyle.Underline)
+        strSelectedLabel = lblPrescriptions.Name
+
+        ' move labels to default position just to ensure they are in the correct position to start off
+        lblDispenseHistory.Location = New Point(153, 217)
+        lblPrescriptions.Location = New Point(10, 217)
+        moveAndResizePanels()
 
 
         ' CreateDispenseHistoryPanels(flpDispenseHistory, "test", "test", "test", "test", "test", "test", "test")
@@ -555,6 +566,8 @@
 
     Private Sub btnEditPatient_Click(sender As Object, e As EventArgs) Handles btnEditPatient.Click
 
+        Dim expandedSize As New Size(1092, 251)
+        Dim shrinkSize As New Size(1092, 139)
         Dim ctl As Control = Nothing
 
         Dim arrPnl As Panel() = {pnlPersonalInformation}
@@ -564,12 +577,18 @@
             SetControlsToAllowEdit(ctl)
             pnlNameBarcode.Visible = True
             btnEditPatient.Text = "Save Changes"
+            moveControlsDown(expandedSize)
+            lblMoreDetails.Visible = False
+
 
         Else
+
             SetControlsToReadOnly(ctl)
             btnEditPatient.Text = "Edit Patient"
             PatientInformation.SavePatientEdits(intPatientID)
             pnlNameBarcode.Visible = False
+            moveControlsUp(shrinkSize)
+            lblMoreDetails.Visible = True
         End If
 
     End Sub
@@ -797,7 +816,7 @@
     '/*  ---   ----     ------------------------------------------------- */
     '/*                                                                   */
     '/*********************************************************************/
-    Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
+    Private Sub btnWaste_Click(sender As Object, e As EventArgs)
 
         frmWaste.SetPatientID(intPatientID) 'this should set the patient MRN using the given patientID
         frmMain.OpenChildForm(frmWaste)
@@ -984,6 +1003,154 @@
     End Sub
 
     Private Sub txtHeight_TextChanged(sender As Object, e As KeyPressEventArgs) Handles txtWeight.KeyPress, txtHeight.KeyPress
+
+    End Sub
+
+    Private Sub lblPrescriptions_Click(sender As Object, e As EventArgs) Handles lblPrescriptions.Click
+
+        lblPrescriptions.ForeColor = Color.Black
+        lblPrescriptions.Font = New Font(New FontFamily("Segoe UI Semibold"), 14.25, FontStyle.Underline)
+        lblDispenseHistory.Font = New Font(New FontFamily("Segoe UI Semibold"), 14.25, FontStyle.Bold)
+        lblDispenseHistory.ForeColor = Color.DarkGray
+        strSelectedLabel = lblPrescriptions.Name
+        moveAndResizePanels()
+    End Sub
+
+    Private Sub lblDispenseHistory_Click(sender As Object, e As EventArgs) Handles lblDispenseHistory.Click
+
+        lblDispenseHistory.ForeColor = Color.Black
+        lblDispenseHistory.Font = New Font(New FontFamily("Segoe UI Semibold"), 14.25, FontStyle.Underline)
+        lblPrescriptions.Font = New Font(New FontFamily("Segoe UI Semibold"), 14.25, FontStyle.Bold)
+        lblPrescriptions.ForeColor = Color.DarkGray
+        strSelectedLabel = lblDispenseHistory.Name
+        moveAndResizePanels()
+    End Sub
+
+    Private Sub moveAndResizePanels()
+
+        ' this is the location that all of the header panels will be mounted to
+        Dim mountLocationHeaderPanel As New Point(lblPrescriptions.Location.X, lblPrescriptions.Location.Y + 50)
+        Dim mountLocationFlowPanel As New Point(lblPrescriptions.Location.X, lblPrescriptions.Location.Y + 50)
+        Dim flowPanelSize As New Size(1067, 320)
+
+        If strSelectedLabel = lblDispenseHistory.Name Then
+
+            ' hide all the other controls from the other panel
+            pnlPrescriptionsHeader.Visible = False
+            flpMedications.Visible = False
+
+            ' make the other ones visible
+            pnlDispenseHistoryHeader.Visible = True
+            flpDispenseHistory.Visible = True
+
+            ' move the dispense history panels because they are lower
+            pnlDispenseHistoryHeader.Location = mountLocationHeaderPanel
+            flpDispenseHistory.Location = mountLocationFlowPanel
+
+            ' make the size of the flow panels larger
+            flpDispenseHistory.Size = flowPanelSize
+
+        Else
+
+
+            ' hide all the other controls from the other panel
+            pnlDispenseHistoryHeader.Visible = False
+            flpDispenseHistory.Visible = False
+
+            ' make the other ones visible
+            pnlPrescriptionsHeader.Visible = True
+            flpMedications.Visible = True
+
+            ' move the prescriptions panels as necessary
+            pnlPrescriptionsHeader.Location = mountLocationHeaderPanel
+            flpMedications.Location = mountLocationFlowPanel
+
+            'this is the size that all flow panels will be set to
+            flpMedications.Size = flowPanelSize
+
+        End If
+
+
+    End Sub
+
+
+    Private Sub lblMoreDetails_Click(sender As Object, e As EventArgs) Handles lblMoreDetails.Click
+
+        Dim expandedSize As New Size(1092, 251)
+        Dim shrinkSize As New Size(1092, 139)
+
+
+        If lblMoreDetails.Text = "Show More..." Then
+            moveControlsDown(expandedSize)
+            '' expand the patient info. 
+            'pnlPersonalInformation.Size = expandedSize
+
+            '' show the necessary controls
+            'pnlNameBarcode.Visible = True
+
+            ''move labels down up
+            'lblDispenseHistory.Location = New Point(153, 288)
+            'lblPrescriptions.Location = New Point(10, 288)
+
+            ''move panels down
+            'moveAndResizePanels()
+
+            ' change the text 
+            lblMoreDetails.Text = "Show Less..."
+
+        Else
+            moveControlsUp(shrinkSize)
+            '' expand the patient info. 
+            'pnlPersonalInformation.Size = shrinkSize
+
+            '' show the necessary controls
+            'pnlNameBarcode.Visible = False
+
+            '' move labels back to default position
+            'lblDispenseHistory.Location = New Point(153, 217)
+            'lblPrescriptions.Location = New Point(10, 217)
+
+            '' move panels down
+            'moveAndResizePanels()
+
+            ' change the text 
+            lblMoreDetails.Text = "Show More..."
+
+        End If
+
+    End Sub
+
+    Private Sub moveControlsDown(ByVal expandedSize As Size)
+
+        ' expand the patient info. 
+        pnlPersonalInformation.Size = expandedSize
+
+        ' show the necessary controls
+        pnlNameBarcode.Visible = True
+
+        'move labels down up
+        lblDispenseHistory.Location = New Point(153, 288)
+        lblPrescriptions.Location = New Point(10, 288)
+
+        'move panels down
+        moveAndResizePanels()
+
+    End Sub
+
+    Private Sub moveControlsUp(ByVal shrinkSize As Size)
+
+        ' expand the patient info. 
+        pnlPersonalInformation.Size = shrinkSize
+
+        ' show the necessary controls
+        pnlNameBarcode.Visible = False
+
+        ' move labels back to default position
+        lblDispenseHistory.Location = New Point(153, 217)
+        lblPrescriptions.Location = New Point(10, 217)
+
+        ' move panels down
+        moveAndResizePanels()
 
     End Sub
 End Class
