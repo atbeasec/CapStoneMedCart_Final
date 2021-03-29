@@ -660,6 +660,7 @@
             End If
         Next
         mtbBirthday.ReadOnly = False
+        cboState.Enabled = True
     End Sub
     '/*********************************************************************/
     '/*                   SUBPROGRAM NAME: SetControlsToReadOnly     	  */         
@@ -720,6 +721,7 @@
         Next
         cboBed.Enabled = False
         cboRoom.Enabled = False
+        cboState.Enabled = False
         mtbBirthday.ReadOnly = True
     End Sub
 
@@ -1319,6 +1321,10 @@
 
         ' move panels down
         moveAndResizePanels()
+
+    End Sub
+
+    Private Sub txtMRN_TextChanged(sender As Object, e As KeyPressEventArgs) Handles txtZipCode.KeyPress, txtPhone.KeyPress, txtMRN.KeyPress
 
     End Sub
 End Class
