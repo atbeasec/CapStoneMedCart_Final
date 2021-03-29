@@ -159,8 +159,14 @@ Public Class frmInventory
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         'create an instance of the progress bar form
+        'Dim thdThread1 As New Threading.Thread(AddressOf ThreadedMessageBox)
+        'thdThread1.Name = strMessage
+        'thdThread1.Start()
         Dim LoadingScreen As New frmProgressBar
         AddHandler UpdateLoadScreen, AddressOf LoadingScreen.UpdateLabel
+        'Dim thdThread1 As New Threading.Thread(AddressOf LoadingScreen.UpdateLabel)
+        'thdThread1.Name = strMessage
+        'thdThread1.Start()
         'LoadingScreen.StartTask()
 
 
@@ -214,6 +220,7 @@ Public Class frmInventory
                     MessageBox.Show("Please enter a valid expiration date.")
                 Else
                     LoadingScreen.Show(Me)
+                    changeStatusVisible()
                     RaiseEvent UpdateLoadScreen("This could take up to 3 minutes")
                     If txtBarcode.Text = Nothing Then
                         strBarcode = generateSampleBarcode()
@@ -249,13 +256,14 @@ Public Class frmInventory
                     ' if yes, then update if there's differences
                     ' if no, then save those items
                     ' and pass it to the function to find interactions
+                    'thdThread1.Start()
                     RaiseEvent UpdateLoadScreen("Retrieving drug interactions from the NIH website")
                     Dim myPropertyNameList As New List(Of String)({"severity", "description", "rxcui"})
                     Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
-                    strMessage = "Retrieving drug interactions from the NIH website"
-                    Dim thdThread1 As New Threading.Thread(AddressOf ThreadedMessageBox)
-                    thdThread1.Name = strMessage
-                    thdThread1.Start()
+                    'strMessage = "Retrieving drug interactions from the NIH website"
+                    'thdThread1.Name = "Loading..." 'Dim thdThread1 As New Threading.Thread(AddressOf ThreadedMessageBox)
+                    'thdThread1.Name = strMessage
+                    'thdThread1.Start()
                     outputList = getInteractionsByName(strRXCUI, myPropertyNameList)
 
                     'Double-check if the interactions with the matching pair of RXCUI's exist
@@ -270,8 +278,8 @@ Public Class frmInventory
 
                         'old code look to delete later?
                         Dim thdThread2 As New Threading.Thread(AddressOf ThreadedMessageBox)
-                        thdThread2.Name = strMessage
-                        thdThread2.Start()
+                        'thdThread2.Name = strMessage
+                        'thdThread2.Start()
 
 
                         CompareDrugInteractions(CInt(strRXCUI), outputList) 'CInt(outputList.Item(i + 3).PropertyValue), outputList.Item(i).PropertyValue, outputList.Item(i + 1).PropertyValue.Replace("'", ""), 1)
@@ -279,8 +287,8 @@ Public Class frmInventory
                         RaiseEvent UpdateLoadScreen("Interactions records have been added")
                         strMessage = "All interaction records have been added"
                         Dim thdThread3 As New Threading.Thread(AddressOf ThreadedMessageBox)
-                        thdThread3.Name = strMessage
-                        thdThread3.Start()
+                        'thdThread3.Name = strMessage
+                        'thdThread3.Start()
                     Catch ex As Exception
                         MessageBox.Show("Interactions could not be recorded")
                     End Try
@@ -307,6 +315,7 @@ Public Class frmInventory
                     eprError.Clear()
 
                     ClearInventoryForm()
+                    changeStatusVisible()
                 End If
             End If
         End If
@@ -363,7 +372,9 @@ Public Class frmInventory
 
         ' first clear the fields
         txtStrength.Text = ""
+        txtStrength.Enabled = True
         txtSchedule.Text = ""
+        txtSchedule.Enabled = True
         txtType.Text = ""
         chkControlled.Checked = False
         chkNarcotic.Checked = False
@@ -378,8 +389,10 @@ Public Class frmInventory
             Select Case result.strPropertyName
                 Case "AVAILABLE_STRENGTH"
                     txtStrength.Text = result.strPropertyValue
+                    txtStrength.Enabled = False
                 Case "STRENGTH"
                     txtStrength.Text = result.strPropertyValue
+                    txtStrength.Enabled = False
                 Case "SCHEDULE"
                     If result.strPropertyValue Is Nothing Then
                         ' do nothing
@@ -387,11 +400,16 @@ Public Class frmInventory
                         ' check the controlled and narcotic
                         chkControlled.Checked = True
                         chkNarcotic.Checked = True
+                        txtSchedule.Enabled = False
                     ElseIf result.strPropertyValue = "2N" Or result.strPropertyValue = "3N" Or result.strPropertyValue = "4" Or result.strPropertyValue = "5" Then
                         ' check controlled only
                         chkControlled.Checked = True
+                        txtSchedule.Enabled = False
+                    ElseIf result.strPropertyValue = "0" Then
+                        txtSchedule.Text = "0"
+                        ' leave it enabled in case there's an error
                     Else
-                        ' if the value isn't in these then it must be 0 or invalid - do nothing
+                        ' if the value isn't in these then it must be invalid - do nothing
                     End If
                     txtSchedule.Text = result.strPropertyValue
             End Select
@@ -806,5 +824,13 @@ Public Class frmInventory
         DataVaildationMethods.KeyPressCheck(e, "0123456789")
     End Sub
 
-
+    Private Sub changeStatusVisible()
+        If lblStatus.Visible = True Then
+            lblStatus.Visible = False
+            txtStatus.Visible = False
+        Else
+            lblStatus.Visible = True
+            txtStatus.Visible = True
+        End If
+    End Sub
 End Class
