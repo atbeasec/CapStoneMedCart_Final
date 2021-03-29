@@ -261,7 +261,7 @@ Partial Class frmNewPatient
         Me.mtbPhone.Name = "mtbPhone"
         Me.mtbPhone.ShortcutsEnabled = False
         Me.mtbPhone.Size = New System.Drawing.Size(248, 22)
-        Me.mtbPhone.TabIndex = 15
+        Me.mtbPhone.TabIndex = 16
         '
         'Panel16
         '
@@ -654,7 +654,7 @@ Partial Class frmNewPatient
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel4.Size = New System.Drawing.Size(107, 31)
-        Me.Panel4.TabIndex = 16
+        Me.Panel4.TabIndex = 15
         '
         'mtbZipCode
         '
