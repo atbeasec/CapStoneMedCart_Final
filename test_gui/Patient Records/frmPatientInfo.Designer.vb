@@ -189,7 +189,7 @@ Partial Class frmPatientInfo
         Me.pnlPersonalInformation.ForeColor = System.Drawing.Color.Gainsboro
         Me.pnlPersonalInformation.Location = New System.Drawing.Point(-1, 49)
         Me.pnlPersonalInformation.Name = "pnlPersonalInformation"
-        Me.pnlPersonalInformation.Size = New System.Drawing.Size(1092, 140)
+        Me.pnlPersonalInformation.Size = New System.Drawing.Size(1092, 146)
         Me.pnlPersonalInformation.TabIndex = 17
         '
         'lblMoreDetails
@@ -293,11 +293,9 @@ Partial Class frmPatientInfo
         '
         'cboState
         '
-        Me.cboState.DropDownHeight = 250
         Me.cboState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboState.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboState.FormattingEnabled = True
-        Me.cboState.IntegralHeight = False
         Me.cboState.Location = New System.Drawing.Point(566, 23)
         Me.cboState.Name = "cboState"
         Me.cboState.Size = New System.Drawing.Size(151, 25)
@@ -308,7 +306,7 @@ Partial Class frmPatientInfo
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label6.Location = New System.Drawing.Point(379, 57)
+        Me.Label6.Location = New System.Drawing.Point(376, 57)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(43, 21)
         Me.Label6.TabIndex = 25
@@ -330,7 +328,7 @@ Partial Class frmPatientInfo
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label5.Location = New System.Drawing.Point(198, 58)
+        Me.Label5.Location = New System.Drawing.Point(194, 58)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(66, 21)
         Me.Label5.TabIndex = 24
@@ -341,7 +339,7 @@ Partial Class frmPatientInfo
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label4.Location = New System.Drawing.Point(12, 58)
+        Me.Label4.Location = New System.Drawing.Point(9, 58)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(45, 21)
         Me.Label4.TabIndex = 23
@@ -431,10 +429,9 @@ Partial Class frmPatientInfo
         'mtbBirthday
         '
         Me.mtbBirthday.Location = New System.Drawing.Point(199, 33)
-        Me.mtbBirthday.Mask = "0000/00/00"
+        Me.mtbBirthday.Mask = "00/00/0000"
         Me.mtbBirthday.Name = "mtbBirthday"
         Me.mtbBirthday.ReadOnly = True
-        Me.mtbBirthday.ShortcutsEnabled = False
         Me.mtbBirthday.Size = New System.Drawing.Size(151, 20)
         Me.mtbBirthday.TabIndex = 1
         Me.mtbBirthday.ValidatingType = GetType(Date)
