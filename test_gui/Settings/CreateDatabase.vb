@@ -116,6 +116,7 @@ Module CreateDatabase
 	'/*  CreateDiscrepanciesTable()										*/	
 	'/*  CreateAdHocOrderTable()										*/
 	'/*  CreatePersonalPatientDrawerMedicationTable()					*/
+	'/*	 CreateDrugInteractionsOverrideTable()							*/
 	'/*******************************************************************/
 	'/*  PARAMETER LIST (In Parameter Order):							*/
 	'/*																	*/
@@ -131,14 +132,15 @@ Module CreateDatabase
 	'/*******************************************************************/
 	'/* MODIFICATION HISTORY:											*/
 	'/*																	*/
-	'/*  WHO	WHEN     WHAT											*/
-	'/*  ---   ----     ------------------------------------------------*/
-	'/*  BRH	01/23/21  Initial creation of the code					*/
-	'/*  BRH	01/28/21  Add the CreateSettingsTable method			*/
+	'/*  WHO	WHEN		WHAT										*/
+	'/*  ---   ----			--------------------------------------------*/
+	'/*  BRH	01/23/21	Initial creation of the code				*/
+	'/*  BRH	01/28/21	Add the CreateSettingsTable method			*/
 	'/*  BRH	02/06/21	Allowed for user to choose database file	*/
 	'/*							and database file name upon creation.	*/
 	'/*	 BRH	02/13/21	Removed code to allow for more practical	*/
 	'/*						programming practices.						*/
+	'/*	 BRH	03/28/21	Added the Drug Interactions Override table	*/
 	'/*******************************************************************/
 
 	Sub Main()
@@ -173,6 +175,7 @@ Module CreateDatabase
 			CreateAdHocOrderTable()
 			CreatePersonalPatientDrawerMedicationTable()
 			CreateSettingsTable()
+			CreateDrugInteractionsOverrideTable()
 
 			DBConn.Close()
 
@@ -561,7 +564,7 @@ Module CreateDatabase
 		'Number_of_Dividers'	INTEGER NOT NULL,
 		'Full_Flag'	INTEGER NOT NULL,
 		'Active_Flag' INTEGER NOT NULL,
-		PRIMARY KEY('Drawers_ID' AUTOINCREMENT));"
+		PRIMARY KEY(" & "Drawers_ID" & " AUTOINCREMENT));"
 		ExecuteQuery("Drawers")
 	End Sub
 
@@ -603,6 +606,7 @@ Module CreateDatabase
 	'/*  BRH  02/04/21  Change Brand_name to Synonym field				*/
 	'/*  BRH  02/08/21  Updated fields per Database meeting				*/
 	'/*  BRH  02/11/21  Added a Schedule field							*/
+	'/*	 BRH  03/28/21	Added proper primary key code					*/
 	'/*******************************************************************/
 	Public Sub CreateMedicationTable()
 		strCreateTable = "CREATE TABLE 'Medication' (
@@ -616,7 +620,7 @@ Module CreateDatabase
 							'Strength'	TEXT,
 							'Schedule'	TEXT,
 							'Active_Flag' INTEGER NOT NULL,
-	                        PRIMARY KEY('Medication_ID' AUTOINCREMENT));"
+							PRIMARY KEY(" & "Medication_ID" & " AUTOINCREMENT));"
 
 		ExecuteQuery("Medication")
 	End Sub
@@ -658,6 +662,7 @@ Module CreateDatabase
 	'/*  BRH  01/28/21  Updated fields in the database					*/
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
 	'/*  BRH  02/04/21  Added Barcode field								*/
+	'/*	 BRH  03/28/21	Added proper primary key code					*/
 	'/*******************************************************************/
 	Public Sub CreatePatientTable()
 		strCreateTable = "CREATE TABLE 'Patient' (
@@ -680,7 +685,8 @@ Module CreateDatabase
 	                    'Primary_Physician_ID'	INTEGER NOT NULL,
 						'Active_Flag' INTEGER NOT NULL,
 	                    FOREIGN KEY(" & "Primary_Physician_ID" & ") REFERENCES " & "Physician" & "(" & "Physician_ID" & "),
-	                    PRIMARY KEY('Patient_ID' AUTOINCREMENT));"
+						PRIMARY KEY(" & "Patient_ID" & " AUTOINCREMENT));"
+
 		ExecuteQuery("Patient")
 	End Sub
 
@@ -820,6 +826,7 @@ Module CreateDatabase
 	'/*  BRH  01/23/21  Initial creation of the code					*/
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
 	'/*  BRH  02/04/21  Made barcode unique								*/
+	'/*	 BRH  03/28/21	Added proper primary key code					*/
 	'/*******************************************************************/
 	Public Sub CreateUserTable()
 		strCreateTable = "CREATE TABLE 'User' (
@@ -833,7 +840,8 @@ Module CreateDatabase
 	                    'Admin_Flag'	INTEGER,
 	                    'Supervisor_Flag'	INTEGER,
 						'Active_Flag' INTEGER NOT NULL,
-	                    PRIMARY KEY('User_ID' AUTOINCREMENT));"
+						PRIMARY KEY(" & "User_ID" & " AUTOINCREMENT));"
+
 		ExecuteQuery("User")
 	End Sub
 
@@ -1015,12 +1023,12 @@ Module CreateDatabase
 	'/*  WHO   WHEN     WHAT											*/
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  BRH  01/23/21  Initial creation of the code					*/
-	'/*  BRH  02/01/21  Updated for unique primary keys					*/
+	'/*  BRH  02/01/21  Updated for unique primary keys, removed medication
+	'/*					tuid											*/
 	'/*******************************************************************/
 	Public Sub CreateAllergyTable()
 		strCreateTable = "CREATE TABLE 'Allergy' (
 	                    'Allergy_Name'	TEXT NOT NULL UNIQUE,
-	                    'Medication_TUID'	INTEGER,
 	                    'Allergy_Type'	TEXT,
 	                    PRIMARY KEY(" & "Allergy_Name" & "));"
 
@@ -1110,6 +1118,7 @@ Module CreateDatabase
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  BRH  01/23/21  Initial creation of the code					*/
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
+	'/*	 BRH  03/28/21	Added proper primary key code					*/
 	'/*******************************************************************/
 	Public Sub CreateAllergyOverrideTable()
 		strCreateTable = "CREATE TABLE 'AllergyOverride' (
@@ -1121,7 +1130,7 @@ Module CreateDatabase
 	                    FOREIGN KEY(" & "User_TUID" & ") REFERENCES " & "User" & "(" & "User_ID" & "),
 	                    FOREIGN KEY(" & "Allergy_Name" & ") REFERENCES " & "Allergy" & "(" & "Allergy_Name" & "),
 	                    FOREIGN KEY(" & "Patient_TUID" & ") REFERENCES " & "Patient" & "(" & "Patient_ID" & "),
-	                    PRIMARY KEY('AllergyOverride_ID' AUTOINCREMENT));"
+						PRIMARY KEY(" & "AllergyOverride_ID" & " AUTOINCREMENT));"
 
 		ExecuteQuery("AllergyOverride")
 	End Sub
@@ -1163,6 +1172,7 @@ Module CreateDatabase
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
 	'/*  BRH  02/09/21  Added Frequency and Notes fields				*/
 	'/*  BRH  02/16/21  Changed Method to Type							*/
+	'/*	 BRH  03/28/21	Added proper primary key code					*/
 	'/*******************************************************************/
 	Public Sub CreatePatientMedicationTable()
 		strCreateTable = "CREATE TABLE 'PatientMedication' (
@@ -1179,7 +1189,7 @@ Module CreateDatabase
 	                    FOREIGN KEY(" & "Medication_TUID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
 	                    FOREIGN KEY(" & "Ordering_Physician_ID" & ") REFERENCES " & "Physician" & "(" & "Physician_ID" & "),
 	                    FOREIGN KEY(" & "Patient_TUID" & ") REFERENCES " & "Patient" & "(" & "Patient_ID" & "),
-	                    PRIMARY KEY('PatientMedication_ID' AUTOINCREMENT));"
+						PRIMARY KEY(" & "PatientMedication_ID" & " AUTOINCREMENT));"
 
 		ExecuteQuery("PatientMedication")
 	End Sub
@@ -1220,6 +1230,7 @@ Module CreateDatabase
 	'/*  BRH  01/23/21  Initial creation of the code					*/
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
 	'/*  BRH  02/04/21  Removed third medication id						*/
+	'/*	 BRH  03/28/21	Added proper primary key code					*/
 	'/*******************************************************************/
 	Public Sub CreateDrugInteractionsTable()
 		strCreateTable = "CREATE TABLE 'Drug_Interactions' (
@@ -1231,7 +1242,7 @@ Module CreateDatabase
 						'Active_Flag' INTEGER NOT NULL,
 	                    FOREIGN KEY(" & "Medication_One_ID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
 	                    FOREIGN KEY(" & "Medication_Two_ID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
-	                    PRIMARY KEY('Drug_Interactions_ID' AUTOINCREMENT));"
+						PRIMARY KEY(" & "Drug_Interactions_ID" & " AUTOINCREMENT));"
 
 		ExecuteQuery("DrugInteractions")
 	End Sub
@@ -1271,18 +1282,23 @@ Module CreateDatabase
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  BRH  01/23/21  Initial creation of the code					*/
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
+	'/*	 BRH  03/28/21	Added proper primary key code, added amount per	*/
+	'/*					container and container unit, and updated quanity
+	'/*					data field to numeric							*/
 	'/*******************************************************************/
 	Public Sub CreateDrawerMedicationTable()
 		strCreateTable = "CREATE TABLE 'DrawerMedication' (
 	                'DrawerMedication_ID'	INTEGER NOT NULL UNIQUE,
 	                'Drawers_TUID'	INTEGER NOT NULL,
 	                'Medication_TUID'	INTEGER NOT NULL,
-	                'Quantity'	INTEGER NOT NULL,
+	                'Quantity'	NUMERIC NOT NULL,
+					'Amount_Per_Container' INTEGER,
+					'Amount_Per_Container Unit'	TEXT,
 	                'Divider_Bin'	INTEGER,
 	                'Expiration_Date'	TEXT NOT NULL,
 	                'Discrepancy_Flag'	INTEGER NOT NULL,
 					'Active_Flag'	INTEGER NOT NULL,
-	                PRIMARY KEY('DrawerMedication_ID' AUTOINCREMENT),
+					PRIMARY KEY(" & "DrawerMedication_ID" & " AUTOINCREMENT),
 	                FOREIGN KEY(" & "Medication_TUID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
 	                FOREIGN KEY(" & "Drawers_TUID" & ") REFERENCES " & "Drawers" & "(" & "Drawers_ID" & "));"
 
@@ -1326,6 +1342,8 @@ Module CreateDatabase
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
 	'/*	 BRH  03/19/21	Added the "Quantity" field						*/
 	'/*	 BRH  03/19/21	Added the "Medication_TUID" field				*/
+	'/*	 BRH  03/28/21	Added proper primary key code, changed quantity	*/
+	'/*					data type to allow decimals (to numeric)		*/
 	'/*******************************************************************/
 	Public Sub CreateWastesTable()
 		strCreateTable = "CREATE TABLE 'Wastes' (
@@ -1334,14 +1352,17 @@ Module CreateDatabase
 	                    'Secondary_User_TUID'	INTEGER NOT NULL,
 	                    'DrawerMedication_TUID'	INTEGER,
 						'Medication_TUID'	INTEGER,
+						'Patient_TUID'	INTEGER,
 	                    'DateTime'	TEXT NOT NULL,
 						'Reason' TEXT,
-						'Quantity' INTEGER,
-	                    PRIMARY KEY('Wastes_ID' AUTOINCREMENT),
+						'Quantity' NUMERIC,
+						PRIMARY KEY(" & "Wastes_ID" & " AUTOINCREMENT),
 	                    FOREIGN KEY(" & "Primary_User_TUID" & ") REFERENCES " & "User" & "(" & "User_ID" & "),
 	                    FOREIGN KEY(" & "Secondary_User_TUID" & ") REFERENCES " & "User" & "(" & "User_ID" & "),
 						FOREIGN KEY(" & "Medication_TUID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
-	                    FOREIGN KEY(" & "DrawerMedication_TUID" & ") REFERENCES " & "DrawerMedication" & "(" & "DrawerMedication_ID" & "));"
+	                    FOREIGN KEY(" & "DrawerMedication_TUID" & ") REFERENCES " & "DrawerMedication" & "(" & "DrawerMedication_ID" & "),
+						FOREIGN KEY(" & "Patient_TUID" & ") REFERENCES " & "Patient" & "(" & "Patient_ID" & "));"
+
 		ExecuteQuery("Wastes")
 	End Sub
 
@@ -1380,6 +1401,7 @@ Module CreateDatabase
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  BRH  01/23/21  Initial creation of the code					*/
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
+	'/*	 BRH  03/28/21	Added proper primary key code					*/
 	'/*******************************************************************/
 	Public Sub CreateDispensingTable()
 		strCreateTable = "CREATE TABLE 'Dispensing' (
@@ -1394,7 +1416,7 @@ Module CreateDatabase
 						FOREIGN KEY(" & "DrawerMedication_TUID" & ") REFERENCES " & "DrawerMedication" & "(" & "DrawerMedication_ID" & "),
 						FOREIGN KEY(" & "PatientMedication_TUID" & ") REFERENCES " & "PatientMedication" & "(" & "PatientMedication_ID" & "),
 						FOREIGN KEY(" & "Primary_User_TUID" & ") REFERENCES " & "User" & "(" & "User_ID" & "),
-						PRIMARY KEY('Dispensing_ID' AUTOINCREMENT));"
+						PRIMARY KEY(" & "Dispensing_ID" & " AUTOINCREMENT));"
 
 		ExecuteQuery("Dispensing")
 	End Sub
@@ -1435,6 +1457,7 @@ Module CreateDatabase
 	'/*  BRH  01/23/21  Initial creation of the code					*/
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
 	'/*  BRH  02/23/21  Added a Reason field							*/
+	'/*	 BRH  03/28/21	Added proper primary key code					*/
 	'/*******************************************************************/
 	Public Sub CreateDiscrepanciesTable()
 		strCreateTable = "CREATE TABLE 'Discrepancies' (
@@ -1452,7 +1475,7 @@ Module CreateDatabase
 						FOREIGN KEY(" & "Drawer_TUID" & ") REFERENCES " & "Drawers" & "(" & "Drawers_ID" & "),
 						FOREIGN KEY(" & "Medication_TUID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
 						FOREIGN KEY(" & "Approving_User_TUID" & ") REFERENCES " & "User" & "(" & "User_ID" & "),
-						PRIMARY KEY('Discrepancies_ID' AUTOINCREMENT));"
+						PRIMARY KEY(" & "Discrepancies_ID" & " AUTOINCREMENT));"
 
 		ExecuteQuery("Discrepancies")
 	End Sub
@@ -1492,6 +1515,7 @@ Module CreateDatabase
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  BRH  01/23/21  Initial creation of the code					*/
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
+	'/*	 BRH  03/28/21	Added proper primary key code					*/
 	'/*******************************************************************/
 	Public Sub CreateAdHocOrderTable()
 		strCreateTable = "CREATE TABLE 'AdHocOrder' (
@@ -1502,7 +1526,7 @@ Module CreateDatabase
 						'Amount'	TEXT NOT NULL,
 						'DrawerMedication_TUID'	INTEGER NOT NULL,
 						'DateTime'	TEXT NOT NULL,
-						PRIMARY KEY('AdHocOrder_ID' AUTOINCREMENT),
+						PRIMARY KEY(" & "AdHocOrder_ID" & " AUTOINCREMENT),
 						FOREIGN KEY(" & "DrawerMedication_TUID" & ") REFERENCES " & "DrawerMedication" & "(" & "DrawerMedication_ID" & "),
 						FOREIGN KEY(" & "Medication_TUID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
 						FOREIGN KEY(" & "Patient_TUID" & ") REFERENCES " & "Patient" & "(" & "Patient_ID" & "),
@@ -1547,6 +1571,7 @@ Module CreateDatabase
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  BRH  01/23/21  Initial creation of the code					*/
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
+	'/*	 BRH  03/28/21	Added proper primary key code					*/
 	'/*******************************************************************/
 	Public Sub CreatePersonalPatientDrawerMedicationTable()
 		strCreateTable = "CREATE TABLE 'Personal_Patient_DrawerMedication' (
@@ -1555,7 +1580,7 @@ Module CreateDatabase
 						'DrawerMedication_TUID'	INTEGER NOT NULL,
 						'Removed_Dispensing'	INTEGER,
 						'Active_Flag'	INTEGER NOT NULL,
-						PRIMARY KEY('PersonalMedication_ID' AUTOINCREMENT),
+						PRIMARY KEY(" & "PersonalMedication_ID" & " AUTOINCREMENT),
 						FOREIGN KEY(" & "DrawerMedication_TUID" & ") REFERENCES " & "DrawerMedication" & "(" & "DrawerMedication_ID" & "),
 						FOREIGN KEY(" & "Patient_TUID" & ") REFERENCES " & "Patient" & "(" & "Patient_ID" & "));"
 
@@ -1599,6 +1624,7 @@ Module CreateDatabase
 	'/*  BRH  01/23/21  Initial creation of the code					*/
 	'/*  BRH  01/28/21  Update fields in database						*/
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
+	'/*	 BRH  03/28/21	Added proper primary key code					*/
 	'/*******************************************************************/
 	Public Sub CreateSettingsTable()
 		strCreateTable = "CREATE TABLE 'Settings' (
@@ -1606,9 +1632,60 @@ Module CreateDatabase
 						'Bit_rate'	TEXT NOT NULL,
 						'Comm_Port'	TEXT NOT NULL,
 						'Simulation_Mode_Flag'	INTEGER,
-						PRIMARY KEY('Settings_ID' AUTOINCREMENT));"
+						PRIMARY KEY(" & "Settings_ID" & " AUTOINCREMENT));"
 
 		ExecuteQuery("Settings")
+	End Sub
+
+	'/*******************************************************************/
+	'/*   SUBROUTINE NAME:		CreateDrugInteractionsOverrideTable		*/
+	'/*******************************************************************/
+	'/*                   WRITTEN BY:  	Breanna Howey					*/
+	'/*		         DATE CREATED: 	   03/28/21							*/
+	'/*******************************************************************/
+	'/*  SUBROUTINE PURPOSE:											*/
+	'/*	 The purpose of this subroutine is to create the Drugs Interactions 
+	'/*  Override table. SQL code is stored in the strCreateTable		*/
+	'/*	 variables and is executed in the call for the ExecuteQuery()	*/ 
+	'/*	 subroutine														*/
+	'/*******************************************************************/
+	'/*  CALLED BY:   													*/
+	'/*   Main()						          						*/
+	'/*******************************************************************/
+	'/*  CALLS:															*/
+	'/*  ExecuteQuery()													*/
+	'/*******************************************************************/
+	'/*  PARAMETER LIST (In Parameter Order):							*/
+	'/*																	*/
+	'/*  (None)															*/
+	'/*******************************************************************/
+	'/* SAMPLE INVOCATION:												*/
+	'/*																	*/
+	'/* CreateDrugInteractionsOverrideTable()							*/	
+	'/*******************************************************************/
+	'/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+	'/*																	*/
+	'/*  (None)															*/
+	'/*******************************************************************/
+	'/* MODIFICATION HISTORY:											*/
+	'/*																	*/
+	'/*  WHO   WHEN     WHAT											*/
+	'/*  ---   ----     ------------------------------------------------*/
+	'/*  BRH  03/28/21  Initial creation of the code					*/
+	'/*******************************************************************/
+	Public Sub CreateDrugInteractionsOverrideTable()
+		strCreateTable = "CREATE TABLE 'Drug_InteractionsOverride' (
+						'Drug_Interaction_Override_TUID'	INTEGER NOT NULL UNIQUE,
+						'Patient_TUID'	INTEGER NOT NULL,
+						'User_TUID'	INTEGER NOT NULL,
+						'Drug_Interactions_TUID'	INTEGER NOT NULL,
+						'DateTime'	TEXT NOT NULL,
+						PRIMARY KEY(" & "Drug_Interaction_Override_TUID" & " AUTOINCREMENT),
+						FOREIGN KEY(" & "Drug_Interactions_TUID" & ") REFERENCES " & "Drug_Interactions" & "(" & "Drug_Interactions_ID" & "),
+						FOREIGN KEY(" & "Patient_TUID" & ") REFERENCES " & "Patient" & "(" & "Patient_ID" & "),	
+						FOREIGN KEY(" & "User_TUID" & ") REFERENCES " & "User" & "(" & "User_ID" & "));"
+
+		ExecuteQuery("Drawers")
 	End Sub
 
 
