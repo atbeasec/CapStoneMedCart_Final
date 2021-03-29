@@ -30,6 +30,8 @@ Partial Class frmPatientInfo
         Me.txtPhysician = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.pnlPersonalInformation = New System.Windows.Forms.Panel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.mtbBirthday = New System.Windows.Forms.MaskedTextBox()
         Me.lblMoreDetails = New System.Windows.Forms.Label()
         Me.pnlNameBarcode = New System.Windows.Forms.Panel()
         Me.txtBarcode = New System.Windows.Forms.TextBox()
@@ -49,7 +51,6 @@ Partial Class frmPatientInfo
         Me.txtCity = New System.Windows.Forms.TextBox()
         Me.txtAddress = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.mtbBirthday = New System.Windows.Forms.MaskedTextBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.txtPhone = New System.Windows.Forms.MaskedTextBox()
         Me.lstBoxAllergies = New System.Windows.Forms.ListBox()
@@ -95,6 +96,7 @@ Partial Class frmPatientInfo
         Me.tpLabelDirections = New System.Windows.Forms.ToolTip(Me.components)
         Me.tpToolTip = New System.Windows.Forms.ToolTip(Me.components)
         Me.pnlPersonalInformation.SuspendLayout()
+        Me.Panel3.SuspendLayout()
         Me.pnlNameBarcode.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.pnlPrescriptionsHeader.SuspendLayout()
@@ -162,10 +164,10 @@ Partial Class frmPatientInfo
         'pnlPersonalInformation
         '
         Me.pnlPersonalInformation.BackColor = System.Drawing.Color.White
+        Me.pnlPersonalInformation.Controls.Add(Me.Panel3)
         Me.pnlPersonalInformation.Controls.Add(Me.lblMoreDetails)
         Me.pnlPersonalInformation.Controls.Add(Me.pnlNameBarcode)
         Me.pnlPersonalInformation.Controls.Add(Me.Label9)
-        Me.pnlPersonalInformation.Controls.Add(Me.mtbBirthday)
         Me.pnlPersonalInformation.Controls.Add(Me.Panel2)
         Me.pnlPersonalInformation.Controls.Add(Me.lstBoxAllergies)
         Me.pnlPersonalInformation.Controls.Add(Me.cboBed)
@@ -191,6 +193,30 @@ Partial Class frmPatientInfo
         Me.pnlPersonalInformation.Name = "pnlPersonalInformation"
         Me.pnlPersonalInformation.Size = New System.Drawing.Size(1092, 146)
         Me.pnlPersonalInformation.TabIndex = 17
+        '
+        'Panel3
+        '
+        Me.Panel3.BackColor = System.Drawing.Color.White
+        Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel3.Controls.Add(Me.mtbBirthday)
+        Me.Panel3.ForeColor = System.Drawing.Color.DarkGray
+        Me.Panel3.Location = New System.Drawing.Point(198, 31)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel3.Size = New System.Drawing.Size(148, 25)
+        Me.Panel3.TabIndex = 66
+        '
+        'mtbBirthday
+        '
+        Me.mtbBirthday.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.mtbBirthday.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.mtbBirthday.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Me.mtbBirthday.Location = New System.Drawing.Point(1, 1)
+        Me.mtbBirthday.Mask = "0000/00/00"
+        Me.mtbBirthday.Name = "mtbBirthday"
+        Me.mtbBirthday.ShortcutsEnabled = False
+        Me.mtbBirthday.Size = New System.Drawing.Size(144, 18)
+        Me.mtbBirthday.TabIndex = 0
         '
         'lblMoreDetails
         '
@@ -294,6 +320,7 @@ Partial Class frmPatientInfo
         'cboState
         '
         Me.cboState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboState.Enabled = False
         Me.cboState.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboState.FormattingEnabled = True
         Me.cboState.Location = New System.Drawing.Point(566, 23)
@@ -426,16 +453,6 @@ Partial Class frmPatientInfo
         Me.Label9.TabIndex = 62
         Me.Label9.Text = "Allergies:"
         '
-        'mtbBirthday
-        '
-        Me.mtbBirthday.Location = New System.Drawing.Point(199, 33)
-        Me.mtbBirthday.Mask = "0000/00/00"
-        Me.mtbBirthday.Name = "mtbBirthday"
-        Me.mtbBirthday.ReadOnly = True
-        Me.mtbBirthday.Size = New System.Drawing.Size(151, 20)
-        Me.mtbBirthday.TabIndex = 1
-        Me.mtbBirthday.ValidatingType = GetType(Date)
-        '
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.White
@@ -452,12 +469,12 @@ Partial Class frmPatientInfo
         '
         Me.txtPhone.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtPhone.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtPhone.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.txtPhone.Font = New System.Drawing.Font("Segoe UI", 9.75!)
         Me.txtPhone.Location = New System.Drawing.Point(1, 1)
         Me.txtPhone.Mask = "(999) 000-0000"
         Me.txtPhone.Name = "txtPhone"
         Me.txtPhone.ShortcutsEnabled = False
-        Me.txtPhone.Size = New System.Drawing.Size(144, 22)
+        Me.txtPhone.Size = New System.Drawing.Size(144, 18)
         Me.txtPhone.TabIndex = 0
         '
         'lstBoxAllergies
@@ -963,6 +980,8 @@ Partial Class frmPatientInfo
         Me.Text = "frmPatientInfo"
         Me.pnlPersonalInformation.ResumeLayout(False)
         Me.pnlPersonalInformation.PerformLayout()
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel3.PerformLayout()
         Me.pnlNameBarcode.ResumeLayout(False)
         Me.pnlNameBarcode.PerformLayout()
         Me.Panel2.ResumeLayout(False)
@@ -1035,7 +1054,6 @@ Partial Class frmPatientInfo
     Friend WithEvents tpToolTip As ToolTip
     Friend WithEvents Panel2 As Panel
     Friend WithEvents txtPhone As MaskedTextBox
-    Friend WithEvents mtbBirthday As MaskedTextBox
     Friend WithEvents pnlNameBarcode As Panel
     Friend WithEvents txtBarcode As TextBox
     Friend WithEvents txtLast As TextBox
@@ -1047,4 +1065,6 @@ Partial Class frmPatientInfo
     Friend WithEvents Label4 As Label
     Friend WithEvents lblMoreDetails As Label
     Friend WithEvents Label9 As Label
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents mtbBirthday As MaskedTextBox
 End Class
