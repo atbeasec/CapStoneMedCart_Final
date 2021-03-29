@@ -1023,12 +1023,12 @@ Module CreateDatabase
 	'/*  WHO   WHEN     WHAT											*/
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  BRH  01/23/21  Initial creation of the code					*/
-	'/*  BRH  02/01/21  Updated for unique primary keys					*/
+	'/*  BRH  02/01/21  Updated for unique primary keys, removed medication
+	'/*					tuid											*/
 	'/*******************************************************************/
 	Public Sub CreateAllergyTable()
 		strCreateTable = "CREATE TABLE 'Allergy' (
 	                    'Allergy_Name'	TEXT NOT NULL UNIQUE,
-	                    'Medication_TUID'	INTEGER,
 	                    'Allergy_Type'	TEXT,
 	                    PRIMARY KEY(" & "Allergy_Name" & "));"
 
@@ -1282,14 +1282,18 @@ Module CreateDatabase
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  BRH  01/23/21  Initial creation of the code					*/
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
-	'/*	 BRH  03/28/21	Added proper primary key code					*/
+	'/*	 BRH  03/28/21	Added proper primary key code, added amount per	*/
+	'/*					container and container unit, and updated quanity
+	'/*					data field to numeric							*/
 	'/*******************************************************************/
 	Public Sub CreateDrawerMedicationTable()
 		strCreateTable = "CREATE TABLE 'DrawerMedication' (
 	                'DrawerMedication_ID'	INTEGER NOT NULL UNIQUE,
 	                'Drawers_TUID'	INTEGER NOT NULL,
 	                'Medication_TUID'	INTEGER NOT NULL,
-	                'Quantity'	INTEGER NOT NULL,
+	                'Quantity'	NUMERIC NOT NULL,
+					'Amount_Per_Container' INTEGER,
+					'Amount_Per_Container Unit'	TEXT,
 	                'Divider_Bin'	INTEGER,
 	                'Expiration_Date'	TEXT NOT NULL,
 	                'Discrepancy_Flag'	INTEGER NOT NULL,
@@ -1338,7 +1342,8 @@ Module CreateDatabase
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
 	'/*	 BRH  03/19/21	Added the "Quantity" field						*/
 	'/*	 BRH  03/19/21	Added the "Medication_TUID" field				*/
-	'/*	 BRH  03/28/21	Added proper primary key code					*/
+	'/*	 BRH  03/28/21	Added proper primary key code, changed quantity	*/
+	'/*					data type to allow decimals (to numeric)		*/
 	'/*******************************************************************/
 	Public Sub CreateWastesTable()
 		strCreateTable = "CREATE TABLE 'Wastes' (
@@ -1347,14 +1352,16 @@ Module CreateDatabase
 	                    'Secondary_User_TUID'	INTEGER NOT NULL,
 	                    'DrawerMedication_TUID'	INTEGER,
 						'Medication_TUID'	INTEGER,
+						'Patient_TUID'	INTEGER,
 	                    'DateTime'	TEXT NOT NULL,
 						'Reason' TEXT,
-						'Quantity' INTEGER,
+						'Quantity' NUMERIC,
 						PRIMARY KEY(" & "Wastes_ID" & " AUTOINCREMENT),
 	                    FOREIGN KEY(" & "Primary_User_TUID" & ") REFERENCES " & "User" & "(" & "User_ID" & "),
 	                    FOREIGN KEY(" & "Secondary_User_TUID" & ") REFERENCES " & "User" & "(" & "User_ID" & "),
 						FOREIGN KEY(" & "Medication_TUID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
-	                    FOREIGN KEY(" & "DrawerMedication_TUID" & ") REFERENCES " & "DrawerMedication" & "(" & "DrawerMedication_ID" & "));"
+	                    FOREIGN KEY(" & "DrawerMedication_TUID" & ") REFERENCES " & "DrawerMedication" & "(" & "DrawerMedication_ID" & "),
+						FOREIGN KEY(" & "Patient_TUID" & ") REFERENCES " & "Patient" & "(" & "Patient_ID" & "));"
 
 		ExecuteQuery("Wastes")
 	End Sub
