@@ -296,10 +296,12 @@ Partial Class frmNewPatient
         Me.cmbState.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbState.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbState.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cmbState.DropDownHeight = 250
         Me.cmbState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbState.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cmbState.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbState.FormattingEnabled = True
+        Me.cmbState.IntegralHeight = False
         Me.cmbState.Location = New System.Drawing.Point(1, 1)
         Me.cmbState.MaxLength = 2
         Me.cmbState.Name = "cmbState"
