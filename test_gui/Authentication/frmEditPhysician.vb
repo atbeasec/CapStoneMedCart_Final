@@ -53,7 +53,7 @@ Public Class frmEditPhysician
                                     "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician;"
         Fill_Table(strFillSQL)
 
-        cboCredentials.Items.AddRange({"Advisor", "Diagnose", "Prescribe"})
+        cboCredentials.Items.AddRange({"MD", "DO", "MBBS", "PhD", "DNP", "NP", "PA", "CNP", "CNNP", "PA", "CNS", "CNM"})
         PopulateStateComboBox(cboState)
         'btnSaveChanges.Visible = False
         btnCancel.Visible = False
@@ -409,135 +409,52 @@ Public Class frmEditPhysician
         KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*()/.,<>=+")
     End Sub
 
-    'Private Sub btnSaveChanges_Click(sender As Object, e As EventArgs) Handles btnSaveChanges.Click
-    '    Dim intID As Integer = txtID.Text
-    '    Dim strStatement = "SELECT COUNT(*) FROM User WHERE Username = '" & txtUsername.Text & "'" & " OR User_ID = '" & intID & "'"
-    '    Dim intSupervisor As Integer = 0
-    '    Dim intAdmin As Integer = 0
-    '    Dim strPassword As String = txtPassword.Text
-    '    Dim strLastName As String = txtLastName.Text
-    '    Dim strFirstName As String = txtFirstName.Text
-    '    Dim strSalt As String = Nothing
-    '    Dim strResults() As String = Nothing ' this will hold the salted, peppered, hashed password and the salt
-    '    Dim strHashedBarcode As String
-    '    strFirstName = Regex.Replace(strFirstName, "'", "''")
-    '    strLastName = Regex.Replace(strLastName, "'", "''")
-
-    '    'check what Role the user will have
-    '    If rbtnAdministrator.Checked = True Then
-    '        intAdmin = 1
-    '    ElseIf rbtnSupervisor.Checked = True Then
-    '        intSupervisor = 1
-    '    End If
-
-    '    'check if the user is changing the password and ran if yes
-
-    '    If txtConfirmPassword.Text <> "" And txtPassword.Text <> "" Then
-    '        'if it returns 2 then the username was changed to something already in the database 
-    '        If ExecuteScalarQuery(strStatement) = 2 Then
-    '            MsgBox("A User already has that Username")
-    '            'call CheckPassword Function to see if password mets security standards
-    '        ElseIf CheckPassword(strPassword) = False Then
-    '            MsgBox("Password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special characters !@#$%^&* ")
-    '            txtPassword.Focus()
-    '            ' make sure password and Confirm Password Match
-    '        ElseIf txtPassword.Text <> txtConfirmPassword.Text Then
-    '            MsgBox("Confirm Password must match Password")
-    '            txtConfirmPassword.Focus()
-    '            'Make Sure all fields are filled
-    '        ElseIf txtFirstName.Text = "" Or txtLastName.Text = "" Or txtUsername.Text = "" Then
-    '            MsgBox("All Fields must be filled12")
-    '        Else
-    '            ' get the peppered hash of the password
-    '            strResults = LogIn.MakeSaltPepperAndHash(strPassword)
-    '            strPassword = strResults(0)
-    '            strSalt = strResults(1)
-
-    '            If txtBarcode.Text = "" Then
-    '                'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
-    '                strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',Salt='" & strSalt & "',Password='" & strPassword & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "',Active_Flag=1 WHERE User_ID='" & txtID.Text & "';"
-    '                ExecuteInsertQuery(strStatement)
-    '            Else
-    '                ' Convert the barcode to the peppered hash
-    '                strHashedBarcode = ConvertBarcodePepperAndHash(txtBarcode.Text)
-    '                'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
-    '                strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',Salt='" & strSalt & "',Password='" & strPassword & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Barcode='" & strHashedBarcode & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "',Active_Flag=1 WHERE User_ID='" & txtID.Text & "';"
-    '                ExecuteInsertQuery(strStatement)
-    '            End If
+    Private Sub btnSaveChanges_Click(sender As Object, e As EventArgs) Handles btnSaveChanges.Click
+        Dim intID As Integer = txtID.Text
+        Dim strStatement = "SELECT COUNT(*) FROM Physician WHERE Physician_First_Name = '" & txtFirstName.Text & "'" & " AND Physician_Middle_Name = '" & txtMiddleName.Text & "'" & " AND Physician_Last_Name = '" & txtLastName.Text & "'"
+        Dim intSupervisor As Integer = 0
+        Dim intAdmin As Integer = 0
+        Dim strLastName As String = txtLastName.Text
+        Dim strFirstName As String = txtFirstName.Text
+        Dim strMiddleName As String = txtMiddleName.Text
+        strFirstName = Regex.Replace(strFirstName, "'", "''")
+        strLastName = Regex.Replace(strLastName, "'", "''")
+        strMiddleName = Regex.Replace(strMiddleName, "'", "''")
 
 
 
-    '            'clear all text boxes and change button visibility back to default 
-    '            txtFirstName.Text = ""
-    '            txtLastName.Text = ""
-    '            txtUsername.Text = ""
-    '            txtBarcode.Text = ""
-    '            txtPassword.Text = ""
-    '            txtConfirmPassword.Text = ""
-    '            txtID.Text = ""
-    '            btnCancel.Visible = False
-    '            btnSaveChanges.Visible = False
-    '            btnSaveUser.Visible = True
-    '        End If
-    '    End If
+        'if it returns 2 then the First, Middle, and Last Name match someone else already in the database 
+        If ExecuteScalarQuery(strStatement) = 2 Then
+            MsgBox("A Physician already has that First, Middle, and Last Name")
+            'Make Sure all fields are filled
+        ElseIf txtFirstName.Text = "" Or txtLastName.Text = "" Or txtMiddleName.Text = "" Or mtbPhone.Text = "" Or mtbFax.Text = "" Or cboCredentials.SelectedText = "" Or txtAddress.Text = "" Or txtCity.Text = "" Or txtZipCode.Text = "" Or cboState.SelectedText = "" Then
+            MsgBox("All Fields must be filled")
+        Else
+            'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
+            strStatement = "UPDATE Physician SET Physician_First_Name='" & strFirstName & "',User_Middle_Name='" & strMiddleName & "', User_Last_Name='" & strLastName & "', Physician_Credentials='" & cboCredentials.SelectedItem & "', Physician_Phone_Number='" & mtbPhone.Text & "', Physician_Fax_Number='" & mtbFax.Text & "', Physician_Address='" & txtAddress.Text & "', Physician_City='" & txtCity.Text & "', Physician_State='" & cboState.SelectedItem & "', Physician_Zip_Code='" & txtZipCode.Text & "',Active_Flag=1 WHERE Physician_ID='" & txtID.Text & "';"
+            ExecuteInsertQuery(strStatement)
 
 
 
-    '    'check if the user is changing the password and ran if no
-    '    If txtConfirmPassword.Text = "" And txtPassword.Text = "" And txtID.Text <> "" Then
-    '        'if it returns 2 then the username was changed to something already in the database 
-    '        If ExecuteScalarQuery(strStatement) = 2 Then
-    '            MsgBox("A User already has that Username")
-    '            'call CheckPassword Function to see if password mets security standards
-    '            ' make sure password and Confirm Password Match
-    '        ElseIf txtPassword.Text <> txtConfirmPassword.Text Then
-    '            MsgBox("Confirm Password must match Password")
-    '            txtConfirmPassword.Focus()
-    '            'Make Sure all fields are filled
-    '        ElseIf txtFirstName.Text = "" Or txtLastName.Text = "" Or txtUsername.Text = "" Then
-    '            MsgBox("All Fields must be filled56")
-    '        Else
-    '            If txtBarcode.Text = "" Then
-    '                'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
-    '                strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "',Active_Flag=1  WHERE User_ID='" & txtID.Text & "';"
-    '                ExecuteInsertQuery(strStatement)
-    '            Else
-    '                ' Convert the barcode to the peppered hash
-    '                strHashedBarcode = ConvertBarcodePepperAndHash(txtBarcode.Text)
-    '                'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
-    '                strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Barcode='" & strHashedBarcode & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "',Active_Flag=1  WHERE User_ID='" & txtID.Text & "';"
-    '                ExecuteInsertQuery(strStatement)
-    '            End If
+            'clear all text boxes and change button visibility back to default 
+            txtFirstName.Text = ""
+            txtLastName.Text = ""
+            txtMiddleName.Text = ""
+            txtAddress.Text = ""
+            txtCity.Text = ""
+            txtZipCode.Text = ""
+            btnCancel.Visible = False
+            btnSaveChanges.Visible = False
+            btnSave.Visible = True
+            mtbFax.Text = ""
+            mtbPhone.Text = ""
+        End If
 
 
-
-    '            'clear all text boxes and change button visibility back to default 
-    '            txtFirstName.Text = ""
-    '            txtLastName.Text = ""
-    '            txtUsername.Text = ""
-    '            txtBarcode.Text = ""
-    '            txtPassword.Text = ""
-    '            txtConfirmPassword.Text = ""
-    '            btnCancel.Visible = False
-    '            btnSaveChanges.Visible = False
-    '            btnSaveUser.Visible = True
-    '        End If
-    '    End If
-
-    '    Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-    '                                  "User.Supervisor_Flag, User.Active_Flag From User;"
-    '    Fill_Table(strFillSQL)
-    'End Sub
-
-
-    'Private Sub SearchIcon_Click(sender As Object, e As EventArgs) Handles pnlSearch.Click
-    '    Dim strFillSQL As String
-    '    strFillSQL = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-    '                                                   "User.Supervisor_Flag, User.Active_Flag From User WHERE Username LIKE '" & txtSearchBox.Text & "%' Or User_First_Name LIKE '" & txtSearchBox.Text & "%' Or User_Last_Name LIKE '" & txtSearchBox.Text & "%';"
-    '    Fill_Table(strFillSQL)
-
-    'End Sub
-    'End Sub
+        Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
+                                      "User.Supervisor_Flag, User.Active_Flag From User;"
+        Fill_Table(strFillSQL)
+    End Sub
 
     Public Sub Fill_Table(ByVal strFillSQL As String)
         flpPhysicianInfo.Controls.Clear()
