@@ -10,7 +10,6 @@
             MsgBox("            WARNING" & vbCrLf & "Password Field is Blank")
             txtPassword.Focus()
             'send strUsername and strPassword to LogIn Module and recive responce
-        ElseIf CheckSQL() <> "safe" Then
         ElseIf LogIn.UsernameLogIn(strUsername, strPassword) = "True" Then
             'If users Username and Password is in the User table in the database then close current form and open frmMain
             Me.Close()
@@ -78,7 +77,6 @@
                 MsgBox("            WARNING" & vbCrLf & "Password Field is Blank")
                 txtPassword.Focus()
                 'send strUsername and strPassword to LogIn Module and recive responce
-            ElseIf CheckSQL() <> "safe" Then
             ElseIf LogIn.UsernameLogIn(strUsername, strPassword) = "True" Then
                 'If users Username and Password is in the User table in the database then close current form and open frmMain
                 Me.Close()
@@ -110,10 +108,6 @@
         frmLoginScan.setBlnFlagToClose(vbTrue)
         frmLoginScan.Visible = True
         Me.Close()
-    End Sub
-
-    Private Sub txtFirst_Last_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress, txtUserName.KeyPress
-        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*/.,<>=+")
     End Sub
 
     Private Sub txtLoginKeypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtUserName.KeyPress, txtPassword.KeyPress

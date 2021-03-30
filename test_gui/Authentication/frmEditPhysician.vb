@@ -368,8 +368,14 @@ Public Class frmEditPhysician
 
     End Sub
 
-    Private Sub txtAllKeypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFirstName.KeyPress, txtLastName.KeyPress, txtMiddleName.KeyPress, txtAddress.KeyPress, txtCity.KeyPress
-        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*()/.,<>=+")
+    Private Sub NameKeypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFirstName.KeyPress, txtLastName.KeyPress, txtMiddleName.KeyPress
+    End Sub
+    Private Sub LocationKeypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAddress.KeyPress, txtCity.KeyPress
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz '-1234567890&()/.,")
+    End Sub
+
+    Private Sub ZipKeypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtZipCode.KeyPress
+        KeyPressCheck(e, "1234567890")
     End Sub
 
     Private Sub btnSaveChanges_Click(sender As Object, e As EventArgs) Handles btnSaveChanges.Click
