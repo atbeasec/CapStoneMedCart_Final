@@ -97,27 +97,34 @@ Module rxNorm
 
 
     Function getDrugInformationByName(drugname As String) As String
+        ' Insert functionality to check the network connectivity
+        frmInventory.txtStatus.Text = "Checking network connectivity"
+        Dim strSite As String = checkConnections() ' insert functionality to return the site string
+        If strSite IsNot "ERROR" Then
+            'URL for finding each drug name 
+            Dim url As String = strSite & "drugs?name=" & drugname
 
-        'URL for finding each drug name 
-        Dim url As String = $"https://rxnav.nlm.nih.gov/REST/drugs?name={drugname}"
+            Dim trawlPointer As String = "$.drugGroup.conceptGroup[1].conceptProperties"
+            'convert web response to Jtoken
+            Dim inputJSON As JToken = GetJSON(url)
 
-        Dim trawlPointer As String = "$.drugGroup.conceptGroup[1].conceptProperties"
-        'convert web response to Jtoken
-        Dim inputJSON As JToken = GetJSON(url)
+            'set Jtoken into array to pull data from json
+            Dim JsonJArray As JArray = inputJSON.SelectToken(trawlPointer)
 
-        'set Jtoken into array to pull data from json
-        Dim JsonJArray As JArray = inputJSON.SelectToken(trawlPointer)
-
-        'currently not working should pull back the full drug name 
-        For Each item In JsonJArray
-            For Each subItem As JProperty In item
-                If subItem.Name = "name" Then
-                    Return DirectCast(subItem.Next, JProperty).Value
-                End If
+            'currently not working should pull back the full drug name 
+            For Each item In JsonJArray
+                For Each subItem As JProperty In item
+                    If subItem.Name = "name" Then
+                        Return DirectCast(subItem.Next, JProperty).Value
+                    End If
+                Next
             Next
-        Next
 
-        Return Nothing
+            Return Nothing
+        Else
+            Return Nothing
+        End If
+
 
     End Function
 
@@ -175,30 +182,39 @@ Module rxNorm
     Function getRxcuiProperty(rxcuiNum As String, propertyNames As List(Of String)) As List(Of (PropertyName As String, PropertyValue As String))
         Dim strName As String
         Dim strValue As String
-        'API url for get all properties
-        Dim url As String = $"https://rxnav.nlm.nih.gov/REST/rxcui/{rxcuiNum}/allProperties.json?prop=attributes"
-        'location in json of properties
-        Dim trawlPointer As String = "$.propConceptGroup.propConcept"
-        'convert web response to Jtoken
-        Dim inputJSON As JToken = GetJSON(url)
-        'set Jtoken into array to pull data from json
-        Dim JsonJArray As JArray = inputJSON.SelectToken(trawlPointer)
         'list that holds Property name and its value
         Dim myReturnList As New List(Of (PropertyName As String, PropertyValue As String))
-        'Goes through the  Json file and looks for the properties set in propertyNames List and pulls the value and stores in myReturnList
-        For Each PropertyName As String In propertyNames
-            For Each item In JsonJArray
-                For Each subItem As JProperty In item
-                    If subItem.Value.ToString.ToUpper = PropertyName.ToUpper Then
-                        strName = subItem.Value.ToString
-                        strValue = DirectCast(subItem.Next, JProperty).Value.ToString
-                        myReturnList.Add((strName, strValue))
-                    End If
+        ' Insert functionality to check the network connectivity
+        frmInventory.txtStatus.Text = "Checking network connectivity"
+        Dim strSite As String = checkConnections() ' insert functionality to return the site string
+        If strSite IsNot "ERROR" Then
+            'API url for get all properties
+            Dim url As String = strSite & "rxcui/" & rxcuiNum & "/allProperties.json?prop=attributes"
+            'location in json of properties
+            Dim trawlPointer As String = "$.propConceptGroup.propConcept"
+            'convert web response to Jtoken
+            Dim inputJSON As JToken = GetJSON(url)
+            'set Jtoken into array to pull data from json
+            Dim JsonJArray As JArray = inputJSON.SelectToken(trawlPointer)
+
+            'Goes through the  Json file and looks for the properties set in propertyNames List and pulls the value and stores in myReturnList
+            For Each PropertyName As String In propertyNames
+                For Each item In JsonJArray
+                    For Each subItem As JProperty In item
+                        If subItem.Value.ToString.ToUpper = PropertyName.ToUpper Then
+                            strName = subItem.Value.ToString
+                            strValue = DirectCast(subItem.Next, JProperty).Value.ToString
+                            myReturnList.Add((strName, strValue))
+                        End If
+                    Next
                 Next
             Next
-        Next
-        'returns the List
-        Return myReturnList
+            'returns the List
+            Return myReturnList
+        Else
+            Return myReturnList
+        End If
+
     End Function
 
 
@@ -256,19 +272,27 @@ Module rxNorm
     '/*********************************************************************/
     Function getDrugRXCUI(drugName As String, drugStrength As String, drugMeasurement As String, drugType As String) As String
         'URL for finding rxcui json file that contains the name and rxcui 
-        Dim url As String = $"https://rxnav.nlm.nih.gov/REST/rxcui.json?name={drugName}+{drugStrength}+{drugMeasurement}+{drugType}&search=1"
-        'location in json of properties
-        Dim trawlPointer As String = "$.idGroup.rxnormId"
-        'convert web response to Jtoken
-        Dim inputJSON As JToken = GetJSON(url)
-        'set Jtoken into array to pull data from json
-        Dim trawledResult As JToken = inputJSON.SelectToken(trawlPointer)
-        ''set Jtoken into array to pull data from json
-        Dim JsonJArray As JArray = DirectCast(trawledResult, JArray)
-        ' convert value from jarray to a jvalue to store the rxcui
-        Dim jValueObj As JValue = DirectCast(JsonJArray.First, JValue)
-        'return the rxcui 
-        Return jValueObj.Value
+        Dim jValueObj As JValue
+        ' Insert functionality to check the network connectivity
+        frmInventory.txtStatus.Text = "Checking network connectivity"
+        Dim strSite As String = checkConnections() ' insert functionality to return the site string
+        If strSite IsNot "ERROR" Then
+            Dim url As String = strSite & "rxcui.json?name=" & drugName & "+" & drugStrength & "+" & drugMeasurement & "+" & drugType & "&search=1"
+            'location in json of properties
+            Dim trawlPointer As String = "$.idGroup.rxnormId"
+            'convert web response to Jtoken
+            Dim inputJSON As JToken = GetJSON(url)
+            'set Jtoken into array to pull data from json
+            Dim trawledResult As JToken = inputJSON.SelectToken(trawlPointer)
+            ''set Jtoken into array to pull data from json
+            Dim JsonJArray As JArray = DirectCast(trawledResult, JArray)
+            ' convert value from jarray to a jvalue to store the rxcui
+            jValueObj = DirectCast(JsonJArray.First, JValue)
+            'return the rxcui 
+            Return jValueObj.Value
+        Else
+            Return jValueObj.Value
+        End If
     End Function
 
 
@@ -360,26 +384,33 @@ Module rxNorm
     '/*                                                                   */
     '/*********************************************************************/
     Function getDrugGeneric(drugRxcui As String)
+        Dim theJArray As JArray
+        ' Insert functionality to check the network connectivity
+        frmInventory.txtStatus.Text = "Checking network connectivity"
+        Dim strSite As String = checkConnections() ' insert functionality to return the site string
+        If strSite IsNot "ERROR" Then
+            'URL for finding each drug name 
+            Dim url As String = strSite & "brands?ingredientids=" & drugRxcui
+            'location of the names im looking for
+            '"$.brandGroup.conceptProperties[1].name"
+            Dim jsonPointer As String = "$.brandGroup.conceptProperties"
 
-        'URL for finding each drug name 
-        Dim url As String = $"https://rxnav.nlm.nih.gov/REST/brands?ingredientids={drugRxcui}"
-        'location of the names im looking for
-        '"$.brandGroup.conceptProperties[1].name"
-        Dim jsonPointer As String = "$.brandGroup.conceptProperties"
+            Dim inputJSON As JToken = GetJSON(url)
 
-        Dim inputJSON As JToken = GetJSON(url)
+            theJArray = inputJSON.SelectToken(jsonPointer)
 
-        Dim theJArray As JArray = inputJSON.SelectToken(jsonPointer)
+            For Each item In theJArray
+                For Each subItem As JProperty In item
+                    If subItem.Value = "name" Then
+                        Return DirectCast(subItem.Next, JProperty).Value
+                    End If
 
-        For Each item In theJArray
-            For Each subItem As JProperty In item
-                If subItem.Value = "name" Then
-                    Return DirectCast(subItem.Next, JProperty).Value
-                End If
-
+                Next
             Next
-        Next
-        Return theJArray.ToString
+            Return theJArray.ToString
+        Else
+            Return theJArray.ToString
+        End If
 
     End Function
 
@@ -432,29 +463,35 @@ Module rxNorm
     '>>>>>>> main
     '/*********************************************************************/
     Function getSchedule(rxcuiID As String) As String
-        'api location
-        Dim url As String = $"https://rxnav.nlm.nih.gov/REST/rxcui/{rxcuiID}/allProperties.json?prop=all"
-        'This is the location where S SCHEDULE should appear in the json file
-        Dim trawlPointer As String = "$.propConceptGroup.propConcept"
+        ' Insert functionality to check the network connectivity
+        frmInventory.txtStatus.Text = "Checking network connectivity"
+        Dim strSite As String = checkConnections() ' insert functionality to return the site string
+        If strSite IsNot "ERROR" Then
+            'api location
+            Dim url As String = strSite & "rxcui/" & rxcuiID & "/allProperties.json?prop=all"
+            'This is the location where S SCHEDULE should appear in the json file
+            Dim trawlPointer As String = "$.propConceptGroup.propConcept"
 
-        'converts the api's json to JToken 
-        Dim inputJSON As JToken = GetJSON(url)
+            'converts the api's json to JToken 
+            Dim inputJSON As JToken = GetJSON(url)
 
-        'set the json file to a JArray 
-        Dim JsonJArray As JArray = inputJSON.SelectToken(trawlPointer)
+            'set the json file to a JArray 
+            Dim JsonJArray As JArray = inputJSON.SelectToken(trawlPointer)
 
-        'Looks Though each propConcept in the json file and returns the value of SCHEDULE 
-        For Each item In JsonJArray
-            For Each subItem As JProperty In item
-                If subItem.Value = "SCHEDULE" Then
-                    frmInventory.txtSchedule.Enabled = False
-                    Return DirectCast(subItem.Next, JProperty).Value
-                End If
+            'Looks Though each propConcept in the json file and returns the value of SCHEDULE 
+            For Each item In JsonJArray
+                For Each subItem As JProperty In item
+                    If subItem.Value = "SCHEDULE" Then
+                        frmInventory.txtSchedule.Enabled = False
+                        Return DirectCast(subItem.Next, JProperty).Value
+                    End If
+                Next
             Next
-        Next
-        'if nothing is found just return nothing 
-        Return Nothing
-
+            'if nothing is found just return nothing 
+            Return Nothing
+        Else
+            Return Nothing
+        End If
     End Function
     '/*********************************************************************/
     '/*                   FUNCTION NAME:  GetJSON                         */
@@ -557,38 +594,45 @@ Module rxNorm
         Dim intIndex = 1
         Dim myReturnList As New List(Of (PropertyName As String, PropertyValue As String))
         drugName = drugName.ToLower
-        Dim url As String = $"https://rxnav.nlm.nih.gov/REST/drugs?name={drugName}"
-        'location of json <rxnormId
+        ' Insert functionality to check the network connectivity
+        frmInventory.txtStatus.Text = "Checking network connectivity"
+        Dim strSite As String = checkConnections() ' insert functionality to return the site string
+        If strSite IsNot "ERROR" Then
+            Dim url As String = strSite & "drugs?name=" & drugName
+            'location of json <rxnormId
 
-        'loop to make sure we've checked all the indexes
-        Do
-            Dim trawlPointer As String = "$.drugGroup.conceptGroup[" & intIndex & "].conceptProperties"
-            'convert web response to Jtoken
-            Dim inputJson As JToken = GetJSON(url)
-            'contains the conceptProperties returned from jason
-            Dim JsonJArray As JArray = inputJson.SelectToken(trawlPointer)
-            'List of the returned results from the api 
+            'loop to make sure we've checked all the indexes
+            Do
+                Dim trawlPointer As String = "$.drugGroup.conceptGroup[" & intIndex & "].conceptProperties"
+                'convert web response to Jtoken
+                Dim inputJson As JToken = GetJSON(url)
+                'contains the conceptProperties returned from jason
+                Dim JsonJArray As JArray = inputJson.SelectToken(trawlPointer)
+                'List of the returned results from the api 
 
 
-            If JsonJArray Is Nothing Then
-                ' prepare for looking in the next index
-                intIndex += 1
-            Else
-                'looks through our JsonJArray for the properties specified 
-                For Each propertyName As String In propertyNames
-                    For Each item As JObject In JsonJArray '
-                        For Each subItem As JProperty In item.Children
-                            If subItem.Name.ToString.ToUpper = "NAME" Then
-                                myReturnList.Add((DirectCast(subItem.Previous, JProperty).Value, subItem.Value))
-                            End If
+                If JsonJArray Is Nothing Then
+                    ' prepare for looking in the next index
+                    intIndex += 1
+                Else
+                    'looks through our JsonJArray for the properties specified 
+                    For Each propertyName As String In propertyNames
+                        For Each item As JObject In JsonJArray '
+                            For Each subItem As JProperty In item.Children
+                                If subItem.Name.ToString.ToUpper = "NAME" Then
+                                    myReturnList.Add((DirectCast(subItem.Previous, JProperty).Value, subItem.Value))
+                                End If
+                            Next
                         Next
                     Next
-                Next
-                ' prepare for looking in the next index
-                intIndex += 1
-            End If
-        Loop While intIndex < 5 ' arbitrarily picking 5 as we haven't seen one with more than 3 
-        Return myReturnList
+                    ' prepare for looking in the next index
+                    intIndex += 1
+                End If
+            Loop While intIndex < 5 ' arbitrarily picking 5 as we haven't seen one with more than 3 
+            Return myReturnList
+        Else
+            Return myReturnList
+        End If
     End Function
     '/*********************************************************************/
     '/*                   FUNCTION NAME: GetSuggestionList                 */
@@ -640,21 +684,31 @@ Module rxNorm
             'Location of result from api 
             Dim trawlpointer As String = "$.suggestionGroup.suggestionList.suggestion"
             'web address for api
-            Dim url As String = $"https://rxnav.nlm.nih.gov/REST/spellingsuggestions.json?name={name}"
-            'Gets json from web api 
-            Dim inputJSON As JToken = GetJSON(url)
-            'creates a jtoken of the location specified by twalpointer
-            Dim trawledResult As JToken = inputJSON.SelectToken(trawlpointer)
-            'creates jarray to store values of twaledResult
-            Dim jArrayObj As JArray = DirectCast(trawledResult, JArray)
+            ' Insert functionality to check the network connectivity
+            frmInventory.txtStatus.Text = "Checking network connectivity"
+            Dim strSite As String = checkConnections() ' insert functionality to return the site string
+            If strSite IsNot "ERROR" Then
+                Dim url As String = strSite & "spellingsuggestions.json?name=" & name
+                'Gets json from web api 
+                Dim inputJSON As JToken = GetJSON(url)
+                'creates a jtoken of the location specified by twalpointer
+                Dim trawledResult As JToken = inputJSON.SelectToken(trawlpointer)
+                'creates jarray to store values of twaledResult
+                Dim jArrayObj As JArray = DirectCast(trawledResult, JArray)
+                If IsNothing(jArrayObj) Then
+                    MessageBox.Show("Could not find suggestions. Please try another search.")
+                Else
+                    ' now get the individual values out from the items and add them to the list
+                    For Each item In jArrayObj
+                        strValue = item.ToString
+                        result.Add(strValue)
+                    Next
 
-            ' now get the individual values out from the items and add them to the list
-            For Each item In jArrayObj
-                strValue = item.ToString
-                result.Add(strValue)
-            Next
-
-            Return result
+                    Return result
+                End If
+            Else
+                Return result
+            End If
         End If
     End Function
 

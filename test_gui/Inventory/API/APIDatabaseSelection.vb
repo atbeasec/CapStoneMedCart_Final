@@ -503,6 +503,44 @@ Module APIDatabaseSelection
 		Return strStringBuilder.ToString()
 	End Function
 
+	'/*********************************************************************/
+	'/*                   FUNCTION NAME:  					   */         
+	'/*********************************************************************/
+	'/*                   WRITTEN BY:  Eric LaVoie           		         */   
+	'/*		         DATE CREATED: 		   */                             
+	'/*********************************************************************/
+	'/*  FUNCTION PURPOSE:								   */             
+	'/*											   */                     
+	'/*                                                                   */
+	'/*********************************************************************/
+	'/*  CALLED BY:   	      						         */           
+	'/*                                         				   */         
+	'/*********************************************************************/
+	'/*  CALLS:										   */                 
+	'/*             (NONE)								   */             
+	'/*********************************************************************/
+	'/*  PARAMETER LIST (In Parameter Order):					   */         
+	'/*											   */                     
+	'/*                                                                     
+	'/*********************************************************************/
+	'/*  RETURNS:								         */                   
+	'/*            (NOTHING)								   */             
+	'/*********************************************************************/
+	'/* SAMPLE INVOCATION:								   */             
+	'/*											   */                     
+	'/*                                                                     
+	'/*********************************************************************/
+	'/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+	'/*											   */                     
+	'/*                                                                     
+	'/*********************************************************************/
+	'/* MODIFICATION HISTORY:						         */               
+	'/*											   */                     
+	'/*  WHO   WHEN     WHAT								   */             
+	'/*  ---   ----     ------------------------------------------------- */
+	'/*                                                                     
+	'/*********************************************************************/
+
 	Function checkConnections() As String
 		Dim strWebSite As String = "https://rxnav.nlm.nih.gov/REST/"
 		Try
@@ -510,15 +548,21 @@ Module APIDatabaseSelection
 				Using Stream = client.OpenRead(strWebSite)
 					Return strWebSite
 				End Using
-				Using stream = client.OpenRead("https:/10.8.30.33/REST/")
-					strWebSite = "https:/10.8.30.33/REST/"
-					Return strWebSite
-				End Using
 			End Using
-			strWebSite = "ERROR"
 			Return strWebSite
 		Catch
+			Try
+				Using client = New WebClient()
+					Using stream = client.OpenRead("https://10.8.30.33/REST/")
+						strWebSite = "https://10.8.30.33/REST/"
+						Return strWebSite
+					End Using
+				End Using
+			Catch
+				strWebSite = "ERROR"
+				Return strWebSite
+			End Try
 		End Try
-		Return "ERROR"
+			Return "ERROR"
 	End Function
 End Module
