@@ -72,6 +72,8 @@ Partial Class frmInventory
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Panel11 = New System.Windows.Forms.Panel()
         Me.pnlPatientName = New System.Windows.Forms.Panel()
+        Me.lblStatus = New System.Windows.Forms.Label()
+        Me.txtStatus = New System.Windows.Forms.TextBox()
         Me.lblPatientName = New System.Windows.Forms.Label()
         Me.pnlPatientNamePadding = New System.Windows.Forms.Panel()
         Me.cmbPatientNames = New System.Windows.Forms.ComboBox()
@@ -79,8 +81,6 @@ Partial Class frmInventory
         Me.pnlHeader = New System.Windows.Forms.Panel()
         Me.btnBack = New System.Windows.Forms.Button()
         Me.tpSelectedItem = New System.Windows.Forms.ToolTip(Me.components)
-        Me.txtStatus = New System.Windows.Forms.TextBox()
-        Me.lblStatus = New System.Windows.Forms.Label()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -705,6 +705,27 @@ Partial Class frmInventory
         Me.pnlPatientName.Size = New System.Drawing.Size(726, 140)
         Me.pnlPatientName.TabIndex = 191
         '
+        'lblStatus
+        '
+        Me.lblStatus.AutoSize = True
+        Me.lblStatus.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblStatus.Location = New System.Drawing.Point(327, 66)
+        Me.lblStatus.Name = "lblStatus"
+        Me.lblStatus.Size = New System.Drawing.Size(55, 21)
+        Me.lblStatus.TabIndex = 193
+        Me.lblStatus.Text = "Status:"
+        Me.lblStatus.Visible = False
+        '
+        'txtStatus
+        '
+        Me.txtStatus.HideSelection = False
+        Me.txtStatus.Location = New System.Drawing.Point(331, 90)
+        Me.txtStatus.Name = "txtStatus"
+        Me.txtStatus.Size = New System.Drawing.Size(299, 20)
+        Me.txtStatus.TabIndex = 192
+        Me.txtStatus.Text = "System Status"
+        Me.txtStatus.Visible = False
+        '
         'lblPatientName
         '
         Me.lblPatientName.AutoSize = True
@@ -769,26 +790,6 @@ Partial Class frmInventory
         Me.btnBack.Text = "Back"
         Me.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnBack.UseVisualStyleBackColor = False
-        '
-        'txtStatus
-        '
-        Me.txtStatus.HideSelection = False
-        Me.txtStatus.Location = New System.Drawing.Point(331, 90)
-        Me.txtStatus.Name = "txtStatus"
-        Me.txtStatus.Size = New System.Drawing.Size(299, 20)
-        Me.txtStatus.TabIndex = 192
-        Me.txtStatus.Text = "System Status"
-        '
-        'lblStatus
-        '
-        Me.lblStatus.AutoSize = True
-        Me.lblStatus.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblStatus.Location = New System.Drawing.Point(327, 66)
-        Me.lblStatus.Name = "lblStatus"
-        Me.lblStatus.Size = New System.Drawing.Size(55, 21)
-        Me.lblStatus.TabIndex = 193
-        Me.lblStatus.Text = "Status:"
-        Me.lblStatus.Visible = False
         '
         'frmInventory
         '

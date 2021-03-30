@@ -1,6 +1,7 @@
 'Import necessary libraries to connect to the SQLite database
 Imports System.Data.SQLite
 Imports System.IO
+Imports System.Net
 'Import necessary to use StringBuilder class
 Imports System.Text
 '/*******************************************************************/
@@ -502,4 +503,67 @@ Module APIDatabaseSelection
 		Return strStringBuilder.ToString()
 	End Function
 
+	'/*********************************************************************/
+	'/*                   FUNCTION NAME:  					   */         
+	'/*********************************************************************/
+	'/*                   WRITTEN BY:  Eric LaVoie           		         */   
+	'/*		         DATE CREATED: 		   */                             
+	'/*********************************************************************/
+	'/*  FUNCTION PURPOSE:								   */             
+	'/*											   */                     
+	'/*                                                                   */
+	'/*********************************************************************/
+	'/*  CALLED BY:   	      						         */           
+	'/*                                         				   */         
+	'/*********************************************************************/
+	'/*  CALLS:										   */                 
+	'/*             (NONE)								   */             
+	'/*********************************************************************/
+	'/*  PARAMETER LIST (In Parameter Order):					   */         
+	'/*											   */                     
+	'/*                                                                     
+	'/*********************************************************************/
+	'/*  RETURNS:								         */                   
+	'/*            (NOTHING)								   */             
+	'/*********************************************************************/
+	'/* SAMPLE INVOCATION:								   */             
+	'/*											   */                     
+	'/*                                                                     
+	'/*********************************************************************/
+	'/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+	'/*											   */                     
+	'/*                                                                     
+	'/*********************************************************************/
+	'/* MODIFICATION HISTORY:						         */               
+	'/*											   */                     
+	'/*  WHO   WHEN     WHAT								   */             
+	'/*  ---   ----     ------------------------------------------------- */
+	'/*                                                                     
+	'/*********************************************************************/
+
+	Function checkConnections() As String
+		Dim strWebSite As String = "https://rxnav.nlm.nih.gov/REST/"
+		Try
+			Using client = New WebClient()
+				Using Stream = client.OpenRead(strWebSite)
+					Return strWebSite
+				End Using
+			End Using
+			Return strWebSite
+		Catch
+			Try
+				frmInventory.txtStatus.Text = "Checking secondary site"
+				Using client = New WebClient()
+					Using stream = client.OpenRead("https://10.8.30.33/REST/")
+						strWebSite = "https://10.8.30.33/REST/"
+						Return strWebSite
+					End Using
+				End Using
+			Catch
+				strWebSite = "ERROR"
+				Return strWebSite
+			End Try
+		End Try
+			Return "ERROR"
+	End Function
 End Module

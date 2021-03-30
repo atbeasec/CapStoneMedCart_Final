@@ -259,51 +259,49 @@ Public Class frmInventory
                     'thdThread1.Name = "Loading..." 'Dim thdThread1 As New Threading.Thread(AddressOf ThreadedMessageBox)
                     'thdThread1.Name = strMessage
                     'thdThread1.Start()
-                    outputList = getInteractionsByName(strRXCUI, myPropertyNameList)
-
-                    'Double-check if the interactions with the matching pair of RXCUI's exist
-                    'If yes, Then update If there's differences
-                    ' Or insert the New lines
-                    ' And save those items
-
-                    Try
-                        RaiseEvent UpdateLoadScreen("Saving interaction to the database")
-
-                        strMessage = "Please wait while the interactions are saved to the database"
-
-                        'old code look to delete later?
-                        Dim thdThread2 As New Threading.Thread(AddressOf ThreadedMessageBox)
-                        'thdThread2.Name = strMessage
-                        'thdThread2.Start()
-
-
-                        CompareDrugInteractions(CInt(strRXCUI), outputList) 'CInt(outputList.Item(i + 3).PropertyValue), outputList.Item(i).PropertyValue, outputList.Item(i + 1).PropertyValue.Replace("'", ""), 1)
-                        'Next
-                        RaiseEvent UpdateLoadScreen("Interactions records have been added")
-                        strMessage = "All interaction records have been added"
-                        Dim thdThread3 As New Threading.Thread(AddressOf ThreadedMessageBox)
-                        'thdThread3.Name = strMessage
-                        'thdThread3.Start()
-                    Catch ex As Exception
-                        MessageBox.Show("Interactions could not be recorded")
-                    End Try
-
-                    intDrawerMedication_ID = ExecuteScalarQuery("SELECT COUNT(DISTINCT DrawerMedication_ID) FROM DrawerMedication;")
-
-
-                    intMedicationTuid = ExecuteScalarQuery("Select Medication_ID From Medication WHERE Drug_Name ='" & strName & "';")
-                    'because we are adding a new drawermedication for now
-                    intDrawerMedication_ID += 1
+                    If IsNothing(getInteractionsByName(strRXCUI, myPropertyNameList)) Then
+                        MessageBox.Show("The network sites are not responding. Please check your network connection and try again.")
+                    Else
+                        outputList = getInteractionsByName(strRXCUI, myPropertyNameList)
 
 
 
-                    ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Divider_Bin,Expiration_Date,Discrepancy_Flag, Active_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & intDividerBin & " , '" & mtbExpirationDate.Text & "'," & intDiscrepancies & ",1);")
-                    OpenOneDrawer(Drawers_Tuid)
+                        'Double-check if the interactions with the matching pair of RXCUI's exist
+                        'If yes, Then update If there's differences
+                        ' Or insert the New lines
+                        ' And save those items
 
-                    RaiseEvent UpdateLoadScreen("Medication has been added to the drawer")
-                    'MessageBox.Show("Medication has been added to the drawer")
-                    Debug.WriteLine("")
+                        Try
+                            RaiseEvent UpdateLoadScreen("Saving interaction to the database")
 
+                            strMessage = "Please wait while the interactions are saved to the database"
+
+                            'old code look to delete later?
+                            Dim thdThread2 As New Threading.Thread(AddressOf ThreadedMessageBox)
+                            'thdThread2.Name = strMessage
+                            'thdThread2.Start()
+
+
+                            CompareDrugInteractions(CInt(strRXCUI), outputList) 'CInt(outputList.Item(i + 3).PropertyValue), outputList.Item(i).PropertyValue, outputList.Item(i + 1).PropertyValue.Replace("'", ""), 1)
+                            'Next
+                            RaiseEvent UpdateLoadScreen("Interactions records have been added")
+                            strMessage = "All interaction records have been added"
+                            Dim thdThread3 As New Threading.Thread(AddressOf ThreadedMessageBox)
+                            'thdThread3.Name = strMessage
+                            'thdThread3.Start()
+                        Catch ex As Exception
+                            MessageBox.Show("Interactions could not be recorded")
+                        End Try
+
+                        intDrawerMedication_ID = ExecuteScalarQuery("SELECT COUNT(DISTINCT DrawerMedication_ID) FROM DrawerMedication;")
+
+
+                        intMedicationTuid = ExecuteScalarQuery("Select Medication_ID From Medication WHERE Drug_Name ='" & strName & "';")
+                        'because we are adding a new drawermedication for now
+                        intDrawerMedication_ID += 1
+
+                        ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Divider_Bin,Expiration_Date,Discrepancy_Flag, Active_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & intDividerBin & " , '" & mtbExpirationDate.Text & "'," & intDiscrepancies & ",1);")
+                        OpenOneDrawer(Drawers_Tuid)
                     'If the user selects "Yes" in the Personal Patient medication drop down
                     'Insert the information into the PersonalPatientDrawerMedication Table
                     'in the database
@@ -313,12 +311,18 @@ Public Class frmInventory
                     End If
 
 
-                    intDividerBin = CInt(cmbDividerBin.SelectedItem)
+                        RaiseEvent UpdateLoadScreen("Medication has been added to the drawer")
+                        'MessageBox.Show("Medication has been added to the drawer")
+                        Debug.WriteLine("")
 
-                    eprError.Clear()
 
-                    ClearInventoryForm()
-                    changeStatusVisible()
+                        intDividerBin = CInt(cmbDividerBin.SelectedItem)
+
+                        eprError.Clear()
+
+                        ClearInventoryForm()
+                        changeStatusVisible()
+                    End If
                 End If
             End If
         End If
@@ -329,19 +333,28 @@ Public Class frmInventory
         Dim myPropertyNameList As New List(Of String)({"rxcui"})
         Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
         Dim suggestedList As New List(Of String)
-
-        outputList = GetRxcuiByName(txtSearch.Text, myPropertyNameList)
-        ' check to see if anything comes back
-        If outputList.Count = 0 Then
-            ' if nothing, then ask to suggest names
-            cboSuggestedNames.Visible = True
-            suggestedList = GetSuggestionList(txtSearch.Text)
-            ' then populate the combobox
-            cboSuggestedNames.DataSource = suggestedList
+        If IsNothing(GetRxcuiByName(txtSearch.Text, myPropertyNameList)) Then
+            MessageBox.Show("Could not connect to web APIs. Please check your connection and try again later.")
         Else
-            ' otherwise populate the medication name comboBox
-            cmbMedicationName.DataSource = outputList
+            outputList = GetRxcuiByName(txtSearch.Text, myPropertyNameList)
+            ' check to see if anything comes back
+            If outputList.Count = 0 Then
+                ' if nothing, then ask to suggest names
+                cboSuggestedNames.Visible = True
+                If IsNothing(GetSuggestionList(txtSearch.Text)) Then
+                    MessageBox.Show("Could not connect to web APIs. Please check your connection and try again later.")
+                Else
+                    suggestedList = GetSuggestionList(txtSearch.Text)
+
+                    ' then populate the combobox
+                    cboSuggestedNames.DataSource = suggestedList
+                End If
+            Else
+                ' otherwise populate the medication name comboBox
+                cmbMedicationName.DataSource = outputList
+            End If
         End If
+
     End Sub
 
     Private Sub cmbMedicationName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMedicationName.SelectedIndexChanged
@@ -368,61 +381,65 @@ Public Class frmInventory
         lstProperties.Add("AVAILABLE_STRENGTH")
         lstProperties.Add("STRENGTH")
         lstProperties.Add("SCHEDULE")
-        lstResults = getRxcuiProperty(strSplitString(0), lstProperties)
-        ' add the original items to the lstResults
-        lstResults.Add(("RXCUI", strSplitString(0)))
-        lstResults.Add(("NAME", strSplitString(1)))
+        If IsNothing(getRxcuiProperty(strSplitString(0), lstProperties)) Then
+            MessageBox.Show("The network sites are not responding. Please check your network connection and try again.")
+        Else
+            lstResults = getRxcuiProperty(strSplitString(0), lstProperties)
+            ' add the original items to the lstResults
+            lstResults.Add(("RXCUI", strSplitString(0)))
+            lstResults.Add(("NAME", strSplitString(1)))
 
-        ' first clear the fields
-        txtStrength.Text = ""
-        txtStrength.Enabled = True
-        txtSchedule.Text = ""
-        txtSchedule.Enabled = True
-        txtType.Text = ""
-        chkControlled.Checked = False
-        chkNarcotic.Checked = False
-        cmbDrawerNumber.Text = ""
-        cmbBin.Items.Clear()
-        txtQuantity.Text = "1"
-        mtbExpirationDate.Text = ""
-        cmbPatientPersonalMedication.SelectedItem = ""
+            ' first clear the fields
+            txtStrength.Text = ""
+            txtStrength.Enabled = True
+            txtSchedule.Text = ""
+            txtSchedule.Enabled = True
+            txtType.Text = ""
+            chkControlled.Checked = False
+            chkNarcotic.Checked = False
+            cmbDrawerNumber.Text = ""
+            cmbBin.Items.Clear()
+            txtQuantity.Text = "1"
+            mtbExpirationDate.Text = ""
+            cmbPatientPersonalMedication.SelectedItem = ""
 
-        ' then populate the form and pass the results on 
-        For Each result In lstResults
-            Select Case result.strPropertyName
-                Case "AVAILABLE_STRENGTH"
-                    txtStrength.Text = result.strPropertyValue
-                    'leave it enabled in case there's an error
-                Case "STRENGTH"
-                    txtStrength.Text = result.strPropertyValue
-                    'leave it enabled in case there's an error
-                Case "SCHEDULE"
-                    If result.strPropertyValue Is Nothing Then
-                        ' do nothing
-                    ElseIf result.strPropertyValue = "1" Or result.strPropertyValue = "2" Or result.strPropertyValue = "3" Then
-                        ' check the controlled and narcotic
-                        chkControlled.Checked = True
-                        chkNarcotic.Checked = True
-                        txtSchedule.Enabled = False
-                    ElseIf result.strPropertyValue = "2N" Or result.strPropertyValue = "3N" Or result.strPropertyValue = "4" Or result.strPropertyValue = "5" Then
-                        ' check controlled only
-                        chkControlled.Checked = True
-                        txtSchedule.Enabled = False
-                    ElseIf result.strPropertyValue = "0" Then
-                        txtSchedule.Text = "0"
-                        ' leave it enabled in case there's an error
-                    Else
-                        ' if the value isn't in these then it must be invalid - do nothing
-                    End If
-                    txtSchedule.Text = result.strPropertyValue
-            End Select
-        Next
+            ' then populate the form and pass the results on 
+            For Each result In lstResults
+                Select Case result.strPropertyName
+                    Case "AVAILABLE_STRENGTH"
+                        txtStrength.Text = result.strPropertyValue
+                        txtStrength.Enabled = False
+                    Case "STRENGTH"
+                        txtStrength.Text = result.strPropertyValue
+                        txtStrength.Enabled = False
+                    Case "SCHEDULE"
+                        If result.strPropertyValue Is Nothing Then
+                            ' do nothing
+                        ElseIf result.strPropertyValue = "1" Or result.strPropertyValue = "2" Or result.strPropertyValue = "3" Then
+                            ' check the controlled and narcotic
+                            chkControlled.Checked = True
+                            chkNarcotic.Checked = True
+                            txtSchedule.Enabled = False
+                        ElseIf result.strPropertyValue = "2N" Or result.strPropertyValue = "3N" Or result.strPropertyValue = "4" Or result.strPropertyValue = "5" Then
+                            ' check controlled only
+                            chkControlled.Checked = True
+                            txtSchedule.Enabled = False
+                        ElseIf result.strPropertyValue = "0" Then
+                            txtSchedule.Text = "0"
+                            ' leave it enabled in case there's an error
+                        Else
+                            ' if the value isn't in these then it must be invalid - do nothing
+                        End If
+                        txtSchedule.Text = result.strPropertyValue
+                End Select
+            Next
 
-        getDrugNameRxcui(lstResults)
+            getDrugNameRxcui(lstResults)
 
-        ' if the combo box text exceeds the box, there will be a tooltip that is provided on hover over the box with the full medication
-        ' name 
-        tpSelectedItem.SetToolTip(cmbMedicationName, cmbMedicationName.SelectedItem.ToString)
+            ' if the combo box text exceeds the box, there will be a tooltip that is provided on hover over the box with the full medication
+            ' name 
+            tpSelectedItem.SetToolTip(cmbMedicationName, cmbMedicationName.SelectedItem.ToString)
+        End If
     End Sub
 
     '/*********************************************************************/
@@ -592,15 +609,18 @@ Public Class frmInventory
         frmProgressBar.Show()
         Dim myPropertyNameList As New List(Of String)({"rxcui"})
         Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
-
-        outputList = GetRxcuiByName(txtSearch.Text, myPropertyNameList)
-        If outputList.Count = 0 Then
-            'outputList = GetSuggestionList(txtSearch.Text)
-            ' then populate the combobox
-            ' and if they click again on an item put it into the search box and search
-            ' recursion 'til the cows come home
+        If IsNothing(GetRxcuiByName(txtSearch.Text, myPropertyNameList)) Then
+            MessageBox.Show("Could not connect to web APIs. Please check your connection and try again later.")
+        Else
+            outputList = GetRxcuiByName(txtSearch.Text, myPropertyNameList)
+            If outputList.Count = 0 Then
+                'outputList = GetSuggestionList(txtSearch.Text)
+                ' then populate the combobox
+                ' and if they click again on an item put it into the search box and search
+                ' recursion 'til the cows come home
+            End If
+            cmbMedicationName.DataSource = outputList
         End If
-        cmbMedicationName.DataSource = outputList
     End Sub
 
     '/*********************************************************************/
