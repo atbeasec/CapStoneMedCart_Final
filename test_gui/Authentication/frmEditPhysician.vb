@@ -467,6 +467,8 @@ Public Class frmEditPhysician
         txtZipCode.Text = Nothing
         txtID.Text = Nothing
         btnCancel.Visible = False
+        btnSaveChanges.Visible = False
+        btnSave.Visible = True
         cboCredentials.ResetText()
         cboState.ResetText()
 

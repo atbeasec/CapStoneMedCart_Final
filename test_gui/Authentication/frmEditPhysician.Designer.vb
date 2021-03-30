@@ -64,6 +64,7 @@ Partial Class frmEditPhysician
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblFirstName = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.pnlPhysicianHeader.SuspendLayout()
         Me.pnlAllTextboxes.SuspendLayout()
         Me.Panel5.SuspendLayout()
@@ -156,6 +157,7 @@ Partial Class frmEditPhysician
         '
         'pnlAllTextboxes
         '
+        Me.pnlAllTextboxes.Controls.Add(Me.Label4)
         Me.pnlAllTextboxes.Controls.Add(Me.Panel5)
         Me.pnlAllTextboxes.Controls.Add(Me.Panel11)
         Me.pnlAllTextboxes.Controls.Add(Me.btnSaveChanges)
@@ -236,7 +238,7 @@ Partial Class frmEditPhysician
         Me.btnSaveChanges.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSaveChanges.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSaveChanges.ForeColor = System.Drawing.Color.White
-        Me.btnSaveChanges.Location = New System.Drawing.Point(311, 413)
+        Me.btnSaveChanges.Location = New System.Drawing.Point(289, 413)
         Me.btnSaveChanges.Name = "btnSaveChanges"
         Me.btnSaveChanges.Size = New System.Drawing.Size(120, 38)
         Me.btnSaveChanges.TabIndex = 12
@@ -461,7 +463,7 @@ Partial Class frmEditPhysician
         Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSave.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.ForeColor = System.Drawing.Color.White
-        Me.btnSave.Location = New System.Drawing.Point(311, 413)
+        Me.btnSave.Location = New System.Drawing.Point(210, 413)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(120, 38)
         Me.btnSave.TabIndex = 178
@@ -572,6 +574,17 @@ Partial Class frmEditPhysician
         Me.lblFirstName.TabIndex = 167
         Me.lblFirstName.Text = "First Name:"
         '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.BackColor = System.Drawing.Color.White
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(9, 12)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(201, 25)
+        Me.Label4.TabIndex = 189
+        Me.Label4.Text = "Create New Physician"
+        '
         'frmEditPhysician
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -651,4 +664,5 @@ Partial Class frmEditPhysician
     Friend WithEvents txtFirstName As TextBox
     Friend WithEvents Panel5 As Panel
     Friend WithEvents txtMiddleName As TextBox
+    Friend WithEvents Label4 As Label
 End Class
