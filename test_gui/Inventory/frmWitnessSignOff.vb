@@ -1,14 +1,17 @@
 ﻿Public Class frmWitnessSignOff
     Public referringForm As Object
 
-    Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs) Handles TextBox2.TextChanged
-        If ScanLogIn(TextBox2.Text) = True Then
+    Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs) Handles TextBox2.Validated
+        Dim strHashedBarcode = ConvertBarcodePepperAndHash(TextBox2.Text)
+        If ExecuteScalarQuery("SELECT COUNT(*) FROM User WHERE User_ID = '" & LoggedInID & "' AND Barcode = '" & strHashedBarcode & "'" & " AND Active_Flag = '1'") <> 0 Then
             ' add the allergy override
             referringForm.blnOverride = True
             referringForm.blnSignedOff = True
             ' clear the entry
             TextBox2.Clear()
             Me.Close()
+        Else
+            MessageBox.Show("Error, barcode entered does not match logged in user. Please try again or cancel dispense.")
         End If
 
         ' after text validation then we can actually dispense the medication
