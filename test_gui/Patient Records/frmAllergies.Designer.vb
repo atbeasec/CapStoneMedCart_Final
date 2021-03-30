@@ -22,6 +22,7 @@ Partial Class frmAllergies
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAllergies))
         Me.flpAllergies = New System.Windows.Forms.FlowLayoutPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
@@ -45,6 +46,7 @@ Partial Class frmAllergies
         Me.btnAllergySave = New System.Windows.Forms.Button()
         Me.Panel13 = New System.Windows.Forms.Panel()
         Me.btnBack = New System.Windows.Forms.Button()
+        Me.tpToolTip = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel2.SuspendLayout()
         Me.Panel13.SuspendLayout()
         Me.SuspendLayout()
@@ -363,4 +365,5 @@ Partial Class frmAllergies
     Friend WithEvents btnAllergySave As Button
     Friend WithEvents Panel13 As Panel
     Friend WithEvents btnBack As Button
+    Friend WithEvents tpToolTip As ToolTip
 End Class
