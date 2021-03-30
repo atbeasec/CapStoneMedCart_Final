@@ -76,7 +76,7 @@ Module LogIn
 
         'If there is a user with that Barcode in the user database then log them in and continue to Form1
         'If sqlite_cmd.ExecuteScalar <> 0 Then
-        If ExecuteScalarQuery("SELECT COUNT(*) FROM User WHERE Barcode = '" & strHashedBarcode & "'" & " AND Acitve_Flag = '1'") <> 0 Then
+        If ExecuteScalarQuery("SELECT COUNT(*) FROM User WHERE Barcode = '" & strHashedBarcode & "'" & " AND Active_Flag = '1'") <> 0 Then
             LogIn.LoggedInUsername = (ExecuteScalarQuery("SELECT Username FROM User WHERE Barcode = '" & strHashedBarcode & "'"))
             LogIn.LoggedInFullName = (ExecuteScalarQuery("SELECT User_First_Name FROM User WHERE Barcode = '" & strHashedBarcode & "'") & " " &
                                     ExecuteScalarQuery("SELECT User_Last_Name FROM User WHERE Barcode = '" & strHashedBarcode & "'"))
