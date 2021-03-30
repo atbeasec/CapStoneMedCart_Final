@@ -358,7 +358,20 @@
         'Runs the database creation module to determine if the database was created
         CreateDatabase.Main()
 
-        'CheckUserPermissions()
+        ' check what controls the user should be able to access based on their assigned permission level
+        '  CheckUserPermissions("Nurse")
+
+
+
+
+
+
+        ' CheckUserPermissions(GetUserPermissions())
+
+
+
+
+
 
         'set submenu to be invisible on form load
         pnlSubMenuSettings.Visible = False
@@ -374,6 +387,210 @@
 
         '  frmSplash.Show()
     End Sub
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: CheckUserPermissions           */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/30/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This identifies what the user's current access level is and shows*/
+    '/*  then calls to out to display only the relevant controls          */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*          frmLoad                                                  */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*      ShowOnlyPermittedScreens                                     */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 permissionlevel as String  */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                     							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	    none                                                          */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/30/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub CheckUserPermissions(ByVal permissionLevel As String)
+
+        Const ADMINACCESS = "Admin"
+        Const SUPERVISORACCESS = "Supervisor"
+        Dim arrButtonsToRemoveSupervisor() = {btnUsers, btnEditPhysician, btnSerialPort, btnConfigureInventory, btnEndOfShiftCount}
+        Dim arrButtonsToRemoveNurse() = {btnSettings, btnPharmacy, btnMaintenance, btnDescrepancies, btnConfigureInventory, btnEndOfShiftCount}
+
+
+        If String.Equals(ADMINACCESS, permissionLevel) Then
+
+            ' dont remove any controls because the admin can access all controls
+
+        ElseIf String.Equals(SUPERVISORACCESS, permissionLevel) Then
+
+            ' remove controls that are in the super visor access level
+            '  ShowOnlySupervisorControls()
+            ShowOnlyPermittedScreens(arrButtonsToRemoveSupervisor)
+
+        Else
+            ' remove the controls that are not in the nurse access level
+            ' ShowOnlyNurseControls()
+            ShowOnlyPermittedScreens(arrButtonsToRemoveNurse)
+
+        End If
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: ShowOnlyPermittedScreens       */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/30/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This hides buttons on the main form from a list.                 */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*          frmLoad                                                  */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*      ShowOnlyPermittedScreens                                     */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 arrButtonsToRemove is an array of buttons                        */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                     							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	    none                                                          */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/30/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub ShowOnlyPermittedScreens(ByVal arrButtonsToRemove() As Button)
+
+        ' array of buttons a supervisor does NOT have access to
+        'Dim arrButtonsToRemoveSupervisor() = {btnUsers, btnEditPhysician, btnSerialPort, btnConfigureInventory, btnEndOfShiftCount}
+
+        For Each btn In arrButtonsToRemove
+
+            btn.Visible = False
+
+        Next
+
+        ' This method needs to be called for each submenu item where we removed a button, otherwise the UI submenu will show
+        ' and there will be large chunks of blue space between the submenu, and next menu item. This space is there because the control was removed
+        ' this method will resize the submenu to accomedate the new menu sizes.
+        ResizeSubMenuSizeAccordingToVisibleButtons(pnlSubMenuInventory)
+        ResizeSubMenuSizeAccordingToVisibleButtons(pnlSubMenuPatientRecords)
+        ResizeSubMenuSizeAccordingToVisibleButtons(pnlSubMenuSettings)
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*   SubProgram NAME: ResizeSubMenuSizeAccordingToVisibleButtons     */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/30/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This resizes the panel that is passed in. When buttons are removed/
+    '*/  from the panel, the panel still is set to be the original size.   /
+    '/*  this leaves extraspace between the next Main menu item and itemsin/
+    '/*  submenu. This method resizes the panel based on the number of btns/
+    '*/  that the control currently contains.                              /
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*          ShowOnlyPermittedScreens                                 */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 pnlSubMenu- the panel which is a submenu containing buttons      */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                     							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	    none                                                          */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/30/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub ResizeSubMenuSizeAccordingToVisibleButtons(ByVal pnlSubMenu As Panel)
+
+        ' the target size of the control we need will be the submenus current width, but we need to adjust the height based on
+        ' the number of buttons within the sub menu.
+
+        ' size = new Size(current width of the sub panel, (buttonCount * (buttonHeight + padding))
+        Dim ctl As Control = Nothing
+        Dim visibleCount As Integer = 0
+        Dim padding As Integer = 2
+        Dim btnHeight As Integer
+
+        ' need the number of visible controls to know which size to make the submenu panel that the buttons sit in
+        For Each ctl In pnlSubMenu.Controls
+            ' get the number of visible buttons
+            If ctl.Visible = True Then
+                visibleCount += 1
+                btnHeight = ctl.Size.Height
+            End If
+
+        Next
+
+        Dim newHeight As Integer = visibleCount * (btnHeight + padding)
+        pnlSubMenu.Size = New Size(pnlSubMenu.Width, newHeight)
+
+    End Sub
+
+
+
+
+
+
+
+
+
+    '*******************
+    '* DYLAN- do SQL query here to get the user's permission level.
+    '* call this function inside the CheckPermissions method in formload. IE CheckPermissions(GetUserPermissions())
+    '*******************
+
+    Private Function GetUserPermissions() As String
+
+        ' will contain the query result indicating the user;s permission level
+        Dim permissionLevel As String = Nothing
+
+
+
+        Return permissionLevel
+
+    End Function
+
+
+
+
+
+
+
+
+
+
+
+
 
     '/*********************************************************************/
     '/*                   SubProgram NAME: btnSettings_Click              */         
@@ -582,16 +799,6 @@
     End Sub
 
 
-    Private Sub CheckUserPermissions()
-
-        ' do database query to check user permission level
-        ' select from case statement to determine which level the user is
-        ' have 3 methods, one for each permission level, iterating over the controls that are needed to be
-        ' removed from the control based on what the user should see
-
-        'need to remove these for everyone on form load
-
-    End Sub
 
     '/*********************************************************************/
     '/*                   SubProgram NAME: AssignHandlersToSubMenuButtons */         
@@ -812,9 +1019,6 @@
     Public isDragging As Boolean = False, isClick As Boolean = False
     Public startPoint, firstPoint, lastPoint As Point
 
-    Private Sub pnlTopBarContrast_Paint(sender As Object, e As PaintEventArgs) Handles pnlTopBarContrast.Paint
-
-    End Sub
 
 
     '/*********************************************************************/
