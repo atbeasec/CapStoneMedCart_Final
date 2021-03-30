@@ -542,8 +542,8 @@ Partial Class frmConfiguration
         Me.PictureBox1.TabIndex = 188
         Me.PictureBox1.TabStop = False
         Me.tpLabelHover.SetToolTip(Me.PictureBox1, "Password must contain at least 8 characters, 1 uppercase, 1 lowercase, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "1 number" &
-        ", 1 special characters !@#$%^&*/.,<>=+-_" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Password can not contain single quot" &
-        "ation, double quotation, spaces")
+        ", 1 special characters !@#$%^&*/<>=+-_" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Password can not contain """";')( or spa" &
+        "ces")
         '
         'PictureBox2
         '
@@ -555,7 +555,8 @@ Partial Class frmConfiguration
         Me.PictureBox2.TabIndex = 189
         Me.PictureBox2.TabStop = False
         Me.tpLabelHover.SetToolTip(Me.PictureBox2, "It is advised to scan the barcode with the barcode reader." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Barcodes must be 12" &
-        "-24 characters long and contain " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "alphanumeric and symbols")
+        "-24 characters long and contain " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "alphanumeric and symbols" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Barcodes can not c" &
+        "ontain """";')( or spaces")
         '
         'btnSaveUser
         '

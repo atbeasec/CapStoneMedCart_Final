@@ -321,9 +321,13 @@ Public Class frmEditPhysician
         Dim strLastName As String = txtLastName.Text
         Dim strFirstName As String = txtFirstName.Text
         Dim strMiddleName As String = txtMiddleName.Text
+        Dim strAddress As String = txtAddress.Text
+        Dim strCity As String = txtCity.Text
         strFirstName = Regex.Replace(strFirstName, "'", "''")
         strLastName = Regex.Replace(strLastName, "'", "''")
         strMiddleName = Regex.Replace(strMiddleName, "'", "''")
+        strAddress = Regex.Replace(strAddress, "'", "''")
+        strCity = Regex.Replace(strCity, "'", "''")
         'Make Sure all fields are filled
         If txtFirstName.Text = "" Or txtLastName.Text = "" Or txtMiddleName.Text = "" Or txtAddress.Text = "" Or txtCity.Text = "" Or txtZipCode.Text = "" Or mtbPhone.Text = "" Or mtbFax.Text = "" Then
             MsgBox("All Fields must be filled")
@@ -332,7 +336,7 @@ Public Class frmEditPhysician
             'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
 
             Dim strStatement = "INSERT INTO Physician(Physician_First_Name, Physician_Middle_Name, Physician_Last_Name, Physician_Credentials, Physician_Phone_Number, Physician_Fax_Number, Physician_Address, Physician_City, Physician_State, Physician_Zip_Code, Active_Flag)" &
-            "VALUES('" & strFirstName & "','" & strMiddleName & "','" & strLastName & "','" & cboCredentials.SelectedItem & "','" & mtbPhone.Text & "','" & mtbFax.Text & "','" & txtAddress.Text & "','" & txtCity.Text & "','" & cboState.SelectedItem & "','" & txtZipCode.Text & "','" & intActiveFlag & "')"
+            "VALUES('" & strFirstName & "','" & strMiddleName & "','" & strLastName & "','" & cboCredentials.SelectedItem & "','" & mtbPhone.Text & "','" & mtbFax.Text & "','" & strAddress & "','" & strCity & "','" & cboState.SelectedItem & "','" & txtZipCode.Text & "','" & intActiveFlag & "')"
             ExecuteInsertQuery(strStatement)
 
 
@@ -364,8 +368,8 @@ Public Class frmEditPhysician
 
     End Sub
 
-    Private Sub txtFirst_Last_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFirstName.KeyPress
-        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*()/.,<>=+")
+    Private Sub txtallKeypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFirstName.KeyPress, txtLastName.KeyPress, txtMiddleName.KeyPress, txtAddress.KeyPress, txtCity.KeyPress
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*/.,<>=+")
     End Sub
 
     Private Sub btnSaveChanges_Click(sender As Object, e As EventArgs) Handles btnSaveChanges.Click
@@ -376,9 +380,13 @@ Public Class frmEditPhysician
         Dim strLastName As String = txtLastName.Text
         Dim strFirstName As String = txtFirstName.Text
         Dim strMiddleName As String = txtMiddleName.Text
+        Dim strAddress As String = txtAddress.Text
+        Dim strCity As String = txtCity.Text
         strFirstName = Regex.Replace(strFirstName, "'", "''")
         strLastName = Regex.Replace(strLastName, "'", "''")
         strMiddleName = Regex.Replace(strMiddleName, "'", "''")
+        strAddress = Regex.Replace(strAddress, "'", "''")
+        strCity = Regex.Replace(strCity, "'", "''")
 
 
 
@@ -390,7 +398,7 @@ Public Class frmEditPhysician
             MsgBox("All Fields must be filled")
         Else
             'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
-            strStatement = "UPDATE Physician SET Physician_First_Name='" & strFirstName & "',Physician_Middle_Name='" & strMiddleName & "', Physician_Last_Name='" & strLastName & "', Physician_Credentials='" & cboCredentials.SelectedItem & "', Physician_Phone_Number='" & mtbPhone.Text & "', Physician_Fax_Number='" & mtbFax.Text & "', Physician_Address='" & txtAddress.Text & "', Physician_City='" & txtCity.Text & "', Physician_State='" & cboState.SelectedItem & "', Physician_Zip_Code='" & txtZipCode.Text & "',Active_Flag=1 WHERE Physician_ID='" & txtID.Text & "';"
+            strStatement = "UPDATE Physician SET Physician_First_Name='" & strFirstName & "',Physician_Middle_Name='" & strMiddleName & "', Physician_Last_Name='" & strLastName & "', Physician_Credentials='" & cboCredentials.SelectedItem & "', Physician_Phone_Number='" & mtbPhone.Text & "', Physician_Fax_Number='" & mtbFax.Text & "', Physician_Address='" & strAddress & "', Physician_City='" & strCity & "', Physician_State='" & cboState.SelectedItem & "', Physician_Zip_Code='" & txtZipCode.Text & "',Active_Flag=1 WHERE Physician_ID='" & txtID.Text & "';"
             ExecuteInsertQuery(strStatement)
 
 

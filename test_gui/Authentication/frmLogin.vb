@@ -10,6 +10,7 @@
             MsgBox("            WARNING" & vbCrLf & "Password Field is Blank")
             txtPassword.Focus()
             'send strUsername and strPassword to LogIn Module and recive responce
+        ElseIf CheckSQL() <> "safe" Then
         ElseIf LogIn.UsernameLogIn(strUsername, strPassword) = "True" Then
             'If users Username and Password is in the User table in the database then close current form and open frmMain
             Me.Close()
@@ -77,6 +78,7 @@
                 MsgBox("            WARNING" & vbCrLf & "Password Field is Blank")
                 txtPassword.Focus()
                 'send strUsername and strPassword to LogIn Module and recive responce
+            ElseIf CheckSQL() <> "safe" Then
             ElseIf LogIn.UsernameLogIn(strUsername, strPassword) = "True" Then
                 'If users Username and Password is in the User table in the database then close current form and open frmMain
                 Me.Close()
@@ -113,4 +115,20 @@
     Private Sub txtFirst_Last_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress, txtUserName.KeyPress
         KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*/.,<>=+")
     End Sub
+
+    Public Function CheckSQL()
+        Dim Answer As String
+        If txtUserName.Text.Contains("""") Or txtUserName.Text.Contains("'") Or txtUserName.Text.Contains(" ") Or txtUserName.Text.Contains(";") Or txtUserName.Text.Contains("(") Or txtUserName.Text.Contains(")") Then
+            MsgBox("No User with that Username or Password")
+            Answer = "NotSafe"
+            txtUserName.Focus()
+        ElseIf txtPassword.Text.Contains("""") Or txtPassword.Text.Contains("'") Or txtPassword.Text.Contains(" ") Or txtPassword.Text.Contains(";") Or txtPassword.Text.Contains("(") Or txtPassword.Text.Contains(")") Then
+            MsgBox("No User with that Username or Password")
+            Answer = "NotSafe"
+            txtPassword.Focus()
+        Else
+            Answer = "safe"
+        End If
+        Return Answer
+    End Function
 End Class
