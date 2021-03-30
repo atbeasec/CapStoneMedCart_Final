@@ -575,7 +575,7 @@
         'Set panel properties
         With pnl
             .BackColor = Color.Gainsboro
-            .Size = New Size(flpAllergies.Width - 7, 47)
+            .Size = New Size(850, 47)
             .Name = "pnlAllergiesPadding" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Padding = New Padding(0, 0, 0, 3)
@@ -585,7 +585,7 @@
         With pnlMainPanel
 
             .BackColor = Color.White
-            .Size = New Size(flpAllergies.Width - 7, 45)
+            .Size = New Size(850, 45)
             .Name = "pnlAllergiestRecord" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Dock = System.Windows.Forms.DockStyle.Top
@@ -616,7 +616,7 @@
         ' CreateIDLabel(pnlMainPanel, lblID, "lblAllergyName", lblAllergyName.Location.X, 20, strAllergyName, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID2, "lblSeverity", lblSeverity.Location.X, 20, strSeverity, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID3, "lblAllergyType", lblAllergyType.Location.X, 20, strAllergyType, getPanelCount(flpPannel))
-        CreateIDLabelWithToolTip(pnlMainPanel, lblID4, "lblAllergyName", lblAllergyName.Location.X, 20, strAllergyName, getPanelCount(flpPannel), tpToolTip, TruncateString(15, strAllergyName))
+        '  CreateIDLabelWithToolTip(pnlMainPanel, lblID4, "lblMedication", lblMedication.Location.X, 20, strMedicationName, getPanelCount(flpPannel), tpToolTip, TruncateString(15, strMedicationName))
         '  CreateIDLabel(pnlMainPanel, lblID4, "lblMedication", lblMedication.Location.X, 20, strMedicationName, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel

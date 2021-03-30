@@ -27,7 +27,6 @@ Partial Class frmAllergies
         Me.flpAllergies = New System.Windows.Forms.FlowLayoutPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.lblActions = New System.Windows.Forms.Label()
-        Me.lblMedication = New System.Windows.Forms.Label()
         Me.lblAllergyName = New System.Windows.Forms.Label()
         Me.lblAllergyType = New System.Windows.Forms.Label()
         Me.lblSeverity = New System.Windows.Forms.Label()
@@ -64,7 +63,6 @@ Partial Class frmAllergies
         '
         Me.Panel2.BackColor = System.Drawing.Color.White
         Me.Panel2.Controls.Add(Me.lblActions)
-        Me.Panel2.Controls.Add(Me.lblMedication)
         Me.Panel2.Controls.Add(Me.lblAllergyName)
         Me.Panel2.Controls.Add(Me.lblAllergyType)
         Me.Panel2.Controls.Add(Me.lblSeverity)
@@ -84,17 +82,6 @@ Partial Class frmAllergies
         Me.lblActions.TabIndex = 10
         Me.lblActions.Text = "Actions"
         '
-        'lblMedication
-        '
-        Me.lblMedication.AutoSize = True
-        Me.lblMedication.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblMedication.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblMedication.Location = New System.Drawing.Point(490, 16)
-        Me.lblMedication.Name = "lblMedication"
-        Me.lblMedication.Size = New System.Drawing.Size(93, 21)
-        Me.lblMedication.TabIndex = 7
-        Me.lblMedication.Text = "Medication"
-        '
         'lblAllergyName
         '
         Me.lblAllergyName.AutoSize = True
@@ -111,7 +98,7 @@ Partial Class frmAllergies
         Me.lblAllergyType.AutoSize = True
         Me.lblAllergyType.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblAllergyType.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblAllergyType.Location = New System.Drawing.Point(350, 16)
+        Me.lblAllergyType.Location = New System.Drawing.Point(475, 16)
         Me.lblAllergyType.Name = "lblAllergyType"
         Me.lblAllergyType.Size = New System.Drawing.Size(45, 21)
         Me.lblAllergyType.TabIndex = 9
@@ -122,7 +109,7 @@ Partial Class frmAllergies
         Me.lblSeverity.AutoSize = True
         Me.lblSeverity.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSeverity.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblSeverity.Location = New System.Drawing.Point(175, 16)
+        Me.lblSeverity.Location = New System.Drawing.Point(234, 16)
         Me.lblSeverity.Name = "lblSeverity"
         Me.lblSeverity.Size = New System.Drawing.Size(109, 21)
         Me.lblSeverity.TabIndex = 0
@@ -345,7 +332,6 @@ Partial Class frmAllergies
 
     Friend WithEvents flpAllergies As FlowLayoutPanel
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents lblMedication As Label
     Friend WithEvents lblAllergyName As Label
     Friend WithEvents lblAllergyType As Label
     Friend WithEvents lblSeverity As Label
