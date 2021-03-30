@@ -116,19 +116,7 @@
         KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*/.,<>=+")
     End Sub
 
-    Public Function CheckSQL()
-        Dim Answer As String
-        If txtUserName.Text.Contains("""") Or txtUserName.Text.Contains("'") Or txtUserName.Text.Contains(" ") Or txtUserName.Text.Contains(";") Or txtUserName.Text.Contains("(") Or txtUserName.Text.Contains(")") Then
-            MsgBox("No User with that Username or Password")
-            Answer = "NotSafe"
-            txtUserName.Focus()
-        ElseIf txtPassword.Text.Contains("""") Or txtPassword.Text.Contains("'") Or txtPassword.Text.Contains(" ") Or txtPassword.Text.Contains(";") Or txtPassword.Text.Contains("(") Or txtPassword.Text.Contains(")") Then
-            MsgBox("No User with that Username or Password")
-            Answer = "NotSafe"
-            txtPassword.Focus()
-        Else
-            Answer = "safe"
-        End If
-        Return Answer
-    End Function
+    Private Sub txtLoginKeypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtUserName.KeyPress, txtPassword.KeyPress
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz-1234567890!@#$%^&*.,<>=+")
+    End Sub
 End Class

@@ -474,10 +474,8 @@ Public Class frmConfiguration
             intSupervisor = 1
         End If
 
-        If CheckSQL() <> "safe" Then
-
-            'call CheckPassword Function to see if password mets security standards
-        ElseIf CheckPassword(strPassword) = False Then
+        'call CheckPassword Function to see if password mets security standards
+        If CheckPassword(strPassword) = False Then
             MsgBox("Password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special characters !@#$%^&*()/.,<>=+-_ ")
             txtPassword.Focus()
             ' make sure password and Confirm Password Match
@@ -663,9 +661,8 @@ Public Class frmConfiguration
                     strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',Salt='" & strSalt & "',Password='" & strPassword & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "',Active_Flag=1 WHERE User_ID='" & txtID.Text & "';"
                     ExecuteInsertQuery(strStatement)
                 Else
-                    If CheckSQL() <> "safe" Then
-                        ' Convert the barcode to the peppered hash
-                        strHashedBarcode = ConvertBarcodePepperAndHash(txtBarcode.Text)
+                    ' Convert the barcode to the peppered hash
+                    strHashedBarcode = ConvertBarcodePepperAndHash(txtBarcode.Text)
                         'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
                         strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',Salt='" & strSalt & "',Password='" & strPassword & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Barcode='" & strHashedBarcode & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "',Active_Flag=1 WHERE User_ID='" & txtID.Text & "';"
                         ExecuteInsertQuery(strStatement)
@@ -686,7 +683,7 @@ Public Class frmConfiguration
                 btnSaveChanges.Visible = False
                 btnSaveUser.Visible = True
             End If
-        End If
+
 
 
 
@@ -709,9 +706,8 @@ Public Class frmConfiguration
                     strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "',Active_Flag=1  WHERE User_ID='" & txtID.Text & "';"
                     ExecuteInsertQuery(strStatement)
                 Else
-                    If CheckSQL() <> "safe" Then
-                        ' Convert the barcode to the peppered hash
-                        strHashedBarcode = ConvertBarcodePepperAndHash(txtBarcode.Text)
+                    ' Convert the barcode to the peppered hash
+                    strHashedBarcode = ConvertBarcodePepperAndHash(txtBarcode.Text)
                         'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
                         strStatement = "UPDATE USER SET Username='" & txtUsername.Text & "',User_First_Name='" & strFirstName & "',User_Last_Name='" & strLastName & "',Barcode='" & strHashedBarcode & "',Admin_Flag='" & intAdmin & "',Supervisor_Flag='" & intSupervisor & "',Active_Flag=1  WHERE User_ID='" & txtID.Text & "';"
                         ExecuteInsertQuery(strStatement)
@@ -731,7 +727,7 @@ Public Class frmConfiguration
                 btnSaveChanges.Visible = False
                 btnSaveUser.Visible = True
             End If
-        End If
+
 
         Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
                                       "User.Supervisor_Flag, User.Active_Flag From User;"
@@ -849,27 +845,11 @@ Public Class frmConfiguration
         End If
     End Sub
 
-    Public Function CheckSQL()
-        Dim Answer As String
-        If txtPassword.Text.Contains("""") Or txtPassword.Text.Contains("'") Or txtPassword.Text.Contains(" ") Or txtPassword.Text.Contains(";") Or txtPassword.Text.Contains("(") Or txtPassword.Text.Contains(")") Then
-            MsgBox("Passwords can not have "";')( or spaces")
-            Answer = "NotSafe"
-            txtPassword.Focus()
-        ElseIf txtBarcode.Text.Contains("""") Or txtBarcode.Text.Contains("'") Or txtBarcode.Text.Contains(" ") Or txtBarcode.Text.Contains(";") Or txtBarcode.Text.Contains("(") Or txtBarcode.Text.Contains(")") Then
-            MsgBox("Barcode can not have "";')( or spaces")
-            Answer = "NotSafe"
-            txtBarcode.Focus()
-        ElseIf txtUsername.Text.Contains("""") Or txtUsername.Text.Contains("'") Or txtUsername.Text.Contains(" ") Or txtUsername.Text.Contains(";") Or txtUsername.Text.Contains("(") Or txtUsername.Text.Contains(")") Then
-            MsgBox("Username can not have "";')( or spaces")
-            Answer = "NotSafe"
-            txtUsername.Focus()
-        Else
-            Answer = "safe"
-        End If
-        Return Answer
-    End Function
+    Private Sub Name_Search_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFirstName.KeyPress, txtLastName.KeyPress, txtSearchBox.KeyPress
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*.,<>=+")
+    End Sub
 
-    Private Sub txtFirst_Last_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFirstName.KeyPress, txtLastName.KeyPress, txtUsername.KeyPress, txtSearchBox.KeyPress
-        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*/.,<>=+")
+    Private Sub Password_Barcode_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress, txtConfirmPassword.KeyPress, txtBarcode.KeyPress
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz-1234567890!@#$%^&*.,<>=+")
     End Sub
 End Class

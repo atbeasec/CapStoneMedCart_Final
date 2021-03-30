@@ -31,6 +31,7 @@ Partial Class frmEditPhysician
         Me.lblName = New System.Windows.Forms.Label()
         Me.txtID = New System.Windows.Forms.TextBox()
         Me.pnlAllTextboxes = New System.Windows.Forms.Panel()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.txtMiddleName = New System.Windows.Forms.TextBox()
         Me.Panel11 = New System.Windows.Forms.Panel()
@@ -64,7 +65,6 @@ Partial Class frmEditPhysician
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblFirstName = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.pnlPhysicianHeader.SuspendLayout()
         Me.pnlAllTextboxes.SuspendLayout()
         Me.Panel5.SuspendLayout()
@@ -185,6 +185,17 @@ Partial Class frmEditPhysician
         Me.pnlAllTextboxes.Name = "pnlAllTextboxes"
         Me.pnlAllTextboxes.Size = New System.Drawing.Size(581, 497)
         Me.pnlAllTextboxes.TabIndex = 167
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.BackColor = System.Drawing.Color.White
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(9, 12)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(201, 25)
+        Me.Label4.TabIndex = 189
+        Me.Label4.Text = "Create New Physician"
         '
         'Panel5
         '
@@ -573,17 +584,6 @@ Partial Class frmEditPhysician
         Me.lblFirstName.Size = New System.Drawing.Size(89, 21)
         Me.lblFirstName.TabIndex = 167
         Me.lblFirstName.Text = "First Name:"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.BackColor = System.Drawing.Color.White
-        Me.Label4.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(9, 12)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(201, 25)
-        Me.Label4.TabIndex = 189
-        Me.Label4.Text = "Create New Physician"
         '
         'frmEditPhysician
         '

@@ -22,8 +22,6 @@ Public Class frmLoginScan
         If strBarcode = "" Then
             MsgBox("           WARNING" & vbCrLf & "Barcode Field is Blank")
             txtBarcode.Focus()
-
-        ElseIf CheckSQL() <> "safe" Then
             'send strBarcode to LogIn Module and recive responce
         ElseIf LogIn.ScanLogIn(strBarcode) = "True" Then
             'If users barcode is in the User table in the database then close current form and open frmMain
@@ -51,7 +49,6 @@ Public Class frmLoginScan
             If strBarcode = "" Then
                 MsgBox("           WARNING" & vbCrLf & "Barcode Field is Blank")
                 txtBarcode.Focus()
-            ElseIf CheckSQL() <> "safe" Then
                 'send strBarcode to LogIn Module and recive responce
             ElseIf LogIn.ScanLogIn(strBarcode) = "True" Then
                 'If users barcode is in the User table in the database then close current form and open frmMain
@@ -102,15 +99,7 @@ Public Class frmLoginScan
         CloseForm()
 
     End Sub
-    Public Function CheckSQL()
-        Dim Answer As String
-        If txtBarcode.Text.Contains("""") Or txtBarcode.Text.Contains("'") Or txtBarcode.Text.Contains(" ") Or txtBarcode.Text.Contains(";") Or txtBarcode.Text.Contains("(") Or txtBarcode.Text.Contains(")") Then
-            MsgBox("No User with that Barcode")
-            Answer = "NotSafe"
-            txtBarcode.Focus()
-        Else
-            Answer = "safe"
-        End If
-        Return Answer
-    End Function
+    Private Sub txtLoginKeypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBarcode.KeyPress
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz-1234567890!@#$%^&*.,<>=+")
+    End Sub
 End Class
