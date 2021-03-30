@@ -531,7 +531,7 @@
         frmInventory.mtbExpirationDate.Clear()
 
         frmInventory.cmbDrawerNumber.SelectedIndex = -1
-        frmInventory.cmbDividerBin.SelectedIndex = -1
+        frmInventory.cmbDividerBin.Items.Clear()
         frmInventory.txtQuantity.Text = "1"
 
         frmInventory.cboPersonalMedication.SelectedIndex = 1
