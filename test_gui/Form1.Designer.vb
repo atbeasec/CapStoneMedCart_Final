@@ -81,7 +81,7 @@ Partial Class frmMain
         '
         Me.pbLogin.BackgroundImage = Global.test_gui.My.Resources.Resources.user_px
         Me.pbLogin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pbLogin.Location = New System.Drawing.Point(1203, 1)
+        Me.pbLogin.Location = New System.Drawing.Point(1234, 1)
         Me.pbLogin.Name = "pbLogin"
         Me.pbLogin.Size = New System.Drawing.Size(25, 25)
         Me.pbLogin.TabIndex = 0
@@ -604,7 +604,7 @@ Partial Class frmMain
         '
         Me.lblCurrentUser.AutoSize = True
         Me.lblCurrentUser.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCurrentUser.Location = New System.Drawing.Point(1233, 5)
+        Me.lblCurrentUser.Location = New System.Drawing.Point(1264, 5)
         Me.lblCurrentUser.Name = "lblCurrentUser"
         Me.lblCurrentUser.Size = New System.Drawing.Size(44, 17)
         Me.lblCurrentUser.TabIndex = 2
