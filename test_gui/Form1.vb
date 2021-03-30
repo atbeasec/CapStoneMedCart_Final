@@ -363,6 +363,9 @@
 
 
 
+
+
+
         ' CheckUserPermissions(GetUserPermissions())
 
 
@@ -385,6 +388,37 @@
         '  frmSplash.Show()
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: CheckUserPermissions           */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/30/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This identifies what the user's current access level is and shows*/
+    '/*  then calls to out to display only the relevant controls          */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*          frmLoad                                                  */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*      ShowOnlyPermittedScreens                                     */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 permissionlevel as String  */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                     							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	    none                                                          */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/30/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Sub CheckUserPermissions(ByVal permissionLevel As String)
 
         Const ADMINACCESS = "Admin"
@@ -410,9 +444,38 @@
 
         End If
 
-
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: ShowOnlyPermittedScreens       */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/30/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This hides buttons on the main form from a list.                 */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*          frmLoad                                                  */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*      ShowOnlyPermittedScreens                                     */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 arrButtonsToRemove is an array of buttons                        */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                     							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	    none                                                          */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/30/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Sub ShowOnlyPermittedScreens(ByVal arrButtonsToRemove() As Button)
 
         ' array of buttons a supervisor does NOT have access to
@@ -427,14 +490,47 @@
         ' This method needs to be called for each submenu item where we removed a button, otherwise the UI submenu will show
         ' and there will be large chunks of blue space between the submenu, and next menu item. This space is there because the control was removed
         ' this method will resize the submenu to accomedate the new menu sizes.
-        EditSubMenuSizeAccordingToVisibleButtons(pnlSubMenuInventory)
-        EditSubMenuSizeAccordingToVisibleButtons(pnlSubMenuPatientRecords)
-        EditSubMenuSizeAccordingToVisibleButtons(pnlSubMenuSettings)
+        ResizeSubMenuSizeAccordingToVisibleButtons(pnlSubMenuInventory)
+        ResizeSubMenuSizeAccordingToVisibleButtons(pnlSubMenuPatientRecords)
+        ResizeSubMenuSizeAccordingToVisibleButtons(pnlSubMenuSettings)
 
     End Sub
 
-
-    Private Sub EditSubMenuSizeAccordingToVisibleButtons(ByVal pnlSubMenu As Panel)
+    '/*********************************************************************/
+    '/*   SubProgram NAME: ResizeSubMenuSizeAccordingToVisibleButtons     */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/30/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This resizes the panel that is passed in. When buttons are removed/
+    '*/  from the panel, the panel still is set to be the original size.   /
+    '/*  this leaves extraspace between the next Main menu item and itemsin/
+    '/*  submenu. This method resizes the panel based on the number of btns/
+    '*/  that the control currently contains.                              /
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*          ShowOnlyPermittedScreens                                 */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 pnlSubMenu- the panel which is a submenu containing buttons      */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                     							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	    none                                                          */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/30/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub ResizeSubMenuSizeAccordingToVisibleButtons(ByVal pnlSubMenu As Panel)
 
         ' the target size of the control we need will be the submenus current width, but we need to adjust the height based on
         ' the number of buttons within the sub menu.
@@ -461,10 +557,18 @@
     End Sub
 
 
+
+
+
+
+
+
+
     '*******************
-    '*DYLAN- do SQL query here to get the user's permission level.
+    '* DYLAN- do SQL query here to get the user's permission level.
     '* call this function inside the CheckPermissions method in formload. IE CheckPermissions(GetUserPermissions())
-    '* 
+    '*******************
+
     Private Function GetUserPermissions() As String
 
         ' will contain the query result indicating the user;s permission level
@@ -475,6 +579,18 @@
         Return permissionLevel
 
     End Function
+
+
+
+
+
+
+
+
+
+
+
+
 
     '/*********************************************************************/
     '/*                   SubProgram NAME: btnSettings_Click              */         
