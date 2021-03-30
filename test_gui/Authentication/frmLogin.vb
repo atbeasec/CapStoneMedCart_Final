@@ -19,7 +19,9 @@
             frmMain.Text = "Medical Dispence - " & LogIn.LoggedInFullName
             frmMain.Show()
             'make btnPatientRecords have focus
-            frmMain.btnPatientRecords.PerformClick()
+            '  frmMain.pnlSubMenuPatientRecords.Visible = True
+
+            '  frmMain.btnAll.PerformClick()
         Else
             'If users Username and Password is not in the User table then inform the user
             MsgBox("No User With That Username and Password")
@@ -83,13 +85,12 @@
                 'call to set what sub form should be open
                 frmMain.DetermineFormToOpen(2)
                 'set the header for main to show who is logged in
-
                 frmMain.SetUserName(strUsername)
                 frmMain.Text = "Medical Dispense - " & LogIn.LoggedInFullName
 
                 frmMain.Show()
                 'make btnPatientRecords have focus
-                frmMain.btnPatientRecords.PerformClick()
+                frmMain.btnAllPatients.PerformClick()
 
                 'pass user name to the main form
 

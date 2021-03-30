@@ -26,8 +26,10 @@ Public Class frmLoginScan
             'send strBarcode to LogIn Module and recive responce
         ElseIf LogIn.ScanLogIn(strBarcode) = "True" Then
             'If users barcode is in the User table in the database then close current form and open frmMain
-            Me.Close()
+            Me.Visible = False
+            frmMain.Show()
             frmMain.DetermineFormToOpen(2)
+
             frmMain.Text = "Medical Dispence - " & LogIn.LoggedInFullName
             frmMain.Show()
             frmMain.btnPatientRecords.PerformClick()

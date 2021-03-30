@@ -25,9 +25,10 @@ Partial Class frmMain
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.pnlTopBar = New System.Windows.Forms.Panel()
+        Me.lblCurrentUser = New System.Windows.Forms.Label()
         Me.pbLogin = New System.Windows.Forms.PictureBox()
-        Me.lblLoggedInUser = New System.Windows.Forms.Label()
         Me.pnlTopBarContrast = New System.Windows.Forms.Panel()
+        Me.lblLoggedInUser = New System.Windows.Forms.Label()
         Me.pnlSideMenu = New System.Windows.Forms.Panel()
         Me.pnlSubMenuSettings = New System.Windows.Forms.Panel()
         Me.btnEditPhysician = New System.Windows.Forms.Button()
@@ -55,7 +56,6 @@ Partial Class frmMain
         Me.Label2 = New System.Windows.Forms.Label()
         Me.pnlDockLocation = New System.Windows.Forms.Panel()
         Me.tpMultiPurposeTooltip = New System.Windows.Forms.ToolTip(Me.components)
-        Me.lblCurrentUser = New System.Windows.Forms.Label()
         Me.pnlTopBar.SuspendLayout()
         CType(Me.pbLogin, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlSideMenu.SuspendLayout()
@@ -77,6 +77,17 @@ Partial Class frmMain
         Me.pnlTopBar.Size = New System.Drawing.Size(1334, 27)
         Me.pnlTopBar.TabIndex = 13
         '
+        'lblCurrentUser
+        '
+        Me.lblCurrentUser.AutoSize = True
+        Me.lblCurrentUser.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCurrentUser.Location = New System.Drawing.Point(1264, 5)
+        Me.lblCurrentUser.Name = "lblCurrentUser"
+        Me.lblCurrentUser.Size = New System.Drawing.Size(44, 17)
+        Me.lblCurrentUser.TabIndex = 2
+        Me.lblCurrentUser.Text = "Label1"
+        Me.lblCurrentUser.Visible = False
+        '
         'pbLogin
         '
         Me.pbLogin.BackgroundImage = Global.test_gui.My.Resources.Resources.user_px
@@ -86,6 +97,15 @@ Partial Class frmMain
         Me.pbLogin.Size = New System.Drawing.Size(25, 25)
         Me.pbLogin.TabIndex = 0
         Me.pbLogin.TabStop = False
+        '
+        'pnlTopBarContrast
+        '
+        Me.pnlTopBarContrast.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.pnlTopBarContrast.Dock = System.Windows.Forms.DockStyle.Left
+        Me.pnlTopBarContrast.Location = New System.Drawing.Point(0, 0)
+        Me.pnlTopBarContrast.Name = "pnlTopBarContrast"
+        Me.pnlTopBarContrast.Size = New System.Drawing.Size(227, 27)
+        Me.pnlTopBarContrast.TabIndex = 0
         '
         'lblLoggedInUser
         '
@@ -97,15 +117,6 @@ Partial Class frmMain
         Me.lblLoggedInUser.TabIndex = 0
         Me.lblLoggedInUser.Text = "Label1"
         Me.lblLoggedInUser.Visible = False
-        '
-        'pnlTopBarContrast
-        '
-        Me.pnlTopBarContrast.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.pnlTopBarContrast.Dock = System.Windows.Forms.DockStyle.Left
-        Me.pnlTopBarContrast.Location = New System.Drawing.Point(0, 0)
-        Me.pnlTopBarContrast.Name = "pnlTopBarContrast"
-        Me.pnlTopBarContrast.Size = New System.Drawing.Size(227, 27)
-        Me.pnlTopBarContrast.TabIndex = 0
         '
         'pnlSideMenu
         '
@@ -599,17 +610,6 @@ Partial Class frmMain
         Me.pnlDockLocation.Name = "pnlDockLocation"
         Me.pnlDockLocation.Size = New System.Drawing.Size(1107, 684)
         Me.pnlDockLocation.TabIndex = 16
-        '
-        'lblCurrentUser
-        '
-        Me.lblCurrentUser.AutoSize = True
-        Me.lblCurrentUser.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCurrentUser.Location = New System.Drawing.Point(1264, 5)
-        Me.lblCurrentUser.Name = "lblCurrentUser"
-        Me.lblCurrentUser.Size = New System.Drawing.Size(44, 17)
-        Me.lblCurrentUser.TabIndex = 2
-        Me.lblCurrentUser.Text = "Label1"
-        Me.lblCurrentUser.Visible = False
         '
         'frmMain
         '
