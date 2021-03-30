@@ -196,16 +196,9 @@ Public Class frmInventory
             intNarcotic = 0
         End If
 
-        'If the API doesn't bring back a schedule, substitue it for 0
-        If txtSchedule.Text.Equals("") Then
-            intSchedule = 0
-        Else
-            intSchedule = CInt(txtSchedule.Text)
-        End If
-
-
-
-        If txtStrength.Text.Equals("") Or txtType.Text.Equals("") Or mtbExpirationDate.MaskFull = False Or cboPersonalMedication.SelectedIndex.Equals(-1) Or mtbExpirationDate.MaskCompleted = False Then
+        'Check that all fields have data entered before attempting to save into the database
+        If txtStrength.Text.Equals("") Or txtType.Text.Equals("") Or mtbExpirationDate.MaskFull = False Or
+            cboPersonalMedication.SelectedIndex.Equals(-1) Or mtbExpirationDate.MaskCompleted = False Or txtSchedule.Text.Equals("") Then
             MessageBox.Show("Please enter data in all fields before saving.")
 
 
@@ -399,10 +392,10 @@ Public Class frmInventory
             Select Case result.strPropertyName
                 Case "AVAILABLE_STRENGTH"
                     txtStrength.Text = result.strPropertyValue
-                    txtStrength.Enabled = False
+                    'leave it enabled in case there's an error
                 Case "STRENGTH"
                     txtStrength.Text = result.strPropertyValue
-                    txtStrength.Enabled = False
+                    'leave it enabled in case there's an error
                 Case "SCHEDULE"
                     If result.strPropertyValue Is Nothing Then
                         ' do nothing
@@ -843,4 +836,5 @@ Public Class frmInventory
             txtStatus.Visible = True
         End If
     End Sub
+
 End Class
