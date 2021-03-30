@@ -462,6 +462,7 @@ Public Class frmConfiguration
         Dim strSalt As String = Nothing
         Dim strResults() As String = Nothing ' this will hold the salted, peppered, hashed password and the salt
         Dim strHashedBarcode As String ' this will hold the peppered, hashed barcode
+        Dim strFullName As String = strFirstName & " " & strLastName
         strFirstName = Regex.Replace(strFirstName, "'", "''")
         strLastName = Regex.Replace(strLastName, "'", "''")
         strFirstName = Regex.Replace(strFirstName, """", "")
@@ -504,7 +505,6 @@ Public Class frmConfiguration
 
             strStatement = "SELECT User_ID FROM User ORDER BY User_ID DESC LIMIT 1;"
             Dim strNewID As String = ExecuteScalarQuery(strStatement)
-            Dim strFullName As String = strFirstName & " " & strLastName
 
             Dim strRole As String
             'check what Role the user will have

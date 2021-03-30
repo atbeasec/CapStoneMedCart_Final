@@ -323,6 +323,7 @@ Public Class frmEditPhysician
         Dim strMiddleName As String = txtMiddleName.Text
         Dim strAddress As String = txtAddress.Text
         Dim strCity As String = txtCity.Text
+        Dim strFullName As String = strFirstName & " " & strLastName
         strFirstName = Regex.Replace(strFirstName, "'", "''")
         strLastName = Regex.Replace(strLastName, "'", "''")
         strMiddleName = Regex.Replace(strMiddleName, "'", "''")
@@ -343,7 +344,7 @@ Public Class frmEditPhysician
 
             strStatement = "SELECT User_ID FROM User ORDER BY User_ID DESC LIMIT 1;"
             Dim strNewID As String = ExecuteScalarQuery(strStatement)
-            Dim strFullName As String = strFirstName & " " & strLastName
+
 
             ' do query to return the record that was just created and return the result into the create panel method below
             CreatePanel_Physician(flpPhysicianInfo, strNewID, strFullName, cboCredentials.SelectedItem, "Yes")
