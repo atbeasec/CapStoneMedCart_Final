@@ -176,7 +176,7 @@ Module DispenseHistory
     '/*********************************************************************/
 
     Sub DispenseHistorySpecificPatient(ByRef intPatientID As Integer)
-        Dim Strdatacommand As String = "Select trim(Medication.Drug_Name,' '), Medication.Strength, PatientMedication.Type, Dispensing.Amount_Dispensed,Dispensing.DateTime_Dispensed, User.User_Last_Name, User.User_First_Name from Dispensing 
+        Dim Strdatacommand As String = "Select trim(Medication.Drug_Name,' '), Medication.Strength, Medication.Type, Dispensing.Amount_Dispensed,Dispensing.DateTime_Dispensed, User.User_Last_Name, User.User_First_Name from Dispensing 
                                         Inner Join PatientMedication ON PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID
                                         INNER JOIN Medication ON Medication.Medication_ID = PatientMedication.Medication_TUID
                                         INNER JOIN User ON User.User_ID = Dispensing.Primary_User_TUID
@@ -240,7 +240,7 @@ Module DispenseHistory
     '/*  Alexander Beasecker  03/14/21	  Initial creation of the code      */
     '/*********************************************************************/
     Public Sub DispenseHistoryByDrugName(ByRef intPatientID As Integer)
-        Dim Strdatacommand As String = "Select trim(Medication.Drug_Name,' '), Medication.Strength, PatientMedication.Type, Dispensing.Amount_Dispensed,Dispensing.DateTime_Dispensed, User.User_Last_Name, User.User_First_Name from Dispensing 
+        Dim Strdatacommand As String = "Select trim(Medication.Drug_Name,' '), Medication.Strength, Medication.Type, Dispensing.Amount_Dispensed,Dispensing.DateTime_Dispensed, User.User_Last_Name, User.User_First_Name from Dispensing 
                                         Inner Join PatientMedication ON PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID
                                         INNER JOIN Medication ON Medication.Medication_ID = PatientMedication.Medication_TUID
                                         INNER JOIN User ON User.User_ID = Dispensing.Primary_User_TUID
@@ -304,7 +304,7 @@ Module DispenseHistory
     '/*  Alexander Beasecker  03/14/21	  Initial creation of the code      */
     '/*********************************************************************/
     Public Sub DispenseHistoryByStrength(ByRef intPatientID As Integer)
-        Dim Strdatacommand As String = "Select trim(Medication.Drug_Name,' '), Medication.Strength as Dosage, PatientMedication.Type, Dispensing.Amount_Dispensed,Dispensing.DateTime_Dispensed, User.User_Last_Name, User.User_First_Name,CAST(Medication.Strength as INTEGER) as Dosage1 from Dispensing 
+        Dim Strdatacommand As String = "Select trim(Medication.Drug_Name,' '), Medication.Strength as Dosage, Medication.Type, Dispensing.Amount_Dispensed,Dispensing.DateTime_Dispensed, User.User_Last_Name, User.User_First_Name,CAST(Medication.Strength as INTEGER) as Dosage1 from Dispensing 
                                         Inner Join PatientMedication ON PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID
                                         INNER JOIN Medication ON Medication.Medication_ID = PatientMedication.Medication_TUID
                                         INNER JOIN User ON User.User_ID = Dispensing.Primary_User_TUID
@@ -368,7 +368,7 @@ Module DispenseHistory
     '/*  Alexander Beasecker  03/14/21	 Initial creation of the code      */
     '/*********************************************************************/
     Public Sub DispenseHistoryByType(ByRef intPatientID As Integer)
-        Dim Strdatacommand As String = "Select trim(Medication.Drug_Name,' '), Medication.Strength, PatientMedication.Type, Dispensing.Amount_Dispensed,Dispensing.DateTime_Dispensed, User.User_Last_Name, User.User_First_Name, Upper(Medication.Type) as TypeUP from Dispensing 
+        Dim Strdatacommand As String = "Select trim(Medication.Drug_Name,' '), Medication.Strength, Medication.Type, Dispensing.Amount_Dispensed,Dispensing.DateTime_Dispensed, User.User_Last_Name, User.User_First_Name, Upper(Medication.Type) as TypeUP from Dispensing 
                                         Inner Join PatientMedication ON PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID
                                         INNER JOIN Medication ON Medication.Medication_ID = PatientMedication.Medication_TUID
                                         INNER JOIN User ON User.User_ID = Dispensing.Primary_User_TUID
@@ -432,7 +432,7 @@ Module DispenseHistory
     '/*  Alexander Beasecker  03/14/21	 Initial creation of the code      */
     '/*********************************************************************/
     Public Sub DispenseHistoryByQuantity(ByRef intPatientID As Integer)
-        Dim Strdatacommand As String = "Select trim(Medication.Drug_Name,' '), Medication.Strength as Dosage, PatientMedication.Type, Cast(Dispensing.Amount_Dispensed as INTEGER) as TotalDispensed,Dispensing.DateTime_Dispensed, User.User_Last_Name, User.User_First_Name from Dispensing 
+        Dim Strdatacommand As String = "Select trim(Medication.Drug_Name,' '), Medication.Strength as Dosage, Medication.Type, Cast(Dispensing.Amount_Dispensed as INTEGER) as TotalDispensed,Dispensing.DateTime_Dispensed, User.User_Last_Name, User.User_First_Name from Dispensing 
                                         Inner Join PatientMedication ON PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID
                                         INNER JOIN Medication ON Medication.Medication_ID = PatientMedication.Medication_TUID
                                         INNER JOIN User ON User.User_ID = Dispensing.Primary_User_TUID
@@ -496,7 +496,7 @@ Module DispenseHistory
     '/*  Alexander Beasecker  03/14/21	 Initial creation of the code      */
     '/*********************************************************************/
     Public Sub DispenseHistoryByDispensingUser(ByRef intPatientID As Integer)
-        Dim Strdatacommand As String = "Select trim(Medication.Drug_Name,' '), Medication.Strength as Dosage, PatientMedication.Type, Cast(Dispensing.Amount_Dispensed as INTEGER) as TotalDispensed,Dispensing.DateTime_Dispensed, User.User_Last_Name, User.User_First_Name from Dispensing 
+        Dim Strdatacommand As String = "Select trim(Medication.Drug_Name,' '), Medication.Strength as Dosage, Medication.Type, Cast(Dispensing.Amount_Dispensed as INTEGER) as TotalDispensed,Dispensing.DateTime_Dispensed, User.User_Last_Name, User.User_First_Name from Dispensing 
                                         Inner Join PatientMedication ON PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID
                                         INNER JOIN Medication ON Medication.Medication_ID = PatientMedication.Medication_TUID
                                         INNER JOIN User ON User.User_ID = Dispensing.Primary_User_TUID
@@ -560,7 +560,7 @@ Module DispenseHistory
     '/*  Alexander Beasecker 03/14/21	  Initial creation of the code      */
     '/*********************************************************************/
     Public Sub DispenseHistoryByDispenseDateAndTime(ByRef intPatientID As Integer)
-        Dim Strdatacommand As String = "Select trim(Medication.Drug_Name,' '), Medication.Strength, PatientMedication.Type, Dispensing.Amount_Dispensed,Dispensing.DateTime_Dispensed, User.User_Last_Name, User.User_First_Name from Dispensing 
+        Dim Strdatacommand As String = "Select trim(Medication.Drug_Name,' '), Medication.Strength, Medication.Type, Dispensing.Amount_Dispensed,Dispensing.DateTime_Dispensed, User.User_Last_Name, User.User_First_Name from Dispensing 
                                         Inner Join PatientMedication ON PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID
                                         INNER JOIN Medication ON Medication.Medication_ID = PatientMedication.Medication_TUID
                                         INNER JOIN User ON User.User_ID = Dispensing.Primary_User_TUID
