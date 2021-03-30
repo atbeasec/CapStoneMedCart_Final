@@ -88,6 +88,9 @@
                 frmMain.Show()
                 'make btnPatientRecords have focus
                 frmMain.btnPatientRecords.PerformClick()
+
+                'pass user name to the main form
+                frmMain.SetUserName(strUsername)
             Else
                 'If users Username and Password is not in the User table then inform the user
                 MsgBox("No User with that Username or Password")

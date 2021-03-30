@@ -1,5 +1,6 @@
 ﻿Public Class frmMain
 
+    Private strSessionUsername As String
     Private frmCurrentChildForm As Form
     Private frmPreviousChildForm As Form
 
@@ -1015,10 +1016,21 @@
 
     End Sub
 
+    Public Sub SetUserName(ByVal strUsername As String)
+
+        strSessionUsername = strUsername
+
+    End Sub
+
+    Public Function GetUserName()
+
+        Return strSessionUsername
+
+    End Function
+
 
     Public isDragging As Boolean = False, isClick As Boolean = False
     Public startPoint, firstPoint, lastPoint As Point
-
 
 
     '/*********************************************************************/
