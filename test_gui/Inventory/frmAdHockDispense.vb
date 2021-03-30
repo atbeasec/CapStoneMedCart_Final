@@ -1,5 +1,7 @@
 ﻿Public Class frmAdHockDispense
     Dim intPatientID As New ArrayList
+    Public blnSignedOff As Boolean = False
+    Public blnOverride As Boolean = False
     Private Sub frmAdHockDispense_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         'set ad efault quantity to the quantity textbox
@@ -33,33 +35,48 @@
     Private Sub btnDispense_Click(sender As Object, e As EventArgs) Handles btnDispense.Click
 
         'make sure that both patient and medication is selected before ordering the AdHoc
-        If IsNothing(cmbMedications.SelectedItem) And IsNothing(cmbPatientName.SelectedItem) Then
-            MessageBox.Show("Please select a medication and patient")
+        If IsNothing(cmbMedications.SelectedItem) Then
+            MessageBox.Show("Please select a medication")
+        ElseIf IsNothing(cmbPatientName.SelectedItem) Then
+            MessageBox.Show("Please select a patient")
+        ElseIf Not CInt(txtQuantity.Text) > 0 Then
+            MessageBox.Show("Please select a quantity of 1 or greater")
         Else
-            If cmbMedications.SelectedItem = lstboxAllergies.SelectedItem Then
-                'show witness sign off
-                frmWitnessSignOff.Label1.Text = cmbMedications.SelectedItem.ToString
-                'if authentication from witness sign off form comes back then
-                'If Not IsNothing(cmbMedications.SelectedItem) Then
-                '    DispenseHistory.DispenseMedication(DispenseHistory.SplitMedicationString(cmbMedications.SelectedItem), intPatientID)
-                'else
-                'End If
-                MessageBox.Show("Patient is allergic to this Medication")
-            Else
+            For Each allergy In lstboxAllergies.Items
+                If cmbMedications.SelectedItem.ToString.ToLower.Contains(allergy.ToString.ToLower) Then
+                    'show witness sign off
+                    frmWitnessSignOff.Label1.Text = cmbMedications.SelectedItem.ToString
+                    frmWitnessSignOff.referringForm = Me
+                    frmWitnessSignOff.ShowDialog()
+                    'if authentication from witness sign off form comes back then
+                    If blnOverride Then
+                        Dim intMaxAllergyID
+                        ' pull the information to insert
+                        If ExecuteScalarQuery("Select AllergyOverride_ID from AllergyOverride") = Nothing Then
+                            intMaxAllergyID = 0
+                        Else
+                            intMaxAllergyID = ExecuteScalarQuery("SELECT MAX(AllergyOverride_ID) from AllergyOverride")
+                            intMaxAllergyID += 1
+                        End If
 
-                If Not IsNothing(cmbMedications.SelectedItem) And txtQuantity.Text > 0 Then
-                    If Not IsNothing(cmbPatientName.SelectedItem) Then
-
-                        AdHoc.InsertAdHoc(AdHoc.intPatientIDArray(cmbPatientName.SelectedIndex), "1", txtQuantity.Text, AdHoc.intMedIDArray(cmbMedications.SelectedIndex))
-                        AdHoc.clearAdhocBoxes()
-                        MessageBox.Show("Order Successfully placed")
+                        ExecuteInsertQuery("INSERT INTO AllergyOverride(AllergyOverride_ID, Patient_TUID, User_TUID, Allergy_Name, DateTime) " &
+                                               "Values(" & intMaxAllergyID & ", " & intPatientIDArray(Me.cmbPatientName.SelectedIndex) & ", " & LoggedInID & ", '" & allergy & "', '" & DateTime.Now & "')")
                     Else
-                        MessageBox.Show("Please select a patient")
+                        MessageBox.Show("Dispense canceled by user.")
+                        Exit Sub
                     End If
+                    blnOverride = False
                 Else
-                    MessageBox.Show("Please select a medication")
+                    ' do nothing as there is no allergy
                 End If
-            End If
+            Next
+            'If blnSignedOff = True Then
+            AdHoc.InsertAdHoc(AdHoc.intPatientIDArray(cmbPatientName.SelectedIndex), LoggedInID, CInt(txtQuantity.Text), AdHoc.intMedIDArray(cmbMedications.SelectedIndex))
+                AdHoc.clearAdhocBoxes()
+                MessageBox.Show("Order Successfully placed")
+            ' blnSignedOff = False
+            'End If
+
         End If
 
     End Sub

@@ -1,6 +1,15 @@
 ﻿Public Class frmWitnessSignOff
-    Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs) Handles TextBox2.TextChanged
+    Public referringForm As Object
 
+    Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs) Handles TextBox2.TextChanged
+        If ScanLogIn(TextBox2.Text) = True Then
+            ' add the allergy override
+            referringForm.blnOverride = True
+            referringForm.blnSignedOff = True
+            ' clear the entry
+            TextBox2.Clear()
+            Me.Close()
+        End If
 
         ' after text validation then we can actually dispense the medication
 
@@ -28,6 +37,9 @@
     End Sub
 
     Private Sub btnConfigureInventory_Click(sender As Object, e As EventArgs) Handles btnConfigureInventory.Click
+        referringForm.blnSignedOff = False
+        TextBox2.Clear()
         Me.Close()
     End Sub
+
 End Class
