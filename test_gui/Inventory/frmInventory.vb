@@ -33,6 +33,7 @@ Public Class frmInventory
         Dim dsactivePatients As DataSet = CreateDatabase.ExecuteSelectQuery("Select * From Patient WHERE Active_Flag = 1 ;")
         For Each dr As DataRow In dsactivePatients.Tables(0).Rows
             cmbPatientNames.Items.Add(dr(EnumList.Patient.LastName) & ", " & dr(EnumList.Patient.FristName) & "   MRN: " & dr(EnumList.Patient.MRN_Number))
+            intPatientIDArray.Add(dr(EnumList.Patient.MRN_Number))
         Next
 
     End Sub
@@ -158,6 +159,7 @@ Public Class frmInventory
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+
         'create an instance of the progress bar form
         'Dim thdThread1 As New Threading.Thread(AddressOf ThreadedMessageBox)
         'thdThread1.Name = strMessage
@@ -308,6 +310,14 @@ Public Class frmInventory
                     RaiseEvent UpdateLoadScreen("Medication has been added to the drawer")
                     'MessageBox.Show("Medication has been added to the drawer")
                     Debug.WriteLine("")
+
+                    'If the user selects "Yes" in the Personal Patient medication drop down
+                    'Insert the information into the PersonalPatientDrawerMedication Table
+                    'in the database
+                    If cboPersonalMedication.SelectedItem = "Yes" Then
+                        InsertPersonalPatientMedication()
+                        RaiseEvent UpdateLoadScreen("Personal Patient Medication has been added")
+                    End If
 
 
                     intDividerBin = CInt(cmbDividerBin.SelectedItem)

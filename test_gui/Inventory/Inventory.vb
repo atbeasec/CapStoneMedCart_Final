@@ -48,9 +48,6 @@
     '/*******************************************************************/
 
 
-
-
-
     '/*********************************************************************/
     '/*                   Function NAME:GetDrawerDrugs                    */
     '/*********************************************************************/
@@ -540,6 +537,89 @@
         frmInventory.cboPersonalMedication.SelectedIndex = 1
 
         frmInventory.cmbMedicationName.DataSource = outputList
+    End Sub
+
+    '/*********************************************************************/
+    '/*      SubProgram NAME: InsertPersonalPatientMedication()           */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Breanna Howey 		              */   
+    '/*		         DATE CREATED: 		 03/29/2021                       */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 The purpose of this subroutine is to insert data into the Personal/
+    '/*  PatientDrawerMedication table when a new medication is entered   */
+    '/*  into the system.                                                 */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  btnSave_Click                                                    */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*  ExecuteSelectQuery                                               */
+    '/*  ExecuteScalarQuery                                               */
+    '/*  ExecuteInsertQuery                                               */
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */ 
+    '/* None                                                              */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	InsertPersonalPatientMedication()                                 */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	 dsPersonalPatientMedicationDataSet - Stores the Personal Patient */
+    '/*                                       Drawer Medication info for the
+    '/*                                       user entered data           */
+    '/*  intDrawerMedicationID - Stores the Drawer Medication to enter into
+    '/*                          the Personal Patient Drawer Medication table
+    '/*  intPatientID - Stores the Patient ID to enter into the Personal  */ 
+    '/*                 Patient Drawer Medication table                   */
+    '/*  strSQLCmd - Stores the SQL command for selecting and inserting into
+    '/*              the database                                         */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN          WHAT								          */             
+    '/*  ---   ----          ---------------------------------------------*/
+    '/*  BRH   03/29/2021    Initial creation                             */
+    '/*********************************************************************/
+    Public Sub InsertPersonalPatientMedication()
+        Dim strSQLCmd As String
+        Dim intDrawerMedicationID As Integer
+        Dim intPatientID As Integer
+        Dim dsPersonalPatientMedicationDataSet As DataSet
+
+        'Get the Drawer Medication for the Drawer number and bin selected
+        strSQLCmd = "Select DrawerMedication_ID FROM DrawerMedication INNER JOIN Drawers ON Drawers_TUID = Drawers_ID
+                     WHERE Drawer_Number = '" & CInt(frmInventory.cmbDrawerNumber.Text) &
+                     "' AND Divider_Bin = '" & CInt(frmInventory.cmbDividerBin.Text) - 1 & "'"
+
+        intDrawerMedicationID = ExecuteScalarQuery(strSQLCmd)
+
+        'Get the Patient Id for the Patient selected
+        strSQLCmd = "SELECT Patient_ID FROM Patient WHERE MRN_Number = '" & intPatientIDArray(frmInventory.cmbPatientNames.SelectedIndex) & "'"
+
+        intPatientID = ExecuteScalarQuery(strSQLCmd)
+
+        strSQLCmd = "SELECT * FROM Personal_Patient_DrawerMedication WHERE Patient_TUID = '" & intPatientID & "' AND DrawerMedication_TUID = '" & intDrawerMedicationID & "'"
+
+        dsPersonalPatientMedicationDataSet = ExecuteSelectQuery(strSQLCmd)
+
+        'If there are no records that have the entered drawer medication and patient ids
+        'insert the record into the database. If there is, update that record in the database
+        If dsPersonalPatientMedicationDataSet.Tables(0).Rows.Count > 0 Then
+
+            strSQLCmd = "UPDATE Personal_Patient_DrawerMedication SET Removed_Dispensing = '" & 0 &
+                         "', Active_Flag = '" & 1 & "' WHERE DrawerMedication_TUID = '" &
+                         intDrawerMedicationID & "' AND Patient_TUID = '" & intPatientID & "'"
+            '"' AND Active_Flag = '" & 1 &
+            ExecuteInsertQuery(strSQLCmd)
+
+        Else
+
+            strSQLCmd = "INSERT INTO Personal_Patient_DrawerMedication(Patient_TUID,DrawerMedication_TUID,Removed_Dispensing,Active_Flag) " &
+                        "VALUES('" & intPatientID & "', '" & intDrawerMedicationID & "', '" & 0 & "', '" & 1 & "')"
+            ExecuteInsertQuery(strSQLCmd)
+        End If
+
     End Sub
 End Module
 
