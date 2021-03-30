@@ -379,6 +379,13 @@
                 ' this would be concated with a search on the database looking at the drawer number
                 btn.Text = CStr(ctl.tabIndex)
 
+
+                'here we will update the buttons to see if they are full and label them as being full
+                If CheckIfDrawerFull(ctl.tabIndex) = True Then
+                    btn.Text = CStr(ctl.tabIndex) & Environment.NewLine & ("Full")
+                End If
+
+
                 ' here we need to check if any of the medications in the drawer are close to being empty.
                 ' if so, then we will make the drawer appear red. Remember that each drawer can hold
                 ' multiple medications.
@@ -864,6 +871,7 @@
         If txtDividers.Text = 1 Then
             'ignore the decrement method because it does not handle 0
             txtDividers.Text = 0
+            SetDrawerPropertiesToSave()
         ElseIf txtDividers.Text = 0 Then
             txtDividers.Text = 0
             MessageBox.Show("The minimum allowed value is zero")
@@ -1000,10 +1008,22 @@
     Private Sub btnSaveOrAdd_Click(sender As Object, e As EventArgs) Handles btnSaveOrAdd.Click
 
         If btnSaveOrAdd.Text = "SAVE CHANGES" Then
+            Dim intdraweer As Integer = intCurrentDrawer
+            Dim intDrugCount As Integer = getPanelCount(flpMedication)
+            Dim intDividerNumber As Integer = txtDividers.Text
+            Dim intDividerNumberBeforeChange As Integer = CreateDatabase.ExecuteScalarQuery("Select Number_of_Dividers from Drawers where Drawers_ID = '" & intCurrentDrawer & "' and Active_Flag = '1'")
+            If (intDividerNumber + 1) >= intDrugCount Then
+                SaveButtonFunctionality()
+                SetDrawerPropertiesToAdd()
+                UpdateUser()
+                UpdateButtonsOnScreen()
+            Else
+                MessageBox.Show("There are currently " & intDrugCount & " medications in this drawer, you can not decrease the divider count below " &
+                                (intDrugCount - 1) & ".")
+                txtDividers.Text = intDividerNumberBeforeChange
+                SetDrawerPropertiesToAdd()
+            End If
 
-            SaveButtonFunctionality()
-            SetDrawerPropertiesToAdd()
-            UpdateUser()
 
         Else
 
@@ -1186,4 +1206,55 @@
     '     ButtonDecrement(txtCapacity)
 
     '  End Sub
+
+
+
+    '/*********************************************************************/
+    '/*             SubProgram NAME: CheckIfDrawerFull             */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker   		          */   
+    '/*		         DATE CREATED: 		 3/30/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This Function will take in a drawer number and check too see if the
+    '/* drawer is fully filled with medications. and return a true or false 
+    '/* if it is or is not filled
+    '/*
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*          btnSaveOrAdd_Click                          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	                       */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                 	              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/24/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Function CheckIfDrawerFull(intDrawerNumber As Integer)
+        Dim blnIsDrawerFull As Boolean
+        Dim intDrawerBinsFilled As Integer
+        Dim intDrawerDividers As Integer
+        intDrawerDividers = CreateDatabase.ExecuteScalarQuery("Select Number_of_Dividers from Drawers where Drawers_ID = '" & intDrawerNumber & "' and Active_Flag = '1'")
+        intDrawerBinsFilled = CreateDatabase.ExecuteScalarQuery("Select count(Divider_Bin) from DrawerMedication where Drawers_TUID = '" & intDrawerNumber & "' and Active_Flag = '1'")
+
+        If intDrawerBinsFilled = (intDrawerDividers + 1) Then
+            blnIsDrawerFull = True
+        Else
+            blnIsDrawerFull = False
+        End If
+        Return blnIsDrawerFull
+
+    End Function
 End Class
