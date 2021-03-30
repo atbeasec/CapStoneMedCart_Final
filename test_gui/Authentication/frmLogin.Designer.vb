@@ -114,6 +114,7 @@ Partial Class frmLogin
         Me.txtPassword.Location = New System.Drawing.Point(1, 1)
         Me.txtPassword.MaxLength = 50
         Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.ShortcutsEnabled = False
         Me.txtPassword.Size = New System.Drawing.Size(236, 22)
         Me.txtPassword.TabIndex = 2
         Me.txtPassword.Tag = "*"
@@ -147,6 +148,7 @@ Partial Class frmLogin
         Me.txtUserName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtUserName.Location = New System.Drawing.Point(1, 1)
         Me.txtUserName.Name = "txtUserName"
+        Me.txtUserName.ShortcutsEnabled = False
         Me.txtUserName.Size = New System.Drawing.Size(236, 22)
         Me.txtUserName.TabIndex = 1
         Me.txtUserName.Tag = "User Name"

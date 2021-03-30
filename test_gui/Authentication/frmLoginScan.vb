@@ -34,6 +34,7 @@ Public Class frmLoginScan
         Else
             'If users barcode is not in the User table then inform the user
             MsgBox("No User With That Barcode")
+            txtBarcode.Focus()
         End If
 
     End Sub
@@ -59,6 +60,7 @@ Public Class frmLoginScan
             Else
                 'If users barcode is not in the User table then inform the user
                 MsgBox("No User With That Barcode")
+                txtBarcode.Focus()
             End If
         End If
     End Sub
@@ -97,7 +99,7 @@ Public Class frmLoginScan
         CloseForm()
 
     End Sub
-    Private Sub txtFirst_Last_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBarcode.KeyPress
-        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*/.,<>=+")
+    Private Sub txtLoginKeypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBarcode.KeyPress
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz-1234567890!@#$%^&*.,<>=+")
     End Sub
 End Class

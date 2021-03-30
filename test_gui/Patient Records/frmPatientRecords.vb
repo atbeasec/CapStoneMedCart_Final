@@ -454,7 +454,6 @@ Public Class frmPatientRecords
             e.Handled = True
             Dim strSearch = txtSearch.Text
             strSearch = Regex.Replace(strSearch, "'", "''")
-            strSearch = Regex.Replace(strSearch, """", "")
             Dim strFillSQL As String = "select Patient.MRN_Number, Patient.Patient_First_Name, " &
                                    "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
                                    "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1 AND " &
@@ -502,7 +501,6 @@ Public Class frmPatientRecords
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
         Dim strSearch = txtSearch.Text
         strSearch = Regex.Replace(strSearch, "'", "''")
-        strSearch = Regex.Replace(strSearch, """", "")
         Dim strFillSQL As String = "select Patient.MRN_Number, Patient.Patient_First_Name, " &
                                            "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
                                            "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1 AND " &
@@ -551,7 +549,7 @@ Public Class frmPatientRecords
     'End If
 
     'End Sub
-    Private Sub txtFirst_Last_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
-        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*/.,<>=+")
+    Private Sub txtSearchKeypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
+        KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*()/.,<>=+")
     End Sub
 End Class
