@@ -183,13 +183,13 @@ Module AdHoc
         intMedIDArray.Clear()
         ' Currently the medication display is appending the RXCUI Number on too the medication
         ' name, as searching by name alone could cause problems if medication names can repeat
-        Strdatacommand = "Select Drug_Name, RXCUI_ID, Medication_ID FROM Medication INNER JOIN DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE DrawerMedication.Active_Flag = 1"
+        Strdatacommand = "Select trim(Drug_Name,' '), RXCUI_ID, Medication_ID FROM Medication INNER JOIN DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE DrawerMedication.Active_Flag = 1 ORDER BY Medication.Drug_Name COLLATE NOCASE ASC"
 
         Dim dsMedicationDataSet As DataSet = New DataSet
         dsMedicationDataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
         'add medication name and RXCUI to listbox
         For Each dr As DataRow In dsMedicationDataSet.Tables(0).Rows
-            frmAdHockDispense.cmbMedications.Items.Add(dr(0) & "--" & dr(1))
+            frmAdHockDispense.cmbMedications.Items.Add(dr(0) & " RXCUI: " & dr(1))
             intMedIDArray.Add(dr(2))
         Next
     End Sub
@@ -306,7 +306,7 @@ Module AdHoc
         'MRN is appended on too the end currently because search just based on name will not work
         ' if system has multiple patients with the same name
         Dim Strdatacommand As String
-        Strdatacommand = "SELECT Patient_First_Name, Patient_Last_Name, MRN_Number, Patient_ID FROM Patient WHERE Active_Flag = 1 Order By Patient_Last_Name, Patient_First_Name"
+        Strdatacommand = "SELECT Patient_First_Name, Patient_Last_Name, MRN_Number, Patient_ID FROM Patient WHERE Active_Flag = 1 Order By Patient_Last_Name COLLATE NOCASE, Patient_First_Name COLLATE NOCASE"
 
         'call sql method
         Dim dsPatientRecords As DataSet = New DataSet
@@ -317,7 +317,7 @@ Module AdHoc
             If IsDBNull(dr(0)) Then
 
             Else
-                frmAdHockDispense.cmbPatientName.Items.Add(dr(1) & ", " & dr(0) & "--" & dr(2))
+                frmAdHockDispense.cmbPatientName.Items.Add(dr(1) & ", " & dr(0) & "  MRN:" & dr(2))
                 intPatientIDArray.Add(dr(3))
             End If
 

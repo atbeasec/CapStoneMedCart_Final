@@ -53,6 +53,7 @@ Public Class frmNewPatient
         If Not hasError() Then
             SavePatientDataToDatabase()
             clearInformationBoxes()
+            MessageBox.Show("new patient has been added to the system")
         End If
     End Sub
 
@@ -806,15 +807,15 @@ Public Class frmNewPatient
         Dim strbErrorMessage As New StringBuilder
         Dim email As MailAddress
         hasError = False
-        If txtFirstName.Text = String.Empty Or txtFirstName.Text.Length <= 3 Then
+        If txtFirstName.Text = String.Empty Or txtFirstName.Text.Length <= 1 Then
             hasError = True
             strbErrorMessage.Append("Please enter a valid first name." & vbCrLf)
         End If
-        If txtMiddleName.Text = String.Empty Or txtMiddleName.Text.Length <= 3 Then
+        If txtMiddleName.Text = String.Empty Or txtMiddleName.Text.Length <= 1 Then
             hasError = True
             strbErrorMessage.Append("Please enter a valid middle name." & vbCrLf)
         End If
-        If txtLastName.Text = String.Empty Or txtLastName.Text.Length <= 3 Then
+        If txtLastName.Text = String.Empty Or txtLastName.Text.Length <= 1 Then
             hasError = True
             strbErrorMessage.Append("Please enter a valid last name." & vbCrLf)
         End If
