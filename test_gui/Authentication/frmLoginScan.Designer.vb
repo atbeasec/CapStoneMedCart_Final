@@ -127,6 +127,7 @@ Partial Class frmLoginScan
         Me.txtBarcode.Location = New System.Drawing.Point(1, 1)
         Me.txtBarcode.Margin = New System.Windows.Forms.Padding(2)
         Me.txtBarcode.Name = "txtBarcode"
+        Me.txtBarcode.ShortcutsEnabled = False
         Me.txtBarcode.Size = New System.Drawing.Size(234, 22)
         Me.txtBarcode.TabIndex = 2
         Me.txtBarcode.Tag = "SVSU ID"
