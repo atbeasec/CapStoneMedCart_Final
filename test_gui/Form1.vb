@@ -358,7 +358,9 @@
         'Runs the database creation module to determine if the database was created
         CreateDatabase.Main()
 
-        'CheckUserPermissions()
+        ' check what controls the user should be able to access based on their assigned permission level
+        CheckUserPermissions("Supervisor")
+
 
         'set submenu to be invisible on form load
         pnlSubMenuSettings.Visible = False
@@ -374,6 +376,103 @@
 
         '  frmSplash.Show()
     End Sub
+
+
+
+    Private Sub CheckUserPermissions(ByVal permissionLevel As String)
+
+        Const ADMINACCESS = "Admin"
+        Const SUPERVISORACCESS = "Supervisor"
+
+        If String.Equals(ADMINACCESS, permissionLevel) Then
+
+            ' dont remove any controls because the admin can access all controls
+
+        ElseIf String.Equals(SUPERVISORACCESS, permissionLevel) Then
+
+            ' remove controls that are in the super visor access level
+            ShowOnlySupervisorControls()
+        Else
+            ' remove the controls that are not in the nurse access level
+            ShowOnlyNurseControls()
+        End If
+        ' 
+
+
+    End Sub
+
+    Private Sub ShowOnlySupervisorControls()
+
+        ' array of buttons a supervisor does NOT have access to
+        Dim arrButtonsToRemove() = {btnUsers, btnEditPhysician, btnSerialPort, btnConfigureInventory, btnEndOfShiftCount}
+
+        For Each btn In arrButtonsToRemove
+
+            btn.Visible = False
+
+        Next
+
+        ' This method needs to be called for each submenu item where we removed a button, otherwise the UI submenu will show
+        ' and there will be large chunks of blue space between the submenu, and next menu item. This space is there because the control was removed
+        ' this method will resize the submenu to accomedate the new menu sizes.
+        EditSubMenuSizeAccordingToVisibleButtons(pnlSubMenuInventory)
+        EditSubMenuSizeAccordingToVisibleButtons(pnlSubMenuPatientRecords)
+        EditSubMenuSizeAccordingToVisibleButtons(pnlSubMenuSettings)
+
+    End Sub
+
+    Private Sub ShowOnlyNurseControls()
+        ' array of buttons a supervisor does NOT have access to
+        ' we can add or remove from this array as needed and the adjustments will be made to the UI automatically when this entire method is done
+        ' running.
+        Dim arrButtonsToRemove() = {btnSettings, btnPharmacy, btnMaintenance, btnDescrepancies, btnConfigureInventory, btnEndOfShiftCount}
+
+
+        For Each btn In arrButtonsToRemove
+            btn.Visible = False
+        Next
+
+        ' This method needs to be called for each submenu item where we removed a button, otherwise the UI submenu will show
+        ' and there will be large chunks of blue space between the submenu, and next menu item. This space is there because the control was removed
+        ' this method will resize the submenu to accomedate the new menu sizes.
+        EditSubMenuSizeAccordingToVisibleButtons(pnlSubMenuInventory)
+        EditSubMenuSizeAccordingToVisibleButtons(pnlSubMenuPatientRecords)
+        EditSubMenuSizeAccordingToVisibleButtons(pnlSubMenuSettings)
+    End Sub
+
+    Private Sub EditSubMenuSizeAccordingToVisibleButtons(ByVal pnlSubMenu As Panel)
+
+        ' the target size of the control we need will be the submenus current width, but we need to adjust the height based on
+        ' the number of buttons within the sub menu.
+
+        ' size = new Size(current width of the sub panel, (buttonCount * (buttonHeight + padding))
+        Dim ctl As Control = Nothing
+        Dim visibleCount As Integer = 0
+        Dim padding As Integer = 2
+        Dim btnHeight As Integer
+
+        ' need the number of visible controls to know which size to make the submenu panel that the buttons sit in
+        For Each ctl In pnlSubMenu.Controls
+            ' get the number of visible buttons
+            If ctl.Visible = True Then
+                visibleCount += 1
+                btnHeight = ctl.Size.Height
+            End If
+
+        Next
+
+        Dim newHeight As Integer = visibleCount * (btnHeight + padding)
+        pnlSubMenu.Size = New Size(pnlSubMenu.Width, newHeight)
+
+    End Sub
+
+    Private Function GetUserPermissions() As String
+
+
+
+
+
+    End Function
 
     '/*********************************************************************/
     '/*                   SubProgram NAME: btnSettings_Click              */         
@@ -582,16 +681,6 @@
     End Sub
 
 
-    Private Sub CheckUserPermissions()
-
-        ' do database query to check user permission level
-        ' select from case statement to determine which level the user is
-        ' have 3 methods, one for each permission level, iterating over the controls that are needed to be
-        ' removed from the control based on what the user should see
-
-        'need to remove these for everyone on form load
-
-    End Sub
 
     '/*********************************************************************/
     '/*                   SubProgram NAME: AssignHandlersToSubMenuButtons */         
@@ -812,9 +901,6 @@
     Public isDragging As Boolean = False, isClick As Boolean = False
     Public startPoint, firstPoint, lastPoint As Point
 
-    Private Sub pnlTopBarContrast_Paint(sender As Object, e As PaintEventArgs) Handles pnlTopBarContrast.Paint
-
-    End Sub
 
 
     '/*********************************************************************/
