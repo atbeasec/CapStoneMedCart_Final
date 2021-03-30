@@ -1725,11 +1725,12 @@ Module CreateDatabase
 	'/*											   */                     
 	'/*  WHO   WHEN     WHAT								   */             
 	'/*  ---   ----     ------------------------------------------------- */
-	'/*                                                                     
+	'/*  NP    3/30/2021 Made the default settings to be com1 and the sim */
+	'/*					 to be off.										  */
 	'/*********************************************************************/
 
 	Sub defaultCartSettings()
-		Dim strDefaultSettings As String = "INSERT INTO Settings('Settings_ID', 'Bit_rate', 'Comm_Port', 'Simulation_Mode_Flag') VALUES (0, '115200', 'COM3', 1);"
+		Dim strDefaultSettings As String = "INSERT INTO Settings('Settings_ID', 'Bit_rate', 'Comm_Port', 'Simulation_Mode_Flag') VALUES (0, '115200', 'COM1', 0);"
 
 		ExecuteInsertQuery(strDefaultSettings)
 	End Sub

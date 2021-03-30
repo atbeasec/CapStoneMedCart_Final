@@ -458,7 +458,9 @@ Public Class frmFullCart
                 CartInterfaceCode.setSimulationMode(Convert.ToBoolean(.rows(0)(EnumList.Settings.SimulationFlag)))
             End With
         Catch ex As Exception
+            ExecuteInsertQuery("Delete From Settings")
             CreateDatabase.defaultCartSettings()
+            gettingConnectionSettings()
         End Try
     End Sub
 
