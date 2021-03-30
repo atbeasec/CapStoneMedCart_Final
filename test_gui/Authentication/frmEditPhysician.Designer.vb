@@ -200,6 +200,7 @@ Partial Class frmEditPhysician
         Me.txtMiddleName.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtMiddleName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtMiddleName.Location = New System.Drawing.Point(1, 1)
+        Me.txtMiddleName.MaxLength = 25
         Me.txtMiddleName.Multiline = True
         Me.txtMiddleName.Name = "txtMiddleName"
         Me.txtMiddleName.ShortcutsEnabled = False
@@ -222,6 +223,7 @@ Partial Class frmEditPhysician
         Me.txtLastName.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtLastName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtLastName.Location = New System.Drawing.Point(1, 1)
+        Me.txtLastName.MaxLength = 25
         Me.txtLastName.Multiline = True
         Me.txtLastName.Name = "txtLastName"
         Me.txtLastName.ShortcutsEnabled = False
@@ -258,6 +260,7 @@ Partial Class frmEditPhysician
         Me.txtFirstName.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtFirstName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtFirstName.Location = New System.Drawing.Point(1, 1)
+        Me.txtFirstName.MaxLength = 25
         Me.txtFirstName.Multiline = True
         Me.txtFirstName.Name = "txtFirstName"
         Me.txtFirstName.ShortcutsEnabled = False
@@ -374,6 +377,7 @@ Partial Class frmEditPhysician
         Me.txtCity.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtCity.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCity.Location = New System.Drawing.Point(1, 1)
+        Me.txtCity.MaxLength = 25
         Me.txtCity.Multiline = True
         Me.txtCity.Name = "txtCity"
         Me.txtCity.ShortcutsEnabled = False
@@ -396,6 +400,7 @@ Partial Class frmEditPhysician
         Me.txtAddress.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtAddress.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAddress.Location = New System.Drawing.Point(1, 1)
+        Me.txtAddress.MaxLength = 50
         Me.txtAddress.Multiline = True
         Me.txtAddress.Name = "txtAddress"
         Me.txtAddress.ShortcutsEnabled = False

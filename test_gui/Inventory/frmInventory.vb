@@ -33,6 +33,7 @@ Public Class frmInventory
         Dim dsactivePatients As DataSet = CreateDatabase.ExecuteSelectQuery("Select * From Patient WHERE Active_Flag = 1 ;")
         For Each dr As DataRow In dsactivePatients.Tables(0).Rows
             cmbPatientNames.Items.Add(dr(EnumList.Patient.LastName) & ", " & dr(EnumList.Patient.FristName) & "   MRN: " & dr(EnumList.Patient.MRN_Number))
+            intPatientIDArray.Add(dr(EnumList.Patient.MRN_Number))
         Next
 
     End Sub
@@ -158,6 +159,7 @@ Public Class frmInventory
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+
         'create an instance of the progress bar form
         'Dim thdThread1 As New Threading.Thread(AddressOf ThreadedMessageBox)
         'thdThread1.Name = strMessage
@@ -194,16 +196,9 @@ Public Class frmInventory
             intNarcotic = 0
         End If
 
-        'If the API doesn't bring back a schedule, substitue it for 0
-        If txtSchedule.Text.Equals("") Then
-            intSchedule = 0
-        Else
-            intSchedule = CInt(txtSchedule.Text)
-        End If
-
-
-
-        If txtStrength.Text.Equals("") Or txtType.Text.Equals("") Or mtbExpirationDate.MaskFull = False Or cboPersonalMedication.SelectedIndex.Equals(-1) Or mtbExpirationDate.MaskCompleted = False Then
+        'Check that all fields have data entered before attempting to save into the database
+        If txtStrength.Text.Equals("") Or txtType.Text.Equals("") Or mtbExpirationDate.MaskFull = False Or
+            cboPersonalMedication.SelectedIndex.Equals(-1) Or mtbExpirationDate.MaskCompleted = False Or txtSchedule.Text.Equals("") Then
             MessageBox.Show("Please enter data in all fields before saving.")
 
 
@@ -305,10 +300,16 @@ Public Class frmInventory
                         'because we are adding a new drawermedication for now
                         intDrawerMedication_ID += 1
 
-
-
                         ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Divider_Bin,Expiration_Date,Discrepancy_Flag, Active_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & intDividerBin & " , '" & mtbExpirationDate.Text & "'," & intDiscrepancies & ",1);")
                         OpenOneDrawer(Drawers_Tuid)
+                    'If the user selects "Yes" in the Personal Patient medication drop down
+                    'Insert the information into the PersonalPatientDrawerMedication Table
+                    'in the database
+                    If cboPersonalMedication.SelectedItem = "Yes" Then
+                        InsertPersonalPatientMedication()
+                        RaiseEvent UpdateLoadScreen("Personal Patient Medication has been added")
+                    End If
+
 
                         RaiseEvent UpdateLoadScreen("Medication has been added to the drawer")
                         'MessageBox.Show("Medication has been added to the drawer")
@@ -855,4 +856,5 @@ Public Class frmInventory
             txtStatus.Visible = True
         End If
     End Sub
+
 End Class
