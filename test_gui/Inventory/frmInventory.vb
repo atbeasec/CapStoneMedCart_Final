@@ -332,24 +332,28 @@ Public Class frmInventory
         Dim myPropertyNameList As New List(Of String)({"rxcui"})
         Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
         Dim suggestedList As New List(Of String)
-
-        outputList = GetRxcuiByName(txtSearch.Text, myPropertyNameList)
-        ' check to see if anything comes back
-        If outputList.Count = 0 Then
-            ' if nothing, then ask to suggest names
-            cboSuggestedNames.Visible = True
-            If IsNothing(GetSuggestionList(txtSearch.Text)) Then
-                MessageBox.Show("Could not connect to web APIs. Please check your connection and try again later.")
-            Else
-                suggestedList = GetSuggestionList(txtSearch.Text)
-
-                ' then populate the combobox
-                cboSuggestedNames.DataSource = suggestedList
-            End If
+        If IsNothing(GetRxcuiByName(txtSearch.Text, myPropertyNameList)) Then
+            MessageBox.Show("Could not connect to web APIs. Please check your connection and try again later.")
         Else
-            ' otherwise populate the medication name comboBox
-            cmbMedicationName.DataSource = outputList
+            outputList = GetRxcuiByName(txtSearch.Text, myPropertyNameList)
+            ' check to see if anything comes back
+            If outputList.Count = 0 Then
+                ' if nothing, then ask to suggest names
+                cboSuggestedNames.Visible = True
+                If IsNothing(GetSuggestionList(txtSearch.Text)) Then
+                    MessageBox.Show("Could not connect to web APIs. Please check your connection and try again later.")
+                Else
+                    suggestedList = GetSuggestionList(txtSearch.Text)
+
+                    ' then populate the combobox
+                    cboSuggestedNames.DataSource = suggestedList
+                End If
+            Else
+                ' otherwise populate the medication name comboBox
+                cmbMedicationName.DataSource = outputList
+            End If
         End If
+
     End Sub
 
     Private Sub cmbMedicationName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMedicationName.SelectedIndexChanged
@@ -604,15 +608,18 @@ Public Class frmInventory
         frmProgressBar.Show()
         Dim myPropertyNameList As New List(Of String)({"rxcui"})
         Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
-
-        outputList = GetRxcuiByName(txtSearch.Text, myPropertyNameList)
-        If outputList.Count = 0 Then
-            'outputList = GetSuggestionList(txtSearch.Text)
-            ' then populate the combobox
-            ' and if they click again on an item put it into the search box and search
-            ' recursion 'til the cows come home
+        If IsNothing(GetRxcuiByName(txtSearch.Text, myPropertyNameList)) Then
+            MessageBox.Show("Could not connect to web APIs. Please check your connection and try again later.")
+        Else
+            outputList = GetRxcuiByName(txtSearch.Text, myPropertyNameList)
+            If outputList.Count = 0 Then
+                'outputList = GetSuggestionList(txtSearch.Text)
+                ' then populate the combobox
+                ' and if they click again on an item put it into the search box and search
+                ' recursion 'til the cows come home
+            End If
+            cmbMedicationName.DataSource = outputList
         End If
-        cmbMedicationName.DataSource = outputList
     End Sub
 
     '/*********************************************************************/

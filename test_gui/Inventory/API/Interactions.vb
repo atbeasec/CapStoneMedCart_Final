@@ -201,6 +201,7 @@ Module Interactions
                                 myReturnList.Add((strName, strValue))
                             End If
                         Next
+                        frmProgressBar.UpdateLabel("Retrieving Interactions " & intCounter & " of " & propertyNames.Count)
                     Next
                     'parses json for rxcui this will return both what drug is searched and what drug it interacts with
                     JsonJArrayRxcui = item("interactionConcept")
@@ -215,11 +216,12 @@ Module Interactions
                                     End If
                                 End If
                             Next
+                            frmProgressBar.UpdateLabel("Retrieving Interactions " & intCounter & " of " & propertyNames.Count)
                         Next
                     Next
                 Next
-                frmProgressBar.UpdateLabel("Retrieving Interactions" & intCounter & " of " & propertyNames.Count)
-                frmInventory.txtStatus.Text = ("Retrieving Interactions" & intCounter & " of " & propertyNames.Count)
+                frmProgressBar.UpdateLabel("Retrieving Interactions " & intCounter & " of " & propertyNames.Count)
+                frmInventory.txtStatus.Text = ("Retrieving Interactions " & intCounter & " of " & propertyNames.Count)
                 intCounter += 1
             Next
 

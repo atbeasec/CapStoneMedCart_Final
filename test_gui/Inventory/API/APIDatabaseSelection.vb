@@ -552,6 +552,7 @@ Module APIDatabaseSelection
 			Return strWebSite
 		Catch
 			Try
+				frmInventory.txtStatus.Text = "Checking secondary site"
 				Using client = New WebClient()
 					Using stream = client.OpenRead("https://10.8.30.33/REST/")
 						strWebSite = "https://10.8.30.33/REST/"
