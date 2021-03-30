@@ -1,5 +1,6 @@
 ﻿Public Class frmDispense
-
+    Public blnSignedOff As Boolean = False
+    Public blnOverride As Boolean = False
     Private intPatientID As Integer
     Private intPatientMRN As Integer
 
@@ -104,20 +105,41 @@
     End Sub
 
     Private Sub btnDispense_Click_1(sender As Object, e As EventArgs) Handles btnDispense.Click
-        If cmbMedications.SelectedItem = lstboxAllergies.SelectedItem Then
-            'show witness sign off
-            frmWitnessSignOff.Label1.Text = cmbMedications.SelectedItem.ToString
-            'if authentication from witness sign off form comes back then
-            'If Not IsNothing(cmbMedications.SelectedItem) Then
-            '    DispenseHistory.DispenseMedication(DispenseHistory.SplitMedicationString(cmbMedications.SelectedItem), intPatientID)
-            'else
-            'End If
-            MessageBox.Show("Patient is allergic to this Medication")
-        Else
+        If Not IsNothing(cmbMedications.SelectedItem) Then
+            For Each allergy In lstboxAllergies.Items
+                If cmbMedications.SelectedItem.ToString.ToLower.Contains(allergy.ToString.ToLower) Then
+                    'show witness sign off
+                    frmWitnessSignOff.Label1.Text = cmbMedications.SelectedItem.ToString
+                    frmWitnessSignOff.referringForm = Me
+                    frmWitnessSignOff.ShowDialog()
+                    'if authentication from witness sign off form comes back then
+                    If blnOverride Then
+                        Dim intMaxAllergyID
+                        ' pull the information to insert
+                        If ExecuteScalarQuery("Select AllergyOverride_ID from AllergyOverride") = Nothing Then
+                            intMaxAllergyID = 0
+                        Else
+                            intMaxAllergyID = ExecuteScalarQuery("SELECT MAX(AllergyOverride_ID) from AllergyOverride")
+                            intMaxAllergyID += 1
+                        End If
 
-            If Not IsNothing(cmbMedications.SelectedItem) Then
-                DispenseHistory.DispenseMedication(DispenseHistory.SplitMedicationString(cmbMedications.SelectedItem), intPatientID)
-            End If
+                        ExecuteInsertQuery("INSERT INTO AllergyOverride(AllergyOverride_ID, Patient_TUID, User_TUID, Allergy_Name, DateTime) " &
+                                           "Values(" & intMaxAllergyID & ", " & intPatientID & ", " & LoggedInID & ", '" & allergy & "', '" & DateTime.Now & "')")
+                    Else
+                        MessageBox.Show("Dispense canceled by user.")
+                        Exit Sub
+                    End If
+                    blnOverride = False
+                Else
+                    ' do nothing as there is no allergy
+                End If
+            Next
+            'If blnSignedOff = True Then
+            DispenseHistory.DispenseMedication(DispenseHistory.SplitMedicationString(cmbMedications.SelectedItem), intPatientID)
+                MessageBox.Show("Order Successfully placed")
+            '   blnSignedOff = False
+            ' End If
+
         End If
 
 
