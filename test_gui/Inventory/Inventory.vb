@@ -530,7 +530,8 @@
         frmInventory.txtBarcode.Clear()
         frmInventory.mtbExpirationDate.Clear()
 
-        frmInventory.cmbDrawerNumber.SelectedIndex = 0
+        frmInventory.cmbDrawerNumber.SelectedIndex = -1
+        frmInventory.cmbDividerBin.SelectedIndex = -1
         frmInventory.txtQuantity.Text = "1"
 
         frmInventory.cboPersonalMedication.SelectedIndex = 1

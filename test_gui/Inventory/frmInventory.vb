@@ -197,7 +197,7 @@ Public Class frmInventory
 
         'Check that all fields have data entered before attempting to save into the database
         If txtStrength.Text.Equals("") Or txtType.Text.Equals("") Or mtbExpirationDate.MaskFull = False Or
-            cboPersonalMedication.SelectedIndex.Equals(-1) Or mtbExpirationDate.MaskCompleted = False Or txtSchedule.Text.Equals("") Then
+            cboPersonalMedication.SelectedIndex.Equals(-1) Or mtbExpirationDate.MaskCompleted = False Or txtSchedule.Text.Equals("") Or cmbDividerBin.SelectedIndex = -1 Then
             MessageBox.Show("Please enter data in all fields before saving.")
 
 
@@ -229,7 +229,7 @@ Public Class frmInventory
                         Else
 
                             Drawers_Tuid = CInt(cmbDrawerNumber.SelectedItem)
-
+                            intDividerBin = CInt(cmbDividerBin.SelectedItem)
                         End If
 
                     Catch ex As Exception
@@ -675,53 +675,55 @@ Public Class frmInventory
     End Sub
 
     Private Sub cmbDrawerNumber_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDrawerNumber.SelectedIndexChanged
-        cmbDividerBin.Items.Clear()
-        Dim arrintBinsFilled As New ArrayList
-        Dim intDrawerSize As Integer = 0
-        Dim intNumDividers As Integer = 0
-        Dim intDrawerNumber As Integer = CInt(cmbDrawerNumber.Text)
-        Dim intCountBinsFilled As Integer
-        Dim dsDividerBinsFilled As DataSet
-        Try
-            dsDividerBinsFilled = CreateDatabase.ExecuteSelectQuery("Select Divider_Bin from DrawerMedication where Drawers_TUID = '" & intDrawerNumber.ToString & "' AND Active_Flag = '1'")
-            intCountBinsFilled = CreateDatabase.ExecuteScalarQuery("Select Count(Divider_Bin) from DrawerMedication where Drawers_TUID = '" & intDrawerNumber.ToString & "' AND Active_Flag = '1'")
-            intDrawerSize = ExecuteScalarQuery("SELECT Size FROM Drawers where Drawers_ID = " & intDrawerNumber.ToString & " AND Active_Flag = '1';")
-            intNumDividers = ExecuteScalarQuery("SELECT Number_of_Dividers FROM Drawers where Drawers_ID = " & intDrawerNumber.ToString & " AND Active_Flag = '1';")
-        Catch ex As Exception
-            ' do nothing because there are empty values in the database
-        End Try
-        'txtQuantity.Text = intDrawerSize.ToString
+        If Not cmbDrawerNumber.SelectedIndex = -1 Then
+            cmbDividerBin.Items.Clear()
+            Dim arrintBinsFilled As New ArrayList
+            Dim intDrawerSize As Integer = 0
+            Dim intNumDividers As Integer = 0
+            Dim intDrawerNumber As Integer = CInt(cmbDrawerNumber.Text)
+            Dim intCountBinsFilled As Integer
+            Dim dsDividerBinsFilled As DataSet
+            Try
+                dsDividerBinsFilled = CreateDatabase.ExecuteSelectQuery("Select Divider_Bin from DrawerMedication where Drawers_TUID = '" & intDrawerNumber.ToString & "' AND Active_Flag = '1'")
+                intCountBinsFilled = CreateDatabase.ExecuteScalarQuery("Select Count(Divider_Bin) from DrawerMedication where Drawers_TUID = '" & intDrawerNumber.ToString & "' AND Active_Flag = '1'")
+                intDrawerSize = ExecuteScalarQuery("SELECT Size FROM Drawers where Drawers_ID = " & intDrawerNumber.ToString & " AND Active_Flag = '1';")
+                intNumDividers = ExecuteScalarQuery("SELECT Number_of_Dividers FROM Drawers where Drawers_ID = " & intDrawerNumber.ToString & " AND Active_Flag = '1';")
+            Catch ex As Exception
+                ' do nothing because there are empty values in the database
+            End Try
+            'txtQuantity.Text = intDrawerSize.ToString
 
-        If intCountBinsFilled = (intNumDividers + 1) Then
+            If intCountBinsFilled = (intNumDividers + 1) Then
 
-        Else
-            For Each dr As DataRow In dsDividerBinsFilled.Tables(0).Rows
-                arrintBinsFilled.Add(dr(0))
-            Next
-            Dim dividerspopulation As New ArrayList(intNumDividers + 1)
-            Dim intCounter As Integer = 1
-            'Do Until intCounter > (intNumDividers + 1)
-            '    cmbDividerBin.Items.Add(intCounter)
-            '    intCounter += 1
-            'Loop
-            Do Until intCounter > (intNumDividers + 1)
-                dividerspopulation.Add(intCounter)
-                intCounter += 1
-            Loop
-            intCounter = 0
+            Else
+                For Each dr As DataRow In dsDividerBinsFilled.Tables(0).Rows
+                    arrintBinsFilled.Add(dr(0))
+                Next
+                Dim dividerspopulation As New ArrayList(intNumDividers + 1)
+                Dim intCounter As Integer = 1
+                'Do Until intCounter > (intNumDividers + 1)
+                '    cmbDividerBin.Items.Add(intCounter)
+                '    intCounter += 1
+                'Loop
+                Do Until intCounter > (intNumDividers + 1)
+                    dividerspopulation.Add(intCounter)
+                    intCounter += 1
+                Loop
+                intCounter = 0
 
-            Do Until intCounter > (arrintBinsFilled.Count - 1)
-                Dim intItem As Integer = arrintBinsFilled(intCounter)
-                If dividerspopulation.Contains(intItem) Then
-                    dividerspopulation.Remove(intItem)
-                End If
-                intCounter += 1
-            Loop
-            intCounter = 0
-            Do Until intCounter > (dividerspopulation.Count - 1)
-                cmbDividerBin.Items.Add(dividerspopulation(intCounter))
-                intCounter += 1
-            Loop
+                Do Until intCounter > (arrintBinsFilled.Count - 1)
+                    Dim intItem As Integer = arrintBinsFilled(intCounter)
+                    If dividerspopulation.Contains(intItem) Then
+                        dividerspopulation.Remove(intItem)
+                    End If
+                    intCounter += 1
+                Loop
+                intCounter = 0
+                Do Until intCounter > (dividerspopulation.Count - 1)
+                    cmbDividerBin.Items.Add(dividerspopulation(intCounter))
+                    intCounter += 1
+                Loop
+            End If
         End If
     End Sub
 
