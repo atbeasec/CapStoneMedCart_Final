@@ -610,7 +610,6 @@
             strSQLCmd = "UPDATE Personal_Patient_DrawerMedication SET Removed_Dispensing = '" & 0 &
                          "', Active_Flag = '" & 1 & "' WHERE DrawerMedication_TUID = '" &
                          intDrawerMedicationID & "' AND Patient_TUID = '" & intPatientID & "'"
-            '"' AND Active_Flag = '" & 1 &
             ExecuteInsertQuery(strSQLCmd)
 
         Else
