@@ -972,6 +972,7 @@
         Inventory.RemoveDrugfromDrawer(intDrawerTUID, intDividerNumber, intMedicationTUID)
         CartInterfaceCode.OpenOneDrawer(intSelectedDrawer)
         MessageBox.Show("Drug removed from drawer number: " & intSelectedDrawer)
+        UpdateButtonsOnScreen()
     End Sub
 
     '/*********************************************************************/
