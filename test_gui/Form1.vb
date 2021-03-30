@@ -359,7 +359,15 @@
         CreateDatabase.Main()
 
         ' check what controls the user should be able to access based on their assigned permission level
-        CheckUserPermissions("Supervisor")
+        '  CheckUserPermissions("Nurse")
+
+
+
+        ' CheckUserPermissions(GetUserPermissions())
+
+
+
+
 
 
         'set submenu to be invisible on form load
@@ -377,12 +385,13 @@
         '  frmSplash.Show()
     End Sub
 
-
-
     Private Sub CheckUserPermissions(ByVal permissionLevel As String)
 
         Const ADMINACCESS = "Admin"
         Const SUPERVISORACCESS = "Supervisor"
+        Dim arrButtonsToRemoveSupervisor() = {btnUsers, btnEditPhysician, btnSerialPort, btnConfigureInventory, btnEndOfShiftCount}
+        Dim arrButtonsToRemoveNurse() = {btnSettings, btnPharmacy, btnMaintenance, btnDescrepancies, btnConfigureInventory, btnEndOfShiftCount}
+
 
         If String.Equals(ADMINACCESS, permissionLevel) Then
 
@@ -391,20 +400,23 @@
         ElseIf String.Equals(SUPERVISORACCESS, permissionLevel) Then
 
             ' remove controls that are in the super visor access level
-            ShowOnlySupervisorControls()
+            '  ShowOnlySupervisorControls()
+            ShowOnlyPermittedScreens(arrButtonsToRemoveSupervisor)
+
         Else
             ' remove the controls that are not in the nurse access level
-            ShowOnlyNurseControls()
+            ' ShowOnlyNurseControls()
+            ShowOnlyPermittedScreens(arrButtonsToRemoveNurse)
+
         End If
-        ' 
 
 
     End Sub
 
-    Private Sub ShowOnlySupervisorControls()
+    Private Sub ShowOnlyPermittedScreens(ByVal arrButtonsToRemove() As Button)
 
         ' array of buttons a supervisor does NOT have access to
-        Dim arrButtonsToRemove() = {btnUsers, btnEditPhysician, btnSerialPort, btnConfigureInventory, btnEndOfShiftCount}
+        'Dim arrButtonsToRemoveSupervisor() = {btnUsers, btnEditPhysician, btnSerialPort, btnConfigureInventory, btnEndOfShiftCount}
 
         For Each btn In arrButtonsToRemove
 
@@ -421,24 +433,6 @@
 
     End Sub
 
-    Private Sub ShowOnlyNurseControls()
-        ' array of buttons a supervisor does NOT have access to
-        ' we can add or remove from this array as needed and the adjustments will be made to the UI automatically when this entire method is done
-        ' running.
-        Dim arrButtonsToRemove() = {btnSettings, btnPharmacy, btnMaintenance, btnDescrepancies, btnConfigureInventory, btnEndOfShiftCount}
-
-
-        For Each btn In arrButtonsToRemove
-            btn.Visible = False
-        Next
-
-        ' This method needs to be called for each submenu item where we removed a button, otherwise the UI submenu will show
-        ' and there will be large chunks of blue space between the submenu, and next menu item. This space is there because the control was removed
-        ' this method will resize the submenu to accomedate the new menu sizes.
-        EditSubMenuSizeAccordingToVisibleButtons(pnlSubMenuInventory)
-        EditSubMenuSizeAccordingToVisibleButtons(pnlSubMenuPatientRecords)
-        EditSubMenuSizeAccordingToVisibleButtons(pnlSubMenuSettings)
-    End Sub
 
     Private Sub EditSubMenuSizeAccordingToVisibleButtons(ByVal pnlSubMenu As Panel)
 
@@ -466,11 +460,19 @@
 
     End Sub
 
+
+    '*******************
+    '*DYLAN- do SQL query here to get the user's permission level.
+    '* call this function inside the CheckPermissions method in formload. IE CheckPermissions(GetUserPermissions())
+    '* 
     Private Function GetUserPermissions() As String
 
+        ' will contain the query result indicating the user;s permission level
+        Dim permissionLevel As String = Nothing
 
 
 
+        Return permissionLevel
 
     End Function
 
