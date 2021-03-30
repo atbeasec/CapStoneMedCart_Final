@@ -382,10 +382,10 @@ Partial Class frmConfigureInventory
         Me.btnDrawer1.BackColor = System.Drawing.Color.Gainsboro
         Me.btnDrawer1.FlatAppearance.BorderSize = 0
         Me.btnDrawer1.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDrawer1.Location = New System.Drawing.Point(4, 0)
+        Me.btnDrawer1.Location = New System.Drawing.Point(0, 0)
         Me.btnDrawer1.Name = "btnDrawer1"
         Me.btnDrawer1.Padding = New System.Windows.Forms.Padding(1)
-        Me.btnDrawer1.Size = New System.Drawing.Size(126, 60)
+        Me.btnDrawer1.Size = New System.Drawing.Size(130, 60)
         Me.btnDrawer1.TabIndex = 1
         Me.btnDrawer1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btnDrawer1.UseVisualStyleBackColor = False
