@@ -582,6 +582,7 @@
     <None Include="Resources\Info.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\user_px.png" />
     <None Include="Resources\circleLoading.gif" />
     <Content Include="Resources\loading.gif" />
     <None Include="Resources\pillLoading.gif" />

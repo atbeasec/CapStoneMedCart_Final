@@ -26,6 +26,19 @@
         LogOut = 19
     End Enum
 
+    Public Sub SetUserName(ByVal strUsername As String)
+
+        strSessionUsername = strUsername
+
+    End Sub
+
+    Public Function GetUserName()
+
+        Return strSessionUsername
+
+    End Function
+
+
     '/*********************************************************************/
     '/*                   SubProgram NAME: btnMenu_Click                  */         
     '/*********************************************************************/
@@ -361,6 +374,13 @@
 
         ' check what controls the user should be able to access based on their assigned permission level
         '  CheckUserPermissions("Nurse")
+
+        ' assing labels to contain the logged in user's name. 
+        ' assign a tooltip because truncation of the username may need to happen. We need to fix the max length 
+        ' that can display on the UI
+        lblLoggedInUser.Text = TruncateString(10, GetUserName())
+        tpMultiPurposeTooltip.SetToolTip(lblLoggedInUser, GetUserName())
+        tpMultiPurposeTooltip.SetToolTip(pbLogin, GetUserName())
 
 
 
@@ -1016,17 +1036,6 @@
 
     End Sub
 
-    Public Sub SetUserName(ByVal strUsername As String)
-
-        strSessionUsername = strUsername
-
-    End Sub
-
-    Public Function GetUserName()
-
-        Return strSessionUsername
-
-    End Function
 
 
     Public isDragging As Boolean = False, isClick As Boolean = False
