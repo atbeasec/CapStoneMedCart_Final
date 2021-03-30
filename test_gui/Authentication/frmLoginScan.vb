@@ -11,7 +11,8 @@ Public Class frmLoginScan
     End Sub
     Private Sub lblBadge_Click(sender As Object, e As EventArgs) Handles lblBadge.Click
         'close current form and open frmLogin to login with username and password
-        Me.Close()
+
+        Me.Visible = False
         frmLogin.Show()
 
     End Sub
@@ -73,13 +74,8 @@ Public Class frmLoginScan
             Dim result As DialogResult = MessageBox.Show("Are you sure you want to quit?", "", MessageBoxButtons.YesNo)
 
             If result = DialogResult.Yes Then
-
-                ' code in **'s is temporary until the start up form is changed.
-                '****************************************
-                frmMain.Visible = True
-                frmMain.Close()
-                '****************************************
                 Me.Close()
+                frmSplash.Close()
             End If
 
         End If
@@ -88,7 +84,7 @@ Public Class frmLoginScan
     End Sub
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
-        ' MessageBox.Show("closing the main login screen")
+
         blnFlagToClose = True
         CloseForm()
 
@@ -96,10 +92,36 @@ Public Class frmLoginScan
 
     Private Sub frmLoginScan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        CloseForm()
+        lblWelcomeBack.Visible = False
+        ShowSplashScreen()
+        CreateDatabase.Main()
 
     End Sub
+
+    Private Sub ShowSplashScreen()
+
+        startUpTimer.Interval = 3000
+        startUpTimer.Enabled = True
+        startUpTimer.Start()
+        pnlSplash.Location = New Point(pnlLogin.Location.X, pnlLogin.Location.Y)
+        pnlLogin.Visible = False
+        pnlSplash.Size = New Size(pnlLogin.Width, pnlLogin.Height)
+
+    End Sub
+
+    Private Sub Timer1_Tick(ByVal Sender As Object, ByVal e As EventArgs) Handles startUpTimer.Tick
+
+        If startUpTimer.Interval = 3000 Then
+            pnlSplash.Visible = False
+            pnlLogin.Visible = True
+            lblWelcomeBack.Visible = False
+        End If
+
+    End Sub
+
+
     Private Sub txtLoginKeypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBarcode.KeyPress
         KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz-1234567890!@#$%^&*.,<>=+")
     End Sub
+
 End Class

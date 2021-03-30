@@ -32,7 +32,7 @@
 
     End Sub
 
-    Public Function GetUserName()
+    Public Function GetUserName() As String
 
         Return strSessionUsername
 
@@ -378,8 +378,11 @@
         ' assing labels to contain the logged in user's name. 
         ' assign a tooltip because truncation of the username may need to happen. We need to fix the max length 
         ' that can display on the UI
-        lblLoggedInUser.Text = TruncateString(10, GetUserName())
-        tpMultiPurposeTooltip.SetToolTip(lblLoggedInUser, GetUserName())
+
+        lblCurrentUser.BringToFront()
+        lblCurrentUser.Visible = True
+        lblCurrentUser.Text = TruncateString(10, GetUserName())
+        tpMultiPurposeTooltip.SetToolTip(lblCurrentUser, GetUserName())
         tpMultiPurposeTooltip.SetToolTip(pbLogin, GetUserName())
 
 
@@ -1037,9 +1040,9 @@
     End Sub
 
 
-
     Public isDragging As Boolean = False, isClick As Boolean = False
     Public startPoint, firstPoint, lastPoint As Point
+
 
 
     '/*********************************************************************/
