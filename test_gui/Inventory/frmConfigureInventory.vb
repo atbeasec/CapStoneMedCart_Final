@@ -459,7 +459,7 @@
     End Sub
 
     '/*********************************************************************/
-    '/*                   SubProgram NAME: UpdateButtonsOnScreen          */         
+    '/*                   SubProgram NAME: AddHandlerToDrawerButtons      */         
     '/*********************************************************************/
     '/*                   WRITTEN BY:  Collin Krygier   		          */   
     '/*		         DATE CREATED: 		 3/24/2021                        */                             
