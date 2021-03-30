@@ -527,8 +527,8 @@ Module BulkImportMethods
                     intRecordCount += 1
                     .ID = intRecordCount
                     strbSQLGetRoom.Clear()
-                    strbSQLGetRoom.Append("select count(Room_ID) From Rooms where Room_ID = '" & checkSQLInjection(.roomData.RoomID))
-                    strbSQLGetRoom.Append("' and Bed_Name = '" & checkSQLInjection(.roomData.BedName) & "';")
+                    strbSQLGetRoom.Append("select count(Room_ID) From Rooms where Room_ID = '" & checkSQLInjection(.roomData.RoomID, True))
+                    strbSQLGetRoom.Append("' and Bed_Name = '" & checkSQLInjection(.roomData.BedName, True) & "';")
                     'finding already exisiting rooms
                     If ExecuteScalarQuery(strbSQLGetRoom.ToString) <> 0 Then
                         editRoomArray.Add(.roomData)
@@ -548,8 +548,8 @@ Module BulkImportMethods
                 With room
                     strbSQLPatientStatement.Clear()
                     strbSQLPatientStatement.Append("Update Rooms set Active_Flag = 1 where")
-                    strbSQLPatientStatement.Append(" Room_ID ='" & checkSQLInjection(.RoomID) & "' and Bed_Name ='")
-                    strbSQLPatientStatement.Append(checkSQLInjection(.BedName) & "';")
+                    strbSQLPatientStatement.Append(" Room_ID ='" & checkSQLInjection(.RoomID, True) & "' and Bed_Name ='")
+                    strbSQLPatientStatement.Append(checkSQLInjection(.BedName, True) & "';")
                     ExecuteInsertQuery(strbSQLPatientStatement.ToString)
                 End With
             Next
@@ -564,8 +564,8 @@ Module BulkImportMethods
         strbSQLPatientStatement.Append(" values ")
         For Each patient As PatientClass In PatientArray
             With patient
-                strbSQLPatientStatement.Append("('" & .ID & "', '" & checkSQLInjection(.roomData.RoomID))
-                strbSQLPatientStatement.Append(" ','" & checkSQLInjection(.roomData.BedName) & "','1'),")
+                strbSQLPatientStatement.Append("('" & .ID & "', '" & checkSQLInjection(.roomData.RoomID, True))
+                strbSQLPatientStatement.Append(" ','" & checkSQLInjection(.roomData.BedName, True) & "','1'),")
             End With
         Next
         finishingUpImport(strbSQLPatientStatement)
@@ -616,9 +616,9 @@ Module BulkImportMethods
 
     Sub addingPatientInformationToSQL(ByRef strbSQLPatientStatement As StringBuilder, Patient As PatientClass)
         With Patient
-            strbSQLPatientStatement.Append(" ('" & .MRN_Number & "', '" & checkSQLInjection(.barcode) & "', '" & checkSQLInjection(.FirstName) & "', '" & checkSQLInjection(.MiddleName) & "', '")
-            strbSQLPatientStatement.Append(checkSQLInjection(.LastName) & "', '" & .DoB & "' , '" & .sex & "', '" & .Height & "', '" & .weight & "', '")
-            strbSQLPatientStatement.Append(.Address & "', '" & .city & "', '" & .State & "', '" & .ZipCode & "', '" & .PhoneNumber & "', '")
+            strbSQLPatientStatement.Append(" ('" & .MRN_Number & "', '" & checkSQLInjection(.barcode) & "', '" & checkSQLInjection(.FirstName, True) & "', '" & checkSQLInjection(.MiddleName, True) & "', '")
+            strbSQLPatientStatement.Append(checkSQLInjection(.LastName, True) & "', '" & .DoB & "' , '" & .sex & "', '" & .Height & "', '" & .weight & "', '")
+            strbSQLPatientStatement.Append(checkSQLInjection(.Address, True) & "', '" & checkSQLInjection(.city, True) & "', '" & .State & "', '" & .ZipCode & "', '" & .PhoneNumber & "', '")
             strbSQLPatientStatement.Append(.email & "', '" & .PrimaryPhysicianID & "', '1')")
         End With
     End Sub
@@ -804,9 +804,9 @@ Module BulkImportMethods
                 'Physician_Address','Physician_City','Physician_State','Physician_Zip_Code','Active_Flag') Values")
                 For Each Physician As PhysicianClass In PhysicianArray
             With Physician
-                strbSQLStatement.Append(" ('" & checkSQLInjection(.FirstName) & "', '" & checkSQLInjection(.MiddleName) & "', '" & checkSQLInjection(.LastName) & "', '")
+                strbSQLStatement.Append(" ('" & checkSQLInjection(.FirstName, True) & "', '" & checkSQLInjection(.MiddleName, True) & "', '" & checkSQLInjection(.LastName, True) & "', '")
                 strbSQLStatement.Append(checkSQLInjection(.Credentials) & "', '" & .PhoneNumber & "', '" & .FaxNumber & "', '")
-                strbSQLStatement.Append(checkSQLInjection(.Address) & "', '" & checkSQLInjection(.city) & "', '" & .State & "', '" & .ZipCode & "', '")
+                strbSQLStatement.Append(checkSQLInjection(.Address, True) & "', '" & checkSQLInjection(.city, True) & "', '" & .State & "', '" & .ZipCode & "', '")
                 strbSQLStatement.Append(1 & "'),")
             End With
         Next
@@ -858,8 +858,8 @@ Module BulkImportMethods
                                 "'User_Last_Name','Barcode','Admin_Flag','Supervisor_Flag','Active_Flag') Values")
         For Each user As UserClass In UserArray
             With user
-                strbSQLStatement.Append(" ('" & .UserName & "','" & .salt & "','" & .Password & "','")
-                strbSQLStatement.Append(.FirstName & "','" & .LastName & "','" & .Barcode & "','")
+                strbSQLStatement.Append(" ('" & checkSQLInjection(.UserName) & "','" & .salt & "','" & checkSQLInjection(.Password) & "','")
+                strbSQLStatement.Append(checkSQLInjection(.FirstName, True) & "','" & checkSQLInjection(.LastName, True) & "','" & .Barcode & "','")
                 strbSQLStatement.Append(.AdminFlag & "','" & .SuperVisorFlag & "','" & 1 & "'),")
             End With
         Next
@@ -1010,7 +1010,7 @@ Module BulkImportMethods
                     strHashedPassword = strhold(0)
                     UsedBarCodesArray.Add(strBarcodeHash)
                     strSalt = strhold(1)
-                    UserArray.Add(New UserClass(checkSQLInjection(strLine(0)), strHashedPassword, strSalt, checkSQLInjection(strLine(2)), checkSQLInjection(strLine(3)),
+                    UserArray.Add(New UserClass(checkSQLInjection(strLine(0)), strHashedPassword, strSalt, checkSQLInjection(strLine(2), True), checkSQLInjection(strLine(3), True),
                                 strBarcodeHash, strLine(5), strLine(6)))
                 End If
             End If
@@ -1169,7 +1169,7 @@ Module BulkImportMethods
         strbSQLStatement.Append("Insert Into Rooms ('Room_ID', 'Bed_Name', 'Active_Flag') Values ")
         For Each room As RoomClass In roomArray
             With room
-                strbSQLStatement.Append("('" & checkSQLInjection(.RoomID) & "', '" & checkSQLInjection(.BedName) & "','")
+                strbSQLStatement.Append("('" & checkSQLInjection(.RoomID, True) & "', '" & checkSQLInjection(.BedName, True) & "','")
                 strbSQLStatement.Append(1 & "'),")
             End With
         Next
