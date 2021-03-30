@@ -333,11 +333,15 @@ Public Class frmFullCart
     Function serialSetup()
 
         gettingConnectionSettings()
-        'comport from the database. 
-        'this is going to set everything up with the cart. 
-
-        SerialPort1.PortName = comPort
-        SerialPort1.BaudRate = bitRate
+        Try
+            'comport from the database. 
+            'this is going to set everything up with the cart.             
+            SerialPort1.PortName = comPort
+            SerialPort1.BaudRate = bitRate
+        Catch
+            restoreDefaults()
+            serialSetup()
+        End Try
         SerialPort1.RtsEnable = False
         SerialPort1.DtrEnable = False
         'StopBits: 1 Parity: NONE WordLength:  8
@@ -351,6 +355,52 @@ Public Class frmFullCart
         Return SerialPort1
     End Function
 
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: restoreDefaults				  */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		              */   
+    '/*		         DATE CREATED: 	3/30/2021                       	  */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								   */             
+    '/*	 This code is to clear out a malformed record in the database.    */
+    '/*  if there is a record that is missing a field the application will*/
+    '/*  fail. So this is used to correct that record.                    */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+
+    Sub restoreDefaults()
+        ExecuteInsertQuery("Delete From Settings")
+        CreateDatabase.defaultCartSettings()
+
+    End Sub
 
 
 
@@ -452,14 +502,15 @@ Public Class frmFullCart
         Try
             Dim strGetSettings As String = "Select * from Settings"
             Dim dsSetting = CreateDatabase.ExecuteSelectQuery(strGetSettings)
+
             With dsSetting.Tables(0)
                 bitRate = .Rows(0)(EnumList.Settings.bitRate).ToString
                 comPort = .Rows(0)(EnumList.Settings.ComPort).ToString
                 CartInterfaceCode.setSimulationMode(Convert.ToBoolean(.rows(0)(EnumList.Settings.SimulationFlag)))
             End With
+
         Catch ex As Exception
-            ExecuteInsertQuery("Delete From Settings")
-            CreateDatabase.defaultCartSettings()
+            restoreDefaults()
             gettingConnectionSettings()
         End Try
     End Sub
