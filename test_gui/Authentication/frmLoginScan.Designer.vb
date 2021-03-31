@@ -176,7 +176,7 @@ Partial Class frmLoginScan
         Me.pnlSplash.Controls.Add(Me.lblVersionNumber)
         Me.pnlSplash.Controls.Add(Me.lblApplicationName)
         Me.pnlSplash.Controls.Add(Me.Panel4)
-        Me.pnlSplash.Location = New System.Drawing.Point(580, 252)
+        Me.pnlSplash.Location = New System.Drawing.Point(517, 252)
         Me.pnlSplash.Name = "pnlSplash"
         Me.pnlSplash.Size = New System.Drawing.Size(332, 232)
         Me.pnlSplash.TabIndex = 13
@@ -184,7 +184,7 @@ Partial Class frmLoginScan
         'PictureBox1
         '
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(146, 176)
+        Me.PictureBox1.Location = New System.Drawing.Point(149, 176)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(35, 35)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -196,7 +196,7 @@ Partial Class frmLoginScan
         Me.lblVersionNumber.AutoSize = True
         Me.lblVersionNumber.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblVersionNumber.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.lblVersionNumber.Location = New System.Drawing.Point(116, 140)
+        Me.lblVersionNumber.Location = New System.Drawing.Point(114, 140)
         Me.lblVersionNumber.Name = "lblVersionNumber"
         Me.lblVersionNumber.Size = New System.Drawing.Size(104, 25)
         Me.lblVersionNumber.TabIndex = 16
@@ -207,17 +207,17 @@ Partial Class frmLoginScan
         Me.lblApplicationName.AutoSize = True
         Me.lblApplicationName.Font = New System.Drawing.Font("Segoe UI", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblApplicationName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.lblApplicationName.Location = New System.Drawing.Point(74, 90)
+        Me.lblApplicationName.Location = New System.Drawing.Point(99, 90)
         Me.lblApplicationName.Name = "lblApplicationName"
-        Me.lblApplicationName.Size = New System.Drawing.Size(177, 37)
+        Me.lblApplicationName.Size = New System.Drawing.Size(135, 37)
         Me.lblApplicationName.TabIndex = 15
-        Me.lblApplicationName.Text = "Project Name"
+        Me.lblApplicationName.Text = "MedServe"
         '
         'Panel4
         '
         Me.Panel4.BackgroundImage = CType(resources.GetObject("Panel4.BackgroundImage"), System.Drawing.Image)
         Me.Panel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Panel4.Location = New System.Drawing.Point(130, 26)
+        Me.Panel4.Location = New System.Drawing.Point(134, 26)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(60, 60)
         Me.Panel4.TabIndex = 14
@@ -233,6 +233,7 @@ Partial Class frmLoginScan
         Me.Controls.Add(Me.lblWelcomeBack)
         Me.Controls.Add(Me.pnlLogin)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmLoginScan"
