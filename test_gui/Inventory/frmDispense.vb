@@ -25,14 +25,13 @@
 
     End Sub
 
-    Public Sub CreatePrescriptionsPanels(ByVal flpPannel As FlowLayoutPanel, ByVal medicationName As String, ByVal strength As String, ByVal frequency As String, ByVal type As String, ByVal quantity As String, ByVal datePrescribed As String, ByVal PrescribedBy As String)
+    Public Sub CreateDispenseHistoryPanels(ByVal flpPannel As FlowLayoutPanel, ByVal strMedicationName As String, ByVal strStrength As String, ByVal strType As String, ByVal strQuantity As String, ByVal strDispenseBy As String, ByVal strDispenseDate As String, ByVal strDispenseTime As String)
+
         Dim pnl As Panel
         pnl = New Panel
 
         Dim pnlMainPanel As Panel
         pnlMainPanel = New Panel
-        ' call method here to get the count from the database and update the panel number so the next item is correct
-
 
         'Set panel properties
         With pnl
@@ -56,7 +55,6 @@
         'put the boarder panel inside the main panel
         pnl.Controls.Add(pnlMainPanel)
 
-
         'AddHandler pnlMainPanel.DoubleClick, AddressOf DynamicDoubleClickNewOrder
         AddHandler pnlMainPanel.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
         AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
@@ -69,24 +67,16 @@
         Dim lblID4 As New Label
         Dim lblID5 As New Label
         Dim lblID6 As New Label
-        Dim lblID7 As New Label
 
-        ' anywhere we have quotes except for the label names, we can call our Database and get method
-        ' to ensure all of the text being added to the panel is inline with the  headers, we will use the label location of the
-        ' header as the reference point for the X axis when creating these labels at run time.
-        CreateIDLabelWithToolTip(pnlMainPanel, lblID, "lblMedicationPrescription", lblMedicationName.Location.X, 20, medicationName, getPanelCount(flpPannel), tpToolTip, TruncateString(15, medicationName))
-        ' CreateIDLabel(pnlMainPanel, lblID, "lblMedicationPrescription", lblMedicationName.Location.X, 20, medicationName, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID2, "lblStrengthPrescription", lblStrength.Location.X, 20, strength, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID3, "lblFrequencyPrescription", lblFrequency.Location.X, 20, frequency, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID4, "lblTypePrescription", lblType.Location.X, 20, type, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID5, "lblQuantityPrescription", lblQuantity.Location.X, 20, quantity, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID6, "lblDatePrescribed", lblDatePrescribed.Location.X, 20, datePrescribed.Substring(0, 10), getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, PrescribedBy, getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID, "lblMedicationName", lblMedication.Location.X, 20, strMedicationName, getPanelCount(flpPannel), tpToolTip, TruncateString(25, strMedicationName))
+        CreateIDLabel(pnlMainPanel, lblID2, "lblStrength", lblStrength.Location.X, 20, strStrength, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID3, "lblType", lblType.Location.X, 20, strType, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID4, "lblQuantity", lblQuantity.Location.X, 20, strQuantity, getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID5, "lblDispensedBy", lblDispensedBy.Location.X, 20, strDispenseBy, getPanelCount(flpPannel), tpToolTip, TruncateString(30, strDispenseBy))
+        CreateIDLabel(pnlMainPanel, lblID6, "lblDispenseTimeAndDate", lblDateTime.Location.X, 20, strDispenseDate.Substring(0, 19), getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
-
-        'currentContactPanel = pnl.Name
 
     End Sub
 
@@ -98,6 +88,7 @@
 
         pnlAmountInDrawer.Visible = False
         pnlAmountAdministered.Visible = False
+        pnlSelector.Visible = False
 
     End Sub
 

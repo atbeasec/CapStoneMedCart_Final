@@ -48,17 +48,17 @@ Partial Class frmWaste
         Me.txtQuantity = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.pnlQuantity = New System.Windows.Forms.Panel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.radWasteSpecific = New System.Windows.Forms.RadioButton()
-        Me.radAllMed = New System.Windows.Forms.RadioButton()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.radAllMed = New System.Windows.Forms.RadioButton()
+        Me.radWasteSpecific = New System.Windows.Forms.RadioButton()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.pnlRadioButtons.SuspendLayout()
         Me.pnlSignOff.SuspendLayout()
         Me.pnlHeader.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.pnlQuantity.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label2
@@ -340,14 +340,20 @@ Partial Class frmWaste
         Me.pnlQuantity.Size = New System.Drawing.Size(149, 94)
         Me.pnlQuantity.TabIndex = 214
         '
-        'Panel2
+        'ErrorProvider1
         '
-        Me.Panel2.Controls.Add(Me.radWasteSpecific)
-        Me.Panel2.Controls.Add(Me.radAllMed)
-        Me.Panel2.Location = New System.Drawing.Point(470, 78)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(262, 71)
-        Me.Panel2.TabIndex = 215
+        Me.ErrorProvider1.ContainerControl = Me
+        '
+        'radAllMed
+        '
+        Me.radAllMed.AutoSize = True
+        Me.radAllMed.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.radAllMed.Location = New System.Drawing.Point(3, 29)
+        Me.radAllMed.Name = "radAllMed"
+        Me.radAllMed.Size = New System.Drawing.Size(241, 25)
+        Me.radAllMed.TabIndex = 0
+        Me.radAllMed.Text = "Waste all medication in drawer"
+        Me.radAllMed.UseVisualStyleBackColor = True
         '
         'radWasteSpecific
         '
@@ -362,20 +368,14 @@ Partial Class frmWaste
         Me.radWasteSpecific.Text = "Waste Specific amount"
         Me.radWasteSpecific.UseVisualStyleBackColor = True
         '
-        'radAllMed
+        'Panel2
         '
-        Me.radAllMed.AutoSize = True
-        Me.radAllMed.Font = New System.Drawing.Font("Segoe UI", 12.0!)
-        Me.radAllMed.Location = New System.Drawing.Point(3, 29)
-        Me.radAllMed.Name = "radAllMed"
-        Me.radAllMed.Size = New System.Drawing.Size(241, 25)
-        Me.radAllMed.TabIndex = 0
-        Me.radAllMed.Text = "Waste all medication in drawer"
-        Me.radAllMed.UseVisualStyleBackColor = True
-        '
-        'ErrorProvider1
-        '
-        Me.ErrorProvider1.ContainerControl = Me
+        Me.Panel2.Controls.Add(Me.radWasteSpecific)
+        Me.Panel2.Controls.Add(Me.radAllMed)
+        Me.Panel2.Location = New System.Drawing.Point(470, 78)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(262, 71)
+        Me.Panel2.TabIndex = 215
         '
         'frmWaste
         '
@@ -403,9 +403,9 @@ Partial Class frmWaste
         Me.Panel5.PerformLayout()
         Me.pnlQuantity.ResumeLayout(False)
         Me.pnlQuantity.PerformLayout()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
-        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -434,8 +434,8 @@ Partial Class frmWaste
     Friend WithEvents txtQuantity As TextBox
     Friend WithEvents Label5 As Label
     Friend WithEvents pnlQuantity As Panel
+    Friend WithEvents ErrorProvider1 As ErrorProvider
     Friend WithEvents Panel2 As Panel
     Friend WithEvents radWasteSpecific As RadioButton
     Friend WithEvents radAllMed As RadioButton
-    Friend WithEvents ErrorProvider1 As ErrorProvider
 End Class
