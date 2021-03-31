@@ -263,6 +263,8 @@ Public Class frmNewPatient
         PopulateStateComboBox(cmbState)
         PopulateRoomComboBox(cboRoom, dsrooms)
         populatePhysicianComboBox(cmbPhysician, dsPhysicians)
+        btnBack.Visible = False
+
     End Sub
 
     '/*********************************************************************/

@@ -36,7 +36,6 @@ Partial Class frmPatientRecords
         Me.pnlSearch = New System.Windows.Forms.Panel()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearch = New System.Windows.Forms.TextBox()
-        Me.btnNewPatient = New System.Windows.Forms.Button()
         Me.flpPatientRecords = New System.Windows.Forms.FlowLayoutPanel()
         Me.tpHeaderSort = New System.Windows.Forms.ToolTip(Me.components)
         Me.tpToolTip = New System.Windows.Forms.ToolTip(Me.components)
@@ -136,7 +135,6 @@ Partial Class frmPatientRecords
         '
         Me.pnlHeaderPatientRecords.BackColor = System.Drawing.Color.White
         Me.pnlHeaderPatientRecords.Controls.Add(Me.Panel9)
-        Me.pnlHeaderPatientRecords.Controls.Add(Me.btnNewPatient)
         Me.pnlHeaderPatientRecords.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlHeaderPatientRecords.Location = New System.Drawing.Point(0, 0)
         Me.pnlHeaderPatientRecords.Name = "pnlHeaderPatientRecords"
@@ -195,23 +193,6 @@ Partial Class frmPatientRecords
         Me.txtSearch.TabIndex = 1
         Me.txtSearch.Tag = "Search Patients"
         '
-        'btnNewPatient
-        '
-        Me.btnNewPatient.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnNewPatient.FlatAppearance.BorderSize = 0
-        Me.btnNewPatient.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNewPatient.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNewPatient.ForeColor = System.Drawing.Color.White
-        Me.btnNewPatient.Image = CType(resources.GetObject("btnNewPatient.Image"), System.Drawing.Image)
-        Me.btnNewPatient.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnNewPatient.Location = New System.Drawing.Point(796, 15)
-        Me.btnNewPatient.Name = "btnNewPatient"
-        Me.btnNewPatient.Size = New System.Drawing.Size(166, 37)
-        Me.btnNewPatient.TabIndex = 18
-        Me.btnNewPatient.Text = "ADD PATIENT"
-        Me.btnNewPatient.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnNewPatient.UseVisualStyleBackColor = False
-        '
         'flpPatientRecords
         '
         Me.flpPatientRecords.AutoScroll = True
@@ -249,7 +230,6 @@ Partial Class frmPatientRecords
     Friend WithEvents lblMRN As Label
     Friend WithEvents lblFirstName As Label
     Friend WithEvents pnlHeaderPatientRecords As Panel
-    Friend WithEvents btnNewPatient As Button
     Friend WithEvents lblDOB As Label
     Friend WithEvents lblLastName As Label
     Friend WithEvents flpPatientRecords As FlowLayoutPanel
