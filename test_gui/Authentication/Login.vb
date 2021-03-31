@@ -4,6 +4,7 @@ Imports System.Security.Cryptography
 
 Module LogIn
     Public LoggedInID As String
+    Public LoggedInPermission As String
     Public LoggedInUsername As String
     Public LoggedInFullName As String
     '/*******************************************************************/
@@ -81,6 +82,12 @@ Module LogIn
             LogIn.LoggedInFullName = (ExecuteScalarQuery("SELECT User_First_Name FROM User WHERE Barcode = '" & strHashedBarcode & "'") & " " &
                                     ExecuteScalarQuery("SELECT User_Last_Name FROM User WHERE Barcode = '" & strHashedBarcode & "'"))
             LogIn.LoggedInID = ExecuteScalarQuery("SELECT User_ID FROM User WHERE Barcode = '" & strHashedBarcode & "'")
+            'check what Role the user will have
+            If ExecuteScalarQuery("SELECT Admin_Flag FROM User WHERE Barcode = '" & strHashedBarcode & "'") = 1 Then
+                LogIn.LoggedInPermission = "Admin"
+            ElseIf ExecuteScalarQuery("SELECT Supervisor_Flag FROM User WHERE Barcode = '" & strHashedBarcode & "'") = 1 Then
+                LogIn.LoggedInPermission = "Supervisor"
+            End If
             Return "True"
         Else
             Return "False"
@@ -121,7 +128,12 @@ Module LogIn
             LogIn.LoggedInUsername = (ExecuteScalarQuery("SELECT Username FROM User WHERE Username = '" & strUsername & "'" & " AND Password = '" & strPassword & "'"))
             LogIn.LoggedInFullName = (ExecuteScalarQuery("SELECT User_First_Name FROM User WHERE Username = '" & strUsername & "'") & " " &
                                     ExecuteScalarQuery("SELECT User_Last_Name FROM User WHERE Username = '" & strUsername & "'"))
-
+            'check what Role the user will have
+            If ExecuteScalarQuery("SELECT Admin_Flag FROM User WHERE Username = '" & strUsername & "'" & " AND Password = '" & strPassword & "'") = 1 Then
+                LogIn.LoggedInPermission = "Admin"
+            ElseIf ExecuteScalarQuery("SELECT Supervisor_Flag FROM User WHERE Username = '" & strUsername & "'" & " AND Password = '" & strPassword & "'") = 1 Then
+                LogIn.LoggedInPermission = "Supervisor"
+            End If
             Return "True"
         Else
             Return "False"
