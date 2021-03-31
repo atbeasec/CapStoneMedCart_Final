@@ -28,7 +28,6 @@ Partial Class frmMain
         Me.lblCurrentUser = New System.Windows.Forms.Label()
         Me.pbLogin = New System.Windows.Forms.PictureBox()
         Me.pnlTopBarContrast = New System.Windows.Forms.Panel()
-        Me.lblLoggedInUser = New System.Windows.Forms.Label()
         Me.pnlSideMenu = New System.Windows.Forms.Panel()
         Me.pnlSubMenuSettings = New System.Windows.Forms.Panel()
         Me.btnEditPhysician = New System.Windows.Forms.Button()
@@ -48,22 +47,20 @@ Partial Class frmMain
         Me.btnAdhockDispense = New System.Windows.Forms.Button()
         Me.btnInventory = New System.Windows.Forms.Button()
         Me.pnlSubMenuPatientRecords = New System.Windows.Forms.Panel()
+        Me.btnAddPatients = New System.Windows.Forms.Button()
         Me.btnMyPatients = New System.Windows.Forms.Button()
         Me.btnAllPatients = New System.Windows.Forms.Button()
         Me.btnLogout = New System.Windows.Forms.Button()
         Me.btnPatientRecords = New System.Windows.Forms.Button()
         Me.pnlLogo = New System.Windows.Forms.Panel()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.pnlDockLocation = New System.Windows.Forms.Panel()
         Me.tpMultiPurposeTooltip = New System.Windows.Forms.ToolTip(Me.components)
-        Me.btnAddPatients = New System.Windows.Forms.Button()
         Me.pnlTopBar.SuspendLayout()
         CType(Me.pbLogin, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlSideMenu.SuspendLayout()
         Me.pnlSubMenuSettings.SuspendLayout()
         Me.pnlSubMenuInventory.SuspendLayout()
         Me.pnlSubMenuPatientRecords.SuspendLayout()
-        Me.pnlLogo.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlTopBar
@@ -82,7 +79,7 @@ Partial Class frmMain
         '
         Me.lblCurrentUser.AutoSize = True
         Me.lblCurrentUser.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCurrentUser.Location = New System.Drawing.Point(1264, 5)
+        Me.lblCurrentUser.Location = New System.Drawing.Point(257, 7)
         Me.lblCurrentUser.Name = "lblCurrentUser"
         Me.lblCurrentUser.Size = New System.Drawing.Size(44, 17)
         Me.lblCurrentUser.TabIndex = 2
@@ -93,7 +90,7 @@ Partial Class frmMain
         '
         Me.pbLogin.BackgroundImage = Global.test_gui.My.Resources.Resources.user_px
         Me.pbLogin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pbLogin.Location = New System.Drawing.Point(1234, 1)
+        Me.pbLogin.Location = New System.Drawing.Point(230, 3)
         Me.pbLogin.Name = "pbLogin"
         Me.pbLogin.Size = New System.Drawing.Size(25, 25)
         Me.pbLogin.TabIndex = 0
@@ -107,17 +104,6 @@ Partial Class frmMain
         Me.pnlTopBarContrast.Name = "pnlTopBarContrast"
         Me.pnlTopBarContrast.Size = New System.Drawing.Size(227, 27)
         Me.pnlTopBarContrast.TabIndex = 0
-        '
-        'lblLoggedInUser
-        '
-        Me.lblLoggedInUser.AutoSize = True
-        Me.lblLoggedInUser.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblLoggedInUser.Location = New System.Drawing.Point(48, 3)
-        Me.lblLoggedInUser.Name = "lblLoggedInUser"
-        Me.lblLoggedInUser.Size = New System.Drawing.Size(44, 17)
-        Me.lblLoggedInUser.TabIndex = 0
-        Me.lblLoggedInUser.Text = "Label1"
-        Me.lblLoggedInUser.Visible = False
         '
         'pnlSideMenu
         '
@@ -496,6 +482,27 @@ Partial Class frmMain
         Me.pnlSubMenuPatientRecords.Size = New System.Drawing.Size(210, 136)
         Me.pnlSubMenuPatientRecords.TabIndex = 26
         '
+        'btnAddPatients
+        '
+        Me.btnAddPatients.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(80, Byte), Integer), CType(CType(150, Byte), Integer))
+        Me.btnAddPatients.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnAddPatients.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnAddPatients.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAddPatients.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAddPatients.ForeColor = System.Drawing.Color.White
+        Me.btnAddPatients.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnAddPatients.Location = New System.Drawing.Point(0, 86)
+        Me.btnAddPatients.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnAddPatients.Name = "btnAddPatients"
+        Me.btnAddPatients.Padding = New System.Windows.Forms.Padding(35, 5, 5, 5)
+        Me.btnAddPatients.Size = New System.Drawing.Size(210, 44)
+        Me.btnAddPatients.TabIndex = 27
+        Me.btnAddPatients.Tag = "4"
+        Me.btnAddPatients.Text = "Add Patient"
+        Me.btnAddPatients.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnAddPatients.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnAddPatients.UseVisualStyleBackColor = False
+        '
         'btnMyPatients
         '
         Me.btnMyPatients.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(80, Byte), Integer), CType(CType(150, Byte), Integer))
@@ -586,24 +593,12 @@ Partial Class frmMain
         '
         Me.pnlLogo.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
         Me.pnlLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.pnlLogo.Controls.Add(Me.Label2)
-        Me.pnlLogo.Controls.Add(Me.lblLoggedInUser)
         Me.pnlLogo.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlLogo.Location = New System.Drawing.Point(0, 0)
         Me.pnlLogo.Margin = New System.Windows.Forms.Padding(2)
         Me.pnlLogo.Name = "pnlLogo"
         Me.pnlLogo.Size = New System.Drawing.Size(210, 46)
         Me.pnlLogo.TabIndex = 8
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(3, 25)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(39, 13)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Label2"
-        Me.Label2.Visible = False
         '
         'pnlDockLocation
         '
@@ -612,27 +607,6 @@ Partial Class frmMain
         Me.pnlDockLocation.Name = "pnlDockLocation"
         Me.pnlDockLocation.Size = New System.Drawing.Size(1107, 684)
         Me.pnlDockLocation.TabIndex = 16
-        '
-        'btnAddPatients
-        '
-        Me.btnAddPatients.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(80, Byte), Integer), CType(CType(150, Byte), Integer))
-        Me.btnAddPatients.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnAddPatients.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnAddPatients.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAddPatients.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddPatients.ForeColor = System.Drawing.Color.White
-        Me.btnAddPatients.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAddPatients.Location = New System.Drawing.Point(0, 86)
-        Me.btnAddPatients.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnAddPatients.Name = "btnAddPatients"
-        Me.btnAddPatients.Padding = New System.Windows.Forms.Padding(35, 5, 5, 5)
-        Me.btnAddPatients.Size = New System.Drawing.Size(210, 44)
-        Me.btnAddPatients.TabIndex = 27
-        Me.btnAddPatients.Tag = "4"
-        Me.btnAddPatients.Text = "Add Patient"
-        Me.btnAddPatients.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAddPatients.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnAddPatients.UseVisualStyleBackColor = False
         '
         'frmMain
         '
@@ -655,8 +629,6 @@ Partial Class frmMain
         Me.pnlSubMenuSettings.ResumeLayout(False)
         Me.pnlSubMenuInventory.ResumeLayout(False)
         Me.pnlSubMenuPatientRecords.ResumeLayout(False)
-        Me.pnlLogo.ResumeLayout(False)
-        Me.pnlLogo.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -686,8 +658,6 @@ Partial Class frmMain
     Friend WithEvents btnLogout As Button
     Friend WithEvents btnPatientRecords As Button
     Friend WithEvents pnlLogo As Panel
-    Friend WithEvents Label2 As Label
-    Friend WithEvents lblLoggedInUser As Label
     Friend WithEvents pnlDockLocation As Panel
     Friend WithEvents pnlTopBarContrast As Panel
     Friend WithEvents pbLogin As PictureBox
