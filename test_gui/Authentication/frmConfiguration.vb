@@ -3,6 +3,12 @@ Imports System.Text.RegularExpressions
 
 Public Class frmConfiguration
 
+    Public Enum DispenseHistoryEnum As Integer
+        Name = 1
+        Username = 2
+        Permission = 3
+        Active = 4
+    End Enum
     Public Enum AddAndRemoveUserEnum
 
         name = 1
@@ -48,7 +54,7 @@ Public Class frmConfiguration
     '/*********************************************************************/
     Private Sub frmConfiguration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-                                                  "User.Supervisor_Flag, User.Active_Flag From User;"
+                                                  "User.Supervisor_Flag, User.Active_Flag From User ORDER BY User_First_Name ASC;"
         Fill_Table(strFillSQL)
 
         'have new users assigned as Nurses by default
@@ -699,7 +705,7 @@ Public Class frmConfiguration
                 txtConfirmPassword.Focus()
                 'Make Sure all fields are filled
             ElseIf txtFirstName.Text = "" Or txtLastName.Text = "" Or txtUsername.Text = "" Then
-                MsgBox("All Fields must be filled56")
+                MsgBox("All Fields must be filled in")
             Else
                 If txtBarcode.Text = "" Then
                     'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
@@ -730,7 +736,7 @@ Public Class frmConfiguration
 
 
         Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-                                      "User.Supervisor_Flag, User.Active_Flag From User;"
+                                      "User.Supervisor_Flag, User.Active_Flag From User ORDER BY User_First_Name ASC;"
         Fill_Table(strFillSQL)
     End Sub
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
@@ -744,6 +750,7 @@ Public Class frmConfiguration
         btnCancel.Visible = False
         btnSaveChanges.Visible = False
         btnSaveUser.Visible = True
+        Label2.Text = "Create New User"
     End Sub
 
     Private Sub btnPasswordEye_Click(sender As Object, e As EventArgs) Handles btnPasswordEye.Click
@@ -785,7 +792,7 @@ Public Class frmConfiguration
 
         If txtSearchBox.Text = "" Then
             strFillSQL = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-                                                  "User.Supervisor_Flag, User.Active_Flag From User;"
+                                                  "User.Supervisor_Flag, User.Active_Flag From User ORDER BY User_First_Name ASC;"
             Fill_Table(strFillSQL)
 
         End If
@@ -851,5 +858,29 @@ Public Class frmConfiguration
 
     Private Sub Password_Barcode_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress, txtConfirmPassword.KeyPress, txtBarcode.KeyPress
         KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz-1234567890!@#$%^&*.,<>=+")
+    End Sub
+
+    Private Sub lblName_Click(sender As Object, e As EventArgs) Handles lblName.Click
+        Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
+                                      "User.Supervisor_Flag, User.Active_Flag From User ORDER BY User_First_Name ASC;"
+        Fill_Table(strFillSQL)
+    End Sub
+
+    Private Sub lblUserName_Click(sender As Object, e As EventArgs) Handles lblUserName.Click
+        Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
+                              "User.Supervisor_Flag, User.Active_Flag From User ORDER BY Username ASC;"
+        Fill_Table(strFillSQL)
+    End Sub
+
+    Private Sub lblStatus_Click(sender As Object, e As EventArgs) Handles lblStatus.Click
+        Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
+                              "User.Supervisor_Flag, User.Active_Flag From User ORDER BY Active_Flag DESC;"
+        Fill_Table(strFillSQL)
+    End Sub
+
+    Private Sub lblPermissions_Click(sender As Object, e As EventArgs) Handles lblPermissions.Click
+        Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
+                      "User.Supervisor_Flag, User.Active_Flag From User ORDER BY Supervisor_Flag, Admin_Flag DESC;"
+        Fill_Table(strFillSQL)
     End Sub
 End Class

@@ -378,25 +378,26 @@
         ' assing labels to contain the logged in user's name. 
         ' assign a tooltip because truncation of the username may need to happen. We need to fix the max length 
         ' that can display on the UI
-        Dim strLoggedInAs = "Logged in as "
+        Dim strLoggedInAs = "Logged in as " & LoggedInUsername
         lblCurrentUser.BringToFront()
         lblCurrentUser.Visible = True
+        lblCurrentUser.Text = strLoggedInAs
 
         ' handles the program from blowing up since there is not a way to check the username when scanning barcode
-        If Not String.IsNullOrEmpty(GetUserName()) Then
-            lblCurrentUser.Text = TruncateString(10, GetUserName())
-        End If
+        'If Not String.IsNullOrEmpty(GetUserName()) Then
+        '    lblCurrentUser.Text = TruncateString(10, GetUserName())
+        'End If
 
-        tpMultiPurposeTooltip.SetToolTip(lblCurrentUser, strLoggedInAs & GetUserName())
-        tpMultiPurposeTooltip.SetToolTip(pbLogin, strLoggedInAs & GetUserName())
-
-
+        'tpMultiPurposeTooltip.SetToolTip(lblCurrentUser, strLoggedInAs & GetUserName())
+        'tpMultiPurposeTooltip.SetToolTip(pbLogin, strLoggedInAs & GetUserName())
 
 
 
 
 
-        ' CheckUserPermissions(GetUserPermissions())
+
+
+        CheckUserPermissions(LoggedInPermission)
 
 
 
