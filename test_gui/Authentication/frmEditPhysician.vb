@@ -533,4 +533,28 @@ Public Class frmEditPhysician
         Fill_Table(strFillSQL)
 
     End Sub
+
+    Private Sub lblName_Click(sender As Object, e As EventArgs) Handles lblName.Click
+        Dim strFillSQL As String = "select Physician.Physician_ID, Physician.Physician_First_Name, Physician.Physician_Middle_Name," &
+                        "Physician.Physician_Last_Name, Physician.Physician_Credentials, Physician.Physician_Phone_Number," &
+                        "Physician.Physician_Fax_Number, Physician.Physician_Address, Physician.Physician_City," &
+                        "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician ORDER BY Physician_First_Name ASC;"
+        Fill_Table(strFillSQL)
+    End Sub
+
+    Private Sub lblPermissions_Click(sender As Object, e As EventArgs) Handles lblPermissions.Click
+        Dim strFillSQL As String = "select Physician.Physician_ID, Physician.Physician_First_Name, Physician.Physician_Middle_Name," &
+                "Physician.Physician_Last_Name, Physician.Physician_Credentials, Physician.Physician_Phone_Number," &
+                "Physician.Physician_Fax_Number, Physician.Physician_Address, Physician.Physician_City," &
+                "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician ORDER BY Physician_Credentials ASC;"
+        Fill_Table(strFillSQL)
+    End Sub
+
+    Private Sub lblStatus_Click(sender As Object, e As EventArgs) Handles lblStatus.Click
+        Dim strFillSQL As String = "select Physician.Physician_ID, Physician.Physician_First_Name, Physician.Physician_Middle_Name," &
+                "Physician.Physician_Last_Name, Physician.Physician_Credentials, Physician.Physician_Phone_Number," &
+                "Physician.Physician_Fax_Number, Physician.Physician_Address, Physician.Physician_City," &
+                "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician ORDER BY Active_Flag DESC;"
+        Fill_Table(strFillSQL)
+    End Sub
 End Class
