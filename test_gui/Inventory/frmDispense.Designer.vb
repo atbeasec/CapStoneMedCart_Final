@@ -66,36 +66,35 @@ Partial Class frmDispense
         Me.btnDrawer17 = New System.Windows.Forms.Button()
         Me.btnDrawer14 = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.lblDirections = New System.Windows.Forms.Label()
-        Me.Panel6 = New System.Windows.Forms.Panel()
-        Me.Panel7 = New System.Windows.Forms.Panel()
-        Me.pnlAmountToRemove = New System.Windows.Forms.Panel()
-        Me.pnlAmountInDrawer = New System.Windows.Forms.Panel()
-        Me.pnlAmountAdministered = New System.Windows.Forms.Panel()
         Me.Panel8 = New System.Windows.Forms.Panel()
         Me.btnDispense = New System.Windows.Forms.Button()
+        Me.pnlAmountAdministered = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.txtAmountDispensed = New System.Windows.Forms.TextBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.txtUnits = New System.Windows.Forms.TextBox()
+        Me.pnlAmountInDrawer = New System.Windows.Forms.Panel()
         Me.Panel9 = New System.Windows.Forms.Panel()
         Me.txtCountInDrawer = New System.Windows.Forms.TextBox()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
+        Me.pnlAmountToRemove = New System.Windows.Forms.Panel()
+        Me.Panel7 = New System.Windows.Forms.Panel()
+        Me.lblDirections = New System.Windows.Forms.Label()
         Me.Panel3.SuspendLayout()
         Me.Panel14.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.pnlHeader.SuspendLayout()
         Me.pnlSelector.SuspendLayout()
         Me.Panel1.SuspendLayout()
-        Me.Panel7.SuspendLayout()
-        Me.pnlAmountToRemove.SuspendLayout()
-        Me.pnlAmountInDrawer.SuspendLayout()
-        Me.pnlAmountAdministered.SuspendLayout()
         Me.Panel8.SuspendLayout()
+        Me.pnlAmountAdministered.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel4.SuspendLayout()
+        Me.pnlAmountInDrawer.SuspendLayout()
         Me.Panel9.SuspendLayout()
+        Me.pnlAmountToRemove.SuspendLayout()
+        Me.Panel7.SuspendLayout()
         Me.SuspendLayout()
         '
         'lstboxAllergies
@@ -103,10 +102,10 @@ Partial Class frmDispense
         Me.lstboxAllergies.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lstboxAllergies.FormattingEnabled = True
         Me.lstboxAllergies.ItemHeight = 20
-        Me.lstboxAllergies.Location = New System.Drawing.Point(839, 263)
+        Me.lstboxAllergies.Location = New System.Drawing.Point(21, 148)
         Me.lstboxAllergies.Name = "lstboxAllergies"
         Me.lstboxAllergies.SelectionMode = System.Windows.Forms.SelectionMode.None
-        Me.lstboxAllergies.Size = New System.Drawing.Size(191, 104)
+        Me.lstboxAllergies.Size = New System.Drawing.Size(182, 204)
         Me.lstboxAllergies.TabIndex = 5
         Me.lstboxAllergies.TabStop = False
         '
@@ -297,7 +296,7 @@ Partial Class frmDispense
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(835, 239)
+        Me.Label13.Location = New System.Drawing.Point(17, 124)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(154, 21)
         Me.Label13.TabIndex = 197
@@ -598,64 +597,6 @@ Partial Class frmDispense
         Me.Panel1.Size = New System.Drawing.Size(326, 367)
         Me.Panel1.TabIndex = 203
         '
-        'lblDirections
-        '
-        Me.lblDirections.AutoSize = True
-        Me.lblDirections.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDirections.Location = New System.Drawing.Point(38, 10)
-        Me.lblDirections.Name = "lblDirections"
-        Me.lblDirections.Size = New System.Drawing.Size(257, 25)
-        Me.lblDirections.TabIndex = 204
-        Me.lblDirections.Text = "Select Amount To Dispense:"
-        '
-        'Panel6
-        '
-        Me.Panel6.Location = New System.Drawing.Point(53, 224)
-        Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(306, 90)
-        Me.Panel6.TabIndex = 204
-        '
-        'Panel7
-        '
-        Me.Panel7.Controls.Add(Me.lblDirections)
-        Me.Panel7.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel7.Location = New System.Drawing.Point(0, 0)
-        Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(326, 45)
-        Me.Panel7.TabIndex = 205
-        '
-        'pnlAmountToRemove
-        '
-        Me.pnlAmountToRemove.Controls.Add(Me.Panel5)
-        Me.pnlAmountToRemove.Controls.Add(Me.btnUp)
-        Me.pnlAmountToRemove.Controls.Add(Me.btnDown)
-        Me.pnlAmountToRemove.Dock = System.Windows.Forms.DockStyle.Top
-        Me.pnlAmountToRemove.Location = New System.Drawing.Point(0, 45)
-        Me.pnlAmountToRemove.Name = "pnlAmountToRemove"
-        Me.pnlAmountToRemove.Size = New System.Drawing.Size(326, 56)
-        Me.pnlAmountToRemove.TabIndex = 205
-        '
-        'pnlAmountInDrawer
-        '
-        Me.pnlAmountInDrawer.Controls.Add(Me.Panel9)
-        Me.pnlAmountInDrawer.Controls.Add(Me.Button2)
-        Me.pnlAmountInDrawer.Controls.Add(Me.Button3)
-        Me.pnlAmountInDrawer.Dock = System.Windows.Forms.DockStyle.Top
-        Me.pnlAmountInDrawer.Location = New System.Drawing.Point(0, 101)
-        Me.pnlAmountInDrawer.Name = "pnlAmountInDrawer"
-        Me.pnlAmountInDrawer.Size = New System.Drawing.Size(326, 65)
-        Me.pnlAmountInDrawer.TabIndex = 206
-        '
-        'pnlAmountAdministered
-        '
-        Me.pnlAmountAdministered.Controls.Add(Me.Panel2)
-        Me.pnlAmountAdministered.Controls.Add(Me.Panel4)
-        Me.pnlAmountAdministered.Dock = System.Windows.Forms.DockStyle.Top
-        Me.pnlAmountAdministered.Location = New System.Drawing.Point(0, 166)
-        Me.pnlAmountAdministered.Name = "pnlAmountAdministered"
-        Me.pnlAmountAdministered.Size = New System.Drawing.Size(326, 57)
-        Me.pnlAmountAdministered.TabIndex = 207
-        '
         'Panel8
         '
         Me.Panel8.Controls.Add(Me.btnDispense)
@@ -679,6 +620,16 @@ Partial Class frmDispense
         Me.btnDispense.Text = "      Dispense Medication"
         Me.btnDispense.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnDispense.UseVisualStyleBackColor = False
+        '
+        'pnlAmountAdministered
+        '
+        Me.pnlAmountAdministered.Controls.Add(Me.Panel2)
+        Me.pnlAmountAdministered.Controls.Add(Me.Panel4)
+        Me.pnlAmountAdministered.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnlAmountAdministered.Location = New System.Drawing.Point(0, 166)
+        Me.pnlAmountAdministered.Name = "pnlAmountAdministered"
+        Me.pnlAmountAdministered.Size = New System.Drawing.Size(326, 57)
+        Me.pnlAmountAdministered.TabIndex = 207
         '
         'Panel2
         '
@@ -725,6 +676,17 @@ Partial Class frmDispense
         Me.txtUnits.Size = New System.Drawing.Size(61, 26)
         Me.txtUnits.TabIndex = 38
         Me.txtUnits.Text = "1"
+        '
+        'pnlAmountInDrawer
+        '
+        Me.pnlAmountInDrawer.Controls.Add(Me.Panel9)
+        Me.pnlAmountInDrawer.Controls.Add(Me.Button2)
+        Me.pnlAmountInDrawer.Controls.Add(Me.Button3)
+        Me.pnlAmountInDrawer.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnlAmountInDrawer.Location = New System.Drawing.Point(0, 101)
+        Me.pnlAmountInDrawer.Name = "pnlAmountInDrawer"
+        Me.pnlAmountInDrawer.Size = New System.Drawing.Size(326, 65)
+        Me.pnlAmountInDrawer.TabIndex = 206
         '
         'Panel9
         '
@@ -779,6 +741,36 @@ Partial Class frmDispense
         Me.Button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.Button3.UseVisualStyleBackColor = False
         '
+        'pnlAmountToRemove
+        '
+        Me.pnlAmountToRemove.Controls.Add(Me.Panel5)
+        Me.pnlAmountToRemove.Controls.Add(Me.btnUp)
+        Me.pnlAmountToRemove.Controls.Add(Me.btnDown)
+        Me.pnlAmountToRemove.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnlAmountToRemove.Location = New System.Drawing.Point(0, 45)
+        Me.pnlAmountToRemove.Name = "pnlAmountToRemove"
+        Me.pnlAmountToRemove.Size = New System.Drawing.Size(326, 56)
+        Me.pnlAmountToRemove.TabIndex = 205
+        '
+        'Panel7
+        '
+        Me.Panel7.Controls.Add(Me.lblDirections)
+        Me.Panel7.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel7.Location = New System.Drawing.Point(0, 0)
+        Me.Panel7.Name = "Panel7"
+        Me.Panel7.Size = New System.Drawing.Size(326, 45)
+        Me.Panel7.TabIndex = 205
+        '
+        'lblDirections
+        '
+        Me.lblDirections.AutoSize = True
+        Me.lblDirections.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDirections.Location = New System.Drawing.Point(38, 10)
+        Me.lblDirections.Name = "lblDirections"
+        Me.lblDirections.Size = New System.Drawing.Size(257, 25)
+        Me.lblDirections.TabIndex = 204
+        Me.lblDirections.Text = "Select Amount To Dispense:"
+        '
         'frmDispense
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -787,7 +779,6 @@ Partial Class frmDispense
         Me.ClientSize = New System.Drawing.Size(1116, 650)
         Me.Controls.Add(Me.pnlSelector)
         Me.Controls.Add(Me.pnlHeader)
-        Me.Controls.Add(Me.Panel6)
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.cmbMethod)
         Me.Controls.Add(Me.Label15)
@@ -812,18 +803,18 @@ Partial Class frmDispense
         Me.pnlHeader.PerformLayout()
         Me.pnlSelector.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
-        Me.Panel7.ResumeLayout(False)
-        Me.Panel7.PerformLayout()
-        Me.pnlAmountToRemove.ResumeLayout(False)
-        Me.pnlAmountInDrawer.ResumeLayout(False)
-        Me.pnlAmountAdministered.ResumeLayout(False)
         Me.Panel8.ResumeLayout(False)
+        Me.pnlAmountAdministered.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
+        Me.pnlAmountInDrawer.ResumeLayout(False)
         Me.Panel9.ResumeLayout(False)
         Me.Panel9.PerformLayout()
+        Me.pnlAmountToRemove.ResumeLayout(False)
+        Me.Panel7.ResumeLayout(False)
+        Me.Panel7.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -875,7 +866,6 @@ Partial Class frmDispense
     Friend WithEvents pnlAmountInDrawer As Panel
     Friend WithEvents pnlAmountToRemove As Panel
     Friend WithEvents Panel7 As Panel
-    Friend WithEvents Panel6 As Panel
     Friend WithEvents Panel8 As Panel
     Friend WithEvents btnDispense As Button
     Friend WithEvents Panel2 As Panel

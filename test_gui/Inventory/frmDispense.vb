@@ -97,6 +97,7 @@
         lblDirections.Left = (pnlSelector.Width \ 2) - (pnlSelector.Width \ 2)
 
         pnlAmountInDrawer.Visible = False
+        pnlAmountAdministered.Visible = False
 
     End Sub
 
@@ -153,39 +154,14 @@
 
 
 
+        ' check if the medication is a narcotic
 
+        ' IsNarcotic()
 
-        'Logic here to check if the medication is narcotic or controlled
-        ' if this is true we will update the label on the screen
+        'else
 
-        If btnDispense.Text = "Dispense Medication" Then
+        'IsNotNarcotic()
 
-            ' first thing that always has to happen is we need to find out how much they want to dispense
-            lblDirections.Text = "Select Amount To Dispense"
-            lblDirections.Left = (pnlSelector.Width \ 2) - (pnlSelector.Width \ 2)
-            pnlAmountToRemove.Visible = True
-
-            'hide other panels
-            pnlAmountAdministered.Visible = False
-            pnlAmountInDrawer.Visible = False
-
-
-            'check here with an if statement to see if the medication is narcotic/controlled
-
-
-
-
-            ' wait for drawer to close
-
-            '  ElseIf btnDispense.Text = "Submit Count" Then
-
-            ' check if the medication count is going to cause a descrepancy with what is in db here
-            ' CInt(txtQuantity.Text)
-
-
-
-
-        End If
 
 
 
@@ -194,6 +170,19 @@
 
     Private Sub IsNarcotic()
         ' if it is narcotic we need to do the following
+
+        ' pop open drawer here()
+        lblDirections.Text = "Select Amount To Dispense"
+        lblDirections.Left = (pnlSelector.Width \ 2) - (pnlSelector.Width \ 2)
+        pnlAmountToRemove.Visible = True
+
+        'hide other panels
+        pnlAmountAdministered.Visible = False
+        pnlAmountInDrawer.Visible = False
+
+        'amount to dispense is stored in this variable
+        'txtQuantityToDispense.Text
+
 
         lblDirections.Text = "Enter the Quantity in the Cart"
         lblDirections.Left = (pnlSelector.Width \ 2) - (pnlSelector.Width \ 2)
@@ -209,16 +198,59 @@
 
         If btnDispense.Text = "Submit Count" Then
 
+            lblDirections.Text = "Enter the Amount Administered"
+            lblDirections.Left = (pnlSelector.Width \ 2) - (pnlSelector.Width \ 2)
+            ' show approiate panels
+            pnlAmountAdministered.Visible = True
+            pnlAmountToRemove.Visible = False
+            pnlAmountInDrawer.Visible = False
+
+            ' we will need to get the data typed in textfields here and dump to db. That is stored in
+            'txtAmountDispensed.Text
+
+
+
+            ' here we call the waste form...
+            frmMain.OpenChildForm(frmWaste)
 
         End If
 
 
-
-
-
     End Sub
 
+    Private Sub IsNotNarcotic()
 
+        ' if it is narcotic we need to do the following
+
+        ' pop open drawer here()
+        lblDirections.Text = "Select Amount To Dispense"
+        lblDirections.Left = (pnlSelector.Width \ 2) - (pnlSelector.Width \ 2)
+        pnlAmountToRemove.Visible = True
+
+        'hide other panels
+        pnlAmountAdministered.Visible = False
+        pnlAmountInDrawer.Visible = False
+
+        'amount to dispense is stored in this variable
+        'txtQuantityToDispense.Text
+
+
+        lblDirections.Text = "Enter the Amount Administered"
+        lblDirections.Left = (pnlSelector.Width \ 2) - (pnlSelector.Width \ 2)
+
+        ' show approiate panels
+        pnlAmountAdministered.Visible = True
+        pnlAmountToRemove.Visible = False
+        pnlAmountInDrawer.Visible = False
+        btnDispense.Text = "Submit Count"
+
+        ' we will need to get the data typed in textfields here and dump to db. That is stored in
+        'txtAmountDispensed.Text
+
+        ' here we call the waste form...
+        frmMain.OpenChildForm(frmWaste)
+
+    End Sub
 
     Private Sub cmbMedications_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMedications.SelectedIndexChanged
         DispenseHistory.SetMedicationProperties()
