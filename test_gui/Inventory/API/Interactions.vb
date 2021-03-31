@@ -325,9 +325,177 @@ Module Interactions
         Else
         End If
 
-
-
     End Sub
 
+    '/*******************************************************************/
+    '/*               SUBROUTINE NAME:         DrugInteractionOverride	*/
+    '/*******************************************************************/
+    '/*                   WRITTEN BY:  	Breanna Howey					*/
+    '/*		         DATE CREATED: 	   03/30/21							*/
+    '/*******************************************************************/
+    '/*  SUBROUTINE PURPOSE:											*/
+    '/*	 The purpose of this subroutine is to handle the code behind drug
+    '/*  interaction overrides. When the user dispense a medication, whether
+    '/*  ad hoc or regular dispensing, this sub routine will be called. */
+    '/*  The medication rxcui, patient mrn, form name are passed to this
+    '/*  subroutine. Next, the patient is selected from the table where the
+    '/*  MRN equals the one sent in by the user. The routine then looks */
+    '/*  for all medication prescribed to the patient. If an interaction*/
+    '/*  is found, then the strInteraction variable is set to true. When*/
+    '/*  it is true, the drug interaction override pop up is available to 
+    '/*  the user. If the user chooses to override the drug, an entry is*/
+    '/*  added to the drug interaction override table.                  */
+    '/*******************************************************************/
+    '/*  CALLED BY:   	      											*/
+    '/*  frmAdHockDispense.btnDispense_Click                            */
+    '/*  frmDispense.btnDispense_Click_1                                */
+    '/*******************************************************************/
+    '/*  CALLS:															*/
+    '/*  ExecuteScalerQuery 											*/
+    '/*  ExecuteSelectQuery 											*/
+    '/*  ExecuteInsertQuery             `                               */
+    '/*******************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):							*/
+    '/*																	*/
+    '/*  strMedRXCUIFromForm - Stores the RXCUI on the dispense or ad   */
+    '/*                        hoc form                                 */
+    '/*  strPatientMRNFromForm - Stores the MRN from the dispense or ad */
+    '/*                          ad hoc form                            */
+    '/*  strForm - Stores the name of the form that called the routine  */
+    '/*******************************************************************/
+    '/* SAMPLE INVOCATION:												*/
+    '/*																	*/
+    '/* DrugInteractionOverride("11111", "121212", "frmDispense")   	*/	
+    '/*******************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+    '/*																	*/
+    '/*  blnInteraction - Stores whether an interaction was found in the*/
+    '/*                   database                                      */
+    '/*  dsDataset - Used to store data sets returned from querying the */
+    '/*              database                                           */
+    '/*  intPatientID - Stores the patient ID passed to the routine     */
+    '/*  objReferencingForm - Stores an object of what form we're referencing
+    '/*  strArray - Stores the split RXCUI from the dropdown list       */
+    '/*  strInteraction - Stores one interacting drug with the selected */
+    '/*                   drug                                          */
+    '/*  strLabel1Text - Stores the text for Label1                     */
+    '/*  strMedicationOneRXCUI - Stores the first medication rxcui      */
+    '/*  strSQLCmd - Stores the SQL command to query the database       */
+    '/*******************************************************************/
+    '/* MODIFICATION HISTORY:											*/
+    '/*																	*/
+    '/*  WHO   WHEN     WHAT											*/
+    '/*  ---   ----     ------------------------------------------------*/
+    '/*  BRH  03/30/21  Initial creation of the code					*/
+    '/*******************************************************************/
+    Public Sub DrugInteractionOverride(strMedRXCUIFromForm As String, strPatientMRNFromForm As String, strForm As String)
+
+        Dim blnInteraction As Boolean = False
+        Dim dsDataset As New DataSet
+        Dim intPatientID As Integer
+        'split out the RXCUI and name
+        Dim objReferencingForm As Object
+        Dim strArray() As String
+        Dim strInteraction As String
+        Dim strLabel1Text As String
+        Dim strMedicationOneRXCUI As String
+        Dim strSQLCmd As String
+
+        'Select the patient id given the mrn
+        strSQLCmd = "Select Patient_ID From Patient 
+                    WHERE MRN_Number = " & CInt(strPatientMRNFromForm) & ";"
+
+        intPatientID = ExecuteScalarQuery(strSQLCmd)
+
+        'The medication name is shown differently
+        'depending on the form. Therefore, we
+        'have to parse out the desired data differently
+        If strForm = "Dispense" Then
+            strMedicationOneRXCUI = strMedRXCUIFromForm
+            strArray = strMedicationOneRXCUI.Split("--")
+            strMedicationOneRXCUI = strArray(2)
+            strLabel1Text = frmDispense.cmbMedications.SelectedItem.ToString
+            objReferencingForm = frmDispense
+
+        ElseIf strForm = "AdHoc" Then
+            strMedicationOneRXCUI = strMedRXCUIFromForm
+            strArray = strMedicationOneRXCUI.Split(":")
+            strMedicationOneRXCUI = strArray(1)
+            strLabel1Text = frmAdHockDispense.cmbMedications.SelectedItem.ToString
+            objReferencingForm = frmAdHockDispense
+
+        End If
+
+        'Select the rxcui from the selected medication
+        strSQLCmd = "Select RXCUI_ID From Medication 
+                    INNER JOIN PatientMedication ON Medication_TUID = Medication_ID 
+                    INNER JOIN Patient ON Patient_TUID = Patient_ID
+                    WHERE MRN_Number = " & CInt(strPatientMRNFromForm) & ";"
+
+        dsDataset = ExecuteSelectQuery(strSQLCmd)
+
+        'Try to find any interactions with the selected medication
+        For Each item In dsDataset.Tables(0).Rows
+            strSQLCmd = "SELECT Drug_Interactions_ID FROM Drug_Interactions
+                         WHERE Medication_One_ID = '" & item(0) & "'
+                         OR Medication_Two_ID = '" & item(0) & "'
+                         AND Medication_Two_ID = '" & strMedicationOneRXCUI & "'
+                         OR Medication_One_ID = '" & strMedicationOneRXCUI & "';"
+
+            'If no interactions were found previously, store the 
+            'rxcui of the interacting medication in strInteraction
+            If blnInteraction.Equals(False) Then
+                strInteraction = ExecuteScalarQuery(strSQLCmd)
+                If strInteraction IsNot Nothing Then
+                    blnInteraction = True
+                End If
+            End If
+        Next
+
+
+
+        If blnInteraction.Equals(True) Then
+            'Change how the witness sign off form looks
+            frmWitnessSignOff.Label1.AutoSize = True
+            frmWitnessSignOff.Label2.AutoSize = True
+            frmWitnessSignOff.Label1.Location = New Point(3, 34)
+            frmWitnessSignOff.Label1.Text = strLabel1Text
+            frmWitnessSignOff.Label2.Text = "Interacts with Other Prescribed Meds"
+            frmWitnessSignOff.referringForm = objReferencingForm
+            frmWitnessSignOff.Text = "Drug Interactions Override"
+            frmWitnessSignOff.ShowDialog()
+
+            'MessageBox.Show("The drug you are trying to dispense interacts with other meds the patient's prescribed")
+
+            'If the user chose to override the interaction, insert the record into the database
+            If frmDispense.blnOverride Or frmAdHockDispense.blnOverride Then
+                ExecuteInsertQuery("INSERT INTO Drug_InteractionsOverride(Patient_TUID, User_TUID, Drug_Interactions_TUID, DateTime) " &
+                                           "Values(" & intPatientID & ", " & LoggedInID & ", '" & strInteraction & "', '" & DateTime.Now & "')")
+
+                If strForm = "Dispense" Then
+                    frmDispense.blnSignedOff = True
+                ElseIf strForm = "AdHoc" Then
+                    frmAdHockDispense.blnSignedOff = True
+                End If
+
+            Else
+                MessageBox.Show("Dispense canceled by user.")
+
+                If strForm = "Dispense" Then
+                    frmDispense.blnSignedOff = False
+                ElseIf strForm = "AdHoc" Then
+                    frmAdHockDispense.blnSignedOff = False
+                End If
+
+                frmDispense.blnOverride = False
+                frmAdHockDispense.blnOverride = False
+
+                Exit Sub
+
+
+            End If
+        End If
+
+    End Sub
 
 End Module
