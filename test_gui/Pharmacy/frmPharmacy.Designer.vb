@@ -45,7 +45,7 @@ Partial Class frmPharmacy
         Me.cmbFrequencyNumber = New System.Windows.Forms.ComboBox()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.txtQuantity = New System.Windows.Forms.TextBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtUnits = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel5.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -297,22 +297,20 @@ Partial Class frmPharmacy
         Me.txtQuantity.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtQuantity.Location = New System.Drawing.Point(396, 156)
         Me.txtQuantity.Name = "txtQuantity"
-        Me.txtQuantity.ReadOnly = True
         Me.txtQuantity.ShortcutsEnabled = False
-        Me.txtQuantity.Size = New System.Drawing.Size(118, 25)
+        Me.txtQuantity.Size = New System.Drawing.Size(161, 25)
         Me.txtQuantity.TabIndex = 176
         '
-        'TextBox1
+        'txtUnits
         '
-        Me.TextBox1.BackColor = System.Drawing.Color.White
-        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(583, 156)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
-        Me.TextBox1.ShortcutsEnabled = False
-        Me.TextBox1.Size = New System.Drawing.Size(67, 25)
-        Me.TextBox1.TabIndex = 177
+        Me.txtUnits.BackColor = System.Drawing.Color.White
+        Me.txtUnits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtUnits.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtUnits.Location = New System.Drawing.Point(583, 156)
+        Me.txtUnits.Name = "txtUnits"
+        Me.txtUnits.ShortcutsEnabled = False
+        Me.txtUnits.Size = New System.Drawing.Size(101, 25)
+        Me.txtUnits.TabIndex = 177
         '
         'Label1
         '
@@ -332,7 +330,7 @@ Partial Class frmPharmacy
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(717, 494)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.txtUnits)
         Me.Controls.Add(Me.txtQuantity)
         Me.Controls.Add(Me.cmbFrequencyNumber)
         Me.Controls.Add(Me.Panel3)
@@ -385,7 +383,7 @@ Partial Class frmPharmacy
     Friend WithEvents txtType As TextBox
     Friend WithEvents cmbFrequencyNumber As ComboBox
     Friend WithEvents ErrorProvider1 As ErrorProvider
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtUnits As TextBox
     Friend WithEvents txtQuantity As TextBox
     Friend WithEvents Label1 As Label
 End Class

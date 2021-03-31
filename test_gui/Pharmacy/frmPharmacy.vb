@@ -18,7 +18,6 @@
         cmbMedication.Items.Clear()
         cmbStrength.Items.Clear()
         cmbFrequencyNumber.Items.Clear()
-        txtQuantity.Text = 1
         PopulateFrequencyNumberComboBox()
         Dim intCounter As Integer = 0
         dsMedications = ExecuteSelectQuery("SELECT *,Trim(Drug_Name,' ') From Medication Inner Join DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE DrawerMedication.Active_Flag = '1' ORDER BY Medication.Drug_Name COLLATE NOCASE")
@@ -80,76 +79,11 @@
             cmbMedication.SelectedIndex = -1
             cmbOrderedBy.SelectedIndex = -1
             cmbFrequencyNumber.SelectedIndex = -1
-            txtQuantity.Text = 1
+            txtQuantity.Text = Nothing
 
         End If
     End Sub
 
-    '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:       */
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
-    '/*		         DATE CREATED: 	   03/11/21							  */
-    '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE:
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      									          
-    '/*  (None)								           					  
-    '/*********************************************************************/
-    '/*  CALLS:														    	
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								                   						                           
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically):	
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						                      */
-    '/*											                          */
-    '/*  WHO                   WHEN     WHAT							  */
-    '/*  ---                   ----     ----------------------------------*/
-    '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
-    '/*********************************************************************/
-    Private Sub btnIncrement_Click(sender As Object, e As EventArgs)
-
-        If Not IsNumeric(txtQuantity.Text) Then
-            txtQuantity.Text = 0
-        End If
-        ButtonIncrement(1000, txtQuantity)
-
-    End Sub
-
-    '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:       */
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
-    '/*		         DATE CREATED: 	   03/11/21							  */
-    '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE:
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      									          
-    '/*  (None)								           					  
-    '/*********************************************************************/
-    '/*  CALLS:														    	
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								                   						                           
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically):	
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						                      */
-    '/*											                          */
-    '/*  WHO                   WHEN     WHAT							  */
-    '/*  ---                   ----     ----------------------------------*/
-    '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
-    '/*********************************************************************/
-    Private Sub btnDecrement_Click(sender As Object, e As EventArgs)
-        If Not IsNumeric(txtQuantity.Text) Or txtQuantity.Text = 0 Then
-            txtQuantity.Text = 2
-        End If
-        ButtonDecrement(txtQuantity)
-    End Sub
 
     Private Sub cmbPatientName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPatientName.SelectedIndexChanged
         If Not cmbPatientName.SelectedIndex = -1 Then
@@ -187,6 +121,10 @@
     '/*********************************************************************/
     Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantity.KeyPress
         KeyPressCheck(e, "0123456789")
+    End Sub
+
+    Private Sub txtUnits_TextChanged(sender As Object, e As EventArgs) Handles txtUnits.KeyPress
+        KeyPressCheck(e, "0123456789abcdefghijklmnopqrstuvwxyz/-.")
     End Sub
 
     '/*********************************************************************/
