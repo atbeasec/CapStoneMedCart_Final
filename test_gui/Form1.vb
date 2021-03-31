@@ -381,15 +381,9 @@
         Dim strLoggedInAs = "Logged in as " & LoggedInUsername
         lblCurrentUser.BringToFront()
         lblCurrentUser.Visible = True
-        lblCurrentUser.Text = strLoggedInAs
-
-        ' handles the program from blowing up since there is not a way to check the username when scanning barcode
-        'If Not String.IsNullOrEmpty(GetUserName()) Then
-        '    lblCurrentUser.Text = TruncateString(10, GetUserName())
-        'End If
-
-        'tpMultiPurposeTooltip.SetToolTip(lblCurrentUser, strLoggedInAs & GetUserName())
-        'tpMultiPurposeTooltip.SetToolTip(pbLogin, strLoggedInAs & GetUserName())
+        lblCurrentUser.Text = TruncateString(15, LoggedInUsername)
+        tpMultiPurposeTooltip.SetToolTip(lblCurrentUser, strLoggedInAs)
+        tpMultiPurposeTooltip.SetToolTip(pbLogin, strLoggedInAs)
 
 
 
