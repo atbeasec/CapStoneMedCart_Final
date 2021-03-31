@@ -1,5 +1,5 @@
 ﻿Public Class frmDispense
-    Public blnSignedOff As Boolean = False
+    Public blnSignedOff As Boolean = True
     Public blnOverride As Boolean = False
     Private intPatientID As Integer
     Private intPatientMRN As Integer
@@ -111,7 +111,12 @@
                     'show witness sign off
                     frmWitnessSignOff.Label1.Text = cmbMedications.SelectedItem.ToString
                     frmWitnessSignOff.referringForm = Me
+                    'added formatting in case a drug interaction override was chosen first
+                    frmWitnessSignOff.Label2.Text = "Causes Allergic Reaction to Patient"
+                    frmWitnessSignOff.Text = "Allergies Override"
+                    frmWitnessSignOff.Label1.Location = New Point(3, 34)
                     frmWitnessSignOff.ShowDialog()
+
                     'if authentication from witness sign off form comes back then
                     If blnOverride Then
                         Dim intMaxAllergyID
@@ -125,22 +130,36 @@
 
                         ExecuteInsertQuery("INSERT INTO AllergyOverride(AllergyOverride_ID, Patient_TUID, User_TUID, Allergy_Name, DateTime) " &
                                            "Values(" & intMaxAllergyID & ", " & intPatientID & ", " & LoggedInID & ", '" & allergy & "', '" & DateTime.Now & "')")
+
                     Else
                         MessageBox.Show("Dispense canceled by user.")
+                        blnSignedOff = False
+                        blnOverride = False
+                        'frmAdHockDispense.blnSignedOff = False
                         Exit Sub
                     End If
-                    blnOverride = False
+
                 Else
                     ' do nothing as there is no allergy
+                    blnSignedOff = False
                 End If
             Next
-            'If blnSignedOff = True Then
-            DispenseHistory.DispenseMedication(DispenseHistory.SplitMedicationString(cmbMedications.SelectedItem), intPatientID)
+
+            'If the user didn't already sign off to dispense the medication,
+            'check interactions
+            If blnSignedOff = False Then
+                DrugInteractionOverride(cmbMedications.SelectedItem, txtPatientMRN.Text, "Dispense")
+            End If
+
+            'If the user signs off for any override, dispense the medication
+            If blnSignedOff = True Then
+                DispenseHistory.DispenseMedication(DispenseHistory.SplitMedicationString(cmbMedications.SelectedItem), intPatientID)
                 MessageBox.Show("Order Successfully placed")
-            '   blnSignedOff = False
-            ' End If
+            End If
 
         End If
+
+
 
 
     End Sub
