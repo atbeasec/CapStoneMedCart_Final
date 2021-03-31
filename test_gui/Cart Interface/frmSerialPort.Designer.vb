@@ -33,6 +33,7 @@ Partial Class frmSerialPort
         '
         'cmbBaudrate
         '
+        Me.cmbBaudrate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbBaudrate.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbBaudrate.FormattingEnabled = True
         Me.cmbBaudrate.Location = New System.Drawing.Point(27, 70)
@@ -52,6 +53,7 @@ Partial Class frmSerialPort
         '
         'cmbComPort
         '
+        Me.cmbComPort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbComPort.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbComPort.FormattingEnabled = True
         Me.cmbComPort.Location = New System.Drawing.Point(26, 146)

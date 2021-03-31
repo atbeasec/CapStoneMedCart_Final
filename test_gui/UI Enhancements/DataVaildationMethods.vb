@@ -179,10 +179,16 @@ Module DataVaildationMethods
     '/*                            out and I needed to make sure that my   */
     '/*                            coded worked before I tried to fix it.
     '/* dillen      3/22/2021      Fixed \ to work with regex              */
+    '/* NP          3/30/2021      added an optional parameter to allow for*/
+    '/*                            situations where single ' are kept      */
     '/*********************************************************************/
 
-    Function checkSQLInjection(TextToCheck As String) As String
-        TextToCheck = Regex.Replace(TextToCheck, Chr(39), "") ' check for '
+    Function checkSQLInjection(TextToCheck As String, Optional allowSingleQuote As Boolean = False) As String
+        If allowSingleQuote Then
+            TextToCheck = Regex.Replace(TextToCheck, Chr(39), "''") ' check for '
+        Else
+            TextToCheck = Regex.Replace(TextToCheck, Chr(39), "") ' check for '
+        End If
         TextToCheck = Regex.Replace(TextToCheck, Chr(34), "") 'check for "
         TextToCheck = Regex.Replace(TextToCheck, "\\", "") ' check for \    
         TextToCheck = Regex.Replace(TextToCheck, Chr(47), "") ' check for /
@@ -190,5 +196,6 @@ Module DataVaildationMethods
 
         Return TextToCheck
     End Function
+
 
 End Module
