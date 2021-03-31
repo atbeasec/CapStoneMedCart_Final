@@ -369,7 +369,7 @@ Public Class frmEditPhysician
 
     End Sub
 
-    Private Sub NameKeypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtFirstName.KeyPress, txtLastName.KeyPress, txtMiddleName.KeyPress, txtSearch.KeyPress
+    Private Sub NameKeypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles  txtMiddleName.KeyPress, txtLastName.KeyPress, txtFirstName.KeyPress
         KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*.,<>=+")
     End Sub
     Private Sub AddressKeypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtAddress.KeyPress
@@ -489,39 +489,26 @@ Public Class frmEditPhysician
 
 
 
-    Private Sub Search_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
+    Private Sub Search_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearchBox.KeyPress
         If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
             e.KeyChar = ChrW(0)
             e.Handled = True
-            Dim strSearch = txtSearch.Text
+            Dim strSearch = txtSearchBox.Text
             strSearch = Regex.Replace(strSearch, "'", "''")
+
             Dim strFillSQL = "select Physician.Physician_ID, Physician.Physician_First_Name, Physician.Physician_Middle_Name," &
                                     "Physician.Physician_Last_Name, Physician.Physician_Credentials, Physician.Physician_Phone_Number," &
                                     "Physician.Physician_Fax_Number, Physician.Physician_Address, Physician.Physician_City," &
                                     "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician " &
                                     "WHERE Physician_First_Name LIKE '" & strSearch & "%' Or Physician_Last_Name LIKE '" & strSearch & "%' Or Physician_Credentials LIKE '" & strSearch & "%';"
-
             Fill_Table(strFillSQL)
         End If
     End Sub
 
-    Private Sub SearchIcon_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
-        Dim strSearch = txtSearch.Text
-        strSearch = Regex.Replace(strSearch, "'", "''")
-
-        Dim strFillSQL = "select Physician.Physician_ID, Physician.Physician_First_Name, Physician.Physician_Middle_Name," &
-                                    "Physician.Physician_Last_Name, Physician.Physician_Credentials, Physician.Physician_Phone_Number," &
-                                    "Physician.Physician_Fax_Number, Physician.Physician_Address, Physician.Physician_City," &
-                                    "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician " &
-                                    "WHERE Physician_First_Name LIKE '" & strSearch & "%' Or Physician_Last_Name LIKE '" & strSearch & "%' Or Physician_Credentials LIKE '" & strSearch & "%';"
-        Fill_Table(strFillSQL)
-
-    End Sub
-
-    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearchBox.TextChanged
 
 
-        If txtSearch.Text = "" Then
+        If txtSearchBox.Text = "" Then
             Dim strFillSQL As String = "select Physician.Physician_ID, Physician.Physician_First_Name, Physician.Physician_Middle_Name," &
                                     "Physician.Physician_Last_Name, Physician.Physician_Credentials, Physician.Physician_Phone_Number," &
                                     "Physician.Physician_Fax_Number, Physician.Physician_Address, Physician.Physician_City," &
@@ -534,4 +521,16 @@ Public Class frmEditPhysician
 
     End Sub
 
+    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        Dim strSearch = txtSearchBox.Text
+        strSearch = Regex.Replace(strSearch, "'", "''")
+
+        Dim strFillSQL = "select Physician.Physician_ID, Physician.Physician_First_Name, Physician.Physician_Middle_Name," &
+                                    "Physician.Physician_Last_Name, Physician.Physician_Credentials, Physician.Physician_Phone_Number," &
+                                    "Physician.Physician_Fax_Number, Physician.Physician_Address, Physician.Physician_City," &
+                                    "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician " &
+                                    "WHERE Physician_First_Name LIKE '" & strSearch & "%' Or Physician_Last_Name LIKE '" & strSearch & "%' Or Physician_Credentials LIKE '" & strSearch & "%';"
+        Fill_Table(strFillSQL)
+
+    End Sub
 End Class
