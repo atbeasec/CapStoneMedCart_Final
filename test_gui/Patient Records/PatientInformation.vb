@@ -624,6 +624,24 @@ Module PatientInformation
         frmDispense.txtPatientMRN.Text &= dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.DoB) & " "
         frmDispense.txtPatientMRN.Text &= dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.FristName) & " "
         frmDispense.txtPatientMRN.Text &= dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.LastName)
+
+        Dim Strdatacommand As String = "Select trim(Medication.Drug_Name,' '), Medication.Strength, Medication.Type, Dispensing.Amount_Dispensed,Dispensing.DateTime_Dispensed, User.User_Last_Name, User.User_First_Name from Dispensing 
+                                        Inner Join PatientMedication ON PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID
+                                        INNER JOIN Medication ON Medication.Medication_ID = PatientMedication.Medication_TUID
+                                        INNER JOIN User ON User.User_ID = Dispensing.Primary_User_TUID
+                                        where PatientMedication.Patient_TUID = '" & intPatient_ID & "'
+                                        UNION
+                                        Select trim(Medication.Drug_Name,' '), Medication.Strength, Medication.Type, AdHocOrder.Amount, AdHocOrder.DateTime, User_Last_Name,User_First_Name  from AdHocOrder
+                                        Inner Join Medication on Medication.Medication_ID = AdHocOrder.Medication_TUID
+                                        INNER JOIN User ON user.User_ID = AdHocOrder.User_TUID
+                                        where AdHocOrder.Patient_TUID = '" & intPatient_ID & "'
+                                        Order by Dispensing.DateTime_Dispensed DESC"
+
+        Dim dsmydataset As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+
+        For Each dr As DataRow In dsmydataset.Tables(0).Rows
+            frmPatientInfo.CreateDispenseHistoryPanels(frmDispense.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(5) & " " & dr(6), dr(4), "")
+        Next
     End Sub
 
     '/*********************************************************************/
@@ -848,7 +866,7 @@ Module PatientInformation
         dsPatientInfo = CreateDatabase.ExecuteSelectQuery(strbSqlCommand.ToString)
         'look create panel method for each prescription the patient has
         For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
-            frmDispense.CreatePrescriptionsPanels(frmDispense.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7))
+            'frmDispense.CreatePrescriptionsPanels(frmDispense.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7))
         Next
 
     End Sub

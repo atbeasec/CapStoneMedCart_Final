@@ -230,7 +230,7 @@
 
     End Sub
     '/*********************************************************************/
-    '/*            SubProgram NAME: CreateDispenseHistoryPanels()         */         
+    '/*            SubProgram NAME: CreatePrescriptionsPanels()         */         
     '/*********************************************************************/
     '/*                   WRITTEN BY:  Collin Krygier   		          */   
     '/*		         DATE CREATED: 		 2/6/2021                         */                             
