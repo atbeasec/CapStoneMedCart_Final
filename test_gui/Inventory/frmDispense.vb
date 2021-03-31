@@ -109,48 +109,6 @@
 
     Private Sub btnDispense_Click_1(sender As Object, e As EventArgs) Handles btnDispense.Click
 
-
-        'If Not IsNothing(cmbMedications.SelectedItem) Then
-        '    For Each allergy In lstboxAllergies.Items
-        '        If cmbMedications.SelectedItem.ToString.ToLower.Contains(allergy.ToString.ToLower) Then
-        '            'show witness sign off
-        '            frmWitnessSignOff.Label1.Text = cmbMedications.SelectedItem.ToString
-        '            frmWitnessSignOff.referringForm = Me
-        '            frmWitnessSignOff.ShowDialog()
-        '            'if authentication from witness sign off form comes back then
-        '            If blnOverride Then
-        '                Dim intMaxAllergyID
-        '                ' pull the information to insert
-        '                If ExecuteScalarQuery("Select AllergyOverride_ID from AllergyOverride") = Nothing Then
-        '                    intMaxAllergyID = 0
-        '                Else
-        '                    intMaxAllergyID = ExecuteScalarQuery("SELECT MAX(AllergyOverride_ID) from AllergyOverride")
-        '                    intMaxAllergyID += 1
-        '                End If
-
-        '                ExecuteInsertQuery("INSERT INTO AllergyOverride(AllergyOverride_ID, Patient_TUID, User_TUID, Allergy_Name, DateTime) " &
-        '                                   "Values(" & intMaxAllergyID & ", " & intPatientID & ", " & LoggedInID & ", '" & allergy & "', '" & DateTime.Now & "')")
-        '            Else
-        '                MessageBox.Show("Dispense canceled by user.")
-        '                Exit Sub
-        '            End If
-        '            blnOverride = False
-        '        Else
-        '            ' do nothing as there is no allergy
-        '        End If
-        '    Next
-        '    'If blnSignedOff = True Then
-        '    DispenseHistory.DispenseMedication(DispenseHistory.SplitMedicationString(cmbMedications.SelectedItem), intPatientID)
-        '    MessageBox.Show("Order Successfully placed")
-        '    '   blnSignedOff = False
-        '    ' End If
-
-        'End If
-
-
-
-
-
         ' check if the medication is a narcotic
 
         ' IsNarcotic()
