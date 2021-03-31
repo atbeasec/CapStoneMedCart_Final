@@ -40,6 +40,8 @@ Module BulkImportMethods
     '/*  ---   ----     ------------------------------------------------- */
     '/*  NP    3/24/2021 Made changes to allow the adding of rooms with   */
     '/*                  when importing patient.                          */
+    '/*  NP    3/31/2021 change the format for the date required for patient*/
+    '*                   imports to be to be yyyy/MM/dd                   */
     '/*********************************************************************/
 
     Const strPhonePattern As String = "^(1-)?\d{3}-\d{3}-\d{4}$"
@@ -275,13 +277,17 @@ Module BulkImportMethods
     '/*                     been used in the import so far. To make sure   */
     '/*                     that two active patients will not share the same*/
     '/*                     barcode.                                        */
+    '/* resultDate - this is the varaible that will store the newly created */
+    '/*                 date object so we can format it later.              */
     '/*                                                                     
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
-    '/*  NP    3/24/2021 Added a check for the room and beds.              */                                                                   
+    '/*  NP    3/24/2021 Added a check for the room and beds.              */  
+    '/*  NP    3/31/2021 change the format for the date required to be     */
+    '/*                  yyyy/MM/dd                                        */
     '/*********************************************************************/
 
 
