@@ -50,7 +50,7 @@ Public Class frmEditPhysician
         Dim strFillSQL As String = "select Physician.Physician_ID, Physician.Physician_First_Name, Physician.Physician_Middle_Name," &
                                     "Physician.Physician_Last_Name, Physician.Physician_Credentials, Physician.Physician_Phone_Number," &
                                     "Physician.Physician_Fax_Number, Physician.Physician_Address, Physician.Physician_City," &
-                                    "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician;"
+                                    "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician ORDER BY Physician_First_Name ASC;"
         Fill_Table(strFillSQL)
 
         cboCredentials.Items.AddRange({"MD", "DO", "MBBS", "PhD", "DNP", "NP", "PA", "CNP", "CNNP", "PA", "CNS", "CNM"})
@@ -434,7 +434,7 @@ Public Class frmEditPhysician
         Dim strFillSQL As String = "select Physician.Physician_ID, Physician.Physician_First_Name, Physician.Physician_Middle_Name," &
                                     "Physician.Physician_Last_Name, Physician.Physician_Credentials, Physician.Physician_Phone_Number," &
                                     "Physician.Physician_Fax_Number, Physician.Physician_Address, Physician.Physician_City," &
-                                    "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician;"
+                                    "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician ORDER BY Physician_First_Name ASC;"
         Fill_Table(strFillSQL)
     End Sub
 
@@ -512,7 +512,7 @@ Public Class frmEditPhysician
             Dim strFillSQL As String = "select Physician.Physician_ID, Physician.Physician_First_Name, Physician.Physician_Middle_Name," &
                                     "Physician.Physician_Last_Name, Physician.Physician_Credentials, Physician.Physician_Phone_Number," &
                                     "Physician.Physician_Fax_Number, Physician.Physician_Address, Physician.Physician_City," &
-                                    "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician;"
+                                    "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician ORDER BY Physician_First_Name ASC;"
             Fill_Table(strFillSQL)
 
         End If

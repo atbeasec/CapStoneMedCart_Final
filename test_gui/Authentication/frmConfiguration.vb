@@ -54,7 +54,7 @@ Public Class frmConfiguration
     '/*********************************************************************/
     Private Sub frmConfiguration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-                                                  "User.Supervisor_Flag, User.Active_Flag From User;"
+                                                  "User.Supervisor_Flag, User.Active_Flag From User ORDER BY User_First_Name ASC;"
         Fill_Table(strFillSQL)
 
         'have new users assigned as Nurses by default
@@ -736,7 +736,7 @@ Public Class frmConfiguration
 
 
         Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-                                      "User.Supervisor_Flag, User.Active_Flag From User;"
+                                      "User.Supervisor_Flag, User.Active_Flag From User ORDER BY User_First_Name ASC;"
         Fill_Table(strFillSQL)
     End Sub
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
@@ -750,6 +750,7 @@ Public Class frmConfiguration
         btnCancel.Visible = False
         btnSaveChanges.Visible = False
         btnSaveUser.Visible = True
+        Label2.Text = "Create New User"
     End Sub
 
     Private Sub btnPasswordEye_Click(sender As Object, e As EventArgs) Handles btnPasswordEye.Click
@@ -791,7 +792,7 @@ Public Class frmConfiguration
 
         If txtSearchBox.Text = "" Then
             strFillSQL = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-                                                  "User.Supervisor_Flag, User.Active_Flag From User;"
+                                                  "User.Supervisor_Flag, User.Active_Flag From User ORDER BY User_First_Name ASC;"
             Fill_Table(strFillSQL)
 
         End If
