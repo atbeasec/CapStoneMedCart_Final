@@ -1231,17 +1231,17 @@ Module CreateDatabase
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
 	'/*  BRH  02/04/21  Removed third medication id						*/
 	'/*	 BRH  03/28/21	Added proper primary key code					*/
+	'/*	 BRH  03/30/21	Fixed Medication One and Two foreign key reference
 	'/*******************************************************************/
 	Public Sub CreateDrugInteractionsTable()
 		strCreateTable = "CREATE TABLE 'Drug_Interactions' (
 	                    'Drug_Interactions_ID'	INTEGER NOT NULL UNIQUE,
-	                    'Medication_One_ID'	INTEGER NOT NULL,
-	                    'Medication_Two_ID'	INTEGER NOT NULL,
+	                    'Medication_One_ID'	TEXT NOT NULL,
+	                    'Medication_Two_ID'	TEXT NOT NULL,
 	                    'Severity'	TEXT,
 	                    'Description'	TEXT,
 						'Active_Flag' INTEGER NOT NULL,
-	                    FOREIGN KEY(" & "Medication_One_ID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
-	                    FOREIGN KEY(" & "Medication_Two_ID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
+	                    FOREIGN KEY(" & "Medication_One_ID" & ") REFERENCES " & "Medication" & "(" & "RXCUI_ID" & "),
 						PRIMARY KEY(" & "Drug_Interactions_ID" & " AUTOINCREMENT));"
 
 		ExecuteQuery("DrugInteractions")
@@ -1458,14 +1458,15 @@ Module CreateDatabase
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
 	'/*  BRH  02/23/21  Added a Reason field							*/
 	'/*	 BRH  03/28/21	Added proper primary key code					*/
+	'/*	 BRH  03/30/21	Changed Expected and Actual Count data types	*/
 	'/*******************************************************************/
 	Public Sub CreateDiscrepanciesTable()
 		strCreateTable = "CREATE TABLE 'Discrepancies' (
 						'Discrepancies_ID'	INTEGER NOT NULL UNIQUE,
 						'Drawer_TUID'	INTEGER NOT NULL,
 						'Medication_TUID'	INTEGER NOT NULL,
-						'Expected_Count'	INTEGER NOT NULL,
-						'Actual_Count'	INTEGER,
+						'Expected_Count'	TEXT NOT NULL,
+						'Actual_Count'	TEXT,
 						'Primary_User_TUID'	INTEGER NOT NULL,
 						'Approving_User_TUID'	INTEGER NOT NULL,
 						'DateTime_Entered'	TEXT NOT NULL,
