@@ -8,22 +8,23 @@
         PatientRecordsDropDown = 1
         AllPatients = 2
         MyPatients = 3
-        InventoryDropDown = 4
-        AdHocDispense = 5
-        EndOfShiftCount = 6
-        Inventory = 7
-        Waste = 8
-        Report = 9
-        Discrepancies = 10
-        Maintenance = 11
-        Pharmacy = 12
-        SettingsDropDown = 13
-        ConfigureUserPermissions = 14
-        Discharge = 15
-        ConfigureRooms = 16
-        SerialPortSettings = 17
-        EditPhysician = 18
-        LogOut = 19
+        AddPatient = 4
+        InventoryDropDown = 5
+        AdHocDispense = 6
+        EndOfShiftCount = 7
+        Inventory = 8
+        Waste = 9
+        Report = 10
+        Discrepancies = 11
+        Maintenance = 12
+        Pharmacy = 13
+        SettingsDropDown = 14
+        ConfigureUserPermissions = 15
+        Discharge = 16
+        ConfigureRooms = 17
+        SerialPortSettings = 18
+        EditPhysician = 19
+        LogOut = 20
     End Enum
 
     Public Sub SetUserName(ByVal strUsername As String)
@@ -75,7 +76,7 @@
     '/*  ---   ----     ------------------------------------------------  */
     '/*  Collin Krygier  2/14/2021    Initial creation                    */
     '/*********************************************************************/
-    Private Sub btnMenu_Click(sender As Object, e As EventArgs) Handles btnWaste.Click, btnUsers.Click, btnSerialPort.Click, btnReport.Click, btnPharmacy.Click, btnMyPatients.Click, btnMaintenance.Click, btnEndOfShiftCount.Click, btnEditRooms.Click, btnEditPhysician.Click, btnDischargePatient.Click, btnDescrepancies.Click, btnConfigureInventory.Click, btnAllPatients.Click, btnAdhockDispense.Click
+    Private Sub btnMenu_Click(sender As Object, e As EventArgs) Handles btnWaste.Click, btnUsers.Click, btnSerialPort.Click, btnReport.Click, btnPharmacy.Click, btnMyPatients.Click, btnMaintenance.Click, btnEndOfShiftCount.Click, btnEditRooms.Click, btnEditPhysician.Click, btnDischargePatient.Click, btnDescrepancies.Click, btnConfigureInventory.Click, btnAllPatients.Click, btnAdhockDispense.Click, btnAddPatients.Click
 
 
 
@@ -235,6 +236,11 @@
 
                 frmCurrentChildForm = frmMyPatients
                 OpenChildForm(frmMyPatients)
+
+            Case SelectedForm.AddPatient
+
+                frmCurrentChildForm = frmNewPatient
+                OpenChildForm(frmNewPatient)
 
             Case SelectedForm.InventoryDropDown
 
