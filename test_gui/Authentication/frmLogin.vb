@@ -112,10 +112,14 @@
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
 
-        frmLoginScan.setBlnFlagToClose(vbTrue)
-        frmLoginScan.Visible = True
-        Me.Close()
-        frmLoginScan.Close()
+        ' If MessageBox.Show("Are you sure you want to quit?", "", MessageBoxButtons.YesNo) = DialogResult.No Then
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to quit?", "", MessageBoxButtons.YesNo)
+
+        If result = DialogResult.Yes Then
+            '  e.Cancel = True
+            Me.Close()
+            frmLoginScan.Close()
+        End If
 
     End Sub
 
