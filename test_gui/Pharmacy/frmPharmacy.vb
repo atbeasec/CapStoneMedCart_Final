@@ -72,7 +72,7 @@
             MessageBox.Show("Please fill out all information before placing the prescription")
         Else
             Dim dtmOrderTime As String = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
-            PharmacyOrder.PharmacyOrder(intPatientIDfromArray, intMedIDfromArray, intPhysicianIDfromArray, txtQuantity.Text, txtType.Text, cmbFrequencyNumber.SelectedItem.ToString)
+            PharmacyOrder.PharmacyOrder(intPatientIDfromArray, intMedIDfromArray, intPhysicianIDfromArray, txtQuantity.Text & " " & txtUnits.Text, txtType.Text, cmbFrequencyNumber.SelectedItem.ToString)
             MessageBox.Show("Medication order placed")
             cmbPatientName.SelectedIndex = -1
             cmbMedication.SelectedIndex = -1
