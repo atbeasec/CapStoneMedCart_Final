@@ -1017,7 +1017,12 @@ Module GraphicalUserInterfaceReusableMethods
     Public Sub ButtonDecrement(ByVal txtBox As TextBox)
 
         If Not CInt(txtBox.Text) = 1 Then
-            txtBox.Text = Int(txtBox.Text) - 1
+            If Not CInt(txtBox.Text) = 0 Then
+                txtBox.Text = Int(txtBox.Text) - 1
+            Else
+                txtBox.Text = 1
+                MessageBox.Show("You cannot reduce the value below the displayed number")
+            End If
         Else
             MessageBox.Show("You cannot reduce the value below the displayed number")
         End If
