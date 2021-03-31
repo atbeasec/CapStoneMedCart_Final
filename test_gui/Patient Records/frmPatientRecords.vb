@@ -15,11 +15,11 @@ Public Class frmPatientRecords
 
     End Enum
 
-    Private Sub btnNewPatient_Click_1(sender As Object, e As EventArgs) Handles btnNewPatient.Click
+    'Private Sub btnNewPatient_Click_1(sender As Object, e As EventArgs) Handles btnNewPatient.Click
 
-        frmMain.OpenChildForm(frmNewPatient)
+    '    frmMain.OpenChildForm(frmNewPatient)
 
-    End Sub
+    'End Sub
     '/*********************************************************************/
     '/*                   FUNCTION NAME:  					   */         
     '/*********************************************************************/
