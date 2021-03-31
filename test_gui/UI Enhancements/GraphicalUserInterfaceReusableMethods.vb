@@ -818,10 +818,10 @@ Module GraphicalUserInterfaceReusableMethods
                     .cmbAllergies.Text = selectedAllergyName
                     .cmbAllergiesType.Text = selectedAllergyType
                     .cmbSeverity.Text = selectedAllergySeverity
-                    .cmbMedicationName.Text = selectedMedication
+                    '.cmbMedicationName.Text = selectedMedication
                     .cmbAllergies.Enabled = False
                     .cmbAllergiesType.Enabled = False
-                    .cmbMedicationName.Enabled = False
+                    '.cmbMedicationName.Enabled = False
                     .btnAllergySave.Visible = True
                     .btnAllergyCancel.Visible = True
                     .btnAddAllergy.Visible = False
