@@ -22,11 +22,13 @@ Partial Class frmSplash
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSplash))
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.lblApplicationName = New System.Windows.Forms.Label()
         Me.lblVersionNumber = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.startUpTimer = New System.Windows.Forms.Timer(Me.components)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -43,7 +45,7 @@ Partial Class frmSplash
         '
         Me.lblApplicationName.AutoSize = True
         Me.lblApplicationName.Font = New System.Drawing.Font("Segoe UI", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblApplicationName.ForeColor = System.Drawing.Color.White
+        Me.lblApplicationName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
         Me.lblApplicationName.Location = New System.Drawing.Point(241, 225)
         Me.lblApplicationName.Name = "lblApplicationName"
         Me.lblApplicationName.Size = New System.Drawing.Size(177, 37)
@@ -54,7 +56,7 @@ Partial Class frmSplash
         '
         Me.lblVersionNumber.AutoSize = True
         Me.lblVersionNumber.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblVersionNumber.ForeColor = System.Drawing.Color.White
+        Me.lblVersionNumber.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
         Me.lblVersionNumber.Location = New System.Drawing.Point(277, 273)
         Me.lblVersionNumber.Name = "lblVersionNumber"
         Me.lblVersionNumber.Size = New System.Drawing.Size(104, 25)
@@ -75,7 +77,7 @@ Partial Class frmSplash
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(664, 496)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.lblVersionNumber)
@@ -95,4 +97,5 @@ Partial Class frmSplash
     Friend WithEvents lblApplicationName As Label
     Friend WithEvents lblVersionNumber As Label
     Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents startUpTimer As Timer
 End Class

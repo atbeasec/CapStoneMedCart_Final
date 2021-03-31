@@ -1,5 +1,6 @@
 ﻿Public Class frmMain
 
+    Private strSessionUsername As String
     Private frmCurrentChildForm As Form
     Private frmPreviousChildForm As Form
 
@@ -24,6 +25,19 @@
         EditPhysician = 18
         LogOut = 19
     End Enum
+
+    Public Sub SetUserName(ByVal strUsername As String)
+
+        strSessionUsername = strUsername
+
+    End Sub
+
+    Public Function GetUserName() As String
+
+        Return strSessionUsername
+
+    End Function
+
 
     '/*********************************************************************/
     '/*                   SubProgram NAME: btnMenu_Click                  */         
@@ -355,11 +369,21 @@
     '/*********************************************************************/
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        'Runs the database creation module to determine if the database was created
-        CreateDatabase.Main()
+        ' assing labels to contain the logged in user's name. 
+        ' assign a tooltip because truncation of the username may need to happen. We need to fix the max length 
+        ' that can display on the UI
+        Dim strLoggedInAs = "Logged in as "
+        lblCurrentUser.BringToFront()
+        lblCurrentUser.Visible = True
 
-        ' check what controls the user should be able to access based on their assigned permission level
-        '  CheckUserPermissions("Nurse")
+        ' handles the program from blowing up since there is not a way to check the username when scanning barcode
+        If Not String.IsNullOrEmpty(GetUserName()) Then
+            lblCurrentUser.Text = TruncateString(10, GetUserName())
+        End If
+
+        tpMultiPurposeTooltip.SetToolTip(lblCurrentUser, strLoggedInAs & GetUserName())
+        tpMultiPurposeTooltip.SetToolTip(pbLogin, strLoggedInAs & GetUserName())
+
 
 
 
@@ -382,10 +406,9 @@
         AssignHandlersToSubMenuButtons(pnlSubMenuPatientRecords)
 
         'set the patient records form to be selected on default application startup
+        pnlSubMenuPatientRecords.Visible = True
         btnAllPatients.PerformClick()
-        Me.Text = "Medical Dispense"
 
-        '  frmSplash.Show()
     End Sub
 
     '/*********************************************************************/
@@ -1010,15 +1033,15 @@
         ' not commenting because functionality will change as the form that the program starts up with is going to
         ' to change and this functionality will too.
 
-        Me.Hide()
+
         frmLoginScan.Show()
+        Me.Close()
 
     End Sub
 
 
     Public isDragging As Boolean = False, isClick As Boolean = False
     Public startPoint, firstPoint, lastPoint As Point
-
 
 
     '/*********************************************************************/
@@ -1145,4 +1168,10 @@
         If lastPoint = startPoint Then isClick = True Else isClick = False
 
     End Sub
+
+
+
+
+
+
 End Class

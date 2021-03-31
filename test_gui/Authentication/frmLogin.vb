@@ -19,7 +19,9 @@
             frmMain.Text = "Medical Dispence - " & LogIn.LoggedInFullName
             frmMain.Show()
             'make btnPatientRecords have focus
-            frmMain.btnPatientRecords.PerformClick()
+            '  frmMain.pnlSubMenuPatientRecords.Visible = True
+
+            '  frmMain.btnAll.PerformClick()
         Else
             'If users Username and Password is not in the User table then inform the user
             MsgBox("No User With That Username and Password")
@@ -31,7 +33,7 @@
     Private Sub lblBadge_Click(sender As Object, e As EventArgs) Handles lblBadge.Click
         'close current form and open frmLoginScan to login with username and password
         Me.Close()
-        frmLoginScan.Show()
+        frmLoginScan.Visible = True
     End Sub
 
     Private Sub btnEye_Click(sender As Object, e As EventArgs) Handles btnEye.Click
@@ -83,11 +85,15 @@
                 'call to set what sub form should be open
                 frmMain.DetermineFormToOpen(2)
                 'set the header for main to show who is logged in
+                frmMain.SetUserName(strUsername)
                 frmMain.Text = "Medical Dispense - " & LogIn.LoggedInFullName
 
                 frmMain.Show()
                 'make btnPatientRecords have focus
-                frmMain.btnPatientRecords.PerformClick()
+                frmMain.btnAllPatients.PerformClick()
+
+                'pass user name to the main form
+
             Else
                 'If users Username and Password is not in the User table then inform the user
                 MsgBox("No User with that Username or Password")
@@ -105,9 +111,12 @@
     End Sub
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+
         frmLoginScan.setBlnFlagToClose(vbTrue)
         frmLoginScan.Visible = True
         Me.Close()
+        frmLoginScan.Close()
+
     End Sub
 
     Private Sub txtLoginKeypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtUserName.KeyPress, txtPassword.KeyPress

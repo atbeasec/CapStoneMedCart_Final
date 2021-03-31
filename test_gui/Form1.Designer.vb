@@ -22,9 +22,13 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.pnlTopBar = New System.Windows.Forms.Panel()
+        Me.lblCurrentUser = New System.Windows.Forms.Label()
+        Me.pbLogin = New System.Windows.Forms.PictureBox()
         Me.pnlTopBarContrast = New System.Windows.Forms.Panel()
+        Me.lblLoggedInUser = New System.Windows.Forms.Label()
         Me.pnlSideMenu = New System.Windows.Forms.Panel()
         Me.pnlSubMenuSettings = New System.Windows.Forms.Panel()
         Me.btnEditPhysician = New System.Windows.Forms.Button()
@@ -50,9 +54,10 @@ Partial Class frmMain
         Me.btnPatientRecords = New System.Windows.Forms.Button()
         Me.pnlLogo = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.pnlDockLocation = New System.Windows.Forms.Panel()
+        Me.tpMultiPurposeTooltip = New System.Windows.Forms.ToolTip(Me.components)
         Me.pnlTopBar.SuspendLayout()
+        CType(Me.pbLogin, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlSideMenu.SuspendLayout()
         Me.pnlSubMenuSettings.SuspendLayout()
         Me.pnlSubMenuInventory.SuspendLayout()
@@ -63,12 +68,35 @@ Partial Class frmMain
         'pnlTopBar
         '
         Me.pnlTopBar.BackColor = System.Drawing.Color.White
+        Me.pnlTopBar.Controls.Add(Me.lblCurrentUser)
+        Me.pnlTopBar.Controls.Add(Me.pbLogin)
         Me.pnlTopBar.Controls.Add(Me.pnlTopBarContrast)
         Me.pnlTopBar.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlTopBar.Location = New System.Drawing.Point(0, 0)
         Me.pnlTopBar.Name = "pnlTopBar"
         Me.pnlTopBar.Size = New System.Drawing.Size(1334, 27)
         Me.pnlTopBar.TabIndex = 13
+        '
+        'lblCurrentUser
+        '
+        Me.lblCurrentUser.AutoSize = True
+        Me.lblCurrentUser.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCurrentUser.Location = New System.Drawing.Point(1264, 5)
+        Me.lblCurrentUser.Name = "lblCurrentUser"
+        Me.lblCurrentUser.Size = New System.Drawing.Size(44, 17)
+        Me.lblCurrentUser.TabIndex = 2
+        Me.lblCurrentUser.Text = "Label1"
+        Me.lblCurrentUser.Visible = False
+        '
+        'pbLogin
+        '
+        Me.pbLogin.BackgroundImage = Global.test_gui.My.Resources.Resources.user_px
+        Me.pbLogin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pbLogin.Location = New System.Drawing.Point(1234, 1)
+        Me.pbLogin.Name = "pbLogin"
+        Me.pbLogin.Size = New System.Drawing.Size(25, 25)
+        Me.pbLogin.TabIndex = 0
+        Me.pbLogin.TabStop = False
         '
         'pnlTopBarContrast
         '
@@ -78,6 +106,17 @@ Partial Class frmMain
         Me.pnlTopBarContrast.Name = "pnlTopBarContrast"
         Me.pnlTopBarContrast.Size = New System.Drawing.Size(227, 27)
         Me.pnlTopBarContrast.TabIndex = 0
+        '
+        'lblLoggedInUser
+        '
+        Me.lblLoggedInUser.AutoSize = True
+        Me.lblLoggedInUser.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblLoggedInUser.Location = New System.Drawing.Point(48, 3)
+        Me.lblLoggedInUser.Name = "lblLoggedInUser"
+        Me.lblLoggedInUser.Size = New System.Drawing.Size(44, 17)
+        Me.lblLoggedInUser.TabIndex = 0
+        Me.lblLoggedInUser.Text = "Label1"
+        Me.lblLoggedInUser.Visible = False
         '
         'pnlSideMenu
         '
@@ -546,7 +585,7 @@ Partial Class frmMain
         Me.pnlLogo.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
         Me.pnlLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.pnlLogo.Controls.Add(Me.Label2)
-        Me.pnlLogo.Controls.Add(Me.Label1)
+        Me.pnlLogo.Controls.Add(Me.lblLoggedInUser)
         Me.pnlLogo.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlLogo.Location = New System.Drawing.Point(0, 0)
         Me.pnlLogo.Margin = New System.Windows.Forms.Padding(2)
@@ -563,16 +602,6 @@ Partial Class frmMain
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "Label2"
         Me.Label2.Visible = False
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(0, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(39, 13)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Label1"
-        Me.Label1.Visible = False
         '
         'pnlDockLocation
         '
@@ -597,6 +626,8 @@ Partial Class frmMain
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Medical Dispense"
         Me.pnlTopBar.ResumeLayout(False)
+        Me.pnlTopBar.PerformLayout()
+        CType(Me.pbLogin, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlSideMenu.ResumeLayout(False)
         Me.pnlSubMenuSettings.ResumeLayout(False)
         Me.pnlSubMenuInventory.ResumeLayout(False)
@@ -633,7 +664,10 @@ Partial Class frmMain
     Friend WithEvents btnPatientRecords As Button
     Friend WithEvents pnlLogo As Panel
     Friend WithEvents Label2 As Label
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblLoggedInUser As Label
     Friend WithEvents pnlDockLocation As Panel
     Friend WithEvents pnlTopBarContrast As Panel
+    Friend WithEvents pbLogin As PictureBox
+    Friend WithEvents tpMultiPurposeTooltip As ToolTip
+    Friend WithEvents lblCurrentUser As Label
 End Class
