@@ -296,6 +296,7 @@ Partial Class frmPharmacy
         Me.txtQuantity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtQuantity.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtQuantity.Location = New System.Drawing.Point(396, 156)
+        Me.txtQuantity.MaxLength = 6
         Me.txtQuantity.Name = "txtQuantity"
         Me.txtQuantity.ShortcutsEnabled = False
         Me.txtQuantity.Size = New System.Drawing.Size(161, 25)
@@ -307,6 +308,7 @@ Partial Class frmPharmacy
         Me.txtUnits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtUnits.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtUnits.Location = New System.Drawing.Point(583, 156)
+        Me.txtUnits.MaxLength = 10
         Me.txtUnits.Name = "txtUnits"
         Me.txtUnits.ShortcutsEnabled = False
         Me.txtUnits.Size = New System.Drawing.Size(101, 25)
