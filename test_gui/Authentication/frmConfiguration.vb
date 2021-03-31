@@ -3,6 +3,12 @@ Imports System.Text.RegularExpressions
 
 Public Class frmConfiguration
 
+    Public Enum DispenseHistoryEnum As Integer
+        Name = 1
+        Username = 2
+        Permission = 3
+        Active = 4
+    End Enum
     Public Enum AddAndRemoveUserEnum
 
         name = 1
