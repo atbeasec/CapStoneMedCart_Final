@@ -44,7 +44,6 @@ Partial Class frmAllergies
         Me.Panel13 = New System.Windows.Forms.Panel()
         Me.btnBack = New System.Windows.Forms.Button()
         Me.tpToolTip = New System.Windows.Forms.ToolTip(Me.components)
-        Me.btnClear = New System.Windows.Forms.Button()
         Me.Panel2.SuspendLayout()
         Me.Panel13.SuspendLayout()
         Me.SuspendLayout()
@@ -275,29 +274,12 @@ Partial Class frmAllergies
         Me.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnBack.UseVisualStyleBackColor = False
         '
-        'btnClear
-        '
-        Me.btnClear.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnClear.FlatAppearance.BorderSize = 0
-        Me.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnClear.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnClear.ForeColor = System.Drawing.Color.White
-        Me.btnClear.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnClear.Location = New System.Drawing.Point(587, 190)
-        Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(146, 37)
-        Me.btnClear.TabIndex = 194
-        Me.btnClear.Text = "Clear"
-        Me.btnClear.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnClear.UseVisualStyleBackColor = False
-        '
         'frmAllergies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(926, 567)
-        Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.Panel13)
         Me.Controls.Add(Me.btnAllergySave)
         Me.Controls.Add(Me.btnAllergyCancel)
@@ -342,5 +324,4 @@ Partial Class frmAllergies
     Friend WithEvents Panel13 As Panel
     Friend WithEvents btnBack As Button
     Friend WithEvents tpToolTip As ToolTip
-    Friend WithEvents btnClear As Button
 End Class

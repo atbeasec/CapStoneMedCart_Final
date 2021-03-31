@@ -65,7 +65,7 @@
                 GetAllergies(intPatientInformationMRN)
             End If
 
-            CreateAllergiesPanels(flpAllergies, strAllergyName, cmbAllergiesType.Text, strSeverity)
+            CreateAllergiesPanels(flpAllergies, strAllergyName, cmbMedicationName.Text, cmbAllergiesType.Text, strSeverity)
         End If
         'End If
     End Sub
@@ -224,7 +224,6 @@
 
         Return strSeverity
     End Function
-
     '/*********************************************************************/
     '/*                   SUBPROGRAM NAME: cmbMedicationName_Click           */         
     '/*********************************************************************/
@@ -266,7 +265,57 @@
     '/*                                                  */
     '/*   
     '/*********************************************************************/
-    Private Sub cmbAllergies_SelectedValueChanged(sender As Object, e As EventArgs) Handles cmbAllergies.SelectedValueChanged
+    Private Sub cmbAllergiesLocked()
+        If cmbMedicationName.Text = "N/A" Or cmbMedicationName.SelectedIndex = -1 Then
+            'cmbAllergies.Enabled = True
+            cmbAllergies.SelectedIndex = -1
+        Else
+            'cmbAllergies.Enabled = False
+
+        End If
+    End Sub
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: cmbMedicationName_Click           */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:Adam Kott            		          */   
+    '/*		         DATE CREATED:2/24/2021                     		   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:	When the user clicks the save button the      */             
+    '/* database needs to be updated and then form needs to be reset and  */                     
+    '/*  locked                                                            */
+    '/*********************************************************************/
+    '/*  CALLED BY: user clicking save button					         */           
+    '/*                                                    				   */         
+    '/*********************************************************************/
+    '/*  CALLS: DisableEditButtons
+    '/* ExecuteScalarQuery						                           */                 
+    '/* GetPatientTuid                  								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                         */
+    '/*                                                   */
+    '/*                                                  */
+    '/*   
+    '/*********************************************************************/
+    Private Sub cmbAllergies_LostFocus(sender As Object, e As EventArgs) Handles cmbAllergies.SelectedValueChanged
         cmbAllergies.DroppedDown = False
         If cmbAllergies.FindStringExact(cmbAllergies.Text) = -1 Then
             cmbAllergiesType.SelectedIndex = -1
@@ -277,7 +326,7 @@
 
             cmbAllergiesType.SelectedItem = objAllergyType.ToString
             If cmbAllergiesType.SelectedItem = "Drug" Then
-                'cmbMedicationName.SelectedItem = cmbAllergies.SelectedItem
+                cmbMedicationName.SelectedItem = cmbAllergies.SelectedItem
                 cmbSeverity.SelectedIndex = 1
             End If
         End If
@@ -328,13 +377,155 @@
 
         If cmbAllergiesType.Text = "Drug" Then
             cmbAllergiesType.Enabled = False
+            If cmbAllergies.SelectedIndex = 0 Then
 
+                'Dim strMedTUID = CreateDatabase.ExecuteScalarQuery("Select Medication_ID from Medication WHERE Drug_Name='" & cmbAllergies.Text & "';")
+                'Dim MedAllergies = CreateDatabase.ExecuteScalarQuery("Select Drug_Name from Medication WHERE Medication_ID=" & CInt(strMedTUID) & ";")
+                'cmbMedicationName.Text = MedAllergies.ToString()
+            Else
+                cmbMedicationName.Text = cmbAllergies.Text
+
+                Debug.WriteLine("")
+            End If
         Else
             cmbAllergiesType.Enabled = True
-            'cmbMedicationName.SelectedIndex = -1
+            cmbMedicationName.SelectedIndex = -1
         End If
     End Sub
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: cmbMedicationName_Click           */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:Adam Kott            		          */   
+    '/*		         DATE CREATED:2/24/2021                     		   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:	When the user clicks the save button the      */             
+    '/* database needs to be updated and then form needs to be reset and  */                     
+    '/*  locked                                                            */
+    '/*********************************************************************/
+    '/*  CALLED BY: user clicking save button					         */           
+    '/*                                                    				   */         
+    '/*********************************************************************/
+    '/*  CALLS: DisableEditButtons
+    '/* ExecuteScalarQuery						                           */                 
+    '/* GetPatientTuid                  								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                         */
+    '/*                                                   */
+    '/*                                                  */
+    '/*   
+    '/*********************************************************************/
+    Private Sub cmbMedicationName_Click(sender As Object, e As EventArgs) 
+        cmbMedicationName.DroppedDown = True
 
+    End Sub
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: cmbMedicationName_Click           */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:Adam Kott            		          */   
+    '/*		         DATE CREATED:2/24/2021                     		   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:	When the user clicks the save button the      */             
+    '/* database needs to be updated and then form needs to be reset and  */                     
+    '/*  locked                                                            */
+    '/*********************************************************************/
+    '/*  CALLED BY: user clicking save button					         */           
+    '/*                                                    				   */         
+    '/*********************************************************************/
+    '/*  CALLS: DisableEditButtons
+    '/* ExecuteScalarQuery						                           */                 
+    '/* GetPatientTuid                  								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                         */
+    '/*                                                   */
+    '/*                                                  */
+    '/*   
+    '/*********************************************************************/
+    Private Sub cmbMedicationName_LostFocus(sender As Object, e As EventArgs) 
+        cmbMedicationName.DroppedDown = False
+
+    End Sub
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: cmbMedicationName_Click           */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:Adam Kott            		          */   
+    '/*		         DATE CREATED:2/24/2021                     		   */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:	When the user clicks the save button the      */             
+    '/* database needs to be updated and then form needs to be reset and  */                     
+    '/*  locked                                                            */
+    '/*********************************************************************/
+    '/*  CALLED BY: user clicking save button					         */           
+    '/*                                                    				   */         
+    '/*********************************************************************/
+    '/*  CALLS: DisableEditButtons
+    '/* ExecuteScalarQuery						                           */                 
+    '/* GetPatientTuid                  								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                         */
+    '/*                                                   */
+    '/*                                                  */
+    '/*   
+    '/*********************************************************************/
+    Private Sub cmbMedicationName_SelectedValueChanged(sender As Object, e As EventArgs) 
+        cmbAllergies.Text = cmbMedicationName.Text
+    End Sub
     '/********************************************************************/
     '/*                   SUB NAME: CreatePanel            	             */         
     '/********************************************************************/
@@ -372,7 +563,7 @@
     '/*  ---            ----             ----				             */
     '/*  CK		        2/10/21		    initial creation                 */
     '/********************************************************************/ 
-    Public Sub CreateAllergiesPanels(ByVal flpPannel As FlowLayoutPanel, ByVal strAllergyName As String, ByVal strAllergyType As String, ByVal strSeverity As String)
+    Public Sub CreateAllergiesPanels(ByVal flpPannel As FlowLayoutPanel, ByVal strAllergyName As String, ByVal strMedicationName As String, ByVal strAllergyType As String, ByVal strSeverity As String)
 
         Dim pnl As Panel
         pnl = New Panel
@@ -438,7 +629,7 @@
         btnAllergySave.Visible = False
         cmbAllergies.Enabled = True
         cmbAllergiesType.Enabled = True
-        'cmbMedicationName.Enabled = True
+        cmbMedicationName.Enabled = True
     End Sub
     Private Sub frmAllergies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         btnAllergyCancel.Visible = False
@@ -450,14 +641,14 @@
         Dim dsAllergyType = CreateDatabase.ExecuteSelectQuery("Select DISTINCT Allergy_Type from Allergy;")
 
         populateAllergiesComboBox(cmbAllergies, dsAllergies)
-        'populateMedicationComboBox(cmbMedicationName, dsDrugAllergies)
+        populateMedicationComboBox(cmbMedicationName, dsDrugAllergies)
         populateAllergyTypeComboBox(cmbAllergiesType, dsAllergyType)
         Dim strSeverity As String = " "
         Dim intPatientTuid As Integer = GetPatientTuid()
-        LoadAllergiesPanel(strSeverity, intPatientTuid)
+        strSeverity = LoadAllergiesPanel(strSeverity, intPatientTuid)
     End Sub
 
-    Private Sub LoadAllergiesPanel(strSeverity As String, intPatientTuid As Integer)
+    Private Function LoadAllergiesPanel(strSeverity As String, intPatientTuid As Integer) As String
         'get the allergy information from the patient allergy tables
         Dim allergy As String = ""
         Dim dtsPatientAllergy As DataSet = CreateDatabase.ExecuteSelectQuery("Select Allergy.Allergy_Name, PatientAllergy.Allergy_Severity," &
@@ -469,26 +660,26 @@
         For Each dr As DataRow In dtsPatientAllergy.Tables(0).Rows
 
             If dr(2) = "Drug" Then
-                'cmbMedicationName.Text = dr(0)
+                cmbMedicationName.Text = dr(0)
                 allergy = "N/A"
                 cmbAllergies.Text = allergy
                 cmbAllergiesType.Text = dr(2)
             Else
                 allergy = dr(0)
                 cmbAllergies.Text = allergy
-                'mbMedicationName.Text = "N/A"
+                cmbMedicationName.Text = "N/A"
                 cmbAllergiesType.Text = dr(2)
                 Debug.WriteLine("")
             End If
 
             strSeverity = CheckSeverity(dr)
-            CreateAllergiesPanels(flpAllergies, allergy, cmbAllergiesType.Text, strSeverity)
-            'cmbAllergiesLocked()
+            CreateAllergiesPanels(flpAllergies, allergy, cmbMedicationName.Text, cmbAllergiesType.Text, strSeverity)
+            cmbAllergiesLocked()
         Next
         'CreateAllergiesPanels()
 
-        ClearComboBoxes()
-    End Sub
+        Return strSeverity
+    End Function
 
     Public Function GetPatientMrn() As Integer
 
@@ -548,18 +739,4 @@
 
     End Sub
 
-    Private Sub cmbAllergies_LostFocus(sender As Object, e As EventArgs) Handles cmbAllergies.LostFocus
-        If cmbAllergies.Text = "" Then
-            cmbAllergiesType.Enabled = True
-        End If
-    End Sub
-    Private Sub ClearComboBoxes()
-        cmbAllergies.SelectedIndex = -1
-        cmbAllergiesType.SelectedIndex = -1
-        cmbSeverity.SelectedIndex = -1
-    End Sub
-
-    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
-        ClearComboBoxes()
-    End Sub
 End Class
