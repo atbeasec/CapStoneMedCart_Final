@@ -27,7 +27,6 @@ Partial Class frmDispense
         Me.lstboxAllergies = New System.Windows.Forms.ListBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.flpMedications = New System.Windows.Forms.FlowLayoutPanel()
-        Me.Label14 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -37,6 +36,7 @@ Partial Class frmDispense
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.txtQuantityToDispense = New System.Windows.Forms.TextBox()
         Me.pnlHeader = New System.Windows.Forms.Panel()
+        Me.lblPatientInfo = New System.Windows.Forms.Label()
         Me.btnBack = New System.Windows.Forms.Button()
         Me.tpToolTip = New System.Windows.Forms.ToolTip(Me.components)
         Me.pnlSelector = New System.Windows.Forms.Panel()
@@ -76,9 +76,13 @@ Partial Class frmDispense
         Me.lblType = New System.Windows.Forms.Label()
         Me.lblStrength = New System.Windows.Forms.Label()
         Me.txtMedication = New System.Windows.Forms.TextBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.lblPatientInfo = New System.Windows.Forms.Label()
+        Me.txtType = New System.Windows.Forms.TextBox()
+        Me.txtContainer = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtPrescribedAmount = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.txtFrequency = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel5.SuspendLayout()
         Me.pnlHeader.SuspendLayout()
         Me.pnlSelector.SuspendLayout()
@@ -125,16 +129,6 @@ Partial Class frmDispense
         Me.flpMedications.Size = New System.Drawing.Size(1066, 186)
         Me.flpMedications.TabIndex = 53
         '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(848, 52)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(65, 21)
-        Me.Label14.TabIndex = 177
-        Me.Label14.Text = "Dosage:"
-        '
         'Label17
         '
         Me.Label17.AutoSize = True
@@ -149,11 +143,11 @@ Partial Class frmDispense
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(590, 52)
+        Me.Label15.Location = New System.Drawing.Point(450, 52)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(67, 21)
+        Me.Label15.Size = New System.Drawing.Size(45, 21)
         Me.Label15.TabIndex = 183
-        Me.Label15.Text = "Method:"
+        Me.Label15.Text = "Type:"
         '
         'Label4
         '
@@ -238,6 +232,16 @@ Partial Class frmDispense
         Me.pnlHeader.Name = "pnlHeader"
         Me.pnlHeader.Size = New System.Drawing.Size(1116, 49)
         Me.pnlHeader.TabIndex = 201
+        '
+        'lblPatientInfo
+        '
+        Me.lblPatientInfo.AutoSize = True
+        Me.lblPatientInfo.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.lblPatientInfo.Location = New System.Drawing.Point(117, 9)
+        Me.lblPatientInfo.Name = "lblPatientInfo"
+        Me.lblPatientInfo.Size = New System.Drawing.Size(56, 21)
+        Me.lblPatientInfo.TabIndex = 199
+        Me.lblPatientInfo.Text = "Label1"
         '
         'btnBack
         '
@@ -714,42 +718,86 @@ Partial Class frmDispense
         Me.txtMedication.Name = "txtMedication"
         Me.txtMedication.ReadOnly = True
         Me.txtMedication.ShortcutsEnabled = False
-        Me.txtMedication.Size = New System.Drawing.Size(571, 25)
+        Me.txtMedication.Size = New System.Drawing.Size(431, 25)
         Me.txtMedication.TabIndex = 205
         '
-        'TextBox1
+        'txtType
         '
-        Me.TextBox1.BackColor = System.Drawing.Color.White
-        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(594, 76)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
-        Me.TextBox1.ShortcutsEnabled = False
-        Me.TextBox1.Size = New System.Drawing.Size(248, 25)
-        Me.TextBox1.TabIndex = 206
+        Me.txtType.BackColor = System.Drawing.Color.White
+        Me.txtType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtType.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtType.Location = New System.Drawing.Point(454, 76)
+        Me.txtType.Name = "txtType"
+        Me.txtType.ReadOnly = True
+        Me.txtType.ShortcutsEnabled = False
+        Me.txtType.Size = New System.Drawing.Size(151, 25)
+        Me.txtType.TabIndex = 206
         '
-        'TextBox2
+        'txtContainer
         '
-        Me.TextBox2.BackColor = System.Drawing.Color.White
-        Me.TextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TextBox2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(852, 76)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.ReadOnly = True
-        Me.TextBox2.ShortcutsEnabled = False
-        Me.TextBox2.Size = New System.Drawing.Size(202, 25)
-        Me.TextBox2.TabIndex = 207
+        Me.txtContainer.BackColor = System.Drawing.Color.White
+        Me.txtContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtContainer.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtContainer.Location = New System.Drawing.Point(935, 76)
+        Me.txtContainer.Name = "txtContainer"
+        Me.txtContainer.ReadOnly = True
+        Me.txtContainer.ShortcutsEnabled = False
+        Me.txtContainer.Size = New System.Drawing.Size(169, 25)
+        Me.txtContainer.TabIndex = 208
         '
-        'lblPatientInfo
+        'Label1
         '
-        Me.lblPatientInfo.AutoSize = True
-        Me.lblPatientInfo.Font = New System.Drawing.Font("Segoe UI", 12.0!)
-        Me.lblPatientInfo.Location = New System.Drawing.Point(117, 9)
-        Me.lblPatientInfo.Name = "lblPatientInfo"
-        Me.lblPatientInfo.Size = New System.Drawing.Size(56, 21)
-        Me.lblPatientInfo.TabIndex = 199
-        Me.lblPatientInfo.Text = "Label1"
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(935, 52)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(169, 21)
+        Me.Label1.TabIndex = 209
+        Me.Label1.Text = "Amount per container: "
+        '
+        'txtPrescribedAmount
+        '
+        Me.txtPrescribedAmount.BackColor = System.Drawing.Color.White
+        Me.txtPrescribedAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtPrescribedAmount.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPrescribedAmount.Location = New System.Drawing.Point(611, 76)
+        Me.txtPrescribedAmount.Name = "txtPrescribedAmount"
+        Me.txtPrescribedAmount.ReadOnly = True
+        Me.txtPrescribedAmount.ShortcutsEnabled = False
+        Me.txtPrescribedAmount.Size = New System.Drawing.Size(163, 25)
+        Me.txtPrescribedAmount.TabIndex = 207
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(607, 52)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(150, 21)
+        Me.Label14.TabIndex = 177
+        Me.Label14.Text = "Prescribed Amount: "
+        '
+        'txtFrequency
+        '
+        Me.txtFrequency.BackColor = System.Drawing.Color.White
+        Me.txtFrequency.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtFrequency.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFrequency.Location = New System.Drawing.Point(780, 76)
+        Me.txtFrequency.Name = "txtFrequency"
+        Me.txtFrequency.ReadOnly = True
+        Me.txtFrequency.ShortcutsEnabled = False
+        Me.txtFrequency.Size = New System.Drawing.Size(144, 25)
+        Me.txtFrequency.TabIndex = 211
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(776, 52)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(85, 21)
+        Me.Label2.TabIndex = 210
+        Me.Label2.Text = "Frequency:"
         '
         'frmDispense
         '
@@ -757,8 +805,12 @@ Partial Class frmDispense
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1116, 650)
-        Me.Controls.Add(Me.TextBox2)
-        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.txtFrequency)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.txtContainer)
+        Me.Controls.Add(Me.txtPrescribedAmount)
+        Me.Controls.Add(Me.txtType)
         Me.Controls.Add(Me.txtMedication)
         Me.Controls.Add(Me.pnlDispenseHistoryHeader)
         Me.Controls.Add(Me.pnlSelector)
@@ -800,7 +852,6 @@ Partial Class frmDispense
     Friend WithEvents lstboxAllergies As ListBox
     Friend WithEvents Label10 As Label
     Friend WithEvents flpMedications As FlowLayoutPanel
-    Friend WithEvents Label14 As Label
     Friend WithEvents Label17 As Label
     Friend WithEvents Label15 As Label
     Friend WithEvents Label4 As Label
@@ -849,7 +900,12 @@ Partial Class frmDispense
     Friend WithEvents lblType As Label
     Friend WithEvents lblStrength As Label
     Friend WithEvents txtMedication As TextBox
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents txtType As TextBox
     Friend WithEvents lblPatientInfo As Label
+    Friend WithEvents txtContainer As TextBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents txtPrescribedAmount As TextBox
+    Friend WithEvents Label14 As Label
+    Friend WithEvents txtFrequency As TextBox
+    Friend WithEvents Label2 As Label
 End Class

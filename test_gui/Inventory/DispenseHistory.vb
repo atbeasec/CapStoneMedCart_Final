@@ -608,7 +608,7 @@ Module DispenseHistory
         Dim Strdatacommand As String
         ' Currently the medication display is appending the RXCUI Number on too the medication
         ' name, as searching by name alone could cause problems if medication names can repeat
-        Strdatacommand = "SELECT Drug_Name,RXCUI_ID FROM PatientMedication " &
+        Strdatacommand = "SELECT Drug_Name,RXCUI_ID, Medication.Type, PatientMedication.Quantity, PatientMedication.Frequency  FROM PatientMedication " &
         "INNER JOIN Medication on Medication.Medication_ID = PatientMedication.Medication_TUID " &
         "INNER JOIN Patient on Patient.Patient_ID = PatientMedication.Patient_TUID " &
         "WHERE Patient.Patient_ID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1' AND Medication.Medication_ID = '" & intMEDID & "'"
@@ -617,8 +617,16 @@ Module DispenseHistory
         dsMedicationDataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
         'add medication name and RXCUI to listbox
         For Each dr As DataRow In dsMedicationDataSet.Tables(0).Rows
-            frmDispense.txtMedication.Text = (dr(0) & "   RXCUI:" & dr(1))
+            frmDispense.txtMedication.Text = (dr(0))
+            frmDispense.txtType.Text = dr(2)
+            frmDispense.txtPrescribedAmount.Text = dr(3)
+            frmDispense.txtFrequency.Text = dr(4)
         Next
+
+        Strdatacommand = "Select Amount_Per_Container,Amount_Per_Container_Unit from DrawerMedication" &
+                          " where Medication_TUID = '" & intMEDID & "' and Active_Flag = '1'"
+        Dim dsDrawerMedData As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+        frmDispense.txtContainer.Text = dsDrawerMedData.Tables(0).Rows(0)(0) & " " & dsDrawerMedData.Tables(0).Rows(0)(1)
 
     End Sub
 
