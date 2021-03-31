@@ -4,6 +4,7 @@ Imports System.Text
 
 
 Module BulkImportMethods
+#Const debug = False
     '/*********************************************************************/
     '/*                   FILE NAME: BulkImportMethods                     */									  
     '/*********************************************************************/
@@ -39,6 +40,8 @@ Module BulkImportMethods
     '/*  ---   ----     ------------------------------------------------- */
     '/*  NP    3/24/2021 Made changes to allow the adding of rooms with   */
     '/*                  when importing patient.                          */
+    '/*  NP    3/31/2021 change the format for the date required for patient*/
+    '*                   imports to be to be yyyy/MM/dd                   */
     '/*********************************************************************/
 
     Const strPhonePattern As String = "^(1-)?\d{3}-\d{3}-\d{4}$"
@@ -112,7 +115,10 @@ Module BulkImportMethods
                     End If
             End Select
             srReader.Close()
-        Catch
+        Catch ex As Exception
+#If DEBUG = True Then
+            MessageBox.Show(ex.ToString)
+#End If
             MessageBox.Show("Error opening file " & strFileName & " file is opened by another application")
         End Try
 
@@ -271,13 +277,17 @@ Module BulkImportMethods
     '/*                     been used in the import so far. To make sure   */
     '/*                     that two active patients will not share the same*/
     '/*                     barcode.                                        */
+    '/* resultDate - this is the varaible that will store the newly created */
+    '/*                 date object so we can format it later.              */
     '/*                                                                     
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
     '/*  WHO   WHEN     WHAT								   */             
     '/*  ---   ----     ------------------------------------------------- */
-    '/*  NP    3/24/2021 Added a check for the room and beds.              */                                                                   
+    '/*  NP    3/24/2021 Added a check for the room and beds.              */  
+    '/*  NP    3/31/2021 change the format for the date required to be     */
+    '/*                  yyyy/MM/dd                                        */
     '/*********************************************************************/
 
 
@@ -289,6 +299,7 @@ Module BulkImportMethods
         Dim strbSQLPull As StringBuilder = New StringBuilder
         Dim PatientArray As ArrayList = New ArrayList()
         Dim UsedBarCodesArray As ArrayList = New ArrayList()
+        Dim resultDate As DateTime
         Do
             strLine = srReader.ReadLine.Split(vbTab)
             If strLine.Length < 16 Then
@@ -335,8 +346,20 @@ Module BulkImportMethods
                         strbErrorMessage.AppendLine("Issue on line " & intLineNum & " date of birth can not be a future date")
                         blnIssue = True
                     End If
+
+                    Try
+                        resultDate = DateTime.ParseExact(strLine(5), "yyyy/MM/dd", Globalization.CultureInfo.InvariantCulture)
+#If DEBUG Then
+                        MessageBox.Show(resultDate.ToString("yyyy/MM/dd"))
+#End If
+
+                    Catch ex As Exception
+                        strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Date must be the format of YYYY/MM/DD")
+                        blnIssue = True
+                    End Try
+
                 End If
-                If Not strLine(6).ToLower.Equals("male") And Not strLine(6).ToLower.Equals("female") Then
+                    If Not strLine(6).ToLower.Equals("male") And Not strLine(6).ToLower.Equals("female") Then
                     strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Sex must be male or female")
                     blnIssue = True
                 End If
@@ -416,7 +439,7 @@ Module BulkImportMethods
                 End If
                 If Not blnIssue Then
                     UsedBarCodesArray.Add(strLine(1))
-                    PatientArray.Add(New PatientClass(strLine(0), strLine(1), strLine(2), strLine(3), strLine(4), strLine(5),
+                    PatientArray.Add(New PatientClass(strLine(0), strLine(1), strLine(2), strLine(3), strLine(4), resultDate.ToString("yyyy/MM/dd"),
                                 strLine(6), strLine(7), strLine(8), strLine(9), strLine(10), strLine(11), strLine(12), strLine(13),
                                 strLine(14), strLine(15), strLine(16), strLine(17)))
                 End If
@@ -527,8 +550,8 @@ Module BulkImportMethods
                     intRecordCount += 1
                     .ID = intRecordCount
                     strbSQLGetRoom.Clear()
-                    strbSQLGetRoom.Append("select count(Room_ID) From Rooms where Room_ID = '" & checkSQLInjection(.roomData.RoomID))
-                    strbSQLGetRoom.Append("' and Bed_Name = '" & checkSQLInjection(.roomData.BedName) & "';")
+                    strbSQLGetRoom.Append("select count(Room_ID) From Rooms where Room_ID = '" & checkSQLInjection(.roomData.RoomID, True))
+                    strbSQLGetRoom.Append("' and Bed_Name = '" & checkSQLInjection(.roomData.BedName, True) & "';")
                     'finding already exisiting rooms
                     If ExecuteScalarQuery(strbSQLGetRoom.ToString) <> 0 Then
                         editRoomArray.Add(.roomData)
@@ -548,8 +571,8 @@ Module BulkImportMethods
                 With room
                     strbSQLPatientStatement.Clear()
                     strbSQLPatientStatement.Append("Update Rooms set Active_Flag = 1 where")
-                    strbSQLPatientStatement.Append(" Room_ID ='" & checkSQLInjection(.RoomID) & "' and Bed_Name ='")
-                    strbSQLPatientStatement.Append(checkSQLInjection(.BedName) & "';")
+                    strbSQLPatientStatement.Append(" Room_ID ='" & checkSQLInjection(.RoomID, True) & "' and Bed_Name ='")
+                    strbSQLPatientStatement.Append(checkSQLInjection(.BedName, True) & "';")
                     ExecuteInsertQuery(strbSQLPatientStatement.ToString)
                 End With
             Next
@@ -564,8 +587,8 @@ Module BulkImportMethods
         strbSQLPatientStatement.Append(" values ")
         For Each patient As PatientClass In PatientArray
             With patient
-                strbSQLPatientStatement.Append("('" & .ID & "', '" & checkSQLInjection(.roomData.RoomID))
-                strbSQLPatientStatement.Append(" ','" & checkSQLInjection(.roomData.BedName) & "','1'),")
+                strbSQLPatientStatement.Append("('" & .ID & "', '" & checkSQLInjection(.roomData.RoomID, True))
+                strbSQLPatientStatement.Append(" ','" & checkSQLInjection(.roomData.BedName, True) & "','1'),")
             End With
         Next
         finishingUpImport(strbSQLPatientStatement)
@@ -616,9 +639,9 @@ Module BulkImportMethods
 
     Sub addingPatientInformationToSQL(ByRef strbSQLPatientStatement As StringBuilder, Patient As PatientClass)
         With Patient
-            strbSQLPatientStatement.Append(" ('" & .MRN_Number & "', '" & checkSQLInjection(.barcode) & "', '" & checkSQLInjection(.FirstName) & "', '" & checkSQLInjection(.MiddleName) & "', '")
-            strbSQLPatientStatement.Append(checkSQLInjection(.LastName) & "', '" & .DoB & "' , '" & .sex & "', '" & .Height & "', '" & .weight & "', '")
-            strbSQLPatientStatement.Append(.Address & "', '" & .city & "', '" & .State & "', '" & .ZipCode & "', '" & .PhoneNumber & "', '")
+            strbSQLPatientStatement.Append(" ('" & .MRN_Number & "', '" & checkSQLInjection(.barcode) & "', '" & checkSQLInjection(.FirstName, True) & "', '" & checkSQLInjection(.MiddleName, True) & "', '")
+            strbSQLPatientStatement.Append(checkSQLInjection(.LastName, True) & "', '" & .DoB & "' , '" & .sex & "', '" & .Height & "', '" & .weight & "', '")
+            strbSQLPatientStatement.Append(checkSQLInjection(.Address, True) & "', '" & checkSQLInjection(.city, True) & "', '" & .State & "', '" & .ZipCode & "', '" & .PhoneNumber & "', '")
             strbSQLPatientStatement.Append(.email & "', '" & .PrimaryPhysicianID & "', '1')")
         End With
     End Sub
@@ -802,11 +825,11 @@ Module BulkImportMethods
         strbSQLStatement.Append("INSERT INTO Physician ('Physician_First_Name','Physician_Middle_Name',
                 'Physician_Last_Name','Physician_Credentials','Physician_Phone_Number','Physician_Fax_Number',
                 'Physician_Address','Physician_City','Physician_State','Physician_Zip_Code','Active_Flag') Values")
-                For Each Physician As PhysicianClass In PhysicianArray
+        For Each Physician As PhysicianClass In PhysicianArray
             With Physician
-                strbSQLStatement.Append(" ('" & checkSQLInjection(.FirstName) & "', '" & checkSQLInjection(.MiddleName) & "', '" & checkSQLInjection(.LastName) & "', '")
+                strbSQLStatement.Append(" ('" & checkSQLInjection(.FirstName, True) & "', '" & checkSQLInjection(.MiddleName, True) & "', '" & checkSQLInjection(.LastName, True) & "', '")
                 strbSQLStatement.Append(checkSQLInjection(.Credentials) & "', '" & .PhoneNumber & "', '" & .FaxNumber & "', '")
-                strbSQLStatement.Append(checkSQLInjection(.Address) & "', '" & checkSQLInjection(.city) & "', '" & .State & "', '" & .ZipCode & "', '")
+                strbSQLStatement.Append(checkSQLInjection(.Address, True) & "', '" & checkSQLInjection(.city, True) & "', '" & .State & "', '" & .ZipCode & "', '")
                 strbSQLStatement.Append(1 & "'),")
             End With
         Next
@@ -858,8 +881,8 @@ Module BulkImportMethods
                                 "'User_Last_Name','Barcode','Admin_Flag','Supervisor_Flag','Active_Flag') Values")
         For Each user As UserClass In UserArray
             With user
-                strbSQLStatement.Append(" ('" & .UserName & "','" & .salt & "','" & .Password & "','")
-                strbSQLStatement.Append(.FirstName & "','" & .LastName & "','" & .Barcode & "','")
+                strbSQLStatement.Append(" ('" & checkSQLInjection(.UserName) & "','" & .salt & "','" & checkSQLInjection(.Password) & "','")
+                strbSQLStatement.Append(checkSQLInjection(.FirstName, True) & "','" & checkSQLInjection(.LastName, True) & "','" & .Barcode & "','")
                 strbSQLStatement.Append(.AdminFlag & "','" & .SuperVisorFlag & "','" & 1 & "'),")
             End With
         Next
@@ -1010,7 +1033,7 @@ Module BulkImportMethods
                     strHashedPassword = strhold(0)
                     UsedBarCodesArray.Add(strBarcodeHash)
                     strSalt = strhold(1)
-                    UserArray.Add(New UserClass(checkSQLInjection(strLine(0)), strHashedPassword, strSalt, checkSQLInjection(strLine(2)), checkSQLInjection(strLine(3)),
+                    UserArray.Add(New UserClass(checkSQLInjection(strLine(0)), strHashedPassword, strSalt, checkSQLInjection(strLine(2), True), checkSQLInjection(strLine(3), True),
                                 strBarcodeHash, strLine(5), strLine(6)))
                 End If
             End If
@@ -1169,7 +1192,7 @@ Module BulkImportMethods
         strbSQLStatement.Append("Insert Into Rooms ('Room_ID', 'Bed_Name', 'Active_Flag') Values ")
         For Each room As RoomClass In roomArray
             With room
-                strbSQLStatement.Append("('" & checkSQLInjection(.RoomID) & "', '" & checkSQLInjection(.BedName) & "','")
+                strbSQLStatement.Append("('" & checkSQLInjection(.RoomID, True) & "', '" & checkSQLInjection(.BedName, True) & "','")
                 strbSQLStatement.Append(1 & "'),")
             End With
         Next

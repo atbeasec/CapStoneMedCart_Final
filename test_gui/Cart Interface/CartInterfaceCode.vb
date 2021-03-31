@@ -343,19 +343,22 @@ Module CartInterfaceCode
                 bytFinal = getSerialString(Number) 'this is going to get the string we need
                 'to send to the cart. 
 
+                Try
+                    comSerialPort1.Open()
+                    getDrawerArray()
+                    comSerialPort1.Write(bytFinal, 0, bytFinal.Length)
+                    intDrawerCount += 1
+                    thread.Start()
 
-                comSerialPort1.Open()
-                getDrawerArray()
-                comSerialPort1.Write(bytFinal, 0, bytFinal.Length)
-                intDrawerCount += 1
-                thread.Start()
+                    Do
+                        'this is going to keep looping until the drawer count reached zero. 
 
-                Do
-                    'this is going to keep looping until the drawer count reached zero. 
-
-                Loop While (intDrawerCount > 0)
-                comSerialPort1.Close()
-                thread.Abort()
+                    Loop While (intDrawerCount > 0)
+                    comSerialPort1.Close()
+                    thread.Abort()
+                Catch
+                    MessageBox.Show("Selected comport does not exist. Please have your admin change the comport in Admin Settings")
+                End Try
             End If
 
 
