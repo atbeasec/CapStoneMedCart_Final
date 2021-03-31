@@ -5,6 +5,11 @@
     Private intPatientMRN As Integer
     Private intMedicationID As Integer
 
+    Private intDispenseAmount As Integer
+    Private intCountedAmount As Integer
+    Private dblDispensedPatientAmount As Integer
+    Private dblWastedAmount As Integer
+
     Dim contactPanelsAddedCount As Integer = 0
     Dim currentContactPanelName As String = Nothing
 
@@ -108,20 +113,40 @@
     End Sub
 
     Private Sub btnDispense_Click_1(sender As Object, e As EventArgs) Handles btnDispense.Click
+        Dim NarcoticFlag As Integer = CreateDatabase.ExecuteScalarQuery("Select Controlled_Flag from Medication where Medication_ID = '" & intMedicationID & "' and Active_Flag = '1'")
+        Dim intdrawerNumber As Integer = CreateDatabase.ExecuteScalarQuery("Select Drawers_TUID from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
+        If lblDirections.Text.Equals("Select Amount To Dispense:") Then
+            If NarcoticFlag = 1 Then
+                'IsNarcotic()
+                OpenOneDrawer(intdrawerNumber)
+                changebuttonForCounting()
+            Else
+                'IsNotNarcotic()
+                OpenOneDrawer(intdrawerNumber)
+                changeButtonforDispensing()
+            End If
+        ElseIf lblDirections.Text.Equals("Enter the Quantity in the Cart") Then
 
-        ' check if the medication is a narcotic
+        ElseIf lblDirections.Text.Equals("Enter the Amount Administered") Then
 
-        ' IsNarcotic()
-
-        'else
-
-        'IsNotNarcotic()
-
-
-
-
+        End If
     End Sub
 
+    Private Sub changebuttonForCounting()
+        lblDirections.Text = "Enter the Quantity in the Cart"
+        lblDirections.Left = (pnlSelector.Width \ 2) - (pnlSelector.Width \ 2)
+        btnDispense.Text = "Submit Count"
+        pnlAmountInDrawer.Visible = True
+        pnlAmountToRemove.Visible = False
+    End Sub
+    Private Sub changeButtonforDispensing()
+        lblDirections.Text = "Enter the Amount Administered"
+        lblDirections.Left = (pnlSelector.Width \ 2) - (pnlSelector.Width \ 2)
+        ' show approiate panels
+        pnlAmountAdministered.Visible = True
+        pnlAmountToRemove.Visible = False
+        pnlAmountInDrawer.Visible = False
+    End Sub
 
     Private Sub IsNarcotic()
         ' if it is narcotic we need to do the following
