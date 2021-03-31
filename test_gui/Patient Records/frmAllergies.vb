@@ -419,7 +419,7 @@
         Dim lblID2 As New Label
         Dim lblID3 As New Label
         Dim lblID4 As New Label
-
+        lblID.Tag = strAllergyName
         ' anywhere we have quotes except for the label names, we can call our Database and get method
         CreateIDLabelWithToolTip(pnlMainPanel, lblID, "lblAllergyName", lblAllergyName.Location.X, 20, strAllergyName, getPanelCount(flpPannel), tpToolTip, TruncateString(15, strAllergyName))
         ' CreateIDLabel(pnlMainPanel, lblID, "lblAllergyName", lblAllergyName.Location.X, 20, strAllergyName, getPanelCount(flpPannel))
@@ -429,6 +429,7 @@
         '  CreateIDLabel(pnlMainPanel, lblID4, "lblMedication", lblMedication.Location.X, 20, strMedicationName, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
+        pnlMainPanel.Tag = strAllergyName
         flpPannel.Controls.Add(pnl)
 
     End Sub
@@ -460,6 +461,7 @@
     Private Sub LoadAllergiesPanel(strSeverity As String, intPatientTuid As Integer)
         'get the allergy information from the patient allergy tables
         Dim allergy As String = ""
+        Dim intSeverity As Integer = 0
         Dim dtsPatientAllergy As DataSet = CreateDatabase.ExecuteSelectQuery("Select Allergy.Allergy_Name, PatientAllergy.Allergy_Severity," &
                                                                              "Allergy.Allergy_Type From PatientAllergy " &
                                                                              "INNER JOIN Allergy on PatientAllergy.Allergy_Name=Allergy.Allergy_Name" &
@@ -468,20 +470,15 @@
         cmbAllergies.SelectedIndex = -1
         For Each dr As DataRow In dtsPatientAllergy.Tables(0).Rows
 
-            If dr(2) = "Drug" Then
-                'cmbMedicationName.Text = dr(0)
-                allergy = "N/A"
-                cmbAllergies.Text = allergy
-                cmbAllergiesType.Text = dr(2)
-            Else
-                allergy = dr(0)
+
+            allergy = dr(0)
                 cmbAllergies.Text = allergy
                 'mbMedicationName.Text = "N/A"
                 cmbAllergiesType.Text = dr(2)
-                Debug.WriteLine("")
-            End If
+            Debug.WriteLine("")
 
-            strSeverity = CheckSeverity(dr)
+            intSeverity = CInt(CheckSeverity(dr))
+            strSeverity = cmbSeverity.Items.Item(intSeverity)
             CreateAllergiesPanels(flpAllergies, allergy, cmbAllergiesType.Text, strSeverity)
             'cmbAllergiesLocked()
         Next
@@ -548,7 +545,7 @@
 
     End Sub
 
-    Private Sub cmbAllergies_LostFocus(sender As Object, e As EventArgs) Handles cmbAllergies.LostFocus
+    Private Sub cmbAllergies_LostFocus(sender As Object, e As EventArgs) Handles cmbAllergies.MouseLeave
         If cmbAllergies.Text = "" Then
             cmbAllergiesType.Enabled = True
         End If
