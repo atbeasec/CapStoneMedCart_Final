@@ -126,9 +126,9 @@
                 changeButtonforDispensing()
             End If
         ElseIf lblDirections.Text.Equals("Enter the Quantity in the Cart") Then
-
+            changeButtonforDispensing()
         ElseIf lblDirections.Text.Equals("Enter the Amount Administered") Then
-
+            frmMain.OpenChildForm(frmWaste)
         End If
     End Sub
 

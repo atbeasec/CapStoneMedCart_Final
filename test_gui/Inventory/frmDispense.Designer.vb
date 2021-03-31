@@ -527,7 +527,6 @@ Partial Class frmDispense
         Me.txtUnits.ShortcutsEnabled = False
         Me.txtUnits.Size = New System.Drawing.Size(61, 26)
         Me.txtUnits.TabIndex = 38
-        Me.txtUnits.Text = "1"
         '
         'pnlAmountInDrawer
         '
