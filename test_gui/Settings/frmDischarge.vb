@@ -203,31 +203,48 @@
     '/*  Alexander Beasecker  03/18/21  Initial creation of the code    */
     '/*********************************************************************/
     Private Sub radAdmitPatient_CheckedChanged(sender As Object, e As EventArgs) Handles radAdmitPatient.CheckedChanged, radDischarge.CheckedChanged
-        pnlAdmit.Visible = False
-        pnlDischarge.Visible = False
-        pnlInformation.Visible = False
+
 
         If radAdmitPatient.Checked = True Then
+
+            ' move the drop down and label then hide the other menu and hide the other one
+            lblAdmitPatients.Visible = True
             pnlAdmit.Visible = True
+            lblAdmitPatients.Location = New Point(lblDischargePatients.Location.X, lblDischargePatients.Location.Y)
+            pnlAdmit.Location = New Point(pnlDischarge.Location.X, pnlDischarge.Location.Y)
+            lblDischargePatients.Visible = False
             pnlDischarge.Visible = False
-            pnlInformation.Visible = True
             pnlAdmitRoomBed.Visible = True
-            pnlDischargeRoomBed.Visible = False
+            pnlInformation.Visible = True
             cmbAdmitPatients.SelectedIndex = -1
             cmbDischargePatients.SelectedIndex = -1
             clearPatientTextBoxes()
             cboRoomandBed.Items.Clear()
             PopulateAdmitRooms()
+            btnAdmit.Visible = True
+            btnAdmit.Location = New Point(btnDischarge.Location.X, btnDischarge.Location.Y)
+            btnDischarge.Visible = False
+
+
         ElseIf radDischarge.Checked = True Then
-            pnlAdmit.Visible = False
+
+            ' move the drop down and label then hide the other menu and hide the other one
+            lblAdmitPatients.Visible = False
+            lblAdmitPatients.Location = New Point(lblDischargePatients.Location.X, lblDischargePatients.Location.Y)
+            lblDischargePatients.Visible = True
             pnlDischarge.Visible = True
+            pnlAdmit.Visible = False
             pnlInformation.Visible = True
             pnlAdmitRoomBed.Visible = False
+            pnlDischarge.Visible = True
             pnlDischargeRoomBed.Visible = True
             cmbAdmitPatients.SelectedIndex = -1
             cmbDischargePatients.SelectedIndex = -1
             clearPatientTextBoxes()
             cboRoomandBed.Items.Clear()
+            btnDischarge.Visible = True
+            btnAdmit.Visible = False
+
         End If
     End Sub
 

@@ -22,16 +22,14 @@ Partial Class frmDischarge
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.lblAdmitPatients = New System.Windows.Forms.Label()
+        Me.pnlAdmit = New System.Windows.Forms.Panel()
         Me.cmbAdmitPatients = New System.Windows.Forms.ComboBox()
         Me.btnAdmit = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.lblDischargePatients = New System.Windows.Forms.Label()
+        Me.pnlDischarge = New System.Windows.Forms.Panel()
         Me.cmbDischargePatients = New System.Windows.Forms.ComboBox()
         Me.btnDischarge = New System.Windows.Forms.Button()
-        Me.pnlDischarge = New System.Windows.Forms.Panel()
-        Me.pnlAdmit = New System.Windows.Forms.Panel()
         Me.pnlRadioButtons = New System.Windows.Forms.Panel()
         Me.radDischarge = New System.Windows.Forms.RadioButton()
         Me.radAdmitPatient = New System.Windows.Forms.RadioButton()
@@ -69,10 +67,8 @@ Partial Class frmDischarge
         Me.txtPhysician = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.Panel3.SuspendLayout()
-        Me.Panel1.SuspendLayout()
-        Me.pnlDischarge.SuspendLayout()
         Me.pnlAdmit.SuspendLayout()
+        Me.pnlDischarge.SuspendLayout()
         Me.pnlRadioButtons.SuspendLayout()
         Me.pnlInformation.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -80,27 +76,27 @@ Partial Class frmDischarge
         Me.pnlDischargeRoomBed.SuspendLayout()
         Me.SuspendLayout()
         '
-        'Label8
+        'lblAdmitPatients
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label8.Location = New System.Drawing.Point(3, 19)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(169, 21)
-        Me.Label8.TabIndex = 109
-        Me.Label8.Text = "Select Patient to Admit:"
+        Me.lblAdmitPatients.AutoSize = True
+        Me.lblAdmitPatients.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblAdmitPatients.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblAdmitPatients.Location = New System.Drawing.Point(454, 70)
+        Me.lblAdmitPatients.Name = "lblAdmitPatients"
+        Me.lblAdmitPatients.Size = New System.Drawing.Size(183, 21)
+        Me.lblAdmitPatients.TabIndex = 109
+        Me.lblAdmitPatients.Text = "Select Patient to Admit:"
         '
-        'Panel3
+        'pnlAdmit
         '
-        Me.Panel3.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel3.Controls.Add(Me.cmbAdmitPatients)
-        Me.Panel3.Location = New System.Drawing.Point(6, 43)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel3.Size = New System.Drawing.Size(437, 28)
-        Me.Panel3.TabIndex = 1
-        Me.Panel3.TabStop = True
+        Me.pnlAdmit.BackColor = System.Drawing.Color.DarkGray
+        Me.pnlAdmit.Controls.Add(Me.cmbAdmitPatients)
+        Me.pnlAdmit.Location = New System.Drawing.Point(457, 94)
+        Me.pnlAdmit.Name = "pnlAdmit"
+        Me.pnlAdmit.Padding = New System.Windows.Forms.Padding(1)
+        Me.pnlAdmit.Size = New System.Drawing.Size(437, 28)
+        Me.pnlAdmit.TabIndex = 1
+        Me.pnlAdmit.TabStop = True
         '
         'cmbAdmitPatients
         '
@@ -121,7 +117,7 @@ Partial Class frmDischarge
         Me.btnAdmit.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAdmit.ForeColor = System.Drawing.Color.White
         Me.btnAdmit.Image = Global.test_gui.My.Resources.Resources.resolve
-        Me.btnAdmit.Location = New System.Drawing.Point(367, 342)
+        Me.btnAdmit.Location = New System.Drawing.Point(386, 280)
         Me.btnAdmit.Name = "btnAdmit"
         Me.btnAdmit.Size = New System.Drawing.Size(132, 38)
         Me.btnAdmit.TabIndex = 2
@@ -129,27 +125,27 @@ Partial Class frmDischarge
         Me.btnAdmit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnAdmit.UseVisualStyleBackColor = False
         '
-        'Label1
+        'lblDischargePatients
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(5, 13)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(196, 21)
-        Me.Label1.TabIndex = 112
-        Me.Label1.Text = "Select Patient to Discharge:"
+        Me.lblDischargePatients.AutoSize = True
+        Me.lblDischargePatients.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDischargePatients.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblDischargePatients.Location = New System.Drawing.Point(11, 69)
+        Me.lblDischargePatients.Name = "lblDischargePatients"
+        Me.lblDischargePatients.Size = New System.Drawing.Size(210, 21)
+        Me.lblDischargePatients.TabIndex = 112
+        Me.lblDischargePatients.Text = "Select Patient to Discharge:"
         '
-        'Panel1
+        'pnlDischarge
         '
-        Me.Panel1.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel1.Controls.Add(Me.cmbDischargePatients)
-        Me.Panel1.Location = New System.Drawing.Point(5, 40)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel1.Size = New System.Drawing.Size(437, 28)
-        Me.Panel1.TabIndex = 3
-        Me.Panel1.TabStop = True
+        Me.pnlDischarge.BackColor = System.Drawing.Color.DarkGray
+        Me.pnlDischarge.Controls.Add(Me.cmbDischargePatients)
+        Me.pnlDischarge.Location = New System.Drawing.Point(11, 94)
+        Me.pnlDischarge.Name = "pnlDischarge"
+        Me.pnlDischarge.Padding = New System.Windows.Forms.Padding(1)
+        Me.pnlDischarge.Size = New System.Drawing.Size(437, 28)
+        Me.pnlDischarge.TabIndex = 3
+        Me.pnlDischarge.TabStop = True
         '
         'cmbDischargePatients
         '
@@ -170,7 +166,7 @@ Partial Class frmDischarge
         Me.btnDischarge.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDischarge.ForeColor = System.Drawing.Color.White
         Me.btnDischarge.Image = Global.test_gui.My.Resources.Resources.resolve
-        Me.btnDischarge.Location = New System.Drawing.Point(367, 342)
+        Me.btnDischarge.Location = New System.Drawing.Point(386, 217)
         Me.btnDischarge.Name = "btnDischarge"
         Me.btnDischarge.Size = New System.Drawing.Size(132, 38)
         Me.btnDischarge.TabIndex = 4
@@ -178,42 +174,23 @@ Partial Class frmDischarge
         Me.btnDischarge.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnDischarge.UseVisualStyleBackColor = False
         '
-        'pnlDischarge
-        '
-        Me.pnlDischarge.Controls.Add(Me.Label1)
-        Me.pnlDischarge.Controls.Add(Me.btnDischarge)
-        Me.pnlDischarge.Controls.Add(Me.Panel1)
-        Me.pnlDischarge.Location = New System.Drawing.Point(12, 64)
-        Me.pnlDischarge.Name = "pnlDischarge"
-        Me.pnlDischarge.Size = New System.Drawing.Size(840, 463)
-        Me.pnlDischarge.TabIndex = 113
-        Me.pnlDischarge.Visible = False
-        '
-        'pnlAdmit
-        '
-        Me.pnlAdmit.Controls.Add(Me.Label8)
-        Me.pnlAdmit.Controls.Add(Me.btnAdmit)
-        Me.pnlAdmit.Controls.Add(Me.Panel3)
-        Me.pnlAdmit.Location = New System.Drawing.Point(12, 64)
-        Me.pnlAdmit.Name = "pnlAdmit"
-        Me.pnlAdmit.Size = New System.Drawing.Size(822, 460)
-        Me.pnlAdmit.TabIndex = 114
-        '
         'pnlRadioButtons
         '
         Me.pnlRadioButtons.Controls.Add(Me.radDischarge)
         Me.pnlRadioButtons.Controls.Add(Me.radAdmitPatient)
         Me.pnlRadioButtons.Location = New System.Drawing.Point(12, 12)
         Me.pnlRadioButtons.Name = "pnlRadioButtons"
-        Me.pnlRadioButtons.Size = New System.Drawing.Size(317, 40)
+        Me.pnlRadioButtons.Size = New System.Drawing.Size(380, 40)
         Me.pnlRadioButtons.TabIndex = 115
         '
         'radDischarge
         '
         Me.radDischarge.AutoSize = True
-        Me.radDischarge.Location = New System.Drawing.Point(128, 11)
+        Me.radDischarge.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.radDischarge.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.radDischarge.Location = New System.Drawing.Point(190, 11)
         Me.radDischarge.Name = "radDischarge"
-        Me.radDischarge.Size = New System.Drawing.Size(109, 17)
+        Me.radDischarge.Size = New System.Drawing.Size(155, 25)
         Me.radDischarge.TabIndex = 1
         Me.radDischarge.TabStop = True
         Me.radDischarge.Text = "Discharge Patient"
@@ -223,9 +200,11 @@ Partial Class frmDischarge
         '
         Me.radAdmitPatient.AutoSize = True
         Me.radAdmitPatient.Checked = True
+        Me.radAdmitPatient.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.radAdmitPatient.ForeColor = System.Drawing.SystemColors.ControlDarkDark
         Me.radAdmitPatient.Location = New System.Drawing.Point(3, 11)
         Me.radAdmitPatient.Name = "radAdmitPatient"
-        Me.radAdmitPatient.Size = New System.Drawing.Size(87, 17)
+        Me.radAdmitPatient.Size = New System.Drawing.Size(128, 25)
         Me.radAdmitPatient.TabIndex = 0
         Me.radAdmitPatient.TabStop = True
         Me.radAdmitPatient.Text = "Admit Patient"
@@ -233,8 +212,10 @@ Partial Class frmDischarge
         '
         'pnlInformation
         '
+        Me.pnlInformation.Controls.Add(Me.btnAdmit)
         Me.pnlInformation.Controls.Add(Me.Panel2)
         Me.pnlInformation.Controls.Add(Me.pnlAdmitRoomBed)
+        Me.pnlInformation.Controls.Add(Me.btnDischarge)
         Me.pnlInformation.Controls.Add(Me.pnlDischargeRoomBed)
         Me.pnlInformation.Controls.Add(Me.txtState)
         Me.pnlInformation.Controls.Add(Me.Label2)
@@ -261,7 +242,7 @@ Partial Class frmDischarge
         Me.pnlInformation.Controls.Add(Me.Label11)
         Me.pnlInformation.Location = New System.Drawing.Point(12, 141)
         Me.pnlInformation.Name = "pnlInformation"
-        Me.pnlInformation.Size = New System.Drawing.Size(907, 259)
+        Me.pnlInformation.Size = New System.Drawing.Size(907, 334)
         Me.pnlInformation.TabIndex = 116
         '
         'Panel2
@@ -292,7 +273,7 @@ Partial Class frmDischarge
         '
         Me.pnlAdmitRoomBed.Controls.Add(Me.Label17)
         Me.pnlAdmitRoomBed.Controls.Add(Me.cboRoomandBed)
-        Me.pnlAdmitRoomBed.Location = New System.Drawing.Point(6, 77)
+        Me.pnlAdmitRoomBed.Location = New System.Drawing.Point(7, 77)
         Me.pnlAdmitRoomBed.Name = "pnlAdmitRoomBed"
         Me.pnlAdmitRoomBed.Size = New System.Drawing.Size(352, 66)
         Me.pnlAdmitRoomBed.TabIndex = 119
@@ -640,18 +621,16 @@ Partial Class frmDischarge
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(982, 580)
-        Me.Controls.Add(Me.pnlInformation)
+        Me.Controls.Add(Me.lblAdmitPatients)
         Me.Controls.Add(Me.pnlAdmit)
-        Me.Controls.Add(Me.pnlRadioButtons)
+        Me.Controls.Add(Me.lblDischargePatients)
+        Me.Controls.Add(Me.pnlInformation)
         Me.Controls.Add(Me.pnlDischarge)
+        Me.Controls.Add(Me.pnlRadioButtons)
         Me.Name = "frmDischarge"
         Me.Text = "frmDischarge"
-        Me.Panel3.ResumeLayout(False)
-        Me.Panel1.ResumeLayout(False)
-        Me.pnlDischarge.ResumeLayout(False)
-        Me.pnlDischarge.PerformLayout()
         Me.pnlAdmit.ResumeLayout(False)
-        Me.pnlAdmit.PerformLayout()
+        Me.pnlDischarge.ResumeLayout(False)
         Me.pnlRadioButtons.ResumeLayout(False)
         Me.pnlRadioButtons.PerformLayout()
         Me.pnlInformation.ResumeLayout(False)
@@ -663,19 +642,18 @@ Partial Class frmDischarge
         Me.pnlDischargeRoomBed.ResumeLayout(False)
         Me.pnlDischargeRoomBed.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents Label8 As Label
-    Friend WithEvents Panel3 As Panel
+    Friend WithEvents lblAdmitPatients As Label
+    Friend WithEvents pnlAdmit As Panel
     Friend WithEvents cmbAdmitPatients As ComboBox
     Friend WithEvents btnAdmit As Button
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Panel1 As Panel
+    Friend WithEvents lblDischargePatients As Label
     Friend WithEvents cmbDischargePatients As ComboBox
     Friend WithEvents btnDischarge As Button
     Friend WithEvents pnlDischarge As Panel
-    Friend WithEvents pnlAdmit As Panel
     Friend WithEvents pnlRadioButtons As Panel
     Friend WithEvents radDischarge As RadioButton
     Friend WithEvents radAdmitPatient As RadioButton
