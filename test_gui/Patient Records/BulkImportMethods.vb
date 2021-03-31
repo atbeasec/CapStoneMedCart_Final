@@ -4,6 +4,7 @@ Imports System.Text
 
 
 Module BulkImportMethods
+#Const debug = False
     '/*********************************************************************/
     '/*                   FILE NAME: BulkImportMethods                     */									  
     '/*********************************************************************/
@@ -112,7 +113,10 @@ Module BulkImportMethods
                     End If
             End Select
             srReader.Close()
-        Catch
+        Catch ex As Exception
+#If DEBUG = True Then
+            MessageBox.Show(ex.ToString)
+#End If
             MessageBox.Show("Error opening file " & strFileName & " file is opened by another application")
         End Try
 
@@ -289,6 +293,7 @@ Module BulkImportMethods
         Dim strbSQLPull As StringBuilder = New StringBuilder
         Dim PatientArray As ArrayList = New ArrayList()
         Dim UsedBarCodesArray As ArrayList = New ArrayList()
+        Dim resultDate As DateTime
         Do
             strLine = srReader.ReadLine.Split(vbTab)
             If strLine.Length < 16 Then
@@ -335,8 +340,20 @@ Module BulkImportMethods
                         strbErrorMessage.AppendLine("Issue on line " & intLineNum & " date of birth can not be a future date")
                         blnIssue = True
                     End If
+
+                    Try
+                        resultDate = DateTime.ParseExact(strLine(5), "yyyy/MM/dd", Globalization.CultureInfo.InvariantCulture)
+#If DEBUG Then
+                        MessageBox.Show(resultDate.ToString("yyyy/MM/dd"))
+#End If
+
+                    Catch ex As Exception
+                        strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Date must be the format of YYYY/MM/DD")
+                        blnIssue = True
+                    End Try
+
                 End If
-                If Not strLine(6).ToLower.Equals("male") And Not strLine(6).ToLower.Equals("female") Then
+                    If Not strLine(6).ToLower.Equals("male") And Not strLine(6).ToLower.Equals("female") Then
                     strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Sex must be male or female")
                     blnIssue = True
                 End If
@@ -416,7 +433,7 @@ Module BulkImportMethods
                 End If
                 If Not blnIssue Then
                     UsedBarCodesArray.Add(strLine(1))
-                    PatientArray.Add(New PatientClass(strLine(0), strLine(1), strLine(2), strLine(3), strLine(4), strLine(5),
+                    PatientArray.Add(New PatientClass(strLine(0), strLine(1), strLine(2), strLine(3), strLine(4), resultDate.ToString("yyyy/MM/dd"),
                                 strLine(6), strLine(7), strLine(8), strLine(9), strLine(10), strLine(11), strLine(12), strLine(13),
                                 strLine(14), strLine(15), strLine(16), strLine(17)))
                 End If
@@ -802,7 +819,7 @@ Module BulkImportMethods
         strbSQLStatement.Append("INSERT INTO Physician ('Physician_First_Name','Physician_Middle_Name',
                 'Physician_Last_Name','Physician_Credentials','Physician_Phone_Number','Physician_Fax_Number',
                 'Physician_Address','Physician_City','Physician_State','Physician_Zip_Code','Active_Flag') Values")
-                For Each Physician As PhysicianClass In PhysicianArray
+        For Each Physician As PhysicianClass In PhysicianArray
             With Physician
                 strbSQLStatement.Append(" ('" & checkSQLInjection(.FirstName, True) & "', '" & checkSQLInjection(.MiddleName, True) & "', '" & checkSQLInjection(.LastName, True) & "', '")
                 strbSQLStatement.Append(checkSQLInjection(.Credentials) & "', '" & .PhoneNumber & "', '" & .FaxNumber & "', '")
