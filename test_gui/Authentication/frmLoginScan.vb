@@ -55,7 +55,7 @@ Public Class frmLoginScan
                 'send strBarcode to LogIn Module and recive responce
             ElseIf LogIn.ScanLogIn(strBarcode) = "True" Then
                 'If users barcode is in the User table in the database then close current form and open frmMain
-                Me.Close()
+                Me.Visible = False
                 frmMain.DetermineFormToOpen(2)
                 frmMain.Text = "Medical Dispence - " & LogIn.LoggedInFullName
                 frmMain.Show()
@@ -76,8 +76,8 @@ Public Class frmLoginScan
             Dim result As DialogResult = MessageBox.Show("Are you sure you want to quit?", "", MessageBoxButtons.YesNo)
 
             If result = DialogResult.Yes Then
+                '  e.Cancel = True
                 Me.Close()
-                frmSplash.Close()
             End If
 
         End If
@@ -88,10 +88,19 @@ Public Class frmLoginScan
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
 
         blnFlagToClose = True
+        'Me.Close()
         CloseForm()
 
     End Sub
 
+    'Private Sub frmLoginScan_FormClosingEvent(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+
+    '    CloseForm()
+
+
+
+
+    ' End Sub
     Private Sub frmLoginScan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         lblWelcomeBack.Visible = False

@@ -1,5 +1,5 @@
 ﻿Public Class frmDispense
-    Public blnSignedOff As Boolean = False
+    Public blnSignedOff As Boolean = True
     Public blnOverride As Boolean = False
     Private intPatientID As Integer
     Private intPatientMRN As Integer
@@ -169,6 +169,8 @@
             frmMain.OpenChildForm(frmWaste)
 
         End If
+
+
 
 
     End Sub

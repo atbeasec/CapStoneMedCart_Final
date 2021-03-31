@@ -584,6 +584,7 @@
   <ItemGroup>
     <None Include="Resources\user_px.png" />
     <None Include="Resources\circleLoading.gif" />
+    <None Include="Resources\image.png" />
     <Content Include="Resources\loading.gif" />
     <None Include="Resources\pillLoading.gif" />
     <None Include="Resources\Loading1.gif" />

@@ -8,22 +8,23 @@
         PatientRecordsDropDown = 1
         AllPatients = 2
         MyPatients = 3
-        InventoryDropDown = 4
-        AdHocDispense = 5
-        EndOfShiftCount = 6
-        Inventory = 7
-        Waste = 8
-        Report = 9
-        Discrepancies = 10
-        Maintenance = 11
-        Pharmacy = 12
-        SettingsDropDown = 13
-        ConfigureUserPermissions = 14
-        Discharge = 15
-        ConfigureRooms = 16
-        SerialPortSettings = 17
-        EditPhysician = 18
-        LogOut = 19
+        AddPatient = 4
+        InventoryDropDown = 5
+        AdHocDispense = 6
+        EndOfShiftCount = 7
+        Inventory = 8
+        Waste = 9
+        Report = 10
+        Discrepancies = 11
+        Maintenance = 12
+        Pharmacy = 13
+        SettingsDropDown = 14
+        ConfigureUserPermissions = 15
+        Discharge = 16
+        ConfigureRooms = 17
+        SerialPortSettings = 18
+        EditPhysician = 19
+        LogOut = 20
     End Enum
 
     Public Sub SetUserName(ByVal strUsername As String)
@@ -75,7 +76,7 @@
     '/*  ---   ----     ------------------------------------------------  */
     '/*  Collin Krygier  2/14/2021    Initial creation                    */
     '/*********************************************************************/
-    Private Sub btnMenu_Click(sender As Object, e As EventArgs) Handles btnWaste.Click, btnUsers.Click, btnSerialPort.Click, btnReport.Click, btnPharmacy.Click, btnMyPatients.Click, btnMaintenance.Click, btnEndOfShiftCount.Click, btnEditRooms.Click, btnEditPhysician.Click, btnDischargePatient.Click, btnDescrepancies.Click, btnConfigureInventory.Click, btnAllPatients.Click, btnAdhockDispense.Click
+    Private Sub btnMenu_Click(sender As Object, e As EventArgs) Handles btnWaste.Click, btnUsers.Click, btnSerialPort.Click, btnReport.Click, btnPharmacy.Click, btnMyPatients.Click, btnMaintenance.Click, btnEndOfShiftCount.Click, btnEditRooms.Click, btnEditPhysician.Click, btnDischargePatient.Click, btnDescrepancies.Click, btnConfigureInventory.Click, btnAllPatients.Click, btnAdhockDispense.Click, btnAddPatients.Click
 
 
 
@@ -236,6 +237,11 @@
                 frmCurrentChildForm = frmMyPatients
                 OpenChildForm(frmMyPatients)
 
+            Case SelectedForm.AddPatient
+
+                frmCurrentChildForm = frmNewPatient
+                OpenChildForm(frmNewPatient)
+
             Case SelectedForm.InventoryDropDown
 
                 'nothing will happen here because we have a submenu that needs to be displayed to show more buttons
@@ -372,17 +378,12 @@
         ' assing labels to contain the logged in user's name. 
         ' assign a tooltip because truncation of the username may need to happen. We need to fix the max length 
         ' that can display on the UI
-        Dim strLoggedInAs = "Logged in as "
+        Dim strLoggedInAs = "Logged in as " & LoggedInUsername
         lblCurrentUser.BringToFront()
         lblCurrentUser.Visible = True
-
-        ' handles the program from blowing up since there is not a way to check the username when scanning barcode
-        If Not String.IsNullOrEmpty(GetUserName()) Then
-            lblCurrentUser.Text = TruncateString(10, GetUserName())
-        End If
-
-        tpMultiPurposeTooltip.SetToolTip(lblCurrentUser, strLoggedInAs & GetUserName())
-        tpMultiPurposeTooltip.SetToolTip(pbLogin, strLoggedInAs & GetUserName())
+        lblCurrentUser.Text = TruncateString(15, LoggedInUsername)
+        tpMultiPurposeTooltip.SetToolTip(lblCurrentUser, strLoggedInAs)
+        tpMultiPurposeTooltip.SetToolTip(pbLogin, strLoggedInAs)
 
 
 
@@ -390,7 +391,7 @@
 
 
 
-        ' CheckUserPermissions("Supervisor")
+        CheckUserPermissions(LoggedInPermission)
 
 
 
