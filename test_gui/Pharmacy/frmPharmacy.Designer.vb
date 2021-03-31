@@ -40,16 +40,14 @@ Partial Class frmPharmacy
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.txtPatientDOB = New System.Windows.Forms.TextBox()
         Me.btnORder = New System.Windows.Forms.Button()
-        Me.btnDecrement = New System.Windows.Forms.Button()
-        Me.btnIncrement = New System.Windows.Forms.Button()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.txtQuantity = New System.Windows.Forms.TextBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.txtType = New System.Windows.Forms.TextBox()
         Me.cmbFrequencyNumber = New System.Windows.Forms.ComboBox()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.txtQuantity = New System.Windows.Forms.TextBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel5.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -166,9 +164,9 @@ Partial Class frmPharmacy
         Me.Label16.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label16.Location = New System.Drawing.Point(392, 132)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(73, 21)
+        Me.Label16.Size = New System.Drawing.Size(165, 21)
         Me.Label16.TabIndex = 164
-        Me.Label16.Text = "Quantity:"
+        Me.Label16.Text = "Amount per container:"
         '
         'Label17
         '
@@ -242,60 +240,6 @@ Partial Class frmPharmacy
         Me.btnORder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnORder.UseVisualStyleBackColor = False
         '
-        'btnDecrement
-        '
-        Me.btnDecrement.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnDecrement.FlatAppearance.BorderSize = 0
-        Me.btnDecrement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDecrement.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDecrement.ForeColor = System.Drawing.Color.White
-        Me.btnDecrement.Image = CType(resources.GetObject("btnDecrement.Image"), System.Drawing.Image)
-        Me.btnDecrement.Location = New System.Drawing.Point(489, 158)
-        Me.btnDecrement.Name = "btnDecrement"
-        Me.btnDecrement.Size = New System.Drawing.Size(28, 28)
-        Me.btnDecrement.TabIndex = 5
-        Me.btnDecrement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnDecrement.UseVisualStyleBackColor = False
-        '
-        'btnIncrement
-        '
-        Me.btnIncrement.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnIncrement.FlatAppearance.BorderSize = 0
-        Me.btnIncrement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnIncrement.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnIncrement.ForeColor = System.Drawing.Color.White
-        Me.btnIncrement.Image = CType(resources.GetObject("btnIncrement.Image"), System.Drawing.Image)
-        Me.btnIncrement.Location = New System.Drawing.Point(455, 158)
-        Me.btnIncrement.Name = "btnIncrement"
-        Me.btnIncrement.Size = New System.Drawing.Size(28, 28)
-        Me.btnIncrement.TabIndex = 4
-        Me.btnIncrement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnIncrement.UseVisualStyleBackColor = False
-        '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel2.Controls.Add(Me.txtQuantity)
-        Me.Panel2.Location = New System.Drawing.Point(396, 158)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel2.Size = New System.Drawing.Size(53, 28)
-        Me.Panel2.TabIndex = 3
-        '
-        'txtQuantity
-        '
-        Me.txtQuantity.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtQuantity.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtQuantity.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtQuantity.Location = New System.Drawing.Point(1, 1)
-        Me.txtQuantity.MaxLength = 4
-        Me.txtQuantity.Multiline = True
-        Me.txtQuantity.Name = "txtQuantity"
-        Me.txtQuantity.ShortcutsEnabled = False
-        Me.txtQuantity.Size = New System.Drawing.Size(51, 26)
-        Me.txtQuantity.TabIndex = 38
-        Me.txtQuantity.Text = "1"
-        '
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.DarkGray
@@ -343,6 +287,40 @@ Partial Class frmPharmacy
         '
         Me.ErrorProvider1.ContainerControl = Me
         '
+        'txtQuantity
+        '
+        Me.txtQuantity.BackColor = System.Drawing.Color.White
+        Me.txtQuantity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtQuantity.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtQuantity.Location = New System.Drawing.Point(396, 156)
+        Me.txtQuantity.Name = "txtQuantity"
+        Me.txtQuantity.ReadOnly = True
+        Me.txtQuantity.ShortcutsEnabled = False
+        Me.txtQuantity.Size = New System.Drawing.Size(118, 25)
+        Me.txtQuantity.TabIndex = 176
+        '
+        'TextBox1
+        '
+        Me.TextBox1.BackColor = System.Drawing.Color.White
+        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(583, 156)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.ReadOnly = True
+        Me.TextBox1.ShortcutsEnabled = False
+        Me.TextBox1.Size = New System.Drawing.Size(67, 25)
+        Me.TextBox1.TabIndex = 177
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(579, 132)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(42, 21)
+        Me.Label1.TabIndex = 178
+        Me.Label1.Text = "Unit:"
+        '
         'frmPharmacy
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -350,11 +328,11 @@ Partial Class frmPharmacy
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(717, 494)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.txtQuantity)
         Me.Controls.Add(Me.cmbFrequencyNumber)
         Me.Controls.Add(Me.Panel3)
-        Me.Controls.Add(Me.btnDecrement)
-        Me.Controls.Add(Me.btnIncrement)
-        Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.cmbOrderedBy)
         Me.Controls.Add(Me.Label11)
@@ -375,8 +353,6 @@ Partial Class frmPharmacy
         Me.Text = "frmPharmacy"
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -402,12 +378,11 @@ Partial Class frmPharmacy
     Friend WithEvents txtPatientDOB As TextBox
     Friend WithEvents btnORder As Button
     Friend WithEvents numQuantity As NumericUpDown
-    Friend WithEvents btnDecrement As Button
-    Friend WithEvents btnIncrement As Button
-    Friend WithEvents Panel2 As Panel
-    Friend WithEvents txtQuantity As TextBox
     Friend WithEvents Panel3 As Panel
     Friend WithEvents txtType As TextBox
     Friend WithEvents cmbFrequencyNumber As ComboBox
     Friend WithEvents ErrorProvider1 As ErrorProvider
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtQuantity As TextBox
+    Friend WithEvents Label1 As Label
 End Class
