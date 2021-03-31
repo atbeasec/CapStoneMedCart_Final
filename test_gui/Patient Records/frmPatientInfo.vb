@@ -318,6 +318,7 @@
         'AddHandler pnlMainPanel.DoubleClick, AddressOf DynamicDoubleClickNewOrder
         AddHandler pnlMainPanel.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
         AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
+        AddHandler pnlMainPanel.Click, AddressOf PrescriptionPanel_Click
 
         ' add controls to this panel
         ' call database info here to populate
@@ -348,6 +349,17 @@
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
+
+    End Sub
+
+    Private Sub PrescriptionPanel_Click(ByVal sender As Object, e As EventArgs)
+
+        frmDispense.SetPatientID(intPatientID)
+        frmMain.OpenChildForm(frmDispense)
+        DispenseHistory.DispensemedicationPopulate(intPatientID)
+        PatientInformation.PopulatePatientDispenseInfo(intPatientID)
+        PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientID)
+        PatientInformation.DisplayPatientPrescriptionsDispense(intPatientID)
 
     End Sub
 
@@ -762,7 +774,7 @@
     '/*  ---   ----     ------------------------------------------------- */
     '/*                                                                   */
     '/*********************************************************************/
-    Private Sub btnDispenseMedication_Click(sender As Object, e As EventArgs) Handles btnDispenseMedication.Click
+    Private Sub btnDispenseMedication_Click(sender As Object, e As EventArgs)
 
         ' pass MRN to the dispense screen because it needs to be used to be sent back to the patient info screen if the user
         ' decides to go back a screen.

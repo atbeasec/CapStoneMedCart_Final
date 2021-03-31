@@ -769,7 +769,7 @@ Module DispenseHistory
         strbSQLcommand.Clear()
         strbSQLcommand.Append("SELECT Quantity FROM DrawerMedication WHERE Medication_TUID  = '" & intMedID & "' AND DrawerMedication.Active_Flag = '1'")
         intPrescribedQuantity = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
-        intPrescribedQuantity = intPrescribedQuantity - frmDispense.txtQuantity.Text
+        intPrescribedQuantity = intPrescribedQuantity - frmDispense.txtQuantityToDispense.Text
         strbSQLcommand.Clear()
         strbSQLcommand.Append("UPDATE DrawerMedication SET Quantity = '" & intPrescribedQuantity & "' WHERE Medication_TUID = '" & intMedID & "' AND DrawerMedication.Active_Flag = '1'")
         CreateDatabase.ExecuteInsertQuery(strbSQLcommand.ToString)
@@ -780,7 +780,7 @@ Module DispenseHistory
         intDrawerMedicationID = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
         strbSQLcommand.Clear()
         strbSQLcommand.Append("INSERT INTO Dispensing(PatientMedication_TUID, Primary_User_TUID, Approving_User_TUID, DateTime_Dispensed, Amount_Dispensed, DrawerMedication_TUID) ")
-        strbSQLcommand.Append("VALUES('" & intPatientMedicationDatabaseID & "','1','1','" & dtmAdhocTime & "','" & frmDispense.txtQuantity.Text & "','" & intDrawerMedicationID & "')")
+        strbSQLcommand.Append("VALUES('" & intPatientMedicationDatabaseID & "','1','1','" & dtmAdhocTime & "','" & frmDispense.txtQuantityToDispense.Text & "','" & intDrawerMedicationID & "')")
         CreateDatabase.ExecuteInsertQuery(strbSQLcommand.ToString)
 
 

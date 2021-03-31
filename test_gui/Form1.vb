@@ -390,7 +390,7 @@
 
 
 
-        ' CheckUserPermissions(GetUserPermissions())
+        ' CheckUserPermissions("Supervisor")
 
 
 
@@ -446,6 +446,7 @@
 
         Const ADMINACCESS = "Admin"
         Const SUPERVISORACCESS = "Supervisor"
+
         Dim arrButtonsToRemoveSupervisor() = {btnUsers, btnEditPhysician, btnSerialPort, btnConfigureInventory, btnEndOfShiftCount}
         Dim arrButtonsToRemoveNurse() = {btnSettings, btnPharmacy, btnMaintenance, btnDescrepancies, btnConfigureInventory, btnEndOfShiftCount}
 

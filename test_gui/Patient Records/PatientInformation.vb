@@ -620,10 +620,10 @@ Module PatientInformation
         'get patient information using sql generic method
         Dim dsPatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT * FROM Patient WHERE Patient_ID = '" & intPatient_ID & "'")
         'set all patient information into dispense textboxes
-        frmDispense.txtPatientMRN.Text = dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.MRN_Number)
-        frmDispense.txtDOB.Text = dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.DoB)
-        frmDispense.txtPatientFirstName.Text = dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.FristName)
-        frmDispense.txtPatientLastName.Text = dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.LastName)
+        frmDispense.txtPatientMRN.Text = dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.MRN_Number) & " "
+        frmDispense.txtPatientMRN.Text &= dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.DoB) & " "
+        frmDispense.txtPatientMRN.Text &= dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.FristName) & " "
+        frmDispense.txtPatientMRN.Text &= dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.LastName)
     End Sub
 
     '/*********************************************************************/
