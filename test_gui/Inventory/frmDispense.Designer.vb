@@ -27,16 +27,11 @@ Partial Class frmDispense
         Me.lstboxAllergies = New System.Windows.Forms.ListBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.flpMedications = New System.Windows.Forms.FlowLayoutPanel()
-        Me.cmbMedications = New System.Windows.Forms.ComboBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
-        Me.cmbDosage = New System.Windows.Forms.ComboBox()
-        Me.cmbMethod = New System.Windows.Forms.ComboBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.Panel14 = New System.Windows.Forms.Panel()
-        Me.txtPatientMRN = New System.Windows.Forms.TextBox()
         Me.btnDown = New System.Windows.Forms.Button()
         Me.btnUp = New System.Windows.Forms.Button()
         Me.Panel5 = New System.Windows.Forms.Panel()
@@ -80,7 +75,10 @@ Partial Class frmDispense
         Me.lblMedication = New System.Windows.Forms.Label()
         Me.lblType = New System.Windows.Forms.Label()
         Me.lblStrength = New System.Windows.Forms.Label()
-        Me.Panel14.SuspendLayout()
+        Me.txtMedication = New System.Windows.Forms.TextBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.lblPatientInfo = New System.Windows.Forms.Label()
         Me.Panel5.SuspendLayout()
         Me.pnlHeader.SuspendLayout()
         Me.pnlSelector.SuspendLayout()
@@ -127,22 +125,11 @@ Partial Class frmDispense
         Me.flpMedications.Size = New System.Drawing.Size(1066, 186)
         Me.flpMedications.TabIndex = 53
         '
-        'cmbMedications
-        '
-        Me.cmbMedications.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbMedications.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbMedications.FormattingEnabled = True
-        Me.cmbMedications.Items.AddRange(New Object() {"Yes", "No"})
-        Me.cmbMedications.Location = New System.Drawing.Point(21, 76)
-        Me.cmbMedications.Name = "cmbMedications"
-        Me.cmbMedications.Size = New System.Drawing.Size(446, 29)
-        Me.cmbMedications.TabIndex = 1
-        '
         'Label14
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(898, 52)
+        Me.Label14.Location = New System.Drawing.Point(848, 52)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(65, 21)
         Me.Label14.TabIndex = 177
@@ -158,33 +145,11 @@ Partial Class frmDispense
         Me.Label17.TabIndex = 176
         Me.Label17.Text = "Medication:"
         '
-        'cmbDosage
-        '
-        Me.cmbDosage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbDosage.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbDosage.FormattingEnabled = True
-        Me.cmbDosage.Items.AddRange(New Object() {"Yes", "No"})
-        Me.cmbDosage.Location = New System.Drawing.Point(902, 76)
-        Me.cmbDosage.Name = "cmbDosage"
-        Me.cmbDosage.Size = New System.Drawing.Size(193, 29)
-        Me.cmbDosage.TabIndex = 3
-        '
-        'cmbMethod
-        '
-        Me.cmbMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbMethod.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbMethod.FormattingEnabled = True
-        Me.cmbMethod.Items.AddRange(New Object() {"Yes", "No"})
-        Me.cmbMethod.Location = New System.Drawing.Point(543, 76)
-        Me.cmbMethod.Name = "cmbMethod"
-        Me.cmbMethod.Size = New System.Drawing.Size(290, 29)
-        Me.cmbMethod.TabIndex = 2
-        '
         'Label15
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(539, 52)
+        Me.Label15.Location = New System.Drawing.Point(590, 52)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(67, 21)
         Me.Label15.TabIndex = 183
@@ -208,30 +173,6 @@ Partial Class frmDispense
         Me.Label13.Size = New System.Drawing.Size(154, 21)
         Me.Label13.TabIndex = 197
         Me.Label13.Text = "Medication Allergies:"
-        '
-        'Panel14
-        '
-        Me.Panel14.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel14.Controls.Add(Me.txtPatientMRN)
-        Me.Panel14.Location = New System.Drawing.Point(112, 6)
-        Me.Panel14.Name = "Panel14"
-        Me.Panel14.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel14.Size = New System.Drawing.Size(355, 24)
-        Me.Panel14.TabIndex = 198
-        '
-        'txtPatientMRN
-        '
-        Me.txtPatientMRN.BackColor = System.Drawing.Color.White
-        Me.txtPatientMRN.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtPatientMRN.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtPatientMRN.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPatientMRN.Location = New System.Drawing.Point(1, 1)
-        Me.txtPatientMRN.Name = "txtPatientMRN"
-        Me.txtPatientMRN.ReadOnly = True
-        Me.txtPatientMRN.ShortcutsEnabled = False
-        Me.txtPatientMRN.Size = New System.Drawing.Size(353, 22)
-        Me.txtPatientMRN.TabIndex = 6
-        Me.txtPatientMRN.TabStop = False
         '
         'btnDown
         '
@@ -289,9 +230,9 @@ Partial Class frmDispense
         'pnlHeader
         '
         Me.pnlHeader.BackColor = System.Drawing.Color.White
+        Me.pnlHeader.Controls.Add(Me.lblPatientInfo)
         Me.pnlHeader.Controls.Add(Me.btnBack)
         Me.pnlHeader.Controls.Add(Me.Label4)
-        Me.pnlHeader.Controls.Add(Me.Panel14)
         Me.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlHeader.Location = New System.Drawing.Point(0, 0)
         Me.pnlHeader.Name = "pnlHeader"
@@ -764,30 +705,74 @@ Partial Class frmDispense
         Me.lblStrength.Tag = "2"
         Me.lblStrength.Text = "Strength"
         '
+        'txtMedication
+        '
+        Me.txtMedication.BackColor = System.Drawing.Color.White
+        Me.txtMedication.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtMedication.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMedication.Location = New System.Drawing.Point(17, 76)
+        Me.txtMedication.Name = "txtMedication"
+        Me.txtMedication.ReadOnly = True
+        Me.txtMedication.ShortcutsEnabled = False
+        Me.txtMedication.Size = New System.Drawing.Size(571, 25)
+        Me.txtMedication.TabIndex = 205
+        '
+        'TextBox1
+        '
+        Me.TextBox1.BackColor = System.Drawing.Color.White
+        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(594, 76)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.ReadOnly = True
+        Me.TextBox1.ShortcutsEnabled = False
+        Me.TextBox1.Size = New System.Drawing.Size(248, 25)
+        Me.TextBox1.TabIndex = 206
+        '
+        'TextBox2
+        '
+        Me.TextBox2.BackColor = System.Drawing.Color.White
+        Me.TextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox2.Location = New System.Drawing.Point(852, 76)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.ReadOnly = True
+        Me.TextBox2.ShortcutsEnabled = False
+        Me.TextBox2.Size = New System.Drawing.Size(202, 25)
+        Me.TextBox2.TabIndex = 207
+        '
+        'lblPatientInfo
+        '
+        Me.lblPatientInfo.AutoSize = True
+        Me.lblPatientInfo.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.lblPatientInfo.Location = New System.Drawing.Point(117, 9)
+        Me.lblPatientInfo.Name = "lblPatientInfo"
+        Me.lblPatientInfo.Size = New System.Drawing.Size(56, 21)
+        Me.lblPatientInfo.TabIndex = 199
+        Me.lblPatientInfo.Text = "Label1"
+        '
         'frmDispense
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1116, 650)
+        Me.Controls.Add(Me.TextBox2)
+        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.txtMedication)
         Me.Controls.Add(Me.pnlDispenseHistoryHeader)
         Me.Controls.Add(Me.pnlSelector)
         Me.Controls.Add(Me.pnlHeader)
         Me.Controls.Add(Me.Label13)
-        Me.Controls.Add(Me.cmbMethod)
         Me.Controls.Add(Me.Label15)
-        Me.Controls.Add(Me.cmbMedications)
         Me.Controls.Add(Me.Label14)
         Me.Controls.Add(Me.Label17)
-        Me.Controls.Add(Me.cmbDosage)
         Me.Controls.Add(Me.flpMedications)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.lstboxAllergies)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "frmDispense"
         Me.Text = "    Dispense"
-        Me.Panel14.ResumeLayout(False)
-        Me.Panel14.PerformLayout()
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
         Me.pnlHeader.ResumeLayout(False)
@@ -815,16 +800,11 @@ Partial Class frmDispense
     Friend WithEvents lstboxAllergies As ListBox
     Friend WithEvents Label10 As Label
     Friend WithEvents flpMedications As FlowLayoutPanel
-    Friend WithEvents cmbMedications As ComboBox
     Friend WithEvents Label14 As Label
     Friend WithEvents Label17 As Label
-    Friend WithEvents cmbDosage As ComboBox
-    Friend WithEvents cmbMethod As ComboBox
     Friend WithEvents Label15 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label13 As Label
-    Friend WithEvents Panel14 As Panel
-    Friend WithEvents txtPatientMRN As TextBox
     Friend WithEvents btnDown As Button
     Friend WithEvents btnUp As Button
     Friend WithEvents Panel5 As Panel
@@ -868,4 +848,8 @@ Partial Class frmDispense
     Friend WithEvents lblMedication As Label
     Friend WithEvents lblType As Label
     Friend WithEvents lblStrength As Label
+    Friend WithEvents txtMedication As TextBox
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents lblPatientInfo As Label
 End Class

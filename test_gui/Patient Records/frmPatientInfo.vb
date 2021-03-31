@@ -285,7 +285,7 @@
     '/*  WHO   WHEN     WHAT								              */             
     '/*  Collin Krygier  2/6/2021    Initial creation                     */
     '/*********************************************************************/
-    Public Sub CreatePrescriptionsPanels(ByVal flpPannel As FlowLayoutPanel, ByVal strMedicationName As String, ByVal strStrength As String, ByVal strFrequency As String, ByVal strType As String, ByVal strQuantity As String, ByVal strDatePrescribed As String, ByVal strPrescribedBy As String)
+    Public Sub CreatePrescriptionsPanels(ByVal flpPannel As FlowLayoutPanel, ByVal strMedicationName As String, ByVal strStrength As String, ByVal strFrequency As String, ByVal strType As String, ByVal strQuantity As String, ByVal strDatePrescribed As String, ByVal strPrescribedBy As String, ByRef intMedID As Integer)
         Dim pnl As Panel
         pnl = New Panel
 
@@ -348,15 +348,18 @@
         ' CreateIDLabel(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, strPrescribedBy, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
+        pnlMainPanel.Tag = intMedID
         flpPannel.Controls.Add(pnl)
 
     End Sub
 
     Private Sub PrescriptionPanel_Click(ByVal sender As Object, e As EventArgs)
+        Dim intMedID As Integer = sender.tag
 
         frmDispense.SetPatientID(intPatientID)
+        frmDispense.SetintMedicationID(intMedID)
         frmMain.OpenChildForm(frmDispense)
-        DispenseHistory.DispensemedicationPopulate(intPatientID)
+        DispenseHistory.DispensemedicationPopulate(intPatientID, intMedID)
         PatientInformation.PopulatePatientDispenseInfo(intPatientID)
         PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientID)
         PatientInformation.DisplayPatientPrescriptionsDispense(intPatientID)
@@ -737,58 +740,58 @@
         mtbBirthday.ReadOnly = True
     End Sub
 
-    '/*********************************************************************/
-    '/*                   SUBPROGRAM NAME: btnDispenseMedication_Click 	  */         
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:     		                          */   
-    '/*		              DATE CREATED: 	                              */                             
-    '/*********************************************************************/
-    '/*  FUNCTION PURPOSE:								                  */             
-    '/*											                          */                     
-    '/*                                                                   */
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      						                      */           
-    '/*                                         				          */         
-    '/*********************************************************************/
-    '/*  CALLS:										                      */                 
-    '/*             (NONE)								                  */             
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					          */         
-    '/*											                          */                     
-    '/*                                                                   */  
-    '/*********************************************************************/
-    '/*  RETURNS:								                          */                   
-    '/*            (NOTHING)								              */             
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								                  */             
-    '/*											                          */                     
-    '/*                                                                   */ 
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											                          */                     
-    '/*                                                                   */  
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						                      */               
-    '/*											                          */                     
-    '/*  WHO   WHEN     WHAT								              */             
-    '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                   */
-    '/*********************************************************************/
-    Private Sub btnDispenseMedication_Click(sender As Object, e As EventArgs)
+    ''/*********************************************************************/
+    ''/*                   SUBPROGRAM NAME: btnDispenseMedication_Click 	  */         
+    ''/*********************************************************************/
+    ''/*                   WRITTEN BY:     		                          */   
+    ''/*		              DATE CREATED: 	                              */                             
+    ''/*********************************************************************/
+    ''/*  FUNCTION PURPOSE:								                  */             
+    ''/*											                          */                     
+    ''/*                                                                   */
+    ''/*********************************************************************/
+    ''/*  CALLED BY:   	      						                      */           
+    ''/*                                         				          */         
+    ''/*********************************************************************/
+    ''/*  CALLS:										                      */                 
+    ''/*             (NONE)								                  */             
+    ''/*********************************************************************/
+    ''/*  PARAMETER LIST (In Parameter Order):					          */         
+    ''/*											                          */                     
+    ''/*                                                                   */  
+    ''/*********************************************************************/
+    ''/*  RETURNS:								                          */                   
+    ''/*            (NOTHING)								              */             
+    ''/*********************************************************************/
+    ''/* SAMPLE INVOCATION:								                  */             
+    ''/*											                          */                     
+    ''/*                                                                   */ 
+    ''/*********************************************************************/
+    ''/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    ''/*											                          */                     
+    ''/*                                                                   */  
+    ''/*********************************************************************/
+    ''/* MODIFICATION HISTORY:						                      */               
+    ''/*											                          */                     
+    ''/*  WHO   WHEN     WHAT								              */             
+    ''/*  ---   ----     ------------------------------------------------- */
+    ''/*                                                                   */
+    ''/*********************************************************************/
+    'Private Sub btnDispenseMedication_Click(sender As Object, e As EventArgs)
 
-        ' pass MRN to the dispense screen because it needs to be used to be sent back to the patient info screen if the user
-        ' decides to go back a screen.
+    '    ' pass MRN to the dispense screen because it needs to be used to be sent back to the patient info screen if the user
+    '    ' decides to go back a screen.
 
-        frmDispense.SetPatientID(intPatientID)
-        frmMain.OpenChildForm(frmDispense)
-        DispenseHistory.DispensemedicationPopulate(intPatientID)
-        PatientInformation.PopulatePatientDispenseInfo(intPatientID)
-        PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientID)
-        PatientInformation.DisplayPatientPrescriptionsDispense(intPatientID)
-        '  Dim frmCurrentForm As Form = Me
+    '    frmDispense.SetPatientID(intPatientID)
+    '    frmMain.OpenChildForm(frmDispense)
+    '    DispenseHistory.DispensemedicationPopulate(intPatientID)
+    '    PatientInformation.PopulatePatientDispenseInfo(intPatientID)
+    '    PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientID)
+    '    PatientInformation.DisplayPatientPrescriptionsDispense(intPatientID)
+    '    '  Dim frmCurrentForm As Form = Me
 
 
-    End Sub
+    'End Sub
 
     ' Private Sub Button1_Click(sender As Object, e As EventArgs)
     '     Returns.Show()

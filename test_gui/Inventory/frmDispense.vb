@@ -3,6 +3,7 @@
     Public blnOverride As Boolean = False
     Private intPatientID As Integer
     Private intPatientMRN As Integer
+    Private intMedicationID As Integer
 
     Dim contactPanelsAddedCount As Integer = 0
     Dim currentContactPanelName As String = Nothing
@@ -11,6 +12,11 @@
         intPatientID = ID
         intPatientMRN = ExecuteScalarQuery("SELECT MRN_Number from Patient WHERE Patient_ID =" & intPatientID & ";")
     End Sub
+
+    Public Sub SetintMedicationID(ByVal ID As Integer)
+        intMedicationID = ID
+    End Sub
+
 
     Public Sub SetPatientMrn(ByVal mrn As Integer)
         intPatientMRN = mrn
@@ -243,7 +249,7 @@
 
     End Sub
 
-    Private Sub cmbMedications_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMedications.SelectedIndexChanged
+    Private Sub cmbMedications_SelectedIndexChanged(sender As Object, e As EventArgs)
         DispenseHistory.SetMedicationProperties()
     End Sub
 
@@ -251,7 +257,7 @@
         DataVaildationMethods.KeyPressCheck(e, "0123456789")
         GraphicalUserInterfaceReusableMethods.MaxValue(CInt(sender.Text), 1000, txtQuantityToDispense)
     End Sub
-    Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantityToDispense.TextChanged
+    Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantityToDispense.Validated
         If IsNumeric(sender.Text) Then
             GraphicalUserInterfaceReusableMethods.MaxValue(CInt(sender.Text), 1000, txtQuantityToDispense)
         Else
@@ -266,5 +272,11 @@
 
     End Sub
 
+    Private Sub Label15_Click(sender As Object, e As EventArgs) Handles Label15.Click
 
+    End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+
+    End Sub
 End Class

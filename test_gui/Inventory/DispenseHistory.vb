@@ -51,8 +51,6 @@ Module DispenseHistory
     '/*  Alexander Beasecker    1/25/2021   Initial creation            */
     '/*******************************************************************/
 
-
-
     ' Dim strDEFAULTFOLDER As String = ""
     ' Dim strDBNAME As String = "Medication_Cart_System"
     ' Dim strDBPath As String = strDEFAULTFOLDER & strDBNAME & ".db"
@@ -605,21 +603,21 @@ Module DispenseHistory
     '/*  ---                   ----     ----------------------------------*/
     '/*  Alexander Beasecker  02/10/21  Initial creation of the code      */
     '/*********************************************************************/
-    Public Sub DispensemedicationPopulate(ByRef intPatientMRN As Integer)
-        frmDispense.cmbMedications.Items.Clear()
+    Public Sub DispensemedicationPopulate(ByRef intPatientID As Integer, ByRef intMEDID As Integer)
+        frmDispense.txtMedication.Text = Nothing
         Dim Strdatacommand As String
         ' Currently the medication display is appending the RXCUI Number on too the medication
         ' name, as searching by name alone could cause problems if medication names can repeat
         Strdatacommand = "SELECT Drug_Name,RXCUI_ID FROM PatientMedication " &
         "INNER JOIN Medication on Medication.Medication_ID = PatientMedication.Medication_TUID " &
         "INNER JOIN Patient on Patient.Patient_ID = PatientMedication.Patient_TUID " &
-        "WHERE Patient.Patient_ID = '" & intPatientMRN & "' AND PatientMedication.Active_Flag = '1'"
+        "WHERE Patient.Patient_ID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1' AND Medication.Medication_ID = '" & intMEDID & "'"
 
         Dim dsMedicationDataSet As DataSet = New DataSet
         dsMedicationDataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
         'add medication name and RXCUI to listbox
         For Each dr As DataRow In dsMedicationDataSet.Tables(0).Rows
-            frmDispense.cmbMedications.Items.Add(dr(0) & "--" & dr(1))
+            frmDispense.txtMedication.Text = (dr(0) & "   RXCUI:" & dr(1))
         Next
 
     End Sub
@@ -650,65 +648,8 @@ Module DispenseHistory
     '/*  Alexander Beasecker  02/10/21  Initial creation of the code      */
     '/*********************************************************************/
     Public Sub SetMedicationProperties()
-        frmDispense.cmbMethod.Items.Clear()
-        frmDispense.cmbDosage.Items.Clear()
 
-        'get selected medication
-        Dim strMedicationRXCUI As String = frmDispense.cmbMedications.SelectedItem
-        'split out the RXCUI and name
-        Dim strArray() As String
-        strArray = strMedicationRXCUI.Split("--")
-        strMedicationRXCUI = strArray(2)
-        'select medication type and strength for the selected medication using rxcui 
-        Dim Strdatacommand As String
-        Strdatacommand = "SELECT PatientMedication.Type, Strength FROM PatientMedication " &
-            "INNER JOIN Medication on Medication.Medication_ID = PatientMedication.Medication_TUID " &
-            "WHERE RXCUI_ID = '" & strMedicationRXCUI & "' AND PatientMedication.Active_Flag = '1'"
-
-        'make dataset and call the sql method
-        Dim dsMedicationInformation As DataSet = New DataSet
-        dsMedicationInformation = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
-
-        'insert the method and dosage into comboboxes
-        frmDispense.cmbMethod.Items.Add(dsMedicationInformation.Tables(0).Rows(0)(0))
-        frmDispense.cmbMethod.SelectedItem = dsMedicationInformation.Tables(0).Rows(0)(0)
-
-        frmDispense.cmbDosage.Items.Add(dsMedicationInformation.Tables(0).Rows(0)(1))
-        frmDispense.cmbDosage.SelectedItem = dsMedicationInformation.Tables(0).Rows(0)(1)
     End Sub
-
-    '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:SplitMedicationString  */
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
-    '/*		         DATE CREATED: 	   02/15/21							  */
-    '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE: 
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      									          
-    '/*  (None)								           					  
-    '/*********************************************************************/
-    '/*  CALLS:														    	
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					   		   
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								                   
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically):	
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						                      */
-    '/*											                          */
-    '/*  WHO                   WHEN     WHAT							  */
-    '/*  ---                   ----     ----------------------------------*/
-    '/*  Alexander Beasecker  02/15/21  Initial creation of the code      */
-    '/*********************************************************************/
-    Function SplitMedicationString(ByRef strMedicationString As String)
-        ''split string to get the RXCUI for the medication selected on form
-        Dim strArray() As String
-        strArray = strMedicationString.Split("--")
-
-        Return strArray(2)
-    End Function
 
     '/*********************************************************************/
     '/*                   SUBROUTINE NAME:DispenseMedication  */
