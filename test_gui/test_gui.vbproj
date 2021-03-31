@@ -74,6 +74,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>medServe.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
@@ -585,6 +588,7 @@
     <None Include="Resources\user_px.png" />
     <None Include="Resources\circleLoading.gif" />
     <None Include="Resources\image.png" />
+    <Content Include="medServe.ico" />
     <Content Include="Resources\loading.gif" />
     <None Include="Resources\pillLoading.gif" />
     <None Include="Resources\Loading1.gif" />
