@@ -153,6 +153,7 @@ Partial Class frmInventory
         Me.cmbDividerBin.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cmbDividerBin.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbDividerBin.FormattingEnabled = True
+        Me.cmbDividerBin.ItemHeight = 21
         Me.cmbDividerBin.Location = New System.Drawing.Point(1, 1)
         Me.cmbDividerBin.Name = "cmbDividerBin"
         Me.cmbDividerBin.Size = New System.Drawing.Size(86, 29)
@@ -270,7 +271,7 @@ Partial Class frmInventory
         Me.btnSave.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.ForeColor = System.Drawing.Color.White
         Me.btnSave.Image = Global.test_gui.My.Resources.Resources.resolve
-        Me.btnSave.Location = New System.Drawing.Point(177, 72)
+        Me.btnSave.Location = New System.Drawing.Point(279, 72)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(120, 38)
         Me.btnSave.TabIndex = 20
@@ -468,6 +469,7 @@ Partial Class frmInventory
         Me.cmbDrawerNumber.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbDrawerNumber.ForeColor = System.Drawing.SystemColors.WindowText
         Me.cmbDrawerNumber.FormattingEnabled = True
+        Me.cmbDrawerNumber.ItemHeight = 21
         Me.cmbDrawerNumber.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25"})
         Me.cmbDrawerNumber.Location = New System.Drawing.Point(7, 285)
         Me.cmbDrawerNumber.Name = "cmbDrawerNumber"
@@ -709,7 +711,7 @@ Partial Class frmInventory
         '
         Me.lblStatus.AutoSize = True
         Me.lblStatus.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblStatus.Location = New System.Drawing.Point(327, 66)
+        Me.lblStatus.Location = New System.Drawing.Point(417, 89)
         Me.lblStatus.Name = "lblStatus"
         Me.lblStatus.Size = New System.Drawing.Size(55, 21)
         Me.lblStatus.TabIndex = 193
@@ -719,7 +721,7 @@ Partial Class frmInventory
         'txtStatus
         '
         Me.txtStatus.HideSelection = False
-        Me.txtStatus.Location = New System.Drawing.Point(331, 90)
+        Me.txtStatus.Location = New System.Drawing.Point(421, 113)
         Me.txtStatus.Name = "txtStatus"
         Me.txtStatus.Size = New System.Drawing.Size(299, 20)
         Me.txtStatus.TabIndex = 192

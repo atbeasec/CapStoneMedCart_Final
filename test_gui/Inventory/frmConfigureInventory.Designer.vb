@@ -435,7 +435,7 @@ Partial Class frmConfigureInventory
         Me.flpMedication.BackColor = System.Drawing.Color.White
         Me.flpMedication.Location = New System.Drawing.Point(350, 137)
         Me.flpMedication.Name = "flpMedication"
-        Me.flpMedication.Size = New System.Drawing.Size(681, 222)
+        Me.flpMedication.Size = New System.Drawing.Size(696, 222)
         Me.flpMedication.TabIndex = 42
         '
         'pnlHeader
@@ -449,7 +449,7 @@ Partial Class frmConfigureInventory
         Me.pnlHeader.Controls.Add(Me.lblStrength)
         Me.pnlHeader.Location = New System.Drawing.Point(350, 84)
         Me.pnlHeader.Name = "pnlHeader"
-        Me.pnlHeader.Size = New System.Drawing.Size(679, 47)
+        Me.pnlHeader.Size = New System.Drawing.Size(696, 47)
         Me.pnlHeader.TabIndex = 41
         '
         'lblDivider
@@ -503,7 +503,7 @@ Partial Class frmConfigureInventory
         Me.lblQuantity.AutoSize = True
         Me.lblQuantity.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblQuantity.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblQuantity.Location = New System.Drawing.Point(472, 19)
+        Me.lblQuantity.Location = New System.Drawing.Point(477, 19)
         Me.lblQuantity.Name = "lblQuantity"
         Me.lblQuantity.Size = New System.Drawing.Size(72, 21)
         Me.lblQuantity.TabIndex = 2
