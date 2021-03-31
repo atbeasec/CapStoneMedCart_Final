@@ -513,6 +513,21 @@ Public Class frmPatientRecords
 
     End Sub
 
+    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+
+
+        If txtSearch.Text = "" Then
+            Dim strFillSQL As String = ("select Patient.MRN_Number, Patient.Patient_First_Name, " &
+                                           "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
+                                           "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag = 1 AND PatientRoom.Active_Flag = 1 ORDER BY Patient.Patient_Last_Name ASC;")
+            Fill_Patient_Table(strFillSQL)
+
+        End If
+
+
+
+    End Sub
+
     'Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
 
     '' detects if there has been another line added to the textbox
