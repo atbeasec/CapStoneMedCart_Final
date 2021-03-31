@@ -433,7 +433,7 @@
     '/*                                                  */
     '/*   
     '/*********************************************************************/
-    Private Sub cmbMedicationName_Click(sender As Object, e As EventArgs) Handles cmbMedicationName.Click
+    Private Sub cmbMedicationName_Click(sender As Object, e As EventArgs) 
         cmbMedicationName.DroppedDown = True
 
     End Sub
@@ -478,7 +478,7 @@
     '/*                                                  */
     '/*   
     '/*********************************************************************/
-    Private Sub cmbMedicationName_LostFocus(sender As Object, e As EventArgs) Handles cmbMedicationName.LostFocus
+    Private Sub cmbMedicationName_LostFocus(sender As Object, e As EventArgs) 
         cmbMedicationName.DroppedDown = False
 
     End Sub
@@ -523,7 +523,7 @@
     '/*                                                  */
     '/*   
     '/*********************************************************************/
-    Private Sub cmbMedicationName_SelectedValueChanged(sender As Object, e As EventArgs) Handles cmbMedicationName.SelectedValueChanged
+    Private Sub cmbMedicationName_SelectedValueChanged(sender As Object, e As EventArgs) 
         cmbAllergies.Text = cmbMedicationName.Text
     End Sub
     '/********************************************************************/

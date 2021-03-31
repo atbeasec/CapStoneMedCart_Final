@@ -34,12 +34,10 @@ Partial Class frmAllergies
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
         Me.btnAddAllergy = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.cmbAllergies = New System.Windows.Forms.ComboBox()
-        Me.cmbMedicationName = New System.Windows.Forms.ComboBox()
         Me.cmbAllergiesType = New System.Windows.Forms.ComboBox()
         Me.btnAllergyCancel = New System.Windows.Forms.Button()
         Me.btnAllergySave = New System.Windows.Forms.Button()
@@ -157,16 +155,6 @@ Partial Class frmAllergies
         Me.Label2.TabIndex = 182
         Me.Label2.Text = "Allergy Type:"
         '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(362, 165)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(136, 21)
-        Me.Label3.TabIndex = 183
-        Me.Label3.Text = "Medication Name:"
-        '
         'btnAddAllergy
         '
         Me.btnAddAllergy.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
@@ -214,18 +202,6 @@ Partial Class frmAllergies
         Me.cmbAllergies.Name = "cmbAllergies"
         Me.cmbAllergies.Size = New System.Drawing.Size(286, 29)
         Me.cmbAllergies.TabIndex = 188
-        '
-        'cmbMedicationName
-        '
-        Me.cmbMedicationName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.cmbMedicationName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cmbMedicationName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbMedicationName.FormattingEnabled = True
-        Me.cmbMedicationName.Items.AddRange(New Object() {"Class 1", "Class 2", "Class 3", "Class 4", "Class 5"})
-        Me.cmbMedicationName.Location = New System.Drawing.Point(364, 190)
-        Me.cmbMedicationName.Name = "cmbMedicationName"
-        Me.cmbMedicationName.Size = New System.Drawing.Size(286, 29)
-        Me.cmbMedicationName.TabIndex = 189
         '
         'cmbAllergiesType
         '
@@ -308,12 +284,10 @@ Partial Class frmAllergies
         Me.Controls.Add(Me.btnAllergySave)
         Me.Controls.Add(Me.btnAllergyCancel)
         Me.Controls.Add(Me.cmbAllergiesType)
-        Me.Controls.Add(Me.cmbMedicationName)
         Me.Controls.Add(Me.cmbAllergies)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.btnAddAllergy)
-        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Label12)
@@ -339,13 +313,11 @@ Partial Class frmAllergies
     Friend WithEvents Label1 As Label
     Friend WithEvents Label12 As Label
     Friend WithEvents Label2 As Label
-    Friend WithEvents Label3 As Label
     Friend WithEvents btnAddAllergy As Button
     Friend WithEvents Label4 As Label
     Friend WithEvents lblActions As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents cmbAllergies As ComboBox
-    Friend WithEvents cmbMedicationName As ComboBox
     Friend WithEvents cmbAllergiesType As ComboBox
     Friend WithEvents btnAllergyCancel As Button
     Friend WithEvents btnAllergySave As Button
