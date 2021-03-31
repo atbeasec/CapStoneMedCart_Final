@@ -63,8 +63,6 @@ Partial Class frmDispense
         Me.pnlAmountInDrawer = New System.Windows.Forms.Panel()
         Me.Panel9 = New System.Windows.Forms.Panel()
         Me.txtCountInDrawer = New System.Windows.Forms.TextBox()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
         Me.pnlAmountToRemove = New System.Windows.Forms.Panel()
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.lblDirections = New System.Windows.Forms.Label()
@@ -531,8 +529,6 @@ Partial Class frmDispense
         'pnlAmountInDrawer
         '
         Me.pnlAmountInDrawer.Controls.Add(Me.Panel9)
-        Me.pnlAmountInDrawer.Controls.Add(Me.Button2)
-        Me.pnlAmountInDrawer.Controls.Add(Me.Button3)
         Me.pnlAmountInDrawer.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlAmountInDrawer.Location = New System.Drawing.Point(0, 101)
         Me.pnlAmountInDrawer.Name = "pnlAmountInDrawer"
@@ -546,7 +542,7 @@ Partial Class frmDispense
         Me.Panel9.Location = New System.Drawing.Point(81, 19)
         Me.Panel9.Name = "Panel9"
         Me.Panel9.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel9.Size = New System.Drawing.Size(90, 28)
+        Me.Panel9.Size = New System.Drawing.Size(174, 28)
         Me.Panel9.TabIndex = 7
         '
         'txtCountInDrawer
@@ -558,39 +554,9 @@ Partial Class frmDispense
         Me.txtCountInDrawer.Multiline = True
         Me.txtCountInDrawer.Name = "txtCountInDrawer"
         Me.txtCountInDrawer.ShortcutsEnabled = False
-        Me.txtCountInDrawer.Size = New System.Drawing.Size(88, 26)
+        Me.txtCountInDrawer.Size = New System.Drawing.Size(172, 26)
         Me.txtCountInDrawer.TabIndex = 38
         Me.txtCountInDrawer.Text = "1"
-        '
-        'Button2
-        '
-        Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.Button2.FlatAppearance.BorderSize = 0
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.ForeColor = System.Drawing.Color.White
-        Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
-        Me.Button2.Location = New System.Drawing.Point(194, 18)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(28, 28)
-        Me.Button2.TabIndex = 8
-        Me.Button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button2.UseVisualStyleBackColor = False
-        '
-        'Button3
-        '
-        Me.Button3.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.Button3.FlatAppearance.BorderSize = 0
-        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.ForeColor = System.Drawing.Color.White
-        Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
-        Me.Button3.Location = New System.Drawing.Point(228, 18)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(28, 28)
-        Me.Button3.TabIndex = 9
-        Me.Button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button3.UseVisualStyleBackColor = False
         '
         'pnlAmountToRemove
         '
@@ -889,8 +855,6 @@ Partial Class frmDispense
     Friend WithEvents txtUnits As TextBox
     Friend WithEvents Panel9 As Panel
     Friend WithEvents txtCountInDrawer As TextBox
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button3 As Button
     Friend WithEvents pnlDispenseHistoryHeader As Panel
     Friend WithEvents lblDateTime As Label
     Friend WithEvents lblDispensedBy As Label

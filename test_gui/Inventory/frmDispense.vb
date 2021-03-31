@@ -116,19 +116,32 @@
         Dim NarcoticFlag As Integer = CreateDatabase.ExecuteScalarQuery("Select Controlled_Flag from Medication where Medication_ID = '" & intMedicationID & "' and Active_Flag = '1'")
         Dim intdrawerNumber As Integer = CreateDatabase.ExecuteScalarQuery("Select Drawers_TUID from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
         If lblDirections.Text.Equals("Select Amount To Dispense:") Then
-            If NarcoticFlag = 1 Then
-                'IsNarcotic()
-                OpenOneDrawer(intdrawerNumber)
-                changebuttonForCounting()
-            Else
-                'IsNotNarcotic()
-                OpenOneDrawer(intdrawerNumber)
+            If IsNumeric(txtQuantityToDispense.Text) Then
+                If txtQuantityToDispense.Text > 0 Then
+                    If NarcoticFlag = 1 Then
+                        'Is a narcotic
+                        OpenOneDrawer(intdrawerNumber)
+                        intDispenseAmount = txtQuantityToDispense.Text
+                        changebuttonForCounting()
+                    Else
+                        'Is not a narcotic
+                        OpenOneDrawer(intdrawerNumber)
+                        intDispenseAmount = txtQuantityToDispense.Text
+                        changeButtonforDispensing()
+                    End If
+                Else
+                    MessageBox.Show("Please enter a quantity value greater than 0")
+                End If
+            End If
+
+        ElseIf lblDirections.Text.Equals("Enter the Quantity in the Cart") Then
+            If IsNumeric(txtQuantityToDispense.Text) Then
+                Dim intAmountinCart As Integer = txtCountInDrawer.Text
+                UpdateSystemCountForDiscrepancy(intMedicationID, intdrawerNumber, intAmountinCart)
                 changeButtonforDispensing()
             End If
-        ElseIf lblDirections.Text.Equals("Enter the Quantity in the Cart") Then
-            changeButtonforDispensing()
         ElseIf lblDirections.Text.Equals("Enter the Amount Administered") Then
-            frmMain.OpenChildForm(frmWaste)
+                    frmMain.OpenChildForm(frmWaste)
         End If
     End Sub
 
@@ -148,6 +161,10 @@
         pnlAmountInDrawer.Visible = False
     End Sub
 
+    Private Sub UpdateSystemCountForDiscrepancy(ByRef intMedID As Integer, ByRef intDrawerCount As Integer, ByRef intEnteredAmount As Integer)
+        Dim intCurrentSystemCount As Integer = CreateDatabase.ExecuteScalarQuery("Select Quantity from DrawerMedication where Medication_TUID = '" & intMedID & "' and Active_Flag = '1' AND Drawers_TUID = '" & intDrawerCount & "'")
+
+    End Sub
     Private Sub IsNarcotic()
         ' if it is narcotic we need to do the following
 
@@ -240,7 +257,10 @@
 
     Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantityToDispense.KeyPress
         DataVaildationMethods.KeyPressCheck(e, "0123456789")
-        GraphicalUserInterfaceReusableMethods.MaxValue(CInt(sender.Text), 1000, txtQuantityToDispense)
+
+        If IsNumeric(txtQuantityToDispense.Text) Then
+            GraphicalUserInterfaceReusableMethods.MaxValue(CInt(sender.Text), 1000, txtQuantityToDispense)
+        End If
     End Sub
     Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantityToDispense.Validated
         If IsNumeric(sender.Text) Then
