@@ -262,6 +262,7 @@ Module PatientInformation
     '/*  WHO                   WHEN     WHAT							  */
     '/*  ---                   ----     ----------------------------------*/
     '/*  Alexander Beasecker  03/15/21  Initial creation of the code      */
+    '/*  NP                   03/31/2021 Added Error checking to the code.*/
     '/*********************************************************************/
     Public Sub SavePatientEdits(ByRef intPatientID As Integer)
         'check if MRN is changed
@@ -269,6 +270,7 @@ Module PatientInformation
         Dim strbItemsChanged As StringBuilder = New StringBuilder
         Dim intCountChanged As Integer = 0
         Dim strbSqlCommand As StringBuilder = New StringBuilder
+        Dim strbErrorMessage As StringBuilder = New StringBuilder
         'this is for checking if first name was changed
         'there is a if not call for each piece of patient information
         'it checks if the .tag value is the same as what is in the box, if they are the same
@@ -277,14 +279,18 @@ Module PatientInformation
         'i have a count that increases after each change to track the number of items that was changed
         'and i add on to a string builder to let the user know all the items that were changed after is saves everything
         If Not frmPatientInfo.txtFirstName.Text.Equals(frmPatientInfo.txtFirstName.Tag) Then
-            strbSqlCommand.Append("UPDATE Patient SET Patient_First_Name = '" & frmPatientInfo.txtFirstName.Text & "' Where Patient_ID = '" & intPatientID & "'")
-            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
-            strbItemsChanged.AppendLine(" First Name")
-            intCountChanged = intCountChanged + 1
-            strbSqlCommand.Clear()
-            frmPatientInfo.txtFirstName.Tag = frmPatientInfo.txtFirstName.Text
-        End If
+            If BulkImportMethods.TextCheck(frmPatientInfo.txtFirstName.Text) Then
+                strbErrorMessage.Append("Frist name cannot contain a ;")
+            Else
 
+                strbSqlCommand.Append("UPDATE Patient SET Patient_First_Name = '" & checkSQLInjection(frmPatientInfo.txtFirstName.Text, True) & "' Where Patient_ID = '" & intPatientID & "'")
+                CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+                strbItemsChanged.AppendLine(" First Name")
+                intCountChanged = intCountChanged + 1
+                strbSqlCommand.Clear()
+                frmPatientInfo.txtFirstName.Tag = frmPatientInfo.txtFirstName.Text
+            End If
+        End If
         'this is for checking if middle name was changed
         If Not frmPatientInfo.txtMiddle.Text.Equals(frmPatientInfo.txtMiddle.Tag) Then
             strbSqlCommand.Append("UPDATE Patient SET Patient_Middle_Name = '" & frmPatientInfo.txtMiddle.Text & "' Where Patient_ID = '" & intPatientID & "'")
