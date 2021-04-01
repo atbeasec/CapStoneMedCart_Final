@@ -197,7 +197,7 @@ Public Class frmInventory
 
         'Check that all fields have data entered before attempting to save into the database
         If txtStrength.Text.Equals("") Or txtType.Text.Equals("") Or mtbExpirationDate.MaskFull = False Or
-            cboPersonalMedication.SelectedIndex.Equals(-1) Or mtbExpirationDate.MaskCompleted = False Or txtSchedule.Text.Equals("") Or cmbDividerBin.SelectedIndex = -1 Then
+            cboPersonalMedication.SelectedIndex.Equals(-1) Or mtbExpirationDate.MaskCompleted = False Or txtSchedule.Text.Equals("") Or cmbDividerBin.SelectedIndex = -1 Or txtUnit.Text = "" Then
             MessageBox.Show("Please enter data in all fields before saving.")
 
 
@@ -238,7 +238,7 @@ Public Class frmInventory
                     End Try
 
                     Try
-                        intMedQuanitiy = CInt(txtAmount.Text)
+                        intMedQuanitiy = CInt(5)
                     Catch ex As Exception
                         eprError.SetError(cmbDrawerNumber, "please enter an amount that is a positive whole number")
                     End Try
@@ -299,7 +299,7 @@ Public Class frmInventory
                         'because we are adding a new drawermedication for now
                         intDrawerMedication_ID += 1
 
-                        ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Divider_Bin,Expiration_Date,Discrepancy_Flag, Active_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & intDividerBin & " , '" & mtbExpirationDate.Text & "'," & intDiscrepancies & ",1);")
+                        ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Amount_Per_Container,Amount_Per_Container_Unit,Divider_Bin,Expiration_Date,Discrepancy_Flag, Active_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & "Amount HERE" & "," & "AMount UNit here" & "," & intDividerBin & " , '" & mtbExpirationDate.Text & "'," & intDiscrepancies & ",1);")
                         OpenOneDrawer(Drawers_Tuid)
                         'If the user selects "Yes" in the Personal Patient medication drop down
                         'Insert the information into the PersonalPatientDrawerMedication Table
