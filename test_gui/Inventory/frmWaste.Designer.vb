@@ -28,6 +28,7 @@ Partial Class frmWaste
         Me.Label1 = New System.Windows.Forms.Label()
         Me.pnlRadioButtons = New System.Windows.Forms.Panel()
         Me.pnlSignOff = New System.Windows.Forms.Panel()
+        Me.txtBarcode = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.btnWaste = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
@@ -37,6 +38,7 @@ Partial Class frmWaste
         Me.RadioButton3 = New System.Windows.Forms.RadioButton()
         Me.RadioButton2 = New System.Windows.Forms.RadioButton()
         Me.pnlHeader = New System.Windows.Forms.Panel()
+        Me.lblPatientInfo = New System.Windows.Forms.Label()
         Me.btnBack = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -45,8 +47,6 @@ Partial Class frmWaste
         Me.txtQuantity = New System.Windows.Forms.TextBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.lblPatientInfo = New System.Windows.Forms.Label()
-        Me.txtBarcode = New System.Windows.Forms.TextBox()
         Me.pnlRadioButtons.SuspendLayout()
         Me.pnlSignOff.SuspendLayout()
         Me.pnlHeader.SuspendLayout()
@@ -96,6 +96,17 @@ Partial Class frmWaste
         Me.pnlSignOff.Name = "pnlSignOff"
         Me.pnlSignOff.Size = New System.Drawing.Size(458, 135)
         Me.pnlSignOff.TabIndex = 24
+        '
+        'txtBarcode
+        '
+        Me.txtBarcode.BackColor = System.Drawing.Color.White
+        Me.txtBarcode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtBarcode.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtBarcode.Location = New System.Drawing.Point(42, 38)
+        Me.txtBarcode.Name = "txtBarcode"
+        Me.txtBarcode.ShortcutsEnabled = False
+        Me.txtBarcode.Size = New System.Drawing.Size(220, 25)
+        Me.txtBarcode.TabIndex = 217
         '
         'Label3
         '
@@ -201,6 +212,16 @@ Partial Class frmWaste
         Me.pnlHeader.Size = New System.Drawing.Size(771, 46)
         Me.pnlHeader.TabIndex = 202
         '
+        'lblPatientInfo
+        '
+        Me.lblPatientInfo.AutoSize = True
+        Me.lblPatientInfo.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.lblPatientInfo.Location = New System.Drawing.Point(109, 15)
+        Me.lblPatientInfo.Name = "lblPatientInfo"
+        Me.lblPatientInfo.Size = New System.Drawing.Size(56, 21)
+        Me.lblPatientInfo.TabIndex = 200
+        Me.lblPatientInfo.Text = "Label1"
+        '
         'btnBack
         '
         Me.btnBack.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
@@ -286,27 +307,6 @@ Partial Class frmWaste
         Me.TextBox3.ShortcutsEnabled = False
         Me.TextBox3.Size = New System.Drawing.Size(163, 25)
         Me.TextBox3.TabIndex = 217
-        '
-        'lblPatientInfo
-        '
-        Me.lblPatientInfo.AutoSize = True
-        Me.lblPatientInfo.Font = New System.Drawing.Font("Segoe UI", 12.0!)
-        Me.lblPatientInfo.Location = New System.Drawing.Point(109, 15)
-        Me.lblPatientInfo.Name = "lblPatientInfo"
-        Me.lblPatientInfo.Size = New System.Drawing.Size(56, 21)
-        Me.lblPatientInfo.TabIndex = 200
-        Me.lblPatientInfo.Text = "Label1"
-        '
-        'txtBarcode
-        '
-        Me.txtBarcode.BackColor = System.Drawing.Color.White
-        Me.txtBarcode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtBarcode.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBarcode.Location = New System.Drawing.Point(42, 38)
-        Me.txtBarcode.Name = "txtBarcode"
-        Me.txtBarcode.ShortcutsEnabled = False
-        Me.txtBarcode.Size = New System.Drawing.Size(220, 25)
-        Me.txtBarcode.TabIndex = 217
         '
         'frmWaste
         '
