@@ -81,6 +81,10 @@ Partial Class frmInventory
         Me.pnlHeader = New System.Windows.Forms.Panel()
         Me.btnBack = New System.Windows.Forms.Button()
         Me.tpSelectedItem = New System.Windows.Forms.ToolTip(Me.components)
+        Me.txtAmount = New System.Windows.Forms.TextBox()
+        Me.txtUnits = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -196,7 +200,7 @@ Partial Class frmInventory
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(490, 261)
+        Me.Label2.Location = New System.Drawing.Point(490, 263)
         Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(73, 21)
@@ -403,7 +407,11 @@ Partial Class frmInventory
         '
         'pnlMainFormFields
         '
+        Me.pnlMainFormFields.Controls.Add(Me.Label11)
+        Me.pnlMainFormFields.Controls.Add(Me.Label8)
+        Me.pnlMainFormFields.Controls.Add(Me.txtAmount)
         Me.pnlMainFormFields.Controls.Add(Me.Panel2)
+        Me.pnlMainFormFields.Controls.Add(Me.txtUnits)
         Me.pnlMainFormFields.Controls.Add(Me.cmbDrawerNumber)
         Me.pnlMainFormFields.Controls.Add(Me.Panel8)
         Me.pnlMainFormFields.Controls.Add(Me.lblBarcode)
@@ -793,6 +801,50 @@ Partial Class frmInventory
         Me.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnBack.UseVisualStyleBackColor = False
         '
+        'txtAmount
+        '
+        Me.txtAmount.BackColor = System.Drawing.Color.White
+        Me.txtAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtAmount.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAmount.Location = New System.Drawing.Point(493, 359)
+        Me.txtAmount.Name = "txtAmount"
+        Me.txtAmount.ShortcutsEnabled = False
+        Me.txtAmount.Size = New System.Drawing.Size(154, 25)
+        Me.txtAmount.TabIndex = 213
+        '
+        'txtUnits
+        '
+        Me.txtUnits.BackColor = System.Drawing.Color.White
+        Me.txtUnits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtUnits.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtUnits.Location = New System.Drawing.Point(659, 359)
+        Me.txtUnits.Name = "txtUnits"
+        Me.txtUnits.ShortcutsEnabled = False
+        Me.txtUnits.Size = New System.Drawing.Size(56, 25)
+        Me.txtUnits.TabIndex = 212
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(489, 335)
+        Me.Label8.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(165, 21)
+        Me.Label8.TabIndex = 214
+        Me.Label8.Text = "Amount per container:"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(655, 335)
+        Me.Label11.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(49, 21)
+        Me.Label11.TabIndex = 215
+        Me.Label11.Text = "Units:"
+        '
         'frmInventory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -890,4 +942,8 @@ Partial Class frmInventory
     Friend WithEvents mtbExpirationDate As MaskedTextBox
     Friend WithEvents txtStatus As TextBox
     Friend WithEvents lblStatus As Label
+    Friend WithEvents Label11 As Label
+    Friend WithEvents Label8 As Label
+    Friend WithEvents txtAmount As TextBox
+    Friend WithEvents txtUnits As TextBox
 End Class

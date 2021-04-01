@@ -51,8 +51,6 @@ Module DispenseHistory
     '/*  Alexander Beasecker    1/25/2021   Initial creation            */
     '/*******************************************************************/
 
-
-
     ' Dim strDEFAULTFOLDER As String = ""
     ' Dim strDBNAME As String = "Medication_Cart_System"
     ' Dim strDBPath As String = strDEFAULTFOLDER & strDBNAME & ".db"
@@ -605,22 +603,30 @@ Module DispenseHistory
     '/*  ---                   ----     ----------------------------------*/
     '/*  Alexander Beasecker  02/10/21  Initial creation of the code      */
     '/*********************************************************************/
-    Public Sub DispensemedicationPopulate(ByRef intPatientMRN As Integer)
-        frmDispense.cmbMedications.Items.Clear()
+    Public Sub DispensemedicationPopulate(ByRef intPatientID As Integer, ByRef intMEDID As Integer)
+        frmDispense.txtMedication.Text = Nothing
         Dim Strdatacommand As String
         ' Currently the medication display is appending the RXCUI Number on too the medication
         ' name, as searching by name alone could cause problems if medication names can repeat
-        Strdatacommand = "SELECT Drug_Name,RXCUI_ID FROM PatientMedication " &
+        Strdatacommand = "SELECT Drug_Name,RXCUI_ID, Medication.Type, PatientMedication.Quantity, PatientMedication.Frequency  FROM PatientMedication " &
         "INNER JOIN Medication on Medication.Medication_ID = PatientMedication.Medication_TUID " &
         "INNER JOIN Patient on Patient.Patient_ID = PatientMedication.Patient_TUID " &
-        "WHERE Patient.Patient_ID = '" & intPatientMRN & "' AND PatientMedication.Active_Flag = '1'"
+        "WHERE Patient.Patient_ID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1' AND Medication.Medication_ID = '" & intMEDID & "'"
 
         Dim dsMedicationDataSet As DataSet = New DataSet
         dsMedicationDataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
         'add medication name and RXCUI to listbox
         For Each dr As DataRow In dsMedicationDataSet.Tables(0).Rows
-            frmDispense.cmbMedications.Items.Add(dr(0) & "--" & dr(1))
+            frmDispense.txtMedication.Text = (dr(0))
+            frmDispense.txtType.Text = dr(2)
+            frmDispense.txtPrescribedAmount.Text = dr(3)
+            frmDispense.txtFrequency.Text = dr(4)
         Next
+
+        Strdatacommand = "Select Amount_Per_Container,Amount_Per_Container_Unit from DrawerMedication" &
+                          " where Medication_TUID = '" & intMEDID & "' and Active_Flag = '1'"
+        Dim dsDrawerMedData As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+        frmDispense.txtContainer.Text = dsDrawerMedData.Tables(0).Rows(0)(0) & " " & dsDrawerMedData.Tables(0).Rows(0)(1)
 
     End Sub
 
@@ -650,65 +656,8 @@ Module DispenseHistory
     '/*  Alexander Beasecker  02/10/21  Initial creation of the code      */
     '/*********************************************************************/
     Public Sub SetMedicationProperties()
-        frmDispense.cmbMethod.Items.Clear()
-        frmDispense.cmbDosage.Items.Clear()
 
-        'get selected medication
-        Dim strMedicationRXCUI As String = frmDispense.cmbMedications.SelectedItem
-        'split out the RXCUI and name
-        Dim strArray() As String
-        strArray = strMedicationRXCUI.Split("--")
-        strMedicationRXCUI = strArray(2)
-        'select medication type and strength for the selected medication using rxcui 
-        Dim Strdatacommand As String
-        Strdatacommand = "SELECT PatientMedication.Type, Strength FROM PatientMedication " &
-            "INNER JOIN Medication on Medication.Medication_ID = PatientMedication.Medication_TUID " &
-            "WHERE RXCUI_ID = '" & strMedicationRXCUI & "' AND PatientMedication.Active_Flag = '1'"
-
-        'make dataset and call the sql method
-        Dim dsMedicationInformation As DataSet = New DataSet
-        dsMedicationInformation = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
-
-        'insert the method and dosage into comboboxes
-        frmDispense.cmbMethod.Items.Add(dsMedicationInformation.Tables(0).Rows(0)(0))
-        frmDispense.cmbMethod.SelectedItem = dsMedicationInformation.Tables(0).Rows(0)(0)
-
-        frmDispense.cmbDosage.Items.Add(dsMedicationInformation.Tables(0).Rows(0)(1))
-        frmDispense.cmbDosage.SelectedItem = dsMedicationInformation.Tables(0).Rows(0)(1)
     End Sub
-
-    '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:SplitMedicationString  */
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
-    '/*		         DATE CREATED: 	   02/15/21							  */
-    '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE: 
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      									          
-    '/*  (None)								           					  
-    '/*********************************************************************/
-    '/*  CALLS:														    	
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					   		   
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								                   
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically):	
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						                      */
-    '/*											                          */
-    '/*  WHO                   WHEN     WHAT							  */
-    '/*  ---                   ----     ----------------------------------*/
-    '/*  Alexander Beasecker  02/15/21  Initial creation of the code      */
-    '/*********************************************************************/
-    Function SplitMedicationString(ByRef strMedicationString As String)
-        ''split string to get the RXCUI for the medication selected on form
-        Dim strArray() As String
-        strArray = strMedicationString.Split("--")
-
-        Return strArray(2)
-    End Function
 
     '/*********************************************************************/
     '/*                   SUBROUTINE NAME:DispenseMedication  */
@@ -769,7 +718,7 @@ Module DispenseHistory
         strbSQLcommand.Clear()
         strbSQLcommand.Append("SELECT Quantity FROM DrawerMedication WHERE Medication_TUID  = '" & intMedID & "' AND DrawerMedication.Active_Flag = '1'")
         intPrescribedQuantity = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
-        intPrescribedQuantity = intPrescribedQuantity - frmDispense.txtQuantity.Text
+        intPrescribedQuantity = intPrescribedQuantity - frmDispense.txtQuantityToDispense.Text
         strbSQLcommand.Clear()
         strbSQLcommand.Append("UPDATE DrawerMedication SET Quantity = '" & intPrescribedQuantity & "' WHERE Medication_TUID = '" & intMedID & "' AND DrawerMedication.Active_Flag = '1'")
         CreateDatabase.ExecuteInsertQuery(strbSQLcommand.ToString)
@@ -780,7 +729,7 @@ Module DispenseHistory
         intDrawerMedicationID = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
         strbSQLcommand.Clear()
         strbSQLcommand.Append("INSERT INTO Dispensing(PatientMedication_TUID, Primary_User_TUID, Approving_User_TUID, DateTime_Dispensed, Amount_Dispensed, DrawerMedication_TUID) ")
-        strbSQLcommand.Append("VALUES('" & intPatientMedicationDatabaseID & "','1','1','" & dtmAdhocTime & "','" & frmDispense.txtQuantity.Text & "','" & intDrawerMedicationID & "')")
+        strbSQLcommand.Append("VALUES('" & intPatientMedicationDatabaseID & "','1','1','" & dtmAdhocTime & "','" & frmDispense.txtQuantityToDispense.Text & "','" & intDrawerMedicationID & "')")
         CreateDatabase.ExecuteInsertQuery(strbSQLcommand.ToString)
 
 

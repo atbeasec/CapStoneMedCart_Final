@@ -22,6 +22,7 @@ Partial Class frmEditPhysician
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmEditPhysician))
         Me.flpPhysicianInfo = New System.Windows.Forms.FlowLayoutPanel()
         Me.pnlPhysicianHeader = New System.Windows.Forms.Panel()
@@ -67,6 +68,7 @@ Partial Class frmEditPhysician
         Me.lblFirstName = New System.Windows.Forms.Label()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearchBox = New System.Windows.Forms.TextBox()
+        Me.tpToolTip = New System.Windows.Forms.ToolTip(Me.components)
         Me.pnlPhysicianHeader.SuspendLayout()
         Me.pnlAllTextboxes.SuspendLayout()
         Me.Panel5.SuspendLayout()
@@ -692,4 +694,5 @@ Partial Class frmEditPhysician
     Friend WithEvents Label4 As Label
     Friend WithEvents btnSearch As Button
     Friend WithEvents txtSearchBox As TextBox
+    Friend WithEvents tpToolTip As ToolTip
 End Class

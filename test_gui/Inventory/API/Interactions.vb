@@ -414,7 +414,7 @@ Module Interactions
             strMedicationOneRXCUI = strMedRXCUIFromForm
             strArray = strMedicationOneRXCUI.Split("--")
             strMedicationOneRXCUI = strArray(2)
-            strLabel1Text = frmDispense.cmbMedications.SelectedItem.ToString
+            strLabel1Text = frmDispense.txtMedication.Text.ToString
             objReferencingForm = frmDispense
 
         ElseIf strForm = "AdHoc" Then

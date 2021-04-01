@@ -385,18 +385,8 @@
         tpMultiPurposeTooltip.SetToolTip(lblCurrentUser, strLoggedInAs)
         tpMultiPurposeTooltip.SetToolTip(pbLogin, strLoggedInAs)
 
-
-
-
-
-
-
+        ' check user permissions
         CheckUserPermissions(LoggedInPermission)
-
-
-
-
-
 
         'set submenu to be invisible on form load
         pnlSubMenuSettings.Visible = False
@@ -447,13 +437,15 @@
 
         Const ADMINACCESS = "Admin"
         Const SUPERVISORACCESS = "Supervisor"
-        Dim arrButtonsToRemoveSupervisor() = {btnUsers, btnEditPhysician, btnSerialPort, btnConfigureInventory, btnEndOfShiftCount}
-        Dim arrButtonsToRemoveNurse() = {btnSettings, btnPharmacy, btnMaintenance, btnDescrepancies, btnConfigureInventory, btnEndOfShiftCount}
+
+        Dim arrBUttonsToRemoveAdmin() = {btnWaste} ' btn waste is not eneded on the side menu currently but easy to add back on as needed
+        Dim arrButtonsToRemoveSupervisor() = {btnUsers, btnEditPhysician, btnSerialPort, btnConfigureInventory, btnEndOfShiftCount, btnWaste}
+        Dim arrButtonsToRemoveNurse() = {btnSettings, btnPharmacy, btnMaintenance, btnDescrepancies, btnConfigureInventory, btnEndOfShiftCount, btnWaste}
 
 
         If String.Equals(ADMINACCESS, permissionLevel) Then
 
-            ' dont remove any controls because the admin can access all controls
+            ShowOnlyPermittedScreens(arrBUttonsToRemoveAdmin)
 
         ElseIf String.Equals(SUPERVISORACCESS, permissionLevel) Then
 

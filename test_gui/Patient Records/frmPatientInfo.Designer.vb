@@ -78,7 +78,6 @@ Partial Class frmPatientInfo
         Me.lblMedicationPrescription = New System.Windows.Forms.Label()
         Me.lblTypePrescription = New System.Windows.Forms.Label()
         Me.lblStrengthPrescription = New System.Windows.Forms.Label()
-        Me.btnDispenseMedication = New System.Windows.Forms.Button()
         Me.btnEditPatient = New System.Windows.Forms.Button()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -770,22 +769,6 @@ Partial Class frmPatientInfo
         Me.lblStrengthPrescription.Tag = "2"
         Me.lblStrengthPrescription.Text = "Strength"
         '
-        'btnDispenseMedication
-        '
-        Me.btnDispenseMedication.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnDispenseMedication.FlatAppearance.BorderSize = 0
-        Me.btnDispenseMedication.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDispenseMedication.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDispenseMedication.ForeColor = System.Drawing.Color.White
-        Me.btnDispenseMedication.Image = CType(resources.GetObject("btnDispenseMedication.Image"), System.Drawing.Image)
-        Me.btnDispenseMedication.Location = New System.Drawing.Point(492, 6)
-        Me.btnDispenseMedication.Name = "btnDispenseMedication"
-        Me.btnDispenseMedication.Size = New System.Drawing.Size(235, 37)
-        Me.btnDispenseMedication.TabIndex = 3
-        Me.btnDispenseMedication.Text = "  Dispense Medication"
-        Me.btnDispenseMedication.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnDispenseMedication.UseVisualStyleBackColor = False
-        '
         'btnEditPatient
         '
         Me.btnEditPatient.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
@@ -818,7 +801,6 @@ Partial Class frmPatientInfo
         Me.Panel1.BackColor = System.Drawing.Color.White
         Me.Panel1.Controls.Add(Me.btnBack)
         Me.Panel1.Controls.Add(Me.btnEditPatient)
-        Me.Panel1.Controls.Add(Me.btnDispenseMedication)
         Me.Panel1.Controls.Add(Me.btnAddAllergies)
         Me.Panel1.Controls.Add(Me.LblPatientName)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
@@ -1008,7 +990,6 @@ Partial Class frmPatientInfo
     Friend WithEvents Label8 As Label
     Friend WithEvents txtHeight As TextBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents btnDispenseMedication As Button
     Friend WithEvents flpMedications As FlowLayoutPanel
     Friend WithEvents lblPrescriptions As Label
     Friend WithEvents pnlPrescriptionsHeader As Panel
