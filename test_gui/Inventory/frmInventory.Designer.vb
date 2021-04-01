@@ -174,10 +174,10 @@ Partial Class frmInventory
         '
         Me.Panel3.BackColor = System.Drawing.Color.DarkGray
         Me.Panel3.Controls.Add(Me.cmbMedicationName)
-        Me.Panel3.Location = New System.Drawing.Point(9, 83)
+        Me.Panel3.Location = New System.Drawing.Point(10, 83)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel3.Size = New System.Drawing.Size(652, 31)
+        Me.Panel3.Size = New System.Drawing.Size(651, 31)
         Me.Panel3.TabIndex = 3
         '
         'cmbMedicationName
@@ -189,7 +189,7 @@ Partial Class frmInventory
         Me.cmbMedicationName.FormattingEnabled = True
         Me.cmbMedicationName.Location = New System.Drawing.Point(1, 1)
         Me.cmbMedicationName.Name = "cmbMedicationName"
-        Me.cmbMedicationName.Size = New System.Drawing.Size(650, 29)
+        Me.cmbMedicationName.Size = New System.Drawing.Size(649, 29)
         Me.cmbMedicationName.TabIndex = 3
         '
         'Label2
@@ -232,7 +232,7 @@ Partial Class frmInventory
         Me.Panel1.BackColor = System.Drawing.Color.DarkGray
         Me.Panel1.Controls.Add(Me.cboPersonalMedication)
         Me.Panel1.Controls.Add(Me.cmbPatientPersonalMedication)
-        Me.Panel1.Location = New System.Drawing.Point(8, 360)
+        Me.Panel1.Location = New System.Drawing.Point(10, 360)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Padding = New System.Windows.Forms.Padding(1)
@@ -287,7 +287,7 @@ Partial Class frmInventory
         Me.btnDrawerUp.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDrawerUp.ForeColor = System.Drawing.Color.White
         Me.btnDrawerUp.Image = CType(resources.GetObject("btnDrawerUp.Image"), System.Drawing.Image)
-        Me.btnDrawerUp.Location = New System.Drawing.Point(67, 287)
+        Me.btnDrawerUp.Location = New System.Drawing.Point(70, 287)
         Me.btnDrawerUp.Margin = New System.Windows.Forms.Padding(2)
         Me.btnDrawerUp.Name = "btnDrawerUp"
         Me.btnDrawerUp.Size = New System.Drawing.Size(27, 27)
@@ -303,7 +303,7 @@ Partial Class frmInventory
         Me.btnDrawerDown.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDrawerDown.ForeColor = System.Drawing.Color.White
         Me.btnDrawerDown.Image = CType(resources.GetObject("btnDrawerDown.Image"), System.Drawing.Image)
-        Me.btnDrawerDown.Location = New System.Drawing.Point(100, 287)
+        Me.btnDrawerDown.Location = New System.Drawing.Point(103, 287)
         Me.btnDrawerDown.Margin = New System.Windows.Forms.Padding(2)
         Me.btnDrawerDown.Name = "btnDrawerDown"
         Me.btnDrawerDown.Size = New System.Drawing.Size(27, 27)
@@ -471,7 +471,7 @@ Partial Class frmInventory
         Me.cmbDrawerNumber.FormattingEnabled = True
         Me.cmbDrawerNumber.ItemHeight = 21
         Me.cmbDrawerNumber.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25"})
-        Me.cmbDrawerNumber.Location = New System.Drawing.Point(7, 285)
+        Me.cmbDrawerNumber.Location = New System.Drawing.Point(10, 285)
         Me.cmbDrawerNumber.Name = "cmbDrawerNumber"
         Me.cmbDrawerNumber.Size = New System.Drawing.Size(49, 29)
         Me.cmbDrawerNumber.TabIndex = 11
@@ -525,7 +525,7 @@ Partial Class frmInventory
         '
         Me.Panel7.BackColor = System.Drawing.Color.DarkGray
         Me.Panel7.Controls.Add(Me.txtType)
-        Me.Panel7.Location = New System.Drawing.Point(8, 220)
+        Me.Panel7.Location = New System.Drawing.Point(10, 220)
         Me.Panel7.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Padding = New System.Windows.Forms.Padding(1)
@@ -587,7 +587,7 @@ Partial Class frmInventory
         Me.Panel10.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel10.Name = "Panel10"
         Me.Panel10.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel10.Size = New System.Drawing.Size(167, 25)
+        Me.Panel10.Size = New System.Drawing.Size(168, 25)
         Me.Panel10.TabIndex = 7
         '
         'txtStrength
@@ -599,7 +599,7 @@ Partial Class frmInventory
         Me.txtStrength.Multiline = True
         Me.txtStrength.Name = "txtStrength"
         Me.txtStrength.ShortcutsEnabled = False
-        Me.txtStrength.Size = New System.Drawing.Size(165, 23)
+        Me.txtStrength.Size = New System.Drawing.Size(166, 23)
         Me.txtStrength.TabIndex = 7
         '
         'Panel9
@@ -607,10 +607,10 @@ Partial Class frmInventory
         Me.Panel9.BackColor = System.Drawing.Color.DarkGray
         Me.Panel9.Controls.Add(Me.pnlSearch)
         Me.Panel9.Controls.Add(Me.txtSearch)
-        Me.Panel9.Location = New System.Drawing.Point(9, 14)
+        Me.Panel9.Location = New System.Drawing.Point(10, 14)
         Me.Panel9.Name = "Panel9"
         Me.Panel9.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel9.Size = New System.Drawing.Size(653, 25)
+        Me.Panel9.Size = New System.Drawing.Size(651, 25)
         Me.Panel9.TabIndex = 1
         '
         'pnlSearch
@@ -621,7 +621,7 @@ Partial Class frmInventory
         Me.pnlSearch.Dock = System.Windows.Forms.DockStyle.Right
         Me.pnlSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.pnlSearch.ForeColor = System.Drawing.Color.White
-        Me.pnlSearch.Location = New System.Drawing.Point(610, 1)
+        Me.pnlSearch.Location = New System.Drawing.Point(608, 1)
         Me.pnlSearch.Name = "pnlSearch"
         Me.pnlSearch.Size = New System.Drawing.Size(42, 23)
         Me.pnlSearch.TabIndex = 2
