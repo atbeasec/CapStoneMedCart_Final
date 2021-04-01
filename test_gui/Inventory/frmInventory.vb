@@ -15,7 +15,7 @@ Public Class frmInventory
     Private Sub frmInventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         cmbDrawerNumber.SelectedIndex = 0
-        txtAmount.Text = "1"
+        txtQuantity.Text = "1"
         ' setdefault text to the search box
         txtSearch.Text = txtSearch.Tag
         txtSearch.ForeColor = Color.Silver
@@ -24,7 +24,7 @@ Public Class frmInventory
         txtSearch.Select()
 
         DefaultSaveButtonLocation()
-        txtAmount.Text = 1
+        txtQuantity.Text = 1
 
         ' the button's tab index from the previous screen will allow us to know what drawer that is
         cmbDrawerNumber.SelectedIndex = btnSelectedDrawer.TabIndex - 1
@@ -238,7 +238,7 @@ Public Class frmInventory
                     End Try
 
                     Try
-                        intMedQuanitiy = CInt(txtAmount.Text)
+                        intMedQuanitiy = CInt(txtQuantity.Text)
                     Catch ex As Exception
                         eprError.SetError(cmbDrawerNumber, "please enter an amount that is a positive whole number")
                     End Try
@@ -398,7 +398,7 @@ Public Class frmInventory
             chkNarcotic.Checked = False
             cmbDrawerNumber.Text = ""
             cmbBin.Items.Clear()
-            txtAmount.Text = "1"
+            txtQuantity.Text = "1"
             mtbExpirationDate.Text = ""
             cmbPatientPersonalMedication.SelectedItem = ""
 
