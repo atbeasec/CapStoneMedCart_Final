@@ -118,7 +118,7 @@
         Dim strAllergyName = cmbAllergies.Text
         Dim intPatientTuid = GetPatientTuid()
         Dim strNewSeverity = cmbSeverity.Text
-        ExecuteScalarQuery("UPDATE PatientAllergy SET Allergy_Severity='" & strNewSeverity & "' WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTuid & ";")
+        ExecuteScalarQuery("UPDATE PatientAllergy SET Allergy_Severity='" & cmbAllergiesType.SelectedIndex & "' WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTuid & ";")
         DisableEditButtons()
         flpAllergies.Controls.Clear()
         LoadAllergiesPanel(strNewSeverity, intPatientTuid)
