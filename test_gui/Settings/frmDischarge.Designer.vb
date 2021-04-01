@@ -273,7 +273,7 @@ Partial Class frmDischarge
         '
         Me.pnlAdmitRoomBed.Controls.Add(Me.Label17)
         Me.pnlAdmitRoomBed.Controls.Add(Me.cboRoomandBed)
-        Me.pnlAdmitRoomBed.Location = New System.Drawing.Point(7, 77)
+        Me.pnlAdmitRoomBed.Location = New System.Drawing.Point(5, 74)
         Me.pnlAdmitRoomBed.Name = "pnlAdmitRoomBed"
         Me.pnlAdmitRoomBed.Size = New System.Drawing.Size(352, 66)
         Me.pnlAdmitRoomBed.TabIndex = 119
@@ -294,9 +294,9 @@ Partial Class frmDischarge
         Me.cboRoomandBed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboRoomandBed.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboRoomandBed.FormattingEnabled = True
-        Me.cboRoomandBed.Location = New System.Drawing.Point(5, 31)
+        Me.cboRoomandBed.Location = New System.Drawing.Point(3, 31)
         Me.cboRoomandBed.Name = "cboRoomandBed"
-        Me.cboRoomandBed.Size = New System.Drawing.Size(333, 25)
+        Me.cboRoomandBed.Size = New System.Drawing.Size(337, 25)
         Me.cboRoomandBed.TabIndex = 118
         '
         'pnlDischargeRoomBed
@@ -305,7 +305,7 @@ Partial Class frmDischarge
         Me.pnlDischargeRoomBed.Controls.Add(Me.txtBed)
         Me.pnlDischargeRoomBed.Controls.Add(Me.Label7)
         Me.pnlDischargeRoomBed.Controls.Add(Me.Label6)
-        Me.pnlDischargeRoomBed.Location = New System.Drawing.Point(8, 77)
+        Me.pnlDischargeRoomBed.Location = New System.Drawing.Point(5, 77)
         Me.pnlDischargeRoomBed.Name = "pnlDischargeRoomBed"
         Me.pnlDischargeRoomBed.Size = New System.Drawing.Size(352, 66)
         Me.pnlDischargeRoomBed.TabIndex = 120
