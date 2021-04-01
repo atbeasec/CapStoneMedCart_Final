@@ -102,10 +102,9 @@ Module AdHoc
     '/*********************************************************************/
 
     Public Sub InsertAdHoc(ByRef intPatientID As Integer, ByRef intUserID As Integer,
-                           ByRef intAmount As Integer, ByRef intMEDID As Integer)
+                           ByRef intAmount As Integer, ByRef intMEDID As Integer, ByRef intDrawerMEDID As Integer)
         'create variables used for insert order
         Dim Strdatacommand As String
-        Dim intMedicationDrawerID As Integer
         Dim StrSelectedMedication As String
         Dim intMedicationCount As Integer
         Dim intDrawerTUID As Integer
@@ -115,21 +114,16 @@ Module AdHoc
         StrSelectedMedication = frmAdHockDispense.cmbMedications.SelectedItem
         intDrawerMEDTUID = intDrawerMedArray(frmAdHockDispense.cmbMedications.SelectedIndex)
 
-
-        'Get Drawer Medication TUID
-        Strdatacommand = "SELECT DrawerMedication_ID FROM DrawerMedication WHERE Medication_TUID = '" & intMEDID & "' AND Active_Flag = '1'"
-        intMedicationDrawerID = ExecuteScalarQuery(Strdatacommand)
-
         Strdatacommand = "SELECT Quantity FROM DrawerMedication WHERE Medication_TUID  = '" & intMEDID & "' AND Active_Flag = '1'"
         intMedicationCount = CreateDatabase.ExecuteScalarQuery(Strdatacommand)
         intMedicationCount = intMedicationCount - intAmount
 
 
-        If Not IsDBNull(intMedicationDrawerID) Then
+        If Not IsDBNull(intDrawerMEDTUID) Then
             'get current time for dateTime in table
             Dim dtmAdhocTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
             Strdatacommand = "INSERT INTO AdHocOrder(Medication_TUID,Patient_TUID,User_TUID,Amount,DrawerMedication_TUID,DateTime) " &
-                "VALUES('" & intMEDID & "', '" & intPatientID & "', '" & intUserID & "', '" & intAmount & "', '" & intMedicationDrawerID & "', '" & dtmAdhocTime & "')"
+                "VALUES('" & intMEDID & "', '" & intPatientID & "', '" & intUserID & "', '" & intAmount & "', '" & intDrawerMEDTUID & "', '" & dtmAdhocTime & "')"
 
             'insert AdHoc
             CreateDatabase.ExecuteInsertQuery(Strdatacommand)
@@ -139,7 +133,7 @@ Module AdHoc
             CreateDatabase.ExecuteInsertQuery(Strdatacommand)
             clearAdhocBoxes()
 
-            Strdatacommand = ("SELECT Drawers_TUID FROM DrawerMedication WHERE DrawerMedication_ID = '" & intMedicationDrawerID & "' AND DrawerMedication.Active_Flag = '1'")
+            Strdatacommand = ("SELECT Drawers_TUID FROM DrawerMedication WHERE DrawerMedication_ID = '" & intDrawerMEDTUID & "' AND DrawerMedication.Active_Flag = '1'")
             intDrawerTUID = CreateDatabase.ExecuteScalarQuery(Strdatacommand)
 
             Strdatacommand = ("SELECT Drawer_Number FROM Drawers WHERE Drawers_ID = '" & intDrawerTUID & "' AND Drawers.Active_Flag = '1'")
