@@ -54,6 +54,7 @@ Module AdHoc
     '/*******************************************************************/
     Public intPatientIDArray As New ArrayList
     Public intMedIDArray As New ArrayList
+    Public intDrawerMedArray As New ArrayList
 
 
     '/*********************************************************************/
@@ -183,7 +184,7 @@ Module AdHoc
         intMedIDArray.Clear()
         ' Currently the medication display is appending the RXCUI Number on too the medication
         ' name, as searching by name alone could cause problems if medication names can repeat
-        Strdatacommand = "Select trim(Drug_Name,' '), RXCUI_ID, Medication_ID FROM Medication INNER JOIN DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE DrawerMedication.Active_Flag = 1 ORDER BY Medication.Drug_Name COLLATE NOCASE ASC"
+        Strdatacommand = "Select trim(Drug_Name,' '), RXCUI_ID, Medication_ID,DrawerMedication_ID FROM Medication INNER JOIN DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE DrawerMedication.Active_Flag = 1 ORDER BY Medication.Drug_Name COLLATE NOCASE ASC"
 
         Dim dsMedicationDataSet As DataSet = New DataSet
         dsMedicationDataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
@@ -191,6 +192,7 @@ Module AdHoc
         For Each dr As DataRow In dsMedicationDataSet.Tables(0).Rows
             frmAdHockDispense.cmbMedications.Items.Add(dr(0) & " RXCUI: " & dr(1))
             intMedIDArray.Add(dr(2))
+            intDrawerMedArray.Add(dr(3))
         Next
     End Sub
 
