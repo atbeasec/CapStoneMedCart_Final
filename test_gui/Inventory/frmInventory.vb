@@ -300,7 +300,9 @@ Public Class frmInventory
                         'because we are adding a new drawermedication for now
                         intDrawerMedication_ID += 1
 
-                        ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Divider_Bin,Expiration_Date,Discrepancy_Flag, Active_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & intDividerBin & " , '" & mtbExpirationDate.Text & "'," & intDiscrepancies & ",1);")
+                        Dim strAmount As String = txtAmount.Text
+                        Dim strUnit As String = txtUnits.Text
+                        ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Amount_Per_Container,Amount_Per_Container_Unit,Divider_Bin,Expiration_Date,Discrepancy_Flag, Active_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & ",'" & strAmount.ToString & "','" & strUnit.ToString & "'," & intDividerBin & " , '" & mtbExpirationDate.Text & "'," & intDiscrepancies & ",1);")
                         OpenOneDrawer(Drawers_Tuid)
                         'If the user selects "Yes" in the Personal Patient medication drop down
                         'Insert the information into the PersonalPatientDrawerMedication Table
