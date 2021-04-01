@@ -378,7 +378,7 @@ Partial Class frmPatientInfo
         Me.txtZipCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtZipCode.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtZipCode.Location = New System.Drawing.Point(750, 23)
-        Me.txtZipCode.MaxLength = 9
+        Me.txtZipCode.MaxLength = 5
         Me.txtZipCode.Name = "txtZipCode"
         Me.txtZipCode.ReadOnly = True
         Me.txtZipCode.ShortcutsEnabled = False

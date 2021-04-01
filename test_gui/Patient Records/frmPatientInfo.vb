@@ -1,5 +1,50 @@
 ﻿Public Class frmPatientInfo
 
+    '/*********************************************************************/
+    '/*                   FILE NAME:  */									  
+    '/*********************************************************************/
+    '/*                 PART OF PROJECT:				   */				  
+    '/*********************************************************************/
+    '/*                   WRITTEN BY: 		         */		  
+    '/*		         DATE CREATED:			   */						  
+    '/*********************************************************************/
+    '/*  PROJECT PURPOSE:								   */				  
+    '/*											   */					  
+    '/* 																	  
+    '/*********************************************************************/
+    '/*  FILE PURPOSE:									   */			  
+    '/*											   */					  
+    '/* 																	  
+    '/*********************************************************************/
+    '/*  COMMAND LINE PARAMETER LIST (In Parameter Order):			   */ 
+    '/*                                                    (NONE)	   */	  
+    '/*********************************************************************/
+    '/*  ENVIRONMENTAL RETURNS:							   */			  
+    '/*                          (NOTHING)					   */		  
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */			  
+    '/*											   */					  
+    '/* 																	  
+    '/*********************************************************************/
+    '/*  GLOBAL VARIABLE LIST (Alphabetically):			         */		  
+    '/*						  	 (NONE)			   */					  
+    '/*********************************************************************/
+    '/* COMPILATION NOTES(will include version notes including libraries):*/
+    '/* 											   */					  
+    '/* 																	  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */				  
+    '/*											   */					  
+    '/*  WHO   WHEN     WHAT								   */			  
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  NP    3/31/2021 made it so the form can't be edited when outside */
+    '/*                  edit mode. And changed the way the edit and view */
+    '/*                  modes work.                                      */
+    '/*********************************************************************/
+
+
+
+
     Private intPatientID As Integer
     Private intPatientMRN As Double
     Private strSelectedLabel As String
@@ -118,7 +163,7 @@
         lblPrescriptions.Location = New Point(10, 190)
         moveAndResizePanels()
 
-
+        disableEdits()
         ' CreateDispenseHistoryPanels(flpDispenseHistory, "test", "test", "test", "test", "test", "test", "test")
     End Sub
     '/*********************************************************************/
@@ -575,6 +620,7 @@
         If Not btnEditPatient.Text = "Save Changes" Then
 
             SetControlsToAllowEdit(ctl)
+            enableEdits()
             pnlNameBarcode.Visible = True
             btnEditPatient.Text = "Save Changes"
             moveControlsDown(expandedSize)
@@ -584,6 +630,7 @@
         Else
 
             SetControlsToReadOnly(ctl)
+            disableEdits()
             btnEditPatient.Text = "Edit Patient"
             PatientInformation.SavePatientEdits(intPatientID)
             pnlNameBarcode.Visible = False
@@ -659,6 +706,17 @@
                 'cboRoom.Enabled = False
             End If
         Next
+
+        For Each ctl In pnlNameBarcode.Controls
+            If TypeName(ctl) = "TextBox" Then
+
+                Dim txtbox As TextBox = CType(ctl, TextBox)
+
+                txtbox.ReadOnly = False
+                txtbox.BorderStyle = BorderStyle.FixedSingle
+                txtbox.BackColor = Color.White
+            End If
+        Next
         mtbBirthday.ReadOnly = False
         cboState.Enabled = True
     End Sub
@@ -719,6 +777,17 @@
 
             End If
         Next
+        For Each ctl In pnlNameBarcode.Controls
+            If TypeName(ctl) = "TextBox" Then
+
+                Dim txtbox As TextBox = CType(ctl, TextBox)
+
+                txtbox.ReadOnly = True
+                txtbox.BorderStyle = BorderStyle.FixedSingle
+                txtbox.BackColor = Color.White
+            End If
+        Next
+
         cboBed.Enabled = False
         cboRoom.Enabled = False
         cboState.Enabled = False
@@ -1326,5 +1395,119 @@
 
     Private Sub txtMRN_TextChanged(sender As Object, e As KeyPressEventArgs) Handles txtZipCode.KeyPress, txtPhone.KeyPress, txtMRN.KeyPress
 
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME:  disableEdits				   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		               */   
+    '/*		         DATE CREATED: 	3/31/2021                       	   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								   */             
+    '/*	 This is going to disable all the information boxes on the form so*/
+    '/*  they can't be editied if we don't want them to be. this will make*/
+    '/*  it far easier to turn edit mode on and off. 
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Private Sub disableEdits()
+        txtMRN.Enabled = False
+        mtbBirthday.Enabled = False
+        txtGender.Enabled = False
+        txtHeight.Enabled = False
+        txtWeight.Enabled = False
+        cboRoom.Enabled = False
+        cboBed.Enabled = False
+        txtPhysician.Enabled = False
+        txtEmail.Enabled = False
+        txtPhone.Enabled = False
+        txtAddress.Enabled = False
+        txtCity.Enabled = False
+        cboState.Enabled = False
+        txtZipCode.Enabled = False
+    End Sub
+
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: enableEdits					   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		                */   
+    '/*		         DATE CREATED: 	3/31/2021                       	   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								   */             
+    '/*	 this works as the opposite to disableEdits. It will allow us to  */
+    '/*  easily turn edit mode on.                                        */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Private Sub enableEdits()
+        txtMRN.Enabled = True
+        mtbBirthday.Enabled = True
+        txtGender.Enabled = True
+        txtHeight.Enabled = True
+        txtWeight.Enabled = True
+        cboRoom.Enabled = True
+        cboBed.Enabled = True
+        txtPhysician.Enabled = True
+        txtEmail.Enabled = True
+        txtPhone.Enabled = True
+        txtAddress.Enabled = True
+        txtCity.Enabled = True
+        cboState.Enabled = True
+        txtZipCode.Enabled = True
     End Sub
 End Class
