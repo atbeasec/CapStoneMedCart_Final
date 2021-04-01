@@ -6,8 +6,9 @@
         '    MessageBox.Show("please Enter a real allergy")
         'Else
         If cmbAllergiesType.Text = "" Then
-            MessageBox.Show("Could not add this allergy - Please check all fields to make sure you entered everything properly.")
-
+            MessageBox.Show("Could not add this allergy - Please pick a type from the drop-down.")
+        ElseIf cmbAllergies.Text = "" Then
+            MessageBox.Show("Could not add this allergy - Please pick an allergy from the drop-down or enter a new one if it isn't on the current list of options.")
         Else
 
 
@@ -72,6 +73,16 @@
     End Sub
     Private Sub btnAllergyCancel_Click(sender As Object, e As EventArgs) Handles btnAllergyCancel.Click
         DisableEditButtons()
+        ' check to make sure the item didn't get deleted from the list
+        Dim strAllergyName = cmbAllergies.Text
+        Dim intPatientTuid = GetPatientTuid()
+        Dim strNewSeverity = cmbSeverity.SelectedIndex.ToString
+
+        If ExecuteScalarQuery("Select count FROM PatientAllergy WHERE Allergy_Severity='" & cmbSeverity.SelectedIndex & "' WHERE Allergy_Name='" & strAllergyName &
+                           "' AND Patient_TUID =" & intPatientTuid & " AND Active_Flag = 0 ;") = 1 Then
+            btnAllergySave_Click(sender, e)
+        End If
+
     End Sub
     '/*********************************************************************/
     '/*                   SUBPROGRAM NAME: btnAllergySave_Click           */         
@@ -119,7 +130,7 @@
         Dim strAllergyName = cmbAllergies.Text
         Dim intPatientTuid = GetPatientTuid()
         Dim strNewSeverity = cmbSeverity.SelectedIndex.ToString
-        ExecuteScalarQuery("UPDATE PatientAllergy SET Allergy_Severity='" & strNewSeverity & "' WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTuid & " AND Active_Flag = 1 ;")
+        ExecuteScalarQuery("UPDATE PatientAllergy SET Allergy_Severity='" & strNewSeverity & "', Active_Flag = 1 WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTuid & " ;")
         DisableEditButtons()
         flpAllergies.Controls.Clear()
         LoadAllergiesPanel(strNewSeverity, intPatientTuid)
