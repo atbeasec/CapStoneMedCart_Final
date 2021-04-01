@@ -27,9 +27,9 @@ Partial Class frmPatientInfo
         Me.LblPatientName = New System.Windows.Forms.Label()
         Me.txtGender = New System.Windows.Forms.TextBox()
         Me.Label19 = New System.Windows.Forms.Label()
-        Me.txtPhysician = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.pnlPersonalInformation = New System.Windows.Forms.Panel()
+        Me.cboPhysicians = New System.Windows.Forms.ComboBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.mtbBirthday = New System.Windows.Forms.MaskedTextBox()
         Me.lblMoreDetails = New System.Windows.Forms.Label()
@@ -137,18 +137,6 @@ Partial Class frmPatientInfo
         Me.Label19.TabIndex = 22
         Me.Label19.Text = "Sex:"
         '
-        'txtPhysician
-        '
-        Me.txtPhysician.BackColor = System.Drawing.Color.White
-        Me.txtPhysician.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtPhysician.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPhysician.Location = New System.Drawing.Point(383, 91)
-        Me.txtPhysician.Name = "txtPhysician"
-        Me.txtPhysician.ReadOnly = True
-        Me.txtPhysician.ShortcutsEnabled = False
-        Me.txtPhysician.Size = New System.Drawing.Size(151, 25)
-        Me.txtPhysician.TabIndex = 7
-        '
         'Label16
         '
         Me.Label16.AutoSize = True
@@ -163,6 +151,7 @@ Partial Class frmPatientInfo
         'pnlPersonalInformation
         '
         Me.pnlPersonalInformation.BackColor = System.Drawing.Color.White
+        Me.pnlPersonalInformation.Controls.Add(Me.cboPhysicians)
         Me.pnlPersonalInformation.Controls.Add(Me.Panel3)
         Me.pnlPersonalInformation.Controls.Add(Me.lblMoreDetails)
         Me.pnlPersonalInformation.Controls.Add(Me.pnlNameBarcode)
@@ -184,7 +173,6 @@ Partial Class frmPatientInfo
         Me.pnlPersonalInformation.Controls.Add(Me.Label3)
         Me.pnlPersonalInformation.Controls.Add(Me.txtGender)
         Me.pnlPersonalInformation.Controls.Add(Me.Label19)
-        Me.pnlPersonalInformation.Controls.Add(Me.txtPhysician)
         Me.pnlPersonalInformation.Controls.Add(Me.Label16)
         Me.pnlPersonalInformation.Controls.Add(Me.Label11)
         Me.pnlPersonalInformation.ForeColor = System.Drawing.Color.Gainsboro
@@ -192,6 +180,16 @@ Partial Class frmPatientInfo
         Me.pnlPersonalInformation.Name = "pnlPersonalInformation"
         Me.pnlPersonalInformation.Size = New System.Drawing.Size(1092, 146)
         Me.pnlPersonalInformation.TabIndex = 17
+        '
+        'cboPhysicians
+        '
+        Me.cboPhysicians.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboPhysicians.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboPhysicians.FormattingEnabled = True
+        Me.cboPhysicians.Location = New System.Drawing.Point(384, 91)
+        Me.cboPhysicians.Name = "cboPhysicians"
+        Me.cboPhysicians.Size = New System.Drawing.Size(152, 25)
+        Me.cboPhysicians.TabIndex = 67
         '
         'Panel3
         '
@@ -377,7 +375,7 @@ Partial Class frmPatientInfo
         Me.txtZipCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtZipCode.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtZipCode.Location = New System.Drawing.Point(750, 23)
-        Me.txtZipCode.MaxLength = 9
+        Me.txtZipCode.MaxLength = 5
         Me.txtZipCode.Name = "txtZipCode"
         Me.txtZipCode.ReadOnly = True
         Me.txtZipCode.ShortcutsEnabled = False
@@ -983,7 +981,6 @@ Partial Class frmPatientInfo
     Friend WithEvents Label16 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents btnEditPatient As Button
-    Friend WithEvents txtPhysician As TextBox
     Friend WithEvents txtGender As TextBox
     Friend WithEvents Label19 As Label
     Friend WithEvents Label21 As Label
@@ -1048,4 +1045,5 @@ Partial Class frmPatientInfo
     Friend WithEvents Label9 As Label
     Friend WithEvents Panel3 As Panel
     Friend WithEvents mtbBirthday As MaskedTextBox
+    Friend WithEvents cboPhysicians As ComboBox
 End Class
