@@ -282,9 +282,14 @@ Module PatientInformation
         'and i add on to a string builder to let the user know all the items that were changed after is saves everything
         With frmPatientInfo
             If Not frmPatientInfo.txtFirstName.Text.Equals(frmPatientInfo.txtFirstName.Tag) Then
-                If BulkImportMethods.TextCheck(frmPatientInfo.txtFirstName.Text) Then
+                If .txtFirstName.Text = String.Empty Or .txtFirstName.Text.Length <= 3 Then
+                    strbErrorMessage.AppendLine("First must be longer than 2 character ")
+                    blnIssue = True
+                    .txtFirstName.Text = .txtFirstName.Tag
+                ElseIf BulkImportMethods.TextCheck(frmPatientInfo.txtFirstName.Text) Then
                     strbErrorMessage.AppendLine("First name cannot contain a ;")
                     blnIssue = True
+                    .txtFirstName.Text = .txtFirstName.Tag
                 Else
 
                     strbSqlCommand.Append("UPDATE Patient SET Patient_First_Name = '" & checkSQLInjection(frmPatientInfo.txtFirstName.Text, True) & "' Where Patient_ID = '" & intPatientID & "'")
@@ -295,11 +300,17 @@ Module PatientInformation
                     frmPatientInfo.txtFirstName.Tag = frmPatientInfo.txtFirstName.Text
                 End If
             End If
+
             'this is for checking if middle name was changed
             If Not frmPatientInfo.txtMiddle.Text.Equals(frmPatientInfo.txtMiddle.Tag) Then
-                If TextCheck(.txtMiddle.Text) Then
+                If .txtMiddle.Text = String.Empty Or .txtMiddle.Text.Length <= 3 Then
+                    strbErrorMessage.AppendLine("Middle name must be longer than 2 characters")
+                    blnIssue = True
+                    .txtMiddle.Text = .txtMiddle.Tag
+                ElseIf TextCheck(.txtMiddle.Text) Then
                     strbErrorMessage.AppendLine("Middle name cannot contain a ;")
                     blnIssue = True
+                    .txtMiddle.Text = .txtMiddle.Tag
                 Else
                     strbSqlCommand.Append("UPDATE Patient SET Patient_Middle_Name = '" & checkSQLInjection(.txtMiddle.Text, True) & "' Where Patient_ID = '" & intPatientID & "'")
                     CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
@@ -312,8 +323,14 @@ Module PatientInformation
 
             'this is for checking if last name was changed
             If Not frmPatientInfo.txtLast.Text.Equals(frmPatientInfo.txtLast.Tag) Then
-                If TextCheck(.txtLast.Text) Then
+                If .txtLast.Text = String.Empty Or .txtLast.Text.Length <= 3 Then
+                    strbErrorMessage.AppendLine("Last name must be longer than 2 characters")
+                    blnIssue = True
+                    .txtLast.Text = .txtLast.Tag
+                ElseIf TextCheck(.txtLast.Text) Then
                     strbErrorMessage.Append("Last name cannot contain a ;")
+                    blnIssue = True
+                    .txtLast.Text = .txtLast.Tag
                 Else
                     strbSqlCommand.Append("UPDATE Patient SET Patient_Last_Name = '" & checkSQLInjection(frmPatientInfo.txtLast.Text, True) & "' Where Patient_ID = '" & intPatientID & "'")
                     CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
@@ -326,6 +343,9 @@ Module PatientInformation
 
             If Not intMRNCurrentValue.Equals(intMRNInitalValue) Then
                 If Not IsNumeric(intMRNCurrentValue) Then
+                    strbErrorMessage.AppendLine("MRN must be numeric")
+                    blnIssue = True
+                Else
                     'build sql update command
                     strbSqlCommand.Append("UPDATE Patient SET MRN_Number = '" & intMRNCurrentValue & "' Where Patient_ID = '" & intPatientID & "'")
                     CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
@@ -342,23 +362,35 @@ Module PatientInformation
 
             'check if date of birth is changed
             If Not frmPatientInfo.mtbBirthday.Text.Equals(frmPatientInfo.mtbBirthday.Tag) Then
-                'build sql update command
-                strbSqlCommand.Append("UPDATE Patient SET Date_of_Birth = '" & frmPatientInfo.mtbBirthday.Text & "' Where Patient_ID = '" & intPatientID & "'")
-                CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
-                'add item that was changed too string that is tracking all changed items
-                strbItemsChanged.Append(" Date of birth")
-                'increase changed item count
-                intCountChanged = intCountChanged + 1
-                'clear string bulder
-                strbSqlCommand.Clear()
-                'update tag to new item
-                frmPatientInfo.mtbBirthday.Tag = frmPatientInfo.mtbBirthday.Text
+                If .mtbBirthday.Text = String.Empty Or Not IsDate(.mtbBirthday.Text) Then
+                    strbErrorMessage.AppendLine("Date of birth must be a vaild date")
+                    blnIssue = True
+                    .mtbBirthday.Text = .mtbBirthday.Tag
+                ElseIf Convert.ToDateTime(.mtbBirthday.Text) > Now() Then
+                    strbErrorMessage.AppendLine("Date of bith cannot be a future date")
+                    blnIssue = True
+                    .mtbBirthday.Text = .mtbBirthday.Tag
+                Else
+
+                    'build sql update command
+                    strbSqlCommand.Append("UPDATE Patient SET Date_of_Birth = '" & frmPatientInfo.mtbBirthday.Text & "' Where Patient_ID = '" & intPatientID & "'")
+                    CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+                    'add item that was changed too string that is tracking all changed items
+                    strbItemsChanged.Append(" Date of birth")
+                    'increase changed item count
+                    intCountChanged = intCountChanged + 1
+                    'clear string bulder
+                    strbSqlCommand.Clear()
+                    'update tag to new item
+                    frmPatientInfo.mtbBirthday.Tag = frmPatientInfo.mtbBirthday.Text
+                End If
             End If
             'check if sex is changed
             If Not frmPatientInfo.txtGender.Text.Equals(frmPatientInfo.txtGender.Tag) Then
                 If Not .txtGender.Text.ToLower.Equals("male") And .txtGender.Text.ToLower.Equals("Female") Then
                     strbErrorMessage.AppendLine("Sex must be male or female")
                     blnIssue = True
+                    .txtGender.Text = .txtGender.Tag
                 Else
                     'build sql update command
                     strbSqlCommand.Append("UPDATE Patient SET Sex = '" & frmPatientInfo.txtGender.Text & "' Where Patient_ID = '" & intPatientID & "'")
@@ -376,31 +408,44 @@ Module PatientInformation
 
             'check if height is changed
             If Not frmPatientInfo.txtHeight.Text.Equals(frmPatientInfo.txtHeight.Tag) Then
-                'build sql update command
-                strbSqlCommand.Append("UPDATE Patient SET Height = '" & frmPatientInfo.txtHeight.Text & "' Where Patient_ID = '" & intPatientID & "'")
-                CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
-                'add item that was changed too string that is tracking all changed items
-                strbItemsChanged.Append(" Height")
-                'increase changed item count
-                intCountChanged = intCountChanged + 1
-                'clear string bulder
-                strbSqlCommand.Clear()
-                'update tag to new item
-                frmPatientInfo.txtHeight.Tag = frmPatientInfo.txtHeight.Text
+                If Not IsNumeric(.txtHeight.Text) Then
+                    .txtHeight.Text = .txtHeight.Tag
+                    strbErrorMessage.AppendLine("Height must be numeric")
+                    blnIssue = True
+
+                Else
+                    'build sql update command
+                    strbSqlCommand.Append("UPDATE Patient SET Height = '" & frmPatientInfo.txtHeight.Text & "' Where Patient_ID = '" & intPatientID & "'")
+                    CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+                    'add item that was changed too string that is tracking all changed items
+                    strbItemsChanged.Append(" Height")
+                    'increase changed item count
+                    intCountChanged = intCountChanged + 1
+                    'clear string bulder
+                    strbSqlCommand.Clear()
+                    'update tag to new item
+                    frmPatientInfo.txtHeight.Tag = frmPatientInfo.txtHeight.Text
+                End If
             End If
             'check if weight is changed
             If Not frmPatientInfo.txtWeight.Text.Equals(frmPatientInfo.txtWeight.Tag) Then
-                'build sql update command
-                strbSqlCommand.Append("UPDATE Patient SET Weight = '" & frmPatientInfo.txtWeight.Text & "' Where Patient_ID = '" & intPatientID & "'")
-                CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
-                'add item that was changed too string that is tracking all changed items
-                strbItemsChanged.Append(" Weight")
-                'increase changed item count
-                intCountChanged = intCountChanged + 1
-                'clear string bulder
-                strbSqlCommand.Clear()
-                'update tag to new item
-                frmPatientInfo.txtWeight.Tag = frmPatientInfo.txtWeight.Text
+                If Not IsNumeric(.txtWeight.Text) Then
+                    .txtWeight.Text = .txtWeight.Tag
+                    strbErrorMessage.AppendLine("Weight must be numeric")
+                    blnIssue = True
+                Else
+                    'build sql update command
+                    strbSqlCommand.Append("UPDATE Patient SET Weight = '" & frmPatientInfo.txtWeight.Text & "' Where Patient_ID = '" & intPatientID & "'")
+                    CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+                    'add item that was changed too string that is tracking all changed items
+                    strbItemsChanged.Append(" Weight")
+                    'increase changed item count
+                    intCountChanged = intCountChanged + 1
+                    'clear string bulder
+                    strbSqlCommand.Clear()
+                    'update tag to new item
+                    frmPatientInfo.txtWeight.Tag = frmPatientInfo.txtWeight.Text
+                End If
             End If
 
             'check if email is changed
@@ -424,28 +469,34 @@ Module PatientInformation
                 Catch ex As Exception
                     strbErrorMessage.AppendLine("Email must follow a vaild email format")
                     blnIssue = True
+                    .txtEmail.Text = .txtEmail.Tag
                 End Try
             End If
             'check if phone is changed
             If Not frmPatientInfo.txtPhone.Text.Equals(frmPatientInfo.txtPhone.Tag) Then
-                'build sql update command
-                strbSqlCommand.Append("UPDATE Patient SET Phone_Number = '" & frmPatientInfo.txtPhone.Text & "' Where Patient_ID = '" & intPatientID & "'")
-                CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
-                'add item that was changed too string that is tracking all changed items
-                strbItemsChanged.Append(" Phone Number")
-                'increase changed item count
-                intCountChanged = intCountChanged + 1
-                'clear string bulder
-                strbSqlCommand.Clear()
+                If Not .txtPhone.Text.Length <> 10 Then
+                    strbErrorMessage.AppendLine("Phone number must be a vaild phone number")
+                Else
+                    'build sql update command
+                    strbSqlCommand.Append("UPDATE Patient SET Phone_Number = '" & frmPatientInfo.txtPhone.Text & "' Where Patient_ID = '" & intPatientID & "'")
+                    CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+                    'add item that was changed too string that is tracking all changed items
+                    strbItemsChanged.Append(" Phone Number")
+                    'increase changed item count
+                    intCountChanged = intCountChanged + 1
+                    'clear string bulder
+                    strbSqlCommand.Clear()
                 'update tag to new item
                 frmPatientInfo.txtPhone.Tag = frmPatientInfo.txtPhone.Text
+                End if
             End If
 
-            'check if street address is changed
-            If Not frmPatientInfo.txtAddress.Text.Equals(frmPatientInfo.txtAddress.Tag) Then
+                'check if street address is changed
+                If Not frmPatientInfo.txtAddress.Text.Equals(frmPatientInfo.txtAddress.Tag) Then
                 If TextCheck(.txtAddress.Text) Then
                     strbErrorMessage.AppendLine("Address cannot contain a ;")
                     blnIssue = True
+                    .txtAddress.Text = .txtAddress.Tag
                 Else
                     'build sql update command
                     strbSqlCommand.Append("UPDATE Patient SET Address = '" & checkSQLInjection(frmPatientInfo.txtAddress.Text, True) & "' Where Patient_ID = '" & intPatientID & "'")
@@ -466,6 +517,7 @@ Module PatientInformation
                 If TextCheck(.txtCity.Text) Then
                     strbErrorMessage.AppendLine("City cannot contain a ;")
                     blnIssue = True
+                    .txtCity.Text = .txtCity.Tag
                 Else
                     'build sql update command
                     strbSqlCommand.Append("UPDATE Patient SET City = '" & checkSQLInjection(frmPatientInfo.txtCity.Text, True) & "' Where Patient_ID = '" & intPatientID & "'")
@@ -498,6 +550,8 @@ Module PatientInformation
             If Not frmPatientInfo.txtZipCode.Text.Equals(frmPatientInfo.txtZipCode.Tag) Then
                 If Not .txtZipCode.Text.Length = 5 Then
                     strbErrorMessage.AppendLine("Zipcode must be 5 digits in length")
+                    blnIssue = True
+                    .txtZipCode.Text = .txtZipCode.Tag
                 Else
                     'build sql update command
                     strbSqlCommand.Append("UPDATE Patient SET Zip_Code = '" & frmPatientInfo.txtZipCode.Text & "' Where Patient_ID = '" & intPatientID & "'")
@@ -517,6 +571,7 @@ Module PatientInformation
                 If TextCheck(.txtBarcode.Text) Then
                     strbErrorMessage.AppendLine("Barcode cannot contain a ;")
                     blnIssue = True
+                    .txtBarcode.Text = .txtBarcode.Tag
                 Else
                     'build sql update command
                     strbSqlCommand.Append("UPDATE Patient SET Barcode = '" & frmPatientInfo.txtBarcode.Text & "' Where Patient_ID = '" & intPatientID & "'")
