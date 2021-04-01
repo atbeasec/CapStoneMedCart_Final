@@ -479,8 +479,8 @@
 
         frmInventory.cmbDrawerNumber.SelectedIndex = -1
         frmInventory.cmbDividerBin.Items.Clear()
-        frmInventory.txtAmount.Text = "1"
-        frmInventory.txtUnit.Text = ""
+        frmInventory.txtQuantity.Text = "1"
+
         frmInventory.cboPersonalMedication.SelectedIndex = 1
 
         frmInventory.cmbMedicationName.DataSource = outputList
