@@ -2,6 +2,7 @@
 Imports System.Net.Mail
 Imports System.Text
 Module PatientInformation
+#Const debug = True
     '/*******************************************************************/
     '/*                   FILE NAME: PatientInformation.vb              */
     '/*******************************************************************/
@@ -216,13 +217,17 @@ Module PatientInformation
             " FROM Physician WHERE Physician_ID = '" & intPhysicianID & "'"
 
         dsPatientDataSet = CreateDatabase.ExecuteSelectQuery(strSQLiteCommand)
+
         'check if physician fields are null
         For Each dr As DataRow In dsPatientDataSet.Tables(0).Rows
             If IsDBNull(dr(1)) Then
-                frmPatientInfo.txtPhysician.Text = "N/A"
+                'frmPatientInfo.txtPhysician.Text = "N/A"
             Else
-                frmPatientInfo.txtPhysician.Text = "Dr. " & dr(0) & " " & dr(1)
+                frmPatientInfo.cboPhysicians.Tag = (dr(1) & ", " & dr(0)).ToString
+                frmPatientInfo.cboPhysicians.SelectedItem = frmPatientInfo.cboPhysicians.GetItemText(frmPatientInfo.cboPhysicians.Tag)
+
             End If
+
         Next
         'call dispense history to get dispensed history of the patient
     End Sub
@@ -486,13 +491,13 @@ Module PatientInformation
                     intCountChanged = intCountChanged + 1
                     'clear string bulder
                     strbSqlCommand.Clear()
-                'update tag to new item
-                frmPatientInfo.txtPhone.Tag = frmPatientInfo.txtPhone.Text
-                End if
+                    'update tag to new item
+                    frmPatientInfo.txtPhone.Tag = frmPatientInfo.txtPhone.Text
+                End If
             End If
 
-                'check if street address is changed
-                If Not frmPatientInfo.txtAddress.Text.Equals(frmPatientInfo.txtAddress.Tag) Then
+            'check if street address is changed
+            If Not frmPatientInfo.txtAddress.Text.Equals(frmPatientInfo.txtAddress.Tag) Then
                 If TextCheck(.txtAddress.Text) Then
                     strbErrorMessage.AppendLine("Address cannot contain a ;")
                     blnIssue = True

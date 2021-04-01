@@ -126,7 +126,8 @@
     '/*  NP    2/16/2021 Changed cboBed to be disabled by default until a */
     '/*                  selection in room is made.                       */
     '/*  NP   2/16/2021  added a call to the GetRoom method in            */
-    '/*                  PatientInformation*/
+    '/*                  PatientInformation                               */
+    '/* NP    4/1/2021   Added a combo box for physician and populated it.*/
     '/*********************************************************************/
 
     Private Sub frmPatientInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -142,6 +143,9 @@
         PatientInformation.getPrescriptions(intPatientID)
         PatientInformation.getRoom(intPatientID, cboRoom, cboBed)
         DispenseHistory.DispenseHistorySpecificPatient(intPatientID)
+
+        populatePhysicianComboBox(cboPhysicians, CreateDatabase.ExecuteSelectQuery("Select * from Physician where Active_flag = '" &
+                                                                                   1 & "' ORDER BY Physician_Last_Name, Physician_First_Name ;"))
         SetControlsToReadOnly(ctl)
 
         CreateToolTips(pnlPrescriptionsHeader, tpLabelDirections)
@@ -1445,7 +1449,7 @@
         txtWeight.Enabled = False
         cboRoom.Enabled = False
         cboBed.Enabled = False
-        txtPhysician.Enabled = False
+        cboPhysicians.Enabled = False
         txtEmail.Enabled = False
         txtPhone.Enabled = False
         txtAddress.Enabled = False
@@ -1502,7 +1506,7 @@
         txtWeight.Enabled = True
         cboRoom.Enabled = True
         cboBed.Enabled = True
-        txtPhysician.Enabled = True
+        cboPhysicians.Enabled = True
         txtEmail.Enabled = True
         txtPhone.Enabled = True
         txtAddress.Enabled = True
