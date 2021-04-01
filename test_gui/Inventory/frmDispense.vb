@@ -145,7 +145,12 @@ Public Class frmDispense
         ElseIf lblDirections.Text.Equals("Enter the Amount Administered") Then
             If IsNumeric(txtAmountDispensed.Text) Then
                 Dim strAmountDispensed As String = txtAmountDispensed.Text & " " & txtUnits.Text
+                Dim intdrawerMEDTUID As Integer = CreateDatabase.ExecuteScalarQuery("Select DrawerMedication_ID from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
                 DispensingDrug(intMedicationID, CInt(LoggedInID), strAmountDispensed)
+                frmWaste.SetPatientID(intPatientID)
+                frmWaste.setDrawer(intdrawerNumber)
+                frmWaste.setMedID(intMedicationID)
+                frmWaste.setDrawerMEDTUID(intdrawerMEDTUID)
                 frmMain.OpenChildForm(frmWaste)
             Else
                 MessageBox.Show("Please enter a numeric number greater than 0")
@@ -196,91 +201,6 @@ Public Class frmDispense
 
             MessageBox.Show("Discrepancy detected and recorded")
         End If
-    End Sub
-    Private Sub IsNarcotic()
-        ' if it is narcotic we need to do the following
-
-        ' pop open drawer here()
-        lblDirections.Text = "Select Amount To Dispense"
-        lblDirections.Left = (pnlSelector.Width \ 2) - (pnlSelector.Width \ 2)
-        pnlAmountToRemove.Visible = True
-
-        'hide other panels
-        pnlAmountAdministered.Visible = False
-        pnlAmountInDrawer.Visible = False
-
-        'amount to dispense is stored in this variable
-        'txtQuantityToDispense.Text
-
-
-        lblDirections.Text = "Enter the Quantity in the Cart"
-        lblDirections.Left = (pnlSelector.Width \ 2) - (pnlSelector.Width \ 2)
-        btnDispense.Text = "Submit Count"
-        pnlAmountInDrawer.Visible = True
-
-        'hide other panels
-        pnlAmountAdministered.Visible = False
-        pnlAmountToRemove.Visible = False
-
-        ' we will need to get the data typed in the textfield here and dump to the db. That is stored in
-        ' txtCountInDrawer.Text
-
-        If btnDispense.Text = "Submit Count" Then
-
-            lblDirections.Text = "Enter the Amount Administered"
-            lblDirections.Left = (pnlSelector.Width \ 2) - (pnlSelector.Width \ 2)
-            ' show approiate panels
-            pnlAmountAdministered.Visible = True
-            pnlAmountToRemove.Visible = False
-            pnlAmountInDrawer.Visible = False
-
-            ' we will need to get the data typed in textfields here and dump to db. That is stored in
-            'txtAmountDispensed.Text
-
-
-
-            ' here we call the waste form...
-            frmMain.OpenChildForm(frmWaste)
-
-        End If
-
-
-
-
-    End Sub
-
-    Private Sub IsNotNarcotic()
-
-        ' if it is narcotic we need to do the following
-
-        ' pop open drawer here()
-        lblDirections.Text = "Select Amount To Dispense"
-        lblDirections.Left = (pnlSelector.Width \ 2) - (pnlSelector.Width \ 2)
-        pnlAmountToRemove.Visible = True
-
-        'hide other panels
-        pnlAmountAdministered.Visible = False
-        pnlAmountInDrawer.Visible = False
-
-        'amount to dispense is stored in this variable
-        'txtQuantityToDispense.Text
-
-
-        lblDirections.Text = "Enter the Amount Administered"
-        lblDirections.Left = (pnlSelector.Width \ 2) - (pnlSelector.Width \ 2)
-
-        ' show approiate panels
-        pnlAmountAdministered.Visible = True
-        pnlAmountToRemove.Visible = False
-        pnlAmountInDrawer.Visible = False
-        btnDispense.Text = "Submit Count"
-
-        ' we will need to get the data typed in textfields here and dump to db. That is stored in
-        'txtAmountDispensed.Text
-
-        ' here we call the waste form...
-        frmMain.OpenChildForm(frmWaste)
-
     End Sub
 
     Private Sub cmbMedications_SelectedIndexChanged(sender As Object, e As EventArgs)

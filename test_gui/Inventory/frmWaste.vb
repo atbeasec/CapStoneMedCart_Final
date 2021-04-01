@@ -1,15 +1,28 @@
 ﻿Public Class frmWaste
 
     Private intPatientID As Integer
-    Public intMedicationID As New ArrayList
-    Private intDrawerID As New ArrayList
     Private intDrawerMedTUID As Integer
+    Private intMedID As Integer
+    Private intDrawerID As Integer
 
-    'this function should set Patient MRN using PatientID
+
+    'this function should set patient ID
     Public Sub SetPatientID(ByVal id As Integer)
 
         intPatientID = id
 
+    End Sub
+
+    Public Sub setMedID(ByRef id As Integer)
+        intMedID = id
+    End Sub
+
+    Public Sub setDrawer(ByRef id As Integer)
+        intDrawerID = id
+    End Sub
+
+    Public Sub setDrawerMEDTUID(ByRef id As Integer)
+        intDrawerMedTUID = id
     End Sub
 
     Private Sub RadioButton6_CheckedChanged(sender As Object, e As EventArgs) Handles rbtnOther.CheckedChanged
