@@ -168,6 +168,8 @@
         If Not intCurrentSystemCount = intEnteredAmount Then
             CreateDatabase.ExecuteInsertQuery("Update DrawerMedication SET Quantity = '" & intEnteredAmount & "' WHERE Medication_TUID = '" & intMedID & "' AND Active_Flag = '1'")
             Discrepancies.CreateDiscrepancy(intdrawerNumber, intBinNumber, intCurrentSystemCount, intEnteredAmount, CInt(LoggedInID), CInt(LoggedInID), intMedID)
+
+            MessageBox.Show("Discrepancy detected and recorded")
         End If
     End Sub
     Private Sub IsNarcotic()
