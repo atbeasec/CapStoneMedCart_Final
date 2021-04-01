@@ -6,9 +6,9 @@
         '    MessageBox.Show("please Enter a real allergy")
         'Else
         If cmbAllergiesType.Text = "" Then
-                MessageBox.Show("please Enter a real Type")
+            MessageBox.Show("Could not add this allergy - Please check all fields to make sure you entered everything properly.")
 
-            Else
+        Else
 
 
                 Dim strAllergyName = " "
