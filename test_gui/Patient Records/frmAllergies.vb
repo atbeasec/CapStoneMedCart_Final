@@ -5,14 +5,16 @@
         'If cmbAllergies.Text = "" Then
         '    MessageBox.Show("please Enter a real allergy")
         'Else
-        If cmbAllergiesType.Text = "" Then
+        If cmbAllergiesType.Text = "" And cmbAllergies.Text = "" Then
+            MessageBox.Show("Could not add this allergy - Please pick a type and an allergy from the drop-down or enter a new one if it isn't on the current list of options.")
+        ElseIf cmbAllergiesType.Text = "" Then
             MessageBox.Show("Could not add this allergy - Please pick a type from the drop-down.")
         ElseIf cmbAllergies.Text = "" Then
             MessageBox.Show("Could not add this allergy - Please pick an allergy from the drop-down or enter a new one if it isn't on the current list of options.")
         Else
 
 
-                Dim strAllergyName = " "
+            Dim strAllergyName = " "
             Dim strSeverity = " "
             Dim intPatientTuid = GetPatientTuid()
 
