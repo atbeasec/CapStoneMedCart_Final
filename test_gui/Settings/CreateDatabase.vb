@@ -1173,6 +1173,7 @@ Module CreateDatabase
 	'/*  BRH  02/09/21  Added Frequency and Notes fields				*/
 	'/*  BRH  02/16/21  Changed Method to Type							*/
 	'/*	 BRH  03/28/21	Added proper primary key code					*/
+	'/*	 BRH  04/01/21	Added 'unit' field and changed quantity data type/
 	'/*******************************************************************/
 	Public Sub CreatePatientMedicationTable()
 		strCreateTable = "CREATE TABLE 'PatientMedication' (
@@ -1181,8 +1182,9 @@ Module CreateDatabase
 	                    'Medication_TUID'	INTEGER NOT NULL,
 	                    'Ordering_Physician_ID'	INTEGER NOT NULL,
 	                    'Date_Presrcibed'	TEXT NOT NULL,
-	                    'Quantity'	INTEGER NOT NULL,
-	                    'Type'	TEXT NOT NULL,
+	                    'Quantity'	NUMERIC NOT NULL,
+	                    'Units'	TEXT,
+						'Type'	TEXT NOT NULL,
 	                    'Frequency'	TEXT NOT NULL,
 						'Notes'		TEXT,
 						'Active_Flag'	INTEGER NOT NULL,
