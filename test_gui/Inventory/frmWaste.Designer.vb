@@ -29,24 +29,24 @@ Partial Class frmWaste
         Me.pnlRadioButtons = New System.Windows.Forms.Panel()
         Me.pnlSignOff = New System.Windows.Forms.Panel()
         Me.txtBarcode = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.lblSignoff = New System.Windows.Forms.Label()
         Me.btnWaste = New System.Windows.Forms.Button()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtOther = New System.Windows.Forms.TextBox()
         Me.rbtnOther = New System.Windows.Forms.RadioButton()
-        Me.rbtnPatientUnavilable = New System.Windows.Forms.RadioButton()
-        Me.RadioButton4 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
+        Me.radPatientUnavilable = New System.Windows.Forms.RadioButton()
+        Me.radRefused = New System.Windows.Forms.RadioButton()
+        Me.radCancel = New System.Windows.Forms.RadioButton()
+        Me.radIncorrect = New System.Windows.Forms.RadioButton()
         Me.pnlHeader = New System.Windows.Forms.Panel()
-        Me.lblPatientInfo = New System.Windows.Forms.Label()
         Me.btnBack = New System.Windows.Forms.Button()
+        Me.lblPatientInfo = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.txtUnit = New System.Windows.Forms.TextBox()
         Me.txtQuantity = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.txtMedication = New System.Windows.Forms.TextBox()
+        Me.txtDrawer = New System.Windows.Forms.TextBox()
         Me.pnlRadioButtons.SuspendLayout()
         Me.pnlSignOff.SuspendLayout()
         Me.pnlHeader.SuspendLayout()
@@ -76,12 +76,12 @@ Partial Class frmWaste
         'pnlRadioButtons
         '
         Me.pnlRadioButtons.Controls.Add(Me.pnlSignOff)
-        Me.pnlRadioButtons.Controls.Add(Me.TextBox1)
+        Me.pnlRadioButtons.Controls.Add(Me.txtOther)
         Me.pnlRadioButtons.Controls.Add(Me.rbtnOther)
-        Me.pnlRadioButtons.Controls.Add(Me.rbtnPatientUnavilable)
-        Me.pnlRadioButtons.Controls.Add(Me.RadioButton4)
-        Me.pnlRadioButtons.Controls.Add(Me.RadioButton3)
-        Me.pnlRadioButtons.Controls.Add(Me.RadioButton2)
+        Me.pnlRadioButtons.Controls.Add(Me.radPatientUnavilable)
+        Me.pnlRadioButtons.Controls.Add(Me.radRefused)
+        Me.pnlRadioButtons.Controls.Add(Me.radCancel)
+        Me.pnlRadioButtons.Controls.Add(Me.radIncorrect)
         Me.pnlRadioButtons.Location = New System.Drawing.Point(17, 252)
         Me.pnlRadioButtons.Name = "pnlRadioButtons"
         Me.pnlRadioButtons.Size = New System.Drawing.Size(488, 441)
@@ -90,11 +90,11 @@ Partial Class frmWaste
         'pnlSignOff
         '
         Me.pnlSignOff.Controls.Add(Me.txtBarcode)
-        Me.pnlSignOff.Controls.Add(Me.Label3)
+        Me.pnlSignOff.Controls.Add(Me.lblSignoff)
         Me.pnlSignOff.Controls.Add(Me.btnWaste)
         Me.pnlSignOff.Location = New System.Drawing.Point(4, 158)
         Me.pnlSignOff.Name = "pnlSignOff"
-        Me.pnlSignOff.Size = New System.Drawing.Size(458, 135)
+        Me.pnlSignOff.Size = New System.Drawing.Size(458, 195)
         Me.pnlSignOff.TabIndex = 24
         '
         'txtBarcode
@@ -102,21 +102,21 @@ Partial Class frmWaste
         Me.txtBarcode.BackColor = System.Drawing.Color.White
         Me.txtBarcode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtBarcode.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBarcode.Location = New System.Drawing.Point(42, 38)
+        Me.txtBarcode.Location = New System.Drawing.Point(15, 41)
         Me.txtBarcode.Name = "txtBarcode"
         Me.txtBarcode.ShortcutsEnabled = False
         Me.txtBarcode.Size = New System.Drawing.Size(220, 25)
         Me.txtBarcode.TabIndex = 217
         '
-        'Label3
+        'lblSignoff
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(37, 10)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(235, 25)
-        Me.Label3.TabIndex = 32
-        Me.Label3.Text = "Witness Sign-off Required"
+        Me.lblSignoff.AutoSize = True
+        Me.lblSignoff.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSignoff.Location = New System.Drawing.Point(10, 13)
+        Me.lblSignoff.Name = "lblSignoff"
+        Me.lblSignoff.Size = New System.Drawing.Size(235, 25)
+        Me.lblSignoff.TabIndex = 32
+        Me.lblSignoff.Text = "Witness Sign-off Required"
         '
         'btnWaste
         '
@@ -127,7 +127,7 @@ Partial Class frmWaste
         Me.btnWaste.ForeColor = System.Drawing.Color.White
         Me.btnWaste.Image = CType(resources.GetObject("btnWaste.Image"), System.Drawing.Image)
         Me.btnWaste.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnWaste.Location = New System.Drawing.Point(80, 69)
+        Me.btnWaste.Location = New System.Drawing.Point(53, 72)
         Me.btnWaste.Name = "btnWaste"
         Me.btnWaste.Size = New System.Drawing.Size(150, 37)
         Me.btnWaste.TabIndex = 31
@@ -135,14 +135,14 @@ Partial Class frmWaste
         Me.btnWaste.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnWaste.UseVisualStyleBackColor = False
         '
-        'TextBox1
+        'txtOther
         '
-        Me.TextBox1.Location = New System.Drawing.Point(21, 158)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ShortcutsEnabled = False
-        Me.TextBox1.Size = New System.Drawing.Size(329, 124)
-        Me.TextBox1.TabIndex = 6
+        Me.txtOther.Location = New System.Drawing.Point(21, 158)
+        Me.txtOther.Multiline = True
+        Me.txtOther.Name = "txtOther"
+        Me.txtOther.ShortcutsEnabled = False
+        Me.txtOther.Size = New System.Drawing.Size(329, 124)
+        Me.txtOther.TabIndex = 6
         '
         'rbtnOther
         '
@@ -155,72 +155,61 @@ Partial Class frmWaste
         Me.rbtnOther.Text = "Other (Provide Explanation)"
         Me.rbtnOther.UseVisualStyleBackColor = True
         '
-        'rbtnPatientUnavilable
+        'radPatientUnavilable
         '
-        Me.rbtnPatientUnavilable.AutoSize = True
-        Me.rbtnPatientUnavilable.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnPatientUnavilable.Location = New System.Drawing.Point(1, 96)
-        Me.rbtnPatientUnavilable.Name = "rbtnPatientUnavilable"
-        Me.rbtnPatientUnavilable.Size = New System.Drawing.Size(160, 25)
-        Me.rbtnPatientUnavilable.TabIndex = 4
-        Me.rbtnPatientUnavilable.Text = "Patient Unavailable"
-        Me.rbtnPatientUnavilable.UseVisualStyleBackColor = True
+        Me.radPatientUnavilable.AutoSize = True
+        Me.radPatientUnavilable.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.radPatientUnavilable.Location = New System.Drawing.Point(1, 96)
+        Me.radPatientUnavilable.Name = "radPatientUnavilable"
+        Me.radPatientUnavilable.Size = New System.Drawing.Size(160, 25)
+        Me.radPatientUnavilable.TabIndex = 4
+        Me.radPatientUnavilable.Text = "Patient Unavailable"
+        Me.radPatientUnavilable.UseVisualStyleBackColor = True
         '
-        'RadioButton4
+        'radRefused
         '
-        Me.RadioButton4.AutoSize = True
-        Me.RadioButton4.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RadioButton4.Location = New System.Drawing.Point(3, 65)
-        Me.RadioButton4.Name = "RadioButton4"
-        Me.RadioButton4.Size = New System.Drawing.Size(135, 25)
-        Me.RadioButton4.TabIndex = 3
-        Me.RadioButton4.Text = "Patient Refused"
-        Me.RadioButton4.UseVisualStyleBackColor = True
+        Me.radRefused.AutoSize = True
+        Me.radRefused.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.radRefused.Location = New System.Drawing.Point(3, 65)
+        Me.radRefused.Name = "radRefused"
+        Me.radRefused.Size = New System.Drawing.Size(135, 25)
+        Me.radRefused.TabIndex = 3
+        Me.radRefused.Text = "Patient Refused"
+        Me.radRefused.UseVisualStyleBackColor = True
         '
-        'RadioButton3
+        'radCancel
         '
-        Me.RadioButton3.AutoSize = True
-        Me.RadioButton3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RadioButton3.Location = New System.Drawing.Point(3, 34)
-        Me.RadioButton3.Name = "RadioButton3"
-        Me.RadioButton3.Size = New System.Drawing.Size(208, 25)
-        Me.RadioButton3.TabIndex = 2
-        Me.RadioButton3.Text = "Order Canceled / On Hold"
-        Me.RadioButton3.UseVisualStyleBackColor = True
+        Me.radCancel.AutoSize = True
+        Me.radCancel.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.radCancel.Location = New System.Drawing.Point(3, 34)
+        Me.radCancel.Name = "radCancel"
+        Me.radCancel.Size = New System.Drawing.Size(208, 25)
+        Me.radCancel.TabIndex = 2
+        Me.radCancel.Text = "Order Canceled / On Hold"
+        Me.radCancel.UseVisualStyleBackColor = True
         '
-        'RadioButton2
+        'radIncorrect
         '
-        Me.RadioButton2.AutoSize = True
-        Me.RadioButton2.Checked = True
-        Me.RadioButton2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RadioButton2.Location = New System.Drawing.Point(3, 3)
-        Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(170, 25)
-        Me.RadioButton2.TabIndex = 1
-        Me.RadioButton2.TabStop = True
-        Me.RadioButton2.Text = "Incorrect Medication"
-        Me.RadioButton2.UseVisualStyleBackColor = True
+        Me.radIncorrect.AutoSize = True
+        Me.radIncorrect.Checked = True
+        Me.radIncorrect.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.radIncorrect.Location = New System.Drawing.Point(3, 3)
+        Me.radIncorrect.Name = "radIncorrect"
+        Me.radIncorrect.Size = New System.Drawing.Size(170, 25)
+        Me.radIncorrect.TabIndex = 1
+        Me.radIncorrect.TabStop = True
+        Me.radIncorrect.Text = "Incorrect Medication"
+        Me.radIncorrect.UseVisualStyleBackColor = True
         '
         'pnlHeader
         '
         Me.pnlHeader.BackColor = System.Drawing.Color.White
-        Me.pnlHeader.Controls.Add(Me.lblPatientInfo)
         Me.pnlHeader.Controls.Add(Me.btnBack)
         Me.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlHeader.Location = New System.Drawing.Point(0, 0)
         Me.pnlHeader.Name = "pnlHeader"
-        Me.pnlHeader.Size = New System.Drawing.Size(771, 46)
+        Me.pnlHeader.Size = New System.Drawing.Size(771, 10)
         Me.pnlHeader.TabIndex = 202
-        '
-        'lblPatientInfo
-        '
-        Me.lblPatientInfo.AutoSize = True
-        Me.lblPatientInfo.Font = New System.Drawing.Font("Segoe UI", 12.0!)
-        Me.lblPatientInfo.Location = New System.Drawing.Point(109, 15)
-        Me.lblPatientInfo.Name = "lblPatientInfo"
-        Me.lblPatientInfo.Size = New System.Drawing.Size(56, 21)
-        Me.lblPatientInfo.TabIndex = 200
-        Me.lblPatientInfo.Text = "Label1"
         '
         'btnBack
         '
@@ -238,12 +227,23 @@ Partial Class frmWaste
         Me.btnBack.Text = "Back"
         Me.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnBack.UseVisualStyleBackColor = False
+        Me.btnBack.Visible = False
+        '
+        'lblPatientInfo
+        '
+        Me.lblPatientInfo.AutoSize = True
+        Me.lblPatientInfo.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.lblPatientInfo.Location = New System.Drawing.Point(10, 13)
+        Me.lblPatientInfo.Name = "lblPatientInfo"
+        Me.lblPatientInfo.Size = New System.Drawing.Size(56, 21)
+        Me.lblPatientInfo.TabIndex = 200
+        Me.lblPatientInfo.Text = "Label1"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(13, 127)
+        Me.Label4.Location = New System.Drawing.Point(240, 71)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(80, 25)
         Me.Label4.TabIndex = 204
@@ -253,11 +253,11 @@ Partial Class frmWaste
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold)
-        Me.Label5.Location = New System.Drawing.Point(238, 71)
+        Me.Label5.Location = New System.Drawing.Point(15, 148)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(152, 25)
+        Me.Label5.Size = New System.Drawing.Size(199, 25)
         Me.Label5.TabIndex = 213
-        Me.Label5.Text = "Amount wasted:"
+        Me.Label5.Text = "Enter amount wasted:"
         '
         'ErrorProvider1
         '
@@ -268,7 +268,7 @@ Partial Class frmWaste
         Me.txtUnit.BackColor = System.Drawing.Color.White
         Me.txtUnit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtUnit.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUnit.Location = New System.Drawing.Point(412, 99)
+        Me.txtUnit.Location = New System.Drawing.Point(189, 176)
         Me.txtUnit.Name = "txtUnit"
         Me.txtUnit.ReadOnly = True
         Me.txtUnit.ShortcutsEnabled = False
@@ -280,33 +280,35 @@ Partial Class frmWaste
         Me.txtQuantity.BackColor = System.Drawing.Color.White
         Me.txtQuantity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtQuantity.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtQuantity.Location = New System.Drawing.Point(243, 99)
+        Me.txtQuantity.Location = New System.Drawing.Point(20, 176)
         Me.txtQuantity.Name = "txtQuantity"
         Me.txtQuantity.ShortcutsEnabled = False
         Me.txtQuantity.Size = New System.Drawing.Size(163, 25)
         Me.txtQuantity.TabIndex = 215
         '
-        'TextBox2
+        'txtMedication
         '
-        Me.TextBox2.BackColor = System.Drawing.Color.White
-        Me.TextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TextBox2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(17, 99)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.ShortcutsEnabled = False
-        Me.TextBox2.Size = New System.Drawing.Size(220, 25)
-        Me.TextBox2.TabIndex = 216
+        Me.txtMedication.BackColor = System.Drawing.Color.White
+        Me.txtMedication.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtMedication.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMedication.Location = New System.Drawing.Point(17, 99)
+        Me.txtMedication.Name = "txtMedication"
+        Me.txtMedication.ReadOnly = True
+        Me.txtMedication.ShortcutsEnabled = False
+        Me.txtMedication.Size = New System.Drawing.Size(220, 25)
+        Me.txtMedication.TabIndex = 216
         '
-        'TextBox3
+        'txtDrawer
         '
-        Me.TextBox3.BackColor = System.Drawing.Color.White
-        Me.TextBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TextBox3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.Location = New System.Drawing.Point(18, 155)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.ShortcutsEnabled = False
-        Me.TextBox3.Size = New System.Drawing.Size(163, 25)
-        Me.TextBox3.TabIndex = 217
+        Me.txtDrawer.BackColor = System.Drawing.Color.White
+        Me.txtDrawer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtDrawer.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDrawer.Location = New System.Drawing.Point(245, 99)
+        Me.txtDrawer.Name = "txtDrawer"
+        Me.txtDrawer.ReadOnly = True
+        Me.txtDrawer.ShortcutsEnabled = False
+        Me.txtDrawer.Size = New System.Drawing.Size(163, 25)
+        Me.txtDrawer.TabIndex = 217
         '
         'frmWaste
         '
@@ -314,10 +316,11 @@ Partial Class frmWaste
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(771, 733)
+        Me.Controls.Add(Me.lblPatientInfo)
         Me.Controls.Add(Me.txtQuantity)
-        Me.Controls.Add(Me.TextBox3)
+        Me.Controls.Add(Me.txtDrawer)
         Me.Controls.Add(Me.txtUnit)
-        Me.Controls.Add(Me.TextBox2)
+        Me.Controls.Add(Me.txtMedication)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.pnlHeader)
@@ -331,7 +334,6 @@ Partial Class frmWaste
         Me.pnlSignOff.ResumeLayout(False)
         Me.pnlSignOff.PerformLayout()
         Me.pnlHeader.ResumeLayout(False)
-        Me.pnlHeader.PerformLayout()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -340,14 +342,14 @@ Partial Class frmWaste
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents pnlRadioButtons As Panel
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtOther As TextBox
     Friend WithEvents rbtnOther As RadioButton
-    Friend WithEvents rbtnPatientUnavilable As RadioButton
-    Friend WithEvents RadioButton4 As RadioButton
-    Friend WithEvents RadioButton3 As RadioButton
-    Friend WithEvents RadioButton2 As RadioButton
+    Friend WithEvents radPatientUnavilable As RadioButton
+    Friend WithEvents radRefused As RadioButton
+    Friend WithEvents radCancel As RadioButton
+    Friend WithEvents radIncorrect As RadioButton
     Friend WithEvents pnlSignOff As Panel
-    Friend WithEvents Label3 As Label
+    Friend WithEvents lblSignoff As Label
     Friend WithEvents btnWaste As Button
     Friend WithEvents pnlHeader As Panel
     Friend WithEvents btnBack As Button
@@ -357,8 +359,8 @@ Partial Class frmWaste
     Friend WithEvents txtQuantity As TextBox
     Friend WithEvents txtUnit As TextBox
     Friend WithEvents Label6 As Label
-    Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents txtDrawer As TextBox
+    Friend WithEvents txtMedication As TextBox
     Friend WithEvents txtBarcode As TextBox
     Friend WithEvents lblPatientInfo As Label
 End Class

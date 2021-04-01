@@ -4,7 +4,9 @@
     Private intDrawerMedTUID As Integer
     Private intMedID As Integer
     Private intDrawerID As Integer
-
+    Private intNarcoticFlagGlobal As Integer
+    Private intSignoffID As Integer
+    Private strReason As String
 
     'this function should set patient ID
     Public Sub SetPatientID(ByVal id As Integer)
@@ -62,19 +64,36 @@
     '/********************************************************************/ 
     Private Sub Waste_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'TextBox1.Visible = False
-        btnWaste.Visible = False
-        ' if the patient mrn is nothing it means the waste form is being accessed
-        ' from the ad hoc menu, otherwise it would be pased a value.
-        If intPatientID = Nothing Then
-            btnBack.Visible = False
+        Dim dsPatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT * from Patient where Patient_ID = '" & intPatientID & "'")
+        lblPatientInfo.Text = "Patient: "
+        lblPatientInfo.Text &= dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.LastName) & ", "
+        lblPatientInfo.Text &= dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.FristName) & "         "
+        lblPatientInfo.Text &= "MRN: "
+        lblPatientInfo.Text &= dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.MRN_Number) & "         "
+        lblPatientInfo.Text &= "DOB: "
+        lblPatientInfo.Text &= dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.DoB) & "         "
+        lblPatientInfo.Text &= "Height: "
+        lblPatientInfo.Text &= dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.Height) & "         "
+        lblPatientInfo.Text &= "Weight: "
+        lblPatientInfo.Text &= dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.Weight) & "         "
+
+        Dim dsMedication As DataSet = CreateDatabase.ExecuteSelectQuery("Select * from Medication INNER JOIN DrawerMedication on DrawerMedication.Medication_TUID = Medication.Medication_ID where Medication_ID = '" & intMedID & "' and Medication.Active_Flag = '1' and DrawerMedication.Active_Flag = '1'")
+        txtMedication.Text = dsMedication.Tables(0).Rows(0)(1)
+        txtUnit.Text = dsMedication.Tables(0).Rows(0)(15)
+
+        Dim dsDrawer As DataSet = CreateDatabase.ExecuteSelectQuery("Select * from DrawerMedication INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID WHERE DrawerMedication.Medication_TUID = '" & intMedID & "' and DrawerMedication.Active_Flag = '1' and Drawers.Active_Flag = '1'")
+        txtDrawer.Text = "Drawer number:  " & dsDrawer.Tables(0).Rows(0)(12) & " Bin: " & dsDrawer.Tables(0).Rows(0)(6)
+
+        Dim intNarcoticFlag As Integer = CreateDatabase.ExecuteScalarQuery("Select Controlled_Flag from Medication where Medication_ID = '" & intMedID & "' and Active_Flag = '1'")
+        intNarcoticFlagGlobal = intNarcoticFlag
+
+        If intNarcoticFlagGlobal = 1 Then
+            lblSignoff.Visible = True
+            txtBarcode.Visible = True
+        Else
+            lblSignoff.Visible = False
+            txtBarcode.Visible = False
         End If
-
-        'Inventory.PopulateWasteComboBoxMedication()
-        'Dim dsWitness As DataSet = CreateDatabase.ExecuteSelectQuery("Select * from User WHERE Active_Flag = '1'")
-        'For Each dr As DataRow In dsWitness.Tables(0).Rows()
-        '    cboWitness.Items.Add(dr(EnumList.User.UserName))
-        'Next
-
     End Sub
 
     '/********************************************************************/
@@ -169,14 +188,97 @@
     '/*  AB		        2/10/21		    initial creation                 */
     '/********************************************************************/ 
     Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
+        If intNarcoticFlagGlobal = 1 Then
+            If IsNumeric(txtQuantity.Text) Then
+                Dim strBarcode As String = txtBarcode.Text
+                CheckBarcode(strBarcode)
+                frmPatientInfo.setPatientID(intPatientID)
+                frmMain.OpenChildForm(frmPatientInfo)
+            Else
+                MessageBox.Show("Please enter a numeric value to waste")
+            End If
+        Else
+            If IsNumeric(txtQuantity.Text) Then
+                InsertWasteNonNarcotic()
+                frmPatientInfo.setPatientID(intPatientID)
+                frmMain.OpenChildForm(frmPatientInfo)
+            End If
 
+        End If
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         frmPatientInfo.setPatientID(intPatientID)
-        ' frmPatientInfo.setPatientMrn(intPatientInformationMRN)
         frmMain.OpenChildForm(frmPatientInfo)
     End Sub
 
+    Private Sub InsertWasteNonNarcotic()
+        Dim dtmWasteTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+        If radIncorrect.Checked = True Then
+            strReason = radIncorrect.Text
 
+        ElseIf radCancel.Checked = True Then
+            strReason = radCancel.Text
+
+        ElseIf radRefused.Checked = True Then
+            strReason = radRefused.Text
+
+        ElseIf radPatientUnavilable.Checked = True Then
+            strReason = radPatientUnavilable.Text
+
+        ElseIf rbtnOther.Checked = True Then
+            strReason = txtOther.Text
+        End If
+        insertWaste(CInt(LoggedInID), CInt(LoggedInID), intDrawerMedTUID, intMedID, intPatientID, strReason, txtQuantity.Text, dtmWasteTime)
+    End Sub
+
+    Private Sub InsertWasteNarcotic(ByRef intApprovingID As Integer)
+        Dim dtmWasteTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+        If radIncorrect.Checked = True Then
+            strReason = radIncorrect.Text
+
+        ElseIf radCancel.Checked = True Then
+            strReason = radCancel.Text
+
+        ElseIf radRefused.Checked = True Then
+            strReason = radRefused.Text
+
+        ElseIf radPatientUnavilable.Checked = True Then
+            strReason = radPatientUnavilable.Text
+
+        ElseIf rbtnOther.Checked = True Then
+            strReason = txtOther.Text
+        End If
+        insertWaste(CInt(LoggedInID), intApprovingID, intDrawerMedTUID, intMedID, intPatientID, strReason, txtQuantity.Text, dtmWasteTime)
+    End Sub
+
+    Private Sub insertWaste(ByRef intPrimaryUser As Integer, ByRef intSecondaryUser As Integer, ByRef intDrawerMEDID As Integer, ByRef intMedicationID As Integer, ByRef intpatientTUID As Integer, ByRef strReason As String, dblQuantity As Double, ByRef dtmDate As String)
+        CreateDatabase.ExecuteInsertQuery("INSERT INTO Wastes(Primary_User_TUID,Secondary_User_TUID,DrawerMedication_TUID,Medication_TUID, Patient_TUID,DateTime,Reason,Quantity) VALUES('" & intPrimaryUser & "','" & intSecondaryUser & "','" & intDrawerMEDID & "','" & intMedicationID & "','" & intpatientTUID & "','" & dtmDate & "','" & strReason & "','" & dblQuantity & "')")
+    End Sub
+    Private Sub CheckBarcode(ByRef strBarcode As String)
+        If strBarcode = "" Then
+            MsgBox("           WARNING" & vbCrLf & "Barcode Field is Blank")
+            txtBarcode.Focus()
+
+        ElseIf scanBarcode(strBarcode) = "True" Then
+            InsertWasteNarcotic(intSignoffID)
+        Else
+            MsgBox("No User With That Barcode")
+            txtBarcode.Focus()
+        End If
+    End Sub
+
+    Private Function scanBarcode(ByRef strBarcode As String)
+        Dim strHashedBarcode = ConvertBarcodePepperAndHash(strBarcode)
+        If ExecuteScalarQuery("SELECT COUNT(*) FROM User WHERE Barcode = '" & strHashedBarcode & "'" & " AND Active_Flag = '1'") <> 0 Then
+            intSignoffID = ExecuteScalarQuery("SELECT User_ID FROM User WHERE Barcode = '" & strHashedBarcode & "'")
+            Return "True"
+        Else
+            Return "False"
+        End If
+    End Function
+
+    Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantity.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789.")
+    End Sub
 End Class
