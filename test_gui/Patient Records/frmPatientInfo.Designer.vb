@@ -29,6 +29,7 @@ Partial Class frmPatientInfo
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.pnlPersonalInformation = New System.Windows.Forms.Panel()
+        Me.cboPhysicians = New System.Windows.Forms.ComboBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.mtbBirthday = New System.Windows.Forms.MaskedTextBox()
         Me.lblMoreDetails = New System.Windows.Forms.Label()
@@ -94,7 +95,6 @@ Partial Class frmPatientInfo
         Me.flpDispenseHistory = New System.Windows.Forms.FlowLayoutPanel()
         Me.tpLabelDirections = New System.Windows.Forms.ToolTip(Me.components)
         Me.tpToolTip = New System.Windows.Forms.ToolTip(Me.components)
-        Me.cboPhysicians = New System.Windows.Forms.ComboBox()
         Me.pnlPersonalInformation.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.pnlNameBarcode.SuspendLayout()
@@ -181,6 +181,16 @@ Partial Class frmPatientInfo
         Me.pnlPersonalInformation.Name = "pnlPersonalInformation"
         Me.pnlPersonalInformation.Size = New System.Drawing.Size(1092, 146)
         Me.pnlPersonalInformation.TabIndex = 17
+        '
+        'cboPhysicians
+        '
+        Me.cboPhysicians.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboPhysicians.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboPhysicians.FormattingEnabled = True
+        Me.cboPhysicians.Location = New System.Drawing.Point(384, 91)
+        Me.cboPhysicians.Name = "cboPhysicians"
+        Me.cboPhysicians.Size = New System.Drawing.Size(152, 25)
+        Me.cboPhysicians.TabIndex = 67
         '
         'Panel3
         '
@@ -948,16 +958,6 @@ Partial Class frmPatientInfo
         Me.flpDispenseHistory.Name = "flpDispenseHistory"
         Me.flpDispenseHistory.Size = New System.Drawing.Size(1067, 64)
         Me.flpDispenseHistory.TabIndex = 1
-        '
-        'cboPhysicians
-        '
-        Me.cboPhysicians.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboPhysicians.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboPhysicians.FormattingEnabled = True
-        Me.cboPhysicians.Location = New System.Drawing.Point(384, 91)
-        Me.cboPhysicians.Name = "cboPhysicians"
-        Me.cboPhysicians.Size = New System.Drawing.Size(152, 25)
-        Me.cboPhysicians.TabIndex = 67
         '
         'frmPatientInfo
         '

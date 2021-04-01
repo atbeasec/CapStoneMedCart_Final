@@ -223,11 +223,11 @@ Module PatientInformation
             If IsDBNull(dr(1)) Then
                 'frmPatientInfo.txtPhysician.Text = "N/A"
             Else
-                frmPatientInfo.cboPhysicians.Tag = (dr(1) & ", " & dr(0)).ToString
-                frmPatientInfo.cboPhysicians.SelectedItem = frmPatientInfo.cboPhysicians.GetItemText(frmPatientInfo.cboPhysicians.Tag)
 
+                frmPatientInfo.cboPhysicians.Tag = (dr(1).ToString & ", " & dr(0).ToString).ToString.Trim
+                frmPatientInfo.cboPhysicians.SelectedItem = frmPatientInfo.cboPhysicians.Tag
+                '   MessageBox.Show(frmPatientInfo.cboPhysicians.GetItemText(frmPatientInfo.cboPhysicians.Tag))
             End If
-
         Next
         'call dispense history to get dispensed history of the patient
     End Sub
@@ -622,6 +622,22 @@ Module PatientInformation
                     End If
 
                 End If
+            End If
+
+            If Not .cboPhysicians.SelectedItem.Equals(.cboPhysicians.Tag) Then
+                Dim strPhysicianName As String() = Split(.cboPhysicians.SelectedItem)
+                Dim dsPhysicians As DataSet
+                strPhysicianName(0) = strPhysicianName(0).TrimEnd(",")
+                dsPhysicians = CreateDatabase.ExecuteSelectQuery("Select Physician_ID from  Physician where Physician_First_name = '" &
+                                                                 strPhysicianName(1) & "' and Physician_Last_Name = '" &
+                                                                 strPhysicianName(0) & "';")
+                strbSqlCommand.Append("UPDATE Patient SET Primary_Physician_ID = '" & dsPhysicians.Tables(0).Rows(0)(EnumList.Physician.Id) &
+                                      "' Where Patient_ID = '" & intPatientID & "'")
+                ExecuteInsertQuery(strbSqlCommand.ToString)
+                intCountChanged += 1
+                strbItemsChanged.Append(" Primary Physician")
+                .cboPhysicians.Tag = .cboPhysicians.SelectedItem
+
             End If
         End With
 
