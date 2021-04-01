@@ -845,32 +845,15 @@ Public Class frmInventory
     Private Sub btnDrawerDown_Click(sender As Object, e As EventArgs) Handles btnDrawerDown.Click
         IndexButtonDecrement(cmbDrawerNumber.SelectedIndex, cmbDrawerNumber)
     End Sub
-    Private Sub btnQuantityUp_Click(sender As Object, e As EventArgs) Handles btnQuantityUp.Click
-        If Not IsNumeric(txtQuantity.Text) Then
-            txtQuantity.Text = 0
-        End If
-        ButtonIncrement(1000, txtQuantity)
-    End Sub
 
-    Private Sub btnQuantityDown_Click(sender As Object, e As EventArgs) Handles btnQuantityDown.Click
-        If Not IsNumeric(txtQuantity.Text) Then
-            txtQuantity.Text = 2
-        End If
-        ButtonDecrement(txtQuantity)
-    End Sub
-
-    Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantity.KeyPress
-        DataVaildationMethods.KeyPressCheck(e, "0123456789")
-        If txtQuantity.Text IsNot "" Then
-            GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
-        Else
+    Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtAmount.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789.")
+        If txtAmount.Text IsNot "" Then
         End If
     End Sub
 
-    Private Sub txtQuantity_Validated(sender As Object, e As EventArgs) Handles txtQuantity.Validated
-        If txtQuantity.Text IsNot "" Then
-            GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
-        Else
+    Private Sub txtQuantity_Validated(sender As Object, e As EventArgs) Handles txtAmount.Validated
+        If txtAmount.Text IsNot "" Then
         End If
     End Sub
 
@@ -888,4 +871,7 @@ Public Class frmInventory
         End If
     End Sub
 
+    Private Sub txtContainer_TextChanged(sender As Object, e As EventArgs) Handles txtUnit.TextChanged
+
+    End Sub
 End Class
