@@ -192,8 +192,6 @@
             If IsNumeric(txtQuantity.Text) Then
                 Dim strBarcode As String = txtBarcode.Text
                 CheckBarcode(strBarcode)
-                frmPatientInfo.setPatientID(intPatientID)
-                frmMain.OpenChildForm(frmPatientInfo)
             Else
                 MessageBox.Show("Please enter a numeric value to waste")
             End If
@@ -262,6 +260,8 @@
 
         ElseIf scanBarcode(strBarcode) = "True" Then
             InsertWasteNarcotic(intSignoffID)
+            frmPatientInfo.setPatientID(intPatientID)
+            frmMain.OpenChildForm(frmPatientInfo)
         Else
             MsgBox("No User With That Barcode")
             txtBarcode.Focus()
