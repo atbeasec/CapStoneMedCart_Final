@@ -120,7 +120,7 @@ Partial Class frmAllergies
         Me.cmbSeverity.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbSeverity.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbSeverity.FormattingEnabled = True
-        Me.cmbSeverity.Items.AddRange(New Object() {"Class 1 (0.35-0.7)", "Class 2 (0.71-3.5)", "Class 3 (3.51-17.5)", "Class 4 (17.51-50)", "Class 5 (50.01-100)"})
+        Me.cmbSeverity.Items.AddRange(New Object() {"Class 1 (0.35-0.7)", "Class 2 (0.71-3.5)", "Class 3 (3.51-17.5)", "Class 4 (17.51-50)", "Class 5 (50.01-100)", "N/A"})
         Me.cmbSeverity.Location = New System.Drawing.Point(10, 186)
         Me.cmbSeverity.Name = "cmbSeverity"
         Me.cmbSeverity.Size = New System.Drawing.Size(286, 29)

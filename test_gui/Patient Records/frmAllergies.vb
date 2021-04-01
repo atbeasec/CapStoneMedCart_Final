@@ -5,13 +5,16 @@
         'If cmbAllergies.Text = "" Then
         '    MessageBox.Show("please Enter a real allergy")
         'Else
-        If cmbAllergiesType.Text = "" Then
-                MessageBox.Show("please Enter a real Type")
+        If cmbAllergiesType.Text = "" And cmbAllergies.Text = "" Then
+            MessageBox.Show("Could not add this allergy - Please pick a type and an allergy from the drop-down or enter a new one if it isn't on the current list of options.")
+        ElseIf cmbAllergiesType.Text = "" Then
+            MessageBox.Show("Could not add this allergy - Please pick a type from the drop-down.")
+        ElseIf cmbAllergies.Text = "" Then
+            MessageBox.Show("Could not add this allergy - Please pick an allergy from the drop-down or enter a new one if it isn't on the current list of options.")
+        Else
 
-            Else
 
-
-                Dim strAllergyName = " "
+            Dim strAllergyName = " "
             Dim strSeverity = " "
             Dim intPatientTuid = GetPatientTuid()
 
@@ -28,7 +31,8 @@
                 strAllergyName = cmbAllergies.Text
             End If
             If cmbSeverity.SelectedIndex = -1 Then
-                strSeverity = "N/A"
+                cmbSeverity.SelectedIndex = 5
+                strSeverity = cmbSeverity.SelectedItem.ToString
             Else
                 strSeverity = cmbSeverity.SelectedItem.ToString
             End If
@@ -71,6 +75,16 @@
     End Sub
     Private Sub btnAllergyCancel_Click(sender As Object, e As EventArgs) Handles btnAllergyCancel.Click
         DisableEditButtons()
+        ' check to make sure the item didn't get deleted from the list
+        Dim strAllergyName = cmbAllergies.Text
+        Dim intPatientTuid = GetPatientTuid()
+        Dim strNewSeverity = cmbSeverity.SelectedIndex.ToString
+
+        If ExecuteScalarQuery("Select count FROM PatientAllergy WHERE Allergy_Severity='" & cmbSeverity.SelectedIndex & "' WHERE Allergy_Name='" & strAllergyName &
+                           "' AND Patient_TUID =" & intPatientTuid & " AND Active_Flag = 0 ;") = 1 Then
+            btnAllergySave_Click(sender, e)
+        End If
+
     End Sub
     '/*********************************************************************/
     '/*                   SUBPROGRAM NAME: btnAllergySave_Click           */         
@@ -117,8 +131,8 @@
 
         Dim strAllergyName = cmbAllergies.Text
         Dim intPatientTuid = GetPatientTuid()
-        Dim strNewSeverity = cmbSeverity.Text
-        ExecuteScalarQuery("UPDATE PatientAllergy SET Allergy_Severity='" & cmbAllergiesType.SelectedIndex & "' WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTuid & ";")
+        Dim strNewSeverity = cmbSeverity.SelectedIndex.ToString
+        ExecuteScalarQuery("UPDATE PatientAllergy SET Allergy_Severity='" & strNewSeverity & "', Active_Flag = 1 WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTuid & " ;")
         DisableEditButtons()
         flpAllergies.Controls.Clear()
         LoadAllergiesPanel(strNewSeverity, intPatientTuid)
@@ -270,7 +284,7 @@
         cmbAllergies.DroppedDown = False
         If cmbAllergies.FindStringExact(cmbAllergies.Text) = -1 Then
             cmbAllergiesType.SelectedIndex = -1
-            cmbSeverity.SelectedIndex = -1
+            cmbSeverity.SelectedIndex = 0
 
         Else
             Dim objAllergyType = CreateDatabase.ExecuteScalarQuery("Select Allergy_Type From Allergy Where Allergy_Name = '" & cmbAllergies.Text & "';")
@@ -278,7 +292,7 @@
             cmbAllergiesType.SelectedItem = objAllergyType.ToString
             If cmbAllergiesType.SelectedItem = "Drug" Then
                 'cmbMedicationName.SelectedItem = cmbAllergies.SelectedItem
-                cmbSeverity.SelectedIndex = 1
+                cmbSeverity.SelectedIndex = 0
             End If
         End If
     End Sub
@@ -324,7 +338,7 @@
     '/*   
     '/*********************************************************************/
     Private Sub cmbAllergies_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbAllergies.SelectedIndexChanged
-        cmbSeverity.SelectedIndex = -1
+        cmbSeverity.SelectedIndex = 0
 
         If cmbAllergiesType.Text = "Drug" Then
             cmbAllergiesType.Enabled = False
@@ -485,6 +499,7 @@
         'CreateAllergiesPanels()
 
         ClearComboBoxes()
+        cmbAllergies.SelectedIndex = 0
     End Sub
 
     Public Function GetPatientMrn() As Integer
