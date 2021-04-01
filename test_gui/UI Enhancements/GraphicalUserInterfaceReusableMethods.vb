@@ -666,7 +666,7 @@ Module GraphicalUserInterfaceReusableMethods
         ElseIf getOpenedForm().GetType() Is frmAllergies.GetType() Then
 
             Dim intPatientTUID As Integer = frmAllergies.GetPatientTuid()
-            Dim strAllergyName As String = GetSelectedInformation(sender.parent, "lblAllergyName")
+            Dim strAllergyName As String = GetSelectedAllergiesInformation(sender)
             Dim strSqlStatment As String = ("Select Active_Flag FROM PatientAllergy WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID= " & intPatientTUID & ";")
             Dim value = ExecuteScalarQuery(strSqlStatment)
             If value = 1 Then
@@ -818,10 +818,10 @@ Module GraphicalUserInterfaceReusableMethods
                     .cmbAllergies.Text = selectedAllergyName
                     .cmbAllergiesType.Text = selectedAllergyType
                     .cmbSeverity.Text = selectedAllergySeverity
-                    .cmbMedicationName.Text = selectedMedication
+                    '.cmbMedicationName.Text = selectedMedication
                     .cmbAllergies.Enabled = False
                     .cmbAllergiesType.Enabled = False
-                    .cmbMedicationName.Enabled = False
+                    '.cmbMedicationName.Enabled = False
                     .btnAllergySave.Visible = True
                     .btnAllergyCancel.Visible = True
                     .btnAddAllergy.Visible = False
@@ -943,6 +943,28 @@ Module GraphicalUserInterfaceReusableMethods
             End If
         Next
         'returning the Requested information from the selected record
+        Return strSelected
+    End Function
+    Function GetSelectedAllergiesInformation(ByVal sender As Object) As String
+        Dim strSelected = Nothing
+
+        strSelected = sender.parent.tag
+
+
+        'Dim ctl As Control
+
+        '' iterating over the list of controls in the panel
+        'For Each ctl In sender.Controls
+
+        '    ' the label containing the wanted information is stored in strLabel and is sent by the user
+        '    ' to represent what number panel it is in the row of created panels.
+        '    If ctl.Name.Contains(strLabel) Then
+
+        '        Debug.Print(ctl.Tag)
+        '        strSelected = (ctl.Tag)
+        '    End If
+        'Next
+        ''returning the Requested information from the selected record
         Return strSelected
     End Function
 
