@@ -163,7 +163,12 @@
 
     Private Sub UpdateSystemCountForDiscrepancy(ByRef intMedID As Integer, ByRef intDrawerCount As Integer, ByRef intEnteredAmount As Integer)
         Dim intCurrentSystemCount As Integer = CreateDatabase.ExecuteScalarQuery("Select Quantity from DrawerMedication where Medication_TUID = '" & intMedID & "' and Active_Flag = '1' AND Drawers_TUID = '" & intDrawerCount & "'")
-
+        Dim intdrawerNumber As Integer = CreateDatabase.ExecuteScalarQuery("Select Drawers_TUID from DrawerMedication where Medication_TUID = '" & intMedID & "' and Active_Flag = '1'")
+        Dim intBinNumber As Integer = CreateDatabase.ExecuteScalarQuery("Select Divider_Bin from DrawerMedication where Medication_TUID = '" & intMedID & "' and Active_Flag = '1'")
+        If Not intCurrentSystemCount = intEnteredAmount Then
+            CreateDatabase.ExecuteInsertQuery("Update DrawerMedication SET Quantity = '" & intEnteredAmount & "' WHERE Medication_TUID = '" & intMedID & "' AND Active_Flag = '1'")
+            Discrepancies.CreateDiscrepancy(intdrawerNumber, intBinNumber, intCurrentSystemCount, intEnteredAmount, CInt(LoggedInID), CInt(LoggedInID), intMedID)
+        End If
     End Sub
     Private Sub IsNarcotic()
         ' if it is narcotic we need to do the following
