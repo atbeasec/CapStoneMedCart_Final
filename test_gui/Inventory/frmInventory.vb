@@ -197,7 +197,8 @@ Public Class frmInventory
 
         'Check that all fields have data entered before attempting to save into the database
         If txtStrength.Text.Equals("") Or txtType.Text.Equals("") Or mtbExpirationDate.MaskFull = False Or
-            cboPersonalMedication.SelectedIndex.Equals(-1) Or mtbExpirationDate.MaskCompleted = False Or txtSchedule.Text.Equals("") Or cmbDividerBin.SelectedIndex = -1 Then
+            cboPersonalMedication.SelectedIndex.Equals(-1) Or mtbExpirationDate.MaskCompleted = False Or txtSchedule.Text.Equals("") Or cmbDividerBin.SelectedIndex = -1 Or
+            txtAmount.Text = "" Or txtUnits.Text = "" Then
             MessageBox.Show("Please enter data in all fields before saving.")
 
 
@@ -299,7 +300,9 @@ Public Class frmInventory
                         'because we are adding a new drawermedication for now
                         intDrawerMedication_ID += 1
 
-                        ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Divider_Bin,Expiration_Date,Discrepancy_Flag, Active_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & intDividerBin & " , '" & mtbExpirationDate.Text & "'," & intDiscrepancies & ",1);")
+                        Dim strAmount As String = txtAmount.Text
+                        Dim strUnit As String = txtUnits.Text
+                        ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Amount_Per_Container,Amount_Per_Container_Unit,Divider_Bin,Expiration_Date,Discrepancy_Flag, Active_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & ",'" & strAmount.ToString & "','" & strUnit.ToString & "'," & intDividerBin & " , '" & mtbExpirationDate.Text & "'," & intDiscrepancies & ",1);")
                         OpenOneDrawer(Drawers_Tuid)
                         'If the user selects "Yes" in the Personal Patient medication drop down
                         'Insert the information into the PersonalPatientDrawerMedication Table
@@ -867,6 +870,13 @@ Public Class frmInventory
         End If
     End Sub
 
+    Private Sub txtUnits_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtAmount.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789.")
+    End Sub
+
+    Private Sub txtAmount_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtUnits.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789.abcdefghijklmnopqrstuvwxyz/")
+    End Sub
     Private Sub txtQuantity_Validated(sender As Object, e As EventArgs) Handles txtQuantity.Validated
         If txtQuantity.Text IsNot "" Then
             GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)

@@ -86,7 +86,7 @@
 
             'If the user signs off for any override, dispense the medication
             If blnSignedOff = True Then
-                AdHoc.InsertAdHoc(AdHoc.intPatientIDArray(cmbPatientName.SelectedIndex), LoggedInID, CInt(txtQuantity.Text), AdHoc.intMedIDArray(cmbMedications.SelectedIndex))
+                AdHoc.InsertAdHoc(AdHoc.intPatientIDArray(cmbPatientName.SelectedIndex), LoggedInID, CInt(txtQuantity.Text), AdHoc.intMedIDArray(cmbMedications.SelectedIndex), AdHoc.intDrawerMedArray(cmbMedications.SelectedIndex))
                 AdHoc.clearAdhocBoxes()
                 MessageBox.Show("Order Successfully placed")
                 ' blnSignedOff = False

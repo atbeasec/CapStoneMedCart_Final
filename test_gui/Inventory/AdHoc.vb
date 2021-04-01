@@ -54,6 +54,7 @@ Module AdHoc
     '/*******************************************************************/
     Public intPatientIDArray As New ArrayList
     Public intMedIDArray As New ArrayList
+    Public intDrawerMedArray As New ArrayList
 
 
     '/*********************************************************************/
@@ -101,33 +102,28 @@ Module AdHoc
     '/*********************************************************************/
 
     Public Sub InsertAdHoc(ByRef intPatientID As Integer, ByRef intUserID As Integer,
-                           ByRef intAmount As Integer, ByRef intMEDID As Integer)
+                           ByRef intAmount As Integer, ByRef intMEDID As Integer, ByRef intDrawerMEDID As Integer)
         'create variables used for insert order
         Dim Strdatacommand As String
-        Dim intMedicationDrawerID As Integer
         Dim StrSelectedMedication As String
         Dim intMedicationCount As Integer
         Dim intDrawerTUID As Integer
         Dim intDrawerNumber As Integer
+        Dim intDrawerMEDTUID As Integer
 
         StrSelectedMedication = frmAdHockDispense.cmbMedications.SelectedItem
-
-
-
-        'Get Drawer Medication TUID
-        Strdatacommand = "SELECT DrawerMedication_ID FROM DrawerMedication WHERE Medication_TUID = '" & intMEDID & "' AND Active_Flag = '1'"
-        intMedicationDrawerID = ExecuteScalarQuery(Strdatacommand)
+        intDrawerMEDTUID = intDrawerMedArray(frmAdHockDispense.cmbMedications.SelectedIndex)
 
         Strdatacommand = "SELECT Quantity FROM DrawerMedication WHERE Medication_TUID  = '" & intMEDID & "' AND Active_Flag = '1'"
         intMedicationCount = CreateDatabase.ExecuteScalarQuery(Strdatacommand)
         intMedicationCount = intMedicationCount - intAmount
 
 
-        If Not IsDBNull(intMedicationDrawerID) Then
+        If Not IsDBNull(intDrawerMEDTUID) Then
             'get current time for dateTime in table
             Dim dtmAdhocTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
             Strdatacommand = "INSERT INTO AdHocOrder(Medication_TUID,Patient_TUID,User_TUID,Amount,DrawerMedication_TUID,DateTime) " &
-                "VALUES('" & intMEDID & "', '" & intPatientID & "', '" & intUserID & "', '" & intAmount & "', '" & intMedicationDrawerID & "', '" & dtmAdhocTime & "')"
+                "VALUES('" & intMEDID & "', '" & intPatientID & "', '" & intUserID & "', '" & intAmount & "', '" & intDrawerMEDTUID & "', '" & dtmAdhocTime & "')"
 
             'insert AdHoc
             CreateDatabase.ExecuteInsertQuery(Strdatacommand)
@@ -137,7 +133,7 @@ Module AdHoc
             CreateDatabase.ExecuteInsertQuery(Strdatacommand)
             clearAdhocBoxes()
 
-            Strdatacommand = ("SELECT Drawers_TUID FROM DrawerMedication WHERE DrawerMedication_ID = '" & intMedicationDrawerID & "' AND DrawerMedication.Active_Flag = '1'")
+            Strdatacommand = ("SELECT Drawers_TUID FROM DrawerMedication WHERE DrawerMedication_ID = '" & intDrawerMEDTUID & "' AND DrawerMedication.Active_Flag = '1'")
             intDrawerTUID = CreateDatabase.ExecuteScalarQuery(Strdatacommand)
 
             Strdatacommand = ("SELECT Drawer_Number FROM Drawers WHERE Drawers_ID = '" & intDrawerTUID & "' AND Drawers.Active_Flag = '1'")
@@ -183,7 +179,7 @@ Module AdHoc
         intMedIDArray.Clear()
         ' Currently the medication display is appending the RXCUI Number on too the medication
         ' name, as searching by name alone could cause problems if medication names can repeat
-        Strdatacommand = "Select trim(Drug_Name,' '), RXCUI_ID, Medication_ID FROM Medication INNER JOIN DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE DrawerMedication.Active_Flag = 1 ORDER BY Medication.Drug_Name COLLATE NOCASE ASC"
+        Strdatacommand = "Select trim(Drug_Name,' '), RXCUI_ID, Medication_ID,DrawerMedication_ID FROM Medication INNER JOIN DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE DrawerMedication.Active_Flag = 1 ORDER BY Medication.Drug_Name COLLATE NOCASE ASC"
 
         Dim dsMedicationDataSet As DataSet = New DataSet
         dsMedicationDataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
@@ -191,6 +187,7 @@ Module AdHoc
         For Each dr As DataRow In dsMedicationDataSet.Tables(0).Rows
             frmAdHockDispense.cmbMedications.Items.Add(dr(0) & " RXCUI: " & dr(1))
             intMedIDArray.Add(dr(2))
+            intDrawerMedArray.Add(dr(3))
         Next
     End Sub
 
@@ -241,13 +238,13 @@ Module AdHoc
 
             'get selected medication ID using the selected index and get the same index from medID array
             Dim intMedID As Integer = intMedIDArray(frmAdHockDispense.cmbMedications.SelectedIndex)
-
+            Dim intDrawerMEDID As Integer = intDrawerMedArray(frmAdHockDispense.cmbMedications.SelectedIndex)
             'select medication type and strength for the selected medication using MEDid 
             Dim Strdatacommand As String
             Strdatacommand = "SELECT Medication.Type,Medication.Strength,Drawers.Drawer_Number,DrawerMedication.Divider_Bin From Medication
                                 Inner Join DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID
                                 INNER JOIN Drawers ON Drawers.Drawers_ID = DrawerMedication.Drawers_TUID
-                                WHERE Medication.Medication_ID = '" & intMedID & "'"
+                                WHERE Medication.Medication_ID = '" & intMedID & "' AND DrawerMedication.DrawerMedication_ID = '" & intDrawerMEDID & "'"
 
             'make dataset and call the sql method
             Dim dsMedicationInformation As DataSet = New DataSet

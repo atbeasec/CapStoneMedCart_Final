@@ -1,15 +1,30 @@
 ﻿Public Class frmWaste
 
     Private intPatientID As Integer
-    Public intMedicationID As New ArrayList
-    Private intDrawerID As New ArrayList
     Private intDrawerMedTUID As Integer
+    Private intMedID As Integer
+    Private intDrawerID As Integer
+    Private intNarcoticFlagGlobal As Integer
+    Private intSignoffID As Integer
+    Private strReason As String
 
-    'this function should set Patient MRN using PatientID
+    'this function should set patient ID
     Public Sub SetPatientID(ByVal id As Integer)
 
         intPatientID = id
 
+    End Sub
+
+    Public Sub setMedID(ByRef id As Integer)
+        intMedID = id
+    End Sub
+
+    Public Sub setDrawer(ByRef id As Integer)
+        intDrawerID = id
+    End Sub
+
+    Public Sub setDrawerMEDTUID(ByRef id As Integer)
+        intDrawerMedTUID = id
     End Sub
 
     Private Sub RadioButton6_CheckedChanged(sender As Object, e As EventArgs) Handles rbtnOther.CheckedChanged
@@ -49,18 +64,36 @@
     '/********************************************************************/ 
     Private Sub Waste_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'TextBox1.Visible = False
+        Dim dsPatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT * from Patient where Patient_ID = '" & intPatientID & "'")
+        lblPatientInfo.Text = "Patient: "
+        lblPatientInfo.Text &= dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.LastName) & ", "
+        lblPatientInfo.Text &= dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.FristName) & "         "
+        lblPatientInfo.Text &= "MRN: "
+        lblPatientInfo.Text &= dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.MRN_Number) & "         "
+        lblPatientInfo.Text &= "DOB: "
+        lblPatientInfo.Text &= dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.DoB) & "         "
+        lblPatientInfo.Text &= "Height: "
+        lblPatientInfo.Text &= dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.Height) & "         "
+        lblPatientInfo.Text &= "Weight: "
+        lblPatientInfo.Text &= dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.Weight) & "         "
 
-        ' if the patient mrn is nothing it means the waste form is being accessed
-        ' from the ad hoc menu, otherwise it would be pased a value.
-        If intPatientID = Nothing Then
-            btnBack.Visible = False
+        Dim dsMedication As DataSet = CreateDatabase.ExecuteSelectQuery("Select * from Medication INNER JOIN DrawerMedication on DrawerMedication.Medication_TUID = Medication.Medication_ID where Medication_ID = '" & intMedID & "' and Medication.Active_Flag = '1' and DrawerMedication.Active_Flag = '1'")
+        txtMedication.Text = dsMedication.Tables(0).Rows(0)(1)
+        txtUnit.Text = dsMedication.Tables(0).Rows(0)(15)
+
+        Dim dsDrawer As DataSet = CreateDatabase.ExecuteSelectQuery("Select * from DrawerMedication INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID WHERE DrawerMedication.Medication_TUID = '" & intMedID & "' and DrawerMedication.Active_Flag = '1' and Drawers.Active_Flag = '1'")
+        txtDrawer.Text = "Drawer number:  " & dsDrawer.Tables(0).Rows(0)(12) & " Bin: " & dsDrawer.Tables(0).Rows(0)(6)
+
+        Dim intNarcoticFlag As Integer = CreateDatabase.ExecuteScalarQuery("Select Controlled_Flag from Medication where Medication_ID = '" & intMedID & "' and Active_Flag = '1'")
+        intNarcoticFlagGlobal = intNarcoticFlag
+
+        If intNarcoticFlagGlobal = 1 Then
+            lblSignoff.Visible = True
+            txtBarcode.Visible = True
+        Else
+            lblSignoff.Visible = False
+            txtBarcode.Visible = False
         End If
-
-        Inventory.PopulateWasteComboBoxMedication()
-        Dim dsWitness As DataSet = CreateDatabase.ExecuteSelectQuery("Select * from User WHERE Active_Flag = '1'")
-        For Each dr As DataRow In dsWitness.Tables(0).Rows()
-            cboWitness.Items.Add(dr(EnumList.User.UserName))
-        Next
     End Sub
 
     '/********************************************************************/
@@ -155,321 +188,97 @@
     '/*  AB		        2/10/21		    initial creation                 */
     '/********************************************************************/ 
     Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
-        If Not cboMedication.SelectedIndex = -1 Then
-            Dim intSelectedMEDID As Integer = intMedicationID(cboMedication.SelectedIndex)
-            Dim intMaxValue As Integer = CreateDatabase.ExecuteScalarQuery("Select Quantity from DrawerMedication where Medication_TUID = '" & intSelectedMEDID & "'")
-            If radAllMed.Checked = True Then
-                txtQuantity.Text = intMaxValue
-            End If
-            If txtQuantity.Text > intMaxValue Then
-                txtQuantity.Text = intMaxValue
-                MessageBox.Show("Maximum value of selected medication available is " & intMaxValue & ".")
+        If intNarcoticFlagGlobal = 1 Then
+            If IsNumeric(txtQuantity.Text) Then
+                Dim strBarcode As String = txtBarcode.Text
+                CheckBarcode(strBarcode)
             Else
-                'create variables and clear error
-                Dim intWasteAmount As Integer
-                ErrorProvider1.Clear()
-
-                'check to see if the quantity input is numeric, if it is not then set an error on the 
-                'txtquantity and dont continue method
-                If Not IsNumeric(txtQuantity.Text) Then
-                    ErrorProvider1.SetError(pnlQuantity, "Please enter a numeric value")
-                Else
-                    'check what radio button is checked
-                    'if the all meds radio button is checked then get the entire quantity from the drawer
-                    If radAllMed.Checked = True Then
-                        intWasteAmount = CreateDatabase.ExecuteScalarQuery("SELECT Quantity from DrawerMedication where DrawerMedication_ID = '" & intDrawerMedTUID & "'")
-                    Else
-                        'if specific amount is clicked then get the quantity text
-                        intWasteAmount = txtQuantity.Text
-                    End If
-                    'check to make sure all combo boxes were selected
-                    If Not cboWitness.SelectedIndex = -1 And Not cboDrawers.SelectedIndex = -1 Then
-                        Dim intMedID As Integer = intMedicationID(cboMedication.SelectedIndex)
-                        'call main waste logic method
-                        Inventory.WasteMedication(intDrawerMedTUID, intWasteAmount, intMedID)
-                        cboMedication.SelectedIndex = -1
-                        RadioButton2.Checked = True
-                        cboWitness.SelectedIndex = -1
-                        txtQuantity.Text = 1
-                        'repopulate med comboboxes incase one medication dropped to zero and was deactivated
-                        Inventory.PopulateWasteComboBoxMedication()
-                    Else
-                        'if validation had an error show message
-                        MessageBox.Show("Please select a Medication, Drawer, and User for the sign off")
-                    End If
-                End If
+                MessageBox.Show("Please enter a numeric value to waste")
             End If
         Else
-            MessageBox.Show("Please select a medication")
-        End If
+            If IsNumeric(txtQuantity.Text) Then
+                InsertWasteNonNarcotic()
+                frmPatientInfo.setPatientID(intPatientID)
+                frmMain.OpenChildForm(frmPatientInfo)
+            End If
 
+        End If
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         frmPatientInfo.setPatientID(intPatientID)
-        ' frmPatientInfo.setPatientMrn(intPatientInformationMRN)
         frmMain.OpenChildForm(frmPatientInfo)
     End Sub
 
-    '/********************************************************************/
-    '/*                   FUNCTION NAME: btnWaste_Click	             */         
-    '/********************************************************************/
-    '/*                   WRITTEN BY: Alexander Beasecker  		             */   
-    '/*		         DATE CREATED: 	3/20/21			                     */                             
-    '/********************************************************************/
-    '/*  SUBROUTINE PURPOSE:This sub is used to populate the drawers comboBox
-    '/*  to list all the drawers the drug that was selected is in
-    '/********************************************************************/
-    '/*  CALLED BY: cboMedication.SelectedIndexChanged                   	      		 */				            
-    '/*                                        				             */         
-    '/********************************************************************/
-    '/*  CALLS:	CreateDatabase.ExecuteSelectQuery(							                             */		                  			                         */		               
-    '/********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):				             */	           
-    '/*sender As Object, 
-    '/*e As EventArgs    							                        							             
-    '/********************************************************************/
-    '/* SAMPLE INVOCATION:						                         */		             
-    '/*	cboMedication_SelectedIndexChanged()				                                 */					                       
-    '/********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
-    '/*	 dsDrawerBin
-    '/*  intMedID
-    '/*
-    '/*
-    '/********************************************************************/
-    '/* MODIFICATION HISTORY:						                     */		                 
-    '/*									 */		                         */
-    '/*  WHO            WHEN             WHAT				             */		            
-    '/*  ---            ----             ----				             */
-    '/*  AB		        3/20/21		    initial creation                 */
-    '/********************************************************************/ 
-    Private Sub cboMedication_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboMedication.SelectedIndexChanged
-        'clear drawer combobox and drawerID array
-        cboDrawers.Items.Clear()
-        intDrawerID.Clear()
-        txtQuantity.Text = 1
-        'when the medication  selection is changed, get the drawers the medication is in and populate drawer
-        ' combobox and the parallel array with the drawer IDs
-        If Not cboMedication.SelectedIndex = -1 Then
-            Dim intMedID As Integer = intMedicationID(cboMedication.SelectedIndex)
-            Dim dsDrawerBin As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT * FROM DrawerMedication where Medication_TUID = '" & intMedID & "' AND Active_Flag = 1")
-            For Each dr As DataRow In dsDrawerBin.Tables(0).Rows
-                cboDrawers.Items.Add("Drawer Number: " & dr(1) & " Bin Number: " & dr(4))
-                intDrawerID.Add(dr(0))
-            Next
+    Private Sub InsertWasteNonNarcotic()
+        Dim dtmWasteTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+        If radIncorrect.Checked = True Then
+            strReason = radIncorrect.Text
+
+        ElseIf radCancel.Checked = True Then
+            strReason = radCancel.Text
+
+        ElseIf radRefused.Checked = True Then
+            strReason = radRefused.Text
+
+        ElseIf radPatientUnavilable.Checked = True Then
+            strReason = radPatientUnavilable.Text
+
+        ElseIf rbtnOther.Checked = True Then
+            strReason = txtOther.Text
         End If
+        insertWaste(CInt(LoggedInID), CInt(LoggedInID), intDrawerMedTUID, intMedID, intPatientID, strReason, txtQuantity.Text, dtmWasteTime)
     End Sub
 
-    '/********************************************************************/
-    '/*                   FUNCTION NAME: cboDrawers_SelectedIndexChanged	             */         
-    '/********************************************************************/
-    '/*                   WRITTEN BY: Alexander Beasecker  		             */   
-    '/*		         DATE CREATED: 	3/20/21			                     */                             
-    '/********************************************************************/
-    '/*  SUBROUTINE PURPOSE:This method is called when the radio buttons change
-    '/* it is used to hide or unhide the quantity selector
-    '/********************************************************************/
-    '/*  CALLED BY:                     				             
-    '/*    radWasteSpecific.CheckedChanged, radAllMed.CheckedChanged   
-    '/********************************************************************/
-    '/*  CALLS:								                             */		                  	               
-    '/********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):				             */	           
-    '/*sender As Object, 
-    '/*e As EventArgs    							                        							             
-    '/********************************************************************/
-    '/* SAMPLE INVOCATION:						                         */		             
-    '/*	radWasteSpecific_CheckedChanged()				                                 */					                       
-    '/********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
-    '/********************************************************************/
-    '/* MODIFICATION HISTORY:						                     */		                 
-    '/*									 */		                         */
-    '/*  WHO            WHEN             WHAT				             */		            
-    '/*  ---            ----             ----				             */
-    '/*  AB		        3/20/21		    initial creation                 */
-    '/********************************************************************/ 
-    Private Sub radWasteSpecific_CheckedChanged(sender As Object, e As EventArgs) Handles radWasteSpecific.CheckedChanged, radAllMed.CheckedChanged
-        If radWasteSpecific.Checked = True Then
-            pnlQuantity.Visible = True
+    Private Sub InsertWasteNarcotic(ByRef intApprovingID As Integer)
+        Dim dtmWasteTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+        If radIncorrect.Checked = True Then
+            strReason = radIncorrect.Text
+
+        ElseIf radCancel.Checked = True Then
+            strReason = radCancel.Text
+
+        ElseIf radRefused.Checked = True Then
+            strReason = radRefused.Text
+
+        ElseIf radPatientUnavilable.Checked = True Then
+            strReason = radPatientUnavilable.Text
+
+        ElseIf rbtnOther.Checked = True Then
+            strReason = txtOther.Text
+        End If
+        insertWaste(CInt(LoggedInID), intApprovingID, intDrawerMedTUID, intMedID, intPatientID, strReason, txtQuantity.Text, dtmWasteTime)
+    End Sub
+
+    Private Sub insertWaste(ByRef intPrimaryUser As Integer, ByRef intSecondaryUser As Integer, ByRef intDrawerMEDID As Integer, ByRef intMedicationID As Integer, ByRef intpatientTUID As Integer, ByRef strReason As String, dblQuantity As Double, ByRef dtmDate As String)
+        CreateDatabase.ExecuteInsertQuery("INSERT INTO Wastes(Primary_User_TUID,Secondary_User_TUID,DrawerMedication_TUID,Medication_TUID, Patient_TUID,DateTime,Reason,Quantity) VALUES('" & intPrimaryUser & "','" & intSecondaryUser & "','" & intDrawerMEDID & "','" & intMedicationID & "','" & intpatientTUID & "','" & dtmDate & "','" & strReason & "','" & dblQuantity & "')")
+    End Sub
+    Private Sub CheckBarcode(ByRef strBarcode As String)
+        If strBarcode = "" Then
+            MsgBox("           WARNING" & vbCrLf & "Barcode Field is Blank")
+            txtBarcode.Focus()
+
+        ElseIf scanBarcode(strBarcode) = "True" Then
+            InsertWasteNarcotic(intSignoffID)
+            frmPatientInfo.setPatientID(intPatientID)
+            frmMain.OpenChildForm(frmPatientInfo)
         Else
-            pnlQuantity.Visible = False
+            MsgBox("No User With That Barcode")
+            txtBarcode.Focus()
         End If
     End Sub
 
-    '/********************************************************************/
-    '/*                   FUNCTION NAME: cboDrawers_SelectedIndexChanged     
-    '/********************************************************************/
-    '/*                   WRITTEN BY: Alexander Beasecker  		            
-    '/*		         DATE CREATED: 	3/20/21			                     */                             
-    '/********************************************************************/
-    '/*  SUBROUTINE PURPOSE:This method is used to update the drawerID array
-    '/********************************************************************/
-    '/*  CALLED BY:                     				             
-    '/*     cboDrawers.SelectedIndexChanged    
-    '/********************************************************************/
-    '/*  CALLS:								                             */		                  
-    '/*  					                         */		               
-    '/********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):				             */	           
-    '/*sender As Object, 
-    '/*e As EventArgs    							                        							             
-    '/********************************************************************/
-    '/* SAMPLE INVOCATION:						                         */		             
-    '/*	cboDrawers_SelectedIndexChanged()				                                 */					                       
-    '/********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
-    '/********************************************************************/
-    '/* MODIFICATION HISTORY:						                     */		                 
-    '/*									 */		                         */
-    '/*  WHO            WHEN             WHAT				             */		            
-    '/*  ---            ----             ----				             */
-    '/*  AB		        3/20/21		    initial creation                 */
-    '/********************************************************************/ 
-    Private Sub cboDrawers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDrawers.SelectedIndexChanged
-        If Not cboDrawers.SelectedIndex = -1 Then
-            intDrawerMedTUID = intDrawerID(cboDrawers.SelectedIndex)
+    Private Function scanBarcode(ByRef strBarcode As String)
+        Dim strHashedBarcode = ConvertBarcodePepperAndHash(strBarcode)
+        If ExecuteScalarQuery("SELECT COUNT(*) FROM User WHERE Barcode = '" & strHashedBarcode & "'" & " AND Active_Flag = '1'") <> 0 Then
+            intSignoffID = ExecuteScalarQuery("SELECT User_ID FROM User WHERE Barcode = '" & strHashedBarcode & "'")
+            Return "True"
+        Else
+            Return "False"
         End If
-    End Sub
-    '/********************************************************************/
-    '/*                   FUNCTION NAME: txtQuantity_KeyPress	             */         
-    '/********************************************************************/
-    '/*                   WRITTEN BY: Alexander Beasecker  		             */   
-    '/*		         DATE CREATED: 	3/20/21			                     */                             
-    '/********************************************************************/
-    '/*  SUBROUTINE PURPOSE:This handles the keypress event for the txtquantity textbox
-    '/********************************************************************/
-    '/*  CALLED BY: txtQuantity.KeyPress                                     				             */         
-    '/********************************************************************/
-    '/*  CALLS:								                             */
-    '/* GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
-    '/********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):				             */	           
-    '/*sender As Object, 
-    '/*e As EventArgs    							                        							             
-    '/********************************************************************/
-    '/* SAMPLE INVOCATION:						                         */		             
-    '/*	txtQuantity_KeyPress(sender, e)				         				                       
-    '/********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
-    '/********************************************************************/
-    '/* MODIFICATION HISTORY:						                     */		                 
-    '/*									 */		                         */
-    '/*  WHO            WHEN             WHAT				             */		            
-    '/*  ---            ----             ----				             */
-    '/*  AB		        3/20/21		    initial creation                 */
-    '/********************************************************************/ 
+    End Function
+
     Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantity.KeyPress
-        'DataVaildationMethods.KeyPressCheck(e, "0123456789")
-        'If txtQuantity.Text IsNot "" Then
-        '    GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
-        'End If
-    End Sub
-
-    '/********************************************************************/
-    '/*                   FUNCTION NAME: txtQuantity_Validated	             */         
-    '/********************************************************************/
-    '/*                   WRITTEN BY: Alexander Beasecker  		             */   
-    '/*		         DATE CREATED: 	3/20/21			                     */                             
-    '/********************************************************************/
-    '/*  SUBROUTINE PURPOSE:This handles the validation event for the txtquantity textbox
-    '/********************************************************************/
-    '/*  CALLED BY: txtQuantity.Validated                                     				             */         
-    '/********************************************************************/
-    '/*  CALLS:								                             */
-    '/* GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
-    '/********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):				             */	           
-    '/*sender As Object, 
-    '/*e As EventArgs    							                        							             
-    '/********************************************************************/
-    '/* SAMPLE INVOCATION:						                         */		             
-    '/*	txtQuantity_Validated(sender, e)				         				                       
-    '/********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
-    '/********************************************************************/
-    '/* MODIFICATION HISTORY:						                     */		                 
-    '/*									 */		                         */
-    '/*  WHO            WHEN             WHAT				             */		            
-    '/*  ---            ----             ----				             */
-    '/*  AB		        3/20/21		    initial creation                 */
-    '/********************************************************************/ 
-    Private Sub txtQuantity_Validated(sender As Object, e As EventArgs) Handles txtQuantity.Validated
-        'If txtQuantity.Text IsNot "" Then
-        '    GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
-        'End If
-    End Sub
-
-    '/********************************************************************/
-    '/*                   FUNCTION NAME: btnWaste_Click	             */         
-    '/********************************************************************/
-    '/*                   WRITTEN BY: Alexander Beasecker  		             */   
-    '/*		         DATE CREATED: 	3/20/21			                     */                             
-    '/********************************************************************/
-    '/*  SUBROUTINE PURPOSE:This when the increment button is clicked
-    '/********************************************************************/
-    '/*  CALLED BY:                    	      		 */				            
-    '/*  btnIncrementQuantity.Click                                      				             */         
-    '/********************************************************************/
-    '/*  CALLS:								                             */
-    '/* ButtonIncrement(txtQuantity)
-    '/********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):				             */	           
-    '/*sender As Object, 
-    '/*e As EventArgs    							                        							             
-    '/********************************************************************/
-    '/* SAMPLE INVOCATION:						                         */		             
-    '/*	btnIncrementQuantity_Click()				                                 */					                       
-    '/********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
-    '/********************************************************************/
-    '/* MODIFICATION HISTORY:						                     */		                 
-    '/*									 */		                         */
-    '/*  WHO            WHEN             WHAT				             */		            
-    '/*  ---            ----             ----				             */
-    '/*  AB		        3/20/21		    initial creation                 */
-    '/********************************************************************/ 
-    Private Sub btnIncrementQuantity_Click(sender As Object, e As EventArgs) Handles btnIncrementQuantity.Click
-        If Not IsNumeric(txtQuantity.Text) Then
-            txtQuantity.Text = 0
-        End If
-        ButtonIncrement(9999, txtQuantity)
-    End Sub
-
-    '/********************************************************************/
-    '/*                   FUNCTION NAME: btnWaste_Click	             */         
-    '/********************************************************************/
-    '/*                   WRITTEN BY: Alexander Beasecker  		             */   
-    '/*		         DATE CREATED: 	3/20/21			                     */                             
-    '/********************************************************************/
-    '/*  SUBROUTINE PURPOSE:This when the decrement button is clicked
-    '/********************************************************************/
-    '/*  CALLED BY:                    	      		 */				            
-    '/*  btnDecrementQuantity.Click                                      				             */         
-    '/********************************************************************/
-    '/*  CALLS:								                             */
-    '/* ButtonDecrement(txtQuantity)
-    '/********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):				             */	           
-    '/*sender As Object, 
-    '/*e As EventArgs    							                        							             
-    '/********************************************************************/
-    '/* SAMPLE INVOCATION:						                         */		             
-    '/*	btnDecrementQuantity_Click()				                                 */					                       
-    '/********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
-    '/********************************************************************/
-    '/* MODIFICATION HISTORY:						                     */		                 
-    '/*									 */		                         */
-    '/*  WHO            WHEN             WHAT				             */		            
-    '/*  ---            ----             ----				             */
-    '/*  AB		        3/20/21		    initial creation                 */
-    '/********************************************************************/ 
-    Private Sub btnDecrementQuantity_Click(sender As Object, e As EventArgs) Handles btnDecrementQuantity.Click
-        If Not IsNumeric(txtQuantity.Text) Then
-            txtQuantity.Text = 2
-        End If
-        ButtonDecrement(txtQuantity)
+        DataVaildationMethods.KeyPressCheck(e, "0123456789.")
     End Sub
 End Class
