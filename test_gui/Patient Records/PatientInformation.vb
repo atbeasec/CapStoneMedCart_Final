@@ -193,9 +193,9 @@ Module PatientInformation
             If IsDBNull(dr(1)) Then
                 frmPatientInfo.LblPatientName.Text = "N/A"
             Else
-                frmPatientInfo.LblPatientName.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.FristName) &
-                    " " & dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.MiddleName) &
-                    " " & dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.LastName)
+                patientRecordLabeling(dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.FristName),
+                                        dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.MiddleName),
+                                        dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.LastName))
                 frmPatientInfo.txtFirstName.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.FristName)
                 frmPatientInfo.txtMiddle.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.MiddleName)
                 frmPatientInfo.txtLast.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.LastName)
@@ -299,7 +299,7 @@ Module PatientInformation
 
                     strbSqlCommand.Append("UPDATE Patient SET Patient_First_Name = '" & checkSQLInjection(frmPatientInfo.txtFirstName.Text, True) & "' Where Patient_ID = '" & intPatientID & "'")
                     CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
-                    strbItemsChanged.AppendLine(" First Name")
+                    strbItemsChanged.AppendLine("First Name")
                     intCountChanged = intCountChanged + 1
                     strbSqlCommand.Clear()
                     frmPatientInfo.txtFirstName.Tag = frmPatientInfo.txtFirstName.Text
@@ -319,7 +319,7 @@ Module PatientInformation
                 Else
                     strbSqlCommand.Append("UPDATE Patient SET Patient_Middle_Name = '" & checkSQLInjection(.txtMiddle.Text, True) & "' Where Patient_ID = '" & intPatientID & "'")
                     CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
-                    strbItemsChanged.AppendLine(" Middle Name")
+                    strbItemsChanged.AppendLine("Middle Name")
                     intCountChanged = intCountChanged + 1
                     strbSqlCommand.Clear()
                     frmPatientInfo.txtMiddle.Tag = frmPatientInfo.txtMiddle.Text
@@ -339,7 +339,7 @@ Module PatientInformation
                 Else
                     strbSqlCommand.Append("UPDATE Patient SET Patient_Last_Name = '" & checkSQLInjection(frmPatientInfo.txtLast.Text, True) & "' Where Patient_ID = '" & intPatientID & "'")
                     CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
-                    strbItemsChanged.AppendLine(" Last Name")
+                    strbItemsChanged.AppendLine("Last Name")
                     intCountChanged = intCountChanged + 1
                     strbSqlCommand.Clear()
                     frmPatientInfo.txtLast.Tag = frmPatientInfo.txtLast.Text
@@ -355,7 +355,7 @@ Module PatientInformation
                     strbSqlCommand.Append("UPDATE Patient SET MRN_Number = '" & intMRNCurrentValue & "' Where Patient_ID = '" & intPatientID & "'")
                     CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
                     'add item that was changed too string that is tracking all changed items
-                    strbItemsChanged.AppendLine(" MRN")
+                    strbItemsChanged.AppendLine("MRN")
                     'increase changed item count
                     intCountChanged = intCountChanged + 1
                     'clear string bulder
@@ -381,7 +381,7 @@ Module PatientInformation
                     strbSqlCommand.Append("UPDATE Patient SET Date_of_Birth = '" & frmPatientInfo.mtbBirthday.Text & "' Where Patient_ID = '" & intPatientID & "'")
                     CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
                     'add item that was changed too string that is tracking all changed items
-                    strbItemsChanged.AppendLine(" Date of birth")
+                    strbItemsChanged.AppendLine("Date of birth")
                     'increase changed item count
                     intCountChanged = intCountChanged + 1
                     'clear string bulder
@@ -401,7 +401,7 @@ Module PatientInformation
                     strbSqlCommand.Append("UPDATE Patient SET Sex = '" & frmPatientInfo.txtGender.Text & "' Where Patient_ID = '" & intPatientID & "'")
                     CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
                     'add item that was changed too string that is tracking all changed items
-                    strbItemsChanged.AppendLine(" Sex")
+                    strbItemsChanged.AppendLine("Sex")
                     'increase changed item count
                     intCountChanged = intCountChanged + 1
                     'clear string bulder
@@ -423,7 +423,7 @@ Module PatientInformation
                     strbSqlCommand.Append("UPDATE Patient SET Height = '" & frmPatientInfo.txtHeight.Text & "' Where Patient_ID = '" & intPatientID & "'")
                     CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
                     'add item that was changed too string that is tracking all changed items
-                    strbItemsChanged.AppendLine(" Height")
+                    strbItemsChanged.AppendLine("Height")
                     'increase changed item count
                     intCountChanged = intCountChanged + 1
                     'clear string bulder
@@ -443,7 +443,7 @@ Module PatientInformation
                     strbSqlCommand.Append("UPDATE Patient SET Weight = '" & frmPatientInfo.txtWeight.Text & "' Where Patient_ID = '" & intPatientID & "'")
                     CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
                     'add item that was changed too string that is tracking all changed items
-                    strbItemsChanged.AppendLine(" Weight")
+                    strbItemsChanged.AppendLine("Weight")
                     'increase changed item count
                     intCountChanged = intCountChanged + 1
                     'clear string bulder
@@ -464,7 +464,7 @@ Module PatientInformation
                     strbSqlCommand.Append("UPDATE Patient SET Email_address = '" & frmPatientInfo.txtEmail.Text & "' Where Patient_ID = '" & intPatientID & "'")
                     CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
                     'add item that was changed too string that is tracking all changed items
-                    strbItemsChanged.AppendLine(" Email")
+                    strbItemsChanged.AppendLine("Email")
                     'increase changed item count
                     intCountChanged = intCountChanged + 1
                     'clear string bulder
@@ -486,7 +486,7 @@ Module PatientInformation
                     strbSqlCommand.Append("UPDATE Patient SET Phone_Number = '" & frmPatientInfo.txtPhone.Text & "' Where Patient_ID = '" & intPatientID & "'")
                     CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
                     'add item that was changed too string that is tracking all changed items
-                    strbItemsChanged.AppendLine(" Phone Number")
+                    strbItemsChanged.AppendLine("Phone Number")
                     'increase changed item count
                     intCountChanged = intCountChanged + 1
                     'clear string bulder
@@ -507,7 +507,7 @@ Module PatientInformation
                     strbSqlCommand.Append("UPDATE Patient SET Address = '" & checkSQLInjection(frmPatientInfo.txtAddress.Text, True) & "' Where Patient_ID = '" & intPatientID & "'")
                     CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
                     'add item that was changed too string that is tracking all changed items
-                    strbItemsChanged.AppendLine(" Street Address")
+                    strbItemsChanged.AppendLine("Street Address")
                     'increase changed item count
                     intCountChanged = intCountChanged + 1
                     'clear string bulder
@@ -528,7 +528,7 @@ Module PatientInformation
                     strbSqlCommand.Append("UPDATE Patient SET City = '" & checkSQLInjection(frmPatientInfo.txtCity.Text, True) & "' Where Patient_ID = '" & intPatientID & "'")
                     CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
                     'add item that was changed too string that is tracking all changed items
-                    strbItemsChanged.AppendLine(" City")
+                    strbItemsChanged.AppendLine("City")
                     'increase changed item count
                     intCountChanged = intCountChanged + 1
                     'clear string bulder
@@ -543,7 +543,7 @@ Module PatientInformation
                 strbSqlCommand.Append("UPDATE Patient SET State = '" & frmPatientInfo.cboState.SelectedItem & "' Where Patient_ID = '" & intPatientID & "'")
                 CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
                 'add item that was changed too string that is tracking all changed items
-                strbItemsChanged.AppendLine(" State")
+                strbItemsChanged.AppendLine("State")
                 'increase changed item count
                 intCountChanged = intCountChanged + 1
                 'clear string bulder
@@ -562,7 +562,7 @@ Module PatientInformation
                     strbSqlCommand.Append("UPDATE Patient SET Zip_Code = '" & frmPatientInfo.txtZipCode.Text & "' Where Patient_ID = '" & intPatientID & "'")
                     CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
                     'add item that was changed too string that is tracking all changed items
-                    strbItemsChanged.AppendLine(" ZipCode")
+                    strbItemsChanged.AppendLine("ZipCode")
                     'increase changed item count
                     intCountChanged = intCountChanged + 1
                     'clear string bulder
@@ -582,7 +582,7 @@ Module PatientInformation
                     strbSqlCommand.Append("UPDATE Patient SET Barcode = '" & frmPatientInfo.txtBarcode.Text & "' Where Patient_ID = '" & intPatientID & "'")
                     CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
                     'add item that was changed too string that is tracking all changed items
-                    strbItemsChanged.AppendLine(" Barcode")
+                    strbItemsChanged.AppendLine("Barcode")
                     'increase changed item count
                     intCountChanged = intCountChanged + 1
                     'clear string bulder
@@ -611,14 +611,14 @@ Module PatientInformation
                         frmPatientInfo.cboRoom.Tag = frmPatientInfo.cboRoom.Text
                         frmPatientInfo.cboBed.Tag = frmPatientInfo.cboBed.Text
                         intCountChanged = intCountChanged + 1
-                        strbItemsChanged.AppendLine(" Room and Bed")
+                        strbItemsChanged.AppendLine("Room and Bed")
                     Else
                         'if it was in the database reactivate it
                         CreateDatabase.ExecuteInsertQuery("Update PatientRoom SET Active_Flag = '1' where Patient_TUID = '" & intPatientID & "' AND Room_TUID = '" & frmPatientInfo.cboRoom.Text & "' AND Bed_Name = '" & frmPatientInfo.cboBed.Text & "'")
                         frmPatientInfo.cboRoom.Tag = frmPatientInfo.cboRoom.Text
                         frmPatientInfo.cboBed.Tag = frmPatientInfo.cboBed.Text
                         intCountChanged = intCountChanged + 1
-                        strbItemsChanged.AppendLine(" Room and Bed")
+                        strbItemsChanged.AppendLine("Room and Bed")
                     End If
 
                 End If
@@ -635,7 +635,7 @@ Module PatientInformation
                                       "' Where Patient_ID = '" & intPatientID & "'")
                 ExecuteInsertQuery(strbSqlCommand.ToString)
                 intCountChanged += 1
-                strbItemsChanged.AppendLine(" Primary Physician")
+                strbItemsChanged.AppendLine("Primary Physician")
                 .cboPhysicians.Tag = .cboPhysicians.SelectedItem
 
             End If
@@ -644,15 +644,90 @@ Module PatientInformation
         If intCountChanged = 1 Then
             MessageBox.Show("Updated " & intCountChanged & " Item " & strbItemsChanged.ToString)
         Else
-            MessageBox.Show("Updated " & intCountChanged & " Items " & strbItemsChanged.ToString)
+            MessageBox.Show("Updated " & intCountChanged & " Items: " & vbCrLf & strbItemsChanged.ToString)
         End If
         If blnIssue Then
             MessageBox.Show(strbErrorMessage.ToString)
         End If
         frmPatientInfo.LblPatientName.Text = Nothing
         Dim dsPatientName As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT Patient_First_Name, Patient_Middle_Name, Patient_Last_Name from Patient where Patient_ID = '" & intPatientID & "'")
-        frmPatientInfo.LblPatientName.Text = dsPatientName.Tables(0).Rows(0)(0) & " " & dsPatientName.Tables(0).Rows(0)(1) & " " & dsPatientName.Tables(0).Rows(0)(2)
+        patientRecordLabeling(dsPatientName.Tables(0).Rows(0)(0), dsPatientName.Tables(0).Rows(0)(1), dsPatientName.Tables(0).Rows(0)(2))
+        frmPatientInfo.lblMoreDetails.Text = "Show More..."
     End Sub
+
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: patientRecordLabeling    	   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		             */   
+    '/*		         DATE CREATED: 4/1/2021                     		   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								   */             
+    '/*	 This method tried to make the patient label. If the first, middle*/
+    '/*  and last name together are above 27 characters it will cut out   */
+    '/*  the middle name. If the first and last name are over 27 characters*/
+    '/*  it will cut out the middle and last name. If the first name is over*/
+    '/*  27 characters it will just remove everything past the 27 character.*/
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 fName - this is the Patient First Name                           */
+    '/*  mName - this is the Patient middle name                          */
+    '/*  lName - this is the patients last name.                                                                   
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	patientRecordLabeling(dsPatientName.Tables(0).Rows(0)(0),         */
+    '/* dsPatientName.Tables(0).Rows(0)(1),                               */  
+    '/* dsPatientName.Tables(0).Rows(0)(2))								  */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*  strbPatientName - this is the string builder that will be used to*/
+    '/*                 work with the string.                             */
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Sub patientRecordLabeling(fName As String, mName As String, lName As String)
+        Dim strbPatientName As StringBuilder = New StringBuilder
+        'this is going to check how long the name is to make sure it doesn't
+        'bleed into other controls. 
+        strbPatientName.Append((fName & " " & mName & " " & lName))
+        If strbPatientName.Length <= 27 Then
+            frmPatientInfo.LblPatientName.Text = strbPatientName.ToString
+        Else
+            strbPatientName.Clear()
+            strbPatientName.Append((fName & " " & lName))
+            If strbPatientName.Length <= 27 Then
+                frmPatientInfo.LblPatientName.Text = strbPatientName.ToString
+
+            Else
+                strbPatientName.Clear()
+                strbPatientName.Append((fName))
+
+                If strbPatientName.Length <= 27 Then
+                    frmPatientInfo.LblPatientName.Text = strbPatientName.ToString
+                Else
+                    strbPatientName.Remove(27, strbPatientName.Length - 27)
+                End If
+            End If
+        End If
+    End Sub
+
 
     '/*********************************************************************/
     '/*                   FUNCTION NAME: GetAllergies                       */         
