@@ -110,9 +110,10 @@ Module AdHoc
         Dim intMedicationCount As Integer
         Dim intDrawerTUID As Integer
         Dim intDrawerNumber As Integer
+        Dim intDrawerMEDTUID As Integer
 
         StrSelectedMedication = frmAdHockDispense.cmbMedications.SelectedItem
-
+        intDrawerMEDTUID = intDrawerMEDTUID(frmAdHockDispense.cmbMedications.SelectedIndex)
 
 
         'Get Drawer Medication TUID
