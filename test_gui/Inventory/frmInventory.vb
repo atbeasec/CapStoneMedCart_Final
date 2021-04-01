@@ -197,7 +197,8 @@ Public Class frmInventory
 
         'Check that all fields have data entered before attempting to save into the database
         If txtStrength.Text.Equals("") Or txtType.Text.Equals("") Or mtbExpirationDate.MaskFull = False Or
-            cboPersonalMedication.SelectedIndex.Equals(-1) Or mtbExpirationDate.MaskCompleted = False Or txtSchedule.Text.Equals("") Or cmbDividerBin.SelectedIndex = -1 Then
+            cboPersonalMedication.SelectedIndex.Equals(-1) Or mtbExpirationDate.MaskCompleted = False Or txtSchedule.Text.Equals("") Or cmbDividerBin.SelectedIndex = -1 Or
+            txtAmount.Text = "" Or txtUnits.Text = "" Then
             MessageBox.Show("Please enter data in all fields before saving.")
 
 
