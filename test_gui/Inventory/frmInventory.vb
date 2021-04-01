@@ -176,7 +176,7 @@ Public Class frmInventory
         Dim intDrawerMedication_ID As Integer = 0
         Dim Drawers_Tuid As Integer = 0
         Dim intMedicationTuid As Integer = 0
-        Dim intMedQuanitiy As Integer = 0
+        Dim intMedQuanitiy As Double = 0
         Dim intDividerBin As Integer = 0
         Dim intDiscrepancies As Integer = 0
         Dim strBarcode As String
@@ -197,7 +197,8 @@ Public Class frmInventory
 
         'Check that all fields have data entered before attempting to save into the database
         If txtStrength.Text.Equals("") Or txtType.Text.Equals("") Or mtbExpirationDate.MaskFull = False Or
-            cboPersonalMedication.SelectedIndex.Equals(-1) Or mtbExpirationDate.MaskCompleted = False Or txtSchedule.Text.Equals("") Or cmbDividerBin.SelectedIndex = -1 Or txtUnit.Text = "" Then
+            cboPersonalMedication.SelectedIndex.Equals(-1) Or mtbExpirationDate.MaskCompleted = False Or txtSchedule.Text.Equals("") Or cmbDividerBin.SelectedIndex = -1 Or txtUnit.Text = "" Or
+            Not IsNumeric(txtAmount.Text) Then
             MessageBox.Show("Please enter data in all fields before saving.")
 
 
@@ -238,11 +239,13 @@ Public Class frmInventory
                     End Try
 
                     Try
-                        intMedQuanitiy = CInt(5)
+                        intMedQuanitiy = txtAmount.Text
                     Catch ex As Exception
-                        eprError.SetError(cmbDrawerNumber, "please enter an amount that is a positive whole number")
+                        eprError.SetError(txtAmount, "please enter an numeric value")
                     End Try
-
+                    If intMedQuanitiy < 0 Then
+                        eprError.SetError(txtAmount, "please enter an positive value")
+                    End If
 
 
                     ' search the information from the allproperties API call
@@ -293,13 +296,14 @@ Public Class frmInventory
                         End Try
 
                         intDrawerMedication_ID = ExecuteScalarQuery("SELECT COUNT(DISTINCT DrawerMedication_ID) FROM DrawerMedication;")
-
+                        Dim dblAmount As Double = txtAmount.Text
+                        Dim strUnit As String = txtUnit.Text
 
                         intMedicationTuid = ExecuteScalarQuery("Select Medication_ID From Medication WHERE Drug_Name ='" & strName & "';")
                         'because we are adding a new drawermedication for now
                         intDrawerMedication_ID += 1
 
-                        ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Amount_Per_Container,Amount_Per_Container_Unit,Divider_Bin,Expiration_Date,Discrepancy_Flag, Active_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & "Amount HERE" & "," & "AMount UNit here" & "," & intDividerBin & " , '" & mtbExpirationDate.Text & "'," & intDiscrepancies & ",1);")
+                        ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Amount_Per_Container,Amount_Per_Container_Unit,Divider_Bin,Expiration_Date,Discrepancy_Flag, Active_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & "," & dblAmount & "," & strUnit & "," & intDividerBin & " , '" & mtbExpirationDate.Text & "'," & intDiscrepancies & ",1);")
                         OpenOneDrawer(Drawers_Tuid)
                         'If the user selects "Yes" in the Personal Patient medication drop down
                         'Insert the information into the PersonalPatientDrawerMedication Table
