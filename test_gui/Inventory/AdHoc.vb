@@ -249,7 +249,7 @@ Module AdHoc
             Strdatacommand = "SELECT Medication.Type,Medication.Strength,Drawers.Drawer_Number,DrawerMedication.Divider_Bin From Medication
                                 Inner Join DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID
                                 INNER JOIN Drawers ON Drawers.Drawers_ID = DrawerMedication.Drawers_TUID
-                                WHERE Medication.Medication_ID = '" & intMedID & "'"
+                                WHERE Medication.Medication_ID = '" & intMedID & "' AND DrawerMedication.DrawerMedication_ID = '" & intDrawerMEDID & "'"
 
             'make dataset and call the sql method
             Dim dsMedicationInformation As DataSet = New DataSet
