@@ -243,7 +243,7 @@ Module AdHoc
 
             'get selected medication ID using the selected index and get the same index from medID array
             Dim intMedID As Integer = intMedIDArray(frmAdHockDispense.cmbMedications.SelectedIndex)
-
+            Dim intDrawerMEDID As Integer = intDrawerMedArray(frmAdHockDispense.cmbMedications.SelectedIndex)
             'select medication type and strength for the selected medication using MEDid 
             Dim Strdatacommand As String
             Strdatacommand = "SELECT Medication.Type,Medication.Strength,Drawers.Drawer_Number,DrawerMedication.Divider_Bin From Medication
