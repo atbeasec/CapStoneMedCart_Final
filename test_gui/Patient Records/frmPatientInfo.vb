@@ -138,14 +138,15 @@
         'select a room. 
 
         ' intPatientMRN = txtMRN.Text
+
+        populatePhysicianComboBox(cboPhysicians, CreateDatabase.ExecuteSelectQuery("Select * from Physician where Active_flag = '" &
+                                                                                   1 & "' ORDER BY Physician_Last_Name, Physician_First_Name ;"))
         PatientInformation.GetAllergies(intPatientID)
         PatientInformation.GetPatientInformation(intPatientID)
         PatientInformation.getPrescriptions(intPatientID)
         PatientInformation.getRoom(intPatientID, cboRoom, cboBed)
         DispenseHistory.DispenseHistorySpecificPatient(intPatientID)
 
-        populatePhysicianComboBox(cboPhysicians, CreateDatabase.ExecuteSelectQuery("Select * from Physician where Active_flag = '" &
-                                                                                   1 & "' ORDER BY Physician_Last_Name, Physician_First_Name ;"))
         SetControlsToReadOnly(ctl)
 
         CreateToolTips(pnlPrescriptionsHeader, tpLabelDirections)
@@ -1303,6 +1304,7 @@
             moveControlsDown(expandedSize)
             ' change the text 
             lblMoreDetails.Text = "Show Less..."
+            disableEdits()
 
         Else
             moveControlsUp(shrinkSize)
@@ -1362,6 +1364,8 @@
         moveAndResizePanels()
 
     End Sub
+
+
 
     '/*********************************************************************/
     '/*                   SubProgram NAME: moveControlsUp()               */         
@@ -1471,6 +1475,10 @@
         txtCity.Enabled = False
         cboState.Enabled = False
         txtZipCode.Enabled = False
+        txtFirstName.Enabled = False
+        txtMiddle.Enabled = False
+        txtLast.Enabled = False
+        txtBarcode.Enabled = False
     End Sub
 
 
@@ -1528,5 +1536,9 @@
         txtCity.Enabled = True
         cboState.Enabled = True
         txtZipCode.Enabled = True
+        txtFirstName.Enabled = True
+        txtMiddle.Enabled = True
+        txtLast.Enabled = True
+        txtBarcode.Enabled = True
     End Sub
 End Class
