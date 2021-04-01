@@ -522,6 +522,7 @@ Partial Class frmDispense
         Me.txtUnits.Location = New System.Drawing.Point(1, 1)
         Me.txtUnits.Multiline = True
         Me.txtUnits.Name = "txtUnits"
+        Me.txtUnits.ReadOnly = True
         Me.txtUnits.ShortcutsEnabled = False
         Me.txtUnits.Size = New System.Drawing.Size(61, 26)
         Me.txtUnits.TabIndex = 38

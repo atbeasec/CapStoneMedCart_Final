@@ -1,4 +1,6 @@
-﻿Public Class frmDispense
+﻿Imports System.Text
+
+Public Class frmDispense
     Public blnSignedOff As Boolean = True
     Public blnOverride As Boolean = False
     Private intPatientID As Integer
@@ -141,7 +143,14 @@
                 changeButtonforDispensing()
             End If
         ElseIf lblDirections.Text.Equals("Enter the Amount Administered") Then
-                    frmMain.OpenChildForm(frmWaste)
+            If IsNumeric(txtAmountDispensed.Text) Then
+                Dim strAmountDispensed As String = txtAmountDispensed.Text & " " & txtUnits.Text
+                DispensingDrug(intMedicationID, CInt(LoggedInID), strAmountDispensed)
+                frmMain.OpenChildForm(frmWaste)
+            Else
+                MessageBox.Show("Please enter a numeric number greater than 0")
+            End If
+
         End If
     End Sub
 
@@ -159,6 +168,22 @@
         pnlAmountAdministered.Visible = True
         pnlAmountToRemove.Visible = False
         pnlAmountInDrawer.Visible = False
+        Dim strAmountUnit As String = CreateDatabase.ExecuteScalarQuery("Select Amount_Per_Container_Unit from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
+        txtUnits.Text = strAmountUnit
+    End Sub
+
+
+    Private Sub DispensingDrug(ByRef intMedID As Integer, ByRef intPrimaryID As Integer, ByRef strAmountDispensed As String)
+        Dim strbSQLcommand As New StringBuilder()
+        Dim dtmAdhocTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+        Dim intdrawerNumber As Integer = CreateDatabase.ExecuteScalarQuery("Select DrawerMedication_ID from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
+        strbSQLcommand.Clear()
+        strbSQLcommand.Append("SELECT PatientMedication_ID FROM PatientMedication WHERE Medication_TUID = '" & intMedID & "' AND Patient_TUID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1'")
+        Dim intPatientMedicationDatabaseID As Integer = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
+        strbSQLcommand.Clear()
+        strbSQLcommand.Append("INSERT INTO Dispensing(PatientMedication_TUID, Primary_User_TUID, Approving_User_TUID, DateTime_Dispensed, Amount_Dispensed, DrawerMedication_TUID) ")
+        strbSQLcommand.Append("VALUES('" & intPatientMedicationDatabaseID & "','" & intPrimaryID & "','" & intPrimaryID & "','" & dtmAdhocTime & "','" & strAmountDispensed & "','" & intdrawerNumber & "')")
+        CreateDatabase.ExecuteInsertQuery(strbSQLcommand.ToString)
     End Sub
 
     Private Sub UpdateSystemCountForDiscrepancy(ByRef intMedID As Integer, ByRef intDrawerCount As Integer, ByRef intEnteredAmount As Integer)
