@@ -870,6 +870,13 @@ Public Class frmInventory
         End If
     End Sub
 
+    Private Sub txtUnits_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtAmount.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789.")
+    End Sub
+
+    Private Sub txtAmount_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtUnits.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789.abcdefghijklmnopqrstuvwxyz/")
+    End Sub
     Private Sub txtQuantity_Validated(sender As Object, e As EventArgs) Handles txtQuantity.Validated
         If txtQuantity.Text IsNot "" Then
             GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
