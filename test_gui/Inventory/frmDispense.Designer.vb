@@ -585,9 +585,9 @@ Partial Class frmDispense
         Me.lblDirections.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDirections.Location = New System.Drawing.Point(40, 10)
         Me.lblDirections.Name = "lblDirections"
-        Me.lblDirections.Size = New System.Drawing.Size(257, 25)
+        Me.lblDirections.Size = New System.Drawing.Size(277, 25)
         Me.lblDirections.TabIndex = 204
-        Me.lblDirections.Text = "Select Amount To Dispense:"
+        Me.lblDirections.Text = "    Select Amount To Dispense:"
         '
         'pnlDispenseHistoryHeader
         '

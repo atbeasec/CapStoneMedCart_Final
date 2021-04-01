@@ -96,7 +96,7 @@ Public Class frmDispense
 
     Private Sub Dispense_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        lblDirections.Text = "Select Amount To Dispense:"
+        lblDirections.Text = "     Select Amount To Dispense:"
         lblDirections.Left = (pnlSelector.Width \ 2) - (pnlSelector.Width \ 2)
 
         pnlAmountInDrawer.Visible = False
