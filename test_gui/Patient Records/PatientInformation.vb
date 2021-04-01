@@ -381,7 +381,7 @@ Module PatientInformation
                     strbSqlCommand.Append("UPDATE Patient SET Date_of_Birth = '" & frmPatientInfo.mtbBirthday.Text & "' Where Patient_ID = '" & intPatientID & "'")
                     CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
                     'add item that was changed too string that is tracking all changed items
-                    strbItemsChanged.Append(" Date of birth")
+                    strbItemsChanged.AppendLine(" Date of birth")
                     'increase changed item count
                     intCountChanged = intCountChanged + 1
                     'clear string bulder
@@ -401,7 +401,7 @@ Module PatientInformation
                     strbSqlCommand.Append("UPDATE Patient SET Sex = '" & frmPatientInfo.txtGender.Text & "' Where Patient_ID = '" & intPatientID & "'")
                     CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
                     'add item that was changed too string that is tracking all changed items
-                    strbItemsChanged.Append(" Gender")
+                    strbItemsChanged.AppendLine(" Sex")
                     'increase changed item count
                     intCountChanged = intCountChanged + 1
                     'clear string bulder
@@ -423,7 +423,7 @@ Module PatientInformation
                     strbSqlCommand.Append("UPDATE Patient SET Height = '" & frmPatientInfo.txtHeight.Text & "' Where Patient_ID = '" & intPatientID & "'")
                     CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
                     'add item that was changed too string that is tracking all changed items
-                    strbItemsChanged.Append(" Height")
+                    strbItemsChanged.AppendLine(" Height")
                     'increase changed item count
                     intCountChanged = intCountChanged + 1
                     'clear string bulder
@@ -443,7 +443,7 @@ Module PatientInformation
                     strbSqlCommand.Append("UPDATE Patient SET Weight = '" & frmPatientInfo.txtWeight.Text & "' Where Patient_ID = '" & intPatientID & "'")
                     CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
                     'add item that was changed too string that is tracking all changed items
-                    strbItemsChanged.Append(" Weight")
+                    strbItemsChanged.AppendLine(" Weight")
                     'increase changed item count
                     intCountChanged = intCountChanged + 1
                     'clear string bulder
@@ -464,7 +464,7 @@ Module PatientInformation
                     strbSqlCommand.Append("UPDATE Patient SET Email_address = '" & frmPatientInfo.txtEmail.Text & "' Where Patient_ID = '" & intPatientID & "'")
                     CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
                     'add item that was changed too string that is tracking all changed items
-                    strbItemsChanged.Append(" Email")
+                    strbItemsChanged.AppendLine(" Email")
                     'increase changed item count
                     intCountChanged = intCountChanged + 1
                     'clear string bulder
@@ -486,7 +486,7 @@ Module PatientInformation
                     strbSqlCommand.Append("UPDATE Patient SET Phone_Number = '" & frmPatientInfo.txtPhone.Text & "' Where Patient_ID = '" & intPatientID & "'")
                     CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
                     'add item that was changed too string that is tracking all changed items
-                    strbItemsChanged.Append(" Phone Number")
+                    strbItemsChanged.AppendLine(" Phone Number")
                     'increase changed item count
                     intCountChanged = intCountChanged + 1
                     'clear string bulder
@@ -507,7 +507,7 @@ Module PatientInformation
                     strbSqlCommand.Append("UPDATE Patient SET Address = '" & checkSQLInjection(frmPatientInfo.txtAddress.Text, True) & "' Where Patient_ID = '" & intPatientID & "'")
                     CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
                     'add item that was changed too string that is tracking all changed items
-                    strbItemsChanged.Append(" Street Address")
+                    strbItemsChanged.AppendLine(" Street Address")
                     'increase changed item count
                     intCountChanged = intCountChanged + 1
                     'clear string bulder
@@ -528,7 +528,7 @@ Module PatientInformation
                     strbSqlCommand.Append("UPDATE Patient SET City = '" & checkSQLInjection(frmPatientInfo.txtCity.Text, True) & "' Where Patient_ID = '" & intPatientID & "'")
                     CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
                     'add item that was changed too string that is tracking all changed items
-                    strbItemsChanged.Append(" City")
+                    strbItemsChanged.AppendLine(" City")
                     'increase changed item count
                     intCountChanged = intCountChanged + 1
                     'clear string bulder
@@ -543,7 +543,7 @@ Module PatientInformation
                 strbSqlCommand.Append("UPDATE Patient SET State = '" & frmPatientInfo.cboState.SelectedItem & "' Where Patient_ID = '" & intPatientID & "'")
                 CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
                 'add item that was changed too string that is tracking all changed items
-                strbItemsChanged.Append(" State")
+                strbItemsChanged.AppendLine(" State")
                 'increase changed item count
                 intCountChanged = intCountChanged + 1
                 'clear string bulder
@@ -562,7 +562,7 @@ Module PatientInformation
                     strbSqlCommand.Append("UPDATE Patient SET Zip_Code = '" & frmPatientInfo.txtZipCode.Text & "' Where Patient_ID = '" & intPatientID & "'")
                     CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
                     'add item that was changed too string that is tracking all changed items
-                    strbItemsChanged.Append(" ZipCode")
+                    strbItemsChanged.AppendLine(" ZipCode")
                     'increase changed item count
                     intCountChanged = intCountChanged + 1
                     'clear string bulder
@@ -582,7 +582,7 @@ Module PatientInformation
                     strbSqlCommand.Append("UPDATE Patient SET Barcode = '" & frmPatientInfo.txtBarcode.Text & "' Where Patient_ID = '" & intPatientID & "'")
                     CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
                     'add item that was changed too string that is tracking all changed items
-                    strbItemsChanged.Append(" Barcode")
+                    strbItemsChanged.AppendLine(" Barcode")
                     'increase changed item count
                     intCountChanged = intCountChanged + 1
                     'clear string bulder
@@ -611,14 +611,14 @@ Module PatientInformation
                         frmPatientInfo.cboRoom.Tag = frmPatientInfo.cboRoom.Text
                         frmPatientInfo.cboBed.Tag = frmPatientInfo.cboBed.Text
                         intCountChanged = intCountChanged + 1
-                        strbItemsChanged.Append(" Room and bed")
+                        strbItemsChanged.AppendLine(" Room and Bed")
                     Else
                         'if it was in the database reactivate it
                         CreateDatabase.ExecuteInsertQuery("Update PatientRoom SET Active_Flag = '1' where Patient_TUID = '" & intPatientID & "' AND Room_TUID = '" & frmPatientInfo.cboRoom.Text & "' AND Bed_Name = '" & frmPatientInfo.cboBed.Text & "'")
                         frmPatientInfo.cboRoom.Tag = frmPatientInfo.cboRoom.Text
                         frmPatientInfo.cboBed.Tag = frmPatientInfo.cboBed.Text
                         intCountChanged = intCountChanged + 1
-                        strbItemsChanged.Append(" Room and bed")
+                        strbItemsChanged.AppendLine(" Room and Bed")
                     End If
 
                 End If
@@ -635,7 +635,7 @@ Module PatientInformation
                                       "' Where Patient_ID = '" & intPatientID & "'")
                 ExecuteInsertQuery(strbSqlCommand.ToString)
                 intCountChanged += 1
-                strbItemsChanged.Append(" Primary Physician")
+                strbItemsChanged.AppendLine(" Primary Physician")
                 .cboPhysicians.Tag = .cboPhysicians.SelectedItem
 
             End If
