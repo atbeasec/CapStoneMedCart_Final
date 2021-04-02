@@ -190,7 +190,7 @@ Partial Class frmPharmacy
         Me.btnORder.Location = New System.Drawing.Point(249, 390)
         Me.btnORder.Name = "btnORder"
         Me.btnORder.Size = New System.Drawing.Size(201, 38)
-        Me.btnORder.TabIndex = 9
+        Me.btnORder.TabIndex = 10
         Me.btnORder.Text = "   Order Prescription"
         Me.btnORder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnORder.UseVisualStyleBackColor = False
@@ -206,7 +206,7 @@ Partial Class frmPharmacy
         Me.btnDecrement.Location = New System.Drawing.Point(579, 159)
         Me.btnDecrement.Name = "btnDecrement"
         Me.btnDecrement.Size = New System.Drawing.Size(28, 28)
-        Me.btnDecrement.TabIndex = 5
+        Me.btnDecrement.TabIndex = 6
         Me.btnDecrement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnDecrement.UseVisualStyleBackColor = False
         '
@@ -221,7 +221,7 @@ Partial Class frmPharmacy
         Me.btnIncrement.Location = New System.Drawing.Point(545, 158)
         Me.btnIncrement.Name = "btnIncrement"
         Me.btnIncrement.Size = New System.Drawing.Size(28, 28)
-        Me.btnIncrement.TabIndex = 4
+        Me.btnIncrement.TabIndex = 5
         Me.btnIncrement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnIncrement.UseVisualStyleBackColor = False
         '
@@ -257,7 +257,7 @@ Partial Class frmPharmacy
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel3.Size = New System.Drawing.Size(299, 28)
-        Me.Panel3.TabIndex = 5
+        Me.Panel3.TabIndex = 7
         '
         'txtType
         '
@@ -286,7 +286,7 @@ Partial Class frmPharmacy
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel1.Size = New System.Drawing.Size(228, 31)
-        Me.Panel1.TabIndex = 6
+        Me.Panel1.TabIndex = 8
         '
         'cmbStrength
         '
@@ -309,12 +309,12 @@ Partial Class frmPharmacy
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel4.Size = New System.Drawing.Size(119, 31)
-        Me.Panel4.TabIndex = 8
+        Me.Panel4.TabIndex = 9
         '
         'cmbFrequencyNumber
         '
         Me.cmbFrequencyNumber.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.cmbFrequencyNumber.DropDownHeight = 25
+        Me.cmbFrequencyNumber.DropDownHeight = 200
         Me.cmbFrequencyNumber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbFrequencyNumber.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cmbFrequencyNumber.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -359,7 +359,7 @@ Partial Class frmPharmacy
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel7.Size = New System.Drawing.Size(410, 31)
-        Me.Panel7.TabIndex = 7
+        Me.Panel7.TabIndex = 9
         '
         'cmbOrderedBy
         '

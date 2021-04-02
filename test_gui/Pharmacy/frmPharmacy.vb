@@ -281,4 +281,13 @@
         Else
         End If
     End Sub
+
+    Private Sub cmbPatientName_LostFocus(sender As Object, e As EventArgs) Handles cmbPatientName.LostFocus, cmbFrequencyNumber.LostFocus, cmbMedication.LostFocus, cmbOrderedBy.LostFocus, cmbStrength.LostFocus
+
+        If sender.SelectedIndex = -1 Then
+            sender.Text = ""
+        End If
+
+
+    End Sub
 End Class
