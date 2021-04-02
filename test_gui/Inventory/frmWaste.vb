@@ -198,6 +198,7 @@
         Else
             If IsNumeric(txtQuantity.Text) Then
                 InsertWasteNonNarcotic()
+                frmMain.UnlockSideMenu()
                 frmPatientInfo.setPatientID(intPatientID)
                 frmMain.OpenChildForm(frmPatientInfo)
             End If
@@ -261,6 +262,7 @@
         ElseIf scanBarcode(strBarcode) = "True" Then
             InsertWasteNarcotic(intSignoffID)
             frmPatientInfo.setPatientID(intPatientID)
+            frmMain.UnlockSideMenu()
             frmMain.OpenChildForm(frmPatientInfo)
         Else
             MsgBox("No User With That Barcode")

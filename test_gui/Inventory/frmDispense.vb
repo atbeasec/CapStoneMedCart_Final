@@ -125,11 +125,15 @@ Public Class frmDispense
                         OpenOneDrawer(intdrawerNumber)
                         intDispenseAmount = txtQuantityToDispense.Text
                         changebuttonForCounting()
+                        frmMain.LockSideMenu()
+                        btnBack.Visible = False
                     Else
                         'Is not a narcotic
                         OpenOneDrawer(intdrawerNumber)
                         intDispenseAmount = txtQuantityToDispense.Text
                         changeButtonforDispensing()
+                        frmMain.LockSideMenu()
+                        btnBack.Visible = False
                     End If
                 Else
                     MessageBox.Show("Please enter a quantity value greater than 0")
@@ -199,7 +203,7 @@ Public Class frmDispense
             CreateDatabase.ExecuteInsertQuery("Update DrawerMedication SET Quantity = '" & intEnteredAmount & "' WHERE Medication_TUID = '" & intMedID & "' AND Active_Flag = '1'")
             Discrepancies.CreateDiscrepancy(intdrawerNumber, intBinNumber, intCurrentSystemCount, intEnteredAmount, CInt(LoggedInID), CInt(LoggedInID), intMedID)
 
-            MessageBox.Show("Discrepancy detected and recorded")
+            ' MessageBox.Show("Discrepancy detected and recorded")
         End If
     End Sub
 
