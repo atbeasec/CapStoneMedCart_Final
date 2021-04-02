@@ -3,6 +3,7 @@
     Private strSessionUsername As String
     Private frmCurrentChildForm As Form
     Private frmPreviousChildForm As Form
+    Dim transparentPanelForLocking As New TransparentPanel
 
     Public Enum SelectedForm As Integer
         PatientRecordsDropDown = 1
@@ -38,6 +39,23 @@
         Return strSessionUsername
 
     End Function
+
+    Public Sub LockSideMenu()
+
+        transparentPanelForLocking.Location = New Point(pnlLogo.Location.X, pnlLogo.Location.Y)
+        transparentPanelForLocking.Size = New Size(pnlLogo.Width, 720)
+        Me.Controls.Add(transparentPanelForLocking)
+        '  transparentPanelForLocking.BackColor = Color.FromArgb(120, 127, 127, 127)
+        transparentPanelForLocking.Visible = True
+        transparentPanelForLocking.BringToFront()
+
+    End Sub
+
+    Public Sub UnlockSideMenu()
+
+        transparentPanelForLocking.Visible = False
+
+    End Sub
 
 
     '/*********************************************************************/

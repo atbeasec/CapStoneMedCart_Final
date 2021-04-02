@@ -161,6 +161,8 @@ Public Class frmReport
     '/*  Eric L.    03/16/21    Initial creation of code                */
     '/*  BRH        03/18/21    Added functionality for displaying the  */
     '/*                         Dispensed Narcotics on the form.        */
+    '/*  BRH        04/01/21    Hide data grid view if there isn't a report
+    '/*                         and auto resize the columns             */
     '/*******************************************************************/
     Private Sub btnGenerateReport_Click(sender As Object, e As EventArgs) Handles btnGenerateReport.Click
         Dim lstOfDataValues As List(Of String) = New List(Of String)
@@ -177,12 +179,16 @@ Public Class frmReport
             lstOfDataValues = getSelectedReport(cmbReports.SelectedIndex)
 
             If lstOfDataValues.Count = 0 Then
+                'If there isn't anything to report
+                'hid the item showing the report on the form
+                dgvReport.Visible = False
                 MessageBox.Show("There is nothing to report.")
             Else
                 PrintItemsToDataGrid(lstOfDataValues)
+                dgvReport.Visible = True
+                'autoresizes the columns to fit the data
+                dgvReport.AutoResizeColumns()
             End If
-
-            dgvReport.Visible = True
 
         End If
 
@@ -228,4 +234,5 @@ Public Class frmReport
     Private Sub btnExportToExcel_Click(sender As Object, e As EventArgs) Handles btnExportToExcel.Click
         ExportToExcel(strReport)
     End Sub
+
 End Class
