@@ -937,11 +937,12 @@ Module PatientInformation
     Public Sub getPrescriptions(ByRef intPatient_ID As Integer)
         Dim strSQLiteCommand As String
         Dim dsPatientPrescription As DataSet
-        strSQLiteCommand = "SELECT trim(Drug_Name,' '), Strength, Frequency, Medication.Type, Quantity ,Date_Presrcibed, Physician_First_Name, Physician_Last_Name, Medication.Medication_ID FROM PatientMedication " &
+        strSQLiteCommand = "SELECT trim(Drug_Name,' '), Medication.Strength, PatientMedication.Frequency, Medication.Type, PatientMedication.Quantity ,PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name, Medication.Medication_ID FROM PatientMedication " &
             "INNER JOIN Medication on Medication.Medication_ID = PatientMedication.Medication_TUID " &
             "INNER JOIN Patient ON Patient.Patient_ID = PatientMedication.Patient_TUID " &
             "INNER JOIN Physician on Physician.Physician_ID = PatientMedication.Ordering_Physician_ID " &
-            "WHERE Patient.Patient_ID = '" & intPatient_ID & "' AND PatientMedication.Active_Flag = '1' ORDER BY trim(Drug_Name,' ') ASC"
+            "INNER JOIN DrawerMedication on DrawerMedication.Medication_TUID = PatientMedication.Medication_TUID " &
+            "WHERE Patient.Patient_ID = '32' AND PatientMedication.Active_Flag = '1' AND DrawerMedication.Active_Flag = '1' ORDER BY trim(Drug_Name,' ') ASC"
 
         dsPatientPrescription = CreateDatabase.ExecuteSelectQuery(strSQLiteCommand)
         For Each dr As DataRow In dsPatientPrescription.Tables(0).Rows
