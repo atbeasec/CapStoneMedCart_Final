@@ -139,6 +139,12 @@
     <Compile Include="Authentication\frmEditPhysician.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Inventory\frmMainScreenWaste.Designer.vb">
+      <DependentUpon>frmMainScreenWaste.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory\frmMainScreenWaste.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI Enhancements\frmSplash.Designer.vb">
       <DependentUpon>frmSplash.vb</DependentUpon>
     </Compile>
@@ -387,6 +393,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Authentication\frmEditPhysician.resx">
       <DependentUpon>frmEditPhysician.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inventory\frmMainScreenWaste.resx">
+      <DependentUpon>frmMainScreenWaste.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI Enhancements\frmSplash.resx">
       <DependentUpon>frmSplash.vb</DependentUpon>
