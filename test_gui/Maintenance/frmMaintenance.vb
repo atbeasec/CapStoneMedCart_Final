@@ -115,17 +115,21 @@
     Private Sub frmMaintenance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         radPatient.Checked = True
         radDatabse.Checked = True
+        pnlOptions.Visible = False
     End Sub
 
     Private Sub btnExportDatabase_Click(sender As Object, e As EventArgs) Handles btnExportDatabase.Click
+        pnlRecords.Visible = False
         ExportDatabase()
     End Sub
 
     Private Sub btnImportDatabase_Click(sender As Object, e As EventArgs) Handles btnImportDatabase.Click
+        pnlRecords.Visible = False
         ImportDatabase()
     End Sub
 
     Private Sub btnImportAsCopy_Click(sender As Object, e As EventArgs) Handles btnImportAsCopy.Click
+        pnlRecords.Visible = False
         ImportDatabaseAsCopy()
     End Sub
 
@@ -139,4 +143,13 @@
         End If
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnRecords.Click
+
+        If pnlRecords.Visible = False Then
+
+            pnlRecords.Visible = True
+
+        End If
+
+    End Sub
 End Class

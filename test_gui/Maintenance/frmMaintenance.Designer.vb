@@ -24,6 +24,9 @@ Partial Class frmMaintenance
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMaintenance))
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.pnlOptions = New System.Windows.Forms.Panel()
+        Me.radRecords = New System.Windows.Forms.RadioButton()
+        Me.radDatabse = New System.Windows.Forms.RadioButton()
         Me.pnlRecords = New System.Windows.Forms.Panel()
         Me.radUser = New System.Windows.Forms.RadioButton()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -35,25 +38,55 @@ Partial Class frmMaintenance
         Me.btnExportDatabase = New System.Windows.Forms.Button()
         Me.btnImportDatabase = New System.Windows.Forms.Button()
         Me.btnImportAsCopy = New System.Windows.Forms.Button()
-        Me.radRecords = New System.Windows.Forms.RadioButton()
-        Me.radDatabse = New System.Windows.Forms.RadioButton()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.pnlOptions = New System.Windows.Forms.Panel()
+        Me.btnRecords = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
+        Me.pnlOptions.SuspendLayout()
         Me.pnlRecords.SuspendLayout()
         Me.pnlDatabase.SuspendLayout()
-        Me.pnlOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
         '
         Me.Panel1.Controls.Add(Me.pnlOptions)
         Me.Panel1.Controls.Add(Me.pnlRecords)
-        Me.Panel1.Controls.Add(Me.pnlDatabase)
-        Me.Panel1.Location = New System.Drawing.Point(14, 12)
+        Me.Panel1.Location = New System.Drawing.Point(0, 65)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(906, 553)
+        Me.Panel1.Size = New System.Drawing.Size(920, 461)
         Me.Panel1.TabIndex = 0
+        '
+        'pnlOptions
+        '
+        Me.pnlOptions.Controls.Add(Me.radRecords)
+        Me.pnlOptions.Controls.Add(Me.radDatabse)
+        Me.pnlOptions.Location = New System.Drawing.Point(583, 117)
+        Me.pnlOptions.Name = "pnlOptions"
+        Me.pnlOptions.Size = New System.Drawing.Size(240, 100)
+        Me.pnlOptions.TabIndex = 68
+        '
+        'radRecords
+        '
+        Me.radRecords.AutoSize = True
+        Me.radRecords.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.radRecords.Location = New System.Drawing.Point(12, 42)
+        Me.radRecords.Name = "radRecords"
+        Me.radRecords.Size = New System.Drawing.Size(143, 25)
+        Me.radRecords.TabIndex = 67
+        Me.radRecords.TabStop = True
+        Me.radRecords.Text = "Import Records"
+        Me.radRecords.UseVisualStyleBackColor = True
+        '
+        'radDatabse
+        '
+        Me.radDatabse.AutoSize = True
+        Me.radDatabse.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.radDatabse.Location = New System.Drawing.Point(12, 11)
+        Me.radDatabse.Name = "radDatabse"
+        Me.radDatabse.Size = New System.Drawing.Size(205, 25)
+        Me.radDatabse.TabIndex = 66
+        Me.radDatabse.TabStop = True
+        Me.radDatabse.Text = "Import/Export Database"
+        Me.radDatabse.UseVisualStyleBackColor = True
         '
         'pnlRecords
         '
@@ -63,7 +96,7 @@ Partial Class frmMaintenance
         Me.pnlRecords.Controls.Add(Me.radPatient)
         Me.pnlRecords.Controls.Add(Me.radRoom)
         Me.pnlRecords.Controls.Add(Me.btnUpload)
-        Me.pnlRecords.Location = New System.Drawing.Point(3, 3)
+        Me.pnlRecords.Location = New System.Drawing.Point(0, 3)
         Me.pnlRecords.Name = "pnlRecords"
         Me.pnlRecords.Size = New System.Drawing.Size(360, 368)
         Me.pnlRecords.TabIndex = 67
@@ -145,12 +178,13 @@ Partial Class frmMaintenance
         '
         'pnlDatabase
         '
+        Me.pnlDatabase.Controls.Add(Me.btnRecords)
         Me.pnlDatabase.Controls.Add(Me.btnExportDatabase)
         Me.pnlDatabase.Controls.Add(Me.btnImportDatabase)
         Me.pnlDatabase.Controls.Add(Me.btnImportAsCopy)
-        Me.pnlDatabase.Location = New System.Drawing.Point(3, 3)
+        Me.pnlDatabase.Location = New System.Drawing.Point(56, 1)
         Me.pnlDatabase.Name = "pnlDatabase"
-        Me.pnlDatabase.Size = New System.Drawing.Size(775, 58)
+        Me.pnlDatabase.Size = New System.Drawing.Size(1032, 47)
         Me.pnlDatabase.TabIndex = 66
         '
         'btnExportDatabase
@@ -160,7 +194,7 @@ Partial Class frmMaintenance
         Me.btnExportDatabase.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnExportDatabase.ForeColor = System.Drawing.Color.White
         Me.btnExportDatabase.Image = CType(resources.GetObject("btnExportDatabase.Image"), System.Drawing.Image)
-        Me.btnExportDatabase.Location = New System.Drawing.Point(560, 7)
+        Me.btnExportDatabase.Location = New System.Drawing.Point(826, 7)
         Me.btnExportDatabase.Name = "btnExportDatabase"
         Me.btnExportDatabase.Size = New System.Drawing.Size(197, 38)
         Me.btnExportDatabase.TabIndex = 187
@@ -175,7 +209,7 @@ Partial Class frmMaintenance
         Me.btnImportDatabase.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnImportDatabase.ForeColor = System.Drawing.Color.White
         Me.btnImportDatabase.Image = CType(resources.GetObject("btnImportDatabase.Image"), System.Drawing.Image)
-        Me.btnImportDatabase.Location = New System.Drawing.Point(17, 7)
+        Me.btnImportDatabase.Location = New System.Drawing.Point(110, 7)
         Me.btnImportDatabase.Name = "btnImportDatabase"
         Me.btnImportDatabase.Size = New System.Drawing.Size(197, 38)
         Me.btnImportDatabase.TabIndex = 186
@@ -190,66 +224,49 @@ Partial Class frmMaintenance
         Me.btnImportAsCopy.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnImportAsCopy.ForeColor = System.Drawing.Color.White
         Me.btnImportAsCopy.Image = CType(resources.GetObject("btnImportAsCopy.Image"), System.Drawing.Image)
-        Me.btnImportAsCopy.Location = New System.Drawing.Point(255, 7)
+        Me.btnImportAsCopy.Location = New System.Drawing.Point(334, 7)
         Me.btnImportAsCopy.Name = "btnImportAsCopy"
-        Me.btnImportAsCopy.Size = New System.Drawing.Size(264, 38)
+        Me.btnImportAsCopy.Size = New System.Drawing.Size(257, 38)
         Me.btnImportAsCopy.TabIndex = 185
         Me.btnImportAsCopy.Text = "IMPORT DATABASE AS COPY"
         Me.btnImportAsCopy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnImportAsCopy.UseVisualStyleBackColor = False
         '
-        'radRecords
-        '
-        Me.radRecords.AutoSize = True
-        Me.radRecords.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.radRecords.Location = New System.Drawing.Point(12, 42)
-        Me.radRecords.Name = "radRecords"
-        Me.radRecords.Size = New System.Drawing.Size(143, 25)
-        Me.radRecords.TabIndex = 67
-        Me.radRecords.TabStop = True
-        Me.radRecords.Text = "Import Records"
-        Me.radRecords.UseVisualStyleBackColor = True
-        '
-        'radDatabse
-        '
-        Me.radDatabse.AutoSize = True
-        Me.radDatabse.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.radDatabse.Location = New System.Drawing.Point(12, 11)
-        Me.radDatabse.Name = "radDatabse"
-        Me.radDatabse.Size = New System.Drawing.Size(205, 25)
-        Me.radDatabse.TabIndex = 66
-        Me.radDatabse.TabStop = True
-        Me.radDatabse.Text = "Import/Export Database"
-        Me.radDatabse.UseVisualStyleBackColor = True
-        '
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'pnlOptions
+        'btnRecords
         '
-        Me.pnlOptions.Controls.Add(Me.radRecords)
-        Me.pnlOptions.Controls.Add(Me.radDatabse)
-        Me.pnlOptions.Location = New System.Drawing.Point(369, 67)
-        Me.pnlOptions.Name = "pnlOptions"
-        Me.pnlOptions.Size = New System.Drawing.Size(240, 100)
-        Me.pnlOptions.TabIndex = 68
+        Me.btnRecords.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnRecords.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRecords.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRecords.ForeColor = System.Drawing.Color.White
+        Me.btnRecords.Image = CType(resources.GetObject("btnRecords.Image"), System.Drawing.Image)
+        Me.btnRecords.Location = New System.Drawing.Point(618, 7)
+        Me.btnRecords.Name = "btnRecords"
+        Me.btnRecords.Size = New System.Drawing.Size(179, 38)
+        Me.btnRecords.TabIndex = 188
+        Me.btnRecords.Text = "IMPORT RECORDS"
+        Me.btnRecords.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnRecords.UseVisualStyleBackColor = False
         '
         'frmMaintenance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(932, 577)
+        Me.ClientSize = New System.Drawing.Size(1091, 645)
         Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.pnlDatabase)
         Me.Name = "frmMaintenance"
         Me.Text = "frmMaintenance"
         Me.Panel1.ResumeLayout(False)
+        Me.pnlOptions.ResumeLayout(False)
+        Me.pnlOptions.PerformLayout()
         Me.pnlRecords.ResumeLayout(False)
         Me.pnlRecords.PerformLayout()
         Me.pnlDatabase.ResumeLayout(False)
-        Me.pnlOptions.ResumeLayout(False)
-        Me.pnlOptions.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -270,4 +287,5 @@ Partial Class frmMaintenance
     Friend WithEvents btnImportDatabase As Button
     Friend WithEvents btnImportAsCopy As Button
     Friend WithEvents pnlOptions As Panel
+    Friend WithEvents btnRecords As Button
 End Class
