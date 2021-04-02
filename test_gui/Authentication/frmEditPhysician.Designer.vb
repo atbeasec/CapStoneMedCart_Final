@@ -69,6 +69,7 @@ Partial Class frmEditPhysician
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.txtSearchBox = New System.Windows.Forms.TextBox()
         Me.tpToolTip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.Panel6 = New System.Windows.Forms.Panel()
         Me.pnlPhysicianHeader.SuspendLayout()
         Me.pnlAllTextboxes.SuspendLayout()
         Me.Panel5.SuspendLayout()
@@ -209,7 +210,7 @@ Partial Class frmEditPhysician
         Me.Panel5.Location = New System.Drawing.Point(13, 140)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel5.Size = New System.Drawing.Size(224, 28)
+        Me.Panel5.Size = New System.Drawing.Size(252, 28)
         Me.Panel5.TabIndex = 3
         '
         'txtMiddleName
@@ -222,17 +223,17 @@ Partial Class frmEditPhysician
         Me.txtMiddleName.Multiline = True
         Me.txtMiddleName.Name = "txtMiddleName"
         Me.txtMiddleName.ShortcutsEnabled = False
-        Me.txtMiddleName.Size = New System.Drawing.Size(222, 26)
+        Me.txtMiddleName.Size = New System.Drawing.Size(250, 26)
         Me.txtMiddleName.TabIndex = 2
         '
         'Panel11
         '
         Me.Panel11.BackColor = System.Drawing.Color.DarkGray
         Me.Panel11.Controls.Add(Me.txtLastName)
-        Me.Panel11.Location = New System.Drawing.Point(285, 71)
+        Me.Panel11.Location = New System.Drawing.Point(283, 71)
         Me.Panel11.Name = "Panel11"
         Me.Panel11.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel11.Size = New System.Drawing.Size(224, 28)
+        Me.Panel11.Size = New System.Drawing.Size(254, 28)
         Me.Panel11.TabIndex = 2
         '
         'txtLastName
@@ -245,7 +246,7 @@ Partial Class frmEditPhysician
         Me.txtLastName.Multiline = True
         Me.txtLastName.Name = "txtLastName"
         Me.txtLastName.ShortcutsEnabled = False
-        Me.txtLastName.Size = New System.Drawing.Size(222, 26)
+        Me.txtLastName.Size = New System.Drawing.Size(252, 26)
         Me.txtLastName.TabIndex = 2
         '
         'btnSaveChanges
@@ -269,7 +270,7 @@ Partial Class frmEditPhysician
         Me.Panel4.Location = New System.Drawing.Point(13, 70)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel4.Size = New System.Drawing.Size(226, 28)
+        Me.Panel4.Size = New System.Drawing.Size(252, 28)
         Me.Panel4.TabIndex = 1
         '
         'txtFirstName
@@ -282,7 +283,7 @@ Partial Class frmEditPhysician
         Me.txtFirstName.Multiline = True
         Me.txtFirstName.Name = "txtFirstName"
         Me.txtFirstName.ShortcutsEnabled = False
-        Me.txtFirstName.Size = New System.Drawing.Size(224, 26)
+        Me.txtFirstName.Size = New System.Drawing.Size(250, 26)
         Me.txtFirstName.TabIndex = 1
         '
         'Label14
@@ -383,7 +384,7 @@ Partial Class frmEditPhysician
         '
         Me.Panel16.BackColor = System.Drawing.Color.DarkGray
         Me.Panel16.Controls.Add(Me.txtCity)
-        Me.Panel16.Location = New System.Drawing.Point(11, 357)
+        Me.Panel16.Location = New System.Drawing.Point(13, 357)
         Me.Panel16.Name = "Panel16"
         Me.Panel16.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel16.Size = New System.Drawing.Size(251, 31)
@@ -406,10 +407,10 @@ Partial Class frmEditPhysician
         '
         Me.Panel10.BackColor = System.Drawing.Color.DarkGray
         Me.Panel10.Controls.Add(Me.txtAddress)
-        Me.Panel10.Location = New System.Drawing.Point(11, 287)
+        Me.Panel10.Location = New System.Drawing.Point(13, 287)
         Me.Panel10.Name = "Panel10"
         Me.Panel10.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel10.Size = New System.Drawing.Size(526, 31)
+        Me.Panel10.Size = New System.Drawing.Size(524, 31)
         Me.Panel10.TabIndex = 7
         '
         'txtAddress
@@ -421,7 +422,7 @@ Partial Class frmEditPhysician
         Me.txtAddress.Multiline = True
         Me.txtAddress.Name = "txtAddress"
         Me.txtAddress.ShortcutsEnabled = False
-        Me.txtAddress.Size = New System.Drawing.Size(523, 29)
+        Me.txtAddress.Size = New System.Drawing.Size(522, 29)
         Me.txtAddress.TabIndex = 11
         '
         'Label5
@@ -506,7 +507,7 @@ Partial Class frmEditPhysician
         Me.Panel1.Location = New System.Drawing.Point(283, 212)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel1.Size = New System.Drawing.Size(252, 31)
+        Me.Panel1.Size = New System.Drawing.Size(254, 31)
         Me.Panel1.TabIndex = 6
         '
         'mtbFax
@@ -518,7 +519,7 @@ Partial Class frmEditPhysician
         Me.mtbFax.Mask = "(999) 000-0000"
         Me.mtbFax.Name = "mtbFax"
         Me.mtbFax.ShortcutsEnabled = False
-        Me.mtbFax.Size = New System.Drawing.Size(248, 22)
+        Me.mtbFax.Size = New System.Drawing.Size(250, 22)
         Me.mtbFax.TabIndex = 15
         '
         'Label15
@@ -538,7 +539,7 @@ Partial Class frmEditPhysician
         Me.Panel15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel15.Controls.Add(Me.mtbPhone)
         Me.Panel15.ForeColor = System.Drawing.Color.DarkGray
-        Me.Panel15.Location = New System.Drawing.Point(11, 212)
+        Me.Panel15.Location = New System.Drawing.Point(13, 212)
         Me.Panel15.Name = "Panel15"
         Me.Panel15.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel15.Size = New System.Drawing.Size(252, 31)
@@ -611,12 +612,20 @@ Partial Class frmEditPhysician
         Me.txtSearchBox.TabIndex = 170
         Me.txtSearchBox.Tag = "Search Users"
         '
+        'Panel6
+        '
+        Me.Panel6.Location = New System.Drawing.Point(-2, 12)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Size = New System.Drawing.Size(27, 544)
+        Me.Panel6.TabIndex = 171
+        '
         'frmEditPhysician
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1091, 672)
+        Me.Controls.Add(Me.Panel6)
         Me.Controls.Add(Me.txtSearchBox)
         Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.pnlAllTextboxes)
@@ -695,4 +704,5 @@ Partial Class frmEditPhysician
     Friend WithEvents btnSearch As Button
     Friend WithEvents txtSearchBox As TextBox
     Friend WithEvents tpToolTip As ToolTip
+    Friend WithEvents Panel6 As Panel
 End Class
