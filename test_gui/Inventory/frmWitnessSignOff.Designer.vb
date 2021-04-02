@@ -40,9 +40,9 @@ Partial Class frmWitnessSignOff
         Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.Location = New System.Drawing.Point(63, 20)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(235, 25)
+        Me.Label3.Size = New System.Drawing.Size(242, 25)
         Me.Label3.TabIndex = 31
-        Me.Label3.Text = "Witness Sign-off Required"
+        Me.Label3.Text = "Override Sign-off Required"
         '
         'TextBox2
         '

@@ -439,21 +439,23 @@ Module Interactions
         'Try to find any interactions with the selected medication
         For Each item In dsDataset.Tables(0).Rows
             strSQLCmd = "SELECT Drug_Interactions_ID FROM Drug_Interactions
-                         WHERE Medication_One_ID = '" & item(0) & "'
-                         OR Medication_Two_ID = '" & item(0) & "'
-                         AND Medication_Two_ID = '" & strMedicationOneRXCUI & "'
-                         OR Medication_One_ID = '" & strMedicationOneRXCUI & "';"
+                         WHERE Medication_One_ID = " & item(0) & "
+                         AND Medication_Two_ID = " & strMedicationOneRXCUI & "
+                         OR Medication_Two_ID = " & item(0) & "
+                         AND Medication_One_ID = " & strMedicationOneRXCUI & ";"
 
-            'If no interactions were found previously, store the 
+            'If no Then interactions were found previously, store the 
             'rxcui of the interacting medication in strInteraction
             If blnInteraction.Equals(False) Then
+
                 strInteraction = ExecuteScalarQuery(strSQLCmd)
                 If strInteraction IsNot Nothing Then
                     blnInteraction = True
+                    'Else
+                    '    blnInteraction = False
                 End If
             End If
         Next
-
 
 
         If blnInteraction.Equals(True) Then
@@ -499,7 +501,7 @@ Module Interactions
         Else
             'If there were no interactions,
             'there is an immediate sign off
-            frmAdHockDispense.blnSignedOff = True
+            'frmAdHockDispense.blnSignedOff = True
         End If
 
     End Sub
