@@ -69,8 +69,8 @@
     '/*********************************************************************/
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnORder.Click
         ErrorProvider1.Clear()
-        If cmbPatientName.SelectedIndex = -1 Or cmbMedication.SelectedIndex = -1 Or cmbOrderedBy.SelectedIndex = -1 Or cmbFrequencyNumber.SelectedIndex = -1 Then
-            MessageBox.Show("Please select a patient, medication, physician and frequency before placing the order")
+        If cmbPatientName.SelectedIndex = -1 Or cmbMedication.SelectedIndex = -1 Or cmbOrderedBy.SelectedIndex = -1 Or cmbFrequencyNumber.SelectedIndex = -1 Or txtUnit.Text = Nothing Or txtUnit.Text = " " Or txtQuantity.Text = Nothing Or txtQuantity.Text = " " Or txtUnit.Text.Trim.Length = 0 Then
+            MessageBox.Show("You must fill out all boxes before proceeding")
         Else
             Dim dtmOrderTime As String = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
             PharmacyOrder.PharmacyOrder(intPatientIDfromArray, intMedIDfromArray, intPhysicianIDfromArray, txtQuantity.Text, txtUnit.Text, txtType.Text, cmbFrequencyNumber.SelectedItem.ToString)
