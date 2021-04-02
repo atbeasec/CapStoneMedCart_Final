@@ -72,14 +72,14 @@
             MessageBox.Show("Please fill out all information before placing the prescription")
         Else
             Dim dtmOrderTime As String = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
-            PharmacyOrder.PharmacyOrder(intPatientIDfromArray, intMedIDfromArray, intPhysicianIDfromArray, txtQuantity.Text & " " & txtUnits.Text, txtType.Text, cmbFrequencyNumber.SelectedItem.ToString)
+            PharmacyOrder.PharmacyOrder(intPatientIDfromArray, intMedIDfromArray, intPhysicianIDfromArray, txtQuantity.Text, txtUnits.Text, txtType.Text, cmbFrequencyNumber.SelectedItem.ToString)
             MessageBox.Show("Medication order placed")
             cmbPatientName.SelectedIndex = -1
             cmbMedication.SelectedIndex = -1
             cmbOrderedBy.SelectedIndex = -1
             cmbFrequencyNumber.SelectedIndex = -1
             txtQuantity.Text = Nothing
-
+            txtUnits.Text = Nothing
         End If
     End Sub
 
@@ -119,7 +119,7 @@
     '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
     '/*********************************************************************/
     Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantity.KeyPress
-        KeyPressCheck(e, "0123456789")
+        KeyPressCheck(e, "0123456789.")
     End Sub
 
     Private Sub txtUnits_TextChanged(sender As Object, e As EventArgs) Handles txtUnits.KeyPress

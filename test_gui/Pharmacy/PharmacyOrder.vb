@@ -81,16 +81,16 @@
     '/*  Alexander Beasecker  02/05/2021  Initial creation of the code    */
     '/*********************************************************************/
     Public Sub PharmacyOrder(ByRef intPatientID As Integer, ByRef intMedicationID As Integer, ByRef intPhysicianID As Integer,
-                             ByRef intAmount As Integer, ByRef strType As String, ByRef strFrequency As String)
+                             ByRef strAmount As String, ByRef strUnits As String, ByRef strType As String, ByRef strFrequency As String)
 
         'get current time and date
         Dim dtmOrderTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         'set active flag
         Dim intActiveFlag As Integer = 1
         'create sql statement command
-        Dim Strdatacommand As String = "INSERT INTO PatientMedication(Patient_TUID, Medication_TUID, Ordering_Physician_ID, Date_Presrcibed, Quantity, Type, Frequency, Active_Flag) " &
+        Dim Strdatacommand As String = "INSERT INTO PatientMedication(Patient_TUID, Medication_TUID, Ordering_Physician_ID, Date_Presrcibed, Quantity, Units, Type, Frequency, Active_Flag) " &
             "VALUES('" & intPatientID & "', '" & intMedicationID & "', '" & intPhysicianID & "', '" & dtmOrderTime & "', '" &
-            intAmount & "', '" & strType & "', '" & strFrequency & "', '" & intActiveFlag & "')"
+            strAmount & "', '" & strUnits & "', '" & strType & "', '" & strFrequency & "', '" & intActiveFlag & "')"
         'call sql insert method to run command
         CreateDatabase.ExecuteInsertQuery(Strdatacommand)
 
