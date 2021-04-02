@@ -439,8 +439,8 @@
         Const SUPERVISORACCESS = "Supervisor"
 
         Dim arrBUttonsToRemoveAdmin() = {btnWaste} ' btn waste is not eneded on the side menu currently but easy to add back on as needed
-        Dim arrButtonsToRemoveSupervisor() = {btnUsers, btnEditPhysician, btnSerialPort, btnConfigureInventory, btnEndOfShiftCount, btnWaste}
-        Dim arrButtonsToRemoveNurse() = {btnSettings, btnPharmacy, btnMaintenance, btnDescrepancies, btnConfigureInventory, btnEndOfShiftCount, btnWaste}
+        Dim arrButtonsToRemoveSupervisor() = {btnSerialPort, btnWaste}
+        Dim arrButtonsToRemoveNurse() = {btnUsers, btnSerialPort, btnEditPhysician, btnPharmacy, btnMaintenance, btnDescrepancies, btnConfigureInventory, btnEndOfShiftCount, btnWaste}
 
 
         If String.Equals(ADMINACCESS, permissionLevel) Then
