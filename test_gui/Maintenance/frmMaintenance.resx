@@ -127,6 +127,16 @@
         8pxhjAHnbiFZg179H1OmAAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="btnRecords.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAQlJREFUSEvl
+        lT0KwkAUhHMGe5OUWoogpBQEr2Id7HMKEQs7q4i9FuIF7Ewr2vtXWq6zuyMEyZJNgij6wVfkOZkXXCXO
+        7yKE8OAKnuC1gDK/hC6rzCA0h1WIWWUGoURnS7NjlRmEqi5JWGVGhnS2NFZLAtirYMCqD4MnieCkghGr
+        zCD0Owf/30tucAatD77or2sMPd7+ReCpbP/xTd4i7xnAkJf5IGxzJgfoMx+qiRAbVWADwnlLLrDO7FBN
+        NFvYzrCmitNgmLdkxFxXX+ZyVMVpMIz1Z0YWzPnwrCaaO9xnOFXFaTB0oXxXm97x8uvqM9uCz0X2Z1IU
+        lMtFcvGao/eABQ3Y4eULjvMAI9jNatCrcdkAAAAASUVORK5CYII=
+</value>
+  </data>
   <data name="btnExportDatabase.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAShJREFUSEvt
