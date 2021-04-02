@@ -14,6 +14,16 @@ Public Class frmDispense
 
     Dim contactPanelsAddedCount As Integer = 0
     Dim currentContactPanelName As String = Nothing
+    Private intEnteredFromAdhoc As Integer = 0
+
+
+    Public Sub setintEntered(ByRef ID As Integer)
+        intEnteredFromAdhoc = ID
+    End Sub
+
+    Public Function getIntEntered()
+        Return intEnteredFromAdhoc
+    End Function
 
     Public Sub SetPatientID(ByVal ID As Integer)
         intPatientID = ID

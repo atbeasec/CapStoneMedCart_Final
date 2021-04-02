@@ -87,10 +87,23 @@
 
             'If the user signs off for any override, dispense the medication
             If blnSignedOff = True Then
-                AdHoc.InsertAdHoc(AdHoc.intPatientIDArray(cmbPatientName.SelectedIndex), LoggedInID, CInt(txtQuantity.Text), AdHoc.intMedIDArray(cmbMedications.SelectedIndex), AdHoc.intDrawerMedArray(cmbMedications.SelectedIndex))
-                AdHoc.clearAdhocBoxes()
-                MessageBox.Show("Order Successfully placed")
                 blnSignedOff = False
+                Dim intPatientID As Integer = AdHoc.intPatientIDArray(cmbPatientName.SelectedIndex)
+                Dim intMedID As Integer = AdHoc.intMedIDArray(cmbMedications.SelectedIndex)
+                'AdHoc.InsertAdHoc(AdHoc.intPatientIDArray(cmbPatientName.SelectedIndex), LoggedInID, CInt(txtQuantity.Text), AdHoc.intMedIDArray(cmbMedications.SelectedIndex), AdHoc.intDrawerMedArray(cmbMedications.SelectedIndex))
+                'AdHoc.clearAdhocBoxes()
+                'MessageBox.Show("Order Successfully placed")
+
+                frmDispense.setintEntered(1)
+
+                frmDispense.SetPatientID(intPatientID)
+                frmDispense.SetintMedicationID(intMedID)
+                frmMain.OpenChildForm(frmDispense)
+                DispenseHistory.DispensemedicationPopulate(intPatientID, intMedID)
+                PatientInformation.PopulatePatientDispenseInfo(intPatientID)
+                PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientID)
+                PatientInformation.DisplayPatientPrescriptionsDispense(intPatientID)
+
             End If
 
         End If
