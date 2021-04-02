@@ -69,12 +69,13 @@
                                                "Values(" & intMaxAllergyID & ", " & intPatientIDArray(Me.cmbPatientName.SelectedIndex) & ", " & LoggedInID & ", '" & allergy & "', '" & DateTime.Now & "')")
                     Else
                         MessageBox.Show("Dispense canceled by user.")
-                        Exit Sub
+                        blnOverride = False
                     End If
-                    blnOverride = False
+
                 Else
                     ' do nothing as there is no allergy
                     blnSignedOff = False
+                    blnOverride = False
                 End If
             Next
 
@@ -87,7 +88,7 @@
                 AdHoc.InsertAdHoc(AdHoc.intPatientIDArray(cmbPatientName.SelectedIndex), LoggedInID, CInt(txtQuantity.Text), AdHoc.intMedIDArray(cmbMedications.SelectedIndex), AdHoc.intDrawerMedArray(cmbMedications.SelectedIndex))
                 AdHoc.clearAdhocBoxes()
                 MessageBox.Show("Order Successfully placed")
-                ' blnSignedOff = False
+                blnSignedOff = False
             End If
 
         End If
