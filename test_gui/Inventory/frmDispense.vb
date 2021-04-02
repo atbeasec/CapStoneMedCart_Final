@@ -1,8 +1,16 @@
-﻿Public Class frmDispense
-    Public blnSignedOff As Boolean = False
+﻿Imports System.Text
+
+Public Class frmDispense
+    Public blnSignedOff As Boolean = True
     Public blnOverride As Boolean = False
     Private intPatientID As Integer
     Private intPatientMRN As Integer
+    Private intMedicationID As Integer
+
+    Private intDispenseAmount As Integer
+    Private intCountedAmount As Integer
+    Private dblDispensedPatientAmount As Integer
+    Private dblWastedAmount As Integer
 
     Dim contactPanelsAddedCount As Integer = 0
     Dim currentContactPanelName As String = Nothing
@@ -11,6 +19,11 @@
         intPatientID = ID
         intPatientMRN = ExecuteScalarQuery("SELECT MRN_Number from Patient WHERE Patient_ID =" & intPatientID & ";")
     End Sub
+
+    Public Sub SetintMedicationID(ByVal ID As Integer)
+        intMedicationID = ID
+    End Sub
+
 
     Public Sub SetPatientMrn(ByVal mrn As Integer)
         intPatientMRN = mrn
@@ -25,14 +38,13 @@
 
     End Sub
 
-    Public Sub CreatePrescriptionsPanels(ByVal flpPannel As FlowLayoutPanel, ByVal medicationName As String, ByVal strength As String, ByVal frequency As String, ByVal type As String, ByVal quantity As String, ByVal datePrescribed As String, ByVal PrescribedBy As String)
+    Public Sub CreateDispenseHistoryPanels(ByVal flpPannel As FlowLayoutPanel, ByVal strMedicationName As String, ByVal strStrength As String, ByVal strType As String, ByVal strQuantity As String, ByVal strDispenseBy As String, ByVal strDispenseDate As String, ByVal strDispenseTime As String)
+
         Dim pnl As Panel
         pnl = New Panel
 
         Dim pnlMainPanel As Panel
         pnlMainPanel = New Panel
-        ' call method here to get the count from the database and update the panel number so the next item is correct
-
 
         'Set panel properties
         With pnl
@@ -56,7 +68,6 @@
         'put the boarder panel inside the main panel
         pnl.Controls.Add(pnlMainPanel)
 
-
         'AddHandler pnlMainPanel.DoubleClick, AddressOf DynamicDoubleClickNewOrder
         AddHandler pnlMainPanel.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
         AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
@@ -69,93 +80,143 @@
         Dim lblID4 As New Label
         Dim lblID5 As New Label
         Dim lblID6 As New Label
-        Dim lblID7 As New Label
 
-        ' anywhere we have quotes except for the label names, we can call our Database and get method
-        ' to ensure all of the text being added to the panel is inline with the  headers, we will use the label location of the
-        ' header as the reference point for the X axis when creating these labels at run time.
-        CreateIDLabelWithToolTip(pnlMainPanel, lblID, "lblMedicationPrescription", lblMedicationName.Location.X, 20, medicationName, getPanelCount(flpPannel), tpToolTip, TruncateString(15, medicationName))
-        ' CreateIDLabel(pnlMainPanel, lblID, "lblMedicationPrescription", lblMedicationName.Location.X, 20, medicationName, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID2, "lblStrengthPrescription", lblStrength.Location.X, 20, strength, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID3, "lblFrequencyPrescription", lblFrequency.Location.X, 20, frequency, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID4, "lblTypePrescription", lblType.Location.X, 20, type, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID5, "lblQuantityPrescription", lblQuantity.Location.X, 20, quantity, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID6, "lblDatePrescribed", lblDatePrescribed.Location.X, 20, datePrescribed.Substring(0, 10), getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, PrescribedBy, getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID, "lblMedicationName", lblMedication.Location.X, 20, strMedicationName, getPanelCount(flpPannel), tpToolTip, TruncateString(25, strMedicationName))
+        CreateIDLabel(pnlMainPanel, lblID2, "lblStrength", lblStrength.Location.X, 20, strStrength, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID3, "lblType", lblType.Location.X, 20, strType, getPanelCount(flpPannel))
+        CreateIDLabel(pnlMainPanel, lblID4, "lblQuantity", lblQuantity.Location.X, 20, strQuantity, getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID5, "lblDispensedBy", lblDispensedBy.Location.X, 20, strDispenseBy, getPanelCount(flpPannel), tpToolTip, TruncateString(30, strDispenseBy))
+        CreateIDLabel(pnlMainPanel, lblID6, "lblDispenseTimeAndDate", lblDateTime.Location.X, 20, strDispenseDate.Substring(0, 19), getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
-
-        'currentContactPanel = pnl.Name
 
     End Sub
 
 
     Private Sub Dispense_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        lblDirections.Text = "Select Amount To Dispense:"
+        lblDirections.Left = (pnlSelector.Width \ 2) - (pnlSelector.Width \ 2)
+
+        pnlAmountInDrawer.Visible = False
+        pnlAmountAdministered.Visible = False
+        pnlSelector.Visible = False
+
     End Sub
 
 
     Private Sub btnUp_Click(sender As Object, e As EventArgs) Handles btnUp.Click
-        ButtonIncrement(1000, txtQuantity)
+        ButtonIncrement(1000, txtQuantityToDispense)
     End Sub
 
     Private Sub btnDown_Click(sender As Object, e As EventArgs) Handles btnDown.Click
-        ButtonDecrement(txtQuantity)
+        ButtonDecrement(txtQuantityToDispense)
     End Sub
 
     Private Sub btnDispense_Click_1(sender As Object, e As EventArgs) Handles btnDispense.Click
-        If Not IsNothing(cmbMedications.SelectedItem) Then
-            For Each allergy In lstboxAllergies.Items
-                If cmbMedications.SelectedItem.ToString.ToLower.Contains(allergy.ToString.ToLower) Then
-                    'show witness sign off
-                    frmWitnessSignOff.Label1.Text = cmbMedications.SelectedItem.ToString
-                    frmWitnessSignOff.referringForm = Me
-                    frmWitnessSignOff.ShowDialog()
-                    'if authentication from witness sign off form comes back then
-                    If blnOverride Then
-                        Dim intMaxAllergyID
-                        ' pull the information to insert
-                        If ExecuteScalarQuery("Select AllergyOverride_ID from AllergyOverride") = Nothing Then
-                            intMaxAllergyID = 0
-                        Else
-                            intMaxAllergyID = ExecuteScalarQuery("SELECT MAX(AllergyOverride_ID) from AllergyOverride")
-                            intMaxAllergyID += 1
-                        End If
-
-                        ExecuteInsertQuery("INSERT INTO AllergyOverride(AllergyOverride_ID, Patient_TUID, User_TUID, Allergy_Name, DateTime) " &
-                                           "Values(" & intMaxAllergyID & ", " & intPatientID & ", " & LoggedInID & ", '" & allergy & "', '" & DateTime.Now & "')")
+        Dim NarcoticFlag As Integer = CreateDatabase.ExecuteScalarQuery("Select Controlled_Flag from Medication where Medication_ID = '" & intMedicationID & "' and Active_Flag = '1'")
+        Dim intdrawerNumber As Integer = CreateDatabase.ExecuteScalarQuery("Select Drawers_TUID from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
+        If lblDirections.Text.Equals("Select Amount To Dispense:") Then
+            If IsNumeric(txtQuantityToDispense.Text) Then
+                If txtQuantityToDispense.Text > 0 Then
+                    If NarcoticFlag = 1 Then
+                        'Is a narcotic
+                        OpenOneDrawer(intdrawerNumber)
+                        intDispenseAmount = txtQuantityToDispense.Text
+                        changebuttonForCounting()
                     Else
-                        MessageBox.Show("Dispense canceled by user.")
-                        Exit Sub
+                        'Is not a narcotic
+                        OpenOneDrawer(intdrawerNumber)
+                        intDispenseAmount = txtQuantityToDispense.Text
+                        changeButtonforDispensing()
                     End If
-                    blnOverride = False
                 Else
-                    ' do nothing as there is no allergy
+                    MessageBox.Show("Please enter a quantity value greater than 0")
                 End If
-            Next
-            'If blnSignedOff = True Then
-            DispenseHistory.DispenseMedication(DispenseHistory.SplitMedicationString(cmbMedications.SelectedItem), intPatientID)
-                MessageBox.Show("Order Successfully placed")
-            '   blnSignedOff = False
-            ' End If
+            End If
+
+        ElseIf lblDirections.Text.Equals("Enter the Quantity in the Cart") Then
+            If IsNumeric(txtQuantityToDispense.Text) Then
+                Dim intAmountinCart As Integer = txtCountInDrawer.Text
+                UpdateSystemCountForDiscrepancy(intMedicationID, intdrawerNumber, intAmountinCart)
+                changeButtonforDispensing()
+            End If
+        ElseIf lblDirections.Text.Equals("Enter the Amount Administered") Then
+            If IsNumeric(txtAmountDispensed.Text) Then
+                Dim strAmountDispensed As String = txtAmountDispensed.Text & " " & txtUnits.Text
+                Dim intdrawerMEDTUID As Integer = CreateDatabase.ExecuteScalarQuery("Select DrawerMedication_ID from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
+                DispensingDrug(intMedicationID, CInt(LoggedInID), strAmountDispensed)
+                frmWaste.SetPatientID(intPatientID)
+                frmWaste.setDrawer(intdrawerNumber)
+                frmWaste.setMedID(intMedicationID)
+                frmWaste.setDrawerMEDTUID(intdrawerMEDTUID)
+                frmMain.OpenChildForm(frmWaste)
+            Else
+                MessageBox.Show("Please enter a numeric number greater than 0")
+            End If
 
         End If
-
-
     End Sub
 
-    Private Sub cmbMedications_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMedications.SelectedIndexChanged
+    Private Sub changebuttonForCounting()
+        lblDirections.Text = "Enter the Quantity in the Cart"
+        lblDirections.Left = (pnlSelector.Width \ 2) - (pnlSelector.Width \ 2)
+        btnDispense.Text = "Submit Count"
+        pnlAmountInDrawer.Visible = True
+        pnlAmountToRemove.Visible = False
+    End Sub
+    Private Sub changeButtonforDispensing()
+        lblDirections.Text = "Enter the Amount Administered"
+        lblDirections.Left = (pnlSelector.Width \ 2) - (pnlSelector.Width \ 2)
+        ' show approiate panels
+        pnlAmountAdministered.Visible = True
+        pnlAmountToRemove.Visible = False
+        pnlAmountInDrawer.Visible = False
+        Dim strAmountUnit As String = CreateDatabase.ExecuteScalarQuery("Select Amount_Per_Container_Unit from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
+        txtUnits.Text = strAmountUnit
+    End Sub
+
+
+    Private Sub DispensingDrug(ByRef intMedID As Integer, ByRef intPrimaryID As Integer, ByRef strAmountDispensed As String)
+        Dim strbSQLcommand As New StringBuilder()
+        Dim dtmAdhocTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+        Dim intdrawerNumber As Integer = CreateDatabase.ExecuteScalarQuery("Select DrawerMedication_ID from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
+        strbSQLcommand.Clear()
+        strbSQLcommand.Append("SELECT PatientMedication_ID FROM PatientMedication WHERE Medication_TUID = '" & intMedID & "' AND Patient_TUID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1'")
+        Dim intPatientMedicationDatabaseID As Integer = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
+        strbSQLcommand.Clear()
+        strbSQLcommand.Append("INSERT INTO Dispensing(PatientMedication_TUID, Primary_User_TUID, Approving_User_TUID, DateTime_Dispensed, Amount_Dispensed, DrawerMedication_TUID) ")
+        strbSQLcommand.Append("VALUES('" & intPatientMedicationDatabaseID & "','" & intPrimaryID & "','" & intPrimaryID & "','" & dtmAdhocTime & "','" & strAmountDispensed & "','" & intdrawerNumber & "')")
+        CreateDatabase.ExecuteInsertQuery(strbSQLcommand.ToString)
+    End Sub
+
+    Private Sub UpdateSystemCountForDiscrepancy(ByRef intMedID As Integer, ByRef intDrawerCount As Integer, ByRef intEnteredAmount As Integer)
+        Dim intCurrentSystemCount As Integer = CreateDatabase.ExecuteScalarQuery("Select Quantity from DrawerMedication where Medication_TUID = '" & intMedID & "' and Active_Flag = '1' AND Drawers_TUID = '" & intDrawerCount & "'")
+        Dim intdrawerNumber As Integer = CreateDatabase.ExecuteScalarQuery("Select Drawers_TUID from DrawerMedication where Medication_TUID = '" & intMedID & "' and Active_Flag = '1'")
+        Dim intBinNumber As Integer = CreateDatabase.ExecuteScalarQuery("Select Divider_Bin from DrawerMedication where Medication_TUID = '" & intMedID & "' and Active_Flag = '1'")
+        If Not intCurrentSystemCount = intEnteredAmount Then
+            CreateDatabase.ExecuteInsertQuery("Update DrawerMedication SET Quantity = '" & intEnteredAmount & "' WHERE Medication_TUID = '" & intMedID & "' AND Active_Flag = '1'")
+            Discrepancies.CreateDiscrepancy(intdrawerNumber, intBinNumber, intCurrentSystemCount, intEnteredAmount, CInt(LoggedInID), CInt(LoggedInID), intMedID)
+
+            MessageBox.Show("Discrepancy detected and recorded")
+        End If
+    End Sub
+
+    Private Sub cmbMedications_SelectedIndexChanged(sender As Object, e As EventArgs)
         DispenseHistory.SetMedicationProperties()
     End Sub
 
-    Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantity.KeyPress
+    Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantityToDispense.KeyPress
         DataVaildationMethods.KeyPressCheck(e, "0123456789")
-        GraphicalUserInterfaceReusableMethods.MaxValue(CInt(sender.Text), 1000, txtQuantity)
+
+        If IsNumeric(txtQuantityToDispense.Text) Then
+            GraphicalUserInterfaceReusableMethods.MaxValue(CInt(sender.Text), 1000, txtQuantityToDispense)
+        End If
     End Sub
-    Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantity.TextChanged
+    Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantityToDispense.Validated
         If IsNumeric(sender.Text) Then
-            GraphicalUserInterfaceReusableMethods.MaxValue(CInt(sender.Text), 1000, txtQuantity)
+            GraphicalUserInterfaceReusableMethods.MaxValue(CInt(sender.Text), 1000, txtQuantityToDispense)
         Else
             MessageBox.Show("Please make sure you enter a positive number 1-1000")
             sender.Text = "1"
@@ -165,6 +226,14 @@
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         frmPatientInfo.setPatientID(intPatientID)
         frmMain.OpenChildForm(frmPatientInfo)
+
+    End Sub
+
+    Private Sub Label15_Click(sender As Object, e As EventArgs) Handles Label15.Click
+
+    End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles txtType.TextChanged
 
     End Sub
 End Class

@@ -67,6 +67,7 @@ Partial Class frmConfiguration
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.btnSaveUser = New System.Windows.Forms.Button()
+        Me.tpToolTip = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel5.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -679,4 +680,5 @@ Partial Class frmConfiguration
     Friend WithEvents tpLabelHover As ToolTip
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents tpToolTip As ToolTip
 End Class

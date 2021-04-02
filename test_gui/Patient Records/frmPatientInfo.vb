@@ -1,5 +1,50 @@
 ﻿Public Class frmPatientInfo
 
+    '/*********************************************************************/
+    '/*                   FILE NAME:  */									  
+    '/*********************************************************************/
+    '/*                 PART OF PROJECT:				   */				  
+    '/*********************************************************************/
+    '/*                   WRITTEN BY: 		         */		  
+    '/*		         DATE CREATED:			   */						  
+    '/*********************************************************************/
+    '/*  PROJECT PURPOSE:								   */				  
+    '/*											   */					  
+    '/* 																	  
+    '/*********************************************************************/
+    '/*  FILE PURPOSE:									   */			  
+    '/*											   */					  
+    '/* 																	  
+    '/*********************************************************************/
+    '/*  COMMAND LINE PARAMETER LIST (In Parameter Order):			   */ 
+    '/*                                                    (NONE)	   */	  
+    '/*********************************************************************/
+    '/*  ENVIRONMENTAL RETURNS:							   */			  
+    '/*                          (NOTHING)					   */		  
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */			  
+    '/*											   */					  
+    '/* 																	  
+    '/*********************************************************************/
+    '/*  GLOBAL VARIABLE LIST (Alphabetically):			         */		  
+    '/*						  	 (NONE)			   */					  
+    '/*********************************************************************/
+    '/* COMPILATION NOTES(will include version notes including libraries):*/
+    '/* 											   */					  
+    '/* 																	  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */				  
+    '/*											   */					  
+    '/*  WHO   WHEN     WHAT								   */			  
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*  NP    3/31/2021 made it so the form can't be edited when outside */
+    '/*                  edit mode. And changed the way the edit and view */
+    '/*                  modes work.                                      */
+    '/*********************************************************************/
+
+
+
+
     Private intPatientID As Integer
     Private intPatientMRN As Double
     Private strSelectedLabel As String
@@ -81,7 +126,8 @@
     '/*  NP    2/16/2021 Changed cboBed to be disabled by default until a */
     '/*                  selection in room is made.                       */
     '/*  NP   2/16/2021  added a call to the GetRoom method in            */
-    '/*                  PatientInformation*/
+    '/*                  PatientInformation                               */
+    '/* NP    4/1/2021   Added a combo box for physician and populated it.*/
     '/*********************************************************************/
 
     Private Sub frmPatientInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -92,11 +138,15 @@
         'select a room. 
 
         ' intPatientMRN = txtMRN.Text
+
+        populatePhysicianComboBox(cboPhysicians, CreateDatabase.ExecuteSelectQuery("Select * from Physician where Active_flag = '" &
+                                                                                   1 & "' ORDER BY Physician_Last_Name, Physician_First_Name ;"))
         PatientInformation.GetAllergies(intPatientID)
         PatientInformation.GetPatientInformation(intPatientID)
         PatientInformation.getPrescriptions(intPatientID)
         PatientInformation.getRoom(intPatientID, cboRoom, cboBed)
         DispenseHistory.DispenseHistorySpecificPatient(intPatientID)
+
         SetControlsToReadOnly(ctl)
 
         CreateToolTips(pnlPrescriptionsHeader, tpLabelDirections)
@@ -118,7 +168,7 @@
         lblPrescriptions.Location = New Point(10, 190)
         moveAndResizePanels()
 
-
+        disableEdits()
         ' CreateDispenseHistoryPanels(flpDispenseHistory, "test", "test", "test", "test", "test", "test", "test")
     End Sub
     '/*********************************************************************/
@@ -230,7 +280,7 @@
 
     End Sub
     '/*********************************************************************/
-    '/*            SubProgram NAME: CreateDispenseHistoryPanels()         */         
+    '/*            SubProgram NAME: CreatePrescriptionsPanels()         */         
     '/*********************************************************************/
     '/*                   WRITTEN BY:  Collin Krygier   		          */   
     '/*		         DATE CREATED: 		 2/6/2021                         */                             
@@ -285,7 +335,7 @@
     '/*  WHO   WHEN     WHAT								              */             
     '/*  Collin Krygier  2/6/2021    Initial creation                     */
     '/*********************************************************************/
-    Public Sub CreatePrescriptionsPanels(ByVal flpPannel As FlowLayoutPanel, ByVal strMedicationName As String, ByVal strStrength As String, ByVal strFrequency As String, ByVal strType As String, ByVal strQuantity As String, ByVal strDatePrescribed As String, ByVal strPrescribedBy As String)
+    Public Sub CreatePrescriptionsPanels(ByVal flpPannel As FlowLayoutPanel, ByVal strMedicationName As String, ByVal strStrength As String, ByVal strFrequency As String, ByVal strType As String, ByVal strQuantity As String, ByVal strDatePrescribed As String, ByVal strPrescribedBy As String, ByRef intMedID As Integer)
         Dim pnl As Panel
         pnl = New Panel
 
@@ -318,6 +368,7 @@
         'AddHandler pnlMainPanel.DoubleClick, AddressOf DynamicDoubleClickNewOrder
         AddHandler pnlMainPanel.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
         AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
+        AddHandler pnlMainPanel.Click, AddressOf PrescriptionPanel_Click
 
         ' add controls to this panel
         ' call database info here to populate
@@ -347,7 +398,21 @@
         ' CreateIDLabel(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, strPrescribedBy, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
+        pnlMainPanel.Tag = intMedID
         flpPannel.Controls.Add(pnl)
+
+    End Sub
+
+    Private Sub PrescriptionPanel_Click(ByVal sender As Object, e As EventArgs)
+        Dim intMedID As Integer = sender.tag
+
+        frmDispense.SetPatientID(intPatientID)
+        frmDispense.SetintMedicationID(intMedID)
+        frmMain.OpenChildForm(frmDispense)
+        DispenseHistory.DispensemedicationPopulate(intPatientID, intMedID)
+        PatientInformation.PopulatePatientDispenseInfo(intPatientID)
+        PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientID)
+        PatientInformation.DisplayPatientPrescriptionsDispense(intPatientID)
 
     End Sub
 
@@ -575,6 +640,7 @@
         If Not btnEditPatient.Text = "Save Changes" Then
 
             SetControlsToAllowEdit(ctl)
+            enableEdits()
             pnlNameBarcode.Visible = True
             btnEditPatient.Text = "Save Changes"
             moveControlsDown(expandedSize)
@@ -584,6 +650,7 @@
         Else
 
             SetControlsToReadOnly(ctl)
+            disableEdits()
             btnEditPatient.Text = "Edit Patient"
             PatientInformation.SavePatientEdits(intPatientID)
             pnlNameBarcode.Visible = False
@@ -659,6 +726,17 @@
                 'cboRoom.Enabled = False
             End If
         Next
+
+        For Each ctl In pnlNameBarcode.Controls
+            If TypeName(ctl) = "TextBox" Then
+
+                Dim txtbox As TextBox = CType(ctl, TextBox)
+
+                txtbox.ReadOnly = False
+                txtbox.BorderStyle = BorderStyle.FixedSingle
+                txtbox.BackColor = Color.White
+            End If
+        Next
         mtbBirthday.ReadOnly = False
         cboState.Enabled = True
     End Sub
@@ -719,64 +797,75 @@
 
             End If
         Next
+        For Each ctl In pnlNameBarcode.Controls
+            If TypeName(ctl) = "TextBox" Then
+
+                Dim txtbox As TextBox = CType(ctl, TextBox)
+
+                txtbox.ReadOnly = True
+                txtbox.BorderStyle = BorderStyle.FixedSingle
+                txtbox.BackColor = Color.White
+            End If
+        Next
+
         cboBed.Enabled = False
         cboRoom.Enabled = False
         cboState.Enabled = False
         mtbBirthday.ReadOnly = True
     End Sub
 
-    '/*********************************************************************/
-    '/*                   SUBPROGRAM NAME: btnDispenseMedication_Click 	  */         
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:     		                          */   
-    '/*		              DATE CREATED: 	                              */                             
-    '/*********************************************************************/
-    '/*  FUNCTION PURPOSE:								                  */             
-    '/*											                          */                     
-    '/*                                                                   */
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      						                      */           
-    '/*                                         				          */         
-    '/*********************************************************************/
-    '/*  CALLS:										                      */                 
-    '/*             (NONE)								                  */             
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					          */         
-    '/*											                          */                     
-    '/*                                                                   */  
-    '/*********************************************************************/
-    '/*  RETURNS:								                          */                   
-    '/*            (NOTHING)								              */             
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								                  */             
-    '/*											                          */                     
-    '/*                                                                   */ 
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											                          */                     
-    '/*                                                                   */  
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						                      */               
-    '/*											                          */                     
-    '/*  WHO   WHEN     WHAT								              */             
-    '/*  ---   ----     ------------------------------------------------- */
-    '/*                                                                   */
-    '/*********************************************************************/
-    Private Sub btnDispenseMedication_Click(sender As Object, e As EventArgs) Handles btnDispenseMedication.Click
+    ''/*********************************************************************/
+    ''/*                   SUBPROGRAM NAME: btnDispenseMedication_Click 	  */         
+    ''/*********************************************************************/
+    ''/*                   WRITTEN BY:     		                          */   
+    ''/*		              DATE CREATED: 	                              */                             
+    ''/*********************************************************************/
+    ''/*  FUNCTION PURPOSE:								                  */             
+    ''/*											                          */                     
+    ''/*                                                                   */
+    ''/*********************************************************************/
+    ''/*  CALLED BY:   	      						                      */           
+    ''/*                                         				          */         
+    ''/*********************************************************************/
+    ''/*  CALLS:										                      */                 
+    ''/*             (NONE)								                  */             
+    ''/*********************************************************************/
+    ''/*  PARAMETER LIST (In Parameter Order):					          */         
+    ''/*											                          */                     
+    ''/*                                                                   */  
+    ''/*********************************************************************/
+    ''/*  RETURNS:								                          */                   
+    ''/*            (NOTHING)								              */             
+    ''/*********************************************************************/
+    ''/* SAMPLE INVOCATION:								                  */             
+    ''/*											                          */                     
+    ''/*                                                                   */ 
+    ''/*********************************************************************/
+    ''/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    ''/*											                          */                     
+    ''/*                                                                   */  
+    ''/*********************************************************************/
+    ''/* MODIFICATION HISTORY:						                      */               
+    ''/*											                          */                     
+    ''/*  WHO   WHEN     WHAT								              */             
+    ''/*  ---   ----     ------------------------------------------------- */
+    ''/*                                                                   */
+    ''/*********************************************************************/
+    'Private Sub btnDispenseMedication_Click(sender As Object, e As EventArgs)
 
-        ' pass MRN to the dispense screen because it needs to be used to be sent back to the patient info screen if the user
-        ' decides to go back a screen.
+    '    ' pass MRN to the dispense screen because it needs to be used to be sent back to the patient info screen if the user
+    '    ' decides to go back a screen.
 
-        frmDispense.SetPatientID(intPatientID)
-        frmMain.OpenChildForm(frmDispense)
-        DispenseHistory.DispensemedicationPopulate(intPatientID)
-        PatientInformation.PopulatePatientDispenseInfo(intPatientID)
-        PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientID)
-        PatientInformation.DisplayPatientPrescriptionsDispense(intPatientID)
-        '  Dim frmCurrentForm As Form = Me
+    '    frmDispense.SetPatientID(intPatientID)
+    '    frmMain.OpenChildForm(frmDispense)
+    '    DispenseHistory.DispensemedicationPopulate(intPatientID)
+    '    PatientInformation.PopulatePatientDispenseInfo(intPatientID)
+    '    PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientID)
+    '    PatientInformation.DisplayPatientPrescriptionsDispense(intPatientID)
+    '    '  Dim frmCurrentForm As Form = Me
 
 
-    End Sub
+    'End Sub
 
     ' Private Sub Button1_Click(sender As Object, e As EventArgs)
     '     Returns.Show()
@@ -1215,6 +1304,7 @@
             moveControlsDown(expandedSize)
             ' change the text 
             lblMoreDetails.Text = "Show Less..."
+            disableEdits()
 
         Else
             moveControlsUp(shrinkSize)
@@ -1275,6 +1365,8 @@
 
     End Sub
 
+
+
     '/*********************************************************************/
     '/*                   SubProgram NAME: moveControlsUp()               */         
     '/*********************************************************************/
@@ -1326,5 +1418,127 @@
 
     Private Sub txtMRN_TextChanged(sender As Object, e As KeyPressEventArgs) Handles txtZipCode.KeyPress, txtPhone.KeyPress, txtMRN.KeyPress
 
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME:  disableEdits				   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		               */   
+    '/*		         DATE CREATED: 	3/31/2021                       	   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								   */             
+    '/*	 This is going to disable all the information boxes on the form so*/
+    '/*  they can't be editied if we don't want them to be. this will make*/
+    '/*  it far easier to turn edit mode on and off. 
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Private Sub disableEdits()
+        txtMRN.Enabled = False
+        mtbBirthday.Enabled = False
+        txtGender.Enabled = False
+        txtHeight.Enabled = False
+        txtWeight.Enabled = False
+        cboRoom.Enabled = False
+        cboBed.Enabled = False
+        cboPhysicians.Enabled = False
+        txtEmail.Enabled = False
+        txtPhone.Enabled = False
+        txtAddress.Enabled = False
+        txtCity.Enabled = False
+        cboState.Enabled = False
+        txtZipCode.Enabled = False
+        txtFirstName.Enabled = False
+        txtMiddle.Enabled = False
+        txtLast.Enabled = False
+        txtBarcode.Enabled = False
+    End Sub
+
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: enableEdits					   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		                */   
+    '/*		         DATE CREATED: 	3/31/2021                       	   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								   */             
+    '/*	 this works as the opposite to disableEdits. It will allow us to  */
+    '/*  easily turn edit mode on.                                        */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Private Sub enableEdits()
+        txtMRN.Enabled = True
+        mtbBirthday.Enabled = True
+        txtGender.Enabled = True
+        txtHeight.Enabled = True
+        txtWeight.Enabled = True
+        cboRoom.Enabled = True
+        cboBed.Enabled = True
+        cboPhysicians.Enabled = True
+        txtEmail.Enabled = True
+        txtPhone.Enabled = True
+        txtAddress.Enabled = True
+        txtCity.Enabled = True
+        cboState.Enabled = True
+        txtZipCode.Enabled = True
+        txtFirstName.Enabled = True
+        txtMiddle.Enabled = True
+        txtLast.Enabled = True
+        txtBarcode.Enabled = True
     End Sub
 End Class

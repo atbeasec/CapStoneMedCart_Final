@@ -78,8 +78,10 @@ Partial Class frmMain
         'lblCurrentUser
         '
         Me.lblCurrentUser.AutoSize = True
+        Me.lblCurrentUser.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
         Me.lblCurrentUser.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCurrentUser.Location = New System.Drawing.Point(257, 7)
+        Me.lblCurrentUser.ForeColor = System.Drawing.Color.White
+        Me.lblCurrentUser.Location = New System.Drawing.Point(30, 6)
         Me.lblCurrentUser.Name = "lblCurrentUser"
         Me.lblCurrentUser.Size = New System.Drawing.Size(44, 17)
         Me.lblCurrentUser.TabIndex = 2
@@ -88,9 +90,10 @@ Partial Class frmMain
         '
         'pbLogin
         '
-        Me.pbLogin.BackgroundImage = Global.test_gui.My.Resources.Resources.user_px
+        Me.pbLogin.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.pbLogin.BackgroundImage = Global.test_gui.My.Resources.Resources.image
         Me.pbLogin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pbLogin.Location = New System.Drawing.Point(230, 3)
+        Me.pbLogin.Location = New System.Drawing.Point(3, 2)
         Me.pbLogin.Name = "pbLogin"
         Me.pbLogin.Size = New System.Drawing.Size(25, 25)
         Me.pbLogin.TabIndex = 0
@@ -618,6 +621,7 @@ Partial Class frmMain
         Me.Controls.Add(Me.pnlSideMenu)
         Me.Controls.Add(Me.pnlTopBar)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

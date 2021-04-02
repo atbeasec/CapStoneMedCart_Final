@@ -13,7 +13,7 @@ Patient_middle_name has to be alphanumeric string
 
 Patient_Last_Name has to be an alphanumeric string
 
-Date_Of_Birth	has to be a vaild date
+Date_Of_Birth	has to be a vaild date in the following format YYYY/MM/DD
 
 Sex has to be "Male" or "Female"
 

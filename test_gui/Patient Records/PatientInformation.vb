@@ -1,6 +1,8 @@
 ﻿Imports System.Data.SQLite
+Imports System.Net.Mail
 Imports System.Text
 Module PatientInformation
+#Const debug = True
     '/*******************************************************************/
     '/*                   FILE NAME: PatientInformation.vb              */
     '/*******************************************************************/
@@ -191,9 +193,9 @@ Module PatientInformation
             If IsDBNull(dr(1)) Then
                 frmPatientInfo.LblPatientName.Text = "N/A"
             Else
-                frmPatientInfo.LblPatientName.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.FristName) &
-                    " " & dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.MiddleName) &
-                    " " & dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.LastName)
+                patientRecordLabeling(dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.FristName),
+                                        dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.MiddleName),
+                                        dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.LastName))
                 frmPatientInfo.txtFirstName.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.FristName)
                 frmPatientInfo.txtMiddle.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.MiddleName)
                 frmPatientInfo.txtLast.Text = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.LastName)
@@ -215,12 +217,16 @@ Module PatientInformation
             " FROM Physician WHERE Physician_ID = '" & intPhysicianID & "'"
 
         dsPatientDataSet = CreateDatabase.ExecuteSelectQuery(strSQLiteCommand)
+
         'check if physician fields are null
         For Each dr As DataRow In dsPatientDataSet.Tables(0).Rows
             If IsDBNull(dr(1)) Then
-                frmPatientInfo.txtPhysician.Text = "N/A"
+                'frmPatientInfo.txtPhysician.Text = "N/A"
             Else
-                frmPatientInfo.txtPhysician.Text = "Dr. " & dr(0) & " " & dr(1)
+
+                frmPatientInfo.cboPhysicians.Tag = (dr(1).ToString & ", " & dr(0).ToString).ToString.Trim
+                frmPatientInfo.cboPhysicians.SelectedItem = frmPatientInfo.cboPhysicians.Tag
+                '   MessageBox.Show(frmPatientInfo.cboPhysicians.GetItemText(frmPatientInfo.cboPhysicians.Tag))
             End If
         Next
         'call dispense history to get dispensed history of the patient
@@ -262,6 +268,7 @@ Module PatientInformation
     '/*  WHO                   WHEN     WHAT							  */
     '/*  ---                   ----     ----------------------------------*/
     '/*  Alexander Beasecker  03/15/21  Initial creation of the code      */
+    '/*  NP                   03/31/2021 Added Error checking to the code.*/
     '/*********************************************************************/
     Public Sub SavePatientEdits(ByRef intPatientID As Integer)
         'check if MRN is changed
@@ -269,6 +276,8 @@ Module PatientInformation
         Dim strbItemsChanged As StringBuilder = New StringBuilder
         Dim intCountChanged As Integer = 0
         Dim strbSqlCommand As StringBuilder = New StringBuilder
+        Dim strbErrorMessage As StringBuilder = New StringBuilder
+        Dim blnIssue = False
         'this is for checking if first name was changed
         'there is a if not call for each piece of patient information
         'it checks if the .tag value is the same as what is in the box, if they are the same
@@ -276,244 +285,449 @@ Module PatientInformation
         'if it is not the same then the value was changed, update the value
         'i have a count that increases after each change to track the number of items that was changed
         'and i add on to a string builder to let the user know all the items that were changed after is saves everything
-        If Not frmPatientInfo.txtFirstName.Text.Equals(frmPatientInfo.txtFirstName.Tag) Then
-            strbSqlCommand.Append("UPDATE Patient SET Patient_First_Name = '" & frmPatientInfo.txtFirstName.Text & "' Where Patient_ID = '" & intPatientID & "'")
-            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
-            strbItemsChanged.AppendLine(" First Name")
-            intCountChanged = intCountChanged + 1
-            strbSqlCommand.Clear()
-            frmPatientInfo.txtFirstName.Tag = frmPatientInfo.txtFirstName.Text
-        End If
-
-        'this is for checking if middle name was changed
-        If Not frmPatientInfo.txtMiddle.Text.Equals(frmPatientInfo.txtMiddle.Tag) Then
-            strbSqlCommand.Append("UPDATE Patient SET Patient_Middle_Name = '" & frmPatientInfo.txtMiddle.Text & "' Where Patient_ID = '" & intPatientID & "'")
-            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
-            strbItemsChanged.AppendLine(" Middle Name")
-            intCountChanged = intCountChanged + 1
-            strbSqlCommand.Clear()
-            frmPatientInfo.txtMiddle.Tag = frmPatientInfo.txtMiddle.Text
-        End If
-
-        'this is for checking if last name was changed
-        If Not frmPatientInfo.txtLast.Text.Equals(frmPatientInfo.txtLast.Tag) Then
-            strbSqlCommand.Append("UPDATE Patient SET Patient_Last_Name = '" & frmPatientInfo.txtLast.Text & "' Where Patient_ID = '" & intPatientID & "'")
-            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
-            strbItemsChanged.AppendLine(" Last Name")
-            intCountChanged = intCountChanged + 1
-            strbSqlCommand.Clear()
-            frmPatientInfo.txtLast.Tag = frmPatientInfo.txtLast.Text
-        End If
-
-        If Not intMRNCurrentValue.Equals(intMRNInitalValue) Then
-            'build sql update command
-            strbSqlCommand.Append("UPDATE Patient SET MRN_Number = '" & intMRNCurrentValue & "' Where Patient_ID = '" & intPatientID & "'")
-            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
-            'add item that was changed too string that is tracking all changed items
-            strbItemsChanged.AppendLine(" MRN")
-            'increase changed item count
-            intCountChanged = intCountChanged + 1
-            'clear string bulder
-            strbSqlCommand.Clear()
-            'update tag to new item
-            intMRNInitalValue = intMRNCurrentValue
-        End If
-        'check if date of birth is changed
-        If Not frmPatientInfo.mtbBirthday.Text.Equals(frmPatientInfo.mtbBirthday.Tag) Then
-            'build sql update command
-            strbSqlCommand.Append("UPDATE Patient SET Date_of_Birth = '" & frmPatientInfo.mtbBirthday.Text & "' Where Patient_ID = '" & intPatientID & "'")
-            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
-            'add item that was changed too string that is tracking all changed items
-            strbItemsChanged.Append(" Date of birth")
-            'increase changed item count
-            intCountChanged = intCountChanged + 1
-            'clear string bulder
-            strbSqlCommand.Clear()
-            'update tag to new item
-            frmPatientInfo.mtbBirthday.Tag = frmPatientInfo.mtbBirthday.Text
-        End If
-        'check if sex is changed
-        If Not frmPatientInfo.txtGender.Text.Equals(frmPatientInfo.txtGender.Tag) Then
-            'build sql update command
-            strbSqlCommand.Append("UPDATE Patient SET Sex = '" & frmPatientInfo.txtGender.Text & "' Where Patient_ID = '" & intPatientID & "'")
-            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
-            'add item that was changed too string that is tracking all changed items
-            strbItemsChanged.Append(" Gender")
-            'increase changed item count
-            intCountChanged = intCountChanged + 1
-            'clear string bulder
-            strbSqlCommand.Clear()
-            'update tag to new item
-            frmPatientInfo.txtGender.Tag = frmPatientInfo.txtGender.Text
-        End If
-        'check if height is changed
-        If Not frmPatientInfo.txtHeight.Text.Equals(frmPatientInfo.txtHeight.Tag) Then
-            'build sql update command
-            strbSqlCommand.Append("UPDATE Patient SET Height = '" & frmPatientInfo.txtHeight.Text & "' Where Patient_ID = '" & intPatientID & "'")
-            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
-            'add item that was changed too string that is tracking all changed items
-            strbItemsChanged.Append(" Height")
-            'increase changed item count
-            intCountChanged = intCountChanged + 1
-            'clear string bulder
-            strbSqlCommand.Clear()
-            'update tag to new item
-            frmPatientInfo.txtHeight.Tag = frmPatientInfo.txtHeight.Text
-        End If
-        'check if weight is changed
-        If Not frmPatientInfo.txtWeight.Text.Equals(frmPatientInfo.txtWeight.Tag) Then
-            'build sql update command
-            strbSqlCommand.Append("UPDATE Patient SET Weight = '" & frmPatientInfo.txtWeight.Text & "' Where Patient_ID = '" & intPatientID & "'")
-            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
-            'add item that was changed too string that is tracking all changed items
-            strbItemsChanged.Append(" Weight")
-            'increase changed item count
-            intCountChanged = intCountChanged + 1
-            'clear string bulder
-            strbSqlCommand.Clear()
-            'update tag to new item
-            frmPatientInfo.txtWeight.Tag = frmPatientInfo.txtWeight.Text
-        End If
-        'check if email is changed
-        If Not frmPatientInfo.txtEmail.Text.Equals(frmPatientInfo.txtEmail.Tag) Then
-            'build sql update command
-            strbSqlCommand.Append("UPDATE Patient SET Email_address = '" & frmPatientInfo.txtEmail.Text & "' Where Patient_ID = '" & intPatientID & "'")
-            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
-            'add item that was changed too string that is tracking all changed items
-            strbItemsChanged.Append(" Email")
-            'increase changed item count
-            intCountChanged = intCountChanged + 1
-            'clear string bulder
-            strbSqlCommand.Clear()
-            'update tag to new item
-            frmPatientInfo.txtEmail.Tag = frmPatientInfo.txtEmail.Text
-        End If
-        'check if phone is changed
-        If Not frmPatientInfo.txtPhone.Text.Equals(frmPatientInfo.txtPhone.Tag) Then
-            'build sql update command
-            strbSqlCommand.Append("UPDATE Patient SET Phone_Number = '" & frmPatientInfo.txtPhone.Text & "' Where Patient_ID = '" & intPatientID & "'")
-            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
-            'add item that was changed too string that is tracking all changed items
-            strbItemsChanged.Append(" Phone Number")
-            'increase changed item count
-            intCountChanged = intCountChanged + 1
-            'clear string bulder
-            strbSqlCommand.Clear()
-            'update tag to new item
-            frmPatientInfo.txtPhone.Tag = frmPatientInfo.txtPhone.Text
-        End If
-        'check if street address is changed
-        If Not frmPatientInfo.txtAddress.Text.Equals(frmPatientInfo.txtAddress.Tag) Then
-            'build sql update command
-            strbSqlCommand.Append("UPDATE Patient SET Address = '" & frmPatientInfo.txtAddress.Text & "' Where Patient_ID = '" & intPatientID & "'")
-            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
-            'add item that was changed too string that is tracking all changed items
-            strbItemsChanged.Append(" Street Address")
-            'increase changed item count
-            intCountChanged = intCountChanged + 1
-            'clear string bulder
-            strbSqlCommand.Clear()
-            'update tag to new item
-            frmPatientInfo.txtAddress.Tag = frmPatientInfo.txtAddress.Text
-        End If
-        'check if city is changed
-        If Not frmPatientInfo.txtCity.Text.Equals(frmPatientInfo.txtCity.Tag) Then
-            'build sql update command
-            strbSqlCommand.Append("UPDATE Patient SET City = '" & frmPatientInfo.txtCity.Text & "' Where Patient_ID = '" & intPatientID & "'")
-            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
-            'add item that was changed too string that is tracking all changed items
-            strbItemsChanged.Append(" City")
-            'increase changed item count
-            intCountChanged = intCountChanged + 1
-            'clear string bulder
-            strbSqlCommand.Clear()
-            'update tag to new item
-            frmPatientInfo.txtCity.Tag = frmPatientInfo.txtCity.Text
-        End If
-        'check if state is changed
-        If Not frmPatientInfo.cboState.SelectedIndex.Equals(frmPatientInfo.cboState.Tag) Then
-            'build sql update command
-            strbSqlCommand.Append("UPDATE Patient SET State = '" & frmPatientInfo.cboState.SelectedItem & "' Where Patient_ID = '" & intPatientID & "'")
-            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
-            'add item that was changed too string that is tracking all changed items
-            strbItemsChanged.Append(" State")
-            'increase changed item count
-            intCountChanged = intCountChanged + 1
-            'clear string bulder
-            strbSqlCommand.Clear()
-            'update tag to new item
-            frmPatientInfo.cboState.Tag = frmPatientInfo.cboState.SelectedIndex
-        End If
-        'check if zip code is changed
-        If Not frmPatientInfo.txtZipCode.Text.Equals(frmPatientInfo.txtZipCode.Tag) Then
-            'build sql update command
-            strbSqlCommand.Append("UPDATE Patient SET Zip_Code = '" & frmPatientInfo.txtZipCode.Text & "' Where Patient_ID = '" & intPatientID & "'")
-            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
-            'add item that was changed too string that is tracking all changed items
-            strbItemsChanged.Append("ZipCode")
-            'increase changed item count
-            intCountChanged = intCountChanged + 1
-            'clear string bulder
-            strbSqlCommand.Clear()
-            'update tag to new item
-            frmPatientInfo.txtZipCode.Tag = frmPatientInfo.txtZipCode.Text
-        End If
-
-        If Not frmPatientInfo.txtBarcode.Text.Equals(frmPatientInfo.txtBarcode.Tag) Then
-            'build sql update command
-            strbSqlCommand.Append("UPDATE Patient SET Barcode = '" & frmPatientInfo.txtBarcode.Text & "' Where Patient_ID = '" & intPatientID & "'")
-            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
-            'add item that was changed too string that is tracking all changed items
-            strbItemsChanged.Append(" Barcode")
-            'increase changed item count
-            intCountChanged = intCountChanged + 1
-            'clear string bulder
-            strbSqlCommand.Clear()
-            'update tag to new item
-            frmPatientInfo.txtBarcode.Tag = frmPatientInfo.txtBarcode.Text
-        End If
-        If Not frmPatientInfo.cboBed.SelectedIndex = -1 Then
-            Dim strRoomBed As String = frmPatientInfo.cboRoom.Text & frmPatientInfo.cboBed.Text
-            Dim strTagRoomBed As String = frmPatientInfo.cboRoom.Tag & frmPatientInfo.cboBed.Tag
-
-            'get the tag room and bed, the tag room and bed are the room and bed the patient is currently in.
-            'check to see if the room and bed changed by checking if they are equal.
-            'if they are equal then it didnt change
-            'if they are not equal then they did change and update the room
-            If Not strTagRoomBed.Equals(strRoomBed) Then
-                strbSqlCommand.Clear()
-                strbSqlCommand.Append("UPDATE PatientRoom SET Active_Flag = '0' Where Patient_TUID = '" & intPatientID & "' AND Active_Flag = '1'")
-                CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
-                strbSqlCommand.Clear()
-                Dim strCheck As String = CreateDatabase.ExecuteScalarQuery("SELECT Room_TUID FROM PatientRoom where Patient_TUID = '" & intPatientID & "' AND Room_TUID = '" & frmPatientInfo.cboRoom.Text & "' AND Bed_Name = '" & frmPatientInfo.cboBed.Text & "' AND Active_Flag = '0'")
-                If IsNothing(strCheck) Then
-                    'if nothing is returned that record is not in the database so insert
-                    CreateDatabase.ExecuteInsertQuery("INSERT INTO PatientRoom(Patient_TUID,Room_TUID,Bed_Name,Active_Flag) VALUES('" & intPatientID & "', '" & frmPatientInfo.cboRoom.Text & "', '" & frmPatientInfo.cboBed.Text & "','1')")
-                    frmPatientInfo.cboRoom.Tag = frmPatientInfo.cboRoom.Text
-                    frmPatientInfo.cboBed.Tag = frmPatientInfo.cboBed.Text
-                    intCountChanged = intCountChanged + 1
-                    strbItemsChanged.Append(" Room and bed")
+        With frmPatientInfo
+            If Not frmPatientInfo.txtFirstName.Text.Equals(frmPatientInfo.txtFirstName.Tag) Then
+                If .txtFirstName.Text = String.Empty Or .txtFirstName.Text.Length <= 3 Then
+                    strbErrorMessage.AppendLine("First must be longer than 2 character ")
+                    blnIssue = True
+                    .txtFirstName.Text = .txtFirstName.Tag
+                ElseIf BulkImportMethods.TextCheck(frmPatientInfo.txtFirstName.Text) Then
+                    strbErrorMessage.AppendLine("First name cannot contain a ;")
+                    blnIssue = True
+                    .txtFirstName.Text = .txtFirstName.Tag
                 Else
-                    'if it was in the database reactivate it
-                    CreateDatabase.ExecuteInsertQuery("Update PatientRoom SET Active_Flag = '1' where Patient_TUID = '" & intPatientID & "' AND Room_TUID = '" & frmPatientInfo.cboRoom.Text & "' AND Bed_Name = '" & frmPatientInfo.cboBed.Text & "'")
-                    frmPatientInfo.cboRoom.Tag = frmPatientInfo.cboRoom.Text
-                    frmPatientInfo.cboBed.Tag = frmPatientInfo.cboBed.Text
+
+                    strbSqlCommand.Append("UPDATE Patient SET Patient_First_Name = '" & checkSQLInjection(frmPatientInfo.txtFirstName.Text, True) & "' Where Patient_ID = '" & intPatientID & "'")
+                    CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+                    strbItemsChanged.AppendLine("First Name")
                     intCountChanged = intCountChanged + 1
-                    strbItemsChanged.Append(" Room and bed")
+                    strbSqlCommand.Clear()
+                    frmPatientInfo.txtFirstName.Tag = frmPatientInfo.txtFirstName.Text
                 End If
+            End If
+
+            'this is for checking if middle name was changed
+            If Not frmPatientInfo.txtMiddle.Text.Equals(frmPatientInfo.txtMiddle.Tag) Then
+                If .txtMiddle.Text = String.Empty Or .txtMiddle.Text.Length <= 3 Then
+                    strbErrorMessage.AppendLine("Middle name must be longer than 2 characters")
+                    blnIssue = True
+                    .txtMiddle.Text = .txtMiddle.Tag
+                ElseIf TextCheck(.txtMiddle.Text) Then
+                    strbErrorMessage.AppendLine("Middle name cannot contain a ;")
+                    blnIssue = True
+                    .txtMiddle.Text = .txtMiddle.Tag
+                Else
+                    strbSqlCommand.Append("UPDATE Patient SET Patient_Middle_Name = '" & checkSQLInjection(.txtMiddle.Text, True) & "' Where Patient_ID = '" & intPatientID & "'")
+                    CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+                    strbItemsChanged.AppendLine("Middle Name")
+                    intCountChanged = intCountChanged + 1
+                    strbSqlCommand.Clear()
+                    frmPatientInfo.txtMiddle.Tag = frmPatientInfo.txtMiddle.Text
+                End If
+            End If
+
+            'this is for checking if last name was changed
+            If Not frmPatientInfo.txtLast.Text.Equals(frmPatientInfo.txtLast.Tag) Then
+                If .txtLast.Text = String.Empty Or .txtLast.Text.Length <= 3 Then
+                    strbErrorMessage.AppendLine("Last name must be longer than 2 characters")
+                    blnIssue = True
+                    .txtLast.Text = .txtLast.Tag
+                ElseIf TextCheck(.txtLast.Text) Then
+                    strbErrorMessage.Append("Last name cannot contain a ;")
+                    blnIssue = True
+                    .txtLast.Text = .txtLast.Tag
+                Else
+                    strbSqlCommand.Append("UPDATE Patient SET Patient_Last_Name = '" & checkSQLInjection(frmPatientInfo.txtLast.Text, True) & "' Where Patient_ID = '" & intPatientID & "'")
+                    CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+                    strbItemsChanged.AppendLine("Last Name")
+                    intCountChanged = intCountChanged + 1
+                    strbSqlCommand.Clear()
+                    frmPatientInfo.txtLast.Tag = frmPatientInfo.txtLast.Text
+                End If
+            End If
+
+            If Not intMRNCurrentValue.Equals(intMRNInitalValue) Then
+                If Not IsNumeric(intMRNCurrentValue) Then
+                    strbErrorMessage.AppendLine("MRN must be numeric")
+                    blnIssue = True
+                Else
+                    'build sql update command
+                    strbSqlCommand.Append("UPDATE Patient SET MRN_Number = '" & intMRNCurrentValue & "' Where Patient_ID = '" & intPatientID & "'")
+                    CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+                    'add item that was changed too string that is tracking all changed items
+                    strbItemsChanged.AppendLine("MRN")
+                    'increase changed item count
+                    intCountChanged = intCountChanged + 1
+                    'clear string bulder
+                    strbSqlCommand.Clear()
+                    'update tag to new item
+                    intMRNInitalValue = intMRNCurrentValue
+                End If
+            End If
+
+            'check if date of birth is changed
+            If Not frmPatientInfo.mtbBirthday.Text.Equals(frmPatientInfo.mtbBirthday.Tag) Then
+                If .mtbBirthday.Text = String.Empty Or Not IsDate(.mtbBirthday.Text) Then
+                    strbErrorMessage.AppendLine("Date of birth must be a vaild date")
+                    blnIssue = True
+                    .mtbBirthday.Text = .mtbBirthday.Tag
+                ElseIf Convert.ToDateTime(.mtbBirthday.Text) > Now() Then
+                    strbErrorMessage.AppendLine("Date of bith cannot be a future date")
+                    blnIssue = True
+                    .mtbBirthday.Text = .mtbBirthday.Tag
+                Else
+
+                    'build sql update command
+                    strbSqlCommand.Append("UPDATE Patient SET Date_of_Birth = '" & frmPatientInfo.mtbBirthday.Text & "' Where Patient_ID = '" & intPatientID & "'")
+                    CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+                    'add item that was changed too string that is tracking all changed items
+                    strbItemsChanged.AppendLine("Date of birth")
+                    'increase changed item count
+                    intCountChanged = intCountChanged + 1
+                    'clear string bulder
+                    strbSqlCommand.Clear()
+                    'update tag to new item
+                    frmPatientInfo.mtbBirthday.Tag = frmPatientInfo.mtbBirthday.Text
+                End If
+            End If
+            'check if sex is changed
+            If Not frmPatientInfo.txtGender.Text.Equals(frmPatientInfo.txtGender.Tag) Then
+                If Not .txtGender.Text.ToLower.Equals("male") And .txtGender.Text.ToLower.Equals("Female") Then
+                    strbErrorMessage.AppendLine("Sex must be male or female")
+                    blnIssue = True
+                    .txtGender.Text = .txtGender.Tag
+                Else
+                    'build sql update command
+                    strbSqlCommand.Append("UPDATE Patient SET Sex = '" & frmPatientInfo.txtGender.Text & "' Where Patient_ID = '" & intPatientID & "'")
+                    CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+                    'add item that was changed too string that is tracking all changed items
+                    strbItemsChanged.AppendLine("Sex")
+                    'increase changed item count
+                    intCountChanged = intCountChanged + 1
+                    'clear string bulder
+                    strbSqlCommand.Clear()
+                    'update tag to new item
+                    frmPatientInfo.txtGender.Tag = frmPatientInfo.txtGender.Text
+                End If
+            End If
+
+            'check if height is changed
+            If Not frmPatientInfo.txtHeight.Text.Equals(frmPatientInfo.txtHeight.Tag) Then
+                If Not IsNumeric(.txtHeight.Text) Then
+                    .txtHeight.Text = .txtHeight.Tag
+                    strbErrorMessage.AppendLine("Height must be numeric")
+                    blnIssue = True
+
+                Else
+                    'build sql update command
+                    strbSqlCommand.Append("UPDATE Patient SET Height = '" & frmPatientInfo.txtHeight.Text & "' Where Patient_ID = '" & intPatientID & "'")
+                    CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+                    'add item that was changed too string that is tracking all changed items
+                    strbItemsChanged.AppendLine("Height")
+                    'increase changed item count
+                    intCountChanged = intCountChanged + 1
+                    'clear string bulder
+                    strbSqlCommand.Clear()
+                    'update tag to new item
+                    frmPatientInfo.txtHeight.Tag = frmPatientInfo.txtHeight.Text
+                End If
+            End If
+            'check if weight is changed
+            If Not frmPatientInfo.txtWeight.Text.Equals(frmPatientInfo.txtWeight.Tag) Then
+                If Not IsNumeric(.txtWeight.Text) Then
+                    .txtWeight.Text = .txtWeight.Tag
+                    strbErrorMessage.AppendLine("Weight must be numeric")
+                    blnIssue = True
+                Else
+                    'build sql update command
+                    strbSqlCommand.Append("UPDATE Patient SET Weight = '" & frmPatientInfo.txtWeight.Text & "' Where Patient_ID = '" & intPatientID & "'")
+                    CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+                    'add item that was changed too string that is tracking all changed items
+                    strbItemsChanged.AppendLine("Weight")
+                    'increase changed item count
+                    intCountChanged = intCountChanged + 1
+                    'clear string bulder
+                    strbSqlCommand.Clear()
+                    'update tag to new item
+                    frmPatientInfo.txtWeight.Tag = frmPatientInfo.txtWeight.Text
+                End If
+            End If
+
+            'check if email is changed
+            If Not frmPatientInfo.txtEmail.Text.Equals(frmPatientInfo.txtEmail.Tag) Then
+                Try
+
+                    Dim email = New MailAddress(.txtEmail.Text) 'this allows .net to check
+                    'to see if the email is vaild. 
+
+                    'build sql update command
+                    strbSqlCommand.Append("UPDATE Patient SET Email_address = '" & frmPatientInfo.txtEmail.Text & "' Where Patient_ID = '" & intPatientID & "'")
+                    CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+                    'add item that was changed too string that is tracking all changed items
+                    strbItemsChanged.AppendLine("Email")
+                    'increase changed item count
+                    intCountChanged = intCountChanged + 1
+                    'clear string bulder
+                    strbSqlCommand.Clear()
+                    'update tag to new item
+                    frmPatientInfo.txtEmail.Tag = frmPatientInfo.txtEmail.Text
+                Catch ex As Exception
+                    strbErrorMessage.AppendLine("Email must follow a vaild email format")
+                    blnIssue = True
+                    .txtEmail.Text = .txtEmail.Tag
+                End Try
+            End If
+            'check if phone is changed
+            If Not frmPatientInfo.txtPhone.Text.Equals(frmPatientInfo.txtPhone.Tag) Then
+                If Not .txtPhone.Text.Length <> 10 Then
+                    strbErrorMessage.AppendLine("Phone number must be a vaild phone number")
+                Else
+                    'build sql update command
+                    strbSqlCommand.Append("UPDATE Patient SET Phone_Number = '" & frmPatientInfo.txtPhone.Text & "' Where Patient_ID = '" & intPatientID & "'")
+                    CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+                    'add item that was changed too string that is tracking all changed items
+                    strbItemsChanged.AppendLine("Phone Number")
+                    'increase changed item count
+                    intCountChanged = intCountChanged + 1
+                    'clear string bulder
+                    strbSqlCommand.Clear()
+                    'update tag to new item
+                    frmPatientInfo.txtPhone.Tag = frmPatientInfo.txtPhone.Text
+                End If
+            End If
+
+            'check if street address is changed
+            If Not frmPatientInfo.txtAddress.Text.Equals(frmPatientInfo.txtAddress.Tag) Then
+                If TextCheck(.txtAddress.Text) Then
+                    strbErrorMessage.AppendLine("Address cannot contain a ;")
+                    blnIssue = True
+                    .txtAddress.Text = .txtAddress.Tag
+                Else
+                    'build sql update command
+                    strbSqlCommand.Append("UPDATE Patient SET Address = '" & checkSQLInjection(frmPatientInfo.txtAddress.Text, True) & "' Where Patient_ID = '" & intPatientID & "'")
+                    CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+                    'add item that was changed too string that is tracking all changed items
+                    strbItemsChanged.AppendLine("Street Address")
+                    'increase changed item count
+                    intCountChanged = intCountChanged + 1
+                    'clear string bulder
+                    strbSqlCommand.Clear()
+                    'update tag to new item
+                    frmPatientInfo.txtAddress.Tag = frmPatientInfo.txtAddress.Text
+                End If
+            End If
+
+            'check if city is changed
+            If Not frmPatientInfo.txtCity.Text.Equals(frmPatientInfo.txtCity.Tag) Then
+                If TextCheck(.txtCity.Text) Then
+                    strbErrorMessage.AppendLine("City cannot contain a ;")
+                    blnIssue = True
+                    .txtCity.Text = .txtCity.Tag
+                Else
+                    'build sql update command
+                    strbSqlCommand.Append("UPDATE Patient SET City = '" & checkSQLInjection(frmPatientInfo.txtCity.Text, True) & "' Where Patient_ID = '" & intPatientID & "'")
+                    CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+                    'add item that was changed too string that is tracking all changed items
+                    strbItemsChanged.AppendLine("City")
+                    'increase changed item count
+                    intCountChanged = intCountChanged + 1
+                    'clear string bulder
+                    strbSqlCommand.Clear()
+                    'update tag to new item
+                    frmPatientInfo.txtCity.Tag = frmPatientInfo.txtCity.Text
+                End If
+            End If
+            'check if state is changed
+            If Not frmPatientInfo.cboState.SelectedIndex.Equals(frmPatientInfo.cboState.Tag) Then
+                'build sql update command
+                strbSqlCommand.Append("UPDATE Patient SET State = '" & frmPatientInfo.cboState.SelectedItem & "' Where Patient_ID = '" & intPatientID & "'")
+                CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+                'add item that was changed too string that is tracking all changed items
+                strbItemsChanged.AppendLine("State")
+                'increase changed item count
+                intCountChanged = intCountChanged + 1
+                'clear string bulder
+                strbSqlCommand.Clear()
+                'update tag to new item
+                frmPatientInfo.cboState.Tag = frmPatientInfo.cboState.SelectedIndex
+            End If
+            'check if zip code is changed
+            If Not frmPatientInfo.txtZipCode.Text.Equals(frmPatientInfo.txtZipCode.Tag) Then
+                If Not .txtZipCode.Text.Length = 5 Then
+                    strbErrorMessage.AppendLine("Zipcode must be 5 digits in length")
+                    blnIssue = True
+                    .txtZipCode.Text = .txtZipCode.Tag
+                Else
+                    'build sql update command
+                    strbSqlCommand.Append("UPDATE Patient SET Zip_Code = '" & frmPatientInfo.txtZipCode.Text & "' Where Patient_ID = '" & intPatientID & "'")
+                    CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+                    'add item that was changed too string that is tracking all changed items
+                    strbItemsChanged.AppendLine("ZipCode")
+                    'increase changed item count
+                    intCountChanged = intCountChanged + 1
+                    'clear string bulder
+                    strbSqlCommand.Clear()
+                    'update tag to new item
+                    frmPatientInfo.txtZipCode.Tag = frmPatientInfo.txtZipCode.Text
+                End If
+            End If
+
+            If Not frmPatientInfo.txtBarcode.Text.Equals(frmPatientInfo.txtBarcode.Tag) Then
+                If TextCheck(.txtBarcode.Text) Then
+                    strbErrorMessage.AppendLine("Barcode cannot contain a ;")
+                    blnIssue = True
+                    .txtBarcode.Text = .txtBarcode.Tag
+                Else
+                    'build sql update command
+                    strbSqlCommand.Append("UPDATE Patient SET Barcode = '" & frmPatientInfo.txtBarcode.Text & "' Where Patient_ID = '" & intPatientID & "'")
+                    CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+                    'add item that was changed too string that is tracking all changed items
+                    strbItemsChanged.AppendLine("Barcode")
+                    'increase changed item count
+                    intCountChanged = intCountChanged + 1
+                    'clear string bulder
+                    strbSqlCommand.Clear()
+                    'update tag to new item
+                    frmPatientInfo.txtBarcode.Tag = frmPatientInfo.txtBarcode.Text
+                End If
+            End If
+            If Not frmPatientInfo.cboBed.SelectedIndex = -1 Then
+                Dim strRoomBed As String = frmPatientInfo.cboRoom.Text & frmPatientInfo.cboBed.Text
+                Dim strTagRoomBed As String = frmPatientInfo.cboRoom.Tag & frmPatientInfo.cboBed.Tag
+
+                'get the tag room and bed, the tag room and bed are the room and bed the patient is currently in.
+                'check to see if the room and bed changed by checking if they are equal.
+                'if they are equal then it didnt change
+                'if they are not equal then they did change and update the room
+                If Not strTagRoomBed.Equals(strRoomBed) Then
+                    strbSqlCommand.Clear()
+                    strbSqlCommand.Append("UPDATE PatientRoom SET Active_Flag = '0' Where Patient_TUID = '" & intPatientID & "' AND Active_Flag = '1'")
+                    CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+                    strbSqlCommand.Clear()
+                    Dim strCheck As String = CreateDatabase.ExecuteScalarQuery("SELECT Room_TUID FROM PatientRoom where Patient_TUID = '" & intPatientID & "' AND Room_TUID = '" & frmPatientInfo.cboRoom.Text & "' AND Bed_Name = '" & frmPatientInfo.cboBed.Text & "' AND Active_Flag = '0'")
+                    If IsNothing(strCheck) Then
+                        'if nothing is returned that record is not in the database so insert
+                        CreateDatabase.ExecuteInsertQuery("INSERT INTO PatientRoom(Patient_TUID,Room_TUID,Bed_Name,Active_Flag) VALUES('" & intPatientID & "', '" & frmPatientInfo.cboRoom.Text & "', '" & frmPatientInfo.cboBed.Text & "','1')")
+                        frmPatientInfo.cboRoom.Tag = frmPatientInfo.cboRoom.Text
+                        frmPatientInfo.cboBed.Tag = frmPatientInfo.cboBed.Text
+                        intCountChanged = intCountChanged + 1
+                        strbItemsChanged.AppendLine("Room and Bed")
+                    Else
+                        'if it was in the database reactivate it
+                        CreateDatabase.ExecuteInsertQuery("Update PatientRoom SET Active_Flag = '1' where Patient_TUID = '" & intPatientID & "' AND Room_TUID = '" & frmPatientInfo.cboRoom.Text & "' AND Bed_Name = '" & frmPatientInfo.cboBed.Text & "'")
+                        frmPatientInfo.cboRoom.Tag = frmPatientInfo.cboRoom.Text
+                        frmPatientInfo.cboBed.Tag = frmPatientInfo.cboBed.Text
+                        intCountChanged = intCountChanged + 1
+                        strbItemsChanged.AppendLine("Room and Bed")
+                    End If
+
+                End If
+            End If
+
+            If Not .cboPhysicians.SelectedItem.Equals(.cboPhysicians.Tag) Then
+                Dim strPhysicianName As String() = Split(.cboPhysicians.SelectedItem)
+                Dim dsPhysicians As DataSet
+                strPhysicianName(0) = strPhysicianName(0).TrimEnd(",")
+                dsPhysicians = CreateDatabase.ExecuteSelectQuery("Select Physician_ID from  Physician where Physician_First_name = '" &
+                                                                 strPhysicianName(1) & "' and Physician_Last_Name = '" &
+                                                                 strPhysicianName(0) & "';")
+                strbSqlCommand.Append("UPDATE Patient SET Primary_Physician_ID = '" & dsPhysicians.Tables(0).Rows(0)(EnumList.Physician.Id) &
+                                      "' Where Patient_ID = '" & intPatientID & "'")
+                ExecuteInsertQuery(strbSqlCommand.ToString)
+                intCountChanged += 1
+                strbItemsChanged.AppendLine("Primary Physician")
+                .cboPhysicians.Tag = .cboPhysicians.SelectedItem
 
             End If
-        End If
+        End With
 
         If intCountChanged = 1 Then
             MessageBox.Show("Updated " & intCountChanged & " Item " & strbItemsChanged.ToString)
         Else
-            MessageBox.Show("Updated " & intCountChanged & " Items " & strbItemsChanged.ToString)
+            MessageBox.Show("Updated " & intCountChanged & " Items: " & vbCrLf & strbItemsChanged.ToString)
+        End If
+        If blnIssue Then
+            MessageBox.Show(strbErrorMessage.ToString)
         End If
         frmPatientInfo.LblPatientName.Text = Nothing
         Dim dsPatientName As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT Patient_First_Name, Patient_Middle_Name, Patient_Last_Name from Patient where Patient_ID = '" & intPatientID & "'")
-        frmPatientInfo.LblPatientName.Text = dsPatientName.Tables(0).Rows(0)(0) & " " & dsPatientName.Tables(0).Rows(0)(1) & " " & dsPatientName.Tables(0).Rows(0)(2)
+        patientRecordLabeling(dsPatientName.Tables(0).Rows(0)(0), dsPatientName.Tables(0).Rows(0)(1), dsPatientName.Tables(0).Rows(0)(2))
+        frmPatientInfo.lblMoreDetails.Text = "Show More..."
     End Sub
+
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: patientRecordLabeling    	   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		             */   
+    '/*		         DATE CREATED: 4/1/2021                     		   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								   */             
+    '/*	 This method tried to make the patient label. If the first, middle*/
+    '/*  and last name together are above 27 characters it will cut out   */
+    '/*  the middle name. If the first and last name are over 27 characters*/
+    '/*  it will cut out the middle and last name. If the first name is over*/
+    '/*  27 characters it will just remove everything past the 27 character.*/
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 fName - this is the Patient First Name                           */
+    '/*  mName - this is the Patient middle name                          */
+    '/*  lName - this is the patients last name.                                                                   
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	patientRecordLabeling(dsPatientName.Tables(0).Rows(0)(0),         */
+    '/* dsPatientName.Tables(0).Rows(0)(1),                               */  
+    '/* dsPatientName.Tables(0).Rows(0)(2))								  */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*  strbPatientName - this is the string builder that will be used to*/
+    '/*                 work with the string.                             */
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Sub patientRecordLabeling(fName As String, mName As String, lName As String)
+        Dim strbPatientName As StringBuilder = New StringBuilder
+        'this is going to check how long the name is to make sure it doesn't
+        'bleed into other controls. 
+        strbPatientName.Append((fName & " " & mName & " " & lName))
+        If strbPatientName.Length <= 27 Then
+            frmPatientInfo.LblPatientName.Text = strbPatientName.ToString
+        Else
+            strbPatientName.Clear()
+            strbPatientName.Append((fName & " " & lName))
+            If strbPatientName.Length <= 27 Then
+                frmPatientInfo.LblPatientName.Text = strbPatientName.ToString
+
+            Else
+                strbPatientName.Clear()
+                strbPatientName.Append((fName))
+
+                If strbPatientName.Length <= 27 Then
+                    frmPatientInfo.LblPatientName.Text = strbPatientName.ToString
+                Else
+                    strbPatientName.Remove(27, strbPatientName.Length - 27)
+                End If
+            End If
+        End If
+    End Sub
+
 
     '/*********************************************************************/
     '/*                   FUNCTION NAME: GetAllergies                       */         
@@ -620,10 +834,36 @@ Module PatientInformation
         'get patient information using sql generic method
         Dim dsPatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT * FROM Patient WHERE Patient_ID = '" & intPatient_ID & "'")
         'set all patient information into dispense textboxes
-        frmDispense.txtPatientMRN.Text = dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.MRN_Number)
-        frmDispense.txtDOB.Text = dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.DoB)
-        frmDispense.txtPatientFirstName.Text = dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.FristName)
-        frmDispense.txtPatientLastName.Text = dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.LastName)
+        frmDispense.lblPatientInfo.Text = "Patient: "
+        frmDispense.lblPatientInfo.Text &= dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.LastName) & ", "
+        frmDispense.lblPatientInfo.Text &= dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.FristName) & "         "
+        frmDispense.lblPatientInfo.Text &= "MRN: "
+        frmDispense.lblPatientInfo.Text &= dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.MRN_Number) & "         "
+        frmDispense.lblPatientInfo.Text &= "DOB: "
+        frmDispense.lblPatientInfo.Text &= dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.DoB) & "         "
+        frmDispense.lblPatientInfo.Text &= "Height: "
+        frmDispense.lblPatientInfo.Text &= dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.Height) & "         "
+        frmDispense.lblPatientInfo.Text &= "Weight: "
+        frmDispense.lblPatientInfo.Text &= dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.Weight) & "         "
+
+
+        Dim Strdatacommand As String = "Select trim(Medication.Drug_Name,' '), Medication.Strength, Medication.Type, Dispensing.Amount_Dispensed,Dispensing.DateTime_Dispensed, User.User_Last_Name, User.User_First_Name from Dispensing 
+                                        Inner Join PatientMedication ON PatientMedication.PatientMedication_ID = Dispensing.PatientMedication_TUID
+                                        INNER JOIN Medication ON Medication.Medication_ID = PatientMedication.Medication_TUID
+                                        INNER JOIN User ON User.User_ID = Dispensing.Primary_User_TUID
+                                        where PatientMedication.Patient_TUID = '" & intPatient_ID & "'
+                                        UNION
+                                        Select trim(Medication.Drug_Name,' '), Medication.Strength, Medication.Type, AdHocOrder.Amount, AdHocOrder.DateTime, User_Last_Name,User_First_Name  from AdHocOrder
+                                        Inner Join Medication on Medication.Medication_ID = AdHocOrder.Medication_TUID
+                                        INNER JOIN User ON user.User_ID = AdHocOrder.User_TUID
+                                        where AdHocOrder.Patient_TUID = '" & intPatient_ID & "'
+                                        Order by Dispensing.DateTime_Dispensed DESC"
+
+        Dim dsmydataset As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+
+        For Each dr As DataRow In dsmydataset.Tables(0).Rows
+            frmPatientInfo.CreateDispenseHistoryPanels(frmDispense.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(5) & " " & dr(6), dr(4), "")
+        Next
     End Sub
 
     '/*********************************************************************/
@@ -691,7 +931,7 @@ Module PatientInformation
     Public Sub getPrescriptions(ByRef intPatient_ID As Integer)
         Dim strSQLiteCommand As String
         Dim dsPatientPrescription As DataSet
-        strSQLiteCommand = "SELECT trim(Drug_Name,' '), Strength, Frequency, Medication.Type, Quantity ,Date_Presrcibed, Physician_First_Name, Physician_Last_Name FROM PatientMedication " &
+        strSQLiteCommand = "SELECT trim(Drug_Name,' '), Strength, Frequency, Medication.Type, Quantity ,Date_Presrcibed, Physician_First_Name, Physician_Last_Name, Medication.Medication_ID FROM PatientMedication " &
             "INNER JOIN Medication on Medication.Medication_ID = PatientMedication.Medication_TUID " &
             "INNER JOIN Patient ON Patient.Patient_ID = PatientMedication.Patient_TUID " &
             "INNER JOIN Physician on Physician.Physician_ID = PatientMedication.Ordering_Physician_ID " &
@@ -699,7 +939,7 @@ Module PatientInformation
 
         dsPatientPrescription = CreateDatabase.ExecuteSelectQuery(strSQLiteCommand)
         For Each dr As DataRow In dsPatientPrescription.Tables(0).Rows
-            frmPatientInfo.CreatePrescriptionsPanels(frmPatientInfo.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7))
+            frmPatientInfo.CreatePrescriptionsPanels(frmPatientInfo.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7), dr(8))
         Next
     End Sub
 
@@ -848,7 +1088,7 @@ Module PatientInformation
         dsPatientInfo = CreateDatabase.ExecuteSelectQuery(strbSqlCommand.ToString)
         'look create panel method for each prescription the patient has
         For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
-            frmDispense.CreatePrescriptionsPanels(frmDispense.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7))
+            'frmDispense.CreatePrescriptionsPanels(frmDispense.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7))
         Next
 
     End Sub
@@ -901,14 +1141,14 @@ Module PatientInformation
         ' is prescribed, it then joins the patient medicaiton table to get the quantity, date prescribed and 
         ' the physician ID who prescribed it, inner joining the physician table with the ID to get the name of the physician
         strbSqlCommand.Append("SELECT trim(Drug_Name,' '), Strength, Frequency, Medication.Type, PatientMedication.Quantity, ")
-        strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name ")
+        strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name, Medication.Medication_ID ")
         strbSqlCommand.Append("FROM Medication Inner Join PatientMedication ON PatientMedication.Medication_TUID = Medication.Medication_ID ")
         strbSqlCommand.Append("Inner Join Physician ON Physician.Physician_ID = PatientMedication.Ordering_Physician_ID ")
         strbSqlCommand.Append("WHERE PatientMedication.Patient_TUID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1' ORDER BY CAST(PatientMedication.Frequency as INTEGER)")
         dsPatientInfo = CreateDatabase.ExecuteSelectQuery(strbSqlCommand.ToString)
         'look create panel method for each prescription the patient has
         For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
-            frmPatientInfo.CreatePrescriptionsPanels(frmPatientInfo.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7))
+            frmPatientInfo.CreatePrescriptionsPanels(frmPatientInfo.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7), dr(8))
         Next
 
     End Sub
@@ -961,14 +1201,14 @@ Module PatientInformation
         ' is prescribed, it then joins the patient medicaiton table to get the quantity, date prescribed and 
         ' the physician ID who prescribed it, inner joining the physician table with the ID to get the name of the physician
         strbSqlCommand.Append("SELECT trim(Drug_Name,' '), Strength, Frequency, Medication.Type, PatientMedication.Quantity, ")
-        strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name ")
+        strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name, Medication.Medication_ID ")
         strbSqlCommand.Append("FROM Medication Inner Join PatientMedication ON PatientMedication.Medication_TUID = Medication.Medication_ID ")
         strbSqlCommand.Append("Inner Join Physician ON Physician.Physician_ID = PatientMedication.Ordering_Physician_ID ")
         strbSqlCommand.Append("WHERE PatientMedication.Patient_TUID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1' ORDER BY Physician_Last_Name, Physician_First_Name")
         dsPatientInfo = CreateDatabase.ExecuteSelectQuery(strbSqlCommand.ToString)
         'look create panel method for each prescription the patient has
         For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
-            frmPatientInfo.CreatePrescriptionsPanels(frmPatientInfo.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7))
+            frmPatientInfo.CreatePrescriptionsPanels(frmPatientInfo.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7), dr(8))
         Next
 
     End Sub
@@ -1021,14 +1261,14 @@ Module PatientInformation
         ' is prescribed, it then joins the patient medicaiton table to get the quantity, date prescribed and 
         ' the physician ID who prescribed it, inner joining the physician table with the ID to get the name of the physician
         strbSqlCommand.Append("SELECT trim(Drug_Name,' '), Strength, Frequency, Medication.Type, PatientMedication.Quantity, ")
-        strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name ")
+        strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name, Medication.Medication_ID ")
         strbSqlCommand.Append("FROM Medication Inner Join PatientMedication ON PatientMedication.Medication_TUID = Medication.Medication_ID ")
         strbSqlCommand.Append("Inner Join Physician ON Physician.Physician_ID = PatientMedication.Ordering_Physician_ID ")
         strbSqlCommand.Append("WHERE PatientMedication.Patient_TUID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1' ORDER BY Date_Presrcibed")
         dsPatientInfo = CreateDatabase.ExecuteSelectQuery(strbSqlCommand.ToString)
         'look create panel method for each prescription the patient has
         For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
-            frmPatientInfo.CreatePrescriptionsPanels(frmPatientInfo.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7))
+            frmPatientInfo.CreatePrescriptionsPanels(frmPatientInfo.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7), dr(8))
         Next
 
     End Sub
@@ -1081,14 +1321,14 @@ Module PatientInformation
         ' is prescribed, it then joins the patient medicaiton table to get the quantity, date prescribed and 
         ' the physician ID who prescribed it, inner joining the physician table with the ID to get the name of the physician
         strbSqlCommand.Append("SELECT trim(Drug_Name,' '), Strength, Frequency, Medication.Type, PatientMedication.Quantity, ")
-        strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name ")
+        strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name, Medication.Medication_ID ")
         strbSqlCommand.Append("FROM Medication Inner Join PatientMedication ON PatientMedication.Medication_TUID = Medication.Medication_ID ")
         strbSqlCommand.Append("Inner Join Physician ON Physician.Physician_ID = PatientMedication.Ordering_Physician_ID ")
         strbSqlCommand.Append("WHERE PatientMedication.Patient_TUID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1' ORDER BY Quantity")
         dsPatientInfo = CreateDatabase.ExecuteSelectQuery(strbSqlCommand.ToString)
         'look create panel method for each prescription the patient has
         For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
-            frmPatientInfo.CreatePrescriptionsPanels(frmPatientInfo.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7))
+            frmPatientInfo.CreatePrescriptionsPanels(frmPatientInfo.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7), dr(8))
         Next
 
     End Sub
@@ -1141,14 +1381,14 @@ Module PatientInformation
         ' is prescribed, it then joins the patient medicaiton table to get the quantity, date prescribed and 
         ' the physician ID who prescribed it, inner joining the physician table with the ID to get the name of the physician
         strbSqlCommand.Append("SELECT trim(Drug_Name,' '), Strength, Frequency, Medication.Type, PatientMedication.Quantity, ")
-        strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name ")
+        strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name, Medication.Medication_ID ")
         strbSqlCommand.Append("FROM Medication Inner Join PatientMedication ON PatientMedication.Medication_TUID = Medication.Medication_ID ")
         strbSqlCommand.Append("Inner Join Physician ON Physician.Physician_ID = PatientMedication.Ordering_Physician_ID ")
         strbSqlCommand.Append("WHERE PatientMedication.Patient_TUID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1' ORDER BY Medication.Type")
         dsPatientInfo = CreateDatabase.ExecuteSelectQuery(strbSqlCommand.ToString)
         'look create panel method for each prescription the patient has
         For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
-            frmPatientInfo.CreatePrescriptionsPanels(frmPatientInfo.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7))
+            frmPatientInfo.CreatePrescriptionsPanels(frmPatientInfo.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7), dr(8))
         Next
 
     End Sub
@@ -1201,14 +1441,14 @@ Module PatientInformation
         ' is prescribed, it then joins the patient medicaiton table to get the quantity, date prescribed and 
         ' the physician ID who prescribed it, inner joining the physician table with the ID to get the name of the physician
         strbSqlCommand.Append("SELECT trim(Drug_Name,' '), Strength, Frequency, Medication.Type, PatientMedication.Quantity, ")
-        strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name ")
+        strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name, Medication.Medication_ID ")
         strbSqlCommand.Append("FROM Medication Inner Join PatientMedication ON PatientMedication.Medication_TUID = Medication.Medication_ID ")
         strbSqlCommand.Append("Inner Join Physician ON Physician.Physician_ID = PatientMedication.Ordering_Physician_ID ")
         strbSqlCommand.Append("WHERE PatientMedication.Patient_TUID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1' ORDER BY CAST(Strength as INTEGER)")
         dsPatientInfo = CreateDatabase.ExecuteSelectQuery(strbSqlCommand.ToString)
         'look create panel method for each prescription the patient has
         For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
-            frmPatientInfo.CreatePrescriptionsPanels(frmPatientInfo.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7))
+            frmPatientInfo.CreatePrescriptionsPanels(frmPatientInfo.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7), dr(8))
         Next
 
     End Sub
@@ -1261,14 +1501,14 @@ Module PatientInformation
         ' is prescribed, it then joins the patient medicaiton table to get the quantity, date prescribed and 
         ' the physician ID who prescribed it, inner joining the physician table with the ID to get the name of the physician
         strbSqlCommand.Append("SELECT trim(Drug_Name,' '), Strength, Frequency, Medication.Type, PatientMedication.Quantity, ")
-        strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name ")
+        strbSqlCommand.Append("PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name, Medication.Medication_ID ")
         strbSqlCommand.Append("FROM Medication Inner Join PatientMedication ON PatientMedication.Medication_TUID = Medication.Medication_ID ")
         strbSqlCommand.Append("Inner Join Physician ON Physician.Physician_ID = PatientMedication.Ordering_Physician_ID ")
         strbSqlCommand.Append("WHERE PatientMedication.Patient_TUID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1' ORDER BY trim(Drug_Name,' ') ASC")
         dsPatientInfo = CreateDatabase.ExecuteSelectQuery(strbSqlCommand.ToString)
         'look create panel method for each prescription the patient has
         For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
-            frmPatientInfo.CreatePrescriptionsPanels(frmPatientInfo.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7))
+            frmPatientInfo.CreatePrescriptionsPanels(frmPatientInfo.flpMedications, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5), "Dr. " & dr(6) & " " & dr(7), dr(8))
         Next
     End Sub
 

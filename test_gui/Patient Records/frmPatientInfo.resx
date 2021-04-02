@@ -118,19 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnDispenseMedication.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAaJJREFUSEvl
-        lUtKA0EURSPJDvyMsgZRNCtQHOkwKBG34mcFZqoGB65FUNCR6MyB4gLEufo8t3wVOl3dnW4d5sCF8N6t
-        vl1dn7RmGzNbRMfoBr2iRzRCPbf8Dx60gz5QEd9oiNpubw6DB+gTiVu0h1bRBtJMvpA49SHNYGA24AJ1
-        vDWGWh8pSDNa93I9GJANOENz3kqgdxlc+Lw0Hcy1AwT9reA0e/BSNRizAVeoMkDgWQlusxcvlYMpGyCe
-        UdfbpeDZD26zay8VgyE/AwWIyiB6HXQvIxx6OYVmsgaoiyqDqMmnbSze0by3JqGhg1a4yPwuDeK3As7V
-        AI3f9tYkNJZQPMk6B8kiU0uCkAL0QkIBA7en0DwJtt/7KDloEXr5IK2ZqA4QGHRNiF0vlYInGySmBwhM
-        b8FutuylUvDoE9WfQQTjUxhitumlQujXX4M8mOP2G3kpgV5+F9UPEAzoId2eukX7Xh5DTQctvkjzgAgD
-        9YcjFKTbVJfdGjpAd0j8PUAwuI0UpBkVoZNcfNCawoP06fRptBm063R2jtCCW2aSVusH1v72O3u82oYA
-        AAAASUVORK5CYII=
-</value>
-  </data>
   <data name="btnEditPatient.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAANBJREFUSEvt

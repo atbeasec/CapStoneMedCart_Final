@@ -27,9 +27,9 @@ Partial Class frmPatientInfo
         Me.LblPatientName = New System.Windows.Forms.Label()
         Me.txtGender = New System.Windows.Forms.TextBox()
         Me.Label19 = New System.Windows.Forms.Label()
-        Me.txtPhysician = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.pnlPersonalInformation = New System.Windows.Forms.Panel()
+        Me.cboPhysicians = New System.Windows.Forms.ComboBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.mtbBirthday = New System.Windows.Forms.MaskedTextBox()
         Me.lblMoreDetails = New System.Windows.Forms.Label()
@@ -79,7 +79,6 @@ Partial Class frmPatientInfo
         Me.lblMedicationPrescription = New System.Windows.Forms.Label()
         Me.lblTypePrescription = New System.Windows.Forms.Label()
         Me.lblStrengthPrescription = New System.Windows.Forms.Label()
-        Me.btnDispenseMedication = New System.Windows.Forms.Button()
         Me.btnEditPatient = New System.Windows.Forms.Button()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -138,18 +137,6 @@ Partial Class frmPatientInfo
         Me.Label19.TabIndex = 22
         Me.Label19.Text = "Sex:"
         '
-        'txtPhysician
-        '
-        Me.txtPhysician.BackColor = System.Drawing.Color.White
-        Me.txtPhysician.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtPhysician.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPhysician.Location = New System.Drawing.Point(383, 91)
-        Me.txtPhysician.Name = "txtPhysician"
-        Me.txtPhysician.ReadOnly = True
-        Me.txtPhysician.ShortcutsEnabled = False
-        Me.txtPhysician.Size = New System.Drawing.Size(151, 25)
-        Me.txtPhysician.TabIndex = 7
-        '
         'Label16
         '
         Me.Label16.AutoSize = True
@@ -164,6 +151,7 @@ Partial Class frmPatientInfo
         'pnlPersonalInformation
         '
         Me.pnlPersonalInformation.BackColor = System.Drawing.Color.White
+        Me.pnlPersonalInformation.Controls.Add(Me.cboPhysicians)
         Me.pnlPersonalInformation.Controls.Add(Me.Panel3)
         Me.pnlPersonalInformation.Controls.Add(Me.lblMoreDetails)
         Me.pnlPersonalInformation.Controls.Add(Me.pnlNameBarcode)
@@ -185,7 +173,6 @@ Partial Class frmPatientInfo
         Me.pnlPersonalInformation.Controls.Add(Me.Label3)
         Me.pnlPersonalInformation.Controls.Add(Me.txtGender)
         Me.pnlPersonalInformation.Controls.Add(Me.Label19)
-        Me.pnlPersonalInformation.Controls.Add(Me.txtPhysician)
         Me.pnlPersonalInformation.Controls.Add(Me.Label16)
         Me.pnlPersonalInformation.Controls.Add(Me.Label11)
         Me.pnlPersonalInformation.ForeColor = System.Drawing.Color.Gainsboro
@@ -193,6 +180,16 @@ Partial Class frmPatientInfo
         Me.pnlPersonalInformation.Name = "pnlPersonalInformation"
         Me.pnlPersonalInformation.Size = New System.Drawing.Size(1092, 146)
         Me.pnlPersonalInformation.TabIndex = 17
+        '
+        'cboPhysicians
+        '
+        Me.cboPhysicians.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboPhysicians.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboPhysicians.FormattingEnabled = True
+        Me.cboPhysicians.Location = New System.Drawing.Point(384, 91)
+        Me.cboPhysicians.Name = "cboPhysicians"
+        Me.cboPhysicians.Size = New System.Drawing.Size(152, 25)
+        Me.cboPhysicians.TabIndex = 67
         '
         'Panel3
         '
@@ -378,7 +375,7 @@ Partial Class frmPatientInfo
         Me.txtZipCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtZipCode.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtZipCode.Location = New System.Drawing.Point(750, 23)
-        Me.txtZipCode.MaxLength = 9
+        Me.txtZipCode.MaxLength = 5
         Me.txtZipCode.Name = "txtZipCode"
         Me.txtZipCode.ReadOnly = True
         Me.txtZipCode.ShortcutsEnabled = False
@@ -782,22 +779,6 @@ Partial Class frmPatientInfo
         Me.lblStrengthPrescription.Tag = "2"
         Me.lblStrengthPrescription.Text = "Strength"
         '
-        'btnDispenseMedication
-        '
-        Me.btnDispenseMedication.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnDispenseMedication.FlatAppearance.BorderSize = 0
-        Me.btnDispenseMedication.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDispenseMedication.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDispenseMedication.ForeColor = System.Drawing.Color.White
-        Me.btnDispenseMedication.Image = CType(resources.GetObject("btnDispenseMedication.Image"), System.Drawing.Image)
-        Me.btnDispenseMedication.Location = New System.Drawing.Point(492, 6)
-        Me.btnDispenseMedication.Name = "btnDispenseMedication"
-        Me.btnDispenseMedication.Size = New System.Drawing.Size(235, 37)
-        Me.btnDispenseMedication.TabIndex = 3
-        Me.btnDispenseMedication.Text = "  Dispense Medication"
-        Me.btnDispenseMedication.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnDispenseMedication.UseVisualStyleBackColor = False
-        '
         'btnEditPatient
         '
         Me.btnEditPatient.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
@@ -830,7 +811,6 @@ Partial Class frmPatientInfo
         Me.Panel1.BackColor = System.Drawing.Color.White
         Me.Panel1.Controls.Add(Me.btnBack)
         Me.Panel1.Controls.Add(Me.btnEditPatient)
-        Me.Panel1.Controls.Add(Me.btnDispenseMedication)
         Me.Panel1.Controls.Add(Me.btnAddAllergies)
         Me.Panel1.Controls.Add(Me.LblPatientName)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
@@ -1001,7 +981,6 @@ Partial Class frmPatientInfo
     Friend WithEvents Label16 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents btnEditPatient As Button
-    Friend WithEvents txtPhysician As TextBox
     Friend WithEvents txtGender As TextBox
     Friend WithEvents Label19 As Label
     Friend WithEvents Label21 As Label
@@ -1011,7 +990,6 @@ Partial Class frmPatientInfo
     Friend WithEvents Label8 As Label
     Friend WithEvents txtHeight As TextBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents btnDispenseMedication As Button
     Friend WithEvents flpMedications As FlowLayoutPanel
     Friend WithEvents lblPrescriptions As Label
     Friend WithEvents pnlPrescriptionsHeader As Panel
@@ -1067,4 +1045,5 @@ Partial Class frmPatientInfo
     Friend WithEvents Label9 As Label
     Friend WithEvents Panel3 As Panel
     Friend WithEvents mtbBirthday As MaskedTextBox
+    Friend WithEvents cboPhysicians As ComboBox
 End Class

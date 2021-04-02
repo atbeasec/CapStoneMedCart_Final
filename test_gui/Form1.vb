@@ -381,28 +381,12 @@
         Dim strLoggedInAs = "Logged in as " & LoggedInUsername
         lblCurrentUser.BringToFront()
         lblCurrentUser.Visible = True
-        lblCurrentUser.Text = strLoggedInAs
+        lblCurrentUser.Text = TruncateString(15, LoggedInUsername)
+        tpMultiPurposeTooltip.SetToolTip(lblCurrentUser, strLoggedInAs)
+        tpMultiPurposeTooltip.SetToolTip(pbLogin, strLoggedInAs)
 
-        ' handles the program from blowing up since there is not a way to check the username when scanning barcode
-        'If Not String.IsNullOrEmpty(GetUserName()) Then
-        '    lblCurrentUser.Text = TruncateString(10, GetUserName())
-        'End If
-
-        'tpMultiPurposeTooltip.SetToolTip(lblCurrentUser, strLoggedInAs & GetUserName())
-        'tpMultiPurposeTooltip.SetToolTip(pbLogin, strLoggedInAs & GetUserName())
-
-
-
-
-
-
-
+        ' check user permissions
         CheckUserPermissions(LoggedInPermission)
-
-
-
-
-
 
         'set submenu to be invisible on form load
         pnlSubMenuSettings.Visible = False
@@ -453,13 +437,15 @@
 
         Const ADMINACCESS = "Admin"
         Const SUPERVISORACCESS = "Supervisor"
-        Dim arrButtonsToRemoveSupervisor() = {btnUsers, btnEditPhysician, btnSerialPort, btnConfigureInventory, btnEndOfShiftCount}
-        Dim arrButtonsToRemoveNurse() = {btnSettings, btnPharmacy, btnMaintenance, btnDescrepancies, btnConfigureInventory, btnEndOfShiftCount}
+
+        Dim arrBUttonsToRemoveAdmin() = {btnWaste} ' btn waste is not eneded on the side menu currently but easy to add back on as needed
+        Dim arrButtonsToRemoveSupervisor() = {btnUsers, btnEditPhysician, btnSerialPort, btnConfigureInventory, btnEndOfShiftCount, btnWaste}
+        Dim arrButtonsToRemoveNurse() = {btnSettings, btnPharmacy, btnMaintenance, btnDescrepancies, btnConfigureInventory, btnEndOfShiftCount, btnWaste}
 
 
         If String.Equals(ADMINACCESS, permissionLevel) Then
 
-            ' dont remove any controls because the admin can access all controls
+            ShowOnlyPermittedScreens(arrBUttonsToRemoveAdmin)
 
         ElseIf String.Equals(SUPERVISORACCESS, permissionLevel) Then
 

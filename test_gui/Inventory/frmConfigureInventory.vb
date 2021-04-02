@@ -251,8 +251,8 @@
         AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
 
         ' add controls to this panel
-        CreateEditButton(pnlMainPanel, getPanelCount(flpPannel), lblActions.Location.X, 5)
-        CreateDeleteBtn(pnlMainPanel, getPanelCount(flpPannel), lblActions.Location.X + 40, 5)
+        '  CreateEditButton(pnlMainPanel, getPanelCount(flpPannel), lblActions.Location.X, 5)
+        CreateDeleteBtn(pnlMainPanel, getPanelCount(flpPannel), lblActions.Location.X + 15, 5)
 
         Dim lblID As New Label
         Dim lblID2 As New Label

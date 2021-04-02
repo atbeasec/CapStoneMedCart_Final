@@ -1,6 +1,6 @@
 ﻿Public Class frmAdHockDispense
     Dim intPatientID As New ArrayList
-    Public blnSignedOff As Boolean = False
+    Public blnSignedOff As Boolean = True
     Public blnOverride As Boolean = False
     Private Sub frmAdHockDispense_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -33,7 +33,6 @@
     End Sub
 
     Private Sub btnDispense_Click(sender As Object, e As EventArgs) Handles btnDispense.Click
-
         'make sure that both patient and medication is selected before ordering the AdHoc
         If IsNothing(cmbMedications.SelectedItem) Then
             MessageBox.Show("Please select a medication")
@@ -42,12 +41,19 @@
         ElseIf Not CInt(txtQuantity.Text) > 0 Then
             MessageBox.Show("Please select a quantity of 1 or greater")
         Else
+
+
             For Each allergy In lstboxAllergies.Items
                 If cmbMedications.SelectedItem.ToString.ToLower.Contains(allergy.ToString.ToLower) Then
                     'show witness sign off
                     frmWitnessSignOff.Label1.Text = cmbMedications.SelectedItem.ToString
                     frmWitnessSignOff.referringForm = Me
+                    'added formatting in case a drug interaction override was chosen first
+                    frmWitnessSignOff.Label2.Text = "Causes Allergic Reaction to Patient"
+                    frmWitnessSignOff.Text = "Allergies Override"
+                    frmWitnessSignOff.Label1.Location = New Point(3, 34)
                     frmWitnessSignOff.ShowDialog()
+
                     'if authentication from witness sign off form comes back then
                     If blnOverride Then
                         Dim intMaxAllergyID
@@ -68,14 +74,23 @@
                     blnOverride = False
                 Else
                     ' do nothing as there is no allergy
+                    blnSignedOff = False
                 End If
             Next
-            'If blnSignedOff = True Then
-            AdHoc.InsertAdHoc(AdHoc.intPatientIDArray(cmbPatientName.SelectedIndex), LoggedInID, CInt(txtQuantity.Text), AdHoc.intMedIDArray(cmbMedications.SelectedIndex))
+
+            'If the user didn't already sign off to dispense the medication,
+            'check interactions
+            If blnSignedOff = False Then
+                DrugInteractionOverride(cmbMedications.SelectedItem, txtMRN.Text, "AdHoc")
+            End If
+
+            'If the user signs off for any override, dispense the medication
+            If blnSignedOff = True Then
+                AdHoc.InsertAdHoc(AdHoc.intPatientIDArray(cmbPatientName.SelectedIndex), LoggedInID, CInt(txtQuantity.Text), AdHoc.intMedIDArray(cmbMedications.SelectedIndex), AdHoc.intDrawerMedArray(cmbMedications.SelectedIndex))
                 AdHoc.clearAdhocBoxes()
                 MessageBox.Show("Order Successfully placed")
-            ' blnSignedOff = False
-            'End If
+                ' blnSignedOff = False
+            End If
 
         End If
 

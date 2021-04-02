@@ -147,7 +147,7 @@ Module Discrepancies
     '/*  ---   ----     ------------------------------------------------- */
     '/*  AB    2/27/2021 Initial creation
     '/*********************************************************************/
-    Private Sub CreateDiscrepancy(ByRef intDrawerNumber As Integer, ByRef intBinNumber As Integer, ByRef intExpectedCount As Integer,
+    Public Sub CreateDiscrepancy(ByRef intDrawerNumber As Integer, ByRef intBinNumber As Integer, ByRef intExpectedCount As Integer,
                                   ByRef intActualCount As Integer, ByRef intPrimaryUserID As Integer, ByRef intApprovingUserID As Integer, ByRef intMedicationTUID As Integer)
 
         Dim dtmAdhocTime As String = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")
