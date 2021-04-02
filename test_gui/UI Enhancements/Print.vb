@@ -200,6 +200,7 @@ Module Print
     '/*  WHO        WHEN        WHAT								      */             
     '/*  ---        ----        ------------------------------------------*/
     '/*  BRH        03/23/21    Initial creation of code                  */
+    '/*  BRH        04/01/21    Auto resize the columns when exported     */
     '/*********************************************************************/
     Sub ExportToExcel(strReport As String)
         Dim xlApp As Excel.Application
@@ -235,6 +236,8 @@ Module Print
 
             'Make the Excel document visible
             xlApp.Visible = True
+            'Auto resize columns to fit data
+            xlWorkSheet.Columns.AutoFit()
         Else
             MessageBox.Show("There is no data to export to Excel.")
         End If
