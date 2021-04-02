@@ -670,7 +670,7 @@ Partial Class frmNewPatient
         Me.Panel17.Name = "Panel17"
         Me.Panel17.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel17.Size = New System.Drawing.Size(252, 31)
-        Me.Panel17.TabIndex = 17
+        Me.Panel17.TabIndex = 5
         '
         'cboBed
         '
@@ -696,7 +696,7 @@ Partial Class frmNewPatient
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel5.Size = New System.Drawing.Size(252, 31)
-        Me.Panel5.TabIndex = 18
+        Me.Panel5.TabIndex = 4
         '
         'cboRoom
         '
