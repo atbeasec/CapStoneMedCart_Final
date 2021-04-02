@@ -501,7 +501,7 @@ Module Interactions
         Else
             'If there were no interactions,
             'there is an immediate sign off
-            frmAdHockDispense.blnSignedOff = True
+            'frmAdHockDispense.blnSignedOff = True
         End If
 
     End Sub

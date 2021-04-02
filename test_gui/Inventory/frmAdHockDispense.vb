@@ -70,6 +70,8 @@
                     Else
                         MessageBox.Show("Dispense canceled by user.")
                         blnOverride = False
+                        blnSignedOff = False
+                        Exit Sub
                     End If
 
                 Else
