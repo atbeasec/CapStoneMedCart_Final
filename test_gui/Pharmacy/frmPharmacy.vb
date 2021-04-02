@@ -18,6 +18,7 @@
         cmbMedication.Items.Clear()
         cmbStrength.Items.Clear()
         cmbFrequencyNumber.Items.Clear()
+        txtQuantity.Text = 1
         PopulateFrequencyNumberComboBox()
         Dim intCounter As Integer = 0
         dsMedications = ExecuteSelectQuery("SELECT *,Trim(Drug_Name,' ') From Medication Inner Join DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE DrawerMedication.Active_Flag = '1' ORDER BY Medication.Drug_Name COLLATE NOCASE")
@@ -68,21 +69,96 @@
     '/*********************************************************************/
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnORder.Click
         ErrorProvider1.Clear()
-        If cmbPatientName.SelectedIndex = -1 Or cmbMedication.SelectedIndex = -1 Or cmbOrderedBy.SelectedIndex = -1 Or cmbFrequencyNumber.SelectedIndex = -1 Or txtQuantity.Text = "" Or txtUnits.Text = "" Then
-            MessageBox.Show("Please fill out all information before placing the prescription")
+
+        If Not IsNumeric(txtQuantity.Text) Then
+            MessageBox.Show("Please select a numeric quantity")
+            ErrorProvider1.SetError(btnDecrement, "Please select a numeric quantity")
+        ElseIf txtQuantity.Text = 0 Then
+            MessageBox.Show("Please select a quantity greater than zero")
+            ErrorProvider1.SetError(btnDecrement, "Please select a quantity greater than zero")
         Else
-            Dim dtmOrderTime As String = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
-            PharmacyOrder.PharmacyOrder(intPatientIDfromArray, intMedIDfromArray, intPhysicianIDfromArray, txtQuantity.Text, txtUnits.Text, txtType.Text, cmbFrequencyNumber.SelectedItem.ToString)
-            MessageBox.Show("Medication order placed")
-            cmbPatientName.SelectedIndex = -1
-            cmbMedication.SelectedIndex = -1
-            cmbOrderedBy.SelectedIndex = -1
-            cmbFrequencyNumber.SelectedIndex = -1
-            txtQuantity.Text = Nothing
-            txtUnits.Text = Nothing
+            If cmbPatientName.SelectedIndex = -1 Or cmbMedication.SelectedIndex = -1 Or cmbOrderedBy.SelectedIndex = -1 Or cmbFrequencyNumber.SelectedIndex = -1 Then
+                MessageBox.Show("Please select a patient, medication, physician and frequency before placing the order")
+            Else
+                Dim dtmOrderTime As String = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
+                PharmacyOrder.PharmacyOrder(intPatientIDfromArray, intMedIDfromArray, intPhysicianIDfromArray, txtQuantity.Text, txtType.Text, cmbFrequencyNumber.SelectedItem.ToString)
+                MessageBox.Show("Medication order placed")
+                cmbPatientName.SelectedIndex = -1
+                cmbMedication.SelectedIndex = -1
+                cmbOrderedBy.SelectedIndex = -1
+                cmbFrequencyNumber.SelectedIndex = -1
+                txtQuantity.Text = 1
+            End If
         End If
+
+
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:       */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/11/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   						                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
+    '/*********************************************************************/
+    Private Sub btnIncrement_Click(sender As Object, e As EventArgs) Handles btnIncrement.Click
+
+        If Not IsNumeric(txtQuantity.Text) Then
+            txtQuantity.Text = 0
+        End If
+        ButtonIncrement(1000, txtQuantity)
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:       */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Alexander Beasecker			      */
+    '/*		         DATE CREATED: 	   03/11/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   						                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
+    '/*********************************************************************/
+    Private Sub btnDecrement_Click(sender As Object, e As EventArgs) Handles btnDecrement.Click
+        If Not IsNumeric(txtQuantity.Text) Or txtQuantity.Text = 0 Then
+            txtQuantity.Text = 2
+        End If
+        ButtonDecrement(txtQuantity)
+    End Sub
 
     Private Sub cmbPatientName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPatientName.SelectedIndexChanged
         If Not cmbPatientName.SelectedIndex = -1 Then
@@ -119,11 +195,7 @@
     '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
     '/*********************************************************************/
     Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantity.KeyPress
-        KeyPressCheck(e, "0123456789.")
-    End Sub
-
-    Private Sub txtUnits_TextChanged(sender As Object, e As EventArgs) Handles txtUnits.KeyPress
-        KeyPressCheck(e, "0123456789abcdefghijklmnopqrstuvwxyz/-.")
+        KeyPressCheck(e, "0123456789")
     End Sub
 
     '/*********************************************************************/
@@ -194,5 +266,28 @@
         If Not cmbOrderedBy.SelectedIndex = -1 Then
             intPhysicianIDfromArray = intPhysicianID(cmbOrderedBy.SelectedIndex)
         End If
+    End Sub
+
+    Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantity.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789")
+        If txtQuantity.Text IsNot "" Then
+            GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
+        Else
+        End If
+    End Sub
+    Private Sub txtQuantity_Validated(sender As Object, e As EventArgs) Handles txtQuantity.Validated
+        If txtQuantity.Text IsNot "" Then
+            GraphicalUserInterfaceReusableMethods.MaxValue(sender.Text.ToString, 1000, txtQuantity)
+        Else
+        End If
+    End Sub
+
+    Private Sub cmbPatientName_LostFocus(sender As Object, e As EventArgs) Handles cmbPatientName.LostFocus, cmbFrequencyNumber.LostFocus, cmbMedication.LostFocus, cmbOrderedBy.LostFocus, cmbStrength.LostFocus
+
+        If sender.SelectedIndex = -1 Then
+            sender.Text = ""
+        End If
+
+
     End Sub
 End Class
