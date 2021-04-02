@@ -37,8 +37,9 @@ Partial Class frmDischarge
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.txtPhone = New System.Windows.Forms.MaskedTextBox()
         Me.pnlAdmitRoomBed = New System.Windows.Forms.Panel()
-        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.cboRoomandBed = New System.Windows.Forms.ComboBox()
+        Me.Label17 = New System.Windows.Forms.Label()
         Me.pnlDischargeRoomBed = New System.Windows.Forms.Panel()
         Me.txtRoom = New System.Windows.Forms.TextBox()
         Me.txtBed = New System.Windows.Forms.TextBox()
@@ -73,6 +74,7 @@ Partial Class frmDischarge
         Me.pnlInformation.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.pnlAdmitRoomBed.SuspendLayout()
+        Me.Panel1.SuspendLayout()
         Me.pnlDischargeRoomBed.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -91,23 +93,22 @@ Partial Class frmDischarge
         '
         Me.pnlAdmit.BackColor = System.Drawing.Color.DarkGray
         Me.pnlAdmit.Controls.Add(Me.cmbAdmitPatients)
-        Me.pnlAdmit.Location = New System.Drawing.Point(457, 94)
+        Me.pnlAdmit.Location = New System.Drawing.Point(458, 94)
         Me.pnlAdmit.Name = "pnlAdmit"
         Me.pnlAdmit.Padding = New System.Windows.Forms.Padding(1)
-        Me.pnlAdmit.Size = New System.Drawing.Size(437, 28)
+        Me.pnlAdmit.Size = New System.Drawing.Size(434, 31)
         Me.pnlAdmit.TabIndex = 1
         Me.pnlAdmit.TabStop = True
         '
         'cmbAdmitPatients
         '
         Me.cmbAdmitPatients.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.cmbAdmitPatients.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbAdmitPatients.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.cmbAdmitPatients.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbAdmitPatients.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbAdmitPatients.FormattingEnabled = True
         Me.cmbAdmitPatients.Location = New System.Drawing.Point(1, 1)
         Me.cmbAdmitPatients.Name = "cmbAdmitPatients"
-        Me.cmbAdmitPatients.Size = New System.Drawing.Size(435, 25)
+        Me.cmbAdmitPatients.Size = New System.Drawing.Size(432, 29)
         Me.cmbAdmitPatients.TabIndex = 5
         '
         'btnAdmit
@@ -143,20 +144,19 @@ Partial Class frmDischarge
         Me.pnlDischarge.Location = New System.Drawing.Point(11, 94)
         Me.pnlDischarge.Name = "pnlDischarge"
         Me.pnlDischarge.Padding = New System.Windows.Forms.Padding(1)
-        Me.pnlDischarge.Size = New System.Drawing.Size(437, 28)
+        Me.pnlDischarge.Size = New System.Drawing.Size(437, 31)
         Me.pnlDischarge.TabIndex = 3
         Me.pnlDischarge.TabStop = True
         '
         'cmbDischargePatients
         '
         Me.cmbDischargePatients.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.cmbDischargePatients.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbDischargePatients.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.cmbDischargePatients.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbDischargePatients.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbDischargePatients.FormattingEnabled = True
         Me.cmbDischargePatients.Location = New System.Drawing.Point(1, 1)
         Me.cmbDischargePatients.Name = "cmbDischargePatients"
-        Me.cmbDischargePatients.Size = New System.Drawing.Size(435, 25)
+        Me.cmbDischargePatients.Size = New System.Drawing.Size(435, 29)
         Me.cmbDischargePatients.TabIndex = 5
         '
         'btnDischarge
@@ -261,7 +261,7 @@ Partial Class frmDischarge
         '
         Me.txtPhone.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtPhone.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtPhone.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.txtPhone.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPhone.Location = New System.Drawing.Point(1, 1)
         Me.txtPhone.Mask = "(999) 000-0000"
         Me.txtPhone.Name = "txtPhone"
@@ -271,12 +271,34 @@ Partial Class frmDischarge
         '
         'pnlAdmitRoomBed
         '
+        Me.pnlAdmitRoomBed.Controls.Add(Me.Panel1)
         Me.pnlAdmitRoomBed.Controls.Add(Me.Label17)
-        Me.pnlAdmitRoomBed.Controls.Add(Me.cboRoomandBed)
-        Me.pnlAdmitRoomBed.Location = New System.Drawing.Point(5, 74)
+        Me.pnlAdmitRoomBed.Location = New System.Drawing.Point(5, 77)
         Me.pnlAdmitRoomBed.Name = "pnlAdmitRoomBed"
         Me.pnlAdmitRoomBed.Size = New System.Drawing.Size(352, 66)
         Me.pnlAdmitRoomBed.TabIndex = 119
+        '
+        'Panel1
+        '
+        Me.Panel1.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel1.Controls.Add(Me.cboRoomandBed)
+        Me.Panel1.Location = New System.Drawing.Point(3, 28)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel1.Size = New System.Drawing.Size(321, 31)
+        Me.Panel1.TabIndex = 6
+        Me.Panel1.TabStop = True
+        '
+        'cboRoomandBed
+        '
+        Me.cboRoomandBed.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cboRoomandBed.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cboRoomandBed.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboRoomandBed.FormattingEnabled = True
+        Me.cboRoomandBed.Location = New System.Drawing.Point(1, 1)
+        Me.cboRoomandBed.Name = "cboRoomandBed"
+        Me.cboRoomandBed.Size = New System.Drawing.Size(319, 29)
+        Me.cboRoomandBed.TabIndex = 5
         '
         'Label17
         '
@@ -288,16 +310,6 @@ Partial Class frmDischarge
         Me.Label17.Size = New System.Drawing.Size(122, 21)
         Me.Label17.TabIndex = 82
         Me.Label17.Text = "Room and Bed:"
-        '
-        'cboRoomandBed
-        '
-        Me.cboRoomandBed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboRoomandBed.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboRoomandBed.FormattingEnabled = True
-        Me.cboRoomandBed.Location = New System.Drawing.Point(3, 31)
-        Me.cboRoomandBed.Name = "cboRoomandBed"
-        Me.cboRoomandBed.Size = New System.Drawing.Size(337, 25)
-        Me.cboRoomandBed.TabIndex = 118
         '
         'pnlDischargeRoomBed
         '
@@ -315,24 +327,24 @@ Partial Class frmDischarge
         '
         Me.txtRoom.BackColor = System.Drawing.Color.White
         Me.txtRoom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtRoom.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRoom.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtRoom.Location = New System.Drawing.Point(3, 24)
         Me.txtRoom.MaxLength = 9
         Me.txtRoom.Name = "txtRoom"
         Me.txtRoom.ReadOnly = True
-        Me.txtRoom.Size = New System.Drawing.Size(150, 25)
+        Me.txtRoom.Size = New System.Drawing.Size(150, 29)
         Me.txtRoom.TabIndex = 85
         '
         'txtBed
         '
         Me.txtBed.BackColor = System.Drawing.Color.White
         Me.txtBed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtBed.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtBed.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtBed.Location = New System.Drawing.Point(187, 24)
         Me.txtBed.MaxLength = 9
         Me.txtBed.Name = "txtBed"
         Me.txtBed.ReadOnly = True
-        Me.txtBed.Size = New System.Drawing.Size(150, 25)
+        Me.txtBed.Size = New System.Drawing.Size(150, 29)
         Me.txtBed.TabIndex = 84
         '
         'Label7
@@ -361,12 +373,12 @@ Partial Class frmDischarge
         '
         Me.txtState.BackColor = System.Drawing.Color.White
         Me.txtState.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtState.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtState.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtState.Location = New System.Drawing.Point(561, 167)
         Me.txtState.MaxLength = 9
         Me.txtState.Name = "txtState"
         Me.txtState.ReadOnly = True
-        Me.txtState.Size = New System.Drawing.Size(151, 25)
+        Me.txtState.Size = New System.Drawing.Size(151, 29)
         Me.txtState.TabIndex = 92
         '
         'Label2
@@ -384,12 +396,12 @@ Partial Class frmDischarge
         '
         Me.txtZipCode.BackColor = System.Drawing.Color.White
         Me.txtZipCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtZipCode.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtZipCode.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtZipCode.Location = New System.Drawing.Point(746, 166)
         Me.txtZipCode.MaxLength = 9
         Me.txtZipCode.Name = "txtZipCode"
         Me.txtZipCode.ReadOnly = True
-        Me.txtZipCode.Size = New System.Drawing.Size(151, 25)
+        Me.txtZipCode.Size = New System.Drawing.Size(151, 29)
         Me.txtZipCode.TabIndex = 77
         '
         'Label3
@@ -407,11 +419,11 @@ Partial Class frmDischarge
         '
         Me.txtCity.BackColor = System.Drawing.Color.White
         Me.txtCity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtCity.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCity.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCity.Location = New System.Drawing.Point(378, 166)
         Me.txtCity.Name = "txtCity"
         Me.txtCity.ReadOnly = True
-        Me.txtCity.Size = New System.Drawing.Size(151, 25)
+        Me.txtCity.Size = New System.Drawing.Size(151, 29)
         Me.txtCity.TabIndex = 75
         '
         'Label15
@@ -451,34 +463,34 @@ Partial Class frmDischarge
         '
         Me.txtEmail.BackColor = System.Drawing.Color.White
         Me.txtEmail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtEmail.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEmail.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtEmail.Location = New System.Drawing.Point(562, 105)
         Me.txtEmail.Name = "txtEmail"
         Me.txtEmail.ReadOnly = True
-        Me.txtEmail.Size = New System.Drawing.Size(151, 25)
+        Me.txtEmail.Size = New System.Drawing.Size(151, 29)
         Me.txtEmail.TabIndex = 71
         '
         'txtAddress
         '
         Me.txtAddress.BackColor = System.Drawing.Color.White
         Me.txtAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtAddress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAddress.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAddress.Location = New System.Drawing.Point(8, 166)
         Me.txtAddress.Name = "txtAddress"
         Me.txtAddress.ReadOnly = True
-        Me.txtAddress.Size = New System.Drawing.Size(337, 25)
+        Me.txtAddress.Size = New System.Drawing.Size(337, 29)
         Me.txtAddress.TabIndex = 73
         '
         'txtMRN
         '
         Me.txtMRN.BackColor = System.Drawing.Color.White
         Me.txtMRN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtMRN.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMRN.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtMRN.Location = New System.Drawing.Point(8, 46)
         Me.txtMRN.MaxLength = 9
         Me.txtMRN.Name = "txtMRN"
         Me.txtMRN.ReadOnly = True
-        Me.txtMRN.Size = New System.Drawing.Size(150, 25)
+        Me.txtMRN.Size = New System.Drawing.Size(150, 29)
         Me.txtMRN.TabIndex = 62
         '
         'Label12
@@ -507,12 +519,12 @@ Partial Class frmDischarge
         '
         Me.txtWeight.BackColor = System.Drawing.Color.White
         Me.txtWeight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtWeight.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtWeight.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtWeight.Location = New System.Drawing.Point(749, 47)
         Me.txtWeight.MaxLength = 5
         Me.txtWeight.Name = "txtWeight"
         Me.txtWeight.ReadOnly = True
-        Me.txtWeight.Size = New System.Drawing.Size(148, 25)
+        Me.txtWeight.Size = New System.Drawing.Size(148, 29)
         Me.txtWeight.TabIndex = 66
         '
         'Label4
@@ -530,12 +542,12 @@ Partial Class frmDischarge
         '
         Me.txtHeight.BackColor = System.Drawing.Color.White
         Me.txtHeight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtHeight.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtHeight.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtHeight.Location = New System.Drawing.Point(563, 46)
         Me.txtHeight.MaxLength = 5
         Me.txtHeight.Name = "txtHeight"
         Me.txtHeight.ReadOnly = True
-        Me.txtHeight.Size = New System.Drawing.Size(150, 25)
+        Me.txtHeight.Size = New System.Drawing.Size(150, 29)
         Me.txtHeight.TabIndex = 65
         '
         'Label5
@@ -553,11 +565,11 @@ Partial Class frmDischarge
         '
         Me.txtGender.BackColor = System.Drawing.Color.White
         Me.txtGender.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtGender.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtGender.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtGender.Location = New System.Drawing.Point(378, 46)
         Me.txtGender.Name = "txtGender"
         Me.txtGender.ReadOnly = True
-        Me.txtGender.Size = New System.Drawing.Size(151, 25)
+        Me.txtGender.Size = New System.Drawing.Size(151, 29)
         Me.txtGender.TabIndex = 64
         '
         'Label19
@@ -575,22 +587,22 @@ Partial Class frmDischarge
         '
         Me.txtBirthday.BackColor = System.Drawing.Color.White
         Me.txtBirthday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtBirthday.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtBirthday.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtBirthday.Location = New System.Drawing.Point(193, 46)
         Me.txtBirthday.Name = "txtBirthday"
         Me.txtBirthday.ReadOnly = True
-        Me.txtBirthday.Size = New System.Drawing.Size(152, 25)
+        Me.txtBirthday.Size = New System.Drawing.Size(152, 29)
         Me.txtBirthday.TabIndex = 63
         '
         'txtPhysician
         '
         Me.txtPhysician.BackColor = System.Drawing.Color.White
         Me.txtPhysician.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtPhysician.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPhysician.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPhysician.Location = New System.Drawing.Point(378, 107)
         Me.txtPhysician.Name = "txtPhysician"
         Me.txtPhysician.ReadOnly = True
-        Me.txtPhysician.Size = New System.Drawing.Size(151, 25)
+        Me.txtPhysician.Size = New System.Drawing.Size(151, 29)
         Me.txtPhysician.TabIndex = 70
         '
         'Label16
@@ -639,6 +651,7 @@ Partial Class frmDischarge
         Me.Panel2.PerformLayout()
         Me.pnlAdmitRoomBed.ResumeLayout(False)
         Me.pnlAdmitRoomBed.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
         Me.pnlDischargeRoomBed.ResumeLayout(False)
         Me.pnlDischargeRoomBed.PerformLayout()
         Me.ResumeLayout(False)
@@ -682,7 +695,6 @@ Partial Class frmDischarge
     Friend WithEvents Label16 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents txtState As TextBox
-    Friend WithEvents cboRoomandBed As ComboBox
     Friend WithEvents pnlAdmitRoomBed As Panel
     Friend WithEvents pnlDischargeRoomBed As Panel
     Friend WithEvents txtRoom As TextBox
@@ -691,4 +703,6 @@ Partial Class frmDischarge
     Friend WithEvents Label6 As Label
     Friend WithEvents Panel2 As Panel
     Friend WithEvents txtPhone As MaskedTextBox
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents cboRoomandBed As ComboBox
 End Class

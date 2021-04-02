@@ -30,8 +30,8 @@
     '/*********************************************************************/
     Private Sub btnAdmit_Click(sender As Object, e As EventArgs) Handles btnAdmit.Click
         If Not cmbAdmitPatients.SelectedIndex = -1 Then
-            If Not cboRoomandBed.SelectedIndex = -1 Then
-                Dim strRoomandBed As String = cboRoomandBed.SelectedItem
+            If Not Me.cboRoomandBed.SelectedIndex = -1 Then
+                Dim strRoomandBed As String = Me.cboRoomandBed.SelectedItem
                 Dim strArraySplit() As String
                 strArraySplit = strRoomandBed.Split(" ")
                 Dim intPatientID As Integer = intAdmitPatientID(cmbAdmitPatients.SelectedIndex)
@@ -219,7 +219,7 @@
             cmbAdmitPatients.SelectedIndex = -1
             cmbDischargePatients.SelectedIndex = -1
             clearPatientTextBoxes()
-            cboRoomandBed.Items.Clear()
+            Me.cboRoomandBed.Items.Clear()
             PopulateAdmitRooms()
             btnAdmit.Visible = True
             btnAdmit.Location = New Point(btnDischarge.Location.X, btnDischarge.Location.Y)
@@ -241,7 +241,7 @@
             cmbAdmitPatients.SelectedIndex = -1
             cmbDischargePatients.SelectedIndex = -1
             clearPatientTextBoxes()
-            cboRoomandBed.Items.Clear()
+            Me.cboRoomandBed.Items.Clear()
             btnDischarge.Visible = True
             btnAdmit.Visible = False
 
@@ -473,5 +473,14 @@
     Private Sub PopulateRoomBedDischarge(ByRef strRoom As String, ByRef strBed As String)
         txtRoom.Text = strRoom
         txtBed.Text = strBed
+    End Sub
+
+    Private Sub cmbPatientName_LostFocus(sender As Object, e As EventArgs) Handles cmbDischargePatients.LostFocus, cmbAdmitPatients.LostFocus, cboRoomandBed.LostFocus
+
+        If sender.SelectedIndex = -1 Then
+            sender.Text = ""
+        End If
+
+
     End Sub
 End Class
