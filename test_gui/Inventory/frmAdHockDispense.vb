@@ -80,9 +80,7 @@
 
             'If the user didn't already sign off to dispense the medication,
             'check interactions
-            If blnSignedOff = False Then
-                DrugInteractionOverride(cmbMedications.SelectedItem, txtMRN.Text, "AdHoc")
-            End If
+            DrugInteractionOverride(cmbMedications.SelectedItem, txtMRN.Text, "AdHoc")
 
             'If the user signs off for any override, dispense the medication
             If blnSignedOff = True Then

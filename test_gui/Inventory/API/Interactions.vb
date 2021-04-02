@@ -387,6 +387,8 @@ Module Interactions
     '/*  WHO   WHEN     WHAT											*/
     '/*  ---   ----     ------------------------------------------------*/
     '/*  BRH  03/30/21  Initial creation of the code					*/
+    '/*  BRH  04/01/21  Fixed issue where the medication wouldn't   	*/  
+    '/*                 dispense if no interactions were found.         */
     '/*******************************************************************/
     Public Sub DrugInteractionOverride(strMedRXCUIFromForm As String, strPatientMRNFromForm As String, strForm As String)
 
@@ -494,6 +496,10 @@ Module Interactions
 
 
             End If
+        Else
+            'If there were no interactions,
+            'there is an immediate sign off
+            frmAdHockDispense.blnSignedOff = True
         End If
 
     End Sub
