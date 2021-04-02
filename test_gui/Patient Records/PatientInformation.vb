@@ -623,27 +623,28 @@ Module PatientInformation
 
                 End If
             End If
-            Try
-                If Not .cboPhysicians.SelectedItem.Equals(.cboPhysicians.Tag) Then
-                    Dim strPhysicianName As String() = Split(.cboPhysicians.SelectedItem)
-                    Dim dsPhysicians As DataSet
-                    strPhysicianName(0) = strPhysicianName(0).TrimEnd(",")
-                    dsPhysicians = CreateDatabase.ExecuteSelectQuery("Select Physician_ID from  Physician where Physician_First_name = '" &
-                                                                     strPhysicianName(1) & "' and Physician_Last_Name = '" &
-                                                                     strPhysicianName(0) & "';")
-                    strbSqlCommand.Append("UPDATE Patient SET Primary_Physician_ID = '" & dsPhysicians.Tables(0).Rows(0)(EnumList.Physician.Id) &
-                                          "' Where Patient_ID = '" & intPatientID & "'")
-                    ExecuteInsertQuery(strbSqlCommand.ToString)
-                    intCountChanged += 1
-                    strbItemsChanged.AppendLine("Primary Physician")
-                    .cboPhysicians.Tag = .cboPhysicians.SelectedItem
+            If Not IsNothing(.cboPhysicians.SelectedItem) Then
+                    If Not .cboPhysicians.SelectedItem.Equals(.cboPhysicians.Tag) Then
+                        Dim strPhysicianName As String() = Split(.cboPhysicians.SelectedItem)
+                        Dim dsPhysicians As DataSet
+                        strPhysicianName(0) = strPhysicianName(0).TrimEnd(",")
+                        dsPhysicians = CreateDatabase.ExecuteSelectQuery("Select Physician_ID from  Physician where Physician_First_name = '" &
+                                                                         strPhysicianName(1) & "' and Physician_Last_Name = '" &
+                                                                         strPhysicianName(0) & "';")
+                        strbSqlCommand.Append("UPDATE Patient SET Primary_Physician_ID = '" & dsPhysicians.Tables(0).Rows(0)(EnumList.Physician.Id) &
+                                              "' Where Patient_ID = '" & intPatientID & "'")
+                        ExecuteInsertQuery(strbSqlCommand.ToString)
+                        intCountChanged += 1
+                        strbItemsChanged.AppendLine("Primary Physician")
+                        .cboPhysicians.Tag = .cboPhysicians.SelectedItem
 
+                    End If
+                Else
+                    strbErrorMessage.AppendLine("You must select a physician to be in charge ")
+                    strbErrorMessage.AppendLine("of the patient")
+                    blnIssue = True
                 End If
-            Catch ex As Exception
-                strbErrorMessage.AppendLine("You must select a physician to be in charge ")
-                strbErrorMessage.AppendLine("of the patient")
-                blnIssue = True
-            End Try
+
         End With
 
         If intCountChanged = 1 Then
