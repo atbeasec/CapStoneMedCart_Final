@@ -3,6 +3,7 @@
     Private intNarcoticFlagGlobal As Integer
     Private intMedID As Integer
     Private intSignoffID As Integer
+
     Private Sub frmMainScreenWaste_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'clear patientname listbox
         cmbPatientName.Items.Clear()
@@ -99,11 +100,11 @@
             Dim intNarcoticFlag As Integer = CreateDatabase.ExecuteScalarQuery(Strdatacommand)
             intNarcoticFlagGlobal = intNarcoticFlag
             If intNarcoticFlag = 1 Then
-                txtBarcode.Visible = False
-                lblSignoff.Visible = False
-            ElseIf intNarcoticFlag = 0 Then
                 txtBarcode.Visible = True
                 lblSignoff.Visible = True
+            ElseIf intNarcoticFlag = 0 Then
+                txtBarcode.Visible = False
+                lblSignoff.Visible = False
             End If
         End If
     End Sub
@@ -159,6 +160,7 @@
                     strReason = txtOther.Text
                 End If
                 frmWaste.insertWaste(CInt(LoggedInID), CInt(LoggedInID), intDrawerMedArray(cmbMedications.SelectedIndex), intMedIDArray(cmbMedications.SelectedIndex), intPatientIDArray(cmbPatientName.SelectedIndex), strReason, txtQuantity.Text, dtmWasteTime)
+                ClearWaste()
             ElseIf intNarcoticFlagGlobal = 1 Then
                 CheckBarcode(txtBarcode.Text)
             End If
@@ -189,6 +191,7 @@
                 strReason = txtOther.Text
             End If
             frmWaste.insertWaste(CInt(LoggedInID), intSignoffID, intDrawerMedArray(cmbMedications.SelectedIndex), intMedIDArray(cmbMedications.SelectedIndex), intPatientIDArray(cmbPatientName.SelectedIndex), strReason, txtQuantity.Text, dtmWasteTime)
+            ClearWaste()
         Else
             MsgBox("No User With That Barcode")
             txtBarcode.Focus()
@@ -206,5 +209,18 @@
         End If
     End Function
 
+
+    Private Sub ClearWaste()
+        cmbMedications.SelectedIndex = -1
+        cmbPatientName.SelectedIndex = -1
+        txtQuantity.Text = Nothing
+        txtDateOfBirth.Text = Nothing
+        txtBarcode.Text = Nothing
+        txtDateOfBirth.Text = Nothing
+        txtMRN.Text = Nothing
+        txtUnit.Text = Nothing
+        txtRoomBed.Text = Nothing
+        txtDrawerBin.Text = Nothing
+    End Sub
 
 End Class
