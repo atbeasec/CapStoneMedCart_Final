@@ -163,14 +163,27 @@ Public Class frmDispense
             End If
         ElseIf lblDirections.Text.Equals("Enter the Amount Administered") Then
             If IsNumeric(txtAmountDispensed.Text) Then
-                Dim strAmountDispensed As String = txtAmountDispensed.Text & " " & txtUnits.Text
-                Dim intdrawerMEDTUID As Integer = CreateDatabase.ExecuteScalarQuery("Select DrawerMedication_ID from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
-                DispensingDrug(intMedicationID, CInt(LoggedInID), strAmountDispensed)
-                frmWaste.SetPatientID(intPatientID)
-                frmWaste.setDrawer(intdrawerNumber)
-                frmWaste.setMedID(intMedicationID)
-                frmWaste.setDrawerMEDTUID(intdrawerMEDTUID)
-                frmMain.OpenChildForm(frmWaste)
+                If intEnteredFromAdhoc = 0 Then
+                    Dim strAmountDispensed As String = txtAmountDispensed.Text & " " & txtUnits.Text
+                    Dim intdrawerMEDTUID As Integer = CreateDatabase.ExecuteScalarQuery("Select DrawerMedication_ID from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
+                    DispensingDrug(intMedicationID, CInt(LoggedInID), strAmountDispensed)
+                    frmWaste.SetPatientID(intPatientID)
+                    frmWaste.setDrawer(intdrawerNumber)
+                    frmWaste.setMedID(intMedicationID)
+                    frmWaste.setDrawerMEDTUID(intdrawerMEDTUID)
+                    frmMain.OpenChildForm(frmWaste)
+
+                ElseIf intEnteredFromAdhoc = 1 Then
+                    Dim strAmountDispensed As String = txtAmountDispensed.Text & " " & txtUnits.Text
+                    DispensingDrugAdhoc(intMedicationID, intPatientID, CInt(LoggedInID), strAmountDispensed, intDrawerMEDAdhoc)
+                    frmWaste.SetPatientID(intPatientID)
+                    frmWaste.setDrawer(intDrawerMEDAdhoc)
+                    frmWaste.setMedID(intMedicationID)
+                    frmWaste.setDrawerMEDTUID(intDrawerMEDAdhoc)
+                    frmWaste.setEnteredFromAdhoc(1)
+                    frmMain.OpenChildForm(frmWaste)
+                End If
+
             Else
                 MessageBox.Show("Please enter a numeric number greater than 0")
             End If
@@ -207,6 +220,15 @@ Public Class frmDispense
         strbSQLcommand.Clear()
         strbSQLcommand.Append("INSERT INTO Dispensing(PatientMedication_TUID, Primary_User_TUID, Approving_User_TUID, DateTime_Dispensed, Amount_Dispensed, DrawerMedication_TUID) ")
         strbSQLcommand.Append("VALUES('" & intPatientMedicationDatabaseID & "','" & intPrimaryID & "','" & intPrimaryID & "','" & dtmAdhocTime & "','" & strAmountDispensed & "','" & intdrawerNumber & "')")
+        CreateDatabase.ExecuteInsertQuery(strbSQLcommand.ToString)
+    End Sub
+
+    Private Sub DispensingDrugAdhoc(ByRef intMedID As Integer, ByRef intPatientID As Integer, ByRef intUserID As Integer, ByRef stramount As String, ByRef intDrawerID As Integer)
+        Dim strbSQLcommand As New StringBuilder()
+        Dim dtmAdhocTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+        strbSQLcommand.Clear()
+        strbSQLcommand.Append("INSERT INTO AdHocOrder(Medication_TUID,Patient_TUID,User_TUID,Amount,DrawerMedication_TUID,DateTime) ")
+        strbSQLcommand.Append("VALUES('" & intMedID & "','" & intPatientID & "','" & intUserID & "','" & stramount & "','" & intDrawerID & "','" & dtmAdhocTime & "')")
         CreateDatabase.ExecuteInsertQuery(strbSQLcommand.ToString)
     End Sub
 

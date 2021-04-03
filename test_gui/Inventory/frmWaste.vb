@@ -7,12 +7,20 @@
     Private intNarcoticFlagGlobal As Integer
     Private intSignoffID As Integer
     Private strReason As String
+    Private intEnteredFromAdhoc As Integer = 0
 
     'this function should set patient ID
     Public Sub SetPatientID(ByVal id As Integer)
 
         intPatientID = id
 
+    End Sub
+    Public Function getEnteredFromAdhoc()
+        Return intEnteredFromAdhoc
+    End Function
+
+    Public Sub setEnteredFromAdhoc(ByRef intEntered As Integer)
+        intEnteredFromAdhoc = intEntered
     End Sub
 
     Public Sub setMedID(ByRef id As Integer)
@@ -199,8 +207,15 @@
             If IsNumeric(txtQuantity.Text) Then
                 InsertWasteNonNarcotic()
                 frmMain.UnlockSideMenu()
-                frmPatientInfo.setPatientID(intPatientID)
-                frmMain.OpenChildForm(frmPatientInfo)
+
+                If intEnteredFromAdhoc = 0 Then
+                    frmPatientInfo.setPatientID(intPatientID)
+                    frmMain.OpenChildForm(frmPatientInfo)
+                ElseIf intEnteredFromAdhoc = 1 Then
+                    frmDispense.setintEntered(0)
+                    setEnteredFromAdhoc(0)
+                    frmMain.OpenChildForm(frmAdHockDispense)
+                End If
             End If
 
         End If
@@ -261,9 +276,17 @@
 
         ElseIf scanBarcode(strBarcode) = "True" Then
             InsertWasteNarcotic(intSignoffID)
-            frmPatientInfo.setPatientID(intPatientID)
+
             frmMain.UnlockSideMenu()
-            frmMain.OpenChildForm(frmPatientInfo)
+            If intEnteredFromAdhoc = 0 Then
+                frmPatientInfo.setPatientID(intPatientID)
+                frmMain.OpenChildForm(frmPatientInfo)
+            ElseIf intEnteredFromAdhoc = 1 Then
+                frmDispense.setintEntered(0)
+                setEnteredFromAdhoc(0)
+                frmMain.OpenChildForm(frmAdHockDispense)
+            End If
+
         Else
             MsgBox("No User With That Barcode")
             txtBarcode.Focus()
