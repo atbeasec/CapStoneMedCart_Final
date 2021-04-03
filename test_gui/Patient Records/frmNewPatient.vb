@@ -758,7 +758,7 @@ Public Class frmNewPatient
         DataVaildationMethods.KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz 0123456789.'-#@%&/")
     End Sub
 
-    Private Sub mtbDOB_KeyPress(sender As Object, e As KeyPressEventArgs) Handles mtbDoB.KeyPress
+    Private Sub mtbDOB_KeyPress(sender As Object, e As KeyPressEventArgs) 
         DataVaildationMethods.KeyPressCheck(e, "0123456789")
     End Sub
 
