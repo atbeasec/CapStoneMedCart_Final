@@ -116,4 +116,8 @@
     Private Sub radIncorrect_CheckedChanged(sender As Object, e As EventArgs) Handles radIncorrect.CheckedChanged
         pnlSignOff.Location = New Point(3, 158)
     End Sub
+
+    Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantity.TextChanged
+
+    End Sub
 End Class

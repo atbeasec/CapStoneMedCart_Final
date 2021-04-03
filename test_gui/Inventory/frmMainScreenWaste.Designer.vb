@@ -479,6 +479,7 @@ Partial Class frmMainScreenWaste
         Me.txtQuantity.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtQuantity.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtQuantity.Location = New System.Drawing.Point(1, 1)
+        Me.txtQuantity.MaxLength = 8
         Me.txtQuantity.Multiline = True
         Me.txtQuantity.Name = "txtQuantity"
         Me.txtQuantity.ShortcutsEnabled = False
@@ -503,6 +504,7 @@ Partial Class frmMainScreenWaste
         Me.txtUnit.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtUnit.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtUnit.Location = New System.Drawing.Point(1, 1)
+        Me.txtUnit.MaxLength = 8
         Me.txtUnit.Multiline = True
         Me.txtUnit.Name = "txtUnit"
         Me.txtUnit.ShortcutsEnabled = False
