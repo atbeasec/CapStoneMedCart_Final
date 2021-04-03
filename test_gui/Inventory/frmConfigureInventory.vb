@@ -250,9 +250,10 @@
         AddHandler pnlMainPanel.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
         AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
 
+        Dim pt As New Point(lblActions.Location.X - 10, 5)
         ' add controls to this panel
-        '  CreateEditButton(pnlMainPanel, getPanelCount(flpPannel), lblActions.Location.X, 5)
-        CreateDeleteBtn(pnlMainPanel, getPanelCount(flpPannel), lblActions.Location.X + 15, 5)
+        CreateEditButton(pnlMainPanel, getPanelCount(flpPannel), lblActions.Location.X - 10, 5)
+        CreateDeleteBtn(pnlMainPanel, getPanelCount(flpPannel), lblActions.Location.X + 40, 5)
 
         Dim lblID As New Label
         Dim lblID2 As New Label
@@ -456,7 +457,7 @@
 
                 AddHandler btn.Click, AddressOf UpdateDrawerLabel
                 AddHandler btn.Click, AddressOf UpdateScreenWithMedicationsInSelectedDrawer
-
+                AddHandler btn.Click, AddressOf HideEditButton
                 count += 1
 
             End If
@@ -1199,23 +1200,6 @@
     End Sub
 
 
-
-    '  Private Sub btnIncrementCapacity_Click(sender As Object, e As EventArgs) Handles btnIncrementCapacity.Click
-
-    '       ButtonIncrement(8, txtCapacity)
-
-    '   End Sub
-
-
-
-    '  Private Sub btnDecrementCapacity_Click(sender As Object, e As EventArgs) Handles btnDecrementCapacity.Click
-
-    '     ButtonDecrement(txtCapacity)
-
-    '  End Sub
-
-
-
     '/*********************************************************************/
     '/*             SubProgram NAME: CheckIfDrawerFull             */         
     '/*********************************************************************/
@@ -1264,4 +1248,31 @@
         Return blnIsDrawerFull
 
     End Function
+
+
+    Private Sub HideEditButton(ByVal sender As Object, e As EventArgs)
+
+        Dim ctl As Control
+        Dim pnl As Control
+        Dim pnlMain As Control
+        ' panel in the flow panel
+        For Each ctl In flpMedication.Controls
+            'panel in the pnlPadding
+            For Each pnl In ctl.Controls
+                'each control in the pnl main
+                For Each pnlMain In pnl.Controls
+
+                    If pnlMain.Name.Contains("Edit") Then
+
+                        pnlMain.Visible = False
+
+                        '   AddHandler pnlMain.VisibleChanged, AddressOf VisibleChangedEvent
+
+                    End If
+                Next
+            Next
+        Next
+
+    End Sub
+
 End Class
