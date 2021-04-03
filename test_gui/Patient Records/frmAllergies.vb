@@ -79,11 +79,11 @@
         Dim strAllergyName = cmbAllergies.Text
         Dim intPatientTuid = GetPatientTuid()
         Dim strNewSeverity = cmbSeverity.SelectedIndex.ToString
-
-        If ExecuteScalarQuery("Select count FROM PatientAllergy WHERE Allergy_Severity='" & cmbSeverity.SelectedIndex & "' WHERE Allergy_Name='" & strAllergyName &
-                           "' AND Patient_TUID =" & intPatientTuid & " AND Active_Flag = 0 ;") = 1 Then
-            btnAllergySave_Click(sender, e)
-        End If
+        ClearComboBoxes()
+        'If ExecuteScalarQuery("Select count FROM PatientAllergy WHERE Allergy_Severity='" & cmbSeverity.SelectedIndex & "' WHERE Allergy_Name='" & strAllergyName &
+        '                   "' AND Patient_TUID =" & intPatientTuid & " AND Active_Flag = 0 ;") = 1 Then
+        '    btnAllergySave_Click(sender, e)
+        'End If
 
     End Sub
     '/*********************************************************************/
