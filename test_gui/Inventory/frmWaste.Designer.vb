@@ -161,9 +161,9 @@ Partial Class frmWaste
         Me.radPatientUnavilable.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.radPatientUnavilable.Location = New System.Drawing.Point(1, 96)
         Me.radPatientUnavilable.Name = "radPatientUnavilable"
-        Me.radPatientUnavilable.Size = New System.Drawing.Size(160, 25)
+        Me.radPatientUnavilable.Size = New System.Drawing.Size(130, 25)
         Me.radPatientUnavilable.TabIndex = 4
-        Me.radPatientUnavilable.Text = "Patient Unavailable"
+        Me.radPatientUnavilable.Text = "Excess amount"
         Me.radPatientUnavilable.UseVisualStyleBackColor = True
         '
         'radRefused
