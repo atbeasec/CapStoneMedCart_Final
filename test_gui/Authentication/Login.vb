@@ -87,6 +87,7 @@ Module LogIn
                 LogIn.LoggedInPermission = "Admin"
             ElseIf ExecuteScalarQuery("SELECT Supervisor_Flag FROM User WHERE Barcode = '" & strHashedBarcode & "'") = 1 Then
                 LogIn.LoggedInPermission = "Supervisor"
+            Else LogIn.LoggedInPermission = "Nurse"
             End If
             Return "True"
         Else
@@ -133,6 +134,7 @@ Module LogIn
                 LogIn.LoggedInPermission = "Admin"
             ElseIf ExecuteScalarQuery("SELECT Supervisor_Flag FROM User WHERE Username = '" & strUsername & "'" & " AND Password = '" & strPassword & "'") = 1 Then
                 LogIn.LoggedInPermission = "Supervisor"
+            Else LogIn.LoggedInPermission = "Nurse"
             End If
             Return "True"
         Else
