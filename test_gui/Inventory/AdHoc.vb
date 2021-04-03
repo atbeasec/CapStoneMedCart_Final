@@ -427,7 +427,9 @@ Module AdHoc
         frmAdHockDispense.cmbPatientName.SelectedIndex = -1
         frmAdHockDispense.txtDateOfBirth.Text = ""
         frmAdHockDispense.txtMRN.Text = ""
-        frmAdHockDispense.txtQuantity.Text = 1
+        frmAdHockDispense.txtAmount.Text = Nothing
+        frmAdHockDispense.txtUnit.Text = Nothing
+
         frmAdHockDispense.txtStrength.Text = ""
         frmAdHockDispense.txtType.Text = ""
         frmAdHockDispense.txtDrawerBin.Text = ""

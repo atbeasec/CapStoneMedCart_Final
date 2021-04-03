@@ -604,29 +604,47 @@ Module DispenseHistory
     '/*  Alexander Beasecker  02/10/21  Initial creation of the code      */
     '/*********************************************************************/
     Public Sub DispensemedicationPopulate(ByRef intPatientID As Integer, ByRef intMEDID As Integer)
-        frmDispense.txtMedication.Text = Nothing
-        Dim Strdatacommand As String
-        ' Currently the medication display is appending the RXCUI Number on too the medication
-        ' name, as searching by name alone could cause problems if medication names can repeat
-        Strdatacommand = "SELECT Drug_Name,RXCUI_ID, Medication.Type, PatientMedication.Quantity, PatientMedication.Frequency  FROM PatientMedication " &
+        If frmDispense.getIntEntered() = 0 Then
+            frmDispense.txtMedication.Text = Nothing
+            Dim Strdatacommand As String
+            ' Currently the medication display is appending the RXCUI Number on too the medication
+            ' name, as searching by name alone could cause problems if medication names can repeat
+            Strdatacommand = "SELECT Drug_Name,RXCUI_ID, Medication.Type, PatientMedication.Quantity, PatientMedication.Frequency  FROM PatientMedication " &
         "INNER JOIN Medication on Medication.Medication_ID = PatientMedication.Medication_TUID " &
         "INNER JOIN Patient on Patient.Patient_ID = PatientMedication.Patient_TUID " &
         "WHERE Patient.Patient_ID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1' AND Medication.Medication_ID = '" & intMEDID & "'"
 
-        Dim dsMedicationDataSet As DataSet = New DataSet
-        dsMedicationDataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
-        'add medication name and RXCUI to listbox
-        For Each dr As DataRow In dsMedicationDataSet.Tables(0).Rows
-            frmDispense.txtMedication.Text = (dr(0))
-            frmDispense.txtType.Text = dr(2)
-            frmDispense.txtPrescribedAmount.Text = dr(3)
-            frmDispense.txtFrequency.Text = dr(4)
-        Next
+            Dim dsMedicationDataSet As DataSet = New DataSet
+            dsMedicationDataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+            'add medication name and RXCUI to listbox
+            For Each dr As DataRow In dsMedicationDataSet.Tables(0).Rows
+                frmDispense.txtMedication.Text = (dr(0))
+                frmDispense.txtType.Text = dr(2)
+                frmDispense.txtPrescribedAmount.Text = dr(3)
+                frmDispense.txtFrequency.Text = dr(4)
+            Next
 
-        Strdatacommand = "Select Amount_Per_Container,Amount_Per_Container_Unit from DrawerMedication" &
+            Strdatacommand = "Select Amount_Per_Container,Amount_Per_Container_Unit from DrawerMedication" &
                           " where Medication_TUID = '" & intMEDID & "' and Active_Flag = '1'"
-        Dim dsDrawerMedData As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
-        frmDispense.txtContainer.Text = dsDrawerMedData.Tables(0).Rows(0)(0) & " " & dsDrawerMedData.Tables(0).Rows(0)(1)
+            Dim dsDrawerMedData As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+            frmDispense.txtContainer.Text = dsDrawerMedData.Tables(0).Rows(0)(0) & " " & dsDrawerMedData.Tables(0).Rows(0)(1)
+
+        ElseIf frmDispense.getIntEntered() = 1 Then
+            Dim Strdatacommand As String = "Select * from Medication where Medication_ID = '" & intMEDID & "' and Active_Flag = '1'"
+            Dim dsMedInformation As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+            frmDispense.txtMedication.Text = dsMedInformation.Tables(0).Rows(0)(EnumList.Medication.Name)
+            frmDispense.txtType.Text = dsMedInformation.Tables(0).Rows(0)(EnumList.Medication.type)
+            frmDispense.txtFrequency.Text = "N/A"
+            frmDispense.txtPrescribedAmount.Text = frmDispense.strAmountAdhoc & " " & frmDispense.strUnitAdhoc
+
+
+            Strdatacommand = "Select Amount_Per_Container,Amount_Per_Container_Unit from DrawerMedication" &
+              " where Medication_TUID = '" & intMEDID & "' and Active_Flag = '1' and DrawerMedication_ID = '" & frmDispense.intDrawerMEDAdhoc & "'"
+            Dim dsDrawerMedData As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+            frmDispense.txtContainer.Text = dsDrawerMedData.Tables(0).Rows(0)(0) & " " & dsDrawerMedData.Tables(0).Rows(0)(1)
+
+        End If
+
 
     End Sub
 

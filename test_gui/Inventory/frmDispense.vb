@@ -14,8 +14,13 @@ Public Class frmDispense
 
     Dim contactPanelsAddedCount As Integer = 0
     Dim currentContactPanelName As String = Nothing
+
     Private intEnteredFromAdhoc As Integer = 0
 
+    'variables here are only used if adhoc is the form that initiated dispensing
+    Public strAmountAdhoc As String
+    Public strUnitAdhoc As String
+    Public intDrawerMEDAdhoc As Integer
 
     Public Sub setintEntered(ByRef ID As Integer)
         intEnteredFromAdhoc = ID
@@ -217,10 +222,6 @@ Public Class frmDispense
         End If
     End Sub
 
-    Private Sub cmbMedications_SelectedIndexChanged(sender As Object, e As EventArgs)
-        DispenseHistory.SetMedicationProperties()
-    End Sub
-
     Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantityToDispense.KeyPress
         DataVaildationMethods.KeyPressCheck(e, "0123456789")
 
@@ -243,11 +244,9 @@ Public Class frmDispense
 
     End Sub
 
-    Private Sub Label15_Click(sender As Object, e As EventArgs) Handles Label15.Click
-
-    End Sub
-
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles txtType.TextChanged
-
+    Public Sub AdhocDispenseSetInformation(ByRef amount As String, ByRef unit As String, ByRef intDrawerMedA As Integer)
+        strAmountAdhoc = amount
+        strUnitAdhoc = unit
+        intDrawerMEDAdhoc = intDrawerMedA
     End Sub
 End Class
