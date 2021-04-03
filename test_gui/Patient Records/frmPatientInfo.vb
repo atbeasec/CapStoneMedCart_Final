@@ -125,7 +125,7 @@
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
-    '/*  WHO   WHEN     WHAT								   */             
+    '/*  WHO   WHEN     WHAT				 				   */             
     '/*  ---   ----     ------------------------------------------------- */
     '/*  NP    2/16/2021 Changed cboBed to be disabled by default until a */
     '/*                  selection in room is made.                       */
