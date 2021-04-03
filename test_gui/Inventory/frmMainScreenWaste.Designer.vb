@@ -80,9 +80,9 @@ Partial Class frmMainScreenWaste
         Me.Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold)
         Me.Label5.Location = New System.Drawing.Point(664, 19)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(199, 25)
+        Me.Label5.Size = New System.Drawing.Size(275, 25)
         Me.Label5.TabIndex = 224
-        Me.Label5.Text = "Enter amount wasted:"
+        Me.Label5.Text = "Enter amount wasted and unit:"
         '
         'pnlHeader
         '
@@ -367,7 +367,7 @@ Partial Class frmMainScreenWaste
         Me.Panel11.Location = New System.Drawing.Point(14, 314)
         Me.Panel11.Name = "Panel11"
         Me.Panel11.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel11.Size = New System.Drawing.Size(190, 28)
+        Me.Panel11.Size = New System.Drawing.Size(296, 28)
         Me.Panel11.TabIndex = 248
         '
         'txtDrawerBin
@@ -381,7 +381,7 @@ Partial Class frmMainScreenWaste
         Me.txtDrawerBin.Name = "txtDrawerBin"
         Me.txtDrawerBin.ReadOnly = True
         Me.txtDrawerBin.ShortcutsEnabled = False
-        Me.txtDrawerBin.Size = New System.Drawing.Size(188, 26)
+        Me.txtDrawerBin.Size = New System.Drawing.Size(294, 26)
         Me.txtDrawerBin.TabIndex = 38
         Me.txtDrawerBin.TabStop = False
         '
@@ -479,7 +479,7 @@ Partial Class frmMainScreenWaste
         Me.txtQuantity.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtQuantity.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtQuantity.Location = New System.Drawing.Point(1, 1)
-        Me.txtQuantity.MaxLength = 8
+        Me.txtQuantity.MaxLength = 5
         Me.txtQuantity.Multiline = True
         Me.txtQuantity.Name = "txtQuantity"
         Me.txtQuantity.ShortcutsEnabled = False
@@ -507,6 +507,7 @@ Partial Class frmMainScreenWaste
         Me.txtUnit.MaxLength = 8
         Me.txtUnit.Multiline = True
         Me.txtUnit.Name = "txtUnit"
+        Me.txtUnit.ReadOnly = True
         Me.txtUnit.ShortcutsEnabled = False
         Me.txtUnit.Size = New System.Drawing.Size(62, 26)
         Me.txtUnit.TabIndex = 38

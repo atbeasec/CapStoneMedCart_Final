@@ -212,6 +212,7 @@ Partial Class frmDispense
         Me.txtQuantityToDispense.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtQuantityToDispense.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtQuantityToDispense.Location = New System.Drawing.Point(1, 1)
+        Me.txtQuantityToDispense.MaxLength = 4
         Me.txtQuantityToDispense.Multiline = True
         Me.txtQuantityToDispense.Name = "txtQuantityToDispense"
         Me.txtQuantityToDispense.ShortcutsEnabled = False
@@ -497,6 +498,7 @@ Partial Class frmDispense
         Me.txtAmountDispensed.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtAmountDispensed.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAmountDispensed.Location = New System.Drawing.Point(1, 1)
+        Me.txtAmountDispensed.MaxLength = 5
         Me.txtAmountDispensed.Multiline = True
         Me.txtAmountDispensed.Name = "txtAmountDispensed"
         Me.txtAmountDispensed.ShortcutsEnabled = False
@@ -552,6 +554,7 @@ Partial Class frmDispense
         Me.txtCountInDrawer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtCountInDrawer.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCountInDrawer.Location = New System.Drawing.Point(1, 1)
+        Me.txtCountInDrawer.MaxLength = 5
         Me.txtCountInDrawer.Multiline = True
         Me.txtCountInDrawer.Name = "txtCountInDrawer"
         Me.txtCountInDrawer.ShortcutsEnabled = False

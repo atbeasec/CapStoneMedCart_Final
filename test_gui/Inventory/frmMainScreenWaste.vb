@@ -42,9 +42,8 @@
         Next
     End Sub
 
-    Private Sub cmbPatientName_SelectedIndexChanged(sender As Object, e As EventArgs) 'Handles cmbPatientName.SelectedIndexChanged
+    Private Sub cmbPatientName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPatientName.SelectedIndexChanged
         If Not cmbPatientName.SelectedIndex = -1 Then
-            sender.text = ""
             'local variables for splitting array and holding patient ID
             Dim intPatientID As Integer
 
@@ -83,17 +82,27 @@
             Dim intDrawerMEDID As Integer = intDrawerMedArray(cmbMedications.SelectedIndex)
             'select medication type and strength for the selected medication using MEDid 
             Dim Strdatacommand As String
-            Strdatacommand = "SELECT Medication.Type,Medication.Strength,Drawers.Drawer_Number,DrawerMedication.Divider_Bin From Medication
+            Strdatacommand = "SELECT Medication.Type,Medication.Strength,Drawers.Drawer_Number,DrawerMedication.Divider_Bin, DrawerMedication.Amount_Per_Container_Unit From Medication
                                 Inner Join DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID
                                 INNER JOIN Drawers ON Drawers.Drawers_ID = DrawerMedication.Drawers_TUID
-                                WHERE Medication.Medication_ID = '" & intMedID & "' AND DrawerMedication.DrawerMedication_ID = '" & intDrawerMEDID & "'"
+                                WHERE Medication.Medication_ID = '" & intMedID & "' AND DrawerMedication.DrawerMedication_ID = '" & intDrawerMEDID & "' AND Medication.Active_Flag = '1' and DrawerMedication.Active_Flag = '1'"
 
             'make dataset and call the sql method
             Dim dsMedicationInformation As DataSet = New DataSet
             dsMedicationInformation = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
 
             txtDrawerBin.Text = "Drawer number: " & (dsMedicationInformation.Tables(0).Rows(0)(2)) & " Bin number: " & (dsMedicationInformation.Tables(0).Rows(0)(3))
+            txtUnit.Text = dsMedicationInformation.Tables(0).Rows(0)(4)
 
+            Strdatacommand = "Select Controlled_Flag from Medication where Medication_ID = '" & intMedID & "' and Active_Flag = '1'"
+            Dim intNarcoticFlag As Integer = CreateDatabase.ExecuteScalarQuery(Strdatacommand)
+            If intNarcoticFlag = 1 Then
+                txtBarcode.Visible = False
+                lblSignoff.Visible = False
+            ElseIf intNarcoticFlag = 0 Then
+                txtBarcode.Visible = True
+                lblSignoff.Visible = True
+            End If
         End If
     End Sub
 
@@ -126,6 +135,10 @@
     End Sub
 
     Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
+        If txtQuantity.Text = Nothing Or txtQuantity.Text.Trim.Length = 0 Or cmbMedications.SelectedIndex = -1 Or cmbPatientName.SelectedIndex = -1 Then
+            MessageBox.Show("please select a medication and patient, and fill out the amount wasted medication")
+        Else
 
+        End If
     End Sub
 End Class

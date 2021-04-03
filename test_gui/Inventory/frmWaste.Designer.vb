@@ -281,6 +281,7 @@ Partial Class frmWaste
         Me.txtQuantity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtQuantity.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtQuantity.Location = New System.Drawing.Point(20, 176)
+        Me.txtQuantity.MaxLength = 5
         Me.txtQuantity.Name = "txtQuantity"
         Me.txtQuantity.ShortcutsEnabled = False
         Me.txtQuantity.Size = New System.Drawing.Size(163, 25)
