@@ -435,16 +435,18 @@
     '/*********************************************************************/
     Private Sub CheckUserPermissions(ByVal permissionLevel As String)
 
-        'Const ADMINACCESS = "Admin"
+        Const ADMINACCESS = "Admin"
         Const SUPERVISORACCESS = "Supervisor"
         Const NURSE = "Nurse"
 
-        'Dim arrBUttonsToRemoveAdmin() = {} ' btn waste is not eneded on the side menu currently but easy to add back on as needed
-        Dim arrButtonsToRemoveSupervisor() = {btnSerialPort}
-        Dim arrButtonsToRemoveNurse() = {btnUsers, btnSerialPort, btnEditPhysician, btnPharmacy, btnMaintenance, btnDescrepancies, btnConfigureInventory, btnEndOfShiftCount}
-
+        Dim arrBUttonsToRemoveAdmin() = {btnWaste} ' btn waste is not eneded on the side menu currently but easy to add back on as needed
+        Dim arrButtonsToRemoveSupervisor() = {btnSerialPort, btnWaste}
+        Dim arrButtonsToRemoveNurse() = {btnUsers, btnSerialPort, btnEditPhysician, btnPharmacy, btnMaintenance, btnDescrepancies, btnConfigureInventory, btnEndOfShiftCount, btnWaste}
 
         If String.Equals(SUPERVISORACCESS, permissionLevel) Then
+            ShowOnlyPermittedScreens(arrBUttonsToRemoveAdmin)
+
+        ElseIf String.Equals(SUPERVISORACCESS, permissionLevel) Then
 
             ' remove controls that are in the super visor access level
             '  ShowOnlySupervisorControls()

@@ -1,3 +1,97 @@
 ﻿Public Class frmMainScreenWaste
+    Public intPatientIDArray As New ArrayList
+    Private intNarcoticFlagGlobal As Integer
+    Private intMedID As Integer
+    Private Sub frmMainScreenWaste_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'clear patientname listbox
+        cmbPatientName.Items.Clear()
+        intPatientIDArray.Clear()
+        'get patient name, first, last, and MRN number
+        'MRN is appended on too the end currently because search just based on name will not work
+        ' if system has multiple patients with the same name
+        Dim Strdatacommand As String
+        Strdatacommand = "SELECT Patient_First_Name, Patient_Last_Name, MRN_Number, Patient_ID FROM Patient WHERE Active_Flag = 1 Order By Patient_Last_Name COLLATE NOCASE, Patient_First_Name COLLATE NOCASE"
 
+        'call sql method
+        Dim dsPatientRecords As DataSet = New DataSet
+        dsPatientRecords = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+
+        'place all patients into list box
+        For Each dr As DataRow In dsPatientRecords.Tables(0).Rows
+            If IsDBNull(dr(0)) Then
+
+            Else
+                cmbPatientName.Items.Add(dr(1) & ", " & dr(0) & "  MRN:" & dr(2))
+                intPatientIDArray.Add(dr(3))
+            End If
+
+        Next
+        Dim Strdatacommand2 As String
+        intMedIDArray.Clear()
+        ' Currently the medication display is appending the RXCUI Number on too the medication
+        ' name, as searching by name alone could cause problems if medication names can repeat
+        Strdatacommand2 = "Select trim(Drug_Name,' '), RXCUI_ID, Medication_ID,DrawerMedication_ID FROM Medication INNER JOIN DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE DrawerMedication.Active_Flag = 1 ORDER BY Medication.Drug_Name COLLATE NOCASE ASC"
+
+        Dim dsMedicationDataSet As DataSet = New DataSet
+        dsMedicationDataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand2)
+        'add medication name and RXCUI to listbox
+        For Each dr As DataRow In dsMedicationDataSet.Tables(0).Rows
+            cmbMedications.Items.Add(dr(0) & " RXCUI: " & dr(1))
+            intMedIDArray.Add(dr(2))
+            intDrawerMedArray.Add(dr(3))
+        Next
+    End Sub
+
+    Private Sub cmbPatientName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPatientName.SelectedIndexChanged
+        If Not cmbPatientName.SelectedIndex = -1 Then
+            'local variables for splitting array and holding patient ID
+            Dim intPatientID As Integer
+
+            'clear textboxes so no overlapping data
+            txtDateOfBirth.Clear()
+            txtMRN.Clear()
+
+            intPatientID = intPatientIDArray(cmbPatientName.SelectedIndex)
+            'create sql command string
+            Dim Strdatacommand As String
+            Strdatacommand = "SELECT Date_of_Birth, MRN_Number from Patient Where Patient_ID = '" & intPatientID & "'"
+
+            'create dataset and call sql method
+            Dim dsPatientRecords As DataSet = New DataSet
+            dsPatientRecords = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+            'set patient properties in textboxes
+            txtDateOfBirth.Text = dsPatientRecords.Tables(0).Rows(0)(0)
+            txtMRN.Text = dsPatientRecords.Tables(0).Rows(0)(1)
+            'get patient allergies
+            Strdatacommand = "SELECT Allergy_Name From PatientAllergy Where Patient_TUID = '" & intPatientID & "'"
+            dsPatientRecords = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+
+            Dim dsRoomBed As DataSet = CreateDatabase.ExecuteSelectQuery("Select * from PatientRoom where Patient_TUID = '" & intPatientID & "'")
+            txtRoomBed.Text = "Room: " & dsRoomBed.Tables(0).Rows(0)(1) & "  Bed: " & dsRoomBed.Tables(0).Rows(0)(2)
+        End If
+    End Sub
+
+    Private Sub cmbMedications_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMedications.SelectedIndexChanged
+        If Not cmbMedications.SelectedIndex = -1 Then
+            'clear the textboxes
+            txtDrawerBin.Clear()
+
+            'get selected medication ID using the selected index and get the same index from medID array
+            Dim intMedID As Integer = intMedIDArray(cmbMedications.SelectedIndex)
+            Dim intDrawerMEDID As Integer = intDrawerMedArray(cmbMedications.SelectedIndex)
+            'select medication type and strength for the selected medication using MEDid 
+            Dim Strdatacommand As String
+            Strdatacommand = "SELECT Medication.Type,Medication.Strength,Drawers.Drawer_Number,DrawerMedication.Divider_Bin From Medication
+                                Inner Join DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID
+                                INNER JOIN Drawers ON Drawers.Drawers_ID = DrawerMedication.Drawers_TUID
+                                WHERE Medication.Medication_ID = '" & intMedID & "' AND DrawerMedication.DrawerMedication_ID = '" & intDrawerMEDID & "'"
+
+            'make dataset and call the sql method
+            Dim dsMedicationInformation As DataSet = New DataSet
+            dsMedicationInformation = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+
+            txtDrawerBin.Text = "Drawer number: " & (dsMedicationInformation.Tables(0).Rows(0)(2)) & " Bin number: " & (dsMedicationInformation.Tables(0).Rows(0)(3))
+
+        End If
+    End Sub
 End Class
