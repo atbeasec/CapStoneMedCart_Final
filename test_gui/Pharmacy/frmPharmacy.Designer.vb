@@ -345,7 +345,7 @@ Partial Class frmPharmacy
         Me.txtQuantity.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtQuantity.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtQuantity.Location = New System.Drawing.Point(1, 1)
-        Me.txtQuantity.MaxLength = 5
+        Me.txtQuantity.MaxLength = 6
         Me.txtQuantity.Multiline = True
         Me.txtQuantity.Name = "txtQuantity"
         Me.txtQuantity.ShortcutsEnabled = False
@@ -359,7 +359,7 @@ Partial Class frmPharmacy
         Me.txtUnit.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtUnit.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtUnit.Location = New System.Drawing.Point(1, 1)
-        Me.txtUnit.MaxLength = 10
+        Me.txtUnit.MaxLength = 8
         Me.txtUnit.Multiline = True
         Me.txtUnit.Name = "txtUnit"
         Me.txtUnit.ShortcutsEnabled = False
@@ -402,9 +402,9 @@ Partial Class frmPharmacy
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(34, 204)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(39, 21)
+        Me.Label1.Size = New System.Drawing.Size(42, 21)
         Me.Label1.TabIndex = 181
-        Me.Label1.Text = "Unit"
+        Me.Label1.Text = "Unit:"
         '
         'frmPharmacy
         '
