@@ -30,8 +30,8 @@
     '/*********************************************************************/
     Private Sub btnAdmit_Click(sender As Object, e As EventArgs) Handles btnAdmit.Click
         If Not cmbAdmitPatients.SelectedIndex = -1 Then
-            If Not cboRoomandBed.SelectedIndex = -1 Then
-                Dim strRoomandBed As String = cboRoomandBed.SelectedItem
+            If Not Me.cboRoomandBed.SelectedIndex = -1 Then
+                Dim strRoomandBed As String = Me.cboRoomandBed.SelectedItem
                 Dim strArraySplit() As String
                 strArraySplit = strRoomandBed.Split(" ")
                 Dim intPatientID As Integer = intAdmitPatientID(cmbAdmitPatients.SelectedIndex)
@@ -54,7 +54,8 @@
                     clearPatientTextBoxes()
                     PopulateAdmitRooms()
                 End If
-
+                cmbAdmitPatients.ResetText()
+                cmbDischargePatients.ResetText()
                 MessageBox.Show("Patient Admitted")
 
             Else
@@ -100,6 +101,8 @@
         Else
             MessageBox.Show("Please select a patient to discharge")
         End If
+        cmbAdmitPatients.ResetText()
+        cmbDischargePatients.ResetText()
         MessageBox.Show("Patient discharged")
     End Sub
 
@@ -218,8 +221,10 @@
             pnlInformation.Visible = True
             cmbAdmitPatients.SelectedIndex = -1
             cmbDischargePatients.SelectedIndex = -1
+            cmbAdmitPatients.ResetText()
+            cmbDischargePatients.ResetText()
             clearPatientTextBoxes()
-            cboRoomandBed.Items.Clear()
+            Me.cboRoomandBed.Items.Clear()
             PopulateAdmitRooms()
             btnAdmit.Visible = True
             btnAdmit.Location = New Point(btnDischarge.Location.X, btnDischarge.Location.Y)
@@ -240,8 +245,10 @@
             pnlDischargeRoomBed.Visible = True
             cmbAdmitPatients.SelectedIndex = -1
             cmbDischargePatients.SelectedIndex = -1
+            cmbAdmitPatients.ResetText()
+            cmbDischargePatients.ResetText()
             clearPatientTextBoxes()
-            cboRoomandBed.Items.Clear()
+            Me.cboRoomandBed.Items.Clear()
             btnDischarge.Visible = True
             btnAdmit.Visible = False
 
@@ -474,4 +481,24 @@
         txtRoom.Text = strRoom
         txtBed.Text = strBed
     End Sub
+
+    Private Sub cmbPatientName_LostFocus(sender As Object, e As EventArgs) Handles cmbDischargePatients.LostFocus, cmbAdmitPatients.LostFocus
+
+        If sender.SelectedIndex = -1 Then
+            sender.Text = ""
+
+            clearPatientTextBoxes()
+
+        End If
+
+    End Sub
+
+    Private Sub cboRoomandBed_LostFocus(sender As Object, e As EventArgs) Handles cboRoomandBed.LostFocus
+
+        If sender.SelectedIndex = -1 Then
+            sender.Text = ""
+        End If
+
+    End Sub
+
 End Class
