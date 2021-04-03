@@ -273,11 +273,15 @@
         Dim lblID6 As New Label
 
         CreateIDLabelWithToolTip(pnlMainPanel, lblID, "lblMedicationName", lblMedication.Location.X, 20, strMedicationName, getPanelCount(flpPannel), tpToolTip, TruncateString(25, strMedicationName))
-        CreateIDLabel(pnlMainPanel, lblID2, "lblStrength", lblStrength.Location.X, 20, strStrength, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID3, "lblType", lblType.Location.X, 20, strType, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID4, "lblQuantity", lblQuantity.Location.X, 20, strQuantity, getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID2, "lblStrength", lblStrength.Location.X, 20, strStrength, getPanelCount(flpPannel), tpToolTip, TruncateString(8, strStrength))
+        ' CreateIDLabel(pnlMainPanel, lblID2, "lblStrength", lblStrength.Location.X, 20, strStrength, getPanelCount(flpPannel))
+        ' CreateIDLabel(pnlMainPanel, lblID3, "lblType", lblType.Location.X, 20, strType, getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID3, "lblType", lblType.Location.X, 20, strType, getPanelCount(flpPannel), tpToolTip, TruncateString(8, strType))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID4, "lblQuantity", lblQuantity.Location.X, 20, strQuantity, getPanelCount(flpPannel), tpToolTip, TruncateString(8, strQuantity))
+        'CreateIDLabel(pnlMainPanel, lblID4, "lblQuantity", lblQuantity.Location.X, 20, strQuantity, getPanelCount(flpPannel))
         CreateIDLabelWithToolTip(pnlMainPanel, lblID5, "lblDispensedBy", lblDispensedBy.Location.X, 20, strDispenseBy, getPanelCount(flpPannel), tpToolTip, TruncateString(30, strDispenseBy))
         CreateIDLabel(pnlMainPanel, lblID6, "lblDispenseTimeAndDate", lblDateTime.Location.X, 20, strDispenseDate.Substring(0, 19), getPanelCount(flpPannel))
+
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
@@ -397,17 +401,18 @@
         ' header as the reference point for the X axis when creating these labels at run time.
 
         CreateIDLabelWithToolTip(pnlMainPanel, lblID, "lblMedicationPrescription", lblMedicationPrescription.Location.X, 20, strMedicationName, getPanelCount(flpPannel), tpToolTip, TruncateString(25, strMedicationName))
-        ' CreateIDLabel(pnlMainPanel, lblID, "lblMedicationPrescription", lblMedicationPrescription.Location.X, 20, strMedicationName, getPanelCount(flpPannel))
-
-        CreateIDLabel(pnlMainPanel, lblID2, "lblStrengthPrescription", lblStrengthPrescription.Location.X, 20, strStrength, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID3, "lblFrequencyPrescription", lblFrequencyPrescription.Location.X, 20, strFrequency, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID4, "lblTypePrescription", lblTypePrescription.Location.X, 20, strType, getPanelCount(flpPannel))
-
-
-        CreateIDLabel(pnlMainPanel, lblID5, "lblQuantityPrescription", lblQuantityPrescription.Location.X, 20, strQuantity, getPanelCount(flpPannel))
+        '  CreateIDLabel(pnlMainPanel, lblID, "lblMedicationPrescription", lblMedicationPrescription.Location.X, 20, strMedicationName, getPanelCount(flpPannel))
+        '  CreateIDLabel(pnlMainPanel, lblID2, "lblStrengthPrescription", lblStrengthPrescription.Location.X, 20, strStrength, getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID2, "lblStrengthPrescription", lblStrengthPrescription.Location.X, 20, strStrength, getPanelCount(flpPannel), tpToolTip, TruncateString(8, strStrength))
+        '  CreateIDLabel(pnlMainPanel, lblID3, "lblFrequencyPrescription", lblFrequencyPrescription.Location.X, 20, strFrequency, getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID3, "lblFrequencyPrescription", lblFrequencyPrescription.Location.X, 20, strFrequency, getPanelCount(flpPannel), tpToolTip, TruncateString(8, strFrequency))
+        '  CreateIDLabel(pnlMainPanel, lblID4, "lblTypePrescription", lblTypePrescription.Location.X, 20, strType, getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID4, "lblTypePrescription", lblTypePrescription.Location.X, 20, strType, getPanelCount(flpPannel), tpToolTip, TruncateString(8, strType))
+        '  CreateIDLabel(pnlMainPanel, lblID5, "lblQuantityPrescription", lblQuantityPrescription.Location.X, 20, strQuantity, getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID5, "lblQuantityPrescription", lblQuantityPrescription.Location.X, 20, strQuantity, getPanelCount(flpPannel), tpToolTip, TruncateString(8, strQuantity))
         CreateIDLabel(pnlMainPanel, lblID6, "lblDatePrescribed", lblDatePrescribed.Location.X, 20, strDatePrescribed.Substring(0, 10), getPanelCount(flpPannel))
         CreateIDLabelWithToolTip(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, strPrescribedBy, getPanelCount(flpPannel), tpToolTip, TruncateString(20, strPrescribedBy))
-        ' CreateIDLabel(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, strPrescribedBy, getPanelCount(flpPannel))
+        '  CreateIDLabel(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, strPrescribedBy, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
         pnlMainPanel.Tag = intMedID
