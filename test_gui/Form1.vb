@@ -437,13 +437,13 @@
 
         Const ADMINACCESS = "Admin"
         Const SUPERVISORACCESS = "Supervisor"
-        Const NURSE = "Nurse"
+        Const NURSEACCESS = "Nurse"
 
         Dim arrBUttonsToRemoveAdmin() = {btnWaste} ' btn waste is not eneded on the side menu currently but easy to add back on as needed
         Dim arrButtonsToRemoveSupervisor() = {btnSerialPort, btnWaste}
         Dim arrButtonsToRemoveNurse() = {btnUsers, btnSerialPort, btnEditPhysician, btnPharmacy, btnMaintenance, btnDescrepancies, btnConfigureInventory, btnEndOfShiftCount, btnWaste}
 
-        If String.Equals(SUPERVISORACCESS, permissionLevel) Then
+        If String.Equals(ADMINACCESS, permissionLevel) Then
             ShowOnlyPermittedScreens(arrBUttonsToRemoveAdmin)
 
         ElseIf String.Equals(SUPERVISORACCESS, permissionLevel) Then
@@ -452,7 +452,7 @@
             '  ShowOnlySupervisorControls()
             ShowOnlyPermittedScreens(arrButtonsToRemoveSupervisor)
 
-        ElseIf String.Equals(NURSE, permissionLevel) Then
+        ElseIf String.Equals(NURSEACCESS, permissionLevel) Then
             ' remove the controls that are not in the nurse access level
             ' ShowOnlyNurseControls()
             ShowOnlyPermittedScreens(arrButtonsToRemoveNurse)
