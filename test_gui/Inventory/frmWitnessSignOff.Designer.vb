@@ -31,6 +31,8 @@ Partial Class frmWitnessSignOff
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblReason = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.pnlInteractions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -55,6 +57,8 @@ Partial Class frmWitnessSignOff
         '
         'pnlInteractions
         '
+        Me.pnlInteractions.Controls.Add(Me.Label6)
+        Me.pnlInteractions.Controls.Add(Me.Label5)
         Me.pnlInteractions.Controls.Add(Me.Label4)
         Me.pnlInteractions.Controls.Add(Me.btnConfigureInventory)
         Me.pnlInteractions.Controls.Add(Me.Label2)
@@ -62,7 +66,7 @@ Partial Class frmWitnessSignOff
         Me.pnlInteractions.Controls.Add(Me.lblReason)
         Me.pnlInteractions.Location = New System.Drawing.Point(38, 91)
         Me.pnlInteractions.Name = "pnlInteractions"
-        Me.pnlInteractions.Size = New System.Drawing.Size(285, 186)
+        Me.pnlInteractions.Size = New System.Drawing.Size(285, 221)
         Me.pnlInteractions.TabIndex = 32
         '
         'Label4
@@ -70,7 +74,7 @@ Partial Class frmWitnessSignOff
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.SystemColors.AppWorkspace
-        Me.Label4.Location = New System.Drawing.Point(27, 114)
+        Me.Label4.Location = New System.Drawing.Point(27, 152)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(242, 17)
         Me.Label4.TabIndex = 37
@@ -85,7 +89,7 @@ Partial Class frmWitnessSignOff
         Me.btnConfigureInventory.ForeColor = System.Drawing.Color.White
         Me.btnConfigureInventory.Image = CType(resources.GetObject("btnConfigureInventory.Image"), System.Drawing.Image)
         Me.btnConfigureInventory.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnConfigureInventory.Location = New System.Drawing.Point(45, 144)
+        Me.btnConfigureInventory.Location = New System.Drawing.Point(45, 182)
         Me.btnConfigureInventory.Name = "btnConfigureInventory"
         Me.btnConfigureInventory.Size = New System.Drawing.Size(204, 32)
         Me.btnConfigureInventory.TabIndex = 36
@@ -97,11 +101,12 @@ Partial Class frmWitnessSignOff
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(12, 65)
+        Me.Label2.Location = New System.Drawing.Point(21, 64)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(248, 21)
         Me.Label2.TabIndex = 35
         Me.Label2.Text = "Causes Allergic Reaction to Patient"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label1
         '
@@ -112,6 +117,7 @@ Partial Class frmWitnessSignOff
         Me.Label1.Size = New System.Drawing.Size(135, 21)
         Me.Label1.TabIndex = 34
         Me.Label1.Text = "Benzhydrocodone"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lblReason
         '
@@ -122,13 +128,36 @@ Partial Class frmWitnessSignOff
         Me.lblReason.Size = New System.Drawing.Size(74, 21)
         Me.lblReason.TabIndex = 33
         Me.lblReason.Text = "Warning!"
+        Me.lblReason.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(18, 100)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(248, 21)
+        Me.Label5.TabIndex = 38
+        Me.Label5.Text = "Causes Allergic Reaction to Patient"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(21, 131)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(248, 21)
+        Me.Label6.TabIndex = 39
+        Me.Label6.Text = "Causes Allergic Reaction to Patient"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'frmWitnessSignOff
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(362, 289)
+        Me.ClientSize = New System.Drawing.Size(362, 324)
         Me.ControlBox = False
         Me.Controls.Add(Me.pnlInteractions)
         Me.Controls.Add(Me.Label3)
@@ -150,4 +179,6 @@ Partial Class frmWitnessSignOff
     Friend WithEvents lblReason As Label
     Friend WithEvents btnConfigureInventory As Button
     Friend WithEvents Label4 As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label5 As Label
 End Class

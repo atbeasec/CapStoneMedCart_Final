@@ -389,7 +389,8 @@ Module Interactions
     '/*  BRH  03/30/21  Initial creation of the code					*/
     '/*  BRH  04/01/21  Fixed issue where the medication wouldn't   	*/  
     '/*                 dispense if no interactions were found.         */
-    '/*  BRH  04/02/21  Add interaction checking for dispensing       	*/
+    '/*  BRH  04/02/21  Add interaction checking for dispensing and fixed/
+    '/*                 the text on the drug overrides                  */
     '/*******************************************************************/
     Public Sub DrugInteractionOverride(strMedRXCUIFromForm As String, strPatientMRNFromForm As String, strForm As String)
 
@@ -402,6 +403,7 @@ Module Interactions
         Dim strInteraction As String
         Dim strLabel1Text As String
         Dim strMedicationOneRXCUI As String
+        Dim strMedicationTwoRXCUI As String
         Dim strSQLCmd As String
 
         'Select the patient id given the mrn
@@ -454,6 +456,7 @@ Module Interactions
 
                 If strInteraction IsNot Nothing Then
                     blnInteraction = True
+                    strMedicationTwoRXCUI = item(0)
                     'Else
                     '    blnInteraction = False
                 End If
@@ -463,11 +466,19 @@ Module Interactions
 
         If blnInteraction.Equals(True) Then
             'Change how the witness sign off form looks
+            frmWitnessSignOff.Label5.Visible = True
+            frmWitnessSignOff.Label6.Visible = True
             frmWitnessSignOff.Label1.AutoSize = True
             frmWitnessSignOff.Label2.AutoSize = True
             frmWitnessSignOff.Label1.Location = New Point(3, 34)
+            frmWitnessSignOff.Label2.Location = New Point(103, 64)
+            frmWitnessSignOff.Label5.Location = New Point(3, 100)
+            frmWitnessSignOff.Label6.Location = New Point(3, 131)
             frmWitnessSignOff.Label1.Text = strLabel1Text
-            frmWitnessSignOff.Label2.Text = "Interacts with Other Prescribed Meds"
+            frmWitnessSignOff.Label2.Text = "Interacts With:"
+            frmWitnessSignOff.Label5.Text = ExecuteScalarQuery("SELECT Drug_Name FROM Medication WHERE RXCUI_ID =" & strMedicationTwoRXCUI & ";")
+            frmWitnessSignOff.Label6.Text = "Reason: " & ExecuteScalarQuery("SELECT Description FROM Drug_Interactions WHERE Drug_Interactions_ID = " & strInteraction & ";")
+
             frmWitnessSignOff.referringForm = objReferencingForm
             frmWitnessSignOff.Text = "Drug Interactions Override"
             frmWitnessSignOff.ShowDialog()
