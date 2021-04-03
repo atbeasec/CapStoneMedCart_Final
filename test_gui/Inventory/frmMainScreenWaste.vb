@@ -117,7 +117,11 @@
         pnlSignOff.Location = New Point(3, 158)
     End Sub
 
-    Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantity.TextChanged
+    Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantity.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789.")
+    End Sub
 
+    Private Sub txtUnit_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtUnit.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789.abcdefghijklmnopqrstuvwxyz /-")
     End Sub
 End Class
