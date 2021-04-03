@@ -54,7 +54,8 @@
                     clearPatientTextBoxes()
                     PopulateAdmitRooms()
                 End If
-
+                cmbAdmitPatients.ResetText()
+                cmbDischargePatients.ResetText()
                 MessageBox.Show("Patient Admitted")
 
             Else
@@ -100,6 +101,8 @@
         Else
             MessageBox.Show("Please select a patient to discharge")
         End If
+        cmbAdmitPatients.ResetText()
+        cmbDischargePatients.ResetText()
         MessageBox.Show("Patient discharged")
     End Sub
 
@@ -218,6 +221,8 @@
             pnlInformation.Visible = True
             cmbAdmitPatients.SelectedIndex = -1
             cmbDischargePatients.SelectedIndex = -1
+            cmbAdmitPatients.ResetText()
+            cmbDischargePatients.ResetText()
             clearPatientTextBoxes()
             Me.cboRoomandBed.Items.Clear()
             PopulateAdmitRooms()
@@ -240,6 +245,8 @@
             pnlDischargeRoomBed.Visible = True
             cmbAdmitPatients.SelectedIndex = -1
             cmbDischargePatients.SelectedIndex = -1
+            cmbAdmitPatients.ResetText()
+            cmbDischargePatients.ResetText()
             clearPatientTextBoxes()
             Me.cboRoomandBed.Items.Clear()
             btnDischarge.Visible = True
@@ -475,12 +482,23 @@
         txtBed.Text = strBed
     End Sub
 
-    Private Sub cmbPatientName_LostFocus(sender As Object, e As EventArgs) Handles cmbDischargePatients.LostFocus, cmbAdmitPatients.LostFocus, cboRoomandBed.LostFocus
+    Private Sub cmbPatientName_LostFocus(sender As Object, e As EventArgs) Handles cmbDischargePatients.LostFocus, cmbAdmitPatients.LostFocus
+
+        If sender.SelectedIndex = -1 Then
+            sender.Text = ""
+
+            clearPatientTextBoxes()
+
+        End If
+
+    End Sub
+
+    Private Sub cboRoomandBed_LostFocus(sender As Object, e As EventArgs) Handles cboRoomandBed.LostFocus
 
         If sender.SelectedIndex = -1 Then
             sender.Text = ""
         End If
 
-
     End Sub
+
 End Class
