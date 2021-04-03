@@ -332,7 +332,7 @@ Public Class frmEditPhysician
         strAddress = Regex.Replace(strAddress, "'", "''")
         strCity = Regex.Replace(strCity, "'", "''")
         'Make Sure all fields are filled
-        If txtFirstName.Text = "" Or txtLastName.Text = "" Or txtMiddleName.Text = "" Or txtAddress.Text = "" Or txtCity.Text = "" Or txtZipCode.Text = "" Or mtbPhone.Text = "" Or mtbFax.Text = "" Then
+        If txtFirstName.Text = "" Or txtLastName.Text = "" Or txtMiddleName.Text = "" Or txtAddress.Text = "" Or txtCity.Text = "" Or txtZipCode.MaskCompleted = False Or mtbPhone.MaskCompleted = False Or mtbFax.MaskCompleted = False Then
             MsgBox("All Fields must be filled")
         Else
 
@@ -351,10 +351,6 @@ Public Class frmEditPhysician
             ' do query to return the record that was just created and return the result into the create panel method below
             CreatePanel_Physician(flpPhysicianInfo, strNewID, strFullName, cboCredentials.SelectedItem, "Yes")
 
-
-
-
-
             'clear all text boxes
             txtFirstName.Text = ""
             txtLastName.Text = ""
@@ -366,6 +362,7 @@ Public Class frmEditPhysician
             mtbPhone.Text = ""
             cboCredentials.SelectedItem = Nothing
             cboState.SelectedItem = Nothing
+            MessageBox.Show("Physician Added")
         End If
 
 
@@ -381,7 +378,7 @@ Public Class frmEditPhysician
         KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz' &()/.,")
     End Sub
 
-    Private Sub ZipKeypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtZipCode.KeyPress
+    Private Sub ZipKeypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
         KeyPressCheck(e, "1234567890")
     End Sub
 
