@@ -58,12 +58,19 @@ Module GraphicalUserInterfaceReusableMethods
 
                     ctlControl.Visible = True
 
-                Else
-                    'even though we hide the other controls, once we select the delete button once, we are hiding all of the other icons
-                    ' there fore we do not need to recreate them we can simply hide or unhide them
-                    ' in this case we will set the visibility to false because they are controls that we need to hide.
+                    If getOpenedForm.GetType() Is frmConfigureInventory.GetType Then
+                        Debug.Print(ctlControl.Name)
+                        If ctlControl.Name.Contains("EditPatientRecord") Or ctlControl.Name.Contains("btnConfirmation") Then
+                            ctlControl.Visible = False
+                        End If
+                    End If
 
-                    ctlControl.Visible = False
+                Else
+                        'even though we hide the other controls, once we select the delete button once, we are hiding all of the other icons
+                        ' there fore we do not need to recreate them we can simply hide or unhide them
+                        ' in this case we will set the visibility to false because they are controls that we need to hide.
+
+                        ctlControl.Visible = False
 
                 End If
             End If
@@ -531,7 +538,7 @@ Module GraphicalUserInterfaceReusableMethods
             ' .Font = New Font(New FontFamily("Microsoft Sans Serif"), 11)
             ' .Location = New Point(  )
             .Location = New Point(pntLocation)
-            .Name = "btnDeletePatientRecord"
+            .Name = "btnConfirmation"
             .Image = mapImageTrash
             .ImageAlign = ContentAlignment.MiddleCenter
 
