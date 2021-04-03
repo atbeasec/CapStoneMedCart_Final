@@ -2,6 +2,7 @@
     Public intPatientIDArray As New ArrayList
     Private intNarcoticFlagGlobal As Integer
     Private intMedID As Integer
+    Private intSignoffID As Integer
     Private Sub frmMainScreenWaste_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'clear patientname listbox
         cmbPatientName.Items.Clear()
@@ -96,6 +97,7 @@
 
             Strdatacommand = "Select Controlled_Flag from Medication where Medication_ID = '" & intMedID & "' and Active_Flag = '1'"
             Dim intNarcoticFlag As Integer = CreateDatabase.ExecuteScalarQuery(Strdatacommand)
+            intNarcoticFlagGlobal = intNarcoticFlag
             If intNarcoticFlag = 1 Then
                 txtBarcode.Visible = False
                 lblSignoff.Visible = False
@@ -138,7 +140,71 @@
         If txtQuantity.Text = Nothing Or txtQuantity.Text.Trim.Length = 0 Or cmbMedications.SelectedIndex = -1 Or cmbPatientName.SelectedIndex = -1 Then
             MessageBox.Show("please select a medication and patient, and fill out the amount wasted medication")
         Else
+            If intNarcoticFlagGlobal = 0 Then
+                Dim strReason As String = " "
+                Dim dtmWasteTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                If radIncorrect.Checked = True Then
+                    strReason = radIncorrect.Text
 
+                ElseIf radCancel.Checked = True Then
+                    strReason = radCancel.Text
+
+                ElseIf radRefused.Checked = True Then
+                    strReason = radRefused.Text
+
+                ElseIf radPatientUnavilable.Checked = True Then
+                    strReason = radPatientUnavilable.Text
+
+                ElseIf rbtnOther.Checked = True Then
+                    strReason = txtOther.Text
+                End If
+                frmWaste.insertWaste(CInt(LoggedInID), CInt(LoggedInID), intDrawerMedArray(cmbMedications.SelectedIndex), intMedIDArray(cmbMedications.SelectedIndex), intPatientIDArray(cmbPatientName.SelectedIndex), strReason, txtQuantity.Text, dtmWasteTime)
+            ElseIf intNarcoticFlagGlobal = 1 Then
+                CheckBarcode(txtBarcode.Text)
+            End If
         End If
     End Sub
+
+    Private Sub CheckBarcode(ByRef strBarcode As String)
+        If strBarcode = "" Then
+            MsgBox("           WARNING" & vbCrLf & "Barcode Field is Blank")
+            txtBarcode.Focus()
+
+        ElseIf scanBarcode(strBarcode) = "True" Then
+            Dim strReason As String = " "
+            Dim dtmWasteTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+            If radIncorrect.Checked = True Then
+                strReason = radIncorrect.Text
+
+            ElseIf radCancel.Checked = True Then
+                strReason = radCancel.Text
+
+            ElseIf radRefused.Checked = True Then
+                strReason = radRefused.Text
+
+            ElseIf radPatientUnavilable.Checked = True Then
+                strReason = radPatientUnavilable.Text
+
+            ElseIf rbtnOther.Checked = True Then
+                strReason = txtOther.Text
+            End If
+            frmWaste.insertWaste(CInt(LoggedInID), intSignoffID, intDrawerMedArray(cmbMedications.SelectedIndex), intMedIDArray(cmbMedications.SelectedIndex), intPatientIDArray(cmbPatientName.SelectedIndex), strReason, txtQuantity.Text, dtmWasteTime)
+        Else
+            MsgBox("No User With That Barcode")
+            txtBarcode.Focus()
+        End If
+    End Sub
+
+
+    Private Function scanBarcode(ByRef strBarcode As String)
+        Dim strHashedBarcode = ConvertBarcodePepperAndHash(strBarcode)
+        If ExecuteScalarQuery("SELECT COUNT(*) FROM User WHERE Barcode = '" & strHashedBarcode & "'" & " AND Active_Flag = '1'") <> 0 Then
+            intSignoffID = ExecuteScalarQuery("SELECT User_ID FROM User WHERE Barcode = '" & strHashedBarcode & "'")
+            Return "True"
+        Else
+            Return "False"
+        End If
+    End Function
+
+
 End Class
