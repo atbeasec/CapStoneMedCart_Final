@@ -389,6 +389,7 @@ Module Interactions
     '/*  BRH  03/30/21  Initial creation of the code					*/
     '/*  BRH  04/01/21  Fixed issue where the medication wouldn't   	*/  
     '/*                 dispense if no interactions were found.         */
+    '/*  BRH  04/02/21  Add interaction checking for dispensing       	*/
     '/*******************************************************************/
     Public Sub DrugInteractionOverride(strMedRXCUIFromForm As String, strPatientMRNFromForm As String, strForm As String)
 
@@ -413,11 +414,12 @@ Module Interactions
         'depending on the form. Therefore, we
         'have to parse out the desired data differently
         If strForm = "Dispense" Then
-            strMedicationOneRXCUI = strMedRXCUIFromForm
-            strArray = strMedicationOneRXCUI.Split("--")
-            strMedicationOneRXCUI = strArray(2)
-            strLabel1Text = frmDispense.txtMedication.Text.ToString
-            objReferencingForm = frmDispense
+            'strMedicationOneRXCUI = strMedRXCUIFromForm
+            'strArray = strMedicationOneRXCUI.Split("--")
+            'strMedicationOneRXCUI = strArray(2)
+            strMedicationOneRXCUI = ExecuteScalarQuery("SELECT RXCUI_ID FROM Medication WHERE Medication_ID = " & strMedRXCUIFromForm & ";")
+            strLabel1Text = frmPatientInfo.strMedName
+            objReferencingForm = frmPatientInfo
 
         ElseIf strForm = "AdHoc" Then
             strMedicationOneRXCUI = strMedRXCUIFromForm
@@ -449,6 +451,7 @@ Module Interactions
             If blnInteraction.Equals(False) Then
 
                 strInteraction = ExecuteScalarQuery(strSQLCmd)
+
                 If strInteraction IsNot Nothing Then
                     blnInteraction = True
                     'Else
@@ -472,12 +475,12 @@ Module Interactions
             'MessageBox.Show("The drug you are trying to dispense interacts with other meds the patient's prescribed")
 
             'If the user chose to override the interaction, insert the record into the database
-            If frmDispense.blnOverride Or frmAdHockDispense.blnOverride Then
+            If frmPatientInfo.blnOverride Or frmAdHockDispense.blnOverride Then
                 ExecuteInsertQuery("INSERT INTO Drug_InteractionsOverride(Patient_TUID, User_TUID, Drug_Interactions_TUID, DateTime) " &
                                            "Values(" & intPatientID & ", " & LoggedInID & ", '" & strInteraction & "', '" & DateTime.Now & "')")
 
                 If strForm = "Dispense" Then
-                    frmDispense.blnSignedOff = True
+                    frmPatientInfo.blnSignedOff = True
                 ElseIf strForm = "AdHoc" Then
                     frmAdHockDispense.blnSignedOff = True
                 End If
@@ -486,12 +489,12 @@ Module Interactions
                 MessageBox.Show("Dispense canceled by user.")
 
                 If strForm = "Dispense" Then
-                    frmDispense.blnSignedOff = False
+                    frmPatientInfo.blnSignedOff = False
                 ElseIf strForm = "AdHoc" Then
                     frmAdHockDispense.blnSignedOff = False
                 End If
 
-                frmDispense.blnOverride = False
+                frmPatientInfo.blnOverride = False
                 frmAdHockDispense.blnOverride = False
 
                 Exit Sub
@@ -501,7 +504,8 @@ Module Interactions
         Else
             'If there were no interactions,
             'there is an immediate sign off
-            'frmAdHockDispense.blnSignedOff = True
+            frmAdHockDispense.blnSignedOff = True
+            frmPatientInfo.blnSignedOff = True
         End If
 
     End Sub

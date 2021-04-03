@@ -41,6 +41,7 @@
 
     Private Sub btnConfigureInventory_Click(sender As Object, e As EventArgs) Handles btnConfigureInventory.Click
         referringForm.blnSignedOff = False
+        referringForm.blnOverride = False
         TextBox2.Clear()
         Me.Close()
     End Sub

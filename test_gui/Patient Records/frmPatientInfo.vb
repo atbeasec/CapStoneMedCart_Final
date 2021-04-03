@@ -48,6 +48,10 @@
     Private intPatientID As Integer
     Private intPatientMRN As Double
     Private strSelectedLabel As String
+    Public blnSignedOff As Boolean = True
+    Public blnOverride As Boolean = False
+    Public strMedName As String
+
     Public Enum DispenseHistoryEnum As Integer
         MedicationName = 1
         Strength = 2
@@ -406,13 +410,72 @@
     Private Sub PrescriptionPanel_Click(ByVal sender As Object, e As EventArgs)
         Dim intMedID As Integer = sender.tag
 
+        Dim strPatientMRN As String
+
         frmDispense.SetPatientID(intPatientID)
         frmDispense.SetintMedicationID(intMedID)
-        frmMain.OpenChildForm(frmDispense)
-        DispenseHistory.DispensemedicationPopulate(intPatientID, intMedID)
-        PatientInformation.PopulatePatientDispenseInfo(intPatientID)
-        PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientID)
-        PatientInformation.DisplayPatientPrescriptionsDispense(intPatientID)
+
+        strMedName = ExecuteScalarQuery("SELECT Drug_Name From Medication WHERE Medication_ID =" & intMedID & ";")
+
+        strPatientMRN = ExecuteScalarQuery("SELECT MRN_Number From Patient WHERE Patient_ID =" & intPatientID & ";")
+
+        'Allergy overrides
+        For Each allergy In lstBoxAllergies.Items
+            If strMedName.Contains(allergy.ToString.ToLower) Then
+                'show witness sign off
+                frmWitnessSignOff.Label1.Text = strMedName
+                frmWitnessSignOff.referringForm = Me
+                'added formatting in case a drug interaction override was chosen first
+                frmWitnessSignOff.Label2.Text = "Causes Allergic Reaction to Patient"
+                frmWitnessSignOff.Text = "Allergies Override"
+                frmWitnessSignOff.Label1.Location = New Point(3, 34)
+                frmWitnessSignOff.ShowDialog()
+
+                'if authentication from witness sign off form comes back then
+                If blnOverride Then
+                    Dim intMaxAllergyID
+                    ' pull the information to insert
+                    If ExecuteScalarQuery("Select AllergyOverride_ID from AllergyOverride") = Nothing Then
+                        intMaxAllergyID = 0
+                    Else
+                        intMaxAllergyID = ExecuteScalarQuery("SELECT MAX(AllergyOverride_ID) from AllergyOverride")
+                        intMaxAllergyID += 1
+                    End If
+
+                    ExecuteInsertQuery("INSERT INTO AllergyOverride(AllergyOverride_ID, Patient_TUID, User_TUID, Allergy_Name, DateTime) " &
+                                               "Values(" & intMaxAllergyID & ", " & intPatientID & ", " & LoggedInID & ", '" & allergy & "', '" & DateTime.Now & "')")
+                Else
+                    MessageBox.Show("Dispense canceled by user.")
+                    blnOverride = False
+                    blnSignedOff = False
+                    Exit Sub
+                End If
+
+            Else
+                ' do nothing as there is no allergy
+                'blnSignedOff = False
+                'blnOverride = False
+            End If
+        Next
+
+        'If the user didn't already sign off to dispense the medication,
+        'check interactions
+        DrugInteractionOverride(CStr(intMedID), strPatientMRN, "Dispense")
+
+        If blnSignedOff = True Then
+            'blnSignedOff = False
+
+            frmMain.OpenChildForm(frmDispense)
+            DispenseHistory.DispensemedicationPopulate(intPatientID, intMedID)
+            PatientInformation.PopulatePatientDispenseInfo(intPatientID)
+            PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientID)
+            PatientInformation.DisplayPatientPrescriptionsDispense(intPatientID)
+        End If
+        'frmMain.OpenChildForm(frmDispense)
+        'DispenseHistory.DispensemedicationPopulate(intPatientID, intMedID)
+        'PatientInformation.PopulatePatientDispenseInfo(intPatientID)
+        'PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientID)
+        'PatientInformation.DisplayPatientPrescriptionsDispense(intPatientID)
 
     End Sub
 
