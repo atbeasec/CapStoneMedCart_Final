@@ -384,6 +384,14 @@
         Dim lblID6 As New Label
         Dim lblID7 As New Label
 
+        AddHandler lblID.Click, AddressOf PrescriptionPanel_Click
+        AddHandler lblID2.Click, AddressOf PrescriptionPanel_Click
+        AddHandler lblID3.Click, AddressOf PrescriptionPanel_Click
+        AddHandler lblID4.Click, AddressOf PrescriptionPanel_Click
+        AddHandler lblID5.Click, AddressOf PrescriptionPanel_Click
+        AddHandler lblID6.Click, AddressOf PrescriptionPanel_Click
+        AddHandler lblID7.Click, AddressOf PrescriptionPanel_Click
+
         ' anywhere we have quotes except for the label names, we can call our Database and get method
         ' to ensure all of the text being added to the panel is inline with the  headers, we will use the label location of the
         ' header as the reference point for the X axis when creating these labels at run time.
@@ -404,6 +412,14 @@
         'Add panel to flow layout panel
         pnlMainPanel.Tag = intMedID
         flpPannel.Controls.Add(pnl)
+
+        lblID.Tag = intMedID
+        lblID2.Tag = intMedID
+        lblID3.Tag = intMedID
+        lblID4.Tag = intMedID
+        lblID5.Tag = intMedID
+        lblID6.Tag = intMedID
+        lblID7.Tag = intMedID
 
     End Sub
 

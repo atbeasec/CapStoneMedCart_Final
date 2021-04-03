@@ -902,7 +902,7 @@ Module PatientInformation
     Public Sub PopulatePatientAllergiesDispenseInfo(ByRef intPatient_ID As Integer)
         Dim dsPatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT Allergy_Name From PatientAllergy " &
                                                                          "INNER JOIN Patient on Patient.Patient_ID = PatientAllergy.Patient_TUID " &
-                                                                         "WHERE Patient_ID = '" & intPatient_ID & "'")
+                                                                         "WHERE Patient_ID = '" & intPatient_ID & "' AND PatientAllergy.Active_Flag = '1' ")
         For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
             frmDispense.lstboxAllergies.Items.Add(dr(0))
         Next
