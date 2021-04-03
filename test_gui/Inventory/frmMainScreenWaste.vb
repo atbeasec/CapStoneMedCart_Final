@@ -124,4 +124,8 @@
     Private Sub txtUnit_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtUnit.KeyPress
         DataVaildationMethods.KeyPressCheck(e, "0123456789.abcdefghijklmnopqrstuvwxyz /-")
     End Sub
+
+    Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
+
+    End Sub
 End Class
