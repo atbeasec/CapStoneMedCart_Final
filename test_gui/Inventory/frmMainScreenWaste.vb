@@ -42,8 +42,9 @@
         Next
     End Sub
 
-    Private Sub cmbPatientName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPatientName.SelectedIndexChanged
+    Private Sub cmbPatientName_SelectedIndexChanged(sender As Object, e As EventArgs) 'Handles cmbPatientName.SelectedIndexChanged
         If Not cmbPatientName.SelectedIndex = -1 Then
+            sender.text = ""
             'local variables for splitting array and holding patient ID
             Dim intPatientID As Integer
 
@@ -74,6 +75,7 @@
     Private Sub cmbMedications_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMedications.SelectedIndexChanged
         If Not cmbMedications.SelectedIndex = -1 Then
             'clear the textboxes
+            sender.text = ""
             txtDrawerBin.Clear()
 
             'get selected medication ID using the selected index and get the same index from medID array
@@ -93,5 +95,25 @@
             txtDrawerBin.Text = "Drawer number: " & (dsMedicationInformation.Tables(0).Rows(0)(2)) & " Bin number: " & (dsMedicationInformation.Tables(0).Rows(0)(3))
 
         End If
+    End Sub
+
+    Private Sub rbtnOther_CheckedChanged(sender As Object, e As EventArgs) Handles rbtnOther.CheckedChanged
+        pnlSignOff.Location = New Point(3, 286)
+    End Sub
+
+    Private Sub radPatientUnavilable_CheckedChanged(sender As Object, e As EventArgs) Handles radPatientUnavilable.CheckedChanged
+        pnlSignOff.Location = New Point(3, 158)
+    End Sub
+
+    Private Sub radRefused_CheckedChanged(sender As Object, e As EventArgs) Handles radRefused.CheckedChanged
+        pnlSignOff.Location = New Point(3, 158)
+    End Sub
+
+    Private Sub radCancel_CheckedChanged(sender As Object, e As EventArgs) Handles radCancel.CheckedChanged
+        pnlSignOff.Location = New Point(3, 158)
+    End Sub
+
+    Private Sub radIncorrect_CheckedChanged(sender As Object, e As EventArgs) Handles radIncorrect.CheckedChanged
+        pnlSignOff.Location = New Point(3, 158)
     End Sub
 End Class
