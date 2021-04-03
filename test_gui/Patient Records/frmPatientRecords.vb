@@ -67,18 +67,16 @@ Public Class frmPatientRecords
     '/*                 times
     '/*********************************************************************/
     Private Sub frmPatientRecords_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         Dim strFillSQL As String = ("select Patient.MRN_Number, Patient.Patient_First_Name, " &
                                            "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
                                            "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag = 1 AND PatientRoom.Active_Flag = 1 ORDER BY Patient.Patient_Last_Name ASC;")
         Fill_Patient_Table(strFillSQL)
-
         txtSearch.Text = txtSearch.Tag
         txtSearch.ForeColor = Color.Silver
-
-
         CreateToolTips(pnlHeader, tpHeaderSort)
         AddHandlerToLabelClick(pnlHeader, AddressOf SortBySelectedLabel)
-
+        AddHandlersLaterForRunTimePerformance()
     End Sub
 
     '/*********************************************************************/
@@ -168,14 +166,21 @@ Public Class frmPatientRecords
         AddHandler pnlMainPanel.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
         AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
 
-        ' add controls to this panel
-
+        'add controls to this panel
         Dim lblID1 As New Label
         Dim lblID2 As New Label
         Dim lblID3 As New Label
         Dim lblID4 As New Label
         Dim lblID5 As New Label
         Dim lblID6 As New Label
+
+        'add click event to the labels and not just the panel
+        AddHandler lblID1.Click, AddressOf DynamicSingleClickOpenPatient
+        AddHandler lblID2.Click, AddressOf DynamicSingleClickOpenPatient
+        AddHandler lblID3.Click, AddressOf DynamicSingleClickOpenPatient
+        AddHandler lblID4.Click, AddressOf DynamicSingleClickOpenPatient
+        AddHandler lblID5.Click, AddressOf DynamicSingleClickOpenPatient
+        AddHandler lblID6.Click, AddressOf DynamicSingleClickOpenPatient
 
         Const YCOORDINATE As Integer = 20
 
@@ -190,9 +195,15 @@ Public Class frmPatientRecords
         flpPannel.Controls.Add(pnl)
         pnlMainPanel.Tag = intPatientID
         currentContactPanel = pnl.Name
+
+        lblID1.Tag = intPatientID
+        lblID2.Tag = intPatientID
+        lblID3.Tag = intPatientID
+        lblID4.Tag = intPatientID
+        lblID5.Tag = intPatientID
+        lblID6.Tag = intPatientID
+
     End Sub
-
-
 
     '/********************************************************************/
     '/*                   SUB NAME: DynamicSingleClickOpenPatient	     */         
@@ -231,6 +242,55 @@ Public Class frmPatientRecords
         frmPatientInfo.setPatientID(sender.tag)
         ' open the patient record form of the matching patient
         frmMain.OpenChildForm(frmPatientInfo)
+
+    End Sub
+
+    '/********************************************************************/
+    '/*            SUB NAME: AddHandlersLaterForRunTimePerformance	     */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Collin Krygier  		             */   
+    '/*		         DATE CREATED: 	2/6/21			                     */                             
+    '/********************************************************************/
+    '/*  SUB Purpose: This sub adds handlers to the labels at form load  */
+    '/*  that allow the user to click the labels and load the next form  */
+    '/*                                                                  */
+    '/********************************************************************/
+    '/*  CALLED BY: DynamicSingleClickOpenPatient   	      		     */				            
+    '/*                                        				             */         
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/*             (NONE)						                         */		               
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	                                                                 */
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             
+    '/*	DynamicSingleClickOpenPatient()					                 */					                       
+    '/*                                                                  */   
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/*	 none                           				                 */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                                 
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  CK		4/3/21		 initial creation                            */
+    '/********************************************************************/ 
+    Public Sub AddHandlersLaterForRunTimePerformance()
+
+        Dim ctl As Control
+        Dim pnlPadding As Control
+        Dim pnlMain As Control
+
+        For Each ctl In flpPatientRecords.Controls
+            For Each pnlPadding In ctl.Controls
+                For Each pnlMain In pnlPadding.Controls
+
+                    AddHandler pnlMain.Click, AddressOf DynamicSingleClickOpenPatient
+
+                Next
+            Next
+        Next
 
     End Sub
 
@@ -295,6 +355,7 @@ Public Class frmPatientRecords
         intPatientID = (ExecuteScalarQuery("SELECT Patient_ID from Patient WHERE MRN_Number = " & intPatientID & " AND Active_Flag = 1"))
         'returning the PatientID of the patient from the selected record
         Return intPatientID
+
     End Function
 
     '/*********************************************************************/
