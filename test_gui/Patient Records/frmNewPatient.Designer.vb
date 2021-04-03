@@ -72,14 +72,13 @@ Partial Class frmNewPatient
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.cboRoom = New System.Windows.Forms.ComboBox()
         Me.Panel18 = New System.Windows.Forms.Panel()
+        Me.Panel19 = New System.Windows.Forms.Panel()
         Me.mtbPhone = New System.Windows.Forms.MaskedTextBox()
         Me.Panel15 = New System.Windows.Forms.Panel()
-        Me.mtbZipCode = New System.Windows.Forms.MaskedTextBox()
         Me.Panel20 = New System.Windows.Forms.Panel()
-        Me.Panel19 = New System.Windows.Forms.Panel()
+        Me.mtbZipCode = New System.Windows.Forms.MaskedTextBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.Panel21 = New System.Windows.Forms.Panel()
-        Me.MaskedTextBox1 = New System.Windows.Forms.MaskedTextBox()
+        Me.Panel14 = New System.Windows.Forms.Panel()
         Me.mtbDoB = New System.Windows.Forms.MaskedTextBox()
         Me.Panel1.SuspendLayout()
         Me.Panel9.SuspendLayout()
@@ -166,7 +165,7 @@ Partial Class frmNewPatient
         Me.Panel10.Name = "Panel10"
         Me.Panel10.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel10.Size = New System.Drawing.Size(843, 31)
-        Me.Panel10.TabIndex = 10
+        Me.Panel10.TabIndex = 13
         '
         'txtAddress
         '
@@ -212,7 +211,7 @@ Partial Class frmNewPatient
         Me.Panel12.Name = "Panel12"
         Me.Panel12.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel12.Size = New System.Drawing.Size(259, 32)
-        Me.Panel12.TabIndex = 14
+        Me.Panel12.TabIndex = 17
         '
         'txtEmail
         '
@@ -235,7 +234,7 @@ Partial Class frmNewPatient
         Me.Panel16.Name = "Panel16"
         Me.Panel16.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel16.Size = New System.Drawing.Size(251, 31)
-        Me.Panel16.TabIndex = 11
+        Me.Panel16.TabIndex = 14
         '
         'txtCity
         '
@@ -275,7 +274,7 @@ Partial Class frmNewPatient
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel2.Size = New System.Drawing.Size(107, 31)
-        Me.Panel2.TabIndex = 12
+        Me.Panel2.TabIndex = 15
         '
         'Panel3
         '
@@ -309,7 +308,7 @@ Partial Class frmNewPatient
         Me.btnSave.Location = New System.Drawing.Point(417, 554)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(120, 38)
-        Me.btnSave.TabIndex = 17
+        Me.btnSave.TabIndex = 20
         Me.btnSave.Text = "   SAVE "
         Me.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnSave.UseVisualStyleBackColor = False
@@ -322,7 +321,7 @@ Partial Class frmNewPatient
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel6.Size = New System.Drawing.Size(105, 32)
-        Me.Panel6.TabIndex = 8
+        Me.Panel6.TabIndex = 11
         '
         'txtHeight
         '
@@ -345,7 +344,7 @@ Partial Class frmNewPatient
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel7.Size = New System.Drawing.Size(87, 32)
-        Me.Panel7.TabIndex = 9
+        Me.Panel7.TabIndex = 12
         '
         'txtWeight
         '
@@ -368,7 +367,7 @@ Partial Class frmNewPatient
         Me.Panel8.Name = "Panel8"
         Me.Panel8.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel8.Size = New System.Drawing.Size(252, 31)
-        Me.Panel8.TabIndex = 16
+        Me.Panel8.TabIndex = 19
         '
         'cmbPhysician
         '
@@ -654,7 +653,16 @@ Partial Class frmNewPatient
         Me.Panel18.Name = "Panel18"
         Me.Panel18.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel18.Size = New System.Drawing.Size(252, 31)
-        Me.Panel18.TabIndex = 207
+        Me.Panel18.TabIndex = 18
+        '
+        'Panel19
+        '
+        Me.Panel19.BackColor = System.Drawing.Color.White
+        Me.Panel19.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel19.Location = New System.Drawing.Point(1, 23)
+        Me.Panel19.Name = "Panel19"
+        Me.Panel19.Size = New System.Drawing.Size(250, 7)
+        Me.Panel19.TabIndex = 173
         '
         'mtbPhone
         '
@@ -677,7 +685,16 @@ Partial Class frmNewPatient
         Me.Panel15.Name = "Panel15"
         Me.Panel15.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel15.Size = New System.Drawing.Size(107, 31)
-        Me.Panel15.TabIndex = 208
+        Me.Panel15.TabIndex = 16
+        '
+        'Panel20
+        '
+        Me.Panel20.BackColor = System.Drawing.Color.White
+        Me.Panel20.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel20.Location = New System.Drawing.Point(1, 23)
+        Me.Panel20.Name = "Panel20"
+        Me.Panel20.Size = New System.Drawing.Size(105, 7)
+        Me.Panel20.TabIndex = 173
         '
         'mtbZipCode
         '
@@ -691,56 +708,25 @@ Partial Class frmNewPatient
         Me.mtbZipCode.Size = New System.Drawing.Size(105, 22)
         Me.mtbZipCode.TabIndex = 172
         '
-        'Panel20
-        '
-        Me.Panel20.BackColor = System.Drawing.Color.White
-        Me.Panel20.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel20.Location = New System.Drawing.Point(1, 23)
-        Me.Panel20.Name = "Panel20"
-        Me.Panel20.Size = New System.Drawing.Size(105, 7)
-        Me.Panel20.TabIndex = 173
-        '
-        'Panel19
-        '
-        Me.Panel19.BackColor = System.Drawing.Color.White
-        Me.Panel19.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel19.Location = New System.Drawing.Point(1, 23)
-        Me.Panel19.Name = "Panel19"
-        Me.Panel19.Size = New System.Drawing.Size(250, 7)
-        Me.Panel19.TabIndex = 173
-        '
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.Color.DarkGray
         Me.Panel4.Controls.Add(Me.mtbDoB)
-        Me.Panel4.Controls.Add(Me.Panel21)
-        Me.Panel4.Controls.Add(Me.MaskedTextBox1)
+        Me.Panel4.Controls.Add(Me.Panel14)
         Me.Panel4.Location = New System.Drawing.Point(46, 260)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel4.Size = New System.Drawing.Size(171, 31)
-        Me.Panel4.TabIndex = 208
+        Me.Panel4.TabIndex = 7
         '
-        'Panel21
+        'Panel14
         '
-        Me.Panel21.BackColor = System.Drawing.Color.White
-        Me.Panel21.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel21.Location = New System.Drawing.Point(1, 23)
-        Me.Panel21.Name = "Panel21"
-        Me.Panel21.Size = New System.Drawing.Size(169, 7)
-        Me.Panel21.TabIndex = 173
-        '
-        'MaskedTextBox1
-        '
-        Me.MaskedTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.MaskedTextBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.MaskedTextBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!)
-        Me.MaskedTextBox1.Location = New System.Drawing.Point(1, 1)
-        Me.MaskedTextBox1.Mask = "(999) 000-0000"
-        Me.MaskedTextBox1.Name = "MaskedTextBox1"
-        Me.MaskedTextBox1.ShortcutsEnabled = False
-        Me.MaskedTextBox1.Size = New System.Drawing.Size(169, 22)
-        Me.MaskedTextBox1.TabIndex = 172
+        Me.Panel14.BackColor = System.Drawing.Color.White
+        Me.Panel14.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel14.Location = New System.Drawing.Point(1, 23)
+        Me.Panel14.Name = "Panel14"
+        Me.Panel14.Size = New System.Drawing.Size(169, 7)
+        Me.Panel14.TabIndex = 174
         '
         'mtbDoB
         '
@@ -752,7 +738,7 @@ Partial Class frmNewPatient
         Me.mtbDoB.Name = "mtbDoB"
         Me.mtbDoB.ShortcutsEnabled = False
         Me.mtbDoB.Size = New System.Drawing.Size(169, 22)
-        Me.mtbDoB.TabIndex = 174
+        Me.mtbDoB.TabIndex = 175
         Me.mtbDoB.ValidatingType = GetType(Date)
         '
         'frmNewPatient
@@ -885,7 +871,6 @@ Partial Class frmNewPatient
     Friend WithEvents Panel20 As Panel
     Friend WithEvents Panel19 As Panel
     Friend WithEvents Panel4 As Panel
+    Friend WithEvents Panel14 As Panel
     Friend WithEvents mtbDoB As MaskedTextBox
-    Friend WithEvents Panel21 As Panel
-    Friend WithEvents MaskedTextBox1 As MaskedTextBox
 End Class
