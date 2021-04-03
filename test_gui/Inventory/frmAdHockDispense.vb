@@ -5,23 +5,10 @@
     Private Sub frmAdHockDispense_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         'set ad efault quantity to the quantity textbox
-        Dim intDefaultQuantity As Integer = 1
-        txtQuantity.Text = intDefaultQuantity
 
         cmbMedications.Items.Clear()
         AdHoc.GetAllMedicationsForListbox()
         AdHoc.PopulatePatientsAdhoc()
-    End Sub
-
-    Private Sub btnIncrementQuantity_Click(sender As Object, e As EventArgs) Handles btnIncrementQuantity.Click
-        ButtonIncrement(1000, txtQuantity)
-    End Sub
-
-    Private Sub btnDecrementQuantity_Click(sender As Object, e As EventArgs) Handles btnDecrementQuantity.Click
-        If Not txtQuantity.Text = 0 Then
-            ButtonDecrement(txtQuantity)
-        End If
-
     End Sub
 
     Private Sub cmbMedications_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMedications.SelectedIndexChanged
@@ -38,11 +25,11 @@
             MessageBox.Show("Please select a medication")
         ElseIf IsNothing(cmbPatientName.SelectedItem) Then
             MessageBox.Show("Please select a patient")
-        ElseIf Not CInt(txtQuantity.Text) > 0 Then
-            MessageBox.Show("Please select a quantity of 1 or greater")
+        ElseIf txtAmount.Text = Nothing Or txtAmount.Text.Trim.Length = 0 Then
+            MessageBox.Show("Please select a quantity")
+        ElseIf txtUnit.Text = Nothing Or txtUnit.Text.Trim.Length = 0 Then
+            MessageBox.Show("Please select a Unit for the amount")
         Else
-
-
             For Each allergy In lstboxAllergies.Items
                 If cmbMedications.SelectedItem.ToString.ToLower.Contains(allergy.ToString.ToLower) Then
                     'show witness sign off
@@ -76,7 +63,6 @@
 
                 Else
                     ' do nothing as there is no allergy
-                    blnSignedOff = False
                     blnOverride = False
                 End If
             Next
@@ -87,10 +73,25 @@
 
             'If the user signs off for any override, dispense the medication
             If blnSignedOff = True Then
-                AdHoc.InsertAdHoc(AdHoc.intPatientIDArray(cmbPatientName.SelectedIndex), LoggedInID, CInt(txtQuantity.Text), AdHoc.intMedIDArray(cmbMedications.SelectedIndex), AdHoc.intDrawerMedArray(cmbMedications.SelectedIndex))
-                AdHoc.clearAdhocBoxes()
-                MessageBox.Show("Order Successfully placed")
                 blnSignedOff = False
+                Dim intPatientID As Integer = AdHoc.intPatientIDArray(cmbPatientName.SelectedIndex)
+                Dim intMedID As Integer = AdHoc.intMedIDArray(cmbMedications.SelectedIndex)
+                Dim strAmount As String = txtAmount.Text
+                Dim strUnit As String = txtUnit.Text
+                Dim intMedDrawer As Integer = AdHoc.intDrawerMedArray(cmbMedications.SelectedIndex)
+                'AdHoc.InsertAdHoc(AdHoc.intPatientIDArray(cmbPatientName.SelectedIndex), LoggedInID, CInt(txtQuantity.Text), AdHoc.intMedIDArray(cmbMedications.SelectedIndex), AdHoc.intDrawerMedArray(cmbMedications.SelectedIndex))
+                'AdHoc.clearAdhocBoxes()
+                'MessageBox.Show("Order Successfully placed")
+
+                frmDispense.setintEntered(1)
+                frmDispense.AdhocDispenseSetInformation(strAmount, strUnit, intMedDrawer)
+                frmDispense.SetPatientID(intPatientID)
+                frmDispense.SetintMedicationID(intMedID)
+                frmMain.OpenChildForm(frmDispense)
+                DispenseHistory.DispensemedicationPopulate(intPatientID, intMedID)
+                PatientInformation.PopulatePatientDispenseInfo(intPatientID)
+                PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientID)
+
             End If
 
         End If
@@ -138,26 +139,15 @@
     '/*                                                                     
     '/*********************************************************************/
 
-    Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantity.KeyPress
-        DataVaildationMethods.KeyPressCheck(e, "0123456789")
-        If IsNumeric(sender.Text) Then
-            GraphicalUserInterfaceReusableMethods.MaxValue(CInt(sender.Text), 1000, txtQuantity)
-        End If
+    Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtAmount.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789.")
 
     End Sub
 
-    Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantity.Validated
-        If IsNumeric(sender.Text) Then
-            GraphicalUserInterfaceReusableMethods.MaxValue(CInt(sender.Text), 1000, txtQuantity)
-        Else
-            MessageBox.Show("Please make sure you enter a positive number 1-1000")
-            sender.Text = "1"
-        End If
-        'LimitQuantityToQuantityStocked(SQLreturnValue, sender)
+    Private Sub txtUnit_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtUnit.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789.abcdefghijklmnopqrstuvwxyz /-")
 
     End Sub
-
-
     '/*********************************************************************/
     '/*                   Function NAME: txtDateOfBirth_TextChanged()     */         
     '/*********************************************************************/

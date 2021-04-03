@@ -15,6 +15,21 @@ Public Class frmDispense
     Dim contactPanelsAddedCount As Integer = 0
     Dim currentContactPanelName As String = Nothing
 
+    Private intEnteredFromAdhoc As Integer = 0
+
+    'variables here are only used if adhoc is the form that initiated dispensing
+    Public strAmountAdhoc As String
+    Public strUnitAdhoc As String
+    Public intDrawerMEDAdhoc As Integer
+
+    Public Sub setintEntered(ByRef ID As Integer)
+        intEnteredFromAdhoc = ID
+    End Sub
+
+    Public Function getIntEntered()
+        Return intEnteredFromAdhoc
+    End Function
+
     Public Sub SetPatientID(ByVal ID As Integer)
         intPatientID = ID
         intPatientMRN = ExecuteScalarQuery("SELECT MRN_Number from Patient WHERE Patient_ID =" & intPatientID & ";")
@@ -148,14 +163,27 @@ Public Class frmDispense
             End If
         ElseIf lblDirections.Text.Equals("Enter the Amount Administered") Then
             If IsNumeric(txtAmountDispensed.Text) Then
-                Dim strAmountDispensed As String = txtAmountDispensed.Text & " " & txtUnits.Text
-                Dim intdrawerMEDTUID As Integer = CreateDatabase.ExecuteScalarQuery("Select DrawerMedication_ID from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
-                DispensingDrug(intMedicationID, CInt(LoggedInID), strAmountDispensed)
-                frmWaste.SetPatientID(intPatientID)
-                frmWaste.setDrawer(intdrawerNumber)
-                frmWaste.setMedID(intMedicationID)
-                frmWaste.setDrawerMEDTUID(intdrawerMEDTUID)
-                frmMain.OpenChildForm(frmWaste)
+                If intEnteredFromAdhoc = 0 Then
+                    Dim strAmountDispensed As String = txtAmountDispensed.Text & " " & txtUnits.Text
+                    Dim intdrawerMEDTUID As Integer = CreateDatabase.ExecuteScalarQuery("Select DrawerMedication_ID from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
+                    DispensingDrug(intMedicationID, CInt(LoggedInID), strAmountDispensed)
+                    frmWaste.SetPatientID(intPatientID)
+                    frmWaste.setDrawer(intdrawerNumber)
+                    frmWaste.setMedID(intMedicationID)
+                    frmWaste.setDrawerMEDTUID(intdrawerMEDTUID)
+                    frmMain.OpenChildForm(frmWaste)
+
+                ElseIf intEnteredFromAdhoc = 1 Then
+                    Dim strAmountDispensed As String = txtAmountDispensed.Text & " " & txtUnits.Text
+                    DispensingDrugAdhoc(intMedicationID, intPatientID, CInt(LoggedInID), strAmountDispensed, intDrawerMEDAdhoc)
+                    frmWaste.SetPatientID(intPatientID)
+                    frmWaste.setDrawer(intDrawerMEDAdhoc)
+                    frmWaste.setMedID(intMedicationID)
+                    frmWaste.setDrawerMEDTUID(intDrawerMEDAdhoc)
+                    frmWaste.setEnteredFromAdhoc(1)
+                    frmMain.OpenChildForm(frmWaste)
+                End If
+
             Else
                 MessageBox.Show("Please enter a numeric number greater than 0")
             End If
@@ -195,6 +223,15 @@ Public Class frmDispense
         CreateDatabase.ExecuteInsertQuery(strbSQLcommand.ToString)
     End Sub
 
+    Private Sub DispensingDrugAdhoc(ByRef intMedID As Integer, ByRef intPatientID As Integer, ByRef intUserID As Integer, ByRef stramount As String, ByRef intDrawerID As Integer)
+        Dim strbSQLcommand As New StringBuilder()
+        Dim dtmAdhocTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+        strbSQLcommand.Clear()
+        strbSQLcommand.Append("INSERT INTO AdHocOrder(Medication_TUID,Patient_TUID,User_TUID,Amount,DrawerMedication_TUID,DateTime) ")
+        strbSQLcommand.Append("VALUES('" & intMedID & "','" & intPatientID & "','" & intUserID & "','" & stramount & "','" & intDrawerID & "','" & dtmAdhocTime & "')")
+        CreateDatabase.ExecuteInsertQuery(strbSQLcommand.ToString)
+    End Sub
+
     Private Sub UpdateSystemCountForDiscrepancy(ByRef intMedID As Integer, ByRef intDrawerCount As Integer, ByRef intEnteredAmount As Integer)
         Dim intCurrentSystemCount As Integer = CreateDatabase.ExecuteScalarQuery("Select Quantity from DrawerMedication where Medication_TUID = '" & intMedID & "' and Active_Flag = '1' AND Drawers_TUID = '" & intDrawerCount & "'")
         Dim intdrawerNumber As Integer = CreateDatabase.ExecuteScalarQuery("Select Drawers_TUID from DrawerMedication where Medication_TUID = '" & intMedID & "' and Active_Flag = '1'")
@@ -205,10 +242,6 @@ Public Class frmDispense
 
             ' MessageBox.Show("Discrepancy detected and recorded")
         End If
-    End Sub
-
-    Private Sub cmbMedications_SelectedIndexChanged(sender As Object, e As EventArgs)
-        DispenseHistory.SetMedicationProperties()
     End Sub
 
     Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantityToDispense.KeyPress
@@ -233,11 +266,9 @@ Public Class frmDispense
 
     End Sub
 
-    Private Sub Label15_Click(sender As Object, e As EventArgs) Handles Label15.Click
-
-    End Sub
-
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles txtType.TextChanged
-
+    Public Sub AdhocDispenseSetInformation(ByRef amount As String, ByRef unit As String, ByRef intDrawerMedA As Integer)
+        strAmountAdhoc = amount
+        strUnitAdhoc = unit
+        intDrawerMEDAdhoc = intDrawerMedA
     End Sub
 End Class
