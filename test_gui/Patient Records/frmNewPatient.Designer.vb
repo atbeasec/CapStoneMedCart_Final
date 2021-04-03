@@ -35,10 +35,6 @@ Partial Class frmNewPatient
         Me.txtLastName = New System.Windows.Forms.TextBox()
         Me.Panel12 = New System.Windows.Forms.Panel()
         Me.txtEmail = New System.Windows.Forms.TextBox()
-        Me.Panel14 = New System.Windows.Forms.Panel()
-        Me.mtbDoB = New System.Windows.Forms.MaskedTextBox()
-        Me.Panel15 = New System.Windows.Forms.Panel()
-        Me.mtbPhone = New System.Windows.Forms.MaskedTextBox()
         Me.Panel16 = New System.Windows.Forms.Panel()
         Me.txtCity = New System.Windows.Forms.TextBox()
         Me.cmbState = New System.Windows.Forms.ComboBox()
@@ -71,19 +67,25 @@ Partial Class frmNewPatient
         Me.Panel13 = New System.Windows.Forms.Panel()
         Me.btnBack = New System.Windows.Forms.Button()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.mtbZipCode = New System.Windows.Forms.MaskedTextBox()
         Me.Panel17 = New System.Windows.Forms.Panel()
         Me.cboBed = New System.Windows.Forms.ComboBox()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.cboRoom = New System.Windows.Forms.ComboBox()
+        Me.Panel18 = New System.Windows.Forms.Panel()
+        Me.mtbPhone = New System.Windows.Forms.MaskedTextBox()
+        Me.Panel15 = New System.Windows.Forms.Panel()
+        Me.mtbZipCode = New System.Windows.Forms.MaskedTextBox()
+        Me.Panel20 = New System.Windows.Forms.Panel()
+        Me.Panel19 = New System.Windows.Forms.Panel()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Panel21 = New System.Windows.Forms.Panel()
+        Me.MaskedTextBox1 = New System.Windows.Forms.MaskedTextBox()
+        Me.mtbDoB = New System.Windows.Forms.MaskedTextBox()
         Me.Panel1.SuspendLayout()
         Me.Panel9.SuspendLayout()
         Me.Panel10.SuspendLayout()
         Me.Panel11.SuspendLayout()
         Me.Panel12.SuspendLayout()
-        Me.Panel14.SuspendLayout()
-        Me.Panel15.SuspendLayout()
         Me.Panel16.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -92,9 +94,11 @@ Partial Class frmNewPatient
         Me.Panel8.SuspendLayout()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel13.SuspendLayout()
-        Me.Panel4.SuspendLayout()
         Me.Panel17.SuspendLayout()
         Me.Panel5.SuspendLayout()
+        Me.Panel18.SuspendLayout()
+        Me.Panel15.SuspendLayout()
+        Me.Panel4.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtFirstName
@@ -204,10 +208,10 @@ Partial Class frmNewPatient
         '
         Me.Panel12.BackColor = System.Drawing.Color.DarkGray
         Me.Panel12.Controls.Add(Me.txtEmail)
-        Me.Panel12.Location = New System.Drawing.Point(630, 417)
+        Me.Panel12.Location = New System.Drawing.Point(630, 415)
         Me.Panel12.Name = "Panel12"
         Me.Panel12.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel12.Size = New System.Drawing.Size(259, 28)
+        Me.Panel12.Size = New System.Drawing.Size(259, 32)
         Me.Panel12.TabIndex = 14
         '
         'txtEmail
@@ -220,57 +224,8 @@ Partial Class frmNewPatient
         Me.txtEmail.Multiline = True
         Me.txtEmail.Name = "txtEmail"
         Me.txtEmail.ShortcutsEnabled = False
-        Me.txtEmail.Size = New System.Drawing.Size(257, 26)
+        Me.txtEmail.Size = New System.Drawing.Size(257, 30)
         Me.txtEmail.TabIndex = 0
-        '
-        'Panel14
-        '
-        Me.Panel14.BackColor = System.Drawing.Color.White
-        Me.Panel14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel14.Controls.Add(Me.mtbDoB)
-        Me.Panel14.ForeColor = System.Drawing.Color.White
-        Me.Panel14.Location = New System.Drawing.Point(46, 259)
-        Me.Panel14.Name = "Panel14"
-        Me.Panel14.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel14.Size = New System.Drawing.Size(180, 32)
-        Me.Panel14.TabIndex = 7
-        '
-        'mtbDoB
-        '
-        Me.mtbDoB.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.mtbDoB.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.mtbDoB.Font = New System.Drawing.Font("Segoe UI", 12.0!)
-        Me.mtbDoB.Location = New System.Drawing.Point(1, 1)
-        Me.mtbDoB.Mask = "0000-00-00"
-        Me.mtbDoB.Name = "mtbDoB"
-        Me.mtbDoB.ShortcutsEnabled = False
-        Me.mtbDoB.Size = New System.Drawing.Size(176, 22)
-        Me.mtbDoB.TabIndex = 0
-        Me.mtbDoB.ValidatingType = GetType(Date)
-        '
-        'Panel15
-        '
-        Me.Panel15.BackColor = System.Drawing.Color.White
-        Me.Panel15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel15.Controls.Add(Me.mtbPhone)
-        Me.Panel15.ForeColor = System.Drawing.Color.DarkGray
-        Me.Panel15.Location = New System.Drawing.Point(46, 495)
-        Me.Panel15.Name = "Panel15"
-        Me.Panel15.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel15.Size = New System.Drawing.Size(250, 31)
-        Me.Panel15.TabIndex = 15
-        '
-        'mtbPhone
-        '
-        Me.mtbPhone.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.mtbPhone.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.mtbPhone.Font = New System.Drawing.Font("Segoe UI", 12.0!)
-        Me.mtbPhone.Location = New System.Drawing.Point(1, 1)
-        Me.mtbPhone.Mask = "(999) 000-0000"
-        Me.mtbPhone.Name = "mtbPhone"
-        Me.mtbPhone.ShortcutsEnabled = False
-        Me.mtbPhone.Size = New System.Drawing.Size(246, 22)
-        Me.mtbPhone.TabIndex = 0
         '
         'Panel16
         '
@@ -309,7 +264,7 @@ Partial Class frmNewPatient
         Me.cmbState.Location = New System.Drawing.Point(1, 1)
         Me.cmbState.MaxLength = 2
         Me.cmbState.Name = "cmbState"
-        Me.cmbState.Size = New System.Drawing.Size(78, 29)
+        Me.cmbState.Size = New System.Drawing.Size(105, 29)
         Me.cmbState.TabIndex = 0
         '
         'Panel2
@@ -319,7 +274,7 @@ Partial Class frmNewPatient
         Me.Panel2.Location = New System.Drawing.Point(338, 415)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel2.Size = New System.Drawing.Size(80, 31)
+        Me.Panel2.Size = New System.Drawing.Size(107, 31)
         Me.Panel2.TabIndex = 12
         '
         'Panel3
@@ -366,7 +321,7 @@ Partial Class frmNewPatient
         Me.Panel6.Location = New System.Drawing.Point(339, 258)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel6.Size = New System.Drawing.Size(93, 32)
+        Me.Panel6.Size = New System.Drawing.Size(105, 32)
         Me.Panel6.TabIndex = 8
         '
         'txtHeight
@@ -379,7 +334,7 @@ Partial Class frmNewPatient
         Me.txtHeight.Multiline = True
         Me.txtHeight.Name = "txtHeight"
         Me.txtHeight.ShortcutsEnabled = False
-        Me.txtHeight.Size = New System.Drawing.Size(91, 30)
+        Me.txtHeight.Size = New System.Drawing.Size(103, 30)
         Me.txtHeight.TabIndex = 0
         '
         'Panel7
@@ -412,7 +367,7 @@ Partial Class frmNewPatient
         Me.Panel8.Location = New System.Drawing.Point(338, 495)
         Me.Panel8.Name = "Panel8"
         Me.Panel8.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel8.Size = New System.Drawing.Size(270, 31)
+        Me.Panel8.Size = New System.Drawing.Size(252, 31)
         Me.Panel8.TabIndex = 16
         '
         'cmbPhysician
@@ -428,7 +383,7 @@ Partial Class frmNewPatient
         Me.cmbPhysician.IntegralHeight = False
         Me.cmbPhysician.Location = New System.Drawing.Point(1, 1)
         Me.cmbPhysician.Name = "cmbPhysician"
-        Me.cmbPhysician.Size = New System.Drawing.Size(268, 29)
+        Me.cmbPhysician.Size = New System.Drawing.Size(250, 29)
         Me.cmbPhysician.TabIndex = 0
         '
         'lblFirstName
@@ -568,7 +523,7 @@ Partial Class frmNewPatient
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label14.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label14.Location = New System.Drawing.Point(497, 391)
+        Me.Label14.Location = New System.Drawing.Point(479, 391)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(75, 21)
         Me.Label14.TabIndex = 81
@@ -638,30 +593,6 @@ Partial Class frmNewPatient
         Me.Label10.TabIndex = 206
         Me.Label10.Text = "Beds:"
         '
-        'Panel4
-        '
-        Me.Panel4.BackColor = System.Drawing.Color.White
-        Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel4.Controls.Add(Me.mtbZipCode)
-        Me.Panel4.ForeColor = System.Drawing.Color.DarkGray
-        Me.Panel4.Location = New System.Drawing.Point(501, 416)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel4.Size = New System.Drawing.Size(107, 31)
-        Me.Panel4.TabIndex = 13
-        '
-        'mtbZipCode
-        '
-        Me.mtbZipCode.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.mtbZipCode.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.mtbZipCode.Font = New System.Drawing.Font("Segoe UI", 12.0!)
-        Me.mtbZipCode.Location = New System.Drawing.Point(1, 1)
-        Me.mtbZipCode.Mask = "00000"
-        Me.mtbZipCode.Name = "mtbZipCode"
-        Me.mtbZipCode.ShortcutsEnabled = False
-        Me.mtbZipCode.Size = New System.Drawing.Size(103, 22)
-        Me.mtbZipCode.TabIndex = 0
-        '
         'Panel17
         '
         Me.Panel17.BackColor = System.Drawing.Color.DarkGray
@@ -714,15 +645,127 @@ Partial Class frmNewPatient
         Me.cboRoom.Size = New System.Drawing.Size(250, 29)
         Me.cboRoom.TabIndex = 0
         '
+        'Panel18
+        '
+        Me.Panel18.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel18.Controls.Add(Me.Panel19)
+        Me.Panel18.Controls.Add(Me.mtbPhone)
+        Me.Panel18.Location = New System.Drawing.Point(46, 495)
+        Me.Panel18.Name = "Panel18"
+        Me.Panel18.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel18.Size = New System.Drawing.Size(252, 31)
+        Me.Panel18.TabIndex = 207
+        '
+        'mtbPhone
+        '
+        Me.mtbPhone.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.mtbPhone.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.mtbPhone.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.mtbPhone.Location = New System.Drawing.Point(1, 1)
+        Me.mtbPhone.Mask = "(999) 000-0000"
+        Me.mtbPhone.Name = "mtbPhone"
+        Me.mtbPhone.ShortcutsEnabled = False
+        Me.mtbPhone.Size = New System.Drawing.Size(250, 22)
+        Me.mtbPhone.TabIndex = 172
+        '
+        'Panel15
+        '
+        Me.Panel15.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel15.Controls.Add(Me.Panel20)
+        Me.Panel15.Controls.Add(Me.mtbZipCode)
+        Me.Panel15.Location = New System.Drawing.Point(483, 415)
+        Me.Panel15.Name = "Panel15"
+        Me.Panel15.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel15.Size = New System.Drawing.Size(107, 31)
+        Me.Panel15.TabIndex = 208
+        '
+        'mtbZipCode
+        '
+        Me.mtbZipCode.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.mtbZipCode.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.mtbZipCode.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.mtbZipCode.Location = New System.Drawing.Point(1, 1)
+        Me.mtbZipCode.Mask = "00000"
+        Me.mtbZipCode.Name = "mtbZipCode"
+        Me.mtbZipCode.ShortcutsEnabled = False
+        Me.mtbZipCode.Size = New System.Drawing.Size(105, 22)
+        Me.mtbZipCode.TabIndex = 172
+        '
+        'Panel20
+        '
+        Me.Panel20.BackColor = System.Drawing.Color.White
+        Me.Panel20.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel20.Location = New System.Drawing.Point(1, 23)
+        Me.Panel20.Name = "Panel20"
+        Me.Panel20.Size = New System.Drawing.Size(105, 7)
+        Me.Panel20.TabIndex = 173
+        '
+        'Panel19
+        '
+        Me.Panel19.BackColor = System.Drawing.Color.White
+        Me.Panel19.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel19.Location = New System.Drawing.Point(1, 23)
+        Me.Panel19.Name = "Panel19"
+        Me.Panel19.Size = New System.Drawing.Size(250, 7)
+        Me.Panel19.TabIndex = 173
+        '
+        'Panel4
+        '
+        Me.Panel4.BackColor = System.Drawing.Color.DarkGray
+        Me.Panel4.Controls.Add(Me.mtbDoB)
+        Me.Panel4.Controls.Add(Me.Panel21)
+        Me.Panel4.Controls.Add(Me.MaskedTextBox1)
+        Me.Panel4.Location = New System.Drawing.Point(46, 260)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
+        Me.Panel4.Size = New System.Drawing.Size(171, 31)
+        Me.Panel4.TabIndex = 208
+        '
+        'Panel21
+        '
+        Me.Panel21.BackColor = System.Drawing.Color.White
+        Me.Panel21.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel21.Location = New System.Drawing.Point(1, 23)
+        Me.Panel21.Name = "Panel21"
+        Me.Panel21.Size = New System.Drawing.Size(169, 7)
+        Me.Panel21.TabIndex = 173
+        '
+        'MaskedTextBox1
+        '
+        Me.MaskedTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.MaskedTextBox1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MaskedTextBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.MaskedTextBox1.Location = New System.Drawing.Point(1, 1)
+        Me.MaskedTextBox1.Mask = "(999) 000-0000"
+        Me.MaskedTextBox1.Name = "MaskedTextBox1"
+        Me.MaskedTextBox1.ShortcutsEnabled = False
+        Me.MaskedTextBox1.Size = New System.Drawing.Size(169, 22)
+        Me.MaskedTextBox1.TabIndex = 172
+        '
+        'mtbDoB
+        '
+        Me.mtbDoB.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.mtbDoB.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.mtbDoB.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.mtbDoB.Location = New System.Drawing.Point(1, 1)
+        Me.mtbDoB.Mask = "0000-00-00"
+        Me.mtbDoB.Name = "mtbDoB"
+        Me.mtbDoB.ShortcutsEnabled = False
+        Me.mtbDoB.Size = New System.Drawing.Size(169, 22)
+        Me.mtbDoB.TabIndex = 174
+        Me.mtbDoB.ValidatingType = GetType(Date)
+        '
         'frmNewPatient
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1091, 645)
+        Me.Controls.Add(Me.Panel4)
+        Me.Controls.Add(Me.Panel15)
+        Me.Controls.Add(Me.Panel18)
         Me.Controls.Add(Me.Panel5)
         Me.Controls.Add(Me.Panel17)
-        Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Panel13)
         Me.Controls.Add(Me.Label16)
@@ -747,8 +790,6 @@ Partial Class frmNewPatient
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel16)
-        Me.Controls.Add(Me.Panel15)
-        Me.Controls.Add(Me.Panel14)
         Me.Controls.Add(Me.Panel12)
         Me.Controls.Add(Me.Panel11)
         Me.Controls.Add(Me.Panel10)
@@ -767,10 +808,6 @@ Partial Class frmNewPatient
         Me.Panel11.PerformLayout()
         Me.Panel12.ResumeLayout(False)
         Me.Panel12.PerformLayout()
-        Me.Panel14.ResumeLayout(False)
-        Me.Panel14.PerformLayout()
-        Me.Panel15.ResumeLayout(False)
-        Me.Panel15.PerformLayout()
         Me.Panel16.ResumeLayout(False)
         Me.Panel16.PerformLayout()
         Me.Panel2.ResumeLayout(False)
@@ -782,10 +819,14 @@ Partial Class frmNewPatient
         Me.Panel8.ResumeLayout(False)
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel13.ResumeLayout(False)
-        Me.Panel4.ResumeLayout(False)
-        Me.Panel4.PerformLayout()
         Me.Panel17.ResumeLayout(False)
         Me.Panel5.ResumeLayout(False)
+        Me.Panel18.ResumeLayout(False)
+        Me.Panel18.PerformLayout()
+        Me.Panel15.ResumeLayout(False)
+        Me.Panel15.PerformLayout()
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -802,8 +843,6 @@ Partial Class frmNewPatient
     Friend WithEvents txtLastName As TextBox
     Friend WithEvents Panel12 As Panel
     Friend WithEvents txtEmail As TextBox
-    Friend WithEvents Panel14 As Panel
-    Friend WithEvents Panel15 As Panel
     Friend WithEvents Panel16 As Panel
     Friend WithEvents txtCity As TextBox
     Friend WithEvents cmbState As ComboBox
@@ -831,16 +870,22 @@ Partial Class frmNewPatient
     Friend WithEvents Label15 As Label
     Friend WithEvents Label16 As Label
     Friend WithEvents cmbPhysician As ComboBox
-    Friend WithEvents mtbDoB As MaskedTextBox
-    Friend WithEvents mtbPhone As MaskedTextBox
     Friend WithEvents ErrorProvider1 As ErrorProvider
     Friend WithEvents Panel13 As Panel
     Friend WithEvents btnBack As Button
     Friend WithEvents Label10 As Label
-    Friend WithEvents Panel4 As Panel
-    Friend WithEvents mtbZipCode As MaskedTextBox
     Friend WithEvents Panel17 As Panel
     Friend WithEvents cboBed As ComboBox
     Friend WithEvents Panel5 As Panel
     Friend WithEvents cboRoom As ComboBox
+    Friend WithEvents Panel15 As Panel
+    Friend WithEvents mtbZipCode As MaskedTextBox
+    Friend WithEvents Panel18 As Panel
+    Friend WithEvents mtbPhone As MaskedTextBox
+    Friend WithEvents Panel20 As Panel
+    Friend WithEvents Panel19 As Panel
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents mtbDoB As MaskedTextBox
+    Friend WithEvents Panel21 As Panel
+    Friend WithEvents MaskedTextBox1 As MaskedTextBox
 End Class
