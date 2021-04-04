@@ -362,7 +362,7 @@ Public Class frmEditPhysician
             mtbPhone.Text = ""
             cboCredentials.SelectedItem = Nothing
             cboState.SelectedItem = Nothing
-            MessageBox.Show("Physician Added")
+            MessageBox.Show("Physician added.")
         End If
 
 
@@ -402,10 +402,10 @@ Public Class frmEditPhysician
 
         'if it returns 2 then the First, Middle, and Last Name match someone else already in the database 
         If ExecuteScalarQuery(strStatement) = 2 Then
-            MsgBox("A Physician already has that First, Middle, and Last Name")
+            MessageBox.Show("A physician already has that first, middle, and last name.")
             'Make Sure all fields are filled
         ElseIf txtFirstName.Text = "" Or txtLastName.Text = "" Or txtMiddleName.Text = "" Or mtbPhone.Text = "" Or mtbFax.Text = "" Or txtAddress.Text = "" Or txtCity.Text = "" Or txtZipCode.Text = "" Then
-            MsgBox("All Fields must be filled")
+            MessageBox.Show("All fields must be filled in.")
         Else
             'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
             strStatement = "UPDATE Physician SET Physician_First_Name='" & strFirstName & "',Physician_Middle_Name='" & strMiddleName & "', Physician_Last_Name='" & strLastName & "', Physician_Credentials='" & cboCredentials.SelectedItem & "', Physician_Phone_Number='" & mtbPhone.Text & "', Physician_Fax_Number='" & mtbFax.Text & "', Physician_Address='" & strAddress & "', Physician_City='" & strCity & "', Physician_State='" & cboState.SelectedItem & "', Physician_Zip_Code='" & txtZipCode.Text & "',Active_Flag=1 WHERE Physician_ID='" & txtID.Text & "';"
