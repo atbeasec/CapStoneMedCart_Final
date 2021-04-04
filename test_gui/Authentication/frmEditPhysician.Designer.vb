@@ -36,13 +36,12 @@ Partial Class frmEditPhysician
         Me.mtbFax = New System.Windows.Forms.MaskedTextBox()
         Me.Panel9 = New System.Windows.Forms.Panel()
         Me.Panel18 = New System.Windows.Forms.Panel()
-        Me.mtbPhone = New System.Windows.Forms.MaskedTextBox()
         Me.Panel19 = New System.Windows.Forms.Panel()
-        Me.MaskedTextBox1 = New System.Windows.Forms.MaskedTextBox()
+        Me.mtbPhone = New System.Windows.Forms.MaskedTextBox()
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.Panel20 = New System.Windows.Forms.Panel()
         Me.txtZipCode = New System.Windows.Forms.MaskedTextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.lblTitle = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.txtMiddleName = New System.Windows.Forms.TextBox()
         Me.Panel11 = New System.Windows.Forms.Panel()
@@ -72,10 +71,10 @@ Partial Class frmEditPhysician
         Me.lblFirstName = New System.Windows.Forms.Label()
         Me.txtSearchBox = New System.Windows.Forms.TextBox()
         Me.tpToolTip = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Panel6 = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.pnlSearch = New System.Windows.Forms.Panel()
         Me.pnlSearchIcon = New System.Windows.Forms.Button()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.pnlPhysicianHeader.SuspendLayout()
         Me.pnlAllTextboxes.SuspendLayout()
         Me.Panel8.SuspendLayout()
@@ -96,9 +95,9 @@ Partial Class frmEditPhysician
         '
         Me.flpPhysicianInfo.AutoScroll = True
         Me.flpPhysicianInfo.BackColor = System.Drawing.Color.White
-        Me.flpPhysicianInfo.Location = New System.Drawing.Point(567, 121)
+        Me.flpPhysicianInfo.Location = New System.Drawing.Point(566, 73)
         Me.flpPhysicianInfo.Name = "flpPhysicianInfo"
-        Me.flpPhysicianInfo.Size = New System.Drawing.Size(513, 398)
+        Me.flpPhysicianInfo.Size = New System.Drawing.Size(513, 562)
         Me.flpPhysicianInfo.TabIndex = 141
         '
         'pnlPhysicianHeader
@@ -108,9 +107,9 @@ Partial Class frmEditPhysician
         Me.pnlPhysicianHeader.Controls.Add(Me.lblActions)
         Me.pnlPhysicianHeader.Controls.Add(Me.lblPermissions)
         Me.pnlPhysicianHeader.Controls.Add(Me.lblName)
-        Me.pnlPhysicianHeader.Location = New System.Drawing.Point(567, 63)
+        Me.pnlPhysicianHeader.Location = New System.Drawing.Point(565, 29)
         Me.pnlPhysicianHeader.Name = "pnlPhysicianHeader"
-        Me.pnlPhysicianHeader.Size = New System.Drawing.Size(513, 47)
+        Me.pnlPhysicianHeader.Size = New System.Drawing.Size(513, 39)
         Me.pnlPhysicianHeader.TabIndex = 142
         '
         'lblStatus
@@ -173,7 +172,7 @@ Partial Class frmEditPhysician
         Me.pnlAllTextboxes.Controls.Add(Me.Panel8)
         Me.pnlAllTextboxes.Controls.Add(Me.Panel18)
         Me.pnlAllTextboxes.Controls.Add(Me.Panel7)
-        Me.pnlAllTextboxes.Controls.Add(Me.Label4)
+        Me.pnlAllTextboxes.Controls.Add(Me.lblTitle)
         Me.pnlAllTextboxes.Controls.Add(Me.txtID)
         Me.pnlAllTextboxes.Controls.Add(Me.Panel5)
         Me.pnlAllTextboxes.Controls.Add(Me.Panel11)
@@ -195,7 +194,7 @@ Partial Class frmEditPhysician
         Me.pnlAllTextboxes.Controls.Add(Me.Label3)
         Me.pnlAllTextboxes.Controls.Add(Me.Label1)
         Me.pnlAllTextboxes.Controls.Add(Me.lblFirstName)
-        Me.pnlAllTextboxes.Location = New System.Drawing.Point(12, 22)
+        Me.pnlAllTextboxes.Location = New System.Drawing.Point(12, 1)
         Me.pnlAllTextboxes.Name = "pnlAllTextboxes"
         Me.pnlAllTextboxes.Size = New System.Drawing.Size(549, 497)
         Me.pnlAllTextboxes.TabIndex = 167
@@ -209,7 +208,7 @@ Partial Class frmEditPhysician
         Me.Panel8.Name = "Panel8"
         Me.Panel8.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel8.Size = New System.Drawing.Size(252, 31)
-        Me.Panel8.TabIndex = 211
+        Me.Panel8.TabIndex = 6
         '
         'mtbFax
         '
@@ -235,14 +234,22 @@ Partial Class frmEditPhysician
         'Panel18
         '
         Me.Panel18.BackColor = System.Drawing.Color.DarkGray
-        Me.Panel18.Controls.Add(Me.mtbPhone)
         Me.Panel18.Controls.Add(Me.Panel19)
-        Me.Panel18.Controls.Add(Me.MaskedTextBox1)
+        Me.Panel18.Controls.Add(Me.mtbPhone)
         Me.Panel18.Location = New System.Drawing.Point(13, 212)
         Me.Panel18.Name = "Panel18"
         Me.Panel18.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel18.Size = New System.Drawing.Size(252, 31)
-        Me.Panel18.TabIndex = 210
+        Me.Panel18.TabIndex = 5
+        '
+        'Panel19
+        '
+        Me.Panel19.BackColor = System.Drawing.Color.White
+        Me.Panel19.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel19.Location = New System.Drawing.Point(1, 23)
+        Me.Panel19.Name = "Panel19"
+        Me.Panel19.Size = New System.Drawing.Size(250, 7)
+        Me.Panel19.TabIndex = 173
         '
         'mtbPhone
         '
@@ -254,28 +261,7 @@ Partial Class frmEditPhysician
         Me.mtbPhone.Name = "mtbPhone"
         Me.mtbPhone.ShortcutsEnabled = False
         Me.mtbPhone.Size = New System.Drawing.Size(250, 22)
-        Me.mtbPhone.TabIndex = 174
-        '
-        'Panel19
-        '
-        Me.Panel19.BackColor = System.Drawing.Color.White
-        Me.Panel19.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel19.Location = New System.Drawing.Point(1, 23)
-        Me.Panel19.Name = "Panel19"
-        Me.Panel19.Size = New System.Drawing.Size(250, 7)
-        Me.Panel19.TabIndex = 173
-        '
-        'MaskedTextBox1
-        '
-        Me.MaskedTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.MaskedTextBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.MaskedTextBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!)
-        Me.MaskedTextBox1.Location = New System.Drawing.Point(1, 1)
-        Me.MaskedTextBox1.Mask = "(999) 000-0000"
-        Me.MaskedTextBox1.Name = "MaskedTextBox1"
-        Me.MaskedTextBox1.ShortcutsEnabled = False
-        Me.MaskedTextBox1.Size = New System.Drawing.Size(250, 22)
-        Me.MaskedTextBox1.TabIndex = 172
+        Me.mtbPhone.TabIndex = 172
         '
         'Panel7
         '
@@ -286,7 +272,7 @@ Partial Class frmEditPhysician
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel7.Size = New System.Drawing.Size(108, 31)
-        Me.Panel7.TabIndex = 209
+        Me.Panel7.TabIndex = 10
         '
         'Panel20
         '
@@ -309,26 +295,26 @@ Partial Class frmEditPhysician
         Me.txtZipCode.Size = New System.Drawing.Size(106, 22)
         Me.txtZipCode.TabIndex = 172
         '
-        'Label4
+        'lblTitle
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.BackColor = System.Drawing.Color.White
-        Me.Label4.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(9, 12)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(201, 25)
-        Me.Label4.TabIndex = 189
-        Me.Label4.Text = "Create New Physician"
+        Me.lblTitle.AutoSize = True
+        Me.lblTitle.BackColor = System.Drawing.Color.White
+        Me.lblTitle.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTitle.Location = New System.Drawing.Point(7, 12)
+        Me.lblTitle.Name = "lblTitle"
+        Me.lblTitle.Size = New System.Drawing.Size(201, 25)
+        Me.lblTitle.TabIndex = 189
+        Me.lblTitle.Text = "Create New Physician"
         '
         'Panel5
         '
         Me.Panel5.BackColor = System.Drawing.Color.DarkGray
         Me.Panel5.Controls.Add(Me.txtMiddleName)
-        Me.Panel5.Location = New System.Drawing.Point(13, 140)
+        Me.Panel5.Location = New System.Drawing.Point(285, 70)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel5.Size = New System.Drawing.Size(252, 28)
-        Me.Panel5.TabIndex = 3
+        Me.Panel5.TabIndex = 2
         '
         'txtMiddleName
         '
@@ -347,11 +333,11 @@ Partial Class frmEditPhysician
         '
         Me.Panel11.BackColor = System.Drawing.Color.DarkGray
         Me.Panel11.Controls.Add(Me.txtLastName)
-        Me.Panel11.Location = New System.Drawing.Point(283, 71)
+        Me.Panel11.Location = New System.Drawing.Point(13, 137)
         Me.Panel11.Name = "Panel11"
         Me.Panel11.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel11.Size = New System.Drawing.Size(254, 28)
-        Me.Panel11.TabIndex = 2
+        Me.Panel11.Size = New System.Drawing.Size(254, 31)
+        Me.Panel11.TabIndex = 3
         '
         'txtLastName
         '
@@ -363,7 +349,7 @@ Partial Class frmEditPhysician
         Me.txtLastName.Multiline = True
         Me.txtLastName.Name = "txtLastName"
         Me.txtLastName.ShortcutsEnabled = False
-        Me.txtLastName.Size = New System.Drawing.Size(252, 26)
+        Me.txtLastName.Size = New System.Drawing.Size(252, 29)
         Me.txtLastName.TabIndex = 2
         '
         'btnSaveChanges
@@ -576,7 +562,7 @@ Partial Class frmEditPhysician
         Me.btnSave.Location = New System.Drawing.Point(210, 413)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(120, 38)
-        Me.btnSave.TabIndex = 178
+        Me.btnSave.TabIndex = 13
         Me.btnSave.Text = "   SAVE "
         Me.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnSave.UseVisualStyleBackColor = False
@@ -608,7 +594,7 @@ Partial Class frmEditPhysician
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(9, 112)
+        Me.Label3.Location = New System.Drawing.Point(280, 43)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(107, 21)
         Me.Label3.TabIndex = 169
@@ -619,7 +605,7 @@ Partial Class frmEditPhysician
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(281, 46)
+        Me.Label1.Location = New System.Drawing.Point(10, 109)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(87, 21)
         Me.Label1.TabIndex = 168
@@ -630,7 +616,7 @@ Partial Class frmEditPhysician
         Me.lblFirstName.AutoSize = True
         Me.lblFirstName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblFirstName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.lblFirstName.Location = New System.Drawing.Point(9, 46)
+        Me.lblFirstName.Location = New System.Drawing.Point(8, 43)
         Me.lblFirstName.Name = "lblFirstName"
         Me.lblFirstName.Size = New System.Drawing.Size(89, 21)
         Me.lblFirstName.TabIndex = 167
@@ -645,26 +631,19 @@ Partial Class frmEditPhysician
         Me.txtSearchBox.Multiline = True
         Me.txtSearchBox.Name = "txtSearchBox"
         Me.txtSearchBox.ShortcutsEnabled = False
-        Me.txtSearchBox.Size = New System.Drawing.Size(482, 29)
+        Me.txtSearchBox.Size = New System.Drawing.Size(361, 29)
         Me.txtSearchBox.TabIndex = 170
         Me.txtSearchBox.Tag = "Search Users"
-        '
-        'Panel6
-        '
-        Me.Panel6.Location = New System.Drawing.Point(-2, 12)
-        Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(27, 544)
-        Me.Panel6.TabIndex = 171
         '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.DarkGray
         Me.Panel1.Controls.Add(Me.pnlSearch)
         Me.Panel1.Controls.Add(Me.txtSearchBox)
-        Me.Panel1.Location = New System.Drawing.Point(567, 22)
+        Me.Panel1.Location = New System.Drawing.Point(692, 1)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel1.Size = New System.Drawing.Size(512, 31)
+        Me.Panel1.Size = New System.Drawing.Size(386, 31)
         Me.Panel1.TabIndex = 172
         '
         'pnlSearch
@@ -676,7 +655,7 @@ Partial Class frmEditPhysician
         Me.pnlSearch.Dock = System.Windows.Forms.DockStyle.Right
         Me.pnlSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.pnlSearch.ForeColor = System.Drawing.Color.White
-        Me.pnlSearch.Location = New System.Drawing.Point(478, 1)
+        Me.pnlSearch.Location = New System.Drawing.Point(352, 1)
         Me.pnlSearch.Name = "pnlSearch"
         Me.pnlSearch.Size = New System.Drawing.Size(33, 29)
         Me.pnlSearch.TabIndex = 2
@@ -695,14 +674,25 @@ Partial Class frmEditPhysician
         Me.pnlSearchIcon.TabIndex = 40
         Me.pnlSearchIcon.UseVisualStyleBackColor = False
         '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.BackColor = System.Drawing.Color.White
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(572, 13)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(107, 25)
+        Me.Label4.TabIndex = 190
+        Me.Label4.Text = "Physicians:"
+        '
         'frmEditPhysician
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1091, 672)
+        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Panel1)
-        Me.Controls.Add(Me.Panel6)
         Me.Controls.Add(Me.pnlAllTextboxes)
         Me.Controls.Add(Me.pnlPhysicianHeader)
         Me.Controls.Add(Me.flpPhysicianInfo)
@@ -734,6 +724,7 @@ Partial Class frmEditPhysician
         Me.Panel1.PerformLayout()
         Me.pnlSearch.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents flpPhysicianInfo As FlowLayoutPanel
@@ -771,10 +762,9 @@ Partial Class frmEditPhysician
     Friend WithEvents txtFirstName As TextBox
     Friend WithEvents Panel5 As Panel
     Friend WithEvents txtMiddleName As TextBox
-    Friend WithEvents Label4 As Label
+    Friend WithEvents lblTitle As Label
     Friend WithEvents txtSearchBox As TextBox
     Friend WithEvents tpToolTip As ToolTip
-    Friend WithEvents Panel6 As Panel
     Friend WithEvents Panel7 As Panel
     Friend WithEvents Panel20 As Panel
     Friend WithEvents txtZipCode As MaskedTextBox
@@ -782,10 +772,10 @@ Partial Class frmEditPhysician
     Friend WithEvents mtbFax As MaskedTextBox
     Friend WithEvents Panel9 As Panel
     Friend WithEvents Panel18 As Panel
-    Friend WithEvents mtbPhone As MaskedTextBox
     Friend WithEvents Panel19 As Panel
-    Friend WithEvents MaskedTextBox1 As MaskedTextBox
+    Friend WithEvents mtbPhone As MaskedTextBox
     Friend WithEvents Panel1 As Panel
     Friend WithEvents pnlSearch As Panel
     Friend WithEvents pnlSearchIcon As Button
+    Friend WithEvents Label4 As Label
 End Class

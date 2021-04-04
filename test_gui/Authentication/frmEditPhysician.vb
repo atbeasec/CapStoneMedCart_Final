@@ -260,7 +260,7 @@ Public Class frmEditPhysician
         ' anywhere we have quotes except for the label names, we can call our Database and get method
 
         CreateIDLabel(pnlMainPanel, lblID, "lblID", lblName.Location.X - 15, INTTWENTY, strID, getPanelCount(flpPannel))
-        CreateIDLabelWithToolTip(pnlMainPanel, lblID2, "lblNames", lblName.Location.X, INTTWENTY, strName, getPanelCount(flpPannel), tpToolTip, TruncateString(15, strName))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID2, "lblNames", lblName.Location.X, INTTWENTY, strName, getPanelCount(flpPannel), tpToolTip, TruncateString(13, strName))
         '  CreateIDLabel(pnlMainPanel, lblID2, "lblNames", lblName.Location.X, INTTWENTY, strName, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID4, "lblPermissions", lblPermissions.Location.X, INTTWENTY, strAccess, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID5, "lblStatus", lblStatus.Location.X, INTTWENTY, strActive, getPanelCount(flpPannel))
@@ -397,7 +397,7 @@ Public Class frmEditPhysician
         strMiddleName = Regex.Replace(strMiddleName, "'", "''")
         strAddress = Regex.Replace(strAddress, "'", "''")
         strCity = Regex.Replace(strCity, "'", "''")
-
+        lblTitle.Text = "Create New Physician"
 
 
         'if it returns 2 then the First, Middle, and Last Name match someone else already in the database 
@@ -481,6 +481,7 @@ Public Class frmEditPhysician
         btnSave.Visible = True
         cboCredentials.ResetText()
         cboState.ResetText()
+        lblTitle.Text = "Create New Physician"
 
     End Sub
 

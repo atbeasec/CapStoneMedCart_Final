@@ -725,7 +725,7 @@ Partial Class frmPatientInfo
         Me.lblDatePrescribed.AutoSize = True
         Me.lblDatePrescribed.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDatePrescribed.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblDatePrescribed.Location = New System.Drawing.Point(545, 16)
+        Me.lblDatePrescribed.Location = New System.Drawing.Point(574, 16)
         Me.lblDatePrescribed.Name = "lblDatePrescribed"
         Me.lblDatePrescribed.Size = New System.Drawing.Size(126, 21)
         Me.lblDatePrescribed.TabIndex = 4
