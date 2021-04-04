@@ -333,7 +333,7 @@ Public Class frmEditPhysician
         strCity = Regex.Replace(strCity, "'", "''")
         'Make Sure all fields are filled
         If txtFirstName.Text = "" Or txtLastName.Text = "" Or txtMiddleName.Text = "" Or txtAddress.Text = "" Or txtCity.Text = "" Or txtZipCode.MaskCompleted = False Or mtbPhone.MaskCompleted = False Or mtbFax.MaskCompleted = False Then
-            MsgBox("All Fields must be filled")
+            MessageBox.Show("All fields must be filled in.")
         Else
 
             'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
