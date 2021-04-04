@@ -23,7 +23,6 @@ Partial Class frmMainScreenWaste
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMainScreenWaste))
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.pnlHeader = New System.Windows.Forms.Panel()
         Me.btnBack = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -61,6 +60,8 @@ Partial Class frmMainScreenWaste
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.txtUnit = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.pnlHeader.SuspendLayout()
         Me.pnlRadioButtons.SuspendLayout()
         Me.pnlSignOff.SuspendLayout()
@@ -73,16 +74,6 @@ Partial Class frmMainScreenWaste
         Me.Panel3.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold)
-        Me.Label5.Location = New System.Drawing.Point(664, 19)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(275, 25)
-        Me.Label5.TabIndex = 224
-        Me.Label5.Text = "Enter amount wasted and unit:"
         '
         'pnlHeader
         '
@@ -116,7 +107,7 @@ Partial Class frmMainScreenWaste
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(665, 97)
+        Me.Label2.Location = New System.Drawing.Point(666, 120)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(163, 25)
         Me.Label2.TabIndex = 220
@@ -131,7 +122,7 @@ Partial Class frmMainScreenWaste
         Me.pnlRadioButtons.Controls.Add(Me.radRefused)
         Me.pnlRadioButtons.Controls.Add(Me.radCancel)
         Me.pnlRadioButtons.Controls.Add(Me.radIncorrect)
-        Me.pnlRadioButtons.Location = New System.Drawing.Point(669, 125)
+        Me.pnlRadioButtons.Location = New System.Drawing.Point(670, 148)
         Me.pnlRadioButtons.Name = "pnlRadioButtons"
         Me.pnlRadioButtons.Size = New System.Drawing.Size(417, 438)
         Me.pnlRadioButtons.TabIndex = 218
@@ -141,7 +132,7 @@ Partial Class frmMainScreenWaste
         Me.pnlSignOff.Controls.Add(Me.txtBarcode)
         Me.pnlSignOff.Controls.Add(Me.lblSignoff)
         Me.pnlSignOff.Controls.Add(Me.btnWaste)
-        Me.pnlSignOff.Location = New System.Drawing.Point(3, 158)
+        Me.pnlSignOff.Location = New System.Drawing.Point(3, 164)
         Me.pnlSignOff.Name = "pnlSignOff"
         Me.pnlSignOff.Size = New System.Drawing.Size(367, 150)
         Me.pnlSignOff.TabIndex = 24
@@ -176,7 +167,7 @@ Partial Class frmMainScreenWaste
         Me.btnWaste.ForeColor = System.Drawing.Color.White
         Me.btnWaste.Image = CType(resources.GetObject("btnWaste.Image"), System.Drawing.Image)
         Me.btnWaste.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnWaste.Location = New System.Drawing.Point(114, 75)
+        Me.btnWaste.Location = New System.Drawing.Point(112, 81)
         Me.btnWaste.Name = "btnWaste"
         Me.btnWaste.Size = New System.Drawing.Size(150, 37)
         Me.btnWaste.TabIndex = 31
@@ -186,6 +177,7 @@ Partial Class frmMainScreenWaste
         '
         'txtOther
         '
+        Me.txtOther.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtOther.Location = New System.Drawing.Point(21, 158)
         Me.txtOther.Multiline = True
         Me.txtOther.Name = "txtOther"
@@ -197,7 +189,7 @@ Partial Class frmMainScreenWaste
         '
         Me.rbtnOther.AutoSize = True
         Me.rbtnOther.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnOther.Location = New System.Drawing.Point(1, 127)
+        Me.rbtnOther.Location = New System.Drawing.Point(3, 127)
         Me.rbtnOther.Name = "rbtnOther"
         Me.rbtnOther.Size = New System.Drawing.Size(219, 25)
         Me.rbtnOther.TabIndex = 5
@@ -208,7 +200,7 @@ Partial Class frmMainScreenWaste
         '
         Me.radPatientUnavilable.AutoSize = True
         Me.radPatientUnavilable.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.radPatientUnavilable.Location = New System.Drawing.Point(1, 96)
+        Me.radPatientUnavilable.Location = New System.Drawing.Point(3, 96)
         Me.radPatientUnavilable.Name = "radPatientUnavilable"
         Me.radPatientUnavilable.Size = New System.Drawing.Size(130, 25)
         Me.radPatientUnavilable.TabIndex = 4
@@ -466,10 +458,10 @@ Partial Class frmMainScreenWaste
         '
         Me.Panel3.BackColor = System.Drawing.Color.DarkGray
         Me.Panel3.Controls.Add(Me.txtQuantity)
-        Me.Panel3.Location = New System.Drawing.Point(669, 56)
+        Me.Panel3.Location = New System.Drawing.Point(670, 79)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel3.Size = New System.Drawing.Size(158, 28)
+        Me.Panel3.Size = New System.Drawing.Size(158, 31)
         Me.Panel3.TabIndex = 3
         '
         'txtQuantity
@@ -483,7 +475,7 @@ Partial Class frmMainScreenWaste
         Me.txtQuantity.Multiline = True
         Me.txtQuantity.Name = "txtQuantity"
         Me.txtQuantity.ShortcutsEnabled = False
-        Me.txtQuantity.Size = New System.Drawing.Size(156, 26)
+        Me.txtQuantity.Size = New System.Drawing.Size(156, 29)
         Me.txtQuantity.TabIndex = 38
         Me.txtQuantity.TabStop = False
         '
@@ -491,10 +483,10 @@ Partial Class frmMainScreenWaste
         '
         Me.Panel5.BackColor = System.Drawing.Color.DarkGray
         Me.Panel5.Controls.Add(Me.txtUnit)
-        Me.Panel5.Location = New System.Drawing.Point(843, 56)
+        Me.Panel5.Location = New System.Drawing.Point(844, 79)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel5.Size = New System.Drawing.Size(64, 28)
+        Me.Panel5.Size = New System.Drawing.Size(64, 31)
         Me.Panel5.TabIndex = 4
         '
         'txtUnit
@@ -509,7 +501,7 @@ Partial Class frmMainScreenWaste
         Me.txtUnit.Name = "txtUnit"
         Me.txtUnit.ReadOnly = True
         Me.txtUnit.ShortcutsEnabled = False
-        Me.txtUnit.Size = New System.Drawing.Size(62, 26)
+        Me.txtUnit.Size = New System.Drawing.Size(62, 29)
         Me.txtUnit.TabIndex = 38
         Me.txtUnit.TabStop = False
         '
@@ -523,12 +515,34 @@ Partial Class frmMainScreenWaste
         Me.Label1.TabIndex = 251
         Me.Label1.Text = "Waste Form"
         '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(667, 55)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(124, 21)
+        Me.Label4.TabIndex = 252
+        Me.Label4.Text = "Amount Wasted:"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(840, 55)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(49, 21)
+        Me.Label10.TabIndex = 253
+        Me.Label10.Text = "Units:"
+        '
         'frmMainScreenWaste
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1203, 593)
+        Me.Controls.Add(Me.Label10)
+        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Panel5)
         Me.Controls.Add(Me.Panel3)
@@ -544,7 +558,6 @@ Partial Class frmMainScreenWaste
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.pnlHeader)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.pnlRadioButtons)
@@ -573,7 +586,6 @@ Partial Class frmMainScreenWaste
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents Label5 As Label
     Friend WithEvents pnlHeader As Panel
     Friend WithEvents btnBack As Button
     Friend WithEvents Label2 As Label
@@ -611,4 +623,6 @@ Partial Class frmMainScreenWaste
     Friend WithEvents Panel5 As Panel
     Friend WithEvents txtUnit As TextBox
     Friend WithEvents Label1 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label10 As Label
 End Class
