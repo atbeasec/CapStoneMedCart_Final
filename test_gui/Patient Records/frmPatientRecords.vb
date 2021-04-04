@@ -468,7 +468,7 @@ Public Class frmPatientRecords
     '/*  ---   ----     ------------------------------------------------  */
     '/*  Collin Krygier  3/14/2021    Initial creation                    */
     '/*********************************************************************/
-    Private Sub SortBySelectedLabel(sender As Object, e As EventArgs)
+    Public Sub SortBySelectedLabel(sender As Object, e As EventArgs)
 
         Dim parent As Panel = sender.parent
         Dim field As Integer = CInt(sender.tag)

@@ -10,6 +10,7 @@
 
         ' select the my patients item from the cbobox by default
         cboFilter.SelectedIndex = 0
+        AddHandlerToLabelClick(pnlHeader, AddressOf frmPatientRecords.SortBySelectedLabel)
         'HideButtonOnPanels()
         ' AddHandlersLaterForRunTimePerformance()
     End Sub
