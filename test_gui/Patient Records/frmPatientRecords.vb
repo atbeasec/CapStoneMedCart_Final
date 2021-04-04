@@ -509,23 +509,6 @@ Public Class frmPatientRecords
     End Sub
 
 
-    Private Sub Form1_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
-        If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
-            e.KeyChar = ChrW(0)
-            e.Handled = True
-            Dim strSearch = txtSearch.Text
-            strSearch = Regex.Replace(strSearch, "'", "''")
-            Dim strFillSQL As String = "select Patient.MRN_Number, Patient.Patient_First_Name, " &
-                                   "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
-                                   "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1 AND " &
-                                   "(Patient_First_Name Like '" & strSearch & "%' OR Patient_Last_Name Like '" & strSearch & "%'" &
-                                   "OR MRN_Number like '" & strSearch & "%') ORDER BY Patient.Patient_Last_Name ASC;"
-            Fill_Patient_Table(strFillSQL)
-        End If
-
-    End Sub
-
-
     Private Sub Fill_Patient_Table(ByVal strFillSQL As String)
         flpPatientRecords.Controls.Clear()
 
@@ -559,9 +542,42 @@ Public Class frmPatientRecords
 
 
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: btnSearch_Click               */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Dylan Walter        		          */   
+    '/*		         DATE CREATED: 		 3/17/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 When the search button is clicked check the databse for users   */   
+    '/*	  with Username, first name, last name similar to search text     */   
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */                 
+    '/*********************************************************************/
+    '/*  CALLS: Fill_Patient_Table(strFillSQL)                            */            
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	     sender                                                      */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                                  */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */   
+    '/* strFillSQL- SQL String passed to Fill_Table                        */
+    '/* strSearch- text from txtSearchBox                                 */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO        WHEN            WHAT					               */             
+    '/*  Dylan W    3/17/2021    Initial creation                          */
+    '/*********************************************************************/
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        'when the user searches change the single comma to allow searching
         Dim strSearch = txtSearch.Text
         strSearch = Regex.Replace(strSearch, "'", "''")
+
+        'search and fill panels with searched content
         If strSearch = "Search Patients" Then
             Dim strFillSQL As String = ("select Patient.MRN_Number, Patient.Patient_First_Name, " &
                                "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
@@ -581,9 +597,39 @@ Public Class frmPatientRecords
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: txtSearch_TextChanged         */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Dylan Walter        		          */   
+    '/*		         DATE CREATED: 		 3/17/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 When the search textbox is empty then fill panels                  */   
+    '/*	                                                                */   
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */                 
+    '/*********************************************************************/
+    '/*  CALLS:	Fill_Patient_Table(strFillSQL)                            */            
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	     sender                                                      */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                                  */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */   
+    '/* strFillSQL- SQL String passed to Fill_Table                        */
+    '/* strSearch- text from txtSearchBox                                 */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO        WHEN            WHAT					               */             
+    '/*  Dylan W    3/17/2021    Initial creation                          */
+    '/*********************************************************************/
     Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
 
-
+        'if the text box is empty then reset the panels
         If txtSearch.Text = "" Then
             Dim strFillSQL As String = ("select Patient.MRN_Number, Patient.Patient_First_Name, " &
                                            "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
@@ -596,47 +642,61 @@ Public Class frmPatientRecords
 
     End Sub
 
-    'Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: Form1_KeyPress                */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Dylan Walter        		          */   
+    '/*		         DATE CREATED: 		 3/17/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 When the searchbox has focus if the user hits enter then search  */   
+    '/*	                                                                */   
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */                 
+    '/*********************************************************************/
+    '/*  CALLS:	Fill_Patient_Table(strFillSQL)                            */            
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	     sender                                                      */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                                  */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */   
+    '/* strFillSQL- SQL String passed to Fill_Table                        */
+    '/* strSearch- text from txtSearchBox                                 */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO        WHEN            WHAT					               */             
+    '/*  Dylan W    3/17/2021    Initial creation                          */
+    '/*********************************************************************/
+    Private Sub Form1_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
+        'when the user hits enter in the search text box then backspace the enter then run the search
+        If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
+            e.KeyChar = ChrW(0)
+            e.Handled = True
+            Dim strSearch = txtSearch.Text
+            'when the user searches change the single comma to allow searching
+            strSearch = Regex.Replace(strSearch, "'", "''")
+            'search and fill panels with searched content
+            Dim strFillSQL As String = "select Patient.MRN_Number, Patient.Patient_First_Name, " &
+                                   "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
+                                   "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1 AND " &
+                                   "(Patient_First_Name Like '" & strSearch & "%' OR Patient_Last_Name Like '" & strSearch & "%'" &
+                                   "OR MRN_Number like '" & strSearch & "%') ORDER BY Patient.Patient_Last_Name ASC;"
+            Fill_Patient_Table(strFillSQL)
+        End If
 
-    '' detects if there has been another line added to the textbox
-    '' indicating the user has selected the "enter" key
-    'If txtSearch.Lines.Length > 1 Then
+    End Sub
 
-    '    ' since we know the user selected enter and we are using a multiline textbox,
-    '    ' the text input will be equal to whatever the user typed + a CRLF character
-    '    ' we will replace that character with an empty string as if it was never typed.
-    '    Dim singleLine = txtSearch.Text.Replace(vbCrLf, "")
-
-    '    ' reset the textbox to be empty because it currently contains the user types string + CRLF
-    '    txtSearch.Text = ""
-
-    '    ' set the textbox to contain the searched word on a single line
-    '    txtSearch.Text = singleLine
-
-    '    ' by default VB will move the text cursor position to be at the first character after adding
-    '    ' a new string to the textbox. This looks weird and seems like a bug to the user when the
-    '    ' cursor position moves from the last character to the first. We will set to be the last 
-    '    ' with the code below.
-    '    txtSearch.Select(txtSearch.Text.Length, 0)
-
-    '    ' this information will be called when the user selects enter and the search event detects this being done.
-    '    Dim strFillSQL As String
-    '    If txtSearch.Text = "" Then
-
-    '        strFillSQL = "select Patient.MRN_Number, Patient.Patient_First_Name, " &
-    '                                       "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name from Patient LEFT JOIN " &
-    '                                       "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1 ORDER BY Patient.Patient_Last_Name ASC;"
-    '        Fill_Patient_Table(strFillSQL)
-    '    End If
-
-    'End If
-
-    'End Sub
     Private Sub txtSearchKeypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
         KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*()/.,<>=+")
     End Sub
 
     Private Sub lblMRN_Click(sender As Object, e As EventArgs) Handles lblMRN.Click
+        'sort by patient MRN number
         Dim strFillSQL As String = ("select Patient.MRN_Number, Patient.Patient_First_Name, " &
                                    "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
                                    "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag = 1 AND PatientRoom.Active_Flag = 1 ORDER BY Patient.MRN_Number ASC;")
@@ -644,6 +704,7 @@ Public Class frmPatientRecords
     End Sub
 
     Private Sub lblFirstName_Click(sender As Object, e As EventArgs) Handles lblFirstName.Click
+        'sort by patient First name
         Dim strFillSQL As String = ("select Patient.MRN_Number, Patient.Patient_First_Name, " &
                            "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
                            "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag = 1 AND PatientRoom.Active_Flag = 1 ORDER BY Patient.Patient_First_Name ASC;")
@@ -651,6 +712,7 @@ Public Class frmPatientRecords
     End Sub
 
     Private Sub lblLastName_Click(sender As Object, e As EventArgs) Handles lblLastName.Click
+        'sort by Patient Last Name
         Dim strFillSQL As String = ("select Patient.MRN_Number, Patient.Patient_First_Name, " &
                                    "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
                                    "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag = 1 AND PatientRoom.Active_Flag = 1 ORDER BY Patient.Patient_Last_Name ASC;")
@@ -658,6 +720,7 @@ Public Class frmPatientRecords
     End Sub
 
     Private Sub lblDOB_Click(sender As Object, e As EventArgs) Handles lblDOB.Click
+        'sort by PatientDate of birth
         Dim strFillSQL As String = ("select Patient.MRN_Number, Patient.Patient_First_Name, " &
                            "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
                            "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag = 1 AND PatientRoom.Active_Flag = 1 ORDER BY Patient.Date_of_Birth ASC;")
@@ -665,6 +728,7 @@ Public Class frmPatientRecords
     End Sub
 
     Private Sub lblRoom_Click(sender As Object, e As EventArgs) Handles lblRoom.Click
+        'sort by Patient room
         Dim strFillSQL As String = ("select Patient.MRN_Number, Patient.Patient_First_Name, " &
                            "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
                            "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag = 1 AND PatientRoom.Active_Flag = 1 ORDER BY patientroom.Room_TUID ASC;")
@@ -672,6 +736,7 @@ Public Class frmPatientRecords
     End Sub
 
     Private Sub lblBed_Click(sender As Object, e As EventArgs) Handles lblBed.Click
+        'sort by Patient bed
         Dim strFillSQL As String = ("select Patient.MRN_Number, Patient.Patient_First_Name, " &
                    "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
                    "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag = 1 AND PatientRoom.Active_Flag = 1 ORDER BY patientroom.Bed_Name ASC;")
