@@ -132,7 +132,7 @@ Partial Class frmMainScreenWaste
         Me.pnlSignOff.Controls.Add(Me.txtBarcode)
         Me.pnlSignOff.Controls.Add(Me.lblSignoff)
         Me.pnlSignOff.Controls.Add(Me.btnWaste)
-        Me.pnlSignOff.Location = New System.Drawing.Point(3, 164)
+        Me.pnlSignOff.Location = New System.Drawing.Point(3, 157)
         Me.pnlSignOff.Name = "pnlSignOff"
         Me.pnlSignOff.Size = New System.Drawing.Size(367, 150)
         Me.pnlSignOff.TabIndex = 24
