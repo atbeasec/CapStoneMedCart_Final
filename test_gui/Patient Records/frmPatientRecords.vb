@@ -635,4 +635,46 @@ Public Class frmPatientRecords
     Private Sub txtSearchKeypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
         KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*()/.,<>=+")
     End Sub
+
+    Private Sub lblMRN_Click(sender As Object, e As EventArgs) Handles lblMRN.Click
+        Dim strFillSQL As String = ("select Patient.MRN_Number, Patient.Patient_First_Name, " &
+                                   "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
+                                   "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag = 1 AND PatientRoom.Active_Flag = 1 ORDER BY Patient.MRN_Number ASC;")
+        Fill_Patient_Table(strFillSQL)
+    End Sub
+
+    Private Sub lblFirstName_Click(sender As Object, e As EventArgs) Handles lblFirstName.Click
+        Dim strFillSQL As String = ("select Patient.MRN_Number, Patient.Patient_First_Name, " &
+                           "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
+                           "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag = 1 AND PatientRoom.Active_Flag = 1 ORDER BY Patient.Patient_First_Name ASC;")
+        Fill_Patient_Table(strFillSQL)
+    End Sub
+
+    Private Sub lblLastName_Click(sender As Object, e As EventArgs) Handles lblLastName.Click
+        Dim strFillSQL As String = ("select Patient.MRN_Number, Patient.Patient_First_Name, " &
+                                   "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
+                                   "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag = 1 AND PatientRoom.Active_Flag = 1 ORDER BY Patient.Patient_Last_Name ASC;")
+        Fill_Patient_Table(strFillSQL)
+    End Sub
+
+    Private Sub lblDOB_Click(sender As Object, e As EventArgs) Handles lblDOB.Click
+        Dim strFillSQL As String = ("select Patient.MRN_Number, Patient.Patient_First_Name, " &
+                           "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
+                           "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag = 1 AND PatientRoom.Active_Flag = 1 ORDER BY Patient.Date_of_Birth ASC;")
+        Fill_Patient_Table(strFillSQL)
+    End Sub
+
+    Private Sub lblRoom_Click(sender As Object, e As EventArgs) Handles lblRoom.Click
+        Dim strFillSQL As String = ("select Patient.MRN_Number, Patient.Patient_First_Name, " &
+                           "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
+                           "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag = 1 AND PatientRoom.Active_Flag = 1 ORDER BY patientroom.Room_TUID ASC;")
+        Fill_Patient_Table(strFillSQL)
+    End Sub
+
+    Private Sub lblBed_Click(sender As Object, e As EventArgs) Handles lblBed.Click
+        Dim strFillSQL As String = ("select Patient.MRN_Number, Patient.Patient_First_Name, " &
+                   "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
+                   "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag = 1 AND PatientRoom.Active_Flag = 1 ORDER BY patientroom.Bed_Name ASC;")
+        Fill_Patient_Table(strFillSQL)
+    End Sub
 End Class
