@@ -90,7 +90,7 @@ Partial Class frmPharmacy
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(35, 54)
+        Me.Label12.Location = New System.Drawing.Point(35, 52)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(106, 21)
         Me.Label12.TabIndex = 169
@@ -100,7 +100,7 @@ Partial Class frmPharmacy
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(704, 53)
+        Me.Label13.Location = New System.Drawing.Point(704, 52)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(96, 21)
         Me.Label13.TabIndex = 167
@@ -130,7 +130,7 @@ Partial Class frmPharmacy
         '
         Me.Label17.AutoSize = True
         Me.Label17.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(34, 132)
+        Me.Label17.Location = New System.Drawing.Point(34, 130)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(90, 21)
         Me.Label17.TabIndex = 163
@@ -392,9 +392,9 @@ Partial Class frmPharmacy
         Me.Label3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.Location = New System.Drawing.Point(35, 204)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(167, 21)
+        Me.Label3.Size = New System.Drawing.Size(69, 21)
         Me.Label3.TabIndex = 180
-        Me.Label3.Text = "Amount Per Container:"
+        Me.Label3.Text = "Amount:"
         '
         'Label1
         '
