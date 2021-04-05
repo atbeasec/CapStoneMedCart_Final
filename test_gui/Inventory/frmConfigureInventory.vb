@@ -977,8 +977,6 @@
         ''get drawer TUID from database using selected drawer
         Dim intDrawerTUID As Integer = CreateDatabase.ExecuteScalarQuery("Select Drawers_ID from Drawers where Drawer_Number = '" & intSelectedDrawer & "'")
         Inventory.RemoveDrugfromDrawer(intDrawerTUID, intDividerNumber, intMedicationTUID)
-        CreateDatabase.ExecuteInsertQuery("UPDATE PatientMedication set Active_Flag = '0' where Medication_TUID = '" & intMedicationTUID & "'")
-        CreateDatabase.ExecuteInsertQuery("UPDATE Medication SET Active_Flag = '0' where Medication_ID = '" & intMedicationTUID & "'")
         CartInterfaceCode.OpenOneDrawer(intSelectedDrawer)
         MessageBox.Show("Drug removed from drawer number: " & intSelectedDrawer)
         UpdateButtonsOnScreen()

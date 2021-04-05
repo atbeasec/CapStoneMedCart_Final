@@ -435,7 +435,7 @@ Partial Class frmConfigureInventory
         Me.flpMedication.BackColor = System.Drawing.Color.White
         Me.flpMedication.Location = New System.Drawing.Point(350, 137)
         Me.flpMedication.Name = "flpMedication"
-        Me.flpMedication.Size = New System.Drawing.Size(696, 341)
+        Me.flpMedication.Size = New System.Drawing.Size(696, 222)
         Me.flpMedication.TabIndex = 42
         '
         'pnlHeader
