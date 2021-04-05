@@ -412,8 +412,8 @@ Module BulkImportMethods
                     strbSQLPull.Append("Select count(Physician_ID) from Physician where Physician_ID = " & strLine(15))
                     If CreateDatabase.ExecuteScalarQuery(strbSQLPull.ToString) < 1 Then
                         strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Physician ID of " & strLine(15) &
-                                                        " found in the system. Please use a " &
-                                                        "Physician ID that is in the system.")
+                                                        " not found in the system. Please use the ID of a " &
+                                                        "Physician that is in the system.")
                         blnIssue = True
                     End If
 
