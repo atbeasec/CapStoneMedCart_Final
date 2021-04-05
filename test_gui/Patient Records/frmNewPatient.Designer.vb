@@ -150,7 +150,7 @@ Partial Class frmNewPatient
         Me.txtMiddleName.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtMiddleName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtMiddleName.Location = New System.Drawing.Point(1, 1)
-        Me.txtMiddleName.MaxLength = 20
+        Me.txtMiddleName.MaxLength = 40
         Me.txtMiddleName.Multiline = True
         Me.txtMiddleName.Name = "txtMiddleName"
         Me.txtMiddleName.ShortcutsEnabled = False

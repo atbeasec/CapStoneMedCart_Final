@@ -166,7 +166,7 @@ Partial Class frmPatientInfo
         Me.pnlPersonalInformation.ForeColor = System.Drawing.Color.Gainsboro
         Me.pnlPersonalInformation.Location = New System.Drawing.Point(-1, 49)
         Me.pnlPersonalInformation.Name = "pnlPersonalInformation"
-        Me.pnlPersonalInformation.Size = New System.Drawing.Size(1092, 146)
+        Me.pnlPersonalInformation.Size = New System.Drawing.Size(1092, 147)
         Me.pnlPersonalInformation.TabIndex = 17
         '
         'cboPhysicians
@@ -259,7 +259,7 @@ Partial Class frmPatientInfo
         Me.txtLast.CausesValidation = False
         Me.txtLast.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtLast.Location = New System.Drawing.Point(380, 82)
-        Me.txtLast.MaxLength = 20
+        Me.txtLast.MaxLength = 40
         Me.txtLast.Name = "txtLast"
         Me.txtLast.ShortcutsEnabled = False
         Me.txtLast.Size = New System.Drawing.Size(154, 25)
@@ -272,7 +272,7 @@ Partial Class frmPatientInfo
         Me.txtMiddle.CausesValidation = False
         Me.txtMiddle.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtMiddle.Location = New System.Drawing.Point(197, 82)
-        Me.txtMiddle.MaxLength = 15
+        Me.txtMiddle.MaxLength = 40
         Me.txtMiddle.Name = "txtMiddle"
         Me.txtMiddle.ShortcutsEnabled = False
         Me.txtMiddle.Size = New System.Drawing.Size(152, 25)
@@ -285,7 +285,7 @@ Partial Class frmPatientInfo
         Me.txtFirstName.CausesValidation = False
         Me.txtFirstName.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtFirstName.Location = New System.Drawing.Point(12, 82)
-        Me.txtFirstName.MaxLength = 20
+        Me.txtFirstName.MaxLength = 40
         Me.txtFirstName.Name = "txtFirstName"
         Me.txtFirstName.ShortcutsEnabled = False
         Me.txtFirstName.Size = New System.Drawing.Size(150, 25)
