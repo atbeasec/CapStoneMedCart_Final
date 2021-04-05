@@ -55,7 +55,7 @@ Partial Class frmMyPatients
         Me.flpMyPatientRecords.BackColor = System.Drawing.Color.White
         Me.flpMyPatientRecords.Location = New System.Drawing.Point(15, 120)
         Me.flpMyPatientRecords.Name = "flpMyPatientRecords"
-        Me.flpMyPatientRecords.Size = New System.Drawing.Size(1064, 543)
+        Me.flpMyPatientRecords.Size = New System.Drawing.Size(1064, 512)
         Me.flpMyPatientRecords.TabIndex = 20
         '
         'pnlHeaderPatientRecords
