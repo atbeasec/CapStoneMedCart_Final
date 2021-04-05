@@ -1629,4 +1629,6 @@
         txtLast.Enabled = True
         txtBarcode.Enabled = True
     End Sub
+
+
 End Class
