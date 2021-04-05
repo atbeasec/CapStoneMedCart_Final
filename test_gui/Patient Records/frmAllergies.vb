@@ -52,7 +52,8 @@
                 ExecuteScalarQuery("UPDATE PatientAllergy SET Active_Flag='1' WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTuid & ";")
 
             ElseIf isActive = 1 Then
-
+                MessageBox.Show("This Allergy already exists for this Patient")
+                Exit Sub
                 'do nothing for now but combo box should not contain the values
             Else
                 If cmbAllergies.FindStringExact(cmbAllergies.Text) = -1 Then
@@ -135,7 +136,7 @@
     '/*********************************************************************/
     Private Sub btnAllergySave_Click(sender As Object, e As EventArgs) Handles btnAllergySave.Click
 
-        Dim strAllergyName = cmbAllergies.Text
+        Dim strAllergyName = cmbAllergies.SelectedItem.ToString
         Dim intPatientTuid = GetPatientTuid()
         Dim strNewSeverity = cmbSeverity.SelectedIndex.ToString
         ExecuteScalarQuery("UPDATE PatientAllergy SET Allergy_Severity='" & strNewSeverity & "', Active_Flag = 1 WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTuid & " ;")
