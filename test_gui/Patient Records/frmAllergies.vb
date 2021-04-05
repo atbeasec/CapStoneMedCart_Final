@@ -38,15 +38,22 @@
             End If
             Dim intMedicationTUID = "NUll" 'for now but medication tuid will need to be looked up
             Dim strSqlStatment As String = ("Select Active_Flag FROM PatientAllergy WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID= " & intPatientTuid & ";")
-            Dim value = ExecuteScalarQuery(strSqlStatment)
-            If value = Nothing Then
-                value = 2
+            Dim isActive = ExecuteScalarQuery(strSqlStatment)
+
+
+            If isActive = Nothing Then
+                isActive = 2
             End If
-            If value = 0 Then
+            'i will do a check right here for if the allergy already exists
+            ' gonna have to search the database or the panel, probably do an execut scalar and if it returns the allergy with name and id then i will exit sub and prevent the user from moving on, i might move this up to speed up the program
+
+            'make the allergie active because it already exists in patient allergy
+            If isActive = 0 Then
                 ExecuteScalarQuery("UPDATE PatientAllergy SET Active_Flag='1' WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTuid & ";")
 
-            ElseIf value = 1 Then
-
+            ElseIf isActive = 1 Then
+                MessageBox.Show("This Allergy already exists for this Patient")
+                Exit Sub
                 'do nothing for now but combo box should not contain the values
             Else
                 If cmbAllergies.FindStringExact(cmbAllergies.Text) = -1 Then
@@ -129,7 +136,7 @@
     '/*********************************************************************/
     Private Sub btnAllergySave_Click(sender As Object, e As EventArgs) Handles btnAllergySave.Click
 
-        Dim strAllergyName = cmbAllergies.Text
+        Dim strAllergyName = cmbAllergies.SelectedItem.ToString
         Dim intPatientTuid = GetPatientTuid()
         Dim strNewSeverity = cmbSeverity.SelectedIndex.ToString
         ExecuteScalarQuery("UPDATE PatientAllergy SET Allergy_Severity='" & strNewSeverity & "', Active_Flag = 1 WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTuid & " ;")
