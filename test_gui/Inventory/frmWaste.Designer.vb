@@ -148,7 +148,7 @@ Partial Class frmWaste
         '
         Me.rbtnOther.AutoSize = True
         Me.rbtnOther.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnOther.Location = New System.Drawing.Point(1, 127)
+        Me.rbtnOther.Location = New System.Drawing.Point(4, 127)
         Me.rbtnOther.Name = "rbtnOther"
         Me.rbtnOther.Size = New System.Drawing.Size(219, 25)
         Me.rbtnOther.TabIndex = 5
@@ -159,7 +159,7 @@ Partial Class frmWaste
         '
         Me.radPatientUnavilable.AutoSize = True
         Me.radPatientUnavilable.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.radPatientUnavilable.Location = New System.Drawing.Point(1, 96)
+        Me.radPatientUnavilable.Location = New System.Drawing.Point(4, 96)
         Me.radPatientUnavilable.Name = "radPatientUnavilable"
         Me.radPatientUnavilable.Size = New System.Drawing.Size(130, 25)
         Me.radPatientUnavilable.TabIndex = 4
