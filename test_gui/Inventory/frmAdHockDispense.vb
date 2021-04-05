@@ -199,4 +199,8 @@
     Private Sub txtStrength_TextChanged(sender As Object, e As EventArgs) Handles txtStrength.TextChanged
 
     End Sub
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs)
+
+    End Sub
 End Class

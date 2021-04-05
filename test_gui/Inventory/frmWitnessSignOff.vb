@@ -1,7 +1,7 @@
 ﻿Public Class frmWitnessSignOff
     Public referringForm As Object
 
-    Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs) Handles TextBox2.Validated
+    Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs)
         Dim strHashedBarcode = ConvertBarcodePepperAndHash(TextBox2.Text)
         If ExecuteScalarQuery("SELECT COUNT(*) FROM User WHERE User_ID = '" & LoggedInID & "' AND Barcode = '" & strHashedBarcode & "'" & " AND Active_Flag = '1'") <> 0 Then
             ' add the allergy override
@@ -42,8 +42,16 @@
     Private Sub btnConfigureInventory_Click(sender As Object, e As EventArgs) Handles btnConfigureInventory.Click
         referringForm.blnSignedOff = False
         referringForm.blnOverride = False
-        TextBox2.Clear()
         Me.Close()
     End Sub
 
+    Private Sub TextBox2_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TextBox2.KeyPress
+        If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
+            e.KeyChar = ChrW(0)
+            e.Handled = True
+            TextBox2_TextChanged(sender, e)
+        Else
+            KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz-1234567890!@#$%^&*.,<>=+")
+        End If
+    End Sub
 End Class
