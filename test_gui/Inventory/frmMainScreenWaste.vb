@@ -139,7 +139,7 @@
 
     Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
         If txtQuantity.Text = Nothing Or txtQuantity.Text.Trim.Length = 0 Or cmbMedications.SelectedIndex = -1 Or cmbPatientName.SelectedIndex = -1 Then
-            MessageBox.Show("please select a medication and patient, and fill out the amount wasted medication")
+            MessageBox.Show("Please select a medication and patient, then fill out the amount wasted.")
         Else
             If intNarcoticFlagGlobal = 0 Then
                 Dim strReason As String = " "
@@ -160,6 +160,7 @@
                     strReason = txtOther.Text
                 End If
                 frmWaste.insertWaste(CInt(LoggedInID), CInt(LoggedInID), intDrawerMedArray(cmbMedications.SelectedIndex), intMedIDArray(cmbMedications.SelectedIndex), intPatientIDArray(cmbPatientName.SelectedIndex), strReason, txtQuantity.Text, dtmWasteTime)
+                MessageBox.Show("Waste information saved.")
                 ClearWaste()
             ElseIf intNarcoticFlagGlobal = 1 Then
                 CheckBarcode(txtBarcode.Text)
@@ -169,7 +170,7 @@
 
     Private Sub CheckBarcode(ByRef strBarcode As String)
         If strBarcode = "" Then
-            MsgBox("           WARNING" & vbCrLf & "Barcode Field is Blank")
+            MessageBox.Show("           WARNING" & vbCrLf & "Barcode Field is Blank")
             txtBarcode.Focus()
 
         ElseIf scanBarcode(strBarcode) = "True" Then
@@ -191,9 +192,10 @@
                 strReason = txtOther.Text
             End If
             frmWaste.insertWaste(CInt(LoggedInID), intSignoffID, intDrawerMedArray(cmbMedications.SelectedIndex), intMedIDArray(cmbMedications.SelectedIndex), intPatientIDArray(cmbPatientName.SelectedIndex), strReason, txtQuantity.Text, dtmWasteTime)
+            MessageBox.Show("Waste information saved.")
             ClearWaste()
         Else
-            MsgBox("No User With That Barcode")
+            MessageBox.Show("The barcode does not match any users.")
             txtBarcode.Focus()
         End If
     End Sub
@@ -221,6 +223,7 @@
         txtUnit.Text = Nothing
         txtRoomBed.Text = Nothing
         txtDrawerBin.Text = Nothing
+        txtOther.Text = Nothing
     End Sub
 
 End Class

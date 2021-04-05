@@ -26,13 +26,13 @@ Partial Class frmWitnessSignOff
         Me.Label3 = New System.Windows.Forms.Label()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.pnlInteractions = New System.Windows.Forms.Panel()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.btnConfigureInventory = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lblReason = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.pnlInteractions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -54,6 +54,7 @@ Partial Class frmWitnessSignOff
         Me.TextBox2.ShortcutsEnabled = False
         Me.TextBox2.Size = New System.Drawing.Size(285, 27)
         Me.TextBox2.TabIndex = 30
+        Me.TextBox2.UseSystemPasswordChar = True
         '
         'pnlInteractions
         '
@@ -68,6 +69,28 @@ Partial Class frmWitnessSignOff
         Me.pnlInteractions.Name = "pnlInteractions"
         Me.pnlInteractions.Size = New System.Drawing.Size(285, 221)
         Me.pnlInteractions.TabIndex = 32
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(21, 131)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(248, 21)
+        Me.Label6.TabIndex = 39
+        Me.Label6.Text = "Causes Allergic Reaction to Patient"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(18, 100)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(248, 21)
+        Me.Label5.TabIndex = 38
+        Me.Label5.Text = "Causes Allergic Reaction to Patient"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label4
         '
@@ -129,28 +152,6 @@ Partial Class frmWitnessSignOff
         Me.lblReason.TabIndex = 33
         Me.lblReason.Text = "Warning!"
         Me.lblReason.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(18, 100)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(248, 21)
-        Me.Label5.TabIndex = 38
-        Me.Label5.Text = "Causes Allergic Reaction to Patient"
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(21, 131)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(248, 21)
-        Me.Label6.TabIndex = 39
-        Me.Label6.Text = "Causes Allergic Reaction to Patient"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'frmWitnessSignOff
         '

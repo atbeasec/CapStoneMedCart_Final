@@ -25,10 +25,10 @@ Partial Class frmPatientInfo
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPatientInfo))
         Me.LblPatientName = New System.Windows.Forms.Label()
-        Me.txtGender = New System.Windows.Forms.TextBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.pnlPersonalInformation = New System.Windows.Forms.Panel()
+        Me.cboSex = New System.Windows.Forms.ComboBox()
         Me.cboPhysicians = New System.Windows.Forms.ComboBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.mtbBirthday = New System.Windows.Forms.MaskedTextBox()
@@ -114,18 +114,6 @@ Partial Class frmPatientInfo
         Me.LblPatientName.TabIndex = 1
         Me.LblPatientName.Text = "Fill Name Here"
         '
-        'txtGender
-        '
-        Me.txtGender.BackColor = System.Drawing.Color.White
-        Me.txtGender.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtGender.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtGender.Location = New System.Drawing.Point(383, 30)
-        Me.txtGender.Name = "txtGender"
-        Me.txtGender.ReadOnly = True
-        Me.txtGender.ShortcutsEnabled = False
-        Me.txtGender.Size = New System.Drawing.Size(151, 25)
-        Me.txtGender.TabIndex = 2
-        '
         'Label19
         '
         Me.Label19.AutoSize = True
@@ -151,6 +139,7 @@ Partial Class frmPatientInfo
         'pnlPersonalInformation
         '
         Me.pnlPersonalInformation.BackColor = System.Drawing.Color.White
+        Me.pnlPersonalInformation.Controls.Add(Me.cboSex)
         Me.pnlPersonalInformation.Controls.Add(Me.cboPhysicians)
         Me.pnlPersonalInformation.Controls.Add(Me.Panel3)
         Me.pnlPersonalInformation.Controls.Add(Me.lblMoreDetails)
@@ -171,15 +160,24 @@ Partial Class frmPatientInfo
         Me.pnlPersonalInformation.Controls.Add(Me.Label8)
         Me.pnlPersonalInformation.Controls.Add(Me.txtHeight)
         Me.pnlPersonalInformation.Controls.Add(Me.Label3)
-        Me.pnlPersonalInformation.Controls.Add(Me.txtGender)
         Me.pnlPersonalInformation.Controls.Add(Me.Label19)
         Me.pnlPersonalInformation.Controls.Add(Me.Label16)
         Me.pnlPersonalInformation.Controls.Add(Me.Label11)
         Me.pnlPersonalInformation.ForeColor = System.Drawing.Color.Gainsboro
         Me.pnlPersonalInformation.Location = New System.Drawing.Point(-1, 49)
         Me.pnlPersonalInformation.Name = "pnlPersonalInformation"
-        Me.pnlPersonalInformation.Size = New System.Drawing.Size(1092, 146)
+        Me.pnlPersonalInformation.Size = New System.Drawing.Size(1092, 147)
         Me.pnlPersonalInformation.TabIndex = 17
+        '
+        'cboSex
+        '
+        Me.cboSex.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboSex.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboSex.FormattingEnabled = True
+        Me.cboSex.Location = New System.Drawing.Point(383, 33)
+        Me.cboSex.Name = "cboSex"
+        Me.cboSex.Size = New System.Drawing.Size(152, 25)
+        Me.cboSex.TabIndex = 68
         '
         'cboPhysicians
         '
@@ -271,7 +269,7 @@ Partial Class frmPatientInfo
         Me.txtLast.CausesValidation = False
         Me.txtLast.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtLast.Location = New System.Drawing.Point(380, 82)
-        Me.txtLast.MaxLength = 20
+        Me.txtLast.MaxLength = 40
         Me.txtLast.Name = "txtLast"
         Me.txtLast.ShortcutsEnabled = False
         Me.txtLast.Size = New System.Drawing.Size(154, 25)
@@ -284,7 +282,7 @@ Partial Class frmPatientInfo
         Me.txtMiddle.CausesValidation = False
         Me.txtMiddle.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtMiddle.Location = New System.Drawing.Point(197, 82)
-        Me.txtMiddle.MaxLength = 15
+        Me.txtMiddle.MaxLength = 40
         Me.txtMiddle.Name = "txtMiddle"
         Me.txtMiddle.ShortcutsEnabled = False
         Me.txtMiddle.Size = New System.Drawing.Size(152, 25)
@@ -297,7 +295,7 @@ Partial Class frmPatientInfo
         Me.txtFirstName.CausesValidation = False
         Me.txtFirstName.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtFirstName.Location = New System.Drawing.Point(12, 82)
-        Me.txtFirstName.MaxLength = 20
+        Me.txtFirstName.MaxLength = 40
         Me.txtFirstName.Name = "txtFirstName"
         Me.txtFirstName.ShortcutsEnabled = False
         Me.txtFirstName.Size = New System.Drawing.Size(150, 25)
@@ -421,6 +419,7 @@ Partial Class frmPatientInfo
         Me.txtCity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtCity.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCity.Location = New System.Drawing.Point(379, 23)
+        Me.txtCity.MaxLength = 25
         Me.txtCity.Name = "txtCity"
         Me.txtCity.ReadOnly = True
         Me.txtCity.ShortcutsEnabled = False
@@ -433,6 +432,7 @@ Partial Class frmPatientInfo
         Me.txtAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtAddress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAddress.Location = New System.Drawing.Point(12, 23)
+        Me.txtAddress.MaxLength = 55
         Me.txtAddress.Name = "txtAddress"
         Me.txtAddress.ReadOnly = True
         Me.txtAddress.ShortcutsEnabled = False
@@ -982,7 +982,6 @@ Partial Class frmPatientInfo
     Friend WithEvents Label16 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents btnEditPatient As Button
-    Friend WithEvents txtGender As TextBox
     Friend WithEvents Label19 As Label
     Friend WithEvents Label21 As Label
     Friend WithEvents Label17 As Label
@@ -1047,4 +1046,5 @@ Partial Class frmPatientInfo
     Friend WithEvents Panel3 As Panel
     Friend WithEvents mtbBirthday As MaskedTextBox
     Friend WithEvents cboPhysicians As ComboBox
+    Friend WithEvents cboSex As ComboBox
 End Class
