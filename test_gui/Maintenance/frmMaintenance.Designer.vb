@@ -35,11 +35,11 @@ Partial Class frmMaintenance
         Me.radRoom = New System.Windows.Forms.RadioButton()
         Me.btnUpload = New System.Windows.Forms.Button()
         Me.pnlDatabase = New System.Windows.Forms.Panel()
+        Me.btnRecords = New System.Windows.Forms.Button()
         Me.btnExportDatabase = New System.Windows.Forms.Button()
         Me.btnImportDatabase = New System.Windows.Forms.Button()
         Me.btnImportAsCopy = New System.Windows.Forms.Button()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.btnRecords = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.pnlOptions.SuspendLayout()
         Me.pnlRecords.SuspendLayout()
@@ -182,10 +182,25 @@ Partial Class frmMaintenance
         Me.pnlDatabase.Controls.Add(Me.btnExportDatabase)
         Me.pnlDatabase.Controls.Add(Me.btnImportDatabase)
         Me.pnlDatabase.Controls.Add(Me.btnImportAsCopy)
-        Me.pnlDatabase.Location = New System.Drawing.Point(56, 1)
+        Me.pnlDatabase.Location = New System.Drawing.Point(3, 3)
         Me.pnlDatabase.Name = "pnlDatabase"
-        Me.pnlDatabase.Size = New System.Drawing.Size(1032, 47)
+        Me.pnlDatabase.Size = New System.Drawing.Size(1150, 47)
         Me.pnlDatabase.TabIndex = 66
+        '
+        'btnRecords
+        '
+        Me.btnRecords.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnRecords.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRecords.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRecords.ForeColor = System.Drawing.Color.White
+        Me.btnRecords.Image = CType(resources.GetObject("btnRecords.Image"), System.Drawing.Image)
+        Me.btnRecords.Location = New System.Drawing.Point(601, 7)
+        Me.btnRecords.Name = "btnRecords"
+        Me.btnRecords.Size = New System.Drawing.Size(179, 38)
+        Me.btnRecords.TabIndex = 188
+        Me.btnRecords.Text = "IMPORT RECORDS"
+        Me.btnRecords.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnRecords.UseVisualStyleBackColor = False
         '
         'btnExportDatabase
         '
@@ -194,7 +209,7 @@ Partial Class frmMaintenance
         Me.btnExportDatabase.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnExportDatabase.ForeColor = System.Drawing.Color.White
         Me.btnExportDatabase.Image = CType(resources.GetObject("btnExportDatabase.Image"), System.Drawing.Image)
-        Me.btnExportDatabase.Location = New System.Drawing.Point(826, 7)
+        Me.btnExportDatabase.Location = New System.Drawing.Point(809, 7)
         Me.btnExportDatabase.Name = "btnExportDatabase"
         Me.btnExportDatabase.Size = New System.Drawing.Size(197, 38)
         Me.btnExportDatabase.TabIndex = 187
@@ -209,7 +224,7 @@ Partial Class frmMaintenance
         Me.btnImportDatabase.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnImportDatabase.ForeColor = System.Drawing.Color.White
         Me.btnImportDatabase.Image = CType(resources.GetObject("btnImportDatabase.Image"), System.Drawing.Image)
-        Me.btnImportDatabase.Location = New System.Drawing.Point(110, 7)
+        Me.btnImportDatabase.Location = New System.Drawing.Point(93, 7)
         Me.btnImportDatabase.Name = "btnImportDatabase"
         Me.btnImportDatabase.Size = New System.Drawing.Size(197, 38)
         Me.btnImportDatabase.TabIndex = 186
@@ -224,7 +239,7 @@ Partial Class frmMaintenance
         Me.btnImportAsCopy.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnImportAsCopy.ForeColor = System.Drawing.Color.White
         Me.btnImportAsCopy.Image = CType(resources.GetObject("btnImportAsCopy.Image"), System.Drawing.Image)
-        Me.btnImportAsCopy.Location = New System.Drawing.Point(334, 7)
+        Me.btnImportAsCopy.Location = New System.Drawing.Point(317, 7)
         Me.btnImportAsCopy.Name = "btnImportAsCopy"
         Me.btnImportAsCopy.Size = New System.Drawing.Size(257, 38)
         Me.btnImportAsCopy.TabIndex = 185
@@ -235,21 +250,6 @@ Partial Class frmMaintenance
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
-        '
-        'btnRecords
-        '
-        Me.btnRecords.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnRecords.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnRecords.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRecords.ForeColor = System.Drawing.Color.White
-        Me.btnRecords.Image = CType(resources.GetObject("btnRecords.Image"), System.Drawing.Image)
-        Me.btnRecords.Location = New System.Drawing.Point(618, 7)
-        Me.btnRecords.Name = "btnRecords"
-        Me.btnRecords.Size = New System.Drawing.Size(179, 38)
-        Me.btnRecords.TabIndex = 188
-        Me.btnRecords.Text = "IMPORT RECORDS"
-        Me.btnRecords.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnRecords.UseVisualStyleBackColor = False
         '
         'frmMaintenance
         '
