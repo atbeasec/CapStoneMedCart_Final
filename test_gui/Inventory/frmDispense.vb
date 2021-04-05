@@ -261,8 +261,17 @@ Public Class frmDispense
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        frmPatientInfo.setPatientID(intPatientID)
-        frmMain.OpenChildForm(frmPatientInfo)
+        If intEnteredFromAdhoc = 0 Then
+            frmPatientInfo.setPatientID(intPatientID)
+            frmMain.OpenChildForm(frmPatientInfo)
+        Else
+            setintEntered(0)
+            frmMain.OpenChildForm(frmAdHockDispense)
+        End If
+
+
+
+
 
     End Sub
 

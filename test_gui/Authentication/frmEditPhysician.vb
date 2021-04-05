@@ -260,7 +260,7 @@ Public Class frmEditPhysician
         ' anywhere we have quotes except for the label names, we can call our Database and get method
 
         CreateIDLabel(pnlMainPanel, lblID, "lblID", lblName.Location.X - 15, INTTWENTY, strID, getPanelCount(flpPannel))
-        CreateIDLabelWithToolTip(pnlMainPanel, lblID2, "lblNames", lblName.Location.X, INTTWENTY, strName, getPanelCount(flpPannel), tpToolTip, TruncateString(20, strName))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID2, "lblNames", lblName.Location.X, INTTWENTY, strName, getPanelCount(flpPannel), tpToolTip, TruncateString(13, strName))
         '  CreateIDLabel(pnlMainPanel, lblID2, "lblNames", lblName.Location.X, INTTWENTY, strName, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID4, "lblPermissions", lblPermissions.Location.X, INTTWENTY, strAccess, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID5, "lblStatus", lblStatus.Location.X, INTTWENTY, strActive, getPanelCount(flpPannel))
@@ -332,8 +332,8 @@ Public Class frmEditPhysician
         strAddress = Regex.Replace(strAddress, "'", "''")
         strCity = Regex.Replace(strCity, "'", "''")
         'Make Sure all fields are filled
-        If txtFirstName.Text = "" Or txtLastName.Text = "" Or txtMiddleName.Text = "" Or txtAddress.Text = "" Or txtCity.Text = "" Or txtZipCode.Text = "" Or mtbPhone.Text = "" Or mtbFax.Text = "" Then
-            MsgBox("All Fields must be filled")
+        If txtFirstName.Text = "" Or txtLastName.Text = "" Or txtMiddleName.Text = "" Or txtAddress.Text = "" Or txtCity.Text = "" Or txtZipCode.MaskCompleted = False Or mtbPhone.MaskCompleted = False Or mtbFax.MaskCompleted = False Then
+            MessageBox.Show("All fields must be filled in.")
         Else
 
             'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
@@ -351,10 +351,6 @@ Public Class frmEditPhysician
             ' do query to return the record that was just created and return the result into the create panel method below
             CreatePanel_Physician(flpPhysicianInfo, strNewID, strFullName, cboCredentials.SelectedItem, "Yes")
 
-
-
-
-
             'clear all text boxes
             txtFirstName.Text = ""
             txtLastName.Text = ""
@@ -366,6 +362,7 @@ Public Class frmEditPhysician
             mtbPhone.Text = ""
             cboCredentials.SelectedItem = Nothing
             cboState.SelectedItem = Nothing
+            MessageBox.Show("Physician added.")
         End If
 
 
@@ -381,7 +378,7 @@ Public Class frmEditPhysician
         KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz' &()/.,")
     End Sub
 
-    Private Sub ZipKeypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtZipCode.KeyPress
+    Private Sub ZipKeypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
         KeyPressCheck(e, "1234567890")
     End Sub
 
@@ -400,15 +397,15 @@ Public Class frmEditPhysician
         strMiddleName = Regex.Replace(strMiddleName, "'", "''")
         strAddress = Regex.Replace(strAddress, "'", "''")
         strCity = Regex.Replace(strCity, "'", "''")
-
+        lblTitle.Text = "Create New Physician"
 
 
         'if it returns 2 then the First, Middle, and Last Name match someone else already in the database 
         If ExecuteScalarQuery(strStatement) = 2 Then
-            MsgBox("A Physician already has that First, Middle, and Last Name")
+            MessageBox.Show("A physician already has that first, middle, and last name.")
             'Make Sure all fields are filled
         ElseIf txtFirstName.Text = "" Or txtLastName.Text = "" Or txtMiddleName.Text = "" Or mtbPhone.Text = "" Or mtbFax.Text = "" Or txtAddress.Text = "" Or txtCity.Text = "" Or txtZipCode.Text = "" Then
-            MsgBox("All Fields must be filled")
+            MessageBox.Show("All fields must be filled in.")
         Else
             'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
             strStatement = "UPDATE Physician SET Physician_First_Name='" & strFirstName & "',Physician_Middle_Name='" & strMiddleName & "', Physician_Last_Name='" & strLastName & "', Physician_Credentials='" & cboCredentials.SelectedItem & "', Physician_Phone_Number='" & mtbPhone.Text & "', Physician_Fax_Number='" & mtbFax.Text & "', Physician_Address='" & strAddress & "', Physician_City='" & strCity & "', Physician_State='" & cboState.SelectedItem & "', Physician_Zip_Code='" & txtZipCode.Text & "',Active_Flag=1 WHERE Physician_ID='" & txtID.Text & "';"
@@ -484,6 +481,7 @@ Public Class frmEditPhysician
         btnSave.Visible = True
         cboCredentials.ResetText()
         cboState.ResetText()
+        lblTitle.Text = "Create New Physician"
 
     End Sub
 
@@ -523,18 +521,18 @@ Public Class frmEditPhysician
 
     End Sub
 
-    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
-        Dim strSearch = txtSearchBox.Text
-        strSearch = Regex.Replace(strSearch, "'", "''")
+    'Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+    '    Dim strSearch = txtSearchBox.Text
+    '    strSearch = Regex.Replace(strSearch, "'", "''")
 
-        Dim strFillSQL = "select Physician.Physician_ID, Physician.Physician_First_Name, Physician.Physician_Middle_Name," &
-                                    "Physician.Physician_Last_Name, Physician.Physician_Credentials, Physician.Physician_Phone_Number," &
-                                    "Physician.Physician_Fax_Number, Physician.Physician_Address, Physician.Physician_City," &
-                                    "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician " &
-                                    "WHERE Physician_First_Name LIKE '" & strSearch & "%' Or Physician_Last_Name LIKE '" & strSearch & "%' Or Physician_Credentials LIKE '" & strSearch & "%';"
-        Fill_Table(strFillSQL)
+    '    Dim strFillSQL = "select Physician.Physician_ID, Physician.Physician_First_Name, Physician.Physician_Middle_Name," &
+    '                                "Physician.Physician_Last_Name, Physician.Physician_Credentials, Physician.Physician_Phone_Number," &
+    '                                "Physician.Physician_Fax_Number, Physician.Physician_Address, Physician.Physician_City," &
+    '                                "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician " &
+    '                                "WHERE Physician_First_Name LIKE '" & strSearch & "%' Or Physician_Last_Name LIKE '" & strSearch & "%' Or Physician_Credentials LIKE '" & strSearch & "%';"
+    '    Fill_Table(strFillSQL)
 
-    End Sub
+    'End Sub
 
     Private Sub lblName_Click(sender As Object, e As EventArgs) Handles lblName.Click
         Dim strFillSQL As String = "select Physician.Physician_ID, Physician.Physician_First_Name, Physician.Physician_Middle_Name," &
@@ -559,4 +557,20 @@ Public Class frmEditPhysician
                 "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician ORDER BY Active_Flag DESC;"
         Fill_Table(strFillSQL)
     End Sub
+
+    Private Sub pnlSearchIcon_Click(sender As Object, e As EventArgs) Handles pnlSearchIcon.Click
+
+        Dim strSearch = txtSearchBox.Text
+        strSearch = Regex.Replace(strSearch, "'", "''")
+
+        Dim strFillSQL = "select Physician.Physician_ID, Physician.Physician_First_Name, Physician.Physician_Middle_Name," &
+                                    "Physician.Physician_Last_Name, Physician.Physician_Credentials, Physician.Physician_Phone_Number," &
+                                    "Physician.Physician_Fax_Number, Physician.Physician_Address, Physician.Physician_City," &
+                                    "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician " &
+                                    "WHERE Physician_First_Name LIKE '" & strSearch & "%' Or Physician_Last_Name LIKE '" & strSearch & "%' Or Physician_Credentials LIKE '" & strSearch & "%';"
+        Fill_Table(strFillSQL)
+    End Sub
+
+
+
 End Class

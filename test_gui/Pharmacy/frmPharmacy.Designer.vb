@@ -70,7 +70,7 @@ Partial Class frmPharmacy
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(483, 288)
+        Me.Label10.Location = New System.Drawing.Point(36, 282)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(85, 21)
         Me.Label10.TabIndex = 175
@@ -80,7 +80,7 @@ Partial Class frmPharmacy
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(34, 286)
+        Me.Label11.Location = New System.Drawing.Point(230, 282)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(92, 21)
         Me.Label11.TabIndex = 172
@@ -90,7 +90,7 @@ Partial Class frmPharmacy
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(35, 54)
+        Me.Label12.Location = New System.Drawing.Point(35, 52)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(106, 21)
         Me.Label12.TabIndex = 169
@@ -100,7 +100,7 @@ Partial Class frmPharmacy
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(628, 54)
+        Me.Label13.Location = New System.Drawing.Point(704, 52)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(96, 21)
         Me.Label13.TabIndex = 167
@@ -110,7 +110,7 @@ Partial Class frmPharmacy
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(482, 204)
+        Me.Label14.Location = New System.Drawing.Point(577, 204)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(72, 21)
         Me.Label14.TabIndex = 166
@@ -120,7 +120,7 @@ Partial Class frmPharmacy
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(153, 204)
+        Me.Label15.Location = New System.Drawing.Point(338, 204)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(45, 21)
         Me.Label15.TabIndex = 165
@@ -130,7 +130,7 @@ Partial Class frmPharmacy
         '
         Me.Label17.AutoSize = True
         Me.Label17.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(34, 132)
+        Me.Label17.Location = New System.Drawing.Point(34, 130)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(90, 21)
         Me.Label17.TabIndex = 163
@@ -151,10 +151,10 @@ Partial Class frmPharmacy
         '
         Me.Panel5.BackColor = System.Drawing.Color.DarkGray
         Me.Panel5.Controls.Add(Me.txtPatientDOB)
-        Me.Panel5.Location = New System.Drawing.Point(631, 80)
+        Me.Panel5.Location = New System.Drawing.Point(707, 76)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel5.Size = New System.Drawing.Size(171, 28)
+        Me.Panel5.Size = New System.Drawing.Size(171, 31)
         Me.Panel5.TabIndex = 2
         '
         'txtPatientDOB
@@ -168,7 +168,7 @@ Partial Class frmPharmacy
         Me.txtPatientDOB.Name = "txtPatientDOB"
         Me.txtPatientDOB.ReadOnly = True
         Me.txtPatientDOB.ShortcutsEnabled = False
-        Me.txtPatientDOB.Size = New System.Drawing.Size(169, 26)
+        Me.txtPatientDOB.Size = New System.Drawing.Size(169, 29)
         Me.txtPatientDOB.TabIndex = 38
         Me.txtPatientDOB.TabStop = False
         '
@@ -179,11 +179,11 @@ Partial Class frmPharmacy
         Me.btnORder.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnORder.ForeColor = System.Drawing.Color.White
         Me.btnORder.Image = CType(resources.GetObject("btnORder.Image"), System.Drawing.Image)
-        Me.btnORder.Location = New System.Drawing.Point(343, 388)
+        Me.btnORder.Location = New System.Drawing.Point(343, 387)
         Me.btnORder.Name = "btnORder"
-        Me.btnORder.Size = New System.Drawing.Size(201, 38)
-        Me.btnORder.TabIndex = 10
-        Me.btnORder.Text = "   Order Prescription"
+        Me.btnORder.Size = New System.Drawing.Size(214, 38)
+        Me.btnORder.TabIndex = 11
+        Me.btnORder.Text = " ORDER PRESCRIPTION"
         Me.btnORder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnORder.UseVisualStyleBackColor = False
         '
@@ -191,10 +191,10 @@ Partial Class frmPharmacy
         '
         Me.Panel3.BackColor = System.Drawing.Color.DarkGray
         Me.Panel3.Controls.Add(Me.txtType)
-        Me.Panel3.Location = New System.Drawing.Point(157, 234)
+        Me.Panel3.Location = New System.Drawing.Point(343, 229)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel3.Size = New System.Drawing.Size(292, 28)
+        Me.Panel3.Size = New System.Drawing.Size(215, 31)
         Me.Panel3.TabIndex = 7
         '
         'txtType
@@ -208,7 +208,7 @@ Partial Class frmPharmacy
         Me.txtType.Name = "txtType"
         Me.txtType.ReadOnly = True
         Me.txtType.ShortcutsEnabled = False
-        Me.txtType.Size = New System.Drawing.Size(290, 26)
+        Me.txtType.Size = New System.Drawing.Size(213, 29)
         Me.txtType.TabIndex = 38
         Me.txtType.TabStop = False
         '
@@ -220,10 +220,10 @@ Partial Class frmPharmacy
         '
         Me.Panel1.BackColor = System.Drawing.Color.DarkGray
         Me.Panel1.Controls.Add(Me.cmbStrength)
-        Me.Panel1.Location = New System.Drawing.Point(486, 229)
+        Me.Panel1.Location = New System.Drawing.Point(581, 229)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel1.Size = New System.Drawing.Size(317, 31)
+        Me.Panel1.Size = New System.Drawing.Size(298, 31)
         Me.Panel1.TabIndex = 8
         '
         'cmbStrength
@@ -235,7 +235,7 @@ Partial Class frmPharmacy
         Me.cmbStrength.FormattingEnabled = True
         Me.cmbStrength.Location = New System.Drawing.Point(1, 1)
         Me.cmbStrength.Name = "cmbStrength"
-        Me.cmbStrength.Size = New System.Drawing.Size(315, 29)
+        Me.cmbStrength.Size = New System.Drawing.Size(296, 29)
         Me.cmbStrength.TabIndex = 0
         Me.cmbStrength.Tag = "cmbFrequencyNumber"
         '
@@ -243,10 +243,10 @@ Partial Class frmPharmacy
         '
         Me.Panel4.BackColor = System.Drawing.Color.DarkGray
         Me.Panel4.Controls.Add(Me.cmbFrequencyNumber)
-        Me.Panel4.Location = New System.Drawing.Point(486, 312)
+        Me.Panel4.Location = New System.Drawing.Point(39, 306)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel4.Size = New System.Drawing.Size(119, 31)
+        Me.Panel4.Size = New System.Drawing.Size(172, 31)
         Me.Panel4.TabIndex = 9
         '
         'cmbFrequencyNumber
@@ -260,7 +260,7 @@ Partial Class frmPharmacy
         Me.cmbFrequencyNumber.IntegralHeight = False
         Me.cmbFrequencyNumber.Location = New System.Drawing.Point(1, 1)
         Me.cmbFrequencyNumber.Name = "cmbFrequencyNumber"
-        Me.cmbFrequencyNumber.Size = New System.Drawing.Size(117, 29)
+        Me.cmbFrequencyNumber.Size = New System.Drawing.Size(170, 29)
         Me.cmbFrequencyNumber.TabIndex = 0
         Me.cmbFrequencyNumber.Tag = "cmbFrequencyNumber"
         '
@@ -268,10 +268,10 @@ Partial Class frmPharmacy
         '
         Me.Panel6.BackColor = System.Drawing.Color.DarkGray
         Me.Panel6.Controls.Add(Me.cmbMedication)
-        Me.Panel6.Location = New System.Drawing.Point(38, 154)
+        Me.Panel6.Location = New System.Drawing.Point(38, 153)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel6.Size = New System.Drawing.Size(565, 31)
+        Me.Panel6.Size = New System.Drawing.Size(840, 31)
         Me.Panel6.TabIndex = 3
         '
         'cmbMedication
@@ -285,7 +285,7 @@ Partial Class frmPharmacy
         Me.cmbMedication.ItemHeight = 21
         Me.cmbMedication.Location = New System.Drawing.Point(1, 1)
         Me.cmbMedication.Name = "cmbMedication"
-        Me.cmbMedication.Size = New System.Drawing.Size(563, 29)
+        Me.cmbMedication.Size = New System.Drawing.Size(838, 29)
         Me.cmbMedication.TabIndex = 0
         Me.cmbMedication.Tag = ""
         '
@@ -293,11 +293,11 @@ Partial Class frmPharmacy
         '
         Me.Panel7.BackColor = System.Drawing.Color.DarkGray
         Me.Panel7.Controls.Add(Me.cmbOrderedBy)
-        Me.Panel7.Location = New System.Drawing.Point(39, 312)
+        Me.Panel7.Location = New System.Drawing.Point(236, 306)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel7.Size = New System.Drawing.Size(410, 31)
-        Me.Panel7.TabIndex = 9
+        Me.Panel7.Size = New System.Drawing.Size(642, 31)
+        Me.Panel7.TabIndex = 10
         '
         'cmbOrderedBy
         '
@@ -309,7 +309,7 @@ Partial Class frmPharmacy
         Me.cmbOrderedBy.IntegralHeight = False
         Me.cmbOrderedBy.Location = New System.Drawing.Point(1, 1)
         Me.cmbOrderedBy.Name = "cmbOrderedBy"
-        Me.cmbOrderedBy.Size = New System.Drawing.Size(408, 29)
+        Me.cmbOrderedBy.Size = New System.Drawing.Size(640, 29)
         Me.cmbOrderedBy.TabIndex = 0
         Me.cmbOrderedBy.Tag = ""
         '
@@ -320,7 +320,7 @@ Partial Class frmPharmacy
         Me.Panel8.Location = New System.Drawing.Point(38, 76)
         Me.Panel8.Name = "Panel8"
         Me.Panel8.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel8.Size = New System.Drawing.Size(566, 31)
+        Me.Panel8.Size = New System.Drawing.Size(650, 31)
         Me.Panel8.TabIndex = 1
         '
         'cmbPatientName
@@ -334,7 +334,7 @@ Partial Class frmPharmacy
         Me.cmbPatientName.ItemHeight = 21
         Me.cmbPatientName.Location = New System.Drawing.Point(1, 1)
         Me.cmbPatientName.Name = "cmbPatientName"
-        Me.cmbPatientName.Size = New System.Drawing.Size(564, 29)
+        Me.cmbPatientName.Size = New System.Drawing.Size(648, 29)
         Me.cmbPatientName.TabIndex = 0
         Me.cmbPatientName.Tag = ""
         '
@@ -345,11 +345,11 @@ Partial Class frmPharmacy
         Me.txtQuantity.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtQuantity.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtQuantity.Location = New System.Drawing.Point(1, 1)
-        Me.txtQuantity.MaxLength = 10
+        Me.txtQuantity.MaxLength = 6
         Me.txtQuantity.Multiline = True
         Me.txtQuantity.Name = "txtQuantity"
         Me.txtQuantity.ShortcutsEnabled = False
-        Me.txtQuantity.Size = New System.Drawing.Size(170, 26)
+        Me.txtQuantity.Size = New System.Drawing.Size(170, 28)
         Me.txtQuantity.TabIndex = 176
         '
         'txtUnit
@@ -359,52 +359,52 @@ Partial Class frmPharmacy
         Me.txtUnit.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtUnit.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtUnit.Location = New System.Drawing.Point(1, 1)
-        Me.txtUnit.MaxLength = 10
+        Me.txtUnit.MaxLength = 8
         Me.txtUnit.Multiline = True
         Me.txtUnit.Name = "txtUnit"
         Me.txtUnit.ShortcutsEnabled = False
-        Me.txtUnit.Size = New System.Drawing.Size(83, 26)
+        Me.txtUnit.Size = New System.Drawing.Size(83, 29)
         Me.txtUnit.TabIndex = 178
         '
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.DarkGray
         Me.Panel2.Controls.Add(Me.txtQuantity)
-        Me.Panel2.Location = New System.Drawing.Point(631, 157)
+        Me.Panel2.Location = New System.Drawing.Point(39, 230)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel2.Size = New System.Drawing.Size(172, 28)
+        Me.Panel2.Size = New System.Drawing.Size(172, 30)
         Me.Panel2.TabIndex = 4
         '
         'Panel9
         '
         Me.Panel9.BackColor = System.Drawing.Color.DarkGray
         Me.Panel9.Controls.Add(Me.txtUnit)
-        Me.Panel9.Location = New System.Drawing.Point(39, 234)
+        Me.Panel9.Location = New System.Drawing.Point(235, 229)
         Me.Panel9.Name = "Panel9"
         Me.Panel9.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel9.Size = New System.Drawing.Size(85, 28)
+        Me.Panel9.Size = New System.Drawing.Size(85, 31)
         Me.Panel9.TabIndex = 5
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(628, 134)
+        Me.Label3.Location = New System.Drawing.Point(35, 204)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(167, 21)
+        Me.Label3.Size = New System.Drawing.Size(69, 21)
         Me.Label3.TabIndex = 180
-        Me.Label3.Text = "Amount Per Container:"
+        Me.Label3.Text = "Amount:"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(34, 204)
+        Me.Label1.Location = New System.Drawing.Point(230, 204)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(39, 21)
+        Me.Label1.Size = New System.Drawing.Size(42, 21)
         Me.Label1.TabIndex = 181
-        Me.Label1.Text = "Unit"
+        Me.Label1.Text = "Unit:"
         '
         'frmPharmacy
         '
@@ -412,7 +412,7 @@ Partial Class frmPharmacy
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(902, 494)
+        Me.ClientSize = New System.Drawing.Size(1091, 645)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Panel9)

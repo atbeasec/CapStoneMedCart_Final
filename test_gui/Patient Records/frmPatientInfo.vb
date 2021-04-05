@@ -48,6 +48,10 @@
     Private intPatientID As Integer
     Private intPatientMRN As Double
     Private strSelectedLabel As String
+    Public blnSignedOff As Boolean = True
+    Public blnOverride As Boolean = False
+    Public strMedName As String
+
     Public Enum DispenseHistoryEnum As Integer
         MedicationName = 1
         Strength = 2
@@ -121,7 +125,7 @@
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
-    '/*  WHO   WHEN     WHAT								   */             
+    '/*  WHO   WHEN     WHAT				 				   */             
     '/*  ---   ----     ------------------------------------------------- */
     '/*  NP    2/16/2021 Changed cboBed to be disabled by default until a */
     '/*                  selection in room is made.                       */
@@ -268,12 +272,16 @@
         Dim lblID5 As New Label
         Dim lblID6 As New Label
 
-        CreateIDLabelWithToolTip(pnlMainPanel, lblID, "lblMedicationName", lblMedication.Location.X, 20, strMedicationName, getPanelCount(flpPannel), tpToolTip, TruncateString(25, strMedicationName))
-        CreateIDLabel(pnlMainPanel, lblID2, "lblStrength", lblStrength.Location.X, 20, strStrength, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID3, "lblType", lblType.Location.X, 20, strType, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID4, "lblQuantity", lblQuantity.Location.X, 20, strQuantity, getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID, "lblMedicationName", lblMedication.Location.X, 20, strMedicationName, getPanelCount(flpPannel), tpToolTip, TruncateString(22, strMedicationName))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID2, "lblStrength", lblStrength.Location.X, 20, strStrength, getPanelCount(flpPannel), tpToolTip, TruncateString(8, strStrength))
+        ' CreateIDLabel(pnlMainPanel, lblID2, "lblStrength", lblStrength.Location.X, 20, strStrength, getPanelCount(flpPannel))
+        ' CreateIDLabel(pnlMainPanel, lblID3, "lblType", lblType.Location.X, 20, strType, getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID3, "lblType", lblType.Location.X, 20, strType, getPanelCount(flpPannel), tpToolTip, TruncateString(8, strType))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID4, "lblQuantity", lblQuantity.Location.X, 20, strQuantity, getPanelCount(flpPannel), tpToolTip, TruncateString(8, strQuantity))
+        'CreateIDLabel(pnlMainPanel, lblID4, "lblQuantity", lblQuantity.Location.X, 20, strQuantity, getPanelCount(flpPannel))
         CreateIDLabelWithToolTip(pnlMainPanel, lblID5, "lblDispensedBy", lblDispensedBy.Location.X, 20, strDispenseBy, getPanelCount(flpPannel), tpToolTip, TruncateString(30, strDispenseBy))
         CreateIDLabel(pnlMainPanel, lblID6, "lblDispenseTimeAndDate", lblDateTime.Location.X, 20, strDispenseDate.Substring(0, 19), getPanelCount(flpPannel))
+
 
         'Add panel to flow layout panel
         flpPannel.Controls.Add(pnl)
@@ -380,39 +388,119 @@
         Dim lblID6 As New Label
         Dim lblID7 As New Label
 
+        AddHandler lblID.Click, AddressOf PrescriptionPanel_Click
+        AddHandler lblID2.Click, AddressOf PrescriptionPanel_Click
+        AddHandler lblID3.Click, AddressOf PrescriptionPanel_Click
+        AddHandler lblID4.Click, AddressOf PrescriptionPanel_Click
+        AddHandler lblID5.Click, AddressOf PrescriptionPanel_Click
+        AddHandler lblID6.Click, AddressOf PrescriptionPanel_Click
+        AddHandler lblID7.Click, AddressOf PrescriptionPanel_Click
+
         ' anywhere we have quotes except for the label names, we can call our Database and get method
         ' to ensure all of the text being added to the panel is inline with the  headers, we will use the label location of the
         ' header as the reference point for the X axis when creating these labels at run time.
 
         CreateIDLabelWithToolTip(pnlMainPanel, lblID, "lblMedicationPrescription", lblMedicationPrescription.Location.X, 20, strMedicationName, getPanelCount(flpPannel), tpToolTip, TruncateString(25, strMedicationName))
-        ' CreateIDLabel(pnlMainPanel, lblID, "lblMedicationPrescription", lblMedicationPrescription.Location.X, 20, strMedicationName, getPanelCount(flpPannel))
-
-        CreateIDLabel(pnlMainPanel, lblID2, "lblStrengthPrescription", lblStrengthPrescription.Location.X, 20, strStrength, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID3, "lblFrequencyPrescription", lblFrequencyPrescription.Location.X, 20, strFrequency, getPanelCount(flpPannel))
-        CreateIDLabel(pnlMainPanel, lblID4, "lblTypePrescription", lblTypePrescription.Location.X, 20, strType, getPanelCount(flpPannel))
-
-
-        CreateIDLabel(pnlMainPanel, lblID5, "lblQuantityPrescription", lblQuantityPrescription.Location.X, 20, strQuantity, getPanelCount(flpPannel))
+        '  CreateIDLabel(pnlMainPanel, lblID, "lblMedicationPrescription", lblMedicationPrescription.Location.X, 20, strMedicationName, getPanelCount(flpPannel))
+        '  CreateIDLabel(pnlMainPanel, lblID2, "lblStrengthPrescription", lblStrengthPrescription.Location.X, 20, strStrength, getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID2, "lblStrengthPrescription", lblStrengthPrescription.Location.X, 20, strStrength, getPanelCount(flpPannel), tpToolTip, TruncateString(8, strStrength))
+        '  CreateIDLabel(pnlMainPanel, lblID3, "lblFrequencyPrescription", lblFrequencyPrescription.Location.X, 20, strFrequency, getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID3, "lblFrequencyPrescription", lblFrequencyPrescription.Location.X, 20, strFrequency, getPanelCount(flpPannel), tpToolTip, TruncateString(8, strFrequency))
+        '  CreateIDLabel(pnlMainPanel, lblID4, "lblTypePrescription", lblTypePrescription.Location.X, 20, strType, getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID4, "lblTypePrescription", lblTypePrescription.Location.X, 20, strType, getPanelCount(flpPannel), tpToolTip, TruncateString(8, strType))
+        '  CreateIDLabel(pnlMainPanel, lblID5, "lblQuantityPrescription", lblQuantityPrescription.Location.X, 20, strQuantity, getPanelCount(flpPannel))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID5, "lblQuantityPrescription", lblQuantityPrescription.Location.X, 20, strQuantity, getPanelCount(flpPannel), tpToolTip, TruncateString(8, strQuantity))
         CreateIDLabel(pnlMainPanel, lblID6, "lblDatePrescribed", lblDatePrescribed.Location.X, 20, strDatePrescribed.Substring(0, 10), getPanelCount(flpPannel))
         CreateIDLabelWithToolTip(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, strPrescribedBy, getPanelCount(flpPannel), tpToolTip, TruncateString(20, strPrescribedBy))
-        ' CreateIDLabel(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, strPrescribedBy, getPanelCount(flpPannel))
+        '  CreateIDLabel(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, strPrescribedBy, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
         pnlMainPanel.Tag = intMedID
         flpPannel.Controls.Add(pnl)
+
+        lblID.Tag = intMedID
+        lblID2.Tag = intMedID
+        lblID3.Tag = intMedID
+        lblID4.Tag = intMedID
+        lblID5.Tag = intMedID
+        lblID6.Tag = intMedID
+        lblID7.Tag = intMedID
 
     End Sub
 
     Private Sub PrescriptionPanel_Click(ByVal sender As Object, e As EventArgs)
         Dim intMedID As Integer = sender.tag
 
+        Dim strPatientMRN As String
+
         frmDispense.SetPatientID(intPatientID)
         frmDispense.SetintMedicationID(intMedID)
-        frmMain.OpenChildForm(frmDispense)
-        DispenseHistory.DispensemedicationPopulate(intPatientID, intMedID)
-        PatientInformation.PopulatePatientDispenseInfo(intPatientID)
-        PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientID)
-        PatientInformation.DisplayPatientPrescriptionsDispense(intPatientID)
+
+        strMedName = ExecuteScalarQuery("SELECT Drug_Name From Medication WHERE Medication_ID =" & intMedID & ";")
+
+        strPatientMRN = ExecuteScalarQuery("SELECT MRN_Number From Patient WHERE Patient_ID =" & intPatientID & ";")
+
+        'Allergy overrides
+        For Each allergy In lstBoxAllergies.Items
+            If strMedName.Contains(allergy.ToString.ToLower) Then
+                'show witness sign off
+                frmWitnessSignOff.Label1.Text = strMedName
+                frmWitnessSignOff.referringForm = Me
+                'added formatting in case a drug interaction override was chosen first
+                frmWitnessSignOff.Label2.Text = "Causes Allergic Reaction to Patient"
+                frmWitnessSignOff.Text = "Allergies Override"
+                frmWitnessSignOff.Label1.Location = New Point(3, 34)
+                frmWitnessSignOff.Label2.Location = New Point(21, 64)
+                frmWitnessSignOff.Label5.Visible = False
+                frmWitnessSignOff.Label6.Visible = False
+                frmWitnessSignOff.ShowDialog()
+
+
+                'if authentication from witness sign off form comes back then
+                If blnOverride Then
+                    Dim intMaxAllergyID
+                    ' pull the information to insert
+                    If ExecuteScalarQuery("Select AllergyOverride_ID from AllergyOverride") = Nothing Then
+                        intMaxAllergyID = 0
+                    Else
+                        intMaxAllergyID = ExecuteScalarQuery("SELECT MAX(AllergyOverride_ID) from AllergyOverride")
+                        intMaxAllergyID += 1
+                    End If
+
+                    ExecuteInsertQuery("INSERT INTO AllergyOverride(AllergyOverride_ID, Patient_TUID, User_TUID, Allergy_Name, DateTime) " &
+                                               "Values(" & intMaxAllergyID & ", " & intPatientID & ", " & LoggedInID & ", '" & allergy & "', '" & DateTime.Now & "')")
+                Else
+                    MessageBox.Show("Dispense canceled by user.")
+                    blnOverride = False
+                    blnSignedOff = False
+                    Exit Sub
+                End If
+
+            Else
+                ' do nothing as there is no allergy
+                'blnSignedOff = False
+                'blnOverride = False
+            End If
+        Next
+
+        'If the user didn't already sign off to dispense the medication,
+        'check interactions
+        DrugInteractionOverride(CStr(intMedID), strPatientMRN, "Dispense")
+
+        If blnSignedOff = True Then
+            'blnSignedOff = False
+
+            frmMain.OpenChildForm(frmDispense)
+            DispenseHistory.DispensemedicationPopulate(intPatientID, intMedID)
+            PatientInformation.PopulatePatientDispenseInfo(intPatientID)
+            PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientID)
+            PatientInformation.DisplayPatientPrescriptionsDispense(intPatientID)
+        End If
+        'frmMain.OpenChildForm(frmDispense)
+        'DispenseHistory.DispensemedicationPopulate(intPatientID, intMedID)
+        'PatientInformation.PopulatePatientDispenseInfo(intPatientID)
+        'PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientID)
+        'PatientInformation.DisplayPatientPrescriptionsDispense(intPatientID)
 
     End Sub
 

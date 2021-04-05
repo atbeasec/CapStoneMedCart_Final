@@ -68,9 +68,9 @@ Partial Class frmEndOfShift
         Me.lblSection.ForeColor = System.Drawing.SystemColors.ControlDarkDark
         Me.lblSection.Location = New System.Drawing.Point(435, 19)
         Me.lblSection.Name = "lblSection"
-        Me.lblSection.Size = New System.Drawing.Size(62, 21)
+        Me.lblSection.Size = New System.Drawing.Size(33, 21)
         Me.lblSection.TabIndex = 8
-        Me.lblSection.Text = "Divider"
+        Me.lblSection.Text = "Bin"
         '
         'lblSystemCount
         '
