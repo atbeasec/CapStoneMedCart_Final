@@ -58,8 +58,8 @@ Module GraphicalUserInterfaceReusableMethods
 
                     ctlControl.Visible = True
 
-                    If getOpenedForm.GetType() Is frmConfigureInventory.GetType Then
-                        Debug.Print(ctlControl.Name)
+                    If getOpenedForm.GetType() Is frmConfigureInventory.GetType Or getOpenedForm.GetType() Is frmPatientInfo.GetType Then
+                        ' Debug.Print(ctlControl.Name)
                         If ctlControl.Name.Contains("EditPatientRecord") Or ctlControl.Name.Contains("btnConfirmation") Then
                             ctlControl.Visible = False
                         End If

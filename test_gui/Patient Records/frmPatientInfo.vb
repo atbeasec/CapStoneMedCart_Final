@@ -171,9 +171,9 @@
         lblDispenseHistory.Location = New Point(153, 190)
         lblPrescriptions.Location = New Point(10, 190)
         moveAndResizePanels()
-
         disableEdits()
-        ' CreateDispenseHistoryPanels(flpDispenseHistory, "test", "test", "test", "test", "test", "test", "test")
+        HideEditButton()
+
     End Sub
     '/*********************************************************************/
     '/*            SubProgram NAME: CreateDispenseHistoryPanels()         */         
@@ -354,7 +354,7 @@
         'Set panel properties
         With pnl
             .BackColor = Color.Gainsboro
-            .Size = New Size(1040, 47)
+            .Size = New Size(1059, 47)
             .Name = "pnlIndividualPatientRecordPadding" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Padding = New Padding(0, 0, 0, 3)
@@ -364,7 +364,7 @@
         With pnlMainPanel
 
             .BackColor = Color.White
-            .Size = New Size(1040, 45)
+            .Size = New Size(1059, 45)
             .Name = "pnlIndividualPatientRecord" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Dock = System.Windows.Forms.DockStyle.Top
@@ -378,6 +378,9 @@
         AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
         AddHandler pnlMainPanel.Click, AddressOf PrescriptionPanel_Click
 
+
+        CreateEditButton(pnlMainPanel, getPanelCount(flpPannel), lblActions.Location.X - 10, 5)
+        CreateDeleteBtn(pnlMainPanel, getPanelCount(flpPannel), lblActions.Location.X + 30, 5)
         ' add controls to this panel
         ' call database info here to populate
         Dim lblID As New Label
@@ -411,7 +414,7 @@
         '  CreateIDLabel(pnlMainPanel, lblID5, "lblQuantityPrescription", lblQuantityPrescription.Location.X, 20, strQuantity, getPanelCount(flpPannel))
         CreateIDLabelWithToolTip(pnlMainPanel, lblID5, "lblQuantityPrescription", lblQuantityPrescription.Location.X, 20, strQuantity, getPanelCount(flpPannel), tpToolTip, TruncateString(8, strQuantity))
         CreateIDLabel(pnlMainPanel, lblID6, "lblDatePrescribed", lblDatePrescribed.Location.X, 20, strDatePrescribed.Substring(0, 10), getPanelCount(flpPannel))
-        CreateIDLabelWithToolTip(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, strPrescribedBy, getPanelCount(flpPannel), tpToolTip, TruncateString(20, strPrescribedBy))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, strPrescribedBy, getPanelCount(flpPannel), tpToolTip, TruncateString(17, strPrescribedBy))
         '  CreateIDLabel(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, strPrescribedBy, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
@@ -1630,5 +1633,29 @@
         txtBarcode.Enabled = True
     End Sub
 
+    Private Sub HideEditButton()
 
+        Dim ctl As Control
+        Dim pnl As Control
+        Dim pnlMain As Control
+
+        ' panel in the flow panel
+        For Each ctl In flpMedications.Controls
+            'panel in the pnlPadding
+            For Each pnl In ctl.Controls
+                'each control in the pnl main
+                For Each pnlMain In pnl.Controls
+
+                    If pnlMain.Name.Contains("Edit") Then
+
+                        pnlMain.Visible = False
+
+                        '   AddHandler pnlMain.VisibleChanged, AddressOf VisibleChangedEvent
+
+                    End If
+                Next
+            Next
+        Next
+
+    End Sub
 End Class
