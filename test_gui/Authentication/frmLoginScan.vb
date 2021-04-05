@@ -33,7 +33,7 @@ Public Class frmLoginScan
             frmMain.Text = "Medical Dispence - " & LogIn.LoggedInFullName
             frmMain.Show()
             frmMain.btnPatientRecords.PerformClick()
-            txtBarcode.Clear()
+
         Else
             'If users barcode is not in the User table then inform the user
             MsgBox("No User With That Barcode")
@@ -60,7 +60,6 @@ Public Class frmLoginScan
                 frmMain.Text = "Medical Dispence - " & LogIn.LoggedInFullName
                 frmMain.Show()
                 frmMain.btnPatientRecords.PerformClick()
-                txtBarcode.Clear()
             Else
                 'If users barcode is not in the User table then inform the user
                 MsgBox("No User With That Barcode")
@@ -127,7 +126,6 @@ Public Class frmLoginScan
             pnlSplash.Visible = False
             pnlLogin.Visible = True
             lblWelcomeBack.Visible = False
-            txtBarcode.Focus()
         End If
 
     End Sub

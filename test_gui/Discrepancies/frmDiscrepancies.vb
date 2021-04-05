@@ -24,14 +24,6 @@
         CreateToolTips(pnlHeader, tpLabelHover)
         AddHandlerToLabelClick(pnlHeader, AddressOf SortBySelectedLabel)
 
-        If flpDiscrepancies.Controls.Count = 0 Then
-
-            btnResolve.Visible = False
-        Else
-
-            btnResolve.Visible = True
-
-        End If
     End Sub
 
 
@@ -253,7 +245,7 @@
         Next
 
         If checkIfSelected = False Then
-            MessageBox.Show("Please select a discrepancy to resolve.")
+            MessageBox.Show("Please Select a discrepancy to resolve")
         Else
 
             frmResolve.SetDiscrepancyID(CInt(getSelectedDiscrepancyLabel().Text))

@@ -408,15 +408,13 @@ Module ConfigureRoomsBeds
     '/* WHO   WHEN     WHAT											    */
     '/*  ---   ----     ------------------------------------------------*/
     '/*  BRH        03/23/21   Initial creation of the code-------------*/
-    '/*  BRH        04/03/21   Hide the add button until the user enters*/
-    '/*                        info into both the room and bed text boxes/
     '/*******************************************************************/
     Public Sub SetButtonVisibility()
 
         If frmConfigureRooms.txtRoom.Text IsNot "" And frmConfigureRooms.txtBed.Text IsNot "" Then
-            frmConfigureRooms.btnAdd.Visible = True
+            frmConfigureRooms.btnAdd.Enabled = True
         Else
-            frmConfigureRooms.btnAdd.Visible = False
+            frmConfigureRooms.btnAdd.Enabled = False
         End If
     End Sub
 

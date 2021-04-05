@@ -272,6 +272,64 @@ Public Class frmConfiguration
     End Sub
 
     '/*********************************************************************/
+    '/*                   Function NAME: RadioButtonSelection()           */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/6/2021                         */                             
+    '/*********************************************************************/
+    '/*  Function   PURPOSE:								              */             
+    '/*	 This is function is intended to take the selected radio button   */
+    '/*  and return a string representation of the selection.             */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*             */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  RETURNS ():					                                  */         
+    '/*	 function returns a string that will be sent to the database    - */
+    '/*  representing the user permission.                                */
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 NONE                                                             */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	   CreatePanel(flpUserInfo, strID9, strFirstName9, strAccess9)    */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	strPrivilege- a string which will be returned by the function that*/
+    '/* contains the selected radio button string.                        */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  Collin Krygier  2/6/2021    Initial creation                     */
+    '/*  Dylan Walter    2/7/2021    commented out, using flags in DB now */
+    '/*********************************************************************/
+    'Function RadioButtonSelection() As String
+
+    '    Dim strPrivilege As String = Nothing
+
+    '    Const NURSE As String = "nurse"
+    '    Const ADMIN As String = "administrator"
+    '    Const SUPERVISOR As String = "supervisor"
+
+    '    If rbtnNurse.Checked = True Then
+
+    '        strPrivilege = NURSE
+    '    ElseIf rbtnAdministrator.Checked = True Then
+
+    '        strPrivilege = ADMIN
+    '    ElseIf rbtnSupervisor.Checked = True Then
+    '        strPrivilege = SUPERVISOR
+    '    End If
+
+    '    Return strPrivilege
+    'End Function
+
+
+    '/*********************************************************************/
     '/*                   SubProgram NAME: txtUsername_LostFocus          */         
     '/*********************************************************************/
     '/*                   WRITTEN BY:  Dylan Walter        		          */   
@@ -355,7 +413,7 @@ Public Class frmConfiguration
     End Sub
 
     '/*********************************************************************/
-    '/*                   SubProgram NAME: btnSaveUser.Click 		    	   */         
+    '/*                   SubProgram NAME: Button1_Click 		    	   */         
     '/*********************************************************************/
     '/*                   WRITTEN BY: Dylan Walter    		            */   
     '/*		         DATE CREATED: 2/6/2021                      		   */                             
@@ -559,47 +617,6 @@ Public Class frmConfiguration
         Return bolSecure
     End Function
 
-    '/*********************************************************************/
-    '/*                   SubProgram NAME: btnSaveChanges_Click		    	   */         
-    '/*********************************************************************/
-    '/*                   WRITTEN BY: Dylan Walter    		            */   
-    '/*		         DATE CREATED: 3/6/2021                      		   */                             
-    '/*********************************************************************/
-    '/*  Subprogram PURPOSE: when btnSaveChanges is clicked check 	*/             
-    '/*	if data in all text boxes is valid and change the User table in SQL 			*/                     
-    '/*  database                                                                 */
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      						         */           
-    '/*                                         				   */         
-    '/*********************************************************************/
-    '/*  CALLS:	CheckPassword						        			   */                 
-    '/*         CreateDatabase.ExecuteInsertQuery   					   */             
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					   */         
-    '/*											   */                     
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								   */             
-    '/*											   */                     
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*		intActiveFlag- used to assign 1 to the active flag      	   */                     
-    '/*      intAdmin- 1 if admin radio button is checked                   */
-    '/*		strFirstName- text from txtFirstName 							*/
-    '/*     strHashedBarcode - hashed barcode
-    '/*		strLastName- text from txtLastName								*/
-    '/*		strPassword- text from txtPassword								*/
-    '/*     strResults() - the results of the salt and the hashed password  */
-    '/*     strSalt - the salt of the password                              */
-    '/*		strSpecialChar-	list of allowed special characters				*/
-    '/*     strStatement- SQL String passed to ExecuteScalarQuery to check */
-    '/*		intSupervisor- 1 if supervisor radio button is checked		    */
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						         */               
-    '/*											   */                     
-    '/*  WHO        WHEN     WHAT								   */             
-    '/*  ---        ----     ------------------------------------------------- */
-    '/*	Dylan W	    3/6/2021  Users can now be added to the User Table		*/ 
-    '/*********************************************************************/
     Private Sub btnSaveChanges_Click(sender As Object, e As EventArgs) Handles btnSaveChanges.Click
         Dim intID As Integer = txtID.Text
         Dim strStatement = "SELECT COUNT(*) FROM User WHERE Username = '" & txtUsername.Text & "'" & " OR User_ID = '" & intID & "'"
@@ -761,82 +778,19 @@ Public Class frmConfiguration
         End If
     End Sub
 
-    '/*********************************************************************/
-    '/*                   SubProgram NAME: SearchIcon_Click               */         
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:  Dylan Walter        		          */   
-    '/*		         DATE CREATED: 		 3/10/2021                        */                             
-    '/*********************************************************************/
-    '/*  Subprogram PURPOSE:								              */             
-    '/*	 When the search button is clicked check the databse for users   */   
-    '/*	  with Username, first name, last name similar to search text     */   
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      						                      */                 
-    '/*********************************************************************/
-    '/*  CALLS:	Fill_Table(strFillSQL)                                  */            
-    '/*                                             				      */             
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					          */         
-    '/*	     sender                                                      */ 
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								                  */             
-    '/*	                                                                  */
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */   
-    '/* strFillSQL- SQL String passed to Fill_Table                        */
-    '/* strSearch- text from txtSearchBox                                 */
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						                      */               
-    '/*											                          */                     
-    '/*  WHO        WHEN            WHAT					               */             
-    '/*  Dylan W    3/10/2021    Initial creation                          */
-    '/*********************************************************************/
     Private Sub SearchIcon_Click(sender As Object, e As EventArgs) Handles pnlSearch.Click
-        'when the user searches change the single comma to allow searching
         Dim strSearch = txtSearchBox.Text
         strSearch = Regex.Replace(strSearch, "'", "''")
 
-        'search and fill panels with searched content
         Dim strFillSQL = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
                                                        "User.Supervisor_Flag, User.Active_Flag From User WHERE Username LIKE '" & strSearch & "%' Or User_First_Name LIKE '" & strSearch & "%' Or User_Last_Name LIKE '" & strSearch & "%';"
         Fill_Table(strFillSQL)
 
     End Sub
 
-    '/*********************************************************************/
-    '/*                   SubProgram NAME: txtSearch_TextChanged         */         
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:  Dylan Walter        		          */   
-    '/*		         DATE CREATED: 		 3/10/2021                        */                             
-    '/*********************************************************************/
-    '/*  Subprogram PURPOSE:								              */             
-    '/*	 When the search button is empty then fill panels                  */   
-    '/*	                                                                */   
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      						                      */                 
-    '/*********************************************************************/
-    '/*  CALLS:	Fill_Table(strFillSQL)                                  */            
-    '/*                                             				      */             
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					          */         
-    '/*	     sender                                                      */ 
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								                  */             
-    '/*	                                                                  */
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */   
-    '/* strFillSQL- SQL String passed to Fill_Table                        */
-    '/* strSearch- text from txtSearchBox                                 */
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						                      */               
-    '/*											                          */                     
-    '/*  WHO        WHEN            WHAT					               */             
-    '/*  Dylan W    3/10/2021    Initial creation                          */
-    '/*********************************************************************/
     Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearchBox.TextChanged
         Dim strFillSQL As String
 
-        'if the text box is empty then reset the panels
         If txtSearchBox.Text = "" Then
             strFillSQL = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
                                                   "User.Supervisor_Flag, User.Active_Flag From User ORDER BY User_First_Name ASC;"
@@ -848,49 +802,6 @@ Public Class frmConfiguration
 
     End Sub
 
-
-    '/*********************************************************************/
-    '/*                   SubProgram NAME: Fill_Table                      */         
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:  Dylan Walter        		          */   
-    '/*		         DATE CREATED: 		 3/10/2021                        */                             
-    '/*********************************************************************/
-    '/*  Subprogram PURPOSE:								              */             
-    '/*	 take the SQL results from CreateDatabase.ExecuteSelectQuery      */   
-    '/*	 Organize the data into a dataset and send to CreatePanel        */   
-    '/*********************************************************************/
-    '/*  CALLED BY: frmConfiguration_Load                                 */         
-    '/*             btnSaveChanges_Click                                */  
-    '/*             SearchIcon_Click                                     */  
-    '/*             txtSearch_TextChanged                                */  
-    '/*             Search_KeyPress                                      */  
-    '/*             lblName_Click                                           */  
-    '/*             lblUserName_Click                                     */  
-    '/*             lblStatus_Click                                         */         
-    '/*             lblPermissions_Click                                    */    
-    '/* GraphicalUserInterfaceReusableMethods. DetermineQueryDelete_Click */
-    '/*********************************************************************/
-    '/*  CALLS:	CreatePanel                                 */            
-    '/*                                             				      */             
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					          */         
-    '/*	     strFillSQL                                                      */ 
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								                  */             
-    '/*	                                                                  */
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */   
-    '/* strActive- check if the user table has 1/0 and set text to yes/no */
-    '/* strFirst- pull users first name from table                        */
-    '/* strLast- pull users last name from table                        */                     
-    '/* strName- combine first and last name                              */
-    '/* dsUserInfo- get dataset from the user table                       */
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						                      */               
-    '/*											                          */                     
-    '/*  WHO        WHEN            WHAT					               */             
-    '/*  Dylan W    3/10/2021    Initial creation and check data in DB   */
-    '/*********************************************************************/
     Public Sub Fill_Table(ByVal strFillSQL As String)
         flpUserInfo.Controls.Clear()
         Dim dsUserInfo As DataSet = CreateDatabase.ExecuteSelectQuery(strFillSQL)
@@ -928,46 +839,14 @@ Public Class frmConfiguration
         Next
     End Sub
 
-    '/*********************************************************************/
-    '/*                   SubProgram NAME: Search_KeyPress               */         
-    '/*********************************************************************/
-    '/*                   WRITTEN BY:  Dylan Walter        		          */   
-    '/*		         DATE CREATED: 		 3/10/2021                        */                             
-    '/*********************************************************************/
-    '/*  Subprogram PURPOSE:								              */             
-    '/*	 When the enter key is pressed check the databse for users         */   
-    '/*	  with Username, first name, last name similar to search text     */   
-    '/*********************************************************************/
-    '/*  CALLED BY:   	      						                      */                 
-    '/*********************************************************************/
-    '/*  CALLS:	Fill_Table(strFillSQL)                                  */            
-    '/*                                             				      */             
-    '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					          */         
-    '/*	     sender                                                      */ 
-    '/*********************************************************************/
-    '/* SAMPLE INVOCATION:								                  */             
-    '/*	                                                                  */
-    '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */   
-    '/* strFillSQL- SQL String passed to Fill_Table                        */
-    '/* strSearch- text from txtSearchBox                                 */
-    '/*********************************************************************/
-    '/* MODIFICATION HISTORY:						                      */               
-    '/*											                          */                     
-    '/*  WHO        WHEN            WHAT					               */             
-    '/*  Dylan W    3/10/2021    Initial creation and check data in DB   */
-    '/*********************************************************************/
+
     Private Sub Search_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearchBox.KeyPress
-        'when the user hits enter in the search text box then backspace the enter then run the search
         If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
             e.KeyChar = ChrW(0)
             e.Handled = True
             Dim strSearch = txtSearchBox.Text
-            'when the user searches change the single comma to allow searching
             strSearch = Regex.Replace(strSearch, "'", "''")
 
-            'search and fill panels with searched content
             Dim strFillSQL = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
                                                        "User.Supervisor_Flag, User.Active_Flag From User WHERE Username LIKE '" & strSearch & "%' Or User_First_Name LIKE '" & strSearch & "%' Or User_Last_Name LIKE '" & strSearch & "%';"
             Fill_Table(strFillSQL)
@@ -983,28 +862,24 @@ Public Class frmConfiguration
     End Sub
 
     Private Sub lblName_Click(sender As Object, e As EventArgs) Handles lblName.Click
-        'sort by User First name
         Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
                                       "User.Supervisor_Flag, User.Active_Flag From User ORDER BY User_First_Name ASC;"
         Fill_Table(strFillSQL)
     End Sub
 
     Private Sub lblUserName_Click(sender As Object, e As EventArgs) Handles lblUserName.Click
-        'sort by User Username
         Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
                               "User.Supervisor_Flag, User.Active_Flag From User ORDER BY Username ASC;"
         Fill_Table(strFillSQL)
     End Sub
 
     Private Sub lblStatus_Click(sender As Object, e As EventArgs) Handles lblStatus.Click
-        'sort by User Active flag
         Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
                               "User.Supervisor_Flag, User.Active_Flag From User ORDER BY Active_Flag DESC;"
         Fill_Table(strFillSQL)
     End Sub
 
     Private Sub lblPermissions_Click(sender As Object, e As EventArgs) Handles lblPermissions.Click
-        'sort by User Permission level
         Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
                       "User.Supervisor_Flag, User.Active_Flag From User ORDER BY Supervisor_Flag, Admin_Flag DESC;"
         Fill_Table(strFillSQL)

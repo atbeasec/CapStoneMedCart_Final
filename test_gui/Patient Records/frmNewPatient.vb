@@ -170,7 +170,7 @@ Public Class frmNewPatient
         'strbSQL.Append(CInt(Rnd() * 20) & "',") 'this is going to make a random barcode this is temporary
 
 
-        Dim strMRN As String = GenerateRandom.generateRandomAlphanumeric(8, "1234567890")
+        Dim strMRN As String = GenerateRandom.generateRandomAlphanumeric(10, "1234567890")
         Dim strBarcode As String = GenerateRandom.generateRandomAlphanumeric(20, strCharactersForRandomGeneration)
         '^this Is going to generate a random MRN number
         'check duplicate MRN
@@ -179,7 +179,7 @@ Public Class frmNewPatient
             If dsCheckforRecord.Tables.Count > 0 Then
                 blnUsedMRN = True
             End If
-            strMRN = GenerateRandom.generateRandomAlphanumeric(8, "1234567890")
+            strMRN = GenerateRandom.generateRandomAlphanumeric(10, "1234567890")
         End While
         'check for duplicate barcode
         blnUsedMRN = False
@@ -758,7 +758,7 @@ Public Class frmNewPatient
         DataVaildationMethods.KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz 0123456789.'-#@%&/")
     End Sub
 
-    Private Sub mtbDOB_KeyPress(sender As Object, e As KeyPressEventArgs) 
+    Private Sub mtbDOB_KeyPress(sender As Object, e As KeyPressEventArgs) Handles mtbDoB.KeyPress
         DataVaildationMethods.KeyPressCheck(e, "0123456789")
     End Sub
 

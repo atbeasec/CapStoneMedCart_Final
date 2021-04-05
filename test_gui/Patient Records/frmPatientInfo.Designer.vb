@@ -651,14 +651,13 @@ Partial Class frmPatientInfo
         Me.btnAddAllergies.FlatAppearance.BorderSize = 0
         Me.btnAddAllergies.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAddAllergies.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddAllergies.ForeColor = System.Drawing.SystemColors.Window
-        Me.btnAddAllergies.Image = Global.test_gui.My.Resources.Resources.add_24px
+        Me.btnAddAllergies.ForeColor = System.Drawing.Color.White
         Me.btnAddAllergies.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnAddAllergies.Location = New System.Drawing.Point(870, 6)
+        Me.btnAddAllergies.Location = New System.Drawing.Point(926, 6)
         Me.btnAddAllergies.Name = "btnAddAllergies"
-        Me.btnAddAllergies.Size = New System.Drawing.Size(212, 37)
+        Me.btnAddAllergies.Size = New System.Drawing.Size(156, 37)
         Me.btnAddAllergies.TabIndex = 10
-        Me.btnAddAllergies.Text = "  Add/Edit Allergies"
+        Me.btnAddAllergies.Text = "  Add Allergies"
         Me.btnAddAllergies.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnAddAllergies.UseVisualStyleBackColor = False
         '
@@ -725,7 +724,7 @@ Partial Class frmPatientInfo
         Me.lblDatePrescribed.AutoSize = True
         Me.lblDatePrescribed.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDatePrescribed.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblDatePrescribed.Location = New System.Drawing.Point(574, 16)
+        Me.lblDatePrescribed.Location = New System.Drawing.Point(545, 16)
         Me.lblDatePrescribed.Name = "lblDatePrescribed"
         Me.lblDatePrescribed.Size = New System.Drawing.Size(126, 21)
         Me.lblDatePrescribed.TabIndex = 4
@@ -788,7 +787,7 @@ Partial Class frmPatientInfo
         Me.btnEditPatient.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnEditPatient.ForeColor = System.Drawing.Color.White
         Me.btnEditPatient.Image = CType(resources.GetObject("btnEditPatient.Image"), System.Drawing.Image)
-        Me.btnEditPatient.Location = New System.Drawing.Point(679, 6)
+        Me.btnEditPatient.Location = New System.Drawing.Point(741, 6)
         Me.btnEditPatient.Name = "btnEditPatient"
         Me.btnEditPatient.Size = New System.Drawing.Size(170, 37)
         Me.btnEditPatient.TabIndex = 4

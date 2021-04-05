@@ -10,9 +10,8 @@
 
         ' select the my patients item from the cbobox by default
         cboFilter.SelectedIndex = 0
-        AddHandlerToLabelClick(pnlHeader, AddressOf frmPatientRecords.SortBySelectedLabel)
         'HideButtonOnPanels()
-        ' AddHandlersLaterForRunTimePerformance()
+
     End Sub
     Private Sub LoadPanel()
 
@@ -147,63 +146,6 @@
         'pnlMainPanel.Tag = intPatientID
         flpPannel.Controls.Add(pnl)
         pnlMainPanel.Tag = intPatientID
-
-
-        lblID1.Tag = intPatientID
-        lblID2.Tag = intPatientID
-        lblID3.Tag = intPatientID
-        lblID4.Tag = intPatientID
-        lblID5.Tag = intPatientID
-        lblID6.Tag = intPatientID
-    End Sub
-
-    '/********************************************************************/
-    '/*            SUB NAME: AddHandlersLaterForRunTimePerformance	     */         
-    '/********************************************************************/
-    '/*                   WRITTEN BY: Collin Krygier  		             */   
-    '/*		         DATE CREATED: 	2/6/21			                     */                             
-    '/********************************************************************/
-    '/*  SUB Purpose: This sub adds handlers to the labels at form load  */
-    '/*  that allow the user to click the labels and load the next form  */
-    '/*                                                                  */
-    '/********************************************************************/
-    '/*  CALLED BY: DynamicSingleClickOpenPatient   	      		     */				            
-    '/*                                        				             */         
-    '/********************************************************************/
-    '/*  CALLS:								                             */		                  
-    '/*             (NONE)						                         */		               
-    '/********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):				             */	           
-    '/*	                                                                 */
-    '/********************************************************************/
-    '/* SAMPLE INVOCATION:						                         */		             
-    '/*	DynamicSingleClickOpenPatient()					                 */					                       
-    '/*                                                                  */   
-    '/********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
-    '/*	 none                           				                 */
-    '/********************************************************************/
-    '/* MODIFICATION HISTORY:						                     */		                                 
-    '/*  WHO            WHEN             WHAT				             */		            
-    '/*  ---            ----             ----				             */
-    '/*  CK		4/3/21		 initial creation                            */
-    '/********************************************************************/ 
-    Public Sub AddHandlersLaterForRunTimePerformance()
-
-        Dim ctl As Control
-        Dim pnlPadding As Control
-        Dim pnlMain As Control
-
-        For Each ctl In flpMyPatientRecords.Controls
-            For Each pnlPadding In ctl.Controls
-                For Each pnlMain In pnlPadding.Controls
-
-                    AddHandler pnlMain.Click, AddressOf frmPatientRecords.DynamicSingleClickOpenPatient
-
-                Next
-            Next
-        Next
-
     End Sub
     '/********************************************************************/
     '/*                   SUB NAME: CreateAddButton             	     */         
@@ -513,7 +455,7 @@
             ShowAllControlsOnPanels()
             HideControlOnPanels("btnAdd")
             lblAssignment.Text = "Remove Assignment"
-            AddHandlersLaterForRunTimePerformance()
+
             'ElseIf cboFilter.SelectedIndex = 1 Then
             '    '******************* 
             '    flpMyPatientRecords.Controls.Clear()
@@ -545,7 +487,7 @@
             ShowAllControlsOnPanels()
             'HideControlOnPanels("btnRemove")
             lblAssignment.Text = "Assign Patient To Me"
-            AddHandlersLaterForRunTimePerformance()
+
             'ElseIf cboFilter.SelectedIndex = 2 Then
 
         End If

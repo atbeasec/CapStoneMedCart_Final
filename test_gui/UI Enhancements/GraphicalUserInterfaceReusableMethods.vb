@@ -812,7 +812,7 @@ Module GraphicalUserInterfaceReusableMethods
             frmEditPhysician.btnSaveChanges.Visible = True
             frmEditPhysician.btnCancel.Visible = True
             frmEditPhysician.btnSave.Visible = False
-            frmEditPhysician.lblTitle.Text = "Editing Physician"
+            frmEditPhysician.Label4.Text = "Editing Physician"
         ElseIf getOpenedForm().GetType() Is frmAllergies.GetType() Then
 
             If frmAllergies.btnAddAllergy.Visible = True Then
