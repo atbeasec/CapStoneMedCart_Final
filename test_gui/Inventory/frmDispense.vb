@@ -46,7 +46,7 @@ Public Class frmDispense
 
     Private Sub btnDispense_Click(sender As Object, e As EventArgs)
 
-        MessageBox.Show("CAUTION: This drug interacts with (insert drug name here) that the patient is currently taking. Or the patient is allergic to this drug")
+        'MessageBox.Show("CAUTION: This drug interacts with (insert drug name here) that the patient is currently taking. Or the patient is allergic to this drug")
 
         'frmWitnessSignOff.Show()
         ' call emthod to open serial port connection and open drawer
