@@ -25,7 +25,6 @@ Partial Class frmPatientInfo
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPatientInfo))
         Me.LblPatientName = New System.Windows.Forms.Label()
-        Me.txtGender = New System.Windows.Forms.TextBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.pnlPersonalInformation = New System.Windows.Forms.Panel()
@@ -94,6 +93,7 @@ Partial Class frmPatientInfo
         Me.flpDispenseHistory = New System.Windows.Forms.FlowLayoutPanel()
         Me.tpLabelDirections = New System.Windows.Forms.ToolTip(Me.components)
         Me.tpToolTip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.cboSex = New System.Windows.Forms.ComboBox()
         Me.pnlPersonalInformation.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.pnlNameBarcode.SuspendLayout()
@@ -113,18 +113,6 @@ Partial Class frmPatientInfo
         Me.LblPatientName.Size = New System.Drawing.Size(140, 25)
         Me.LblPatientName.TabIndex = 1
         Me.LblPatientName.Text = "Fill Name Here"
-        '
-        'txtGender
-        '
-        Me.txtGender.BackColor = System.Drawing.Color.White
-        Me.txtGender.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtGender.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtGender.Location = New System.Drawing.Point(383, 30)
-        Me.txtGender.Name = "txtGender"
-        Me.txtGender.ReadOnly = True
-        Me.txtGender.ShortcutsEnabled = False
-        Me.txtGender.Size = New System.Drawing.Size(151, 25)
-        Me.txtGender.TabIndex = 2
         '
         'Label19
         '
@@ -151,6 +139,7 @@ Partial Class frmPatientInfo
         'pnlPersonalInformation
         '
         Me.pnlPersonalInformation.BackColor = System.Drawing.Color.White
+        Me.pnlPersonalInformation.Controls.Add(Me.cboSex)
         Me.pnlPersonalInformation.Controls.Add(Me.cboPhysicians)
         Me.pnlPersonalInformation.Controls.Add(Me.Panel3)
         Me.pnlPersonalInformation.Controls.Add(Me.lblMoreDetails)
@@ -171,7 +160,6 @@ Partial Class frmPatientInfo
         Me.pnlPersonalInformation.Controls.Add(Me.Label8)
         Me.pnlPersonalInformation.Controls.Add(Me.txtHeight)
         Me.pnlPersonalInformation.Controls.Add(Me.Label3)
-        Me.pnlPersonalInformation.Controls.Add(Me.txtGender)
         Me.pnlPersonalInformation.Controls.Add(Me.Label19)
         Me.pnlPersonalInformation.Controls.Add(Me.Label16)
         Me.pnlPersonalInformation.Controls.Add(Me.Label11)
@@ -942,6 +930,16 @@ Partial Class frmPatientInfo
         Me.flpDispenseHistory.Size = New System.Drawing.Size(1067, 64)
         Me.flpDispenseHistory.TabIndex = 1
         '
+        'cboSex
+        '
+        Me.cboSex.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboSex.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboSex.FormattingEnabled = True
+        Me.cboSex.Location = New System.Drawing.Point(383, 33)
+        Me.cboSex.Name = "cboSex"
+        Me.cboSex.Size = New System.Drawing.Size(152, 25)
+        Me.cboSex.TabIndex = 68
+        '
         'frmPatientInfo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -982,7 +980,6 @@ Partial Class frmPatientInfo
     Friend WithEvents Label16 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents btnEditPatient As Button
-    Friend WithEvents txtGender As TextBox
     Friend WithEvents Label19 As Label
     Friend WithEvents Label21 As Label
     Friend WithEvents Label17 As Label
@@ -1047,4 +1044,5 @@ Partial Class frmPatientInfo
     Friend WithEvents Panel3 As Panel
     Friend WithEvents mtbBirthday As MaskedTextBox
     Friend WithEvents cboPhysicians As ComboBox
+    Friend WithEvents cboSex As ComboBox
 End Class

@@ -1551,7 +1551,7 @@
     Private Sub disableEdits()
         txtMRN.Enabled = False
         mtbBirthday.Enabled = False
-        txtGender.Enabled = False
+        cboSex.Enabled = False
         txtHeight.Enabled = False
         txtWeight.Enabled = False
         cboRoom.Enabled = False
@@ -1612,7 +1612,7 @@
     Private Sub enableEdits()
         txtMRN.Enabled = True
         mtbBirthday.Enabled = True
-        txtGender.Enabled = True
+        cboSex.Enabled = True
         txtHeight.Enabled = True
         txtWeight.Enabled = True
         cboRoom.Enabled = True

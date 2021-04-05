@@ -78,8 +78,8 @@ Partial Class frmNewPatient
         Me.Panel20 = New System.Windows.Forms.Panel()
         Me.mtbZipCode = New System.Windows.Forms.MaskedTextBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.Panel14 = New System.Windows.Forms.Panel()
         Me.mtbDoB = New System.Windows.Forms.MaskedTextBox()
+        Me.Panel14 = New System.Windows.Forms.Panel()
         Me.Panel1.SuspendLayout()
         Me.Panel9.SuspendLayout()
         Me.Panel10.SuspendLayout()
@@ -719,15 +719,6 @@ Partial Class frmNewPatient
         Me.Panel4.Size = New System.Drawing.Size(171, 31)
         Me.Panel4.TabIndex = 7
         '
-        'Panel14
-        '
-        Me.Panel14.BackColor = System.Drawing.Color.White
-        Me.Panel14.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel14.Location = New System.Drawing.Point(1, 23)
-        Me.Panel14.Name = "Panel14"
-        Me.Panel14.Size = New System.Drawing.Size(169, 7)
-        Me.Panel14.TabIndex = 174
-        '
         'mtbDoB
         '
         Me.mtbDoB.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -740,6 +731,15 @@ Partial Class frmNewPatient
         Me.mtbDoB.Size = New System.Drawing.Size(169, 22)
         Me.mtbDoB.TabIndex = 175
         Me.mtbDoB.ValidatingType = GetType(Date)
+        '
+        'Panel14
+        '
+        Me.Panel14.BackColor = System.Drawing.Color.White
+        Me.Panel14.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel14.Location = New System.Drawing.Point(1, 23)
+        Me.Panel14.Name = "Panel14"
+        Me.Panel14.Size = New System.Drawing.Size(169, 7)
+        Me.Panel14.TabIndex = 174
         '
         'frmNewPatient
         '
