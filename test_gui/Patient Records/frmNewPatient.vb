@@ -851,6 +851,19 @@ Public Class frmNewPatient
                 strbErrorMessage.Append("Please enter a valid date of birth." & vbCrLf)
             End If
         End If
+        If IsNumeric(txtHeight.Text) Then
+            If CDbl(txtHeight.Text) > 250 Then
+                hasError = True
+                strbErrorMessage.Append("Please enter a valid height." & vbCrLf)
+            End If
+        End If
+
+        If IsNumeric(txtWeight.Text) Then
+            If CDbl(txtWeight.Text) > 440 Then
+                hasError = True
+                strbErrorMessage.Append("Please enter a valid weight." & vbCrLf)
+            End If
+        End If
 
         If txtHeight.Text = String.Empty Then
             hasError = True
