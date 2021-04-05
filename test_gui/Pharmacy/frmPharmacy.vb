@@ -65,22 +65,39 @@
     '/*											                          */
     '/*  WHO                   WHEN     WHAT							  */
     '/*  ---                   ----     ----------------------------------*/
-    '/*  Alexander Beasecker  03/11/21  Initial creation of the code    */
+    '/*  Alexander Beasecker  03/11/21  Initial creation of the code      */
+    '/*  Dillen Perron        04/03/21  Check for duplicat medication     */
     '/*********************************************************************/
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnORder.Click
+        Dim Go As Boolean = True
+        Dim Result As DialogResult
         ErrorProvider1.Clear()
         If cmbPatientName.SelectedIndex = -1 Or cmbMedication.SelectedIndex = -1 Or cmbOrderedBy.SelectedIndex = -1 Or cmbFrequencyNumber.SelectedIndex = -1 Or txtUnit.Text = Nothing Or txtUnit.Text = " " Or txtQuantity.Text = Nothing Or txtQuantity.Text = " " Or txtUnit.Text.Trim.Length = 0 Then
             MessageBox.Show("You must fill out all boxes before proceeding")
         Else
-            Dim dtmOrderTime As String = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
-            PharmacyOrder.PharmacyOrder(intPatientIDfromArray, intMedIDfromArray, intPhysicianIDfromArray, txtQuantity.Text, txtUnit.Text, txtType.Text, cmbFrequencyNumber.SelectedItem.ToString)
-            MessageBox.Show("Medication order placed")
-            cmbPatientName.SelectedIndex = -1
-            cmbMedication.SelectedIndex = -1
-            cmbOrderedBy.SelectedIndex = -1
-            cmbFrequencyNumber.SelectedIndex = -1
-            txtQuantity.Text = Nothing
-            txtUnit.Text = Nothing
+            Dim cmdSQLExistsCheck = "SELECT Count(Medication_TUID) FROM PatientMedication Where Medication_TUID = " & intMedIDfromArray.ToString & " AND Patient_TUID = " & intPatientIDfromArray.ToString & " AND Active_Flag = 1"
+            '
+            If ExecuteScalarQuery(cmdSQLExistsCheck) <> 0 Then
+                Result = MessageBox.Show("Medication is already assigned to patient, are you sure you wish to continue? ", "Duplicate Medication Detected", MessageBoxButtons.YesNo)
+                If Result = DialogResult.No Then
+                    Go = False
+                End If
+
+
+            End If
+            '
+
+            If Go Then
+                Dim dtmOrderTime As String = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")
+                PharmacyOrder.PharmacyOrder(intPatientIDfromArray, intMedIDfromArray, intPhysicianIDfromArray, txtQuantity.Text, txtUnit.Text, txtType.Text, cmbFrequencyNumber.SelectedItem.ToString)
+                MessageBox.Show("Medication order placed")
+                cmbPatientName.SelectedIndex = -1
+                cmbMedication.SelectedIndex = -1
+                cmbOrderedBy.SelectedIndex = -1
+                cmbFrequencyNumber.SelectedIndex = -1
+                txtQuantity.Text = Nothing
+                txtUnit.Text = Nothing
+            End If
         End If
     End Sub
 
