@@ -312,8 +312,8 @@ Module PatientInformation
 
             'this is for checking if middle name was changed
             If Not frmPatientInfo.txtMiddle.Text.Equals(frmPatientInfo.txtMiddle.Tag) Then
-                If .txtMiddle.Text = String.Empty Or .txtMiddle.Text.Length <= 3 Then
-                    strbErrorMessage.AppendLine("Middle name must be longer than 2 characters")
+                If .txtMiddle.Text = String.Empty Or .txtMiddle.Text.Length < 1 Then
+                    strbErrorMessage.AppendLine("Middle name must be at least one character")
                     blnIssue = True
                     .txtMiddle.Text = .txtMiddle.Tag
                 ElseIf TextCheck(.txtMiddle.Text) Then
@@ -508,28 +508,35 @@ Module PatientInformation
 
             'check if street address is changed
             If Not frmPatientInfo.txtAddress.Text.Equals(frmPatientInfo.txtAddress.Tag) Then
-                If TextCheck(.txtAddress.Text) Then
-                    strbErrorMessage.AppendLine("Address cannot contain a ;")
+                If Not frmPatientInfo.txtAddress.Text.Trim.Length = 0 And frmPatientInfo.txtAddress.Text.Length > 2 Then
+
+                    If TextCheck(.txtAddress.Text) Then
+                        strbErrorMessage.AppendLine("Address cannot contain a ;")
+                        blnIssue = True
+                        .txtAddress.Text = .txtAddress.Tag
+                    Else
+                        'build sql update command
+                        strbSqlCommand.Append("UPDATE Patient SET Address = '" & checkSQLInjection(frmPatientInfo.txtAddress.Text, True) & "' Where Patient_ID = '" & intPatientID & "'")
+                        CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+                        'add item that was changed too string that is tracking all changed items
+                        strbItemsChanged.AppendLine("Street Address")
+                        'increase changed item count
+                        intCountChanged = intCountChanged + 1
+                        'clear string bulder
+                        strbSqlCommand.Clear()
+                        'update tag to new item
+                        frmPatientInfo.txtAddress.Tag = frmPatientInfo.txtAddress.Text
+                    End If
+                Else
+                    strbErrorMessage.AppendLine("Address must be longer than 2 characters")
                     blnIssue = True
                     .txtAddress.Text = .txtAddress.Tag
-                Else
-                    'build sql update command
-                    strbSqlCommand.Append("UPDATE Patient SET Address = '" & checkSQLInjection(frmPatientInfo.txtAddress.Text, True) & "' Where Patient_ID = '" & intPatientID & "'")
-                    CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
-                    'add item that was changed too string that is tracking all changed items
-                    strbItemsChanged.AppendLine("Street Address")
-                    'increase changed item count
-                    intCountChanged = intCountChanged + 1
-                    'clear string bulder
-                    strbSqlCommand.Clear()
-                    'update tag to new item
-                    frmPatientInfo.txtAddress.Tag = frmPatientInfo.txtAddress.Text
                 End If
             End If
-
             'check if city is changed
+            Dim intlength As Integer = frmPatientInfo.txtCity.Text.Length
             If Not frmPatientInfo.txtCity.Text.Equals(frmPatientInfo.txtCity.Tag) Then
-                If Not frmPatientInfo.txtCity.Text.Trim.Length = 0 Or Not frmPatientInfo.txtCity.Text.Length < 2 Then
+                If Not frmPatientInfo.txtCity.Text.Trim.Length = 0 And frmPatientInfo.txtCity.Text.Length > 2 Then
                     If TextCheck(.txtCity.Text) Then
                         strbErrorMessage.AppendLine("City cannot contain a ;")
                         blnIssue = True
@@ -547,6 +554,10 @@ Module PatientInformation
                         'update tag to new item
                         frmPatientInfo.txtCity.Tag = frmPatientInfo.txtCity.Text
                     End If
+                Else
+                    strbErrorMessage.AppendLine("City must be longer than 2 characters")
+                    blnIssue = True
+                    .txtCity.Text = .txtCity.Tag
                 End If
             End If
             'check if state is changed
@@ -585,30 +596,36 @@ Module PatientInformation
             End If
 
             If Not frmPatientInfo.txtBarcode.Text.Equals(frmPatientInfo.txtBarcode.Tag) Then
-                If TextCheck(.txtBarcode.Text) Then
-                    strbErrorMessage.AppendLine("Barcode cannot contain a ;")
-                    blnIssue = True
-                    .txtBarcode.Text = .txtBarcode.Tag
-                Else
-                    Dim cmdSQLExistsCheck As String = "Select Count(Patient_ID) from Patient where Barcode = '" & .txtBarcode.Text & "'"
-                    If ExecuteScalarQuery(cmdSQLExistsCheck) = 0 Then
-                        'build sql update command
-                        strbSqlCommand.Append("UPDATE Patient SET Barcode = '" & frmPatientInfo.txtBarcode.Text & "' Where Patient_ID = '" & intPatientID & "'")
-                        CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
-                        'add item that was changed too string that is tracking all changed items
-                        strbItemsChanged.AppendLine("Barcode")
-                        'increase changed item count
-                        intCountChanged = intCountChanged + 1
-                        'clear string bulder
-                        strbSqlCommand.Clear()
-                        'update tag to new item
-                        frmPatientInfo.txtBarcode.Tag = frmPatientInfo.txtBarcode.Text
-                    Else
-                        strbErrorMessage.AppendLine("Barcode must be unique")
+                If Not frmPatientInfo.txtBarcode.Text.Trim.Length = 0 And frmPatientInfo.txtBarcode.Text.Length > 4 Then
+                    If TextCheck(.txtBarcode.Text) Then
+                        strbErrorMessage.AppendLine("Barcode cannot contain a ;")
                         blnIssue = True
                         .txtBarcode.Text = .txtBarcode.Tag
+                    Else
+                        'check if barcode is already assigned to patient
+                        Dim cmdSQLExistsCheck As String = "Select Count(Patient_ID) from Patient where Barcode = '" & .txtBarcode.Text & "'"
+                        If ExecuteScalarQuery(cmdSQLExistsCheck) = 0 Then
+                            'build sql update command
+                            strbSqlCommand.Append("UPDATE Patient SET Barcode = '" & frmPatientInfo.txtBarcode.Text & "' Where Patient_ID = '" & intPatientID & "'")
+                            CreateDatabase.ExecuteInsertQuery(strbSqlCommand.ToString)
+                            'add item that was changed too string that is tracking all changed items
+                            strbItemsChanged.AppendLine("Barcode")
+                            'increase changed item count
+                            intCountChanged = intCountChanged + 1
+                            'clear string bulder
+                            strbSqlCommand.Clear()
+                            'update tag to new item
+                            frmPatientInfo.txtBarcode.Tag = frmPatientInfo.txtBarcode.Text
+                        Else
+                            strbErrorMessage.AppendLine("Barcode must be unique")
+                            blnIssue = True
+                            .txtBarcode.Text = .txtBarcode.Tag
+                        End If
                     End If
-
+                Else
+                    strbErrorMessage.AppendLine("Barcode must be longer than 4 characters")
+                    blnIssue = True
+                    .txtBarcode.Text = .txtBarcode.Tag
                 End If
             End If
             If Not frmPatientInfo.cboBed.SelectedIndex = -1 Then

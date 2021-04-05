@@ -28,6 +28,7 @@ Partial Class frmPatientInfo
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.pnlPersonalInformation = New System.Windows.Forms.Panel()
+        Me.cboSex = New System.Windows.Forms.ComboBox()
         Me.cboPhysicians = New System.Windows.Forms.ComboBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.mtbBirthday = New System.Windows.Forms.MaskedTextBox()
@@ -93,7 +94,6 @@ Partial Class frmPatientInfo
         Me.flpDispenseHistory = New System.Windows.Forms.FlowLayoutPanel()
         Me.tpLabelDirections = New System.Windows.Forms.ToolTip(Me.components)
         Me.tpToolTip = New System.Windows.Forms.ToolTip(Me.components)
-        Me.cboSex = New System.Windows.Forms.ComboBox()
         Me.pnlPersonalInformation.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.pnlNameBarcode.SuspendLayout()
@@ -168,6 +168,16 @@ Partial Class frmPatientInfo
         Me.pnlPersonalInformation.Name = "pnlPersonalInformation"
         Me.pnlPersonalInformation.Size = New System.Drawing.Size(1092, 147)
         Me.pnlPersonalInformation.TabIndex = 17
+        '
+        'cboSex
+        '
+        Me.cboSex.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboSex.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboSex.FormattingEnabled = True
+        Me.cboSex.Location = New System.Drawing.Point(383, 33)
+        Me.cboSex.Name = "cboSex"
+        Me.cboSex.Size = New System.Drawing.Size(152, 25)
+        Me.cboSex.TabIndex = 68
         '
         'cboPhysicians
         '
@@ -409,6 +419,7 @@ Partial Class frmPatientInfo
         Me.txtCity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtCity.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCity.Location = New System.Drawing.Point(379, 23)
+        Me.txtCity.MaxLength = 30
         Me.txtCity.Name = "txtCity"
         Me.txtCity.ReadOnly = True
         Me.txtCity.ShortcutsEnabled = False
@@ -421,6 +432,7 @@ Partial Class frmPatientInfo
         Me.txtAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtAddress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAddress.Location = New System.Drawing.Point(12, 23)
+        Me.txtAddress.MaxLength = 60
         Me.txtAddress.Name = "txtAddress"
         Me.txtAddress.ReadOnly = True
         Me.txtAddress.ShortcutsEnabled = False
@@ -929,16 +941,6 @@ Partial Class frmPatientInfo
         Me.flpDispenseHistory.Name = "flpDispenseHistory"
         Me.flpDispenseHistory.Size = New System.Drawing.Size(1067, 64)
         Me.flpDispenseHistory.TabIndex = 1
-        '
-        'cboSex
-        '
-        Me.cboSex.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboSex.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboSex.FormattingEnabled = True
-        Me.cboSex.Location = New System.Drawing.Point(383, 33)
-        Me.cboSex.Name = "cboSex"
-        Me.cboSex.Size = New System.Drawing.Size(152, 25)
-        Me.cboSex.TabIndex = 68
         '
         'frmPatientInfo
         '
