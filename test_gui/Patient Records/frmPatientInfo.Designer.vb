@@ -419,7 +419,7 @@ Partial Class frmPatientInfo
         Me.txtCity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtCity.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCity.Location = New System.Drawing.Point(379, 23)
-        Me.txtCity.MaxLength = 30
+        Me.txtCity.MaxLength = 25
         Me.txtCity.Name = "txtCity"
         Me.txtCity.ReadOnly = True
         Me.txtCity.ShortcutsEnabled = False
@@ -432,7 +432,7 @@ Partial Class frmPatientInfo
         Me.txtAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtAddress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAddress.Location = New System.Drawing.Point(12, 23)
-        Me.txtAddress.MaxLength = 60
+        Me.txtAddress.MaxLength = 55
         Me.txtAddress.Name = "txtAddress"
         Me.txtAddress.ReadOnly = True
         Me.txtAddress.ShortcutsEnabled = False

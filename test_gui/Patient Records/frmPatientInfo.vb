@@ -1169,7 +1169,7 @@
         DataVaildationMethods.KeyPressCheck(e, "0123456789.")
     End Sub
 
-    Private Sub txtAddress_TextChanged(sender As Object, e As EventArgs) Handles txtAddress.KeyPress, txtCity.KeyPress, txtEmail.KeyPress
+    Private Sub txtAddress_TextChanged(sender As Object, e As EventArgs) Handles txtAddress.KeyPress, txtCity.KeyPress, txtEmail.KeyPress, txtBarcode.KeyPress
         DataVaildationMethods.KeyPressCheck(e, "0123456789abcdefghijklmnopqrstuvwxyz-/@.")
     End Sub
 
