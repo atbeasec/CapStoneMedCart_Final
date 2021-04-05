@@ -457,12 +457,12 @@
         Const SUPERVISORACCESS = "Supervisor"
         Const NURSEACCESS = "Nurse"
 
-        ' Dim arrBUttonsToRemoveAdmin() = {btnWaste} ' btn waste is not eneded on the side menu currently but easy to add back on as needed
-        Dim arrButtonsToRemoveSupervisor() = {btnSerialPort}
-        Dim arrButtonsToRemoveNurse() = {btnUsers, btnSerialPort, btnEditPhysician, btnPharmacy, btnMaintenance, btnDescrepancies, btnConfigureInventory, btnEndOfShiftCount}
+        Dim arrBUttonsToRemoveAdmin() = {btnWaste} ' btn waste is not eneded on the side menu currently but easy to add back on as needed
+        Dim arrButtonsToRemoveSupervisor() = {btnSerialPort, btnWaste}
+        Dim arrButtonsToRemoveNurse() = {btnUsers, btnSerialPort, btnEditPhysician, btnPharmacy, btnMaintenance, btnDescrepancies, btnConfigureInventory, btnEndOfShiftCount, btnWaste}
 
         If String.Equals(ADMINACCESS, permissionLevel) Then
-            ' ShowOnlyPermittedScreens(arrBUttonsToRemoveAdmin)
+            ShowOnlyPermittedScreens(arrBUttonsToRemoveAdmin)
 
         ElseIf String.Equals(SUPERVISORACCESS, permissionLevel) Then
 

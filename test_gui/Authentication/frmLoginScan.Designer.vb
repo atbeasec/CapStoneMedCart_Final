@@ -141,7 +141,6 @@ Partial Class frmLoginScan
         Me.txtBarcode.Size = New System.Drawing.Size(234, 22)
         Me.txtBarcode.TabIndex = 2
         Me.txtBarcode.Tag = "SVSU ID"
-        Me.txtBarcode.UseSystemPasswordChar = True
         '
         'panelTopBar
         '

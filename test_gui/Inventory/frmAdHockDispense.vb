@@ -39,11 +39,7 @@
                     frmWitnessSignOff.Label2.Text = "Causes Allergic Reaction to Patient"
                     frmWitnessSignOff.Text = "Allergies Override"
                     frmWitnessSignOff.Label1.Location = New Point(3, 34)
-                    frmWitnessSignOff.Label2.Location = New Point(21, 64)
-                    frmWitnessSignOff.Label5.Visible = False
-                    frmWitnessSignOff.Label6.Visible = False
                     frmWitnessSignOff.ShowDialog()
-
 
                     'if authentication from witness sign off form comes back then
                     If blnOverride Then

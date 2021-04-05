@@ -177,11 +177,9 @@ Module AdHoc
     Public Sub GetAllMedicationsForListbox()
         Dim Strdatacommand As String
         intMedIDArray.Clear()
-        intDrawerMedArray.Clear()
-        frmAdHockDispense.cmbMedications.Items.Clear()
         ' Currently the medication display is appending the RXCUI Number on too the medication
         ' name, as searching by name alone could cause problems if medication names can repeat
-        Strdatacommand = "Select DISTINCT trim(Drug_Name,' '), RXCUI_ID, Medication_ID,DrawerMedication_ID FROM Medication INNER JOIN DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE DrawerMedication.Active_Flag = 1 ORDER BY Medication.Drug_Name COLLATE NOCASE ASC"
+        Strdatacommand = "Select trim(Drug_Name,' '), RXCUI_ID, Medication_ID,DrawerMedication_ID FROM Medication INNER JOIN DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID WHERE DrawerMedication.Active_Flag = 1 ORDER BY Medication.Drug_Name COLLATE NOCASE ASC"
 
         Dim dsMedicationDataSet As DataSet = New DataSet
         dsMedicationDataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)

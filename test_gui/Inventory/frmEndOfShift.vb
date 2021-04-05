@@ -162,7 +162,7 @@
         'Set panel properties
         With pnl
             .BackColor = Color.Gainsboro
-            .Size = New Size(flpEndOfShiftCount.Width - 25, 47)
+            .Size = New Size(flpEndOfShiftCount.Size.Width - 5, 47)
             .Name = "pnlMedicationFlaggedPadding" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Padding = New Padding(0, 0, 0, 3)
@@ -174,7 +174,7 @@
         With pnlMainPanel
 
             .BackColor = Color.White
-            .Size = New Size(flpEndOfShiftCount.Width - 25, 45)
+            .Size = New Size(flpEndOfShiftCount.Size.Width - 5, 45)
             .Name = "pnlMedicationFlagged" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Dock = System.Windows.Forms.DockStyle.Top

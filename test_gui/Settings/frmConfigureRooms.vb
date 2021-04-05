@@ -75,8 +75,6 @@ Public Class frmConfigureRooms
     '/*  ---   ----     ------------------------------------------------*/
     '/*  BRH        02/17/21   Initial creation of the code-------------*/
     '/*  BRH        03/23/21   Changed text boxes to only allow 12 characters
-    '/*  BRH        04/03/21   Hid the add button and automatically     */
-    '/*                        checked the add radio button             */
     '/*******************************************************************/
 
     Private Sub frmConfigureRooms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -87,10 +85,7 @@ Public Class frmConfigureRooms
         rdoNo.Visible = False
         txtRoom.MaxLength = 12
         txtBed.MaxLength = 12
-        'hide the add button
-        btnAdd.Visible = False
-        'have the add rooms and bed checked by default
-        rdoAddRoomBed.Checked = True
+        btnAdd.Enabled = False
     End Sub
 
     '/*******************************************************************/
