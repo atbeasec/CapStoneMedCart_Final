@@ -302,7 +302,7 @@ Module BulkImportMethods
         Dim resultDate As DateTime
         Do
             strLine = srReader.ReadLine.Split(vbTab)
-            If strLine.Length < 16 Then
+            If strLine.Length < 17 Then
                 strbErrorMessage.AppendLine("Issue on line " & intLineNum & " record is missing information")
                 blnIssue = True
             Else
@@ -349,9 +349,6 @@ Module BulkImportMethods
 
                     Try
                         resultDate = DateTime.ParseExact(strLine(5), "yyyy/MM/dd", Globalization.CultureInfo.InvariantCulture)
-#If DEBUG Then
-                        MessageBox.Show(resultDate.ToString("yyyy/MM/dd"))
-#End If
 
                     Catch ex As Exception
                         strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Date must be the format of YYYY/MM/DD")
@@ -412,8 +409,8 @@ Module BulkImportMethods
                     strbSQLPull.Append("Select count(Physician_ID) from Physician where Physician_ID = " & strLine(15))
                     If CreateDatabase.ExecuteScalarQuery(strbSQLPull.ToString) < 1 Then
                         strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Physician ID of " & strLine(15) &
-                                                        " found in the system. Please use a " &
-                                                        "Physician ID that is in the system.")
+                                                        " not found in the system. Please use the ID of a " &
+                                                        "Physician that is in the system.")
                         blnIssue = True
                     End If
 
