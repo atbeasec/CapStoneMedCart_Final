@@ -438,7 +438,17 @@ Public Class frmEditPhysician
     End Sub
 
     Public Sub Fill_Table(ByVal strFillSQL As String)
+
+        'While flpPhysicianInfo.Controls.Count > 0
+
+        '    While flpPhysicianInfo.Controls(0).Controls.Count > 0
+        '        flpPhysicianInfo.Controls(0).Controls(0).Dispose()
+        '    End While
+
+        '    flpPhysicianInfo.Controls(0).Dispose()
+        'End While
         flpPhysicianInfo.Controls.Clear()
+
         Dim dsPhysicianInfo As DataSet = CreateDatabase.ExecuteSelectQuery(strFillSQL)
 
 
