@@ -54,4 +54,8 @@
             KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz-1234567890!@#$%^&*.,<>=+")
         End If
     End Sub
+
+    Private Sub frmWitnessSignOff_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class
