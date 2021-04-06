@@ -259,7 +259,9 @@ Public Class frmDispense
     '/*		         DATE CREATED: 		 3/20/2021                        */                             
     '/*********************************************************************/
     '/*  Subprogram PURPOSE:								              */             
-    '/*	  
+    '/*	  This method will swap the frmDispense labels to the narcotic counting
+    '/* visuals
+    '/*
     '/*********************************************************************/
     '/*  CALLED BY:   	      						                      */                 
     '/*********************************************************************/
@@ -296,7 +298,7 @@ Public Class frmDispense
     '/*		         DATE CREATED: 		 3/20/2021                        */                             
     '/*********************************************************************/
     '/*  Subprogram PURPOSE:								              */             
-    '/*	  
+    '/*	 this program will swap the GUI to the labels and visuals for dispensing 
     '/*********************************************************************/
     '/*  CALLED BY:   	      						                      */                 
     '/*********************************************************************/
@@ -310,7 +312,10 @@ Public Class frmDispense
     '/* SAMPLE INVOCATION:								                  */             
     '/*	                                                                  */
     '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */  
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */ 
+    '/*
+    '/* strAmountUnit -- gets the unit count from the database for the medication
+    '/*
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						                      */               
     '/*											                          */                     
@@ -335,7 +340,7 @@ Public Class frmDispense
     '/*		         DATE CREATED: 		 3/20/2021                        */                             
     '/*********************************************************************/
     '/*  Subprogram PURPOSE:								              */             
-    '/*	  
+    '/*	  this method handles the sql statements to insert the dispense into the database
     '/*********************************************************************/
     '/*  CALLED BY:   	      						                      */                 
     '/*********************************************************************/
@@ -343,13 +348,20 @@ Public Class frmDispense
     '/*                                             				      */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					          */         
-    '/*	     sender
-    '/*      e                                                             */ 
+    '/*	     intMedID -- Integer -- holds medication database id
+    '/*      intPrimaryID -- Integer -- holds patient database id
+    '/*      strAmountDispensed -- Integer -- holds amount dispensed
+    '/*
+    '/**/ 
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                  */             
     '/*	                                                                  */
     '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */  
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */ 
+    '/* dtmAdhocTime
+    '/* strbSQLcommand
+    '/* intdrawerNumber
+    '/* intPatientMedicationDatabaseID
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						                      */               
     '/*											                          */                     
