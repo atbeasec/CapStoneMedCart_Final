@@ -744,7 +744,7 @@
         Dim strBed As String = ""
         Dim intActive_Flag As String = ""
 
-        Sorting_MyPatients_Fix_Physicians
+        'Sorting_MyPatients_Fix_Physicians
         dsPatientUser = CreateDatabase.ExecuteSelectQuery(strSQLCode)
 
 
