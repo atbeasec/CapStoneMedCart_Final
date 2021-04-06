@@ -75,7 +75,7 @@ Imports System.Data.SQLite
 Imports System.IO
 Module CreateDatabase
 	'The path where the database is desired to be stored. 
-	Dim STRDEFAULTFOLDER As String = "C:\Users\Breanna\Documents\MedServe" '"C:\Users\Public\Documents\MedServe\"
+	Dim STRDEFAULTFOLDER As String = "C:\Users\Public\Documents\MedServe\"
 	Public strDBNAME As String = "Medication_Cart_System"
 	Public strDBPath As String = strDEFAULTFOLDER & strDBNAME & ".db"
 	Public DBConn As SQLiteConnection
