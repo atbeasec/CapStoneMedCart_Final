@@ -696,7 +696,9 @@ Module GraphicalUserInterfaceReusableMethods
 
         ElseIf getOpenedForm().GetType() Is frmPatientInfo.GetType() Then
 
-
+            Dim intPATMedID As Integer = sender.parent.parent.tag
+            frmPatientInfo.removePrescription(intPATMedID)
+            MessageBox.Show("Prescription has been removed")
         End If
 
     End Sub

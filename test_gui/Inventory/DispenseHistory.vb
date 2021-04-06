@@ -607,12 +607,13 @@ Module DispenseHistory
         If frmDispense.getIntEntered() = 0 Then
             frmDispense.txtMedication.Text = Nothing
             Dim Strdatacommand As String
+            Dim intPATMED As Integer = frmDispense.getPattientMedID
             ' Currently the medication display is appending the RXCUI Number on too the medication
             ' name, as searching by name alone could cause problems if medication names can repeat
             Strdatacommand = "SELECT Drug_Name,RXCUI_ID, Medication.Type, PatientMedication.Quantity, PatientMedication.Frequency  FROM PatientMedication " &
         "INNER JOIN Medication on Medication.Medication_ID = PatientMedication.Medication_TUID " &
         "INNER JOIN Patient on Patient.Patient_ID = PatientMedication.Patient_TUID " &
-        "WHERE Patient.Patient_ID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1' AND Medication.Medication_ID = '" & intMEDID & "'"
+        "WHERE Patient.Patient_ID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1' AND Medication.Medication_ID = '" & intMEDID & "' and PatientMedication.PatientMedication_ID = '" & intPATMED & "'"
 
             Dim dsMedicationDataSet As DataSet = New DataSet
             dsMedicationDataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
@@ -730,7 +731,7 @@ Module DispenseHistory
         'the dispensing table as a foreign key
         strbSQLcommand.Clear()
         strbSQLcommand.Append("SELECT PatientMedication_ID FROM PatientMedication WHERE Medication_TUID = '" & intMedID & "' AND Patient_TUID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1'")
-        intPatientMedicationDatabaseID = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
+        intPatientMedicationDatabaseID = frmDispense.getPattientMedID
 
         'clear string builder and set up sql statement to decrease drawer amount
         strbSQLcommand.Clear()

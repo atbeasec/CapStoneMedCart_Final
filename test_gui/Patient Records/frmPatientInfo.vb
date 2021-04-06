@@ -52,6 +52,15 @@
     Public blnOverride As Boolean = False
     Public strMedName As String
 
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+
+    End Sub
+
     Public Enum DispenseHistoryEnum As Integer
         MedicationName = 1
         Strength = 2
@@ -343,7 +352,7 @@
     '/*  WHO   WHEN     WHAT								              */             
     '/*  Collin Krygier  2/6/2021    Initial creation                     */
     '/*********************************************************************/
-    Public Sub CreatePrescriptionsPanels(ByVal flpPannel As FlowLayoutPanel, ByVal strMedicationName As String, ByVal strStrength As String, ByVal strFrequency As String, ByVal strType As String, ByVal strQuantity As String, ByVal strDatePrescribed As String, ByVal strPrescribedBy As String, ByRef intMedID As Integer)
+    Public Sub CreatePrescriptionsPanels(ByVal flpPannel As FlowLayoutPanel, ByVal strMedicationName As String, ByVal strStrength As String, ByVal strFrequency As String, ByVal strType As String, ByVal strQuantity As String, ByVal strDatePrescribed As String, ByVal strPrescribedBy As String, ByRef intMedID As Integer, ByRef intPatMEDID As Integer)
         Dim pnl As Panel
         pnl = New Panel
 
@@ -419,6 +428,7 @@
 
         'Add panel to flow layout panel
         pnlMainPanel.Tag = intMedID
+
         flpPannel.Controls.Add(pnl)
 
         lblID.Tag = intMedID
@@ -428,10 +438,18 @@
         lblID5.Tag = intMedID
         lblID6.Tag = intMedID
         lblID7.Tag = intMedID
+        pnl.Tag = intPatMEDID
 
     End Sub
 
     Private Sub PrescriptionPanel_Click(ByVal sender As Object, e As EventArgs)
+
+        Dim intPatientPrescriptionID As Integer = sender.parent.parent.tag
+        If intPatientPrescriptionID = Nothing Then
+            intPatientPrescriptionID = sender.parent.tag
+        End If
+        frmDispense.setPatientMedID(intPatientPrescriptionID)
+
         Dim intMedID As Integer = sender.tag
 
         Dim strPatientMRN As String
@@ -1657,5 +1675,10 @@
             Next
         Next
 
+    End Sub
+
+
+    Public Sub removePrescription(ByRef intPatientMedicationID As Integer)
+        CreateDatabase.ExecuteInsertQuery("UPDATE PatientMedication SET Active_Flag = '0' where PatientMedication_ID = '" & intPatientMedicationID & "'")
     End Sub
 End Class
