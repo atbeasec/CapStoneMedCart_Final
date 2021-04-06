@@ -214,13 +214,14 @@ Public Class frmDispense
                     MessageBox.Show("Please enter a quantity value greater than 0")
                 End If
             End If
-
+            'step after narcotic amount entered
         ElseIf lblDirections.Text.Equals("Enter the Quantity in the Cart") Then
             If IsNumeric(txtQuantityToDispense.Text) Then
                 Dim intAmountinCart As Integer = txtCountInDrawer.Text
                 UpdateSystemCountForDiscrepancy(intMedicationID, intdrawerNumber, intAmountinCart)
                 changeButtonforDispensing()
             End If
+            'step after administered drugs, enter wasting
         ElseIf lblDirections.Text.Equals("Enter the Amount Administered") Then
             If IsNumeric(txtAmountDispensed.Text) Then
                 If intEnteredFromAdhoc = 0 Then
@@ -232,7 +233,7 @@ Public Class frmDispense
                     frmWaste.setMedID(intMedicationID)
                     frmWaste.setDrawerMEDTUID(intdrawerMEDTUID)
                     frmMain.OpenChildForm(frmWaste)
-
+                    'used to check if the form that entered this dispense was adhoc or not
                 ElseIf intEnteredFromAdhoc = 1 Then
                     Dim strAmountDispensed As String = txtAmountDispensed.Text & " " & txtUnits.Text
                     DispensingDrugAdhoc(intMedicationID, intPatientID, CInt(LoggedInID), strAmountDispensed, intDrawerMEDAdhoc)
