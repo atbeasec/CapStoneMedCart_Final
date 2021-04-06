@@ -388,21 +388,29 @@ Public Class frmDispense
     '/*		         DATE CREATED: 		 3/20/2021                        */                             
     '/*********************************************************************/
     '/*  Subprogram PURPOSE:								              */             
-    '/*	  
+    '/*	  this method handles the dispensing insert database sql for adhoc orders
     '/*********************************************************************/
     '/*  CALLED BY:   	      						                      */                 
     '/*********************************************************************/
     '/*  CALLS:	Fill_Table(strFillSQL)                                  */            
     '/*                                             				      */             
     '/*********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):					          */         
-    '/*	     sender
-    '/*      e                                                             */ 
+    '/*  PARAMETER LIST (In Parameter Order):					          */             
+    '/* intMedID As Integer- database med tuid
+    '/* intPatientID As Integer -- patient database tuid
+    '/* intUserID As Integer -- logged in user tuid
+    '/* stramount As String -- amount dispensed
+    '/* intDrawerID As Integer -- drawer id to be opened
+    '/* 
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                  */             
     '/*	                                                                  */
     '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */  
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */ 
+    '/*
+    '/* strbSQLcommand -- sql command
+    '/* dtmAdhocTime -- date time object
+    '/*
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						                      */               
     '/*											                          */                     
