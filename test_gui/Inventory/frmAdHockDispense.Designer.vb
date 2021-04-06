@@ -116,13 +116,13 @@ Partial Class frmAdHockDispense
         '
         'lstboxAllergies
         '
-        Me.lstboxAllergies.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lstboxAllergies.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.lstboxAllergies.FormattingEnabled = True
-        Me.lstboxAllergies.ItemHeight = 20
+        Me.lstboxAllergies.ItemHeight = 21
         Me.lstboxAllergies.Location = New System.Drawing.Point(711, 293)
         Me.lstboxAllergies.Name = "lstboxAllergies"
         Me.lstboxAllergies.SelectionMode = System.Windows.Forms.SelectionMode.None
-        Me.lstboxAllergies.Size = New System.Drawing.Size(321, 204)
+        Me.lstboxAllergies.Size = New System.Drawing.Size(321, 193)
         Me.lstboxAllergies.TabIndex = 10
         Me.lstboxAllergies.TabStop = False
         '
@@ -190,26 +190,26 @@ Partial Class frmAdHockDispense
         '
         Me.txtStrength.BackColor = System.Drawing.Color.White
         Me.txtStrength.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtStrength.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtStrength.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.txtStrength.Location = New System.Drawing.Point(36, 221)
         Me.txtStrength.MaxLength = 9
         Me.txtStrength.Name = "txtStrength"
         Me.txtStrength.ReadOnly = True
         Me.txtStrength.ShortcutsEnabled = False
-        Me.txtStrength.Size = New System.Drawing.Size(293, 25)
+        Me.txtStrength.Size = New System.Drawing.Size(293, 29)
         Me.txtStrength.TabIndex = 5
         '
         'txtType
         '
         Me.txtType.BackColor = System.Drawing.Color.White
         Me.txtType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtType.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtType.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.txtType.Location = New System.Drawing.Point(711, 68)
         Me.txtType.MaxLength = 9
         Me.txtType.Name = "txtType"
         Me.txtType.ReadOnly = True
         Me.txtType.ShortcutsEnabled = False
-        Me.txtType.Size = New System.Drawing.Size(321, 25)
+        Me.txtType.Size = New System.Drawing.Size(321, 29)
         Me.txtType.TabIndex = 1
         '
         'Label4
@@ -226,52 +226,52 @@ Partial Class frmAdHockDispense
         '
         Me.txtDrawerBin.BackColor = System.Drawing.Color.White
         Me.txtDrawerBin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtDrawerBin.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDrawerBin.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.txtDrawerBin.Location = New System.Drawing.Point(35, 145)
         Me.txtDrawerBin.MaxLength = 9
         Me.txtDrawerBin.Name = "txtDrawerBin"
         Me.txtDrawerBin.ReadOnly = True
         Me.txtDrawerBin.ShortcutsEnabled = False
-        Me.txtDrawerBin.Size = New System.Drawing.Size(293, 25)
+        Me.txtDrawerBin.Size = New System.Drawing.Size(293, 29)
         Me.txtDrawerBin.TabIndex = 2
         '
         'txtMRN
         '
         Me.txtMRN.BackColor = System.Drawing.Color.White
         Me.txtMRN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtMRN.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMRN.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.txtMRN.Location = New System.Drawing.Point(34, 372)
         Me.txtMRN.MaxLength = 9
         Me.txtMRN.Name = "txtMRN"
         Me.txtMRN.ReadOnly = True
         Me.txtMRN.ShortcutsEnabled = False
-        Me.txtMRN.Size = New System.Drawing.Size(294, 25)
+        Me.txtMRN.Size = New System.Drawing.Size(294, 29)
         Me.txtMRN.TabIndex = 8
         '
         'txtDateOfBirth
         '
         Me.txtDateOfBirth.BackColor = System.Drawing.Color.White
         Me.txtDateOfBirth.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtDateOfBirth.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDateOfBirth.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.txtDateOfBirth.Location = New System.Drawing.Point(710, 216)
         Me.txtDateOfBirth.MaxLength = 9
         Me.txtDateOfBirth.Name = "txtDateOfBirth"
         Me.txtDateOfBirth.ReadOnly = True
         Me.txtDateOfBirth.ShortcutsEnabled = False
-        Me.txtDateOfBirth.Size = New System.Drawing.Size(322, 25)
+        Me.txtDateOfBirth.Size = New System.Drawing.Size(322, 29)
         Me.txtDateOfBirth.TabIndex = 6
         '
         'txtRoomBed
         '
         Me.txtRoomBed.BackColor = System.Drawing.Color.White
         Me.txtRoomBed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtRoomBed.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRoomBed.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.txtRoomBed.Location = New System.Drawing.Point(33, 443)
         Me.txtRoomBed.MaxLength = 9
         Me.txtRoomBed.Name = "txtRoomBed"
         Me.txtRoomBed.ReadOnly = True
         Me.txtRoomBed.ShortcutsEnabled = False
-        Me.txtRoomBed.Size = New System.Drawing.Size(294, 25)
+        Me.txtRoomBed.Size = New System.Drawing.Size(294, 29)
         Me.txtRoomBed.TabIndex = 9
         '
         'Label6
@@ -310,25 +310,25 @@ Partial Class frmAdHockDispense
         '
         Me.txtAmount.BackColor = System.Drawing.Color.White
         Me.txtAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtAmount.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAmount.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.txtAmount.Location = New System.Drawing.Point(710, 148)
         Me.txtAmount.MaxLength = 5
         Me.txtAmount.Name = "txtAmount"
         Me.txtAmount.ShortcutsEnabled = False
-        Me.txtAmount.Size = New System.Drawing.Size(172, 25)
+        Me.txtAmount.Size = New System.Drawing.Size(172, 29)
         Me.txtAmount.TabIndex = 3
         '
         'txtUnit
         '
         Me.txtUnit.BackColor = System.Drawing.Color.White
         Me.txtUnit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtUnit.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtUnit.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.txtUnit.Location = New System.Drawing.Point(896, 148)
         Me.txtUnit.MaxLength = 5
         Me.txtUnit.Name = "txtUnit"
         Me.txtUnit.ReadOnly = True
         Me.txtUnit.ShortcutsEnabled = False
-        Me.txtUnit.Size = New System.Drawing.Size(150, 25)
+        Me.txtUnit.Size = New System.Drawing.Size(150, 29)
         Me.txtUnit.TabIndex = 4
         '
         'frmAdHockDispense
