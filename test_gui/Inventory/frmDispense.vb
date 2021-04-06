@@ -139,6 +139,42 @@ Public Class frmDispense
         ButtonDecrement(txtQuantityToDispense)
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: btnDispense_Click_1               */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker        		          */   
+    '/*		         DATE CREATED: 		 3/20/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	  
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */                 
+    '/*********************************************************************/
+    '/*  CALLS:	Fill_Table(strFillSQL)                                  */            
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	     sender
+    '/*      e                                                             */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                                  */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */  
+    '/*
+    '/* NarcoticFlag
+    '/* intdrawerNumber
+    '/* intAmountinCart
+    '/* strAmountDispensed
+    '/* intdrawerMEDTUID
+    '/*
+    '/*
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO        WHEN            WHAT					               */             
+    '/*  AB    3/20/2021     Initial creation/rework of dispensing
+    '/*********************************************************************/
     Private Sub btnDispense_Click_1(sender As Object, e As EventArgs) Handles btnDispense.Click
         Dim NarcoticFlag As Integer = CreateDatabase.ExecuteScalarQuery("Select Controlled_Flag from Medication where Medication_ID = '" & intMedicationID & "' and Active_Flag = '1'")
         Dim intdrawerNumber As Integer = CreateDatabase.ExecuteScalarQuery("Select Drawers_TUID from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
@@ -201,6 +237,34 @@ Public Class frmDispense
         End If
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: changebuttonForCounting               */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker        		          */   
+    '/*		         DATE CREATED: 		 3/20/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	  
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */                 
+    '/*********************************************************************/
+    '/*  CALLS:	Fill_Table(strFillSQL)                                  */            
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	     sender
+    '/*      e                                                             */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                                  */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO        WHEN            WHAT					               */             
+    '/*  AB    3/20/2021     Initial creation/rework of dispensing
+    '/*********************************************************************/
     Private Sub changebuttonForCounting()
         lblDirections.Text = "Enter the Quantity in the Cart"
         lblDirections.Left = (pnlSelector.Width \ 2) - (pnlSelector.Width \ 2)
@@ -208,6 +272,36 @@ Public Class frmDispense
         pnlAmountInDrawer.Visible = True
         pnlAmountToRemove.Visible = False
     End Sub
+
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: changeButtonforDispensing               */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker        		          */   
+    '/*		         DATE CREATED: 		 3/20/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	  
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */                 
+    '/*********************************************************************/
+    '/*  CALLS:	Fill_Table(strFillSQL)                                  */            
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	     sender
+    '/*      e                                                             */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                                  */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO        WHEN            WHAT					               */             
+    '/*  AB    3/20/2021     Initial creation/rework of dispensing
+    '/*********************************************************************/
     Private Sub changeButtonforDispensing()
         lblDirections.Text = "Enter the Amount Administered"
         lblDirections.Left = (pnlSelector.Width \ 2) - (pnlSelector.Width \ 2)
@@ -219,7 +313,34 @@ Public Class frmDispense
         txtUnits.Text = strAmountUnit
     End Sub
 
-
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: DispensingDrug               */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker        		          */   
+    '/*		         DATE CREATED: 		 3/20/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	  
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */                 
+    '/*********************************************************************/
+    '/*  CALLS:	Fill_Table(strFillSQL)                                  */            
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	     sender
+    '/*      e                                                             */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                                  */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO        WHEN            WHAT					               */             
+    '/*  AB    3/20/2021     Initial creation/rework of dispensing
+    '/*********************************************************************/
     Private Sub DispensingDrug(ByRef intMedID As Integer, ByRef intPrimaryID As Integer, ByRef strAmountDispensed As String)
         Dim strbSQLcommand As New StringBuilder()
         Dim dtmAdhocTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
@@ -233,6 +354,34 @@ Public Class frmDispense
         CreateDatabase.ExecuteInsertQuery(strbSQLcommand.ToString)
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: DispensingDrugAdhoc               */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker        		          */   
+    '/*		         DATE CREATED: 		 3/20/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	  
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */                 
+    '/*********************************************************************/
+    '/*  CALLS:	Fill_Table(strFillSQL)                                  */            
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	     sender
+    '/*      e                                                             */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                                  */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO        WHEN            WHAT					               */             
+    '/*  AB    3/20/2021     Initial creation/rework of dispensing
+    '/*********************************************************************/
     Private Sub DispensingDrugAdhoc(ByRef intMedID As Integer, ByRef intPatientID As Integer, ByRef intUserID As Integer, ByRef stramount As String, ByRef intDrawerID As Integer)
         Dim strbSQLcommand As New StringBuilder()
         Dim dtmAdhocTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
@@ -242,6 +391,34 @@ Public Class frmDispense
         CreateDatabase.ExecuteInsertQuery(strbSQLcommand.ToString)
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: UpdateSystemCountForDiscrepancy               */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker        		          */   
+    '/*		         DATE CREATED: 		 3/20/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	  
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */                 
+    '/*********************************************************************/
+    '/*  CALLS:	Fill_Table(strFillSQL)                                  */            
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	     sender
+    '/*      e                                                             */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                                  */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO        WHEN            WHAT					               */             
+    '/*  AB    3/20/2021     Initial creation/rework of dispensing
+    '/*********************************************************************/
     Private Sub UpdateSystemCountForDiscrepancy(ByRef intMedID As Integer, ByRef intDrawerCount As Integer, ByRef intEnteredAmount As Integer)
         Dim intCurrentSystemCount As Integer = CreateDatabase.ExecuteScalarQuery("Select Quantity from DrawerMedication where Medication_TUID = '" & intMedID & "' and Active_Flag = '1' AND Drawers_TUID = '" & intDrawerCount & "'")
         Dim intdrawerNumber As Integer = CreateDatabase.ExecuteScalarQuery("Select Drawers_TUID from DrawerMedication where Medication_TUID = '" & intMedID & "' and Active_Flag = '1'")
@@ -254,6 +431,34 @@ Public Class frmDispense
         End If
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: txtQuantity_KeyPress               */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker        		          */   
+    '/*		         DATE CREATED: 		 3/20/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	  
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */                 
+    '/*********************************************************************/
+    '/*  CALLS:	Fill_Table(strFillSQL)                                  */            
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	     sender
+    '/*      e                                                             */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                                  */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO        WHEN            WHAT					               */             
+    '/*  AB    3/20/2021     Initial creation/rework of dispensing
+    '/*********************************************************************/
     Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantityToDispense.KeyPress
         DataVaildationMethods.KeyPressCheck(e, "0123456789")
 
@@ -261,6 +466,35 @@ Public Class frmDispense
             GraphicalUserInterfaceReusableMethods.MaxValue(CInt(sender.Text), 1000, txtQuantityToDispense)
         End If
     End Sub
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: txtQuantity_TextChanged               */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker        		          */   
+    '/*		         DATE CREATED: 		 3/20/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	  
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */                 
+    '/*********************************************************************/
+    '/*  CALLS:	Fill_Table(strFillSQL)                                  */            
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	     sender
+    '/*      e                                                             */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                                  */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO        WHEN            WHAT					               */             
+    '/*  AB    3/20/2021     Initial creation/rework of dispensing
+    '/*********************************************************************/
     Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantityToDispense.Validated
         If IsNumeric(sender.Text) Then
             GraphicalUserInterfaceReusableMethods.MaxValue(CInt(sender.Text), 1000, txtQuantityToDispense)
@@ -270,6 +504,34 @@ Public Class frmDispense
         End If
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: btnBack_Click               */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker        		          */   
+    '/*		         DATE CREATED: 		 3/20/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	  
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */                 
+    '/*********************************************************************/
+    '/*  CALLS:	Fill_Table(strFillSQL)                                  */            
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	     sender
+    '/*      e                                                             */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                                  */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO        WHEN            WHAT					               */             
+    '/*  AB    3/20/2021     Initial creation/rework of dispensing
+    '/*********************************************************************/
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         If intEnteredFromAdhoc = 0 Then
             frmPatientInfo.setPatientID(intPatientID)
@@ -285,6 +547,34 @@ Public Class frmDispense
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: AdhocDispenseSetInformation               */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker        		          */   
+    '/*		         DATE CREATED: 		 3/20/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	  
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */                 
+    '/*********************************************************************/
+    '/*  CALLS:	Fill_Table(strFillSQL)                                  */            
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	     sender
+    '/*      e                                                             */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                                  */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO        WHEN            WHAT					               */             
+    '/*  AB    3/20/2021     Initial creation/rework of dispensing
+    '/*********************************************************************/
     Public Sub AdhocDispenseSetInformation(ByRef amount As String, ByRef unit As String, ByRef intDrawerMedA As Integer)
         strAmountAdhoc = amount
         strUnitAdhoc = unit
