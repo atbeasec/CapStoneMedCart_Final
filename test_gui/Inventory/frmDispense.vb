@@ -160,8 +160,7 @@ Public Class frmDispense
     '/*********************************************************************/
     '/*  CALLED BY:   	      						                      */                 
     '/*********************************************************************/
-    '/*  CALLS:	Fill_Table(strFillSQL)                                  */            
-    '/*                                             				      */             
+    '/*  CALLS:                                        				      */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					          */         
     '/*	     sender
@@ -265,7 +264,7 @@ Public Class frmDispense
     '/*********************************************************************/
     '/*  CALLED BY:   	      						                      */                 
     '/*********************************************************************/
-    '/*  CALLS:	Fill_Table(strFillSQL)                                  */            
+    '/*  CALLS:	                                                              */            
     '/*                                             				      */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					          */         
@@ -302,7 +301,7 @@ Public Class frmDispense
     '/*********************************************************************/
     '/*  CALLED BY:   	      						                      */                 
     '/*********************************************************************/
-    '/*  CALLS:	Fill_Table(strFillSQL)                                  */            
+    '/*  CALLS:	                                                              */            
     '/*                                             				      */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					          */         
@@ -344,7 +343,7 @@ Public Class frmDispense
     '/*********************************************************************/
     '/*  CALLED BY:   	      						                      */                 
     '/*********************************************************************/
-    '/*  CALLS:	Fill_Table(strFillSQL)                                  */            
+    '/*  CALLS:	                                      */            
     '/*                                             				      */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					          */         
@@ -392,7 +391,7 @@ Public Class frmDispense
     '/*********************************************************************/
     '/*  CALLED BY:   	      						                      */                 
     '/*********************************************************************/
-    '/*  CALLS:	Fill_Table(strFillSQL)                                  */            
+    '/*  CALLS:                             */            
     '/*                                             				      */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					          */             
@@ -433,16 +432,19 @@ Public Class frmDispense
     '/*		         DATE CREATED: 		 3/20/2021                        */                             
     '/*********************************************************************/
     '/*  Subprogram PURPOSE:								              */             
-    '/*	  
+    '/*	 this method handles the updating of the drawer amount to the counted amount
+    '/* and calls the insert discrepancy method.
     '/*********************************************************************/
     '/*  CALLED BY:   	      						                      */                 
     '/*********************************************************************/
-    '/*  CALLS:	Fill_Table(strFillSQL)                                  */            
-    '/*                                             				      */             
+    '/*  CALLS:	                                 */            
+    '/*      CreateDatabase.ExecuteInsertQuery 
+    '/*      Discrepancies.CreateDiscrepancy                                        				      */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					          */         
-    '/*	     sender
-    '/*      e                                                             */ 
+    '/*     intMedID As Integer- database med tuid
+    '/*      intDrawerCount           
+    '/*      intEnteredAmount   */ 
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                  */             
     '/*	                                                                  */
