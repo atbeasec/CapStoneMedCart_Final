@@ -172,10 +172,10 @@ Public Class frmDispense
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */  
     '/*
-    '/* NarcoticFlag
-    '/* intdrawerNumber
-    '/* intAmountinCart
-    '/* strAmountDispensed
+    '/* NarcoticFlag -- flag that is either zero or one based on if the drug is a narcotic or not
+    '/* intdrawerNumber -- the number drawer the medication is in
+    '/* intAmountinCart  -- the amount the cart system registers in the cart
+    '/* strAmountDispensed -- the amount being removed from the cart
     '/* intdrawerMEDTUID
     '/*
     '/*
@@ -186,11 +186,15 @@ Public Class frmDispense
     '/*  AB    3/20/2021     Initial creation/rework of dispensing
     '/*********************************************************************/
     Private Sub btnDispense_Click_1(sender As Object, e As EventArgs) Handles btnDispense.Click
+        'get if the drug is a narcotic and get the drawer the medication selected is in 
         Dim NarcoticFlag As Integer = CreateDatabase.ExecuteScalarQuery("Select Controlled_Flag from Medication where Medication_ID = '" & intMedicationID & "' and Active_Flag = '1'")
         Dim intdrawerNumber As Integer = CreateDatabase.ExecuteScalarQuery("Select Drawers_TUID from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
+        'check for what set in the process the dispense is in.
         If lblDirections.Text.Equals("Select Amount To Dispense:") Then
+            'check to see if the amount is a numeric
             If IsNumeric(txtQuantityToDispense.Text) Then
                 If txtQuantityToDispense.Text > 0 Then
+                    'check to see if the drug is a narcotic
                     If NarcoticFlag = 1 Then
                         'Is a narcotic
                         OpenOneDrawer(intdrawerNumber)
