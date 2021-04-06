@@ -58,8 +58,8 @@ Module GraphicalUserInterfaceReusableMethods
 
                     ctlControl.Visible = True
 
-                    If getOpenedForm.GetType() Is frmConfigureInventory.GetType Then
-                        Debug.Print(ctlControl.Name)
+                    If getOpenedForm.GetType() Is frmConfigureInventory.GetType Or getOpenedForm.GetType() Is frmPatientInfo.GetType Then
+                        ' Debug.Print(ctlControl.Name)
                         If ctlControl.Name.Contains("EditPatientRecord") Or ctlControl.Name.Contains("btnConfirmation") Then
                             ctlControl.Visible = False
                         End If
@@ -693,6 +693,12 @@ Module GraphicalUserInterfaceReusableMethods
 
             MessageBox.Show(sender.name)
 
+
+        ElseIf getOpenedForm().GetType() Is frmPatientInfo.GetType() Then
+
+            Dim intPATMedID As Integer = sender.parent.parent.tag
+            frmPatientInfo.removePrescription(intPATMedID)
+            MessageBox.Show("Prescription has been removed")
         End If
 
     End Sub

@@ -52,6 +52,15 @@
     Public blnOverride As Boolean = False
     Public strMedName As String
 
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+
+    End Sub
+
     Public Enum DispenseHistoryEnum As Integer
         MedicationName = 1
         Strength = 2
@@ -171,9 +180,9 @@
         lblDispenseHistory.Location = New Point(153, 190)
         lblPrescriptions.Location = New Point(10, 190)
         moveAndResizePanels()
-
         disableEdits()
-        ' CreateDispenseHistoryPanels(flpDispenseHistory, "test", "test", "test", "test", "test", "test", "test")
+        HideEditButton()
+
     End Sub
     '/*********************************************************************/
     '/*            SubProgram NAME: CreateDispenseHistoryPanels()         */         
@@ -343,7 +352,7 @@
     '/*  WHO   WHEN     WHAT								              */             
     '/*  Collin Krygier  2/6/2021    Initial creation                     */
     '/*********************************************************************/
-    Public Sub CreatePrescriptionsPanels(ByVal flpPannel As FlowLayoutPanel, ByVal strMedicationName As String, ByVal strStrength As String, ByVal strFrequency As String, ByVal strType As String, ByVal strQuantity As String, ByVal strDatePrescribed As String, ByVal strPrescribedBy As String, ByRef intMedID As Integer)
+    Public Sub CreatePrescriptionsPanels(ByVal flpPannel As FlowLayoutPanel, ByVal strMedicationName As String, ByVal strStrength As String, ByVal strFrequency As String, ByVal strType As String, ByVal strQuantity As String, ByVal strDatePrescribed As String, ByVal strPrescribedBy As String, ByRef intMedID As Integer, ByRef intPatMEDID As Integer)
         Dim pnl As Panel
         pnl = New Panel
 
@@ -354,7 +363,7 @@
         'Set panel properties
         With pnl
             .BackColor = Color.Gainsboro
-            .Size = New Size(1040, 47)
+            .Size = New Size(1059, 47)
             .Name = "pnlIndividualPatientRecordPadding" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Padding = New Padding(0, 0, 0, 3)
@@ -364,7 +373,7 @@
         With pnlMainPanel
 
             .BackColor = Color.White
-            .Size = New Size(1040, 45)
+            .Size = New Size(1059, 45)
             .Name = "pnlIndividualPatientRecord" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Dock = System.Windows.Forms.DockStyle.Top
@@ -378,6 +387,9 @@
         AddHandler pnlMainPanel.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
         AddHandler pnlMainPanel.Click, AddressOf PrescriptionPanel_Click
 
+
+        CreateEditButton(pnlMainPanel, getPanelCount(flpPannel), lblActions.Location.X - 10, 5)
+        CreateDeleteBtn(pnlMainPanel, getPanelCount(flpPannel), lblActions.Location.X + 30, 5)
         ' add controls to this panel
         ' call database info here to populate
         Dim lblID As New Label
@@ -411,11 +423,12 @@
         '  CreateIDLabel(pnlMainPanel, lblID5, "lblQuantityPrescription", lblQuantityPrescription.Location.X, 20, strQuantity, getPanelCount(flpPannel))
         CreateIDLabelWithToolTip(pnlMainPanel, lblID5, "lblQuantityPrescription", lblQuantityPrescription.Location.X, 20, strQuantity, getPanelCount(flpPannel), tpToolTip, TruncateString(8, strQuantity))
         CreateIDLabel(pnlMainPanel, lblID6, "lblDatePrescribed", lblDatePrescribed.Location.X, 20, strDatePrescribed.Substring(0, 10), getPanelCount(flpPannel))
-        CreateIDLabelWithToolTip(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, strPrescribedBy, getPanelCount(flpPannel), tpToolTip, TruncateString(20, strPrescribedBy))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, strPrescribedBy, getPanelCount(flpPannel), tpToolTip, TruncateString(17, strPrescribedBy))
         '  CreateIDLabel(pnlMainPanel, lblID7, "lblPrescribedBy", lblPrescribedBy.Location.X, 20, strPrescribedBy, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
         pnlMainPanel.Tag = intMedID
+
         flpPannel.Controls.Add(pnl)
 
         lblID.Tag = intMedID
@@ -425,10 +438,18 @@
         lblID5.Tag = intMedID
         lblID6.Tag = intMedID
         lblID7.Tag = intMedID
+        pnl.Tag = intPatMEDID
 
     End Sub
 
     Private Sub PrescriptionPanel_Click(ByVal sender As Object, e As EventArgs)
+
+        Dim intPatientPrescriptionID As Integer = sender.parent.parent.tag
+        If intPatientPrescriptionID = Nothing Then
+            intPatientPrescriptionID = sender.parent.tag
+        End If
+        frmDispense.setPatientMedID(intPatientPrescriptionID)
+
         Dim intMedID As Integer = sender.tag
 
         Dim strPatientMRN As String
@@ -1630,5 +1651,34 @@
         txtBarcode.Enabled = True
     End Sub
 
+    Private Sub HideEditButton()
 
+        Dim ctl As Control
+        Dim pnl As Control
+        Dim pnlMain As Control
+
+        ' panel in the flow panel
+        For Each ctl In flpMedications.Controls
+            'panel in the pnlPadding
+            For Each pnl In ctl.Controls
+                'each control in the pnl main
+                For Each pnlMain In pnl.Controls
+
+                    If pnlMain.Name.Contains("Edit") Then
+
+                        pnlMain.Visible = False
+
+                        '   AddHandler pnlMain.VisibleChanged, AddressOf VisibleChangedEvent
+
+                    End If
+                Next
+            Next
+        Next
+
+    End Sub
+
+
+    Public Sub removePrescription(ByRef intPatientMedicationID As Integer)
+        CreateDatabase.ExecuteInsertQuery("UPDATE PatientMedication SET Active_Flag = '0' where PatientMedication_ID = '" & intPatientMedicationID & "'")
+    End Sub
 End Class

@@ -377,6 +377,8 @@
         txtZipCode.Text = ""
         txtRoom.Text = ""
         txtBed.Text = ""
+        cboRoomandBed.SelectedIndex = -1
+        cboRoomandBed.Text = Nothing
     End Sub
 
     '/*********************************************************************/

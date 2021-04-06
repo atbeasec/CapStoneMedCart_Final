@@ -94,6 +94,7 @@ Partial Class frmPatientInfo
         Me.flpDispenseHistory = New System.Windows.Forms.FlowLayoutPanel()
         Me.tpLabelDirections = New System.Windows.Forms.ToolTip(Me.components)
         Me.tpToolTip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lblActions = New System.Windows.Forms.Label()
         Me.pnlPersonalInformation.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.pnlNameBarcode.SuspendLayout()
@@ -668,7 +669,7 @@ Partial Class frmPatientInfo
         Me.flpMedications.BackColor = System.Drawing.Color.White
         Me.flpMedications.Location = New System.Drawing.Point(11, 447)
         Me.flpMedications.Name = "flpMedications"
-        Me.flpMedications.Size = New System.Drawing.Size(1067, 93)
+        Me.flpMedications.Size = New System.Drawing.Size(1080, 93)
         Me.flpMedications.TabIndex = 51
         '
         'lblPrescriptions
@@ -684,6 +685,7 @@ Partial Class frmPatientInfo
         'pnlPrescriptionsHeader
         '
         Me.pnlPrescriptionsHeader.BackColor = System.Drawing.Color.White
+        Me.pnlPrescriptionsHeader.Controls.Add(Me.lblActions)
         Me.pnlPrescriptionsHeader.Controls.Add(Me.lblFrequencyPrescription)
         Me.pnlPrescriptionsHeader.Controls.Add(Me.lblPrescribedBy)
         Me.pnlPrescriptionsHeader.Controls.Add(Me.lblDatePrescribed)
@@ -701,7 +703,7 @@ Partial Class frmPatientInfo
         Me.lblFrequencyPrescription.AutoSize = True
         Me.lblFrequencyPrescription.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblFrequencyPrescription.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblFrequencyPrescription.Location = New System.Drawing.Point(917, 16)
+        Me.lblFrequencyPrescription.Location = New System.Drawing.Point(869, 16)
         Me.lblFrequencyPrescription.Name = "lblFrequencyPrescription"
         Me.lblFrequencyPrescription.Size = New System.Drawing.Size(86, 21)
         Me.lblFrequencyPrescription.TabIndex = 6
@@ -713,7 +715,7 @@ Partial Class frmPatientInfo
         Me.lblPrescribedBy.AutoSize = True
         Me.lblPrescribedBy.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblPrescribedBy.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblPrescribedBy.Location = New System.Drawing.Point(741, 16)
+        Me.lblPrescribedBy.Location = New System.Drawing.Point(718, 16)
         Me.lblPrescribedBy.Name = "lblPrescribedBy"
         Me.lblPrescribedBy.Size = New System.Drawing.Size(110, 21)
         Me.lblPrescribedBy.TabIndex = 5
@@ -942,6 +944,18 @@ Partial Class frmPatientInfo
         Me.flpDispenseHistory.Size = New System.Drawing.Size(1067, 64)
         Me.flpDispenseHistory.TabIndex = 1
         '
+        'lblActions
+        '
+        Me.lblActions.AutoSize = True
+        Me.lblActions.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblActions.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblActions.Location = New System.Drawing.Point(989, 16)
+        Me.lblActions.Name = "lblActions"
+        Me.lblActions.Size = New System.Drawing.Size(65, 21)
+        Me.lblActions.TabIndex = 7
+        Me.lblActions.Tag = "7"
+        Me.lblActions.Text = "Actions"
+        '
         'frmPatientInfo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1047,4 +1061,5 @@ Partial Class frmPatientInfo
     Friend WithEvents mtbBirthday As MaskedTextBox
     Friend WithEvents cboPhysicians As ComboBox
     Friend WithEvents cboSex As ComboBox
+    Friend WithEvents lblActions As Label
 End Class

@@ -6,6 +6,7 @@ Public Class frmDispense
     Private intPatientID As Integer
     Private intPatientMRN As Integer
     Private intMedicationID As Integer
+    Private intPatientMedID As Integer
 
     Private intDispenseAmount As Integer
     Private intCountedAmount As Integer
@@ -39,10 +40,19 @@ Public Class frmDispense
         intMedicationID = ID
     End Sub
 
+    Public Sub setPatientMedID(ByRef ID As Integer)
+        intPatientMedID = ID
+    End Sub
 
     Public Sub SetPatientMrn(ByVal mrn As Integer)
         intPatientMRN = mrn
     End Sub
+
+
+    Public Function getPattientMedID()
+        Return intPatientMedID
+    End Function
+
 
     Private Sub btnDispense_Click(sender As Object, e As EventArgs)
 
@@ -216,7 +226,7 @@ Public Class frmDispense
         Dim intdrawerNumber As Integer = CreateDatabase.ExecuteScalarQuery("Select DrawerMedication_ID from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
         strbSQLcommand.Clear()
         strbSQLcommand.Append("SELECT PatientMedication_ID FROM PatientMedication WHERE Medication_TUID = '" & intMedID & "' AND Patient_TUID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1'")
-        Dim intPatientMedicationDatabaseID As Integer = CreateDatabase.ExecuteScalarQuery(strbSQLcommand.ToString)
+        Dim intPatientMedicationDatabaseID As Integer = getPattientMedID()
         strbSQLcommand.Clear()
         strbSQLcommand.Append("INSERT INTO Dispensing(PatientMedication_TUID, Primary_User_TUID, Approving_User_TUID, DateTime_Dispensed, Amount_Dispensed, DrawerMedication_TUID) ")
         strbSQLcommand.Append("VALUES('" & intPatientMedicationDatabaseID & "','" & intPrimaryID & "','" & intPrimaryID & "','" & dtmAdhocTime & "','" & strAmountDispensed & "','" & intdrawerNumber & "')")

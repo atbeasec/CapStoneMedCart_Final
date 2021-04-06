@@ -606,6 +606,7 @@
         Dim intActive_Flag As String = ""
 
         dsPatient = CreateDatabase.ExecuteSelectQuery(strSQLCode)
+
         For Each Patient As DataRow In dsPatient.Tables(0).Rows
             intPatientMRN = Patient(0)
             strPatientFirst = Patient(1)
@@ -743,7 +744,9 @@
         Dim strBed As String = ""
         Dim intActive_Flag As String = ""
 
+        Sorting_MyPatients_Fix_Physicians
         dsPatientUser = CreateDatabase.ExecuteSelectQuery(strSQLCode)
+
 
         For Each dr As DataRow In dsPatientUser.Tables(0).Rows
             intPatientID = dr(0)

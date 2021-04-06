@@ -54,7 +54,7 @@ Public Class frmConfiguration
     '/*********************************************************************/
     Private Sub frmConfiguration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-                                                  "User.Supervisor_Flag, User.Active_Flag From User ORDER BY User_First_Name ASC;"
+                                                  "User.Supervisor_Flag, User.Active_Flag From User ORDER BY User_First_Name COLLATE NOCASE ASC;"
         Fill_Table(strFillSQL)
 
         'have new users assigned as Nurses by default
@@ -720,7 +720,7 @@ Public Class frmConfiguration
 
 
         Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-                                      "User.Supervisor_Flag, User.Active_Flag From User ORDER BY User_First_Name ASC;"
+                                      "User.Supervisor_Flag, User.Active_Flag From User ORDER BY User_First_Name COLLATE NOCASE ASC;"
         Fill_Table(strFillSQL)
     End Sub
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
@@ -839,7 +839,7 @@ Public Class frmConfiguration
         'if the text box is empty then reset the panels
         If txtSearchBox.Text = "" Then
             strFillSQL = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-                                                  "User.Supervisor_Flag, User.Active_Flag From User ORDER BY User_First_Name ASC;"
+                                                  "User.Supervisor_Flag, User.Active_Flag From User ORDER BY User_First_Name COLLATE NOCASE ASC;"
             Fill_Table(strFillSQL)
 
         End If
@@ -985,14 +985,14 @@ Public Class frmConfiguration
     Private Sub lblName_Click(sender As Object, e As EventArgs) Handles lblName.Click
         'sort by User First name
         Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-                                      "User.Supervisor_Flag, User.Active_Flag From User ORDER BY User_First_Name ASC;"
+                                      "User.Supervisor_Flag, User.Active_Flag From User ORDER BY User_First_Name COLLATE NOCASE ASC;"
         Fill_Table(strFillSQL)
     End Sub
 
     Private Sub lblUserName_Click(sender As Object, e As EventArgs) Handles lblUserName.Click
         'sort by User Username
         Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-                              "User.Supervisor_Flag, User.Active_Flag From User ORDER BY Username ASC;"
+                              "User.Supervisor_Flag, User.Active_Flag From User ORDER BY Username COLLATE NOCASE ASC;"
         Fill_Table(strFillSQL)
     End Sub
 
