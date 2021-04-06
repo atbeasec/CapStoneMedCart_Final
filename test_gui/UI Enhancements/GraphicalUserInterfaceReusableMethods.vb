@@ -693,6 +693,10 @@ Module GraphicalUserInterfaceReusableMethods
 
             MessageBox.Show(sender.name)
 
+
+        ElseIf getOpenedForm().GetType() Is frmPatientInfo.GetType() Then
+
+
         End If
 
     End Sub
