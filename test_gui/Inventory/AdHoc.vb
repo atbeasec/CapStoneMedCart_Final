@@ -237,13 +237,13 @@ Module AdHoc
             frmAdHockDispense.txtStrength.Clear()
             frmAdHockDispense.txtType.Clear()
             frmAdHockDispense.txtDrawerBin.Clear()
-
+            frmAdHockDispense.txtUnit.Clear()
             'get selected medication ID using the selected index and get the same index from medID array
             Dim intMedID As Integer = intMedIDArray(frmAdHockDispense.cmbMedications.SelectedIndex)
             Dim intDrawerMEDID As Integer = intDrawerMedArray(frmAdHockDispense.cmbMedications.SelectedIndex)
             'select medication type and strength for the selected medication using MEDid 
             Dim Strdatacommand As String
-            Strdatacommand = "SELECT Medication.Type,Medication.Strength,Drawers.Drawer_Number,DrawerMedication.Divider_Bin From Medication
+            Strdatacommand = "SELECT Medication.Type,Medication.Strength,Drawers.Drawer_Number,DrawerMedication.Divider_Bin, DrawerMedication.Amount_Per_Container_Unit From Medication
                                 Inner Join DrawerMedication ON DrawerMedication.Medication_TUID = Medication.Medication_ID
                                 INNER JOIN Drawers ON Drawers.Drawers_ID = DrawerMedication.Drawers_TUID
                                 WHERE Medication.Medication_ID = '" & intMedID & "' AND DrawerMedication.DrawerMedication_ID = '" & intDrawerMEDID & "'"
@@ -257,7 +257,7 @@ Module AdHoc
 
             frmAdHockDispense.txtStrength.Text = (dsMedicationInformation.Tables(0).Rows(0)(1))
             frmAdHockDispense.txtDrawerBin.Text = "Drawer number: " & (dsMedicationInformation.Tables(0).Rows(0)(2)) & " Bin number: " & (dsMedicationInformation.Tables(0).Rows(0)(3))
-
+            frmAdHockDispense.txtUnit.Text = (dsMedicationInformation.Tables(0).Rows(0)(4))
         End If
 
 

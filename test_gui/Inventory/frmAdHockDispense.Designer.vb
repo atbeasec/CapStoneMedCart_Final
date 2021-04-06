@@ -326,6 +326,7 @@ Partial Class frmAdHockDispense
         Me.txtUnit.Location = New System.Drawing.Point(896, 148)
         Me.txtUnit.MaxLength = 5
         Me.txtUnit.Name = "txtUnit"
+        Me.txtUnit.ReadOnly = True
         Me.txtUnit.ShortcutsEnabled = False
         Me.txtUnit.Size = New System.Drawing.Size(150, 25)
         Me.txtUnit.TabIndex = 233
