@@ -475,11 +475,11 @@ Public Class frmDispense
     '/*		         DATE CREATED: 		 3/20/2021                        */                             
     '/*********************************************************************/
     '/*  Subprogram PURPOSE:								              */             
-    '/*	  
+    '/*	   this handles the limiting of dispensed mediaction quantity text
+    '/*  box to not go above 1000 or below 1
     '/*********************************************************************/
-    '/*  CALLED BY:   	      						                      */                 
-    '/*********************************************************************/
-    '/*  CALLS:	Fill_Table(strFillSQL)                                  */            
+    '/*  CALLED BY:  txtQuantityToDispense.KeyPress 	      			            
+    '/*********************************************************************/          
     '/*                                             				      */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					          */         
@@ -511,11 +511,12 @@ Public Class frmDispense
     '/*		         DATE CREATED: 		 3/20/2021                        */                             
     '/*********************************************************************/
     '/*  Subprogram PURPOSE:								              */             
-    '/*	  
+    '/*	  this handles the limiting of dispensed mediaction quantity text
+    '/*  box to not go above 1000 or below 1
     '/*********************************************************************/
-    '/*  CALLED BY:   	      						                      */                 
+    '/*  CALLED BY:   txtQuantityToDispense.Validated	      		         */                 
     '/*********************************************************************/
-    '/*  CALLS:	Fill_Table(strFillSQL)                                  */            
+    '/*  CALLS:                               */            
     '/*                                             				      */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					          */         
