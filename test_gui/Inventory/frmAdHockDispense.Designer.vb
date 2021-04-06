@@ -123,7 +123,7 @@ Partial Class frmAdHockDispense
         Me.lstboxAllergies.Name = "lstboxAllergies"
         Me.lstboxAllergies.SelectionMode = System.Windows.Forms.SelectionMode.None
         Me.lstboxAllergies.Size = New System.Drawing.Size(321, 193)
-        Me.lstboxAllergies.TabIndex = 10
+        Me.lstboxAllergies.TabIndex = 7
         Me.lstboxAllergies.TabStop = False
         '
         'cmbPatientName
@@ -139,7 +139,7 @@ Partial Class frmAdHockDispense
         Me.cmbPatientName.Location = New System.Drawing.Point(35, 292)
         Me.cmbPatientName.Name = "cmbPatientName"
         Me.cmbPatientName.Size = New System.Drawing.Size(579, 29)
-        Me.cmbPatientName.TabIndex = 7
+        Me.cmbPatientName.TabIndex = 1
         '
         'Label1
         '
@@ -181,7 +181,7 @@ Partial Class frmAdHockDispense
         Me.btnDispense.Location = New System.Drawing.Point(353, 530)
         Me.btnDispense.Name = "btnDispense"
         Me.btnDispense.Size = New System.Drawing.Size(229, 38)
-        Me.btnDispense.TabIndex = 11
+        Me.btnDispense.TabIndex = 3
         Me.btnDispense.Text = "      Dispense Medication"
         Me.btnDispense.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnDispense.UseVisualStyleBackColor = False
@@ -198,6 +198,7 @@ Partial Class frmAdHockDispense
         Me.txtStrength.ShortcutsEnabled = False
         Me.txtStrength.Size = New System.Drawing.Size(293, 29)
         Me.txtStrength.TabIndex = 5
+        Me.txtStrength.TabStop = False
         '
         'txtType
         '
@@ -211,6 +212,7 @@ Partial Class frmAdHockDispense
         Me.txtType.ShortcutsEnabled = False
         Me.txtType.Size = New System.Drawing.Size(321, 29)
         Me.txtType.TabIndex = 1
+        Me.txtType.TabStop = False
         '
         'Label4
         '
@@ -234,6 +236,7 @@ Partial Class frmAdHockDispense
         Me.txtDrawerBin.ShortcutsEnabled = False
         Me.txtDrawerBin.Size = New System.Drawing.Size(293, 29)
         Me.txtDrawerBin.TabIndex = 2
+        Me.txtDrawerBin.TabStop = False
         '
         'txtMRN
         '
@@ -247,6 +250,7 @@ Partial Class frmAdHockDispense
         Me.txtMRN.ShortcutsEnabled = False
         Me.txtMRN.Size = New System.Drawing.Size(294, 29)
         Me.txtMRN.TabIndex = 8
+        Me.txtMRN.TabStop = False
         '
         'txtDateOfBirth
         '
@@ -260,6 +264,7 @@ Partial Class frmAdHockDispense
         Me.txtDateOfBirth.ShortcutsEnabled = False
         Me.txtDateOfBirth.Size = New System.Drawing.Size(322, 29)
         Me.txtDateOfBirth.TabIndex = 6
+        Me.txtDateOfBirth.TabStop = False
         '
         'txtRoomBed
         '
@@ -272,7 +277,8 @@ Partial Class frmAdHockDispense
         Me.txtRoomBed.ReadOnly = True
         Me.txtRoomBed.ShortcutsEnabled = False
         Me.txtRoomBed.Size = New System.Drawing.Size(294, 29)
-        Me.txtRoomBed.TabIndex = 9
+        Me.txtRoomBed.TabIndex = 6
+        Me.txtRoomBed.TabStop = False
         '
         'Label6
         '
@@ -316,7 +322,7 @@ Partial Class frmAdHockDispense
         Me.txtAmount.Name = "txtAmount"
         Me.txtAmount.ShortcutsEnabled = False
         Me.txtAmount.Size = New System.Drawing.Size(172, 29)
-        Me.txtAmount.TabIndex = 3
+        Me.txtAmount.TabIndex = 2
         '
         'txtUnit
         '
@@ -330,6 +336,7 @@ Partial Class frmAdHockDispense
         Me.txtUnit.ShortcutsEnabled = False
         Me.txtUnit.Size = New System.Drawing.Size(150, 29)
         Me.txtUnit.TabIndex = 4
+        Me.txtUnit.TabStop = False
         '
         'frmAdHockDispense
         '
