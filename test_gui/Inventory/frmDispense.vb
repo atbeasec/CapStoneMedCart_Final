@@ -146,7 +146,17 @@ Public Class frmDispense
     '/*		         DATE CREATED: 		 3/20/2021                        */                             
     '/*********************************************************************/
     '/*  Subprogram PURPOSE:								              */             
-    '/*	  
+    '/*	  this is called and handles the button click methods
+    '/* the way the dispense screen is written is it reuses the same
+    '/* controls multiple times for multiple parts in the dispensing flow
+    '/* first it checks if the drug being dispensed is a narcotic. it will ask the amount to be removed from the drawer.
+    '/* after that it opens the drawer. if it is a
+    '/* narcotic then it changes to require the narcotic count.
+    '/* after the narcotoc count if it is not correct to the system amount, then it
+    '/* will alert the user to a discrepancy. after this it will ask for the 
+    '/* amount that was given to the patient, and after that it will move to
+    '/* the waste input requireing the waste input.
+    '/*
     '/*********************************************************************/
     '/*  CALLED BY:   	      						                      */                 
     '/*********************************************************************/
