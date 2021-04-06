@@ -302,9 +302,9 @@ Partial Class frmAdHockDispense
         Me.Label7.ForeColor = System.Drawing.SystemColors.ControlDarkDark
         Me.Label7.Location = New System.Drawing.Point(706, 124)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(176, 21)
+        Me.Label7.Size = New System.Drawing.Size(139, 21)
         Me.Label7.TabIndex = 228
-        Me.Label7.Text = "Amount per container:"
+        Me.Label7.Text = "Ordered Amount:"
         '
         'txtAmount
         '
