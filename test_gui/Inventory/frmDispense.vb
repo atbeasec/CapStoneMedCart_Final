@@ -548,7 +548,9 @@ Public Class frmDispense
     '/*		         DATE CREATED: 		 3/20/2021                        */                             
     '/*********************************************************************/
     '/*  Subprogram PURPOSE:								              */             
-    '/*	  
+    '/*	  this method handles the back button on the form, it will determine
+    '/* if patientInfo or adhoc is the one who entered the dispensing flow 
+    '/* then return to the correct one
     '/*********************************************************************/
     '/*  CALLED BY:   	      						                      */                 
     '/*********************************************************************/
@@ -570,6 +572,7 @@ Public Class frmDispense
     '/*  AB    3/20/2021     Initial creation/rework of dispensing
     '/*********************************************************************/
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        'check variable too see if adhoc or patientinfromation was the one who opened the form
         If intEnteredFromAdhoc = 0 Then
             frmPatientInfo.setPatientID(intPatientID)
             frmMain.OpenChildForm(frmPatientInfo)
@@ -591,15 +594,16 @@ Public Class frmDispense
     '/*		         DATE CREATED: 		 3/20/2021                        */                             
     '/*********************************************************************/
     '/*  Subprogram PURPOSE:								              */             
-    '/*	  
+    '/*	  this method will set the global variables that are only used in adhoc
+    '/* dispensing
     '/*********************************************************************/
-    '/*  CALLED BY:   	      						                      */                 
-    '/*********************************************************************/
-    '/*  CALLS:	Fill_Table(strFillSQL)                                  */            
-    '/*                                             				      */             
+    '/*  CALLED BY:   adhocSetinformation	      						                      */                 
+    '/*********************************************************************/                                        				      */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					          */         
-    '/*	     sender
+    '/*	     amount As String
+    '/* unit As String
+    '/* intDrawerMedA As Integer
     '/*      e                                                             */ 
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                  */             
