@@ -65,7 +65,9 @@
 '/*							saving file functionality to be used in other
 '*/							modules.									*/
 
-'/*	BRH	 04/05/21	Changed the default folder for the database			*/
+'/*	 BRH		04/05/21	Changed the default folder for the database	*/
+'/*  BRH		04/06/21	Updated the create database file dialog to 	*/
+'/*						default database files (.db)				*/
 '/********************************************************************	*/
 
 'Imports the libraries necessary to connect and create SQLite databases
@@ -351,8 +353,9 @@ Module CreateDatabase
 		Dim dlgSaveFileDialog As New SaveFileDialog
 
 		'Set up how the save dialog box will work
-		dlgSaveFileDialog.InitialDirectory = strDEFAULTFOLDER
-		dlgSaveFileDialog.Filter = "db files (*.db)|*.db|All files (*.*)|*.*"
+		dlgSaveFileDialog.InitialDirectory = STRDEFAULTFOLDER
+		'Default the file type to database (db)
+		dlgSaveFileDialog.Filter = "All files (*.*)|*.*| db files (*.db)|*.db"
 		dlgSaveFileDialog.FilterIndex = 2
 		dlgSaveFileDialog.RestoreDirectory = True
 

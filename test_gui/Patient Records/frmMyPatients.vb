@@ -383,7 +383,7 @@
 
             RemoveOnScreenPanel(sender)
         Else
-            LoadAllActivePatients()
+            LoadAllActivePatients("Select MRN_Number, Patient_First_Name, Patient_Last_Name, Date_of_Birth, Primary_Physician_ID, Patient.Patient_ID, PatientRoom.Patient_TUID, Room_TUID, Bed_Name FROM Patient LEFT JOIN PatientRoom ON PatientRoom.Patient_TUID = Patient.Patient_ID Where Patient.Active_Flag= 1 ;")
         End If
 
     End Sub
@@ -452,7 +452,7 @@
 
             RemoveOnScreenPanel(sender)
         Else
-            LoadAllActivePatients()
+            LoadAllActivePatients("Select MRN_Number, Patient_First_Name, Patient_Last_Name, Date_of_Birth, Primary_Physician_ID, Patient.Patient_ID, PatientRoom.Patient_TUID, Room_TUID, Bed_Name FROM Patient LEFT JOIN PatientRoom ON PatientRoom.Patient_TUID = Patient.Patient_ID Where Patient.Active_Flag= 1 ;")
         End If
     End Sub
 
@@ -506,9 +506,13 @@
         If cboFilter.SelectedIndex = 0 Then
             '******************* 
             flpMyPatientRecords.Controls.Clear()
-            ' ADAM call this before calling a create panel method to show the new items
-            LoadMyPatients()
 
+            ' ADAM call this before calling a create panel method to show the new items
+            Dim strSQLCode As String = "Select * from Patient
+                Inner JOIN PatientUser on PatientUser.Patient_TUID = Patient.Patient_ID
+                Inner Join PatientRoom on PatientRoom.Patient_TUID = Patient.Patient_ID
+                Where PatientUser.User_TUID = '" & LoggedInID.ToString & "' AND PatientUser.Active_Flag = '1' AND Patient.Active_Flag = '1' AND PatientRoom.Active_Flag = '1' ORDER BY Patient.Patient_Last_Name"
+            LoadMyPatients(strSQLCode)
 
             ShowAllControlsOnPanels()
             HideControlOnPanels("btnAdd")
@@ -541,7 +545,7 @@
             flpMyPatientRecords.Controls.Clear()
             ' ADAM call this before calling a create panel method to show the new items
 
-            LoadAllActivePatients()
+            LoadAllActivePatients("Select MRN_Number, Patient_First_Name, Patient_Last_Name, Date_of_Birth, Primary_Physician_ID, Patient.Patient_ID, PatientRoom.Patient_TUID, Room_TUID, Bed_Name FROM Patient LEFT JOIN PatientRoom ON PatientRoom.Patient_TUID = Patient.Patient_ID Where Patient.Active_Flag= 1 ;")
             ShowAllControlsOnPanels()
             'HideControlOnPanels("btnRemove")
             lblAssignment.Text = "Assign Patient To Me"
@@ -583,7 +587,7 @@
     '/*  ---            ----             ----				             */
     '/*  CK		2/6/21		 initial creation                            */
     '/********************************************************************/ 
-    Private Sub LoadAllActivePatients()
+    Private Sub LoadAllActivePatients(ByRef strSQLCode As String)
         flpMyPatientRecords.Controls.Clear()
         Dim dsPatient As DataSet
         Dim dsPatientUserAssigned As DataSet
@@ -601,7 +605,8 @@
         Dim strBed As String = ""
         Dim intActive_Flag As String = ""
 
-        dsPatient = CreateDatabase.ExecuteSelectQuery("Select MRN_Number, Patient_First_Name, Patient_Last_Name, Date_of_Birth, Primary_Physician_ID, Patient.Patient_ID, PatientRoom.Patient_TUID, Room_TUID, Bed_Name FROM Patient LEFT JOIN PatientRoom ON PatientRoom.Patient_TUID = Patient.Patient_ID Where Patient.Active_Flag= 1 ORDER BY Patient.Patient_Last_Name COLLATE NOCASE ASC;")
+        dsPatient = CreateDatabase.ExecuteSelectQuery(strSQLCode)
+
         For Each Patient As DataRow In dsPatient.Tables(0).Rows
             intPatientMRN = Patient(0)
             strPatientFirst = Patient(1)
@@ -720,7 +725,8 @@
     '/*  ---            ----             ----				             */
     '/*  CK		2/6/21		 initial creation                            */
     '/********************************************************************/ 
-    Private Sub LoadMyPatients()
+    Private Sub LoadMyPatients(ByRef strSQLCode As String)
+        flpMyPatientRecords.Controls.Clear()
         Dim dsPatientUser As DataSet
         'Dim dsPatientUserAssigned As DataSet
         Dim dsPatient As DataSet
@@ -738,10 +744,9 @@
         Dim strBed As String = ""
         Dim intActive_Flag As String = ""
 
-        dsPatientUser = CreateDatabase.ExecuteSelectQuery("Select * from Patient
-                Inner JOIN PatientUser on PatientUser.Patient_TUID = Patient.Patient_ID
-                Inner Join PatientRoom on PatientRoom.Patient_TUID = Patient.Patient_ID
-                Where PatientUser.User_TUID = '" & UserID.ToString & "' AND PatientUser.Active_Flag = '1' AND Patient.Active_Flag = '1' AND PatientRoom.Active_Flag = '1' ORDER BY Patient.Patient_Last_Name COLLATE NOCASE ASC")
+        Sorting_MyPatients_Fix_Physicians
+        dsPatientUser = CreateDatabase.ExecuteSelectQuery(strSQLCode)
+
 
         For Each dr As DataRow In dsPatientUser.Tables(0).Rows
             intPatientID = dr(0)
@@ -1018,4 +1023,81 @@
         Next
     End Sub
 
+    Private Sub lblMRN_Click(sender As Object, e As EventArgs) Handles lblMRN.Click
+        If cboFilter.SelectedIndex = 0 Then
+            'sort by patient MRN number
+            Dim strSQLCode As String = "Select * from Patient
+                Inner JOIN PatientUser on PatientUser.Patient_TUID = Patient.Patient_ID
+                Inner Join PatientRoom on PatientRoom.Patient_TUID = Patient.Patient_ID
+                Where PatientUser.User_TUID = '" & LoggedInID.ToString & "' AND PatientUser.Active_Flag = '1' AND Patient.Active_Flag = '1' AND PatientRoom.Active_Flag = '1' ORDER BY Patient.MRN_Number ASC"
+            LoadMyPatients(strSQLCode)
+        Else
+            LoadAllActivePatients("Select MRN_Number, Patient_First_Name, Patient_Last_Name, Date_of_Birth, Primary_Physician_ID, Patient.Patient_ID, PatientRoom.Patient_TUID, Room_TUID, Bed_Name FROM Patient LEFT JOIN PatientRoom ON PatientRoom.Patient_TUID = Patient.Patient_ID Where Patient.Active_Flag= 1 ORDER BY Patient.MRN_Number ASC;")
+        End If
+    End Sub
+
+    Private Sub lblFirstName_Click(sender As Object, e As EventArgs) Handles lblFirstName.Click
+        'sort by patient First name
+        If cboFilter.SelectedIndex = 0 Then
+            Dim strSQLCode As String = "Select * from Patient
+                Inner JOIN PatientUser on PatientUser.Patient_TUID = Patient.Patient_ID
+                Inner Join PatientRoom on PatientRoom.Patient_TUID = Patient.Patient_ID
+                Where PatientUser.User_TUID = '" & LoggedInID.ToString & "' AND PatientUser.Active_Flag = '1' AND Patient.Active_Flag = '1' AND PatientRoom.Active_Flag = '1' ORDER BY Patient.Patient_First_Name ASC"
+            LoadMyPatients(strSQLCode)
+        Else
+            LoadAllActivePatients("Select MRN_Number, Patient_First_Name, Patient_Last_Name, Date_of_Birth, Primary_Physician_ID, Patient.Patient_ID, PatientRoom.Patient_TUID, Room_TUID, Bed_Name FROM Patient LEFT JOIN PatientRoom ON PatientRoom.Patient_TUID = Patient.Patient_ID Where Patient.Active_Flag= 1 ORDER BY Patient.Patient_First_Name ASC;")
+        End If
+    End Sub
+
+    Private Sub lblLastName_Click(sender As Object, e As EventArgs) Handles lblLastName.Click
+        'sort by Patient Last Name
+        If cboFilter.SelectedIndex = 0 Then
+            Dim strSQLCode As String = "Select * from Patient
+                Inner JOIN PatientUser on PatientUser.Patient_TUID = Patient.Patient_ID
+                Inner Join PatientRoom on PatientRoom.Patient_TUID = Patient.Patient_ID
+                Where PatientUser.User_TUID = '" & LoggedInID.ToString & "' AND PatientUser.Active_Flag = '1' AND Patient.Active_Flag = '1' AND PatientRoom.Active_Flag = '1' ORDER BY Patient.Patient_Last_Name ASC"
+            LoadMyPatients(strSQLCode)
+        Else
+            LoadAllActivePatients("Select MRN_Number, Patient_First_Name, Patient_Last_Name, Date_of_Birth, Primary_Physician_ID, Patient.Patient_ID, PatientRoom.Patient_TUID, Room_TUID, Bed_Name FROM Patient LEFT JOIN PatientRoom ON PatientRoom.Patient_TUID = Patient.Patient_ID Where Patient.Active_Flag= 1 ORDER BY Patient.Patient_Last_Name ASC;")
+        End If
+    End Sub
+
+    Private Sub lblDOB_Click(sender As Object, e As EventArgs) Handles lblDOB.Click
+        'sort by PatientDate of birth
+        If cboFilter.SelectedIndex = 0 Then
+            Dim strSQLCode As String = "Select * from Patient
+                Inner JOIN PatientUser on PatientUser.Patient_TUID = Patient.Patient_ID
+                Inner Join PatientRoom on PatientRoom.Patient_TUID = Patient.Patient_ID
+                Where PatientUser.User_TUID = '" & LoggedInID.ToString & "' AND PatientUser.Active_Flag = '1' AND Patient.Active_Flag = '1' AND PatientRoom.Active_Flag = '1' ORDER BY Patient.Date_of_Birth ASC"
+            LoadMyPatients(strSQLCode)
+        Else
+            LoadAllActivePatients("Select MRN_Number, Patient_First_Name, Patient_Last_Name, Date_of_Birth, Primary_Physician_ID, Patient.Patient_ID, PatientRoom.Patient_TUID, Room_TUID, Bed_Name FROM Patient LEFT JOIN PatientRoom ON PatientRoom.Patient_TUID = Patient.Patient_ID Where Patient.Active_Flag= 1 ORDER BY Patient.Date_of_Birth ASC;")
+        End If
+    End Sub
+
+    Private Sub lblRoom_Click(sender As Object, e As EventArgs) Handles lblRoom.Click
+        'sort by Patient room
+        If cboFilter.SelectedIndex = 0 Then
+            Dim strSQLCode As String = "Select * from Patient
+                Inner JOIN PatientUser on PatientUser.Patient_TUID = Patient.Patient_ID
+                Inner Join PatientRoom on PatientRoom.Patient_TUID = Patient.Patient_ID
+                Where PatientUser.User_TUID = '" & LoggedInID.ToString & "' AND PatientUser.Active_Flag = '1' AND Patient.Active_Flag = '1' AND PatientRoom.Active_Flag = '1' ORDER BY patientroom.Room_TUID ASC"
+            LoadMyPatients(strSQLCode)
+        Else
+            LoadAllActivePatients("Select MRN_Number, Patient_First_Name, Patient_Last_Name, Date_of_Birth, Primary_Physician_ID, Patient.Patient_ID, PatientRoom.Patient_TUID, Room_TUID, Bed_Name FROM Patient LEFT JOIN PatientRoom ON PatientRoom.Patient_TUID = Patient.Patient_ID Where Patient.Active_Flag= 1 ORDER BY patientroom.Room_TUID ASC;")
+        End If
+    End Sub
+
+    Private Sub lblBed_Click(sender As Object, e As EventArgs) Handles lblBed.Click
+        'sort by Patient bed
+        If cboFilter.SelectedIndex = 0 Then
+            Dim strSQLCode As String = "Select * from Patient
+                Inner JOIN PatientUser on PatientUser.Patient_TUID = Patient.Patient_ID
+                Inner Join PatientRoom on PatientRoom.Patient_TUID = Patient.Patient_ID
+                Where PatientUser.User_TUID = '" & LoggedInID.ToString & "' AND PatientUser.Active_Flag = '1' AND Patient.Active_Flag = '1' AND PatientRoom.Active_Flag = '1' ORDER BY patientroom.Bed_Name ASC"
+            LoadMyPatients(strSQLCode)
+        Else
+            LoadAllActivePatients("Select MRN_Number, Patient_First_Name, Patient_Last_Name, Date_of_Birth, Primary_Physician_ID, Patient.Patient_ID, PatientRoom.Patient_TUID, Room_TUID, Bed_Name FROM Patient LEFT JOIN PatientRoom ON PatientRoom.Patient_TUID = Patient.Patient_ID Where Patient.Active_Flag= 1 ORDER BY patientroom.Bed_Name ASC;")
+        End If
+    End Sub
 End Class
