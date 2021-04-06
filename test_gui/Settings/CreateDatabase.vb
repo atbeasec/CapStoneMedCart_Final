@@ -65,7 +65,9 @@
 '/*							saving file functionality to be used in other
 '*/							modules.									*/
 
-'/*	BRH	 04/05/21	Changed the default folder for the database			*/
+'/*	 BRH		04/05/21	Changed the default folder for the database	*/
+'/*  BRH		04/06/21	Updated the create database file dialog to 	*/
+'/*						default database files (.db)				*/
 '/********************************************************************	*/
 
 'Imports the libraries necessary to connect and create SQLite databases
@@ -73,7 +75,7 @@ Imports System.Data.SQLite
 Imports System.IO
 Module CreateDatabase
 	'The path where the database is desired to be stored. 
-	Dim STRDEFAULTFOLDER As String = "C:\Users\Public\Documents\MedServe\"
+	Dim STRDEFAULTFOLDER As String = "C:\Users\Breanna\Documents\MedServe" '"C:\Users\Public\Documents\MedServe\"
 	Public strDBNAME As String = "Medication_Cart_System"
 	Public strDBPath As String = strDEFAULTFOLDER & strDBNAME & ".db"
 	Public DBConn As SQLiteConnection
@@ -351,8 +353,9 @@ Module CreateDatabase
 		Dim dlgSaveFileDialog As New SaveFileDialog
 
 		'Set up how the save dialog box will work
-		dlgSaveFileDialog.InitialDirectory = strDEFAULTFOLDER
-		dlgSaveFileDialog.Filter = "db files (*.db)|*.db|All files (*.*)|*.*"
+		dlgSaveFileDialog.InitialDirectory = STRDEFAULTFOLDER
+		'Default the file type to database (db)
+		dlgSaveFileDialog.Filter = "All files (*.*)|*.*| db files (*.db)|*.db"
 		dlgSaveFileDialog.FilterIndex = 2
 		dlgSaveFileDialog.RestoreDirectory = True
 
