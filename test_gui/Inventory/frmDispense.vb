@@ -552,10 +552,7 @@ Public Class frmDispense
     '/* if patientInfo or adhoc is the one who entered the dispensing flow 
     '/* then return to the correct one
     '/*********************************************************************/
-    '/*  CALLED BY:   	      						                      */                 
-    '/*********************************************************************/
-    '/*  CALLS:	Fill_Table(strFillSQL)                                  */            
-    '/*                                             				      */             
+    '/*  CALLED BY:   back button clicked     						                      */                            
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					          */         
     '/*	     sender
