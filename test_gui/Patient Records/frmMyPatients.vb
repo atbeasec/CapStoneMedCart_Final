@@ -601,7 +601,7 @@
         Dim strBed As String = ""
         Dim intActive_Flag As String = ""
 
-        dsPatient = CreateDatabase.ExecuteSelectQuery("Select MRN_Number, Patient_First_Name, Patient_Last_Name, Date_of_Birth, Primary_Physician_ID, Patient.Patient_ID, PatientRoom.Patient_TUID, Room_TUID, Bed_Name FROM Patient LEFT JOIN PatientRoom ON PatientRoom.Patient_TUID = Patient.Patient_ID Where Patient.Active_Flag= 1 ;")
+        dsPatient = CreateDatabase.ExecuteSelectQuery("Select MRN_Number, Patient_First_Name, Patient_Last_Name, Date_of_Birth, Primary_Physician_ID, Patient.Patient_ID, PatientRoom.Patient_TUID, Room_TUID, Bed_Name FROM Patient LEFT JOIN PatientRoom ON PatientRoom.Patient_TUID = Patient.Patient_ID Where Patient.Active_Flag= 1 ORDER BY Patient.Patient_Last_Name COLLATE NOCASE ASC;")
         For Each Patient As DataRow In dsPatient.Tables(0).Rows
             intPatientMRN = Patient(0)
             strPatientFirst = Patient(1)
@@ -741,7 +741,7 @@
         dsPatientUser = CreateDatabase.ExecuteSelectQuery("Select * from Patient
                 Inner JOIN PatientUser on PatientUser.Patient_TUID = Patient.Patient_ID
                 Inner Join PatientRoom on PatientRoom.Patient_TUID = Patient.Patient_ID
-                Where PatientUser.User_TUID = '" & UserID.ToString & "' AND PatientUser.Active_Flag = '1' AND Patient.Active_Flag = '1' AND PatientRoom.Active_Flag = '1' ORDER BY Patient.Patient_Last_Name")
+                Where PatientUser.User_TUID = '" & UserID.ToString & "' AND PatientUser.Active_Flag = '1' AND Patient.Active_Flag = '1' AND PatientRoom.Active_Flag = '1' ORDER BY Patient.Patient_Last_Name COLLATE NOCASE ASC")
 
         For Each dr As DataRow In dsPatientUser.Tables(0).Rows
             intPatientID = dr(0)

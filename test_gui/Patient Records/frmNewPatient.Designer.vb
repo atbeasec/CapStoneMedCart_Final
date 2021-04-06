@@ -725,7 +725,7 @@ Partial Class frmNewPatient
         Me.mtbDoB.Dock = System.Windows.Forms.DockStyle.Fill
         Me.mtbDoB.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.mtbDoB.Location = New System.Drawing.Point(1, 1)
-        Me.mtbDoB.Mask = "0000-00-00"
+        Me.mtbDoB.Mask = "0000/00/00"
         Me.mtbDoB.Name = "mtbDoB"
         Me.mtbDoB.ShortcutsEnabled = False
         Me.mtbDoB.Size = New System.Drawing.Size(169, 22)
