@@ -755,6 +755,7 @@ Module PatientInformation
         Else
             strbPatientName.Clear()
             strbPatientName.Append((fName & " " & lName))
+
             If strbPatientName.Length <= 27 Then
                 frmPatientInfo.LblPatientName.Text = strbPatientName.ToString
 
@@ -766,6 +767,7 @@ Module PatientInformation
                     frmPatientInfo.LblPatientName.Text = strbPatientName.ToString
                 Else
                     strbPatientName.Remove(27, strbPatientName.Length - 27)
+                    frmPatientInfo.LblPatientName.Text = strbPatientName.ToString
                 End If
             End If
         End If

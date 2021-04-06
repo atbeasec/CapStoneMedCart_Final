@@ -468,8 +468,8 @@ Module Interactions
             'Change how the witness sign off form looks
             frmWitnessSignOff.Label5.Visible = True
             frmWitnessSignOff.Label6.Visible = True
-            frmWitnessSignOff.Label1.AutoSize = True
-            frmWitnessSignOff.Label2.AutoSize = True
+            '  frmWitnessSignOff.Label1.AutoSize = True
+            ' frmWitnessSignOff.Label2.AutoSize = True
             frmWitnessSignOff.Label1.Location = New Point(3, 34)
             frmWitnessSignOff.Label2.Location = New Point(103, 64)
             frmWitnessSignOff.Label5.Location = New Point(3, 100)

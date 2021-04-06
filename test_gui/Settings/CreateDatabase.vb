@@ -1,4 +1,5 @@
-﻿'/********************************************************************	*/
+﻿
+'/********************************************************************	*/
 '/*                   FILE NAME:  CreateDatabase.vb						*/
 '/********************************************************************	*/
 '/*					  PART OF PROJECT: 									*/
@@ -63,6 +64,8 @@
 '/*	 BRH		02/13/2021	Added subroutines to allow for opening and	*/
 '/*							saving file functionality to be used in other
 '*/							modules.									*/
+
+'/*	BRH	 04/05/21	Changed the default folder for the database			*/
 '/********************************************************************	*/
 
 'Imports the libraries necessary to connect and create SQLite databases
@@ -70,9 +73,7 @@ Imports System.Data.SQLite
 Imports System.IO
 Module CreateDatabase
 	'The path where the database is desired to be stored. 
-	'Right now, the database is stored in the bin\debug folder where this 
-	'	project is housed.
-	Dim strDEFAULTFOLDER As String = ""
+	Dim STRDEFAULTFOLDER As String = "C:\Users\Public\Documents\MedServe\"
 	Public strDBNAME As String = "Medication_Cart_System"
 	Public strDBPath As String = strDEFAULTFOLDER & strDBNAME & ".db"
 	Public DBConn As SQLiteConnection
@@ -144,6 +145,11 @@ Module CreateDatabase
 	'/*******************************************************************/
 
 	Sub Main()
+
+		'If the default directory doesn't exist, create it
+		If My.Computer.FileSystem.DirectoryExists(STRDEFAULTFOLDER) = False Then
+			My.Computer.FileSystem.CreateDirectory(STRDEFAULTFOLDER)
+		End If
 
 		CreateConfigAppFile()
 
@@ -222,12 +228,16 @@ Module CreateDatabase
 	'/* WHO   WHEN     WHAT											*/
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*	BRH	 02/13/21	Created subroutine to allow for less code in main
+	'/*	BRH	 04/05/21	Show the default path in the open file dialog	*/
 	'/*******************************************************************/
 	Public Sub SetupOpenFileDialog()
+
 		'Initialize the dialog for opening a file
+		dlgOpenFileDialog.InitialDirectory = strDEFAULTFOLDER
 		dlgOpenFileDialog.Title = "Open File..."
 		dlgOpenFileDialog.Multiselect = False
 		dlgOpenFileDialog.Filter = "All Files|*.*"
+
 	End Sub
 
 	'/*******************************************************************/
@@ -334,12 +344,14 @@ Module CreateDatabase
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*	BRH	 02/13/21	Created subroutine to allow for less code in main
 	'/*					Initial code created by Alexander B.			*/
+	'/*	BRH	 04/05/21	Show the default path in the open file dialog	*/
 	'/*******************************************************************/
 	Public Sub SaveDatabaseFile()
 		'Initializes a dialog for saving files
 		Dim dlgSaveFileDialog As New SaveFileDialog
 
 		'Set up how the save dialog box will work
+		dlgSaveFileDialog.InitialDirectory = strDEFAULTFOLDER
 		dlgSaveFileDialog.Filter = "db files (*.db)|*.db|All files (*.*)|*.*"
 		dlgSaveFileDialog.FilterIndex = 2
 		dlgSaveFileDialog.RestoreDirectory = True
@@ -390,10 +402,12 @@ Module CreateDatabase
 	'/* WHO   WHEN     WHAT											*/
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*	BRH	 02/13/21	Created subroutine to allow for less code in main
-	'/*					Initial code created by Alexander B.			*/	
+	'/*					Initial code created by Alexander B.			*/
+	'/*	BRH	 04/05/21	Show the default path in the open file dialog	*/
 	'/*******************************************************************/
 	Public Sub CreateDefaultDBPath()
-		strDEFAULTFOLDER = Application.StartupPath
+		dlgOpenFileDialog.InitialDirectory = strDEFAULTFOLDER
+		'strDEFAULTFOLDER = Application.StartupPath
 		strDBPath = strDEFAULTFOLDER & "\" & strDBNAME & ".db"
 		My.Computer.FileSystem.WriteAllText(strApplicationPath, strDBPath, True)
 	End Sub
@@ -441,11 +455,11 @@ Module CreateDatabase
 	'/*					Initial code created by Alexander B.			*/
 	'/*******************************************************************/
 	Public Sub CreateConfigAppFile()
-		'Create folder dialoge object to prompt user to select a folder path
+		'Create folder dialog object to prompt user to select a folder path
 		Dim dlgFolderDialogeLocation As New FolderBrowserDialog
 
 		'Set the default displayed path to the application path for better user experience
-		dlgFolderDialogeLocation.SelectedPath = Application.StartupPath
+		dlgFolderDialogeLocation.SelectedPath = strDEFAULTFOLDER
 
 		'check if the config file exists or not
 		If Not System.IO.File.Exists(strApplicationPath) Then
@@ -459,7 +473,6 @@ Module CreateDatabase
 
 			'If the user selects yes, they want to select an existing file
 			If dlgResult = DialogResult.Yes Then
-
 				OpenDatabaseFile()
 
 			Else 'If the user didn't want to open a file, the user is prompted to choose a path to save the database
@@ -514,6 +527,7 @@ Module CreateDatabase
 	'/*  BRH  01/23/21  Initial creation of the code					*/
 	'/*******************************************************************/
 	Public Sub CreateDataBase()
+
 		'Creates a database file through the SQLiteConnection
 		SQLiteConnection.CreateFile(strDBPath)
 		MessageBox.Show("Database Created")
