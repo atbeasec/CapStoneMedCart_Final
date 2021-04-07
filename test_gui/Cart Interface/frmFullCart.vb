@@ -1,6 +1,7 @@
 ﻿Imports System.IO.Ports
 Imports System.Data.SQLite
 Public Class frmFullCart
+    Friend CartInterfaceCode
 
     '/*********************************************************************/
     '/*                   FILE NAME:  FullCart                              */									  
@@ -207,8 +208,8 @@ Public Class frmFullCart
         Next
 
         If blnClosing Then
-                Me.Close()
-            End If
+            Me.Close()
+        End If
 
     End Sub
 
@@ -450,9 +451,14 @@ Public Class frmFullCart
         Dim strFeedback = SerialPort1.ReadExisting
         ' MessageBox.Show(strFeedback)
         If strFeedback.Equals("N") Then
-            CartInterfaceCode.minusDrawerCount()
+            minusDrawerCount()
+            comSerialPort1.Close()
+
         End If
     End Sub
+
+
+
     '/*********************************************************************/
     '/*                   SUBPROGRAM NAME:  	gettingConnectionSettings  */         
     '/*********************************************************************/
@@ -506,7 +512,7 @@ Public Class frmFullCart
             With dsSetting.Tables(0)
                 bitRate = .Rows(0)(EnumList.Settings.bitRate).ToString
                 comPort = .Rows(0)(EnumList.Settings.ComPort).ToString
-                CartInterfaceCode.setSimulationMode(Convert.ToBoolean(.rows(0)(EnumList.Settings.SimulationFlag)))
+                setSimulationMode(Convert.ToBoolean(.rows(0)(EnumList.Settings.SimulationFlag)))
             End With
 
         Catch ex As Exception

@@ -71,17 +71,19 @@ Module CartInterfaceCode
     '/*                  settings for our cart so the software will always */
     '/*                  be able to work for our cart out of the box.      */
     '/* NP     3/24/2021 Moved some variables around to allow access from  */
-    '/*                  Other methods. 
+    '/*                  Other methods.                                    */
+    '/*     
     '/*********************************************************************/
 
     '26
 
     Private FrmCart = New frmFullCart()
     Dim SerialPort1 = FrmCart.serialSetup()
-    Dim intDrawerCount As Integer
+    Dim intDrawerCountValue As Integer
     Private bytFinal As Byte()
-    Private comSerialPort1
+    Friend comSerialPort1
     Private strDrawerNumer As String
+    Public thread As Thread
 
     'TODO
     'set up a way to change the COM port. (by default it looks like it is COM3
@@ -195,7 +197,7 @@ Module CartInterfaceCode
 
     Sub main()
         'ChangeSettings("115200", "COM4", True)
-        OpenOneDrawer("10")
+        OpenOneDrawer("2")
 
 
 
@@ -331,7 +333,7 @@ Module CartInterfaceCode
         Else
 
             If Not blnissue Then
-                Dim thread As New Thread(AddressOf OpenDrawerFormOpener)
+                threadAccessor = New Thread(AddressOf OpenDrawerFormOpener)
                 strDrawerNumer = (CInt(Number) - 1).ToString 'nurses see the cart as having 25 drawers
                 'but the cart doesn't have a drawer number 2 so we have to change how it is seen
                 'in the gui. 
@@ -348,14 +350,8 @@ Module CartInterfaceCode
                     getDrawerArray()
                     comSerialPort1.Write(bytFinal, 0, bytFinal.Length)
                     intDrawerCount += 1
-                    thread.Start()
+                    threadAccessor.Start()
 
-                    Do
-                        'this is going to keep looping until the drawer count reached zero. 
-
-                    Loop While (intDrawerCount > 0)
-                    comSerialPort1.Close()
-                    thread.Abort()
                 Catch
                     MessageBox.Show("Selected comport does not exist. Please have your admin change the comport in Admin Settings")
                 End Try
@@ -412,6 +408,10 @@ Module CartInterfaceCode
         DrawerForm.lblDrawerNumber.Text = "Drawer " & strDrawerNumer & " is open."
 
         DrawerForm.ShowDialog()
+
+
+
+
     End Sub
 
 
@@ -879,5 +879,155 @@ Module CartInterfaceCode
         intDrawerCount = 0
     End Sub
 
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: killFormThread				   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		         */   
+    '/*		         DATE CREATED: 4/7/2021                 		   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								   */             
+    '/*	 This sub checks to see if there is a thread in the threadaccessor*/
+    '/*  if there is it checks to see if it is still running. If it is    */
+    '/*  running then it kills this. This method made made in case the    */
+    '/*  needs to be stopped from another form.                           */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+
+    Public Sub killFormThread()
+        If Not IsNothing(threadAccessor) Then
+            If threadAccessor.IsAlive Then
+                threadAccessor.Abort()
+            End If
+        End If
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   Property NAME:  intDrawerCount				   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		         */   
+    '/*		         DATE CREATED: 	4/7/2021                        	   */                             
+    '/*********************************************************************/
+    '/*  Property PURPOSE:								   */             
+    '/*	 This is to act as a getter and setter for the drawer count        */                     
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 value - this is the value that will be assigned to the drawer count*/                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            intDrawerCountValue								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+
+    Public Property intDrawerCount As Integer
+        Get
+            Return intDrawerCountValue
+        End Get
+        Set(value As Integer)
+            intDrawerCountValue = value
+            If intDrawerCount = 0 Then
+                killFormThread
+            End If
+        End Set
+    End Property
+
+
+    '/*********************************************************************/
+    '/*                   Property NAME:  threadAccessor    			   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		         */   
+    '/*		         DATE CREATED: 	4/8/2021                               */                             
+    '/*********************************************************************/
+    '/*  Property PURPOSE:								   */             
+    '/*	 this is the getter and setter for the thread to make it easier to*/
+    '/*  work with in other forms.                                        */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 value - this is the thread that is being assigned to the thread  */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								                           */                   
+    '/*         thread                     								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Public Property threadAccessor() As Thread
+        Get
+            Return thread
+        End Get
+        Set(value As Thread)
+            thread = value
+        End Set
+    End Property
 
 End Module
