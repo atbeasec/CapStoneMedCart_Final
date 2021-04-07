@@ -79,6 +79,7 @@
             CreateAllergiesPanels(flpAllergies, strAllergyName, cmbAllergiesType.Text, strSeverity)
         End If
         'End If
+
     End Sub
     Private Sub btnAllergyCancel_Click(sender As Object, e As EventArgs) Handles btnAllergyCancel.Click
         DisableEditButtons()
@@ -469,7 +470,7 @@
         btnAllergySave.Visible = False
         'cmbAllergiesLocked()
 
-        Dim dsAllergies = CreateDatabase.ExecuteSelectQuery("Select * From Allergy ORDER BY Allergy_Type, Allergy_Name ;")
+        Dim dsAllergies = CreateDatabase.ExecuteSelectQuery("Select * From Allergy ORDER BY Allergy_Name, Allergy_Type ;")
         Dim dsDrugAllergies = CreateDatabase.ExecuteSelectQuery("Select * From Allergy WHERE Allergy_Type = 'Drug' ORDER BY Allergy_Type, Allergy_Name ;")
         'Dim dsAllergyType = CreateDatabase.ExecuteSelectQuery("Select DISTINCT Allergy_Type from Allergy;")
 
