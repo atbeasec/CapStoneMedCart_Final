@@ -255,6 +255,7 @@
         Dim ctlControl As Control
         Dim txtBox As TextBox
 
+        Dim strArrayList As New List(Of String)
 
         'the construction of the panels is important to consider here. Look over the createPanel method to understand
         'there is a panel docked inside of another panel which is used to create a padding effect.
@@ -281,13 +282,34 @@
                             Dim dblUserCount As Double = CDbl(txtBox.Text)
                             Dim strsqlCommand As String = "UPDATE DrawerMedication SET Quantity = '" & dblUserCount & "' where DrawerMedication_ID = '" & strmedicationID & "'"
                             CreateDatabase.ExecuteInsertQuery(strsqlCommand)
-
+                            strsqlCommand = "Select Drawers_TUID from DrawerMedication where DrawerMedication_ID = '" & strmedicationID & "'"
+                            Dim intDrawerTUID As Integer = CreateDatabase.ExecuteScalarQuery(strsqlCommand)
+                            strArrayList.Add(intDrawerTUID)
                         End If
                     Next
                 End If
             Next
         Next
+        Dim strArray As String() = strArrayList.ToArray
+        If Not strArray.Length = 0 Then
+            OpenMutliDrawer(strArray)
 
+            If Not cmbFilter.SelectedIndex = -1 Then
+                btnSave.Visible = True
+            Else
+                btnSave.Visible = False
+
+            End If
+
+            ' remove all controls and the handlers of those controls before generating new panels
+            RemoveHandlersAndAssociations(GetListOfAllControls(flpEndOfShiftCount), flpEndOfShiftCount)
+
+            ' determine which report will be run based on the user selection from the drop down
+            ' this selection determines which SQL query will be called.
+
+            DetermineSelectedReport(cmbFilter.SelectedIndex)
+
+        End If
     End Sub
 
     '/*********************************************************************/

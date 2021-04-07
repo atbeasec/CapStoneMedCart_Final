@@ -376,7 +376,11 @@ Module GraphicalUserInterfaceReusableMethods
         ' be able to flag anything so the button will not respond.
 
         If String.IsNullOrEmpty(txtBoxOnFlaggedPanel.Text) Or Not IsNumeric(txtBoxOnFlaggedPanel.Text) Then
-
+            For Each ctl In pnlFlaggedPannel.Controls
+                If ctl.Name.Contains("lbl") Then
+                    ctl.ForeColor = Color.Black
+                End If
+            Next
             MessageBox.Show("A count has not been entered. Please type a number into the count field.")
         Else
 
