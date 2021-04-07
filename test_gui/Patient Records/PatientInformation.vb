@@ -976,12 +976,12 @@ Module PatientInformation
     Public Sub getPrescriptions(ByRef intPatient_ID As Integer)
         Dim strSQLiteCommand As String
         Dim dsPatientPrescription As DataSet
-        strSQLiteCommand = "SELECT DISTINCT trim(Drug_Name,' '), Medication.Strength, PatientMedication.Frequency, Medication.Type, PatientMedication.Quantity, PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name, Medication.Medication_ID, PatientMedication.Units, PatientMedication.PatientMedication_ID FROM PatientMedication " &
+        strSQLiteCommand = "SELECT DISTINCT trim(Drug_Name,' '), Medication.Strength, PatientMedication.Frequency, PatientMedication.Type, PatientMedication.Quantity, PatientMedication.Date_Presrcibed, Physician.Physician_First_Name, Physician.Physician_Last_Name, Medication.Medication_ID, PatientMedication.Units, PatientMedication.PatientMedication_ID FROM PatientMedication " &
             "INNER JOIN Medication on Medication.Medication_ID = PatientMedication.Medication_TUID " &
             "INNER JOIN Patient ON Patient.Patient_ID = PatientMedication.Patient_TUID " &
             "INNER JOIN Physician on Physician.Physician_ID = PatientMedication.Ordering_Physician_ID " &
             "INNER JOIN DrawerMedication on DrawerMedication.Medication_TUID = PatientMedication.Medication_TUID " &
-            "WHERE Patient.Patient_ID = '" & intPatient_ID & "' AND PatientMedication.Active_Flag = '1' AND DrawerMedication.Active_Flag = '1' ORDER BY trim(Drug_Name,' ') ASC"
+            "WHERE Patient.Patient_ID = '" & intPatient_ID & "' AND PatientMedication.Active_Flag = '1' AND DrawerMedication.Active_Flag = '1' ORDER BY trim(Drug_Name,' ') COLLATE NOCASE ASC"
 
         dsPatientPrescription = CreateDatabase.ExecuteSelectQuery(strSQLiteCommand)
         For Each dr As DataRow In dsPatientPrescription.Tables(0).Rows
@@ -1435,7 +1435,7 @@ Module PatientInformation
         strbSqlCommand.Append("FROM Medication Inner Join PatientMedication ON PatientMedication.Medication_TUID = Medication.Medication_ID ")
         strbSqlCommand.Append("Inner Join Physician ON Physician.Physician_ID = PatientMedication.Ordering_Physician_ID ")
         strbSqlCommand.Append("INNER JOIN DrawerMedication on DrawerMedication.Medication_TUID = Medication.Medication_ID ")
-        strbSqlCommand.Append("WHERE PatientMedication.Patient_TUID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1' AND DrawerMedication.Active_Flag = '1'  ORDER BY PatientMedication.Type")
+        strbSqlCommand.Append("WHERE PatientMedication.Patient_TUID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1' AND DrawerMedication.Active_Flag = '1'  ORDER BY trim(PatientMedication.Type,' ') COLLATE NOCASE")
         dsPatientInfo = CreateDatabase.ExecuteSelectQuery(strbSqlCommand.ToString)
         'look create panel method for each prescription the patient has
         For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
@@ -1557,7 +1557,7 @@ Module PatientInformation
         strbSqlCommand.Append("FROM Medication Inner Join PatientMedication ON PatientMedication.Medication_TUID = Medication.Medication_ID ")
         strbSqlCommand.Append("Inner Join Physician ON Physician.Physician_ID = PatientMedication.Ordering_Physician_ID ")
         strbSqlCommand.Append("INNER JOIN DrawerMedication on DrawerMedication.Medication_TUID = Medication.Medication_ID ")
-        strbSqlCommand.Append("WHERE PatientMedication.Patient_TUID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1' AND DrawerMedication.Active_Flag = '1'  ORDER BY trim(Drug_Name,' ') ASC")
+        strbSqlCommand.Append("WHERE PatientMedication.Patient_TUID = '" & intPatientID & "' AND PatientMedication.Active_Flag = '1' AND DrawerMedication.Active_Flag = '1'  ORDER BY trim(Drug_Name,' ') COLLATE NOCASE ASC")
         dsPatientInfo = CreateDatabase.ExecuteSelectQuery(strbSqlCommand.ToString)
         'look create panel method for each prescription the patient has
         For Each dr As DataRow In dsPatientInfo.Tables(0).Rows
