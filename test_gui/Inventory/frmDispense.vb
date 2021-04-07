@@ -324,6 +324,7 @@ Public Class frmDispense
     '/*********************************************************************/
     Private Sub changeButtonforDispensing()
         lblDirections.Text = "Enter the Amount Administered"
+        btnDispense.Text = "Submit Amount"
         lblDirections.Left = (pnlSelector.Width \ 2) - (pnlSelector.Width \ 2)
         ' show approiate panels
         pnlAmountAdministered.Visible = True
@@ -579,11 +580,6 @@ Public Class frmDispense
             setintEntered(0)
             frmMain.OpenChildForm(frmAdHockDispense)
         End If
-
-
-
-
-
     End Sub
 
     '/*********************************************************************/
