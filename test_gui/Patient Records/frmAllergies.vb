@@ -27,6 +27,10 @@
 
             If cmbAllergies.SelectedIndex = -1 Then
                 strAllergyName = cmbAllergies.Text
+                ' make sure the first letter is capitalized for sorting
+                Dim arrChars() As Char = strAllergyName.ToCharArray()
+                arrChars(0) = Char.ToUpper(arrChars(0))
+                strAllergyName = New String(arrChars)
             Else
                 strAllergyName = cmbAllergies.Text
             End If
@@ -79,7 +83,7 @@
             CreateAllergiesPanels(flpAllergies, strAllergyName, cmbAllergiesType.Text, strSeverity)
         End If
         'End If
-
+        frmAllergies_Load(sender, e)
     End Sub
     Private Sub btnAllergyCancel_Click(sender As Object, e As EventArgs) Handles btnAllergyCancel.Click
         DisableEditButtons()
@@ -470,8 +474,8 @@
         btnAllergySave.Visible = False
         'cmbAllergiesLocked()
 
-        Dim dsAllergies = CreateDatabase.ExecuteSelectQuery("Select * From Allergy ORDER BY Allergy_Name, Allergy_Type ;")
-        Dim dsDrugAllergies = CreateDatabase.ExecuteSelectQuery("Select * From Allergy WHERE Allergy_Type = 'Drug' ORDER BY Allergy_Type, Allergy_Name ;")
+        Dim dsAllergies = CreateDatabase.ExecuteSelectQuery("Select Allergy_Name From Allergy ORDER BY Allergy.Allergy_Name COLLATE NOCASE ASC;") '*  ORDER BY Allergy_Name, Allergy_Type
+        Dim dsDrugAllergies = CreateDatabase.ExecuteSelectQuery("Select * From Allergy WHERE Allergy_Type = 'Drug' ORDER BY Allergy_Name, Allergy_Type COLLATE NOCASE ASC;")
         'Dim dsAllergyType = CreateDatabase.ExecuteSelectQuery("Select DISTINCT Allergy_Type from Allergy;")
 
         populateAllergiesComboBox(cmbAllergies, dsAllergies)

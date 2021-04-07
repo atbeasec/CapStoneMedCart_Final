@@ -54,10 +54,9 @@ Partial Class frmAllergies
         '
         Me.flpAllergies.AutoScroll = True
         Me.flpAllergies.BackColor = System.Drawing.Color.White
-        Me.flpAllergies.Location = New System.Drawing.Point(14, 290)
-        Me.flpAllergies.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.flpAllergies.Location = New System.Drawing.Point(10, 236)
         Me.flpAllergies.Name = "flpAllergies"
-        Me.flpAllergies.Size = New System.Drawing.Size(1164, 271)
+        Me.flpAllergies.Size = New System.Drawing.Size(873, 319)
         Me.flpAllergies.TabIndex = 50
         '
         'Panel2
@@ -67,10 +66,9 @@ Partial Class frmAllergies
         Me.Panel2.Controls.Add(Me.lblAllergyName)
         Me.Panel2.Controls.Add(Me.lblAllergyType)
         Me.Panel2.Controls.Add(Me.lblSeverity)
-        Me.Panel2.Location = New System.Drawing.Point(14, 228)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel2.Location = New System.Drawing.Point(10, 185)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1164, 58)
+        Me.Panel2.Size = New System.Drawing.Size(873, 47)
         Me.Panel2.TabIndex = 49
         '
         'lblActions
@@ -78,10 +76,9 @@ Partial Class frmAllergies
         Me.lblActions.AutoSize = True
         Me.lblActions.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblActions.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblActions.Location = New System.Drawing.Point(948, 20)
-        Me.lblActions.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblActions.Location = New System.Drawing.Point(711, 16)
         Me.lblActions.Name = "lblActions"
-        Me.lblActions.Size = New System.Drawing.Size(79, 28)
+        Me.lblActions.Size = New System.Drawing.Size(65, 21)
         Me.lblActions.TabIndex = 10
         Me.lblActions.Text = "Actions"
         '
@@ -90,10 +87,9 @@ Partial Class frmAllergies
         Me.lblAllergyName.AutoSize = True
         Me.lblAllergyName.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblAllergyName.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblAllergyName.Location = New System.Drawing.Point(15, 20)
-        Me.lblAllergyName.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblAllergyName.Location = New System.Drawing.Point(11, 16)
         Me.lblAllergyName.Name = "lblAllergyName"
-        Me.lblAllergyName.Size = New System.Drawing.Size(81, 28)
+        Me.lblAllergyName.Size = New System.Drawing.Size(66, 21)
         Me.lblAllergyName.TabIndex = 1
         Me.lblAllergyName.Text = "Allergy "
         '
@@ -102,10 +98,9 @@ Partial Class frmAllergies
         Me.lblAllergyType.AutoSize = True
         Me.lblAllergyType.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblAllergyType.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblAllergyType.Location = New System.Drawing.Point(633, 20)
-        Me.lblAllergyType.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblAllergyType.Location = New System.Drawing.Point(475, 16)
         Me.lblAllergyType.Name = "lblAllergyType"
-        Me.lblAllergyType.Size = New System.Drawing.Size(55, 28)
+        Me.lblAllergyType.Size = New System.Drawing.Size(45, 21)
         Me.lblAllergyType.TabIndex = 9
         Me.lblAllergyType.Text = "Type"
         '
@@ -114,10 +109,9 @@ Partial Class frmAllergies
         Me.lblSeverity.AutoSize = True
         Me.lblSeverity.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSeverity.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblSeverity.Location = New System.Drawing.Point(312, 20)
-        Me.lblSeverity.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblSeverity.Location = New System.Drawing.Point(234, 16)
         Me.lblSeverity.Name = "lblSeverity"
-        Me.lblSeverity.Size = New System.Drawing.Size(134, 28)
+        Me.lblSeverity.Size = New System.Drawing.Size(109, 21)
         Me.lblSeverity.TabIndex = 0
         Me.lblSeverity.Text = "Severity KU/L"
         '
@@ -129,20 +123,18 @@ Partial Class frmAllergies
         Me.cmbSeverity.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbSeverity.FormattingEnabled = True
         Me.cmbSeverity.Items.AddRange(New Object() {"Class 1 (0.35-0.7)", "Class 2 (0.71-3.5)", "Class 3 (3.51-17.5)", "Class 4 (17.51-50)", "Class 5 (50.01-100)", "N/A"})
-        Me.cmbSeverity.Location = New System.Drawing.Point(805, 145)
-        Me.cmbSeverity.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmbSeverity.Location = New System.Drawing.Point(604, 118)
         Me.cmbSeverity.Name = "cmbSeverity"
-        Me.cmbSeverity.Size = New System.Drawing.Size(375, 36)
+        Me.cmbSeverity.Size = New System.Drawing.Size(282, 29)
         Me.cmbSeverity.TabIndex = 3
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(800, 113)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label1.Location = New System.Drawing.Point(600, 92)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(197, 28)
+        Me.Label1.Size = New System.Drawing.Size(157, 21)
         Me.Label1.TabIndex = 181
         Me.Label1.Text = "Allergy Severity KU/L"
         '
@@ -150,10 +142,9 @@ Partial Class frmAllergies
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(8, 113)
-        Me.Label12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label12.Location = New System.Drawing.Point(6, 92)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(135, 28)
+        Me.Label12.Size = New System.Drawing.Size(108, 21)
         Me.Label12.TabIndex = 180
         Me.Label12.Text = "Allergy Name:"
         '
@@ -161,10 +152,9 @@ Partial Class frmAllergies
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(471, 113)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label2.Location = New System.Drawing.Point(353, 92)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(124, 28)
+        Me.Label2.Size = New System.Drawing.Size(98, 21)
         Me.Label2.TabIndex = 182
         Me.Label2.Text = "Allergy Type:"
         '
@@ -177,10 +167,9 @@ Partial Class frmAllergies
         Me.btnAddAllergy.ForeColor = System.Drawing.Color.White
         Me.btnAddAllergy.Image = CType(resources.GetObject("btnAddAllergy.Image"), System.Drawing.Image)
         Me.btnAddAllergy.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnAddAllergy.Location = New System.Drawing.Point(985, 7)
-        Me.btnAddAllergy.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnAddAllergy.Location = New System.Drawing.Point(739, 6)
         Me.btnAddAllergy.Name = "btnAddAllergy"
-        Me.btnAddAllergy.Size = New System.Drawing.Size(195, 46)
+        Me.btnAddAllergy.Size = New System.Drawing.Size(146, 37)
         Me.btnAddAllergy.TabIndex = 5
         Me.btnAddAllergy.Text = "Add Allergy"
         Me.btnAddAllergy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -190,20 +179,18 @@ Partial Class frmAllergies
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(9, 75)
-        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label4.Location = New System.Drawing.Point(7, 61)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(0, 28)
+        Me.Label4.Size = New System.Drawing.Size(0, 21)
         Me.Label4.TabIndex = 185
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(172, 14)
-        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label5.Location = New System.Drawing.Point(129, 11)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(329, 32)
+        Me.Label5.Size = New System.Drawing.Size(256, 25)
         Me.Label5.TabIndex = 186
         Me.Label5.Text = "Patient Allergy Information"
         '
@@ -214,10 +201,9 @@ Partial Class frmAllergies
         Me.cmbAllergies.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbAllergies.FormattingEnabled = True
         Me.cmbAllergies.Items.AddRange(New Object() {"Class 1", "Class 2", "Class 3", "Class 4", "Class 5"})
-        Me.cmbAllergies.Location = New System.Drawing.Point(13, 145)
-        Me.cmbAllergies.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmbAllergies.Location = New System.Drawing.Point(10, 118)
         Me.cmbAllergies.Name = "cmbAllergies"
-        Me.cmbAllergies.Size = New System.Drawing.Size(380, 36)
+        Me.cmbAllergies.Size = New System.Drawing.Size(286, 29)
         Me.cmbAllergies.TabIndex = 188
         '
         'cmbAllergiesType
@@ -228,10 +214,9 @@ Partial Class frmAllergies
         Me.cmbAllergiesType.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbAllergiesType.FormattingEnabled = True
         Me.cmbAllergiesType.Items.AddRange(New Object() {"Food", "Drug", "Insect", "Latex", "Mold", "Pet", "Environmental"})
-        Me.cmbAllergiesType.Location = New System.Drawing.Point(476, 145)
-        Me.cmbAllergiesType.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmbAllergiesType.Location = New System.Drawing.Point(357, 118)
         Me.cmbAllergiesType.Name = "cmbAllergiesType"
-        Me.cmbAllergiesType.Size = New System.Drawing.Size(258, 36)
+        Me.cmbAllergiesType.Size = New System.Drawing.Size(194, 29)
         Me.cmbAllergiesType.TabIndex = 190
         '
         'btnAllergyCancel
@@ -242,10 +227,9 @@ Partial Class frmAllergies
         Me.btnAllergyCancel.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAllergyCancel.ForeColor = System.Drawing.Color.White
         Me.btnAllergyCancel.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnAllergyCancel.Location = New System.Drawing.Point(985, 7)
-        Me.btnAllergyCancel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnAllergyCancel.Location = New System.Drawing.Point(739, 6)
         Me.btnAllergyCancel.Name = "btnAllergyCancel"
-        Me.btnAllergyCancel.Size = New System.Drawing.Size(195, 46)
+        Me.btnAllergyCancel.Size = New System.Drawing.Size(146, 37)
         Me.btnAllergyCancel.TabIndex = 191
         Me.btnAllergyCancel.Text = "Cancel"
         Me.btnAllergyCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -259,10 +243,9 @@ Partial Class frmAllergies
         Me.btnAllergySave.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAllergySave.ForeColor = System.Drawing.Color.White
         Me.btnAllergySave.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnAllergySave.Location = New System.Drawing.Point(782, 7)
-        Me.btnAllergySave.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnAllergySave.Location = New System.Drawing.Point(586, 6)
         Me.btnAllergySave.Name = "btnAllergySave"
-        Me.btnAllergySave.Size = New System.Drawing.Size(195, 46)
+        Me.btnAllergySave.Size = New System.Drawing.Size(146, 37)
         Me.btnAllergySave.TabIndex = 192
         Me.btnAllergySave.Text = "Save"
         Me.btnAllergySave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -278,9 +261,8 @@ Partial Class frmAllergies
         Me.Panel13.Controls.Add(Me.Label5)
         Me.Panel13.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel13.Location = New System.Drawing.Point(0, 0)
-        Me.Panel13.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel13.Name = "Panel13"
-        Me.Panel13.Size = New System.Drawing.Size(1235, 57)
+        Me.Panel13.Size = New System.Drawing.Size(926, 46)
         Me.Panel13.TabIndex = 193
         '
         'btnBack
@@ -292,10 +274,9 @@ Partial Class frmAllergies
         Me.btnBack.ForeColor = System.Drawing.Color.White
         Me.btnBack.Image = CType(resources.GetObject("btnBack.Image"), System.Drawing.Image)
         Me.btnBack.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnBack.Location = New System.Drawing.Point(31, 7)
-        Me.btnBack.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnBack.Location = New System.Drawing.Point(23, 6)
         Me.btnBack.Name = "btnBack"
-        Me.btnBack.Size = New System.Drawing.Size(119, 46)
+        Me.btnBack.Size = New System.Drawing.Size(89, 37)
         Me.btnBack.TabIndex = 61
         Me.btnBack.Text = "Back"
         Me.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -309,10 +290,9 @@ Partial Class frmAllergies
         Me.btnClear.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClear.ForeColor = System.Drawing.Color.White
         Me.btnClear.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnClear.Location = New System.Drawing.Point(985, 65)
-        Me.btnClear.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnClear.Location = New System.Drawing.Point(739, 53)
         Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(195, 46)
+        Me.btnClear.Size = New System.Drawing.Size(146, 37)
         Me.btnClear.TabIndex = 194
         Me.btnClear.Text = "Clear"
         Me.btnClear.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -323,19 +303,18 @@ Partial Class frmAllergies
         '
         Me.lblAction.AutoSize = True
         Me.lblAction.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAction.Location = New System.Drawing.Point(7, 71)
-        Me.lblAction.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblAction.Location = New System.Drawing.Point(5, 58)
         Me.lblAction.Name = "lblAction"
-        Me.lblAction.Size = New System.Drawing.Size(235, 35)
+        Me.lblAction.Size = New System.Drawing.Size(151, 21)
         Me.lblAction.TabIndex = 193
         Me.lblAction.Text = "Add a new allergy:"
         '
         'frmAllergies
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1235, 698)
+        Me.ClientSize = New System.Drawing.Size(926, 567)
         Me.Controls.Add(Me.lblAction)
         Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.Panel13)
@@ -348,7 +327,6 @@ Partial Class frmAllergies
         Me.Controls.Add(Me.cmbSeverity)
         Me.Controls.Add(Me.flpAllergies)
         Me.Controls.Add(Me.Panel2)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "frmAllergies"
         Me.Text = "frmAllergies"
         Me.Panel2.ResumeLayout(False)
