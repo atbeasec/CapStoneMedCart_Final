@@ -135,11 +135,11 @@ Partial Class frmEndOfShift
         Me.btnSave.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.ForeColor = System.Drawing.Color.White
         Me.btnSave.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnSave.Location = New System.Drawing.Point(801, 12)
+        Me.btnSave.Location = New System.Drawing.Point(746, 12)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(166, 37)
+        Me.btnSave.Size = New System.Drawing.Size(221, 37)
         Me.btnSave.TabIndex = 2
-        Me.btnSave.Text = "SAVE REPORT"
+        Me.btnSave.Text = "UPDATE INVENTORY"
         Me.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnSave.UseVisualStyleBackColor = False
         '

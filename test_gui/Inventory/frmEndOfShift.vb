@@ -150,7 +150,7 @@
     '/*  WHO   WHEN     WHAT								              */             
     '/*  Collin Krygier  2/5/2021    Initial creation                     */
     '/*********************************************************************/
-    Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal intMedicationTUID As String, ByVal strMedicationName As String, ByVal strDrawerNumber As String, ByVal strSection As String, ByVal strSystemCount As String)
+    Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal intMedicationTUID As String, ByVal strMedicationName As String, ByVal strDrawerNumber As String, ByVal strSection As String, ByVal strSystemCount As String, ByRef intDrawerMEDID As Integer)
 
         Dim pnl As Panel
         pnl = New Panel
@@ -205,8 +205,9 @@
         CreateIDLabel(pnlMainPanel, lblID4, "lblSystemCount", lblSystemCount.Location.X, 20, strSystemCount, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
-        flpPannel.Controls.Add(pnl)
 
+        flpPannel.Controls.Add(pnl)
+        pnlMainPanel.Tag = intDrawerMEDID
     End Sub
 
     '/*********************************************************************/
@@ -217,8 +218,10 @@
     '/*********************************************************************/
     '/*  Subprogram PURPOSE:								              */             
     '/*	 This is going to iterate over the flow panel to strip the data   */
-    '/*  the user typed in when creating the report. This data will be    */
-    '/*  passed to a method that updates the database discrepancies.      */ 
+    '/*  the user typed in when creating the report. it will see if the box 
+    '/* has an updated amount, it updates the amount, collects the drawer 
+    '/*  numbers for the updated items and opens those drawers
+    '/*
     '/*********************************************************************/
     '/*  CALLED BY:   	      						                      */           
     '/*                                         				          */         
@@ -240,12 +243,17 @@
     '/*     particular panel.                                             */
     '/* txtBox- represents a textbox, specifically the one that the user  */
     '/*    typed in to update the medication count in the drawer          */
+    '/*
+    '/* strArrayList  -- list of strings that collects each drawer that is updated
+    '/* strArray -- array of string of each item in strArrayList to pass to multidrawer open method
+    '/*
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						                      */               
     '/*											                          */                     
     '/*  WHO   WHEN     WHAT								              */             
     '/*  ---   ----     ------------------------------------------------  */
     '/*  Collin Krygier  2/5/2021    Initial creation                     */
+    '/* AB              4/07/2021    Form changed to restocking form
     '/*********************************************************************/
     Sub ExtractFormDataForDatabase()
 
@@ -254,6 +262,7 @@
         Dim ctlControl As Control
         Dim txtBox As TextBox
 
+        Dim strArrayList As New List(Of String)
 
         'the construction of the panels is important to consider here. Look over the createPanel method to understand
         'there is a panel docked inside of another panel which is used to create a padding effect.
@@ -265,7 +274,7 @@
                 ' retreiving list of all panels within the padding
 
                 'check if the panel is marked as red
-                If pnlPanel.BackColor = Color.Red Then
+                If pnlPanel.BackColor = Color.FromArgb(71, 103, 216) Then
 
                     For Each ctlControl In pnlPanel.Controls
                         ' retreiving the items in the panel such as labels and textbox values
@@ -276,19 +285,15 @@
                             'Debug.Print(txtBox.Text) 'textbox will contain the typed count 
                             'Debug.Print(pnlPanel.BackColor.ToString) 'if the backcolor is red, then the item was flagged
 
-                            Dim medicationID As String = pnlPanel.Tag
-                            Dim userCount As Integer = CInt(txtBox.Text)
+                            Dim strmedicationID As String = pnlPanel.Tag
+                            Dim dblUserCount As Double = CDbl(txtBox.Text)
+                            Dim strsqlCommand As String = "UPDATE DrawerMedication SET Quantity = '" & dblUserCount & "' where DrawerMedication_ID = '" & strmedicationID & "'"
+                            CreateDatabase.ExecuteInsertQuery(strsqlCommand)
+                            strsqlCommand = "Select Drawers_TUID from DrawerMedication where DrawerMedication_ID = '" & strmedicationID & "'"
+                            Dim intDrawerTUID As Integer = CreateDatabase.ExecuteScalarQuery(strsqlCommand)
 
-
-                            If Discrepancies.IsInsertedAlready(medicationID, userCount) = True Then
-
-                                '   update the record to make sure the new count is selected.
-                                Discrepancies.UpdateSplit(medicationID, userCount)
-                            Else
-
-                                '   insert the record because it is not already in the database.
-                                Discrepancies.InsertSplit(medicationID, userCount)
-
+                            If Not strArrayList.Contains(intDrawerTUID) Then
+                                strArrayList.Add(intDrawerTUID)
                             End If
 
                         End If
@@ -296,7 +301,24 @@
                 End If
             Next
         Next
+        Dim strArray As String() = strArrayList.ToArray
+        For Each strItem As String In strArrayList
+            OpenOneDrawer(strItem)
+            If Not cmbFilter.SelectedIndex = -1 Then
+                btnSave.Visible = True
+            Else
+                btnSave.Visible = False
 
+            End If
+
+            ' remove all controls and the handlers of those controls before generating new panels
+            RemoveHandlersAndAssociations(GetListOfAllControls(flpEndOfShiftCount), flpEndOfShiftCount)
+
+            ' determine which report will be run based on the user selection from the drop down
+            ' this selection determines which SQL query will be called.
+
+            DetermineSelectedReport(cmbFilter.SelectedIndex)
+        Next
     End Sub
 
     '/*********************************************************************/
@@ -571,7 +593,7 @@
                 ' retreiving list of all panels within the padding
 
                 'check if the panel is marked as red
-                If pnlPanel.BackColor = Color.Red Then
+                If pnlPanel.BackColor = Color.FromArgb(71, 103, 216) Then
                     flag = True
                 End If
             Next
