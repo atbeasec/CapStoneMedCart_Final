@@ -98,10 +98,13 @@
         If intNarcoticFlagGlobal = 1 Then
             lblSignoff.Visible = True
             txtBarcode.Visible = True
+            pnlCredentials.Visible = False
         Else
             lblSignoff.Visible = False
             txtBarcode.Visible = False
         End If
+
+
     End Sub
 
     '/********************************************************************/
@@ -195,7 +198,7 @@
     '/*  ---            ----             ----				             */
     '/*  AB		        2/10/21		    initial creation                 */
     '/********************************************************************/ 
-    Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
+    Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWasteWithBarcode.Click
         If intNarcoticFlagGlobal = 1 Then
             If IsNumeric(txtQuantity.Text) Then
                 Dim strBarcode As String = txtBarcode.Text
@@ -306,4 +309,28 @@
     Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantity.KeyPress
         DataVaildationMethods.KeyPressCheck(e, "0123456789.")
     End Sub
+
+    Private Sub lblBadge_Click(sender As Object, e As EventArgs) Handles lblBadge.Click
+
+        If pnlBarcode.Visible = True Then
+            pnlBarcode.Visible = False
+            txtBarcode.Text = Nothing
+            pnlCredentials.Visible = True
+        End If
+
+    End Sub
+
+    Private Sub Label8_Click(sender As Object, e As EventArgs) Handles lblUseBarcode.Click
+
+        If pnlCredentials.Visible = True Then
+
+            pnlCredentials.Visible = False
+            txtUsername.Text = Nothing
+            txtPassword.Text = Nothing
+            pnlBarcode.Visible = True
+
+        End If
+
+    End Sub
+
 End Class
