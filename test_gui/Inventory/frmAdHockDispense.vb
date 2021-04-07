@@ -26,7 +26,7 @@
         ElseIf IsNothing(cmbPatientName.SelectedItem) Then
             MessageBox.Show("Please select a patient")
         ElseIf txtAmount.Text = Nothing Or txtAmount.Text.Trim.Length = 0 Then
-            MessageBox.Show("Please select a quantity")
+            MessageBox.Show("Please enter a prescription amount")
         ElseIf txtUnit.Text = Nothing Or txtUnit.Text.Trim.Length = 0 Then
             MessageBox.Show("Please select a Unit for the amount")
         Else
