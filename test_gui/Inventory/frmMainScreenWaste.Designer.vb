@@ -28,9 +28,20 @@ Partial Class frmMainScreenWaste
         Me.Label2 = New System.Windows.Forms.Label()
         Me.pnlRadioButtons = New System.Windows.Forms.Panel()
         Me.pnlSignOff = New System.Windows.Forms.Panel()
+        Me.pnlCredentials = New System.Windows.Forms.Panel()
+        Me.txtPassword = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.lblFirstName = New System.Windows.Forms.Label()
+        Me.lblUseBarcode = New System.Windows.Forms.Label()
+        Me.txtUsername = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.btnWasteWithCredentials = New System.Windows.Forms.Button()
+        Me.pnlBarcode = New System.Windows.Forms.Panel()
         Me.txtBarcode = New System.Windows.Forms.TextBox()
-        Me.lblSignoff = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.lblBadge = New System.Windows.Forms.Label()
         Me.btnWaste = New System.Windows.Forms.Button()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.txtOther = New System.Windows.Forms.TextBox()
         Me.rbtnOther = New System.Windows.Forms.RadioButton()
         Me.radPatientUnavilable = New System.Windows.Forms.RadioButton()
@@ -65,6 +76,8 @@ Partial Class frmMainScreenWaste
         Me.pnlHeader.SuspendLayout()
         Me.pnlRadioButtons.SuspendLayout()
         Me.pnlSignOff.SuspendLayout()
+        Me.pnlCredentials.SuspendLayout()
+        Me.pnlBarcode.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel12.SuspendLayout()
         Me.Panel11.SuspendLayout()
@@ -124,39 +137,161 @@ Partial Class frmMainScreenWaste
         Me.pnlRadioButtons.Controls.Add(Me.radIncorrect)
         Me.pnlRadioButtons.Location = New System.Drawing.Point(670, 148)
         Me.pnlRadioButtons.Name = "pnlRadioButtons"
-        Me.pnlRadioButtons.Size = New System.Drawing.Size(417, 438)
+        Me.pnlRadioButtons.Size = New System.Drawing.Size(497, 438)
         Me.pnlRadioButtons.TabIndex = 218
         '
         'pnlSignOff
         '
-        Me.pnlSignOff.Controls.Add(Me.txtBarcode)
-        Me.pnlSignOff.Controls.Add(Me.lblSignoff)
-        Me.pnlSignOff.Controls.Add(Me.btnWaste)
+        Me.pnlSignOff.Controls.Add(Me.pnlCredentials)
+        Me.pnlSignOff.Controls.Add(Me.pnlBarcode)
         Me.pnlSignOff.Location = New System.Drawing.Point(3, 157)
         Me.pnlSignOff.Name = "pnlSignOff"
-        Me.pnlSignOff.Size = New System.Drawing.Size(367, 150)
+        Me.pnlSignOff.Size = New System.Drawing.Size(491, 253)
         Me.pnlSignOff.TabIndex = 24
+        '
+        'pnlCredentials
+        '
+        Me.pnlCredentials.Controls.Add(Me.txtPassword)
+        Me.pnlCredentials.Controls.Add(Me.Label5)
+        Me.pnlCredentials.Controls.Add(Me.lblFirstName)
+        Me.pnlCredentials.Controls.Add(Me.lblUseBarcode)
+        Me.pnlCredentials.Controls.Add(Me.txtUsername)
+        Me.pnlCredentials.Controls.Add(Me.Label11)
+        Me.pnlCredentials.Controls.Add(Me.btnWasteWithCredentials)
+        Me.pnlCredentials.Dock = System.Windows.Forms.DockStyle.Left
+        Me.pnlCredentials.Location = New System.Drawing.Point(245, 0)
+        Me.pnlCredentials.Name = "pnlCredentials"
+        Me.pnlCredentials.Size = New System.Drawing.Size(242, 253)
+        Me.pnlCredentials.TabIndex = 221
+        '
+        'txtPassword
+        '
+        Me.txtPassword.BackColor = System.Drawing.Color.White
+        Me.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtPassword.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPassword.Location = New System.Drawing.Point(8, 122)
+        Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.ShortcutsEnabled = False
+        Me.txtPassword.Size = New System.Drawing.Size(220, 25)
+        Me.txtPassword.TabIndex = 223
+        Me.txtPassword.UseSystemPasswordChar = True
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
+        Me.Label5.Location = New System.Drawing.Point(6, 98)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(79, 21)
+        Me.Label5.TabIndex = 222
+        Me.Label5.Text = "Password:"
+        '
+        'lblFirstName
+        '
+        Me.lblFirstName.AutoSize = True
+        Me.lblFirstName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFirstName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
+        Me.lblFirstName.Location = New System.Drawing.Point(3, 38)
+        Me.lblFirstName.Name = "lblFirstName"
+        Me.lblFirstName.Size = New System.Drawing.Size(84, 21)
+        Me.lblFirstName.TabIndex = 221
+        Me.lblFirstName.Text = "Username:"
+        '
+        'lblUseBarcode
+        '
+        Me.lblUseBarcode.AutoSize = True
+        Me.lblUseBarcode.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblUseBarcode.ForeColor = System.Drawing.Color.Black
+        Me.lblUseBarcode.Location = New System.Drawing.Point(56, 199)
+        Me.lblUseBarcode.Name = "lblUseBarcode"
+        Me.lblUseBarcode.Size = New System.Drawing.Size(133, 17)
+        Me.lblUseBarcode.TabIndex = 220
+        Me.lblUseBarcode.Text = "Scan Barcode Instead"
+        '
+        'txtUsername
+        '
+        Me.txtUsername.BackColor = System.Drawing.Color.White
+        Me.txtUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtUsername.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtUsername.Location = New System.Drawing.Point(8, 61)
+        Me.txtUsername.Name = "txtUsername"
+        Me.txtUsername.ShortcutsEnabled = False
+        Me.txtUsername.Size = New System.Drawing.Size(220, 25)
+        Me.txtUsername.TabIndex = 217
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(3, 6)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(235, 25)
+        Me.Label11.TabIndex = 32
+        Me.Label11.Text = "Witness Sign-off Required"
+        '
+        'btnWasteWithCredentials
+        '
+        Me.btnWasteWithCredentials.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnWasteWithCredentials.FlatAppearance.BorderSize = 0
+        Me.btnWasteWithCredentials.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnWasteWithCredentials.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnWasteWithCredentials.ForeColor = System.Drawing.Color.White
+        Me.btnWasteWithCredentials.Image = CType(resources.GetObject("btnWasteWithCredentials.Image"), System.Drawing.Image)
+        Me.btnWasteWithCredentials.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnWasteWithCredentials.Location = New System.Drawing.Point(47, 159)
+        Me.btnWasteWithCredentials.Name = "btnWasteWithCredentials"
+        Me.btnWasteWithCredentials.Size = New System.Drawing.Size(150, 37)
+        Me.btnWasteWithCredentials.TabIndex = 31
+        Me.btnWasteWithCredentials.Text = "   SUBMIT"
+        Me.btnWasteWithCredentials.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnWasteWithCredentials.UseVisualStyleBackColor = False
+        '
+        'pnlBarcode
+        '
+        Me.pnlBarcode.Controls.Add(Me.txtBarcode)
+        Me.pnlBarcode.Controls.Add(Me.Label12)
+        Me.pnlBarcode.Controls.Add(Me.lblBadge)
+        Me.pnlBarcode.Controls.Add(Me.btnWaste)
+        Me.pnlBarcode.Controls.Add(Me.Label13)
+        Me.pnlBarcode.Dock = System.Windows.Forms.DockStyle.Left
+        Me.pnlBarcode.Location = New System.Drawing.Point(0, 0)
+        Me.pnlBarcode.Name = "pnlBarcode"
+        Me.pnlBarcode.Size = New System.Drawing.Size(245, 253)
+        Me.pnlBarcode.TabIndex = 220
         '
         'txtBarcode
         '
         Me.txtBarcode.BackColor = System.Drawing.Color.White
         Me.txtBarcode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtBarcode.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBarcode.Location = New System.Drawing.Point(18, 41)
+        Me.txtBarcode.Location = New System.Drawing.Point(4, 61)
         Me.txtBarcode.Name = "txtBarcode"
         Me.txtBarcode.ShortcutsEnabled = False
-        Me.txtBarcode.Size = New System.Drawing.Size(329, 25)
+        Me.txtBarcode.Size = New System.Drawing.Size(230, 25)
         Me.txtBarcode.TabIndex = 217
         '
-        'lblSignoff
+        'Label12
         '
-        Me.lblSignoff.AutoSize = True
-        Me.lblSignoff.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSignoff.Location = New System.Drawing.Point(13, 13)
-        Me.lblSignoff.Name = "lblSignoff"
-        Me.lblSignoff.Size = New System.Drawing.Size(235, 25)
-        Me.lblSignoff.TabIndex = 32
-        Me.lblSignoff.Text = "Witness Sign-off Required"
+        Me.Label12.AutoSize = True
+        Me.Label12.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.ForeColor = System.Drawing.Color.Black
+        Me.Label12.Location = New System.Drawing.Point(74, 41)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(88, 17)
+        Me.Label12.TabIndex = 219
+        Me.Label12.Text = "Scan barcode"
+        '
+        'lblBadge
+        '
+        Me.lblBadge.AutoSize = True
+        Me.lblBadge.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblBadge.ForeColor = System.Drawing.Color.Black
+        Me.lblBadge.Location = New System.Drawing.Point(46, 141)
+        Me.lblBadge.Name = "lblBadge"
+        Me.lblBadge.Size = New System.Drawing.Size(144, 17)
+        Me.lblBadge.TabIndex = 218
+        Me.lblBadge.Text = "Enter Password Instead"
         '
         'btnWaste
         '
@@ -167,13 +302,23 @@ Partial Class frmMainScreenWaste
         Me.btnWaste.ForeColor = System.Drawing.Color.White
         Me.btnWaste.Image = CType(resources.GetObject("btnWaste.Image"), System.Drawing.Image)
         Me.btnWaste.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnWaste.Location = New System.Drawing.Point(112, 81)
+        Me.btnWaste.Location = New System.Drawing.Point(40, 101)
         Me.btnWaste.Name = "btnWaste"
         Me.btnWaste.Size = New System.Drawing.Size(150, 37)
         Me.btnWaste.TabIndex = 31
         Me.btnWaste.Text = "   SUBMIT"
         Me.btnWaste.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnWaste.UseVisualStyleBackColor = False
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(4, 8)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(235, 25)
+        Me.Label13.TabIndex = 32
+        Me.Label13.Text = "Witness Sign-off Required"
         '
         'txtOther
         '
@@ -567,7 +712,10 @@ Partial Class frmMainScreenWaste
         Me.pnlRadioButtons.ResumeLayout(False)
         Me.pnlRadioButtons.PerformLayout()
         Me.pnlSignOff.ResumeLayout(False)
-        Me.pnlSignOff.PerformLayout()
+        Me.pnlCredentials.ResumeLayout(False)
+        Me.pnlCredentials.PerformLayout()
+        Me.pnlBarcode.ResumeLayout(False)
+        Me.pnlBarcode.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.Panel12.ResumeLayout(False)
         Me.Panel12.PerformLayout()
@@ -592,7 +740,6 @@ Partial Class frmMainScreenWaste
     Friend WithEvents pnlRadioButtons As Panel
     Friend WithEvents pnlSignOff As Panel
     Friend WithEvents txtBarcode As TextBox
-    Friend WithEvents lblSignoff As Label
     Friend WithEvents btnWaste As Button
     Friend WithEvents txtOther As TextBox
     Friend WithEvents rbtnOther As RadioButton
@@ -625,4 +772,16 @@ Partial Class frmMainScreenWaste
     Friend WithEvents Label1 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label10 As Label
+    Friend WithEvents pnlCredentials As Panel
+    Friend WithEvents txtPassword As TextBox
+    Friend WithEvents Label5 As Label
+    Friend WithEvents lblFirstName As Label
+    Friend WithEvents lblUseBarcode As Label
+    Friend WithEvents txtUsername As TextBox
+    Friend WithEvents Label11 As Label
+    Friend WithEvents btnWasteWithCredentials As Button
+    Friend WithEvents pnlBarcode As Panel
+    Friend WithEvents Label12 As Label
+    Friend WithEvents lblBadge As Label
+    Friend WithEvents Label13 As Label
 End Class
