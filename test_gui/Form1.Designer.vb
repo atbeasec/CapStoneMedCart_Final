@@ -426,7 +426,7 @@ Partial Class frmMain
         Me.btnEndOfShiftCount.Size = New System.Drawing.Size(210, 44)
         Me.btnEndOfShiftCount.TabIndex = 26
         Me.btnEndOfShiftCount.Tag = "7"
-        Me.btnEndOfShiftCount.Text = "End Of Shift Count"
+        Me.btnEndOfShiftCount.Text = "Restock Inventory"
         Me.btnEndOfShiftCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnEndOfShiftCount.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnEndOfShiftCount.UseVisualStyleBackColor = False
