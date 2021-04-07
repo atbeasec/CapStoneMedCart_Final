@@ -201,9 +201,9 @@ Public Class frmMyPatients
         For Each ctl In flpMyPatientRecords.Controls
             For Each pnlPadding In ctl.Controls
                 For Each pnlMain In pnlPadding.Controls
-
-                    AddHandler pnlMain.Click, AddressOf frmPatientRecords.DynamicSingleClickOpenPatient
-
+                    If pnlMain.Name.Contains("lbl") Then
+                        AddHandler pnlMain.Click, AddressOf frmPatientRecords.DynamicSingleClickOpenPatient
+                    End If
                 Next
             Next
         Next
