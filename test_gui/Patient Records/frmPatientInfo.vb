@@ -491,7 +491,7 @@
                     ExecuteInsertQuery("INSERT INTO AllergyOverride(AllergyOverride_ID, Patient_TUID, User_TUID, Allergy_Name, DateTime) " &
                                                "Values(" & intMaxAllergyID & ", " & intPatientID & ", " & LoggedInID & ", '" & allergy & "', '" & DateTime.Now & "')")
                 Else
-                    MessageBox.Show("Dispense canceled by user.")
+                    '   MessageBox.Show("Dispense canceled by user.")
                     blnOverride = False
                     blnSignedOff = False
                     Exit Sub

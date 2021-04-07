@@ -56,6 +56,7 @@
     End Sub
 
     Private Sub frmWitnessSignOff_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        pnlBarcode.Visible = True
         pnlCredentials.Visible = False
     End Sub
 
