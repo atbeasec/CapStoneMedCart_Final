@@ -291,7 +291,7 @@ Module PatientInformation
         'and i add on to a string builder to let the user know all the items that were changed after is saves everything
         With frmPatientInfo
             If Not frmPatientInfo.txtFirstName.Text.Equals(frmPatientInfo.txtFirstName.Tag) Then
-                If .txtFirstName.Text = String.Empty Or .txtFirstName.Text.Length <= 3 Then
+                If .txtFirstName.Text = String.Empty Or .txtFirstName.Text.Length <= 2 Then
                     strbErrorMessage.AppendLine("First must be longer than 2 character ")
                     blnIssue = True
                     .txtFirstName.Text = .txtFirstName.Tag
@@ -332,7 +332,7 @@ Module PatientInformation
 
             'this is for checking if last name was changed
             If Not frmPatientInfo.txtLast.Text.Equals(frmPatientInfo.txtLast.Tag) Then
-                If .txtLast.Text = String.Empty Or .txtLast.Text.Length <= 3 Then
+                If .txtLast.Text = String.Empty Or .txtLast.Text.Length <= 2 Then
                     strbErrorMessage.AppendLine("Last name must be longer than 2 characters")
                     blnIssue = True
                     .txtLast.Text = .txtLast.Tag

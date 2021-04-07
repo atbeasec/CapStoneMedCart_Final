@@ -127,7 +127,7 @@ Public Class frmDispense
         pnlAmountInDrawer.Visible = False
         pnlAmountAdministered.Visible = False
         pnlSelector.Visible = False
-
+        btnReopenDrawer.Visible = False
     End Sub
 
 
@@ -188,6 +188,7 @@ Public Class frmDispense
         'get if the drug is a narcotic and get the drawer the medication selected is in 
         Dim NarcoticFlag As Integer = CreateDatabase.ExecuteScalarQuery("Select Controlled_Flag from Medication where Medication_ID = '" & intMedicationID & "' and Active_Flag = '1'")
         Dim intdrawerNumber As Integer = CreateDatabase.ExecuteScalarQuery("Select Drawers_TUID from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
+        btnReopenDrawer.Visible = True
         'check for what set in the process the dispense is in.
         If lblDirections.Text.Equals("Select Amount To Dispense:") Then
             'check to see if the amount is a numeric
