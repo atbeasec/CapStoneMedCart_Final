@@ -758,7 +758,7 @@ Public Class frmNewPatient
     '/*********************************************************************/
 
     Private Sub txtCity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtCity.KeyPress
-        DataVaildationMethods.KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz 0123456789.'-#@%&/")
+        DataVaildationMethods.KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz -")
     End Sub
 
     Private Sub mtbDOB_KeyPress(sender As Object, e As KeyPressEventArgs) 
