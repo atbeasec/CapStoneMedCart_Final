@@ -290,7 +290,7 @@
     Private Sub cmbAllergies_SelectedValueChanged(sender As Object, e As EventArgs) Handles cmbAllergies.SelectedValueChanged
         cmbAllergies.DroppedDown = False
         If cmbAllergies.FindStringExact(cmbAllergies.Text) = -1 Then
-            cmbAllergiesType.SelectedIndex = -1
+            cmbAllergiesType.SelectedIndex = 0
             cmbSeverity.SelectedIndex = 0
 
         Else
@@ -460,7 +460,10 @@
         btnAllergySave.Visible = False
         cmbAllergies.Enabled = True
         cmbAllergiesType.Enabled = True
-        'cmbMedicationName.Enabled = True
+        cmbAllergies.SelectedIndex = -1
+        cmbAllergiesType.SelectedIndex = 0
+        cmbSeverity.SelectedIndex = 0
+        lblAction.Text = "Add a new allergy:"
     End Sub
     Private Sub frmAllergies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         btnAllergyCancel.Visible = False
@@ -469,11 +472,11 @@
 
         Dim dsAllergies = CreateDatabase.ExecuteSelectQuery("Select * From Allergy ORDER BY Allergy_Type, Allergy_Name ;")
         Dim dsDrugAllergies = CreateDatabase.ExecuteSelectQuery("Select * From Allergy WHERE Allergy_Type = 'Drug' ORDER BY Allergy_Type, Allergy_Name ;")
-        Dim dsAllergyType = CreateDatabase.ExecuteSelectQuery("Select DISTINCT Allergy_Type from Allergy;")
+        'Dim dsAllergyType = CreateDatabase.ExecuteSelectQuery("Select DISTINCT Allergy_Type from Allergy;")
 
         populateAllergiesComboBox(cmbAllergies, dsAllergies)
         'populateMedicationComboBox(cmbMedicationName, dsDrugAllergies)
-        populateAllergyTypeComboBox(cmbAllergiesType, dsAllergyType)
+        'populateAllergyTypeComboBox(cmbAllergiesType, dsAllergyType)
         Dim strSeverity As String = " "
         Dim intPatientTuid As Integer = GetPatientTuid()
         LoadAllergiesPanel(strSeverity, intPatientTuid)
@@ -574,8 +577,8 @@
     End Sub
     Private Sub ClearComboBoxes()
         cmbAllergies.SelectedIndex = -1
-        cmbAllergiesType.SelectedIndex = -1
-        cmbSeverity.SelectedIndex = -1
+        cmbAllergiesType.SelectedIndex = 0
+        cmbSeverity.SelectedIndex = 0
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
