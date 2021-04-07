@@ -801,7 +801,7 @@ Module CartInterfaceCode
             If CInt(item) > 1 Then
                 item = (CInt(item) + 1).ToString
             End If
-            If errorChecking(item).Then Then
+            If errorChecking(item) Then
                 'the cart doesn't have a drawer 2 so if it is 2 or higher we add one
                 blnIssue = True
             End If
