@@ -120,7 +120,7 @@ Partial Class frmMainScreenWaste
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(666, 120)
+        Me.Label2.Location = New System.Drawing.Point(666, 103)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(163, 25)
         Me.Label2.TabIndex = 220
@@ -135,9 +135,9 @@ Partial Class frmMainScreenWaste
         Me.pnlRadioButtons.Controls.Add(Me.radRefused)
         Me.pnlRadioButtons.Controls.Add(Me.radCancel)
         Me.pnlRadioButtons.Controls.Add(Me.radIncorrect)
-        Me.pnlRadioButtons.Location = New System.Drawing.Point(670, 148)
+        Me.pnlRadioButtons.Location = New System.Drawing.Point(670, 131)
         Me.pnlRadioButtons.Name = "pnlRadioButtons"
-        Me.pnlRadioButtons.Size = New System.Drawing.Size(497, 438)
+        Me.pnlRadioButtons.Size = New System.Drawing.Size(497, 513)
         Me.pnlRadioButtons.TabIndex = 218
         '
         'pnlSignOff
@@ -146,7 +146,7 @@ Partial Class frmMainScreenWaste
         Me.pnlSignOff.Controls.Add(Me.pnlBarcode)
         Me.pnlSignOff.Location = New System.Drawing.Point(3, 157)
         Me.pnlSignOff.Name = "pnlSignOff"
-        Me.pnlSignOff.Size = New System.Drawing.Size(491, 253)
+        Me.pnlSignOff.Size = New System.Drawing.Size(491, 353)
         Me.pnlSignOff.TabIndex = 24
         '
         'pnlCredentials
@@ -161,7 +161,7 @@ Partial Class frmMainScreenWaste
         Me.pnlCredentials.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlCredentials.Location = New System.Drawing.Point(245, 0)
         Me.pnlCredentials.Name = "pnlCredentials"
-        Me.pnlCredentials.Size = New System.Drawing.Size(242, 253)
+        Me.pnlCredentials.Size = New System.Drawing.Size(242, 353)
         Me.pnlCredentials.TabIndex = 221
         '
         'txtPassword
@@ -257,7 +257,7 @@ Partial Class frmMainScreenWaste
         Me.pnlBarcode.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlBarcode.Location = New System.Drawing.Point(0, 0)
         Me.pnlBarcode.Name = "pnlBarcode"
-        Me.pnlBarcode.Size = New System.Drawing.Size(245, 253)
+        Me.pnlBarcode.Size = New System.Drawing.Size(245, 353)
         Me.pnlBarcode.TabIndex = 220
         '
         'txtBarcode
@@ -391,7 +391,7 @@ Partial Class frmMainScreenWaste
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(237, 132)
+        Me.Label6.Location = New System.Drawing.Point(237, 119)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(166, 21)
         Me.Label6.TabIndex = 235
@@ -401,7 +401,7 @@ Partial Class frmMainScreenWaste
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(10, 132)
+        Me.Label3.Location = New System.Drawing.Point(10, 119)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(100, 21)
         Me.Label3.TabIndex = 232
@@ -411,7 +411,7 @@ Partial Class frmMainScreenWaste
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(492, 132)
+        Me.Label8.Location = New System.Drawing.Point(492, 119)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(96, 21)
         Me.Label8.TabIndex = 231
@@ -421,7 +421,7 @@ Partial Class frmMainScreenWaste
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(10, 55)
+        Me.Label7.Location = New System.Drawing.Point(10, 42)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(105, 21)
         Me.Label7.TabIndex = 230
@@ -431,7 +431,7 @@ Partial Class frmMainScreenWaste
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(10, 291)
+        Me.Label9.Location = New System.Drawing.Point(10, 278)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(179, 21)
         Me.Label9.TabIndex = 239
@@ -441,7 +441,7 @@ Partial Class frmMainScreenWaste
         '
         Me.Label17.AutoSize = True
         Me.Label17.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(10, 210)
+        Me.Label17.Location = New System.Drawing.Point(10, 197)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(90, 21)
         Me.Label17.TabIndex = 238
@@ -451,7 +451,7 @@ Partial Class frmMainScreenWaste
         '
         Me.Panel1.BackColor = System.Drawing.Color.DarkGray
         Me.Panel1.Controls.Add(Me.cmbMedications)
-        Me.Panel1.Location = New System.Drawing.Point(14, 234)
+        Me.Panel1.Location = New System.Drawing.Point(14, 221)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel1.Size = New System.Drawing.Size(604, 31)
@@ -476,7 +476,7 @@ Partial Class frmMainScreenWaste
         '
         Me.Panel12.BackColor = System.Drawing.Color.DarkGray
         Me.Panel12.Controls.Add(Me.txtDateOfBirth)
-        Me.Panel12.Location = New System.Drawing.Point(496, 158)
+        Me.Panel12.Location = New System.Drawing.Point(496, 145)
         Me.Panel12.Name = "Panel12"
         Me.Panel12.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel12.Size = New System.Drawing.Size(122, 28)
@@ -501,7 +501,7 @@ Partial Class frmMainScreenWaste
         '
         Me.Panel11.BackColor = System.Drawing.Color.DarkGray
         Me.Panel11.Controls.Add(Me.txtDrawerBin)
-        Me.Panel11.Location = New System.Drawing.Point(14, 314)
+        Me.Panel11.Location = New System.Drawing.Point(14, 301)
         Me.Panel11.Name = "Panel11"
         Me.Panel11.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel11.Size = New System.Drawing.Size(296, 28)
@@ -526,7 +526,7 @@ Partial Class frmMainScreenWaste
         '
         Me.Panel6.BackColor = System.Drawing.Color.DarkGray
         Me.Panel6.Controls.Add(Me.txtRoomBed)
-        Me.Panel6.Location = New System.Drawing.Point(241, 158)
+        Me.Panel6.Location = New System.Drawing.Point(241, 145)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel6.Size = New System.Drawing.Size(209, 28)
@@ -551,7 +551,7 @@ Partial Class frmMainScreenWaste
         '
         Me.Panel4.BackColor = System.Drawing.Color.DarkGray
         Me.Panel4.Controls.Add(Me.txtMRN)
-        Me.Panel4.Location = New System.Drawing.Point(14, 158)
+        Me.Panel4.Location = New System.Drawing.Point(14, 145)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel4.Size = New System.Drawing.Size(175, 28)
@@ -576,7 +576,7 @@ Partial Class frmMainScreenWaste
         '
         Me.Panel2.BackColor = System.Drawing.Color.DarkGray
         Me.Panel2.Controls.Add(Me.cmbPatientName)
-        Me.Panel2.Location = New System.Drawing.Point(15, 79)
+        Me.Panel2.Location = New System.Drawing.Point(15, 66)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel2.Size = New System.Drawing.Size(602, 31)
@@ -603,7 +603,7 @@ Partial Class frmMainScreenWaste
         '
         Me.Panel3.BackColor = System.Drawing.Color.DarkGray
         Me.Panel3.Controls.Add(Me.txtQuantity)
-        Me.Panel3.Location = New System.Drawing.Point(670, 79)
+        Me.Panel3.Location = New System.Drawing.Point(670, 66)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel3.Size = New System.Drawing.Size(158, 31)
@@ -628,7 +628,7 @@ Partial Class frmMainScreenWaste
         '
         Me.Panel5.BackColor = System.Drawing.Color.DarkGray
         Me.Panel5.Controls.Add(Me.txtUnit)
-        Me.Panel5.Location = New System.Drawing.Point(844, 79)
+        Me.Panel5.Location = New System.Drawing.Point(844, 66)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel5.Size = New System.Drawing.Size(64, 31)
@@ -654,7 +654,7 @@ Partial Class frmMainScreenWaste
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold)
-        Me.Label1.Location = New System.Drawing.Point(12, 13)
+        Me.Label1.Location = New System.Drawing.Point(9, 6)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(114, 25)
         Me.Label1.TabIndex = 251
@@ -664,7 +664,7 @@ Partial Class frmMainScreenWaste
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(667, 55)
+        Me.Label4.Location = New System.Drawing.Point(667, 42)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(124, 21)
         Me.Label4.TabIndex = 252
@@ -674,7 +674,7 @@ Partial Class frmMainScreenWaste
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(840, 55)
+        Me.Label10.Location = New System.Drawing.Point(840, 42)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(49, 21)
         Me.Label10.TabIndex = 253
@@ -685,7 +685,7 @@ Partial Class frmMainScreenWaste
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1203, 593)
+        Me.ClientSize = New System.Drawing.Size(1203, 656)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label1)

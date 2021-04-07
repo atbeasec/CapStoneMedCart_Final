@@ -37,7 +37,12 @@
 
     Private Sub RadioButton6_CheckedChanged(sender As Object, e As EventArgs) Handles rbtnOther.CheckedChanged
 
-        MovePanelOnScreen()
+        ' MovePanelOnScreen()
+        If rbtnOther.Checked = True Then
+            pnlSignOff.Location = New Point(4, 225)
+        Else
+            pnlSignOff.Location = New Point(4, 153)
+        End If
 
     End Sub
 
@@ -96,18 +101,21 @@
         intNarcoticFlagGlobal = intNarcoticFlag
 
         If intNarcoticFlagGlobal = 1 Then
-            lblSignoff.Visible = True
-            txtBarcode.Visible = True
+
+
             Label7.Visible = True
-            lblBadge.Visible = True
-            pnlCredentials.Visible = False
+
+
         Else
-            lblSignoff.Visible = False
-            txtBarcode.Visible = False
+
+
             Label7.Visible = False
-            lblBadge.Visible = False
-            pnlCredentials.Visible = False
+
+
         End If
+
+        '  pnlBarcode.Visible = True
+        pnlCredentials.Visible = False
 
 
     End Sub

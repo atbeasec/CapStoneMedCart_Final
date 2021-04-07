@@ -70,7 +70,7 @@ Partial Class frmWaste
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(296, 224)
+        Me.Label2.Location = New System.Drawing.Point(296, 165)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(163, 25)
         Me.Label2.TabIndex = 26
@@ -80,7 +80,7 @@ Partial Class frmWaste
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(292, 71)
+        Me.Label1.Location = New System.Drawing.Point(292, 44)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(114, 25)
         Me.Label1.TabIndex = 25
@@ -95,18 +95,18 @@ Partial Class frmWaste
         Me.pnlRadioButtons.Controls.Add(Me.radRefused)
         Me.pnlRadioButtons.Controls.Add(Me.radCancel)
         Me.pnlRadioButtons.Controls.Add(Me.radIncorrect)
-        Me.pnlRadioButtons.Location = New System.Drawing.Point(297, 252)
+        Me.pnlRadioButtons.Location = New System.Drawing.Point(297, 193)
         Me.pnlRadioButtons.Name = "pnlRadioButtons"
-        Me.pnlRadioButtons.Size = New System.Drawing.Size(524, 441)
+        Me.pnlRadioButtons.Size = New System.Drawing.Size(524, 449)
         Me.pnlRadioButtons.TabIndex = 23
         '
         'pnlSignOff
         '
         Me.pnlSignOff.Controls.Add(Me.pnlCredentials)
         Me.pnlSignOff.Controls.Add(Me.pnlBarcode)
-        Me.pnlSignOff.Location = New System.Drawing.Point(4, 158)
+        Me.pnlSignOff.Location = New System.Drawing.Point(3, 153)
         Me.pnlSignOff.Name = "pnlSignOff"
-        Me.pnlSignOff.Size = New System.Drawing.Size(517, 223)
+        Me.pnlSignOff.Size = New System.Drawing.Size(517, 293)
         Me.pnlSignOff.TabIndex = 24
         '
         'pnlCredentials
@@ -121,7 +121,7 @@ Partial Class frmWaste
         Me.pnlCredentials.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlCredentials.Location = New System.Drawing.Point(245, 0)
         Me.pnlCredentials.Name = "pnlCredentials"
-        Me.pnlCredentials.Size = New System.Drawing.Size(242, 223)
+        Me.pnlCredentials.Size = New System.Drawing.Size(242, 293)
         Me.pnlCredentials.TabIndex = 219
         '
         'txtPassword
@@ -217,7 +217,7 @@ Partial Class frmWaste
         Me.pnlBarcode.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlBarcode.Location = New System.Drawing.Point(0, 0)
         Me.pnlBarcode.Name = "pnlBarcode"
-        Me.pnlBarcode.Size = New System.Drawing.Size(245, 223)
+        Me.pnlBarcode.Size = New System.Drawing.Size(245, 293)
         Me.pnlBarcode.TabIndex = 218
         '
         'Label7
@@ -287,7 +287,7 @@ Partial Class frmWaste
         Me.txtOther.Multiline = True
         Me.txtOther.Name = "txtOther"
         Me.txtOther.ShortcutsEnabled = False
-        Me.txtOther.Size = New System.Drawing.Size(329, 124)
+        Me.txtOther.Size = New System.Drawing.Size(420, 61)
         Me.txtOther.TabIndex = 6
         '
         'rbtnOther
@@ -389,7 +389,7 @@ Partial Class frmWaste
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(520, 71)
+        Me.Label4.Location = New System.Drawing.Point(520, 44)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(80, 25)
         Me.Label4.TabIndex = 204
@@ -399,7 +399,7 @@ Partial Class frmWaste
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold)
-        Me.Label5.Location = New System.Drawing.Point(295, 148)
+        Me.Label5.Location = New System.Drawing.Point(295, 105)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(199, 25)
         Me.Label5.TabIndex = 213
@@ -414,7 +414,7 @@ Partial Class frmWaste
         Me.txtUnit.BackColor = System.Drawing.Color.White
         Me.txtUnit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtUnit.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUnit.Location = New System.Drawing.Point(469, 176)
+        Me.txtUnit.Location = New System.Drawing.Point(469, 133)
         Me.txtUnit.Name = "txtUnit"
         Me.txtUnit.ReadOnly = True
         Me.txtUnit.ShortcutsEnabled = False
@@ -426,7 +426,7 @@ Partial Class frmWaste
         Me.txtQuantity.BackColor = System.Drawing.Color.White
         Me.txtQuantity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtQuantity.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtQuantity.Location = New System.Drawing.Point(300, 176)
+        Me.txtQuantity.Location = New System.Drawing.Point(297, 133)
         Me.txtQuantity.MaxLength = 5
         Me.txtQuantity.Name = "txtQuantity"
         Me.txtQuantity.ShortcutsEnabled = False
@@ -438,7 +438,7 @@ Partial Class frmWaste
         Me.txtMedication.BackColor = System.Drawing.Color.White
         Me.txtMedication.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtMedication.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMedication.Location = New System.Drawing.Point(297, 99)
+        Me.txtMedication.Location = New System.Drawing.Point(297, 72)
         Me.txtMedication.Name = "txtMedication"
         Me.txtMedication.ReadOnly = True
         Me.txtMedication.ShortcutsEnabled = False
@@ -450,7 +450,7 @@ Partial Class frmWaste
         Me.txtDrawer.BackColor = System.Drawing.Color.White
         Me.txtDrawer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtDrawer.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDrawer.Location = New System.Drawing.Point(525, 99)
+        Me.txtDrawer.Location = New System.Drawing.Point(525, 72)
         Me.txtDrawer.Name = "txtDrawer"
         Me.txtDrawer.ReadOnly = True
         Me.txtDrawer.ShortcutsEnabled = False
