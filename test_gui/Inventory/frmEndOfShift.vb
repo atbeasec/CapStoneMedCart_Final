@@ -265,7 +265,7 @@
                 ' retreiving list of all panels within the padding
 
                 'check if the panel is marked as red
-                If pnlPanel.BackColor = Color.Red Then
+                If pnlPanel.BackColor = Color.FromArgb(71, 103, 216) Then
 
                     For Each ctlControl In pnlPanel.Controls
                         ' retreiving the items in the panel such as labels and textbox values

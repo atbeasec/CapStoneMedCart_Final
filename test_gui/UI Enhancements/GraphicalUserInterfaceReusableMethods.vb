@@ -362,6 +362,13 @@ Module GraphicalUserInterfaceReusableMethods
 
         Dim systemCount As Integer = CInt(FindLabelOnPanel(pnlFlaggedPannel).Text)
 
+        Dim ctl As Control
+
+        For Each ctl In pnlFlaggedPannel.Controls
+            If ctl.Name.Contains("lbl") Then
+                ctl.ForeColor = Color.White
+            End If
+        Next
 
         ' when using the flag, we need to check that the system count is not the same as the user count
         ' if it is, then there is nothing to flag and we need to let the user know that incase they
@@ -382,16 +389,15 @@ Module GraphicalUserInterfaceReusableMethods
                 ' at this point there is a valid difference and we will want to lock the textbox and change
                 ' the color of the panel so it is clear a discrepancy is being marked.
 
-                If Not pnlFlaggedPannel.BackColor = Color.Red Then
+                If Not pnlFlaggedPannel.BackColor = Color.FromArgb(71, 103, 216) Then
 
                     'find the textbox and set the field to be read only
                     'txtBoxOnFlaggedPanel.ReadOnly = True
                     'txtBoxOnFlaggedPanel.AcceptsTab = False
 
                     txtBoxOnFlaggedPanel.Enabled = False
-
-                    ' change the panel color to be red
-                    pnlFlaggedPannel.BackColor = Color.Red
+                    ' change the panel color to be blue
+                    pnlFlaggedPannel.BackColor = Color.FromArgb(71, 103, 216)
 
                 Else
 
@@ -402,6 +408,13 @@ Module GraphicalUserInterfaceReusableMethods
 
                     ' change the panel color to be white
                     pnlFlaggedPannel.BackColor = Color.White
+
+                    ' reset label color
+                    For Each ctl In pnlFlaggedPannel.Controls
+                        If ctl.Name.Contains("lbl") Then
+                            ctl.ForeColor = Color.Black
+                        End If
+                    Next
 
                 End If
 
