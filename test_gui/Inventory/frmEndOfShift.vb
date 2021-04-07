@@ -150,7 +150,7 @@
     '/*  WHO   WHEN     WHAT								              */             
     '/*  Collin Krygier  2/5/2021    Initial creation                     */
     '/*********************************************************************/
-    Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal intMedicationTUID As String, ByVal strMedicationName As String, ByVal strDrawerNumber As String, ByVal strSection As String, ByVal strSystemCount As String)
+    Public Sub CreatePanel(ByVal flpPannel As FlowLayoutPanel, ByVal intMedicationTUID As String, ByVal strMedicationName As String, ByVal strDrawerNumber As String, ByVal strSection As String, ByVal strSystemCount As String, ByRef intDrawerMEDID As Integer)
 
         Dim pnl As Panel
         pnl = New Panel
@@ -205,8 +205,9 @@
         CreateIDLabel(pnlMainPanel, lblID4, "lblSystemCount", lblSystemCount.Location.X, 20, strSystemCount, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
-        flpPannel.Controls.Add(pnl)
 
+        flpPannel.Controls.Add(pnl)
+        pnlMainPanel.Tag = intDrawerMEDID
     End Sub
 
     '/*********************************************************************/
@@ -277,19 +278,9 @@
                             'Debug.Print(pnlPanel.BackColor.ToString) 'if the backcolor is red, then the item was flagged
 
                             Dim medicationID As String = pnlPanel.Tag
-                            Dim userCount As Integer = CInt(txtBox.Text)
+                            Dim userCount As Double = CDbl(txtBox.Text)
 
 
-                            If Discrepancies.IsInsertedAlready(medicationID, userCount) = True Then
-
-                                '   update the record to make sure the new count is selected.
-                                Discrepancies.UpdateSplit(medicationID, userCount)
-                            Else
-
-                                '   insert the record because it is not already in the database.
-                                Discrepancies.InsertSplit(medicationID, userCount)
-
-                            End If
 
                         End If
                     Next
