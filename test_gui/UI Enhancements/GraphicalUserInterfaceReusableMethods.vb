@@ -386,6 +386,11 @@ Module GraphicalUserInterfaceReusableMethods
 
             If systemCount = CInt(txtBoxOnFlaggedPanel.Text) Then
 
+                For Each ctl In pnlFlaggedPannel.Controls
+                    If ctl.Name.Contains("lbl") Then
+                        ctl.ForeColor = Color.Black
+                    End If
+                Next
                 MessageBox.Show("The system count matches the entered count. This will not be flagged as a discrepancy .")
 
             Else
