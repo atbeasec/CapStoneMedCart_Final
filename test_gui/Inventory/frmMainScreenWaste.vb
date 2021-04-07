@@ -103,10 +103,10 @@
             intNarcoticFlagGlobal = intNarcoticFlag
             If intNarcoticFlag = 1 Then
                 txtBarcode.Visible = True
-                lblSignoff.Visible = True
+                pnlSignOff.Visible = True
             ElseIf intNarcoticFlag = 0 Then
                 txtBarcode.Visible = False
-                lblSignoff.Visible = False
+                pnlSignOff.Visible = False
             End If
         End If
     End Sub
