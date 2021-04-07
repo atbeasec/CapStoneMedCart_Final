@@ -2,7 +2,7 @@
 Imports System.Text.RegularExpressions
 
 Public Class frmEditPhysician
-
+    Dim strSort As String
     Public Enum AddAndRemovePhysicianEnum
 
         name = 1
@@ -47,12 +47,8 @@ Public Class frmEditPhysician
     '/*  Dylan W    2/10/2021    Initial creation and pull data from DB   */
     '/*********************************************************************/
     Private Sub frmEditPhysician_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim strFillSQL As String = "select Physician.Physician_ID, Physician.Physician_First_Name, Physician.Physician_Middle_Name," &
-                                    "Physician.Physician_Last_Name, Physician.Physician_Credentials, Physician.Physician_Phone_Number," &
-                                    "Physician.Physician_Fax_Number, Physician.Physician_Address, Physician.Physician_City," &
-                                    "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician ORDER BY Physician_First_Name COLLATE NOCASE ASC;"
-        Fill_Table(strFillSQL)
-
+        lblName_Click(Nothing, Nothing)
+        lblName.Font = New Font(New FontFamily("Segoe UI Semibold"), 12, FontStyle.Underline)
         cboCredentials.Items.AddRange({"MD", "DO", "MBBS", "PhD", "DNP", "NP", "PA", "CNP", "CNNP", "PA", "CNS", "CNM"})
         PopulateStateComboBox(cboState)
         'btnSaveChanges.Visible = False
@@ -64,6 +60,7 @@ Public Class frmEditPhysician
         txtID.Visible = False
         btnSaveChanges.Visible = False
         btnCancel.Visible = False
+        strSort = "Physician_First_Name COLLATE NOCASE ASC;"
 
     End Sub
 
@@ -223,7 +220,7 @@ Public Class frmEditPhysician
         With pnl
             .BackColor = Color.Gainsboro
             .Size = New Size(flpPhysicianInfo.Size.Width - 25, 47)
-            .Name = "pnlIndividualPatientRecordPadding" + getPanelCount(flpPannel).ToString
+            .Name = "pnlIndividualPhysicianRecordPadding" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Padding = New Padding(0, 0, 0, 3)
             ' .Dock = System.Windows.Forms.DockStyle.Top
@@ -233,7 +230,7 @@ Public Class frmEditPhysician
 
             .BackColor = Color.White
             .Size = New Size(flpPhysicianInfo.Size.Width - 25, 45)
-            .Name = "pnlIndividualPatientRecord" + getPanelCount(flpPannel).ToString
+            .Name = "pnlIndividualPhysicianRecord" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Dock = System.Windows.Forms.DockStyle.Top
         End With
@@ -260,7 +257,7 @@ Public Class frmEditPhysician
         ' anywhere we have quotes except for the label names, we can call our Database and get method
 
         CreateIDLabel(pnlMainPanel, lblID, "lblID", lblName.Location.X - 15, INTTWENTY, strID, getPanelCount(flpPannel))
-        CreateIDLabelWithToolTip(pnlMainPanel, lblID2, "lblNames", lblName.Location.X, INTTWENTY, strName, getPanelCount(flpPannel), tpToolTip, TruncateString(13, strName))
+        CreateIDLabelWithToolTip(pnlMainPanel, lblID2, "lblNames", lblName.Location.X, INTTWENTY, strName, getPanelCount(flpPannel), tpToolTip, TruncateString(30, strName))
         '  CreateIDLabel(pnlMainPanel, lblID2, "lblNames", lblName.Location.X, INTTWENTY, strName, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID4, "lblPermissions", lblPermissions.Location.X, INTTWENTY, strAccess, getPanelCount(flpPannel))
         CreateIDLabel(pnlMainPanel, lblID5, "lblStatus", lblStatus.Location.X, INTTWENTY, strActive, getPanelCount(flpPannel))
@@ -363,6 +360,8 @@ Public Class frmEditPhysician
             cboCredentials.SelectedItem = Nothing
             cboState.SelectedItem = Nothing
             MessageBox.Show("Physician added.")
+
+            SortItems()
         End If
 
 
@@ -430,24 +429,164 @@ Public Class frmEditPhysician
         End If
 
 
-        Dim strFillSQL As String = "select Physician.Physician_ID, Physician.Physician_First_Name, Physician.Physician_Middle_Name," &
-                                    "Physician.Physician_Last_Name, Physician.Physician_Credentials, Physician.Physician_Phone_Number," &
-                                    "Physician.Physician_Fax_Number, Physician.Physician_Address, Physician.Physician_City," &
-                                    "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician ORDER BY Physician_First_Name COLLATE NOCASE ASC;"
-        Fill_Table(strFillSQL)
+        SortItems()
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUB NAME: RemoveHandlersAndAssociations         */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/13/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to iterate over a list of controls and remove the  */
+    '/* control handlers before removing and disposing of the controls    */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*     cmbFilter_SelectedIndexChanged                                */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*         nothing                                    				  */                     
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 A flow panel object                                              */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 RemoveHandlersAndAssociations(listOfControls, flowpanel1)    	  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	ctlControlObject- a control representing all controls             */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/13/2021    Initial creation                    */
+    '/*  Dylan Walter    4/6/2021    copied to frmConfiguration           */
+    '/*********************************************************************/
+
+    Private Sub RemoveHandlersAndAssociations(ByVal lstOfControlsToRemove As List(Of Control), flpFlowPanel As FlowLayoutPanel)
+
+        Dim ctlControlObject As Control
+        Const PANELWITHASSIGNEDHANDLERS As String = "pnlIndividualPhysicianRecord"
+        For Each ctlControlObject In lstOfControlsToRemove
+
+            If TypeName(ctlControlObject) = "TextBox" Then
+                ' no handler here
+                flpFlowPanel.Controls.Remove(ctlControlObject)
+                ctlControlObject.Dispose()
+
+            ElseIf TypeName(ctlControlObject) = "Button" Then
+                ' remove the handler that is assiged to all edit buttons
+                RemoveHandler ctlControlObject.Click, AddressOf DynamicFlagMedicationButton
+                flpFlowPanel.Controls.Remove(ctlControlObject)
+                ctlControlObject.Dispose()
+
+            ElseIf TypeName(ctlControlObject) = "Panel" And ctlControlObject.Name.Contains(PANELWITHASSIGNEDHANDLERS) Then
+
+                RemoveHandler ctlControlObject.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
+                RemoveHandler ctlControlObject.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
+                flpFlowPanel.Controls.Remove(ctlControlObject)
+                ctlControlObject.Dispose()
+            Else
+
+                flpFlowPanel.Controls.Remove(ctlControlObject)
+                ctlControlObject.Dispose()
+            End If
+
+        Next
+
+        ' clear the panel even though it should be empty at this point and all links to old controls are deleted.
+        flpFlowPanel.Controls.Clear()
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   Function NAME: GetListOfAllControls             */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/13/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to iterate over the flow panel and return all of the/
+    '/*  controls within the flow panel.                                  */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*             RemoveHandlersAndAssociations                         */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*             nothing                                				  */             
+    '/*********************************************************************/
+    '/*  Returns: A list of controls that are contained on the flowpanel  */                 
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 A flow panel object                                              */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 GetListOfAllControls(FlowPanel1)       						  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	ctlRemainingControls- a control representing all non panel controls/
+    '/* pnlMain- a control which represents a panel in this usecase       */
+    '/*     particular panel.                                             */
+    '/* pnlPadding- a control which represents a panel in this usecase    */
+    '/*     particular panel.                                             */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/13/2021    Initial creation                    */
+    '/*  Dylan Walter    4/6/2021    copied to frmConfiguration           */
+    '/*********************************************************************/
+    Private Function GetListOfAllControls(ByVal flpFlowPanel As FlowLayoutPanel)
+
+        ' the order in which this list is created is important because the controls added
+        ' to this list will need to be disposed of and have handles removed properly
+        ' to allow for effecient use of resources within the software.
+
+        Dim lstOfControlsToRemove As New List(Of Control)
+        Dim pnlPadding As Control
+        Dim pnlMain As Control
+        Dim ctlRemainingControls As Control
+
+        ' add all of the padding panels to the list
+        For Each pnlPadding In flpFlowPanel.Controls
+            lstOfControlsToRemove.Add(pnlPadding)
+        Next
+
+        ' add all of the main panels to the list
+        For Each pnlPadding In flpFlowPanel.Controls
+            For Each pnlMain In pnlPadding.Controls
+                lstOfControlsToRemove.Add(pnlMain)
+            Next
+        Next
+
+        ' add all of the remaining controls such as txtboxes, labels, and buttons to the list
+        For Each pnlPadding In flpFlowPanel.Controls
+            For Each pnlMain In pnlPadding.Controls
+                For Each ctlRemainingControls In pnlMain.Controls
+                    lstOfControlsToRemove.Add(ctlRemainingControls)
+                Next
+            Next
+        Next
+
+
+        ' List of all controls on the form is populated. Next, the controls needs to be
+        ' iterated over from last to first because if the panels are disposed of before
+        ' the single controls, the handlers and other parts will not be disposed of correctly
+        ' and may consume memory for the life of the running application.
+
+        lstOfControlsToRemove.Reverse()
+
+        Return lstOfControlsToRemove
+
+    End Function
     Public Sub Fill_Table(ByVal strFillSQL As String)
 
-        'While flpPhysicianInfo.Controls.Count > 0
-
-        '    While flpPhysicianInfo.Controls(0).Controls.Count > 0
-        '        flpPhysicianInfo.Controls(0).Controls(0).Dispose()
-        '    End While
-
-        '    flpPhysicianInfo.Controls(0).Dispose()
-        'End While
-        flpPhysicianInfo.Controls.Clear()
+        ' remove all controls and the handlers of those controls before generating new panels
+        RemoveHandlersAndAssociations(GetListOfAllControls(flpPhysicianInfo), flpPhysicianInfo)
 
         Dim dsPhysicianInfo As DataSet = CreateDatabase.ExecuteSelectQuery(strFillSQL)
 
@@ -489,98 +628,77 @@ Public Class frmEditPhysician
         btnCancel.Visible = False
         btnSaveChanges.Visible = False
         btnSave.Visible = True
-        cboCredentials.ResetText()
-        cboState.ResetText()
+        cboCredentials.SelectedIndex = 0
+        cboCredentials.Text = Nothing
+        cboState.SelectedIndex = 0
+        cboState.Text = Nothing
         lblTitle.Text = "Create New Physician"
 
     End Sub
-
-
-
 
 
     Private Sub Search_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearchBox.KeyPress
         If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
             e.KeyChar = ChrW(0)
             e.Handled = True
-            Dim strSearch = txtSearchBox.Text
-            strSearch = Regex.Replace(strSearch, "'", "''")
-
-            Dim strFillSQL = "select Physician.Physician_ID, Physician.Physician_First_Name, Physician.Physician_Middle_Name," &
-                                    "Physician.Physician_Last_Name, Physician.Physician_Credentials, Physician.Physician_Phone_Number," &
-                                    "Physician.Physician_Fax_Number, Physician.Physician_Address, Physician.Physician_City," &
-                                    "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician " &
-                                    "WHERE Physician_First_Name LIKE '" & strSearch & "%' Or Physician_Last_Name LIKE '" & strSearch & "%' Or Physician_Credentials LIKE '" & strSearch & "%';"
-            Fill_Table(strFillSQL)
+            SortItems()
         End If
-    End Sub
-
-    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearchBox.TextChanged
-
-
-        If txtSearchBox.Text = "" Then
-            Dim strFillSQL As String = "select Physician.Physician_ID, Physician.Physician_First_Name, Physician.Physician_Middle_Name," &
-                                    "Physician.Physician_Last_Name, Physician.Physician_Credentials, Physician.Physician_Phone_Number," &
-                                    "Physician.Physician_Fax_Number, Physician.Physician_Address, Physician.Physician_City," &
-                                    "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician ORDER BY Physician_First_Name COLLATE NOCASE ASC;"
-            Fill_Table(strFillSQL)
-
-        End If
-
-
-
-    End Sub
-
-    'Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
-    '    Dim strSearch = txtSearchBox.Text
-    '    strSearch = Regex.Replace(strSearch, "'", "''")
-
-    '    Dim strFillSQL = "select Physician.Physician_ID, Physician.Physician_First_Name, Physician.Physician_Middle_Name," &
-    '                                "Physician.Physician_Last_Name, Physician.Physician_Credentials, Physician.Physician_Phone_Number," &
-    '                                "Physician.Physician_Fax_Number, Physician.Physician_Address, Physician.Physician_City," &
-    '                                "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician " &
-    '                                "WHERE Physician_First_Name LIKE '" & strSearch & "%' Or Physician_Last_Name LIKE '" & strSearch & "%' Or Physician_Credentials LIKE '" & strSearch & "%';"
-    '    Fill_Table(strFillSQL)
-
-    'End Sub
-
-    Private Sub lblName_Click(sender As Object, e As EventArgs) Handles lblName.Click
-        Dim strFillSQL As String = "select Physician.Physician_ID, Physician.Physician_First_Name, Physician.Physician_Middle_Name," &
-                        "Physician.Physician_Last_Name, Physician.Physician_Credentials, Physician.Physician_Phone_Number," &
-                        "Physician.Physician_Fax_Number, Physician.Physician_Address, Physician.Physician_City," &
-                        "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician ORDER BY Physician_First_Name COLLATE NOCASE ASC;"
-        Fill_Table(strFillSQL)
-    End Sub
-
-    Private Sub lblPermissions_Click(sender As Object, e As EventArgs) Handles lblPermissions.Click
-        Dim strFillSQL As String = "select Physician.Physician_ID, Physician.Physician_First_Name, Physician.Physician_Middle_Name," &
-                "Physician.Physician_Last_Name, Physician.Physician_Credentials, Physician.Physician_Phone_Number," &
-                "Physician.Physician_Fax_Number, Physician.Physician_Address, Physician.Physician_City," &
-                "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician ORDER BY Physician_Credentials ASC;"
-        Fill_Table(strFillSQL)
-    End Sub
-
-    Private Sub lblStatus_Click(sender As Object, e As EventArgs) Handles lblStatus.Click
-        Dim strFillSQL As String = "select Physician.Physician_ID, Physician.Physician_First_Name, Physician.Physician_Middle_Name," &
-                "Physician.Physician_Last_Name, Physician.Physician_Credentials, Physician.Physician_Phone_Number," &
-                "Physician.Physician_Fax_Number, Physician.Physician_Address, Physician.Physician_City," &
-                "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician ORDER BY Active_Flag DESC;"
-        Fill_Table(strFillSQL)
     End Sub
 
     Private Sub pnlSearchIcon_Click(sender As Object, e As EventArgs) Handles pnlSearchIcon.Click
 
-        Dim strSearch = txtSearchBox.Text
-        strSearch = Regex.Replace(strSearch, "'", "''")
+        SortItems()
+    End Sub
 
-        Dim strFillSQL = "select Physician.Physician_ID, Physician.Physician_First_Name, Physician.Physician_Middle_Name," &
+    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearchBox.TextChanged
+        If txtSearchBox.Text = "" Then
+            SortItems()
+        End If
+    End Sub
+
+    Private Sub lblName_Click(sender As Object, e As EventArgs) Handles lblName.Click
+        If strSort <> "Physician_First_Name COLLATE NOCASE ASC;" Then
+            strSort = "Physician_First_Name COLLATE NOCASE ASC;"
+        Else strSort = "Physician_First_Name COLLATE NOCASE DESC;"
+        End If
+        SortItems()
+    End Sub
+
+    Private Sub lblPermissions_Click(sender As Object, e As EventArgs) Handles lblPermissions.Click
+        If strSort <> "Physician_Credentials COLLATE NOCASE ASC;" Then
+            strSort = "Physician_Credentials COLLATE NOCASE ASC;"
+        Else strSort = "Physician_Credentials COLLATE NOCASE DESC;"
+        End If
+        SortItems()
+    End Sub
+
+    Private Sub lblStatus_Click(sender As Object, e As EventArgs) Handles lblStatus.Click
+        If strSort <> "Active_Flag COLLATE NOCASE DESC;" Then
+            strSort = "Active_Flag COLLATE NOCASE DESC;"
+        Else strSort = "Active_Flag COLLATE NOCASE ASC;"
+        End If
+        SortItems()
+    End Sub
+
+    Sub SortItems()
+
+        Dim strFillSQL As String
+        Dim strSearch = txtSearchBox.Text
+        'when the user searches change the single comma to allow searching
+        strSearch = Regex.Replace(strSearch, "'", "''")
+        If txtSearchBox.Text = "" Then
+
+            strFillSQL = "select Physician.Physician_ID, Physician.Physician_First_Name, Physician.Physician_Middle_Name," &
+                                    "Physician.Physician_Last_Name, Physician.Physician_Credentials, Physician.Physician_Phone_Number," &
+                                    "Physician.Physician_Fax_Number, Physician.Physician_Address, Physician.Physician_City," &
+                                    "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician ORDER BY " & strSort
+        Else
+            strFillSQL = "select Physician.Physician_ID, Physician.Physician_First_Name, Physician.Physician_Middle_Name," &
                                     "Physician.Physician_Last_Name, Physician.Physician_Credentials, Physician.Physician_Phone_Number," &
                                     "Physician.Physician_Fax_Number, Physician.Physician_Address, Physician.Physician_City," &
                                     "Physician.Physician_State, Physician.Physician_Zip_Code, Physician.Active_Flag From Physician " &
-                                    "WHERE Physician_First_Name LIKE '" & strSearch & "%' Or Physician_Last_Name LIKE '" & strSearch & "%' Or Physician_Credentials LIKE '" & strSearch & "%';"
+                                    "WHERE Physician_First_Name LIKE '" & strSearch & "%' Or Physician_Last_Name LIKE '" & strSearch & "%' Or Physician_Credentials LIKE '" & strSearch & "%' ORDER BY " & strSort
+        End If
         Fill_Table(strFillSQL)
     End Sub
-
-
-
 End Class

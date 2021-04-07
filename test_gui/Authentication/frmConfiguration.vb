@@ -2,7 +2,7 @@
 Imports System.Text.RegularExpressions
 
 Public Class frmConfiguration
-
+    Dim strSort As String
     Public Enum DispenseHistoryEnum As Integer
         Name = 1
         Username = 2
@@ -53,6 +53,7 @@ Public Class frmConfiguration
     '/*  Dylan W    2/10/2021    Initial creation and pull data from DB   */
     '/*********************************************************************/
     Private Sub frmConfiguration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        lblName.Font = New Font(New FontFamily("Segoe UI Semibold"), 12, FontStyle.Underline)
         Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
                                                   "User.Supervisor_Flag, User.Active_Flag From User ORDER BY User_First_Name COLLATE NOCASE ASC;"
         Fill_Table(strFillSQL)
@@ -65,6 +66,7 @@ Public Class frmConfiguration
         CreateToolTips(pnlHeader, tpLabelHover)
         AddHandlerToLabelClick(pnlHeader, AddressOf SortBySelectedLabel)
 
+        strSort = "User_First_Name COLLATE NOCASE ASC;"
     End Sub
 
     '/*********************************************************************/
@@ -223,7 +225,7 @@ Public Class frmConfiguration
         With pnl
             .BackColor = Color.Gainsboro
             .Size = New Size(flpUserInfo.Size.Width - 25, 47)
-            .Name = "pnlIndividualPatientRecordPadding" + getPanelCount(flpPannel).ToString
+            .Name = "pnlIndividualUserRecordPadding" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Padding = New Padding(0, 0, 0, 3)
             ' .Dock = System.Windows.Forms.DockStyle.Top
@@ -233,7 +235,7 @@ Public Class frmConfiguration
 
             .BackColor = Color.White
             .Size = New Size(flpUserInfo.Size.Width - 25, 45)
-            .Name = "pnlIndividualPatientRecord" + getPanelCount(flpPannel).ToString
+            .Name = "pnlIndividualUserRecord" + getPanelCount(flpPannel).ToString
             .Tag = getPanelCount(flpPannel).ToString
             .Dock = System.Windows.Forms.DockStyle.Top
         End With
@@ -718,10 +720,8 @@ Public Class frmConfiguration
                 btnSaveUser.Visible = True
             End If
 
+        SortItems()
 
-        Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-                                      "User.Supervisor_Flag, User.Active_Flag From User ORDER BY User_First_Name COLLATE NOCASE ASC;"
-        Fill_Table(strFillSQL)
     End Sub
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         'clear all text boxes and change button visibility back to default 
@@ -792,14 +792,7 @@ Public Class frmConfiguration
     '/*  Dylan W    3/10/2021    Initial creation                          */
     '/*********************************************************************/
     Private Sub SearchIcon_Click(sender As Object, e As EventArgs) Handles pnlSearch.Click
-        'when the user searches change the single comma to allow searching
-        Dim strSearch = txtSearchBox.Text
-        strSearch = Regex.Replace(strSearch, "'", "''")
-
-        'search and fill panels with searched content
-        Dim strFillSQL = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-                                                       "User.Supervisor_Flag, User.Active_Flag From User WHERE Username LIKE '" & strSearch & "%' Or User_First_Name LIKE '" & strSearch & "%' Or User_Last_Name LIKE '" & strSearch & "%';"
-        Fill_Table(strFillSQL)
+        SortItems()
 
     End Sub
 
@@ -834,13 +827,10 @@ Public Class frmConfiguration
     '/*  Dylan W    3/10/2021    Initial creation                          */
     '/*********************************************************************/
     Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearchBox.TextChanged
-        Dim strFillSQL As String
 
         'if the text box is empty then reset the panels
         If txtSearchBox.Text = "" Then
-            strFillSQL = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-                                                  "User.Supervisor_Flag, User.Active_Flag From User ORDER BY User_First_Name COLLATE NOCASE ASC;"
-            Fill_Table(strFillSQL)
+            SortItems()
 
         End If
 
@@ -892,7 +882,10 @@ Public Class frmConfiguration
     '/*  Dylan W    3/10/2021    Initial creation and check data in DB   */
     '/*********************************************************************/
     Public Sub Fill_Table(ByVal strFillSQL As String)
-        flpUserInfo.Controls.Clear()
+
+        ' remove all controls and the handlers of those controls before generating new panels
+        RemoveHandlersAndAssociations(GetListOfAllControls(flpUserInfo), flpUserInfo)
+        'flpUserInfo.Controls.Clear()
         Dim dsUserInfo As DataSet = CreateDatabase.ExecuteSelectQuery(strFillSQL)
 
 
@@ -927,6 +920,159 @@ Public Class frmConfiguration
             End With
         Next
     End Sub
+
+
+    '/*********************************************************************/
+    '/*                   SUB NAME: RemoveHandlersAndAssociations         */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/13/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to iterate over a list of controls and remove the  */
+    '/* control handlers before removing and disposing of the controls    */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*     cmbFilter_SelectedIndexChanged                                */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*         nothing                                    				  */                     
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 A flow panel object                                              */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 RemoveHandlersAndAssociations(listOfControls, flowpanel1)    	  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	ctlControlObject- a control representing all controls             */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/13/2021    Initial creation                    */
+    '/*  Dylan Walter    4/6/2021    copied to frmConfiguration           */
+    '/*********************************************************************/
+
+    Private Sub RemoveHandlersAndAssociations(ByVal lstOfControlsToRemove As List(Of Control), flpFlowPanel As FlowLayoutPanel)
+
+        Dim ctlControlObject As Control
+        Const PANELWITHASSIGNEDHANDLERS As String = "pnlIndividualUserRecord"
+        For Each ctlControlObject In lstOfControlsToRemove
+
+            If TypeName(ctlControlObject) = "TextBox" Then
+                ' no handler here
+                flpFlowPanel.Controls.Remove(ctlControlObject)
+                ctlControlObject.Dispose()
+
+            ElseIf TypeName(ctlControlObject) = "Button" Then
+                ' remove the handler that is assiged to all edit buttons
+                RemoveHandler ctlControlObject.Click, AddressOf DynamicFlagMedicationButton
+                flpFlowPanel.Controls.Remove(ctlControlObject)
+                ctlControlObject.Dispose()
+
+            ElseIf TypeName(ctlControlObject) = "Panel" And ctlControlObject.Name.Contains(PANELWITHASSIGNEDHANDLERS) Then
+
+                RemoveHandler ctlControlObject.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
+                RemoveHandler ctlControlObject.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
+                flpFlowPanel.Controls.Remove(ctlControlObject)
+                ctlControlObject.Dispose()
+            Else
+
+                flpFlowPanel.Controls.Remove(ctlControlObject)
+                ctlControlObject.Dispose()
+            End If
+
+        Next
+
+        ' clear the panel even though it should be empty at this point and all links to old controls are deleted.
+        flpFlowPanel.Controls.Clear()
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   Function NAME: GetListOfAllControls             */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/13/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to iterate over the flow panel and return all of the/
+    '/*  controls within the flow panel.                                  */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*             RemoveHandlersAndAssociations                         */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*             nothing                                				  */             
+    '/*********************************************************************/
+    '/*  Returns: A list of controls that are contained on the flowpanel  */                 
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 A flow panel object                                              */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 GetListOfAllControls(FlowPanel1)       						  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	ctlRemainingControls- a control representing all non panel controls/
+    '/* pnlMain- a control which represents a panel in this usecase       */
+    '/*     particular panel.                                             */
+    '/* pnlPadding- a control which represents a panel in this usecase    */
+    '/*     particular panel.                                             */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/13/2021    Initial creation                    */
+    '/*  Dylan Walter    4/6/2021    copied to frmConfiguration           */
+    '/*********************************************************************/
+    Private Function GetListOfAllControls(ByVal flpFlowPanel As FlowLayoutPanel)
+
+        ' the order in which this list is created is important because the controls added
+        ' to this list will need to be disposed of and have handles removed properly
+        ' to allow for effecient use of resources within the software.
+
+        Dim lstOfControlsToRemove As New List(Of Control)
+        Dim pnlPadding As Control
+        Dim pnlMain As Control
+        Dim ctlRemainingControls As Control
+
+        ' add all of the padding panels to the list
+        For Each pnlPadding In flpFlowPanel.Controls
+            lstOfControlsToRemove.Add(pnlPadding)
+        Next
+
+        ' add all of the main panels to the list
+        For Each pnlPadding In flpFlowPanel.Controls
+            For Each pnlMain In pnlPadding.Controls
+                lstOfControlsToRemove.Add(pnlMain)
+            Next
+        Next
+
+        ' add all of the remaining controls such as txtboxes, labels, and buttons to the list
+        For Each pnlPadding In flpFlowPanel.Controls
+            For Each pnlMain In pnlPadding.Controls
+                For Each ctlRemainingControls In pnlMain.Controls
+                    lstOfControlsToRemove.Add(ctlRemainingControls)
+                Next
+            Next
+        Next
+
+
+        ' List of all controls on the form is populated. Next, the controls needs to be
+        ' iterated over from last to first because if the panels are disposed of before
+        ' the single controls, the handlers and other parts will not be disposed of correctly
+        ' and may consume memory for the life of the running application.
+
+        lstOfControlsToRemove.Reverse()
+
+        Return lstOfControlsToRemove
+
+    End Function
 
     '/*********************************************************************/
     '/*                   SubProgram NAME: Search_KeyPress               */         
@@ -963,14 +1109,7 @@ Public Class frmConfiguration
         If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
             e.KeyChar = ChrW(0)
             e.Handled = True
-            Dim strSearch = txtSearchBox.Text
-            'when the user searches change the single comma to allow searching
-            strSearch = Regex.Replace(strSearch, "'", "''")
-
-            'search and fill panels with searched content
-            Dim strFillSQL = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-                                                       "User.Supervisor_Flag, User.Active_Flag From User WHERE Username LIKE '" & strSearch & "%' Or User_First_Name LIKE '" & strSearch & "%' Or User_Last_Name LIKE '" & strSearch & "%';"
-            Fill_Table(strFillSQL)
+            SortItems()
         End If
     End Sub
 
@@ -984,29 +1123,53 @@ Public Class frmConfiguration
 
     Private Sub lblName_Click(sender As Object, e As EventArgs) Handles lblName.Click
         'sort by User First name
-        Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-                                      "User.Supervisor_Flag, User.Active_Flag From User ORDER BY User_First_Name COLLATE NOCASE ASC;"
-        Fill_Table(strFillSQL)
+        If strSort <> "User_First_Name COLLATE NOCASE ASC;" Then
+            strSort = "User_First_Name COLLATE NOCASE ASC;"
+        Else strSort = "User_First_Name COLLATE NOCASE DESC;"
+        End If
+        SortItems()
     End Sub
 
     Private Sub lblUserName_Click(sender As Object, e As EventArgs) Handles lblUserName.Click
         'sort by User Username
-        Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-                              "User.Supervisor_Flag, User.Active_Flag From User ORDER BY Username COLLATE NOCASE ASC;"
-        Fill_Table(strFillSQL)
+        If strSort <> "Username COLLATE NOCASE ASC;" Then
+            strSort = "Username COLLATE NOCASE ASC;"
+        Else strSort = "Username COLLATE NOCASE DESC;"
+        End If
+        SortItems()
     End Sub
 
     Private Sub lblStatus_Click(sender As Object, e As EventArgs) Handles lblStatus.Click
         'sort by User Active flag
-        Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-                              "User.Supervisor_Flag, User.Active_Flag From User ORDER BY Active_Flag DESC;"
-        Fill_Table(strFillSQL)
+        If strSort <> "Active_Flag DESC;" Then
+            strSort = "Active_Flag DESC;"
+        Else strSort = "Active_Flag ASC;"
+        End If
+        SortItems()
     End Sub
 
     Private Sub lblPermissions_Click(sender As Object, e As EventArgs) Handles lblPermissions.Click
         'sort by User Permission level
-        Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-                      "User.Supervisor_Flag, User.Active_Flag From User ORDER BY Supervisor_Flag, Admin_Flag DESC;"
+        If strSort <> "Supervisor_Flag, Admin_Flag DESC;" Then
+            strSort = "Supervisor_Flag, Admin_Flag DESC;"
+        Else strSort = "Supervisor_Flag, Admin_Flag ASC;"
+        End If
+        SortItems()
+    End Sub
+
+    Sub SortItems()
+        Dim strFillSQL As String
+        Dim strSearch = txtSearchBox.Text
+        'when the user searches change the single comma to allow searching
+        strSearch = Regex.Replace(strSearch, "'", "''")
+        If txtSearchBox.Text = "" Then
+            strFillSQL = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
+                              "User.Supervisor_Flag, User.Active_Flag From User ORDER BY " & strSort
+        Else
+            strFillSQL = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
+                             "User.Supervisor_Flag, User.Active_Flag From User WHERE Username LIKE '" & strSearch & "%' Or User_First_Name LIKE '" & strSearch & "%' Or User_Last_Name LIKE '" & strSearch & "%' ORDER BY " & strSort
+        End If
         Fill_Table(strFillSQL)
+
     End Sub
 End Class
