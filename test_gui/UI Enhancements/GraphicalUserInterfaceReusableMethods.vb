@@ -839,6 +839,7 @@ Module GraphicalUserInterfaceReusableMethods
                     .cmbAllergies.Enabled = False
                     .cmbAllergiesType.Enabled = False
                     '.cmbMedicationName.Enabled = False
+                    .lblAction.Text = "Edit existing allergy:"
                     .btnAllergySave.Visible = True
                     .btnAllergyCancel.Visible = True
                     .btnAddAllergy.Visible = False
