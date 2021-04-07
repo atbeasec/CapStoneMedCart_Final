@@ -81,6 +81,7 @@ Partial Class frmDispense
         Me.Label14 = New System.Windows.Forms.Label()
         Me.txtFrequency = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.btnReopenDrawer = New System.Windows.Forms.Button()
         Me.Panel5.SuspendLayout()
         Me.pnlHeader.SuspendLayout()
         Me.pnlSelector.SuspendLayout()
@@ -223,6 +224,7 @@ Partial Class frmDispense
         'pnlHeader
         '
         Me.pnlHeader.BackColor = System.Drawing.Color.White
+        Me.pnlHeader.Controls.Add(Me.btnReopenDrawer)
         Me.pnlHeader.Controls.Add(Me.lblPatientInfo)
         Me.pnlHeader.Controls.Add(Me.btnBack)
         Me.pnlHeader.Controls.Add(Me.Label4)
@@ -768,6 +770,21 @@ Partial Class frmDispense
         Me.Label2.TabIndex = 210
         Me.Label2.Text = "Frequency:"
         '
+        'btnReopenDrawer
+        '
+        Me.btnReopenDrawer.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnReopenDrawer.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnReopenDrawer.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReopenDrawer.ForeColor = System.Drawing.Color.White
+        Me.btnReopenDrawer.Image = CType(resources.GetObject("btnReopenDrawer.Image"), System.Drawing.Image)
+        Me.btnReopenDrawer.Location = New System.Drawing.Point(884, 8)
+        Me.btnReopenDrawer.Name = "btnReopenDrawer"
+        Me.btnReopenDrawer.Size = New System.Drawing.Size(229, 38)
+        Me.btnReopenDrawer.TabIndex = 212
+        Me.btnReopenDrawer.Text = "     Reopen Drawer"
+        Me.btnReopenDrawer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnReopenDrawer.UseVisualStyleBackColor = False
+        '
         'frmDispense
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -875,4 +892,5 @@ Partial Class frmDispense
     Friend WithEvents Label14 As Label
     Friend WithEvents txtFrequency As TextBox
     Friend WithEvents Label2 As Label
+    Friend WithEvents btnReopenDrawer As Button
 End Class
