@@ -277,10 +277,10 @@
                             'Debug.Print(txtBox.Text) 'textbox will contain the typed count 
                             'Debug.Print(pnlPanel.BackColor.ToString) 'if the backcolor is red, then the item was flagged
 
-                            Dim medicationID As String = pnlPanel.Tag
-                            Dim userCount As Double = CDbl(txtBox.Text)
-
-
+                            Dim strmedicationID As String = pnlPanel.Tag
+                            Dim dblUserCount As Double = CDbl(txtBox.Text)
+                            Dim strsqlCommand As String = "UPDATE DrawerMedication SET Quantity = '" & dblUserCount & "' where DrawerMedication_ID = '" & strmedicationID & "'"
+                            CreateDatabase.ExecuteInsertQuery(strsqlCommand)
 
                         End If
                     Next
