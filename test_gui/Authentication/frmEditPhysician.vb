@@ -462,7 +462,7 @@ Public Class frmEditPhysician
     '/*  WHO   WHEN     WHAT								              */             
     '/*  ---   ----     ------------------------------------------------  */
     '/*  Collin Krygier  2/13/2021    Initial creation                    */
-    '/*  Dylan Walter    4/6/2021    copied to frmConfiguration           */
+    '/*  Dylan Walter    4/6/2021    copied to frmEditPhysician           */
     '/*********************************************************************/
 
     Private Sub RemoveHandlersAndAssociations(ByVal lstOfControlsToRemove As List(Of Control), flpFlowPanel As FlowLayoutPanel)
@@ -538,7 +538,7 @@ Public Class frmEditPhysician
     '/*  WHO   WHEN     WHAT								              */             
     '/*  ---   ----     ------------------------------------------------  */
     '/*  Collin Krygier  2/13/2021    Initial creation                    */
-    '/*  Dylan Walter    4/6/2021    copied to frmConfiguration           */
+    '/*  Dylan Walter    4/6/2021    copied to frmEditPhysician           */
     '/*********************************************************************/
     Private Function GetListOfAllControls(ByVal flpFlowPanel As FlowLayoutPanel)
 

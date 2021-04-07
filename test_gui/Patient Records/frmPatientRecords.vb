@@ -1,7 +1,7 @@
 ﻿Imports System.Text.RegularExpressions
 
 Public Class frmPatientRecords
-
+    Dim strSort As String
     Dim currentContactPanel As String = Nothing
 
     Public Enum PatientRecordsEnum
@@ -77,6 +77,7 @@ Public Class frmPatientRecords
         CreateToolTips(pnlHeader, tpHeaderSort)
         AddHandlerToLabelClick(pnlHeader, AddressOf SortBySelectedLabel)
         AddHandlersLaterForRunTimePerformance()
+        strSort = "Patient.Patient_Last_Name COLLATE NOCASE, Patient.Patient_First_Name COLLATE NOCASE ASC;"
     End Sub
 
     '/*********************************************************************/
@@ -510,7 +511,8 @@ Public Class frmPatientRecords
 
 
     Private Sub Fill_Patient_Table(ByVal strFillSQL As String)
-        flpPatientRecords.Controls.Clear()
+        ' remove all controls and the handlers of those controls before generating new panels
+        RemoveHandlersAndAssociations(GetListOfAllControls(flpPatientRecords), flpPatientRecords)
 
         Dim dsPatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery(strFillSQL)
         Dim strRoom As String
@@ -539,7 +541,157 @@ Public Class frmPatientRecords
             End With
         Next
     End Sub
+    '/*********************************************************************/
+    '/*                   SUB NAME: RemoveHandlersAndAssociations         */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/13/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to iterate over a list of controls and remove the  */
+    '/* control handlers before removing and disposing of the controls    */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*     cmbFilter_SelectedIndexChanged                                */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*         nothing                                    				  */                     
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 A flow panel object                                              */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 RemoveHandlersAndAssociations(listOfControls, flowpanel1)    	  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	ctlControlObject- a control representing all controls             */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/13/2021    Initial creation                    */
+    '/*  Dylan Walter    4/6/2021    copied to frmPatientRecords          */
+    '/*********************************************************************/
 
+    Private Sub RemoveHandlersAndAssociations(ByVal lstOfControlsToRemove As List(Of Control), flpFlowPanel As FlowLayoutPanel)
+
+        Dim ctlControlObject As Control
+        Const PANELWITHASSIGNEDHANDLERS As String = "pnlIndividualPatientRecord"
+        For Each ctlControlObject In lstOfControlsToRemove
+
+            If TypeName(ctlControlObject) = "TextBox" Then
+                ' no handler here
+                flpFlowPanel.Controls.Remove(ctlControlObject)
+                ctlControlObject.Dispose()
+
+            ElseIf TypeName(ctlControlObject) = "Button" Then
+                ' remove the handler that is assiged to all edit buttons
+                RemoveHandler ctlControlObject.Click, AddressOf DynamicFlagMedicationButton
+                flpFlowPanel.Controls.Remove(ctlControlObject)
+                ctlControlObject.Dispose()
+
+            ElseIf TypeName(ctlControlObject) = "Panel" And ctlControlObject.Name.Contains(PANELWITHASSIGNEDHANDLERS) Then
+
+                RemoveHandler ctlControlObject.MouseEnter, AddressOf MouseEnterPanelSetBackGroundColor
+                RemoveHandler ctlControlObject.MouseLeave, AddressOf MouseLeavePanelSetBackGroundColorToDefault
+                flpFlowPanel.Controls.Remove(ctlControlObject)
+                ctlControlObject.Dispose()
+            Else
+
+                flpFlowPanel.Controls.Remove(ctlControlObject)
+                ctlControlObject.Dispose()
+            End If
+
+        Next
+
+        ' clear the panel even though it should be empty at this point and all links to old controls are deleted.
+        flpFlowPanel.Controls.Clear()
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   Function NAME: GetListOfAllControls             */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/13/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to iterate over the flow panel and return all of the/
+    '/*  controls within the flow panel.                                  */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*             RemoveHandlersAndAssociations                         */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*             nothing                                				  */             
+    '/*********************************************************************/
+    '/*  Returns: A list of controls that are contained on the flowpanel  */                 
+    '/*                                             				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 A flow panel object                                              */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 GetListOfAllControls(FlowPanel1)       						  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	ctlRemainingControls- a control representing all non panel controls/
+    '/* pnlMain- a control which represents a panel in this usecase       */
+    '/*     particular panel.                                             */
+    '/* pnlPadding- a control which represents a panel in this usecase    */
+    '/*     particular panel.                                             */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/13/2021    Initial creation                    */
+    '/*  Dylan Walter    4/6/2021    copied to frmPatientRecords          */
+    '/*********************************************************************/
+    Private Function GetListOfAllControls(ByVal flpFlowPanel As FlowLayoutPanel)
+
+        ' the order in which this list is created is important because the controls added
+        ' to this list will need to be disposed of and have handles removed properly
+        ' to allow for effecient use of resources within the software.
+
+        Dim lstOfControlsToRemove As New List(Of Control)
+        Dim pnlPadding As Control
+        Dim pnlMain As Control
+        Dim ctlRemainingControls As Control
+
+        ' add all of the padding panels to the list
+        For Each pnlPadding In flpFlowPanel.Controls
+            lstOfControlsToRemove.Add(pnlPadding)
+        Next
+
+        ' add all of the main panels to the list
+        For Each pnlPadding In flpFlowPanel.Controls
+            For Each pnlMain In pnlPadding.Controls
+                lstOfControlsToRemove.Add(pnlMain)
+            Next
+        Next
+
+        ' add all of the remaining controls such as txtboxes, labels, and buttons to the list
+        For Each pnlPadding In flpFlowPanel.Controls
+            For Each pnlMain In pnlPadding.Controls
+                For Each ctlRemainingControls In pnlMain.Controls
+                    lstOfControlsToRemove.Add(ctlRemainingControls)
+                Next
+            Next
+        Next
+
+
+        ' List of all controls on the form is populated. Next, the controls needs to be
+        ' iterated over from last to first because if the panels are disposed of before
+        ' the single controls, the handlers and other parts will not be disposed of correctly
+        ' and may consume memory for the life of the running application.
+
+        lstOfControlsToRemove.Reverse()
+
+        Return lstOfControlsToRemove
+
+    End Function
 
 
     '/*********************************************************************/
@@ -575,22 +727,7 @@ Public Class frmPatientRecords
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
         'when the user searches change the single comma to allow searching
         Dim strSearch = txtSearch.Text
-        strSearch = Regex.Replace(strSearch, "'", "''")
-
-        'search and fill panels with searched content
-        If strSearch = "Search Patients" Then
-            Dim strFillSQL As String = ("select Patient.MRN_Number, Patient.Patient_First_Name, " &
-                               "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
-                               "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag = 1 AND PatientRoom.Active_Flag = 1 ORDER BY Patient.Patient_Last_Name COLLATE NOCASE ASC;")
-            Fill_Patient_Table(strFillSQL)
-        Else
-            Dim strFillSQL As String = "select Patient.MRN_Number, Patient.Patient_First_Name, " &
-                                           "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
-                                           "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1 AND " &
-                                           "(Patient_First_Name Like '" & strSearch & "%' OR Patient_Last_Name Like '" & strSearch & "%'" &
-                                           "OR MRN_Number like '" & strSearch & "%') ORDER BY Patient.Patient_Last_Name COLLATE NOCASE ASC;"
-            Fill_Patient_Table(strFillSQL)
-        End If
+        SortItems()
         If strSearch = "" Then
             txtSearch.Text = txtSearch.Tag
         End If
@@ -631,10 +768,7 @@ Public Class frmPatientRecords
 
         'if the text box is empty then reset the panels
         If txtSearch.Text = "" Then
-            Dim strFillSQL As String = ("select Patient.MRN_Number, Patient.Patient_First_Name, " &
-                                           "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
-                                           "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag = 1 AND PatientRoom.Active_Flag = 1 ORDER BY Patient.Patient_Last_Name COLLATE NOCASE ASC;")
-            Fill_Patient_Table(strFillSQL)
+            SortItems()
 
         End If
 
@@ -677,16 +811,7 @@ Public Class frmPatientRecords
         If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
             e.KeyChar = ChrW(0)
             e.Handled = True
-            Dim strSearch = txtSearch.Text
-            'when the user searches change the single comma to allow searching
-            strSearch = Regex.Replace(strSearch, "'", "''")
-            'search and fill panels with searched content
-            Dim strFillSQL As String = "select Patient.MRN_Number, Patient.Patient_First_Name, " &
-                                   "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
-                                   "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1 AND " &
-                                   "(Patient_First_Name Like '" & strSearch & "%' OR Patient_Last_Name Like '" & strSearch & "%'" &
-                                   "OR MRN_Number like '" & strSearch & "%') ORDER BY Patient.Patient_Last_Name COLLATE NOCASE ASC;"
-            Fill_Patient_Table(strFillSQL)
+            SortItems()
         End If
 
     End Sub
@@ -697,49 +822,76 @@ Public Class frmPatientRecords
 
     Private Sub lblMRN_Click(sender As Object, e As EventArgs) Handles lblMRN.Click
         'sort by patient MRN number
-        Dim strFillSQL As String = ("select Patient.MRN_Number, Patient.Patient_First_Name, " &
-                                   "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
-                                   "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag = 1 AND PatientRoom.Active_Flag = 1 ORDER BY Patient.MRN_Number ASC;")
-        Fill_Patient_Table(strFillSQL)
+        If strSort <> "Patient.MRN_Number ASC;" Then
+            strSort = "Patient.MRN_Number ASC;"
+        Else strSort = "Patient.MRN_Number DESC;"
+        End If
+        SortItems()
     End Sub
 
     Private Sub lblFirstName_Click(sender As Object, e As EventArgs) Handles lblFirstName.Click
         'sort by patient First name
-        Dim strFillSQL As String = ("select Patient.MRN_Number, Patient.Patient_First_Name, " &
-                           "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
-                           "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag = 1 AND PatientRoom.Active_Flag = 1 ORDER BY Patient.Patient_First_Name COLLATE NOCASE ASC;")
-        Fill_Patient_Table(strFillSQL)
+        If strSort <> "Patient.Patient_First_Name COLLATE NOCASE ASC;" Then
+            strSort = "Patient.Patient_First_Name COLLATE NOCASE ASC;"
+        Else strSort = "Patient.Patient_First_Name COLLATE NOCASE DESC;"
+        End If
+        SortItems()
     End Sub
 
     Private Sub lblLastName_Click(sender As Object, e As EventArgs) Handles lblLastName.Click
         'sort by Patient Last Name
-        Dim strFillSQL As String = ("select Patient.MRN_Number, Patient.Patient_First_Name, " &
-                                   "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
-                                   "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag = 1 AND PatientRoom.Active_Flag = 1 ORDER BY Patient.Patient_Last_Name COLLATE NOCASE ASC;")
-        Fill_Patient_Table(strFillSQL)
+        If strSort <> "Patient.Patient_Last_Name COLLATE NOCASE ASC;" Then
+            strSort = "Patient.Patient_Last_Name COLLATE NOCASE ASC;"
+        Else strSort = "Patient.Patient_Last_Name COLLATE NOCASE DESC;"
+        End If
+        SortItems()
     End Sub
 
     Private Sub lblDOB_Click(sender As Object, e As EventArgs) Handles lblDOB.Click
         'sort by PatientDate of birth
-        Dim strFillSQL As String = ("select Patient.MRN_Number, Patient.Patient_First_Name, " &
-                           "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
-                           "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag = 1 AND PatientRoom.Active_Flag = 1 ORDER BY Patient.Date_of_Birth ASC;")
-        Fill_Patient_Table(strFillSQL)
+        If strSort <> "Patient.Date_of_Birth ASC;" Then
+            strSort = "Patient.Date_of_Birth ASC;"
+        Else strSort = "Patient.Date_of_Birth DESC;"
+        End If
+        SortItems()
     End Sub
 
     Private Sub lblRoom_Click(sender As Object, e As EventArgs) Handles lblRoom.Click
         'sort by Patient room
-        Dim strFillSQL As String = ("select Patient.MRN_Number, Patient.Patient_First_Name, " &
-                           "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
-                           "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag = 1 AND PatientRoom.Active_Flag = 1 ORDER BY patientroom.Room_TUID ASC;")
-        Fill_Patient_Table(strFillSQL)
+        If strSort <> "patientroom.Room_TUID ASC;" Then
+            strSort = "patientroom.Room_TUID ASC;"
+        Else strSort = "patientroom.Room_TUID DESC;"
+        End If
+        SortItems()
     End Sub
 
     Private Sub lblBed_Click(sender As Object, e As EventArgs) Handles lblBed.Click
         'sort by Patient bed
-        Dim strFillSQL As String = ("select Patient.MRN_Number, Patient.Patient_First_Name, " &
-                   "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
-                   "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag = 1 AND PatientRoom.Active_Flag = 1 ORDER BY patientroom.Bed_Name ASC;")
+        If strSort <> "patientroom.Bed_Name ASC;" Then
+            strSort = "patientroom.Bed_Name ASC;"
+        Else strSort = "patientroom.Bed_Name DESC;"
+        End If
+        SortItems()
+    End Sub
+
+    Sub SortItems()
+        Dim strFillSQL As String
+        Dim strSearch = txtSearch.Text
+        'when the user searches change the single comma to allow searching
+        strSearch = Regex.Replace(strSearch, "'", "''")
+        'if the user is not searching then run the first part of the if statment
+        If strSearch = "" Or strSearch = "Search Patients" Then
+            strFillSQL = "select Patient.MRN_Number, Patient.Patient_First_Name, " &
+                                   "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
+                                   "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag = 1 AND PatientRoom.Active_Flag = 1 ORDER BY " & strSort
+        Else 'if the user is searching then reduce the results and also sort
+            strFillSQL = "select Patient.MRN_Number, Patient.Patient_First_Name, " &
+                                   "Patient.Patient_Last_Name, Patient.Date_of_Birth, patientroom.Room_TUID, patientroom.Bed_Name, Patient.Patient_ID from Patient LEFT JOIN " &
+                                   "PatientRoom on Patient.Patient_ID = PatientRoom.Patient_TUID where Patient.Active_Flag =1 AND " &
+                                   "(Patient_First_Name Like '" & strSearch & "%' OR Patient_Last_Name Like '" & strSearch & "%'" &
+                                   "OR MRN_Number like '" & strSearch & "%') ORDER BY " & strSort
+        End If
         Fill_Patient_Table(strFillSQL)
+
     End Sub
 End Class
