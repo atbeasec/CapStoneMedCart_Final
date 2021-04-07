@@ -291,16 +291,19 @@
                             CreateDatabase.ExecuteInsertQuery(strsqlCommand)
                             strsqlCommand = "Select Drawers_TUID from DrawerMedication where DrawerMedication_ID = '" & strmedicationID & "'"
                             Dim intDrawerTUID As Integer = CreateDatabase.ExecuteScalarQuery(strsqlCommand)
-                            strArrayList.Add(intDrawerTUID)
+
+                            If Not strArrayList.Contains(intDrawerTUID) Then
+                                strArrayList.Add(intDrawerTUID)
+                            End If
+
                         End If
                     Next
                 End If
             Next
         Next
         Dim strArray As String() = strArrayList.ToArray
-        If Not strArray.Length = 0 Then
-            OpenMutliDrawer(strArray)
-
+        For Each strItem As String In strArrayList
+            OpenOneDrawer(strItem)
             If Not cmbFilter.SelectedIndex = -1 Then
                 btnSave.Visible = True
             Else
@@ -315,8 +318,7 @@
             ' this selection determines which SQL query will be called.
 
             DetermineSelectedReport(cmbFilter.SelectedIndex)
-
-        End If
+        Next
     End Sub
 
     '/*********************************************************************/
