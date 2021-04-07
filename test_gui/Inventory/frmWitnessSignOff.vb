@@ -58,13 +58,18 @@
     Private Sub frmWitnessSignOff_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         pnlBarcode.Visible = True
         pnlCredentials.Visible = False
+        btnWasteWithBarcode.Visible = False
     End Sub
 
     Private Sub lblBadge_Click_1(sender As Object, e As EventArgs) Handles lblBadge.Click
+
         If pnlBarcode.Visible = True Then
+
             pnlBarcode.Visible = False
             txtBarcode.Text = Nothing
             pnlCredentials.Visible = True
+            btnWasteWithBarcode.Visible = True
+
         End If
 
     End Sub
@@ -77,7 +82,7 @@
             txtUsername.Text = Nothing
             txtPassword.Text = Nothing
             pnlBarcode.Visible = True
-
+            btnWasteWithBarcode.Visible = False
         End If
     End Sub
 End Class
