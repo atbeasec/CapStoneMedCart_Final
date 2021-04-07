@@ -345,15 +345,15 @@
     '/*   
     '/*********************************************************************/
     Private Sub cmbAllergies_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbAllergies.SelectedIndexChanged
-        cmbSeverity.SelectedIndex = 0
+        'cmbSeverity.SelectedIndex = 0
 
-        If cmbAllergiesType.Text = "Drug" Then
-            cmbAllergiesType.Enabled = False
+        'If cmbAllergiesType.Text = "Drug" Then
+        'cmbAllergiesType.Enabled = False
 
-        Else
-            cmbAllergiesType.Enabled = True
-            'cmbMedicationName.SelectedIndex = -1
-        End If
+        'Else
+        'cmbAllergiesType.Enabled = True
+        'cmbMedicationName.SelectedIndex = -1
+        'End If
     End Sub
 
     '/********************************************************************/
@@ -460,7 +460,6 @@
         btnAllergySave.Visible = False
         cmbAllergies.Enabled = True
         cmbAllergiesType.Enabled = True
-        cmbAllergies.SelectedIndex = -1
         cmbAllergiesType.SelectedIndex = 0
         cmbSeverity.SelectedIndex = 0
         lblAction.Text = "Add a new allergy:"
@@ -475,6 +474,7 @@
         'Dim dsAllergyType = CreateDatabase.ExecuteSelectQuery("Select DISTINCT Allergy_Type from Allergy;")
 
         populateAllergiesComboBox(cmbAllergies, dsAllergies)
+        cmbAllergies.SelectedIndex = -1
         'populateMedicationComboBox(cmbMedicationName, dsDrugAllergies)
         'populateAllergyTypeComboBox(cmbAllergiesType, dsAllergyType)
         Dim strSeverity As String = " "
@@ -509,7 +509,7 @@
         'CreateAllergiesPanels()
 
         ClearComboBoxes()
-        cmbAllergies.SelectedIndex = 0
+        cmbAllergies.SelectedIndex = -1
     End Sub
 
     Public Function GetPatientMrn() As Integer
