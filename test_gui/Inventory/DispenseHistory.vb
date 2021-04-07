@@ -248,7 +248,7 @@ Module DispenseHistory
                                         Inner Join Medication on Medication.Medication_ID = AdHocOrder.Medication_TUID
                                         INNER JOIN User ON user.User_ID = AdHocOrder.User_TUID
                                         where AdHocOrder.Patient_TUID = '" & intPatientID & "'
-                                        ORDER BY Trim(Medication.Drug_Name,' ') ASC"
+                                        ORDER BY Trim(Medication.Drug_Name,' ') COLLATE NOCASE ASC"
 
         Dim dsmydataset As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
 
@@ -376,7 +376,7 @@ Module DispenseHistory
                                         Inner Join Medication on Medication.Medication_ID = AdHocOrder.Medication_TUID
                                         INNER JOIN User ON user.User_ID = AdHocOrder.User_TUID
                                         where AdHocOrder.Patient_TUID = '" & intPatientID & "'
-                                        ORDER BY TypeUP;"
+                                        ORDER BY TypeUP COLLATE NOCASE;"
 
         Dim dsmydataset As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
 
@@ -568,7 +568,7 @@ Module DispenseHistory
                                         Inner Join Medication on Medication.Medication_ID = AdHocOrder.Medication_TUID
                                         INNER JOIN User ON user.User_ID = AdHocOrder.User_TUID
                                         where AdHocOrder.Patient_TUID = '" & intPatientID & "'
-                                        Order by Dispensing.DateTime_Dispensed DESC"
+                                        Order by Dispensing.DateTime_Dispensed ASC"
 
         Dim dsmydataset As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
 

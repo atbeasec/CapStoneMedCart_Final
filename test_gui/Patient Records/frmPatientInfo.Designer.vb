@@ -72,6 +72,7 @@ Partial Class frmPatientInfo
         Me.flpMedications = New System.Windows.Forms.FlowLayoutPanel()
         Me.lblPrescriptions = New System.Windows.Forms.Label()
         Me.pnlPrescriptionsHeader = New System.Windows.Forms.Panel()
+        Me.lblActions = New System.Windows.Forms.Label()
         Me.lblFrequencyPrescription = New System.Windows.Forms.Label()
         Me.lblPrescribedBy = New System.Windows.Forms.Label()
         Me.lblDatePrescribed = New System.Windows.Forms.Label()
@@ -94,7 +95,6 @@ Partial Class frmPatientInfo
         Me.flpDispenseHistory = New System.Windows.Forms.FlowLayoutPanel()
         Me.tpLabelDirections = New System.Windows.Forms.ToolTip(Me.components)
         Me.tpToolTip = New System.Windows.Forms.ToolTip(Me.components)
-        Me.lblActions = New System.Windows.Forms.Label()
         Me.pnlPersonalInformation.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.pnlNameBarcode.SuspendLayout()
@@ -698,6 +698,18 @@ Partial Class frmPatientInfo
         Me.pnlPrescriptionsHeader.Size = New System.Drawing.Size(1067, 47)
         Me.pnlPrescriptionsHeader.TabIndex = 48
         '
+        'lblActions
+        '
+        Me.lblActions.AutoSize = True
+        Me.lblActions.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblActions.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblActions.Location = New System.Drawing.Point(989, 16)
+        Me.lblActions.Name = "lblActions"
+        Me.lblActions.Size = New System.Drawing.Size(65, 21)
+        Me.lblActions.TabIndex = 7
+        Me.lblActions.Tag = "7"
+        Me.lblActions.Text = "Actions"
+        '
         'lblFrequencyPrescription
         '
         Me.lblFrequencyPrescription.AutoSize = True
@@ -943,18 +955,6 @@ Partial Class frmPatientInfo
         Me.flpDispenseHistory.Name = "flpDispenseHistory"
         Me.flpDispenseHistory.Size = New System.Drawing.Size(1067, 64)
         Me.flpDispenseHistory.TabIndex = 1
-        '
-        'lblActions
-        '
-        Me.lblActions.AutoSize = True
-        Me.lblActions.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblActions.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblActions.Location = New System.Drawing.Point(989, 16)
-        Me.lblActions.Name = "lblActions"
-        Me.lblActions.Size = New System.Drawing.Size(65, 21)
-        Me.lblActions.TabIndex = 7
-        Me.lblActions.Tag = "7"
-        Me.lblActions.Text = "Actions"
         '
         'frmPatientInfo
         '
