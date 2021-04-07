@@ -2,13 +2,13 @@
     Public referringForm As Object
 
     Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs)
-        Dim strHashedBarcode = ConvertBarcodePepperAndHash(TextBox2.Text)
+        Dim strHashedBarcode = ConvertBarcodePepperAndHash(txtBarcode.Text)
         If ExecuteScalarQuery("SELECT COUNT(*) FROM User WHERE User_ID = '" & LoggedInID & "' AND Barcode = '" & strHashedBarcode & "'" & " AND Active_Flag = '1'") <> 0 Then
             ' add the allergy override
             referringForm.blnOverride = True
             referringForm.blnSignedOff = True
             ' clear the entry
-            TextBox2.Clear()
+            txtBarcode.Clear()
             Me.Close()
         Else
             MessageBox.Show("Error, barcode entered does not match logged in user. Please try again or cancel dispense.")
@@ -45,7 +45,7 @@
         Me.Close()
     End Sub
 
-    Private Sub TextBox2_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TextBox2.KeyPress
+    Private Sub TextBox2_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
         If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
             e.KeyChar = ChrW(0)
             e.Handled = True
@@ -56,6 +56,27 @@
     End Sub
 
     Private Sub frmWitnessSignOff_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        pnlCredentials.Visible = False
+    End Sub
 
+    Private Sub lblBadge_Click_1(sender As Object, e As EventArgs) Handles lblBadge.Click
+        If pnlBarcode.Visible = True Then
+            pnlBarcode.Visible = False
+            txtBarcode.Text = Nothing
+            pnlCredentials.Visible = True
+        End If
+
+    End Sub
+
+    Private Sub lblUseBarcode_Click(sender As Object, e As EventArgs) Handles lblUseBarcode.Click
+
+        If pnlCredentials.Visible = True Then
+
+            pnlCredentials.Visible = False
+            txtUsername.Text = Nothing
+            txtPassword.Text = Nothing
+            pnlBarcode.Visible = True
+
+        End If
     End Sub
 End Class

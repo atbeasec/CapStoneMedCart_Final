@@ -42,6 +42,8 @@
             intMedIDArray.Add(dr(2))
             intDrawerMedArray.Add(dr(3))
         Next
+
+        pnlCredentials.Visible = False
     End Sub
 
     Private Sub cmbPatientName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPatientName.SelectedIndexChanged
@@ -101,10 +103,10 @@
             intNarcoticFlagGlobal = intNarcoticFlag
             If intNarcoticFlag = 1 Then
                 txtBarcode.Visible = True
-                lblSignoff.Visible = True
+                pnlSignOff.Visible = True
             ElseIf intNarcoticFlag = 0 Then
                 txtBarcode.Visible = False
-                lblSignoff.Visible = False
+                pnlSignOff.Visible = False
             End If
         End If
     End Sub
@@ -226,4 +228,26 @@
         txtOther.Text = Nothing
     End Sub
 
+    Private Sub lblBadge_Click(sender As Object, e As EventArgs) Handles lblBadge.Click
+
+        If pnlBarcode.Visible = True Then
+            pnlBarcode.Visible = False
+            txtBarcode.Text = Nothing
+            pnlCredentials.Visible = True
+        End If
+
+    End Sub
+
+    Private Sub Label8_Click(sender As Object, e As EventArgs) Handles lblUseBarcode.Click
+
+        If pnlCredentials.Visible = True Then
+
+            pnlCredentials.Visible = False
+            txtUsername.Text = Nothing
+            txtPassword.Text = Nothing
+            pnlBarcode.Visible = True
+
+        End If
+
+    End Sub
 End Class
