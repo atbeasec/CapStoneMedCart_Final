@@ -619,4 +619,9 @@ Public Class frmDispense
         strUnitAdhoc = unit
         intDrawerMEDAdhoc = intDrawerMedA
     End Sub
+
+    Private Sub btnReopenDrawer_Click(sender As Object, e As EventArgs) Handles btnReopenDrawer.Click
+        Dim intdrawerNumber As Integer = CreateDatabase.ExecuteScalarQuery("Select Drawers_TUID from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
+        OpenOneDrawer(intdrawerNumber)
+    End Sub
 End Class
