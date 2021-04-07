@@ -218,8 +218,10 @@
     '/*********************************************************************/
     '/*  Subprogram PURPOSE:								              */             
     '/*	 This is going to iterate over the flow panel to strip the data   */
-    '/*  the user typed in when creating the report. This data will be    */
-    '/*  passed to a method that updates the database discrepancies.      */ 
+    '/*  the user typed in when creating the report. it will see if the box 
+    '/* has an updated amount, it updates the amount, collects the drawer 
+    '/*  numbers for the updated items and opens those drawers
+    '/*
     '/*********************************************************************/
     '/*  CALLED BY:   	      						                      */           
     '/*                                         				          */         
@@ -241,12 +243,17 @@
     '/*     particular panel.                                             */
     '/* txtBox- represents a textbox, specifically the one that the user  */
     '/*    typed in to update the medication count in the drawer          */
+    '/*
+    '/* strArrayList  -- list of strings that collects each drawer that is updated
+    '/* strArray -- array of string of each item in strArrayList to pass to multidrawer open method
+    '/*
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						                      */               
     '/*											                          */                     
     '/*  WHO   WHEN     WHAT								              */             
     '/*  ---   ----     ------------------------------------------------  */
     '/*  Collin Krygier  2/5/2021    Initial creation                     */
+    '/* AB              4/07/2021    Form changed to restocking form
     '/*********************************************************************/
     Sub ExtractFormDataForDatabase()
 
