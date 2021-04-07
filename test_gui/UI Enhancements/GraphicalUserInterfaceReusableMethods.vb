@@ -545,10 +545,14 @@ Module GraphicalUserInterfaceReusableMethods
         End With
 
         pnlPanelName.Controls.Add(btnCheckMark)
-        ' MessageBox.Show("again")
+
         'Add handler for click events
         AddHandler btnCheckMark.Click, AddressOf DetermineQueryDelete_Click
-        AddHandler btnCheckMark.Click, AddressOf DynamicButton_Click
+
+        If getOpenedForm().GetType() Is frmConfiguration.GetType() Then
+        ElseIf getOpenedForm().GetType() Is frmEditPhysician.GetType() Then
+        Else AddHandler btnCheckMark.Click, AddressOf DynamicButton_Click
+        End If
 
     End Sub
 
@@ -578,7 +582,7 @@ Module GraphicalUserInterfaceReusableMethods
 
 
         pnlPanelName.Controls.Add(btnCancel)
-        ' MessageBox.Show("again")
+
         'Add handler for click events
         AddHandler btnCancel.Click, AddressOf RestDefaultButtons
 
@@ -639,7 +643,7 @@ Module GraphicalUserInterfaceReusableMethods
                 ExecuteInsertQuery(strStatement)
             End If
             Dim strFillSQL As String = "select User.User_ID, User.Username, User.User_First_Name, User.User_Last_Name, User.Admin_Flag, " &
-                                                  "User.Supervisor_Flag, User.Active_Flag From User;"
+                                                  "User.Supervisor_Flag, User.Active_Flag From User ORDER BY User_First_Name COLLATE NOCASE ASC;"
             frmConfiguration.Fill_Table(strFillSQL)
 
         ElseIf getOpenedForm().GetType() Is frmPatientRecords.GetType() Then
@@ -790,7 +794,7 @@ Module GraphicalUserInterfaceReusableMethods
         ElseIf getOpenedForm().GetType() Is frmEditPhysician.GetType() Then
             'call GetSelectedInformation to get the selected username and ID
             frmEditPhysician.txtID.Text = GetSelectedInformation(sender.parent, "lblID")
-            Dim IDNumber As Integer = GetSelectedInformation(sender.parent, "lblID")
+            Dim IDNumber As String = frmEditPhysician.txtID.Text
 
             'calls to fill the other textboxes for editing the user
             Dim strStatement = "SELECT Physician_First_Name FROM Physician WHERE Physician_ID = '" & IDNumber & "';"
