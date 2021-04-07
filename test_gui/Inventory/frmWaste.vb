@@ -98,10 +98,15 @@
         If intNarcoticFlagGlobal = 1 Then
             lblSignoff.Visible = True
             txtBarcode.Visible = True
+            Label7.Visible = True
+            lblBadge.Visible = True
             pnlCredentials.Visible = False
         Else
             lblSignoff.Visible = False
             txtBarcode.Visible = False
+            Label7.Visible = False
+            lblBadge.Visible = False
+            pnlCredentials.Visible = False
         End If
 
 
