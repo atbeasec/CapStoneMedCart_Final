@@ -338,4 +338,37 @@
 
     End Sub
 
+    Private Sub btnWasteWithCredentials_Click(sender As Object, e As EventArgs) Handles btnWasteWithCredentials.Click
+        'set textbox text to string variable strUsername and strPassword
+        Dim strUsername = txtUsername.Text
+        Dim strPassword = txtPassword.Text
+        If strUsername = "" Then
+            MsgBox("            WARNING" & vbCrLf & "User Name Field is Blank")
+            txtUsername.Focus()
+        ElseIf strPassword = "" Then
+            MsgBox("            WARNING" & vbCrLf & "Password Field is Blank")
+            txtPassword.Focus()
+            'send strUsername and strPassword to LogIn Module and recive responce
+        ElseIf LogIn.UsernameLogIn(strUsername, strPassword) = "True" Then
+            If IsNumeric(txtQuantity.Text) Then
+                InsertWasteNarcotic(intSignoffID)
+
+                frmMain.UnlockSideMenu()
+                If intEnteredFromAdhoc = 0 Then
+                    frmPatientInfo.setPatientID(intPatientID)
+                    frmMain.OpenChildForm(frmPatientInfo)
+                ElseIf intEnteredFromAdhoc = 1 Then
+                    frmDispense.setintEntered(0)
+                    setEnteredFromAdhoc(0)
+                    frmMain.OpenChildForm(frmAdHockDispense)
+                End If
+            Else
+                MessageBox.Show("Please enter a numeric value to waste")
+            End If
+        Else
+            'If users Username and Password is not in the User table then inform the user
+            MsgBox("No User With That Username and Password")
+        End If
+
+    End Sub
 End Class
