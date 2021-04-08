@@ -36,6 +36,7 @@ Partial Class frmDispense
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.txtQuantityToDispense = New System.Windows.Forms.TextBox()
         Me.pnlHeader = New System.Windows.Forms.Panel()
+        Me.btnReopenDrawer = New System.Windows.Forms.Button()
         Me.lblPatientInfo = New System.Windows.Forms.Label()
         Me.btnBack = New System.Windows.Forms.Button()
         Me.tpToolTip = New System.Windows.Forms.ToolTip(Me.components)
@@ -81,7 +82,6 @@ Partial Class frmDispense
         Me.Label14 = New System.Windows.Forms.Label()
         Me.txtFrequency = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.btnReopenDrawer = New System.Windows.Forms.Button()
         Me.Panel5.SuspendLayout()
         Me.pnlHeader.SuspendLayout()
         Me.pnlSelector.SuspendLayout()
@@ -233,6 +233,21 @@ Partial Class frmDispense
         Me.pnlHeader.Name = "pnlHeader"
         Me.pnlHeader.Size = New System.Drawing.Size(1116, 49)
         Me.pnlHeader.TabIndex = 201
+        '
+        'btnReopenDrawer
+        '
+        Me.btnReopenDrawer.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnReopenDrawer.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnReopenDrawer.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReopenDrawer.ForeColor = System.Drawing.Color.White
+        Me.btnReopenDrawer.Image = CType(resources.GetObject("btnReopenDrawer.Image"), System.Drawing.Image)
+        Me.btnReopenDrawer.Location = New System.Drawing.Point(884, 8)
+        Me.btnReopenDrawer.Name = "btnReopenDrawer"
+        Me.btnReopenDrawer.Size = New System.Drawing.Size(229, 38)
+        Me.btnReopenDrawer.TabIndex = 212
+        Me.btnReopenDrawer.Text = "     Reopen Drawer"
+        Me.btnReopenDrawer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnReopenDrawer.UseVisualStyleBackColor = False
         '
         'lblPatientInfo
         '
@@ -590,9 +605,9 @@ Partial Class frmDispense
         Me.lblDirections.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDirections.Location = New System.Drawing.Point(40, 10)
         Me.lblDirections.Name = "lblDirections"
-        Me.lblDirections.Size = New System.Drawing.Size(257, 25)
+        Me.lblDirections.Size = New System.Drawing.Size(247, 25)
         Me.lblDirections.TabIndex = 204
-        Me.lblDirections.Text = "Select Amount To Dispense:"
+        Me.lblDirections.Text = "Insert Amount to Remove:"
         '
         'pnlDispenseHistoryHeader
         '
@@ -769,21 +784,6 @@ Partial Class frmDispense
         Me.Label2.Size = New System.Drawing.Size(85, 21)
         Me.Label2.TabIndex = 210
         Me.Label2.Text = "Frequency:"
-        '
-        'btnReopenDrawer
-        '
-        Me.btnReopenDrawer.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnReopenDrawer.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnReopenDrawer.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnReopenDrawer.ForeColor = System.Drawing.Color.White
-        Me.btnReopenDrawer.Image = CType(resources.GetObject("btnReopenDrawer.Image"), System.Drawing.Image)
-        Me.btnReopenDrawer.Location = New System.Drawing.Point(884, 8)
-        Me.btnReopenDrawer.Name = "btnReopenDrawer"
-        Me.btnReopenDrawer.Size = New System.Drawing.Size(229, 38)
-        Me.btnReopenDrawer.TabIndex = 212
-        Me.btnReopenDrawer.Text = "     Reopen Drawer"
-        Me.btnReopenDrawer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnReopenDrawer.UseVisualStyleBackColor = False
         '
         'frmDispense
         '
