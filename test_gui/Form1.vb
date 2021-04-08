@@ -1,5 +1,6 @@
 ﻿Public Class frmMain
 
+    Public comportIssue As Boolean = False
     Private strSessionUsername As String
     Private frmCurrentChildForm As Form
     Private frmPreviousChildForm As Form
@@ -390,9 +391,21 @@
     '/*  WHO   WHEN     WHAT								              */             
     '/*  ---   ----     ------------------------------------------------  */
     '/*  Collin Krygier  2/14/2021    Initial creation                    */
+    '/*  NP     4/7/2021   Made a test to see if there are issues with the*/
+    '/*                    COM port when a user logins.                   */
     '/*********************************************************************/
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        'the following gets the COM port settings and testing to see if the 
+        'COM port that would be used exisits.   
+        Dim testingForm = New frmFullCart
+        Dim allPorts = IO.Ports.SerialPort.GetPortNames
+        testingForm.gettingConnectionSettings()
+        If Not allPorts.Contains(testingForm.comPort) Then
+            comportIssue = True
+        End If
+
+        'MessageBox.Show(comportIssue)
         ' assing labels to contain the logged in user's name. 
         ' assign a tooltip because truncation of the username may need to happen. We need to fix the max length 
         ' that can display on the UI

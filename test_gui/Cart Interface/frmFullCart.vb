@@ -47,8 +47,8 @@ Public Class frmFullCart
     '/*                  working with the data brought back from the      */
     '/*                  database to use to EnumListTo make it more readable.*/
     '/*********************************************************************/
-    Dim bitRateValue As Integer = 0
-    Dim comPortValue As String = "COM3" 'these only have a value to supress warnings
+    Private bitRateValue As Integer = 0
+    Private comPortValue As String = "COM3" 'these only have a value to supress warnings
 
     '/*********************************************************************/
     '/*                   Property NAME: bitRate     					   */         
