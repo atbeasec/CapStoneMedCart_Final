@@ -13,23 +13,24 @@
     '/********************************************************************/
     '/*                   FUNCTION NAME: SetPatientID	         */         
     '/********************************************************************/
-    '/*                   WRITTEN BY: Alexander Beasecker          */   
+    '/*                   WRITTEN BY: Collin Kreiger          */   
     '/*		         DATE CREATED:  4/08/2021               */                             
     '/********************************************************************/
     '/*  SUBROUTINE PURPOSE:
-    '/*  
+    '/*  sets the patient ID variable
     '/********************************************************************/
     '/*  CALLED BY 
-    '/*
+    '/* frmPatientInfo.wastebuttonclick
+    '/* FrmDispense.btnDispenseClick
     '/********************************************************************/
     '/*  CALLS:								                             */	
-    '/*
+    '/* (none)
     '/********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):				             */	           
-    '/*	            (NONE)	                                             */								                        							             
+    '/*	 id -- integer-- holds value to set into patient ID	                                             */								                        							             
     '/********************************************************************/
     '/* SAMPLE INVOCATION:						                         */
-    '/*
+    '/* SetPatientID(1232)
     '/********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
     '/*
@@ -38,7 +39,7 @@
     '/*									 */		                         */
     '/*  WHO            WHEN             WHAT				             */		            
     '/*  ---            ----             ----				             */
-    '/*
+    '/*   CK            4/02/2021       initial creation
     '/********************************************************************/ 
     Public Sub SetPatientID(ByVal id As Integer)
 
@@ -50,22 +51,22 @@
     '/*                   FUNCTION NAME: getEnteredFromAdhoc	         */         
     '/********************************************************************/
     '/*                   WRITTEN BY: Alexander Beasecker          */   
-    '/*		         DATE CREATED:  4/08/2021               */                             
+    '/*		         DATE CREATED:  4/04/2021               */                             
     '/********************************************************************/
     '/*  SUBROUTINE PURPOSE:
-    '/*
+    '/*  returns the intenteredFromAdhoc variable
     '/********************************************************************/
     '/*  CALLED BY 
-    '/*
+    '/* 
     '/********************************************************************/
     '/*  CALLS:								                             */	
-    '/*
+    '/* none
     '/********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):				             */	           
     '/*	            (NONE)	                                             */								                        							             
     '/********************************************************************/
     '/* SAMPLE INVOCATION:						                         */
-    '/*
+    '/* dim intEntered as integer = getEnteredFromAdhoc()
     '/********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
     '/*
@@ -74,7 +75,7 @@
     '/*									 */		                         */
     '/*  WHO            WHEN             WHAT				             */		            
     '/*  ---            ----             ----				             */
-    '/*
+    '/*  AB             4/04/2021       Initial creation
     '/********************************************************************/ 
     Public Function getEnteredFromAdhoc()
         Return intEnteredFromAdhoc
@@ -108,7 +109,7 @@
     '/*									 */		                         */
     '/*  WHO            WHEN             WHAT				             */		            
     '/*  ---            ----             ----				             */
-    '/*
+    '/*  AB             4/04/2021       Initial creation
     '/********************************************************************/ 
     Public Sub setEnteredFromAdhoc(ByRef intEntered As Integer)
         intEnteredFromAdhoc = intEntered
@@ -142,7 +143,7 @@
     '/*									 */		                         */
     '/*  WHO            WHEN             WHAT				             */		            
     '/*  ---            ----             ----				             */
-    '/*
+    '/*  AB             4/04/2021       Initial creation
     '/********************************************************************/ 
     Public Sub setMedID(ByRef id As Integer)
         intMedID = id
@@ -176,8 +177,8 @@
     '/*									 */		                         */
     '/*  WHO            WHEN             WHAT				             */		            
     '/*  ---            ----             ----				             */
-    '/*
-    '/********************************************************************/  
+    '/*  AB             4/04/2021       Initial creation
+    '/********************************************************************/ 
     Public Sub setDrawer(ByRef id As Integer)
         intDrawerID = id
     End Sub
@@ -210,7 +211,7 @@
     '/*									 */		                         */
     '/*  WHO            WHEN             WHAT				             */		            
     '/*  ---            ----             ----				             */
-    '/*
+    '/*  AB             4/04/2021       Initial creation
     '/********************************************************************/ 
     Public Sub setDrawerMEDTUID(ByRef id As Integer)
         intDrawerMedTUID = id
@@ -239,6 +240,7 @@
     '/*									 */		                         */
     '/*  WHO            WHEN             WHAT				             */		            
     '/*  ---            ----             ----				             */
+    '/*  DW			             */
     '/********************************************************************/ 
     Private Sub RadioButton6_CheckedChanged(sender As Object, e As EventArgs) Handles rbtnOther.CheckedChanged
 
