@@ -1,5 +1,6 @@
 ﻿Public Class frmWaste
 
+    'global variables
     Private intPatientID As Integer
     Private intDrawerMedTUID As Integer
     Private intMedID As Integer
@@ -195,6 +196,37 @@
         frmPatientInfo.setPatientID(intPatientID)
         frmMain.OpenChildForm(frmPatientInfo)
     End Sub
+
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: txtQuantity_KeyPress	             */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Alexander beasecker  		             */   
+    '/*		         DATE CREATED: 	4/5/21			                     */                             
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:This sub handles the keypress event on quantity
+    '/*   sends the value in the textbox to the keypresscheck method
+    '/********************************************************************/
+    '/*  CALLED BY: checkchanged events                    	      		 */				            
+    '/* txtQuantity.KeyPress                                       				             */         
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/* DataVaildationMethods.KeyPressCheck(e, "0123456789.")	        */		               
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	sender As Object
+    '/* e As KeyPressEventArgs	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             
+    '/*	txtQuantity_KeyPress()				                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  AB		        4/5/21		    initial creation                 */
+    '/********************************************************************/ 
     Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantity.KeyPress
         DataVaildationMethods.KeyPressCheck(e, "0123456789.")
     End Sub
@@ -284,7 +316,7 @@
     '/*	MovePanelOnScreen()				                                 */					                       
     '/********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
-    '/*	 
+    '/*	 Dim dtmWasteTime As String = date time now
     '/********************************************************************/
     '/* MODIFICATION HISTORY:						                     */		                 
     '/*									 */		                         */
@@ -314,8 +346,37 @@
         insertWaste(CInt(LoggedInID), CInt(LoggedInID), intDrawerMedTUID, intMedID, intPatientID, strReason, txtQuantity.Text, dtmWasteTime)
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: InsertWasteNarcotic	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Alexander Beasecker  		         */   
+    '/*		         DATE CREATED: 	4/02/21			                     */                             
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE: This method inserts the waste if itsa narcotic
+    '/********************************************************************/
+    '/*  CALLED BY:     frmwaste   
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/*  insertWaste					                         */		               
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             
+    '/*	MovePanelOnScreen()				                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/*	 Dim dtmWasteTime As String = date time now
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  AB		        4/7/21		    initial creation                 */
+    '/********************************************************************/ 
     Private Sub InsertWasteNarcotic(ByRef intApprovingID As Integer)
         Dim dtmWasteTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+        'checks for which checked radio button
         If radIncorrect.Checked = True Then
             strReason = radIncorrect.Text
 
@@ -331,12 +392,66 @@
         ElseIf rbtnOther.Checked = True Then
             strReason = txtOther.Text
         End If
+        'insert waste 
         insertWaste(CInt(LoggedInID), intApprovingID, intDrawerMedTUID, intMedID, intPatientID, strReason, txtQuantity.Text, dtmWasteTime)
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: insertWaste	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Alexander Beasecker  		         */   
+    '/*		         DATE CREATED: 	4/02/21			                     */                             
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE: This method inserts the waste to the database
+    '/********************************************************************/
+    '/*  CALLED BY:  frmwaste  
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/* CreateDatabase.ExecuteInsertQuery()		               
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             
+    '/*	insertWaste()				                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/*	 Dim dtmWasteTime As String = date time now
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  AB		        4/2/21		    initial creation                 */
+    '/********************************************************************/ 
     Public Sub insertWaste(ByRef intPrimaryUser As Integer, ByRef intSecondaryUser As Integer, ByRef intDrawerMEDID As Integer, ByRef intMedicationID As Integer, ByRef intpatientTUID As Integer, ByRef strReason As String, dblQuantity As Double, ByRef dtmDate As String)
         CreateDatabase.ExecuteInsertQuery("INSERT INTO Wastes(Primary_User_TUID,Secondary_User_TUID,DrawerMedication_TUID,Medication_TUID, Patient_TUID,DateTime,Reason,Quantity) VALUES('" & intPrimaryUser & "','" & intSecondaryUser & "','" & intDrawerMEDID & "','" & intMedicationID & "','" & intpatientTUID & "','" & dtmDate & "','" & strReason & "','" & dblQuantity & "')")
     End Sub
+
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: CheckBarcode	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY:         */   
+    '/*		         DATE CREATED:                 */                             
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/********************************************************************/
+    '/*  CALLED BY 
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/ 
     Private Sub CheckBarcode(ByRef strBarcode As String)
         If strBarcode = "" Then
             MsgBox("           WARNING" & vbCrLf & "Barcode Field is Blank")
@@ -364,6 +479,30 @@
         End If
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: scanBarcode	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY:         */   
+    '/*		         DATE CREATED:                 */                             
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/********************************************************************/
+    '/*  CALLED BY 
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/ 
     Private Function scanBarcode(ByRef strBarcode As String)
         Dim strHashedBarcode = ConvertBarcodePepperAndHash(strBarcode)
         If strHashedBarcode = ExecuteScalarQuery("SELECT Barcode FROM User WHERE User_ID = '" & LoggedInID & "'") Then
@@ -376,7 +515,30 @@
         End If
     End Function
 
-
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: lblBadge_Click	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY:         */   
+    '/*		         DATE CREATED:                 */                             
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/********************************************************************/
+    '/*  CALLED BY 
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/ 
     Private Sub lblBadge_Click(sender As Object, e As EventArgs) Handles lblBadge.Click
 
         If pnlBarcode.Visible = True Then
@@ -387,6 +549,30 @@
 
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: Label8_Click	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY:         */   
+    '/*		         DATE CREATED:                 */                             
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/********************************************************************/
+    '/*  CALLED BY 
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/ 
     Private Sub Label8_Click(sender As Object, e As EventArgs) Handles lblUseBarcode.Click
 
         If pnlCredentials.Visible = True Then
@@ -400,6 +586,31 @@
 
     End Sub
 
+
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: btnWasteWithCredentials_Click	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY:         */   
+    '/*		         DATE CREATED:                 */                             
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/********************************************************************/
+    '/*  CALLED BY 
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/ 
     Private Sub btnWasteWithCredentials_Click(sender As Object, e As EventArgs) Handles btnWasteWithCredentials.Click
         If intNarcoticFlagGlobal = 1 Then
             If IsNumeric(txtQuantity.Text) Then
@@ -427,6 +638,30 @@
         txtPassword.Text = Nothing
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: CheckUsername	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY:         */   
+    '/*		         DATE CREATED:                 */                             
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/********************************************************************/
+    '/*  CALLED BY 
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/ 
     Private Sub CheckUsername(ByRef strUsername As String, ByRef strPassword As String)
         If strUsername = "" Then
             MsgBox("           WARNING" & vbCrLf & "Username Field is Blank")
@@ -457,6 +692,30 @@
         End If
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: scanUserName	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY:         */   
+    '/*		         DATE CREATED:                 */                             
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/********************************************************************/
+    '/*  CALLED BY 
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/ 
     Private Function scanUserName(ByRef strUsername As String, ByRef strPassword As String)
         strPassword = AddSaltPepperAndHash(strPassword, strUsername)
         If strUsername = LoggedInUsername Then
