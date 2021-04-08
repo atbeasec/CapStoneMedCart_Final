@@ -206,10 +206,13 @@
     '/*		         DATE CREATED:  4/08/2021               */                             
     '/********************************************************************/
     '/*  SUBROUTINE PURPOSE:
-    '/*
+    '/* sets the drawerMEDTUID
+    '/*  drawerMEDTUID -- is the drawerMedicationTUID from the database
+    '/*   this is used to diferenciate between multiple of the same drug being
+    '/*   in the system since the MedID might not be unique
     '/********************************************************************/
     '/*  CALLED BY 
-    '/*
+    '/* frmDispense.btnDispenseClick
     '/********************************************************************/
     '/*  CALLS:								                             */	
     '/*
@@ -295,6 +298,7 @@
     '/********************************************************************/ 
     Private Sub Waste_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'TextBox1.Visible = False
+        'set the patientinfo label to hold patient infomation that is tied to waste
         Dim dsPatientInfo As DataSet = CreateDatabase.ExecuteSelectQuery("SELECT * from Patient where Patient_ID = '" & intPatientID & "'")
         lblPatientInfo.Text = "Patient: "
         lblPatientInfo.Text &= dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.LastName) & ", "
@@ -307,17 +311,17 @@
         lblPatientInfo.Text &= dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.Height) & "         "
         lblPatientInfo.Text &= "Weight: "
         lblPatientInfo.Text &= dsPatientInfo.Tables(0).Rows(0)(EnumList.Patient.Weight) & "         "
-
+        'get information on medication being wasted
         Dim dsMedication As DataSet = CreateDatabase.ExecuteSelectQuery("Select * from Medication INNER JOIN DrawerMedication on DrawerMedication.Medication_TUID = Medication.Medication_ID where Medication_ID = '" & intMedID & "' and Medication.Active_Flag = '1' and DrawerMedication.Active_Flag = '1'")
         txtMedication.Text = dsMedication.Tables(0).Rows(0)(1)
         txtUnit.Text = dsMedication.Tables(0).Rows(0)(15)
-
+        'get drawer information for medication in drawer
         Dim dsDrawer As DataSet = CreateDatabase.ExecuteSelectQuery("Select * from DrawerMedication INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID WHERE DrawerMedication.Medication_TUID = '" & intMedID & "' and DrawerMedication.Active_Flag = '1' and Drawers.Active_Flag = '1'")
         txtDrawer.Text = "Drawer number:  " & dsDrawer.Tables(0).Rows(0)(12) & " Bin: " & dsDrawer.Tables(0).Rows(0)(6)
-
+        'get narcotic flag from database for medication
         Dim intNarcoticFlag As Integer = CreateDatabase.ExecuteScalarQuery("Select Controlled_Flag from Medication where Medication_ID = '" & intMedID & "' and Active_Flag = '1'")
         intNarcoticFlagGlobal = intNarcoticFlag
-
+        'check if it is a narcotic, if it is, show signoff fields, if not hide them
         If intNarcoticFlagGlobal = 1 Then
             lblSignoff.Visible = True
             txtBarcode.Visible = True
@@ -496,6 +500,8 @@
     '/*  AB		        2/10/21		    initial creation                 */
     '/********************************************************************/ 
     Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWasteWithBarcode.Click, Button1.Click
+        'heck to see if the drug being wasted is a narcotic or not
+        'if it is a narcotic require sign off
         If intNarcoticFlagGlobal = 1 Then
             If IsNumeric(txtQuantity.Text) Then
                 Dim strBarcode As String = txtBarcode.Text
@@ -504,6 +510,7 @@
                 MessageBox.Show("Please enter a numeric value to waste")
             End If
         Else
+            'if not narcotic dont require sign off
             If IsNumeric(txtQuantity.Text) Then
                 InsertWasteNonNarcotic()
                 frmMain.UnlockSideMenu()
@@ -580,7 +587,7 @@
     '/********************************************************************/
     '/*  SUBROUTINE PURPOSE: This method inserts the waste if itsa narcotic
     '/********************************************************************/
-    '/*  CALLED BY:     frmwaste   
+    '/*  CALLED BY: frmwaste   
     '/********************************************************************/
     '/*  CALLS:								                             */		                  
     '/*  insertWaste					                         */		               
