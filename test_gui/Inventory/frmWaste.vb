@@ -1,13 +1,21 @@
 ﻿Public Class frmWaste
 
     'global variables
+    'used to store patientID from dispense
     Private intPatientID As Integer
+    'holds drawerMedicationTUID from database
     Private intDrawerMedTUID As Integer
+    'holds intMedID database TUID from database
     Private intMedID As Integer
+    'holds intDrawerID TUID from database
     Private intDrawerID As Integer
+    'holds the database from database if the drug is a narcotic
     Private intNarcoticFlagGlobal As Integer
+    'holds the id of the user that signs off the medication waste/dispense
     Private intSignoffID As Integer
+    'holds the reason selected for why the waste is being done
     Private strReason As String
+    'set intEntered to zero for launch, will only set to 1 if the form is sent to from adhoc
     Private intEnteredFromAdhoc As Integer = 0
 
     '/********************************************************************/
