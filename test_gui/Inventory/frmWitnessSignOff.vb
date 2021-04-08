@@ -1,29 +1,42 @@
 ﻿Public Class frmWitnessSignOff
     Public referringForm As Object
 
-    Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs)
-        Dim strHashedBarcode = ConvertBarcodePepperAndHash(txtBarcode.Text)
-        If ExecuteScalarQuery("SELECT COUNT(*) FROM User WHERE User_ID = '" & LoggedInID & "' AND Barcode = '" & strHashedBarcode & "'" & " AND Active_Flag = '1'") <> 0 Then
-            ' add the allergy override
-            referringForm.blnOverride = True
-            referringForm.blnSignedOff = True
-            ' clear the entry
-            txtBarcode.Clear()
-            Me.Close()
-        Else
-            MessageBox.Show("Error, barcode entered does not match logged in user. Please try again or cancel dispense.")
+    Private Sub Checking_Credentials(sender As Object, e As EventArgs) Handles btnWasteWithBarcode.Click
+        If pnlBarcode.Visible = True Then
+            Dim strHashedBarcode = ConvertBarcodePepperAndHash(txtBarcode.Text)
+            If ExecuteScalarQuery("SELECT COUNT(*) FROM User WHERE User_ID = '" & LoggedInID & "' AND Barcode = '" & strHashedBarcode & "'" & " AND Active_Flag = '1'") <> 0 Then
+                ' add the allergy override
+                referringForm.blnOverride = True
+                referringForm.blnSignedOff = True
+                ' clear the entry
+                txtBarcode.Clear()
+                Me.Close()
+            Else
+                MessageBox.Show("Error, barcode entered does not match logged in user. Please try again or cancel dispense.")
+                txtBarcode.Clear()
+            End If
+
+            ' after text validation then we can actually dispense the medication
+
+            ' close this form and the dispense form at the same time
+
+            ' the patient record gets updated here on the patient information page with the new dispense history
+
+
+            ' dispensing medications methods from here where we open the drawers
+        ElseIf pnlCredentials.Visible = True And txtUsername.Text IsNot "" And txtPassword.Text IsNot "" Then
+            Dim strHashedPassword = AddSaltPepperAndHash(txtPassword.Text, txtUsername.Text)
+            If ExecuteScalarQuery("SELECT COUNT(*) FROM User WHERE User_ID = '" & LoggedInID & "' AND Password = '" & strHashedPassword & "'" & " AND Active_Flag = '1'") <> 0 Then
+                referringForm.blnOverride = True
+                referringForm.blnSignedOff = True
+                ' clear the entry
+                txtBarcode.Clear()
+                Me.Close()
+            Else
+                MessageBox.Show("Error, username and password entered does not match logged in user. Please try again or cancel dispense.")
+                txtPassword.Clear()
+            End If
         End If
-
-        ' after text validation then we can actually dispense the medication
-
-        ' close this form and the dispense form at the same time
-
-        ' the patient record gets updated here on the patient information page with the new dispense history
-
-
-        ' dispensing medications methods from here where we open the drawers
-
-
     End Sub
 
     Private Sub pnlInteractions_Paint(sender As Object, e As PaintEventArgs) Handles pnlInteractions.Paint
@@ -45,11 +58,20 @@
         Me.Close()
     End Sub
 
-    Private Sub TextBox2_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBarcode.KeyPress
+    Private Sub Codes_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBarcode.KeyPress, txtPassword.KeyPress
         If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
             e.KeyChar = ChrW(0)
             e.Handled = True
-            TextBox2_TextChanged(sender, e)
+            Checking_Credentials(sender, e)
+        Else
+            KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz-1234567890!@#$%^&*.,<>=+")
+        End If
+    End Sub
+
+    Private Sub Username_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtUsername.KeyPress
+        If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
+            e.KeyChar = ChrW(0)
+            txtPassword.Focus()
         Else
             KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz-1234567890!@#$%^&*.,<>=+")
         End If

@@ -28,11 +28,12 @@ Partial Class frmWitnessSignOff
         Me.Label2 = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.TextBox()
         Me.lblReason = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
+        Me.btnWasteWithBarcode = New System.Windows.Forms.Button()
         Me.btnConfigureInventory = New System.Windows.Forms.Button()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.pnlCredentials = New System.Windows.Forms.Panel()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.lblFirstName = New System.Windows.Forms.Label()
@@ -43,8 +44,7 @@ Partial Class frmWitnessSignOff
         Me.Label3 = New System.Windows.Forms.Label()
         Me.lblBadge = New System.Windows.Forms.Label()
         Me.txtBarcode = New System.Windows.Forms.TextBox()
-        Me.btnWasteWithBarcode = New System.Windows.Forms.Button()
-        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.pnlInteractions.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.pnlCredentials.SuspendLayout()
@@ -126,16 +126,22 @@ Partial Class frmWitnessSignOff
         Me.lblReason.TabStop = False
         Me.lblReason.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'Label5
+        'btnWasteWithBarcode
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(41, 111)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(248, 21)
-        Me.Label5.TabIndex = 38
-        Me.Label5.Text = "Causes Allergic Reaction to Patient"
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.btnWasteWithBarcode.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnWasteWithBarcode.FlatAppearance.BorderSize = 0
+        Me.btnWasteWithBarcode.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnWasteWithBarcode.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnWasteWithBarcode.ForeColor = System.Drawing.Color.White
+        Me.btnWasteWithBarcode.Image = CType(resources.GetObject("btnWasteWithBarcode.Image"), System.Drawing.Image)
+        Me.btnWasteWithBarcode.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnWasteWithBarcode.Location = New System.Drawing.Point(98, 153)
+        Me.btnWasteWithBarcode.Name = "btnWasteWithBarcode"
+        Me.btnWasteWithBarcode.Size = New System.Drawing.Size(135, 37)
+        Me.btnWasteWithBarcode.TabIndex = 31
+        Me.btnWasteWithBarcode.Text = "   SUBMIT"
+        Me.btnWasteWithBarcode.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnWasteWithBarcode.UseVisualStyleBackColor = False
         '
         'btnConfigureInventory
         '
@@ -154,6 +160,17 @@ Partial Class frmWitnessSignOff
         Me.btnConfigureInventory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnConfigureInventory.UseVisualStyleBackColor = False
         '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(41, 111)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(248, 21)
+        Me.Label5.TabIndex = 38
+        Me.Label5.Text = "Causes Allergic Reaction to Patient"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'Panel1
         '
         Me.Panel1.Controls.Add(Me.pnlCredentials)
@@ -164,14 +181,6 @@ Partial Class frmWitnessSignOff
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(328, 186)
         Me.Panel1.TabIndex = 35
-        '
-        'Panel2
-        '
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Panel2.Location = New System.Drawing.Point(0, 0)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(46, 186)
-        Me.Panel2.TabIndex = 0
         '
         'pnlCredentials
         '
@@ -186,6 +195,16 @@ Partial Class frmWitnessSignOff
         Me.pnlCredentials.Name = "pnlCredentials"
         Me.pnlCredentials.Size = New System.Drawing.Size(242, 186)
         Me.pnlCredentials.TabIndex = 224
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(0, 9)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(242, 25)
+        Me.Label7.TabIndex = 224
+        Me.Label7.Text = "Override Sign-off Required"
         '
         'txtPassword
         '
@@ -299,32 +318,13 @@ Partial Class frmWitnessSignOff
         Me.txtBarcode.TabIndex = 217
         Me.txtBarcode.UseSystemPasswordChar = True
         '
-        'btnWasteWithBarcode
+        'Panel2
         '
-        Me.btnWasteWithBarcode.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnWasteWithBarcode.FlatAppearance.BorderSize = 0
-        Me.btnWasteWithBarcode.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnWasteWithBarcode.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnWasteWithBarcode.ForeColor = System.Drawing.Color.White
-        Me.btnWasteWithBarcode.Image = CType(resources.GetObject("btnWasteWithBarcode.Image"), System.Drawing.Image)
-        Me.btnWasteWithBarcode.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnWasteWithBarcode.Location = New System.Drawing.Point(98, 153)
-        Me.btnWasteWithBarcode.Name = "btnWasteWithBarcode"
-        Me.btnWasteWithBarcode.Size = New System.Drawing.Size(135, 37)
-        Me.btnWasteWithBarcode.TabIndex = 31
-        Me.btnWasteWithBarcode.Text = "   SUBMIT"
-        Me.btnWasteWithBarcode.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnWasteWithBarcode.UseVisualStyleBackColor = False
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(0, 9)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(242, 25)
-        Me.Label7.TabIndex = 224
-        Me.Label7.Text = "Override Sign-off Required"
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Panel2.Location = New System.Drawing.Point(0, 0)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(46, 186)
+        Me.Panel2.TabIndex = 0
         '
         'frmWitnessSignOff
         '
