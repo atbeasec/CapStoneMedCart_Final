@@ -5,7 +5,7 @@
 
 
     '/********************************************************************/
-    '/*                   SUB NAME: 	         */         
+    '/*                   SUB NAME: frmAdHockDispense_Load 	         */         
     '/********************************************************************/
     '/*                   WRITTEN BY: 
     '/*		         DATE CREATED:                            
@@ -39,15 +39,17 @@
         'set ad efault quantity to the quantity textbox
 
         cmbMedications.Items.Clear()
+        'populate medications onthe cart into comboboxs
         AdHoc.GetAllMedicationsForListbox()
+        'populate active patients into comboboxes
         AdHoc.PopulatePatientsAdhoc()
     End Sub
 
 
     '/********************************************************************/
-    '/*                   SUB NAME: 	         */         
+    '/*                   SUB NAME: cmbMedications_SelectedIndexChanged 	         */         
     '/********************************************************************/
-    '/*                   WRITTEN BY: 
+    '/*                   WRITTEN BY:  cmbMedications_SelectedIndexChanged
     '/*		         DATE CREATED:                            
     '/********************************************************************/
     '/*  SUBROUTINE PURPOSE:
@@ -80,7 +82,7 @@
 
 
     '/********************************************************************/
-    '/*                   SUB NAME: 	         */         
+    '/*                   SUB NAME:  cmbPatientName_SelectedIndexChanged	         */         
     '/********************************************************************/
     '/*                   WRITTEN BY: 
     '/*		         DATE CREATED:                            
@@ -114,7 +116,7 @@
     End Sub
 
     '/********************************************************************/
-    '/*                   SUB NAME: 	         */         
+    '/*                   SUB NAME: btnDispense_Click 	         */         
     '/********************************************************************/
     '/*                   WRITTEN BY: 
     '/*		         DATE CREATED:                            
