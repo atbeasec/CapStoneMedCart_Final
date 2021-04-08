@@ -601,6 +601,7 @@
     <None Include="Resources\circleLoading.gif" />
     <None Include="Resources\image.png" />
     <Content Include="medServe.ico" />
+    <None Include="Resources\BLOCK - CMYK.png" />
     <Content Include="Resources\loading.gif" />
     <None Include="Resources\pillLoading.gif" />
     <None Include="Resources\Loading1.gif" />
