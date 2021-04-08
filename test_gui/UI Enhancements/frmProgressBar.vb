@@ -47,7 +47,7 @@ Public Class frmProgressBar
     '/*                                                                   */
     '/*********************************************************************/
     Private Sub frmProgressBar_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        Me.ShowInTaskbar = False
         'set the loading bar as the front most form 
         Me.TopMost = True
         'point that is the bottom right of frmMain, This will always appear based on the forms location on load
