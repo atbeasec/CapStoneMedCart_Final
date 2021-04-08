@@ -94,19 +94,20 @@ Public Class frmLoginScan
 
     End Sub
 
-    'Private Sub frmLoginScan_FormClosingEvent(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-
-    '    CloseForm()
-
-
-
-
-    ' End Sub
     Private Sub frmLoginScan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        SetLogo()
         lblWelcomeBack.Visible = False
         ShowSplashScreen()
         CreateDatabase.Main()
+
+    End Sub
+
+    Private Sub SetLogo()
+
+        ' pnlLogo contains the image chosen to be the logo
+        ' the logo must be imported into visual studio and stored in the resources folder
+        ' once there, you can reference the images from the resources folder.
+        pnlLogo.BackgroundImage = My.Resources.BLOCK___CMYK
 
     End Sub
 
@@ -136,5 +137,6 @@ Public Class frmLoginScan
     Private Sub txtLoginKeypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBarcode.KeyPress
         KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz-1234567890!@#$%^&*.,<>=+")
     End Sub
+
 
 End Class

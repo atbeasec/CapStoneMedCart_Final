@@ -39,7 +39,7 @@ Partial Class frmLoginScan
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.lblVersionNumber = New System.Windows.Forms.Label()
         Me.lblApplicationName = New System.Windows.Forms.Label()
-        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.pnlLogo = New System.Windows.Forms.Panel()
         Me.pnlLogin.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.panelTopBar.SuspendLayout()
@@ -176,7 +176,7 @@ Partial Class frmLoginScan
         Me.pnlSplash.Controls.Add(Me.PictureBox1)
         Me.pnlSplash.Controls.Add(Me.lblVersionNumber)
         Me.pnlSplash.Controls.Add(Me.lblApplicationName)
-        Me.pnlSplash.Controls.Add(Me.Panel4)
+        Me.pnlSplash.Controls.Add(Me.pnlLogo)
         Me.pnlSplash.Location = New System.Drawing.Point(517, 252)
         Me.pnlSplash.Name = "pnlSplash"
         Me.pnlSplash.Size = New System.Drawing.Size(332, 232)
@@ -214,14 +214,14 @@ Partial Class frmLoginScan
         Me.lblApplicationName.TabIndex = 15
         Me.lblApplicationName.Text = "MedServe"
         '
-        'Panel4
+        'pnlLogo
         '
-        Me.Panel4.BackgroundImage = CType(resources.GetObject("Panel4.BackgroundImage"), System.Drawing.Image)
-        Me.Panel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Panel4.Location = New System.Drawing.Point(134, 26)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(60, 60)
-        Me.Panel4.TabIndex = 14
+        Me.pnlLogo.BackgroundImage = CType(resources.GetObject("pnlLogo.BackgroundImage"), System.Drawing.Image)
+        Me.pnlLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pnlLogo.Location = New System.Drawing.Point(134, 27)
+        Me.pnlLogo.Name = "pnlLogo"
+        Me.pnlLogo.Size = New System.Drawing.Size(60, 60)
+        Me.pnlLogo.TabIndex = 14
         '
         'frmLoginScan
         '
@@ -268,5 +268,5 @@ Partial Class frmLoginScan
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents lblVersionNumber As Label
     Friend WithEvents lblApplicationName As Label
-    Friend WithEvents Panel4 As Panel
+    Friend WithEvents pnlLogo As Panel
 End Class
