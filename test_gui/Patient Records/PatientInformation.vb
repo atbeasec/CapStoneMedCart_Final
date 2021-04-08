@@ -1025,7 +1025,13 @@ Module PatientInformation
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
     '/*											   */                     
-    '/*                                                                     
+    '/* strbSQL -- sql builder
+    '/* dsPatient -- 
+    '/* dsPatientRoom -- 
+    '/* intPatient_TUID -- patient database id
+    '/* strbed -- holds room 
+    '/* strroom -- holds bed
+    '/* 
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
@@ -1112,8 +1118,10 @@ Module PatientInformation
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
-    '/*                                                                     
+    '/*
+    '/*		intPatientID --	Integer --	stores patient ID 							                      
+    '/*     dsPatientInfo -- As DataSet -- dataset that holds patient information
+    '/*     strbSqlCommand -- StringBuilder -- sql string builder                                                                   
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
@@ -1172,8 +1180,10 @@ Module PatientInformation
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
-    '/*                                                                     
+    '/*
+    '/*		intPatientID --	Integer --	stores patient ID 							                      
+    '/*     dsPatientInfo -- As DataSet -- dataset that holds patient information
+    '/*     strbSqlCommand -- StringBuilder -- sql string builder
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
@@ -1233,8 +1243,10 @@ Module PatientInformation
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
-    '/*                                                                     
+    '/*
+    '/*		intPatientID --	Integer --	stores patient ID 							                      
+    '/*     dsPatientInfo -- As DataSet -- dataset that holds patient information
+    '/*     strbSqlCommand -- StringBuilder -- sql string builder                                                                   
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
@@ -1294,8 +1306,10 @@ Module PatientInformation
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
-    '/*                                                                     
+    '/*
+    '/*		intPatientID --	Integer --	stores patient ID 							                      
+    '/*     dsPatientInfo -- As DataSet -- dataset that holds patient information
+    '/*     strbSqlCommand -- StringBuilder -- sql string builder                                                                  
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
@@ -1355,8 +1369,10 @@ Module PatientInformation
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
-    '/*                                                                     
+    '/*
+    '/*		intPatientID --	Integer --	stores patient ID 							                      
+    '/*     dsPatientInfo -- As DataSet -- dataset that holds patient information
+    '/*     strbSqlCommand -- StringBuilder -- sql string builder                                                                  
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
@@ -1416,8 +1432,10 @@ Module PatientInformation
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
-    '/*                                                                     
+    '/*
+    '/*		intPatientID --	Integer --	stores patient ID 							                      
+    '/*     dsPatientInfo -- As DataSet -- dataset that holds patient information
+    '/*     strbSqlCommand -- StringBuilder -- sql string builder                                                                  
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
@@ -1477,8 +1495,10 @@ Module PatientInformation
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
-    '/*                                                                     
+    '/*
+    '/*		intPatientID --	Integer --	stores patient ID 							                      
+    '/*     dsPatientInfo -- As DataSet -- dataset that holds patient information
+    '/*     strbSqlCommand -- StringBuilder -- sql string builder                                                             
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
@@ -1538,8 +1558,10 @@ Module PatientInformation
     '/*                                                                     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*											   */                     
-    '/*                                                                     
+    '/*
+    '/*		intPatientID --	Integer --	stores patient ID 							                      
+    '/*     dsPatientInfo -- As DataSet -- dataset that holds patient information
+    '/*     strbSqlCommand -- StringBuilder -- sql string builder
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						         */               
     '/*											   */                     
