@@ -2,23 +2,176 @@
     Dim intPatientID As New ArrayList
     Public blnSignedOff As Boolean = True
     Public blnOverride As Boolean = False
+
+
+    '/********************************************************************/
+    '/*                   SUB NAME: frmAdHockDispense_Load 	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY:
+    '/*		         DATE CREATED:                            
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*
+    '/********************************************************************/
+    '/*  CALLED BY 
+    '/* 
+    '/********************************************************************/
+    '/*  CALLS:								                             */	
+    '/* (none)
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	                                   */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */
+    '/* 
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/*
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*
+    '/********************************************************************/ 
     Private Sub frmAdHockDispense_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         'set ad efault quantity to the quantity textbox
 
         cmbMedications.Items.Clear()
+        'populate medications onthe cart into comboboxs
         AdHoc.GetAllMedicationsForListbox()
+        'populate active patients into comboboxes
         AdHoc.PopulatePatientsAdhoc()
     End Sub
 
+
+    '/********************************************************************/
+    '/*                   SUB NAME: cmbMedications_SelectedIndexChanged          
+    '/********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker
+    '/*		         DATE CREATED:     3/12/2021                       
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/* this will call the method to set medicaiton properties when the 
+    '/*  medication combobox index changes
+    '/*
+    '/********************************************************************/
+    '/*  CALLED BY 
+    '/*  cmbMedications.SelectedIndexChanged
+    '/********************************************************************/
+    '/*  CALLS:								                             */	
+    '/* AdHoc.SetMedicationProperties()
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	                                   */						
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */
+    '/* change index in cmbMedications
+    '/* when the index changes it will call this method
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/* 
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  AB             3/12/2021          initial creation
+    '/********************************************************************/ 
     Private Sub cmbMedications_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMedications.SelectedIndexChanged
         AdHoc.SetMedicationProperties()
     End Sub
 
+
+    '/********************************************************************/
+    '/*                   SUB NAME:  cmbPatientName_SelectedIndexChanged	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker
+    '/*		         DATE CREATED:     3/12/2021                       
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/* this will call the method to set populate patient properties when the 
+    '/*  medication combobox index changes
+    '/*
+    '/********************************************************************/
+    '/*  CALLED BY 
+    '/*  cmbPatientName.SelectedIndexChanged
+    '/********************************************************************/
+    '/*  CALLS:								                             */	
+    '/* AdHoc.PopulatePatientInformation()
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	                                   */						
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */
+    '/* change index in cmbPatientName
+    '/* when the index changes it will call this method
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/* 
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  AB             3/12/2021          initial creation
+    '/********************************************************************/ 
     Private Sub cmbPatientName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPatientName.SelectedIndexChanged
         AdHoc.PopulatePatientInformation()
     End Sub
 
+    '/********************************************************************/
+    '/*                   SUB NAME: btnDispense_Click 	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker
+    '/*		         DATE CREATED:     3/12/2021                       
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/* this 
+    '/*
+    '/********************************************************************/
+    '/*  CALLED BY 
+    '/*  btnDispense.Click
+    '/********************************************************************/
+    '/*  CALLS:								                             */	
+    '/* ExecuteScalarQuery("Select AllergyOverride_ID from AllergyOverride")
+    '/* ExecuteScalarQuery("SELECT MAX(AllergyOverride_ID) from AllergyOverride")
+    '/* ExecuteInsertQuery("INSERT INTO AllergyOverride(AllergyOverride_ID, Patient_TUID, User_TUID, Allergy_Name, DateTime)
+    '/* DrugInteractionOverride(cmbMedications.SelectedItem, txtMRN.Text, "AdHoc")
+    '/* frmDispense.setintEntered(1)
+    '/* frmDispense.AdhocDispenseSetInformation(strAmount, strUnit, intMedDrawer)
+    '/* frmDispense.SetPatientID(intPatientID)
+    '/* frmDispense.SetintMedicationID(intMedID)
+    '/* frmMain.OpenChildForm(frmDispense)
+    '/* DispenseHistory.DispensemedicationPopulate(intPatientID, intMedID)
+    '/* PatientInformation.PopulatePatientDispenseInfo(intPatientID)
+    '/* PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientID)
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	                                   */						
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */
+    '/* 
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/* 
+    '/* intMaxAllergyID 
+    '/* intPatientID -- holds selected patient id
+    '/* intMedID -- holds selected medication id
+    '/* strAmount -- adhoc prescption amount from textbox
+    '/* strUnit -- unit from textbox
+    '/* intMedDrawer -- drawermedicationTUID from database for selected medication
+    '/*
+    '/*
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  AB             3/12/2021          initial creation
+    '/*  BH             4/2/2021         added allergy/interaction overrides
+    '/********************************************************************/ 
     Private Sub btnDispense_Click(sender As Object, e As EventArgs) Handles btnDispense.Click
         'make sure that both patient and medication is selected before ordering the AdHoc
         If IsNothing(cmbMedications.SelectedItem) Then
@@ -78,6 +231,13 @@
             'If the user signs off for any override, dispense the medication
             If blnSignedOff = True Then
                 blnSignedOff = False
+
+                'get IDs from parallel arrays
+                'this form has three arrays, intPatientIDArray, intMedIDArray, and intDrawerMedArray
+                'they have the IDs of the comboboxes added in the same order that they are added to the combobox
+                'this allows identifiability when selecting comboboxes, this is required as many database fields
+                'are not unique, so i set up these arrays, you can get the Database TUID for any selected item
+                ' by indexing the index at the same index of the combobox selected item
                 Dim intPatientID As Integer = AdHoc.intPatientIDArray(cmbPatientName.SelectedIndex)
                 Dim intMedID As Integer = AdHoc.intMedIDArray(cmbMedications.SelectedIndex)
                 Dim strAmount As String = txtAmount.Text
@@ -87,17 +247,23 @@
                 'AdHoc.clearAdhocBoxes()
                 'MessageBox.Show("Order Successfully placed")
 
+                'set entered variable to 1 to let dispense know adhoc is what started this dispensing
                 frmDispense.setintEntered(1)
+
+                'set medication variables into dispense screen
                 frmDispense.AdhocDispenseSetInformation(strAmount, strUnit, intMedDrawer)
+
+                'set patient id for dispense
                 frmDispense.SetPatientID(intPatientID)
+
+                'set medication id for dispense
                 frmDispense.SetintMedicationID(intMedID)
                 frmMain.OpenChildForm(frmDispense)
                 DispenseHistory.DispensemedicationPopulate(intPatientID, intMedID)
                 PatientInformation.PopulatePatientDispenseInfo(intPatientID)
                 PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientID)
-
+                '
             End If
-
         End If
 
     End Sub
@@ -148,6 +314,37 @@
 
     End Sub
 
+
+    '/********************************************************************/
+    '/*                   SUB NAME: 	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: 
+    '/*		         DATE CREATED:                            
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*
+    '/********************************************************************/
+    '/*  CALLED BY 
+    '/* 
+    '/********************************************************************/
+    '/*  CALLS:								                             */	
+    '/* (none)
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	                                   */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */
+    '/* 
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/*
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*
+    '/********************************************************************/ 
     Private Sub txtUnit_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtUnit.KeyPress
         DataVaildationMethods.KeyPressCheck(e, "0123456789.abcdefghijklmnopqrstuvwxyz /-")
 
