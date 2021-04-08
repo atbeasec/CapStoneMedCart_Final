@@ -385,6 +385,9 @@
                 'here we will update the buttons to see if they are full and label them as being full
                 If CheckIfDrawerFull(ctl.tabIndex) = True Then
                     btn.Text = CStr(ctl.tabIndex) & Environment.NewLine & ("Full")
+                    CreateDatabase.ExecuteInsertQuery("Update Drawers set Full_Flag = '1' where Drawers_ID = '" & CStr(ctl.tabIndex) & "'")
+                Else
+                    CreateDatabase.ExecuteInsertQuery("Update Drawers set Full_Flag = '0' where Drawers_ID = '" & CStr(ctl.tabIndex) & "'")
                 End If
 
 
