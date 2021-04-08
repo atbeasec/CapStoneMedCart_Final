@@ -217,7 +217,7 @@ Module PatientInformation
             intPhysicianID = dsPatientDataSet.Tables(0).Rows(0)(EnumList.Patient.PhysicianID)
         Next
         'get name of physician that is assigned to patient
-        strSQLiteCommand = "SELECT Physician_First_Name,Physician_Last_Name" &
+        strSQLiteCommand = "SELECT Physician_First_Name,Physician_Last_Name,Physician_Credentials" &
             " FROM Physician WHERE Physician_ID = '" & intPhysicianID & "'"
 
         dsPatientDataSet = CreateDatabase.ExecuteSelectQuery(strSQLiteCommand)
@@ -228,7 +228,7 @@ Module PatientInformation
                 'frmPatientInfo.txtPhysician.Text = "N/A"
             Else
 
-                frmPatientInfo.cboPhysicians.Tag = (dr(1).ToString & ", " & dr(0).ToString).ToString.Trim
+                frmPatientInfo.cboPhysicians.Tag = (dr(1).ToString & ", " & dr(0).ToString & ", " & dr(2).ToString).ToString.Trim
                 frmPatientInfo.cboPhysicians.SelectedItem = frmPatientInfo.cboPhysicians.Tag
                 '   MessageBox.Show(frmPatientInfo.cboPhysicians.GetItemText(frmPatientInfo.cboPhysicians.Tag))
             End If
@@ -273,6 +273,9 @@ Module PatientInformation
     '/*  ---                   ----     ----------------------------------*/
     '/*  Alexander Beasecker  03/15/21  Initial creation of the code      */
     '/*  NP                   03/31/2021 Added Error checking to the code.*/
+    '/*  NP                   4/7/2021   fixed an issue that caused a crash*/
+    '/*                                 I had to add a second trim for the*/
+    '/*                                 Physician.trim(",")               */
     '/*********************************************************************/
     Public Sub SavePatientEdits(ByRef intPatientID As Integer)
         'check if MRN is changed
@@ -663,14 +666,15 @@ Module PatientInformation
             If Not IsNothing(.cboPhysicians.SelectedItem) Then
                     If Not .cboPhysicians.SelectedItem.Equals(.cboPhysicians.Tag) Then
                         Dim strPhysicianName As String() = Split(.cboPhysicians.SelectedItem)
-                        Dim dsPhysicians As DataSet
-                        strPhysicianName(0) = strPhysicianName(0).TrimEnd(",")
-                        dsPhysicians = CreateDatabase.ExecuteSelectQuery("Select Physician_ID from  Physician where Physician_First_name = '" &
+                    Dim dsPhysicians As DataSet
+                    strPhysicianName(0) = strPhysicianName(0).TrimEnd(",")
+                    strPhysicianName(1) = strPhysicianName(1).TrimEnd(",")
+                    dsPhysicians = CreateDatabase.ExecuteSelectQuery("Select Physician_ID from  Physician where Physician_First_name = '" &
                                                                          strPhysicianName(1) & "' and Physician_Last_Name = '" &
                                                                          strPhysicianName(0) & "';")
-                        strbSqlCommand.Append("UPDATE Patient SET Primary_Physician_ID = '" & dsPhysicians.Tables(0).Rows(0)(EnumList.Physician.Id) &
+                    strbSqlCommand.Append("UPDATE Patient SET Primary_Physician_ID = '" & dsPhysicians.Tables(0).Rows(0)(EnumList.Physician.Id) &
                                               "' Where Patient_ID = '" & intPatientID & "'")
-                        ExecuteInsertQuery(strbSqlCommand.ToString)
+                    ExecuteInsertQuery(strbSqlCommand.ToString)
                         intCountChanged += 1
                         strbItemsChanged.AppendLine("Primary Physician")
                         .cboPhysicians.Tag = .cboPhysicians.SelectedItem
