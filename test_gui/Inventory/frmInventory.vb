@@ -5,10 +5,17 @@ Public Class frmInventory
     Public Event UpdateLoadScreen(txt As String)
 
     Private btnSelectedDrawer As Button
+    Private lstFullDrawers As List(Of Integer)
 
     Public Sub SetSelectedDrawer(ByVal btnDrawer As Button)
 
         btnSelectedDrawer = btnDrawer
+
+    End Sub
+
+    Public Sub SetFullDrawersList(ByVal lstDrawers As List(Of Integer))
+
+        lstFullDrawers = lstDrawers
 
     End Sub
 
@@ -25,6 +32,8 @@ Public Class frmInventory
 
         DefaultSaveButtonLocation()
         txtQuantity.Text = 1
+
+        RemoveFullDrawersFromComboBox(cmbDrawerNumber)
 
         ' the button's tab index from the previous screen will allow us to know what drawer that is
         cmbDrawerNumber.SelectedIndex = btnSelectedDrawer.TabIndex - 1
@@ -72,6 +81,20 @@ Public Class frmInventory
         btnSave.Location = New Point(184, 75)
         pnlPatientNamePadding.Visible = True
         lblPatientName.Visible = True
+    End Sub
+
+    Public Sub RemoveFullDrawersFromComboBox(ByVal cboBox As ComboBox)
+
+        Dim drawerNum As Integer
+
+        For Each drawerNum In lstFullDrawers
+
+
+
+        Next
+
+
+
     End Sub
 
     '/*********************************************************************/

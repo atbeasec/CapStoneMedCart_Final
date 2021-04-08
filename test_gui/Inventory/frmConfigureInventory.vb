@@ -574,6 +574,7 @@
             btnSaveOrAdd.Text = "ADD TO DRAWER"
         End If
 
+        LockButton()
 
     End Sub
 
@@ -730,6 +731,7 @@
         Dim dividers As Integer = CreateDatabase.ExecuteScalarQuery("SELECT Number_of_Dividers FROM Drawers where Drawers_ID = " & sender.TabIndex.ToString() & ";")
         txtDividers.Text = dividers
 
+
         'MessageBox.Show(strDrugName + " " + intStrength.ToString() + "   " + intDividerBin.ToString() + " In drawer number: " + sender.TabIndex.ToString())
     End Sub
 
@@ -835,6 +837,7 @@
     '/*********************************************************************/
     Private Sub btnIncrementDividers_Click(sender As Object, e As EventArgs) Handles btnIncrementDividers.Click
 
+        btnSaveOrAdd.Visible = True
         ButtonIncrement(5, txtDividers)
         SetDrawerPropertiesToSave()
 
@@ -874,7 +877,7 @@
     '/*  Collin Krygier  3/24/2021    Initial creation                    */
     '/*********************************************************************/
     Private Sub btnDecrementDividers_Click(sender As Object, e As EventArgs) Handles btnDecrementDividers.Click
-
+        btnSaveOrAdd.Visible = True
         If txtDividers.Text = 1 Then
             'ignore the decrement method because it does not handle 0
             txtDividers.Text = 0
@@ -1027,6 +1030,7 @@
                 SetDrawerPropertiesToAdd()
                 UpdateUser()
                 UpdateButtonsOnScreen()
+                LockButton()
             Else
                 MessageBox.Show("There are currently " & intDrugCount & " medications in this drawer, you can not decrease the divider count below " &
                                 (intDrugCount - 1) & ".")
@@ -1196,6 +1200,9 @@
         ' pass the name of thecurrently selected drawer the user is looking at
         frmInventory.SetSelectedDrawer(GetSelectedDrawer)
 
+        ' pass the list of full drawers to the next form
+        frmInventory.SetFullDrawersList(GetDrawersThatAreFull)
+
         ' open the inventory form
         frmMain.OpenChildForm(frmInventory)
 
@@ -1276,5 +1283,47 @@
         Next
 
     End Sub
+
+    Private Sub LockButton()
+
+        Dim ctl As Control
+
+        For Each ctl In pnlLayoutButtons.Controls
+            If TypeName(ctl) = "Button" Then
+                If ctl.BackColor = Color.FromArgb(71, 103, 216) Then
+                    If ctl.Text.Contains("Full") Then
+
+                        btnSaveOrAdd.Visible = False
+                        If btnSaveOrAdd.Text = "ADD TO DRAWER" Then
+                            btnSaveOrAdd.Visible = False
+                        End If
+
+                    Else
+
+                        btnSaveOrAdd.Visible = True
+
+                    End If
+                End If
+            End If
+        Next
+
+    End Sub
+
+    Private Function GetDrawersThatAreFull() As List(Of Integer)
+
+        Dim lstFullDrawers As New List(Of Integer)
+        Dim ctl As Control
+
+        For Each ctl In pnlLayoutButtons.Controls
+            If TypeName(ctl) = "Button" Then
+                If ctl.Text.Contains("Full") Then
+                    lstFullDrawers.Add(ctl.TabIndex)
+                End If
+            End If
+        Next
+
+        Return lstFullDrawers
+
+    End Function
 
 End Class
