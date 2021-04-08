@@ -33,8 +33,6 @@ Public Class frmInventory
         DefaultSaveButtonLocation()
         txtQuantity.Text = 1
 
-        RemoveFullDrawersFromComboBox(cmbDrawerNumber)
-
         ' the button's tab index from the previous screen will allow us to know what drawer that is
         cmbDrawerNumber.SelectedIndex = btnSelectedDrawer.TabIndex - 1
         cmbPatientNames.Items.Clear()
@@ -83,19 +81,6 @@ Public Class frmInventory
         lblPatientName.Visible = True
     End Sub
 
-    Public Sub RemoveFullDrawersFromComboBox(ByVal cboBox As ComboBox)
-
-        Dim drawerNum As Integer
-
-        For Each drawerNum In lstFullDrawers
-
-
-
-        Next
-
-
-
-    End Sub
 
     '/*********************************************************************/
     '/*               SubProgram NAME: DefaultSaveButtonLocation          */         

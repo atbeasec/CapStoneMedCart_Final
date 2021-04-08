@@ -1258,7 +1258,42 @@
 
     End Function
 
-
+    '/*********************************************************************/
+    '/*             SubProgram NAME: HideEditButton             */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/30/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This sub hides the pencil icon because it is not needed to appear */
+    '/ on the form. It is needed to be physically located on it because it */
+    '/* plays a roll in showing the check mark icon so we need to still add*/
+    '/  add it to the form
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*          UpdateButtonsOnScreen                                    */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 This is an event handler and uses Vb default parameters for handlers 
+    '/*  sender and e
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                 	              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	ctl- a control that is being iterated over                        */
+    '/*	pnl- a control that is being iterated over                        */
+    '/*	pnlMain - a control that is being iterated over                   */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/24/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Sub HideEditButton(ByVal sender As Object, e As EventArgs)
 
         Dim ctl As Control
@@ -1284,6 +1319,39 @@
 
     End Sub
 
+    '/*********************************************************************/
+    '/*             SubProgram NAME: LockButtons             */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/30/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This sub checks if a drawer is full, then hides the add to drawer /
+    '/*  button to prevent a user from trying to add to a full drawer before
+    '/*  increasing the drawers capacity.                                  /
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*          HighlightSelectedDrawer                                  */ 
+    '/*          btnSaveOrAddClick                                        */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	                       */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                 	              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/24/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Sub LockButton()
 
         Dim ctl As Control
@@ -1309,6 +1377,42 @@
 
     End Sub
 
+    '/*********************************************************************/
+    '/*             SubProgram NAME: GetDrawersThatAreFull                */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/30/2021                        */                             
+    '/*********************************************************************/
+    '/*  FUNCTION PURPOSE:			    					              */             
+    '/*	 This sub checks if a drawer is full, then hides the add to drawer /
+    '/*  button to prevent a user from trying to add to a full drawer before
+    '/*  increasing the drawers capacity.                                  /
+    '/*********************************************************************/
+    '/   RETURNS                                                           /
+    '/   List of integers that represent the drawers that are full         /
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*          HighlightSelectedDrawer                                  */ 
+    '/*          btnSaveOrAddClick                                        */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	  none                                                            */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                 	              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	 ctl- a control that is being iterated over                       */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/24/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Function GetDrawersThatAreFull() As List(Of Integer)
 
         Dim lstFullDrawers As New List(Of Integer)
@@ -1317,6 +1421,7 @@
         For Each ctl In pnlLayoutButtons.Controls
             If TypeName(ctl) = "Button" Then
                 If ctl.Text.Contains("Full") Then
+                    ' if the drawer is full we will add it to the array to indicate so
                     lstFullDrawers.Add(ctl.TabIndex)
                 End If
             End If
