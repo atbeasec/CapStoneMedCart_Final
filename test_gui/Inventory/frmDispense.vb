@@ -121,7 +121,7 @@ Public Class frmDispense
 
     Private Sub Dispense_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        lblDirections.Text = "Select Amount To Dispense:"
+        lblDirections.Text = "Insert Amount to Remove:"
         lblDirections.Left = (pnlSelector.Width \ 2) - (pnlSelector.Width \ 2)
 
         pnlAmountInDrawer.Visible = False
@@ -190,7 +190,7 @@ Public Class frmDispense
         Dim intdrawerNumber As Integer = CreateDatabase.ExecuteScalarQuery("Select Drawers_TUID from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
         btnReopenDrawer.Visible = True
         'check for what set in the process the dispense is in.
-        If lblDirections.Text.Equals("Select Amount To Dispense:") Then
+        If lblDirections.Text.Equals("Insert Amount to Remove:") Then
             'check to see if the amount is a numeric
             If IsNumeric(txtQuantityToDispense.Text) Then
                 If txtQuantityToDispense.Text > 0 Then

@@ -352,7 +352,7 @@ Partial Class frmNewPatient
         Me.txtWeight.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtWeight.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtWeight.Location = New System.Drawing.Point(1, 1)
-        Me.txtWeight.MaxLength = 4
+        Me.txtWeight.MaxLength = 5
         Me.txtWeight.Multiline = True
         Me.txtWeight.Name = "txtWeight"
         Me.txtWeight.ShortcutsEnabled = False
@@ -458,9 +458,9 @@ Partial Class frmNewPatient
         Me.Label7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
         Me.Label7.Location = New System.Drawing.Point(334, 235)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(59, 21)
+        Me.Label7.Size = New System.Drawing.Size(114, 21)
         Me.Label7.TabIndex = 74
-        Me.Label7.Text = "Height:"
+        Me.Label7.Text = "Height (in CM):"
         '
         'Label8
         '
@@ -469,9 +469,9 @@ Partial Class frmNewPatient
         Me.Label8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
         Me.Label8.Location = New System.Drawing.Point(627, 235)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(62, 21)
+        Me.Label8.Size = New System.Drawing.Size(111, 21)
         Me.Label8.TabIndex = 75
-        Me.Label8.Text = "Weight:"
+        Me.Label8.Text = "Weight (in Kg):"
         '
         'Label9
         '
