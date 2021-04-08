@@ -407,7 +407,7 @@ Partial Class frmMain
         Me.btnReport.Padding = New System.Windows.Forms.Padding(10, 5, 5, 5)
         Me.btnReport.Size = New System.Drawing.Size(210, 50)
         Me.btnReport.TabIndex = 65
-        Me.btnReport.Tag = "19"
+        Me.btnReport.Tag = "9"
         Me.btnReport.Text = "   Reports"
         Me.btnReport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnReport.UseVisualStyleBackColor = False
