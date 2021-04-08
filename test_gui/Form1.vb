@@ -12,21 +12,22 @@
         MyPatients = 3
         AddPatient = 4
         InventoryDropDown = 5
-        AdHocDispense = 6
-        EndOfShiftCount = 7
-        Inventory = 8
-        Waste = 9
-        Report = 10
-        Discrepancies = 11
-        Maintenance = 12
-        Pharmacy = 13
-        SettingsDropDown = 14
-        ConfigureUserPermissions = 15
-        Discharge = 16
-        ConfigureRooms = 17
-        SerialPortSettings = 18
-        EditPhysician = 19
-        LogOut = 20
+        EndOfShiftCount = 6
+        Inventory = 7
+        Waste = 8
+        Report = 9
+        Discrepancies = 10
+        Maintenance = 11
+        Pharmacy = 12
+        NewPrescription = 13
+        AdhocOrder = 14
+        SettingsDropDown = 15
+        ConfigureUserPermissions = 16
+        Discharge = 17
+        ConfigureRooms = 18
+        SerialPortSettings = 19
+        EditPhysician = 20
+        LogOut = 21
     End Enum
 
     Public Sub SetUserName(ByVal strUsername As String)
@@ -95,7 +96,7 @@
     '/*  ---   ----     ------------------------------------------------  */
     '/*  Collin Krygier  2/14/2021    Initial creation                    */
     '/*********************************************************************/
-    Private Sub btnMenu_Click(sender As Object, e As EventArgs) Handles btnWaste.Click, btnUsers.Click, btnSerialPort.Click, btnReport.Click, btnPharmacy.Click, btnMyPatients.Click, btnMaintenance.Click, btnEndOfShiftCount.Click, btnEditRooms.Click, btnEditPhysician.Click, btnDischargePatient.Click, btnDescrepancies.Click, btnConfigureInventory.Click, btnAllPatients.Click, btnAdhockDispense.Click, btnAddPatients.Click
+    Private Sub btnMenu_Click(sender As Object, e As EventArgs) Handles btnWaste.Click, btnUsers.Click, btnSerialPort.Click, btnReport.Click, btnPharmacy.Click, btnMyPatients.Click, btnMaintenance.Click, btnEndOfShiftCount.Click, btnEditRooms.Click, btnEditPhysician.Click, btnDischargePatient.Click, btnDescrepancies.Click, btnConfigureInventory.Click, btnAllPatients.Click, btnAddPatients.Click, btnAdhoc.Click, btnNewPrescription.Click
 
 
 
@@ -266,11 +267,6 @@
                 'nothing will happen here because we have a submenu that needs to be displayed to show more buttons
                 'more buttons will be shown and we will take the tag num of those to determine which form to dock
 
-            Case SelectedForm.AdHocDispense
-
-                frmCurrentChildForm = frmAdHockDispense
-                OpenChildForm(frmAdHockDispense)
-
             Case SelectedForm.EndOfShiftCount
 
                 frmCurrentChildForm = frmEndOfShift
@@ -312,11 +308,21 @@
 
             Case SelectedForm.Pharmacy
 
-                frmCurrentChildForm = frmPharmacy
+              '  frmCurrentChildForm = frmPharmacy
+                ' OpenChildForm(frmPharmacy)
+                '  HideSubMenu(pnlSubMenuSettings)
+                ' HideSubMenu(pnlSubMenuPatientRecords)
+               ' HideSubMenu(pnlSubMenuInventory)
+
+            Case SelectedForm.NewPrescription
+
+                frmCurrentChildForm = frmAdHockDispense
                 OpenChildForm(frmPharmacy)
-                HideSubMenu(pnlSubMenuSettings)
-                HideSubMenu(pnlSubMenuPatientRecords)
-                HideSubMenu(pnlSubMenuInventory)
+
+            Case SelectedForm.AdhocOrder
+
+                frmCurrentChildForm = frmAdHockDispense
+                OpenChildForm(frmAdHockDispense)
 
             Case SelectedForm.SettingsDropDown
 
@@ -422,10 +428,12 @@
         'set submenu to be invisible on form load
         pnlSubMenuSettings.Visible = False
         pnlSubMenuInventory.Visible = False
+        pnlSubMenuPharmacy.Visible = False
 
         AssignHandlersToSubMenuButtons(pnlSubMenuInventory)
         AssignHandlersToSubMenuButtons(pnlSubMenuSettings)
         AssignHandlersToSubMenuButtons(pnlSubMenuPatientRecords)
+        AssignHandlersToSubMenuButtons(pnlSubMenuPharmacy)
 
         'set the patient records form to be selected on default application startup
         pnlSubMenuPatientRecords.Visible = True
@@ -472,7 +480,7 @@
 
         ' Dim arrBUttonsToRemoveAdmin() = {btnWaste} ' btn waste is not eneded on the side menu currently but easy to add back on as needed
         Dim arrButtonsToRemoveSupervisor() = {btnSerialPort}
-        Dim arrButtonsToRemoveNurse() = {btnUsers, btnSerialPort, btnEditPhysician, btnPharmacy, btnMaintenance, btnDescrepancies, btnConfigureInventory, btnEndOfShiftCount}
+        Dim arrButtonsToRemoveNurse() = {btnUsers, btnSerialPort, btnEditPhysician, btnNewPrescription, btnMaintenance, btnDescrepancies, btnConfigureInventory, btnEndOfShiftCount}
 
         If String.Equals(ADMINACCESS, permissionLevel) Then
             ' ShowOnlyPermittedScreens(arrBUttonsToRemoveAdmin)
@@ -603,18 +611,6 @@
     End Sub
 
 
-
-
-
-
-
-
-
-    '*******************
-    '* DYLAN- do SQL query here to get the user's permission level.
-    '* call this function inside the CheckPermissions method in formload. IE CheckPermissions(GetUserPermissions())
-    '*******************
-
     Private Function GetUserPermissions() As String
 
         ' will contain the query result indicating the user;s permission level
@@ -625,16 +621,6 @@
         Return permissionLevel
 
     End Function
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -674,6 +660,7 @@
 
         HideSubMenu(pnlSubMenuInventory)
         HideSubMenu(pnlSubMenuPatientRecords)
+        HideSubMenu(pnlSubMenuPharmacy)
         ShowOrHideSubMenu(pnlSubMenuSettings)
 
     End Sub
@@ -715,6 +702,7 @@
 
         HideSubMenu(pnlSubMenuSettings)
         HideSubMenu(pnlSubMenuPatientRecords)
+        HideSubMenu(pnlSubMenuPharmacy)
         ShowOrHideSubMenu(pnlSubMenuInventory)
 
     End Sub
@@ -756,7 +744,51 @@
 
         HideSubMenu(pnlSubMenuSettings)
         HideSubMenu(pnlSubMenuInventory)
+        HideSubMenu(pnlSubMenuPharmacy)
         ShowOrHideSubMenu(pnlSubMenuPatientRecords)
+
+    End Sub
+
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: btnPharmacy_Click              */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/14/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This identifies what to do when the patient records button is    */
+    '/*  clicked                                                          */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*          none                                                     */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*      ShowOrHideSubMenu                                            */ 
+    '/*      HideSubMenu                                                  */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 sender- object representing a control                            */
+    '/*  e- eventargs indicating there is an event handle assigned        */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                     							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	    none                                                          */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/14/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub btnPharmacy_Click(sender As Object, e As EventArgs) Handles btnPharmacy.Click
+
+        HideSubMenu(pnlSubMenuSettings)
+        HideSubMenu(pnlSubMenuInventory)
+        HideSubMenu(pnlSubMenuPatientRecords)
+        ShowOrHideSubMenu(pnlSubMenuPharmacy)
 
     End Sub
 
@@ -938,7 +970,7 @@
 
         'changes the background color when the mouse clicks the submenu buttons
 
-        Dim arrPanels As Panel() = {pnlSubMenuSettings, pnlSubMenuPatientRecords, pnlSubMenuInventory}
+        Dim arrPanels As Panel() = {pnlSubMenuSettings, pnlSubMenuPatientRecords, pnlSubMenuInventory, pnlSubMenuPharmacy}
         ' arrPanels = 
 
         Dim ctlControl As Control
