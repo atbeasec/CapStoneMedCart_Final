@@ -261,6 +261,7 @@
             End If
 
         End If
+        txtBarcode.Text = Nothing
     End Sub
 
     '/********************************************************************/
@@ -422,6 +423,8 @@
             End If
 
         End If
+        txtUsername.Text = Nothing
+        txtPassword.Text = Nothing
     End Sub
 
     Private Sub CheckUsername(ByRef strUsername As String, ByRef strPassword As String)
