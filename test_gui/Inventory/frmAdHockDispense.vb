@@ -7,7 +7,7 @@
     '/********************************************************************/
     '/*                   SUB NAME: frmAdHockDispense_Load 	         */         
     '/********************************************************************/
-    '/*                   WRITTEN BY: 
+    '/*                   WRITTEN BY:
     '/*		         DATE CREATED:                            
     '/********************************************************************/
     '/*  SUBROUTINE PURPOSE:
@@ -47,34 +47,37 @@
 
 
     '/********************************************************************/
-    '/*                   SUB NAME: cmbMedications_SelectedIndexChanged 	         */         
+    '/*                   SUB NAME: cmbMedications_SelectedIndexChanged          
     '/********************************************************************/
-    '/*                   WRITTEN BY:  cmbMedications_SelectedIndexChanged
-    '/*		         DATE CREATED:                            
+    '/*                   WRITTEN BY:  Alexander Beasecker
+    '/*		         DATE CREATED:     3/12/2021                       
     '/********************************************************************/
     '/*  SUBROUTINE PURPOSE:
+    '/* this will call the method to set medicaiton properties when the 
+    '/*  medication combobox index changes
     '/*
     '/********************************************************************/
     '/*  CALLED BY 
-    '/* 
+    '/*  cmbMedications.SelectedIndexChanged
     '/********************************************************************/
     '/*  CALLS:								                             */	
-    '/* (none)
+    '/* AdHoc.SetMedicationProperties()
     '/********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):				             */	           
-    '/*	                                   */								                        							             
+    '/*	                                   */						
     '/********************************************************************/
     '/* SAMPLE INVOCATION:						                         */
-    '/* 
+    '/* change index in cmbMedications
+    '/* when the index changes it will call this method
     '/********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
-    '/*
+    '/* 
     '/********************************************************************/
     '/* MODIFICATION HISTORY:						                     */		                 
     '/*									 */		                         */
     '/*  WHO            WHEN             WHAT				             */		            
     '/*  ---            ----             ----				             */
-    '/*
+    '/*  AB             3/12/2021          initial creation
     '/********************************************************************/ 
     Private Sub cmbMedications_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMedications.SelectedIndexChanged
         AdHoc.SetMedicationProperties()
@@ -84,32 +87,35 @@
     '/********************************************************************/
     '/*                   SUB NAME:  cmbPatientName_SelectedIndexChanged	         */         
     '/********************************************************************/
-    '/*                   WRITTEN BY: 
-    '/*		         DATE CREATED:                            
+    '/*                   WRITTEN BY:  Alexander Beasecker
+    '/*		         DATE CREATED:     3/12/2021                       
     '/********************************************************************/
     '/*  SUBROUTINE PURPOSE:
+    '/* this will call the method to set populate patient properties when the 
+    '/*  medication combobox index changes
     '/*
     '/********************************************************************/
     '/*  CALLED BY 
-    '/* 
+    '/*  cmbPatientName.SelectedIndexChanged
     '/********************************************************************/
     '/*  CALLS:								                             */	
-    '/* (none)
+    '/* AdHoc.PopulatePatientInformation()
     '/********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):				             */	           
-    '/*	                                   */								                        							             
+    '/*	                                   */						
     '/********************************************************************/
     '/* SAMPLE INVOCATION:						                         */
-    '/* 
+    '/* change index in cmbPatientName
+    '/* when the index changes it will call this method
     '/********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
-    '/*
+    '/* 
     '/********************************************************************/
     '/* MODIFICATION HISTORY:						                     */		                 
     '/*									 */		                         */
     '/*  WHO            WHEN             WHAT				             */		            
     '/*  ---            ----             ----				             */
-    '/*
+    '/*  AB             3/12/2021          initial creation
     '/********************************************************************/ 
     Private Sub cmbPatientName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPatientName.SelectedIndexChanged
         AdHoc.PopulatePatientInformation()
@@ -118,32 +124,53 @@
     '/********************************************************************/
     '/*                   SUB NAME: btnDispense_Click 	         */         
     '/********************************************************************/
-    '/*                   WRITTEN BY: 
-    '/*		         DATE CREATED:                            
+    '/*                   WRITTEN BY:  Alexander Beasecker
+    '/*		         DATE CREATED:     3/12/2021                       
     '/********************************************************************/
     '/*  SUBROUTINE PURPOSE:
+    '/* this 
     '/*
     '/********************************************************************/
     '/*  CALLED BY 
-    '/* 
+    '/*  btnDispense.Click
     '/********************************************************************/
     '/*  CALLS:								                             */	
-    '/* (none)
+    '/* ExecuteScalarQuery("Select AllergyOverride_ID from AllergyOverride")
+    '/* ExecuteScalarQuery("SELECT MAX(AllergyOverride_ID) from AllergyOverride")
+    '/* ExecuteInsertQuery("INSERT INTO AllergyOverride(AllergyOverride_ID, Patient_TUID, User_TUID, Allergy_Name, DateTime)
+    '/* DrugInteractionOverride(cmbMedications.SelectedItem, txtMRN.Text, "AdHoc")
+    '/* frmDispense.setintEntered(1)
+    '/* frmDispense.AdhocDispenseSetInformation(strAmount, strUnit, intMedDrawer)
+    '/* frmDispense.SetPatientID(intPatientID)
+    '/* frmDispense.SetintMedicationID(intMedID)
+    '/* frmMain.OpenChildForm(frmDispense)
+    '/* DispenseHistory.DispensemedicationPopulate(intPatientID, intMedID)
+    '/* PatientInformation.PopulatePatientDispenseInfo(intPatientID)
+    '/* PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientID)
     '/********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):				             */	           
-    '/*	                                   */								                        							             
+    '/*	                                   */						
     '/********************************************************************/
     '/* SAMPLE INVOCATION:						                         */
     '/* 
     '/********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/* 
+    '/*
+    '/*
+    '/*
+    '/*
+    '/*
+    '/*
+    '/*
     '/*
     '/********************************************************************/
     '/* MODIFICATION HISTORY:						                     */		                 
     '/*									 */		                         */
     '/*  WHO            WHEN             WHAT				             */		            
     '/*  ---            ----             ----				             */
-    '/*
+    '/*  AB             3/12/2021          initial creation
+    '/*  BH             4/2/2021         added allergy/interaction overrides
     '/********************************************************************/ 
     Private Sub btnDispense_Click(sender As Object, e As EventArgs) Handles btnDispense.Click
         'make sure that both patient and medication is selected before ordering the AdHoc
