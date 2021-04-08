@@ -156,12 +156,12 @@
     '/********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
     '/* 
-    '/*
-    '/*
-    '/*
-    '/*
-    '/*
-    '/*
+    '/* intMaxAllergyID 
+    '/* intPatientID -- holds selected patient id
+    '/* intMedID -- holds selected medication id
+    '/* strAmount -- adhoc prescption amount from textbox
+    '/* strUnit -- unit from textbox
+    '/* intMedDrawer -- drawermedicationTUID from database for selected medication
     '/*
     '/*
     '/********************************************************************/
@@ -231,6 +231,13 @@
             'If the user signs off for any override, dispense the medication
             If blnSignedOff = True Then
                 blnSignedOff = False
+
+                'get IDs from parallel arrays
+                'this form has three arrays, intPatientIDArray, intMedIDArray, and intDrawerMedArray
+                'they have the IDs of the comboboxes added in the same order that they are added to the combobox
+                'this allows identifiability when selecting comboboxes, this is required as many database fields
+                'are not unique, so i set up these arrays, you can get the Database TUID for any selected item
+                ' by indexing the index at the same index of the combobox selected item
                 Dim intPatientID As Integer = AdHoc.intPatientIDArray(cmbPatientName.SelectedIndex)
                 Dim intMedID As Integer = AdHoc.intMedIDArray(cmbMedications.SelectedIndex)
                 Dim strAmount As String = txtAmount.Text
@@ -240,17 +247,23 @@
                 'AdHoc.clearAdhocBoxes()
                 'MessageBox.Show("Order Successfully placed")
 
+                'set entered variable to 1 to let dispense know adhoc is what started this dispensing
                 frmDispense.setintEntered(1)
+
+                'set medication variables into dispense screen
                 frmDispense.AdhocDispenseSetInformation(strAmount, strUnit, intMedDrawer)
+
+                'set patient id for dispense
                 frmDispense.SetPatientID(intPatientID)
+
+                'set medication id for dispense
                 frmDispense.SetintMedicationID(intMedID)
                 frmMain.OpenChildForm(frmDispense)
                 DispenseHistory.DispensemedicationPopulate(intPatientID, intMedID)
                 PatientInformation.PopulatePatientDispenseInfo(intPatientID)
                 PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientID)
-
+                '
             End If
-
         End If
 
     End Sub
