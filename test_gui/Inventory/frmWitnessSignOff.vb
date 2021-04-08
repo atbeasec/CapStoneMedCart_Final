@@ -60,6 +60,10 @@
                 txtPassword.Clear()
             End If
         End If
+        ' clear the inputs no matter what
+        txtBarcode.Clear()
+        txtUsername.Clear()
+        txtPassword.Clear()
     End Sub
 
     Private Sub pnlInteractions_Paint(sender As Object, e As PaintEventArgs) Handles pnlInteractions.Paint
