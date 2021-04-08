@@ -74,6 +74,7 @@ Partial Class frmMainScreenWaste
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.pnlHeader.SuspendLayout()
         Me.pnlRadioButtons.SuspendLayout()
         Me.pnlSignOff.SuspendLayout()
@@ -129,6 +130,7 @@ Partial Class frmMainScreenWaste
         '
         'pnlRadioButtons
         '
+        Me.pnlRadioButtons.Controls.Add(Me.Label14)
         Me.pnlRadioButtons.Controls.Add(Me.Button1)
         Me.pnlRadioButtons.Controls.Add(Me.pnlSignOff)
         Me.pnlRadioButtons.Controls.Add(Me.txtOther)
@@ -151,7 +153,7 @@ Partial Class frmMainScreenWaste
         Me.Button1.ForeColor = System.Drawing.Color.White
         Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button1.Location = New System.Drawing.Point(101, 288)
+        Me.Button1.Location = New System.Drawing.Point(41, 157)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(150, 37)
         Me.Button1.TabIndex = 220
@@ -163,7 +165,7 @@ Partial Class frmMainScreenWaste
         '
         Me.pnlSignOff.Controls.Add(Me.pnlCredentials)
         Me.pnlSignOff.Controls.Add(Me.pnlBarcode)
-        Me.pnlSignOff.Location = New System.Drawing.Point(3, 158)
+        Me.pnlSignOff.Location = New System.Drawing.Point(3, 157)
         Me.pnlSignOff.Name = "pnlSignOff"
         Me.pnlSignOff.Size = New System.Drawing.Size(491, 253)
         Me.pnlSignOff.TabIndex = 24
@@ -342,11 +344,11 @@ Partial Class frmMainScreenWaste
         'txtOther
         '
         Me.txtOther.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtOther.Location = New System.Drawing.Point(21, 158)
+        Me.txtOther.Location = New System.Drawing.Point(217, 31)
         Me.txtOther.Multiline = True
         Me.txtOther.Name = "txtOther"
         Me.txtOther.ShortcutsEnabled = False
-        Me.txtOther.Size = New System.Drawing.Size(329, 124)
+        Me.txtOther.Size = New System.Drawing.Size(191, 124)
         Me.txtOther.TabIndex = 6
         '
         'rbtnOther
@@ -699,6 +701,16 @@ Partial Class frmMainScreenWaste
         Me.Label10.TabIndex = 253
         Me.Label10.Text = "Units:"
         '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(212, 3)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(113, 25)
+        Me.Label14.TabIndex = 221
+        Me.Label14.Text = "Explanation"
+        '
         'frmMainScreenWaste
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -804,4 +816,5 @@ Partial Class frmMainScreenWaste
     Friend WithEvents lblBadge As Label
     Friend WithEvents Label13 As Label
     Friend WithEvents Button1 As Button
+    Friend WithEvents Label14 As Label
 End Class

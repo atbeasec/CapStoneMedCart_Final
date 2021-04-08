@@ -99,13 +99,14 @@
             lblSignoff.Visible = True
             txtBarcode.Visible = True
             pnlCredentials.Visible = False
+            Button1.Visible = False
         Else
             pnlSignOff.Visible = False
             lblSignoff.Visible = False
             txtBarcode.Visible = False
         End If
-
-
+        txtOther.Visible = False
+        Label14.Visible = False
     End Sub
 
     '/********************************************************************/
@@ -151,9 +152,12 @@
                 If ctl.Name = "rbtnOther" Then
                     rbtn = CType(ctl, RadioButton)
                     If rbtn.Checked = True Then
-                        pnlSignOff.Dock = DockStyle.Bottom
+                        txtOther.Visible = True
+                        Label14.Visible = True
                     Else
                         pnlSignOff.Dock = False
+                        txtOther.Visible = False
+                        Label14.Visible = False
                     End If
                 End If
             End If
