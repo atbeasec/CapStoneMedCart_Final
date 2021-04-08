@@ -57,7 +57,7 @@
     '/*  returns the intenteredFromAdhoc variable
     '/********************************************************************/
     '/*  CALLED BY 
-    '/* 
+    '/* none
     '/********************************************************************/
     '/*  CALLS:								                             */	
     '/* none
@@ -85,25 +85,32 @@
     '/*                   FUNCTION NAME: setEnteredFromAdhoc	         */         
     '/********************************************************************/
     '/*                   WRITTEN BY: Alexander Beasecker          */   
-    '/*		         DATE CREATED:  4/08/2021               */                             
+    '/*		         DATE CREATED:  4/04/2021               */                             
     '/********************************************************************/
     '/*  SUBROUTINE PURPOSE:
+    '/* sets the intEnteredFromAdhoc to the variable passed to it
+    '/* this variable flips between a 1 or a 0 to tell if the dispensing
+    '/* flow of screens was entered from the adhoc screen or patientinfo screen
     '/*
     '/********************************************************************/
     '/*  CALLED BY 
-    '/*
+    '/* frmDispense.btnDispenseClick
+    '/* frmwaste.btnWaste_click
+    '/* frmwaste.CheckBarcode
+    '/* frmwaste.buttonwasteWithCredentials
+    '/* frmwaste.CheckUsername
     '/********************************************************************/
     '/*  CALLS:								                             */	
-    '/*
+    '/* none
     '/********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):				             */	           
     '/*	            (NONE)	                                             */								                        							             
     '/********************************************************************/
     '/* SAMPLE INVOCATION:						                         */
-    '/*
+    '/* setEnteredFromAdhoc(1)
     '/********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
-    '/*
+    '/* none
     '/********************************************************************/
     '/* MODIFICATION HISTORY:						                     */		                 
     '/*									 */		                         */
@@ -115,29 +122,30 @@
         intEnteredFromAdhoc = intEntered
     End Sub
 
+
     '/********************************************************************/
     '/*                   FUNCTION NAME: setMedID	         */         
     '/********************************************************************/
     '/*                   WRITTEN BY: Alexander Beasecker          */   
-    '/*		         DATE CREATED:  4/08/2021               */                             
+    '/*		         DATE CREATED:  4/04/2021               */                             
     '/********************************************************************/
     '/*  SUBROUTINE PURPOSE:
-    '/*
+    '/* sets the intMedID to the variable passed to it
     '/********************************************************************/
     '/*  CALLED BY 
-    '/*
+    '/* frmDispense.btnDispenseClick
     '/********************************************************************/
     '/*  CALLS:								                             */	
-    '/*
+    '/* none
     '/********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):				             */	           
     '/*	            (NONE)	                                             */								                        							             
     '/********************************************************************/
     '/* SAMPLE INVOCATION:						                         */
-    '/*
+    '/* setMedID(1)
     '/********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
-    '/*
+    '/* none
     '/********************************************************************/
     '/* MODIFICATION HISTORY:						                     */		                 
     '/*									 */		                         */
@@ -153,25 +161,25 @@
     '/*                   FUNCTION NAME: setDrawer	         */         
     '/********************************************************************/
     '/*                   WRITTEN BY: Alexander Beasecker          */   
-    '/*		         DATE CREATED:  4/08/2021               */                             
+    '/*		         DATE CREATED:  4/04/2021               */                             
     '/********************************************************************/
     '/*  SUBROUTINE PURPOSE:
-    '/*
+    '/* sets the intDrawerID to the variable passed to it
     '/********************************************************************/
     '/*  CALLED BY 
-    '/*
+    '/* frmDispense.btnDispenseClick
     '/********************************************************************/
     '/*  CALLS:								                             */	
-    '/*
+    '/* none
     '/********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):				             */	           
     '/*	            (NONE)	                                             */								                        							             
     '/********************************************************************/
     '/* SAMPLE INVOCATION:						                         */
-    '/*
+    '/* setDrawer(1)
     '/********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
-    '/*
+    '/* none
     '/********************************************************************/
     '/* MODIFICATION HISTORY:						                     */		                 
     '/*									 */		                         */
