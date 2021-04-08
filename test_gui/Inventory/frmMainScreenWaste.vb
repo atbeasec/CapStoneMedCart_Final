@@ -174,6 +174,7 @@
                 CheckBarcode(txtBarcode.Text)
             End If
         End If
+        txtBarcode.Text = Nothing
     End Sub
 
     Private Sub CheckBarcode(ByRef strBarcode As String)
@@ -299,6 +300,8 @@
                 CheckLogin(txtUsername.Text, txtPassword.Text)
             End If
         End If
+        txtUsername.Text = Nothing
+        txtPassword.Text = Nothing
     End Sub
 
     Private Sub CheckLogin(ByRef strusername As String, ByRef strPassword As String)
