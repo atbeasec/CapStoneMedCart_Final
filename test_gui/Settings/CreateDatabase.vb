@@ -67,7 +67,8 @@
 
 '/*	 BRH		04/05/21	Changed the default folder for the database	*/
 '/*  BRH		04/06/21	Updated the create database file dialog to 	*/
-'/*						default database files (.db)				*/
+'/*						default database files (.db)					*/
+'/*	 BRH		04/08/21	Fixed the file path to remove an extra \	*/
 '/********************************************************************	*/
 
 'Imports the libraries necessary to connect and create SQLite databases
@@ -75,7 +76,7 @@ Imports System.Data.SQLite
 Imports System.IO
 Module CreateDatabase
 	'The path where the database is desired to be stored. 
-	Dim STRDEFAULTFOLDER As String = "C:\Users\Public\Documents\MedServe\"
+	Dim STRDEFAULTFOLDER As String = "C:\Users\Public\Documents\MedServe"
 	Public strDBNAME As String = "Medication_Cart_System"
 	Public strDBPath As String = strDEFAULTFOLDER & strDBNAME & ".db"
 	Public DBConn As SQLiteConnection
@@ -189,6 +190,7 @@ Module CreateDatabase
 
 			MessageBox.Show("All tables were created")
 			defaultCartSettings() 'this is going to put the default settings for our cart in the database. 
+			CreateDefaultUser()
 		Else
 
 		End If
@@ -1753,6 +1755,55 @@ Module CreateDatabase
 		Dim strDefaultSettings As String = "INSERT INTO Settings('Settings_ID', 'Bit_rate', 'Comm_Port', 'Simulation_Mode_Flag') VALUES (0, '115200', 'COM1', 0);"
 
 		ExecuteInsertQuery(strDefaultSettings)
+	End Sub
+
+	'/*******************************************************************/
+	'/*				SUBROUTINE NAME:		CreateDefaultUser			*/
+	'/*******************************************************************/
+	'/*                   WRITTEN BY:  	Breanna Howey					*/
+	'/*		         DATE CREATED: 	   03/28/21							*/
+	'/*******************************************************************/
+	'/*  SUBROUTINE PURPOSE:											*/
+	'/*	 The purpose of this subroutine is to create a default user when*/
+	'/*  creating a blank database. This allows the user to import new	*/
+	'/*	 data into the system when creating a blank database.			*/
+	'/*******************************************************************/
+	'/*  CALLED BY:   													*/
+	'/*   Main()						          						*/
+	'/*******************************************************************/
+	'/*  CALLS:															*/
+	'/*  ExecuteInsertQuery()											*/
+	'/*******************************************************************/
+	'/*  PARAMETER LIST (In Parameter Order):							*/
+	'/*																	*/
+	'/*  (None)															*/
+	'/*******************************************************************/
+	'/* SAMPLE INVOCATION:												*/
+	'/*																	*/
+	'/* CreateDefaultUser()												*/	
+	'/*******************************************************************/
+	'/*  LOCAL VARIABLE LIST (Alphabetically):							*/
+	'/*																	*/
+	'/*  strSQLCmd - Stores the SQL statement for manipulating the database
+	'/*******************************************************************/
+	'/* MODIFICATION HISTORY:											*/
+	'/*																	*/
+	'/*  WHO   WHEN     WHAT											*/
+	'/*  ---   ----     ------------------------------------------------*/
+	'/*  BRH  04/08/21  Initial creation of the code					*/
+	'/*******************************************************************/
+	Sub CreateDefaultUser()
+		Dim strSQLCmd As String
+
+		'Inserts a default user into the database so the user can begin entering in the appropriate
+		'data. This inserts the already salted and hashed values for easier input and faster performance
+		'when loading.
+		strSQLCmd = "INSERT INTO User('User_ID', 'Username', 'Salt', 'Password', 'User_First_Name', 
+					'User_Last_Name', 'Barcode', 'Admin_Flag', 'Supervisor_Flag', 'Active_Flag') 
+					VALUES (1, 'MedServeAdmin', 'oYqaK6pa', 'NIbDUOTNj3mrJiI1n/m6PfySImw2mxOCKQlZFkboY0Q=', 
+					'MedServe', 'Admin', 'zfa1PP7+DaLGpQeSfnvs+65sVL43djxQQoffdbcEhLo=', 1, 0, 1);"
+
+		ExecuteInsertQuery(strSQLCmd)
 	End Sub
 
 	'/*******************************************************************/
