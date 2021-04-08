@@ -20,7 +20,7 @@ Public Class frmInventory
     End Sub
 
     Private Sub frmInventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        PopulateInventoryComboBoxes()
         cmbDrawerNumber.SelectedIndex = 0
         txtQuantity.Text = "1"
         ' setdefault text to the search box
@@ -34,7 +34,7 @@ Public Class frmInventory
         txtQuantity.Text = 1
 
         ' the button's tab index from the previous screen will allow us to know what drawer that is
-        cmbDrawerNumber.SelectedIndex = btnSelectedDrawer.TabIndex - 1
+        'cmbDrawerNumber.SelectedIndex = btnSelectedDrawer.TabIndex - 1
         cmbPatientNames.Items.Clear()
         Dim dsactivePatients As DataSet = CreateDatabase.ExecuteSelectQuery("Select * From Patient WHERE Active_Flag = 1 ;")
         For Each dr As DataRow In dsactivePatients.Tables(0).Rows
@@ -906,4 +906,12 @@ Public Class frmInventory
         End If
     End Sub
 
+
+    Public Sub PopulateInventoryComboBoxes()
+        cmbDrawerNumber.Items.Clear()
+        Dim dsDrawers As DataSet = CreateDatabase.ExecuteSelectQuery("Select * from Drawers where Full_Flag = '0'")
+        For Each dr As DataRow In dsDrawers.Tables(0).Rows
+            cmbDrawerNumber.Items.Add(dr(2))
+        Next
+    End Sub
 End Class
