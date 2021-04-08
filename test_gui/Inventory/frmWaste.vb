@@ -37,12 +37,7 @@
 
     Private Sub RadioButton6_CheckedChanged(sender As Object, e As EventArgs) Handles rbtnOther.CheckedChanged
 
-        ' MovePanelOnScreen()
-        If rbtnOther.Checked = True Then
-            pnlSignOff.Location = New Point(4, 225)
-        Else
-            pnlSignOff.Location = New Point(4, 153)
-        End If
+        MovePanelOnScreen()
 
     End Sub
 
@@ -101,21 +96,14 @@
         intNarcoticFlagGlobal = intNarcoticFlag
 
         If intNarcoticFlagGlobal = 1 Then
-
-
-            Label7.Visible = True
-
-
+            lblSignoff.Visible = True
+            txtBarcode.Visible = True
+            pnlCredentials.Visible = False
         Else
-
-
-            Label7.Visible = False
-
-
+            pnlSignOff.Visible = False
+            lblSignoff.Visible = False
+            txtBarcode.Visible = False
         End If
-
-        '  pnlBarcode.Visible = True
-        pnlCredentials.Visible = False
 
 
     End Sub
@@ -173,6 +161,16 @@
 
     End Sub
 
+
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        frmPatientInfo.setPatientID(intPatientID)
+        frmMain.OpenChildForm(frmPatientInfo)
+    End Sub
+    Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantity.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789.")
+    End Sub
+
     '/********************************************************************/
     '/*                   FUNCTION NAME: btnWaste_Click	             */         
     '/********************************************************************/
@@ -211,7 +209,7 @@
     '/*  ---            ----             ----				             */
     '/*  AB		        2/10/21		    initial creation                 */
     '/********************************************************************/ 
-    Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWasteWithBarcode.Click
+    Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWasteWithBarcode.Click, Button1.Click
         If intNarcoticFlagGlobal = 1 Then
             If IsNumeric(txtQuantity.Text) Then
                 Dim strBarcode As String = txtBarcode.Text
@@ -235,11 +233,6 @@
             End If
 
         End If
-    End Sub
-
-    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        frmPatientInfo.setPatientID(intPatientID)
-        frmMain.OpenChildForm(frmPatientInfo)
     End Sub
 
     Private Sub InsertWasteNonNarcotic()
@@ -302,7 +295,10 @@
                 setEnteredFromAdhoc(0)
                 frmMain.OpenChildForm(frmAdHockDispense)
             End If
-
+        ElseIf scanBarcode(strBarcode) = "SameBarcode" Then
+            MessageBox.Show("Can not sign-off for yourself.")
+            txtBarcode.Text = ""
+            txtBarcode.Focus()
         Else
             MsgBox("No User With That Barcode")
             txtBarcode.Focus()
@@ -311,7 +307,9 @@
 
     Private Function scanBarcode(ByRef strBarcode As String)
         Dim strHashedBarcode = ConvertBarcodePepperAndHash(strBarcode)
-        If ExecuteScalarQuery("SELECT COUNT(*) FROM User WHERE Barcode = '" & strHashedBarcode & "'" & " AND Active_Flag = '1'") <> 0 Then
+        If strHashedBarcode = ExecuteScalarQuery("SELECT Barcode FROM User WHERE User_ID = '" & LoggedInID & "'") Then
+            Return "SameBarcode"
+        ElseIf ExecuteScalarQuery("SELECT COUNT(*) FROM User WHERE Barcode = '" & strHashedBarcode & "'" & " AND Active_Flag = '1'") <> 0 Then
             intSignoffID = ExecuteScalarQuery("SELECT User_ID FROM User WHERE Barcode = '" & strHashedBarcode & "'")
             Return "True"
         Else
@@ -319,9 +317,6 @@
         End If
     End Function
 
-    Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantity.KeyPress
-        DataVaildationMethods.KeyPressCheck(e, "0123456789.")
-    End Sub
 
     Private Sub lblBadge_Click(sender As Object, e As EventArgs) Handles lblBadge.Click
 
@@ -347,21 +342,17 @@
     End Sub
 
     Private Sub btnWasteWithCredentials_Click(sender As Object, e As EventArgs) Handles btnWasteWithCredentials.Click
-        'set textbox text to string variable strUsername and strPassword
-        Dim strUsername = txtUsername.Text
-        Dim strPassword = txtPassword.Text
-        If strUsername = "" Then
-            MsgBox("            WARNING" & vbCrLf & "User Name Field is Blank")
-            txtUsername.Focus()
-        ElseIf strPassword = "" Then
-            MsgBox("            WARNING" & vbCrLf & "Password Field is Blank")
-            txtPassword.Focus()
-            'send strUsername and strPassword to LogIn Module and recive responce
-        ElseIf LogIn.UsernameLogIn(strUsername, strPassword) = "True" Then
+        If intNarcoticFlagGlobal = 1 Then
             If IsNumeric(txtQuantity.Text) Then
-                InsertWasteNarcotic(intSignoffID)
-
+                CheckUsername(txtUsername.Text, txtPassword.Text)
+            Else
+                MessageBox.Show("Please enter a numeric value to waste")
+            End If
+        Else
+            If IsNumeric(txtQuantity.Text) Then
+                InsertWasteNonNarcotic()
                 frmMain.UnlockSideMenu()
+
                 If intEnteredFromAdhoc = 0 Then
                     frmPatientInfo.setPatientID(intPatientID)
                     frmMain.OpenChildForm(frmPatientInfo)
@@ -370,13 +361,50 @@
                     setEnteredFromAdhoc(0)
                     frmMain.OpenChildForm(frmAdHockDispense)
                 End If
-            Else
-                MessageBox.Show("Please enter a numeric value to waste")
             End If
-        Else
-            'If users Username and Password is not in the User table then inform the user
-            MsgBox("No User With That Username and Password")
-        End If
 
+        End If
     End Sub
+
+    Private Sub CheckUsername(ByRef strUsername As String, ByRef strPassword As String)
+        If strUsername = "" Then
+            MsgBox("           WARNING" & vbCrLf & "Username Field is Blank")
+            txtUsername.Focus()
+        ElseIf strPassword = "" Then
+            MsgBox("           WARNING" & vbCrLf & "Password Field is Blank")
+            txtPassword.Focus()
+
+        ElseIf scanUserName(strUsername, strPassword) = "True" Then
+            InsertWasteNarcotic(intSignoffID)
+
+            frmMain.UnlockSideMenu()
+            If intEnteredFromAdhoc = 0 Then
+                frmPatientInfo.setPatientID(intPatientID)
+                frmMain.OpenChildForm(frmPatientInfo)
+            ElseIf intEnteredFromAdhoc = 1 Then
+                frmDispense.setintEntered(0)
+                setEnteredFromAdhoc(0)
+                frmMain.OpenChildForm(frmAdHockDispense)
+            End If
+        ElseIf scanUserName(strUsername, strPassword) = "SameUser" Then
+            MessageBox.Show("Can not sign-off for yourself.")
+            txtUsername.Text = ""
+            txtUsername.Focus()
+        Else
+            MsgBox("No User With That Username")
+            txtUsername.Focus()
+        End If
+    End Sub
+
+    Private Function scanUserName(ByRef strUsername As String, ByRef strPassword As String)
+        strPassword = AddSaltPepperAndHash(strPassword, strUsername)
+        If strUsername = LoggedInUsername Then
+            Return "SameUser"
+        ElseIf ExecuteScalarQuery("SELECT COUNT(*) FROM User WHERE Username = '" & strUsername & "'" & " AND Password = '" & strPassword & "'" & " AND Active_Flag = '1'") <> 0 Then
+            intSignoffID = ExecuteScalarQuery("SELECT User_ID FROM User WHERE Username = '" & strUsername & "'")
+            Return "True"
+        Else
+            Return "False"
+        End If
+    End Function
 End Class
