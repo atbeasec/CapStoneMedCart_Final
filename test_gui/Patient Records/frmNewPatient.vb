@@ -51,9 +51,10 @@ Public Class frmNewPatient
     Dim strAllowedNameCharacters = "abcdefghijklmnopqrstuvwxyz '-1234567890!@#$%^&*()/.,<>=+"
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         If Not hasError() Then
+            Dim strPatientName = txtFirstName.Text & " " & txtLastName.Text
             SavePatientDataToDatabase()
             clearInformationBoxes()
-            MessageBox.Show("new patient has been added to the system")
+            MessageBox.Show("New patient " & strPatientName & " has been added to the system")
         End If
     End Sub
 
@@ -141,7 +142,9 @@ Public Class frmNewPatient
 
     Private Sub SavePatientDataToDatabase()
         Dim strbSQL As New StringBuilder()
-        Dim strPhysicianName As String() = Split(cmbPhysician.SelectedItem)
+        Dim strPhysicianName As String() = Split(cmbPhysician.SelectedItem, ",")
+        strPhysicianName(0) = strPhysicianName(0).Trim
+        strPhysicianName(1) = strPhysicianName(1).Trim
         Dim strCharactersForRandomGeneration = "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         'the following is just to escape the ' so that it won't break the SQL
         Dim strFirstName = Regex.Replace(txtFirstName.Text, "'", "''")
@@ -455,7 +458,7 @@ Public Class frmNewPatient
     '/*********************************************************************/
 
     Private Sub txtHeight_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtHeight.KeyPress
-        DataVaildationMethods.KeyPressCheck(e, "0123456789")
+        DataVaildationMethods.KeyPressCheck(e, "0123456789.")
     End Sub
 
     '/*********************************************************************/
@@ -755,7 +758,7 @@ Public Class frmNewPatient
     '/*********************************************************************/
 
     Private Sub txtCity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtCity.KeyPress
-        DataVaildationMethods.KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz 0123456789.'-#@%&/")
+        DataVaildationMethods.KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz -")
     End Sub
 
     Private Sub mtbDOB_KeyPress(sender As Object, e As KeyPressEventArgs) 
@@ -814,10 +817,15 @@ Public Class frmNewPatient
             strbErrorMessage.Append("Please enter a valid first name." & vbCrLf)
         End If
         If txtMiddleName.Text = String.Empty Or txtMiddleName.Text.Length <= 1 Then
-            hasError = True
-            strbErrorMessage.Append("Please enter a valid middle name." & vbCrLf)
+            If MsgBox("There is no middle name entered, is this intentional?", vbYesNo) Then
+                'to not break the application elsewhere, set the middle name to space.
+                txtMiddleName.Text = " "
+            Else
+                hasError = True
+                strbErrorMessage.Append("Please enter a valid middle name." & vbCrLf)
+            End If
         End If
-        If txtLastName.Text = String.Empty Or txtLastName.Text.Length <= 1 Then
+            If txtLastName.Text = String.Empty Or txtLastName.Text.Length <= 1 Then
             hasError = True
             strbErrorMessage.Append("Please enter a valid last name." & vbCrLf)
         End If
@@ -844,34 +852,34 @@ Public Class frmNewPatient
             Dim intDOByear As Integer = dtmDOByear.Year
             If dtmDOByear > Date.Today Then
                 hasError = True
-                strbErrorMessage.Append("Please enter a valid date of birth." & vbCrLf)
+                strbErrorMessage.Append("DOB is in the future. Please enter a valid date of birth." & vbCrLf)
             End If
             If (intyear - intDOByear) > 125 Then
                 hasError = True
-                strbErrorMessage.Append("Please enter a valid date of birth." & vbCrLf)
+                strbErrorMessage.Append("Patient cannot be more than 125 years old. Please enter a valid date of birth." & vbCrLf)
             End If
         End If
         If IsNumeric(txtHeight.Text) Then
             If CDbl(txtHeight.Text) > 250 Then
                 hasError = True
-                strbErrorMessage.Append("Please enter a valid height." & vbCrLf)
+                strbErrorMessage.Append("Please enter a valid height 0.1 - 440 kg." & vbCrLf)
             End If
         End If
 
         If IsNumeric(txtWeight.Text) Then
             If CDbl(txtWeight.Text) > 440 Then
                 hasError = True
-                strbErrorMessage.Append("Please enter a valid weight." & vbCrLf)
+                strbErrorMessage.Append("Please enter a valid weight 1-250 cm." & vbCrLf)
             End If
         End If
 
         If txtHeight.Text = String.Empty Then
             hasError = True
-            strbErrorMessage.Append("Please enter a valid height." & vbCrLf)
+            strbErrorMessage.Append("Please enter a valid height 1-250 cm." & vbCrLf)
         End If
         If txtWeight.Text = String.Empty Then
             hasError = True
-            strbErrorMessage.Append("Please enter a valid weight." & vbCrLf)
+            strbErrorMessage.Append("Please enter a valid weight. 0.1 - 440 kg." & vbCrLf)
         End If
         If cboRoom.SelectedIndex = -1 Then
             hasError = True
