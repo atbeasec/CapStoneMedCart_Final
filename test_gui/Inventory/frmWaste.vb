@@ -218,10 +218,10 @@
     '/*
     '/********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):				             */	           
-    '/*	            (NONE)	                                             */								                        							             
+    '/*	id -- drawerMEDTUID -- integer that holds drawerMEDID	                                             */								                        							             
     '/********************************************************************/
     '/* SAMPLE INVOCATION:						                         */
-    '/*
+    '/* setDrawerMEDTUID(23)
     '/********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
     '/*
