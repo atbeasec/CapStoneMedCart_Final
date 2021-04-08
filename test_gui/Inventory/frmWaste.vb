@@ -162,7 +162,35 @@
     End Sub
 
 
-
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: btnBack_Click	             */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Alexander Beasecker  		         */   
+    '/*		         DATE CREATED: 	4/07/21			                     */                             
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE: this method will take you back to the previous form
+    '/********************************************************************/
+    '/*  CALLED BY:             	      		 */				            
+    '/*                                        				             */         
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/*             (NONE)						                         */		               
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             
+    '/*	MovePanelOnScreen()				                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/*	 
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  AB		        4/7/21		    initial creation                 */
+    '/********************************************************************/ 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         frmPatientInfo.setPatientID(intPatientID)
         frmMain.OpenChildForm(frmPatientInfo)
@@ -235,8 +263,38 @@
         End If
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: InsertWasteNonNarcotic	             */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Alexander Beasecker  		         */   
+    '/*		         DATE CREATED: 	4/07/21			                     */                             
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE: This method inserts the waste if its a non-narcotic
+    '/********************************************************************/
+    '/*  CALLED BY:     frmwaste   
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/*             (NONE)						                         */		               
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             
+    '/*	MovePanelOnScreen()				                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/*	 
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  AB		        4/7/21		    initial creation                 */
+    '/********************************************************************/ 
     Private Sub InsertWasteNonNarcotic()
+        'get time for waste
         Dim dtmWasteTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+        'check which waste reason is checked
         If radIncorrect.Checked = True Then
             strReason = radIncorrect.Text
 
