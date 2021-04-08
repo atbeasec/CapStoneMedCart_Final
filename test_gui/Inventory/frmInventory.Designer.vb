@@ -49,8 +49,12 @@ Partial Class frmInventory
         Me.Label3 = New System.Windows.Forms.Label()
         Me.pnlMainLocation = New System.Windows.Forms.Panel()
         Me.pnlMainFormFields = New System.Windows.Forms.Panel()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtAmount = New System.Windows.Forms.TextBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.mtbExpirationDate = New System.Windows.Forms.MaskedTextBox()
+        Me.txtUnits = New System.Windows.Forms.TextBox()
         Me.cmbDrawerNumber = New System.Windows.Forms.ComboBox()
         Me.Panel8 = New System.Windows.Forms.Panel()
         Me.txtBarcode = New System.Windows.Forms.TextBox()
@@ -81,10 +85,6 @@ Partial Class frmInventory
         Me.pnlHeader = New System.Windows.Forms.Panel()
         Me.btnBack = New System.Windows.Forms.Button()
         Me.tpSelectedItem = New System.Windows.Forms.ToolTip(Me.components)
-        Me.txtAmount = New System.Windows.Forms.TextBox()
-        Me.txtUnits = New System.Windows.Forms.TextBox()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -173,6 +173,7 @@ Partial Class frmInventory
         Me.cmbBin.Name = "cmbBin"
         Me.cmbBin.Size = New System.Drawing.Size(86, 29)
         Me.cmbBin.TabIndex = 50
+        Me.cmbBin.TabStop = False
         '
         'Panel3
         '
@@ -267,6 +268,7 @@ Partial Class frmInventory
         Me.cmbPatientPersonalMedication.Name = "cmbPatientPersonalMedication"
         Me.cmbPatientPersonalMedication.Size = New System.Drawing.Size(198, 29)
         Me.cmbPatientPersonalMedication.TabIndex = 60
+        Me.cmbPatientPersonalMedication.TabStop = False
         '
         'btnSave
         '
@@ -278,7 +280,7 @@ Partial Class frmInventory
         Me.btnSave.Location = New System.Drawing.Point(279, 72)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(120, 38)
-        Me.btnSave.TabIndex = 20
+        Me.btnSave.TabIndex = 21
         Me.btnSave.Text = "   SAVE "
         Me.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnSave.UseVisualStyleBackColor = False
@@ -446,6 +448,39 @@ Partial Class frmInventory
         Me.pnlMainFormFields.Size = New System.Drawing.Size(726, 411)
         Me.pnlMainFormFields.TabIndex = 189
         '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(655, 335)
+        Me.Label11.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(49, 21)
+        Me.Label11.TabIndex = 215
+        Me.Label11.Text = "Units:"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(489, 335)
+        Me.Label8.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(165, 21)
+        Me.Label8.TabIndex = 214
+        Me.Label8.Text = "Amount per container:"
+        '
+        'txtAmount
+        '
+        Me.txtAmount.BackColor = System.Drawing.Color.White
+        Me.txtAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtAmount.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAmount.Location = New System.Drawing.Point(493, 359)
+        Me.txtAmount.Name = "txtAmount"
+        Me.txtAmount.ShortcutsEnabled = False
+        Me.txtAmount.Size = New System.Drawing.Size(154, 25)
+        Me.txtAmount.TabIndex = 19
+        '
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.DarkGray
@@ -469,6 +504,17 @@ Partial Class frmInventory
         Me.mtbExpirationDate.Size = New System.Drawing.Size(90, 22)
         Me.mtbExpirationDate.TabIndex = 10
         Me.mtbExpirationDate.ValidatingType = GetType(Date)
+        '
+        'txtUnits
+        '
+        Me.txtUnits.BackColor = System.Drawing.Color.White
+        Me.txtUnits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtUnits.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtUnits.Location = New System.Drawing.Point(659, 359)
+        Me.txtUnits.Name = "txtUnits"
+        Me.txtUnits.ShortcutsEnabled = False
+        Me.txtUnits.Size = New System.Drawing.Size(56, 25)
+        Me.txtUnits.TabIndex = 20
         '
         'cmbDrawerNumber
         '
@@ -800,50 +846,6 @@ Partial Class frmInventory
         Me.btnBack.Text = "Back"
         Me.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnBack.UseVisualStyleBackColor = False
-        '
-        'txtAmount
-        '
-        Me.txtAmount.BackColor = System.Drawing.Color.White
-        Me.txtAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtAmount.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAmount.Location = New System.Drawing.Point(493, 359)
-        Me.txtAmount.Name = "txtAmount"
-        Me.txtAmount.ShortcutsEnabled = False
-        Me.txtAmount.Size = New System.Drawing.Size(154, 25)
-        Me.txtAmount.TabIndex = 213
-        '
-        'txtUnits
-        '
-        Me.txtUnits.BackColor = System.Drawing.Color.White
-        Me.txtUnits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtUnits.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUnits.Location = New System.Drawing.Point(659, 359)
-        Me.txtUnits.Name = "txtUnits"
-        Me.txtUnits.ShortcutsEnabled = False
-        Me.txtUnits.Size = New System.Drawing.Size(56, 25)
-        Me.txtUnits.TabIndex = 212
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(489, 335)
-        Me.Label8.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(165, 21)
-        Me.Label8.TabIndex = 214
-        Me.Label8.Text = "Amount per container:"
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(655, 335)
-        Me.Label11.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(49, 21)
-        Me.Label11.TabIndex = 215
-        Me.Label11.Text = "Units:"
         '
         'frmInventory
         '
