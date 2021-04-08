@@ -46,6 +46,8 @@
         intNarcoticFlagGlobal = 0
         pnlCredentials.Visible = False
         pnlSignOff.Visible = False
+        txtOther.Visible = False
+        Label14.Visible = False
     End Sub
 
     Private Sub cmbPatientName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPatientName.SelectedIndexChanged
@@ -118,7 +120,16 @@
     End Sub
 
     Private Sub rbtnOther_CheckedChanged(sender As Object, e As EventArgs) Handles rbtnOther.CheckedChanged
-        pnlSignOff.Location = New Point(3, 286)
+        'pnlSignOff.Location = New Point(3, 286)
+        If rbtnOther.Checked = True Then
+            Label14.Visible = True
+            txtOther.Visible = True
+        Else
+            Label14.Visible = False
+            txtOther.Visible = False
+        End If
+
+
     End Sub
 
     Private Sub radPatientUnavilable_CheckedChanged(sender As Object, e As EventArgs) Handles radPatientUnavilable.CheckedChanged
