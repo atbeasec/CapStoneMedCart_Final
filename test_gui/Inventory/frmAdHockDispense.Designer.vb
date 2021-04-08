@@ -182,7 +182,7 @@ Partial Class frmAdHockDispense
         Me.btnDispense.Name = "btnDispense"
         Me.btnDispense.Size = New System.Drawing.Size(229, 38)
         Me.btnDispense.TabIndex = 3
-        Me.btnDispense.Text = "      Dispense Medication"
+        Me.btnDispense.Text = "    SUBMIT ORDER"
         Me.btnDispense.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnDispense.UseVisualStyleBackColor = False
         '
