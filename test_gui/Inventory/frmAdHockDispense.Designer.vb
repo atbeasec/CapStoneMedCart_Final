@@ -85,6 +85,7 @@ Partial Class frmAdHockDispense
         Me.cmbMedications.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbMedications.BackColor = System.Drawing.Color.White
         Me.cmbMedications.DropDownHeight = 300
+        Me.cmbMedications.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbMedications.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbMedications.FormattingEnabled = True
         Me.cmbMedications.IntegralHeight = False

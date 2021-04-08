@@ -22,6 +22,8 @@ Public Class frmDispense
     Public strAmountAdhoc As String
     Public strUnitAdhoc As String
     Public intDrawerMEDAdhoc As Integer
+    Private intAdhocDrawerNumber As Integer
+    Private intAdhocBin As Integer
 
     Public Sub setintEntered(ByRef ID As Integer)
         intEnteredFromAdhoc = ID
@@ -189,6 +191,9 @@ Public Class frmDispense
         Dim NarcoticFlag As Integer = CreateDatabase.ExecuteScalarQuery("Select Controlled_Flag from Medication where Medication_ID = '" & intMedicationID & "' and Active_Flag = '1'")
         Dim intdrawerNumber As Integer = CreateDatabase.ExecuteScalarQuery("Select Drawers_TUID from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
         btnReopenDrawer.Visible = True
+        If intEnteredFromAdhoc = 1 Then
+            intdrawerNumber = intAdhocDrawerNumber
+        End If
         'check for what set in the process the dispense is in.
         If lblDirections.Text.Equals("Insert Amount to Remove:") Then
             'check to see if the amount is a numeric
@@ -238,7 +243,7 @@ Public Class frmDispense
                     Dim strAmountDispensed As String = txtAmountDispensed.Text & " " & txtUnits.Text
                     DispensingDrugAdhoc(intMedicationID, intPatientID, CInt(LoggedInID), strAmountDispensed, intDrawerMEDAdhoc)
                     frmWaste.SetPatientID(intPatientID)
-                    frmWaste.setDrawer(intDrawerMEDAdhoc)
+                    frmWaste.setDrawer(intdrawerNumber)
                     frmWaste.setMedID(intMedicationID)
                     frmWaste.setDrawerMEDTUID(intDrawerMEDAdhoc)
                     frmWaste.setEnteredFromAdhoc(1)
@@ -611,10 +616,12 @@ Public Class frmDispense
     '/*  WHO        WHEN            WHAT					               */             
     '/*  AB    3/20/2021     Initial creation/rework of dispensing
     '/*********************************************************************/
-    Public Sub AdhocDispenseSetInformation(ByRef amount As String, ByRef unit As String, ByRef intDrawerMedA As Integer)
+    Public Sub AdhocDispenseSetInformation(ByRef amount As String, ByRef unit As String, ByRef intDrawerMedA As Integer, ByRef intDrawerNumber As Integer, ByRef intBin As Integer)
         strAmountAdhoc = amount
         strUnitAdhoc = unit
         intDrawerMEDAdhoc = intDrawerMedA
+        intAdhocDrawerNumber = intDrawerNumber
+        intAdhocBin = intBin
     End Sub
 
     Private Sub btnReopenDrawer_Click(sender As Object, e As EventArgs) Handles btnReopenDrawer.Click

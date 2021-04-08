@@ -243,6 +243,9 @@
                 Dim strAmount As String = txtAmount.Text
                 Dim strUnit As String = txtUnit.Text
                 Dim intMedDrawer As Integer = AdHoc.intDrawerMedArray(cmbMedications.SelectedIndex)
+                Dim intDrawerNumber As Integer = CreateDatabase.ExecuteScalarQuery("Select Drawers_TUID from DrawerMedication where DrawerMedication_ID = '" & AdHoc.intDrawerMedArray(cmbMedications.SelectedIndex) & "'")
+
+                Dim intDrawerBin As Integer = CreateDatabase.ExecuteScalarQuery("Select Divider_Bin from DrawerMedication where DrawerMedication_ID = '" & AdHoc.intDrawerMedArray(cmbMedications.SelectedIndex) & "'")
                 'AdHoc.InsertAdHoc(AdHoc.intPatientIDArray(cmbPatientName.SelectedIndex), LoggedInID, CInt(txtQuantity.Text), AdHoc.intMedIDArray(cmbMedications.SelectedIndex), AdHoc.intDrawerMedArray(cmbMedications.SelectedIndex))
                 'AdHoc.clearAdhocBoxes()
                 'MessageBox.Show("Order Successfully placed")
@@ -251,7 +254,7 @@
                 frmDispense.setintEntered(1)
 
                 'set medication variables into dispense screen
-                frmDispense.AdhocDispenseSetInformation(strAmount, strUnit, intMedDrawer)
+                frmDispense.AdhocDispenseSetInformation(strAmount, strUnit, intMedDrawer, intDrawerNumber, intDrawerBin)
 
                 'set patient id for dispense
                 frmDispense.SetPatientID(intPatientID)
