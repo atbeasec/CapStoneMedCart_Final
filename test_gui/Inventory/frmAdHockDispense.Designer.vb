@@ -75,9 +75,9 @@ Partial Class frmAdHockDispense
         Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.Location = New System.Drawing.Point(12, 9)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(139, 21)
+        Me.Label3.Size = New System.Drawing.Size(117, 21)
         Me.Label3.TabIndex = 207
-        Me.Label3.Text = "Ad Hoc Dispense:"
+        Me.Label3.Text = "Ad Hoc Order:"
         '
         'cmbMedications
         '
