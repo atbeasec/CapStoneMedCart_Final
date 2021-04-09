@@ -211,6 +211,8 @@ Public Class frmDispense
                         'Is not a narcotic
                         OpenOneDrawer(intdrawerNumber)
                         intDispenseAmount = txtQuantityToDispense.Text
+                        Dim intquantity As Integer = CreateDatabase.ExecuteScalarQuery("Select Quantity from DrawerMedication where Medication_TUID = '" & intMedicationID & "' AND Active_Flag = '1' AND Drawers_TUID = '" & intdrawerNumber & "'")
+                        UpdateDrawerCount(intDispenseAmount, intquantity, intdrawerNumber, intMedicationID)
                         changeButtonforDispensing()
                         frmMain.LockSideMenu()
                         btnBack.Visible = False
@@ -224,6 +226,8 @@ Public Class frmDispense
             If IsNumeric(txtQuantityToDispense.Text) Then
                 Dim intAmountinCart As Integer = txtCountInDrawer.Text
                 UpdateSystemCountForDiscrepancy(intMedicationID, intdrawerNumber, intAmountinCart)
+                Dim intquantity As Integer = CreateDatabase.ExecuteScalarQuery("Select Quantity from DrawerMedication where Medication_TUID = '" & intMedicationID & "' AND Active_Flag = '1' AND Drawers_TUID = '" & intdrawerNumber & "'")
+                UpdateDrawerCount(intDispenseAmount, intquantity, intdrawerNumber, intMedicationID)
                 changeButtonforDispensing()
             End If
             'step after administered drugs, enter wasting
@@ -232,7 +236,7 @@ Public Class frmDispense
                 If intEnteredFromAdhoc = 0 Then
                     Dim strAmountDispensed As String = txtAmountDispensed.Text & " " & txtUnits.Text
                     Dim intdrawerMEDTUID As Integer = CreateDatabase.ExecuteScalarQuery("Select DrawerMedication_ID from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
-                    DispensingDrug(intMedicationID, CInt(LoggedInID), strAmountDispensed)
+                        DispensingDrug(intMedicationID, CInt(LoggedInID), strAmountDispensed)
                     frmWaste.SetPatientID(intPatientID)
                     frmWaste.setDrawer(intdrawerNumber)
                     frmWaste.setMedID(intMedicationID)
@@ -627,5 +631,17 @@ Public Class frmDispense
     Private Sub btnReopenDrawer_Click(sender As Object, e As EventArgs) Handles btnReopenDrawer.Click
         Dim intdrawerNumber As Integer = CreateDatabase.ExecuteScalarQuery("Select Drawers_TUID from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
         OpenOneDrawer(intdrawerNumber)
+    End Sub
+
+    Private Sub UpdateDrawerCount(ByRef intAmountDispense As Integer, ByRef intAmountInDrawer As Integer, ByRef intDrawerNumber As Integer, ByRef intMedID As Integer)
+        Dim intLeftover As Integer = intAmountInDrawer - intAmountDispense
+        Dim intUpdateNumber As Integer = 0
+        If intLeftover <= 0 Then
+            intUpdateNumber = 0
+        Else
+            intUpdateNumber = intLeftover
+        End If
+
+        CreateDatabase.ExecuteInsertQuery("UPDATE DrawerMedication set Quantity = '" & intUpdateNumber & "' where Drawers_TUID = '" & intDrawerNumber & "' and Medication_TUID = '" & intMedID & "'")
     End Sub
 End Class
