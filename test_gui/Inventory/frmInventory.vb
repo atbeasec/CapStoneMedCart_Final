@@ -910,7 +910,7 @@ Public Class frmInventory
 
     Public Sub PopulateInventoryComboBoxes()
         cmbDrawerNumber.Items.Clear()
-        Dim dsDrawers As DataSet = CreateDatabase.ExecuteSelectQuery("Select * from Drawers where Full_Flag = '0'")
+        Dim dsDrawers As DataSet = CreateDatabase.ExecuteSelectQuery("Select * from Drawers where Full_Flag = '0' AND Active_Flag = '1'")
         For Each dr As DataRow In dsDrawers.Tables(0).Rows
             cmbDrawerNumber.Items.Add(dr(2))
         Next
