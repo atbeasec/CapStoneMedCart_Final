@@ -50,7 +50,9 @@ Module CartInterfaceCode
     '/*  comSerialPort1 - this is the port that is used to talk to the cart */
     '/*     It will be set up using the serialSetup function and then used  */
     '/*     to send information to the cart.                                */
-    '/*     
+    '/*  intLastDrawer - this is the drawer the user tried to open. It is  */
+    '/*                  saved in case they try to reopen the drawer in sim */
+    '/*                  mode.                                              */
     '/*********************************************************************/
     '/* COMPILATION NOTES(will include version notes including libraries):*/
     '/* 											   */					  
@@ -72,7 +74,8 @@ Module CartInterfaceCode
     '/*                  be able to work for our cart out of the box.      */
     '/* NP     3/24/2021 Moved some variables around to allow access from  */
     '/*                  Other methods.                                    */
-    '/*     
+    '/* NP     4/9/2021  Move the Drawer Sim window frmFullCart to it own  */
+    '/*                  Thread when it is shown.                          */
     '/*********************************************************************/
 
     '26
@@ -84,9 +87,9 @@ Module CartInterfaceCode
     Friend comSerialPort1
     Private strDrawerNumer As String
     Public thread As Thread
-
+    Private intLastDrawer As Integer
     'TODO
-    'set up a way to change the COM port. (by default it looks like it is COM3
+    'set up a way to change the COM port. (by default it looks like it is COM1
     'default bit rate looks to be 115200
     Dim blnSimulationModeValue = True 'this is going to dictate if the cart is going to be simulated or not.
 
@@ -252,6 +255,8 @@ Module CartInterfaceCode
         Try
             comSerialPort1.Write(bytFinal, 0, bytFinal.Length)
         Catch
+            'if this fails it is likely in sim mode. 
+            OpenOneDrawer(intLastDrawer - 1)
         End Try
     End Sub
 
@@ -314,6 +319,7 @@ Module CartInterfaceCode
             'the cart doesn't have a drawer 2 so if it is 2 or higher we add one
             Number += 1
         End If
+        intLastDrawer = Number
         Dim blnissue = errorChecking(Number)
         comSerialPort1 = FrmCart.serialSetup()
         intDrawerCount = 0 'reset the drawer count just in case. 
@@ -328,7 +334,8 @@ Module CartInterfaceCode
                 dicButtonDictionary.Item(Number).BackColor = Color.Red 'changes the color of the button to red
                 'to make it looks like it is red. 
 
-                FrmCart.showdialog()
+                threadAccessor = New Thread(AddressOf openSimModeWindow)
+                threadAccessor.Start()
             End If
         Else
 
@@ -361,6 +368,62 @@ Module CartInterfaceCode
         End If
 
     End Sub
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: Nathan Premo     			   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		               */   
+    '/*		         DATE CREATED: 4/9/2021                     		   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								   */             
+    '/*	 THis is going to handle opening the fullCart form in another thread*/
+    '/*  so the main GUI can keep working.                                */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+
+    Sub openSimModeWindow()
+        Try
+            FrmCart.showdialog()
+        Catch
+            'it is fails they didn't close the last window so I will just close it for them. 
+            threadAccessor.Abort()
+            If intLastDrawer > 1 Then
+                OpenOneDrawer(intLastDrawer - 1)
+            Else
+                OpenOneDrawer(intLastDrawer)
+            End If
+
+        End Try
+    End Sub
+
 
 
     '/*********************************************************************/
@@ -408,10 +471,6 @@ Module CartInterfaceCode
         DrawerForm.lblDrawerNumber.Text = "Drawer " & strDrawerNumer & " is open."
 
         DrawerForm.ShowDialog()
-
-
-
-
     End Sub
 
 
