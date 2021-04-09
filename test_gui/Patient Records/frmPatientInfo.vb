@@ -460,6 +460,8 @@
         strMedName = ExecuteScalarQuery("SELECT Drug_Name From Medication WHERE Medication_ID =" & intMedID & ";")
 
         strPatientMRN = ExecuteScalarQuery("SELECT MRN_Number From Patient WHERE Patient_ID =" & intPatientID & ";")
+        Dim intQuantity As Integer = CreateDatabase.ExecuteScalarQuery("Select Quantity from DrawerMedication where Medication_TUID = '54' AND Active_Flag = '1'")
+
 
         'Allergy overrides
         For Each allergy In lstBoxAllergies.Items
