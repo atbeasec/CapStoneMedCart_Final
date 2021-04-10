@@ -131,6 +131,9 @@ Public Class frmDispense
         pnlAmountAdministered.Visible = False
         ' pnlSelector.Visible = False
         btnReopenDrawer.Visible = False
+
+        AddVisibleChangedEventHandler()
+
     End Sub
 
 
@@ -193,8 +196,14 @@ Public Class frmDispense
 
         Dim NarcoticFlag As Integer = CreateDatabase.ExecuteScalarQuery("Select Controlled_Flag from Medication where Medication_ID = '" & intMedicationID & "' and Active_Flag = '1'")
         Dim intdrawerNumber As Integer = CreateDatabase.ExecuteScalarQuery("Select Drawers_TUID from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
-        btnReopenDrawer.Visible = True
-        If intEnteredFromAdhoc = 1 Then
+
+        If txtQuantityToDispense.Text.Length > 1 Then
+
+            btnReopenDrawer.Visible = True
+
+        End If
+
+            If intEnteredFromAdhoc = 1 Then
             intdrawerNumber = intAdhocDrawerNumber
         End If
         'check for what set in the process the dispense is in.
@@ -718,6 +727,22 @@ Public Class frmDispense
     Private Sub btnEnter_Click_1(sender As Object, e As EventArgs) Handles btnEnter.Click
 
         btnDispense.PerformClick()
+
+    End Sub
+
+    Private Sub AddVisibleChangedEventHandler()
+
+        AddHandler pnlAmountToRemove.VisibleChanged, AddressOf VisibleChangedEvent
+
+    End Sub
+
+    Private Sub VisibleChangedEvent(ByVal sender As Object, ByVal e As EventArgs)
+
+        If pnlAmountToRemove.Visible = False Then
+
+            btnReopenDrawer.Visible = True
+
+        End If
 
     End Sub
 End Class
