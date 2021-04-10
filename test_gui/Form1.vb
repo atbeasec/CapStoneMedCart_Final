@@ -289,6 +289,7 @@
                 HideSubMenu(pnlSubMenuSettings)
                 HideSubMenu(pnlSubMenuPatientRecords)
                 HideSubMenu(pnlSubMenuInventory)
+                HideSubMenu(pnlSubMenuPharmacy)
 
             Case SelectedForm.Discrepancies
 
@@ -297,6 +298,7 @@
                 HideSubMenu(pnlSubMenuSettings)
                 HideSubMenu(pnlSubMenuPatientRecords)
                 HideSubMenu(pnlSubMenuInventory)
+                HideSubMenu(pnlSubMenuPharmacy)
 
             Case SelectedForm.Maintenance
 
@@ -305,6 +307,7 @@
                 HideSubMenu(pnlSubMenuSettings)
                 HideSubMenu(pnlSubMenuPatientRecords)
                 HideSubMenu(pnlSubMenuInventory)
+                HideSubMenu(pnlSubMenuPharmacy)
 
             Case SelectedForm.Pharmacy
 
@@ -547,6 +550,7 @@
         ResizeSubMenuSizeAccordingToVisibleButtons(pnlSubMenuInventory)
         ResizeSubMenuSizeAccordingToVisibleButtons(pnlSubMenuPatientRecords)
         ResizeSubMenuSizeAccordingToVisibleButtons(pnlSubMenuSettings)
+        ResizeSubMenuSizeAccordingToVisibleButtons(pnlSubMenuPharmacy)
 
     End Sub
 
@@ -609,19 +613,6 @@
         pnlSubMenu.Size = New Size(pnlSubMenu.Width, newHeight)
 
     End Sub
-
-
-    Private Function GetUserPermissions() As String
-
-        ' will contain the query result indicating the user;s permission level
-        Dim permissionLevel As String = Nothing
-
-
-
-        Return permissionLevel
-
-    End Function
-
 
 
     '/*********************************************************************/
