@@ -24,6 +24,7 @@ Public Class frmDispense
     Public intDrawerMEDAdhoc As Integer
     Private intAdhocDrawerNumber As Integer
     Private intAdhocBin As Integer
+    Const ENTERAMOUNTOTREMOVE As String = "  Insert Amount to Remove:"
 
     Public Sub setintEntered(ByRef ID As Integer)
         intEnteredFromAdhoc = ID
@@ -123,21 +124,21 @@ Public Class frmDispense
 
     Private Sub Dispense_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        lblDirections.Text = "Insert Amount to Remove:"
-        lblDirections.Left = (pnlSelector.Width \ 2) - (pnlSelector.Width \ 2)
-
+        lblDirections.Text = ENTERAMOUNTOTREMOVE
+        ' lblDirections.Left = (pnlSelector.Width \ 2) - (pnlSelector.Width \ 2)
+        lblDirections.Location = New Point(pnlLabel.Width \ 2 - lblDirections.Width \ 2, lblDirections.Location.Y)
         pnlAmountInDrawer.Visible = False
         pnlAmountAdministered.Visible = False
-        pnlSelector.Visible = False
+        ' pnlSelector.Visible = False
         btnReopenDrawer.Visible = False
     End Sub
 
 
-    Private Sub btnUp_Click(sender As Object, e As EventArgs) Handles btnUp.Click
+    Private Sub btnUp_Click(sender As Object, e As EventArgs)
         ButtonIncrement(1000, txtQuantityToDispense)
     End Sub
 
-    Private Sub btnDown_Click(sender As Object, e As EventArgs) Handles btnDown.Click
+    Private Sub btnDown_Click(sender As Object, e As EventArgs)
         ButtonDecrement(txtQuantityToDispense)
     End Sub
 
@@ -188,6 +189,8 @@ Public Class frmDispense
     '/*********************************************************************/
     Private Sub btnDispense_Click_1(sender As Object, e As EventArgs) Handles btnDispense.Click
         'get if the drug is a narcotic and get the drawer the medication selected is in 
+
+
         Dim NarcoticFlag As Integer = CreateDatabase.ExecuteScalarQuery("Select Controlled_Flag from Medication where Medication_ID = '" & intMedicationID & "' and Active_Flag = '1'")
         Dim intdrawerNumber As Integer = CreateDatabase.ExecuteScalarQuery("Select Drawers_TUID from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
         btnReopenDrawer.Visible = True
@@ -195,7 +198,8 @@ Public Class frmDispense
             intdrawerNumber = intAdhocDrawerNumber
         End If
         'check for what set in the process the dispense is in.
-        If lblDirections.Text.Equals("Insert Amount to Remove:") Then
+        'If lblDirections.Text.Equals("Insert Amount to Remove:") Then
+        If lblDirections.Text.Equals(ENTERAMOUNTOTREMOVE) Then
             'check to see if the amount is a numeric
             If IsNumeric(txtQuantityToDispense.Text) Then
                 If txtQuantityToDispense.Text > 0 Then
@@ -293,8 +297,9 @@ Public Class frmDispense
     '/*********************************************************************/
     Private Sub changebuttonForCounting()
         lblDirections.Text = "Enter the Quantity in the Cart"
-        lblDirections.Left = (pnlSelector.Width \ 2) - (pnlSelector.Width \ 2)
-        btnDispense.Text = "Submit Count"
+        ' lblDirections.Left = (pnlSelector.Width \ 2) - (pnlSelector.Width \ 2)
+        lblDirections.Location = New Point(pnlLabel.Width \ 2 - lblDirections.Width \ 2, lblDirections.Location.Y)
+        btnDispense.Text = "    Submit Count"
         pnlAmountInDrawer.Visible = True
         pnlAmountToRemove.Visible = False
     End Sub
@@ -333,8 +338,9 @@ Public Class frmDispense
     '/*********************************************************************/
     Private Sub changeButtonforDispensing()
         lblDirections.Text = "Enter the Amount Administered"
-        btnDispense.Text = "Submit Amount"
-        lblDirections.Left = (pnlSelector.Width \ 2) - (pnlSelector.Width \ 2)
+        btnDispense.Text = "    Submit Amount"
+        ' lblDirections.Left = (pnlSelector.Width \ 2) - (pnlSelector.Width \ 2)
+        lblDirections.Location = New Point(pnlLabel.Width \ 2 - lblDirections.Width \ 2, lblDirections.Location.Y)
         ' show approiate panels
         pnlAmountAdministered.Visible = True
         pnlAmountToRemove.Visible = False
@@ -643,5 +649,75 @@ Public Class frmDispense
         End If
 
         CreateDatabase.ExecuteInsertQuery("UPDATE DrawerMedication set Quantity = '" & intUpdateNumber & "' where Drawers_TUID = '" & intDrawerNumber & "' and Medication_TUID = '" & intMedID & "'")
+    End Sub
+
+    Private Sub btnDrawer7_Click(sender As Object, e As EventArgs) Handles btnOne.Click, btnTwo.Click, btnThree.Click, btnFour.Click, btnFive.Click, btnSix.Click, btnSeven.Click, btnEight.Click, btnNine.Click, btnZero.Click
+
+        Dim replaceString As String
+
+        If pnlAmountToRemove.Visible = True Then
+
+            If txtQuantityToDispense.Text.Length = 4 Then
+                'MessageBox.Show("Max number of digits is 4.")
+                'replaceString = txtQuantityToDispense.Text.Remove(txtQuantityToDispense.Text.Length - 1, 1)
+                'txtQuantityToDispense.Text = replaceString
+            Else
+
+                txtQuantityToDispense.Text &= CStr(sender.Text)
+
+            End If
+
+        ElseIf pnlAmountInDrawer.Visible = True Then
+
+            If txtQuantityToDispense.Text.Length = 4 Then
+                'MessageBox.Show("Max number of digits is 4.")
+                'replaceString = txtQuantityToDispense.Text.Remove(txtQuantityToDispense.Text.Length - 1, 1)
+                'txtQuantityToDispense.Text = replaceString
+            Else
+
+                txtCountInDrawer.Text &= CStr(sender.Text)
+
+            End If
+
+        ElseIf pnlAmountAdministered.Visible = True Then
+
+            If txtQuantityToDispense.Text.Length = 4 Then
+                'MessageBox.Show("Max number of digits is 4.")
+                'replaceString = txtQuantityToDispense.Text.Remove(txtQuantityToDispense.Text.Length - 1, 1)
+                'txtQuantityToDispense.Text = replaceString
+            Else
+
+                txtAmountDispensed.Text &= CStr(sender.Text)
+
+            End If
+        End If
+
+    End Sub
+
+    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+
+        If pnlAmountToRemove.Visible = True Then
+
+            txtQuantityToDispense.Text = Nothing
+
+        ElseIf pnlAmountInDrawer.Visible = True Then
+
+            txtCountInDrawer.Text = Nothing
+
+        ElseIf pnlAmountAdministered.Visible = True Then
+
+            txtAmountDispensed.Text = Nothing
+
+        End If
+    End Sub
+
+    Private Sub btnEnter_Click(sender As Object, e As EventArgs) Handles btnEnter.Click
+
+    End Sub
+
+    Private Sub btnEnter_Click_1(sender As Object, e As EventArgs) Handles btnEnter.Click
+
+        btnDispense.PerformClick()
+
     End Sub
 End Class
