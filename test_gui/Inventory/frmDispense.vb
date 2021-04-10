@@ -240,10 +240,10 @@ Public Class frmDispense
             End If
             'step after narcotic amount entered
         ElseIf lblDirections.Text.Equals("Enter the Quantity in the Cart") Then
-            If IsNumeric(txtQuantityToDispense.Text) Then
+            If IsNumeric(txtQuantityToDispense.Text) Or String.IsNullOrEmpty(txtQuantityToDispense.Text) Then
                 btnZero.Size = New Point(136, 65)
                 btnZero.BringToFront()
-                Dim intAmountinCart As Integer = txtCountInDrawer.Text
+                Dim intAmountinCart As Integer = CInt(txtCountInDrawer.Text)
                 UpdateSystemCountForDiscrepancy(intMedicationID, intdrawerNumber, intAmountinCart)
                 Dim intquantity As Integer = CreateDatabase.ExecuteScalarQuery("Select Quantity from DrawerMedication where Medication_TUID = '" & intMedicationID & "' AND Active_Flag = '1' AND Drawers_TUID = '" & intdrawerNumber & "'")
                 UpdateDrawerCount(intDispenseAmount, intquantity, intdrawerNumber, intMedicationID)
@@ -686,8 +686,8 @@ Public Class frmDispense
 
             If txtQuantityToDispense.Text.Length >= 7 Then
                 'MessageBox.Show("Max number of digits is 4.")
-                replaceString = txtQuantityToDispense.Text.Remove(txtQuantityToDispense.Text.Length - 1, 1)
-                txtQuantityToDispense.Text = replaceString
+                ' replaceString = txtQuantityToDispense.Text.Remove(txtQuantityToDispense.Text.Length - 1, 1)
+                ' txtQuantityToDispense.Text = replaceString
             Else
 
                 txtCountInDrawer.Text &= CStr(sender.Text)
