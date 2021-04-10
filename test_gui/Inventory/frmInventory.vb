@@ -167,7 +167,9 @@ Public Class frmInventory
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-
+        frmMain.LockSideMenu()
+        btnBack.Enabled = False
+        btnSave.Enabled = False
         'create an instance of the progress bar form
         'Dim thdThread1 As New Threading.Thread(AddressOf ThreadedMessageBox)
         'thdThread1.Name = strMessage
@@ -213,7 +215,9 @@ Public Class frmInventory
 
             RaiseEvent UpdateLoadScreen("")
             LoadingScreen.Close()
-
+            btnBack.Enabled = True
+            btnSave.Enabled = True
+            frmMain.UnlockSideMenu()
             Exit Sub
         Else
             If Not IsDate(mtbExpirationDate.Text) Then
@@ -338,6 +342,9 @@ Public Class frmInventory
             End If
         End If
         LoadingScreen.Close()
+        btnBack.Enabled = True
+        btnSave.Enabled = True
+        frmMain.UnlockSideMenu()
     End Sub
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles pnlSearch.Click
@@ -910,7 +917,7 @@ Public Class frmInventory
 
     Public Sub PopulateInventoryComboBoxes()
         cmbDrawerNumber.Items.Clear()
-        Dim dsDrawers As DataSet = CreateDatabase.ExecuteSelectQuery("Select * from Drawers where Full_Flag = '0'")
+        Dim dsDrawers As DataSet = CreateDatabase.ExecuteSelectQuery("Select * from Drawers where Full_Flag = '0' AND Active_Flag = '1'")
         For Each dr As DataRow In dsDrawers.Tables(0).Rows
             cmbDrawerNumber.Items.Add(dr(2))
         Next

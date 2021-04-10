@@ -721,12 +721,7 @@
             intDividerBin = dr(3)
             intMedicationTUID = dr(4)
 
-            If intDrugQuantity = 0 Then
-                ' the drawer is empty. Do nothing
-            Else
-                'based on the selected drawer we will need to call the database to see what medications are in the drawers
-                CreatePanel(flpMedication, strDrugName, intDividerBin, intStrength.ToString(), intDrugQuantity.ToString(), intMedicationTUID)
-            End If
+            CreatePanel(flpMedication, strDrugName, intDividerBin, intStrength.ToString(), intDrugQuantity.ToString(), intMedicationTUID)
         Next
 
         '  Dim size As Integer = CreateDatabase.ExecuteScalarQuery("SELECT Size FROM Drawers where Drawers_ID = " & sender.TabIndex.ToString() & ";")

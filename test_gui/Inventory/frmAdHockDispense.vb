@@ -173,6 +173,9 @@
     '/*  BH             4/2/2021         added allergy/interaction overrides
     '/********************************************************************/ 
     Private Sub btnDispense_Click(sender As Object, e As EventArgs) Handles btnDispense.Click
+
+
+
         'make sure that both patient and medication is selected before ordering the AdHoc
         If IsNothing(cmbMedications.SelectedItem) Then
             MessageBox.Show("Please select a medication")
@@ -243,26 +246,33 @@
                 Dim strAmount As String = txtAmount.Text
                 Dim strUnit As String = txtUnit.Text
                 Dim intMedDrawer As Integer = AdHoc.intDrawerMedArray(cmbMedications.SelectedIndex)
-                'AdHoc.InsertAdHoc(AdHoc.intPatientIDArray(cmbPatientName.SelectedIndex), LoggedInID, CInt(txtQuantity.Text), AdHoc.intMedIDArray(cmbMedications.SelectedIndex), AdHoc.intDrawerMedArray(cmbMedications.SelectedIndex))
-                'AdHoc.clearAdhocBoxes()
-                'MessageBox.Show("Order Successfully placed")
+                Dim intDrawerNumber As Integer = CreateDatabase.ExecuteScalarQuery("Select Drawers_TUID from DrawerMedication where DrawerMedication_ID = '" & AdHoc.intDrawerMedArray(cmbMedications.SelectedIndex) & "'")
 
-                'set entered variable to 1 to let dispense know adhoc is what started this dispensing
-                frmDispense.setintEntered(1)
+                Dim intDrawerBin As Integer = CreateDatabase.ExecuteScalarQuery("Select Divider_Bin from DrawerMedication where DrawerMedication_ID = '" & AdHoc.intDrawerMedArray(cmbMedications.SelectedIndex) & "'")
+                Dim intQuantity As Integer = CreateDatabase.ExecuteScalarQuery("Select Quantity from DrawerMedication where DrawerMedication_ID = '" & AdHoc.intDrawerMedArray(cmbMedications.SelectedIndex) & "'")
+                If intQuantity = 0 Then
+                    MessageBox.Show("Medication in the drawer is empty, please restock the drawer")
+                Else
+                    'AdHoc.InsertAdHoc(AdHoc.intPatientIDArray(cmbPatientName.SelectedIndex), LoggedInID, CInt(txtQuantity.Text), AdHoc.intMedIDArray(cmbMedications.SelectedIndex), AdHoc.intDrawerMedArray(cmbMedications.SelectedIndex))
+                    'AdHoc.clearAdhocBoxes()
+                    'MessageBox.Show("Order Successfully placed")
 
-                'set medication variables into dispense screen
-                frmDispense.AdhocDispenseSetInformation(strAmount, strUnit, intMedDrawer)
+                    'set entered variable to 1 to let dispense know adhoc is what started this dispensing
+                    frmDispense.setintEntered(1)
 
-                'set patient id for dispense
-                frmDispense.SetPatientID(intPatientID)
+                    'set medication variables into dispense screen
+                    frmDispense.AdhocDispenseSetInformation(strAmount, strUnit, intMedDrawer, intDrawerNumber, intDrawerBin)
 
-                'set medication id for dispense
-                frmDispense.SetintMedicationID(intMedID)
-                frmMain.OpenChildForm(frmDispense)
-                DispenseHistory.DispensemedicationPopulate(intPatientID, intMedID)
-                PatientInformation.PopulatePatientDispenseInfo(intPatientID)
-                PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientID)
-                '
+                    'set patient id for dispense
+                    frmDispense.SetPatientID(intPatientID)
+
+                    'set medication id for dispense
+                    frmDispense.SetintMedicationID(intMedID)
+                    frmMain.OpenChildForm(frmDispense)
+                    DispenseHistory.DispensemedicationPopulate(intPatientID, intMedID)
+                    PatientInformation.PopulatePatientDispenseInfo(intPatientID)
+                    PatientInformation.PopulatePatientAllergiesDispenseInfo(intPatientID)
+                End If
             End If
         End If
 

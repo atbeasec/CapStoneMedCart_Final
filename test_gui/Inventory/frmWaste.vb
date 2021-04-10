@@ -17,6 +17,8 @@
     Private strReason As String
     'set intEntered to zero for launch, will only set to 1 if the form is sent to from adhoc
     Private intEnteredFromAdhoc As Integer = 0
+    'set drawer bin for med
+    Private intAdhocBin As Integer
 
     '/********************************************************************/
     '/*                   FUNCTION NAME: SetPatientID	         */         
@@ -315,8 +317,17 @@
         Dim dsMedication As DataSet = CreateDatabase.ExecuteSelectQuery("Select * from Medication INNER JOIN DrawerMedication on DrawerMedication.Medication_TUID = Medication.Medication_ID where Medication_ID = '" & intMedID & "' and Medication.Active_Flag = '1' and DrawerMedication.Active_Flag = '1'")
         txtMedication.Text = dsMedication.Tables(0).Rows(0)(1)
         txtUnit.Text = dsMedication.Tables(0).Rows(0)(15)
+        Dim dsDrawer As DataSet
+        If intEnteredFromAdhoc = 1 Then
+            dsDrawer = CreateDatabase.ExecuteSelectQuery("Select * from DrawerMedication INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID WHERE DrawerMedication.DrawerMedication_ID = '" & intDrawerMedTUID & "' and DrawerMedication.Active_Flag = '1' and Drawers.Active_Flag = '1'")
+
+        Else
+            dsDrawer = CreateDatabase.ExecuteSelectQuery("Select * from DrawerMedication INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID WHERE DrawerMedication.DrawerMedication_ID = '" & intDrawerMedTUID & "' and DrawerMedication.Active_Flag = '1' and Drawers.Active_Flag = '1'")
+
+        End If
+
+
         'get drawer information for medication in drawer
-        Dim dsDrawer As DataSet = CreateDatabase.ExecuteSelectQuery("Select * from DrawerMedication INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID WHERE DrawerMedication.Medication_TUID = '" & intMedID & "' and DrawerMedication.Active_Flag = '1' and Drawers.Active_Flag = '1'")
         txtDrawer.Text = "Drawer number:  " & dsDrawer.Tables(0).Rows(0)(12) & " Bin: " & dsDrawer.Tables(0).Rows(0)(6)
         'get narcotic flag from database for medication
         Dim intNarcoticFlag As Integer = CreateDatabase.ExecuteScalarQuery("Select Controlled_Flag from Medication where Medication_ID = '" & intMedID & "' and Active_Flag = '1'")
