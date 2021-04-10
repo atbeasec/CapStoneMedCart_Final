@@ -668,11 +668,11 @@ Public Class frmDispense
 
     Private Sub btnDrawer7_Click(sender As Object, e As EventArgs) Handles btnOne.Click, btnTwo.Click, btnThree.Click, btnFour.Click, btnFive.Click, btnSix.Click, btnSeven.Click, btnEight.Click, btnNine.Click, btnZero.Click, btnDecimal.Click
 
-
+        Dim replaceString As String
 
         If pnlAmountToRemove.Visible = True Then
 
-            If txtQuantityToDispense.Text.Length = 4 Then
+            If txtQuantityToDispense.Text.Length >= 4 Then
                 'MessageBox.Show("Max number of digits is 4.")
                 'replaceString = txtQuantityToDispense.Text.Remove(txtQuantityToDispense.Text.Length - 1, 1)
                 'txtQuantityToDispense.Text = replaceString
@@ -684,10 +684,10 @@ Public Class frmDispense
 
         ElseIf pnlAmountInDrawer.Visible = True Then
 
-            If txtQuantityToDispense.Text.Length = 4 Then
+            If txtQuantityToDispense.Text.Length >= 7 Then
                 'MessageBox.Show("Max number of digits is 4.")
-                'replaceString = txtQuantityToDispense.Text.Remove(txtQuantityToDispense.Text.Length - 1, 1)
-                'txtQuantityToDispense.Text = replaceString
+                replaceString = txtQuantityToDispense.Text.Remove(txtQuantityToDispense.Text.Length - 1, 1)
+                txtQuantityToDispense.Text = replaceString
             Else
 
                 txtCountInDrawer.Text &= CStr(sender.Text)
@@ -697,7 +697,7 @@ Public Class frmDispense
         ElseIf pnlAmountAdministered.Visible = True Then
 
 
-            If txtQuantityToDispense.Text.Length = 4 Then
+            If txtQuantityToDispense.Text.Length > 4 Then
                 'MessageBox.Show("Max number of digits is 4.")
                 'replaceString = txtQuantityToDispense.Text.Remove(txtQuantityToDispense.Text.Length - 1, 1)
                 'txtQuantityToDispense.Text = replaceString
