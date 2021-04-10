@@ -86,6 +86,7 @@ Module PopulateAllergiesComboBoxMethods
 
 
     Sub populateAllergiesComboBox(cmbAllergies As ComboBox, dsAllergies As DataSet)
+        frmAllergies.flpAllergies.Controls.Clear()
         Dim strbTesting As New StringBuilder
         Dim dcAllergies As New AutoCompleteStringCollection
         'cmbAllergies.Items.Clear()
