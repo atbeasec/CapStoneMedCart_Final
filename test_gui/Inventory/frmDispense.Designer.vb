@@ -39,6 +39,7 @@ Partial Class frmDispense
         Me.btnBack = New System.Windows.Forms.Button()
         Me.tpToolTip = New System.Windows.Forms.ToolTip(Me.components)
         Me.pnlSelector = New System.Windows.Forms.Panel()
+        Me.btnDecimal = New System.Windows.Forms.Button()
         Me.btnFive = New System.Windows.Forms.Button()
         Me.btnFour = New System.Windows.Forms.Button()
         Me.btnZero = New System.Windows.Forms.Button()
@@ -169,10 +170,10 @@ Partial Class frmDispense
         '
         Me.Panel5.BackColor = System.Drawing.Color.DarkGray
         Me.Panel5.Controls.Add(Me.txtQuantityToDispense)
-        Me.Panel5.Location = New System.Drawing.Point(63, 5)
+        Me.Panel5.Location = New System.Drawing.Point(30, 5)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel5.Size = New System.Drawing.Size(206, 28)
+        Me.Panel5.Size = New System.Drawing.Size(279, 28)
         Me.Panel5.TabIndex = 4
         '
         'txtQuantityToDispense
@@ -186,7 +187,7 @@ Partial Class frmDispense
         Me.txtQuantityToDispense.Name = "txtQuantityToDispense"
         Me.txtQuantityToDispense.ReadOnly = True
         Me.txtQuantityToDispense.ShortcutsEnabled = False
-        Me.txtQuantityToDispense.Size = New System.Drawing.Size(204, 26)
+        Me.txtQuantityToDispense.Size = New System.Drawing.Size(277, 26)
         Me.txtQuantityToDispense.TabIndex = 38
         '
         'pnlHeader
@@ -246,6 +247,7 @@ Partial Class frmDispense
         '
         'pnlSelector
         '
+        Me.pnlSelector.Controls.Add(Me.btnDecimal)
         Me.pnlSelector.Controls.Add(Me.btnFive)
         Me.pnlSelector.Controls.Add(Me.btnFour)
         Me.pnlSelector.Controls.Add(Me.btnZero)
@@ -258,10 +260,23 @@ Partial Class frmDispense
         Me.pnlSelector.Controls.Add(Me.btnEight)
         Me.pnlSelector.Controls.Add(Me.btnSeven)
         Me.pnlSelector.Controls.Add(Me.btnSix)
-        Me.pnlSelector.Location = New System.Drawing.Point(370, 172)
+        Me.pnlSelector.Location = New System.Drawing.Point(337, 171)
         Me.pnlSelector.Name = "pnlSelector"
-        Me.pnlSelector.Size = New System.Drawing.Size(404, 286)
+        Me.pnlSelector.Size = New System.Drawing.Size(437, 286)
         Me.pnlSelector.TabIndex = 202
+        '
+        'btnDecimal
+        '
+        Me.btnDecimal.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnDecimal.FlatAppearance.BorderSize = 0
+        Me.btnDecimal.Font = New System.Drawing.Font("Segoe UI", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDecimal.Location = New System.Drawing.Point(236, 214)
+        Me.btnDecimal.Name = "btnDecimal"
+        Me.btnDecimal.Padding = New System.Windows.Forms.Padding(1)
+        Me.btnDecimal.Size = New System.Drawing.Size(64, 65)
+        Me.btnDecimal.TabIndex = 25
+        Me.btnDecimal.Text = "."
+        Me.btnDecimal.UseVisualStyleBackColor = False
         '
         'btnFive
         '
@@ -294,10 +309,10 @@ Partial Class frmDispense
         Me.btnZero.BackColor = System.Drawing.Color.Gainsboro
         Me.btnZero.FlatAppearance.BorderSize = 0
         Me.btnZero.Font = New System.Drawing.Font("Segoe UI", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnZero.Location = New System.Drawing.Point(165, 214)
+        Me.btnZero.Location = New System.Drawing.Point(94, 214)
         Me.btnZero.Name = "btnZero"
         Me.btnZero.Padding = New System.Windows.Forms.Padding(1)
-        Me.btnZero.Size = New System.Drawing.Size(65, 65)
+        Me.btnZero.Size = New System.Drawing.Size(136, 65)
         Me.btnZero.TabIndex = 23
         Me.btnZero.Text = "0"
         Me.btnZero.UseVisualStyleBackColor = False
@@ -307,10 +322,10 @@ Partial Class frmDispense
         Me.btnClear.BackColor = System.Drawing.Color.Gainsboro
         Me.btnClear.FlatAppearance.BorderSize = 0
         Me.btnClear.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnClear.Location = New System.Drawing.Point(94, 214)
+        Me.btnClear.Location = New System.Drawing.Point(308, 1)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Padding = New System.Windows.Forms.Padding(1)
-        Me.btnClear.Size = New System.Drawing.Size(65, 65)
+        Me.btnClear.Size = New System.Drawing.Size(65, 136)
         Me.btnClear.TabIndex = 22
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = False
@@ -333,10 +348,10 @@ Partial Class frmDispense
         Me.btnEnter.BackColor = System.Drawing.Color.Gainsboro
         Me.btnEnter.FlatAppearance.BorderSize = 0
         Me.btnEnter.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEnter.Location = New System.Drawing.Point(236, 214)
+        Me.btnEnter.Location = New System.Drawing.Point(308, 143)
         Me.btnEnter.Name = "btnEnter"
         Me.btnEnter.Padding = New System.Windows.Forms.Padding(1)
-        Me.btnEnter.Size = New System.Drawing.Size(65, 65)
+        Me.btnEnter.Size = New System.Drawing.Size(65, 136)
         Me.btnEnter.TabIndex = 24
         Me.btnEnter.Text = "Enter"
         Me.btnEnter.UseVisualStyleBackColor = False
@@ -471,10 +486,10 @@ Partial Class frmDispense
         '
         Me.Panel2.BackColor = System.Drawing.Color.DarkGray
         Me.Panel2.Controls.Add(Me.txtAmountDispensed)
-        Me.Panel2.Location = New System.Drawing.Point(63, 5)
+        Me.Panel2.Location = New System.Drawing.Point(30, 5)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel2.Size = New System.Drawing.Size(109, 28)
+        Me.Panel2.Size = New System.Drawing.Size(142, 28)
         Me.Panel2.TabIndex = 41
         '
         'txtAmountDispensed
@@ -488,7 +503,7 @@ Partial Class frmDispense
         Me.txtAmountDispensed.Name = "txtAmountDispensed"
         Me.txtAmountDispensed.ReadOnly = True
         Me.txtAmountDispensed.ShortcutsEnabled = False
-        Me.txtAmountDispensed.Size = New System.Drawing.Size(107, 26)
+        Me.txtAmountDispensed.Size = New System.Drawing.Size(140, 26)
         Me.txtAmountDispensed.TabIndex = 38
         '
         'Panel4
@@ -498,7 +513,7 @@ Partial Class frmDispense
         Me.Panel4.Location = New System.Drawing.Point(192, 5)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel4.Size = New System.Drawing.Size(76, 28)
+        Me.Panel4.Size = New System.Drawing.Size(117, 28)
         Me.Panel4.TabIndex = 42
         '
         'txtUnits
@@ -511,7 +526,7 @@ Partial Class frmDispense
         Me.txtUnits.Name = "txtUnits"
         Me.txtUnits.ReadOnly = True
         Me.txtUnits.ShortcutsEnabled = False
-        Me.txtUnits.Size = New System.Drawing.Size(74, 26)
+        Me.txtUnits.Size = New System.Drawing.Size(115, 26)
         Me.txtUnits.TabIndex = 38
         '
         'pnlAmountInDrawer
@@ -527,10 +542,10 @@ Partial Class frmDispense
         '
         Me.Panel9.BackColor = System.Drawing.Color.DarkGray
         Me.Panel9.Controls.Add(Me.txtCountInDrawer)
-        Me.Panel9.Location = New System.Drawing.Point(63, 6)
+        Me.Panel9.Location = New System.Drawing.Point(30, 6)
         Me.Panel9.Name = "Panel9"
         Me.Panel9.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel9.Size = New System.Drawing.Size(205, 28)
+        Me.Panel9.Size = New System.Drawing.Size(279, 28)
         Me.Panel9.TabIndex = 7
         '
         'txtCountInDrawer
@@ -544,7 +559,7 @@ Partial Class frmDispense
         Me.txtCountInDrawer.Name = "txtCountInDrawer"
         Me.txtCountInDrawer.ReadOnly = True
         Me.txtCountInDrawer.ShortcutsEnabled = False
-        Me.txtCountInDrawer.Size = New System.Drawing.Size(203, 26)
+        Me.txtCountInDrawer.Size = New System.Drawing.Size(277, 26)
         Me.txtCountInDrawer.TabIndex = 38
         '
         'pnlAmountToRemove
@@ -857,4 +872,5 @@ Partial Class frmDispense
     Friend WithEvents txtFrequency As TextBox
     Friend WithEvents Label2 As Label
     Friend WithEvents btnReopenDrawer As Button
+    Friend WithEvents btnDecimal As Button
 End Class
