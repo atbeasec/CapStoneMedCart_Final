@@ -64,7 +64,7 @@
                     CreateDatabase.ExecuteInsertQuery("INSERT INTO Allergy(Allergy_Name,Allergy_Type) VALUES('" & strAllergyName & "','" & cmbAllergiesType.Text & "');")
                 End If
                 ' insert into database statement/method goes here
-                CreateDatabase.ExecuteInsertQuery("INSERT INTO PatientAllergy (Patient_TUID, Allergy_Name, Allergy_Severity, Active_Flag) VALUES (" & intPatientTuid & ",'" & strAllergyName & "','" & cmbAllergiesType.SelectedIndex & "',1);")
+                CreateDatabase.ExecuteInsertQuery("INSERT INTO PatientAllergy (Patient_TUID, Allergy_Name, Allergy_Severity, Active_Flag) VALUES (" & intPatientTuid & ",'" & strAllergyName & "','" & cmbSeverity.SelectedIndex & "',1);")
                 ' populate the screen from a manually added allergy.
                 'probably going to need a select query to get the medication name from the TUID
                 Debug.WriteLine("Value must already be in the table")
