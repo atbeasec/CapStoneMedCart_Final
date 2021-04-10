@@ -403,7 +403,7 @@ Public Class frmEditPhysician
         If ExecuteScalarQuery(strStatement) = 2 Then
             MessageBox.Show("A physician already has that first, middle, and last name.")
             'Make Sure all fields are filled
-        ElseIf txtFirstName.Text = "" Or txtLastName.Text = "" Or txtMiddleName.Text = "" Or mtbPhone.Text = "" Or mtbFax.Text = "" Or txtAddress.Text = "" Or txtCity.Text = "" Or txtZipCode.Text = "" Then
+        ElseIf txtFirstName.Text = "" Or txtLastName.Text = "" Or txtMiddleName.Text = "" Or txtAddress.Text = "" Or txtCity.Text = "" Or txtZipCode.MaskCompleted = False Or mtbPhone.MaskCompleted = False Or mtbFax.MaskCompleted = False Then
             MessageBox.Show("All fields must be filled in.")
         Else
             'Insert data into table by calling ExecuteInsertQuery in CreateDatabase Module
