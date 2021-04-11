@@ -260,7 +260,7 @@ Partial Class frmDispense
         Me.pnlSelector.Controls.Add(Me.btnEight)
         Me.pnlSelector.Controls.Add(Me.btnSeven)
         Me.pnlSelector.Controls.Add(Me.btnSix)
-        Me.pnlSelector.Location = New System.Drawing.Point(337, 171)
+        Me.pnlSelector.Location = New System.Drawing.Point(337, 172)
         Me.pnlSelector.Name = "pnlSelector"
         Me.pnlSelector.Size = New System.Drawing.Size(437, 286)
         Me.pnlSelector.TabIndex = 202

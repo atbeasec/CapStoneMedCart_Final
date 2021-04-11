@@ -240,7 +240,7 @@ Public Class frmDispense
             End If
             'step after narcotic amount entered
         ElseIf lblDirections.Text.Equals("Enter the Quantity in the Cart") Then
-            If IsNumeric(txtQuantityToDispense.Text) Or String.IsNullOrEmpty(txtQuantityToDispense.Text) Then
+            If IsNumeric(txtQuantityToDispense.Text) Then
                 btnZero.Size = New Point(136, 65)
                 btnZero.BringToFront()
                 Dim intAmountinCart As Integer = CInt(txtCountInDrawer.Text)
@@ -668,14 +668,10 @@ Public Class frmDispense
 
     Private Sub btnDrawer7_Click(sender As Object, e As EventArgs) Handles btnOne.Click, btnTwo.Click, btnThree.Click, btnFour.Click, btnFive.Click, btnSix.Click, btnSeven.Click, btnEight.Click, btnNine.Click, btnZero.Click, btnDecimal.Click
 
-        Dim replaceString As String
-
         If pnlAmountToRemove.Visible = True Then
 
             If txtQuantityToDispense.Text.Length >= 4 Then
-                'MessageBox.Show("Max number of digits is 4.")
-                'replaceString = txtQuantityToDispense.Text.Remove(txtQuantityToDispense.Text.Length - 1, 1)
-                'txtQuantityToDispense.Text = replaceString
+
             Else
 
                 txtQuantityToDispense.Text &= CStr(sender.Text)
@@ -684,10 +680,8 @@ Public Class frmDispense
 
         ElseIf pnlAmountInDrawer.Visible = True Then
 
-            If txtQuantityToDispense.Text.Length >= 7 Then
-                'MessageBox.Show("Max number of digits is 4.")
-                ' replaceString = txtQuantityToDispense.Text.Remove(txtQuantityToDispense.Text.Length - 1, 1)
-                ' txtQuantityToDispense.Text = replaceString
+            If txtCountInDrawer.Text.Length > 4 Then
+
             Else
 
                 txtCountInDrawer.Text &= CStr(sender.Text)
@@ -697,10 +691,8 @@ Public Class frmDispense
         ElseIf pnlAmountAdministered.Visible = True Then
 
 
-            If txtQuantityToDispense.Text.Length > 4 Then
-                'MessageBox.Show("Max number of digits is 4.")
-                'replaceString = txtQuantityToDispense.Text.Remove(txtQuantityToDispense.Text.Length - 1, 1)
-                'txtQuantityToDispense.Text = replaceString
+            If txtAmountDispensed.Text.Length > 5 Then
+
             Else
 
                 txtAmountDispensed.Text &= CStr(sender.Text)
@@ -727,11 +719,30 @@ Public Class frmDispense
         End If
     End Sub
 
-
-
     Private Sub btnEnter_Click_1(sender As Object, e As EventArgs) Handles btnEnter.Click
 
-        btnDispense.PerformClick()
+        If pnlAmountToRemove.Visible = True Then
+
+            If Not String.IsNullOrEmpty(txtQuantityToDispense.Text) Then
+                btnDispense.PerformClick()
+            End If
+
+        ElseIf pnlAmountInDrawer.Visible = True Then
+
+            If Not String.IsNullOrEmpty(txtCountInDrawer.Text) Then
+                btnDispense.PerformClick()
+            End If
+
+
+        ElseIf pnlAmountAdministered.Visible = True Then
+
+            If Not String.IsNullOrEmpty(txtAmountDispensed.Text) Then
+                btnDispense.PerformClick()
+            End If
+
+
+        End If
+
 
     End Sub
 
