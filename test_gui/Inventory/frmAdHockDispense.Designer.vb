@@ -331,7 +331,6 @@ Partial Class frmAdHockDispense
         Me.txtAmount.Location = New System.Drawing.Point(712, 136)
         Me.txtAmount.MaxLength = 5
         Me.txtAmount.Name = "txtAmount"
-        Me.txtAmount.ReadOnly = True
         Me.txtAmount.ShortcutsEnabled = False
         Me.txtAmount.Size = New System.Drawing.Size(147, 29)
         Me.txtAmount.TabIndex = 2
@@ -346,7 +345,7 @@ Partial Class frmAdHockDispense
         Me.txtUnit.Name = "txtUnit"
         Me.txtUnit.ReadOnly = True
         Me.txtUnit.ShortcutsEnabled = False
-        Me.txtUnit.Size = New System.Drawing.Size(107, 29)
+        Me.txtUnit.Size = New System.Drawing.Size(125, 29)
         Me.txtUnit.TabIndex = 4
         Me.txtUnit.TabStop = False
         '

@@ -185,7 +185,6 @@ Partial Class frmDispense
         Me.txtQuantityToDispense.MaxLength = 4
         Me.txtQuantityToDispense.Multiline = True
         Me.txtQuantityToDispense.Name = "txtQuantityToDispense"
-        Me.txtQuantityToDispense.ReadOnly = True
         Me.txtQuantityToDispense.ShortcutsEnabled = False
         Me.txtQuantityToDispense.Size = New System.Drawing.Size(277, 26)
         Me.txtQuantityToDispense.TabIndex = 38
@@ -260,7 +259,7 @@ Partial Class frmDispense
         Me.pnlSelector.Controls.Add(Me.btnEight)
         Me.pnlSelector.Controls.Add(Me.btnSeven)
         Me.pnlSelector.Controls.Add(Me.btnSix)
-        Me.pnlSelector.Location = New System.Drawing.Point(337, 172)
+        Me.pnlSelector.Location = New System.Drawing.Point(337, 171)
         Me.pnlSelector.Name = "pnlSelector"
         Me.pnlSelector.Size = New System.Drawing.Size(437, 286)
         Me.pnlSelector.TabIndex = 202
@@ -501,7 +500,6 @@ Partial Class frmDispense
         Me.txtAmountDispensed.MaxLength = 5
         Me.txtAmountDispensed.Multiline = True
         Me.txtAmountDispensed.Name = "txtAmountDispensed"
-        Me.txtAmountDispensed.ReadOnly = True
         Me.txtAmountDispensed.ShortcutsEnabled = False
         Me.txtAmountDispensed.Size = New System.Drawing.Size(140, 26)
         Me.txtAmountDispensed.TabIndex = 38
@@ -557,7 +555,6 @@ Partial Class frmDispense
         Me.txtCountInDrawer.MaxLength = 5
         Me.txtCountInDrawer.Multiline = True
         Me.txtCountInDrawer.Name = "txtCountInDrawer"
-        Me.txtCountInDrawer.ReadOnly = True
         Me.txtCountInDrawer.ShortcutsEnabled = False
         Me.txtCountInDrawer.Size = New System.Drawing.Size(277, 26)
         Me.txtCountInDrawer.TabIndex = 38

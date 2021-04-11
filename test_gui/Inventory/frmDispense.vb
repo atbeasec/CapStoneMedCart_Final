@@ -139,13 +139,13 @@ Public Class frmDispense
     End Sub
 
 
-    Private Sub btnUp_Click(sender As Object, e As EventArgs)
-        ButtonIncrement(1000, txtQuantityToDispense)
-    End Sub
+    ' Private Sub btnUp_Click(sender As Object, e As EventArgs)
+    '     ButtonIncrement(1000, txtQuantityToDispense)
+    '  End Sub
 
-    Private Sub btnDown_Click(sender As Object, e As EventArgs)
-        ButtonDecrement(txtQuantityToDispense)
-    End Sub
+    ' Private Sub btnDown_Click(sender As Object, e As EventArgs)
+    '     ButtonDecrement(txtQuantityToDispense)
+    '  End Sub
 
     '/*********************************************************************/
     '/*                   SubProgram NAME: btnDispense_Click_1               */         
@@ -570,9 +570,12 @@ Public Class frmDispense
             GraphicalUserInterfaceReusableMethods.MaxValue(CInt(sender.Text), 1000, txtQuantityToDispense)
         Else
             MessageBox.Show("Please make sure you enter a positive number 1-1000")
-            sender.Text = "1"
+            '  sender.Text = "1"
         End If
     End Sub
+
+
+
 
     '/*********************************************************************/
     '/*                   SubProgram NAME: btnBack_Click               */         
@@ -670,13 +673,20 @@ Public Class frmDispense
 
         If pnlAmountToRemove.Visible = True Then
 
-            If txtQuantityToDispense.Text.Length >= 4 Then
+            'If Not String.IsNullOrEmpty(txtQuantityToDispense.Text) Then
 
-            Else
+            ' If CInt(txtQuantityToDispense.Text.Length) > 4 And CInt(txtQuantityToDispense.Text) <= 1000 Then
 
-                txtQuantityToDispense.Text &= CStr(sender.Text)
+            'Else
 
-            End If
+            'txtQuantityToDispense.Text &= CStr(sender.Text)
+
+            'End If
+
+            'Else
+            ' txtQuantityToDispense.Text &= CStr(sender.Text)
+            '    End If
+            txtQuantityToDispense.Text &= CStr(sender.Text)
 
         ElseIf pnlAmountInDrawer.Visible = True Then
 
@@ -740,7 +750,6 @@ Public Class frmDispense
                 btnDispense.PerformClick()
             End If
 
-
         End If
 
 
@@ -762,5 +771,32 @@ Public Class frmDispense
 
     End Sub
 
+    Private Sub txtQuantityToDispense_TextChanged(sender As Object, e As EventArgs) Handles txtQuantityToDispense.TextChanged
 
+        If txtQuantityToDispense.Text.Length > 4 Then
+
+            ' dont let it grow larger
+
+            If CInt(txtQuantityToDispense.Text) >= 1000 Then
+
+                MessageBox.Show("Value must be between 0-1000.")
+                txtQuantityToDispense.Text = Nothing
+
+            End If
+
+        Else
+
+            txtQuantityToDispense.Text &= CStr(sender.Text)
+
+        End If
+
+    End Sub
+
+    Private Sub txtCountInDrawer_TextChanged(sender As Object, e As EventArgs) Handles txtCountInDrawer.TextChanged
+
+    End Sub
+
+    Private Sub txtAmountDispensed_TextChanged(sender As Object, e As EventArgs) Handles txtAmountDispensed.TextChanged
+
+    End Sub
 End Class
