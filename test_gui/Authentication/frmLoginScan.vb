@@ -57,7 +57,7 @@ Public Class frmLoginScan
                 'If users barcode is in the User table in the database then close current form and open frmMain
                 Me.Visible = False
                 frmMain.DetermineFormToOpen(2)
-                frmMain.Text = "Medical Dispence - " & LogIn.LoggedInFullName
+                frmMain.Text = "MedServe - " & LogIn.LoggedInFullName
                 frmMain.Show()
                 frmMain.btnPatientRecords.PerformClick()
                 txtBarcode.Clear()

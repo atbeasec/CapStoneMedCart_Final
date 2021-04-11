@@ -214,7 +214,6 @@ Partial Class frmLogin
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmLogin"
-        Me.ShowIcon = False
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Panel1.ResumeLayout(False)

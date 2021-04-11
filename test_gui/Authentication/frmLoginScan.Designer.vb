@@ -238,7 +238,6 @@ Partial Class frmLoginScan
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmLoginScan"
-        Me.ShowIcon = False
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.pnlLogin.ResumeLayout(False)
