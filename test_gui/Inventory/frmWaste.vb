@@ -337,7 +337,7 @@
             lblSignoff.Visible = True
             txtBarcode.Visible = True
             pnlCredentials.Visible = False
-            Button1.Visible = False
+            btnSubmitWithoutSignoff.Visible = False
         Else
             pnlSignOff.Visible = False
             lblSignoff.Visible = False
@@ -345,6 +345,8 @@
         End If
         txtOther.Visible = False
         Label14.Visible = False
+
+        txtQuantity.Select()
     End Sub
 
     '/********************************************************************/
@@ -510,7 +512,7 @@
     '/*  ---            ----             ----				             */
     '/*  AB		        2/10/21		    initial creation                 */
     '/********************************************************************/ 
-    Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWasteWithBarcode.Click, Button1.Click
+    Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWasteWithBarcode.Click, btnSubmitWithoutSignoff.Click
         'heck to see if the drug being wasted is a narcotic or not
         'if it is a narcotic require sign off
         If intNarcoticFlagGlobal = 1 Then
@@ -971,4 +973,50 @@
             Return "False"
         End If
     End Function
+
+    Private Sub btnDrawer7_Click(sender As Object, e As EventArgs) Handles btnOne.Click, btnTwo.Click, btnThree.Click, btnFour.Click, btnFive.Click, btnSix.Click, btnSeven.Click, btnEight.Click, btnNine.Click, btnZero.Click, btnDecimal.Click
+
+        If txtQuantity.Text.Length >= 4 Then
+
+        Else
+
+            txtQuantity.Text &= CStr(sender.Text)
+
+        End If
+
+    End Sub
+
+    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+        txtQuantity.Text = Nothing
+
+    End Sub
+
+    Private Sub btnEnter_Click(sender As Object, e As EventArgs) Handles btnEnter.Click
+
+        ' make sure the user has input a value to the textbox
+        If String.IsNullOrEmpty(txtQuantity.Text) Then
+            MessageBox.Show("Please enter the amount wasted.")
+
+        Else
+
+            'give the barcode field focus, or give the password field focus
+            If pnlBarcode.Visible = True Then
+
+                txtBarcode.Select()
+
+            ElseIf pnlCredentials.Visible = True Then
+
+                txtUsername.Select()
+
+            ElseIf pnlSignOff.Visible = False Then
+
+                btnSubmitWithoutSignoff.PerformClick()
+
+            End If
+
+        End If
+
+
+
+    End Sub
 End Class

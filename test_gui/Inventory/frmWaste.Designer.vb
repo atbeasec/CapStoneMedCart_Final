@@ -27,6 +27,7 @@ Partial Class frmWaste
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.pnlRadioButtons = New System.Windows.Forms.Panel()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.pnlSignOff = New System.Windows.Forms.Panel()
         Me.pnlCredentials = New System.Windows.Forms.Panel()
         Me.txtPassword = New System.Windows.Forms.TextBox()
@@ -42,7 +43,7 @@ Partial Class frmWaste
         Me.txtBarcode = New System.Windows.Forms.TextBox()
         Me.lblSignoff = New System.Windows.Forms.Label()
         Me.btnWasteWithBarcode = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnSubmitWithoutSignoff = New System.Windows.Forms.Button()
         Me.txtOther = New System.Windows.Forms.TextBox()
         Me.rbtnOther = New System.Windows.Forms.RadioButton()
         Me.radPatientUnavilable = New System.Windows.Forms.RadioButton()
@@ -59,20 +60,34 @@ Partial Class frmWaste
         Me.txtQuantity = New System.Windows.Forms.TextBox()
         Me.txtMedication = New System.Windows.Forms.TextBox()
         Me.txtDrawer = New System.Windows.Forms.TextBox()
-        Me.Label14 = New System.Windows.Forms.Label()
+        Me.pnlSelector = New System.Windows.Forms.Panel()
+        Me.btnDecimal = New System.Windows.Forms.Button()
+        Me.btnFive = New System.Windows.Forms.Button()
+        Me.btnFour = New System.Windows.Forms.Button()
+        Me.btnZero = New System.Windows.Forms.Button()
+        Me.btnClear = New System.Windows.Forms.Button()
+        Me.btnThree = New System.Windows.Forms.Button()
+        Me.btnEnter = New System.Windows.Forms.Button()
+        Me.btnTwo = New System.Windows.Forms.Button()
+        Me.btnOne = New System.Windows.Forms.Button()
+        Me.btnNine = New System.Windows.Forms.Button()
+        Me.btnEight = New System.Windows.Forms.Button()
+        Me.btnSeven = New System.Windows.Forms.Button()
+        Me.btnSix = New System.Windows.Forms.Button()
         Me.pnlRadioButtons.SuspendLayout()
         Me.pnlSignOff.SuspendLayout()
         Me.pnlCredentials.SuspendLayout()
         Me.pnlBarcode.SuspendLayout()
         Me.pnlHeader.SuspendLayout()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlSelector.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(296, 224)
+        Me.Label2.Location = New System.Drawing.Point(137, 127)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(163, 25)
         Me.Label2.TabIndex = 26
@@ -82,7 +97,7 @@ Partial Class frmWaste
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(292, 71)
+        Me.Label1.Location = New System.Drawing.Point(138, 60)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(114, 25)
         Me.Label1.TabIndex = 25
@@ -92,17 +107,26 @@ Partial Class frmWaste
         '
         Me.pnlRadioButtons.Controls.Add(Me.Label14)
         Me.pnlRadioButtons.Controls.Add(Me.pnlSignOff)
-        Me.pnlRadioButtons.Controls.Add(Me.Button1)
         Me.pnlRadioButtons.Controls.Add(Me.txtOther)
         Me.pnlRadioButtons.Controls.Add(Me.rbtnOther)
         Me.pnlRadioButtons.Controls.Add(Me.radPatientUnavilable)
         Me.pnlRadioButtons.Controls.Add(Me.radRefused)
         Me.pnlRadioButtons.Controls.Add(Me.radCancel)
         Me.pnlRadioButtons.Controls.Add(Me.radIncorrect)
-        Me.pnlRadioButtons.Location = New System.Drawing.Point(297, 252)
+        Me.pnlRadioButtons.Location = New System.Drawing.Point(143, 155)
         Me.pnlRadioButtons.Name = "pnlRadioButtons"
         Me.pnlRadioButtons.Size = New System.Drawing.Size(532, 441)
         Me.pnlRadioButtons.TabIndex = 23
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(224, 3)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(113, 25)
+        Me.Label14.TabIndex = 222
+        Me.Label14.Text = "Explanation"
         '
         'pnlSignOff
         '
@@ -285,22 +309,22 @@ Partial Class frmWaste
         Me.btnWasteWithBarcode.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnWasteWithBarcode.UseVisualStyleBackColor = False
         '
-        'Button1
+        'btnSubmitWithoutSignoff
         '
-        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.Button1.FlatAppearance.BorderSize = 0
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.ForeColor = System.Drawing.Color.White
-        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button1.Location = New System.Drawing.Point(153, 158)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(150, 37)
-        Me.Button1.TabIndex = 220
-        Me.Button1.Text = "   SUBMIT"
-        Me.Button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button1.UseVisualStyleBackColor = False
+        Me.btnSubmitWithoutSignoff.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnSubmitWithoutSignoff.FlatAppearance.BorderSize = 0
+        Me.btnSubmitWithoutSignoff.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSubmitWithoutSignoff.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSubmitWithoutSignoff.ForeColor = System.Drawing.Color.White
+        Me.btnSubmitWithoutSignoff.Image = CType(resources.GetObject("btnSubmitWithoutSignoff.Image"), System.Drawing.Image)
+        Me.btnSubmitWithoutSignoff.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnSubmitWithoutSignoff.Location = New System.Drawing.Point(797, 244)
+        Me.btnSubmitWithoutSignoff.Name = "btnSubmitWithoutSignoff"
+        Me.btnSubmitWithoutSignoff.Size = New System.Drawing.Size(150, 37)
+        Me.btnSubmitWithoutSignoff.TabIndex = 220
+        Me.btnSubmitWithoutSignoff.Text = "   SUBMIT"
+        Me.btnSubmitWithoutSignoff.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnSubmitWithoutSignoff.UseVisualStyleBackColor = False
         '
         'txtOther
         '
@@ -308,7 +332,7 @@ Partial Class frmWaste
         Me.txtOther.Multiline = True
         Me.txtOther.Name = "txtOther"
         Me.txtOther.ShortcutsEnabled = False
-        Me.txtOther.Size = New System.Drawing.Size(288, 124)
+        Me.txtOther.Size = New System.Drawing.Size(270, 124)
         Me.txtOther.TabIndex = 6
         '
         'rbtnOther
@@ -410,7 +434,7 @@ Partial Class frmWaste
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(520, 71)
+        Me.Label4.Location = New System.Drawing.Point(477, 60)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(80, 25)
         Me.Label4.TabIndex = 204
@@ -420,7 +444,7 @@ Partial Class frmWaste
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold)
-        Me.Label5.Location = New System.Drawing.Point(295, 148)
+        Me.Label5.Location = New System.Drawing.Point(657, 60)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(199, 25)
         Me.Label5.TabIndex = 213
@@ -435,11 +459,11 @@ Partial Class frmWaste
         Me.txtUnit.BackColor = System.Drawing.Color.White
         Me.txtUnit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtUnit.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUnit.Location = New System.Drawing.Point(469, 176)
+        Me.txtUnit.Location = New System.Drawing.Point(848, 88)
         Me.txtUnit.Name = "txtUnit"
         Me.txtUnit.ReadOnly = True
         Me.txtUnit.ShortcutsEnabled = False
-        Me.txtUnit.Size = New System.Drawing.Size(77, 25)
+        Me.txtUnit.Size = New System.Drawing.Size(96, 25)
         Me.txtUnit.TabIndex = 214
         '
         'txtQuantity
@@ -447,9 +471,10 @@ Partial Class frmWaste
         Me.txtQuantity.BackColor = System.Drawing.Color.White
         Me.txtQuantity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtQuantity.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtQuantity.Location = New System.Drawing.Point(300, 176)
+        Me.txtQuantity.Location = New System.Drawing.Point(665, 88)
         Me.txtQuantity.MaxLength = 5
         Me.txtQuantity.Name = "txtQuantity"
+        Me.txtQuantity.ReadOnly = True
         Me.txtQuantity.ShortcutsEnabled = False
         Me.txtQuantity.Size = New System.Drawing.Size(163, 25)
         Me.txtQuantity.TabIndex = 215
@@ -459,11 +484,11 @@ Partial Class frmWaste
         Me.txtMedication.BackColor = System.Drawing.Color.White
         Me.txtMedication.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtMedication.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMedication.Location = New System.Drawing.Point(297, 99)
+        Me.txtMedication.Location = New System.Drawing.Point(142, 88)
         Me.txtMedication.Name = "txtMedication"
         Me.txtMedication.ReadOnly = True
         Me.txtMedication.ShortcutsEnabled = False
-        Me.txtMedication.Size = New System.Drawing.Size(220, 25)
+        Me.txtMedication.Size = New System.Drawing.Size(321, 25)
         Me.txtMedication.TabIndex = 216
         '
         'txtDrawer
@@ -471,22 +496,203 @@ Partial Class frmWaste
         Me.txtDrawer.BackColor = System.Drawing.Color.White
         Me.txtDrawer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtDrawer.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDrawer.Location = New System.Drawing.Point(542, 99)
+        Me.txtDrawer.Location = New System.Drawing.Point(482, 88)
         Me.txtDrawer.Name = "txtDrawer"
         Me.txtDrawer.ReadOnly = True
         Me.txtDrawer.ShortcutsEnabled = False
         Me.txtDrawer.Size = New System.Drawing.Size(163, 25)
         Me.txtDrawer.TabIndex = 217
         '
-        'Label14
+        'pnlSelector
         '
-        Me.Label14.AutoSize = True
-        Me.Label14.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(224, 3)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(113, 25)
-        Me.Label14.TabIndex = 222
-        Me.Label14.Text = "Explanation"
+        Me.pnlSelector.Controls.Add(Me.btnDecimal)
+        Me.pnlSelector.Controls.Add(Me.btnFive)
+        Me.pnlSelector.Controls.Add(Me.btnFour)
+        Me.pnlSelector.Controls.Add(Me.btnZero)
+        Me.pnlSelector.Controls.Add(Me.btnClear)
+        Me.pnlSelector.Controls.Add(Me.btnThree)
+        Me.pnlSelector.Controls.Add(Me.btnEnter)
+        Me.pnlSelector.Controls.Add(Me.btnTwo)
+        Me.pnlSelector.Controls.Add(Me.btnOne)
+        Me.pnlSelector.Controls.Add(Me.btnNine)
+        Me.pnlSelector.Controls.Add(Me.btnEight)
+        Me.pnlSelector.Controls.Add(Me.btnSeven)
+        Me.pnlSelector.Controls.Add(Me.btnSix)
+        Me.pnlSelector.Location = New System.Drawing.Point(662, 124)
+        Me.pnlSelector.Name = "pnlSelector"
+        Me.pnlSelector.Size = New System.Drawing.Size(287, 300)
+        Me.pnlSelector.TabIndex = 218
+        '
+        'btnDecimal
+        '
+        Me.btnDecimal.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnDecimal.FlatAppearance.BorderSize = 0
+        Me.btnDecimal.Font = New System.Drawing.Font("Segoe UI", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDecimal.Location = New System.Drawing.Point(145, 213)
+        Me.btnDecimal.Name = "btnDecimal"
+        Me.btnDecimal.Padding = New System.Windows.Forms.Padding(1)
+        Me.btnDecimal.Size = New System.Drawing.Size(64, 65)
+        Me.btnDecimal.TabIndex = 25
+        Me.btnDecimal.Text = "."
+        Me.btnDecimal.UseVisualStyleBackColor = False
+        '
+        'btnFive
+        '
+        Me.btnFive.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnFive.FlatAppearance.BorderSize = 0
+        Me.btnFive.Font = New System.Drawing.Font("Segoe UI", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnFive.Location = New System.Drawing.Point(74, 71)
+        Me.btnFive.Name = "btnFive"
+        Me.btnFive.Padding = New System.Windows.Forms.Padding(1)
+        Me.btnFive.Size = New System.Drawing.Size(65, 65)
+        Me.btnFive.TabIndex = 13
+        Me.btnFive.Text = "5"
+        Me.btnFive.UseVisualStyleBackColor = False
+        '
+        'btnFour
+        '
+        Me.btnFour.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnFour.FlatAppearance.BorderSize = 0
+        Me.btnFour.Font = New System.Drawing.Font("Segoe UI", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnFour.Location = New System.Drawing.Point(3, 71)
+        Me.btnFour.Name = "btnFour"
+        Me.btnFour.Padding = New System.Windows.Forms.Padding(1)
+        Me.btnFour.Size = New System.Drawing.Size(65, 65)
+        Me.btnFour.TabIndex = 12
+        Me.btnFour.Text = "4"
+        Me.btnFour.UseVisualStyleBackColor = False
+        '
+        'btnZero
+        '
+        Me.btnZero.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnZero.FlatAppearance.BorderSize = 0
+        Me.btnZero.Font = New System.Drawing.Font("Segoe UI", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnZero.Location = New System.Drawing.Point(3, 213)
+        Me.btnZero.Name = "btnZero"
+        Me.btnZero.Padding = New System.Windows.Forms.Padding(1)
+        Me.btnZero.Size = New System.Drawing.Size(136, 65)
+        Me.btnZero.TabIndex = 23
+        Me.btnZero.Text = "0"
+        Me.btnZero.UseVisualStyleBackColor = False
+        '
+        'btnClear
+        '
+        Me.btnClear.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnClear.FlatAppearance.BorderSize = 0
+        Me.btnClear.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClear.Location = New System.Drawing.Point(217, 0)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Padding = New System.Windows.Forms.Padding(1)
+        Me.btnClear.Size = New System.Drawing.Size(65, 136)
+        Me.btnClear.TabIndex = 22
+        Me.btnClear.Text = "Clear"
+        Me.btnClear.UseVisualStyleBackColor = False
+        '
+        'btnThree
+        '
+        Me.btnThree.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnThree.FlatAppearance.BorderSize = 0
+        Me.btnThree.Font = New System.Drawing.Font("Segoe UI", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnThree.Location = New System.Drawing.Point(145, 0)
+        Me.btnThree.Name = "btnThree"
+        Me.btnThree.Padding = New System.Windows.Forms.Padding(1)
+        Me.btnThree.Size = New System.Drawing.Size(65, 65)
+        Me.btnThree.TabIndex = 9
+        Me.btnThree.Text = "3"
+        Me.btnThree.UseVisualStyleBackColor = False
+        '
+        'btnEnter
+        '
+        Me.btnEnter.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnEnter.FlatAppearance.BorderSize = 0
+        Me.btnEnter.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEnter.Location = New System.Drawing.Point(217, 142)
+        Me.btnEnter.Name = "btnEnter"
+        Me.btnEnter.Padding = New System.Windows.Forms.Padding(1)
+        Me.btnEnter.Size = New System.Drawing.Size(65, 136)
+        Me.btnEnter.TabIndex = 24
+        Me.btnEnter.Text = "Enter"
+        Me.btnEnter.UseVisualStyleBackColor = False
+        '
+        'btnTwo
+        '
+        Me.btnTwo.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnTwo.FlatAppearance.BorderSize = 0
+        Me.btnTwo.Font = New System.Drawing.Font("Segoe UI", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnTwo.Location = New System.Drawing.Point(74, 0)
+        Me.btnTwo.Name = "btnTwo"
+        Me.btnTwo.Padding = New System.Windows.Forms.Padding(1)
+        Me.btnTwo.Size = New System.Drawing.Size(65, 65)
+        Me.btnTwo.TabIndex = 8
+        Me.btnTwo.Text = "2"
+        Me.btnTwo.UseVisualStyleBackColor = False
+        '
+        'btnOne
+        '
+        Me.btnOne.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnOne.FlatAppearance.BorderSize = 0
+        Me.btnOne.Font = New System.Drawing.Font("Segoe UI", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnOne.Location = New System.Drawing.Point(3, 0)
+        Me.btnOne.Name = "btnOne"
+        Me.btnOne.Padding = New System.Windows.Forms.Padding(1)
+        Me.btnOne.Size = New System.Drawing.Size(65, 65)
+        Me.btnOne.TabIndex = 7
+        Me.btnOne.Text = "1"
+        Me.btnOne.UseVisualStyleBackColor = False
+        '
+        'btnNine
+        '
+        Me.btnNine.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnNine.FlatAppearance.BorderSize = 0
+        Me.btnNine.Font = New System.Drawing.Font("Segoe UI", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNine.Location = New System.Drawing.Point(145, 142)
+        Me.btnNine.Name = "btnNine"
+        Me.btnNine.Padding = New System.Windows.Forms.Padding(1)
+        Me.btnNine.Size = New System.Drawing.Size(65, 65)
+        Me.btnNine.TabIndex = 19
+        Me.btnNine.Tag = "9"
+        Me.btnNine.Text = "9"
+        Me.btnNine.UseVisualStyleBackColor = False
+        '
+        'btnEight
+        '
+        Me.btnEight.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnEight.FlatAppearance.BorderSize = 0
+        Me.btnEight.Font = New System.Drawing.Font("Segoe UI", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEight.Location = New System.Drawing.Point(74, 142)
+        Me.btnEight.Name = "btnEight"
+        Me.btnEight.Padding = New System.Windows.Forms.Padding(1)
+        Me.btnEight.Size = New System.Drawing.Size(65, 65)
+        Me.btnEight.TabIndex = 18
+        Me.btnEight.Tag = "8"
+        Me.btnEight.Text = "8"
+        Me.btnEight.UseVisualStyleBackColor = False
+        '
+        'btnSeven
+        '
+        Me.btnSeven.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnSeven.FlatAppearance.BorderSize = 0
+        Me.btnSeven.Font = New System.Drawing.Font("Segoe UI", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSeven.Location = New System.Drawing.Point(3, 142)
+        Me.btnSeven.Name = "btnSeven"
+        Me.btnSeven.Padding = New System.Windows.Forms.Padding(1)
+        Me.btnSeven.Size = New System.Drawing.Size(65, 65)
+        Me.btnSeven.TabIndex = 17
+        Me.btnSeven.Text = "7"
+        Me.btnSeven.UseVisualStyleBackColor = False
+        '
+        'btnSix
+        '
+        Me.btnSix.BackColor = System.Drawing.Color.Gainsboro
+        Me.btnSix.FlatAppearance.BorderSize = 0
+        Me.btnSix.Font = New System.Drawing.Font("Segoe UI", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSix.Location = New System.Drawing.Point(145, 71)
+        Me.btnSix.Name = "btnSix"
+        Me.btnSix.Padding = New System.Windows.Forms.Padding(1)
+        Me.btnSix.Size = New System.Drawing.Size(65, 65)
+        Me.btnSix.TabIndex = 14
+        Me.btnSix.Text = "6"
+        Me.btnSix.UseVisualStyleBackColor = False
         '
         'frmWaste
         '
@@ -494,7 +700,9 @@ Partial Class frmWaste
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1091, 645)
+        Me.Controls.Add(Me.pnlSelector)
         Me.Controls.Add(Me.lblPatientInfo)
+        Me.Controls.Add(Me.btnSubmitWithoutSignoff)
         Me.Controls.Add(Me.txtQuantity)
         Me.Controls.Add(Me.txtDrawer)
         Me.Controls.Add(Me.txtUnit)
@@ -516,6 +724,7 @@ Partial Class frmWaste
         Me.pnlBarcode.PerformLayout()
         Me.pnlHeader.ResumeLayout(False)
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlSelector.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -555,6 +764,20 @@ Partial Class frmWaste
     Friend WithEvents txtPassword As TextBox
     Friend WithEvents Label9 As Label
     Friend WithEvents lblFirstName As Label
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnSubmitWithoutSignoff As Button
     Friend WithEvents Label14 As Label
+    Friend WithEvents pnlSelector As Panel
+    Friend WithEvents btnDecimal As Button
+    Friend WithEvents btnFive As Button
+    Friend WithEvents btnFour As Button
+    Friend WithEvents btnZero As Button
+    Friend WithEvents btnClear As Button
+    Friend WithEvents btnThree As Button
+    Friend WithEvents btnEnter As Button
+    Friend WithEvents btnTwo As Button
+    Friend WithEvents btnOne As Button
+    Friend WithEvents btnNine As Button
+    Friend WithEvents btnEight As Button
+    Friend WithEvents btnSeven As Button
+    Friend WithEvents btnSix As Button
 End Class
