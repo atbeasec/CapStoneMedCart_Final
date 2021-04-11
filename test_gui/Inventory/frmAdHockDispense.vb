@@ -43,6 +43,7 @@
         AdHoc.GetAllMedicationsForListbox()
         'populate active patients into comboboxes
         AdHoc.PopulatePatientsAdhoc()
+
     End Sub
 
 
@@ -410,4 +411,38 @@
     Private Sub btnBack_Click(sender As Object, e As EventArgs)
 
     End Sub
+
+    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+
+        txtAmount.Text = Nothing
+
+    End Sub
+
+    Private Sub btnEnter_Click(sender As Object, e As EventArgs) Handles btnEnter.Click
+
+        ' make sure the user has input a value to the textbox
+        If String.IsNullOrEmpty(txtAmount.Text) Then
+
+            MessageBox.Show("Please enter the an amount.")
+
+        Else
+
+            btnDispense.PerformClick()
+
+        End If
+
+    End Sub
+
+    Private Sub btnDrawer7_Click(sender As Object, e As EventArgs) Handles btnOne.Click, btnTwo.Click, btnThree.Click, btnFour.Click, btnFive.Click, btnSix.Click, btnSeven.Click, btnEight.Click, btnNine.Click, btnZero.Click, btnDecimal.Click
+
+        If txtAmount.Text.Length >= 4 Then
+
+        Else
+
+            txtAmount.Text &= CStr(sender.Text)
+
+        End If
+
+    End Sub
+
 End Class
