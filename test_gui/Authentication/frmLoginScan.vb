@@ -96,9 +96,10 @@ Public Class frmLoginScan
 
     Private Sub frmLoginScan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetLogo()
-        lblWelcomeBack.Visible = False
         ShowSplashScreen()
         CreateDatabase.Main()
+        lblSoftwareName.Visible = False
+        pnlSoftwareLogo.Visible = False
 
     End Sub
 
@@ -127,7 +128,9 @@ Public Class frmLoginScan
         If startUpTimer.Interval = 3000 Then
             pnlSplash.Visible = False
             pnlLogin.Visible = True
-            lblWelcomeBack.Visible = False
+            lblSoftwareName.Visible = True
+            lblSoftwareName.BringToFront()
+            pnlSoftwareLogo.Visible = True
             txtBarcode.Focus()
         End If
 
