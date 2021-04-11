@@ -525,13 +525,17 @@
         Else
             'if not narcotic dont require sign off
             If IsNumeric(txtQuantity.Text) Then
+                'insert the waste record
                 InsertWasteNonNarcotic()
+                'unlock the side panels
                 frmMain.UnlockSideMenu()
-
+                'check to see if adhoc or patient informationw as dispensing to know where to return too
                 If intEnteredFromAdhoc = 0 Then
+                    ''set patient id and return to patient information
                     frmPatientInfo.setPatientID(intPatientID)
                     frmMain.OpenChildForm(frmPatientInfo)
                 ElseIf intEnteredFromAdhoc = 1 Then
+                    'reset adhoc entered flags and return to adhoc
                     frmDispense.setintEntered(0)
                     setEnteredFromAdhoc(0)
                     frmMain.OpenChildForm(frmAdHockDispense)
