@@ -494,8 +494,11 @@ Module PatientInformation
             End If
             'check if phone is changed
             If Not frmPatientInfo.txtPhone.Text.Equals(frmPatientInfo.txtPhone.Tag) Then
-                If Not .txtPhone.Text.Length <> 10 Then
+                '
+                If Not .txtPhone.MaskCompleted Then
+                    .txtPhone.Text = .txtPhone.Tag
                     strbErrorMessage.AppendLine("Phone number must be a vaild phone number")
+                    blnIssue = True
                 Else
                     'build sql update command
                     strbSqlCommand.Append("UPDATE Patient SET Phone_Number = '" & frmPatientInfo.txtPhone.Text & "' Where Patient_ID = '" & intPatientID & "'")
