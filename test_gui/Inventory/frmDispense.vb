@@ -664,6 +664,12 @@ Public Class frmDispense
         End If
 
         CreateDatabase.ExecuteInsertQuery("UPDATE DrawerMedication set Quantity = '" & intUpdateNumber & "' where Drawers_TUID = '" & intDrawerNumber & "' and Medication_TUID = '" & intMedID & "'")
+
+        If intAmountDispense > intAmountInDrawer Then
+            intAmountDispense = intAmountInDrawer
+        End If
+
+        frmWaste.SetintQuantity(intAmountDispense)
     End Sub
 
     Private Sub btnDrawer7_Click(sender As Object, e As EventArgs) Handles btnOne.Click, btnTwo.Click, btnThree.Click, btnFour.Click, btnFive.Click, btnSix.Click, btnSeven.Click, btnEight.Click, btnNine.Click, btnZero.Click, btnDecimal.Click

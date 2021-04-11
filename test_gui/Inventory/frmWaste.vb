@@ -20,6 +20,18 @@
     'set drawer bin for med
     Private intAdhocBin As Integer
 
+    'information used to limit max wasted
+    'MAxWaste is quantity in drawer multiplied by AMount per container
+    Private dblMaxWaste As Double
+    Private dblQuantity As Double
+    Private dblAmountContainer As Double
+
+
+
+    Public Sub SetintQuantity(ByRef Amount As Double)
+        dblQuantity = Amount
+    End Sub
+
     '/********************************************************************/
     '/*                   FUNCTION NAME: SetPatientID	         */         
     '/********************************************************************/
@@ -329,6 +341,10 @@
 
         'get drawer information for medication in drawer
         txtDrawer.Text = "Drawer number:  " & dsDrawer.Tables(0).Rows(0)(12) & " Bin: " & dsDrawer.Tables(0).Rows(0)(6)
+
+
+        dblAmountContainer = dsDrawer.Tables(0).Rows(0)(4)
+        dblMaxWaste = (CDbl(dblQuantity) * CDbl(dblAmountContainer))
         'get narcotic flag from database for medication
         Dim intNarcoticFlag As Integer = CreateDatabase.ExecuteScalarQuery("Select Controlled_Flag from Medication where Medication_ID = '" & intMedID & "' and Active_Flag = '1'")
         intNarcoticFlagGlobal = intNarcoticFlag
@@ -1002,24 +1018,27 @@
             MessageBox.Show("Please enter the amount wasted.")
 
         Else
+            Dim dblWastingAmount As Double = txtQuantity.Text
+            If dblWastingAmount > dblMaxWaste Then
+                MessageBox.Show("Please enter a wasted amount less than " & dblMaxWaste.ToString & " " & txtUnit.Text)
+            Else
+                'give the barcode field focus, or give the password field focus
+                If pnlBarcode.Visible = True Then
 
-            'give the barcode field focus, or give the password field focus
-            If pnlBarcode.Visible = True Then
+                    txtBarcode.Select()
 
-                txtBarcode.Select()
+                ElseIf pnlCredentials.Visible = True Then
 
-            ElseIf pnlCredentials.Visible = True Then
+                    txtUsername.Select()
 
-                txtUsername.Select()
+                ElseIf pnlSignOff.Visible = False Then
 
-            ElseIf pnlSignOff.Visible = False Then
+                    btnSubmitWithoutSignoff.PerformClick()
 
-                btnSubmitWithoutSignoff.PerformClick()
+                End If
 
             End If
-
         End If
-
 
 
     End Sub
