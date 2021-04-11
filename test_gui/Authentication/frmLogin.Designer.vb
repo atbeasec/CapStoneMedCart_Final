@@ -27,15 +27,16 @@ Partial Class frmLogin
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.btnEye = New System.Windows.Forms.Button()
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.lblFirstName = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.txtUserName = New System.Windows.Forms.TextBox()
         Me.lblBadge = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.panelTopBar = New System.Windows.Forms.Panel()
         Me.btnClose = New System.Windows.Forms.Button()
+        Me.lblWelcomeBack = New System.Windows.Forms.Label()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.btnEye = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel5.SuspendLayout()
@@ -65,7 +66,7 @@ Partial Class frmLogin
         Me.Panel1.Controls.Add(Me.Panel5)
         Me.Panel1.Controls.Add(Me.lblBadge)
         Me.Panel1.Controls.Add(Me.Button1)
-        Me.Panel1.Location = New System.Drawing.Point(166, 116)
+        Me.Panel1.Location = New System.Drawing.Point(166, 137)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(332, 232)
         Me.Panel1.TabIndex = 7
@@ -91,20 +92,6 @@ Partial Class frmLogin
         Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel2.Size = New System.Drawing.Size(238, 24)
         Me.Panel2.TabIndex = 2
-        '
-        'btnEye
-        '
-        Me.btnEye.BackColor = System.Drawing.Color.White
-        Me.btnEye.Dock = System.Windows.Forms.DockStyle.Right
-        Me.btnEye.FlatAppearance.BorderSize = 0
-        Me.btnEye.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnEye.ForeColor = System.Drawing.Color.Transparent
-        Me.btnEye.Image = CType(resources.GetObject("btnEye.Image"), System.Drawing.Image)
-        Me.btnEye.Location = New System.Drawing.Point(207, 1)
-        Me.btnEye.Name = "btnEye"
-        Me.btnEye.Size = New System.Drawing.Size(30, 22)
-        Me.btnEye.TabIndex = 19
-        Me.btnEye.UseVisualStyleBackColor = False
         '
         'txtPassword
         '
@@ -164,17 +151,6 @@ Partial Class frmLogin
         Me.lblBadge.TabIndex = 17
         Me.lblBadge.Text = "Scan ID Card"
         '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.White
-        Me.Label1.Location = New System.Drawing.Point(261, 64)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(158, 30)
-        Me.Label1.TabIndex = 8
-        Me.Label1.Text = "Welcome back!"
-        '
         'panelTopBar
         '
         Me.panelTopBar.Controls.Add(Me.btnClose)
@@ -199,14 +175,49 @@ Partial Class frmLogin
         Me.btnClose.Text = "X"
         Me.btnClose.UseVisualStyleBackColor = False
         '
+        'lblWelcomeBack
+        '
+        Me.lblWelcomeBack.AutoSize = True
+        Me.lblWelcomeBack.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblWelcomeBack.ForeColor = System.Drawing.Color.White
+        Me.lblWelcomeBack.Location = New System.Drawing.Point(288, 104)
+        Me.lblWelcomeBack.Name = "lblWelcomeBack"
+        Me.lblWelcomeBack.Size = New System.Drawing.Size(87, 21)
+        Me.lblWelcomeBack.TabIndex = 15
+        Me.lblWelcomeBack.Text = "MedServe"
+        '
+        'Panel3
+        '
+        Me.Panel3.BackgroundImage = Global.test_gui.My.Resources.Resources.MicrosoftTeams_image__4_
+        Me.Panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Panel3.Location = New System.Drawing.Point(278, 18)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(104, 89)
+        Me.Panel3.TabIndex = 16
+        '
+        'btnEye
+        '
+        Me.btnEye.BackColor = System.Drawing.Color.White
+        Me.btnEye.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnEye.FlatAppearance.BorderSize = 0
+        Me.btnEye.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEye.ForeColor = System.Drawing.Color.Transparent
+        Me.btnEye.Image = CType(resources.GetObject("btnEye.Image"), System.Drawing.Image)
+        Me.btnEye.Location = New System.Drawing.Point(207, 1)
+        Me.btnEye.Name = "btnEye"
+        Me.btnEye.Size = New System.Drawing.Size(30, 22)
+        Me.btnEye.TabIndex = 19
+        Me.btnEye.UseVisualStyleBackColor = False
+        '
         'frmLogin
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(664, 496)
+        Me.Controls.Add(Me.Panel3)
+        Me.Controls.Add(Me.lblWelcomeBack)
         Me.Controls.Add(Me.panelTopBar)
-        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -229,7 +240,6 @@ Partial Class frmLogin
     End Sub
     Friend WithEvents Button1 As Button
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents Label1 As Label
     Friend WithEvents lblBadge As Label
     Friend WithEvents btnEye As Button
     Friend WithEvents Panel5 As Panel
@@ -240,4 +250,6 @@ Partial Class frmLogin
     Friend WithEvents lblFirstName As Label
     Friend WithEvents panelTopBar As Panel
     Friend WithEvents btnClose As Button
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents lblWelcomeBack As Label
 End Class
