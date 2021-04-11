@@ -108,12 +108,12 @@
             If intNarcoticFlag = 1 Then
                 txtBarcode.Visible = True
                 pnlSignOff.Visible = True
-                Button1.Visible = False
+                btnSubmitNonNarcotic.Visible = False
                 txtBarcode.Text = ""
             ElseIf intNarcoticFlag = 0 Then
                 txtBarcode.Visible = False
                 pnlSignOff.Visible = False
-                Button1.Visible = True
+                btnSubmitNonNarcotic.Visible = True
                 txtBarcode.Text = ""
             End If
         End If
@@ -370,7 +370,7 @@
         End If
     End Function
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnSubmitNonNarcotic.Click
         If txtQuantity.Text = Nothing Or txtQuantity.Text.Trim.Length = 0 Or cmbMedications.SelectedIndex = -1 Or cmbPatientName.SelectedIndex = -1 Then
             MessageBox.Show("Please select a medication and patient, then fill out the amount wasted.")
         Else
@@ -397,5 +397,49 @@
                 ClearWaste()
             End If
         End If
+    End Sub
+
+    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+        txtQuantity.Text = Nothing
+    End Sub
+
+    Private Sub btnEnter_Click(sender As Object, e As EventArgs) Handles btnEnter.Click
+
+
+        ' make sure the user has input a value to the textbox
+        If String.IsNullOrEmpty(txtQuantity.Text) Then
+            MessageBox.Show("Please enter the amount wasted.")
+
+        Else
+
+            'give the barcode field focus, or give the password field focus
+            If pnlBarcode.Visible = True Then
+
+                txtBarcode.Select()
+
+            ElseIf pnlCredentials.Visible = True Then
+
+                txtUsername.Select()
+
+            ElseIf pnlSignOff.Visible = False Then
+
+                btnSubmitNonNarcotic.PerformClick()
+
+            End If
+
+        End If
+
+    End Sub
+
+    Private Sub btnDrawer7_Click(sender As Object, e As EventArgs) Handles btnOne.Click, btnTwo.Click, btnThree.Click, btnFour.Click, btnFive.Click, btnSix.Click, btnSeven.Click, btnEight.Click, btnNine.Click, btnZero.Click, btnDecimal.Click
+
+        If txtQuantity.Text.Length >= 4 Then
+
+        Else
+
+            txtQuantity.Text &= CStr(sender.Text)
+
+        End If
+
     End Sub
 End Class
