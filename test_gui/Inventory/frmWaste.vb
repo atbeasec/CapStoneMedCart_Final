@@ -1020,7 +1020,7 @@
         Else
             Dim dblWastingAmount As Double = txtQuantity.Text
             If dblWastingAmount > dblMaxWaste Then
-                MessageBox.Show("Please enter a wasted amount less than " & dblMaxWaste.ToString & " " & txtUnit.Text)
+                MessageBox.Show("Please enter a wasted amount that is " & dblMaxWaste.ToString & " " & txtUnit.Text & " or less")
             Else
                 'give the barcode field focus, or give the password field focus
                 If pnlBarcode.Visible = True Then
