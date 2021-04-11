@@ -345,6 +345,8 @@
         End If
         txtOther.Visible = False
         Label14.Visible = False
+
+        txtQuantity.Select()
     End Sub
 
     '/********************************************************************/
@@ -971,4 +973,45 @@
             Return "False"
         End If
     End Function
+
+    Private Sub btnDrawer7_Click(sender As Object, e As EventArgs) Handles btnOne.Click, btnTwo.Click, btnThree.Click, btnFour.Click, btnFive.Click, btnSix.Click, btnSeven.Click, btnEight.Click, btnNine.Click, btnZero.Click, btnDecimal.Click
+
+        If txtQuantity.Text.Length >= 4 Then
+
+        Else
+
+            txtQuantity.Text &= CStr(sender.Text)
+
+        End If
+
+    End Sub
+
+    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+        txtQuantity.Text = Nothing
+
+    End Sub
+
+    Private Sub btnEnter_Click(sender As Object, e As EventArgs) Handles btnEnter.Click
+
+        ' make sure the user has input a value to the textbox
+        If String.IsNullOrEmpty(txtQuantity.Text) Then
+            MessageBox.Show("Please enter the amount wasted.")
+
+        Else
+
+            'give the barcode field focus, or give the password field focus
+            If pnlBarcode.Visible = True Then
+
+                txtBarcode.Select()
+
+            Else
+                txtUsername.Select()
+
+            End If
+
+        End If
+
+
+
+    End Sub
 End Class
