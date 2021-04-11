@@ -82,7 +82,7 @@
                 frmMain.DetermineFormToOpen(2)
                 'set the header for main to show who is logged in
                 frmMain.SetUserName(strUsername)
-                frmMain.Text = "Medical Dispense - " & LogIn.LoggedInFullName
+                frmMain.Text = "MedServe - " & LogIn.LoggedInFullName
 
                 frmMain.Show()
                 'make btnPatientRecords have focus
@@ -121,5 +121,9 @@
 
     Private Sub txtLoginKeypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtUserName.KeyPress, txtPassword.KeyPress
         KeyPressCheck(e, "abcdefghijklmnopqrstuvwxyz-1234567890!@#$%^&*.,<>=+")
+    End Sub
+
+    Private Sub frmLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
 End Class
