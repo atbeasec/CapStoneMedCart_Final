@@ -251,14 +251,19 @@ Public Class frmConfigureRooms
     '/*******************************************************************/
     '/* MODIFICATION HISTORY:											*/
     '/*																	*/
-    '/* WHO   WHEN     WHAT											    */
-    '/*  ---   ----     ------------------------------------------------*/
-    '/*  BRH        02/17/21   Initial creation of the code-------------*/
+    '/* WHO   WHEN      WHAT											*/
+    '/*  ---  ----      ------------------------------------------------*/
+    '/* BRH   02/17/21  Initial creation of the code--------------------*/
+    '/* BRH   04/11/21  Fixed the drop down to only show the rooms that */
+    '/*                 have beds not filled by patients yet.           */
     '/*******************************************************************/
     Public Sub ShowRoomsBeds()
         lstRooms.Items.Clear()
         lstBeds.Items.Clear()
-        ShowRooms("SELECT DISTINCT Room_ID FROM Rooms WHERE Active_Flag = 1 ORDER BY Room_ID ASC")
+        'Show rooms unfilled
+        ShowRooms("SELECT DISTINCT Room_ID FROM Rooms WHERE Room_ID || Rooms.Bed_Name  NOT IN 
+                   (SELECT Room_TUID || PatientRoom.Bed_Name FROM PatientRoom Inner Join Rooms On Room_TUID = Room_ID 
+                    WHERE PatientRoom.Active_Flag = 1) AND Rooms.Active_Flag = 1 ORDER BY Room_ID ASC")
     End Sub
 
     '/*******************************************************************/
@@ -292,14 +297,19 @@ Public Class frmConfigureRooms
     '/*******************************************************************/
     '/* MODIFICATION HISTORY:											*/
     '/*																	*/
-    '/* WHO   WHEN     WHAT											    */
+    '/* WHO   WHEN      WHAT											*/
     '/*  ---   ----     ------------------------------------------------*/
-    '/*  BRH        02/17/21   Initial creation of the code-------------*/
+    '/* BRH   02/17/21  Initial creation of the code--------------------*/
+    '/* BRH   04/111/21  Fixed the drop down to only show the beds that */
+    '/*                 have beds not filled by patients yet.           */
     '/*******************************************************************/
 
     Private Sub lstRooms_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles lstRooms.SelectedIndexChanged
         lstBeds.Items.Clear()
-        ShowBeds("SELECT DISTINCT Bed_Name FROM Rooms WHERE Room_ID = '" & lstRooms.SelectedItem & "' AND Active_Flag = 1 ORDER BY Bed_Name ASC")
+        'Show beds unfilled
+        ShowBeds("SELECT DISTINCT Bed_Name FROM Rooms WHERE Room_ID || Rooms.Bed_Name  NOT IN 
+                   (SELECT Room_TUID || PatientRoom.Bed_Name FROM PatientRoom Inner Join Rooms On Room_TUID = Room_ID 
+                    WHERE PatientRoom.Active_Flag = 1) AND Room_ID = '" & lstRooms.SelectedItem & "' AND Rooms.Active_Flag = 1 ORDER BY Bed_Name ASC")
     End Sub
 
     '/*******************************************************************/
