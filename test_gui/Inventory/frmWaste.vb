@@ -337,7 +337,7 @@
             lblSignoff.Visible = True
             txtBarcode.Visible = True
             pnlCredentials.Visible = False
-            Button1.Visible = False
+            btnSubmitWithoutSignoff.Visible = False
         Else
             pnlSignOff.Visible = False
             lblSignoff.Visible = False
@@ -512,7 +512,7 @@
     '/*  ---            ----             ----				             */
     '/*  AB		        2/10/21		    initial creation                 */
     '/********************************************************************/ 
-    Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWasteWithBarcode.Click, Button1.Click
+    Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWasteWithBarcode.Click, btnSubmitWithoutSignoff.Click
         'heck to see if the drug being wasted is a narcotic or not
         'if it is a narcotic require sign off
         If intNarcoticFlagGlobal = 1 Then
@@ -1004,8 +1004,13 @@
 
                 txtBarcode.Select()
 
-            Else
+            ElseIf pnlCredentials.Visible = True Then
+
                 txtUsername.Select()
+
+            ElseIf pnlSignOff.Visible = False Then
+
+                btnSubmitWithoutSignoff.PerformClick()
 
             End If
 

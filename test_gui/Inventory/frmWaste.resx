@@ -118,16 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Button1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAOdJREFUSEvt
-        lTEOgkAQRbExtlpLYWViazyO9/EOVp4AjccwJl5A6IyncPifncYMEnaBjQUvecXO8HeyKm4yEoyIpPAC
-        nx08w1S3tKDJAX2Q6ZYWNHP3jOzhNkDmSK5bWtAs3DOy05IXzLm4FFqysOmesUNQm8GVLmthjmHgPwTr
-        KbzCN9xo2cAcJEFDFvBRdURecK2tL1Dv/HHN4a3q/jgRal5DTvBQ4xF+IDEnwtprSFvucKLx/zxJlO8k
-        /q8L6+HfE4LasG98W5hz8eYhUf6FeeH0QeN9wpsxg3U3XluZX+qWI74kSQmFpKeJx84YGQAAAABJRU5E
-        rkJggg==
-</value>
-  </data>
   <data name="btnWasteWithCredentials.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAOdJREFUSEvt
@@ -139,6 +129,16 @@
 </value>
   </data>
   <data name="btnWasteWithBarcode.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAOdJREFUSEvt
+        lTEOgkAQRbExtlpLYWViazyO9/EOVp4AjccwJl5A6IyncPifncYMEnaBjQUvecXO8HeyKm4yEoyIpPAC
+        nx08w1S3tKDJAX2Q6ZYWNHP3jOzhNkDmSK5bWtAs3DOy05IXzLm4FFqysOmesUNQm8GVLmthjmHgPwTr
+        KbzCN9xo2cAcJEFDFvBRdURecK2tL1Dv/HHN4a3q/jgRal5DTvBQ4xF+IDEnwtprSFvucKLx/zxJlO8k
+        /q8L6+HfE4LasG98W5hz8eYhUf6FeeH0QeN9wpsxg3U3XluZX+qWI74kSQmFpKeJx84YGQAAAABJRU5E
+        rkJggg==
+</value>
+  </data>
+  <data name="btnSubmitWithoutSignoff.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAOdJREFUSEvt
         lTEOgkAQRbExtlpLYWViazyO9/EOVp4AjccwJl5A6IyncPifncYMEnaBjQUvecXO8HeyKm4yEoyIpPAC

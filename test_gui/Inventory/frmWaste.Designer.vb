@@ -43,7 +43,7 @@ Partial Class frmWaste
         Me.txtBarcode = New System.Windows.Forms.TextBox()
         Me.lblSignoff = New System.Windows.Forms.Label()
         Me.btnWasteWithBarcode = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnSubmitWithoutSignoff = New System.Windows.Forms.Button()
         Me.txtOther = New System.Windows.Forms.TextBox()
         Me.rbtnOther = New System.Windows.Forms.RadioButton()
         Me.radPatientUnavilable = New System.Windows.Forms.RadioButton()
@@ -107,7 +107,6 @@ Partial Class frmWaste
         '
         Me.pnlRadioButtons.Controls.Add(Me.Label14)
         Me.pnlRadioButtons.Controls.Add(Me.pnlSignOff)
-        Me.pnlRadioButtons.Controls.Add(Me.Button1)
         Me.pnlRadioButtons.Controls.Add(Me.txtOther)
         Me.pnlRadioButtons.Controls.Add(Me.rbtnOther)
         Me.pnlRadioButtons.Controls.Add(Me.radPatientUnavilable)
@@ -310,22 +309,22 @@ Partial Class frmWaste
         Me.btnWasteWithBarcode.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnWasteWithBarcode.UseVisualStyleBackColor = False
         '
-        'Button1
+        'btnSubmitWithoutSignoff
         '
-        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.Button1.FlatAppearance.BorderSize = 0
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.ForeColor = System.Drawing.Color.White
-        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button1.Location = New System.Drawing.Point(153, 158)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(150, 37)
-        Me.Button1.TabIndex = 220
-        Me.Button1.Text = "   SUBMIT"
-        Me.Button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button1.UseVisualStyleBackColor = False
+        Me.btnSubmitWithoutSignoff.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnSubmitWithoutSignoff.FlatAppearance.BorderSize = 0
+        Me.btnSubmitWithoutSignoff.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSubmitWithoutSignoff.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSubmitWithoutSignoff.ForeColor = System.Drawing.Color.White
+        Me.btnSubmitWithoutSignoff.Image = CType(resources.GetObject("btnSubmitWithoutSignoff.Image"), System.Drawing.Image)
+        Me.btnSubmitWithoutSignoff.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnSubmitWithoutSignoff.Location = New System.Drawing.Point(797, 244)
+        Me.btnSubmitWithoutSignoff.Name = "btnSubmitWithoutSignoff"
+        Me.btnSubmitWithoutSignoff.Size = New System.Drawing.Size(150, 37)
+        Me.btnSubmitWithoutSignoff.TabIndex = 220
+        Me.btnSubmitWithoutSignoff.Text = "   SUBMIT"
+        Me.btnSubmitWithoutSignoff.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnSubmitWithoutSignoff.UseVisualStyleBackColor = False
         '
         'txtOther
         '
@@ -703,6 +702,7 @@ Partial Class frmWaste
         Me.ClientSize = New System.Drawing.Size(1091, 645)
         Me.Controls.Add(Me.pnlSelector)
         Me.Controls.Add(Me.lblPatientInfo)
+        Me.Controls.Add(Me.btnSubmitWithoutSignoff)
         Me.Controls.Add(Me.txtQuantity)
         Me.Controls.Add(Me.txtDrawer)
         Me.Controls.Add(Me.txtUnit)
@@ -764,7 +764,7 @@ Partial Class frmWaste
     Friend WithEvents txtPassword As TextBox
     Friend WithEvents Label9 As Label
     Friend WithEvents lblFirstName As Label
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnSubmitWithoutSignoff As Button
     Friend WithEvents Label14 As Label
     Friend WithEvents pnlSelector As Panel
     Friend WithEvents btnDecimal As Button
