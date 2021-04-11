@@ -289,22 +289,22 @@ Partial Class frmAdHockDispense
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label5.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.Label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.Label5.Location = New System.Drawing.Point(892, 124)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(44, 21)
+        Me.Label5.Size = New System.Drawing.Size(42, 21)
         Me.Label5.TabIndex = 229
         Me.Label5.Text = "Unit:"
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label7.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.Label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.Label7.Location = New System.Drawing.Point(706, 124)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(139, 21)
+        Me.Label7.Size = New System.Drawing.Size(131, 21)
         Me.Label7.TabIndex = 228
         Me.Label7.Text = "Ordered Amount:"
         '
