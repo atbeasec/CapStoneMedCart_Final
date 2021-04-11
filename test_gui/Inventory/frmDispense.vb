@@ -4,7 +4,7 @@ Public Class frmDispense
     Public blnSignedOff As Boolean = True
     Public blnOverride As Boolean = False
     Private intPatientID As Integer
-    Private intPatientMRN As Integer
+    Private intPatientMRN As Double
     Private intMedicationID As Integer
     Private intPatientMedID As Integer
 
