@@ -435,7 +435,7 @@
 
     Private Sub btnDrawer7_Click(sender As Object, e As EventArgs) Handles btnOne.Click, btnTwo.Click, btnThree.Click, btnFour.Click, btnFive.Click, btnSix.Click, btnSeven.Click, btnEight.Click, btnNine.Click, btnZero.Click, btnDecimal.Click
 
-        If txtAmount.Text.Length >= 5 Then
+        If txtAmount.Text.Length >= 4 Then
 
         Else
 
