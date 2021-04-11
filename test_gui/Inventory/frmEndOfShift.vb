@@ -92,7 +92,7 @@
 
         End If
         'Remove these once the SQL statements are corrected and updated.
-
+        AddHandlerToLabelClick(pnlHeader, AddressOf SortBySelectedLabel)
 
     End Sub
 
@@ -605,6 +605,48 @@
         Else
             MessageBox.Show("A medication is not flagged")
         End If
+
+    End Sub
+
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: SortBySelectedLabel            */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/14/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to be called as the click event for any label the  */
+    '/*  user clicks on. Underline the label, and update the panel contents/
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      frmPatientInfo_load                                          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 field- an integer equal to the tag value of the selected label   */ 
+    '/*	 parent- a panel object that the label lives on                   */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 BoldLabelToSortBy(sender, parent)     							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	field- integer equal to the tag value of the control*/
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/14/2021    Initial creation                    */
+    '/*********************************************************************/
+    Public Sub SortBySelectedLabel(sender As Object, e As EventArgs)
+
+        Dim parent As Panel = sender.parent
+        Dim field As Integer = CInt(sender.tag)
+
+        BoldLabelToSortBy(sender, parent)
 
     End Sub
 
