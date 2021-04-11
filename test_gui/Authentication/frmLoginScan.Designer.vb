@@ -24,7 +24,7 @@ Partial Class frmLoginScan
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLoginScan))
-        Me.lblWelcomeBack = New System.Windows.Forms.Label()
+        Me.lblSoftwareName = New System.Windows.Forms.Label()
         Me.pnlLogin = New System.Windows.Forms.Panel()
         Me.lblBadge = New System.Windows.Forms.Label()
         Me.btnLogin = New System.Windows.Forms.Button()
@@ -36,9 +36,10 @@ Partial Class frmLoginScan
         Me.btnClose = New System.Windows.Forms.Button()
         Me.startUpTimer = New System.Windows.Forms.Timer(Me.components)
         Me.pnlSplash = New System.Windows.Forms.Panel()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.lblVersionNumber = New System.Windows.Forms.Label()
         Me.lblApplicationName = New System.Windows.Forms.Label()
+        Me.pnlSoftwareLogo = New System.Windows.Forms.Panel()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.pnlLogo = New System.Windows.Forms.Panel()
         Me.pnlLogin.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -47,16 +48,16 @@ Partial Class frmLoginScan
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'lblWelcomeBack
+        'lblSoftwareName
         '
-        Me.lblWelcomeBack.AutoSize = True
-        Me.lblWelcomeBack.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblWelcomeBack.ForeColor = System.Drawing.Color.White
-        Me.lblWelcomeBack.Location = New System.Drawing.Point(261, 64)
-        Me.lblWelcomeBack.Name = "lblWelcomeBack"
-        Me.lblWelcomeBack.Size = New System.Drawing.Size(154, 30)
-        Me.lblWelcomeBack.TabIndex = 11
-        Me.lblWelcomeBack.Text = "Welcome back!"
+        Me.lblSoftwareName.AutoSize = True
+        Me.lblSoftwareName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSoftwareName.ForeColor = System.Drawing.Color.White
+        Me.lblSoftwareName.Location = New System.Drawing.Point(288, 104)
+        Me.lblSoftwareName.Name = "lblSoftwareName"
+        Me.lblSoftwareName.Size = New System.Drawing.Size(87, 21)
+        Me.lblSoftwareName.TabIndex = 11
+        Me.lblSoftwareName.Text = "MedServe"
         '
         'pnlLogin
         '
@@ -66,7 +67,7 @@ Partial Class frmLoginScan
         Me.pnlLogin.Controls.Add(Me.lblForgotID)
         Me.pnlLogin.Controls.Add(Me.Label2)
         Me.pnlLogin.Controls.Add(Me.Panel3)
-        Me.pnlLogin.Location = New System.Drawing.Point(166, 116)
+        Me.pnlLogin.Location = New System.Drawing.Point(166, 137)
         Me.pnlLogin.Name = "pnlLogin"
         Me.pnlLogin.Size = New System.Drawing.Size(332, 232)
         Me.pnlLogin.TabIndex = 10
@@ -182,16 +183,6 @@ Partial Class frmLoginScan
         Me.pnlSplash.Size = New System.Drawing.Size(332, 232)
         Me.pnlSplash.TabIndex = 13
         '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(149, 176)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(35, 35)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 17
-        Me.PictureBox1.TabStop = False
-        '
         'lblVersionNumber
         '
         Me.lblVersionNumber.AutoSize = True
@@ -214,6 +205,25 @@ Partial Class frmLoginScan
         Me.lblApplicationName.TabIndex = 15
         Me.lblApplicationName.Text = "MedServe"
         '
+        'pnlSoftwareLogo
+        '
+        Me.pnlSoftwareLogo.BackgroundImage = Global.test_gui.My.Resources.Resources.MicrosoftTeams_image__4_
+        Me.pnlSoftwareLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pnlSoftwareLogo.Location = New System.Drawing.Point(278, 18)
+        Me.pnlSoftwareLogo.Name = "pnlSoftwareLogo"
+        Me.pnlSoftwareLogo.Size = New System.Drawing.Size(104, 89)
+        Me.pnlSoftwareLogo.TabIndex = 14
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(149, 176)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(35, 35)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 17
+        Me.PictureBox1.TabStop = False
+        '
         'pnlLogo
         '
         Me.pnlLogo.BackgroundImage = CType(resources.GetObject("pnlLogo.BackgroundImage"), System.Drawing.Image)
@@ -229,9 +239,10 @@ Partial Class frmLoginScan
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(664, 496)
+        Me.Controls.Add(Me.pnlSoftwareLogo)
         Me.Controls.Add(Me.pnlSplash)
         Me.Controls.Add(Me.panelTopBar)
-        Me.Controls.Add(Me.lblWelcomeBack)
+        Me.Controls.Add(Me.lblSoftwareName)
         Me.Controls.Add(Me.pnlLogin)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -252,7 +263,7 @@ Partial Class frmLoginScan
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents lblWelcomeBack As Label
+    Friend WithEvents lblSoftwareName As Label
     Friend WithEvents pnlLogin As Panel
     Friend WithEvents lblForgotID As Label
     Friend WithEvents Label2 As Label
@@ -268,4 +279,5 @@ Partial Class frmLoginScan
     Friend WithEvents lblVersionNumber As Label
     Friend WithEvents lblApplicationName As Label
     Friend WithEvents pnlLogo As Panel
+    Friend WithEvents pnlSoftwareLogo As Panel
 End Class

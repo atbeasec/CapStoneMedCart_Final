@@ -597,6 +597,8 @@
     <None Include="Resources\Info.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\MicrosoftTeams-image %284%29.png" />
+    <None Include="Resources\LoginWhiteWriting.png" />
     <None Include="Resources\user_px.png" />
     <None Include="Resources\circleLoading.gif" />
     <None Include="Resources\image.png" />
