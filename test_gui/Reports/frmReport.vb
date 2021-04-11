@@ -88,6 +88,7 @@ Public Class frmReport
     '/*  BRH        03/25/21    Added Active and Resolved Discrepancy code*/
     '/*  BRH        03/28/21    Added Allergy and Drug Interaction overrides
     '/*                         and all and narcotic end of shift counts  */
+    '/*  BRH        04/11/21    Updated End of Shift count to Restock Inventory.
     '/*********************************************************************/
     Private Sub PopulateReportsList()
 
@@ -101,8 +102,8 @@ Public Class frmReport
         Const STRWASTES As String = "Wasted Medication"
         Const STRRESOLVEDDISCREPANCIES As String = "Resolved Discrepancies"
         Const STRDRUGINTERACTIONOVERRIDES As String = "Drug Interaction Overrides"
-        Const STRNARCENDOFSHIFTCOUNT As String = "Narcotics End of Shift Count"
-        Const STRENDOFSHIFTCOUNT As String = "End of Shift Count"
+        Const STRNARCRESTOCKINVENTORY As String = "Narcotic Restock Inventory"
+        Const STRRESTOCKINVENTORY As String = "Restock Inventory"
 
         cmbReports.Items.Add(STRACTIVEDISCREPANCIES)
         cmbReports.Items.Add(STRDISPENSINGHISTORY)
@@ -114,8 +115,8 @@ Public Class frmReport
         cmbReports.Items.Add(STRWASTES)
         cmbReports.Items.Add(STRRESOLVEDDISCREPANCIES)
         cmbReports.Items.Add(STRDRUGINTERACTIONOVERRIDES)
-        cmbReports.Items.Add(STRNARCENDOFSHIFTCOUNT)
-        cmbReports.Items.Add(STRENDOFSHIFTCOUNT)
+        cmbReports.Items.Add(STRNARCRESTOCKINVENTORY)
+        cmbReports.Items.Add(STRRESTOCKINVENTORY)
 
     End Sub
     '/*******************************************************************/
@@ -163,6 +164,7 @@ Public Class frmReport
     '/*                         Dispensed Narcotics on the form.        */
     '/*  BRH        04/01/21    Hide data grid view if there isn't a report
     '/*                         and auto resize the columns             */
+    '/*  BRH        04/11/21    Updated End of Shift count to Restock Inventory
     '/*******************************************************************/
     Private Sub btnGenerateReport_Click(sender As Object, e As EventArgs) Handles btnGenerateReport.Click
         Dim lstOfDataValues As List(Of String) = New List(Of String)

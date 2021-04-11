@@ -40,8 +40,10 @@
     '/*  WHO            WHEN        WHAT								*/
     '/*  Eric LaVoie    1/25/2021   Initial creation                    */
     '/*  BRH            03/21/21    Add narcotics wasted                */
-    '/*  BRH        03/28/21    Added Allergy and Drug Interaction overrides
-    '/*                         and all and narcotic end of shift counts  */
+    '/*  BRH            03/28/21    Added Allergy and Drug Interaction overrides
+    '/*                             and all and narcotic end of shift counts
+    '/*  BRH            04/11/21    Updated End of Shift count to       */
+    '/*                             Restock Inventory.                  */
     '/*******************************************************************/
     Public intColumnCount As Integer = 0
     Public intRowCount As Integer = 0
@@ -54,12 +56,12 @@
         AllergyOverride = 2
         DispensedMeds = 3
         DrugInteractionOverride = 4
-        EndOfShiftCount = 5
-        NarcAdhoc = 6
-        DispensedNarc = 7
-        NarcEndOfShiftCount = 8
-        WastedNarc = 9
-        ResolvedDiscrepancies = 10
+        NarcAdhoc = 5
+        DispensedNarc = 6
+        NarcRestockInven = 7
+        WastedNarc = 8
+        ResolvedDiscrepancies = 9
+        RestockInven = 10
         Wastes = 11
     End Enum
 
@@ -116,6 +118,7 @@
     '/*  BRH        03/25/21   Added Active and Resolved Discrepancy code */
     '/*  BRH        03/28/21    Added Allergy and Drug Interaction overrides
     '/*                         and all and narcotic end of shift counts  */
+    '/*  BRH        04/11/21    Updated End of Shift count to Restock Inventory.
     '/*********************************************************************/
     Function getSelectedReport(intSelectedIndex As Integer) As List(Of String)
         'Dim arrData As ArrayList = New ArrayList
@@ -170,15 +173,15 @@
                              INNER JOIN User ON User_TUID = User_ID
                              INNER JOIN Drug_Interactions ON Drug_Interactions_TUID = Drug_Interactions_ID;"
 
-            Case Reports.EndOfShiftCount
-                strReport = "End of Shift Count"
+            Case Reports.RestockInven
+                strReport = "Restock Inventory"
                 strSQLCmd = "SELECT Drug_Name, Drawer_Number, Divider_Bin, Quantity FROM DrawerMedication " &
                                "INNER JOIN Medication on Medication.Medication_ID = DrawerMedication.Medication_TUID " &
                                "INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID 
                                 WHERE DrawerMedication.Active_Flag = '1'"
 
-            Case Reports.NarcEndOfShiftCount
-                strReport = "Narcotics End of Shift Count"
+            Case Reports.NarcRestockInven
+                strReport = "Narcotic Restock Inventory"
                 strSQLCmd = "SELECT Drug_Name, Drawer_Number, Divider_Bin, Quantity FROM DrawerMedication " &
                                "INNER JOIN Medication on Medication.Medication_ID = DrawerMedication.Medication_TUID " &
                                "INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID 
@@ -343,6 +346,7 @@
     '/* BRH  03/25/21   Added Active and Resolved Discrepancy code      */
     '/* BRH  03/28/21   Added Allergy and Drug Interaction overrides    */
     '/*                 and all and narcotic end of shift counts        */
+    '/* BRH  04/11/21   Updated End of Shift count to Restock Inventory.*/
     '/*******************************************************************/
     Sub PrintItemsToDataGrid(ByRef lstOfDataValues As List(Of String))
 
@@ -364,7 +368,7 @@
 
             intColumnCount = 6
 
-        ElseIf frmReport.cmbReports.SelectedItem.Equals("End of Shift Count") Or frmReport.cmbReports.SelectedItem.Equals("Narcotics End of Shift Count") Then
+        ElseIf frmReport.cmbReports.SelectedItem.Equals("Restock Inventory") Or frmReport.cmbReports.SelectedItem.Equals("Narcotic Restock Inventory") Then
             frmReport.dgvReport.Columns.Add(1, "Drug Name")
             frmReport.dgvReport.Columns.Add(2, "Drawer")
             frmReport.dgvReport.Columns.Add(3, "Drawer Bin")
