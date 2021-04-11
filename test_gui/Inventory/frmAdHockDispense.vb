@@ -43,6 +43,7 @@
         AdHoc.GetAllMedicationsForListbox()
         'populate active patients into comboboxes
         AdHoc.PopulatePatientsAdhoc()
+
     End Sub
 
 
