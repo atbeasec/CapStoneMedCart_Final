@@ -20,6 +20,21 @@
     'set drawer bin for med
     Private intAdhocBin As Integer
 
+    'information used to limit max wasted
+    'MAxWaste is quantity in drawer multiplied by AMount per container
+    Private dblMaxWaste As Double
+    Private dblQuantity As Double
+    Private dblAmountContainer As Double
+    Private dblAmountGivenToPatient As Double
+
+
+    Public Sub SetdblAmountGivenToPatient(ByRef amount As Double)
+        dblAmountGivenToPatient = amount
+    End Sub
+    Public Sub SetintQuantity(ByRef Amount As Double)
+        dblQuantity = Amount
+    End Sub
+
     '/********************************************************************/
     '/*                   FUNCTION NAME: SetPatientID	         */         
     '/********************************************************************/
@@ -329,6 +344,10 @@
 
         'get drawer information for medication in drawer
         txtDrawer.Text = "Drawer number:  " & dsDrawer.Tables(0).Rows(0)(12) & " Bin: " & dsDrawer.Tables(0).Rows(0)(6)
+
+
+        dblAmountContainer = dsDrawer.Tables(0).Rows(0)(4)
+        dblMaxWaste = (CDbl(dblQuantity) * CDbl(dblAmountContainer))
         'get narcotic flag from database for medication
         Dim intNarcoticFlag As Integer = CreateDatabase.ExecuteScalarQuery("Select Controlled_Flag from Medication where Medication_ID = '" & intMedID & "' and Active_Flag = '1'")
         intNarcoticFlagGlobal = intNarcoticFlag
@@ -525,13 +544,17 @@
         Else
             'if not narcotic dont require sign off
             If IsNumeric(txtQuantity.Text) Then
+                'insert the waste record
                 InsertWasteNonNarcotic()
+                'unlock the side panels
                 frmMain.UnlockSideMenu()
-
+                'check to see if adhoc or patient informationw as dispensing to know where to return too
                 If intEnteredFromAdhoc = 0 Then
+                    ''set patient id and return to patient information
                     frmPatientInfo.setPatientID(intPatientID)
                     frmMain.OpenChildForm(frmPatientInfo)
                 ElseIf intEnteredFromAdhoc = 1 Then
+                    'reset adhoc entered flags and return to adhoc
                     frmDispense.setintEntered(0)
                     setEnteredFromAdhoc(0)
                     frmMain.OpenChildForm(frmAdHockDispense)
@@ -998,24 +1021,29 @@
             MessageBox.Show("Please enter the amount wasted.")
 
         Else
+            'check for the max amount that can be wasted
+            Dim dblWastingAmount As Double = txtQuantity.Text
+            Dim dblWastingAmountLeftOver As Double = dblMaxWaste - dblAmountGivenToPatient
+            If dblWastingAmount > dblWastingAmountLeftOver Then
+                MessageBox.Show("Please enter a wasted amount that is " & dblWastingAmountLeftOver.ToString & " " & txtUnit.Text & " or less")
+            Else
+                'give the barcode field focus, or give the password field focus
+                If pnlBarcode.Visible = True Then
 
-            'give the barcode field focus, or give the password field focus
-            If pnlBarcode.Visible = True Then
+                    txtBarcode.Select()
 
-                txtBarcode.Select()
+                ElseIf pnlCredentials.Visible = True Then
 
-            ElseIf pnlCredentials.Visible = True Then
+                    txtUsername.Select()
 
-                txtUsername.Select()
+                ElseIf pnlSignOff.Visible = False Then
 
-            ElseIf pnlSignOff.Visible = False Then
+                    btnSubmitWithoutSignoff.PerformClick()
 
-                btnSubmitWithoutSignoff.PerformClick()
+                End If
 
             End If
-
         End If
-
 
 
     End Sub

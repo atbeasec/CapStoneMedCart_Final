@@ -628,6 +628,7 @@ Module DispenseHistory
             Strdatacommand = "Select Amount_Per_Container,Amount_Per_Container_Unit from DrawerMedication" &
                           " where Medication_TUID = '" & intMEDID & "' and Active_Flag = '1'"
             Dim dsDrawerMedData As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+            frmDispense.setAmountPerContainer(dsDrawerMedData.Tables(0).Rows(0)(0))
             frmDispense.txtContainer.Text = dsDrawerMedData.Tables(0).Rows(0)(0) & " " & dsDrawerMedData.Tables(0).Rows(0)(1)
 
         ElseIf frmDispense.getIntEntered() = 1 Then
@@ -642,6 +643,7 @@ Module DispenseHistory
             Strdatacommand = "Select Amount_Per_Container,Amount_Per_Container_Unit from DrawerMedication" &
               " where Medication_TUID = '" & intMEDID & "' and Active_Flag = '1' and DrawerMedication_ID = '" & frmDispense.intDrawerMEDAdhoc & "'"
             Dim dsDrawerMedData As DataSet = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+            frmDispense.setAmountPerContainer(dsDrawerMedData.Tables(0).Rows(0)(0))
             frmDispense.txtContainer.Text = dsDrawerMedData.Tables(0).Rows(0)(0) & " " & dsDrawerMedData.Tables(0).Rows(0)(1)
 
         End If

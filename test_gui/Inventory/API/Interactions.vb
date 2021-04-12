@@ -408,7 +408,7 @@ Module Interactions
 
         'Select the patient id given the mrn
         strSQLCmd = "Select Patient_ID From Patient 
-                    WHERE MRN_Number = " & CInt(strPatientMRNFromForm) & ";"
+                    WHERE MRN_Number = '" & strPatientMRNFromForm & "';"
 
         intPatientID = ExecuteScalarQuery(strSQLCmd)
 
@@ -436,7 +436,7 @@ Module Interactions
         strSQLCmd = "Select RXCUI_ID From Medication 
                     INNER JOIN PatientMedication ON Medication_TUID = Medication_ID 
                     INNER JOIN Patient ON Patient_TUID = Patient_ID
-                    WHERE MRN_Number = " & CInt(strPatientMRNFromForm) & ";"
+                    WHERE MRN_Number = '" & strPatientMRNFromForm & "';"
 
         dsDataset = ExecuteSelectQuery(strSQLCmd)
 
