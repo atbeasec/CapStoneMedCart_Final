@@ -531,36 +531,41 @@
     '/*  ---            ----             ----				             */
     '/*  AB		        2/10/21		    initial creation                 */
     '/********************************************************************/ 
-    Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWasteWithBarcode.Click, btnSubmitWithoutSignoff.Click
-        'heck to see if the drug being wasted is a narcotic or not
-        'if it is a narcotic require sign off
-        If intNarcoticFlagGlobal = 1 Then
-            If IsNumeric(txtQuantity.Text) Then
-                Dim strBarcode As String = txtBarcode.Text
-                CheckBarcode(strBarcode)
-            Else
-                MessageBox.Show("Please enter a numeric value to waste")
-            End If
+    Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWasteWithBarcode.Click
+        If (rbtnOther.Checked = True) And (txtOther.Text.Trim = Nothing) Then
+            MessageBox.Show("Please fill in an Explanation")
+            txtOther.Text = Nothing
         Else
-            'if not narcotic dont require sign off
-            If IsNumeric(txtQuantity.Text) Then
-                'insert the waste record
-                InsertWasteNonNarcotic()
-                'unlock the side panels
-                frmMain.UnlockSideMenu()
-                'check to see if adhoc or patient informationw as dispensing to know where to return too
-                If intEnteredFromAdhoc = 0 Then
-                    ''set patient id and return to patient information
-                    frmPatientInfo.setPatientID(intPatientID)
-                    frmMain.OpenChildForm(frmPatientInfo)
-                ElseIf intEnteredFromAdhoc = 1 Then
-                    'reset adhoc entered flags and return to adhoc
-                    frmDispense.setintEntered(0)
-                    setEnteredFromAdhoc(0)
-                    frmMain.OpenChildForm(frmAdHockDispense)
+            'check to see if the drug being wasted is a narcotic or not
+            'if it is a narcotic require sign off
+            If intNarcoticFlagGlobal = 1 Then
+                If IsNumeric(txtQuantity.Text) Then
+                    Dim strBarcode As String = txtBarcode.Text
+                    CheckBarcode(strBarcode)
+                Else
+                    MessageBox.Show("Please enter a numeric value to waste")
                 End If
-            End If
+            Else
+                'if not narcotic dont require sign off
+                If IsNumeric(txtQuantity.Text) Then
+                    'insert the waste record
+                    InsertWasteNonNarcotic()
+                    'unlock the side panels
+                    frmMain.UnlockSideMenu()
+                    'check to see if adhoc or patient informationw as dispensing to know where to return too
+                    If intEnteredFromAdhoc = 0 Then
+                        ''set patient id and return to patient information
+                        frmPatientInfo.setPatientID(intPatientID)
+                        frmMain.OpenChildForm(frmPatientInfo)
+                    ElseIf intEnteredFromAdhoc = 1 Then
+                        'reset adhoc entered flags and return to adhoc
+                        frmDispense.setintEntered(0)
+                        setEnteredFromAdhoc(0)
+                        frmMain.OpenChildForm(frmAdHockDispense)
+                    End If
+                End If
 
+            End If
         End If
         txtBarcode.Text = Nothing
     End Sub
@@ -594,6 +599,7 @@
     '/*  AB		        4/7/21		    initial creation                 */
     '/********************************************************************/ 
     Private Sub InsertWasteNonNarcotic()
+
         'get time for waste
         Dim dtmWasteTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         'check which waste reason is checked
@@ -612,6 +618,7 @@
         ElseIf rbtnOther.Checked = True Then
             strReason = txtOther.Text
         End If
+
         insertWaste(CInt(LoggedInID), CInt(LoggedInID), intDrawerMedTUID, intMedID, intPatientID, strReason, txtQuantity.Text, dtmWasteTime)
     End Sub
 
@@ -722,6 +729,7 @@
     '/*  ---            ----             ----				             */
     '/********************************************************************/ 
     Private Sub CheckBarcode(ByRef strBarcode As String)
+
         If strBarcode = "" Then
             MsgBox("           WARNING" & vbCrLf & "Barcode Field is Blank")
             txtBarcode.Focus()
@@ -880,28 +888,32 @@
     '/*  WHO            WHEN             WHAT				             */		            
     '/*  ---            ----             ----				             */
     '/********************************************************************/ 
-    Private Sub btnWasteWithCredentials_Click(sender As Object, e As EventArgs) Handles btnWasteWithCredentials.Click
-        If intNarcoticFlagGlobal = 1 Then
-            If IsNumeric(txtQuantity.Text) Then
-                CheckUsername(txtUsername.Text, txtPassword.Text)
-            Else
-                MessageBox.Show("Please enter a numeric value to waste")
-            End If
+    Private Sub btnWasteWithCredentials_Click(sender As Object, e As EventArgs) Handles btnWasteWithCredentials.Click, btnSubmitWithoutSignoff.Click
+        If (rbtnOther.Checked = True) And (txtOther.Text.Trim = Nothing) Then
+            MessageBox.Show("Please fill in an Explanation")
         Else
-            If IsNumeric(txtQuantity.Text) Then
-                InsertWasteNonNarcotic()
-                frmMain.UnlockSideMenu()
-
-                If intEnteredFromAdhoc = 0 Then
-                    frmPatientInfo.setPatientID(intPatientID)
-                    frmMain.OpenChildForm(frmPatientInfo)
-                ElseIf intEnteredFromAdhoc = 1 Then
-                    frmDispense.setintEntered(0)
-                    setEnteredFromAdhoc(0)
-                    frmMain.OpenChildForm(frmAdHockDispense)
+            If intNarcoticFlagGlobal = 1 Then
+                If IsNumeric(txtQuantity.Text) Then
+                    CheckUsername(txtUsername.Text, txtPassword.Text)
+                Else
+                    MessageBox.Show("Please enter a numeric value to waste")
                 End If
-            End If
+            Else
+                If IsNumeric(txtQuantity.Text) Then
+                    InsertWasteNonNarcotic()
+                    frmMain.UnlockSideMenu()
 
+                    If intEnteredFromAdhoc = 0 Then
+                        frmPatientInfo.setPatientID(intPatientID)
+                        frmMain.OpenChildForm(frmPatientInfo)
+                    ElseIf intEnteredFromAdhoc = 1 Then
+                        frmDispense.setintEntered(0)
+                        setEnteredFromAdhoc(0)
+                        frmMain.OpenChildForm(frmAdHockDispense)
+                    End If
+                End If
+
+            End If
         End If
         txtUsername.Text = Nothing
         txtPassword.Text = Nothing
@@ -1015,36 +1027,38 @@
     End Sub
 
     Private Sub btnEnter_Click(sender As Object, e As EventArgs) Handles btnEnter.Click
-
-        ' make sure the user has input a value to the textbox
-        If String.IsNullOrEmpty(txtQuantity.Text) Then
-            MessageBox.Show("Please enter the amount wasted.")
-
+        If (rbtnOther.Checked = True) And (txtOther.Text.Trim = Nothing) Then
+            MessageBox.Show("Please fill in an Explanation")
         Else
-            'check for the max amount that can be wasted
-            Dim dblWastingAmount As Double = txtQuantity.Text
-            Dim dblWastingAmountLeftOver As Double = dblMaxWaste - dblAmountGivenToPatient
-            If dblWastingAmount > dblWastingAmountLeftOver Then
-                MessageBox.Show("Please enter a wasted amount that is " & dblWastingAmountLeftOver.ToString & " " & txtUnit.Text & " or less")
+            ' make sure the user has input a value to the textbox
+            If String.IsNullOrEmpty(txtQuantity.Text) Then
+                MessageBox.Show("Please enter the amount wasted.")
+
             Else
-                'give the barcode field focus, or give the password field focus
-                If pnlBarcode.Visible = True Then
+                'check for the max amount that can be wasted
+                Dim dblWastingAmount As Double = txtQuantity.Text
+                Dim dblWastingAmountLeftOver As Double = dblMaxWaste - dblAmountGivenToPatient
+                If dblWastingAmount > dblWastingAmountLeftOver Then
+                    MessageBox.Show("Please enter a wasted amount that is " & dblWastingAmountLeftOver.ToString & " " & txtUnit.Text & " or less")
+                Else
+                    'give the barcode field focus, or give the password field focus
+                    If pnlBarcode.Visible = True Then
 
-                    txtBarcode.Select()
+                        btnWasteWithBarcode.PerformClick()
 
-                ElseIf pnlCredentials.Visible = True Then
+                    ElseIf pnlCredentials.Visible = True Then
 
-                    txtUsername.Select()
+                        btnWasteWithCredentials.PerformClick()
 
-                ElseIf pnlSignOff.Visible = False Then
+                    ElseIf pnlSignOff.Visible = False Then
 
-                    btnSubmitWithoutSignoff.PerformClick()
+                        btnSubmitWithoutSignoff.PerformClick()
+
+                    End If
 
                 End If
-
             End If
         End If
-
 
     End Sub
 
@@ -1067,4 +1081,19 @@
         End If
     End Sub
 
+    Private Sub txtBarcode_TextChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBarcode.KeyPress
+        If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
+            e.KeyChar = ChrW(0)
+            e.Handled = True
+            btnWaste_Click(sender, e)
+        End If
+    End Sub
+
+    Private Sub txtPassword_TextChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress
+        If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
+            e.KeyChar = ChrW(0)
+            e.Handled = True
+            btnWasteWithCredentials_Click(sender, e)
+        End If
+    End Sub
 End Class
