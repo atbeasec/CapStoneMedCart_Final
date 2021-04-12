@@ -46,10 +46,10 @@ Partial Class frmMainScreenWaste
         Me.txtOther = New System.Windows.Forms.TextBox()
         Me.rbtnOther = New System.Windows.Forms.RadioButton()
         Me.radPatientUnavilable = New System.Windows.Forms.RadioButton()
+        Me.btnSubmitNonNarcotic = New System.Windows.Forms.Button()
         Me.radRefused = New System.Windows.Forms.RadioButton()
         Me.radCancel = New System.Windows.Forms.RadioButton()
         Me.radIncorrect = New System.Windows.Forms.RadioButton()
-        Me.btnSubmitNonNarcotic = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -381,6 +381,23 @@ Partial Class frmMainScreenWaste
         Me.radPatientUnavilable.Text = "Excess amount"
         Me.radPatientUnavilable.UseVisualStyleBackColor = True
         '
+        'btnSubmitNonNarcotic
+        '
+        Me.btnSubmitNonNarcotic.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnSubmitNonNarcotic.FlatAppearance.BorderSize = 0
+        Me.btnSubmitNonNarcotic.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSubmitNonNarcotic.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSubmitNonNarcotic.ForeColor = System.Drawing.Color.White
+        Me.btnSubmitNonNarcotic.Image = CType(resources.GetObject("btnSubmitNonNarcotic.Image"), System.Drawing.Image)
+        Me.btnSubmitNonNarcotic.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnSubmitNonNarcotic.Location = New System.Drawing.Point(172, 186)
+        Me.btnSubmitNonNarcotic.Name = "btnSubmitNonNarcotic"
+        Me.btnSubmitNonNarcotic.Size = New System.Drawing.Size(150, 37)
+        Me.btnSubmitNonNarcotic.TabIndex = 220
+        Me.btnSubmitNonNarcotic.Text = "   SUBMIT"
+        Me.btnSubmitNonNarcotic.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnSubmitNonNarcotic.UseVisualStyleBackColor = False
+        '
         'radRefused
         '
         Me.radRefused.AutoSize = True
@@ -415,23 +432,6 @@ Partial Class frmMainScreenWaste
         Me.radIncorrect.TabStop = True
         Me.radIncorrect.Text = "Incorrect Medication"
         Me.radIncorrect.UseVisualStyleBackColor = True
-        '
-        'btnSubmitNonNarcotic
-        '
-        Me.btnSubmitNonNarcotic.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnSubmitNonNarcotic.FlatAppearance.BorderSize = 0
-        Me.btnSubmitNonNarcotic.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSubmitNonNarcotic.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSubmitNonNarcotic.ForeColor = System.Drawing.Color.White
-        Me.btnSubmitNonNarcotic.Image = CType(resources.GetObject("btnSubmitNonNarcotic.Image"), System.Drawing.Image)
-        Me.btnSubmitNonNarcotic.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnSubmitNonNarcotic.Location = New System.Drawing.Point(172, 186)
-        Me.btnSubmitNonNarcotic.Name = "btnSubmitNonNarcotic"
-        Me.btnSubmitNonNarcotic.Size = New System.Drawing.Size(150, 37)
-        Me.btnSubmitNonNarcotic.TabIndex = 220
-        Me.btnSubmitNonNarcotic.Text = "   SUBMIT"
-        Me.btnSubmitNonNarcotic.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnSubmitNonNarcotic.UseVisualStyleBackColor = False
         '
         'Label6
         '
