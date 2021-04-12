@@ -531,9 +531,10 @@
     '/*  ---            ----             ----				             */
     '/*  AB		        2/10/21		    initial creation                 */
     '/********************************************************************/ 
-    Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWasteWithBarcode.Click, btnSubmitWithoutSignoff.Click
+    Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWasteWithBarcode.Click
         If (rbtnOther.Checked = True) And (txtOther.Text.Trim = Nothing) Then
             MessageBox.Show("Please fill on Explanation")
+            txtOther.Text = Nothing
         Else
             'check to see if the drug being wasted is a narcotic or not
             'if it is a narcotic require sign off
@@ -1025,7 +1026,7 @@
 
     End Sub
 
-    Private Sub btnEnter_Click(sender As Object, e As EventArgs) Handles btnEnter.Click
+    Private Sub btnEnter_Click(sender As Object, e As EventArgs) Handles btnEnter.Click, btnSubmitWithoutSignoff.Click
         If (rbtnOther.Checked = True) And (txtOther.Text.Trim = Nothing) Then
             MessageBox.Show("Please fill on Explanation")
         Else
@@ -1043,11 +1044,11 @@
                     'give the barcode field focus, or give the password field focus
                     If pnlBarcode.Visible = True Then
 
-                        txtBarcode.Select()
+                        btnWasteWithBarcode.PerformClick()
 
                     ElseIf pnlCredentials.Visible = True Then
 
-                        txtUsername.Select()
+                        btnWasteWithCredentials.PerformClick()
 
                     ElseIf pnlSignOff.Visible = False Then
 
