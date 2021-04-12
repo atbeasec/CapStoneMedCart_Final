@@ -748,15 +748,21 @@ Public Class frmDispense
 
 
         ElseIf pnlAmountAdministered.Visible = True Then
-            Dim dblAmountGiven As Double = CDbl(txtAmountDispensed.Text)
-            If dblAmountGiven > dblAmountAdministerMAX Then
-                MessageBox.Show("Max amount to administer to patient is " & dblAmountAdministerMAX.ToString)
-            Else
-                If Not String.IsNullOrEmpty(txtAmountDispensed.Text) Then
-                    btnDispense.PerformClick()
-                End If
-            End If
 
+            If IsNumeric(txtAmountDispensed.Text) Then
+                Dim dblAmountGiven As Double = CDbl(txtAmountDispensed.Text)
+
+                If dblAmountGiven > dblAmountAdministerMAX Then
+                    MessageBox.Show("Max amount to administer to patient is " & dblAmountAdministerMAX.ToString)
+                Else
+                    If Not String.IsNullOrEmpty(txtAmountDispensed.Text) Then
+                        btnDispense.PerformClick()
+                    End If
+                End If
+            Else
+                MessageBox.Show("Please enter a valid number.")
+                txtAmountDispensed.Text = Nothing
+            End If
         End If
 
     End Sub
@@ -806,17 +812,19 @@ Public Class frmDispense
     Private Sub txtAmountDispensed_TextChanged(sender As Object, e As EventArgs) Handles txtAmountDispensed.TextChanged
 
         If Not String.IsNullOrEmpty(sender.text) Then
-            If sender.text.length > 3 Then
-                If CDbl(sender.text) > 1000 Then
+            If IsNumeric(sender.text) Then
+                If sender.text.length > 3 Then
+                    If CDbl(sender.text) > 1000 Then
 
-                    MessageBox.Show("Please pick a number between 0 - 1000")
-                    sender.text = Nothing
+                        MessageBox.Show("Please pick a number between 0 - 1000")
+                        sender.text = Nothing
 
-
+                    End If
                 End If
             End If
         End If
 
+    End Sub
 
     Private Sub CalculateMaxDispense(ByRef RemoveNumber As Double)
         dblAmountAdministerMAX = RemoveNumber * dblAmountPerContainer
