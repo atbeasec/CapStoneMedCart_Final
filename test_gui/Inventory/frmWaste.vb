@@ -1051,13 +1051,18 @@
     Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantity.TextChanged
 
         If Not String.IsNullOrEmpty(sender.text) Then
-            If sender.text.length > 3 Then
-                If CDbl(sender.text) > 1000 Then
+            If IsNumeric(sender.text) Then
+                If sender.text.length > 3 Then
+                    If CDbl(sender.text) > 1000 Then
 
-                    MessageBox.Show("Please pick a number between 0 - 1000")
-                    sender.text = Nothing
+                        MessageBox.Show("Please pick a number between 0 - 1000")
+                        sender.text = Nothing
 
+                    End If
                 End If
+            Else
+                MessageBox.Show("Please make sure to enter a number with a lead zero if using a decimal and only one decimal point")
+                sender.Text = sender.Text.ToString.TrimEnd(CChar("."))
             End If
         End If
     End Sub

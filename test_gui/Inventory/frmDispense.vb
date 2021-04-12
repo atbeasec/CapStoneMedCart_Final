@@ -821,6 +821,9 @@ Public Class frmDispense
 
                     End If
                 End If
+            Else
+                MessageBox.Show("Please make sure to enter a number with a lead zero if using a decimal and only one decimal point")
+                sender.Text = sender.Text.ToString.TrimEnd(CChar("."))
             End If
         End If
 
