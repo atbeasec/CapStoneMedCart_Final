@@ -440,31 +440,32 @@
     End Sub
 
     Private Sub btnEnter_Click(sender As Object, e As EventArgs) Handles btnEnter.Click
-
-
-        ' make sure the user has input a value to the textbox
-        If String.IsNullOrEmpty(txtQuantity.Text) Then
-            MessageBox.Show("Please enter the amount wasted.")
-
+        If (rbtnOther.Checked = True) And (txtOther.Text.Trim = Nothing) Then
+            MessageBox.Show("Please fill on Explanation")
         Else
+            ' make sure the user has input a value to the textbox
+            If String.IsNullOrEmpty(txtQuantity.Text) Then
+                MessageBox.Show("Please enter the amount wasted.")
 
-            'give the barcode field focus, or give the password field focus
-            If pnlBarcode.Visible = True Then
+            Else
 
-                txtBarcode.Select()
+                'give the barcode field focus, or give the password field focus
+                If pnlBarcode.Visible = True Then
 
-            ElseIf pnlCredentials.Visible = True Then
+                    txtBarcode.Select()
 
-                txtUsername.Select()
+                ElseIf pnlCredentials.Visible = True Then
 
-            ElseIf pnlSignOff.Visible = False Then
+                    txtUsername.Select()
 
-                btnSubmitNonNarcotic.PerformClick()
+                ElseIf pnlSignOff.Visible = False Then
+
+                    btnSubmitNonNarcotic.PerformClick()
+
+                End If
 
             End If
-
         End If
-
     End Sub
 
     Private Sub btnDrawer7_Click(sender As Object, e As EventArgs) Handles btnOne.Click, btnTwo.Click, btnThree.Click, btnFour.Click, btnFive.Click, btnSix.Click, btnSeven.Click, btnEight.Click, btnNine.Click, btnZero.Click, btnDecimal.Click

@@ -1026,36 +1026,38 @@
     End Sub
 
     Private Sub btnEnter_Click(sender As Object, e As EventArgs) Handles btnEnter.Click
-
-        ' make sure the user has input a value to the textbox
-        If String.IsNullOrEmpty(txtQuantity.Text) Then
-            MessageBox.Show("Please enter the amount wasted.")
-
+        If (rbtnOther.Checked = True) And (txtOther.Text.Trim = Nothing) Then
+            MessageBox.Show("Please fill on Explanation")
         Else
-            'check for the max amount that can be wasted
-            Dim dblWastingAmount As Double = txtQuantity.Text
-            Dim dblWastingAmountLeftOver As Double = dblMaxWaste - dblAmountGivenToPatient
-            If dblWastingAmount > dblWastingAmountLeftOver Then
-                MessageBox.Show("Please enter a wasted amount that is " & dblWastingAmountLeftOver.ToString & " " & txtUnit.Text & " or less")
+            ' make sure the user has input a value to the textbox
+            If String.IsNullOrEmpty(txtQuantity.Text) Then
+                MessageBox.Show("Please enter the amount wasted.")
+
             Else
-                'give the barcode field focus, or give the password field focus
-                If pnlBarcode.Visible = True Then
+                'check for the max amount that can be wasted
+                Dim dblWastingAmount As Double = txtQuantity.Text
+                Dim dblWastingAmountLeftOver As Double = dblMaxWaste - dblAmountGivenToPatient
+                If dblWastingAmount > dblWastingAmountLeftOver Then
+                    MessageBox.Show("Please enter a wasted amount that is " & dblWastingAmountLeftOver.ToString & " " & txtUnit.Text & " or less")
+                Else
+                    'give the barcode field focus, or give the password field focus
+                    If pnlBarcode.Visible = True Then
 
-                    txtBarcode.Select()
+                        txtBarcode.Select()
 
-                ElseIf pnlCredentials.Visible = True Then
+                    ElseIf pnlCredentials.Visible = True Then
 
-                    txtUsername.Select()
+                        txtUsername.Select()
 
-                ElseIf pnlSignOff.Visible = False Then
+                    ElseIf pnlSignOff.Visible = False Then
 
-                    btnSubmitWithoutSignoff.PerformClick()
+                        btnSubmitWithoutSignoff.PerformClick()
+
+                    End If
 
                 End If
-
             End If
         End If
-
 
     End Sub
 
