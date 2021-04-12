@@ -159,10 +159,50 @@
     End Sub
 
     Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
-        If txtQuantity.Text = Nothing Or txtQuantity.Text.Trim.Length = 0 Or cmbMedications.SelectedIndex = -1 Or cmbPatientName.SelectedIndex = -1 Then
-            MessageBox.Show("Please select a medication and patient, then fill out the amount wasted.")
+        If (rbtnOther.Checked = True) And (txtOther.Text = Nothing) Then
+            MessageBox.Show("Please fill in Explanation")
         Else
-            If intNarcoticFlagGlobal = 0 Then
+            If txtQuantity.Text = Nothing Or txtQuantity.Text.Trim.Length = 0 Or cmbMedications.SelectedIndex = -1 Or cmbPatientName.SelectedIndex = -1 Then
+                MessageBox.Show("Please select a medication and patient, then fill out the amount wasted.")
+            Else
+                If intNarcoticFlagGlobal = 0 Then
+                    Dim strReason As String = " "
+                    Dim dtmWasteTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                    If radIncorrect.Checked = True Then
+                        strReason = radIncorrect.Text
+
+                    ElseIf radCancel.Checked = True Then
+                        strReason = radCancel.Text
+
+                    ElseIf radRefused.Checked = True Then
+                        strReason = radRefused.Text
+
+                    ElseIf radPatientUnavilable.Checked = True Then
+                        strReason = radPatientUnavilable.Text
+
+                    ElseIf rbtnOther.Checked = True Then
+                        strReason = txtOther.Text
+                    End If
+                    frmWaste.insertWaste(CInt(LoggedInID), CInt(LoggedInID), intDrawerMedArray(cmbMedications.SelectedIndex), intMedIDArray(cmbMedications.SelectedIndex), intPatientIDArray(cmbPatientName.SelectedIndex), strReason, txtQuantity.Text, dtmWasteTime)
+                    MessageBox.Show("Waste information saved.")
+                    ClearWaste()
+                ElseIf intNarcoticFlagGlobal = 1 Then
+                    CheckBarcode(txtBarcode.Text)
+                End If
+            End If
+        End If
+        txtBarcode.Text = Nothing
+    End Sub
+
+    Private Sub CheckBarcode(ByRef strBarcode As String)
+        If (rbtnOther.Checked = True) And (txtOther.Text = Nothing) Then
+            MessageBox.Show("Please fill in Explanation")
+        Else
+            If strBarcode = "" Then
+                MessageBox.Show("           WARNING" & vbCrLf & "Barcode Field is Blank")
+                txtBarcode.Focus()
+
+            ElseIf scanBarcode(strBarcode) = "True" Then
                 Dim strReason As String = " "
                 Dim dtmWasteTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
                 If radIncorrect.Checked = True Then
@@ -178,54 +218,27 @@
                     strReason = radPatientUnavilable.Text
 
                 ElseIf rbtnOther.Checked = True Then
-                    strReason = txtOther.Text
+                    If txtOther.Text <> Nothing Then
+                        strReason = txtOther.Text
+                    Else
+                        MessageBox.Show("Please fill on Explanation")
+                    End If
+
                 End If
-                frmWaste.insertWaste(CInt(LoggedInID), CInt(LoggedInID), intDrawerMedArray(cmbMedications.SelectedIndex), intMedIDArray(cmbMedications.SelectedIndex), intPatientIDArray(cmbPatientName.SelectedIndex), strReason, txtQuantity.Text, dtmWasteTime)
-                MessageBox.Show("Waste information saved.")
+                frmWaste.insertWaste(CInt(LoggedInID), intSignoffID, intDrawerMedArray(cmbMedications.SelectedIndex), intMedIDArray(cmbMedications.SelectedIndex), intPatientIDArray(cmbPatientName.SelectedIndex), strReason, txtQuantity.Text, dtmWasteTime)
                 ClearWaste()
-            ElseIf intNarcoticFlagGlobal = 1 Then
-                CheckBarcode(txtBarcode.Text)
+                MessageBox.Show("Waste information saved.")
+                intNarcoticFlagGlobal = 0
+                pnlCredentials.Visible = False
+                pnlSignOff.Visible = False
+                txtBarcode.Text = ""
+            ElseIf scanBarcode(strBarcode) = "SameBarcode" Then
+                MessageBox.Show("Can not sign-off for yourself.")
+                txtBarcode.Text = ""
+            Else
+                MessageBox.Show("The barcode does not match any users.")
+                txtBarcode.Focus()
             End If
-        End If
-        txtBarcode.Text = Nothing
-    End Sub
-
-    Private Sub CheckBarcode(ByRef strBarcode As String)
-        If strBarcode = "" Then
-            MessageBox.Show("           WARNING" & vbCrLf & "Barcode Field is Blank")
-            txtBarcode.Focus()
-
-        ElseIf scanBarcode(strBarcode) = "True" Then
-            Dim strReason As String = " "
-            Dim dtmWasteTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
-            If radIncorrect.Checked = True Then
-                strReason = radIncorrect.Text
-
-            ElseIf radCancel.Checked = True Then
-                strReason = radCancel.Text
-
-            ElseIf radRefused.Checked = True Then
-                strReason = radRefused.Text
-
-            ElseIf radPatientUnavilable.Checked = True Then
-                strReason = radPatientUnavilable.Text
-
-            ElseIf rbtnOther.Checked = True Then
-                strReason = txtOther.Text
-            End If
-            frmWaste.insertWaste(CInt(LoggedInID), intSignoffID, intDrawerMedArray(cmbMedications.SelectedIndex), intMedIDArray(cmbMedications.SelectedIndex), intPatientIDArray(cmbPatientName.SelectedIndex), strReason, txtQuantity.Text, dtmWasteTime)
-            ClearWaste()
-            MessageBox.Show("Waste information saved.")
-            intNarcoticFlagGlobal = 0
-            pnlCredentials.Visible = False
-            pnlSignOff.Visible = False
-            txtBarcode.Text = ""
-        ElseIf scanBarcode(strBarcode) = "SameBarcode" Then
-            MessageBox.Show("Can not sign-off for yourself.")
-            txtBarcode.Text = ""
-        Else
-            MessageBox.Show("The barcode does not match any users.")
-            txtBarcode.Focus()
         End If
 
     End Sub
@@ -285,32 +298,41 @@
     End Sub
 
     Private Sub btnWasteWithCredentials_Click(sender As Object, e As EventArgs) Handles btnWasteWithCredentials.Click
-        If txtQuantity.Text = Nothing Or txtQuantity.Text.Trim.Length = 0 Or cmbMedications.SelectedIndex = -1 Or cmbPatientName.SelectedIndex = -1 Then
-            MessageBox.Show("Please select a medication and patient, then fill out the amount wasted.")
+        If (rbtnOther.Checked = True) And (txtOther.Text = Nothing) Then
+            MessageBox.Show("Please fill in Explanation")
         Else
-            If intNarcoticFlagGlobal = 0 Then
-                Dim strReason As String = " "
-                Dim dtmWasteTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
-                If radIncorrect.Checked = True Then
-                    strReason = radIncorrect.Text
+            If txtQuantity.Text = Nothing Or txtQuantity.Text.Trim.Length = 0 Or cmbMedications.SelectedIndex = -1 Or cmbPatientName.SelectedIndex = -1 Then
+                MessageBox.Show("Please select a medication and patient, then fill out the amount wasted.")
+            Else
+                If intNarcoticFlagGlobal = 0 Then
+                    Dim strReason As String = " "
+                    Dim dtmWasteTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                    If radIncorrect.Checked = True Then
+                        strReason = radIncorrect.Text
 
-                ElseIf radCancel.Checked = True Then
-                    strReason = radCancel.Text
+                    ElseIf radCancel.Checked = True Then
+                        strReason = radCancel.Text
 
-                ElseIf radRefused.Checked = True Then
-                    strReason = radRefused.Text
+                    ElseIf radRefused.Checked = True Then
+                        strReason = radRefused.Text
 
-                ElseIf radPatientUnavilable.Checked = True Then
-                    strReason = radPatientUnavilable.Text
+                    ElseIf radPatientUnavilable.Checked = True Then
+                        strReason = radPatientUnavilable.Text
 
-                ElseIf rbtnOther.Checked = True Then
-                    strReason = txtOther.Text
+                    ElseIf rbtnOther.Checked = True Then
+                        If txtOther.Text <> Nothing Then
+                            strReason = txtOther.Text
+                        Else
+                            MessageBox.Show("Please fill on Explanation")
+                        End If
+
+                    End If
+                    frmWaste.insertWaste(CInt(LoggedInID), CInt(LoggedInID), intDrawerMedArray(cmbMedications.SelectedIndex), intMedIDArray(cmbMedications.SelectedIndex), intPatientIDArray(cmbPatientName.SelectedIndex), strReason, txtQuantity.Text, dtmWasteTime)
+                    MessageBox.Show("Waste information saved.")
+                    ClearWaste()
+                ElseIf intNarcoticFlagGlobal = 1 Then
+                    CheckLogin(txtUsername.Text, txtPassword.Text)
                 End If
-                frmWaste.insertWaste(CInt(LoggedInID), CInt(LoggedInID), intDrawerMedArray(cmbMedications.SelectedIndex), intMedIDArray(cmbMedications.SelectedIndex), intPatientIDArray(cmbPatientName.SelectedIndex), strReason, txtQuantity.Text, dtmWasteTime)
-                MessageBox.Show("Waste information saved.")
-                ClearWaste()
-            ElseIf intNarcoticFlagGlobal = 1 Then
-                CheckLogin(txtUsername.Text, txtPassword.Text)
             End If
         End If
         txtUsername.Text = Nothing
@@ -341,7 +363,12 @@
                 strReason = radPatientUnavilable.Text
 
             ElseIf rbtnOther.Checked = True Then
-                strReason = txtOther.Text
+                If txtOther.Text <> Nothing Then
+                    strReason = txtOther.Text
+                Else
+                    MessageBox.Show("Please fill on Explanation")
+                End If
+
             End If
             frmWaste.insertWaste(CInt(LoggedInID), intSignoffID, intDrawerMedArray(cmbMedications.SelectedIndex), intMedIDArray(cmbMedications.SelectedIndex), intPatientIDArray(cmbPatientName.SelectedIndex), strReason, txtQuantity.Text, dtmWasteTime)
             MessageBox.Show("Waste information saved.")
@@ -392,7 +419,12 @@
                     strReason = radPatientUnavilable.Text
 
                 ElseIf rbtnOther.Checked = True Then
-                    strReason = txtOther.Text
+                    If txtOther.Text <> Nothing Then
+                        strReason = txtOther.Text
+                    Else
+                        MessageBox.Show("Please fill on Explanation")
+                    End If
+
                 End If
                 frmWaste.insertWaste(CInt(LoggedInID), CInt(LoggedInID), intDrawerMedArray(cmbMedications.SelectedIndex), intMedIDArray(cmbMedications.SelectedIndex), intPatientIDArray(cmbPatientName.SelectedIndex), strReason, txtQuantity.Text, dtmWasteTime)
                 MessageBox.Show("Waste information saved.")
