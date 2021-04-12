@@ -419,7 +419,7 @@
                     strReason = radPatientUnavilable.Text
 
                 ElseIf rbtnOther.Checked = True Then
-                    If txtOther.Text <> Nothing Then
+                    If txtOther.Text.Trim <> Nothing Then
                         strReason = txtOther.Text
                     Else
                         MessageBox.Show("Please fill on Explanation")
