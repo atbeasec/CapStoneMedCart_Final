@@ -413,10 +413,9 @@ Partial Class frmMainScreenWaste
         Me.btnSubmitNonNarcotic.ForeColor = System.Drawing.Color.White
         Me.btnSubmitNonNarcotic.Image = CType(resources.GetObject("btnSubmitNonNarcotic.Image"), System.Drawing.Image)
         Me.btnSubmitNonNarcotic.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnSubmitNonNarcotic.Location = New System.Drawing.Point(229, 229)
-        Me.btnSubmitNonNarcotic.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSubmitNonNarcotic.Location = New System.Drawing.Point(172, 186)
         Me.btnSubmitNonNarcotic.Name = "btnSubmitNonNarcotic"
-        Me.btnSubmitNonNarcotic.Size = New System.Drawing.Size(200, 46)
+        Me.btnSubmitNonNarcotic.Size = New System.Drawing.Size(150, 37)
         Me.btnSubmitNonNarcotic.TabIndex = 220
         Me.btnSubmitNonNarcotic.Text = "   SUBMIT"
         Me.btnSubmitNonNarcotic.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
