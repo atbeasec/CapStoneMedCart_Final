@@ -533,7 +533,7 @@
     '/********************************************************************/ 
     Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWasteWithBarcode.Click
         If (rbtnOther.Checked = True) And (txtOther.Text.Trim = Nothing) Then
-            MessageBox.Show("Please fill on Explanation")
+            MessageBox.Show("Please fill in an Explanation")
             txtOther.Text = Nothing
         Else
             'check to see if the drug being wasted is a narcotic or not
@@ -888,9 +888,9 @@
     '/*  WHO            WHEN             WHAT				             */		            
     '/*  ---            ----             ----				             */
     '/********************************************************************/ 
-    Private Sub btnWasteWithCredentials_Click(sender As Object, e As EventArgs) Handles btnWasteWithCredentials.Click
+    Private Sub btnWasteWithCredentials_Click(sender As Object, e As EventArgs) Handles btnWasteWithCredentials.Click, btnSubmitWithoutSignoff.Click
         If (rbtnOther.Checked = True) And (txtOther.Text.Trim = Nothing) Then
-            MessageBox.Show("Please fill on Explanation")
+            MessageBox.Show("Please fill in an Explanation")
         Else
             If intNarcoticFlagGlobal = 1 Then
                 If IsNumeric(txtQuantity.Text) Then
@@ -1026,9 +1026,9 @@
 
     End Sub
 
-    Private Sub btnEnter_Click(sender As Object, e As EventArgs) Handles btnEnter.Click, btnSubmitWithoutSignoff.Click
+    Private Sub btnEnter_Click(sender As Object, e As EventArgs) Handles btnEnter.Click
         If (rbtnOther.Checked = True) And (txtOther.Text.Trim = Nothing) Then
-            MessageBox.Show("Please fill on Explanation")
+            MessageBox.Show("Please fill in an Explanation")
         Else
             ' make sure the user has input a value to the textbox
             If String.IsNullOrEmpty(txtQuantity.Text) Then

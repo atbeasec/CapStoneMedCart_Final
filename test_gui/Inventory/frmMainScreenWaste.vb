@@ -221,7 +221,8 @@
                     If txtOther.Text <> Nothing Then
                         strReason = txtOther.Text
                     Else
-                        MessageBox.Show("Please fill on Explanation")
+                        MessageBox.Show("Please fill in an Explanation")
+                        Exit Sub
                     End If
 
                 End If
@@ -323,7 +324,8 @@
                         If txtOther.Text <> Nothing Then
                             strReason = txtOther.Text
                         Else
-                            MessageBox.Show("Please fill on Explanation")
+                            MessageBox.Show("Please fill in an Explanation")
+                            Exit Sub
                         End If
 
                     End If
@@ -366,7 +368,8 @@
                 If txtOther.Text <> Nothing Then
                     strReason = txtOther.Text
                 Else
-                    MessageBox.Show("Please fill on Explanation")
+                    MessageBox.Show("Please fill in an Explanation")
+                    Exit Sub
                 End If
 
             End If
@@ -422,7 +425,8 @@
                     If txtOther.Text.Trim <> Nothing Then
                         strReason = txtOther.Text
                     Else
-                        MessageBox.Show("Please fill on Explanation")
+                        MessageBox.Show("Please fill in an Explanation")
+                        Exit Sub
                     End If
 
                 End If
@@ -441,7 +445,7 @@
 
     Private Sub btnEnter_Click(sender As Object, e As EventArgs) Handles btnEnter.Click
         If (rbtnOther.Checked = True) And (txtOther.Text.Trim = Nothing) Then
-            MessageBox.Show("Please fill on Explanation")
+            MessageBox.Show("Please fill in an Explanation")
         Else
             ' make sure the user has input a value to the textbox
             If String.IsNullOrEmpty(txtQuantity.Text) Then
