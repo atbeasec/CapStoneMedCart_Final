@@ -25,9 +25,12 @@
     Private dblMaxWaste As Double
     Private dblQuantity As Double
     Private dblAmountContainer As Double
+    Private dblAmountGivenToPatient As Double
 
 
-
+    Public Sub SetdblAmountGivenToPatient(ByRef amount As Double)
+        dblAmountGivenToPatient = amount
+    End Sub
     Public Sub SetintQuantity(ByRef Amount As Double)
         dblQuantity = Amount
     End Sub
@@ -1018,9 +1021,11 @@
             MessageBox.Show("Please enter the amount wasted.")
 
         Else
+            'check for the max amount that can be wasted
             Dim dblWastingAmount As Double = txtQuantity.Text
-            If dblWastingAmount > dblMaxWaste Then
-                MessageBox.Show("Please enter a wasted amount that is " & dblMaxWaste.ToString & " " & txtUnit.Text & " or less")
+            Dim dblWastingAmountLeftOver As Double = dblMaxWaste - dblAmountGivenToPatient
+            If dblWastingAmount > dblWastingAmountLeftOver Then
+                MessageBox.Show("Please enter a wasted amount that is " & dblWastingAmountLeftOver.ToString & " " & txtUnit.Text & " or less")
             Else
                 'give the barcode field focus, or give the password field focus
                 If pnlBarcode.Visible = True Then

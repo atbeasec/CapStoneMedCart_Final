@@ -258,6 +258,7 @@ Public Class frmDispense
                     frmWaste.setDrawer(intdrawerNumber)
                     frmWaste.setMedID(intMedicationID)
                     frmWaste.setDrawerMEDTUID(intdrawerMEDTUID)
+                    frmWaste.SetdblAmountGivenToPatient(CDbl(txtAmountDispensed.Text))
                     frmMain.OpenChildForm(frmWaste)
                     'used to check if the form that entered this dispense was adhoc or not
                 ElseIf intEnteredFromAdhoc = 1 Then
@@ -268,6 +269,7 @@ Public Class frmDispense
                     frmWaste.setMedID(intMedicationID)
                     frmWaste.setDrawerMEDTUID(intDrawerMEDAdhoc)
                     frmWaste.setEnteredFromAdhoc(1)
+                    frmWaste.SetdblAmountGivenToPatient(CDbl(txtAmountDispensed.Text))
                     frmMain.OpenChildForm(frmWaste)
                 End If
 
