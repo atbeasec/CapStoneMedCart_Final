@@ -48,6 +48,8 @@
         pnlSignOff.Visible = False
         txtOther.Visible = False
         Label14.Visible = False
+
+        btnSubmitNonNarcotic.SendToBack()
     End Sub
 
     Private Sub cmbPatientName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPatientName.SelectedIndexChanged
@@ -442,4 +444,5 @@
         End If
 
     End Sub
+
 End Class

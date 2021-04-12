@@ -530,10 +530,14 @@ Public Class frmDispense
     '/*********************************************************************/
     Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantityToDispense.KeyPress
         DataVaildationMethods.KeyPressCheck(e, "0123456789")
+    End Sub
 
-        If IsNumeric(txtQuantityToDispense.Text) Then
-            GraphicalUserInterfaceReusableMethods.MaxValue(CInt(sender.Text), 1000, txtQuantityToDispense)
-        End If
+    Private Sub txtCountInDrawer_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtCountInDrawer.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789")
+    End Sub
+
+    Private Sub txtAmountDispensed_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtAmountDispensed.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789.")
     End Sub
 
     '/*********************************************************************/
@@ -566,13 +570,16 @@ Public Class frmDispense
     '/*  AB    3/20/2021     Initial creation/rework of dispensing
     '/*********************************************************************/
     Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantityToDispense.Validated
-        If IsNumeric(sender.Text) Then
-            GraphicalUserInterfaceReusableMethods.MaxValue(CInt(sender.Text), 1000, txtQuantityToDispense)
-        Else
-            MessageBox.Show("Please make sure you enter a positive number 1-1000")
-            sender.Text = "1"
-        End If
+        'If IsNumeric(sender.Text) Then
+        '    GraphicalUserInterfaceReusableMethods.MaxValue(CInt(sender.Text), 1000, txtQuantityToDispense)
+        'Else
+        '    MessageBox.Show("Please make sure you enter a positive number 1-1000.")
+        '    '  sender.Text = "1"
+        'End If
     End Sub
+
+
+
 
     '/*********************************************************************/
     '/*                   SubProgram NAME: btnBack_Click               */         
@@ -676,7 +683,7 @@ Public Class frmDispense
 
         If pnlAmountToRemove.Visible = True Then
 
-            If txtQuantityToDispense.Text.Length >= 4 Then
+            If txtCountInDrawer.Text.Length > 4 Then
 
             Else
 
@@ -696,7 +703,6 @@ Public Class frmDispense
 
         ElseIf pnlAmountAdministered.Visible = True Then
 
-
             If txtAmountDispensed.Text.Length > 5 Then
 
             Else
@@ -704,6 +710,7 @@ Public Class frmDispense
                 txtAmountDispensed.Text &= CStr(sender.Text)
 
             End If
+
         End If
 
     End Sub
@@ -741,40 +748,89 @@ Public Class frmDispense
 
 
         ElseIf pnlAmountAdministered.Visible = True Then
-            Dim dblAmountGiven As Double = CDbl(txtAmountDispensed.Text)
-            If dblAmountGiven > dblAmountAdministerMAX Then
-                MessageBox.Show("Max amount to administer to patient is " & dblAmountAdministerMAX.ToString)
-            Else
-                If Not String.IsNullOrEmpty(txtAmountDispensed.Text) Then
-                    btnDispense.PerformClick()
+
+            If IsNumeric(txtAmountDispensed.Text) Then
+                Dim dblAmountGiven As Double = CDbl(txtAmountDispensed.Text)
+
+                If dblAmountGiven > dblAmountAdministerMAX Then
+                    MessageBox.Show("Max amount to administer to patient is " & dblAmountAdministerMAX.ToString)
+                Else
+                    If Not String.IsNullOrEmpty(txtAmountDispensed.Text) Then
+                        btnDispense.PerformClick()
+                    End If
                 End If
+            Else
+                MessageBox.Show("Please enter a valid number.")
+                txtAmountDispensed.Text = Nothing
             End If
-
-
-
         End If
-
 
     End Sub
 
     Private Sub AddVisibleChangedEventHandler()
-
         AddHandler pnlAmountToRemove.VisibleChanged, AddressOf VisibleChangedEvent
-
     End Sub
 
     Private Sub VisibleChangedEvent(ByVal sender As Object, ByVal e As EventArgs)
 
         If pnlAmountToRemove.Visible = False Then
-
             btnReopenDrawer.Visible = True
-
         End If
 
     End Sub
 
+    Private Sub txtQuantityToDispense_TextChanged(sender As Object, e As EventArgs) Handles txtQuantityToDispense.TextChanged
+
+        If Not String.IsNullOrEmpty(sender.text) Then
+            If sender.text.length > 3 Then
+                If CInt(sender.text) > 1000 Then
+
+                    MessageBox.Show("Please pick a number between 0 - 1000")
+                    sender.text = Nothing
+
+                End If
+            End If
+        End If
+
+    End Sub
+
+    Private Sub txtCountInDrawer_TextChanged(sender As Object, e As EventArgs) Handles txtCountInDrawer.TextChanged
+
+        If Not String.IsNullOrEmpty(sender.text) Then
+            If sender.text.length > 3 Then
+                If CInt(sender.text) > 1000 Then
+
+                    MessageBox.Show("Please pick a number between 0 - 1000")
+                    sender.text = Nothing
+
+                End If
+            End If
+        End If
+
+    End Sub
+
+    Private Sub txtAmountDispensed_TextChanged(sender As Object, e As EventArgs) Handles txtAmountDispensed.TextChanged
+
+        If Not String.IsNullOrEmpty(sender.text) Then
+            If IsNumeric(sender.text) Then
+                If sender.text.length > 3 Then
+                    If CDbl(sender.text) > 1000 Then
+
+                        MessageBox.Show("Please pick a number between 0 - 1000")
+                        sender.text = Nothing
+
+                    End If
+                End If
+            Else
+                MessageBox.Show("Please make sure to enter a number with a lead zero if using a decimal and only one decimal point")
+                sender.Text = sender.Text.ToString.TrimEnd(CChar("."))
+            End If
+        End If
+
+    End Sub
 
     Private Sub CalculateMaxDispense(ByRef RemoveNumber As Double)
         dblAmountAdministerMAX = RemoveNumber * dblAmountPerContainer
     End Sub
+
 End Class

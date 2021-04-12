@@ -43,13 +43,13 @@ Partial Class frmWaste
         Me.txtBarcode = New System.Windows.Forms.TextBox()
         Me.lblSignoff = New System.Windows.Forms.Label()
         Me.btnWasteWithBarcode = New System.Windows.Forms.Button()
-        Me.btnSubmitWithoutSignoff = New System.Windows.Forms.Button()
         Me.txtOther = New System.Windows.Forms.TextBox()
         Me.rbtnOther = New System.Windows.Forms.RadioButton()
         Me.radPatientUnavilable = New System.Windows.Forms.RadioButton()
         Me.radRefused = New System.Windows.Forms.RadioButton()
         Me.radCancel = New System.Windows.Forms.RadioButton()
         Me.radIncorrect = New System.Windows.Forms.RadioButton()
+        Me.btnSubmitWithoutSignoff = New System.Windows.Forms.Button()
         Me.pnlHeader = New System.Windows.Forms.Panel()
         Me.btnBack = New System.Windows.Forms.Button()
         Me.lblPatientInfo = New System.Windows.Forms.Label()
@@ -107,6 +107,7 @@ Partial Class frmWaste
         '
         Me.pnlRadioButtons.Controls.Add(Me.Label14)
         Me.pnlRadioButtons.Controls.Add(Me.pnlSignOff)
+        Me.pnlRadioButtons.Controls.Add(Me.btnSubmitWithoutSignoff)
         Me.pnlRadioButtons.Controls.Add(Me.txtOther)
         Me.pnlRadioButtons.Controls.Add(Me.rbtnOther)
         Me.pnlRadioButtons.Controls.Add(Me.radPatientUnavilable)
@@ -309,23 +310,6 @@ Partial Class frmWaste
         Me.btnWasteWithBarcode.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnWasteWithBarcode.UseVisualStyleBackColor = False
         '
-        'btnSubmitWithoutSignoff
-        '
-        Me.btnSubmitWithoutSignoff.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.btnSubmitWithoutSignoff.FlatAppearance.BorderSize = 0
-        Me.btnSubmitWithoutSignoff.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSubmitWithoutSignoff.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSubmitWithoutSignoff.ForeColor = System.Drawing.Color.White
-        Me.btnSubmitWithoutSignoff.Image = CType(resources.GetObject("btnSubmitWithoutSignoff.Image"), System.Drawing.Image)
-        Me.btnSubmitWithoutSignoff.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnSubmitWithoutSignoff.Location = New System.Drawing.Point(797, 244)
-        Me.btnSubmitWithoutSignoff.Name = "btnSubmitWithoutSignoff"
-        Me.btnSubmitWithoutSignoff.Size = New System.Drawing.Size(150, 37)
-        Me.btnSubmitWithoutSignoff.TabIndex = 220
-        Me.btnSubmitWithoutSignoff.Text = "   SUBMIT"
-        Me.btnSubmitWithoutSignoff.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnSubmitWithoutSignoff.UseVisualStyleBackColor = False
-        '
         'txtOther
         '
         Me.txtOther.Location = New System.Drawing.Point(229, 28)
@@ -391,6 +375,23 @@ Partial Class frmWaste
         Me.radIncorrect.TabStop = True
         Me.radIncorrect.Text = "Incorrect Medication"
         Me.radIncorrect.UseVisualStyleBackColor = True
+        '
+        'btnSubmitWithoutSignoff
+        '
+        Me.btnSubmitWithoutSignoff.BackColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
+        Me.btnSubmitWithoutSignoff.FlatAppearance.BorderSize = 0
+        Me.btnSubmitWithoutSignoff.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSubmitWithoutSignoff.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSubmitWithoutSignoff.ForeColor = System.Drawing.Color.White
+        Me.btnSubmitWithoutSignoff.Image = CType(resources.GetObject("btnSubmitWithoutSignoff.Image"), System.Drawing.Image)
+        Me.btnSubmitWithoutSignoff.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnSubmitWithoutSignoff.Location = New System.Drawing.Point(170, 212)
+        Me.btnSubmitWithoutSignoff.Name = "btnSubmitWithoutSignoff"
+        Me.btnSubmitWithoutSignoff.Size = New System.Drawing.Size(150, 37)
+        Me.btnSubmitWithoutSignoff.TabIndex = 220
+        Me.btnSubmitWithoutSignoff.Text = "   SUBMIT"
+        Me.btnSubmitWithoutSignoff.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnSubmitWithoutSignoff.UseVisualStyleBackColor = False
         '
         'pnlHeader
         '
@@ -474,7 +475,6 @@ Partial Class frmWaste
         Me.txtQuantity.Location = New System.Drawing.Point(665, 88)
         Me.txtQuantity.MaxLength = 5
         Me.txtQuantity.Name = "txtQuantity"
-        Me.txtQuantity.ReadOnly = True
         Me.txtQuantity.ShortcutsEnabled = False
         Me.txtQuantity.Size = New System.Drawing.Size(163, 25)
         Me.txtQuantity.TabIndex = 215
@@ -518,7 +518,7 @@ Partial Class frmWaste
         Me.pnlSelector.Controls.Add(Me.btnEight)
         Me.pnlSelector.Controls.Add(Me.btnSeven)
         Me.pnlSelector.Controls.Add(Me.btnSix)
-        Me.pnlSelector.Location = New System.Drawing.Point(662, 124)
+        Me.pnlSelector.Location = New System.Drawing.Point(663, 127)
         Me.pnlSelector.Name = "pnlSelector"
         Me.pnlSelector.Size = New System.Drawing.Size(287, 300)
         Me.pnlSelector.TabIndex = 218
@@ -702,7 +702,6 @@ Partial Class frmWaste
         Me.ClientSize = New System.Drawing.Size(1091, 645)
         Me.Controls.Add(Me.pnlSelector)
         Me.Controls.Add(Me.lblPatientInfo)
-        Me.Controls.Add(Me.btnSubmitWithoutSignoff)
         Me.Controls.Add(Me.txtQuantity)
         Me.Controls.Add(Me.txtDrawer)
         Me.Controls.Add(Me.txtUnit)

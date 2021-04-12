@@ -331,7 +331,6 @@ Partial Class frmAdHockDispense
         Me.txtAmount.Location = New System.Drawing.Point(712, 136)
         Me.txtAmount.MaxLength = 5
         Me.txtAmount.Name = "txtAmount"
-        Me.txtAmount.ReadOnly = True
         Me.txtAmount.ShortcutsEnabled = False
         Me.txtAmount.Size = New System.Drawing.Size(147, 29)
         Me.txtAmount.TabIndex = 2
@@ -346,7 +345,7 @@ Partial Class frmAdHockDispense
         Me.txtUnit.Name = "txtUnit"
         Me.txtUnit.ReadOnly = True
         Me.txtUnit.ShortcutsEnabled = False
-        Me.txtUnit.Size = New System.Drawing.Size(107, 29)
+        Me.txtUnit.Size = New System.Drawing.Size(125, 29)
         Me.txtUnit.TabIndex = 4
         Me.txtUnit.TabStop = False
         '
@@ -367,7 +366,7 @@ Partial Class frmAdHockDispense
         Me.pnlSelector.Controls.Add(Me.btnSix)
         Me.pnlSelector.Location = New System.Drawing.Point(708, 175)
         Me.pnlSelector.Name = "pnlSelector"
-        Me.pnlSelector.Size = New System.Drawing.Size(287, 300)
+        Me.pnlSelector.Size = New System.Drawing.Size(304, 300)
         Me.pnlSelector.TabIndex = 230
         '
         'btnDecimal
@@ -430,7 +429,7 @@ Partial Class frmAdHockDispense
         Me.btnClear.Location = New System.Drawing.Point(217, 0)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Padding = New System.Windows.Forms.Padding(1)
-        Me.btnClear.Size = New System.Drawing.Size(65, 136)
+        Me.btnClear.Size = New System.Drawing.Size(84, 136)
         Me.btnClear.TabIndex = 22
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = False
@@ -456,9 +455,9 @@ Partial Class frmAdHockDispense
         Me.btnEnter.Location = New System.Drawing.Point(217, 142)
         Me.btnEnter.Name = "btnEnter"
         Me.btnEnter.Padding = New System.Windows.Forms.Padding(1)
-        Me.btnEnter.Size = New System.Drawing.Size(65, 136)
+        Me.btnEnter.Size = New System.Drawing.Size(84, 136)
         Me.btnEnter.TabIndex = 24
-        Me.btnEnter.Text = "Enter"
+        Me.btnEnter.Text = "Submit"
         Me.btnEnter.UseVisualStyleBackColor = False
         '
         'btnTwo
