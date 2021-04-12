@@ -426,9 +426,11 @@
                     End If
 
                 End If
-                frmWaste.insertWaste(CInt(LoggedInID), CInt(LoggedInID), intDrawerMedArray(cmbMedications.SelectedIndex), intMedIDArray(cmbMedications.SelectedIndex), intPatientIDArray(cmbPatientName.SelectedIndex), strReason, txtQuantity.Text, dtmWasteTime)
-                MessageBox.Show("Waste information saved.")
-                ClearWaste()
+                If IsNumeric(txtQuantity.Text) Then
+                    frmWaste.insertWaste(CInt(LoggedInID), CInt(LoggedInID), intDrawerMedArray(cmbMedications.SelectedIndex), intMedIDArray(cmbMedications.SelectedIndex), intPatientIDArray(cmbPatientName.SelectedIndex), strReason, txtQuantity.Text, dtmWasteTime)
+                    MessageBox.Show("Waste information saved.")
+                    ClearWaste()
+                End If
             End If
         End If
     End Sub
@@ -467,7 +469,7 @@
 
     Private Sub btnDrawer7_Click(sender As Object, e As EventArgs) Handles btnOne.Click, btnTwo.Click, btnThree.Click, btnFour.Click, btnFive.Click, btnSix.Click, btnSeven.Click, btnEight.Click, btnNine.Click, btnZero.Click, btnDecimal.Click
 
-        If txtQuantity.Text.Length >= 4 Then
+        If txtQuantity.Text.Length >= 5 Then
 
         Else
 
@@ -477,7 +479,7 @@
 
     End Sub
 
-    Private Sub txtBarcode_TextChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBarcode.KeyPress
+    Private Sub txtBarcode_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBarcode.KeyPress
         If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
             e.KeyChar = ChrW(0)
             e.Handled = True
@@ -485,11 +487,29 @@
         End If
     End Sub
 
-    Private Sub txtPassword_TextChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress
+    Private Sub txtPassword_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress
         If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
             e.KeyChar = ChrW(0)
             e.Handled = True
             btnWasteWithCredentials_Click(sender, e)
+        End If
+    End Sub
+
+    Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantity.TextChanged
+        If Not String.IsNullOrEmpty(sender.text) Then
+            If IsNumeric(sender.text) Then
+                If sender.text.length > 3 Then
+                    If CDbl(sender.text) > 1000 Then
+
+                        MessageBox.Show("Please pick a number between 0 - 1000")
+                        sender.text = Nothing
+
+                    End If
+                End If
+            Else
+                MessageBox.Show("Please make sure to enter a number with a lead zero if using a decimal and only one decimal point")
+                sender.Text = sender.Text.ToString.TrimEnd(CChar("."))
+            End If
         End If
     End Sub
 End Class
