@@ -159,7 +159,7 @@
     End Sub
 
     Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWaste.Click
-        If (rbtnOther.Checked = True) And (txtOther.Text = Nothing) Then
+        If (rbtnOther.Checked = True) And (txtOther.Text.Trim = Nothing) Then
             MessageBox.Show("Please fill in Explanation")
         Else
             If txtQuantity.Text = Nothing Or txtQuantity.Text.Trim.Length = 0 Or cmbMedications.SelectedIndex = -1 Or cmbPatientName.SelectedIndex = -1 Then
@@ -298,7 +298,7 @@
     End Sub
 
     Private Sub btnWasteWithCredentials_Click(sender As Object, e As EventArgs) Handles btnWasteWithCredentials.Click
-        If (rbtnOther.Checked = True) And (txtOther.Text = Nothing) Then
+        If (rbtnOther.Checked = True) And (txtOther.Text.Trim = Nothing) Then
             MessageBox.Show("Please fill in Explanation")
         Else
             If txtQuantity.Text = Nothing Or txtQuantity.Text.Trim.Length = 0 Or cmbMedications.SelectedIndex = -1 Or cmbPatientName.SelectedIndex = -1 Then
@@ -477,4 +477,19 @@
 
     End Sub
 
+    Private Sub txtBarcode_TextChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBarcode.KeyPress
+        If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
+            e.KeyChar = ChrW(0)
+            e.Handled = True
+            btnWaste_Click(sender, e)
+        End If
+    End Sub
+
+    Private Sub txtPassword_TextChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress
+        If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
+            e.KeyChar = ChrW(0)
+            e.Handled = True
+            btnWasteWithCredentials_Click(sender, e)
+        End If
+    End Sub
 End Class

@@ -532,10 +532,10 @@
     '/*  AB		        2/10/21		    initial creation                 */
     '/********************************************************************/ 
     Private Sub btnWaste_Click(sender As Object, e As EventArgs) Handles btnWasteWithBarcode.Click, btnSubmitWithoutSignoff.Click
-        If (rbtnOther.Checked = True) And (txtOther.Text = Nothing) Then
+        If (rbtnOther.Checked = True) And (txtOther.Text.Trim = Nothing) Then
             MessageBox.Show("Please fill on Explanation")
         Else
-            'heck to see if the drug being wasted is a narcotic or not
+            'check to see if the drug being wasted is a narcotic or not
             'if it is a narcotic require sign off
             If intNarcoticFlagGlobal = 1 Then
                 If IsNumeric(txtQuantity.Text) Then
@@ -888,7 +888,7 @@
     '/*  ---            ----             ----				             */
     '/********************************************************************/ 
     Private Sub btnWasteWithCredentials_Click(sender As Object, e As EventArgs) Handles btnWasteWithCredentials.Click
-        If (rbtnOther.Checked = True) And (txtOther.Text = Nothing) Then
+        If (rbtnOther.Checked = True) And (txtOther.Text.Trim = Nothing) Then
             MessageBox.Show("Please fill on Explanation")
         Else
             If intNarcoticFlagGlobal = 1 Then
@@ -1078,4 +1078,19 @@
         End If
     End Sub
 
+    Private Sub txtBarcode_TextChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBarcode.KeyPress
+        If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
+            e.KeyChar = ChrW(0)
+            e.Handled = True
+            btnWaste_Click(sender, e)
+        End If
+    End Sub
+
+    Private Sub txtPassword_TextChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress
+        If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
+            e.KeyChar = ChrW(0)
+            e.Handled = True
+            btnWasteWithCredentials_Click(sender, e)
+        End If
+    End Sub
 End Class
