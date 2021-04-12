@@ -13,6 +13,9 @@ Public Class frmDispense
     Private dblDispensedPatientAmount As Integer
     Private dblWastedAmount As Integer
 
+    Private dblAmountPerContainer As Double
+    Private dblAmountAdministerMAX As Double
+
     Dim contactPanelsAddedCount As Integer = 0
     Dim currentContactPanelName As String = Nothing
 
@@ -25,6 +28,10 @@ Public Class frmDispense
     Private intAdhocDrawerNumber As Integer
     Private intAdhocBin As Integer
     Const ENTERAMOUNTOTREMOVE As String = "  Insert Amount to Remove:"
+
+    Public Sub setAmountPerContainer(ByRef ID As Double)
+        dblAmountPerContainer = ID
+    End Sub
 
     Public Sub setintEntered(ByRef ID As Integer)
         intEnteredFromAdhoc = ID
@@ -138,15 +145,6 @@ Public Class frmDispense
 
     End Sub
 
-
-    Private Sub btnUp_Click(sender As Object, e As EventArgs)
-        ButtonIncrement(1000, txtQuantityToDispense)
-    End Sub
-
-    Private Sub btnDown_Click(sender As Object, e As EventArgs)
-        ButtonDecrement(txtQuantityToDispense)
-    End Sub
-
     '/*********************************************************************/
     '/*                   SubProgram NAME: btnDispense_Click_1               */         
     '/*********************************************************************/
@@ -205,7 +203,7 @@ Public Class frmDispense
 
         End If
 
-            If intEnteredFromAdhoc = 1 Then
+        If intEnteredFromAdhoc = 1 Then
             intdrawerNumber = intAdhocDrawerNumber
         End If
         'check for what set in the process the dispense is in.
@@ -255,7 +253,7 @@ Public Class frmDispense
                 If intEnteredFromAdhoc = 0 Then
                     Dim strAmountDispensed As String = txtAmountDispensed.Text & " " & txtUnits.Text
                     Dim intdrawerMEDTUID As Integer = CreateDatabase.ExecuteScalarQuery("Select DrawerMedication_ID from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
-                        DispensingDrug(intMedicationID, CInt(LoggedInID), strAmountDispensed)
+                    DispensingDrug(intMedicationID, CInt(LoggedInID), strAmountDispensed)
                     frmWaste.SetPatientID(intPatientID)
                     frmWaste.setDrawer(intdrawerNumber)
                     frmWaste.setMedID(intMedicationID)
@@ -668,7 +666,7 @@ Public Class frmDispense
         If intAmountDispense > intAmountInDrawer Then
             intAmountDispense = intAmountInDrawer
         End If
-
+        CalculateMaxDispense(intAmountDispense)
         frmWaste.SetintQuantity(intAmountDispense)
     End Sub
 
@@ -741,10 +739,15 @@ Public Class frmDispense
 
 
         ElseIf pnlAmountAdministered.Visible = True Then
-
-            If Not String.IsNullOrEmpty(txtAmountDispensed.Text) Then
-                btnDispense.PerformClick()
+            Dim dblAmountGiven As Double = CDbl(txtAmountDispensed.Text)
+            If dblAmountGiven > dblAmountAdministerMAX Then
+                MessageBox.Show("Max amount to administer to patient is " & dblAmountAdministerMAX.ToString)
+            Else
+                If Not String.IsNullOrEmpty(txtAmountDispensed.Text) Then
+                    btnDispense.PerformClick()
+                End If
             End If
+
 
 
         End If
@@ -769,4 +772,7 @@ Public Class frmDispense
     End Sub
 
 
+    Private Sub CalculateMaxDispense(ByRef RemoveNumber As Double)
+        dblAmountAdministerMAX = RemoveNumber * dblAmountPerContainer
+    End Sub
 End Class
