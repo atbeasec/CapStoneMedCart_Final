@@ -688,12 +688,11 @@ Module GraphicalUserInterfaceReusableMethods
             Dim intID As Integer = GetSelectedInformation(sender.parent, "lblID")
             Dim strStatement As String = "SELECT Active_Flag FROM Physician WHERE Physician_ID = '" & intID & "'"
             If ExecuteScalarQuery(strStatement) = 1 Then
-                'Check to see if the physician has patients assigned to them
 
-                strSQLCmd = "SELECT Patient_First_Name, Patient_Middle_Name, Patient_Last_Name, PatientPhysician.Physician_ID FROM Patient 
-                            INNER JOIN PatientPhysician On Patient.Patient_ID = PatientPhysician.Patient_ID 
-                            INNER JOIN Physician On Physician.Physician_ID = PatientPhysician.Physician_ID 
-                            WHERE PatientPhysician.Active_Flag = 1 AND Physician.Physician_ID ='" & intID & "';"
+                'Check to see if the physician has patients assigned to them
+                strSQLCmd = "SELECT Patient_First_Name, Patient_Middle_Name, Patient_Last_Name FROM Patient 
+                            INNER JOIN Physician On Physician.Physician_ID = Primary_Physician_ID
+                            WHERE Patient.Active_Flag = 1 AND Physician.Physician_ID ='" & intID & "';"
 
                 dsValues = ExecuteSelectQuery(strSQLCmd)
 
