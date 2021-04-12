@@ -976,7 +976,7 @@
 
     Private Sub btnDrawer7_Click(sender As Object, e As EventArgs) Handles btnOne.Click, btnTwo.Click, btnThree.Click, btnFour.Click, btnFive.Click, btnSix.Click, btnSeven.Click, btnEight.Click, btnNine.Click, btnZero.Click, btnDecimal.Click
 
-        If txtQuantity.Text.Length >= 4 Then
+        If txtQuantity.Text.Length >= 5 Then
 
         Else
 
@@ -1019,4 +1019,19 @@
 
 
     End Sub
+
+    Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantity.TextChanged
+
+        If Not String.IsNullOrEmpty(sender.text) Then
+            If sender.text.length > 3 Then
+                If CDbl(sender.text) > 1000 Then
+
+                    MessageBox.Show("Please pick a number between 0 - 1000")
+                    sender.text = Nothing
+
+                End If
+            End If
+        End If
+    End Sub
+
 End Class

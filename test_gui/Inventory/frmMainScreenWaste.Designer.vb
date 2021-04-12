@@ -150,6 +150,7 @@ Partial Class frmMainScreenWaste
         Me.pnlRadioButtons.Controls.Add(Me.txtOther)
         Me.pnlRadioButtons.Controls.Add(Me.rbtnOther)
         Me.pnlRadioButtons.Controls.Add(Me.radPatientUnavilable)
+        Me.pnlRadioButtons.Controls.Add(Me.btnSubmitNonNarcotic)
         Me.pnlRadioButtons.Controls.Add(Me.radRefused)
         Me.pnlRadioButtons.Controls.Add(Me.radCancel)
         Me.pnlRadioButtons.Controls.Add(Me.radIncorrect)
@@ -172,7 +173,7 @@ Partial Class frmMainScreenWaste
         '
         Me.pnlSignOff.Controls.Add(Me.pnlCredentials)
         Me.pnlSignOff.Controls.Add(Me.pnlBarcode)
-        Me.pnlSignOff.Location = New System.Drawing.Point(3, 157)
+        Me.pnlSignOff.Location = New System.Drawing.Point(3, 161)
         Me.pnlSignOff.Name = "pnlSignOff"
         Me.pnlSignOff.Size = New System.Drawing.Size(491, 253)
         Me.pnlSignOff.TabIndex = 24
@@ -424,7 +425,7 @@ Partial Class frmMainScreenWaste
         Me.btnSubmitNonNarcotic.ForeColor = System.Drawing.Color.White
         Me.btnSubmitNonNarcotic.Image = CType(resources.GetObject("btnSubmitNonNarcotic.Image"), System.Drawing.Image)
         Me.btnSubmitNonNarcotic.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnSubmitNonNarcotic.Location = New System.Drawing.Point(776, 374)
+        Me.btnSubmitNonNarcotic.Location = New System.Drawing.Point(172, 186)
         Me.btnSubmitNonNarcotic.Name = "btnSubmitNonNarcotic"
         Me.btnSubmitNonNarcotic.Size = New System.Drawing.Size(150, 37)
         Me.btnSubmitNonNarcotic.TabIndex = 220
@@ -740,7 +741,7 @@ Partial Class frmMainScreenWaste
         Me.pnlSelector.Controls.Add(Me.btnEight)
         Me.pnlSelector.Controls.Add(Me.btnSeven)
         Me.pnlSelector.Controls.Add(Me.btnSix)
-        Me.pnlSelector.Location = New System.Drawing.Point(646, 255)
+        Me.pnlSelector.Location = New System.Drawing.Point(647, 250)
         Me.pnlSelector.Name = "pnlSelector"
         Me.pnlSelector.Size = New System.Drawing.Size(287, 300)
         Me.pnlSelector.TabIndex = 254
@@ -923,7 +924,6 @@ Partial Class frmMainScreenWaste
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1091, 645)
         Me.Controls.Add(Me.pnlSelector)
-        Me.Controls.Add(Me.btnSubmitNonNarcotic)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label1)
