@@ -476,7 +476,6 @@
             txtQuantity.Text &= CStr(sender.Text)
 
         End If
-
     End Sub
 
     Private Sub txtBarcode_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBarcode.KeyPress
@@ -487,7 +486,7 @@
         End If
     End Sub
 
-    Private Sub txtPassword_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress
+    Private Sub txtPassword_Keypress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress
         If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
             e.KeyChar = ChrW(0)
             e.Handled = True
