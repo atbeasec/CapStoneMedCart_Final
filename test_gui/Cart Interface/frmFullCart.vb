@@ -6,7 +6,7 @@ Public Class frmFullCart
     '/*********************************************************************/
     '/*                   FILE NAME:  FullCart                              */									  
     '/*********************************************************************/
-    '/*                 PART OF PROJECT: CartInterface  				   */				  
+    '/*                 PART OF PROJECT: MedServe         				   */				  
     '/*********************************************************************/
     '/*                   WRITTEN BY:  Nathan Premo  		                */		  
     '/*		         DATE CREATED: 1/28/2021                			   */						  

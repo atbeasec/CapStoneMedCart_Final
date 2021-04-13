@@ -208,6 +208,7 @@
         pnlBarcode.Visible = True
         pnlCredentials.Visible = False
         btnWasteWithBarcode.Visible = False
+        txtBarcode.Focus()
     End Sub
 
     '/*********************************************************************/
@@ -245,7 +246,7 @@
             txtBarcode.Text = Nothing
             pnlCredentials.Visible = True
             btnWasteWithBarcode.Visible = True
-
+            txtUsername.Focus()
         End If
 
     End Sub
@@ -294,6 +295,7 @@
             txtPassword.Text = Nothing
             pnlBarcode.Visible = True
             btnWasteWithBarcode.Visible = False
+            txtBarcode.Focus()
         End If
     End Sub
 End Class
