@@ -140,10 +140,11 @@
     '/*   
     '/*********************************************************************/
     Private Sub btnAllergySave_Click(sender As Object, e As EventArgs) Handles btnAllergySave.Click
-
         Dim strAllergyName = cmbAllergies.SelectedItem.ToString
         Dim intPatientTuid = GetPatientTuid()
         Dim strNewSeverity = cmbSeverity.SelectedIndex.ToString
+        Dim intAllergyId As Integer
+
         ExecuteScalarQuery("UPDATE PatientAllergy SET Allergy_Severity='" & strNewSeverity & "', Active_Flag = 1 WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTuid & " ;")
         DisableEditButtons()
         flpAllergies.Controls.Clear()
@@ -493,7 +494,7 @@
         Dim intSeverity As Integer = 0
         Dim dtsPatientAllergy As DataSet = CreateDatabase.ExecuteSelectQuery("Select Allergy.Allergy_Name, PatientAllergy.Allergy_Severity," &
                                                                              "Allergy.Allergy_Type From PatientAllergy " &
-                                                                             "INNER JOIN Allergy on PatientAllergy.Allergy_Name=Allergy.Allergy_Name" &
+                                                                             "INNER JOIN Allergy on PatientAllergy.Allergy_TUID=Allergy.Allergy_ID" &
                             " Where Active_Flag =1 And Patient_TUID =" & (intPatientTuid).ToString & ";")
         ' insert the select statement here and send the results to the createAllergiesPanel
         cmbAllergies.SelectedIndex = -1

@@ -998,12 +998,14 @@ Module CreateDatabase
 	'/*  BRH  01/23/21  Initial creation of the code					*/
 	'/*  BRH  02/01/21  Updated for unique primary keys, removed medication
 	'/*					tuid											*/
+	'/*	 BRH  04/13/21	Added allergy id								*/
 	'/*******************************************************************/
 	Public Sub CreateAllergyTable()
 		strCreateTable = "CREATE TABLE 'Allergy' (
+						'Allergy_ID'	INTEGER NOT NULL,
 	                    'Allergy_Name'	TEXT NOT NULL UNIQUE,
 	                    'Allergy_Type'	TEXT,
-	                    PRIMARY KEY(" & "Allergy_Name" & "));"
+	                    PRIMARY KEY(" & "Allergy_ID" & "));"
 
 		ExecuteQuery("Allergy")
 	End Sub
@@ -1042,15 +1044,16 @@ Module CreateDatabase
 	'/*  WHO   WHEN     WHAT											*/
 	'/*  ---   ----     ------------------------------------------------*/
 	'/*  BRH  01/23/21  Initial creation of the code					*/
+	'/*	 BRH  04/13/21	fixed foreign key to the allergy table			*/
 	'/*******************************************************************/
 	Public Sub CreatePatientAllergyTable()
 		strCreateTable = "CREATE TABLE 'PatientAllergy' (
 	                    'Patient_TUID'	INTEGER NOT NULL,
-	                    'Allergy_Name'	TEXT NOT NULL,
+	                    'Allergy_TUID'	INTEGER NOT NULL,
 	                    'Allergy_Severity'	TEXT,
 	                    'Active_Flag'	INTEGER NOT NULL,
-	                    PRIMARY KEY(" & "Patient_TUID" & "," & "Allergy_Name" & "),
-	                    FOREIGN KEY(" & "Allergy_Name" & ") REFERENCES " & "Allergy" & "(" & "Allergy_Name" & "),
+	                    PRIMARY KEY(" & "Patient_TUID" & "," & "Allergy_TUID" & "),
+	                    FOREIGN KEY(" & "Allergy_TUID" & ") REFERENCES " & "Allergy" & "(" & "Allergy_ID" & "),
 	                    FOREIGN KEY(" & "Patient_TUID" & ") REFERENCES " & "Patient" & "(" & "Patient_ID" & "));"
 
 		ExecuteQuery("PatientAllergy")

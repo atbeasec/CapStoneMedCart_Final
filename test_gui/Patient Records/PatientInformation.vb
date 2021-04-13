@@ -824,6 +824,7 @@ Module PatientInformation
     '/*  ---   ----     ------------------------------------------------- */
     '/*  AK   2/8/2021 Created the SQL statements to pull back the       */
     '/*                 information needed for Patient allergies list     */
+    '/* BRH   4/13/2021 Fixed SQL so the program wouldn't break.          */
     '/*********************************************************************/
     Public Sub GetAllergies(ByRef intPatient_ID As Integer)
         frmPatientInfo.lstBoxAllergies.Items.Clear()
@@ -834,7 +835,7 @@ Module PatientInformation
         Dim intPatientAllergyId As Integer = intPatient_ID ' CInt(CreateDatabase.ExecuteScalarQuery("select patient.Patient_ID From Patient " &
         '"where Patient.Patient_ID=" & (intPatient_ID).ToString & ";"))
         'get the allergy information from the patient allergy tables
-        Dim dtsPatientAllergy As DataSet = CreateDatabase.ExecuteSelectQuery("Select Allergy_Name From PatientAllergy " &
+        Dim dtsPatientAllergy As DataSet = CreateDatabase.ExecuteSelectQuery("Select Allergy_Name From Allergy INNER JOIN PatientAllergy ON Allergy_ID = Allergy_TUID " &
                             "Where Active_Flag =1 AND Patient_TUID =" & (intPatientAllergyId).ToString & ";")
 
         'push each row from the
