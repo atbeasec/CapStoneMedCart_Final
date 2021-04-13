@@ -90,9 +90,9 @@ Partial Class frmEndOfShift
         Me.lblCount.ForeColor = System.Drawing.SystemColors.ControlDarkDark
         Me.lblCount.Location = New System.Drawing.Point(730, 19)
         Me.lblCount.Name = "lblCount"
-        Me.lblCount.Size = New System.Drawing.Size(54, 21)
+        Me.lblCount.Size = New System.Drawing.Size(82, 21)
         Me.lblCount.TabIndex = 6
-        Me.lblCount.Text = "Count"
+        Me.lblCount.Text = "New Total"
         '
         'lblActions
         '
