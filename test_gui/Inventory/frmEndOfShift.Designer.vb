@@ -23,6 +23,7 @@ Partial Class frmEndOfShift
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmEndOfShift))
         Me.flpEndOfShiftCount = New System.Windows.Forms.FlowLayoutPanel()
         Me.pnlHeader = New System.Windows.Forms.Panel()
         Me.lblSection = New System.Windows.Forms.Label()
@@ -35,6 +36,7 @@ Partial Class frmEndOfShift
         Me.cmbFilter = New System.Windows.Forms.ComboBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.tpToolTip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lblInstructions = New System.Windows.Forms.Label()
         Me.pnlHeader.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -77,22 +79,24 @@ Partial Class frmEndOfShift
         Me.lblSystemCount.AutoSize = True
         Me.lblSystemCount.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSystemCount.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblSystemCount.Location = New System.Drawing.Point(574, 19)
+        Me.lblSystemCount.Location = New System.Drawing.Point(553, 19)
         Me.lblSystemCount.Name = "lblSystemCount"
-        Me.lblSystemCount.Size = New System.Drawing.Size(111, 21)
+        Me.lblSystemCount.Size = New System.Drawing.Size(102, 21)
         Me.lblSystemCount.TabIndex = 7
-        Me.lblSystemCount.Text = "System Count"
+        Me.lblSystemCount.Text = "System Total"
+        Me.tpToolTip.SetToolTip(Me.lblSystemCount, "Current system medication amount")
         '
         'lblCount
         '
         Me.lblCount.AutoSize = True
         Me.lblCount.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCount.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblCount.Location = New System.Drawing.Point(730, 19)
+        Me.lblCount.Location = New System.Drawing.Point(718, 19)
         Me.lblCount.Name = "lblCount"
         Me.lblCount.Size = New System.Drawing.Size(82, 21)
         Me.lblCount.TabIndex = 6
         Me.lblCount.Text = "New Total"
+        Me.tpToolTip.SetToolTip(Me.lblCount, "Please enter the new total amount of the medication in the bin.")
         '
         'lblActions
         '
@@ -165,12 +169,25 @@ Partial Class frmEndOfShift
         Me.Label15.TabIndex = 167
         Me.Label15.Text = "Report Type:"
         '
+        'lblInstructions
+        '
+        Me.lblInstructions.AutoSize = True
+        Me.lblInstructions.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblInstructions.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.lblInstructions.Location = New System.Drawing.Point(447, 21)
+        Me.lblInstructions.Name = "lblInstructions"
+        Me.lblInstructions.Size = New System.Drawing.Size(207, 21)
+        Me.lblInstructions.TabIndex = 168
+        Me.lblInstructions.Text = "Hover here for instructions"
+        Me.tpToolTip.SetToolTip(Me.lblInstructions, resources.GetString("lblInstructions.ToolTip"))
+        '
         'frmEndOfShift
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1021, 663)
+        Me.Controls.Add(Me.lblInstructions)
         Me.Controls.Add(Me.cmbFilter)
         Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.btnSave)
@@ -197,4 +214,5 @@ Partial Class frmEndOfShift
     Friend WithEvents cmbFilter As ComboBox
     Friend WithEvents Label15 As Label
     Friend WithEvents tpToolTip As ToolTip
+    Friend WithEvents lblInstructions As Label
 End Class
