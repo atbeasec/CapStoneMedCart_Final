@@ -252,6 +252,7 @@ Public Class frmDispense
             If IsNumeric(txtAmountDispensed.Text) Then
                 If intEnteredFromAdhoc = 0 Then
                     If dblAmountAdministerMAX = CDbl(txtAmountDispensed.Text) Then
+                        frmMain.UnlockSideMenu()
                         frmPatientInfo.setPatientID(intPatientID)
                         frmMain.OpenChildForm(frmPatientInfo)
                     Else
@@ -269,6 +270,7 @@ Public Class frmDispense
                     'used to check if the form that entered this dispense was adhoc or not
                 ElseIf intEnteredFromAdhoc = 1 Then
                     If dblAmountAdministerMAX = CDbl(txtAmountDispensed.Text) Then
+                        frmMain.UnlockSideMenu()
                         setintEntered(0)
                         frmWaste.setEnteredFromAdhoc(0)
                         frmMain.OpenChildForm(frmAdHockDispense)
