@@ -104,7 +104,6 @@ Module CreateDatabase
 	'/*  CreateMedicationTable()										*/
 	'/*  CreatePatientTable()											*/
 	'/*  CreatePhysicianTable()											*/		
-	'/*  CreatePatientPhysicianTable()									*/	
 	'/*  CreateUserTable()												*/	
 	'/*  CreatePatientUserTable()										*/		
 	'/*  CreateRoomsTable()												*/
@@ -145,6 +144,7 @@ Module CreateDatabase
 	'/*	 BRH	02/13/21	Removed code to allow for more practical	*/
 	'/*						programming practices.						*/
 	'/*	 BRH	03/28/21	Added the Drug Interactions Override table	*/
+	'/*	 BRH	04/13/21	Removed PatientPhysician table				*/
 	'/*******************************************************************/
 
 	Sub Main()
@@ -167,7 +167,6 @@ Module CreateDatabase
 			CreateMedicationTable()
 			CreatePatientTable()
 			CreatePhysicianTable()
-			CreatePatientPhysicianTable()
 			CreateUserTable()
 			CreatePatientUserTable()
 			CreateRoomsTable()
@@ -762,51 +761,6 @@ Module CreateDatabase
 	                    PRIMARY KEY(" & "Physician_ID" & "));"
 
 		ExecuteQuery("Physician")
-	End Sub
-
-	'/*******************************************************************/
-	'/*                   SUBROUTINE NAME:	CreatePatientPhysicianTable	*/
-	'/*******************************************************************/
-	'/*                   WRITTEN BY:  	Breanna Howey					*/
-	'/*		         DATE CREATED: 	   01/23/21							*/
-	'/*******************************************************************/
-	'/*  SUBROUTINE PURPOSE:											*/
-	'/*	 The purpose of this subroutine is to create the PatientPHysician*/
-	'/*  table. SQL code is stored in the strCreateTable variables and 	*/  
-	'/*  is executed in the call for the ExecuteQuery() subroutine		*/
-	'/*******************************************************************/
-	'/*  CALLED BY:   													*/
-	'/*   Main()						          						*/
-	'/*******************************************************************/
-	'/*  CALLS:															*/
-	'/*  ExecuteQuery()													*/
-	'/*******************************************************************/
-	'/*  PARAMETER LIST (In Parameter Order):							*/
-	'/*																	*/
-	'/*  (None)															*/
-	'/*******************************************************************/
-	'/* SAMPLE INVOCATION:												*/
-	'/*																	*/
-	'/* CreatePatientPHysicianTable()									*/	
-	'/*******************************************************************/
-	'/*  LOCAL VARIABLE LIST (Alphabetically):							*/
-	'/*																	*/
-	'/*  (None)															*/
-	'/*******************************************************************/
-	'/* MODIFICATION HISTORY:											*/
-	'/*																	*/
-	'/*  WHO   WHEN     WHAT											*/
-	'/*  ---   ----     ------------------------------------------------*/
-	'/*  BRH  01/23/21  Initial creation of the code					*/
-	'/*******************************************************************/
-	Public Sub CreatePatientPhysicianTable()
-		strCreateTable = "CREATE TABLE 'PatientPhysician' (
-	                    'Patient_ID'	INTEGER NOT NULL,
-	                    'Physician_ID'	INTEGER NOT NULL,
-	                    'Active_Flag'	INTEGER NOT NULL,
-	                    PRIMARY KEY(" & "Patient_ID" & "," & "Physician_ID" & "));"
-
-		ExecuteQuery("PatientPhysician")
 	End Sub
 
 	'/*******************************************************************/
@@ -1538,6 +1492,7 @@ Module CreateDatabase
 	'/*  BRH  01/23/21  Initial creation of the code					*/
 	'/*  BRH  02/01/21  Updated for autoincrementing primary keys		*/
 	'/*	 BRH  03/28/21	Added proper primary key code					*/
+	'/*	 BRH  04/13/21	Added Physician_TUID							*/
 	'/*******************************************************************/
 	Public Sub CreateAdHocOrderTable()
 		strCreateTable = "CREATE TABLE 'AdHocOrder' (
@@ -1548,7 +1503,9 @@ Module CreateDatabase
 						'Amount'	TEXT NOT NULL,
 						'DrawerMedication_TUID'	INTEGER NOT NULL,
 						'DateTime'	TEXT NOT NULL,
+						'Physician_TUID'	INTEGER,
 						PRIMARY KEY(" & "AdHocOrder_ID" & " AUTOINCREMENT),
+						FOREIGN KEY(" & "Physician_TUID" & ") REFERENCES " & "Physician" & "(" & "Physician_ID" & "),
 						FOREIGN KEY(" & "DrawerMedication_TUID" & ") REFERENCES " & "DrawerMedication" & "(" & "DrawerMedication_ID" & "),
 						FOREIGN KEY(" & "Medication_TUID" & ") REFERENCES " & "Medication" & "(" & "Medication_ID" & "),
 						FOREIGN KEY(" & "Patient_TUID" & ") REFERENCES " & "Patient" & "(" & "Patient_ID" & "),
