@@ -330,7 +330,7 @@ Partial Class frmWaste
         'txtOther
         '
         Me.txtOther.Location = New System.Drawing.Point(229, 28)
-        Me.txtOther.MaxLength = 100
+        Me.txtOther.MaxLength = 500
         Me.txtOther.Multiline = True
         Me.txtOther.Name = "txtOther"
         Me.txtOther.ShortcutsEnabled = False

@@ -353,6 +353,7 @@ Partial Class frmMainScreenWaste
         '
         Me.txtOther.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtOther.Location = New System.Drawing.Point(217, 31)
+        Me.txtOther.MaxLength = 500
         Me.txtOther.Multiline = True
         Me.txtOther.Name = "txtOther"
         Me.txtOther.ShortcutsEnabled = False
