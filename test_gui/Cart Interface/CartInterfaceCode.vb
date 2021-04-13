@@ -6,7 +6,7 @@ Module CartInterfaceCode
     '/*********************************************************************/
     '/*                   FILE NAME: CartInterfaceCode                    */									  
     '/*********************************************************************/
-    '/*                 PART OF PROJECT: CartInterface  				   */				  
+    '/*                 PART OF PROJECT: MedServe         				   */				  
     '/*********************************************************************/
     '/*                   WRITTEN BY:  Nathan Premo  		               */		  
     '/*		         DATE CREATED:	1/21/2021                   		   */						  
@@ -200,7 +200,7 @@ Module CartInterfaceCode
 
     Sub main()
         'ChangeSettings("115200", "COM4", True)
-        OpenOneDrawer("2")
+        OpenOneDrawer("1")
 
 
 
@@ -341,7 +341,11 @@ Module CartInterfaceCode
 
             If Not blnissue Then
                 threadAccessor = New Thread(AddressOf OpenDrawerFormOpener)
-                strDrawerNumer = (CInt(Number) - 1).ToString 'nurses see the cart as having 25 drawers
+                If Number > 1 Then
+                    strDrawerNumer = (CInt(Number) - 1).ToString 'nurses see the cart as having 25 draw
+                Else
+                    strDrawerNumer = Number.ToString
+                End If
                 'but the cart doesn't have a drawer number 2 so we have to change how it is seen
                 'in the gui. 
                 FrmCart.gettingConnectionSettings() 'get the settings in the database for the cart
@@ -350,22 +354,22 @@ Module CartInterfaceCode
 
 
                 bytFinal = getSerialString(Number) 'this is going to get the string we need
-                'to send to the cart. 
+                    'to send to the cart. 
 
-                Try
+                    Try
                     comSerialPort1.Open()
                     getDrawerArray()
                     comSerialPort1.Write(bytFinal, 0, bytFinal.Length)
                     intDrawerCount += 1
                     threadAccessor.Start()
 
-                Catch
-                    MessageBox.Show("Selected comport does not exist. Please have your admin change the comport in Admin Settings")
-                End Try
+                    Catch
+                        MessageBox.Show("Selected comport does not exist. Please have your admin change the comport in Admin Settings")
+                    End Try
+                End If
+
+
             End If
-
-
-        End If
 
     End Sub
 
