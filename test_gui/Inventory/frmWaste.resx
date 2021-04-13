@@ -128,7 +128,7 @@
         rkJggg==
 </value>
   </data>
-  <data name="btnWasteWithBarcode.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnSubmitWithoutSignoff.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAOdJREFUSEvt
         lTEOgkAQRbExtlpLYWViazyO9/EOVp4AjccwJl5A6IyncPifncYMEnaBjQUvecXO8HeyKm4yEoyIpPAC
@@ -138,7 +138,7 @@
         rkJggg==
 </value>
   </data>
-  <data name="btnSubmitWithoutSignoff.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnWasteWithBarcode.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAOdJREFUSEvt
         lTEOgkAQRbExtlpLYWViazyO9/EOVp4AjccwJl5A6IyncPifncYMEnaBjQUvecXO8HeyKm4yEoyIpPAC

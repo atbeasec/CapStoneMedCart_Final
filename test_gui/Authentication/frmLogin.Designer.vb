@@ -27,6 +27,7 @@ Partial Class frmLogin
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnEye = New System.Windows.Forms.Button()
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.lblFirstName = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
@@ -36,7 +37,6 @@ Partial Class frmLogin
         Me.btnClose = New System.Windows.Forms.Button()
         Me.lblWelcomeBack = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.btnEye = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel5.SuspendLayout()
@@ -78,7 +78,7 @@ Partial Class frmLogin
         Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
         Me.Label2.Location = New System.Drawing.Point(48, 80)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(76, 21)
+        Me.Label2.Size = New System.Drawing.Size(93, 28)
         Me.Label2.TabIndex = 70
         Me.Label2.Text = "Password"
         '
@@ -93,6 +93,20 @@ Partial Class frmLogin
         Me.Panel2.Size = New System.Drawing.Size(238, 24)
         Me.Panel2.TabIndex = 2
         '
+        'btnEye
+        '
+        Me.btnEye.BackColor = System.Drawing.Color.White
+        Me.btnEye.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnEye.FlatAppearance.BorderSize = 0
+        Me.btnEye.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEye.ForeColor = System.Drawing.Color.Transparent
+        Me.btnEye.Image = CType(resources.GetObject("btnEye.Image"), System.Drawing.Image)
+        Me.btnEye.Location = New System.Drawing.Point(207, 1)
+        Me.btnEye.Name = "btnEye"
+        Me.btnEye.Size = New System.Drawing.Size(30, 22)
+        Me.btnEye.TabIndex = 19
+        Me.btnEye.UseVisualStyleBackColor = False
+        '
         'txtPassword
         '
         Me.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -102,7 +116,7 @@ Partial Class frmLogin
         Me.txtPassword.MaxLength = 50
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.ShortcutsEnabled = False
-        Me.txtPassword.Size = New System.Drawing.Size(236, 22)
+        Me.txtPassword.Size = New System.Drawing.Size(236, 27)
         Me.txtPassword.TabIndex = 2
         Me.txtPassword.Tag = "*"
         Me.txtPassword.UseSystemPasswordChar = True
@@ -114,7 +128,7 @@ Partial Class frmLogin
         Me.lblFirstName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
         Me.lblFirstName.Location = New System.Drawing.Point(48, 23)
         Me.lblFirstName.Name = "lblFirstName"
-        Me.lblFirstName.Size = New System.Drawing.Size(81, 21)
+        Me.lblFirstName.Size = New System.Drawing.Size(99, 28)
         Me.lblFirstName.TabIndex = 69
         Me.lblFirstName.Text = "Username"
         '
@@ -136,7 +150,7 @@ Partial Class frmLogin
         Me.txtUserName.Location = New System.Drawing.Point(1, 1)
         Me.txtUserName.Name = "txtUserName"
         Me.txtUserName.ShortcutsEnabled = False
-        Me.txtUserName.Size = New System.Drawing.Size(236, 22)
+        Me.txtUserName.Size = New System.Drawing.Size(236, 27)
         Me.txtUserName.TabIndex = 1
         Me.txtUserName.Tag = "User Name"
         '
@@ -147,7 +161,7 @@ Partial Class frmLogin
         Me.lblBadge.ForeColor = System.Drawing.Color.Black
         Me.lblBadge.Location = New System.Drawing.Point(126, 189)
         Me.lblBadge.Name = "lblBadge"
-        Me.lblBadge.Size = New System.Drawing.Size(83, 17)
+        Me.lblBadge.Size = New System.Drawing.Size(109, 23)
         Me.lblBadge.TabIndex = 17
         Me.lblBadge.Text = "Scan ID Card"
         '
@@ -182,7 +196,7 @@ Partial Class frmLogin
         Me.lblWelcomeBack.ForeColor = System.Drawing.Color.White
         Me.lblWelcomeBack.Location = New System.Drawing.Point(288, 104)
         Me.lblWelcomeBack.Name = "lblWelcomeBack"
-        Me.lblWelcomeBack.Size = New System.Drawing.Size(87, 21)
+        Me.lblWelcomeBack.Size = New System.Drawing.Size(107, 28)
         Me.lblWelcomeBack.TabIndex = 15
         Me.lblWelcomeBack.Text = "MedServe"
         '
@@ -194,20 +208,6 @@ Partial Class frmLogin
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(104, 89)
         Me.Panel3.TabIndex = 16
-        '
-        'btnEye
-        '
-        Me.btnEye.BackColor = System.Drawing.Color.White
-        Me.btnEye.Dock = System.Windows.Forms.DockStyle.Right
-        Me.btnEye.FlatAppearance.BorderSize = 0
-        Me.btnEye.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnEye.ForeColor = System.Drawing.Color.Transparent
-        Me.btnEye.Image = CType(resources.GetObject("btnEye.Image"), System.Drawing.Image)
-        Me.btnEye.Location = New System.Drawing.Point(207, 1)
-        Me.btnEye.Name = "btnEye"
-        Me.btnEye.Size = New System.Drawing.Size(30, 22)
-        Me.btnEye.TabIndex = 19
-        Me.btnEye.UseVisualStyleBackColor = False
         '
         'frmLogin
         '
