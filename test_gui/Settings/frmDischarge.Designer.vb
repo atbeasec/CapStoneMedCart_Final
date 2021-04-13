@@ -854,9 +854,9 @@ Partial Class frmDischarge
         Me.Label18.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label18.Location = New System.Drawing.Point(7, 9)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(229, 25)
+        Me.Label18.Size = New System.Drawing.Size(234, 25)
         Me.Label18.TabIndex = 159
-        Me.Label18.Text = "Admit/Discharge Patient"
+        Me.Label18.Text = "Admit/Discharge Patient:"
         '
         'frmDischarge
         '
