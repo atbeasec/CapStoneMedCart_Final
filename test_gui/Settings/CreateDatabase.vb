@@ -1002,10 +1002,10 @@ Module CreateDatabase
 	'/*******************************************************************/
 	Public Sub CreateAllergyTable()
 		strCreateTable = "CREATE TABLE 'Allergy' (
-						'Allergy_ID'	INTEGER NOT NULL,
-	                    'Allergy_Name'	TEXT NOT NULL UNIQUE,
-	                    'Allergy_Type'	TEXT,
-	                    PRIMARY KEY(" & "Allergy_ID" & "));"
+						'Allergy_ID'	INTEGER NOT NULL UNIQUE,
+	                    'Allergy_Name'	TEXT NOT NULL,
+	                    'Allergy_Type'	TEXT NOT NULL,
+	                    PRIMARY KEY(" & "Allergy_ID" & " AUTOINCREMENT));"
 
 		ExecuteQuery("Allergy")
 	End Sub
