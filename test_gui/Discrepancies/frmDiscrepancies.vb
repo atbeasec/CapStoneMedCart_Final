@@ -419,9 +419,9 @@
     '/********************************************************************/ 
     Private Sub SingleClickButtonShow(sender As Object, e As EventArgs)
 
-        Dim pnlSelected As Panel
+        Dim pnlSelected As Panel = Nothing
 
-        If TypeName(sender.parent) = "Panel" Then
+        If TypeName(sender) = "Label" Then
 
             pnlSelected = CType(sender.parent, Panel)
             UpdateBackColors(pnlSelected)
