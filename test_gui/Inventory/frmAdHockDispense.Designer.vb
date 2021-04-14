@@ -61,6 +61,8 @@ Partial Class frmAdHockDispense
         Me.btnEight = New System.Windows.Forms.Button()
         Me.btnSeven = New System.Windows.Forms.Button()
         Me.btnSix = New System.Windows.Forms.Button()
+        Me.cmbphysician = New System.Windows.Forms.ComboBox()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.pnlSelector.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -540,6 +542,29 @@ Partial Class frmAdHockDispense
         Me.btnSix.Text = "6"
         Me.btnSix.UseVisualStyleBackColor = False
         '
+        'cmbphysician
+        '
+        Me.cmbphysician.BackColor = System.Drawing.Color.White
+        Me.cmbphysician.DropDownHeight = 300
+        Me.cmbphysician.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbphysician.FormattingEnabled = True
+        Me.cmbphysician.IntegralHeight = False
+        Me.cmbphysician.Items.AddRange(New Object() {"Yes", "No"})
+        Me.cmbphysician.Location = New System.Drawing.Point(35, 582)
+        Me.cmbphysician.Name = "cmbphysician"
+        Me.cmbphysician.Size = New System.Drawing.Size(579, 29)
+        Me.cmbphysician.TabIndex = 231
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(32, 558)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(123, 21)
+        Me.Label9.TabIndex = 232
+        Me.Label9.Text = "Select Physician:"
+        '
         'frmAdHockDispense
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -547,6 +572,8 @@ Partial Class frmAdHockDispense
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1091, 645)
         Me.ControlBox = False
+        Me.Controls.Add(Me.cmbphysician)
+        Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.pnlSelector)
         Me.Controls.Add(Me.txtUnit)
         Me.Controls.Add(Me.txtAmount)
@@ -618,4 +645,6 @@ Partial Class frmAdHockDispense
     Friend WithEvents btnEight As Button
     Friend WithEvents btnSeven As Button
     Friend WithEvents btnSix As Button
+    Friend WithEvents cmbphysician As ComboBox
+    Friend WithEvents Label9 As Label
 End Class

@@ -27,6 +27,7 @@ Public Class frmDispense
     Public intDrawerMEDAdhoc As Integer
     Private intAdhocDrawerNumber As Integer
     Private intAdhocBin As Integer
+    Private intAdhocDoctor As Integer
     Const ENTERAMOUNTOTREMOVE As String = "  Insert Amount to Remove:"
 
     Public Sub setAmountPerContainer(ByRef ID As Double)
@@ -263,7 +264,7 @@ Public Class frmDispense
                     'used to check if the form that entered this dispense was adhoc or not
                 ElseIf intEnteredFromAdhoc = 1 Then
                     Dim strAmountDispensed As String = txtAmountDispensed.Text & " " & txtUnits.Text
-                    DispensingDrugAdhoc(intMedicationID, intPatientID, CInt(LoggedInID), strAmountDispensed, intDrawerMEDAdhoc)
+                    DispensingDrugAdhoc(intMedicationID, intPatientID, CInt(LoggedInID), strAmountDispensed, intDrawerMEDAdhoc, intAdhocDoctor)
                     frmWaste.SetPatientID(intPatientID)
                     frmWaste.setDrawer(intdrawerNumber)
                     frmWaste.setMedID(intMedicationID)
@@ -448,12 +449,12 @@ Public Class frmDispense
     '/*  WHO        WHEN            WHAT					               */             
     '/*  AB    3/20/2021     Initial creation/rework of dispensing
     '/*********************************************************************/
-    Private Sub DispensingDrugAdhoc(ByRef intMedID As Integer, ByRef intPatientID As Integer, ByRef intUserID As Integer, ByRef stramount As String, ByRef intDrawerID As Integer)
+    Private Sub DispensingDrugAdhoc(ByRef intMedID As Integer, ByRef intPatientID As Integer, ByRef intUserID As Integer, ByRef stramount As String, ByRef intDrawerID As Integer, ByRef intDoctor As Integer)
         Dim strbSQLcommand As New StringBuilder()
         Dim dtmAdhocTime As String = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         strbSQLcommand.Clear()
-        strbSQLcommand.Append("INSERT INTO AdHocOrder(Medication_TUID,Patient_TUID,User_TUID,Amount,DrawerMedication_TUID,DateTime) ")
-        strbSQLcommand.Append("VALUES('" & intMedID & "','" & intPatientID & "','" & intUserID & "','" & stramount & "','" & intDrawerID & "','" & dtmAdhocTime & "')")
+        strbSQLcommand.Append("INSERT INTO AdHocOrder(Medication_TUID,Patient_TUID,User_TUID,Amount,DrawerMedication_TUID,DateTime,Physician_TUID) ")
+        strbSQLcommand.Append("VALUES('" & intMedID & "','" & intPatientID & "','" & intUserID & "','" & stramount & "','" & intDrawerID & "','" & dtmAdhocTime & "','" & intDoctor & "')")
         CreateDatabase.ExecuteInsertQuery(strbSQLcommand.ToString)
     End Sub
 
@@ -648,12 +649,13 @@ Public Class frmDispense
     '/*  WHO        WHEN            WHAT					               */             
     '/*  AB    3/20/2021     Initial creation/rework of dispensing
     '/*********************************************************************/
-    Public Sub AdhocDispenseSetInformation(ByRef amount As String, ByRef unit As String, ByRef intDrawerMedA As Integer, ByRef intDrawerNumber As Integer, ByRef intBin As Integer)
+    Public Sub AdhocDispenseSetInformation(ByRef amount As String, ByRef unit As String, ByRef intDrawerMedA As Integer, ByRef intDrawerNumber As Integer, ByRef intBin As Integer, ByRef intDoctor As Integer)
         strAmountAdhoc = amount
         strUnitAdhoc = unit
         intDrawerMEDAdhoc = intDrawerMedA
         intAdhocDrawerNumber = intDrawerNumber
         intAdhocBin = intBin
+        intAdhocDoctor = intDoctor
     End Sub
 
     Private Sub btnReopenDrawer_Click(sender As Object, e As EventArgs) Handles btnReopenDrawer.Click
