@@ -23,6 +23,7 @@
         Discrepancies.PopulateDiscrepancies()
         CreateToolTips(pnlHeader, tpLabelHover)
         AddHandlerToLabelClick(pnlHeader, AddressOf SortBySelectedLabel)
+        AddHandlersLaterForRunTimePerformance()
 
         If flpDiscrepancies.Controls.Count = 0 Then
 
@@ -32,6 +33,55 @@
             btnResolve.Visible = True
 
         End If
+    End Sub
+
+    '/********************************************************************/
+    '/*            SUB NAME: AddHandlersLaterForRunTimePerformance	     */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Collin Krygier  		             */   
+    '/*		         DATE CREATED: 	2/6/21			                     */                             
+    '/********************************************************************/
+    '/*  SUB Purpose: This sub adds handlers to the labels at form load  */
+    '/*  that allow the user to click the labels and load the next form  */
+    '/*                                                                  */
+    '/********************************************************************/
+    '/*  CALLED BY: DynamicSingleClickOpenPatient   	      		     */				            
+    '/*                                        				             */         
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/*             (NONE)						                         */		               
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	                                                                 */
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             
+    '/*	DynamicSingleClickOpenPatient()					                 */					                       
+    '/*                                                                  */   
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/*	 none                           				                 */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                                 
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  CK		4/3/21		 initial creation                            */
+    '/********************************************************************/ 
+    Public Sub AddHandlersLaterForRunTimePerformance()
+
+        Dim ctl As Control
+        Dim pnlPadding As Control
+        Dim pnlMain As Control
+
+        For Each ctl In flpDiscrepancies.Controls
+            For Each pnlPadding In ctl.Controls
+                For Each pnlMain In pnlPadding.Controls
+
+                    AddHandler pnlMain.Click, AddressOf SingleClickButtonShow
+
+                Next
+            Next
+        Next
+
     End Sub
 
 
@@ -311,19 +361,17 @@
         Dim ctlPaddingPanel As Control
         Dim ctlPanel As Control
         Dim lbl As Control
-        ' Dim intDiscrepancyID As Integer
         Dim lblID As Label = Nothing
 
         For Each ctlPaddingPanel In flpDiscrepancies.Controls
-            'Debug.Print(paddingPanel.Name)
             For Each ctlPanel In ctlPaddingPanel.Controls
                 If ctlPanel.Name.Contains("pnlIndividualDiscrepancy") Then
                     If ctlPanel.BackColor = Color.FromArgb(71, 103, 216) Then
                         For Each lbl In ctlPanel.Controls
                             If lbl.Name.Contains("lblDiscrepancyID") Then
 
-                                ' grab the control and cast it as a label
-                                ' intDiscrepancyID = CInt(lbl.Text)
+                                ' grab the control and cast it as a labels
+
                                 lblID = CType(lbl, Label)
                             End If
                         Next
@@ -333,7 +381,6 @@
         Next
 
         Return lblID
-        'Return intDiscrepancyID
 
     End Function
 
@@ -343,9 +390,62 @@
     '/*                   WRITTEN BY: Collin Krygier  		             */   
     '/*		         DATE CREATED: 	2/7/21			                     */                             
     '/********************************************************************/
-    '/*  SUB PURPOSE: contains functionality that is assigned to the panel/
-    '/*  It ensures that only a single panel can be selected at one time */
-    '/*                                                                  */
+    '/*  SUB PURPOSE: contains functionality to determine which control  */
+    '/*  was selected and based on that, the background color and labels */
+    '/*  will be updated.                                                */
+    '/********************************************************************/
+    '/*  CALLED BY:                                      	      		 */				            
+    '/*            (NONE)                           			         */         
+    '/********************************************************************/
+    '/*  CALLS:							                            	 */		                  
+    '/*             UpdateBackColors      					             */		               
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	 sender- object representing the selected control                */								                        
+    '/*  e- the base class containing the data                           */  
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             
+    '/*	                        				                         */					                       
+    '/*                                                                  */   
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/*	 pnlSelected- an object of type panel that will be iterated over */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									                                 */		                   
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  CK		        2/7/21		    initial creation                 */
+    '/********************************************************************/ 
+    Private Sub SingleClickButtonShow(sender As Object, e As EventArgs)
+
+        Dim pnlSelected As Panel = Nothing
+
+        If TypeName(sender) = "Label" Then
+
+            pnlSelected = CType(sender.parent, Panel)
+            UpdateBackColors(pnlSelected)
+
+        Else
+
+            pnlSelected = CType(sender, Panel)
+            UpdateBackColors(pnlSelected)
+
+        End If
+
+    End Sub
+
+    '/********************************************************************/
+    '/*                   SUB NAME: UpdateBackColors           	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Collin Krygier  		             */   
+    '/*		         DATE CREATED: 	4/13/21			                     */                             
+    '/********************************************************************/
+    '/*  SUB PURPOSE: Changes the background color by checking each panel*/
+    '/*  in the flow panel and looking to see if one is already highlighted
+    '/*  if one already is, the back color will be set back to default and/
+    '/*  the newly selected one will be updated to have a blue background*/
+    '*/  with white text.                                                */
     '/********************************************************************/
     '/*  CALLED BY:                                      	      		 */				            
     '/*            (NONE)                           			         */         
@@ -368,13 +468,9 @@
     '/*									                                 */		                   
     '/*  WHO            WHEN             WHAT				             */		            
     '/*  ---            ----             ----				             */
-    '/*  CK		        2/7/21		    initial creation                 */
+    '/*  CK		        4/13/21		    initial creation                 */
     '/********************************************************************/ 
-    Private Sub SingleClickButtonShow(sender As Object, e As EventArgs)
-
-        Dim pnlSelected As Panel
-        pnlSelected = CType(sender, Panel)
-        Debug.Print(CheckIfPanelIsSelected(pnlSelected))
+    Private Sub UpdateBackColors(ByVal pnlSelected As Panel)
 
         If CheckIfPanelIsSelected(pnlSelected) = True Then
 
