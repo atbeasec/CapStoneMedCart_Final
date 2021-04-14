@@ -735,14 +735,14 @@ Public Class frmMyPatients
         RemoveHandlersAndAssociations(GetListOfAllControls(flpMyPatientRecords), flpMyPatientRecords)
         Dim dsPatientUser As DataSet
         'Dim dsPatientUserAssigned As DataSet
-        Dim dsPatient As DataSet
+        'Dim dsPatient As DataSet
         Dim UserID As Integer = LoggedInID
         Dim strUserFirst As String = ""
         Dim strUserLast As String = ""
         Dim strVisitDate As String = ""
         Dim intPhysicianID As Integer = 0
         Dim intPatientID As Integer = 0
-        Dim intPatientMRN As Integer = 0
+        Dim intPatientMRN As Double = 0
         Dim strPatientFirst As String = ""
         Dim strPatientLast As String = ""
         Dim StrDOB As String = ""

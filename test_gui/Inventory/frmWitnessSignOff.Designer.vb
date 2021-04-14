@@ -155,7 +155,8 @@ Partial Class frmWitnessSignOff
         Me.btnConfigureInventory.Location = New System.Drawing.Point(98, 202)
         Me.btnConfigureInventory.Name = "btnConfigureInventory"
         Me.btnConfigureInventory.Size = New System.Drawing.Size(135, 37)
-        Me.btnConfigureInventory.TabIndex = 36
+        Me.btnConfigureInventory.TabIndex = 99
+        Me.btnConfigureInventory.TabStop = False
         Me.btnConfigureInventory.Text = "CANCEL"
         Me.btnConfigureInventory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnConfigureInventory.UseVisualStyleBackColor = False
@@ -315,7 +316,7 @@ Partial Class frmWitnessSignOff
         Me.txtBarcode.Name = "txtBarcode"
         Me.txtBarcode.ShortcutsEnabled = False
         Me.txtBarcode.Size = New System.Drawing.Size(231, 25)
-        Me.txtBarcode.TabIndex = 217
+        Me.txtBarcode.TabIndex = 1
         Me.txtBarcode.UseSystemPasswordChar = True
         '
         'Panel2

@@ -4,7 +4,7 @@ Public Class frmDispense
     Public blnSignedOff As Boolean = True
     Public blnOverride As Boolean = False
     Private intPatientID As Integer
-    Private intPatientMRN As Integer
+    Private intPatientMRN As Double
     Private intMedicationID As Integer
     Private intPatientMedID As Integer
 
@@ -12,6 +12,9 @@ Public Class frmDispense
     Private intCountedAmount As Integer
     Private dblDispensedPatientAmount As Integer
     Private dblWastedAmount As Integer
+
+    Private dblAmountPerContainer As Double
+    Private dblAmountAdministerMAX As Double
 
     Dim contactPanelsAddedCount As Integer = 0
     Dim currentContactPanelName As String = Nothing
@@ -25,6 +28,10 @@ Public Class frmDispense
     Private intAdhocDrawerNumber As Integer
     Private intAdhocBin As Integer
     Const ENTERAMOUNTOTREMOVE As String = "  Insert Amount to Remove:"
+
+    Public Sub setAmountPerContainer(ByRef ID As Double)
+        dblAmountPerContainer = ID
+    End Sub
 
     Public Sub setintEntered(ByRef ID As Integer)
         intEnteredFromAdhoc = ID
@@ -138,15 +145,6 @@ Public Class frmDispense
 
     End Sub
 
-
-    Private Sub btnUp_Click(sender As Object, e As EventArgs)
-        ButtonIncrement(1000, txtQuantityToDispense)
-    End Sub
-
-    Private Sub btnDown_Click(sender As Object, e As EventArgs)
-        ButtonDecrement(txtQuantityToDispense)
-    End Sub
-
     '/*********************************************************************/
     '/*                   SubProgram NAME: btnDispense_Click_1               */         
     '/*********************************************************************/
@@ -205,7 +203,7 @@ Public Class frmDispense
 
         End If
 
-            If intEnteredFromAdhoc = 1 Then
+        If intEnteredFromAdhoc = 1 Then
             intdrawerNumber = intAdhocDrawerNumber
         End If
         'check for what set in the process the dispense is in.
@@ -255,11 +253,12 @@ Public Class frmDispense
                 If intEnteredFromAdhoc = 0 Then
                     Dim strAmountDispensed As String = txtAmountDispensed.Text & " " & txtUnits.Text
                     Dim intdrawerMEDTUID As Integer = CreateDatabase.ExecuteScalarQuery("Select DrawerMedication_ID from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
-                        DispensingDrug(intMedicationID, CInt(LoggedInID), strAmountDispensed)
+                    DispensingDrug(intMedicationID, CInt(LoggedInID), strAmountDispensed)
                     frmWaste.SetPatientID(intPatientID)
                     frmWaste.setDrawer(intdrawerNumber)
                     frmWaste.setMedID(intMedicationID)
                     frmWaste.setDrawerMEDTUID(intdrawerMEDTUID)
+                    frmWaste.SetdblAmountGivenToPatient(CDbl(txtAmountDispensed.Text))
                     frmMain.OpenChildForm(frmWaste)
                     'used to check if the form that entered this dispense was adhoc or not
                 ElseIf intEnteredFromAdhoc = 1 Then
@@ -270,6 +269,7 @@ Public Class frmDispense
                     frmWaste.setMedID(intMedicationID)
                     frmWaste.setDrawerMEDTUID(intDrawerMEDAdhoc)
                     frmWaste.setEnteredFromAdhoc(1)
+                    frmWaste.SetdblAmountGivenToPatient(CDbl(txtAmountDispensed.Text))
                     frmMain.OpenChildForm(frmWaste)
                 End If
 
@@ -530,10 +530,14 @@ Public Class frmDispense
     '/*********************************************************************/
     Private Sub txtQuantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtQuantityToDispense.KeyPress
         DataVaildationMethods.KeyPressCheck(e, "0123456789")
+    End Sub
 
-        If IsNumeric(txtQuantityToDispense.Text) Then
-            GraphicalUserInterfaceReusableMethods.MaxValue(CInt(sender.Text), 1000, txtQuantityToDispense)
-        End If
+    Private Sub txtCountInDrawer_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtCountInDrawer.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789")
+    End Sub
+
+    Private Sub txtAmountDispensed_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtAmountDispensed.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789.")
     End Sub
 
     '/*********************************************************************/
@@ -566,13 +570,16 @@ Public Class frmDispense
     '/*  AB    3/20/2021     Initial creation/rework of dispensing
     '/*********************************************************************/
     Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantityToDispense.Validated
-        If IsNumeric(sender.Text) Then
-            GraphicalUserInterfaceReusableMethods.MaxValue(CInt(sender.Text), 1000, txtQuantityToDispense)
-        Else
-            MessageBox.Show("Please make sure you enter a positive number 1-1000")
-            sender.Text = "1"
-        End If
+        'If IsNumeric(sender.Text) Then
+        '    GraphicalUserInterfaceReusableMethods.MaxValue(CInt(sender.Text), 1000, txtQuantityToDispense)
+        'Else
+        '    MessageBox.Show("Please make sure you enter a positive number 1-1000.")
+        '    '  sender.Text = "1"
+        'End If
     End Sub
+
+
+
 
     '/*********************************************************************/
     '/*                   SubProgram NAME: btnBack_Click               */         
@@ -664,13 +671,19 @@ Public Class frmDispense
         End If
 
         CreateDatabase.ExecuteInsertQuery("UPDATE DrawerMedication set Quantity = '" & intUpdateNumber & "' where Drawers_TUID = '" & intDrawerNumber & "' and Medication_TUID = '" & intMedID & "'")
+
+        If intAmountDispense > intAmountInDrawer Then
+            intAmountDispense = intAmountInDrawer
+        End If
+        CalculateMaxDispense(intAmountDispense)
+        frmWaste.SetintQuantity(intAmountDispense)
     End Sub
 
     Private Sub btnDrawer7_Click(sender As Object, e As EventArgs) Handles btnOne.Click, btnTwo.Click, btnThree.Click, btnFour.Click, btnFive.Click, btnSix.Click, btnSeven.Click, btnEight.Click, btnNine.Click, btnZero.Click, btnDecimal.Click
 
         If pnlAmountToRemove.Visible = True Then
 
-            If txtQuantityToDispense.Text.Length >= 4 Then
+            If txtCountInDrawer.Text.Length > 4 Then
 
             Else
 
@@ -690,7 +703,6 @@ Public Class frmDispense
 
         ElseIf pnlAmountAdministered.Visible = True Then
 
-
             If txtAmountDispensed.Text.Length > 5 Then
 
             Else
@@ -698,6 +710,7 @@ Public Class frmDispense
                 txtAmountDispensed.Text &= CStr(sender.Text)
 
             End If
+
         End If
 
     End Sub
@@ -736,31 +749,88 @@ Public Class frmDispense
 
         ElseIf pnlAmountAdministered.Visible = True Then
 
-            If Not String.IsNullOrEmpty(txtAmountDispensed.Text) Then
-                btnDispense.PerformClick()
+            If IsNumeric(txtAmountDispensed.Text) Then
+                Dim dblAmountGiven As Double = CDbl(txtAmountDispensed.Text)
+
+                If dblAmountGiven > dblAmountAdministerMAX Then
+                    MessageBox.Show("Max amount to administer to patient is " & dblAmountAdministerMAX.ToString)
+                Else
+                    If Not String.IsNullOrEmpty(txtAmountDispensed.Text) Then
+                        btnDispense.PerformClick()
+                    End If
+                End If
+            Else
+                MessageBox.Show("Please enter a valid number.")
+                txtAmountDispensed.Text = Nothing
             End If
-
-
         End If
-
 
     End Sub
 
     Private Sub AddVisibleChangedEventHandler()
-
         AddHandler pnlAmountToRemove.VisibleChanged, AddressOf VisibleChangedEvent
-
     End Sub
 
     Private Sub VisibleChangedEvent(ByVal sender As Object, ByVal e As EventArgs)
 
         If pnlAmountToRemove.Visible = False Then
-
             btnReopenDrawer.Visible = True
-
         End If
 
     End Sub
 
+    Private Sub txtQuantityToDispense_TextChanged(sender As Object, e As EventArgs) Handles txtQuantityToDispense.TextChanged
+
+        If Not String.IsNullOrEmpty(sender.text) Then
+            If sender.text.length > 3 Then
+                If CInt(sender.text) > 1000 Then
+
+                    MessageBox.Show("Please pick a number between 0 - 1000")
+                    sender.text = Nothing
+
+                End If
+            End If
+        End If
+
+    End Sub
+
+    Private Sub txtCountInDrawer_TextChanged(sender As Object, e As EventArgs) Handles txtCountInDrawer.TextChanged
+
+        If Not String.IsNullOrEmpty(sender.text) Then
+            If sender.text.length > 3 Then
+                If CInt(sender.text) > 1000 Then
+
+                    MessageBox.Show("Please pick a number between 0 - 1000")
+                    sender.text = Nothing
+
+                End If
+            End If
+        End If
+
+    End Sub
+
+    Private Sub txtAmountDispensed_TextChanged(sender As Object, e As EventArgs) Handles txtAmountDispensed.TextChanged
+
+        If Not String.IsNullOrEmpty(sender.text) Then
+            If IsNumeric(sender.text) Then
+                If sender.text.length > 3 Then
+                    If CDbl(sender.text) > 1000 Then
+
+                        MessageBox.Show("Please pick a number between 0 - 1000")
+                        sender.text = Nothing
+
+                    End If
+                End If
+            Else
+                MessageBox.Show("Please make sure to enter a number with a lead zero if using a decimal and only one decimal point")
+                sender.Text = sender.Text.ToString.TrimEnd(CChar("."))
+            End If
+        End If
+
+    End Sub
+
+    Private Sub CalculateMaxDispense(ByRef RemoveNumber As Double)
+        dblAmountAdministerMAX = RemoveNumber * dblAmountPerContainer
+    End Sub
 
 End Class

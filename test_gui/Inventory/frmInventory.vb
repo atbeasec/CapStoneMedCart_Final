@@ -206,137 +206,141 @@ Public Class frmInventory
             intNarcotic = 0
         End If
 
-        'Check that all fields have data entered before attempting to save into the database
-        If txtStrength.Text.Equals("") Or txtType.Text.Equals("") Or mtbExpirationDate.MaskFull = False Or
+        If Not IsNumeric(txtAmount.Text) Then
+            MessageBox.Show("please make sure amount per container is numeric")
+        Else
+            'Check that all fields have data entered before attempting to save into the database
+            If txtStrength.Text.Equals("") Or txtType.Text.Equals("") Or mtbExpirationDate.MaskFull = False Or
             cboPersonalMedication.SelectedIndex.Equals(-1) Or mtbExpirationDate.MaskCompleted = False Or txtSchedule.Text.Equals("") Or cmbDividerBin.SelectedIndex = -1 Or
             txtAmount.Text = "" Or txtUnits.Text = "" Then
-            MessageBox.Show("Please enter data in all fields before saving.")
+                MessageBox.Show("Please enter data in all fields before saving.")
 
 
-            RaiseEvent UpdateLoadScreen("")
-            LoadingScreen.Close()
-            btnBack.Enabled = True
-            btnSave.Enabled = True
-            frmMain.UnlockSideMenu()
-            Exit Sub
-        Else
-            If Not IsDate(mtbExpirationDate.Text) Then
-                MessageBox.Show("Please enter a valid expiration date.")
+                RaiseEvent UpdateLoadScreen("")
+                LoadingScreen.Close()
+                btnBack.Enabled = True
+                btnSave.Enabled = True
+                frmMain.UnlockSideMenu()
+                Exit Sub
             Else
-                Dim dtmDOByear As Date = CDate(mtbExpirationDate.Text)
-                If dtmDOByear < Date.Today Then
+                If Not IsDate(mtbExpirationDate.Text) Then
                     MessageBox.Show("Please enter a valid expiration date.")
                 Else
-                    LoadingScreen.Show(Me)
-                    changeStatusVisible()
-                    RaiseEvent UpdateLoadScreen("This could take up to 3 minutes")
-                    If txtBarcode.Text = Nothing Then
-                        strBarcode = generateSampleBarcode()
+                    Dim dtmDOByear As Date = CDate(mtbExpirationDate.Text)
+                    If dtmDOByear < Date.Today Then
+                        MessageBox.Show("Please enter a valid expiration date.")
                     Else
-                        strBarcode = txtBarcode.Text
-                    End If
-                    CompareMedications(strName.Substring(0, strName.Length), strRXCUI, intControlled, intNarcotic, strBarcode, txtType.Text, txtStrength.Text, intSchedule, 1)
-
-                    Try
-                        If CInt(cmbDrawerNumber.SelectedItem) > 25 Or CInt(cmbDrawerNumber.SelectedItem) < 0 Then
-                            MessageBox.Show("Please select an appropriate drawer number")
+                        LoadingScreen.Show(Me)
+                        changeStatusVisible()
+                        RaiseEvent UpdateLoadScreen("This could take up to 3 minutes")
+                        If txtBarcode.Text = Nothing Then
+                            strBarcode = generateSampleBarcode()
                         Else
-
-                            Drawers_Tuid = CInt(cmbDrawerNumber.SelectedItem)
-                            intDividerBin = CInt(cmbDividerBin.SelectedItem)
+                            strBarcode = txtBarcode.Text
                         End If
-
-                    Catch ex As Exception
-                        eprError.SetError(cmbDrawerNumber, "please enter an integer for drawer number between 1-25")
-
-                    End Try
-
-                    Try
-                        intMedQuanitiy = CInt(txtQuantity.Text)
-                    Catch ex As Exception
-                        eprError.SetError(cmbDrawerNumber, "please enter an amount that is a positive whole number")
-                    End Try
-
-
-
-                    ' search the information from the allproperties API call
-                    ' double-check if the drug is in the database already
-                    ' if yes, then update if there's differences
-                    ' if no, then save those items
-                    ' and pass it to the function to find interactions
-                    'thdThread1.Start()
-                    RaiseEvent UpdateLoadScreen("Retrieving drug interactions from the NIH website")
-                    Dim myPropertyNameList As New List(Of String)({"severity", "description", "rxcui"})
-                    Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
-                    'strMessage = "Retrieving drug interactions from the NIH website"
-                    'thdThread1.Name = "Loading..." 'Dim thdThread1 As New Threading.Thread(AddressOf ThreadedMessageBox)
-                    'thdThread1.Name = strMessage
-                    'thdThread1.Start()
-                    If IsNothing(getInteractionsByName(strRXCUI, myPropertyNameList)) Then
-                        MessageBox.Show("The network sites are not responding. Please check your network connection and try again.")
-                    Else
-                        outputList = getInteractionsByName(strRXCUI, myPropertyNameList)
-
-
-
-                        'Double-check if the interactions with the matching pair of RXCUI's exist
-                        'If yes, Then update If there's differences
-                        ' Or insert the New lines
-                        ' And save those items
+                        CompareMedications(strName.Substring(0, strName.Length), strRXCUI, intControlled, intNarcotic, strBarcode, txtType.Text, txtStrength.Text, intSchedule, 1)
 
                         Try
-                            RaiseEvent UpdateLoadScreen("Saving interaction to the database")
+                            If CInt(cmbDrawerNumber.SelectedItem) > 25 Or CInt(cmbDrawerNumber.SelectedItem) < 0 Then
+                                MessageBox.Show("Please select an appropriate drawer number")
+                            Else
 
-                            strMessage = "Please wait while the interactions are saved to the database"
+                                Drawers_Tuid = CInt(cmbDrawerNumber.SelectedItem)
+                                intDividerBin = CInt(cmbDividerBin.SelectedItem)
+                            End If
 
-                            'old code look to delete later?
-                            Dim thdThread2 As New Threading.Thread(AddressOf ThreadedMessageBox)
-                            'thdThread2.Name = strMessage
-                            'thdThread2.Start()
-
-
-                            CompareDrugInteractions(CInt(strRXCUI), outputList) 'CInt(outputList.Item(i + 3).PropertyValue), outputList.Item(i).PropertyValue, outputList.Item(i + 1).PropertyValue.Replace("'", ""), 1)
-                            'Next
-                            RaiseEvent UpdateLoadScreen("Interactions records have been added")
-                            strMessage = "All interaction records have been added"
-                            Dim thdThread3 As New Threading.Thread(AddressOf ThreadedMessageBox)
-                            'thdThread3.Name = strMessage
-                            'thdThread3.Start()
                         Catch ex As Exception
-                            MessageBox.Show("Interactions could not be recorded")
+                            eprError.SetError(cmbDrawerNumber, "please enter an integer for drawer number between 1-25")
+
                         End Try
 
-                        intDrawerMedication_ID = ExecuteScalarQuery("SELECT COUNT(DISTINCT DrawerMedication_ID) FROM DrawerMedication;")
+                        Try
+                            intMedQuanitiy = CInt(txtQuantity.Text)
+                        Catch ex As Exception
+                            eprError.SetError(cmbDrawerNumber, "please enter an amount that is a positive whole number")
+                        End Try
 
 
-                        intMedicationTuid = ExecuteScalarQuery("Select Medication_ID From Medication WHERE Drug_Name ='" & strName & "';")
-                        'because we are adding a new drawermedication for now
-                        intDrawerMedication_ID += 1
 
-                        Dim strAmount As String = txtAmount.Text
-                        Dim strUnit As String = txtUnits.Text
-                        ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Amount_Per_Container,Amount_Per_Container_Unit,Divider_Bin,Expiration_Date,Discrepancy_Flag, Active_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & ",'" & strAmount.ToString & "','" & strUnit.ToString & "'," & intDividerBin & " , '" & mtbExpirationDate.Text & "'," & intDiscrepancies & ",1);")
-                        OpenOneDrawer(Drawers_Tuid)
-                        'If the user selects "Yes" in the Personal Patient medication drop down
-                        'Insert the information into the PersonalPatientDrawerMedication Table
-                        'in the database
-                        If cboPersonalMedication.SelectedItem = "Yes" Then
-                            InsertPersonalPatientMedication()
-                            RaiseEvent UpdateLoadScreen("Personal Patient Medication has been added")
+                        ' search the information from the allproperties API call
+                        ' double-check if the drug is in the database already
+                        ' if yes, then update if there's differences
+                        ' if no, then save those items
+                        ' and pass it to the function to find interactions
+                        'thdThread1.Start()
+                        RaiseEvent UpdateLoadScreen("Retrieving drug interactions from the NIH website")
+                        Dim myPropertyNameList As New List(Of String)({"severity", "description", "rxcui"})
+                        Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
+                        'strMessage = "Retrieving drug interactions from the NIH website"
+                        'thdThread1.Name = "Loading..." 'Dim thdThread1 As New Threading.Thread(AddressOf ThreadedMessageBox)
+                        'thdThread1.Name = strMessage
+                        'thdThread1.Start()
+                        If IsNothing(getInteractionsByName(strRXCUI, myPropertyNameList)) Then
+                            MessageBox.Show("The network sites are not responding. Please check your network connection and try again.")
+                        Else
+                            outputList = getInteractionsByName(strRXCUI, myPropertyNameList)
+
+
+
+                            'Double-check if the interactions with the matching pair of RXCUI's exist
+                            'If yes, Then update If there's differences
+                            ' Or insert the New lines
+                            ' And save those items
+
+                            Try
+                                RaiseEvent UpdateLoadScreen("Saving interaction to the database")
+
+                                strMessage = "Please wait while the interactions are saved to the database"
+
+                                'old code look to delete later?
+                                Dim thdThread2 As New Threading.Thread(AddressOf ThreadedMessageBox)
+                                'thdThread2.Name = strMessage
+                                'thdThread2.Start()
+
+
+                                CompareDrugInteractions(CInt(strRXCUI), outputList) 'CInt(outputList.Item(i + 3).PropertyValue), outputList.Item(i).PropertyValue, outputList.Item(i + 1).PropertyValue.Replace("'", ""), 1)
+                                'Next
+                                RaiseEvent UpdateLoadScreen("Interactions records have been added")
+                                strMessage = "All interaction records have been added"
+                                Dim thdThread3 As New Threading.Thread(AddressOf ThreadedMessageBox)
+                                'thdThread3.Name = strMessage
+                                'thdThread3.Start()
+                            Catch ex As Exception
+                                MessageBox.Show("Interactions could not be recorded")
+                            End Try
+
+                            intDrawerMedication_ID = ExecuteScalarQuery("SELECT COUNT(DISTINCT DrawerMedication_ID) FROM DrawerMedication;")
+
+
+                            intMedicationTuid = ExecuteScalarQuery("Select Medication_ID From Medication WHERE Drug_Name ='" & strName & "';")
+                            'because we are adding a new drawermedication for now
+                            intDrawerMedication_ID += 1
+
+                            Dim strAmount As String = txtAmount.Text
+                            Dim strUnit As String = txtUnits.Text
+                            ExecuteInsertQuery("INSERT INTO DrawerMedication (DrawerMedication_ID,Drawers_TUID,Medication_TUID,Quantity,Amount_Per_Container,Amount_Per_Container_Unit,Divider_Bin,Expiration_Date,Discrepancy_Flag, Active_Flag) VALUES (" & intDrawerMedication_ID & ", " & Drawers_Tuid & ", " & intMedicationTuid & ", " & intMedQuanitiy & ",'" & strAmount.ToString & "','" & strUnit.ToString & "'," & intDividerBin & " , '" & mtbExpirationDate.Text & "'," & intDiscrepancies & ",1);")
+                            OpenOneDrawer(Drawers_Tuid)
+                            'If the user selects "Yes" in the Personal Patient medication drop down
+                            'Insert the information into the PersonalPatientDrawerMedication Table
+                            'in the database
+                            If cboPersonalMedication.SelectedItem = "Yes" Then
+                                InsertPersonalPatientMedication()
+                                RaiseEvent UpdateLoadScreen("Personal Patient Medication has been added")
+                            End If
+
+
+                            RaiseEvent UpdateLoadScreen("Medication has been added to the drawer")
+                            'MessageBox.Show("Medication has been added to the drawer")
+                            Debug.WriteLine("")
+
+
+                            intDividerBin = CInt(cmbDividerBin.SelectedItem)
+
+                            eprError.Clear()
+
+                            ClearInventoryForm()
+                            changeStatusVisible()
                         End If
-
-
-                        RaiseEvent UpdateLoadScreen("Medication has been added to the drawer")
-                        'MessageBox.Show("Medication has been added to the drawer")
-                        Debug.WriteLine("")
-
-
-                        intDividerBin = CInt(cmbDividerBin.SelectedItem)
-
-                        eprError.Clear()
-
-                        ClearInventoryForm()
-                        changeStatusVisible()
                     End If
                 End If
             End If

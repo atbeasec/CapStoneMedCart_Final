@@ -476,7 +476,9 @@
         frmInventory.txtType.Clear()
         frmInventory.txtBarcode.Clear()
         frmInventory.mtbExpirationDate.Clear()
-
+        frmInventory.cmbPatientPersonalMedication.SelectedIndex = -1
+        frmInventory.txtAmount.Text = Nothing
+        frmInventory.txtUnits.Text = Nothing
         frmInventory.cmbDrawerNumber.SelectedIndex = -1
         frmInventory.cmbDividerBin.Items.Clear()
         frmInventory.txtQuantity.Text = "1"

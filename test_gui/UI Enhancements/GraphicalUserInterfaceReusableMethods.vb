@@ -634,15 +634,25 @@ Module GraphicalUserInterfaceReusableMethods
     '/*	None                                 							  */     
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
-    '/*	None                                                              */
+    '/*	dsValues - Stores the patient's who have the selected physician   */
+    '/*            assigned to them.                                      */
+    '/* strPatients - Stores the patient names                            */
+    '/* strSQLCmd - Stores the sql command for selecting the patient names*/
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						                      */               
     '/*											                          */                     
     '/*  WHO   WHEN     WHAT								              */             
     '/*  ---   ----     ------------------------------------------------  */
     '/*  Collin Krygier  2/15/2021    Initial creation                    */
+    '/*  BRH   4/11/2021 Added functionality to block user from deactivating
+    '/*                  a physician without changing the patient's physician
+    '/*                  first.                                           */
     '/*********************************************************************/
     Public Sub DetermineQueryDelete_Click(sender As Object, ByVal e As EventArgs)
+
+        Dim dsValues As DataSet
+        Dim strSQLCmd As String
+        Dim strPatients As String = vbCrLf
 
         ' determine the form that is currently opened in the application because this
         ' will influence the SQL query called to update the database
@@ -678,8 +688,27 @@ Module GraphicalUserInterfaceReusableMethods
             Dim intID As Integer = GetSelectedInformation(sender.parent, "lblID")
             Dim strStatement As String = "SELECT Active_Flag FROM Physician WHERE Physician_ID = '" & intID & "'"
             If ExecuteScalarQuery(strStatement) = 1 Then
-                strStatement = "UPDATE Physician SET Active_Flag='0' WHERE Physician_ID='" & intID & "';"
-                ExecuteInsertQuery(strStatement)
+
+                'Check to see if the physician has patients assigned to them
+                strSQLCmd = "SELECT Patient_First_Name, Patient_Middle_Name, Patient_Last_Name FROM Patient 
+                            INNER JOIN Physician On Physician.Physician_ID = Primary_Physician_ID
+                            WHERE Patient.Active_Flag = 1 AND Physician.Physician_ID ='" & intID & "';"
+
+                dsValues = ExecuteSelectQuery(strSQLCmd)
+
+                For Each item In dsValues.Tables(0).Rows
+                    strPatients += item(0) & " " & item(1) & " " & item(2) & vbCrLf
+                Next
+
+                'If there are patients assigned, let the user know what patients are assigned and block them from deactivating the physician
+                If dsValues.Tables(0).Rows.Count > 0 Then
+                    MessageBox.Show("The following patients are assigned to this physician: " & strPatients & "Please assign them to another physician before deleting.")
+                    'Else, allow the physician to deactivate the physician
+                Else
+                    strStatement = "UPDATE Physician SET Active_Flag='0' WHERE Physician_ID='" & intID & "';"
+                    ExecuteInsertQuery(strStatement)
+                End If
+
             Else
                 strStatement = "UPDATE Physician SET Active_Flag='1' WHERE Physician_ID='" & intID & "';"
                 ExecuteInsertQuery(strStatement)
