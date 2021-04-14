@@ -401,7 +401,8 @@
     '/*  CK		        2/10/21		    initial creation                 */
     '/********************************************************************/ 
     Public Sub CreateAllergiesPanels(ByVal flpPannel As FlowLayoutPanel, ByVal strAllergyName As String, ByVal strAllergyType As String, ByVal strSeverity As String)
-
+        Dim intAllergyID As Integer = ExecuteScalarQuery("Select Allergy_ID from Allergy where Allergy_Name = '" & strAllergyName & "' and Allergy_Type= '" &
+                                                         strAllergyType & "';")
         Dim pnl As Panel
         pnl = New Panel
 
@@ -457,7 +458,7 @@
         '  CreateIDLabel(pnlMainPanel, lblID4, "lblMedication", lblMedication.Location.X, 20, strMedicationName, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
-        pnlMainPanel.Tag = strAllergyName
+        pnlMainPanel.Tag = intAllergyID
         flpPannel.Controls.Add(pnl)
 
     End Sub
