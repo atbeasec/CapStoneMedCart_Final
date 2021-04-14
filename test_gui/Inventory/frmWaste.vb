@@ -1096,4 +1096,10 @@
             btnWasteWithCredentials_Click(sender, e)
         End If
     End Sub
+
+
+
+    Private Sub txtother_TextChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtOther.KeyPress
+        DataVaildationMethods.KeyPressCheck(e, "0123456789. abcdefghijklmnopqrstuvwxyz -_=+!@#$%^&*")
+    End Sub
 End Class

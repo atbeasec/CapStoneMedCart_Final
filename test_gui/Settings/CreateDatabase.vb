@@ -83,7 +83,7 @@ Module CreateDatabase
 	Public DBCmd As SQLiteCommand
     Public strCONNECTION As String
 	Dim strCreateTable As String
-	Public strApplicationPath As String = Application.StartupPath & "\config.app"
+	Public strApplicationPath As String = "C:\Users\Public\Documents\MedServe\config.app"
 	Public dlgOpenFileDialog As New OpenFileDialog
 
 	'/*********************************************************************/
