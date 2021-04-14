@@ -130,9 +130,9 @@ Partial Class frmNewPatient
         Me.Label2.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(29, 51)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(188, 25)
+        Me.Label2.Size = New System.Drawing.Size(193, 25)
         Me.Label2.TabIndex = 17
-        Me.Label2.Text = "Patient Information"
+        Me.Label2.Text = "Patient Information:"
         '
         'Panel9
         '

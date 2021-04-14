@@ -216,9 +216,9 @@ Partial Class frmInventory
         Me.Label17.Location = New System.Drawing.Point(18, 48)
         Me.Label17.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(208, 25)
+        Me.Label17.Size = New System.Drawing.Size(213, 25)
         Me.Label17.TabIndex = 168
-        Me.Label17.Text = "Drawer Configuration"
+        Me.Label17.Text = "Drawer Configuration:"
         '
         'Label1
         '
