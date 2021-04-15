@@ -57,11 +57,11 @@ Partial Class frmSplash
         Me.lblVersionNumber.AutoSize = True
         Me.lblVersionNumber.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblVersionNumber.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.lblVersionNumber.Location = New System.Drawing.Point(277, 273)
+        Me.lblVersionNumber.Location = New System.Drawing.Point(228, 275)
         Me.lblVersionNumber.Name = "lblVersionNumber"
-        Me.lblVersionNumber.Size = New System.Drawing.Size(104, 25)
+        Me.lblVersionNumber.Size = New System.Drawing.Size(132, 25)
         Me.lblVersionNumber.TabIndex = 12
-        Me.lblVersionNumber.Text = "Version 1.0"
+        Me.lblVersionNumber.Text = "Version 1.0.1.1"
         '
         'PictureBox1
         '
