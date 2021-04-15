@@ -108,7 +108,7 @@ Partial Class frmInventory
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label10.Location = New System.Drawing.Point(252, 261)
+        Me.Label10.Location = New System.Drawing.Point(242, 261)
         Me.Label10.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(90, 21)
@@ -120,7 +120,7 @@ Partial Class frmInventory
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label6.Location = New System.Drawing.Point(490, 183)
+        Me.Label6.Location = New System.Drawing.Point(477, 183)
         Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(140, 42)
@@ -132,7 +132,7 @@ Partial Class frmInventory
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label5.Location = New System.Drawing.Point(11, 51)
+        Me.Label5.Location = New System.Drawing.Point(7, 60)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(120, 21)
         Me.Label5.TabIndex = 106
@@ -143,7 +143,7 @@ Partial Class frmInventory
         Me.Panel4.BackColor = System.Drawing.Color.DarkGray
         Me.Panel4.Controls.Add(Me.cmbDividerBin)
         Me.Panel4.Controls.Add(Me.cmbBin)
-        Me.Panel4.Location = New System.Drawing.Point(255, 283)
+        Me.Panel4.Location = New System.Drawing.Point(245, 283)
         Me.Panel4.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Padding = New System.Windows.Forms.Padding(1)
@@ -201,7 +201,7 @@ Partial Class frmInventory
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(490, 263)
+        Me.Label2.Location = New System.Drawing.Point(477, 263)
         Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(73, 21)
@@ -213,19 +213,19 @@ Partial Class frmInventory
         Me.Label17.AutoSize = True
         Me.Label17.BackColor = System.Drawing.Color.White
         Me.Label17.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(18, 48)
+        Me.Label17.Location = New System.Drawing.Point(29, 45)
         Me.Label17.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(208, 25)
+        Me.Label17.Size = New System.Drawing.Size(213, 25)
         Me.Label17.TabIndex = 168
-        Me.Label17.Text = "Drawer Configuration"
+        Me.Label17.Text = "Drawer Configuration:"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(7, 335)
+        Me.Label1.Location = New System.Drawing.Point(7, 336)
         Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(204, 21)
@@ -325,7 +325,7 @@ Partial Class frmInventory
         Me.btnQuantityDown.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnQuantityDown.ForeColor = System.Drawing.Color.White
         Me.btnQuantityDown.Image = CType(resources.GetObject("btnQuantityDown.Image"), System.Drawing.Image)
-        Me.btnQuantityDown.Location = New System.Drawing.Point(585, 286)
+        Me.btnQuantityDown.Location = New System.Drawing.Point(572, 286)
         Me.btnQuantityDown.Margin = New System.Windows.Forms.Padding(2)
         Me.btnQuantityDown.Name = "btnQuantityDown"
         Me.btnQuantityDown.Size = New System.Drawing.Size(28, 27)
@@ -341,7 +341,7 @@ Partial Class frmInventory
         Me.btnQuantityUp.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnQuantityUp.ForeColor = System.Drawing.Color.White
         Me.btnQuantityUp.Image = CType(resources.GetObject("btnQuantityUp.Image"), System.Drawing.Image)
-        Me.btnQuantityUp.Location = New System.Drawing.Point(554, 286)
+        Me.btnQuantityUp.Location = New System.Drawing.Point(541, 286)
         Me.btnQuantityUp.Margin = New System.Windows.Forms.Padding(2)
         Me.btnQuantityUp.Name = "btnQuantityUp"
         Me.btnQuantityUp.Size = New System.Drawing.Size(27, 27)
@@ -353,7 +353,7 @@ Partial Class frmInventory
         '
         Me.Panel5.BackColor = System.Drawing.Color.DarkGray
         Me.Panel5.Controls.Add(Me.txtQuantity)
-        Me.Panel5.Location = New System.Drawing.Point(493, 286)
+        Me.Panel5.Location = New System.Drawing.Point(480, 286)
         Me.Panel5.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
@@ -378,7 +378,7 @@ Partial Class frmInventory
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(5, 197)
+        Me.Label15.Location = New System.Drawing.Point(5, 203)
         Me.Label15.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(45, 21)
@@ -389,7 +389,7 @@ Partial Class frmInventory
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(489, 127)
+        Me.Label3.Location = New System.Drawing.Point(476, 130)
         Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(72, 21)
@@ -452,7 +452,7 @@ Partial Class frmInventory
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(655, 335)
+        Me.Label11.Location = New System.Drawing.Point(663, 342)
         Me.Label11.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(49, 21)
@@ -463,22 +463,22 @@ Partial Class frmInventory
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(489, 335)
+        Me.Label8.Location = New System.Drawing.Point(475, 341)
         Me.Label8.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(165, 21)
+        Me.Label8.Size = New System.Drawing.Size(167, 21)
         Me.Label8.TabIndex = 214
-        Me.Label8.Text = "Amount per container:"
+        Me.Label8.Text = "Amount Per Container:"
         '
         'txtAmount
         '
         Me.txtAmount.BackColor = System.Drawing.Color.White
         Me.txtAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtAmount.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAmount.Location = New System.Drawing.Point(493, 359)
+        Me.txtAmount.Location = New System.Drawing.Point(479, 365)
         Me.txtAmount.Name = "txtAmount"
         Me.txtAmount.ShortcutsEnabled = False
-        Me.txtAmount.Size = New System.Drawing.Size(154, 25)
+        Me.txtAmount.Size = New System.Drawing.Size(176, 25)
         Me.txtAmount.TabIndex = 19
         '
         'Panel2
@@ -486,7 +486,7 @@ Partial Class frmInventory
         Me.Panel2.BackColor = System.Drawing.Color.DarkGray
         Me.Panel2.Controls.Add(Me.mtbExpirationDate)
         Me.Panel2.ForeColor = System.Drawing.Color.DarkGray
-        Me.Panel2.Location = New System.Drawing.Point(493, 228)
+        Me.Panel2.Location = New System.Drawing.Point(480, 228)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Padding = New System.Windows.Forms.Padding(1)
         Me.Panel2.Size = New System.Drawing.Size(92, 24)
@@ -510,7 +510,7 @@ Partial Class frmInventory
         Me.txtUnits.BackColor = System.Drawing.Color.White
         Me.txtUnits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtUnits.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUnits.Location = New System.Drawing.Point(659, 359)
+        Me.txtUnits.Location = New System.Drawing.Point(667, 365)
         Me.txtUnits.Name = "txtUnits"
         Me.txtUnits.ShortcutsEnabled = False
         Me.txtUnits.Size = New System.Drawing.Size(56, 25)
@@ -534,7 +534,7 @@ Partial Class frmInventory
         '
         Me.Panel8.BackColor = System.Drawing.Color.DarkGray
         Me.Panel8.Controls.Add(Me.txtBarcode)
-        Me.Panel8.Location = New System.Drawing.Point(255, 220)
+        Me.Panel8.Location = New System.Drawing.Point(245, 226)
         Me.Panel8.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel8.Name = "Panel8"
         Me.Panel8.Padding = New System.Windows.Forms.Padding(1)
@@ -558,7 +558,7 @@ Partial Class frmInventory
         '
         Me.lblBarcode.AutoSize = True
         Me.lblBarcode.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblBarcode.Location = New System.Drawing.Point(251, 197)
+        Me.lblBarcode.Location = New System.Drawing.Point(241, 203)
         Me.lblBarcode.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblBarcode.Name = "lblBarcode"
         Me.lblBarcode.Size = New System.Drawing.Size(69, 21)
@@ -579,7 +579,7 @@ Partial Class frmInventory
         '
         Me.Panel7.BackColor = System.Drawing.Color.DarkGray
         Me.Panel7.Controls.Add(Me.txtType)
-        Me.Panel7.Location = New System.Drawing.Point(10, 220)
+        Me.Panel7.Location = New System.Drawing.Point(10, 226)
         Me.Panel7.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Padding = New System.Windows.Forms.Padding(1)
@@ -603,7 +603,7 @@ Partial Class frmInventory
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label7.Location = New System.Drawing.Point(251, 127)
+        Me.Label7.Location = New System.Drawing.Point(242, 132)
         Me.Label7.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(76, 21)
@@ -614,7 +614,7 @@ Partial Class frmInventory
         '
         Me.Panel6.BackColor = System.Drawing.Color.DarkGray
         Me.Panel6.Controls.Add(Me.txtSchedule)
-        Me.Panel6.Location = New System.Drawing.Point(255, 155)
+        Me.Panel6.Location = New System.Drawing.Point(245, 155)
         Me.Panel6.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Padding = New System.Windows.Forms.Padding(1)
@@ -637,7 +637,7 @@ Partial Class frmInventory
         '
         Me.Panel10.BackColor = System.Drawing.Color.DarkGray
         Me.Panel10.Controls.Add(Me.txtStrength)
-        Me.Panel10.Location = New System.Drawing.Point(493, 156)
+        Me.Panel10.Location = New System.Drawing.Point(479, 152)
         Me.Panel10.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel10.Name = "Panel10"
         Me.Panel10.Padding = New System.Windows.Forms.Padding(1)
@@ -698,7 +698,7 @@ Partial Class frmInventory
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label4.Location = New System.Drawing.Point(6, 127)
+        Me.Label4.Location = New System.Drawing.Point(6, 132)
         Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(123, 21)

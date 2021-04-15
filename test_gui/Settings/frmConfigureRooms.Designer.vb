@@ -288,7 +288,7 @@ Partial Class frmConfigureRooms
         Me.lblDetailAddInstruc.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.lblDetailAddInstruc.Location = New System.Drawing.Point(525, 30)
         Me.lblDetailAddInstruc.Name = "lblDetailAddInstruc"
-        Me.lblDetailAddInstruc.Size = New System.Drawing.Size(175, 173)
+        Me.lblDetailAddInstruc.Size = New System.Drawing.Size(175, 211)
         Me.lblDetailAddInstruc.TabIndex = 199
         Me.lblDetailAddInstruc.Text = resources.GetString("lblDetailAddInstruc.Text")
         '
@@ -328,7 +328,7 @@ Partial Class frmConfigureRooms
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAdd.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAdd.ForeColor = System.Drawing.Color.White
-        Me.btnAdd.Location = New System.Drawing.Point(407, 28)
+        Me.btnAdd.Location = New System.Drawing.Point(420, 30)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(87, 33)
         Me.btnAdd.TabIndex = 183

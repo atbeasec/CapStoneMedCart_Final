@@ -39,11 +39,13 @@
         'set ad efault quantity to the quantity textbox
 
         cmbMedications.Items.Clear()
+        cmbphysician.Items.Clear()
+        cmbPatientName.Items.Clear()
         'populate medications onthe cart into comboboxs
         AdHoc.GetAllMedicationsForListbox()
         'populate active patients into comboboxes
         AdHoc.PopulatePatientsAdhoc()
-
+        AdHoc.PopulatePhysicianAdhoc()
     End Sub
 
 
@@ -186,6 +188,8 @@
             MessageBox.Show("Please enter a prescription amount")
         ElseIf txtUnit.Text = Nothing Or txtUnit.Text.Trim.Length = 0 Then
             MessageBox.Show("Please select a Unit for the amount")
+        ElseIf IsNothing(cmbphysician.SelectedItem) Then
+            MessageBox.Show("Please select an ordering physician")
         Else
             For Each allergy In lstboxAllergies.Items
                 If cmbMedications.SelectedItem.ToString.ToLower.Contains(allergy.ToString.ToLower) Then
@@ -247,6 +251,7 @@
                 Dim strAmount As String = txtAmount.Text
                 Dim strUnit As String = txtUnit.Text
                 Dim intMedDrawer As Integer = AdHoc.intDrawerMedArray(cmbMedications.SelectedIndex)
+                Dim intPhysicianID As Integer = AdHoc.intPhysicianIDArray(cmbphysician.SelectedIndex)
                 Dim intDrawerNumber As Integer = CreateDatabase.ExecuteScalarQuery("Select Drawers_TUID from DrawerMedication where DrawerMedication_ID = '" & AdHoc.intDrawerMedArray(cmbMedications.SelectedIndex) & "'")
 
                 Dim intDrawerBin As Integer = CreateDatabase.ExecuteScalarQuery("Select Divider_Bin from DrawerMedication where DrawerMedication_ID = '" & AdHoc.intDrawerMedArray(cmbMedications.SelectedIndex) & "'")
@@ -262,7 +267,7 @@
                     frmDispense.setintEntered(1)
 
                     'set medication variables into dispense screen
-                    frmDispense.AdhocDispenseSetInformation(strAmount, strUnit, intMedDrawer, intDrawerNumber, intDrawerBin)
+                    frmDispense.AdhocDispenseSetInformation(strAmount, strUnit, intMedDrawer, intDrawerNumber, intDrawerBin, intPhysicianID)
 
                     'set patient id for dispense
                     frmDispense.SetPatientID(intPatientID)

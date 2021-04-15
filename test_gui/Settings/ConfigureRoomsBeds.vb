@@ -143,7 +143,7 @@ Module ConfigureRoomsBeds
 
                 ExecuteInsertQuery(strSQLCmd)
 
-                MessageBox.Show("The room and bed has been inserted")
+                MessageBox.Show("The room and bed has been inserted.")
             End If
 
             'Show the radio buttons asking the user if they want to add

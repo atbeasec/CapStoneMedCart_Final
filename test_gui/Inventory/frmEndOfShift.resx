@@ -120,7 +120,10 @@
   <metadata name="tpToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>36</value>
-  </metadata>
+  <data name="lblInstructions.ToolTip" xml:space="preserve">
+    <value>1. Select a reporting type
+2. Input the new total medication amount into the New Total box
+3. Click the flag icon on the right side of the medication panel to flag that medication record for updating
+4. Click the update button to update all Medication bin amounts that have been flagged.</value>
+  </data>
 </root>
