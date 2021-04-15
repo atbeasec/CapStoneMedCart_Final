@@ -36,11 +36,11 @@ Partial Class frmLoginScan
         Me.btnClose = New System.Windows.Forms.Button()
         Me.startUpTimer = New System.Windows.Forms.Timer(Me.components)
         Me.pnlSplash = New System.Windows.Forms.Panel()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.lblVersionNumber = New System.Windows.Forms.Label()
         Me.lblApplicationName = New System.Windows.Forms.Label()
-        Me.pnlSoftwareLogo = New System.Windows.Forms.Panel()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.pnlLogo = New System.Windows.Forms.Panel()
+        Me.pnlSoftwareLogo = New System.Windows.Forms.Panel()
         Me.pnlLogin.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.panelTopBar.SuspendLayout()
@@ -94,6 +94,7 @@ Partial Class frmLoginScan
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Size = New System.Drawing.Size(236, 40)
         Me.btnLogin.TabIndex = 15
+        Me.btnLogin.TabStop = False
         Me.btnLogin.Text = "Login"
         Me.btnLogin.UseVisualStyleBackColor = False
         '
@@ -165,6 +166,7 @@ Partial Class frmLoginScan
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(40, 28)
         Me.btnClose.TabIndex = 0
+        Me.btnClose.TabStop = False
         Me.btnClose.Text = "X"
         Me.btnClose.UseVisualStyleBackColor = False
         '
@@ -183,12 +185,22 @@ Partial Class frmLoginScan
         Me.pnlSplash.Size = New System.Drawing.Size(332, 232)
         Me.pnlSplash.TabIndex = 13
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(149, 176)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(35, 35)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 17
+        Me.PictureBox1.TabStop = False
+        '
         'lblVersionNumber
         '
         Me.lblVersionNumber.AutoSize = True
         Me.lblVersionNumber.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblVersionNumber.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(216, Byte), Integer))
-        Me.lblVersionNumber.Location = New System.Drawing.Point(114, 140)
+        Me.lblVersionNumber.Location = New System.Drawing.Point(80, 138)
         Me.lblVersionNumber.Name = "lblVersionNumber"
         Me.lblVersionNumber.Size = New System.Drawing.Size(104, 25)
         Me.lblVersionNumber.TabIndex = 16
@@ -205,25 +217,6 @@ Partial Class frmLoginScan
         Me.lblApplicationName.TabIndex = 15
         Me.lblApplicationName.Text = "MedServe"
         '
-        'pnlSoftwareLogo
-        '
-        Me.pnlSoftwareLogo.BackgroundImage = Global.test_gui.My.Resources.Resources.MicrosoftTeams_image__4_
-        Me.pnlSoftwareLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pnlSoftwareLogo.Location = New System.Drawing.Point(278, 18)
-        Me.pnlSoftwareLogo.Name = "pnlSoftwareLogo"
-        Me.pnlSoftwareLogo.Size = New System.Drawing.Size(104, 89)
-        Me.pnlSoftwareLogo.TabIndex = 14
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(149, 176)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(35, 35)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 17
-        Me.PictureBox1.TabStop = False
-        '
         'pnlLogo
         '
         Me.pnlLogo.BackgroundImage = CType(resources.GetObject("pnlLogo.BackgroundImage"), System.Drawing.Image)
@@ -232,6 +225,15 @@ Partial Class frmLoginScan
         Me.pnlLogo.Name = "pnlLogo"
         Me.pnlLogo.Size = New System.Drawing.Size(60, 60)
         Me.pnlLogo.TabIndex = 14
+        '
+        'pnlSoftwareLogo
+        '
+        Me.pnlSoftwareLogo.BackgroundImage = Global.test_gui.My.Resources.Resources.MicrosoftTeams_image__4_
+        Me.pnlSoftwareLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pnlSoftwareLogo.Location = New System.Drawing.Point(278, 18)
+        Me.pnlSoftwareLogo.Name = "pnlSoftwareLogo"
+        Me.pnlSoftwareLogo.Size = New System.Drawing.Size(104, 89)
+        Me.pnlSoftwareLogo.TabIndex = 14
         '
         'frmLoginScan
         '

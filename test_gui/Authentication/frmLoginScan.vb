@@ -11,7 +11,7 @@ Public Class frmLoginScan
     End Sub
     Private Sub lblBadge_Click(sender As Object, e As EventArgs) Handles lblBadge.Click
         'close current form and open frmLogin to login with username and password
-
+        txtBarcode.Clear()
         Me.Visible = False
         frmLogin.Show()
 
@@ -39,7 +39,7 @@ Public Class frmLoginScan
             MsgBox("No User With That Barcode")
             txtBarcode.Focus()
         End If
-
+        txtBarcode.Clear()
     End Sub
 
     Private Sub Barcode_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBarcode.KeyPress
@@ -66,6 +66,7 @@ Public Class frmLoginScan
                 MsgBox("No User With That Barcode")
                 txtBarcode.Focus()
             End If
+            txtBarcode.Clear()
         End If
     End Sub
 
@@ -96,6 +97,11 @@ Public Class frmLoginScan
 
     Private Sub frmLoginScan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetLogo()
+        Dim strProjectName As String = System.Reflection.Assembly.GetExecutingAssembly.GetName.Name.ToString
+        lblApplicationName.Text = strProjectName
+        Dim Version As Version = System.Reflection.Assembly.GetExecutingAssembly.GetName.Version
+        Console.WriteLine("Trying to set the version number")
+        lblVersionNumber.Text = "Version " & Version.Major & "." & Version.Minor & " (build " & Version.Build & ")"
         ShowSplashScreen()
         CreateDatabase.Main()
         lblSoftwareName.Visible = False
