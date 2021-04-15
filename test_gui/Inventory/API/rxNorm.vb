@@ -596,6 +596,7 @@ Module rxNorm
         drugName = drugName.ToLower
         ' Insert functionality to check the network connectivity
         frmInventory.txtStatus.Text = "Checking network connectivity"
+        frmProgressBar.UpdateLabel("Checking network connectivity")
         Dim strSite As String = checkConnections() ' insert functionality to return the site string
         If strSite IsNot "ERROR" Then
             Dim url As String = strSite & "drugs?name=" & drugName
@@ -615,6 +616,7 @@ Module rxNorm
                     ' prepare for looking in the next index
                     intIndex += 1
                 Else
+                    frmProgressBar.UpdateLabel("Retrieving drug information...")
                     'looks through our JsonJArray for the properties specified 
                     For Each propertyName As String In propertyNames
                         For Each item As JObject In JsonJArray '
@@ -686,6 +688,7 @@ Module rxNorm
             'web address for api
             ' Insert functionality to check the network connectivity
             frmInventory.txtStatus.Text = "Checking network connectivity"
+            frmProgressBar.UpdateLabel("Checking network connectivity")
             Dim strSite As String = checkConnections() ' insert functionality to return the site string
             If strSite IsNot "ERROR" Then
                 Dim url As String = strSite & "spellingsuggestions.json?name=" & name
@@ -696,7 +699,9 @@ Module rxNorm
                 'creates jarray to store values of twaledResult
                 Dim jArrayObj As JArray = DirectCast(trawledResult, JArray)
                 If IsNothing(jArrayObj) Then
+                    frmInventory.txtStatus.Text = "No suggestions found. Please try again."
                     MessageBox.Show("Could not find suggestions. Please try another search.")
+                    frmInventory.cboSuggestedNames.Visible = False
                 Else
                     ' now get the individual values out from the items and add them to the list
                     For Each item In jArrayObj
