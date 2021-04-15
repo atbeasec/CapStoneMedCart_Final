@@ -698,6 +698,7 @@ Module rxNorm
                 If IsNothing(jArrayObj) Then
                     frmInventory.txtStatus.Text = "No suggestions found. Please try again."
                     MessageBox.Show("Could not find suggestions. Please try another search.")
+                    frmInventory.cboSuggestedNames.Visible = False
                 Else
                     ' now get the individual values out from the items and add them to the list
                     For Each item In jArrayObj
