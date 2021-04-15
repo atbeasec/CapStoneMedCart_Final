@@ -316,6 +316,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
     }
@@ -915,7 +923,7 @@
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_986A9FE7915647F3AFBA45A1B673945C"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder]\\MedServe\\"
+            "DefaultLocation" = "8:[WindowsVolume]\\Users\\Public\\MedServe"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:TRUE"
             "Condition" = "8:"
@@ -953,7 +961,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:MedServe_Installer"
         "ProductCode" = "8:{D7B61030-3733-49F6-9A23-53F346072220}"
-        "PackageCode" = "8:{BEBE4578-4BC9-4E38-B7FA-DFA01D032744}"
+        "PackageCode" = "8:{FB70752A-5C58-49F1-B35E-877101F9F87D}"
         "UpgradeCode" = "8:{B4A1FBDA-CA15-4D82-8837-62B927A07F89}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -1614,7 +1622,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_935CC19F3C92418786BAFBE5525C2CA7"
             {
-            "SourcePath" = "8:..\\test_gui\\obj\\x86\\Debug\\MedServe.xml"
+            "SourcePath" = "8:..\\test_gui\\obj\\Release\\MedServe.xml"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_986A9FE7915647F3AFBA45A1B673945C"
@@ -1642,7 +1650,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B0062A5A5E224AA8B281671E7F7192B6"
             {
-            "SourcePath" = "8:..\\test_gui\\obj\\x86\\Debug\\MedServe.exe"
+            "SourcePath" = "8:..\\test_gui\\obj\\Release\\MedServe.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_986A9FE7915647F3AFBA45A1B673945C"
