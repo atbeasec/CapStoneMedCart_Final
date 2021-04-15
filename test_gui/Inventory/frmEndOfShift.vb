@@ -356,7 +356,10 @@
     '/*  Collin Krygier  2/13/2021    Initial creation                    */
     '/*********************************************************************/
     Private Sub cmbFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFilter.SelectedIndexChanged
-
+        Dim lbl As Label
+        For Each lbl In pnlHeader.Controls
+            lbl.Font = New Font(New FontFamily("Segoe UI Semibold"), 12, FontStyle.Regular)
+        Next
 
         If Not cmbFilter.SelectedIndex = -1 Then
             btnSave.Visible = True
@@ -645,8 +648,10 @@
 
         Dim parent As Panel = sender.parent
         Dim field As Integer = CInt(sender.tag)
+        If Not cmbFilter.SelectedIndex = -1 Then
+            BoldLabelToSortBy(sender, parent)
+        End If
 
-        BoldLabelToSortBy(sender, parent)
 
     End Sub
 
