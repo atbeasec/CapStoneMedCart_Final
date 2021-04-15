@@ -923,7 +923,7 @@
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_986A9FE7915647F3AFBA45A1B673945C"
             {
-            "DefaultLocation" = "8:[CommonDocuments]\\MedServe\\"
+            "DefaultLocation" = "8:[WindowsVolume]\\Users\\Public\\MedServe"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:TRUE"
             "Condition" = "8:"
@@ -961,7 +961,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:MedServe_Installer"
         "ProductCode" = "8:{D7B61030-3733-49F6-9A23-53F346072220}"
-        "PackageCode" = "8:{BEBE4578-4BC9-4E38-B7FA-DFA01D032744}"
+        "PackageCode" = "8:{FB70752A-5C58-49F1-B35E-877101F9F87D}"
         "UpgradeCode" = "8:{B4A1FBDA-CA15-4D82-8837-62B927A07F89}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
