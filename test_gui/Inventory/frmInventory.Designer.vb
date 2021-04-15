@@ -85,6 +85,7 @@ Partial Class frmInventory
         Me.pnlHeader = New System.Windows.Forms.Panel()
         Me.btnBack = New System.Windows.Forms.Button()
         Me.tpSelectedItem = New System.Windows.Forms.ToolTip(Me.components)
+        Me.pnlTransparent = New test_gui.TransparentPanel()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -409,6 +410,7 @@ Partial Class frmInventory
         '
         'pnlMainFormFields
         '
+        Me.pnlMainFormFields.Controls.Add(Me.pnlTransparent)
         Me.pnlMainFormFields.Controls.Add(Me.Label11)
         Me.pnlMainFormFields.Controls.Add(Me.Label8)
         Me.pnlMainFormFields.Controls.Add(Me.txtAmount)
@@ -847,6 +849,14 @@ Partial Class frmInventory
         Me.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnBack.UseVisualStyleBackColor = False
         '
+        'pnlTransparent
+        '
+        Me.pnlTransparent.Location = New System.Drawing.Point(0, 0)
+        Me.pnlTransparent.Name = "pnlTransparent"
+        Me.pnlTransparent.Size = New System.Drawing.Size(735, 571)
+        Me.pnlTransparent.TabIndex = 216
+        Me.pnlTransparent.Visible = False
+        '
         'frmInventory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -948,4 +958,5 @@ Partial Class frmInventory
     Friend WithEvents Label8 As Label
     Friend WithEvents txtAmount As TextBox
     Friend WithEvents txtUnits As TextBox
+    Friend WithEvents pnlTransparent As TransparentPanel
 End Class
