@@ -545,6 +545,7 @@ Module APIDatabaseSelection
 		Dim strWebSite As String = "https://rxnav.nlm.nih.gov/REST/"
 		Try
 			frmInventory.txtStatus.Text = "Checking primary site..."
+			frmProgressBar.UpdateLabel("Checking primary site...")
 			Using client = New WebClient()
 				Using Stream = client.OpenRead(strWebSite)
 					Return strWebSite
@@ -554,6 +555,7 @@ Module APIDatabaseSelection
 		Catch
 			Try
 				frmInventory.txtStatus.Text = "Checking secondary site..."
+				frmProgressBar.UpdateLabel("Checking secondary site...")
 				Using client = New WebClient()
 					Using stream = client.OpenRead("https://10.8.30.33/REST/")
 						strWebSite = "https://10.8.30.33/REST/"
