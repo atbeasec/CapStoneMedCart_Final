@@ -204,10 +204,10 @@ Partial Class frmEditPhysician
         Me.Panel8.BackColor = System.Drawing.Color.DarkGray
         Me.Panel8.Controls.Add(Me.mtbFax)
         Me.Panel8.Controls.Add(Me.Panel9)
-        Me.Panel8.Location = New System.Drawing.Point(284, 213)
+        Me.Panel8.Location = New System.Drawing.Point(263, 212)
         Me.Panel8.Name = "Panel8"
         Me.Panel8.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel8.Size = New System.Drawing.Size(186, 31)
+        Me.Panel8.Size = New System.Drawing.Size(207, 31)
         Me.Panel8.TabIndex = 6
         '
         'mtbFax
@@ -219,7 +219,7 @@ Partial Class frmEditPhysician
         Me.mtbFax.Mask = "(999) 000-0000"
         Me.mtbFax.Name = "mtbFax"
         Me.mtbFax.ShortcutsEnabled = False
-        Me.mtbFax.Size = New System.Drawing.Size(184, 22)
+        Me.mtbFax.Size = New System.Drawing.Size(205, 22)
         Me.mtbFax.TabIndex = 174
         '
         'Panel9
@@ -228,7 +228,7 @@ Partial Class frmEditPhysician
         Me.Panel9.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel9.Location = New System.Drawing.Point(1, 23)
         Me.Panel9.Name = "Panel9"
-        Me.Panel9.Size = New System.Drawing.Size(184, 7)
+        Me.Panel9.Size = New System.Drawing.Size(205, 7)
         Me.Panel9.TabIndex = 173
         '
         'Panel18
@@ -300,7 +300,7 @@ Partial Class frmEditPhysician
         Me.lblTitle.AutoSize = True
         Me.lblTitle.BackColor = System.Drawing.Color.White
         Me.lblTitle.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTitle.Location = New System.Drawing.Point(7, 12)
+        Me.lblTitle.Location = New System.Drawing.Point(8, 6)
         Me.lblTitle.Name = "lblTitle"
         Me.lblTitle.Size = New System.Drawing.Size(201, 25)
         Me.lblTitle.TabIndex = 189
@@ -313,7 +313,7 @@ Partial Class frmEditPhysician
         Me.Panel5.Location = New System.Drawing.Point(263, 70)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel5.Size = New System.Drawing.Size(215, 28)
+        Me.Panel5.Size = New System.Drawing.Size(207, 28)
         Me.Panel5.TabIndex = 2
         '
         'txtMiddleName
@@ -326,7 +326,7 @@ Partial Class frmEditPhysician
         Me.txtMiddleName.Multiline = True
         Me.txtMiddleName.Name = "txtMiddleName"
         Me.txtMiddleName.ShortcutsEnabled = False
-        Me.txtMiddleName.Size = New System.Drawing.Size(213, 26)
+        Me.txtMiddleName.Size = New System.Drawing.Size(205, 26)
         Me.txtMiddleName.TabIndex = 2
         '
         'Panel11
@@ -394,7 +394,7 @@ Partial Class frmEditPhysician
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label14.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label14.Location = New System.Drawing.Point(365, 331)
+        Me.Label14.Location = New System.Drawing.Point(359, 332)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(75, 21)
         Me.Label14.TabIndex = 188
@@ -416,7 +416,7 @@ Partial Class frmEditPhysician
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label12.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label12.Location = New System.Drawing.Point(8, 333)
+        Me.Label12.Location = New System.Drawing.Point(10, 333)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(40, 21)
         Me.Label12.TabIndex = 186
@@ -427,7 +427,7 @@ Partial Class frmEditPhysician
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label11.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label11.Location = New System.Drawing.Point(9, 261)
+        Me.Label11.Location = New System.Drawing.Point(9, 264)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(113, 21)
         Me.Label11.TabIndex = 185
@@ -511,7 +511,7 @@ Partial Class frmEditPhysician
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label5.Location = New System.Drawing.Point(282, 109)
+        Me.Label5.Location = New System.Drawing.Point(260, 110)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(91, 21)
         Me.Label5.TabIndex = 180
@@ -521,10 +521,10 @@ Partial Class frmEditPhysician
         '
         Me.Panel3.BackColor = System.Drawing.Color.DarkGray
         Me.Panel3.Controls.Add(Me.cboCredentials)
-        Me.Panel3.Location = New System.Drawing.Point(285, 137)
+        Me.Panel3.Location = New System.Drawing.Point(263, 134)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Padding = New System.Windows.Forms.Padding(1)
-        Me.Panel3.Size = New System.Drawing.Size(124, 31)
+        Me.Panel3.Size = New System.Drawing.Size(207, 31)
         Me.Panel3.TabIndex = 4
         '
         'cboCredentials
@@ -536,7 +536,7 @@ Partial Class frmEditPhysician
         Me.cboCredentials.FormattingEnabled = True
         Me.cboCredentials.Location = New System.Drawing.Point(1, 1)
         Me.cboCredentials.Name = "cboCredentials"
-        Me.cboCredentials.Size = New System.Drawing.Size(122, 29)
+        Me.cboCredentials.Size = New System.Drawing.Size(205, 29)
         Me.cboCredentials.TabIndex = 5
         '
         'btnCancel
@@ -573,7 +573,7 @@ Partial Class frmEditPhysician
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label2.Location = New System.Drawing.Point(281, 188)
+        Me.Label2.Location = New System.Drawing.Point(260, 187)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(35, 21)
         Me.Label2.TabIndex = 176
@@ -595,7 +595,7 @@ Partial Class frmEditPhysician
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(260, 43)
+        Me.Label3.Location = New System.Drawing.Point(259, 46)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(107, 21)
         Me.Label3.TabIndex = 169
@@ -606,7 +606,7 @@ Partial Class frmEditPhysician
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(10, 109)
+        Me.Label1.Location = New System.Drawing.Point(10, 114)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(87, 21)
         Me.Label1.TabIndex = 168
@@ -617,7 +617,7 @@ Partial Class frmEditPhysician
         Me.lblFirstName.AutoSize = True
         Me.lblFirstName.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblFirstName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
-        Me.lblFirstName.Location = New System.Drawing.Point(8, 43)
+        Me.lblFirstName.Location = New System.Drawing.Point(9, 47)
         Me.lblFirstName.Name = "lblFirstName"
         Me.lblFirstName.Size = New System.Drawing.Size(89, 21)
         Me.lblFirstName.TabIndex = 167
@@ -680,7 +680,7 @@ Partial Class frmEditPhysician
         Me.Label4.AutoSize = True
         Me.Label4.BackColor = System.Drawing.Color.White
         Me.Label4.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(572, 13)
+        Me.Label4.Location = New System.Drawing.Point(529, 2)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(107, 25)
         Me.Label4.TabIndex = 190

@@ -40,8 +40,9 @@
             Else
                 strSeverity = cmbSeverity.SelectedItem.ToString
             End If
-            Dim intMedicationTUID = "NUll" 'for now but medication tuid will need to be looked up
-            Dim strSqlStatment As String = ("Select Active_Flag FROM PatientAllergy WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID= " & intPatientTuid & ";")
+            'Dim intMedicationTUID = "NUll" 'for now but medication tuid will need to be looked up
+            Dim intAllergyID As Integer = getAllergyID(strAllergyName, cmbAllergiesType.SelectedItem.ToString)
+            Dim strSqlStatment As String = ("Select Active_Flag FROM PatientAllergy WHERE Allergy_TUID=" & intAllergyID & " and Patient_TUID= " & intPatientTuid & ";")
             Dim isActive = ExecuteScalarQuery(strSqlStatment)
 
 
@@ -53,7 +54,7 @@
 
             'make the allergie active because it already exists in patient allergy
             If isActive = 0 Then
-                ExecuteScalarQuery("UPDATE PatientAllergy SET Active_Flag='1' WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTuid & ";")
+                ExecuteScalarQuery("UPDATE PatientAllergy SET Active_Flag='1' WHERE Allergy_TUID=" & intAllergyID & " and Patient_TUID =" & intPatientTuid & ";")
 
             ElseIf isActive = 1 Then
                 MessageBox.Show("This Allergy already exists for this Patient")
@@ -61,10 +62,10 @@
                 'do nothing for now but combo box should not contain the values
             Else
                 If cmbAllergies.FindStringExact(cmbAllergies.Text) = -1 Then
-                    CreateDatabase.ExecuteInsertQuery("INSERT INTO Allergy(Allergy_Name,Allergy_Type) VALUES('" & strAllergyName & "','" & cmbAllergiesType.Text & "');")
+                    CreateDatabase.ExecuteInsertQuery("INSERT INTO Allergy(Allergy_Name,Allergy_Type) VALUES('" & strAllergyName & "','" & cmbAllergiesType.SelectedItem.ToString & "');")
                 End If
                 ' insert into database statement/method goes here
-                CreateDatabase.ExecuteInsertQuery("INSERT INTO PatientAllergy (Patient_TUID, Allergy_Name, Allergy_Severity, Active_Flag) VALUES (" & intPatientTuid & ",'" & strAllergyName & "','" & cmbSeverity.SelectedIndex & "',1);")
+                CreateDatabase.ExecuteInsertQuery("INSERT INTO PatientAllergy (Patient_TUID, Allergy_TUID, Allergy_Severity, Active_Flag) VALUES (" & intPatientTuid & "," & intAllergyID & ",'" & cmbSeverity.SelectedIndex & "',1);")
                 ' populate the screen from a manually added allergy.
                 'probably going to need a select query to get the medication name from the TUID
                 Debug.WriteLine("Value must already be in the table")
@@ -140,11 +141,12 @@
     '/*   
     '/*********************************************************************/
     Private Sub btnAllergySave_Click(sender As Object, e As EventArgs) Handles btnAllergySave.Click
-
         Dim strAllergyName = cmbAllergies.SelectedItem.ToString
+        Dim strAllergyType = cmbAllergiesType.SelectedItem.ToString
         Dim intPatientTuid = GetPatientTuid()
+        Dim intAllergyID = getAllergyID(strAllergyName, strAllergyType)
         Dim strNewSeverity = cmbSeverity.SelectedIndex.ToString
-        ExecuteScalarQuery("UPDATE PatientAllergy SET Allergy_Severity='" & strNewSeverity & "', Active_Flag = 1 WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTuid & " ;")
+        ExecuteScalarQuery("UPDATE PatientAllergy SET Allergy_Severity='" & strNewSeverity & "', Active_Flag = 1 WHERE Allergy_TUID=" & intAllergyID & " and Patient_TUID =" & intPatientTuid & " ;")
         DisableEditButtons()
         flpAllergies.Controls.Clear()
         LoadAllergiesPanel(strNewSeverity, intPatientTuid)
@@ -292,22 +294,22 @@
     '/*                                                  */
     '/*   
     '/*********************************************************************/
-    Private Sub cmbAllergies_SelectedValueChanged(sender As Object, e As EventArgs) Handles cmbAllergies.SelectedValueChanged
-        cmbAllergies.DroppedDown = False
-        If cmbAllergies.FindStringExact(cmbAllergies.Text) = -1 Then
-            cmbAllergiesType.SelectedIndex = 0
-            cmbSeverity.SelectedIndex = 0
-
-        Else
-            Dim objAllergyType = CreateDatabase.ExecuteScalarQuery("Select Allergy_Type From Allergy Where Allergy_Name = '" & cmbAllergies.Text & "';")
-
-            cmbAllergiesType.SelectedItem = objAllergyType.ToString
-            If cmbAllergiesType.SelectedItem = "Drug" Then
-                'cmbMedicationName.SelectedItem = cmbAllergies.SelectedItem
-                cmbSeverity.SelectedIndex = 0
-            End If
-        End If
-    End Sub
+    'Private Sub cmbAllergies_SelectedValueChanged(sender As Object, e As EventArgs) Handles cmbAllergies.SelectedValueChanged
+    '   cmbAllergies.DroppedDown = False
+    'If cmbAllergies.FindStringExact(cmbAllergies.Text) = -1 Then
+    '       cmbAllergiesType.SelectedIndex = 0
+    '      cmbSeverity.SelectedIndex = 0
+    '
+    'Else
+    'Dim objAllergyType = CreateDatabase.ExecuteScalarQuery("Select Allergy_Type From Allergy Where Allergy_Name = '" & cmbAllergies.Text & "';")
+    'Dim strFirstItem As String() = objAllergyType.ToString.Split
+    '       cmbAllergiesType.SelectedItem = strFirstItem(0)
+    'If cmbAllergiesType.SelectedItem = "Drug" Then
+    '           'cmbMedicationName.SelectedItem = cmbAllergies.SelectedItem
+    '          cmbSeverity.SelectedIndex = 0
+    'End If
+    'End If
+    'End Sub
     '/*********************************************************************/
     '/*                SUBPROGRAM NAME: cmbAllergies_SelectedIndexChanged */         
     '/*********************************************************************/
@@ -399,7 +401,8 @@
     '/*  CK		        2/10/21		    initial creation                 */
     '/********************************************************************/ 
     Public Sub CreateAllergiesPanels(ByVal flpPannel As FlowLayoutPanel, ByVal strAllergyName As String, ByVal strAllergyType As String, ByVal strSeverity As String)
-
+        Dim intAllergyID As Integer = ExecuteScalarQuery("Select Allergy_ID from Allergy where Allergy_Name = '" & strAllergyName & "' and Allergy_Type= '" &
+                                                         strAllergyType & "';")
         Dim pnl As Panel
         pnl = New Panel
 
@@ -455,7 +458,7 @@
         '  CreateIDLabel(pnlMainPanel, lblID4, "lblMedication", lblMedication.Location.X, 20, strMedicationName, getPanelCount(flpPannel))
 
         'Add panel to flow layout panel
-        pnlMainPanel.Tag = strAllergyName
+        pnlMainPanel.Tag = intAllergyID
         flpPannel.Controls.Add(pnl)
 
     End Sub
@@ -474,8 +477,8 @@
         btnAllergySave.Visible = False
         'cmbAllergiesLocked()
 
-        Dim dsAllergies = CreateDatabase.ExecuteSelectQuery("Select Allergy_Name From Allergy ORDER BY Allergy.Allergy_Name COLLATE NOCASE ASC;") '*  ORDER BY Allergy_Name, Allergy_Type
-        Dim dsDrugAllergies = CreateDatabase.ExecuteSelectQuery("Select * From Allergy WHERE Allergy_Type = 'Drug' ORDER BY Allergy_Name, Allergy_Type COLLATE NOCASE ASC;")
+        Dim dsAllergies = CreateDatabase.ExecuteSelectQuery("Select Distinct Allergy_Name From Allergy ORDER BY Allergy.Allergy_Name COLLATE NOCASE ASC;") '*  ORDER BY Allergy_Name, Allergy_Type
+        'Dim dsDrugAllergies = CreateDatabase.ExecuteSelectQuery("Select * From Allergy WHERE Allergy_Type = 'Drug' ORDER BY Allergy_Name, Allergy_Type COLLATE NOCASE ASC;")
         'Dim dsAllergyType = CreateDatabase.ExecuteSelectQuery("Select DISTINCT Allergy_Type from Allergy;")
 
         populateAllergiesComboBox(cmbAllergies, dsAllergies)
@@ -493,7 +496,7 @@
         Dim intSeverity As Integer = 0
         Dim dtsPatientAllergy As DataSet = CreateDatabase.ExecuteSelectQuery("Select Allergy.Allergy_Name, PatientAllergy.Allergy_Severity," &
                                                                              "Allergy.Allergy_Type From PatientAllergy " &
-                                                                             "INNER JOIN Allergy on PatientAllergy.Allergy_Name=Allergy.Allergy_Name" &
+                                                                             "INNER JOIN Allergy on PatientAllergy.Allergy_TUID=Allergy.Allergy_ID" &
                             " Where Active_Flag =1 And Patient_TUID =" & (intPatientTuid).ToString & ";")
         ' insert the select statement here and send the results to the createAllergiesPanel
         cmbAllergies.SelectedIndex = -1
@@ -589,4 +592,61 @@
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
         ClearComboBoxes()
     End Sub
+
+    Private Function getAllergyID(ByVal strAllergyName As String, ByVal strAllergyType As String) As Integer
+        Dim intAllergyTUID As Integer = Nothing
+        Dim blnFound As Boolean = False
+        ' try to get a table ID based off of the name and type
+        Try
+            intAllergyTUID = ExecuteScalarQuery("Select Allergy_ID FROM Allergy WHERE Allergy_Name= '" & strAllergyName & "' AND Allergy_Type= '" & strAllergyType & "';")
+            If intAllergyTUID <> Nothing Then
+                blnFound = True
+            Else
+                blnFound = False
+            End If
+
+        Catch ex As Exception
+            Console.Write("No record found, insert instead")
+        End Try
+        ' if nothing is found, insert the record and return the TUID
+        If blnFound = False Then
+            ExecuteInsertQuery("INSERT INTO Allergy (Allergy_Name, Allergy_Type) Values ('" & strAllergyName & "','" & strAllergyType & "');")
+            intAllergyTUID = ExecuteScalarQuery("Select Allergy_ID FROM Allergy WHERE Allergy_Name = '" & strAllergyName & "' AND Allergy_Type = '" & strAllergyType & "';")
+            Return intAllergyTUID
+        ElseIf blnFound Then
+            ' otherwise return the TUID
+            Return intAllergyTUID
+        Else
+            MessageBox.Show("Error in retrieving allergies. Please try again later or contact support.")
+            Return Nothing
+        End If
+
+    End Function
+
+    Private Function getAllergyNameAndType(ByVal intAllergyTUID As Integer) As String()
+        Dim strAllergyNameAndType(2) As String
+        Dim dsAllergyNameAndType As DataSet = New DataSet
+        Dim blnFound As Boolean = False
+        ' try to get the name and type based off of the TUID given.
+        Try
+            dsAllergyNameAndType = ExecuteSelectQuery("SELECT Allergy_Name, Allergy_Type from Allergy WHERE Allergy_ID = " & intAllergyTUID & ";")
+            ' we only want the one row to get the allergy name and type and there should be only one row
+            Dim dr As DataRow = dsAllergyNameAndType.Tables(0).Rows(0)
+            ' if there is a type then the item was found
+            If dr(1) <> Nothing Then
+                strAllergyNameAndType(0) = dr(0).ToString.Trim
+                strAllergyNameAndType(1) = dr(1).ToString.Trim
+                blnFound = True
+            End If
+        Catch ex As Exception
+
+        End Try
+        If blnFound Then
+            Return strAllergyNameAndType
+        End If
+        ' if there is no TUID, the return ("error","error")
+        strAllergyNameAndType(0) = "error"
+        strAllergyNameAndType(1) = "error"
+        Return strAllergyNameAndType
+    End Function
 End Class

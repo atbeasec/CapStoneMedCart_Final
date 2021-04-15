@@ -143,9 +143,9 @@ Partial Class frmPharmacy
         Me.Label18.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label18.Location = New System.Drawing.Point(23, 18)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(165, 25)
+        Me.Label18.Size = New System.Drawing.Size(170, 25)
         Me.Label18.TabIndex = 158
-        Me.Label18.Text = "New Prescription"
+        Me.Label18.Text = "New Prescription:"
         '
         'Panel5
         '

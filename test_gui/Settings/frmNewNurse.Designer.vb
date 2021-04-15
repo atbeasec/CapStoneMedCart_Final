@@ -64,9 +64,9 @@ Partial Class frmNewNurse
         Me.Label2.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(12, 9)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(210, 25)
+        Me.Label2.Size = New System.Drawing.Size(215, 25)
         Me.Label2.TabIndex = 77
-        Me.Label2.Text = "New User Registration"
+        Me.Label2.Text = "New User Registration:"
         '
         'Panel9
         '
