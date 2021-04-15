@@ -728,13 +728,13 @@ Module GraphicalUserInterfaceReusableMethods
         ElseIf getOpenedForm().GetType() Is frmAllergies.GetType() Then
 
             Dim intPatientTUID As Integer = frmAllergies.GetPatientTuid()
-            Dim strAllergyName As String = GetSelectedAllergiesInformation(sender)
-            Dim strSqlStatment As String = ("Select Active_Flag FROM PatientAllergy WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID= " & intPatientTUID & ";")
+            Dim intAllergyName As Integer = GetSelectedAllergiesInformation(sender)
+            Dim strSqlStatment As String = ("Select Active_Flag FROM PatientAllergy WHERE Allergy_TUID=" & intAllergyName & " and Patient_TUID= " & intPatientTUID & ";")
             Dim value = ExecuteScalarQuery(strSqlStatment)
             If value = 1 Then
-                ExecuteScalarQuery("UPDATE PatientAllergy SET Active_Flag='0' WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTUID & ";")
+                ExecuteScalarQuery("UPDATE PatientAllergy SET Active_Flag='0' WHERE Allergy_TUID=" & intAllergyName & " and Patient_TUID =" & intPatientTUID & ";")
             Else
-                ExecuteScalarQuery("UPDATE PatientAllergy SET Active_Flag='1' WHERE Allergy_Name='" & strAllergyName & "' and Patient_TUID =" & intPatientTUID & ";")
+                ExecuteScalarQuery("UPDATE PatientAllergy SET Active_Flag='1' WHERE Allergy_TUID=" & intAllergyName & " and Patient_TUID =" & intPatientTUID & ";")
             End If
 
             ' add the update to the patients table because the patient information form is not visible anymore. the update will be reflected
