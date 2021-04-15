@@ -54,13 +54,11 @@ Partial Class frmEndOfShift
         Me.pnlHeader.BackColor = System.Drawing.Color.White
         Me.pnlHeader.Controls.Add(Me.lblSection)
         Me.pnlHeader.Controls.Add(Me.lblSystemCount)
-        Me.pnlHeader.Controls.Add(Me.lblCount)
-        Me.pnlHeader.Controls.Add(Me.lblActions)
         Me.pnlHeader.Controls.Add(Me.lblMedication)
         Me.pnlHeader.Controls.Add(Me.lblDrawerNum)
         Me.pnlHeader.Location = New System.Drawing.Point(12, 66)
         Me.pnlHeader.Name = "pnlHeader"
-        Me.pnlHeader.Size = New System.Drawing.Size(955, 47)
+        Me.pnlHeader.Size = New System.Drawing.Size(658, 47)
         Me.pnlHeader.TabIndex = 18
         '
         'lblSection
@@ -91,7 +89,7 @@ Partial Class frmEndOfShift
         Me.lblCount.AutoSize = True
         Me.lblCount.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCount.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblCount.Location = New System.Drawing.Point(718, 19)
+        Me.lblCount.Location = New System.Drawing.Point(732, 85)
         Me.lblCount.Name = "lblCount"
         Me.lblCount.Size = New System.Drawing.Size(82, 21)
         Me.lblCount.TabIndex = 6
@@ -103,7 +101,7 @@ Partial Class frmEndOfShift
         Me.lblActions.AutoSize = True
         Me.lblActions.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblActions.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.lblActions.Location = New System.Drawing.Point(844, 19)
+        Me.lblActions.Location = New System.Drawing.Point(866, 85)
         Me.lblActions.Name = "lblActions"
         Me.lblActions.Size = New System.Drawing.Size(65, 21)
         Me.lblActions.TabIndex = 2
@@ -189,7 +187,9 @@ Partial Class frmEndOfShift
         Me.ClientSize = New System.Drawing.Size(1021, 663)
         Me.Controls.Add(Me.lblInstructions)
         Me.Controls.Add(Me.cmbFilter)
+        Me.Controls.Add(Me.lblCount)
         Me.Controls.Add(Me.Label15)
+        Me.Controls.Add(Me.lblActions)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.flpEndOfShiftCount)
         Me.Controls.Add(Me.pnlHeader)
