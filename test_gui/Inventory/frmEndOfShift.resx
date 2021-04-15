@@ -121,7 +121,7 @@
     <value>17, 17</value>
   </metadata>
   <data name="lblInstructions.ToolTip" xml:space="preserve">
-    <value>1. Select a reporting type
+    <value>1. Select a reporting type, Labels can be clicked to sort the report information
 2. Input the new total medication amount into the New Total box
 3. Click the flag icon on the right side of the medication panel to flag that medication record for updating
 4. Click the update button to update all Medication bin amounts that have been flagged.</value>

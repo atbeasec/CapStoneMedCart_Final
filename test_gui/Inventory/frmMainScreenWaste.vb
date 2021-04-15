@@ -73,8 +73,8 @@
             txtDateOfBirth.Text = dsPatientRecords.Tables(0).Rows(0)(0)
             txtMRN.Text = dsPatientRecords.Tables(0).Rows(0)(1)
             'get patient allergies
-            Strdatacommand = "SELECT Allergy_Name From PatientAllergy Where Patient_TUID = '" & intPatientID & "'"
-            dsPatientRecords = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
+            'Strdatacommand = "SELECT Allergy_Name From PatientAllergy Where Patient_TUID = '" & intPatientID & "'"
+            'dsPatientRecords = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
 
             Dim dsRoomBed As DataSet = CreateDatabase.ExecuteSelectQuery("Select * from PatientRoom where Patient_TUID = '" & intPatientID & "'")
             txtRoomBed.Text = "Room: " & dsRoomBed.Tables(0).Rows(0)(1) & "  Bed: " & dsRoomBed.Tables(0).Rows(0)(2)

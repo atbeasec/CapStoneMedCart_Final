@@ -381,7 +381,7 @@ Module GraphicalUserInterfaceReusableMethods
                     ctl.ForeColor = Color.Black
                 End If
             Next
-            MessageBox.Show("A count has not been entered. Please type a number into the count field.")
+            MessageBox.Show("A new total has not been entered. Please type a number into the new total field.")
         Else
 
             If systemCount = CInt(txtBoxOnFlaggedPanel.Text) Then
@@ -391,7 +391,7 @@ Module GraphicalUserInterfaceReusableMethods
                         ctl.ForeColor = Color.Black
                     End If
                 Next
-                MessageBox.Show("The system count matches the entered count. This will not be flagged as a discrepancy .")
+                MessageBox.Show("The system total matches the entered new total.")
 
             Else
 
