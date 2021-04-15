@@ -650,4 +650,168 @@
 
     End Sub
 
+
+
+    Private Sub DetermineSelectedReportForLabelsDrawerNumber(ByVal intIndex As Integer)
+        Select Case intIndex
+
+            Case TypesOfReports.AllMedication
+
+
+            Case TypesOfReports.Controlled
+
+
+            Case TypesOfReports.ControlledNonNarcotic
+
+
+            Case TypesOfReports.Narcotic
+
+
+            Case TypesOfReports.NonNarcotic
+
+
+        End Select
+
+    End Sub
+
+
+    Private Sub DetermineSelectedReportForLabelsMedicationName(ByVal intIndex As Integer)
+
+        Select Case intIndex
+
+            Case TypesOfReports.AllMedication
+                Dim strSqlCommand As String
+                Dim dsMedicationDataset As DataSet
+
+                strSqlCommand = "SELECT Medication_TUID, Drug_Name, Drawer_Number, Divider_Bin, Quantity, DrawerMedication.DrawerMedication_ID FROM DrawerMedication " &
+            "INNER JOIN Medication on Medication.Medication_ID = DrawerMedication.Medication_TUID " &
+            "INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID WHERE DrawerMedication.Active_Flag = '1' ORDER BY trim(Drug_Name,' ') COLLATE NOCASE"
+                dsMedicationDataset = CreateDatabase.ExecuteSelectQuery(strSqlCommand)
+
+                For Each dr As DataRow In dsMedicationDataset.Tables(0).Rows
+                    CreatePanel(flpEndOfShiftCount, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5))
+                Next
+
+
+            Case TypesOfReports.Controlled
+                Dim strSqlCommand As String
+                Dim dsMedicationDataset As DataSet
+                strSqlCommand = "SELECT Medication_TUID, Drug_Name, Drawer_Number, Divider_Bin, Quantity, DrawerMedication.DrawerMedication_ID FROM DrawerMedication " &
+                    "INNER JOIN Medication on Medication.Medication_ID = DrawerMedication.Medication_TUID " &
+                    "INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID WHERE Medication.Controlled_Flag = '1' AND DrawerMedication.Active_Flag = '1' ORDER BY trim(Drug_Name,' ') COLLATE NOCASE"
+                dsMedicationDataset = CreateDatabase.ExecuteSelectQuery(strSqlCommand)
+                For Each dr As DataRow In dsMedicationDataset.Tables(0).Rows
+                    CreatePanel(flpEndOfShiftCount, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5))
+                Next
+
+
+            Case TypesOfReports.ControlledNonNarcotic
+                Dim strSqlCommand As String
+                Dim dsMedicationDataset As DataSet
+                strSqlCommand = "SELECT Medication_TUID, Drug_Name, Drawer_Number, Divider_Bin, Quantity, DrawerMedication.DrawerMedication_ID FROM DrawerMedication " &
+                    "INNER JOIN Medication on Medication.Medication_ID = DrawerMedication.Medication_TUID " &
+                    "INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID WHERE Medication.Controlled_Flag = '1' AND Medication.NarcoticControlled_Flag = '0' AND DrawerMedication.Active_Flag = '1' ORDER BY trim(Drug_Name,' ') COLLATE NOCASE"
+                dsMedicationDataset = CreateDatabase.ExecuteSelectQuery(strSqlCommand)
+                For Each dr As DataRow In dsMedicationDataset.Tables(0).Rows
+                    CreatePanel(flpEndOfShiftCount, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5))
+                Next
+
+            Case TypesOfReports.Narcotic
+                Dim strSqlCommand As String
+                Dim dsMedicationDataset As DataSet
+                strSqlCommand = "SELECT Medication_TUID, Drug_Name, Drawer_Number, Divider_Bin, Quantity, DrawerMedication.DrawerMedication_ID FROM DrawerMedication " &
+                    "INNER JOIN Medication on Medication.Medication_ID = DrawerMedication.Medication_TUID " &
+                    "INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID WHERE Medication.NarcoticControlled_Flag = '1' AND DrawerMedication.Active_Flag = '1' ORDER BY trim(Drug_Name,' ') COLLATE NOCASE"
+                dsMedicationDataset = CreateDatabase.ExecuteSelectQuery(strSqlCommand)
+                For Each dr As DataRow In dsMedicationDataset.Tables(0).Rows
+                    CreatePanel(flpEndOfShiftCount, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5))
+                Next
+
+            Case TypesOfReports.NonNarcotic
+                Dim strSqlCommand As String
+                Dim dsMedicationDataset As DataSet
+                strSqlCommand = "SELECT Medication_TUID, Drug_Name, Drawer_Number, Divider_Bin, Quantity, DrawerMedication.DrawerMedication_ID FROM DrawerMedication " &
+                    "INNER JOIN Medication on Medication.Medication_ID = DrawerMedication.Medication_TUID " &
+                    "INNER JOIN Drawers on Drawers.Drawers_ID = DrawerMedication.Drawers_TUID WHERE Medication.Controlled_Flag = '0' AND DrawerMedication.Active_Flag = '1' ORDER BY trim(Drug_Name,' ') COLLATE NOCASE"
+                dsMedicationDataset = CreateDatabase.ExecuteSelectQuery(strSqlCommand)
+                For Each dr As DataRow In dsMedicationDataset.Tables(0).Rows
+                    CreatePanel(flpEndOfShiftCount, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5))
+                Next
+
+        End Select
+
+    End Sub
+
+
+
+    Private Sub DetermineSelectedReportForLabelsBin(ByVal intIndex As Integer)
+
+        Select Case intIndex
+
+            Case TypesOfReports.AllMedication
+
+
+            Case TypesOfReports.Controlled
+
+
+            Case TypesOfReports.ControlledNonNarcotic
+
+
+            Case TypesOfReports.Narcotic
+
+
+            Case TypesOfReports.NonNarcotic
+
+
+        End Select
+
+    End Sub
+
+
+
+
+    Private Sub DetermineSelectedReportForLabelsSystemCount(ByVal intIndex As Integer)
+
+        Select Case intIndex
+
+            Case TypesOfReports.AllMedication
+
+
+            Case TypesOfReports.Controlled
+
+
+            Case TypesOfReports.ControlledNonNarcotic
+
+
+            Case TypesOfReports.Narcotic
+
+
+            Case TypesOfReports.NonNarcotic
+
+
+        End Select
+
+    End Sub
+
+
+    Private Sub lblMedication_Click(sender As Object, e As EventArgs) Handles lblMedication.Click
+        RemoveHandlersAndAssociations(GetListOfAllControls(flpEndOfShiftCount), flpEndOfShiftCount)
+        DetermineSelectedReportForLabelsMedicationName(cmbFilter.SelectedIndex)
+    End Sub
+
+    Private Sub lblDrawerNum_Click(sender As Object, e As EventArgs) Handles lblDrawerNum.Click
+        RemoveHandlersAndAssociations(GetListOfAllControls(flpEndOfShiftCount), flpEndOfShiftCount)
+        DetermineSelectedReportForLabelsDrawerNumber(cmbFilter.SelectedIndex)
+    End Sub
+
+    Private Sub lblSection_Click(sender As Object, e As EventArgs) Handles lblSection.Click
+        RemoveHandlersAndAssociations(GetListOfAllControls(flpEndOfShiftCount), flpEndOfShiftCount)
+        DetermineSelectedReportForLabelsBin(cmbFilter.SelectedIndex)
+    End Sub
+
+    Private Sub lblSystemCount_Click(sender As Object, e As EventArgs) Handles lblSystemCount.Click
+        RemoveHandlersAndAssociations(GetListOfAllControls(flpEndOfShiftCount), flpEndOfShiftCount)
+        DetermineSelectedReportForLabelsSystemCount(cmbFilter.SelectedIndex)
+    End Sub
+
 End Class
