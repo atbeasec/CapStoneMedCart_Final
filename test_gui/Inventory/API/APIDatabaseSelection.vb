@@ -544,6 +544,7 @@ Module APIDatabaseSelection
 	Function checkConnections() As String
 		Dim strWebSite As String = "https://rxnav.nlm.nih.gov/REST/"
 		Try
+			frmInventory.txtStatus.Text = "Checking primary site..."
 			Using client = New WebClient()
 				Using Stream = client.OpenRead(strWebSite)
 					Return strWebSite
@@ -552,7 +553,7 @@ Module APIDatabaseSelection
 			Return strWebSite
 		Catch
 			Try
-				frmInventory.txtStatus.Text = "Checking secondary site"
+				frmInventory.txtStatus.Text = "Checking secondary site..."
 				Using client = New WebClient()
 					Using stream = client.OpenRead("https://10.8.30.33/REST/")
 						strWebSite = "https://10.8.30.33/REST/"
@@ -564,6 +565,8 @@ Module APIDatabaseSelection
 				Return strWebSite
 			End Try
 		End Try
-			Return "ERROR"
+		frmInventory.txtStatus.Text = "Error with network connection"
+		MessageBox.Show("Could not connect to web APIs. Please check your connection and try again later.")
+		Return "ERROR"
 	End Function
 End Module

@@ -696,6 +696,7 @@ Module rxNorm
                 'creates jarray to store values of twaledResult
                 Dim jArrayObj As JArray = DirectCast(trawledResult, JArray)
                 If IsNothing(jArrayObj) Then
+                    frmInventory.txtStatus.Text = "No suggestions found. Please try again."
                     MessageBox.Show("Could not find suggestions. Please try another search.")
                 Else
                     ' now get the individual values out from the items and add them to the list

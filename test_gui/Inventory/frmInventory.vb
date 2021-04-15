@@ -26,7 +26,7 @@ Public Class frmInventory
         ' setdefault text to the search box
         txtSearch.Text = txtSearch.Tag
         txtSearch.ForeColor = Color.Silver
-
+        txtStatus.Visible = False
         'Set the focus
         txtSearch.Select()
 
@@ -355,8 +355,16 @@ Public Class frmInventory
         Dim myPropertyNameList As New List(Of String)({"rxcui"})
         Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
         Dim suggestedList As New List(Of String)
+        Dim LoadingScreen As New frmProgressBar
+        cboSuggestedNames.Visible = False
+        txtStatus.Visible = True
+        txtStatus.Text = "Please wait while we check the network connection..."
+        LoadingScreen.Show(Me)
+        RaiseEvent UpdateLoadScreen("This could take up to 3 minutes")
+        frmMain.LockSideMenu()
+        System.Threading.Thread.Sleep(500)
         If IsNothing(GetRxcuiByName(txtSearch.Text, myPropertyNameList)) Then
-            MessageBox.Show("Could not connect to web APIs. Please check your connection and try again later.")
+            ' do nothing, this is handled in the API database selection or rxNorm modules
         Else
             outputList = GetRxcuiByName(txtSearch.Text, myPropertyNameList)
             ' check to see if anything comes back
@@ -364,19 +372,21 @@ Public Class frmInventory
                 ' if nothing, then ask to suggest names
                 cboSuggestedNames.Visible = True
                 If IsNothing(GetSuggestionList(txtSearch.Text)) Then
-                    MessageBox.Show("Could not connect to web APIs. Please check your connection and try again later.")
+                    ' do nothing, this is handled in the API database selection or rxNorm modules
                 Else
                     suggestedList = GetSuggestionList(txtSearch.Text)
-
+                    txtStatus.Text = "Please choose from suggestions or try again."
                     ' then populate the combobox
                     cboSuggestedNames.DataSource = suggestedList
                 End If
             Else
+                txtStatus.Text = "Success! Please select from the list of medications"
                 ' otherwise populate the medication name comboBox
                 cmbMedicationName.DataSource = outputList
             End If
         End If
-
+        LoadingScreen.Close()
+        frmMain.UnlockSideMenu()
     End Sub
 
     Private Sub cmbMedicationName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMedicationName.SelectedIndexChanged
@@ -461,6 +471,7 @@ Public Class frmInventory
             ' if the combo box text exceeds the box, there will be a tooltip that is provided on hover over the box with the full medication
             ' name 
             tpSelectedItem.SetToolTip(cmbMedicationName, cmbMedicationName.SelectedItem.ToString)
+            txtStatus.Text = "Success! Please continue with your entry."
         End If
     End Sub
 
@@ -642,6 +653,7 @@ Public Class frmInventory
                 ' recursion 'til the cows come home
             End If
             cmbMedicationName.DataSource = outputList
+            txtStatus.Text = "Drug not found. Please select from suggestions or retry search."
         End If
     End Sub
 
