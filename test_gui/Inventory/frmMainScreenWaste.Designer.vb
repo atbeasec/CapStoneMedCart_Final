@@ -353,7 +353,6 @@ Partial Class frmMainScreenWaste
         '
         Me.txtOther.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtOther.Location = New System.Drawing.Point(217, 31)
-        Me.txtOther.MaxLength = 500
         Me.txtOther.Multiline = True
         Me.txtOther.Name = "txtOther"
         Me.txtOther.ShortcutsEnabled = False
@@ -703,9 +702,9 @@ Partial Class frmMainScreenWaste
         Me.Label1.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold)
         Me.Label1.Location = New System.Drawing.Point(8, 13)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(119, 25)
+        Me.Label1.Size = New System.Drawing.Size(114, 25)
         Me.Label1.TabIndex = 251
-        Me.Label1.Text = "Waste Form:"
+        Me.Label1.Text = "Waste Form"
         '
         'Label4
         '

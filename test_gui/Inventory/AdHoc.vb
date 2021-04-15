@@ -55,7 +55,7 @@ Module AdHoc
     Public intPatientIDArray As New ArrayList
     Public intMedIDArray As New ArrayList
     Public intDrawerMedArray As New ArrayList
-    Public intPhysicianIDArray As New ArrayList
+
 
     '/*********************************************************************/
     '/*                   SUBROUTINE NAME:InsertAdHoc                     */
@@ -324,31 +324,6 @@ Module AdHoc
 
     End Sub
 
-    Public Sub PopulatePhysicianAdhoc()
-        frmAdHockDispense.cmbphysician.Items.Clear()
-        intPhysicianIDArray.Clear()
-
-        Dim Strdatacommand As String
-        Strdatacommand = "Select * from Physician where Active_Flag = '1' Order by Physician_Last_Name COLLATE NOCASE, Physician_First_Name COLLATE NOCASE"
-
-        'call sql method
-        Dim dsPhysicianRecords As DataSet = New DataSet
-        dsPhysicianRecords = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
-
-        For Each dr As DataRow In dsPhysicianRecords.Tables(0).Rows
-            If IsDBNull(dr(0)) Then
-
-            Else
-                frmAdHockDispense.cmbphysician.Items.Add("Dr. " & dr(EnumList.Physician.LastName) & ", " & dr(EnumList.Physician.FirstName) & " " & dr(EnumList.Physician.PhysicianCredentials))
-                intPhysicianIDArray.Add(dr(EnumList.Physician.Id))
-            End If
-
-        Next
-
-    End Sub
-
-
-
     '/*********************************************************************/
     '/*                   SUBROUTINE NAME:PopulatePatientInformation                     */
     '/*********************************************************************/
@@ -409,7 +384,7 @@ Module AdHoc
             frmAdHockDispense.txtDateOfBirth.Text = dsPatientRecords.Tables(0).Rows(0)(0)
             frmAdHockDispense.txtMRN.Text = dsPatientRecords.Tables(0).Rows(0)(1)
             'get patient allergies
-            Strdatacommand = "SELECT Allergy_Name From PatientAllergy INNER JOIN Allergy on Allergy.Allergy_ID = PatientAllergy.Allergy_TUID Where Patient_TUID = '" & intPatientID & "'"
+            Strdatacommand = "SELECT Allergy_Name From PatientAllergy Where Patient_TUID = '" & intPatientID & "'"
             dsPatientRecords = CreateDatabase.ExecuteSelectQuery(Strdatacommand)
 
             'place all allergies for the patient

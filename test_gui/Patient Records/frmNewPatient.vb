@@ -817,7 +817,7 @@ Public Class frmNewPatient
             strbErrorMessage.Append("Please enter a valid first name." & vbCrLf)
         End If
         If txtMiddleName.Text = String.Empty Or txtMiddleName.Text.Length <= 1 Then
-            If MsgBox("The middle name entered is very short or blank, is this intentional?", vbYesNo) Then
+            If MsgBox("There is no middle name entered, is this intentional?", vbYesNo) Then
                 'to not break the application elsewhere, set the middle name to space.
                 txtMiddleName.Text = " "
             Else
@@ -835,7 +835,7 @@ Public Class frmNewPatient
 
         Catch ex As Exception
             hasError = True
-            strbErrorMessage.Append("Please enter a valid email address." & vbCrLf)
+            strbErrorMessage.Append("Please Enter a valid email address." & vbCrLf)
         End Try
         If cmbSex.SelectedIndex = -1 Then
             hasError = True
@@ -869,7 +869,7 @@ Public Class frmNewPatient
         If IsNumeric(txtWeight.Text) Then
             If CDbl(txtWeight.Text) > 440 Then
                 hasError = True
-                strbErrorMessage.Append("Please enter a valid weight 0.1 - 440 kg" & vbCrLf)
+                strbErrorMessage.Append("Please enter a valid weight 1-250 cm." & vbCrLf)
             End If
         End If
 

@@ -212,7 +212,7 @@ Partial Class frmDischarge
         '
         Me.pnlRadioButtons.Controls.Add(Me.radDischarge)
         Me.pnlRadioButtons.Controls.Add(Me.radAdmitPatient)
-        Me.pnlRadioButtons.Location = New System.Drawing.Point(20, 43)
+        Me.pnlRadioButtons.Location = New System.Drawing.Point(12, 41)
         Me.pnlRadioButtons.Name = "pnlRadioButtons"
         Me.pnlRadioButtons.Size = New System.Drawing.Size(380, 40)
         Me.pnlRadioButtons.TabIndex = 115
@@ -852,11 +852,11 @@ Partial Class frmDischarge
         Me.Label18.AutoSize = True
         Me.Label18.BackColor = System.Drawing.Color.White
         Me.Label18.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(15, 9)
+        Me.Label18.Location = New System.Drawing.Point(7, 9)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(234, 25)
+        Me.Label18.Size = New System.Drawing.Size(229, 25)
         Me.Label18.TabIndex = 159
-        Me.Label18.Text = "Admit/Discharge Patient:"
+        Me.Label18.Text = "Admit/Discharge Patient"
         '
         'frmDischarge
         '

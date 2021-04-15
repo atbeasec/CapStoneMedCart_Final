@@ -186,9 +186,9 @@ Partial Class frmConfiguration
         Me.Label4.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.Location = New System.Drawing.Point(356, 9)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(164, 25)
+        Me.Label4.Size = New System.Drawing.Size(159, 25)
         Me.Label4.TabIndex = 156
-        Me.Label4.Text = "Registered Users:"
+        Me.Label4.Text = "Registered Users"
         '
         'Label3
         '
@@ -266,9 +266,9 @@ Partial Class frmConfiguration
         Me.Label2.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(13, 9)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(165, 25)
+        Me.Label2.Size = New System.Drawing.Size(159, 25)
         Me.Label2.TabIndex = 141
-        Me.Label2.Text = "Create New User:"
+        Me.Label2.Text = "Create New User"
         '
         'Panel9
         '
