@@ -128,7 +128,7 @@ Partial Class frmNewPatient
         Me.Label2.AutoSize = True
         Me.Label2.BackColor = System.Drawing.Color.White
         Me.Label2.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(29, 51)
+        Me.Label2.Location = New System.Drawing.Point(41, 49)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(193, 25)
         Me.Label2.TabIndex = 17
@@ -458,9 +458,9 @@ Partial Class frmNewPatient
         Me.Label7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
         Me.Label7.Location = New System.Drawing.Point(334, 235)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(114, 21)
+        Me.Label7.Size = New System.Drawing.Size(111, 21)
         Me.Label7.TabIndex = 74
-        Me.Label7.Text = "Height (in CM):"
+        Me.Label7.Text = "Height (in cm):"
         '
         'Label8
         '
@@ -469,9 +469,9 @@ Partial Class frmNewPatient
         Me.Label8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(56, Byte), Integer))
         Me.Label8.Location = New System.Drawing.Point(627, 235)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(111, 21)
+        Me.Label8.Size = New System.Drawing.Size(110, 21)
         Me.Label8.TabIndex = 75
-        Me.Label8.Text = "Weight (in Kg):"
+        Me.Label8.Text = "Weight (in kg):"
         '
         'Label9
         '

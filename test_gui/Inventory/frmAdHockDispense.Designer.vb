@@ -113,7 +113,7 @@ Partial Class frmAdHockDispense
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(32, 182)
+        Me.Label14.Location = New System.Drawing.Point(32, 184)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(72, 21)
         Me.Label14.TabIndex = 206
@@ -231,7 +231,7 @@ Partial Class frmAdHockDispense
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(32, 109)
+        Me.Label4.Location = New System.Drawing.Point(32, 112)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(179, 21)
         Me.Label4.TabIndex = 220
@@ -308,7 +308,7 @@ Partial Class frmAdHockDispense
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.Label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label5.Location = New System.Drawing.Point(893, 109)
+        Me.Label5.Location = New System.Drawing.Point(880, 112)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(42, 21)
         Me.Label5.TabIndex = 229
@@ -319,7 +319,7 @@ Partial Class frmAdHockDispense
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.Label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label7.Location = New System.Drawing.Point(707, 109)
+        Me.Label7.Location = New System.Drawing.Point(706, 113)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(131, 21)
         Me.Label7.TabIndex = 228
@@ -550,7 +550,7 @@ Partial Class frmAdHockDispense
         Me.cmbphysician.FormattingEnabled = True
         Me.cmbphysician.IntegralHeight = False
         Me.cmbphysician.Items.AddRange(New Object() {"Yes", "No"})
-        Me.cmbphysician.Location = New System.Drawing.Point(35, 582)
+        Me.cmbphysician.Location = New System.Drawing.Point(35, 564)
         Me.cmbphysician.Name = "cmbphysician"
         Me.cmbphysician.Size = New System.Drawing.Size(579, 29)
         Me.cmbphysician.TabIndex = 231
@@ -559,7 +559,7 @@ Partial Class frmAdHockDispense
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(32, 558)
+        Me.Label9.Location = New System.Drawing.Point(32, 540)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(123, 21)
         Me.Label9.TabIndex = 232
