@@ -604,7 +604,7 @@
 
         If flag = True Then
             ExtractFormDataForDatabase()
-            MessageBox.Show("Counts have been updated")
+            MessageBox.Show("Medication totals have been updated")
         Else
             MessageBox.Show("A medication is not flagged")
         End If
