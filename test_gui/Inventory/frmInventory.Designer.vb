@@ -948,4 +948,5 @@ Partial Class frmInventory
     Friend WithEvents Label8 As Label
     Friend WithEvents txtAmount As TextBox
     Friend WithEvents txtUnits As TextBox
+    Friend WithEvents pnlTransparent As TransparentPanel
 End Class

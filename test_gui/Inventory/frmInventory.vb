@@ -6,6 +6,7 @@ Public Class frmInventory
 
     Private btnSelectedDrawer As Button
     Private lstFullDrawers As List(Of Integer)
+    Private transparentPanelForLocking As New TransparentPanel
 
     Public Sub SetSelectedDrawer(ByVal btnDrawer As Button)
 
@@ -168,6 +169,7 @@ Public Class frmInventory
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         frmMain.LockSideMenu()
+        LockUnlock()
         btnBack.Enabled = False
         btnSave.Enabled = False
         'create an instance of the progress bar form
@@ -221,6 +223,7 @@ Public Class frmInventory
                 btnBack.Enabled = True
                 btnSave.Enabled = True
                 frmMain.UnlockSideMenu()
+                LockUnlock()
                 Exit Sub
             Else
                 If Not IsDate(mtbExpirationDate.Text) Then
@@ -349,6 +352,7 @@ Public Class frmInventory
         btnBack.Enabled = True
         btnSave.Enabled = True
         frmMain.UnlockSideMenu()
+        LockUnlock()
     End Sub
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles pnlSearch.Click
@@ -356,12 +360,16 @@ Public Class frmInventory
         Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
         Dim suggestedList As New List(Of String)
         Dim LoadingScreen As New frmProgressBar
+        txtSearch.ReadOnly = True
+        pnlSearch.Enabled = False
+        frmMain.LockSideMenu()
         cboSuggestedNames.Visible = False
         txtStatus.Visible = True
         txtStatus.Text = "Please wait while we check the network connection..."
         LoadingScreen.Show(Me)
         RaiseEvent UpdateLoadScreen("This could take up to 3 minutes")
         frmMain.LockSideMenu()
+        LockUnlock()
         System.Threading.Thread.Sleep(500)
         If IsNothing(GetRxcuiByName(txtSearch.Text, myPropertyNameList)) Then
             ' do nothing, this is handled in the API database selection or rxNorm modules
@@ -387,6 +395,9 @@ Public Class frmInventory
         End If
         LoadingScreen.Close()
         frmMain.UnlockSideMenu()
+        pnlSearch.Enabled = True
+        txtSearch.ReadOnly = False
+        LockUnlock()
     End Sub
 
     Private Sub cmbMedicationName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMedicationName.SelectedIndexChanged
@@ -413,8 +424,12 @@ Public Class frmInventory
         lstProperties.Add("AVAILABLE_STRENGTH")
         lstProperties.Add("STRENGTH")
         lstProperties.Add("SCHEDULE")
+        frmMain.LockSideMenu()
+        LockUnlock()
         If IsNothing(getRxcuiProperty(strSplitString(0), lstProperties)) Then
             MessageBox.Show("The network sites are not responding. Please check your network connection and try again.")
+            frmMain.UnlockSideMenu()
+            LockUnlock()
         Else
             lstResults = getRxcuiProperty(strSplitString(0), lstProperties)
             ' add the original items to the lstResults
@@ -472,6 +487,8 @@ Public Class frmInventory
             ' name 
             tpSelectedItem.SetToolTip(cmbMedicationName, cmbMedicationName.SelectedItem.ToString)
             txtStatus.Text = "Success! Please continue with your entry."
+            frmMain.UnlockSideMenu()
+            LockUnlock()
         End If
     End Sub
 
@@ -938,4 +955,13 @@ Public Class frmInventory
             cmbDrawerNumber.Items.Add(dr(2))
         Next
     End Sub
+
+    Public Sub LockUnlock()
+        'If pnlTransparent.Visible = True Then
+        '    pnlTransparent.Visible = False
+        'Else
+        '    pnlTransparent.Visible = True
+        'End If
+    End Sub
+
 End Class
