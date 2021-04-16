@@ -419,18 +419,23 @@
 
             Case TypesOfReports.AllMedication
                 Inventory.EndofShiftAllMedications()
+                AddTexChangedHandlerToTextboxes()
 
             Case TypesOfReports.Controlled
                 Inventory.ControlledMedsEndofShift()
+                AddTexChangedHandlerToTextboxes()
 
             Case TypesOfReports.ControlledNonNarcotic
                 Inventory.ControlledNonNarcoticMedsEndofShift()
+                AddTexChangedHandlerToTextboxes()
 
             Case TypesOfReports.Narcotic
                 Inventory.NarcoticEndOfShift()
+                AddTexChangedHandlerToTextboxes()
 
             Case TypesOfReports.NonNarcotic
                 Inventory.NonNarcoticEndOfShift()
+                AddTexChangedHandlerToTextboxes()
 
         End Select
 
@@ -951,5 +956,114 @@
         RemoveHandlersAndAssociations(GetListOfAllControls(flpEndOfShiftCount), flpEndOfShiftCount)
         DetermineSelectedReportForLabelsSystemCount(cmbFilter.SelectedIndex)
     End Sub
+
+    '/*********************************************************************/
+    '/*             SubProgram NAME: AddTexChangedHandlerToTextboxes      */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 4/16/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is working to assign the text changed handler to the textboxes
+    '/*  at run time. the functionality of the textboxes is specific to   */
+    '/*  this form and that is why this is not handled in the public method/
+    '/*  that creates the textboxes originally.                            /
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      DetermineSelectedReport                                      */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 none                                                             */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 BoldLabelToSortBy(sender, parent)     							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	txtbox- A textbox control representing a textbox in a panel       */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  4/16/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub AddTexChangedHandlerToTextboxes()
+
+        'looping over the panel construct until we can get to the textbox item
+        'and then when we get there we can assign the textchanged handler to it
+        For Each ctlPanelPadding In flpEndOfShiftCount.Controls
+            ' retreiving the pannels for padding
+            For Each pnlPanel In ctlPanelPadding.Controls
+                ' retreiving list of all panels within the padding
+
+                For Each ctlControl In pnlPanel.Controls
+
+                    ' retreiving the items in the panel such as labels and textbox values
+                    If TypeName(ctlControl) = "TextBox" Then
+
+                        Dim txtbox As TextBox
+                        txtbox = CType(ctlControl, TextBox)
+                        AddHandler txtbox.TextChanged, AddressOf txtbox_TextChanged
+
+                    End If
+                Next
+            Next
+        Next
+
+    End Sub
+
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: SortBySelectedLabel            */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 4/16/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is checks if the text in the textbox is between0-1000       */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*      frmPatientInfo_load                                          */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 field- an integer equal to the tag value of the selected label   */ 
+    '/*	 parent- a panel object that the label lives on                   */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 BoldLabelToSortBy(sender, parent)     							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	field- integer equal to the tag value of the control              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  4/16/2021    Initial creation                    */
+    '/*********************************************************************/
+    Private Sub txtbox_TextChanged(sender As Object, e As EventArgs)
+
+        'check if the textbox is not null, has valid numeric data in it,
+        'if these cases are true then we can cast the data to a double and
+        'then check if the value is between 1 and 1000. If it is not, we need
+        'to set the value in the textbox to nothing 
+
+        If Not String.IsNullOrEmpty(sender.text) Then
+            If IsNumeric(sender.text) Then
+                If CDbl(sender.text) < 1 Or CDbl(sender.text) > 1000 Then
+                    MessageBox.Show("Please enter a value between 1-1000.")
+                    sender.Text = Nothing
+                End If
+            End If
+        End If
+
+    End Sub
+
+
 
 End Class
