@@ -1271,7 +1271,7 @@ Module CreateDatabase
 	                'Medication_TUID'	INTEGER NOT NULL,
 	                'Quantity'	NUMERIC NOT NULL,
 					'Amount_Per_Container' INTEGER,
-					'Amount_Per_Container Unit'	TEXT,
+					'Amount_Per_Container_Unit'	TEXT,
 	                'Divider_Bin'	INTEGER,
 	                'Expiration_Date'	TEXT NOT NULL,
 	                'Discrepancy_Flag'	INTEGER NOT NULL,
