@@ -6,6 +6,7 @@ Public Class frmInventory
 
     Private btnSelectedDrawer As Button
     Private lstFullDrawers As List(Of Integer)
+    Private transparentPanelForLocking As New TransparentPanel
 
     Public Sub SetSelectedDrawer(ByVal btnDrawer As Button)
 
@@ -359,6 +360,9 @@ Public Class frmInventory
         Dim outputList As New List(Of (PropertyName As String, PropertyValue As String))
         Dim suggestedList As New List(Of String)
         Dim LoadingScreen As New frmProgressBar
+        txtSearch.ReadOnly = True
+        pnlSearch.Enabled = False
+        frmMain.LockSideMenu()
         cboSuggestedNames.Visible = False
         txtStatus.Visible = True
         txtStatus.Text = "Please wait while we check the network connection..."
@@ -391,6 +395,8 @@ Public Class frmInventory
         End If
         LoadingScreen.Close()
         frmMain.UnlockSideMenu()
+        pnlSearch.Enabled = True
+        txtSearch.ReadOnly = False
         LockUnlock()
     End Sub
 
@@ -951,10 +957,11 @@ Public Class frmInventory
     End Sub
 
     Public Sub LockUnlock()
-        If pnlTransparent.Visible = True Then
-            pnlTransparent.Visible = False
-        Else
-            pnlTransparent.Visible = True
-        End If
+        'If pnlTransparent.Visible = True Then
+        '    pnlTransparent.Visible = False
+        'Else
+        '    pnlTransparent.Visible = True
+        'End If
     End Sub
+
 End Class
