@@ -270,31 +270,33 @@ Public Class frmDispense
 
                     'used to check if the form that entered this dispense was adhoc or not
                 ElseIf intEnteredFromAdhoc = 1 Then
-                    Dim strAmountDispensed As String = txtAmountDispensed.Text & " " & txtUnits.Text
-                    DispensingDrugAdhoc(intMedicationID, intPatientID, CInt(LoggedInID), strAmountDispensed, intDrawerMEDAdhoc, intAdhocDoctor)
-                    frmWaste.SetPatientID(intPatientID)
-                    frmWaste.setDrawer(intdrawerNumber)
-                    frmWaste.setMedID(intMedicationID)
-                    frmWaste.setDrawerMEDTUID(intDrawerMEDAdhoc)
-                    frmWaste.setEnteredFromAdhoc(1)
-                    frmWaste.SetdblAmountGivenToPatient(CDbl(txtAmountDispensed.Text))
-                    frmMain.OpenChildForm(frmWaste)
-                    'If dblAmountAdministerMAX = CDbl(txtAmountDispensed.Text) Then
-                    '    frmMain.UnlockSideMenu()
-                    '    setintEntered(0)
-                    '    frmWaste.setEnteredFromAdhoc(0)
-                    '    frmMain.OpenChildForm(frmAdHockDispense)
-                    'Else
-                    '    Dim strAmountDispensed As String = txtAmountDispensed.Text & " " & txtUnits.Text
-                    '    DispensingDrugAdhoc(intMedicationID, intPatientID, CInt(LoggedInID), strAmountDispensed, intDrawerMEDAdhoc)
-                    '    frmWaste.SetPatientID(intPatientID)
-                    '    frmWaste.setDrawer(intdrawerNumber)
-                    '    frmWaste.setMedID(intMedicationID)
-                    '    frmWaste.setDrawerMEDTUID(intDrawerMEDAdhoc)
-                    '    frmWaste.setEnteredFromAdhoc(1)
-                    '    frmWaste.SetdblAmountGivenToPatient(CDbl(txtAmountDispensed.Text))
-                    '    frmMain.OpenChildForm(frmWaste)
-                    'End If
+                    'Dim strAmountDispensed As String = txtAmountDispensed.Text & " " & txtUnits.Text
+                    'DispensingDrugAdhoc(intMedicationID, intPatientID, CInt(LoggedInID), strAmountDispensed, intDrawerMEDAdhoc, intAdhocDoctor)
+                    'frmWaste.SetPatientID(intPatientID)
+                    'frmWaste.setDrawer(intdrawerNumber)
+                    'frmWaste.setMedID(intMedicationID)
+                    'frmWaste.setDrawerMEDTUID(intDrawerMEDAdhoc)
+                    'frmWaste.setEnteredFromAdhoc(1)
+                    'frmWaste.SetdblAmountGivenToPatient(CDbl(txtAmountDispensed.Text))
+                    'frmMain.OpenChildForm(frmWaste)
+                    If dblAmountAdministerMAX = CDbl(txtAmountDispensed.Text) Then
+                        frmMain.UnlockSideMenu()
+                        Dim strAmountDispensed As String = txtAmountDispensed.Text & " " & txtUnits.Text
+                        DispensingDrugAdhoc(intMedicationID, intPatientID, CInt(LoggedInID), strAmountDispensed, intDrawerMEDAdhoc, intAdhocDoctor)
+                        setintEntered(0)
+                        frmWaste.setEnteredFromAdhoc(0)
+                        frmMain.OpenChildForm(frmAdHockDispense)
+                    Else
+                        Dim strAmountDispensed As String = txtAmountDispensed.Text & " " & txtUnits.Text
+                        DispensingDrugAdhoc(intMedicationID, intPatientID, CInt(LoggedInID), strAmountDispensed, intDrawerMEDAdhoc, intAdhocDoctor)
+                        frmWaste.SetPatientID(intPatientID)
+                        frmWaste.setDrawer(intdrawerNumber)
+                        frmWaste.setMedID(intMedicationID)
+                        frmWaste.setDrawerMEDTUID(intDrawerMEDAdhoc)
+                        frmWaste.setEnteredFromAdhoc(1)
+                        frmWaste.SetdblAmountGivenToPatient(CDbl(txtAmountDispensed.Text))
+                        frmMain.OpenChildForm(frmWaste)
+                    End If
                 End If
 
             Else
