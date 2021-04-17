@@ -113,6 +113,11 @@ Module BulkImportMethods
                     If Not IsNothing(userArray) Then
                         addUsersToDatabase(userArray)
                     End If
+                Case "drawer"
+                    Dim importDrawerArray As ArrayList
+                    If Not IsNothing(importDrawerArray) Then
+
+                    End If
             End Select
             srReader.Close()
         Catch ex As Exception
