@@ -114,9 +114,9 @@ Module BulkImportMethods
                         addUsersToDatabase(userArray)
                     End If
                 Case "drawer"
-                    Dim importDrawerArray As ArrayList
+                    Dim importDrawerArray As ArrayList = parseDrawerFile(srReader)
                     If Not IsNothing(importDrawerArray) Then
-
+                        addDrawersToDatabase(importDrawerArray)
                     End If
             End Select
             srReader.Close()
@@ -203,7 +203,8 @@ Module BulkImportMethods
     '/*  PARAMETER LIST (In Parameter Order):					   */         
     '/*	 strbSQLStatement - this is the string builder that is being used  */
     '/*                     make the sql statments.                        */                     
-    '/*                                                                     
+    '/*  ShowEnd - this is a boolean on if a pop up saying the imports is  */
+    '/*            is finished should show up at the end.                  */
     '/*********************************************************************/
     '/*  RETURNS:								         */                   
     '/*            (NOTHING)								   */             
@@ -361,7 +362,7 @@ Module BulkImportMethods
                     End Try
 
                 End If
-                    If Not strLine(6).ToLower.Equals("male") And Not strLine(6).ToLower.Equals("female") Then
+                If Not strLine(6).ToLower.Equals("male") And Not strLine(6).ToLower.Equals("female") Then
                     strbErrorMessage.AppendLine("Issue on line " & intLineNum & " Sex must be male or female")
                     blnIssue = True
                 End If
@@ -1168,7 +1169,8 @@ Module BulkImportMethods
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					          */         
     '/*	 roomArray - this is the array list that is being added to the database*/                     
-    '/*                                                                     
+    '/*  showEnd - this is the boolean statement that is passed to the    */
+    '/*            finishingUpImport method                               */
     '/*********************************************************************/
     '/*  RETURNS:								         */                   
     '/*            (NOTHING)								   */             
@@ -1199,5 +1201,166 @@ Module BulkImportMethods
             End With
         Next
         finishingUpImport(strbSQLStatement, showEnd)
+    End Sub
+
+
+    '/*********************************************************************/
+    '/*                   Function NAME: parseDrawerFile				   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		         */   
+    '/*		         DATE CREATED: 	4/17/2021                       	   */                             
+    '/*********************************************************************/
+    '/*  Function PURPOSE:								   */             
+    '/*	 This is going to parse the Drawer file the user is trying to      */  
+    '/*  import and will check it for errors. If there are errors it will */
+    '/*  show an error message of everything wrong with file and return   */
+    '/*  nothing. Other wise it will return an array list of all the      */
+    '/*  records in DrawerClass objects.                                  */  
+    '/*
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*	 srReader - this is the stream reader that is being used to read in*/
+    '/*             the file.                                              */
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	strbErrorMessage - this is the message that is going to be built    */
+    '/*                     that contains all issues with the file.       */
+    '/* blnIssue - this is the boolean that tells us if there was an issue*/
+    '/*            with the file and we should block the import.          */
+    '/* strLine - this is the array that the text from the file is sent to*/
+    '/* intLineNum - this is keeping track of what line number we are on  */
+    '/*              in the file so we can tell the user where the error is*/
+    '/* DrawerArray - this is the array list of Drawers that will be added to  */
+    '/*             the database if there is no issue. If there is an issue*/
+    '/*             it will be nothing.                                    */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+    Function parseDrawerFile(srReader As StreamReader)
+        Dim DrawerArray = New ArrayList
+        Dim strLine As String()
+        Dim intLineNum As Integer = 1
+        Dim blnIssue = False
+        Dim strbErrorMessage As StringBuilder = New StringBuilder
+
+        Do
+            strLine = srReader.ReadLine.Split(vbTab)
+            If strLine.Length < 4 Then
+                strbErrorMessage.AppendLine("Issue on line " & intLineNum & " record is missing information")
+                blnIssue = True
+            Else
+                If Not IsNumeric(strLine(0)) Then
+                    blnIssue = True
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " drawer node must be numeric")
+
+
+                End If
+                If Not IsNumeric(strLine(1)) Then
+                    blnIssue = True
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " drawer number must be numeric")
+
+                End If
+
+
+                If Not IsNumeric(strLine(2)) Then
+                    blnIssue = True
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " size must be numeric")
+
+                End If
+
+                If Not IsNumeric(strLine(3)) Then
+                    blnIssue = True
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & "  number of dividers must be numeric")
+
+                End If
+            End If
+            If Not blnIssue Then
+                DrawerArray.Add(New DrawerClass(strLine(0), strLine(1), strLine(2), strLine(3)))
+            End If
+        Loop While (Not srReader.EndOfStream)
+
+
+        If blnIssue Then
+            MessageBox.Show(strbErrorMessage.ToString)
+            DrawerArray.Clear()
+            DrawerArray = Nothing
+        End If
+
+        Return DrawerArray
+    End Function
+
+    '/*********************************************************************/
+    '/*                   SUBPROGRAM NAME: addDrawersToDatabase			   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Nathan Premo   		         */   
+    '/*		         DATE CREATED: 4/17/2021	   */                             
+    '/*********************************************************************/
+    '/*  SUBPROGRAM PURPOSE:								   */             
+    '/*	 This is going to go through the arraylist of drawers and make a  */
+    '/*  large insert statement to add them to the database. When it      */
+    '/*  adds the drawers it make the full_flag false because the drawer  */
+    '/*  shouldn't have anything in them if the database is empty and the */
+    '/*  active_flag is true because the record should be active if we are*/
+    '/*  adding it.                                                       */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						         */           
+    '/*                                         				   */         
+    '/*********************************************************************/
+    '/*  CALLS:										   */                 
+    '/*             (NONE)								   */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					   */         
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  RETURNS:								         */                   
+    '/*            (NOTHING)								   */             
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								   */             
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*											   */                     
+    '/*                                                                     
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						         */               
+    '/*											   */                     
+    '/*  WHO   WHEN     WHAT								   */             
+    '/*  ---   ----     ------------------------------------------------- */
+    '/*                                                                     
+    '/*********************************************************************/
+
+
+    Sub addDrawersToDatabase(DrawerArray As ArrayList)
+        Dim strbSQLStatement As StringBuilder = New StringBuilder
+        strbSQLStatement.Append("Inset into Drawers ('Drawer_Node', 'Drawers_Number', 'Size', 'Number_of_Dividers', 'Full_Flag', 'Active_Flag') Values ")
+        For Each drawer As DrawerClass In DrawerArray
+            With drawer
+                strbSQLStatement.Append("('" & .DrawerNode & "', '" & .DrawerNumber & "', '" & .size & "','")
+                strbSQLStatement.Append(.NumberOfDividers & "', '0','1'")
+            End With
+        Next
+        finishingUpImport(strbSQLStatement)
     End Sub
 End Module
