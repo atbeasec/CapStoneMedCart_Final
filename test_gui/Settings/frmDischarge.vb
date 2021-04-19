@@ -183,17 +183,19 @@
     End Sub
 
     '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:       */
+    '/*                   SUBROUTINE NAME: radAdmitPatient_CheckedChanged      */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
     '/*		         DATE CREATED: 	   03/18/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE:
+    '/*  SUBROUTINE PURPOSE: the purpose of this sub is to swap the items on the 
+    '/*  screen when they user clicks the admit/discharge radio buttons
+    '/*
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
     '/*  (None)								           					  
     '/*********************************************************************/
-    '/*  CALLS:														    	
+    '/*  CALLS:	clearPatientTextBoxes()													    	
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):
     '/*********************************************************************/
@@ -258,23 +260,32 @@
     End Sub
 
     '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:       */
+    '/*                   SUBROUTINE NAME: cmbAdmitPatients_SelectedIndexChanged      */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
     '/*		         DATE CREATED: 	   03/18/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE:
+    '/*  SUBROUTINE PURPOSE: this method is run every time the admit patient
+    '/*   combobox index is changed, it will get the corrosponding ID from the parallel
+    '/*   array, it will then get the patient information from the database with that patient ID and 
+    '/*   pass that information to the populate information method
+    '/*
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
     '/*  (None)								           					  
     '/*********************************************************************/
-    '/*  CALLS:														    	
+    '/*  CALLS:	populatePatientTextBoxes													    	
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                   						                           
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*
+    '/* intPatientID
+    '/* dsPatientAdmit
+    '/* dsPrimaryDoctor
+    '/* strPrimaryDoctor
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						                      */
     '/*											                          */
