@@ -148,6 +148,29 @@ Public Class frmDispense
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: CreateDispenseHistoryPanels               */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier       		          */   
+    '/*		         DATE CREATED: 		 3/20/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	
+    '/*********************************************************************/
+    '/*  CALLED BY:   back button clicked     						                      */                            
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	                                                      */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                                  */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO        WHEN            WHAT					               */             
+    '/*********************************************************************/
     Public Sub CreateDispenseHistoryPanels(ByVal flpPannel As FlowLayoutPanel, ByVal strMedicationName As String, ByVal strStrength As String, ByVal strType As String, ByVal strQuantity As String, ByVal strDispenseBy As String, ByVal strDispenseDate As String, ByVal strDispenseTime As String)
 
         Dim pnl As Panel
@@ -203,7 +226,29 @@ Public Class frmDispense
 
     End Sub
 
-
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: Dispense_Load               */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier       		          */   
+    '/*		         DATE CREATED: 		 3/20/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	
+    '/*********************************************************************/
+    '/*  CALLED BY:   back button clicked     						                      */                            
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	                                                      */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                                  */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO        WHEN            WHAT					               */             
+    '/*********************************************************************/
     Private Sub Dispense_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         lblDirections.Text = ENTERAMOUNTOTREMOVE
@@ -239,9 +284,29 @@ Public Class frmDispense
     '/* the waste input requireing the waste input.
     '/*
     '/*********************************************************************/
-    '/*  CALLED BY:   	      						                      */                 
+    '/*  CALLED BY:  btnDispense.Click 	      						                      */                 
     '/*********************************************************************/
-    '/*  CALLS:                                        				      */             
+    '/*  CALLS: 
+    '/* CreateDatabase.ExecuteScalarQuery("Select Controlled_Flag from Medication where Medication_ID = '" & intMedicationID & "' and Active_Flag = '1'")
+    '/* CreateDatabase.ExecuteScalarQuery("Select Drawers_TUID from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
+    '/* OpenOneDrawer(intdrawerNumber)
+    '/* changebuttonForCounting()
+    '/* frmMain.LockSideMenu()
+    '/* UpdateDrawerCount(intDispenseAmount, intquantity, intdrawerNumber, intMedicationID)
+    '/* UpdateSystemCountForDiscrepancy(intMedicationID, intdrawerNumber, intAmountinCart)
+    '/* UpdateDrawerCount(intDispenseAmount, intquantity, intdrawerNumber, intMedicationID)
+    '/* changeButtonforDispensing()
+    '/* frmMain.UnlockSideMenu()
+    '/* frmPatientInfo.setPatientID(intPatientID)
+    '/* frmMain.OpenChildForm(frmPatientInfo)
+    '/* DispensingDrug(intMedicationID, CInt(LoggedInID), strAmountDispensed)
+    '/* frmWaste.SetPatientID(intPatientID)
+    '/* frmWaste.setDrawer(intdrawerNumber)
+    '/* frmWaste.setMedID(intMedicationID)
+    '/* frmWaste.setDrawerMEDTUID(intdrawerMEDTUID)
+    '/* frmWaste.SetdblAmountGivenToPatient(CDbl(txtAmountDispensed.Text))
+    '/* frmMain.OpenChildForm(frmWaste)
+    '/**/             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					          */         
     '/*	     sender
@@ -290,9 +355,11 @@ Public Class frmDispense
                     'check to see if the drug is a narcotic
                     If NarcoticFlag = 1 Then
                         'Is a narcotic
+                        'open drawer for counting
                         OpenOneDrawer(intdrawerNumber)
                         intDispenseAmount = txtQuantityToDispense.Text
                         changebuttonForCounting()
+                        'lock side bars to prevent leaving the dispensing early
                         frmMain.LockSideMenu()
                         btnBack.Visible = False
                     Else
