@@ -936,22 +936,132 @@
 
     End Sub
 
-
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: txtPassword_TextChanged	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Alexander Beasecker        */   
+    '/*		         DATE CREATED:    4/14/2021             */                              
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:this will call the sorting methods for sorting the 
+    '/*   restocking by the medication name
+    '/********************************************************************/
+    '/*  CALLED BY lblMedication.Click
+    '/********************************************************************/
+    '/*  CALLS:	
+    ' RemoveHandlersAndAssociations(GetListOfAllControls(flpEndOfShiftCount), flpEndOfShiftCount)
+    ' DetermineSelectedReportForLabelsDrawerNumber(cmbFilter.SelectedIndex)*/		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION: user clicks the medication label						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  AB             4/14/2021       Initial creation
+    '/********************************************************************/ 
     Private Sub lblMedication_Click(sender As Object, e As EventArgs) Handles lblMedication.Click
         RemoveHandlersAndAssociations(GetListOfAllControls(flpEndOfShiftCount), flpEndOfShiftCount)
         DetermineSelectedReportForLabelsMedicationName(cmbFilter.SelectedIndex)
     End Sub
-
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: txtPassword_TextChanged	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Alexander Beasecker        */   
+    '/*		         DATE CREATED:    4/14/2021             */                            
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:this will call the sorting methods for sorting the 
+    '/*   restocking by the drawer number
+    '/********************************************************************/
+    '/*  CALLED BY lblDrawerNum.Click
+    '/********************************************************************/
+    '/*  CALLS:		
+    ' RemoveHandlersAndAssociations(GetListOfAllControls(flpEndOfShiftCount), flpEndOfShiftCount)
+    ' DetermineSelectedReportForLabelsDrawerNumber(cmbFilter.SelectedIndex)
+    '*/		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION: user clicks the drawer number label							                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  AB             4/14/2021       Initial creation
+    '/********************************************************************/ 
     Private Sub lblDrawerNum_Click(sender As Object, e As EventArgs) Handles lblDrawerNum.Click
         RemoveHandlersAndAssociations(GetListOfAllControls(flpEndOfShiftCount), flpEndOfShiftCount)
         DetermineSelectedReportForLabelsDrawerNumber(cmbFilter.SelectedIndex)
     End Sub
-
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: txtPassword_TextChanged	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Alexander Beasecker        */   
+    '/*		         DATE CREATED:    4/14/2021             */                              
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:this will call the sorting methods for sorting the 
+    '/*   restocking by the bin number
+    '/********************************************************************/
+    '/*  CALLED BY lblSection.Click
+    '/********************************************************************/
+    '/*  CALLS:	
+    ' RemoveHandlersAndAssociations(GetListOfAllControls(flpEndOfShiftCount), flpEndOfShiftCount)
+    ' DetermineSelectedReportForLabelsDrawerNumber(cmbFilter.SelectedIndex)*/		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:	 user clicks the bin number label						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  AB             4/14/2021       Initial creation
+    '/********************************************************************/ 
     Private Sub lblSection_Click(sender As Object, e As EventArgs) Handles lblSection.Click
         RemoveHandlersAndAssociations(GetListOfAllControls(flpEndOfShiftCount), flpEndOfShiftCount)
         DetermineSelectedReportForLabelsBin(cmbFilter.SelectedIndex)
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: lblSystemCount_Click	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Alexander Beasecker        */   
+    '/*		         DATE CREATED:    4/14/2021             */                             
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE: this will call the sorting methods for sorting the 
+    '/*   restocking by the system count 
+    '/********************************************************************/
+    '/*  CALLED BY lblSystemCount.Click
+    '/********************************************************************/
+    '/*  CALLS:		
+    ' RemoveHandlersAndAssociations(GetListOfAllControls(flpEndOfShiftCount), flpEndOfShiftCount)
+    ' DetermineSelectedReportForLabelsDrawerNumber(cmbFilter.SelectedIndex)*/		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION: user clicks the system count label							                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  AB             4/14/2021       Initial creation
+    '/********************************************************************/ 
     Private Sub lblSystemCount_Click(sender As Object, e As EventArgs) Handles lblSystemCount.Click
         RemoveHandlersAndAssociations(GetListOfAllControls(flpEndOfShiftCount), flpEndOfShiftCount)
         DetermineSelectedReportForLabelsSystemCount(cmbFilter.SelectedIndex)
