@@ -338,12 +338,12 @@
     End Sub
 
     '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:       */
+    '/*                   SUBROUTINE NAME: clearPatientTextBoxes      */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
     '/*		         DATE CREATED: 	   03/18/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE:
+    '/*  SUBROUTINE PURPOSE: the purpose of this sub is to clear the screen textboxes
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
     '/*  (None)								           					  
@@ -382,12 +382,12 @@
     End Sub
 
     '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:       */
+    '/*                   SUBROUTINE NAME: populatePatientTextBoxes      */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
     '/*		         DATE CREATED: 	   03/18/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE:
+    '/*  SUBROUTINE PURPOSE: the purpose of this sub is to populate the information boxes with the passed values
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
     '/*  (None)								           					  
@@ -395,6 +395,19 @@
     '/*  CALLS:														    	
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):
+    '/*
+    '/*intMRN -- patient MRN
+    '/*strDOB -- patient Date of birth
+    '/*strGender -- patient gender
+    '/*intHeight -- patient height
+    '/*intWeight -- patient weight
+    '/*strPhysician -- patient primary physician
+    '/*strEmail -- patient email
+    '/*strAddress -- patient address
+    '/*strCity -- patient city
+    '/*strState -- patient state
+    '/*intPhone -- patient phone number
+    '/*intZip -- patient zip code
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                   						                           
     '/*********************************************************************/
@@ -424,12 +437,12 @@
     End Sub
 
     '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:       */
+    '/*                   SUBROUTINE NAME: PopulateAdmitRooms      */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
     '/*		         DATE CREATED: 	   03/18/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE:
+    '/*  SUBROUTINE PURPOSE: this populates the room bed combobox with all the open available rooms and beds
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
     '/*  (None)								           					  
@@ -457,12 +470,12 @@
     End Sub
 
     '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:       */
+    '/*                   SUBROUTINE NAME: PopulateRoomBedDischarge      */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
     '/*		         DATE CREATED: 	   03/18/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE:
+    '/*  SUBROUTINE PURPOSE: This sub populates the room and bed textboxes with the passed values
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
     '/*  (None)								           					  
@@ -487,7 +500,7 @@
     End Sub
 
     '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:       */
+    '/*                   SUBROUTINE NAME:cmbPatientName_LostFocus       */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Collin Krygier			      */
     '/*		         DATE CREATED: 	   03/18/21							  */
@@ -509,7 +522,7 @@
     '/*											                          */
     '/*  WHO                   WHEN     WHAT							  */
     '/*  ---                   ----     ----------------------------------*/
-    '/*  Alexander Beasecker  03/18/21  Initial creation of the code    */
+    '/*  Collin Krygier	  03/18/21  Initial creation of the code    */
     '/*********************************************************************/
     Private Sub cmbPatientName_LostFocus(sender As Object, e As EventArgs) Handles cmbDischargePatients.LostFocus, cmbAdmitPatients.LostFocus
 
@@ -523,7 +536,7 @@
     End Sub
 
     '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:       */
+    '/*                   SUBROUTINE NAME: cboRoomandBed_LostFocus      */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Collin Krygier			      */
     '/*		         DATE CREATED: 	   03/18/21							  */
@@ -545,7 +558,7 @@
     '/*											                          */
     '/*  WHO                   WHEN     WHAT							  */
     '/*  ---                   ----     ----------------------------------*/
-    '/*  Alexander Beasecker  03/18/21  Initial creation of the code    */
+    '/*  Collin Krygier  03/18/21  Initial creation of the code    */
     '/*********************************************************************/
     Private Sub cboRoomandBed_LostFocus(sender As Object, e As EventArgs) Handles cboRoomandBed.LostFocus
 
