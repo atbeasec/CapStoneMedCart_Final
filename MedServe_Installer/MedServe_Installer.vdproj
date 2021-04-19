@@ -27,6 +27,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_158B739E3AD54ACFA02E235B8364C867"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_198FDC39AEE7841D101EAAA04457C8B4"
         "OwnerKey" = "8:_935CC19F3C92418786BAFBE5525C2CA7"
         "MsmSig" = "8:_UNDEFINED"
@@ -136,6 +142,12 @@
         "Entry"
         {
         "MsmKey" = "8:_B0062A5A5E224AA8B281671E7F7192B6"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B92EFF2411D840F69342F0F44322E481"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -389,6 +401,26 @@
             {
             "SourcePath" = "8:..\\BarCodeGenerator.exe"
             "TargetName" = "8:BarCodeGenerator.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_986A9FE7915647F3AFBA45A1B673945C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_158B739E3AD54ACFA02E235B8364C867"
+            {
+            "SourcePath" = "8:..\\User Manual v1.2.docx"
+            "TargetName" = "8:User Manual v1.2.docx"
             "Tag" = "8:"
             "Folder" = "8:_986A9FE7915647F3AFBA45A1B673945C"
             "Condition" = "8:"
@@ -718,6 +750,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B92EFF2411D840F69342F0F44322E481"
+            {
+            "SourcePath" = "8:..\\MedServe Installation and Setup v1.2.docx"
+            "TargetName" = "8:MedServe Installation and Setup v1.2.docx"
+            "Tag" = "8:"
+            "Folder" = "8:_986A9FE7915647F3AFBA45A1B673945C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BA6D4976F0B9A3239616D478A085A2BE"
@@ -1093,6 +1145,34 @@
             "Folder" = "8:_0C8C43E509844A02A71EC608B0BEEA82"
             "WorkingFolder" = "8:_986A9FE7915647F3AFBA45A1B673945C"
             "Icon" = "8:_585F3B27A0CE4F359C7C7F318623B083"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_599E77F42A034BAF98F89DCE913B6CEE"
+            {
+            "Name" = "8:User Manual v1.2.docx"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_158B739E3AD54ACFA02E235B8364C867"
+            "Folder" = "8:_0C8C43E509844A02A71EC608B0BEEA82"
+            "WorkingFolder" = "8:_986A9FE7915647F3AFBA45A1B673945C"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C627FB105118418DB7C60B730248036A"
+            {
+            "Name" = "8:MedServe Installation and Setup v1.2.docx"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_B92EFF2411D840F69342F0F44322E481"
+            "Folder" = "8:_0C8C43E509844A02A71EC608B0BEEA82"
+            "WorkingFolder" = "8:_986A9FE7915647F3AFBA45A1B673945C"
+            "Icon" = "8:"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_F527811A0C0D4170AAC8FF66794FA560"
