@@ -699,10 +699,56 @@ Public Class frmDispense
         DataVaildationMethods.KeyPressCheck(e, "0123456789")
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: txtCountInDrawer_KeyPress	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Collin Krygier
+    '/*		         DATE CREATED:                             
+    '/********************************************************************/
+    '/*  SUBROUTINE 
+    '/********************************************************************/
+    '/*  CALLED BY
+    '/********************************************************************/
+    '/*  CALLS:			                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           					                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/
     Private Sub txtCountInDrawer_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtCountInDrawer.KeyPress
         DataVaildationMethods.KeyPressCheck(e, "0123456789")
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: txtAmountDispensed_KeyPress	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Collin Krygier
+    '/*		         DATE CREATED:                             
+    '/********************************************************************/
+    '/*  SUBROUTINE 
+    '/********************************************************************/
+    '/*  CALLED BY
+    '/********************************************************************/
+    '/*  CALLS:			                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           					                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/
     Private Sub txtAmountDispensed_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtAmountDispensed.KeyPress
         DataVaildationMethods.KeyPressCheck(e, "0123456789.")
     End Sub
@@ -828,25 +874,25 @@ Public Class frmDispense
     '/*                   SubProgram NAME: btnReopenDrawer_Click               */         
     '/*********************************************************************/
     '/*                   WRITTEN BY:  Alexander Beasecker        		          */   
-    '/*		         DATE CREATED:                        */                             
+    '/*		         DATE CREATED:    4/07/2021                    */                             
     '/*********************************************************************/
     '/*  Subprogram PURPOSE:								              */             
-    '/*	  
+    '/*	  this sub program will reopen the drawer for the medication they are dispensing
     '/*********************************************************************/
-    '/*  CALLED BY:        						                      */                 
+    '/*  CALLED BY:  btnReopenDrawer.Click      						                      */                 
     '/*********************************************************************/                                        				      */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					          */                                                              */ 
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                  */             
-    '/*	                                                                  */
+    '/*	  user presses reopen drawer button                                                                */
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */  
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						                      */               
     '/*											                          */                     
     '/*  WHO        WHEN            WHAT					               */             
-    '/*  AB         Initial creation/rework of dispensing
+    '/*  AB        4/07/2021   Initial creation/rework of dispensing
     '/*********************************************************************/
     Private Sub btnReopenDrawer_Click(sender As Object, e As EventArgs) Handles btnReopenDrawer.Click
         Dim intdrawerNumber As Integer = CreateDatabase.ExecuteScalarQuery("Select Drawers_TUID from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
@@ -857,12 +903,13 @@ Public Class frmDispense
     '/*                   SubProgram NAME: UpdateDrawerCount               */         
     '/*********************************************************************/
     '/*                   WRITTEN BY:  Alexander Beasecker        		          */   
-    '/*		         DATE CREATED:                        */                             
+    '/*		         DATE CREATED:   4/12/2021                       */                             
     '/*********************************************************************/
     '/*  Subprogram PURPOSE:								              */             
-    '/*	  
+    '/*	  this sub will update the count in the drawer that will be left after the user dispenses
+    '/*   from the drawer
     '/*********************************************************************/
-    '/*  CALLED BY:        						                      */                 
+    '/*  CALLED BY: btnDispense_click       						                      */                 
     '/*********************************************************************/                                        				      */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					          */                                                              */ 
@@ -875,23 +922,27 @@ Public Class frmDispense
     '/* MODIFICATION HISTORY:						                      */               
     '/*											                          */                     
     '/*  WHO        WHEN            WHAT					               */             
-    '/*  AB         Initial creation/rework of dispensing
+    '/*  AB        4/12/2021   Initial creation/rework of dispensing
     '/*********************************************************************/
     Private Sub UpdateDrawerCount(ByRef intAmountDispense As Integer, ByRef intAmountInDrawer As Integer, ByRef intDrawerNumber As Integer, ByRef intMedID As Integer)
+        'get amount that should be left
         Dim intLeftover As Integer = intAmountInDrawer - intAmountDispense
         Dim intUpdateNumber As Integer = 0
+        'if they dispensed more than was in the drawer set the count to zero
         If intLeftover <= 0 Then
             intUpdateNumber = 0
         Else
             intUpdateNumber = intLeftover
         End If
-
+        'update amount
         CreateDatabase.ExecuteInsertQuery("UPDATE DrawerMedication set Quantity = '" & intUpdateNumber & "' where Drawers_TUID = '" & intDrawerNumber & "' and Medication_TUID = '" & intMedID & "'")
 
         If intAmountDispense > intAmountInDrawer Then
             intAmountDispense = intAmountInDrawer
         End If
+        'using the amount dispensed calculate the max amounts that can be dispensed
         CalculateMaxDispense(intAmountDispense)
+        'set the amount dispensed into the waste form
         frmWaste.SetintQuantity(intAmountDispense)
     End Sub
 
