@@ -661,7 +661,35 @@
     End Sub
 
 
-
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: DetermineSelectedReportForLabelsDrawerNumber	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Alexander Beasecker        */   
+    '/*		         DATE CREATED:    4/14/2021             */                              
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE: this sub will check which reporting type is 
+    '/* selected and call the correct sorted method for the correct selected report
+    '/*
+    '/*
+    '/********************************************************************/
+    '/*  CALLED BY 
+    '/********************************************************************/
+    '/*  CALLS:	
+    ' CreatePanel(flpEndOfShiftCount, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5))		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION: user clicks the drarwer number label						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  AB             4/14/2021       Initial creation
+    '/********************************************************************/ 
     Private Sub DetermineSelectedReportForLabelsDrawerNumber(ByVal intIndex As Integer)
 
         Select Case intIndex
@@ -729,7 +757,34 @@
 
     End Sub
 
-
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: txtPassword_TextChanged	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Alexander Beasecker        */   
+    '/*		         DATE CREATED:    4/14/2021             */                              
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE: this sub will check which reporting type is 
+    '/* selected and call the correct sorted method for the correct selected report
+    '/********************************************************************/
+    '/*  CALLED BY lblMedication.Click
+    '/********************************************************************/
+    '/*  CALLS:	
+    '/*  CALLS:	
+    ' CreatePanel(flpEndOfShiftCount, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5))		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION: user clicks the medication label						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  AB             4/14/2021       Initial creation
+    '/********************************************************************/ 
     Private Sub DetermineSelectedReportForLabelsMedicationName(ByVal intIndex As Integer)
 
         Select Case intIndex
@@ -798,7 +853,33 @@
     End Sub
 
 
-
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: txtPassword_TextChanged	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Alexander Beasecker        */   
+    '/*		         DATE CREATED:    4/14/2021             */                              
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE: this sub will check which reporting type is 
+    '/* selected and call the correct sorted method for the correct selected report
+    '/********************************************************************/
+    '/*  CALLED BY lblMedication.Click
+    '/********************************************************************/
+    '/*  CALLS:	
+    ' CreatePanel(flpEndOfShiftCount, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5))		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION: user clicks the bin label						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  AB             4/14/2021       Initial creation
+    '/********************************************************************/ 
     Private Sub DetermineSelectedReportForLabelsBin(ByVal intIndex As Integer)
 
         Select Case intIndex
@@ -868,7 +949,33 @@
 
 
 
-
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: DetermineSelectedReportForLabelsSystemCount	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Alexander Beasecker        */   
+    '/*		         DATE CREATED:    4/14/2021             */                              
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE: this sub will check which reporting type is 
+    '/* selected and call the correct sorted method for the correct selected report
+    '/********************************************************************/
+    '/*  CALLED BY lblMedication.Click
+    '/********************************************************************/
+    '/*  CALLS:	
+    ' CreatePanel(flpEndOfShiftCount, dr(0), dr(1), dr(2), dr(3), dr(4), dr(5))		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION: user clicks the system count label				                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  AB             4/14/2021       Initial creation
+    '/********************************************************************/ 
     Private Sub DetermineSelectedReportForLabelsSystemCount(ByVal intIndex As Integer)
 
         Select Case intIndex
@@ -949,7 +1056,7 @@
     '/********************************************************************/
     '/*  CALLS:	
     ' RemoveHandlersAndAssociations(GetListOfAllControls(flpEndOfShiftCount), flpEndOfShiftCount)
-    ' DetermineSelectedReportForLabelsDrawerNumber(cmbFilter.SelectedIndex)*/		                  
+    ' DetermineSelectedReportForLabelsMedicationName(cmbFilter.SelectedIndex)*/		                  
     '/********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):				             */	           
     '/*	            (NONE)	                                             */								                        							             
@@ -1014,7 +1121,7 @@
     '/********************************************************************/
     '/*  CALLS:	
     ' RemoveHandlersAndAssociations(GetListOfAllControls(flpEndOfShiftCount), flpEndOfShiftCount)
-    ' DetermineSelectedReportForLabelsDrawerNumber(cmbFilter.SelectedIndex)*/		                  
+    ' DetermineSelectedReportForLabelsBin(cmbFilter.SelectedIndex)*/		                  
     '/********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):				             */	           
     '/*	            (NONE)	                                             */								                        							             
@@ -1047,7 +1154,7 @@
     '/********************************************************************/
     '/*  CALLS:		
     ' RemoveHandlersAndAssociations(GetListOfAllControls(flpEndOfShiftCount), flpEndOfShiftCount)
-    ' DetermineSelectedReportForLabelsDrawerNumber(cmbFilter.SelectedIndex)*/		                  
+    ' DetermineSelectedReportForLabelsSystemCount(cmbFilter.SelectedIndex)*/		                  
     '/********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):				             */	           
     '/*	            (NONE)	                                             */								                        							             
