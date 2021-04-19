@@ -153,12 +153,14 @@
     End Sub
 
     '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:       */
+    '/*                   SUBROUTINE NAME: frmDischarge_Load      */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
     '/*		         DATE CREATED: 	   03/18/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE:
+    '/*  SUBROUTINE PURPOSE: this sub is called on load and does the initial
+    '/*   set up for the form by calling the populate methods 
+    '/*
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
     '/*  (None)								           					  
