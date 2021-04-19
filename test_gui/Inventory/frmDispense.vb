@@ -824,11 +824,59 @@ Public Class frmDispense
         intAdhocDoctor = intDoctor
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: btnReopenDrawer_Click               */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker        		          */   
+    '/*		         DATE CREATED:                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	  
+    '/*********************************************************************/
+    '/*  CALLED BY:        						                      */                 
+    '/*********************************************************************/                                        				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */                                                              */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                                  */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO        WHEN            WHAT					               */             
+    '/*  AB         Initial creation/rework of dispensing
+    '/*********************************************************************/
     Private Sub btnReopenDrawer_Click(sender As Object, e As EventArgs) Handles btnReopenDrawer.Click
         Dim intdrawerNumber As Integer = CreateDatabase.ExecuteScalarQuery("Select Drawers_TUID from DrawerMedication where Medication_TUID = '" & intMedicationID & "' and Active_Flag = '1'")
         OpenOneDrawer(intdrawerNumber)
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: UpdateDrawerCount               */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker        		          */   
+    '/*		         DATE CREATED:                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	  
+    '/*********************************************************************/
+    '/*  CALLED BY:        						                      */                 
+    '/*********************************************************************/                                        				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */                                                              */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                                  */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO        WHEN            WHAT					               */             
+    '/*  AB         Initial creation/rework of dispensing
+    '/*********************************************************************/
     Private Sub UpdateDrawerCount(ByRef intAmountDispense As Integer, ByRef intAmountInDrawer As Integer, ByRef intDrawerNumber As Integer, ByRef intMedID As Integer)
         Dim intLeftover As Integer = intAmountInDrawer - intAmountDispense
         Dim intUpdateNumber As Integer = 0
@@ -847,6 +895,29 @@ Public Class frmDispense
         frmWaste.SetintQuantity(intAmountDispense)
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: btnDrawer7_Click	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Collin Krygier
+    '/*		         DATE CREATED:                             
+    '/********************************************************************/
+    '/*  SUBROUTINE 
+    '/********************************************************************/
+    '/*  CALLED BY
+    '/********************************************************************/
+    '/*  CALLS:			                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           					                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/
     Private Sub btnDrawer7_Click(sender As Object, e As EventArgs) Handles btnOne.Click, btnTwo.Click, btnThree.Click, btnFour.Click, btnFive.Click, btnSix.Click, btnSeven.Click, btnEight.Click, btnNine.Click, btnZero.Click, btnDecimal.Click
 
         If pnlAmountToRemove.Visible = True Then
@@ -883,6 +954,29 @@ Public Class frmDispense
 
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: btnClear_Click	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Collin Krygier
+    '/*		         DATE CREATED:                             
+    '/********************************************************************/
+    '/*  SUBROUTINE 
+    '/********************************************************************/
+    '/*  CALLED BY
+    '/********************************************************************/
+    '/*  CALLS:			                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           					                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
 
         If pnlAmountToRemove.Visible = True Then
@@ -900,16 +994,39 @@ Public Class frmDispense
         End If
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: btnEnter_Click_1	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Alexander Beasecker
+    '/*		         DATE CREATED:                             
+    '/********************************************************************/
+    '/*  SUBROUTINE this methods handles the enter button interactions
+    '/********************************************************************/
+    '/*  CALLED BY btnEnter.Click
+    '/********************************************************************/
+    '/*  CALLS:			                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           					                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION: user presses the enter button on the on screen keyboard						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/
     Private Sub btnEnter_Click_1(sender As Object, e As EventArgs) Handles btnEnter.Click
-
+        'check which stage in the dispensing screen flow we are in
         If pnlAmountToRemove.Visible = True Then
-
+            'make sure not null in the textboxes
             If Not String.IsNullOrEmpty(txtQuantityToDispense.Text) Then
                 btnDispense.PerformClick()
             End If
 
         ElseIf pnlAmountInDrawer.Visible = True Then
-
+            'make sure the count box is not null
             If Not String.IsNullOrEmpty(txtCountInDrawer.Text) Then
                 btnDispense.PerformClick()
             End If
@@ -935,10 +1052,56 @@ Public Class frmDispense
 
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: AddVisibleChangedEventHandler	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Collin Krygier
+    '/*		         DATE CREATED:                             
+    '/********************************************************************/
+    '/*  SUBROUTINE 
+    '/********************************************************************/
+    '/*  CALLED BY
+    '/********************************************************************/
+    '/*  CALLS:			                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           					                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/
     Private Sub AddVisibleChangedEventHandler()
         AddHandler pnlAmountToRemove.VisibleChanged, AddressOf VisibleChangedEvent
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: VisibleChangedEvent	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Collin Krygier
+    '/*		         DATE CREATED:                             
+    '/********************************************************************/
+    '/*  SUBROUTINE 
+    '/********************************************************************/
+    '/*  CALLED BY
+    '/********************************************************************/
+    '/*  CALLS:			                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           					                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/
     Private Sub VisibleChangedEvent(ByVal sender As Object, ByVal e As EventArgs)
 
         If pnlAmountToRemove.Visible = False Then
@@ -947,6 +1110,29 @@ Public Class frmDispense
 
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: txtQuantityToDispense_TextChanged	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Collin Krygier
+    '/*		         DATE CREATED:                             
+    '/********************************************************************/
+    '/*  SUBROUTINE 
+    '/********************************************************************/
+    '/*  CALLED BY
+    '/********************************************************************/
+    '/*  CALLS:			                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           					                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/ 
     Private Sub txtQuantityToDispense_TextChanged(sender As Object, e As EventArgs) Handles txtQuantityToDispense.TextChanged
 
         If Not String.IsNullOrEmpty(sender.text) Then
@@ -962,6 +1148,29 @@ Public Class frmDispense
 
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: txtCountInDrawer_TextChanged	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Collin Krygier
+    '/*		         DATE CREATED:                             
+    '/********************************************************************/
+    '/*  SUBROUTINE 
+    '/********************************************************************/
+    '/*  CALLED BY
+    '/********************************************************************/
+    '/*  CALLS:			                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           					                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/ 
     Private Sub txtCountInDrawer_TextChanged(sender As Object, e As EventArgs) Handles txtCountInDrawer.TextChanged
 
         If Not String.IsNullOrEmpty(sender.text) Then
@@ -977,6 +1186,29 @@ Public Class frmDispense
 
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: txtAmountDispensed_TextChanged	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Collin Krygier
+    '/*		         DATE CREATED:                             
+    '/********************************************************************/
+    '/*  SUBROUTINE 
+    '/********************************************************************/
+    '/*  CALLED BY
+    '/********************************************************************/
+    '/*  CALLS:			                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           					                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/ 
     Private Sub txtAmountDispensed_TextChanged(sender As Object, e As EventArgs) Handles txtAmountDispensed.TextChanged
 
         If Not String.IsNullOrEmpty(sender.text) Then
@@ -997,6 +1229,34 @@ Public Class frmDispense
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: CalculateMaxDispense               */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Alexander Beasecker        		          */   
+    '/*		         DATE CREATED: 		 4/15/2021                       */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 this method calculates the max amount that can be dispensed based on how 
+    '/*  much was removed from the drawer
+    '/*
+    '/*
+    '/*********************************************************************/
+    '/*  CALLED BY:	 dispense updatedrawer count     						                      */                 
+    '/*********************************************************************/                                        				      */             
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	     RemoveNumber As Double                                                        */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                                  */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */  
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO        WHEN            WHAT					               */             
+    '/*  AB    4/15/2021     Initial creation/rework of dispensing
+    '/*********************************************************************/
     Private Sub CalculateMaxDispense(ByRef RemoveNumber As Double)
         dblAmountAdministerMAX = RemoveNumber * dblAmountPerContainer
     End Sub
