@@ -57,7 +57,31 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_22CAE616CB394BDA9A60A949D6225457"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_24BACB6063BD4037A1E03CF3AF152FD3"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2B8A6D0983AD4B0EA1B7AEC1DC2ED7C6"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_362306D85CA644079B699DB847BC1B59"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_407A5E5E6B6F4692AC0FF4D7EADFE912"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -77,6 +101,12 @@
         {
         "MsmKey" = "8:_4F5EB4F6D5CF9397C2CCD17E0B998573"
         "OwnerKey" = "8:_935CC19F3C92418786BAFBE5525C2CA7"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_527224A4A2F8438A876AAB1E7A748115"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -508,12 +538,92 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_22CAE616CB394BDA9A60A949D6225457"
+            {
+            "SourcePath" = "8:..\\Bulk Import Templates\\Drawers.txt"
+            "TargetName" = "8:Drawers.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_2D70A97CD9B442BE87474B04C1F8D6AA"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_24BACB6063BD4037A1E03CF3AF152FD3"
+            {
+            "SourcePath" = "8:..\\Bulk Import Templates\\Patient.txt"
+            "TargetName" = "8:Patient.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_2D70A97CD9B442BE87474B04C1F8D6AA"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2B8A6D0983AD4B0EA1B7AEC1DC2ED7C6"
+            {
+            "SourcePath" = "8:..\\Bulk Import Templates\\Users.txt"
+            "TargetName" = "8:Users.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_2D70A97CD9B442BE87474B04C1F8D6AA"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_362306D85CA644079B699DB847BC1B59"
             {
             "SourcePath" = "8:..\\Bulk Import Templates\\Users.txt"
             "TargetName" = "8:Users.txt"
             "Tag" = "8:"
             "Folder" = "8:_986A9FE7915647F3AFBA45A1B673945C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_407A5E5E6B6F4692AC0FF4D7EADFE912"
+            {
+            "SourcePath" = "8:..\\Bulk Import Templates\\Physician.txt"
+            "TargetName" = "8:Physician.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_2D70A97CD9B442BE87474B04C1F8D6AA"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -597,6 +707,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_527224A4A2F8438A876AAB1E7A748115"
+            {
+            "SourcePath" = "8:..\\Bulk Import Templates\\Rooms.txt"
+            "TargetName" = "8:Rooms.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_2D70A97CD9B442BE87474B04C1F8D6AA"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_585F3B27A0CE4F359C7C7F318623B083"
@@ -983,6 +1113,17 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_2D70A97CD9B442BE87474B04C1F8D6AA"
+                    {
+                    "Name" = "8:Bulk Import Templates"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_6C362C2E007C4FBE8B8BC52AB36B86F7"
+                        "Folders"
+                        {
+                        }
+                    }
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_8031DA117FA24A80924F50C51D8AA3D9"
                     {
                     "Name" = "8:x86"
