@@ -877,12 +877,24 @@
     '/********************************************************************/
     '/*  CALLED BY btnWasteWithCredentials.Click, btnSubmitWithoutSignoff.Click
     '/********************************************************************/
-    '/*  CALLS:								                             */		                  
+    '/*  CALLS:	 IsNumeric(txtQuantity.Text)	
+    '/*	 CheckUsername(txtUsername.Text, txtPassword.Text)
+    '/*	 InsertWasteNonNarcotic()
+    '/*	 frmMain.UnlockSideMenu()
+    '/*	 frmPatientInfo.setPatientID(intPatientID)
+    '/*	 frmMain.OpenChildForm(frmPatientInfo)
+    '/*	 frmDispense.setintEntered(0)
+    '/*	 setEnteredFromAdhoc(0)
+    '/*	 frmMain.OpenChildForm(frmAdHockDispense)
+    '/*			                  
     '/********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):				             */	           
     '/*	            (NONE)	                                             */								                        							             
     '/********************************************************************/
-    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/* SAMPLE INVOCATION:	user goes through dispensing flow, and 	
+    '/* gets the the waste screen and fills out the waste information, when they clikc submit
+    '/* it will call this method
+    '/**/		             			                                 */					                       
     '/********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
     '/********************************************************************/
