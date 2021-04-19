@@ -1,4 +1,78 @@
-﻿Imports System.Text
+﻿'/*********************************************************************/
+'/*                   FILE NAME:  frmDispense                         */
+'/*********************************************************************/
+'/* PART OF PROJECT: MedServe                 */
+'/*********************************************************************/
+'/* WRITTEN BY: Capstone Dev team 2021		         */
+'/*********************************************************************/
+'/* PROJECT PURPOSE:								   */
+'/*	 this project is a medical dispensing software solution for nursing students
+'/*  it will work as a simulation or full install into a medical cart for students
+'/*  to use as a learning tool in clinical enviornments
+'/*********************************************************************/
+'/*  FILE PURPOSE:									   */
+'/*	 this form Handles all the gui logic for doing the dispensing logic
+'/*  the user will input the amount of the dispensing drug they want to remove
+'/*  if the drug is a narcotic it will ask for a count of the amount in the drawer
+'/*  it will ask how much they gave to the patient.
+'/*********************************************************************/
+'/*  COMMAND LINE PARAMETER LIST (In Parameter Order):			   */
+'/*                                                    (NONE)	   */
+''/*********************************************************************/
+'/*  ENVIRONMENTAL RETURNS:							   */
+'/*                          (NOTHING)					   */
+'/*********************************************************************/
+'/* SAMPLE INVOCATION:								   */
+'/*											   */
+'/* This form is launched with two methods, the user launches the program
+'/* goes into a patients form, selects a prescription to dispense and it will
+'/* open this form.
+'/* the second method is to choose the adhoc dispensing method. they fill out all
+'/* the adhoc information and hit order adhoc, it will launch this form.
+'/*
+'/*
+'/*********************************************************************/
+'/*  GLOBAL VARIABLE LIST (Alphabetically):			         */
+'/*
+'/* blnOverride 
+'/* blnSignedOff 
+'/* contactPanelsAddedCount 
+'/* currentContactPanelName 
+'/* dblAmountAdministerMAX  -- this holds the max amount that could be administered to the patient based on how much was removed
+'/* dblAmountPerContainer   -- this holds the amount per container from the datbase
+'/* dblDispensedPatientAmount  -- this is the amount that was actually dispensed to the patient
+'/* ENTERAMOUNTOTREMOVE 
+'/* intAdhocBin -- this is used in the adhoc dispensing 
+'/* intAdhocDoctor -- this holds the physician id of the physician who ordered the adhoc
+'/* intAdhocDrawerNumber -- the drawer number for the medication being removed for the adhoc
+'/* intCountedAmount -- this is the amount that the user input for the amount they counted in the drawer
+'/* intDispenseAmount -- this is the amount of the containers the user will remove from the drawer
+'/* intDrawerMEDAdhoc -- this is the drawerMedicationID from the database
+'/* intEnteredFromAdhoc -- this varirable is used to flag if the user is entering the form from an adhoc order or patient inforamtion
+'/* intMedicationID -- the database ID for the medication being dispensed
+'/* intPatientID  -- the patient ID for the patient that is being dispensed
+'/* intPatientMedID  -- the patient Medication ID, this is the database TUID for the patient prescription
+'/* intPatientMRN  -- this is the MRN for the patient
+'/* strAmountAdhoc  -- this is the ordered amount from the adhoc order form
+'/* strUnitAdhoc -- this is the measurement from the database for the medication (ususally MG or ML)
+'/*
+'/*********************************************************************/
+'/* COMPILATION NOTES:								   */
+'/* 											   */
+'/* This project compiles normally under Microsoft Visual C++ 7.2   */
+'/* All one needs to do Is open up the Solver project And compile.    */
+'/* No special compile options Or optimizations were used.  No        */
+'/* unresolved warnings Or errors exist under these compilation       */
+'/* conditions.									   */
+'/*********************************************************************/
+'/* MODIFICATION HISTORY:						         */
+'/*											   */
+'/*  WHO   WHEN     WHAT								   */
+'/*  ---   ----     ------------------------------------------------- */
+'/*********************************************************************/
+
+
+Imports System.Text
 
 Public Class frmDispense
     Public blnSignedOff As Boolean = True
