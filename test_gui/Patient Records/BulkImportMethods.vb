@@ -1261,6 +1261,7 @@ Module BulkImportMethods
         Dim intLineNum As Integer = 1
         Dim blnIssue = False
         Dim strbErrorMessage As StringBuilder = New StringBuilder
+        Dim drawerNumbersUsedArray = New ArrayList
 
         Do
             strLine = srReader.ReadLine.Split(vbTab)
@@ -1271,31 +1272,54 @@ Module BulkImportMethods
                 If Not IsNumeric(strLine(0)) Then
                     blnIssue = True
                     strbErrorMessage.AppendLine("Issue on line " & intLineNum & " drawer node must be numeric")
-
-
+                ElseIf strLine(0) > 100 Or strLine(0) < 1 Then
+                    blnIssue = True
+                    strbErrorMessage.AppendLine("Issue on line " & intLineNum & " drawer node must be between 1 and 100")
                 End If
                 If Not IsNumeric(strLine(1)) Then
                     blnIssue = True
                     strbErrorMessage.AppendLine("Issue on line " & intLineNum & " drawer number must be numeric")
+                Else
+                    If strLine(1) > 100 Or strLine(1) < 1 Then
+                        blnIssue = True
+                        strbErrorMessage.AppendLine("Issue on line " & intLineNum & " drawer number must be between 1 and 100")
+                    Else
+
+                    End If
+                    If drawerNumbersUsedArray.Contains(strLine(1)) Then
+                        blnIssue = True
+                        strbErrorMessage.AppendLine("Issue on line " & intLineNum & " drawer number already used.")
+                    Else
+                        drawerNumbersUsedArray.Add(strLine(1)) 'keeps track of the numbers used. 
+                    End If
 
                 End If
-
 
                 If Not IsNumeric(strLine(2)) Then
                     blnIssue = True
                     strbErrorMessage.AppendLine("Issue on line " & intLineNum & " size must be numeric")
-
+                Else
+                    If strLine(2) > 100 Or strLine(2) < 1 Then
+                        blnIssue = True
+                        strbErrorMessage.AppendLine("Issue on line " & intLineNum & " size must be between 1 and 100")
+                    End If
                 End If
 
                 If Not IsNumeric(strLine(3)) Then
                     blnIssue = True
                     strbErrorMessage.AppendLine("Issue on line " & intLineNum & "  number of dividers must be numeric")
-
+                Else
+                    If strLine(3) > 10 Or strLine(3) < 0 Then
+                        blnIssue = True
+                        strbErrorMessage.AppendLine("Issue on line " & intLineNum & " number of divders must be between 0 and 10")
+                    End If
                 End If
             End If
             If Not blnIssue Then
+
                 DrawerArray.Add(New DrawerClass(strLine(0), strLine(1), strLine(2), strLine(3)))
             End If
+            intLineNum += 1
         Loop While (Not srReader.EndOfStream)
 
 
@@ -1354,6 +1378,10 @@ Module BulkImportMethods
 
     Sub addDrawersToDatabase(DrawerArray As ArrayList)
         Dim strbSQLStatement As StringBuilder = New StringBuilder
+        'clear everything from the database first
+        strbSQLStatement.Append("Delete from Drawers")
+        ExecuteInsertQuery(strbSQLStatement.ToString)
+        strbSQLStatement.Clear()
         strbSQLStatement.Append("Insert into Drawers ('Drawer_Node', 'Drawer_Number', 'Size', 'Number_of_Dividers', 'Full_Flag', 'Active_Flag') Values ")
         For Each drawer As DrawerClass In DrawerArray
             With drawer
