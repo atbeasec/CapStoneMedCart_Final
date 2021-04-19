@@ -867,12 +867,15 @@
     '/********************************************************************/
     '/*                   FUNCTION NAME: btnWasteWithCredentials_Click	         */         
     '/********************************************************************/
-    '/*                   WRITTEN BY:         */   
-    '/*		         DATE CREATED:                 */                             
+    '/*                   WRITTEN BY: Alexander Beasecker         */   
+    '/*		         DATE CREATED: 4/11/2021                */                             
     '/********************************************************************/
-    '/*  SUBROUTINE PURPOSE:
+    '/*  SUBROUTINE PURPOSE: this subs purpose is called when the submit waste
+    '/*      is clicked and they are choosing to submit with username and password, it will check if the drug that is currrently being wasted is a narcotic or not
+    '/*      if it is a narcotic it will call the check username and password method.   
+    '/*      if it is not a narcotic then it will not check credentials as it is not needed.
     '/********************************************************************/
-    '/*  CALLED BY 
+    '/*  CALLED BY btnWasteWithCredentials.Click, btnSubmitWithoutSignoff.Click
     '/********************************************************************/
     '/*  CALLS:								                             */		                  
     '/********************************************************************/
@@ -886,7 +889,7 @@
     '/* MODIFICATION HISTORY:						                     */		                 
     '/*									 */		                         */
     '/*  WHO            WHEN             WHAT				             */		            
-    '/*  ---            ----             ----				             */
+    '/*  AB            4/11/2021               Initial				             */
     '/********************************************************************/ 
     Private Sub btnWasteWithCredentials_Click(sender As Object, e As EventArgs) Handles btnWasteWithCredentials.Click, btnSubmitWithoutSignoff.Click
         If (rbtnOther.Checked = True) And (txtOther.Text.Trim = Nothing) Then
@@ -922,7 +925,7 @@
     '/********************************************************************/
     '/*                   FUNCTION NAME: CheckUsername	         */         
     '/********************************************************************/
-    '/*                   WRITTEN BY:         */   
+    '/*                   WRITTEN BY: Dylan Walter         */   
     '/*		         DATE CREATED:                 */                             
     '/********************************************************************/
     '/*  SUBROUTINE PURPOSE:
@@ -976,7 +979,7 @@
     '/********************************************************************/
     '/*                   FUNCTION NAME: scanUserName	         */         
     '/********************************************************************/
-    '/*                   WRITTEN BY:         */   
+    '/*                   WRITTEN BY: Dylan Walter          */   
     '/*		         DATE CREATED:                 */                             
     '/********************************************************************/
     '/*  SUBROUTINE PURPOSE:
@@ -1010,7 +1013,7 @@
     End Function
 
     '/********************************************************************/
-    '/*                   FUNCTION NAME: scanUserName	         */         
+    '/*                   FUNCTION NAME: btnDrawer7_Click	         */         
     '/********************************************************************/
     '/*                   WRITTEN BY:         */   
     '/*		         DATE CREATED:                 */                             
@@ -1046,14 +1049,14 @@
     End Sub
 
     '/********************************************************************/
-    '/*                   FUNCTION NAME: scanUserName	         */         
+    '/*                   FUNCTION NAME: btnClear_Click	         */         
     '/********************************************************************/
-    '/*                   WRITTEN BY:         */   
+    '/*                   WRITTEN BY: Alexander Beasecker        */   
     '/*		         DATE CREATED:                 */                             
     '/********************************************************************/
-    '/*  SUBROUTINE PURPOSE:
+    '/*  SUBROUTINE PURPOSE: sets the quantity textbox to nothing when called
     '/********************************************************************/
-    '/*  CALLED BY 
+    '/*  CALLED BY  btnClear.Click
     '/********************************************************************/
     '/*  CALLS:								                             */		                  
     '/********************************************************************/
@@ -1068,6 +1071,7 @@
     '/*									 */		                         */
     '/*  WHO            WHEN             WHAT				             */		            
     '/*  ---            ----             ----				             */
+    '/*  AB            4/13/2021             Initial				   */
     '/********************************************************************/ 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
         txtQuantity.Text = Nothing
@@ -1075,9 +1079,9 @@
     End Sub
 
     '/********************************************************************/
-    '/*                   FUNCTION NAME: scanUserName	         */         
+    '/*                   FUNCTION NAME: btnEnter_Click	         */         
     '/********************************************************************/
-    '/*                   WRITTEN BY:         */   
+    '/*                   WRITTEN BY:        */   
     '/*		         DATE CREATED:                 */                             
     '/********************************************************************/
     '/*  SUBROUTINE PURPOSE:
@@ -1135,9 +1139,9 @@
     End Sub
 
     '/********************************************************************/
-    '/*                   FUNCTION NAME: scanUserName	         */         
+    '/*                   FUNCTION NAME: txtQuantity_TextChanged	         */         
     '/********************************************************************/
-    '/*                   WRITTEN BY:         */   
+    '/*                   WRITTEN BY:      */   
     '/*		         DATE CREATED:                 */                             
     '/********************************************************************/
     '/*  SUBROUTINE PURPOSE:
@@ -1178,9 +1182,9 @@
     End Sub
 
     '/********************************************************************/
-    '/*                   FUNCTION NAME: scanUserName	         */         
+    '/*                   FUNCTION NAME: txtBarcode_TextChanged	         */         
     '/********************************************************************/
-    '/*                   WRITTEN BY:         */   
+    '/*                   WRITTEN BY:Eric LaVoie         */   
     '/*		         DATE CREATED:                 */                             
     '/********************************************************************/
     '/*  SUBROUTINE PURPOSE:
@@ -1210,9 +1214,9 @@
     End Sub
 
     '/********************************************************************/
-    '/*                   FUNCTION NAME: scanUserName	         */         
+    '/*                   FUNCTION NAME: txtPassword_TextChanged	         */         
     '/********************************************************************/
-    '/*                   WRITTEN BY:         */   
+    '/*                   WRITTEN BY: Eric LaVoie         */   
     '/*		         DATE CREATED:                 */                             
     '/********************************************************************/
     '/*  SUBROUTINE PURPOSE:
@@ -1243,19 +1247,24 @@
 
 
     '/********************************************************************/
-    '/*                   FUNCTION NAME: scanUserName	         */         
+    '/*                   FUNCTION NAME: txtother_TextChanged	         */         
     '/********************************************************************/
-    '/*                   WRITTEN BY:         */   
+    '/*                   WRITTEN BY: Eric LaVoie        */   
     '/*		         DATE CREATED:                 */                             
     '/********************************************************************/
-    '/*  SUBROUTINE PURPOSE:
+    '/*  SUBROUTINE PURPOSE: Checks the keypress for the other textbox and sends the text
+    '/* to the keypresscheck method to prevent unwanted characters from being typed
     '/********************************************************************/
-    '/*  CALLED BY 
+    '/*  CALLED BY  txtOther.KeyPress
     '/********************************************************************/
-    '/*  CALLS:								                             */		                  
+    '/*  CALLS:	DataVaildationMethods.KeyPressCheck(e, "0123456789. abcdefghijklmnopqrstuvwxyz -_=+!@#$%^&*")							                             */		                  
     '/********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):				             */	           
-    '/*	            (NONE)	                                             */								                        							             
+    '/*	ByVal sender As Object
+    '/* ByVal e As System.Windows.Forms.KeyPressEventArgs
+    '/*
+    '/*
+    '/**/								                        							             
     '/********************************************************************/
     '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
     '/********************************************************************/
