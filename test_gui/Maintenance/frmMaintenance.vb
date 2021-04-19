@@ -65,6 +65,8 @@
                 strFileType = "room"
             Case radUser.Checked
                 strFileType = "user"
+            Case radDrawers.CheckAlign
+                strFileType = "drawer"
         End Select
 
         If Not IsNothing(strFileName) Then

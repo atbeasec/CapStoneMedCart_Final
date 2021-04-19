@@ -181,6 +181,7 @@
     <Compile Include="Inventory\frmMainScreenWaste.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Settings\DrawerClass.vb" />
     <Compile Include="UI Enhancements\frmSplash.Designer.vb">
       <DependentUpon>frmSplash.vb</DependentUpon>
     </Compile>

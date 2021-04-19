@@ -40,6 +40,7 @@ Partial Class frmMaintenance
         Me.btnImportDatabase = New System.Windows.Forms.Button()
         Me.btnImportAsCopy = New System.Windows.Forms.Button()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.radDrawers = New System.Windows.Forms.RadioButton()
         Me.Panel1.SuspendLayout()
         Me.pnlOptions.SuspendLayout()
         Me.pnlRecords.SuspendLayout()
@@ -90,6 +91,7 @@ Partial Class frmMaintenance
         '
         'pnlRecords
         '
+        Me.pnlRecords.Controls.Add(Me.radDrawers)
         Me.pnlRecords.Controls.Add(Me.radUser)
         Me.pnlRecords.Controls.Add(Me.Label1)
         Me.pnlRecords.Controls.Add(Me.radPhysician)
@@ -168,7 +170,7 @@ Partial Class frmMaintenance
         Me.btnUpload.ForeColor = System.Drawing.Color.White
         Me.btnUpload.Image = CType(resources.GetObject("btnUpload.Image"), System.Drawing.Image)
         Me.btnUpload.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnUpload.Location = New System.Drawing.Point(79, 254)
+        Me.btnUpload.Location = New System.Drawing.Point(79, 295)
         Me.btnUpload.Name = "btnUpload"
         Me.btnUpload.Size = New System.Drawing.Size(158, 39)
         Me.btnUpload.TabIndex = 60
@@ -251,6 +253,18 @@ Partial Class frmMaintenance
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
+        'radDrawers
+        '
+        Me.radDrawers.AutoSize = True
+        Me.radDrawers.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.radDrawers.Location = New System.Drawing.Point(79, 246)
+        Me.radDrawers.Name = "radDrawers"
+        Me.radDrawers.Size = New System.Drawing.Size(87, 25)
+        Me.radDrawers.TabIndex = 64
+        Me.radDrawers.TabStop = True
+        Me.radDrawers.Text = "Drawers"
+        Me.radDrawers.UseVisualStyleBackColor = True
+        '
         'frmMaintenance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -288,4 +302,5 @@ Partial Class frmMaintenance
     Friend WithEvents btnImportAsCopy As Button
     Friend WithEvents pnlOptions As Panel
     Friend WithEvents btnRecords As Button
+    Friend WithEvents radDrawers As RadioButton
 End Class
