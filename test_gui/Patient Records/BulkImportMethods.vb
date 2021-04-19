@@ -1354,11 +1354,11 @@ Module BulkImportMethods
 
     Sub addDrawersToDatabase(DrawerArray As ArrayList)
         Dim strbSQLStatement As StringBuilder = New StringBuilder
-        strbSQLStatement.Append("Inset into Drawers ('Drawer_Node', 'Drawers_Number', 'Size', 'Number_of_Dividers', 'Full_Flag', 'Active_Flag') Values ")
+        strbSQLStatement.Append("Insert into Drawers ('Drawer_Node', 'Drawer_Number', 'Size', 'Number_of_Dividers', 'Full_Flag', 'Active_Flag') Values ")
         For Each drawer As DrawerClass In DrawerArray
             With drawer
                 strbSQLStatement.Append("('" & .DrawerNode & "', '" & .DrawerNumber & "', '" & .size & "','")
-                strbSQLStatement.Append(.NumberOfDividers & "', '0','1'")
+                strbSQLStatement.Append(.NumberOfDividers & "', '0','1'),")
             End With
         Next
         finishingUpImport(strbSQLStatement)

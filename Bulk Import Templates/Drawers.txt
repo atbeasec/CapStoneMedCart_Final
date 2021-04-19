@@ -1,3 +1,5 @@
+All files are going to  be delimited with a tab. the spacing looks off but they are all tabs. Might want to make the data using excel. 
+
 Drawer_node	Drawer_Number	Size	Number_of_Dividers
 
 Drawer_node is the communication mode the drawer us using to open
