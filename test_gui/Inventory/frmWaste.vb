@@ -1009,6 +1009,30 @@
         End If
     End Function
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: scanUserName	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY:         */   
+    '/*		         DATE CREATED:                 */                             
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/********************************************************************/
+    '/*  CALLED BY 
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/ 
     Private Sub btnDrawer7_Click(sender As Object, e As EventArgs) Handles btnOne.Click, btnTwo.Click, btnThree.Click, btnFour.Click, btnFive.Click, btnSix.Click, btnSeven.Click, btnEight.Click, btnNine.Click, btnZero.Click, btnDecimal.Click
 
         If txtQuantity.Text.Length >= 5 Then
@@ -1021,11 +1045,59 @@
 
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: scanUserName	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY:         */   
+    '/*		         DATE CREATED:                 */                             
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/********************************************************************/
+    '/*  CALLED BY 
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/ 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
         txtQuantity.Text = Nothing
 
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: scanUserName	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY:         */   
+    '/*		         DATE CREATED:                 */                             
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/********************************************************************/
+    '/*  CALLED BY 
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/ 
     Private Sub btnEnter_Click(sender As Object, e As EventArgs) Handles btnEnter.Click
         If (rbtnOther.Checked = True) And (txtOther.Text.Trim = Nothing) Then
             MessageBox.Show("Please fill in an Explanation")
@@ -1062,6 +1134,30 @@
 
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: scanUserName	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY:         */   
+    '/*		         DATE CREATED:                 */                             
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/********************************************************************/
+    '/*  CALLED BY 
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/ 
     Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantity.TextChanged
 
         If Not String.IsNullOrEmpty(sender.text) Then
@@ -1081,6 +1177,30 @@
         End If
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: scanUserName	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY:         */   
+    '/*		         DATE CREATED:                 */                             
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/********************************************************************/
+    '/*  CALLED BY 
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/ 
     Private Sub txtBarcode_TextChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBarcode.KeyPress
         If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
             e.KeyChar = ChrW(0)
@@ -1089,6 +1209,30 @@
         End If
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: scanUserName	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY:         */   
+    '/*		         DATE CREATED:                 */                             
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/********************************************************************/
+    '/*  CALLED BY 
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/ 
     Private Sub txtPassword_TextChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress
         If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
             e.KeyChar = ChrW(0)
@@ -1098,7 +1242,30 @@
     End Sub
 
 
-
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: scanUserName	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY:         */   
+    '/*		         DATE CREATED:                 */                             
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/********************************************************************/
+    '/*  CALLED BY 
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/ 
     Private Sub txtother_TextChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtOther.KeyPress
         DataVaildationMethods.KeyPressCheck(e, "0123456789. abcdefghijklmnopqrstuvwxyz -_=+!@#$%^&*")
     End Sub
