@@ -1,9 +1,35 @@
 ﻿Imports System.Threading
 Module GraphicalUserInterfaceReusableMethods
-
-    'Method that allows for highlighting when hovering over panels. has two parts
-    'part 1
-
+    '/*********************************************************************/
+    '/*           SubProgram NAME: MouseEnterPanelSetBackGroundColor      */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/2/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 Hander that controls the appearance of a panel when the user hovers
+    '/*  over the panel.                                                  */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*    none                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                      			                                  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/2/2021    Initial creation                    */
+    '/*********************************************************************/
     Public Sub MouseEnterPanelSetBackGroundColor(Sender As Object, e As EventArgs)
 
         'changes the background color when the mouse is hovered over the panel
@@ -19,11 +45,38 @@ Module GraphicalUserInterfaceReusableMethods
 
         End If
 
-
-
     End Sub
 
-    'part 2
+    '/*********************************************************************/
+    '/*           SubProgram NAME: MouseEnterPanelSetBackGroundColor      */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/2/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 Hander that controls the appearance of a panel when the user leaves
+    '/*  the panel with their cursor.                                     */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*    none                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                      			                                  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/2/2021    Initial creation                     */
+    '/*********************************************************************/
     Public Sub MouseLeavePanelSetBackGroundColorToDefault(sender As Object, e As EventArgs)
 
         ' checking if the background color is set to the highlighted color
@@ -42,7 +95,39 @@ Module GraphicalUserInterfaceReusableMethods
 
     End Sub
 
-    'Add new  delete button to contact panel
+    '/*********************************************************************/
+    '/*           SubProgram NAME:RestDefaultButtons                      */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/2/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 When the user decides to click on the trash can icon or the check*/
+    '/*  at some point the settings need to go back to the standard icons.*/
+    '/*  this method resets the icons to how they should be which is just */
+    '/*  the trash can being visble.                                      */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/* CreateXMarkButton()                                               */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*    none                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                      			                                  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/2/2021    Initial creation                     */
+    '/*********************************************************************/
     Public Sub RestDefaultButtons(ByVal sender As Object, ByVal e As EventArgs)
 
         Dim intTemp As Integer = 1
@@ -76,15 +161,40 @@ Module GraphicalUserInterfaceReusableMethods
             End If
         Next
 
-
-
     End Sub
 
-
+    '/*********************************************************************/
+    '/*           SubProgram NAME: ShowConfirmationButtons                */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/2/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 Hander that controls when the Xmark button is made visible       */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*    none                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                      			                                  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/2/2021    Initial creation                     */
+    '/*********************************************************************/
     Public Sub ShowConfirmationButtons(ByVal sender As Object, ByVal e As EventArgs)
 
         'call methods here to show the checkmark buttons when the item is clicked
-
 
         ' hide the sender which is the trash can icon
         sender.Visible = False
@@ -117,10 +227,38 @@ Module GraphicalUserInterfaceReusableMethods
             End If
         Next
 
-
-
     End Sub
 
+    '/*********************************************************************/
+    '/*           SubProgram NAME: DynamicButton_Click                    */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/2/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 Removes handler from the panel and destroys the object. This is  */
+    '/*  used when the delete button is called to properly dispose the obj*/
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*    none                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                      			                                  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*  strParentPanelName                                               */
+    '/*  strParentPanelName                                               */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/2/2021    Initial creation                     */
     Public Sub DynamicButton_Click(ByVal sender As Object, ByVal e As EventArgs)
 
         'the parent of the button will be the panel the control is located on.
@@ -128,8 +266,6 @@ Module GraphicalUserInterfaceReusableMethods
         ' to get the name of flowpanel which the button is laid out on
         Dim ctlControl As Control = sender.Parent
         Dim ctlParents As Control = ctlControl.Parent
-
-
 
         Dim ctlParentFlowPanel As Control = ctlControl.Parent
         Dim strParentPanelName As String
@@ -174,9 +310,42 @@ Module GraphicalUserInterfaceReusableMethods
 
     End Sub
 
-
-
-
+    '/*********************************************************************/
+    '/*           SubProgram NAME: CreateIDLabel                          */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/2/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 arranges the label on the panel when it is created by giving it  */
+    '/*  proper formatting, font, and alignment. Used for every panels creation
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*    none                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	pnlName                                                           */
+    '/*	lblName                                                           */
+    '/*	strLabelName                                                      */
+    '/*	x                                                                 */
+    '/*	y                                                                 */
+    '/*	strLabelText                                                      */
+    '/*intPanelsAddedCount                                                */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                      			                                  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/2/2021    Initial creation                     */
+    '/*********************************************************************/
     Public Sub CreateIDLabel(ByVal pnlName As Panel, lblName As Label, strLabelName As String, x As Integer, y As Integer, strLabelText As String, ByVal intPanelsAddedCount As Integer)
 
         ' Dim lblID As Label
@@ -204,6 +373,36 @@ Module GraphicalUserInterfaceReusableMethods
 
     End Sub
 
+    '/*********************************************************************/
+    '/*           SubProgram NAME: CreateIDLabelWithToolTip                */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/2/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 arranges the label on the panel when it is created by giving it  */
+    '/*  proper formatting, font, and alignment. Used for every panels creation
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*    none                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                      			                                  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/2/2021    Initial creation                     */
+    '/*********************************************************************/
     Public Sub CreateIDLabelWithToolTip(ByVal pnlName As Panel, lblName As Label, strLabelName As String, x As Integer, y As Integer, strLabelText As String, ByVal intPanelsAddedCount As Integer, ByVal toolTip As ToolTip, ByVal strTruncatedText As String)
 
         'Set button properties
@@ -227,6 +426,35 @@ Module GraphicalUserInterfaceReusableMethods
 
     End Sub
 
+    '/*********************************************************************/
+    '/*           SubProgram NAME: DynamicRemoveHandlerFromSender         */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/2/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 Removes handler from the specified control when this is called.  */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*    none                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                      			                                  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/2/2021    Initial creation                     */
+    '/*********************************************************************/
     Public Sub DynamicRemoveHandlerFromSender(ByVal sender As Object, ByVal e As EventArgs)
 
         'the parent of the button will be the panel the control is located on.
@@ -252,7 +480,39 @@ Module GraphicalUserInterfaceReusableMethods
 
     End Sub
 
-    'Add new  delete button to contact panel
+    '/*********************************************************************/
+    '/*           SubProgram NAME: CreateDeleteBtn                        */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/2/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 arranges the button on the panel when it is created by giving it */
+    '/*  proper formatting, font, and alignment. Used for every panels creation
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*    none                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	pnlPanelName                                                      */
+    '/*	intPanelsAddedCount                                               */
+    '/*	intX                                                              */
+    '/*	intY                                                              */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                      			                                  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/2/2021    Initial creation                     */
+    '/*********************************************************************/
     Public Sub CreateDeleteBtn(ByVal pnlPanelName As Panel, ByVal intPanelsAddedCount As Integer, ByVal intX As Integer, ByVal intY As Integer)
 
         Dim btnDeleteButton As Button
@@ -320,6 +580,39 @@ Module GraphicalUserInterfaceReusableMethods
 
     End Sub
 
+    '/*********************************************************************/
+    '/*           SubProgram NAME: CreateFlagBtn                          */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/2/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 arranges the button on the panel when it is created by giving it */
+    '/*  proper formatting, font, and alignment. Used for every panels creation
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*    none                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	pnlPanelName                                                      */
+    '/*	intPanelsAddedCount                                               */
+    '/*	intX                                                              */
+    '/*	intY                                                              */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                      			                                  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/2/2021    Initial creation                     */
+    '/*********************************************************************/
     Public Sub CreateFlagBtn(ByVal pnlPanelName As Panel, ByVal intPanelsAddedCount As Integer, ByVal intX As Integer, ByVal intY As Integer)
 
         Dim btnFlagMedication As Button
@@ -351,6 +644,41 @@ Module GraphicalUserInterfaceReusableMethods
         AddHandler btnFlagMedication.Click, AddressOf DynamicFlagMedicationButton
 
     End Sub
+
+    '/*********************************************************************/
+    '/*           SubProgram NAME: DynamicFlagMedicationButton            */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/2/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 is a handler that tells the flag button how to behave when clicked/
+    '/*  it checks the textboxes to make sure they have correct quantities*/
+    '/*  before the user can submit their information to the db           */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*    none                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	pnlPanelName                                                      */
+    '/*	intPanelsAddedCount                                               */
+    '/*	intX                                                              */
+    '/*	intY                                                              */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                      			                                  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/2/2021    Initial creation                     */
+    '/*********************************************************************/
     Public Sub DynamicFlagMedicationButton(sender As Object, ByVal e As EventArgs)
 
 
@@ -438,6 +766,36 @@ Module GraphicalUserInterfaceReusableMethods
 
     End Sub
 
+    '/*********************************************************************/
+    '/*           SubProgram NAME: FindTextBoxOnPanel                     */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/2/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 Finds the textbox that a user could type in and that is on the   */
+    '/*  flagged panel. This takes that textbox and returns the control   */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*    none                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	pnlFlagged                                                        */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                      			                                  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/2/2021    Initial creation                     */
+    '/*********************************************************************/
     Public Function FindTextBoxOnPanel(ByVal pnlFlagged As Panel) As TextBox
 
         ' search for control with the name txtCount
@@ -458,6 +816,36 @@ Module GraphicalUserInterfaceReusableMethods
 
     End Function
 
+    '/*********************************************************************/
+    '/*           SubProgram NAME: FindLabelOnPanel                       */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/2/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 Finds the label on the panel and takes the numeric value of that */
+    '/*  to ensure that the count is not the same as the system count     */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*    none                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	pnlFlagged                                                        */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                      			                                  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/2/2021    Initial creation                     */
+    '/*********************************************************************/
     Public Function FindLabelOnPanel(ByVal pnlFlagged As Panel) As Label
 
         ' search for control with the name txtCount
@@ -478,7 +866,39 @@ Module GraphicalUserInterfaceReusableMethods
 
     End Function
 
-
+    '/*********************************************************************/
+    '/*           SubProgram NAME: CreateTextBox                          */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/2/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 Creates the textbox and positions it with the correct formatting */
+    '/*  onto the panel on the form.                                      */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*    none                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	pnlPanelName                                                      */
+    '/*	intPanelsAddedCount                                               */
+    '/*	intX                                                              */
+    '/*	intY                                                              */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                      			                                  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/2/2021    Initial creation                     */
+    '/*********************************************************************/
     Public Sub CreateTextBox(ByVal pnlPanelName As Panel, ByVal intPanelsAddedCount As Integer, ByVal intX As Integer, ByVal intY As Integer)
 
         Dim txtCount As TextBox
@@ -510,7 +930,39 @@ Module GraphicalUserInterfaceReusableMethods
 
     End Sub
 
-
+    '/*********************************************************************/
+    '/*           SubProgram NAME: CreateEditButton                       */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/2/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 Creates the edit and positions it with the correct formatting */
+    '/*  onto the panel on the form.                                      */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*    none                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	pnlPanelName                                                      */
+    '/*	intPanelsAddedCount                                               */
+    '/*	intX                                                              */
+    '/*	intY                                                              */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                      			                                  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/2/2021    Initial creation                     */
+    '/*********************************************************************/
     Public Sub CreateEditButton(ByVal pnlPanelName As Panel, ByVal pnlPanelsAddedCount As Integer, ByVal intX As Integer, ByVal intY As Integer)
 
         Dim btnEditButton As Button
@@ -542,6 +994,39 @@ Module GraphicalUserInterfaceReusableMethods
 
     End Sub
 
+    '/*********************************************************************/
+    '/*           SubProgram NAME: CreateCheckMarkBtn                     */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/2/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 Creates the check and positions it with the correct formatting   */
+    '/*  onto the panel on the form.                                      */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*    none                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	pnlPanelName                                                      */
+    '/*	intPanelsAddedCount                                               */
+    '/*	intX                                                              */
+    '/*	intY                                                              */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                      			                                  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/2/2021    Initial creation                     */
+    '/*********************************************************************/
     Public Sub CreateCheckMarkBtn(ByVal pnlPanelName As Panel, ByVal pntLocation As Point)
 
         Dim btnCheckMark As Button
@@ -578,6 +1063,39 @@ Module GraphicalUserInterfaceReusableMethods
 
     End Sub
 
+    '/*********************************************************************/
+    '/*           SubProgram NAME: CreateXMarkBtn                         */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/2/2021                         */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 Creates the X and positions it with the correct formatting       */
+    '/*  onto the panel on the form.                                      */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*    none                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	pnlPanelName                                                      */
+    '/*	intPanelsAddedCount                                               */
+    '/*	intX                                                              */
+    '/*	intY                                                              */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                      			                                  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/2/2021    Initial creation                     */
+    '/*********************************************************************/
     Public Sub CreateXMarkBtn(ByVal pnlPanelName As Panel, ByVal pntLocation As Point)
 
         Dim btnCancel As Button
@@ -1014,6 +1532,35 @@ Module GraphicalUserInterfaceReusableMethods
         'returning the Requested information from the selected record
         Return strSelected
     End Function
+    '/*********************************************************************/
+    '/*           SubProgram NAME: GetSelectedAllergiesInformation        */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Adam Kott   		          */   
+    '/*		         DATE CREATED: 		                       */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	                                 */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*    none                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*                                                    */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                      			                                  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*                    */
+    '/*********************************************************************/
     Function GetSelectedAllergiesInformation(ByVal sender As Object) As String
         Dim strSelected = Nothing
 
@@ -1037,8 +1584,37 @@ Module GraphicalUserInterfaceReusableMethods
         Return strSelected
     End Function
 
-
-
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: getCurrentPanel                */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:  Collin Krygier          		          */   
+    '/*		         DATE CREATED: 		 2/15/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is a debugging method that helps determine which panel the  */
+    '/*  user is interacting with when making GUI updates/changes         */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  CreateEditButton, it is working as a handler                     */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*             none                                                  */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	None                                                              */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	None                                 							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	None                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/15/2021    Initial creation                    */
+    '/*********************************************************************/
     Public Function getCurrentPanel(ByVal flpPanel As FlowLayoutPanel, ByVal intPanelsAddedCount As Integer) As Panel
 
         Dim ctlName As String = "pnlIndividualPatientRecord"
@@ -1061,11 +1637,47 @@ Module GraphicalUserInterfaceReusableMethods
 
     End Function
 
-    ' method keeps track of the panel count by checking how many panels are on the main flowPanel.
-    ' this is necessary because with the generic methods global counting variables would need to be
-    ' defined in too many classes to keep track of what number of panel has been created.
-    Public Function getPanelCount(flpPanel As FlowLayoutPanel) As Integer
+    '/*********************************************************************/
+    '/*                   Function NAME: getPanelCount()                  */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:  Collin Krygier          		          */   
+    '/*		         DATE CREATED: 		 2/15/2021                        */                             
+    '/*********************************************************************/
+    '/*  Function PURPOSE:								                  */             
+    '/*	 Used everywhere on each form to track the number of panels that  */
+    '/*  have been created. Specifically it is used to generate names for */
+    '/*  controls that are made at runtime to ensure unique naming.       */
+    '/*********************************************************************/
+    '/*  Function Return Value:					                          */         
+    '/*	 A form object representing the form that is opened on the screen */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*  DynamicButtonEditRecord_Click                                    */ 
+    '/*  DetermineQueryDelete_Click                                       */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/* None                                                              */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	None                                                              */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	None                                 							  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	None                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/15/2021    Initial creation                    */
+    '/*********************************************************************/
 
+    Public Function getPanelCount(flpPanel As FlowLayoutPanel) As Integer
+        ' method keeps track of the panel count by checking how many panels are on the main flowPanel.
+        ' this is necessary because with the generic methods global counting variables would need to be
+        ' defined in too many classes to keep track of what number of panel has been created.
         Dim ctlControl As Control
         Dim intCount As Integer
 
@@ -1085,8 +1697,37 @@ Module GraphicalUserInterfaceReusableMethods
 
     End Function
 
+    '/*********************************************************************/
+    '/*              Sub NAME: DynamicSingleClick()                          */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:            		          */   
+    '/*		         DATE CREATED: 		                       */                             
+    '/*********************************************************************/
+    '/*  SUB PURPOSE:								                      */             
+    '/*	                                             */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	                                                       */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                               		  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*                     */
+    '/*********************************************************************/
     Public Sub DynamicSingleClick(sender As Object, ByVal e As EventArgs)
-
 
         If sender.backColor = Color.White Then
             sender.backColor = Color.Gainsboro
@@ -1095,6 +1736,36 @@ Module GraphicalUserInterfaceReusableMethods
         End If
     End Sub
 
+    '/*********************************************************************/
+    '/*              Sub NAME: ButtonIncrement()                          */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:            		          */   
+    '/*		         DATE CREATED: 		                       */                             
+    '/*********************************************************************/
+    '/*  SUB PURPOSE:								                      */             
+    '/*	                                             */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	                                                       */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                               		  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*                     */
+    '/*********************************************************************/
     Public Sub ButtonIncrement(intMaxValue As Integer, ByVal txtBox As TextBox)
 
         If Not CInt(txtBox.Text) = intMaxValue Then
@@ -1105,6 +1776,37 @@ Module GraphicalUserInterfaceReusableMethods
 
     End Sub
 
+    '/*********************************************************************/
+    '/*              Sub NAME: ButtonDecrement()                          */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:  Collin Krygier          		          */   
+    '/*		         DATE CREATED: 		 3/22/2021                        */                             
+    '/*********************************************************************/
+    '/*  SUB PURPOSE:								                      */             
+    '/*	 This Subroutine is called whenever the user decrements the qty   */
+    '/*  buttons on a form.                                               */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*  None                                                             */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	txtBox                                                            */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	RemoveCharacters("1hello")                                		  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/* None                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/22/2021    Initial creation                    */
+    '/*********************************************************************/
     Public Sub ButtonDecrement(ByVal txtBox As TextBox)
 
         If Not CInt(txtBox.Text) = 1 Then
@@ -1120,6 +1822,36 @@ Module GraphicalUserInterfaceReusableMethods
 
     End Sub
 
+    '/*********************************************************************/
+    '/*              Sub NAME: MaxValue()                          */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:            		          */   
+    '/*		         DATE CREATED: 		                       */                             
+    '/*********************************************************************/
+    '/*  SUB PURPOSE:								                      */             
+    '/*	                                             */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	                                                       */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                               		  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*                     */
+    '/*********************************************************************/
     Public Sub MaxValue(intValue As Integer, intTest As Integer, ByVal txtBox As TextBox)
         If intValue > intTest Then
             txtBox.Text = intTest
@@ -1127,6 +1859,36 @@ Module GraphicalUserInterfaceReusableMethods
         End If
     End Sub
 
+    '/*********************************************************************/
+    '/*              Sub NAME: IndexButtonIncrement()                          */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:            		          */   
+    '/*		         DATE CREATED: 		                       */                             
+    '/*********************************************************************/
+    '/*  SUB PURPOSE:								                      */             
+    '/*	                                             */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	                                                       */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                               		  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*                     */
+    '/*********************************************************************/
     Public Sub IndexButtonIncrement(intCurrent As Integer, intMax As Integer, ByVal cboBox As ComboBox)
         If intCurrent <= intMax Then
             cboBox.SelectedIndex = intCurrent + 1
@@ -1134,6 +1896,36 @@ Module GraphicalUserInterfaceReusableMethods
             MessageBox.Show("The maximum allowed value is " & intMax)
         End If
     End Sub
+    '/*********************************************************************/
+    '/*              Sub NAME: IndexButtonDecrement()                          */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:            		          */   
+    '/*		         DATE CREATED: 		                       */                             
+    '/*********************************************************************/
+    '/*  SUB PURPOSE:								                      */             
+    '/*	                                             */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	                                                       */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                               		  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*                     */
+    '/*********************************************************************/
     Public Sub IndexButtonDecrement(intCurrent As Integer, ByVal cboBox As ComboBox)
         If intCurrent > 0 Then
             cboBox.SelectedIndex = intCurrent - 1
@@ -1142,6 +1934,36 @@ Module GraphicalUserInterfaceReusableMethods
         End If
     End Sub
 
+    '/*********************************************************************/
+    '/*              Sub NAME: ThreadedMessageBox()                          */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:            		          */   
+    '/*		         DATE CREATED: 		                       */                             
+    '/*********************************************************************/
+    '/*  SUB PURPOSE:								                      */             
+    '/*	                                             */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	                                                       */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                               		  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*                     */
+    '/*********************************************************************/
     Public Sub ThreadedMessageBox()
         MessageBox.Show(Thread.CurrentThread.Name())
 
