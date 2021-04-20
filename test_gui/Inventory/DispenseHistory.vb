@@ -584,10 +584,12 @@ Module DispenseHistory
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
     '/*		         DATE CREATED: 	   02/10/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE: 
+    '/*  SUBROUTINE PURPOSE: the purpose of this sub is to populate the frmdispense
+    '/*  information for the patient and medication selected
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
-    '/*  (None)								           					  
+    '/*  frmPatientInfo.PrescriptionPanle_click	
+    '/* frrmAdhoc.btnDispense_Click	
     '/*********************************************************************/
     '/*  CALLS:														    	
     '/*********************************************************************/
@@ -686,7 +688,8 @@ Module DispenseHistory
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
     '/*		         DATE CREATED: 	   02/15/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE: 
+    '/*  SUBROUTINE PURPOSE: this subs purpose is to take in a medication id and 
+    '/* patient id and insert a entry into the dispensing table to record the dispensed medication for the patient
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
     '/*  (None)								           					  

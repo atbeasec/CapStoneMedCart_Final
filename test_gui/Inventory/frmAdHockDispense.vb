@@ -417,12 +417,66 @@
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   Function NAME: btnClear_Click()     */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:  Collin Krygier          		          */   
+    '/*		         DATE CREATED: 		 3/17/2021                        */                             
+    '/*********************************************************************/
+    '/*  SUB PURPOSE:	    							                  */             
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/* None                                                              */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	sender As Object                                                  */ 
+    '/*	e As EventArgs                                                    */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	None                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/17/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
 
         txtAmount.Text = Nothing
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   Function NAME: btnEnter_Click()     */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:  Collin Krygier          		          */   
+    '/*		         DATE CREATED: 		 4/12/2021                        */                             
+    '/*********************************************************************/
+    '/*  SUB PURPOSE:	    							                  */             
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/* None                                                              */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	sender As Object                                                  */ 
+    '/*	e As EventArgs                                                    */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	None                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  4/12/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Sub btnEnter_Click(sender As Object, e As EventArgs) Handles btnEnter.Click
 
         ' make sure the user has input a value to the textbox
@@ -438,6 +492,33 @@
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   Function NAME: btnDrawer7_Click()     */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:  Collin Krygier          		          */   
+    '/*		         DATE CREATED: 		 4/12/2021                        */                             
+    '/*********************************************************************/
+    '/*  SUB PURPOSE:	    							                  */             
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/* None                                                              */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	sender As Object                                                  */ 
+    '/*	e As EventArgs                                                    */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	None                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  4/12/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Sub btnDrawer7_Click(sender As Object, e As EventArgs) Handles btnOne.Click, btnTwo.Click, btnThree.Click, btnFour.Click, btnFive.Click, btnSix.Click, btnSeven.Click, btnEight.Click, btnNine.Click, btnZero.Click, btnDecimal.Click
 
         If txtAmount.Text.Length >= 5 Then
@@ -450,6 +531,33 @@
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   Function NAME: txtAmount_TextChanged()     */         
+    '/*********************************************************************/
+    '/*              WRITTEN BY:  Collin Krygier          		          */   
+    '/*		         DATE CREATED: 		 4/12/2021                        */                             
+    '/*********************************************************************/
+    '/*  SUB PURPOSE:	    							                  */             
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/* None                                                              */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	sender As Object                                                  */ 
+    '/*	e As EventArgs                                                    */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	None                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  4/12/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Sub txtAmount_TextChanged(sender As Object, e As EventArgs) Handles txtAmount.TextChanged
         If Not String.IsNullOrEmpty(sender.text) Then
             If IsNumeric(sender.text) Then

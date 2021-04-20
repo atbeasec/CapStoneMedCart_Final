@@ -707,7 +707,7 @@
     '/********************************************************************/
     '/*                   FUNCTION NAME: CheckBarcode	         */         
     '/********************************************************************/
-    '/*                   WRITTEN BY:         */   
+    '/*                   WRITTEN BY: Dylan Walter          */   
     '/*		         DATE CREATED:                 */                             
     '/********************************************************************/
     '/*  SUBROUTINE PURPOSE:
@@ -759,7 +759,7 @@
     '/********************************************************************/
     '/*                   FUNCTION NAME: scanBarcode	         */         
     '/********************************************************************/
-    '/*                   WRITTEN BY:         */   
+    '/*                   WRITTEN BY: Dylan Walter         */   
     '/*		         DATE CREATED:                 */                             
     '/********************************************************************/
     '/*  SUBROUTINE PURPOSE:
@@ -867,26 +867,41 @@
     '/********************************************************************/
     '/*                   FUNCTION NAME: btnWasteWithCredentials_Click	         */         
     '/********************************************************************/
-    '/*                   WRITTEN BY:         */   
-    '/*		         DATE CREATED:                 */                             
+    '/*                   WRITTEN BY: Alexander Beasecker         */   
+    '/*		         DATE CREATED: 4/11/2021                */                             
     '/********************************************************************/
-    '/*  SUBROUTINE PURPOSE:
+    '/*  SUBROUTINE PURPOSE: this subs purpose is called when the submit waste
+    '/*      is clicked and they are choosing to submit with username and password, it will check if the drug that is currrently being wasted is a narcotic or not
+    '/*      if it is a narcotic it will call the check username and password method.   
+    '/*      if it is not a narcotic then it will not check credentials as it is not needed.
     '/********************************************************************/
-    '/*  CALLED BY 
+    '/*  CALLED BY btnWasteWithCredentials.Click, btnSubmitWithoutSignoff.Click
     '/********************************************************************/
-    '/*  CALLS:								                             */		                  
+    '/*  CALLS:	 IsNumeric(txtQuantity.Text)	
+    '/*	 CheckUsername(txtUsername.Text, txtPassword.Text)
+    '/*	 InsertWasteNonNarcotic()
+    '/*	 frmMain.UnlockSideMenu()
+    '/*	 frmPatientInfo.setPatientID(intPatientID)
+    '/*	 frmMain.OpenChildForm(frmPatientInfo)
+    '/*	 frmDispense.setintEntered(0)
+    '/*	 setEnteredFromAdhoc(0)
+    '/*	 frmMain.OpenChildForm(frmAdHockDispense)
+    '/*			                  
     '/********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):				             */	           
     '/*	            (NONE)	                                             */								                        							             
     '/********************************************************************/
-    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/* SAMPLE INVOCATION:	user goes through dispensing flow, and 	
+    '/* gets the the waste screen and fills out the waste information, when they clikc submit
+    '/* it will call this method
+    '/**/		             			                                 */					                       
     '/********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
     '/********************************************************************/
     '/* MODIFICATION HISTORY:						                     */		                 
     '/*									 */		                         */
     '/*  WHO            WHEN             WHAT				             */		            
-    '/*  ---            ----             ----				             */
+    '/*  AB            4/11/2021               Initial				             */
     '/********************************************************************/ 
     Private Sub btnWasteWithCredentials_Click(sender As Object, e As EventArgs) Handles btnWasteWithCredentials.Click, btnSubmitWithoutSignoff.Click
         If (rbtnOther.Checked = True) And (txtOther.Text.Trim = Nothing) Then
@@ -922,7 +937,7 @@
     '/********************************************************************/
     '/*                   FUNCTION NAME: CheckUsername	         */         
     '/********************************************************************/
-    '/*                   WRITTEN BY:         */   
+    '/*                   WRITTEN BY: Dylan Walter         */   
     '/*		         DATE CREATED:                 */                             
     '/********************************************************************/
     '/*  SUBROUTINE PURPOSE:
@@ -976,7 +991,7 @@
     '/********************************************************************/
     '/*                   FUNCTION NAME: scanUserName	         */         
     '/********************************************************************/
-    '/*                   WRITTEN BY:         */   
+    '/*                   WRITTEN BY: Dylan Walter          */   
     '/*		         DATE CREATED:                 */                             
     '/********************************************************************/
     '/*  SUBROUTINE PURPOSE:
@@ -1009,6 +1024,30 @@
         End If
     End Function
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: btnDrawer7_Click	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY:         */   
+    '/*		         DATE CREATED:                 */                             
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/********************************************************************/
+    '/*  CALLED BY 
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/ 
     Private Sub btnDrawer7_Click(sender As Object, e As EventArgs) Handles btnOne.Click, btnTwo.Click, btnThree.Click, btnFour.Click, btnFive.Click, btnSix.Click, btnSeven.Click, btnEight.Click, btnNine.Click, btnZero.Click, btnDecimal.Click
 
         If txtQuantity.Text.Length >= 5 Then
@@ -1021,11 +1060,60 @@
 
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: btnClear_Click	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Alexander Beasecker        */   
+    '/*		         DATE CREATED:                 */                             
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE: sets the quantity textbox to nothing when called
+    '/********************************************************************/
+    '/*  CALLED BY  btnClear.Click
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  AB            4/13/2021             Initial				   */
+    '/********************************************************************/ 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
         txtQuantity.Text = Nothing
 
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: btnEnter_Click	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY:        */   
+    '/*		         DATE CREATED:                 */                             
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/********************************************************************/
+    '/*  CALLED BY 
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/ 
     Private Sub btnEnter_Click(sender As Object, e As EventArgs) Handles btnEnter.Click
         If (rbtnOther.Checked = True) And (txtOther.Text.Trim = Nothing) Then
             MessageBox.Show("Please fill in an Explanation")
@@ -1062,6 +1150,30 @@
 
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: txtQuantity_TextChanged	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY:      */   
+    '/*		         DATE CREATED:                 */                             
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/********************************************************************/
+    '/*  CALLED BY 
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/ 
     Private Sub txtQuantity_TextChanged(sender As Object, e As EventArgs) Handles txtQuantity.TextChanged
 
         If Not String.IsNullOrEmpty(sender.text) Then
@@ -1081,6 +1193,30 @@
         End If
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: txtBarcode_TextChanged	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY:Eric LaVoie         */   
+    '/*		         DATE CREATED:                 */                             
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/********************************************************************/
+    '/*  CALLED BY 
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/ 
     Private Sub txtBarcode_TextChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBarcode.KeyPress
         If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
             e.KeyChar = ChrW(0)
@@ -1089,6 +1225,30 @@
         End If
     End Sub
 
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: txtPassword_TextChanged	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Eric LaVoie         */   
+    '/*		         DATE CREATED:                 */                             
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/********************************************************************/
+    '/*  CALLED BY 
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	            (NONE)	                                             */								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/ 
     Private Sub txtPassword_TextChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPassword.KeyPress
         If e.KeyChar = Microsoft.VisualBasic.ChrW(Keys.Return) Then
             e.KeyChar = ChrW(0)
@@ -1098,7 +1258,35 @@
     End Sub
 
 
-
+    '/********************************************************************/
+    '/*                   FUNCTION NAME: txtother_TextChanged	         */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Eric LaVoie        */   
+    '/*		         DATE CREATED:                 */                             
+    '/********************************************************************/
+    '/*  SUBROUTINE PURPOSE: Checks the keypress for the other textbox and sends the text
+    '/* to the keypresscheck method to prevent unwanted characters from being typed
+    '/********************************************************************/
+    '/*  CALLED BY  txtOther.KeyPress
+    '/********************************************************************/
+    '/*  CALLS:	DataVaildationMethods.KeyPressCheck(e, "0123456789. abcdefghijklmnopqrstuvwxyz -_=+!@#$%^&*")							                             */		                  
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	ByVal sender As Object
+    '/* ByVal e As System.Windows.Forms.KeyPressEventArgs
+    '/*
+    '/*
+    '/**/								                        							             
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                 
+    '/*									 */		                         */
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/********************************************************************/ 
     Private Sub txtother_TextChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtOther.KeyPress
         DataVaildationMethods.KeyPressCheck(e, "0123456789. abcdefghijklmnopqrstuvwxyz -_=+!@#$%^&*")
     End Sub

@@ -4,15 +4,16 @@
     Dim intAdmitPatientID As New ArrayList
 
     '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:       */
+    '/*                   SUBROUTINE NAME: btnAdmit_Click      */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
     '/*		         DATE CREATED: 	   03/18/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE:
+    '/*  SUBROUTINE PURPOSE: the purpose of this sub is to admit the patient 
+    '/*  and assign them into the room and bed that is selected for that patient
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
-    '/*  (None)								           					  
+    '/*   btnAdmit.Click						           					  
     '/*********************************************************************/
     '/*  CALLS:														    	
     '/*********************************************************************/
@@ -21,6 +22,12 @@
     '/* SAMPLE INVOCATION:								                   						                           
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*
+    '/* strRoomandBed
+    '/* strArraySplit
+    '/* intPatientID
+    '/* strCheck
+    '/*
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						                      */
     '/*											                          */
@@ -66,23 +73,27 @@
         End If
     End Sub
     '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:       */
+    '/*                   SUBROUTINE NAME: btnDischarge_Click       */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
     '/*		         DATE CREATED: 	   03/18/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE:
+    '/*  SUBROUTINE PURPOSE: the purpose of this sub is to discharge a patient
+    '/*  when the patient is discharged it will inactivate their medications, the patient, and the nurse assignments
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
-    '/*  (None)								           					  
+    '/*  btnDischarge.Click							           					  
     '/*********************************************************************/
-    '/*  CALLS:														    	
+    '/*  CALLS:	 CreateDatabase.ExecuteInsertQuery()													    	
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                   						                           
     '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*  LOCAL VARIABLE LIST (Alphabetically):
+    '/*intPatientID
+    '/*dsRoomandBed
+    '/*
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						                      */
     '/*											                          */
@@ -109,17 +120,19 @@
     End Sub
 
     '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:       */
+    '/*                   SUBROUTINE NAME:  Loadcmb     */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
     '/*		         DATE CREATED: 	   03/18/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE:
+    '/*  SUBROUTINE PURPOSE: the purpose of this method is to clear out the
+    '/*  items in the patientAdmit and discharge comboboxes and load them with the 
+    '/*  current uptodate information
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
     '/*  (None)								           					  
     '/*********************************************************************/
-    '/*  CALLS:														    	
+    '/*  CALLS:		CreateDatabase.ExecuteSelectQuery()												    	
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):
     '/*********************************************************************/
@@ -153,12 +166,14 @@
     End Sub
 
     '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:       */
+    '/*                   SUBROUTINE NAME: frmDischarge_Load      */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
     '/*		         DATE CREATED: 	   03/18/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE:
+    '/*  SUBROUTINE PURPOSE: this sub is called on load and does the initial
+    '/*   set up for the form by calling the populate methods 
+    '/*
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
     '/*  (None)								           					  
@@ -183,17 +198,19 @@
     End Sub
 
     '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:       */
+    '/*                   SUBROUTINE NAME: radAdmitPatient_CheckedChanged      */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
     '/*		         DATE CREATED: 	   03/18/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE:
+    '/*  SUBROUTINE PURPOSE: the purpose of this sub is to swap the items on the 
+    '/*  screen when they user clicks the admit/discharge radio buttons
+    '/*
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
     '/*  (None)								           					  
     '/*********************************************************************/
-    '/*  CALLS:														    	
+    '/*  CALLS:	clearPatientTextBoxes()													    	
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):
     '/*********************************************************************/
@@ -258,23 +275,32 @@
     End Sub
 
     '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:       */
+    '/*                   SUBROUTINE NAME: cmbAdmitPatients_SelectedIndexChanged      */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
     '/*		         DATE CREATED: 	   03/18/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE:
+    '/*  SUBROUTINE PURPOSE: this method is run every time the admit patient
+    '/*   combobox index is changed, it will get the corrosponding ID from the parallel
+    '/*   array, it will then get the patient information from the database with that patient ID and 
+    '/*   pass that information to the populate information method
+    '/*
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
     '/*  (None)								           					  
     '/*********************************************************************/
-    '/*  CALLS:														    	
+    '/*  CALLS:	populatePatientTextBoxes													    	
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                   						                           
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*
+    '/* intPatientID
+    '/* dsPatientAdmit
+    '/* dsPrimaryDoctor
+    '/* strPrimaryDoctor
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						                      */
     '/*											                          */
@@ -338,12 +364,12 @@
     End Sub
 
     '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:       */
+    '/*                   SUBROUTINE NAME: clearPatientTextBoxes      */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
     '/*		         DATE CREATED: 	   03/18/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE:
+    '/*  SUBROUTINE PURPOSE: the purpose of this sub is to clear the screen textboxes
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
     '/*  (None)								           					  
@@ -382,12 +408,12 @@
     End Sub
 
     '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:       */
+    '/*                   SUBROUTINE NAME: populatePatientTextBoxes      */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
     '/*		         DATE CREATED: 	   03/18/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE:
+    '/*  SUBROUTINE PURPOSE: the purpose of this sub is to populate the information boxes with the passed values
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
     '/*  (None)								           					  
@@ -395,6 +421,19 @@
     '/*  CALLS:														    	
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):
+    '/*
+    '/*intMRN -- patient MRN
+    '/*strDOB -- patient Date of birth
+    '/*strGender -- patient gender
+    '/*intHeight -- patient height
+    '/*intWeight -- patient weight
+    '/*strPhysician -- patient primary physician
+    '/*strEmail -- patient email
+    '/*strAddress -- patient address
+    '/*strCity -- patient city
+    '/*strState -- patient state
+    '/*intPhone -- patient phone number
+    '/*intZip -- patient zip code
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                   						                           
     '/*********************************************************************/
@@ -424,12 +463,12 @@
     End Sub
 
     '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:       */
+    '/*                   SUBROUTINE NAME: PopulateAdmitRooms      */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
     '/*		         DATE CREATED: 	   03/18/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE:
+    '/*  SUBROUTINE PURPOSE: this populates the room bed combobox with all the open available rooms and beds
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
     '/*  (None)								           					  
@@ -457,12 +496,12 @@
     End Sub
 
     '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:       */
+    '/*                   SUBROUTINE NAME: PopulateRoomBedDischarge      */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
     '/*		         DATE CREATED: 	   03/18/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE:
+    '/*  SUBROUTINE PURPOSE: This sub populates the room and bed textboxes with the passed values
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
     '/*  (None)								           					  
@@ -486,6 +525,31 @@
         txtBed.Text = strBed
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME:cmbPatientName_LostFocus       */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Collin Krygier			      */
+    '/*		         DATE CREATED: 	   03/18/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   						                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Collin Krygier	  03/18/21  Initial creation of the code    */
+    '/*********************************************************************/
     Private Sub cmbPatientName_LostFocus(sender As Object, e As EventArgs) Handles cmbDischargePatients.LostFocus, cmbAdmitPatients.LostFocus
 
         If sender.SelectedIndex = -1 Then
@@ -497,6 +561,31 @@
 
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SUBROUTINE NAME: cboRoomandBed_LostFocus      */
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  	Collin Krygier			      */
+    '/*		         DATE CREATED: 	   03/18/21							  */
+    '/*********************************************************************/
+    '/*  SUBROUTINE PURPOSE:
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      									          
+    '/*  (None)								           					  
+    '/*********************************************************************/
+    '/*  CALLS:														    	
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                   						                           
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */
+    '/*											                          */
+    '/*  WHO                   WHEN     WHAT							  */
+    '/*  ---                   ----     ----------------------------------*/
+    '/*  Collin Krygier  03/18/21  Initial creation of the code    */
+    '/*********************************************************************/
     Private Sub cboRoomandBed_LostFocus(sender As Object, e As EventArgs) Handles cboRoomandBed.LostFocus
 
         If sender.SelectedIndex = -1 Then
