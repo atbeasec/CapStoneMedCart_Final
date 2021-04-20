@@ -30,18 +30,109 @@
         LogOut = 21
     End Enum
 
+    '/*********************************************************************/
+    '/*           SubProgram NAME: SetUserName                            */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/20/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 sets the variable within this file to be the logged in users     */
+    '/*  username.                                                        */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*    none                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                      			                                  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/20/2021    Initial creation                    */
+    '/*********************************************************************/
     Public Sub SetUserName(ByVal strUsername As String)
 
         strSessionUsername = strUsername
 
     End Sub
 
+    '/*********************************************************************/
+    '/*           SubProgram NAME: GetUserName                            */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/20/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 gets the logged in users username                                */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*    none                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                      			                                  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/20/2021    Initial creation                    */
+    '/*********************************************************************/
     Public Function GetUserName() As String
 
         Return strSessionUsername
 
     End Function
 
+    '/*********************************************************************/
+    '/*           SubProgram NAME: LockSideMenu                           */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/20/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 Places a transparent panel over the menu so the user is not able */
+    '/*  to click on controls. Easier than disabling all buttons or removing
+    '/*  handlers from buttons. plus, disabling buttons changes the colors*/
+    '/*  which is not appealing to the app design.                        */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*    none                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                      			                                  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/20/2021    Initial creation                    */
+    '/*********************************************************************/
     Public Sub LockSideMenu()
 
         transparentPanelForLocking.Location = New Point(pnlLogo.Location.X, pnlLogo.Location.Y)
@@ -53,6 +144,36 @@
 
     End Sub
 
+    '/*********************************************************************/
+    '/*           SubProgram NAME: UnlockSideMenu                         */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/20/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 makes the transparent panel over the side menu of the application*/
+    '/*  invisible.                                                       */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*    none                                                           */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                      			                                  */     
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*                                                                   */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/20/2021    Initial creation                    */
+    '/*********************************************************************/
     Public Sub UnlockSideMenu()
 
         transparentPanelForLocking.Visible = False
