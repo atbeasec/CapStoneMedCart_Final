@@ -567,7 +567,9 @@
     '/*                   WRITTEN BY:  	Collin Krygier			      */
     '/*		         DATE CREATED: 	   03/18/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE:
+    '/*  SUBROUTINE PURPOSE: ensures the user cannot search and select
+    '/* if they search returns no match, this method sets the value to nothing
+    '/*  to ensure proper data entry/
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
     '/*  (None)								           					  
