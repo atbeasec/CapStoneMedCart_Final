@@ -7,11 +7,11 @@
     '/********************************************************************/
     '/*                   SUB NAME: frmAdHockDispense_Load 	         */         
     '/********************************************************************/
-    '/*                   WRITTEN BY:
+    '/*                   WRITTEN BY:Collin Krygier
     '/*		         DATE CREATED:                            
     '/********************************************************************/
     '/*  SUBROUTINE PURPOSE:
-    '/*
+    '/* Sets the form up for the user to use
     '/********************************************************************/
     '/*  CALLED BY 
     '/* 
@@ -20,13 +20,14 @@
     '/* (none)
     '/********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):				             */	           
-    '/*	                                   */								                        							             
+    '/*	 Sender
+    '/*  E 								                        							             
     '/********************************************************************/
     '/* SAMPLE INVOCATION:						                         */
     '/* 
     '/********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
-    '/*
+    '/* None
     '/********************************************************************/
     '/* MODIFICATION HISTORY:						                     */		                 
     '/*									 */		                         */
@@ -493,12 +494,14 @@
     End Sub
 
     '/*********************************************************************/
-    '/*                   Function NAME: btnDrawer7_Click()     */         
+    '/*                   Function NAME: btnDrawer7_Click()               */         
     '/*********************************************************************/
     '/*              WRITTEN BY:  Collin Krygier          		          */   
     '/*		         DATE CREATED: 		 4/12/2021                        */                             
     '/*********************************************************************/
-    '/*  SUB PURPOSE:	    							                  */             
+    '/*  SUB PURPOSE:	
+    '/*  checks the length of the string and then concats the number to the
+    '/*  string if it does not exceed the specified character length.							                           
     '/*********************************************************************/
     '/*  CALLED BY:   	      						                      */           
     '/*                                                                   */
@@ -537,7 +540,9 @@
     '/*              WRITTEN BY:  Collin Krygier          		          */   
     '/*		         DATE CREATED: 		 4/12/2021                        */                             
     '/*********************************************************************/
-    '/*  SUB PURPOSE:	    							                  */             
+    '/*  SUB PURPOSE:	    							
+    '/*  ensures the textbox has valid data and edits the text if the user
+    '/*  types the wrong data in the textbox.                   
     '/*********************************************************************/
     '/*  CALLED BY:   	      						                      */           
     '/*                                                                   */
