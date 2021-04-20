@@ -4,15 +4,16 @@
     Dim intAdmitPatientID As New ArrayList
 
     '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:       */
+    '/*                   SUBROUTINE NAME: btnAdmit_Click      */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
     '/*		         DATE CREATED: 	   03/18/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE:
+    '/*  SUBROUTINE PURPOSE: the purpose of this sub is to admit the patient 
+    '/*  and assign them into the room and bed that is selected for that patient
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
-    '/*  (None)								           					  
+    '/*   btnAdmit.Click						           					  
     '/*********************************************************************/
     '/*  CALLS:														    	
     '/*********************************************************************/
@@ -21,6 +22,12 @@
     '/* SAMPLE INVOCATION:								                   						                           
     '/*********************************************************************/
     '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*
+    '/* strRoomandBed
+    '/* strArraySplit
+    '/* intPatientID
+    '/* strCheck
+    '/*
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						                      */
     '/*											                          */
@@ -66,23 +73,27 @@
         End If
     End Sub
     '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:       */
+    '/*                   SUBROUTINE NAME: btnDischarge_Click       */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
     '/*		         DATE CREATED: 	   03/18/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE:
+    '/*  SUBROUTINE PURPOSE: the purpose of this sub is to discharge a patient
+    '/*  when the patient is discharged it will inactivate their medications, the patient, and the nurse assignments
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
-    '/*  (None)								           					  
+    '/*  btnDischarge.Click							           					  
     '/*********************************************************************/
-    '/*  CALLS:														    	
+    '/*  CALLS:	 CreateDatabase.ExecuteInsertQuery()													    	
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                   						                           
     '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically):	
+    '/*  LOCAL VARIABLE LIST (Alphabetically):
+    '/*intPatientID
+    '/*dsRoomandBed
+    '/*
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						                      */
     '/*											                          */
@@ -109,17 +120,19 @@
     End Sub
 
     '/*********************************************************************/
-    '/*                   SUBROUTINE NAME:       */
+    '/*                   SUBROUTINE NAME:  Loadcmb     */
     '/*********************************************************************/
     '/*                   WRITTEN BY:  	Alexander Beasecker			      */
     '/*		         DATE CREATED: 	   03/18/21							  */
     '/*********************************************************************/
-    '/*  SUBROUTINE PURPOSE:
+    '/*  SUBROUTINE PURPOSE: the purpose of this method is to clear out the
+    '/*  items in the patientAdmit and discharge comboboxes and load them with the 
+    '/*  current uptodate information
     '/*********************************************************************/
     '/*  CALLED BY:   	      									          
     '/*  (None)								           					  
     '/*********************************************************************/
-    '/*  CALLS:														    	
+    '/*  CALLS:		CreateDatabase.ExecuteSelectQuery()												    	
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):
     '/*********************************************************************/
