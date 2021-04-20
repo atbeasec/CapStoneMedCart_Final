@@ -17,6 +17,38 @@
         ' MessageBox.Show(discrepancyID)
     End Sub
 
+    '/********************************************************************/
+    '/*            SUB NAME: btnResolve_Click                    	     */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Collin Krygier  		             */   
+    '/*		         DATE CREATED: 	3/15/21			                     */                             
+    '/********************************************************************/
+    '/*  SUB Purpose:                                                    */
+    '/*  updates the user it has been resolved and then closes the form .*/
+    '/*  directing the user back to the discrepancies page.              */
+    '/*                                                                  */
+    '/********************************************************************/
+    '/*  CALLED BY: DynamicSingleClickOpenPatient   	      		     */				            
+    '/*                                        				             */         
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/*             (NONE)						                         */		               
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	                                                                 */
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             
+    '/*	DynamicSingleClickOpenPatient()					                 */					                       
+    '/*                                                                  */   
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/*	 checkIfSelected                           				         */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                                 
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  CK		3/15/21		 initial creation                            */
+    '/********************************************************************/ 
     Private Sub btnResolve_Click(sender As Object, e As EventArgs) Handles btnResolve.Click
 
         'CALL TO DELETE DISCREPANCY FROM DATABASE TABLE HERE

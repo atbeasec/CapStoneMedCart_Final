@@ -12,6 +12,38 @@
     Dim currentContactPanelName As String = Nothing
     Dim ContactPanelsAddedCount As Integer = 0
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: frmDiscrepancies_Load   */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		  */   
+    '/*		         DATE CREATED: 		 2/14/2021                 */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 This is going to be called when a the form loads and handle the  */
+    '/*  necessary logic involved in setting the form up for the user     */
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                             */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 sender                                                           */ 
+    '/*  e
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	 none  	              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/14/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Sub frmDiscrepancies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
 
@@ -284,7 +316,37 @@
 
     End Sub
 
-
+    '/********************************************************************/
+    '/*            SUB NAME: btnResolve_Click                    	     */         
+    '/********************************************************************/
+    '/*                   WRITTEN BY: Collin Krygier  		             */   
+    '/*		         DATE CREATED: 	3/15/21			                     */                             
+    '/********************************************************************/
+    '/*  SUB Purpose:                                                    */
+    '/*  This sub ensures the user has selected a discrepancy to resolve.*/
+    '/*                                                                  */
+    '/********************************************************************/
+    '/*  CALLED BY: DynamicSingleClickOpenPatient   	      		     */				            
+    '/*                                        				             */         
+    '/********************************************************************/
+    '/*  CALLS:								                             */		                  
+    '/*             (NONE)						                         */		               
+    '/********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):				             */	           
+    '/*	                                                                 */
+    '/********************************************************************/
+    '/* SAMPLE INVOCATION:						                         */		             
+    '/*	DynamicSingleClickOpenPatient()					                 */					                       
+    '/*                                                                  */   
+    '/********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
+    '/*	 checkIfSelected                           				         */
+    '/********************************************************************/
+    '/* MODIFICATION HISTORY:						                     */		                                 
+    '/*  WHO            WHEN             WHAT				             */		            
+    '/*  ---            ----             ----				             */
+    '/*  CK		3/15/21		 initial creation                            */
+    '/********************************************************************/ 
     Private Sub btnResolve_Click(sender As Object, e As EventArgs) Handles btnResolve.Click
 
         Dim paddingPanel As Control

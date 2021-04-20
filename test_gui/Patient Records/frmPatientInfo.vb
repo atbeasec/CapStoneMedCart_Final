@@ -1659,6 +1659,38 @@
         txtBarcode.Enabled = True
     End Sub
 
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: moveControlsUp()               */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 3/29/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 hides the edit button and assigns a handler as needed when looping/
+    '/*  over the panels. Panel construction is important to remember if the
+    '/*  nested for each loops
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                         */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                            */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*		              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  3/29/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Sub HideEditButton()
 
         Dim ctl As Control

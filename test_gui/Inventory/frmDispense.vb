@@ -147,30 +147,59 @@ Public Class frmDispense
         ' call emthod to open serial port connection and open drawer
 
     End Sub
-
     '/*********************************************************************/
-    '/*                   SubProgram NAME: CreateDispenseHistoryPanels               */         
+    '/*            SubProgram NAME: CreateDispenseHistoryPanels()         */         
     '/*********************************************************************/
-    '/*                   WRITTEN BY:  Collin Krygier       		          */   
-    '/*		         DATE CREATED: 		 3/20/2021                        */                             
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 2/6/2021                         */                             
     '/*********************************************************************/
     '/*  Subprogram PURPOSE:								              */             
-    '/*	
+    '/*	 This is routine is dynamically creates panels that are placed    */ 
+    '/*	 inside of the flowpanel that is fixed on the form. The panels are*/
+    '/*	 created here, assigned handlers, and the contents of the panels  */
+    '/*	 are updated in this routine                                      */
     '/*********************************************************************/
-    '/*  CALLED BY:   back button clicked     						                      */                            
+    '/*  CALLED BY: frmConfiguration_Load  	      						  */           
+    '/*                                                                   */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                             				      */             
     '/*********************************************************************/
     '/*  PARAMETER LIST (In Parameter Order):					          */         
-    '/*	                                                      */ 
+    '/*	 NONE                                                             */ 
+    '/* flpPannel- the flow panel which the user wants to create the      */
+    '/*     create the single panel.                                      */
+    '/* strMedicationName- medication name from the database we will display   
+    '/* strStrength- strength value from the the database                 */
+    '/* strType- type value from the database                             */
+    '/* strQuantity- quantity value from the database                     */
+    '/* strDispenseBy- dispensedby value from the database                */
+    '/* strDispenseDate- dispense date from the database                  */
+    '/* strDispenseTime=- dispense time from the database                 */
     '/*********************************************************************/
     '/* SAMPLE INVOCATION:								                  */             
-    '/*	                                                                  */
+    '/*	 CreateDispenseHistoryPanels(frmPatientInfo.flpDispenseHistory, dr(0), dr(1), dr(2), dr(3), dr(4) & " " & dr(5), dr(6), "")   
     '/*********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */  
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	pnl- is the pnl which we are creating for padding purposes        */
+    '/* pnlMainPanel- is the pnl which we are going to add controls       */
+    '/* lblID1 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID2 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID3 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID4 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID5 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
+    '/* lblID6 - a new label that is used to contain the string passed in */
+    '/*     to the sub routine.                                           */
     '/*********************************************************************/
     '/* MODIFICATION HISTORY:						                      */               
     '/*											                          */                     
-    '/*  WHO        WHEN            WHAT					               */             
-    '/*********************************************************************/
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  Collin Krygier  2/6/2021    Initial creation                     */
     Public Sub CreateDispenseHistoryPanels(ByVal flpPannel As FlowLayoutPanel, ByVal strMedicationName As String, ByVal strStrength As String, ByVal strType As String, ByVal strQuantity As String, ByVal strDispenseBy As String, ByVal strDispenseDate As String, ByVal strDispenseTime As String)
 
         Dim pnl As Panel
@@ -945,30 +974,36 @@ Public Class frmDispense
         'set the amount dispensed into the waste form
         frmWaste.SetintQuantity(intAmountDispense)
     End Sub
-
-    '/********************************************************************/
-    '/*                   FUNCTION NAME: btnDrawer7_Click	         */         
-    '/********************************************************************/
-    '/*                   WRITTEN BY: Collin Krygier
-    '/*		         DATE CREATED:                             
-    '/********************************************************************/
-    '/*  SUBROUTINE 
-    '/********************************************************************/
-    '/*  CALLED BY
-    '/********************************************************************/
-    '/*  CALLS:			                             */		                  
-    '/********************************************************************/
-    '/*  PARAMETER LIST (In Parameter Order):				             */	           					                        							             
-    '/********************************************************************/
-    '/* SAMPLE INVOCATION:						                         */		             			                                 */					                       
-    '/********************************************************************/
-    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):   */
-    '/********************************************************************/
-    '/* MODIFICATION HISTORY:						                     */		                 
-    '/*									 */		                         */
-    '/*  WHO            WHEN             WHAT				             */		            
-    '/*  ---            ----             ----				             */
-    '/********************************************************************/
+    '/*********************************************************************/
+    '/*                   SubProgram NAME: btnDrawer7_Click              */         
+    '/*********************************************************************/
+    '/*                   WRITTEN BY:  Collin Krygier   		          */   
+    '/*		         DATE CREATED: 		 4/14/2021                        */                             
+    '/*********************************************************************/
+    '/*  Subprogram PURPOSE:								              */             
+    '/*	 Ensures the user cannot add invalid data from the numeric num pad*/
+    '/*********************************************************************/
+    '/*  CALLED BY:   	      						                      */           
+    '/*                                                           */         
+    '/*********************************************************************/
+    '/*  CALLS:										                      */                 
+    '/*                                                                   */  
+    '/*********************************************************************/
+    '/*  PARAMETER LIST (In Parameter Order):					          */         
+    '/*	 field- an integer equal to the tag value of the selected label   */ 
+    '/*********************************************************************/
+    '/* SAMPLE INVOCATION:								                  */             
+    '/*	                                                 	              */
+    '/*********************************************************************/
+    '/*  LOCAL VARIABLE LIST (Alphabetically without hungry notation):    */
+    '/*	none                                                              */
+    '/*********************************************************************/
+    '/* MODIFICATION HISTORY:						                      */               
+    '/*											                          */                     
+    '/*  WHO   WHEN     WHAT								              */             
+    '/*  ---   ----     ------------------------------------------------  */
+    '/*  Collin Krygier  2/14/2021    Initial creation                    */
+    '/*********************************************************************/
     Private Sub btnDrawer7_Click(sender As Object, e As EventArgs) Handles btnOne.Click, btnTwo.Click, btnThree.Click, btnFour.Click, btnFive.Click, btnSix.Click, btnSeven.Click, btnEight.Click, btnNine.Click, btnZero.Click, btnDecimal.Click
 
         If pnlAmountToRemove.Visible = True Then
@@ -1011,7 +1046,7 @@ Public Class frmDispense
     '/*                   WRITTEN BY: Collin Krygier
     '/*		         DATE CREATED:                             
     '/********************************************************************/
-    '/*  SUBROUTINE 
+    '/*  SUBROUTINE Sets the textbox to nothing when it becomes visible
     '/********************************************************************/
     '/*  CALLED BY
     '/********************************************************************/
@@ -1109,7 +1144,7 @@ Public Class frmDispense
     '/*                   WRITTEN BY: Collin Krygier
     '/*		         DATE CREATED:                             
     '/********************************************************************/
-    '/*  SUBROUTINE 
+    '/*  SUBROUTINE - adds a handler to the pnlAmountToRemove for monitoring
     '/********************************************************************/
     '/*  CALLED BY
     '/********************************************************************/
@@ -1136,7 +1171,7 @@ Public Class frmDispense
     '/*                   WRITTEN BY: Collin Krygier
     '/*		         DATE CREATED:                             
     '/********************************************************************/
-    '/*  SUBROUTINE 
+    '/*  SUBROUTINE sets the visiblility of the reopen drawer button for the user
     '/********************************************************************/
     '/*  CALLED BY
     '/********************************************************************/
@@ -1167,7 +1202,8 @@ Public Class frmDispense
     '/*                   WRITTEN BY: Collin Krygier
     '/*		         DATE CREATED:                             
     '/********************************************************************/
-    '/*  SUBROUTINE 
+    '/*  SUBROUTINE - ensures valid data in the textbox by monitoring the 
+    '/*  the textchanged event.
     '/********************************************************************/
     '/*  CALLED BY
     '/********************************************************************/
@@ -1205,7 +1241,8 @@ Public Class frmDispense
     '/*                   WRITTEN BY: Collin Krygier
     '/*		         DATE CREATED:                             
     '/********************************************************************/
-    '/*  SUBROUTINE 
+    '/*  SUBROUTINE ensures valid data in the textbox by monitoring the 
+    '/*  the textchanged event.
     '/********************************************************************/
     '/*  CALLED BY
     '/********************************************************************/
@@ -1243,7 +1280,9 @@ Public Class frmDispense
     '/*                   WRITTEN BY: Collin Krygier
     '/*		         DATE CREATED:                             
     '/********************************************************************/
-    '/*  SUBROUTINE 
+    '/*  SUBROUTINE ensures valid data in the textbox by monitoring the 
+    '/*  the textchanged event. Also modifies the text if a . is incorrectly
+    '/*  added.
     '/********************************************************************/
     '/*  CALLED BY
     '/********************************************************************/
