@@ -46,7 +46,7 @@
         "Entry"
         {
         "MsmKey" = "8:_20E0D43048A3AF50D57B872BBB788A04"
-        "OwnerKey" = "8:_60A375070E09487A892496100C00382E"
+        "OwnerKey" = "8:_789D8313B01640729D29ABA6DA212F74"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -111,25 +111,19 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_585F3B27A0CE4F359C7C7F318623B083"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_601547A07EFB002EC7F05222E13F1FE3"
         "OwnerKey" = "8:_B0062A5A5E224AA8B281671E7F7192B6"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_60A375070E09487A892496100C00382E"
+        "MsmKey" = "8:_6D9E7A49C03C4F5A961567BF3ADDDE99"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_6D9E7A49C03C4F5A961567BF3ADDDE99"
+        "MsmKey" = "8:_789D8313B01640729D29ABA6DA212F74"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -154,7 +148,7 @@
         "Entry"
         {
         "MsmKey" = "8:_9E302B32F9700AB03E566280374672EB"
-        "OwnerKey" = "8:_60A375070E09487A892496100C00382E"
+        "OwnerKey" = "8:_789D8313B01640729D29ABA6DA212F74"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -167,6 +161,12 @@
         {
         "MsmKey" = "8:_9E302B32F9700AB03E566280374672EB"
         "OwnerKey" = "8:_051C9F273D9759E50053D5A2D56B4F04"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_AC55B31FD0A8406A8B0B2345B80CAD75"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -190,7 +190,7 @@
         "Entry"
         {
         "MsmKey" = "8:_BA6D4976F0B9A3239616D478A085A2BE"
-        "OwnerKey" = "8:_60A375070E09487A892496100C00382E"
+        "OwnerKey" = "8:_789D8313B01640729D29ABA6DA212F74"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -250,7 +250,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_60A375070E09487A892496100C00382E"
+        "OwnerKey" = "8:_789D8313B01640729D29ABA6DA212F74"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -729,26 +729,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_585F3B27A0CE4F359C7C7F318623B083"
-            {
-            "SourcePath" = "8:C:\\Users\\Eric\\Desktop\\medServe.ico"
-            "TargetName" = "8:medServe.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_986A9FE7915647F3AFBA45A1B673945C"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_601547A07EFB002EC7F05222E13F1FE3"
             {
             "AssemblyRegister" = "3:1"
@@ -780,23 +760,12 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_60A375070E09487A892496100C00382E"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6D9E7A49C03C4F5A961567BF3ADDDE99"
             {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:MedServe, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86"
-                "ScatterAssemblies"
-                {
-                    "_60A375070E09487A892496100C00382E"
-                    {
-                    "Name" = "8:MedServe.exe"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\test_gui\\bin\\x86\\Debug\\MedServe.exe"
-            "TargetName" = "8:"
+            "SourcePath" = "8:..\\test_gui\\bin\\x86\\Debug\\x86\\SQLite.Interop.dll"
+            "TargetName" = "8:SQLite.Interop.dll"
             "Tag" = "8:"
-            "Folder" = "8:_986A9FE7915647F3AFBA45A1B673945C"
+            "Folder" = "8:_8031DA117FA24A80924F50C51D8AA3D9"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -811,12 +780,23 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6D9E7A49C03C4F5A961567BF3ADDDE99"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_789D8313B01640729D29ABA6DA212F74"
             {
-            "SourcePath" = "8:..\\test_gui\\bin\\x86\\Debug\\x86\\SQLite.Interop.dll"
-            "TargetName" = "8:SQLite.Interop.dll"
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:MedServe, Version=1.0.1.1, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_789D8313B01640729D29ABA6DA212F74"
+                    {
+                    "Name" = "8:MedServe.exe"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\test_gui\\bin\\Release\\MedServe.exe"
+            "TargetName" = "8:"
             "Tag" = "8:"
-            "Folder" = "8:_8031DA117FA24A80924F50C51D8AA3D9"
+            "Folder" = "8:_986A9FE7915647F3AFBA45A1B673945C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -880,6 +860,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AC55B31FD0A8406A8B0B2345B80CAD75"
+            {
+            "SourcePath" = "8:..\\medServe.ico"
+            "TargetName" = "8:medServe.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_986A9FE7915647F3AFBA45A1B673945C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B92EFF2411D840F69342F0F44322E481"
@@ -1274,20 +1274,6 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_25F111D3A16E4ED288D14080FAA80778"
-            {
-            "Name" = "8:MedServe"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_60A375070E09487A892496100C00382E"
-            "Folder" = "8:_0C8C43E509844A02A71EC608B0BEEA82"
-            "WorkingFolder" = "8:_986A9FE7915647F3AFBA45A1B673945C"
-            "Icon" = "8:_585F3B27A0CE4F359C7C7F318623B083"
-            "Feature" = "8:"
-            }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_599E77F42A034BAF98F89DCE913B6CEE"
             {
             "Name" = "8:User Manual v1.2.docx"
@@ -1298,6 +1284,34 @@
             "Transitive" = "11:FALSE"
             "Target" = "8:_158B739E3AD54ACFA02E235B8364C867"
             "Folder" = "8:_0C8C43E509844A02A71EC608B0BEEA82"
+            "WorkingFolder" = "8:_986A9FE7915647F3AFBA45A1B673945C"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_A604905280A64E62BAF6EE3AB867608E"
+            {
+            "Name" = "8:MedServe"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_789D8313B01640729D29ABA6DA212F74"
+            "Folder" = "8:_0C8C43E509844A02A71EC608B0BEEA82"
+            "WorkingFolder" = "8:_986A9FE7915647F3AFBA45A1B673945C"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C26B2200F1AB42C48BC31F79BEB763BD"
+            {
+            "Name" = "8:MedServe"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_789D8313B01640729D29ABA6DA212F74"
+            "Folder" = "8:_643C0E9A4514407B8FE54124FB8D4F67"
             "WorkingFolder" = "8:_986A9FE7915647F3AFBA45A1B673945C"
             "Icon" = "8:"
             "Feature" = "8:"
@@ -1314,20 +1328,6 @@
             "Folder" = "8:_0C8C43E509844A02A71EC608B0BEEA82"
             "WorkingFolder" = "8:_986A9FE7915647F3AFBA45A1B673945C"
             "Icon" = "8:"
-            "Feature" = "8:"
-            }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_F527811A0C0D4170AAC8FF66794FA560"
-            {
-            "Name" = "8:MedServe"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_60A375070E09487A892496100C00382E"
-            "Folder" = "8:_643C0E9A4514407B8FE54124FB8D4F67"
-            "WorkingFolder" = "8:_986A9FE7915647F3AFBA45A1B673945C"
-            "Icon" = "8:_585F3B27A0CE4F359C7C7F318623B083"
             "Feature" = "8:"
             }
         }
