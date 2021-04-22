@@ -27,14 +27,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_158B739E3AD54ACFA02E235B8364C867"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_198FDC39AEE7841D101EAAA04457C8B4"
+        "OwnerKey" = "8:_935CC19F3C92418786BAFBE5525C2CA7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_198FDC39AEE7841D101EAAA04457C8B4"
-        "OwnerKey" = "8:_935CC19F3C92418786BAFBE5525C2CA7"
+        "MsmKey" = "8:_1F8079515F0340C586C8DB74AEE28038"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -76,6 +76,12 @@
         "Entry"
         {
         "MsmKey" = "8:_362306D85CA644079B699DB847BC1B59"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3DD47BE0FDDB4754906D0253D7776C6D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -172,12 +178,6 @@
         "Entry"
         {
         "MsmKey" = "8:_B0062A5A5E224AA8B281671E7F7192B6"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B92EFF2411D840F69342F0F44322E481"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -447,26 +447,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_158B739E3AD54ACFA02E235B8364C867"
-            {
-            "SourcePath" = "8:..\\User Manual v1.2.docx"
-            "TargetName" = "8:User Manual v1.2.docx"
-            "Tag" = "8:"
-            "Folder" = "8:_986A9FE7915647F3AFBA45A1B673945C"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_198FDC39AEE7841D101EAAA04457C8B4"
             {
             "SourcePath" = "8:RestSharp.xml"
@@ -485,6 +465,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1F8079515F0340C586C8DB74AEE28038"
+            {
+            "SourcePath" = "8:..\\MedServe Installation and Setup v1.2.1.docx"
+            "TargetName" = "8:MedServe Installation and Setup v1.2.1.docx"
+            "Tag" = "8:"
+            "Folder" = "8:_986A9FE7915647F3AFBA45A1B673945C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_20E0D43048A3AF50D57B872BBB788A04"
@@ -602,6 +602,26 @@
             {
             "SourcePath" = "8:..\\Bulk Import Templates\\Users.txt"
             "TargetName" = "8:Users.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_986A9FE7915647F3AFBA45A1B673945C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3DD47BE0FDDB4754906D0253D7776C6D"
+            {
+            "SourcePath" = "8:..\\MedServe User Manual v1.2.1.docx"
+            "TargetName" = "8:MedServe User Manual v1.2.1.docx"
             "Tag" = "8:"
             "Folder" = "8:_986A9FE7915647F3AFBA45A1B673945C"
             "Condition" = "8:"
@@ -866,26 +886,6 @@
             {
             "SourcePath" = "8:..\\medServe.ico"
             "TargetName" = "8:medServe.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_986A9FE7915647F3AFBA45A1B673945C"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B92EFF2411D840F69342F0F44322E481"
-            {
-            "SourcePath" = "8:..\\MedServe Installation and Setup v1.2.docx"
-            "TargetName" = "8:MedServe Installation and Setup v1.2.docx"
             "Tag" = "8:"
             "Folder" = "8:_986A9FE7915647F3AFBA45A1B673945C"
             "Condition" = "8:"
@@ -1274,15 +1274,15 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_599E77F42A034BAF98F89DCE913B6CEE"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_16C66CC787EA4557911ECB9243D57775"
             {
-            "Name" = "8:User Manual v1.2.docx"
+            "Name" = "8:MedServe User Manual v1.2.1.docx"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_158B739E3AD54ACFA02E235B8364C867"
+            "Target" = "8:_3DD47BE0FDDB4754906D0253D7776C6D"
             "Folder" = "8:_0C8C43E509844A02A71EC608B0BEEA82"
             "WorkingFolder" = "8:_986A9FE7915647F3AFBA45A1B673945C"
             "Icon" = "8:"
@@ -1314,20 +1314,6 @@
             "Folder" = "8:_643C0E9A4514407B8FE54124FB8D4F67"
             "WorkingFolder" = "8:_986A9FE7915647F3AFBA45A1B673945C"
             "Icon" = "8:_AC55B31FD0A8406A8B0B2345B80CAD75"
-            "Feature" = "8:"
-            }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C627FB105118418DB7C60B730248036A"
-            {
-            "Name" = "8:MedServe Installation and Setup v1.2.docx"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_B92EFF2411D840F69342F0F44322E481"
-            "Folder" = "8:_0C8C43E509844A02A71EC608B0BEEA82"
-            "WorkingFolder" = "8:_986A9FE7915647F3AFBA45A1B673945C"
-            "Icon" = "8:"
             "Feature" = "8:"
             }
         }
